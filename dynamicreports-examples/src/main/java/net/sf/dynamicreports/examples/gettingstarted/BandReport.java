@@ -1,0 +1,103 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package net.sf.dynamicreports.examples.gettingstarted;
+
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Rotation;
+import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRDataSource;
+
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
+public class BandReport {
+	private StyleBuilder boldCenteredStyle;
+	
+	public BandReport() {
+		build();
+	}
+	
+	private void build() {	
+		boldCenteredStyle = stl.style()
+		                       .bold()
+		                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder backgroundStyle = stl.style(boldCenteredStyle)
+		                                  .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                  .setRotation(Rotation.LEFT);
+		
+		TextColumnBuilder<String> column1 = col.column("Column1", "column1", type.stringType());
+		TextColumnBuilder<String> column2 = col.column("Column2", "column2", type.stringType());
+		ColumnGroupBuilder columnGroup = grp.group(column1);
+		
+		try {			
+			report()//create new report design
+			  .setPageColumnsPerPage(2)
+			  .columns(column1, column2)
+			  .groupBy(columnGroup)			  
+			  
+			  //bands
+			  .title(createTextField("This is title band"))
+			  .pageHeader(createTextField("This is page header band"))
+			  .pageFooter(createTextField("This is page footer band"))
+			  .columnHeader(createTextField("This is column header band"))
+			  .columnFooter(createTextField("This is column footer band"))			  
+			  .lastPageFooter(createTextField("This is last page footer band"))
+			  .summary(createTextField("This is summary band"))
+			  //.detail(createTextField("This is detail band"))
+			  .groupHeader(columnGroup, createTextField("This is group header band"))
+			  .groupFooter(columnGroup, createTextField("This is group footer band"))
+			  .background(createTextField("This is background band").setHeight(800).setStyle(backgroundStyle))
+			  
+			  .setDataSource(createDataSource())//set datasource
+			  .show();//create and show report		
+		} catch (DRException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private TextFieldBuilder<String> createTextField(String label) {
+		return cmp.text(label).setStyle(boldCenteredStyle);
+	}
+	
+	private JRDataSource createDataSource() {
+		DataSource dataSource = new DataSource("column1", "column2");
+		int row = 1;
+		for (int i = 1; i <= 2; i++) {
+			for (int j = 0; j < 50; j++) {
+				dataSource.add("group" + i, "row " + row++);
+			}			
+		}
+		return dataSource;
+	}
+	
+	public static void main(String[] args) {
+		new BandReport();
+	}
+}

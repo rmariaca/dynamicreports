@@ -44,7 +44,7 @@ public class Defaults {
 	}
 	
 	private static XmlDynamicReports load() {
-		InputStream is = ClassLoader.getSystemResourceAsStream("dynamicreports-defaults.xml");
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("dynamicreports-defaults.xml");
 		if (is == null) {
 			throw new DRReportException("Dynamic reports defaults xml file not found");
 		}

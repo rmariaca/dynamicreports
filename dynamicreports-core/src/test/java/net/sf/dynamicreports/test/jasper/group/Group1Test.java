@@ -41,7 +41,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupTest extends AbstractJasperValueTest implements Serializable {
+public class Group1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private ColumnGroupBuilder group1;

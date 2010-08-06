@@ -35,7 +35,7 @@ import net.sf.dynamicreports.test.design.AbstractBandTest;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnPositionTest extends AbstractBandTest {
+public class ColumnPosition1Test extends AbstractBandTest {
 	
 	@Override
 	public void configureReport(ReportBuilder<?> rb) {

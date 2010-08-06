@@ -43,7 +43,7 @@ import net.sf.jasperreports.engine.JRPen;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class StyleTest extends AbstractJasperStyleTest implements Serializable {
+public class Style1Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private TextColumnBuilder<Integer> column1;

@@ -20,39 +20,33 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.group;
+package net.sf.dynamicreports.test.jasper.subtotal;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-
-import java.util.Locale;
-
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.constant.PercentageTotalType;
-import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageGroupTest extends AbstractJasperValueTest {
-	private PercentageColumnBuilder percentage1;
-	private PercentageColumnBuilder percentage2;
+public class SubtotalPosition1Test extends AbstractJasperPositionTest {	
+	private AggregationSubtotalBuilder<Integer> subtotal1;
+	private AggregationSubtotalBuilder<Double> subtotal2;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {		
-		TextColumnBuilder<String> column1;
-		TextColumnBuilder<Integer> column2;
+		TextColumnBuilder<Integer> column1;
 		
-		rb.setLocale(Locale.ENGLISH)
-			.columns(
-					column1 = col.column("Column1", "field1", String.class),
-					column2 = col.column("Column2", "field2", Integer.class),
-					percentage1 = col.percentageColumn(column2),
-					percentage2 = col.percentageColumn(column2).setTotalType(PercentageTotalType.REPORT))
-			.groupBy(column1);
+		rb.columns(
+					column1 = col.column("Column1", "field1", Integer.class).setWidth(600))
+			.subtotalsAtSummary(
+				subtotal1 = sbt.sum(column1),
+				subtotal2 = sbt.aggregate(column1, Calculation.AVERAGE));
 	}
 
 	@Override
@@ -60,23 +54,15 @@ public class PercentageGroupTest extends AbstractJasperValueTest {
 		super.test();
 		
 		numberOfPagesTest(1);
-		//percentage1
-		columnDetailCountTest(percentage1, 6);
-		columnDetailValueTest(percentage1, "16.67%", "33.33%", "50.00%", "26.67%", "33.33%", "40.00%");
-		//percentage2
-		columnDetailCountTest(percentage2, 6);
-		columnDetailValueTest(percentage2, "4.76%", "9.52%", "14.29%", "19.05%", "23.81%", "28.57%");
+		//summary
+		subtotalPositionTest(subtotal1, 0, 0, 0, 575, 16);
+		subtotalIndexPositionTest(subtotal2, 2, 0, 0, 16, 575, 16);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
-		for (int i = 1; i <= 3; i++) {
-			dataSource.add("group1", i);
-		}
-		for (int i = 4; i <= 6; i++) {
-			dataSource.add("group2", i);
-		}	
+		DataSource dataSource = new DataSource("field1");
+		dataSource.add(1);
 		return dataSource;
 	}
 }

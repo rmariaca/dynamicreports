@@ -28,58 +28,65 @@ import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
+import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ReportTest2 extends AbstractJasperPositionTest implements Serializable {
+public class Style2Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-		
+	
+	private TextColumnBuilder<Integer> column1;
+	private TextColumnBuilder<String> column2;
+	private ColumnGroupBuilder group1;
 	private AggregationSubtotalBuilder<Integer> subtotal1;
-	private AggregationSubtotalBuilder<Integer> subtotal2;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		TextColumnBuilder<Integer> column1;
+		StyleBuilder textStyle = stl.style().setPadding(2);
+		StyleBuilder titleStyle = stl.style(textStyle).bold();	
+		StyleBuilder subtotalStyle = stl.style(2).setTopBorder(stl.pen1Point()).bold();
 		
-		rb.setTitleOnANewPage(true)
-			.setSummaryOnANewPage(true)
-			.setFloatColumnFooter(true)
+		rb.setTextStyle(textStyle)
+			.setColumnTitleStyle(titleStyle)
+			.setSubtotalStyle(subtotalStyle)
 			.columns(
-					column1 = col.column("Column1", "field1", Integer.class))
-			.subtotalsAtColumnFooter(
-					subtotal1 = sbt.sum(column1))
-			.subtotalsAtSummary(
-					subtotal2 = sbt.sum(column1))
-			.title(cmp.text("title"));		
+					column1 = col.column("Column1", "field1", type.integerType()),
+					column2 = col.column("Column2", "field2", type.stringType()).setStyle(stl.style().bold()))
+			.groupBy(group1 = grp.group(column2))
+			.subtotalsAtSummary(subtotal1 = sbt.sum(column1).setLabel("total").setLabelStyle(stl.style().bold()));
 	}
 
 	@Override
 	public void test() {
 		super.test();
 		
-		numberOfPagesTest(3);
+		numberOfPagesTest(1);
 		
-		//title
-		elementPositionTest("title.textField1", 0, 10, 10, 575, 16);
+		//column1		
+		columnTitleStyleTest(column1, 0, null, null, "Arial", 10, true, null);
+		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
+				
+		columnDetailStyleTest(column1, 0, null, null, "Arial", 10, null, null);
+		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
 		
-		//column footer
-		subtotalPositionTest(subtotal1, 0, 10, 186, 575, 16);
-
-		//summary
-		subtotalPositionTest(subtotal2, 0, 10, 10, 575, 16);
+		//column2
+		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, true, null);
+		
+		//subtotal
+		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10, true, null);
+		subtotalLabelBorderTest(subtotal1, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
-		for (int i = 0; i < 10; i++) {
-			dataSource.add(i);
-		}
+		DataSource dataSource = new DataSource("field1", "field2");
+		dataSource.add(1, "1");
 		return dataSource;
 	}
 }

@@ -46,7 +46,7 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 	
 	private FieldBuilder<Double> field1;
 	private TextColumnBuilder<Double> column2;
-	private TextColumnBuilder<Double> expression;
+	private TextColumnBuilder<Double> expression1;
 	private TextColumnBuilder<BigDecimal> calcExpression1;
 	private TextColumnBuilder<BigDecimal> calcExpression2;
 	private TextColumnBuilder<BigDecimal> calcExpression3;
@@ -55,6 +55,7 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 	private TextColumnBuilder<BigDecimal> calcExpression6;
 	private TextColumnBuilder<BigDecimal> calcExpression7;
 	private TextColumnBuilder<BigDecimal> calcExpression8;
+	private TextColumnBuilder<Double> expression2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {		
@@ -63,15 +64,16 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 					field1 = field("field1", Double.class))
 			.columns(
 					column2 = col.column("Column2", "field2", Double.class).setValueFormatter(new ColumnValueFormatter()),
-					expression = col.column("Expression",  new ValueExpression()),
-					calcExpression1 = expression.multiply(column2),
+					expression1 = col.column("Expression",  new ValueExpression1()),
+					calcExpression1 = expression1.multiply(column2),
 					calcExpression2 = calcExpression1.multiply(5),
 					calcExpression3 = calcExpression2.subtract(calcExpression1),
 					calcExpression4 = calcExpression3.subtract(5),
 					calcExpression5 = calcExpression4.add(calcExpression1),
 					calcExpression6 = calcExpression5.add(5),
-					calcExpression7 = calcExpression6.divide(2, expression),
-					calcExpression8 = calcExpression7.divide(2, 3));
+					calcExpression7 = calcExpression6.divide(2, expression1),
+					calcExpression8 = calcExpression7.divide(2, 3),
+					expression2 = col.column("Expression",  new ValueExpression2()));
 	}
 
 	@Override
@@ -83,8 +85,10 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 		columnDetailCountTest(column2, 3);
 		columnDetailValueTest(column2, "value = 4.0", "value = 5.0", "value = 6.0");
 		//expression
-		columnDetailCountTest(expression, 3);
-		columnDetailValueTest(expression, "5.0", "7.0", "9.0");
+		columnDetailCountTest(expression1, 3);
+		columnDetailValueTest(expression1, "5.0", "7.0", "9.0");
+		columnDetailCountTest(expression2, 3);
+		columnDetailValueTest(expression2, "11.67", "15.33", "19.0");
 		//calcExpression
 		columnDetailCountTest(calcExpression1, 3);
 		columnDetailValueTest(calcExpression1, "20.00", "35.00", "54.00");
@@ -113,12 +117,22 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 		return dataSource;
 	}	
 	
-	private class ValueExpression extends AbstractSimpleExpression<Double> {
+	private class ValueExpression1 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
 		public Double evaluate(ReportParameters reportParameters) {
-			double f1 = ((Number) reportParameters.getValue(field1)).doubleValue();
-			double f2 = ((Number) reportParameters.getValue(column2)).doubleValue();
+			double f1 = reportParameters.getValue(field1);
+			double f2 = reportParameters.getValue(column2);
+			return f1 + f2;
+		}		
+	}
+	
+	private class ValueExpression2 extends AbstractSimpleExpression<Double> {
+		private static final long serialVersionUID = 1L;
+
+		public Double evaluate(ReportParameters reportParameters) {
+			double f1 = reportParameters.getValue(expression1);
+			double f2 = reportParameters.getValue(calcExpression8).doubleValue();
 			return f1 + f2;
 		}		
 	}

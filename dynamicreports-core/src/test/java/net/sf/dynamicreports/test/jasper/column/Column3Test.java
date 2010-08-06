@@ -44,7 +44,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnTest3 extends AbstractJasperValueTest implements Serializable {
+public class Column3Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private TextColumnBuilder<String> column1;

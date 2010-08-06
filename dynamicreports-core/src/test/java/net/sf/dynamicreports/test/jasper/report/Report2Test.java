@@ -20,13 +20,15 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.subtotal;
+package net.sf.dynamicreports.test.jasper.report;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.Serializable;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -34,35 +36,50 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SubtotalPositionTest extends AbstractJasperPositionTest {	
+public class Report2Test extends AbstractJasperPositionTest implements Serializable {
+	private static final long serialVersionUID = 1L;
+		
 	private AggregationSubtotalBuilder<Integer> subtotal1;
-	private AggregationSubtotalBuilder<Double> subtotal2;
+	private AggregationSubtotalBuilder<Integer> subtotal2;
 	
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<Integer> column1;
 		
-		rb.columns(
-					column1 = col.column("Column1", "field1", Integer.class).setWidth(600))
+		rb.setTitleOnANewPage(true)
+			.setSummaryOnANewPage(true)
+			.setFloatColumnFooter(true)
+			.columns(
+					column1 = col.column("Column1", "field1", Integer.class))
+			.subtotalsAtColumnFooter(
+					subtotal1 = sbt.sum(column1))
 			.subtotalsAtSummary(
-				subtotal1 = sbt.sum(column1),
-				subtotal2 = sbt.aggregate(column1, Calculation.AVERAGE));
+					subtotal2 = sbt.sum(column1))
+			.title(cmp.text("title"));		
 	}
 
 	@Override
 	public void test() {
 		super.test();
 		
-		numberOfPagesTest(1);
+		numberOfPagesTest(3);
+		
+		//title
+		elementPositionTest("title.textField1", 0, 10, 10, 575, 16);
+		
+		//column footer
+		subtotalPositionTest(subtotal1, 0, 10, 186, 575, 16);
+
 		//summary
-		subtotalPositionTest(subtotal1, 0, 0, 0, 575, 16);
-		subtotalIndexPositionTest(subtotal2, 2, 0, 0, 16, 575, 16);
+		subtotalPositionTest(subtotal2, 0, 10, 10, 575, 16);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
-		dataSource.add(1);
+		for (int i = 0; i < 10; i++) {
+			dataSource.add(i);
+		}
 		return dataSource;
 	}
 }

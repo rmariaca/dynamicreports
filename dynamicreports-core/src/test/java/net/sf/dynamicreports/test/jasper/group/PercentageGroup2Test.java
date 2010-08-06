@@ -39,7 +39,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageGroupTest2 extends AbstractJasperValueTest {
+public class PercentageGroup2Test extends AbstractJasperValueTest {
 	private PercentageColumnBuilder percentage1;
 	private PercentageColumnBuilder percentage2;
 	private PercentageColumnBuilder percentage3;

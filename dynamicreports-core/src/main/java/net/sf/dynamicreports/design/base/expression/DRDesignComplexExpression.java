@@ -44,4 +44,9 @@ public class DRDesignComplexExpression extends AbstractDesignComplexExpression {
 	public Class<?> getValueClass() {
 		return complexExpression.getValueClass();
 	}
+	
+	@Override
+	public String getName() {
+		return complexExpression.getName();
+	}
 }

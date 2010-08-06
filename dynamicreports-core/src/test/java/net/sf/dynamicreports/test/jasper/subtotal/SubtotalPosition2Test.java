@@ -35,7 +35,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SubtotalPositionTest2 extends AbstractJasperPositionTest {	
+public class SubtotalPosition2Test extends AbstractJasperPositionTest {	
 	private AggregationSubtotalBuilder<Integer> subtotal1;
 	private AggregationSubtotalBuilder<Integer> subtotal2;
 	private AggregationSubtotalBuilder<Integer> subtotal3;

@@ -34,7 +34,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupTest2 extends AbstractJasperValueTest {	
+public class Group2Test extends AbstractJasperValueTest {	
 	private TextColumnBuilder<Integer> column2;
 	private TextColumnBuilder<Integer> column3;
 	private TextColumnBuilder<Integer> column4;

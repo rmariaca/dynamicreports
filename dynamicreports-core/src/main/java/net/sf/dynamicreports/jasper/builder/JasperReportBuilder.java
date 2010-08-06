@@ -22,16 +22,24 @@
 
 package net.sf.dynamicreports.jasper.builder;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
 
+import javax.imageio.ImageIO;
+
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.QueryBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -47,6 +55,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JExcelApiExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
+import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
+import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
@@ -78,6 +88,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	
 	public JasperReportBuilder setDataSource(ResultSet resultSet) {
 		return setDataSource(new JRResultSetDataSource(resultSet));
+	}
+	
+	public JasperReportBuilder setDataSource(String sql, Connection connection) {	
+		Validate.notNull(sql, "sql must not be null");
+		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);
 	}
 	
 	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {	
@@ -180,6 +195,56 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		try {
 			JasperPrintManager.printReport(toJasperPrint(), withPrintDialog);
 		} catch (JRException e) {
+			throw new DRException(e);
+		}
+		return this;
+	}
+	
+	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex) throws DRException {
+		return toPng(outputStream, pageIndex, 1);
+	}
+	
+	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex, float zoom) throws DRException {
+		Validate.notNull(outputStream, "outputStream must not be null");
+		Validate.isTrue(zoom > 0, "zoom must be > 0");
+		
+		JasperPrint jasperPrint = toJasperPrint();		
+		int fromPage;
+		int toPage;		
+		if (pageIndex < 0) {
+			fromPage = 0;
+			toPage = jasperPrint.getPages().size();
+		}
+		else {
+			fromPage = pageIndex;
+			toPage = pageIndex + 1;
+		}
+		int pages = toPage - fromPage;
+		
+		int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
+		int width = pageWidth * pages + (pages - 1) + 2;
+		int height = (int) (jasperPrint.getPageHeight() * zoom) + 2;
+		Image pageImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		
+		int offset = 1;
+		for (int i = 0; i < pages; i++) {			
+			try {
+				JRGraphics2DExporter exporter = new JRGraphics2DExporter();			
+				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+				exporter.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D, pageImage.getGraphics());
+				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_X, offset);
+				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_Y, 1);
+				exporter.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(fromPage++));
+				exporter.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO, new Float(zoom));
+				exporter.exportReport();
+				offset += pageWidth + 1;				
+			} catch (JRException e) {
+				throw new DRException(e);
+			}
+		}
+		try {
+			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
+		} catch (IOException e) {
 			throw new DRException(e);
 		}
 		return this;

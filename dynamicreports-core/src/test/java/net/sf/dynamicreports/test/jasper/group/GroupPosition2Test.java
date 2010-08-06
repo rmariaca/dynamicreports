@@ -35,7 +35,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupPositionTest2 extends AbstractJasperPositionTest {	
+public class GroupPosition2Test extends AbstractJasperPositionTest {	
 	private ColumnGroupBuilder group1;
 	private ColumnGroupBuilder group2;
 	private TextColumnBuilder<Integer> column3;

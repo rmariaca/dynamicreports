@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.constant.ListType;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnPositionTest2 extends ColumnPositionTest {
+public class ColumnPosition2Test extends ColumnPosition1Test {
 	
 	@Override
 	public void configureReport(ReportBuilder<?> rb) {

@@ -32,7 +32,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnPositionTest extends AbstractJasperPositionTest {
+public class ColumnPosition1Test extends AbstractJasperPositionTest {
 	private TextColumnBuilder<String> column2;
 	private TextColumnBuilder<Integer> column3;
 	private TextColumnBuilder<Integer> column4;
