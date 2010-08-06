@@ -1,0 +1,13 @@
+DynamicReports Change Log
+=========================
+
+Changes in version 1.0.0 (2010-03-31)
+---------------------------------------------------
+Initial version
+supports
+- column grid
+- columns : column, expression column, percentage column, ...
+- subtotals : agregate, custom, percentage
+- components : horizontal list, horizontal flow list, vertical list, text field, image, filler, ...
+- charts : area, stackedarea, bar, bar3D, stackedbar, stackedbar3D, line, pie, pie3D, timeseries, xyarea, xybar, xyline, scatter
+- groups, data types, styles, bands, report templates, detail row highlighters, ...

@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.sourceforge.dynamicreports</groupId>
+		<artifactId>dynamicreports-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>dynamicreports-core</artifactId>
+	<packaging>jar</packaging>
+
+	<name>DynamicReports - core</name>
+	<url>http://dynamicreports.sourceforge.net</url>
+	<description>
+	DynamicReports is a Java reporting library. The main benefit of this library is a dynamic report design and no need for a visual report designer. 
+	You can very quickly create reports and produce documents which can be displayed, printed or exported to many popular formats such as PDF, Excel, Word and others.
+	</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>		
+		<dependency>
+			<!-- only for JDK 1.5, not required for JDK 1.6 -->
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<scope>test</scope>
+		</dependency>		    
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.7.2</version>
+				<configuration>
+					<schemaIncludes>
+						<schemaInclude>**/*.xsd</schemaInclude>
+					</schemaIncludes>
+					<bindingIncludes>
+						<bindingInclude>**/*.xjb</bindingInclude>
+					</bindingIncludes>
+					<removeOldOutput>true</removeOldOutput>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jaxb</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
+		</plugins>
+	</build>	
+
+</project>

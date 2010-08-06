@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/component-1.1.1.xsd">
+    
+	<fileSets>
+		<fileSet>
+			<directory>..</directory>
+			<includes>
+				<include>*.txt</include>
+			</includes>
+		</fileSet>
+        
+		<fileSet>
+			<directory>..</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>projects</outputDirectory>
+			<excludes>
+				<exclude>**/${project.build.directory}/**</exclude>
+			</excludes>
+		</fileSet>
+	</fileSets>
+        
+	<dependencySets>
+		<dependencySet>
+			<includes>
+				<include>net.sourceforge.dynamicreports:dynamicreports-core</include>
+			</includes>
+			<outputDirectory>dist</outputDirectory>      
+		</dependencySet>
+		
+		<dependencySet>
+			<includes>
+				<include>net.sourceforge.dynamicreports:dynamicreports-core:*:javadoc</include>
+			</includes>
+			<outputDirectory>apidocs</outputDirectory>  
+			<unpack>true</unpack>    
+			<unpackOptions>
+				<excludes>
+					<exclude>**/META-INF/**</exclude>
+				</excludes>
+			</unpackOptions>      
+		</dependencySet>    
+	</dependencySets>
+
+</component>
