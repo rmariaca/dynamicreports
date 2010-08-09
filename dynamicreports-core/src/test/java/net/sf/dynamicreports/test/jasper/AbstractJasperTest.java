@@ -37,6 +37,7 @@ import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintPage;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,8 @@ import org.junit.Test;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractJasperTest {	
-	private JasperPrint jasperPrint;	
+	private JasperReport jasperReport;
+	private JasperPrint jasperPrint;
 	
 	@Before
 	public void init() {
@@ -53,6 +55,7 @@ public abstract class AbstractJasperTest {
 			JasperReportBuilder reportBuilder = DynamicReports.report();
 			configureReport(reportBuilder);		
 			serializableTest(reportBuilder);
+			jasperReport = reportBuilder.toJasperReport();
 			jasperPrint = reportBuilder
 											.setDataSource(createDataSource())
 											.toJasperPrint();						
@@ -72,6 +75,10 @@ public abstract class AbstractJasperTest {
 		oos.writeObject(report);
 		oos.flush();
 		oos.close();
+	}
+	
+	public JasperReport getJasperReport() {
+		return jasperReport;
 	}
 	
 	public JasperPrint getJasperPrint() {

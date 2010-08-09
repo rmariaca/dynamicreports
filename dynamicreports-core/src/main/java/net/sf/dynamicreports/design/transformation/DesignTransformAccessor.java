@@ -46,4 +46,6 @@ public interface DesignTransformAccessor {
 	public StyleTransform getStyleTransform();
 	
 	public ChartTransform getChartTransform();
+
+	public BarcodeTransform getBarcodeTransform();
 }

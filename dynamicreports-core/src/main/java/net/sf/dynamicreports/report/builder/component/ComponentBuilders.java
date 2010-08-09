@@ -105,7 +105,7 @@ public class ComponentBuilders {
 		return Components.text(text);
 	}
 
-	public TextFieldBuilder<Number> text(Number number) {
+	public <T extends Number> TextFieldBuilder<T> text(T number) {
 		return Components.text(number);
 	}
 	

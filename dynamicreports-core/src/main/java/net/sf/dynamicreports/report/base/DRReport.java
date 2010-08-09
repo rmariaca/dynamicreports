@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -80,6 +81,7 @@ public class DRReport implements DRIReport {
 	private DRStyle subtotalStyle;
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
+	private DRStyle barcodeStyle;
 	
 	private DRBand titleBand;	
 	private DRBand pageHeaderBand;
@@ -408,6 +410,14 @@ public class DRReport implements DRIReport {
 	
 	public void setChartStyle(DRStyle chartStyle) {
 		this.chartStyle = chartStyle;
+	}
+	
+	public DRIStyle getBarcodeStyle() {
+		return barcodeStyle;
+	}
+	
+	public void setBarcodeStyle(DRStyle barcodeStyle) {
+		this.barcodeStyle = barcodeStyle;
 	}
 	
 	public Boolean getHighlightDetailOddRows() {

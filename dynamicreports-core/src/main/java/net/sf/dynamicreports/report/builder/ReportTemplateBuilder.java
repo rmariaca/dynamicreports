@@ -217,6 +217,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 	
+	public ReportTemplateBuilder setBarcodeStyle(StyleBuilder barcodeStyle) {
+		if (barcodeStyle != null) {
+			getObject().setBarcodeStyle(barcodeStyle.build());
+		}
+		else {
+			getObject().setBarcodeStyle(null);
+		}		
+		return this;
+	}
+	
 	public ReportTemplateBuilder setPageFormat(PageType pageType) {
 		return setPageFormat(pageType, PageOrientation.PORTRAIT);		
 	}	
@@ -330,6 +340,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		for (Color seriesColor : seriesColors) {
 			getObject().addChartSeriesColor(seriesColor);
 		}		
+		return this;
+	}
+	
+	public ReportTemplateBuilder setBarcodeHeight(Integer barcodeHeight) {
+		getObject().setBarcodeHeight(barcodeHeight);
+		return this;
+	}
+
+	public ReportTemplateBuilder setBarcodeWidth(Integer barcodeWidth) {
+		getObject().setBarcodeWidth(barcodeWidth);
 		return this;
 	}
 	

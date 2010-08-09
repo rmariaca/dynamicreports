@@ -175,14 +175,14 @@ public class BandTransform {
 	}
 	
 	private void generateComponentNames(DRDesignComponent component, String bandName) {
-		String componentName = bandName + "." + component.getName();
+		String componentName = bandName + "." + component.getUniqueName();
 		if (!componentNames.containsKey(componentName)) {
 			componentNames.put(componentName, new Integer(1));
 		}
 		else {
 			componentNames.put(componentName, componentNames.get(componentName) + 1);
 		}
-		component.setName(componentName + componentNames.get(componentName));
+		component.setUniqueName(componentName + componentNames.get(componentName));
 		if (component instanceof DRDesignList) {
 			for (DRDesignComponent lComponent : ((DRDesignList) component).getComponents()) {
 				generateComponentNames(lComponent, bandName);

@@ -35,6 +35,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpres
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.design.transformation.BandTransform;
+import net.sf.dynamicreports.design.transformation.BarcodeTransform;
 import net.sf.dynamicreports.design.transformation.ChartTransform;
 import net.sf.dynamicreports.design.transformation.ColumnGridTransform;
 import net.sf.dynamicreports.design.transformation.ColumnTransform;
@@ -68,7 +69,8 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private ColumnTransform columnTransform;
 	private SubtotalTransform subtotalTransform;
 	private StyleTransform styleTransform;
-	private ChartTransform chartTransform;	
+	private ChartTransform chartTransform;
+	private BarcodeTransform barcodeTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
 		this.report = report;
@@ -89,6 +91,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		subtotalTransform = new SubtotalTransform(this);
 		styleTransform = new StyleTransform(this);
 		chartTransform = new ChartTransform(this);
+		barcodeTransform = new BarcodeTransform(this);
 	}
 	
 	private void transform() throws DRException {		
@@ -139,6 +142,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	
 	public ChartTransform getChartTransform() {
 		return chartTransform;
+	}
+	
+	public BarcodeTransform getBarcodeTransform() {
+		return barcodeTransform;
 	}
 	
 	public Locale getLocale() {

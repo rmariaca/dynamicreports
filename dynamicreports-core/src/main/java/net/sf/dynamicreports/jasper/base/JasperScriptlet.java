@@ -106,7 +106,7 @@ public class JasperScriptlet extends JRDefaultScriptlet {
 		return chartCustomizers.get(name);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void setData(Map parsm, Map fldsm, Map varsm, JRFillGroup[] grps) {
 		super.setData(parsm, fldsm, varsm, grps);

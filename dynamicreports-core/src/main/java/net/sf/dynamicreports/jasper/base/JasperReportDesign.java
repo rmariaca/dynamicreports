@@ -27,6 +27,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.transformation.BandTransform;
+import net.sf.dynamicreports.jasper.transformation.BarcodeTransform;
 import net.sf.dynamicreports.jasper.transformation.ChartTransform;
 import net.sf.dynamicreports.jasper.transformation.ComponentTransform;
 import net.sf.dynamicreports.jasper.transformation.ExpressionTransform;
@@ -48,7 +49,8 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private ComponentTransform componentTransform;
 	private GroupTransform groupTransform;
 	private StyleTransform styleTransform;
-	private ChartTransform chartTransform;	
+	private ChartTransform chartTransform;
+	private BarcodeTransform barcodeTransform;
 	
 	private JasperDesign design;
 	private JasperScriptlet scriptlet;
@@ -68,6 +70,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		componentTransform = new ComponentTransform(this);
 		styleTransform = new StyleTransform(this);
 		chartTransform = new ChartTransform(this);
+		barcodeTransform = new BarcodeTransform(this);
 		
 		this.design = new JasperDesign();
 		design.setName("Report");
@@ -91,6 +94,10 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return chartTransform;
 	}
 
+	public BarcodeTransform getBarcodeTransform() {
+		return barcodeTransform;
+	}
+	
 	public ComponentTransform getComponentTransform() {
 		return componentTransform;
 	}

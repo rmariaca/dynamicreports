@@ -47,7 +47,7 @@ public class SalesDesign implements ReportDesign<SalesData> {
 	
 	public void configureReport(ReportBuilder<?> rb, SalesData invoiceData) {
 		//init styles
-		FontBuilder  boldFont         = stl.fontArialBold();
+		FontBuilder  boldFont = stl.fontArialBold();
 		//init columns
 		TextColumnBuilder<String>     stateColumn     = col.column("State", "state", type.stringType());
 		TextColumnBuilder<String>     itemColumn      = col.column("Item", "item", type.stringType()).setPrintRepeatedDetailValues(false);

@@ -90,7 +90,7 @@ public class ExpressionBuilders {
 		return Expressions.date(date);
 	}
 	
-	public NumberExpression number(Number number) {
+	public <T extends Number> NumberExpression<T> number(T number) {
 		return Expressions.number(number);
 	}
 

@@ -31,6 +31,8 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 public interface DRIDesignComponent {
 	public String getName();
 	
+	public String getUniqueName();
+	
 	public DRIDesignStyle getStyle();
 
 	public Integer getX();

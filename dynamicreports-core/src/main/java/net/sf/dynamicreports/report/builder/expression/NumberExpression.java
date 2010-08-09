@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
+import org.apache.commons.lang.Validate;
+
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -30,16 +32,23 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class NumberExpression extends AbstractSimpleExpression<Number> { 
+public class NumberExpression<T extends Number> extends AbstractSimpleExpression<T> { 
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private Number number;
+	private T number;
 
-	public NumberExpression(Number number) {
+	public NumberExpression(T number) {
+		Validate.notNull(number, "number must not be null");
 		this.number = number;		
 	}
 	
-	public Number evaluate(ReportParameters reportParameters) {
+	public T evaluate(ReportParameters reportParameters) {
 		return number;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Class<T> getValueClass() {
+		return (Class<T>) number.getClass();
 	}
 }

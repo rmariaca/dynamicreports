@@ -95,6 +95,8 @@ public interface DRIReport extends Serializable {
 
 	public DRIStyle getChartStyle();
 	
+	public DRIStyle getBarcodeStyle();
+	
 	public Boolean getHighlightDetailOddRows();
 
 	public DRISimpleStyle getDetailOddRowStyle();

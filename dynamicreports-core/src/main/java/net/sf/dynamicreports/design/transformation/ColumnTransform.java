@@ -93,6 +93,7 @@ public class ColumnTransform {
 	//title
 	@SuppressWarnings("unchecked")
 	private DRDesignComponent titleComponent(DRIColumn<?> column) throws DRException {
+		@SuppressWarnings("rawtypes")
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(column.getTitleExpression());
 		titleField.setStyle((DRStyle) column.getTitleStyle());
@@ -101,14 +102,14 @@ public class ColumnTransform {
 		titleField.setHeightType(column.getTitleHeightType());
 		titleField.setRows(column.getTitleRows());
 		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.COLUMN_TITLE);
-		designTitleField.setName("column_" + column.getName() + ".title");		
+		designTitleField.setUniqueName("column_" + column.getName() + ".title");		
 		return designTitleField;	
 	}
 	
 	//value
 	private DRDesignComponent valueComponent(DRIColumn<?> column) throws DRException {
 		DRDesignTextField designValueField = accessor.getComponentTransform().textField(column.getValueField(), DefaultStyleType.COLUMN);	
-		designValueField.setName("column_" + column.getName());
+		designValueField.setUniqueName("column_" + column.getName());
 		designValueField.setPrintRepeatedValues(accessor.getTemplateTransform().isColumnPrintRepeatedDetailValues(column));
 
 		List<DRIConditionalStyle> rowHighlighters = new ArrayList<DRIConditionalStyle>();

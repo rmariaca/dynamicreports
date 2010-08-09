@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
@@ -274,6 +275,16 @@ public class TemplateTransform {
 			return template.getChartStyle();
 		}
 		return Defaults.getDefaults().getChartStyle();
+	}
+	
+	protected DRIStyle getBarcodeStyle() {
+		if (report.getBarcodeStyle() != null) {
+			return report.getBarcodeStyle();
+		}
+		if (template.getBarcodeStyle() != null) {
+			return template.getBarcodeStyle();
+		}
+		return Defaults.getDefaults().getBarcodeStyle();
 	}
 	
 	//page
@@ -589,6 +600,27 @@ public class TemplateTransform {
 			return dataset.getTimePeriodType();
 		}
 		return Defaults.getDefaults().getChartTimeSeriesDatasetTimePeriodType();
+	}
+	
+	//barcode
+	protected int getBarcodeWidth(DRIBarcode barcode) {
+		if (barcode.getWidth() != null) {
+			return barcode.getWidth();
+		}
+		if (template.getBarcodeWidth() != null) {
+			return template.getBarcodeWidth();
+		}
+		return Defaults.getDefaults().getBarcodeWidth();
+	}
+	
+	protected int getBarcodeHeight(DRIBarcode barcode) {
+		if (barcode.getHeight() != null) {
+			return barcode.getHeight();
+		}
+		if (template.getBarcodeHeight() != null) {
+			return template.getBarcodeHeight();
+		}
+		return Defaults.getDefaults().getBarcodeHeight();
 	}
 	
 	//split

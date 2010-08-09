@@ -218,19 +218,20 @@ public class SubtotalTransform {
 	//label
 	@SuppressWarnings("unchecked")
 	private DRDesignComponent labelComponent(DRISubtotal<?> subtotal) throws DRException {
+		@SuppressWarnings("rawtypes")
 		DRTextField labelField = new DRTextField();
 		labelField.setValueExpression(subtotal.getLabelExpression());
 		labelField.setStyle((DRStyle) subtotal.getLabelStyle());
 		labelField.setWidth(accessor.getTemplateTransform().getColumnWidth(subtotal.getShowInColumn(), accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));
 		DRDesignTextField designLabelField = accessor.getComponentTransform().textField(labelField, DefaultStyleType.TEXT);
-		designLabelField.setName("column_" + subtotal.getShowInColumn().getName() + ".subtotal.label");
+		designLabelField.setUniqueName("column_" + subtotal.getShowInColumn().getName() + ".subtotal.label");
 		return designLabelField;	
 	}
 	
 	//value
 	private DRDesignComponent valueComponent(DRISubtotal<?> subtotal) throws DRException {
 		DRDesignTextField designValueField = accessor.getComponentTransform().textField(subtotal.getValueField(), DefaultStyleType.SUBTOTAL);
-		designValueField.setName("column_" + subtotal.getShowInColumn().getName() + ".subtotal");
+		designValueField.setUniqueName("column_" + subtotal.getShowInColumn().getName() + ".subtotal");
 		designValueField.setWidth(accessor.getTemplateTransform().getColumnWidth(subtotal.getShowInColumn(), accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));
 		return designValueField;
 	}

@@ -77,6 +77,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public DRIStyle getChartStyle();
 	
+	public DRIStyle getBarcodeStyle();
+	
 	public Integer getPageWidth();
 
 	public Integer getPageHeight();
@@ -119,6 +121,10 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Integer getChartWidth();
 
+	public Integer getBarcodeHeight();
+
+	public Integer getBarcodeWidth();
+	
 	public List<Color> getChartSeriesColors();
 	
 	public SplitType getDefaultSplitType();

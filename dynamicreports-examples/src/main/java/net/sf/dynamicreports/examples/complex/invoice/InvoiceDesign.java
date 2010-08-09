@@ -50,9 +50,9 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 	public void configureReport(ReportBuilder<?> rb, InvoiceData invoiceData) {		
 		invoice = invoiceData.getInvoice();
 		//init styles
-		StyleBuilder columnStyle      = stl.style(Templates.columnStyle).setBorder(stl.pen1Point());
-		StyleBuilder subtotalStyle    = stl.style(columnStyle).bold();
-		StyleBuilder shippingStyle    = stl.style(Templates.boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT);
+		StyleBuilder columnStyle   = stl.style(Templates.columnStyle).setBorder(stl.pen1Point());
+		StyleBuilder subtotalStyle = stl.style(columnStyle).bold();
+		StyleBuilder shippingStyle = stl.style(Templates.boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT);
 		//init columns
 		TextColumnBuilder<Integer>    rowNumberColumn   = col.reportRowNumberColumn()
 		                                                     .setFixedColumns(2)

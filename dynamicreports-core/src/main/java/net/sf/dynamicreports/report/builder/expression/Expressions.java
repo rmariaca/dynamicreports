@@ -105,8 +105,8 @@ public class Expressions {
 		return new DateExpression(date);
 	}
 	
-	public static NumberExpression number(Number number) {
-		return new NumberExpression(number);
+	public static <T extends Number> NumberExpression<T> number(T number) {
+		return new NumberExpression<T>(number);
 	}
 
 	public static ImageExpression image(Image image) {

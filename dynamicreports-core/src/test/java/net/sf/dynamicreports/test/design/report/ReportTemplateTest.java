@@ -31,6 +31,7 @@ import java.util.Locale;
 import junit.framework.Assert;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.DRDesignReport;
+import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
@@ -65,7 +66,8 @@ public class ReportTemplateTest {
 			.title(
 				cmp.horizontalList(
 					cmp.hListCell(cmp.image("")).widthFixed().heightFixedOnTop(),
-					cmp.hListCell(cht.barChart()).widthFixed().heightFixedOnTop()))
+					cmp.hListCell(cht.barChart()).widthFixed().heightFixedOnTop(),
+					cmp.hListCell(bcode.ean128("12345678")).widthFixed().heightFixedOnTop()))
 			.setTemplate(
 					template()
 						.setLocale(Locale.ENGLISH)
@@ -109,12 +111,15 @@ public class ReportTemplateTest {
 						.setChartHeight(220)
 						.chartSeriesColors(Color.BLUE)
 						
+						.setBarcodeWidth(110)
+						.setBarcodeHeight(120)
+						
 						.setDetailSplitType(SplitType.IMMEDIATE));
 	}
 	
 	@Test
 	public void test() {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder rb = new ReportBuilder();
 		configureReport(rb);
 		try {
@@ -146,7 +151,7 @@ public class ReportTemplateTest {
 			DRDesignGroup group = (DRDesignGroup) report.getGroups().toArray()[0];
 			DRDesignComponent textField = group.getHeaderBands().get(1).getBandComponent();
 			Assert.assertEquals("group header layout", 2, ((DRDesignList) group.getHeaderBands().get(0).getBandComponent()).getComponents().size());		
-			Assert.assertEquals("group header layout", "groupHeader.textField1", textField.getName());
+			Assert.assertEquals("group header layout", "groupHeader.textField1", textField.getUniqueName());
 			Assert.assertEquals("group padding", new Integer(20), columnTextField.getX());
 			Assert.assertTrue("group start in new page", group.isStartInNewPage());
 			Assert.assertTrue("group start in new column", group.isStartInNewColumn());
@@ -166,6 +171,10 @@ public class ReportTemplateTest {
 			Assert.assertEquals("chart height", new Integer(220), chart.getHeight());
 			Assert.assertEquals("chart colors", Color.BLUE, ((DRDesignChart) chart).getPlot().getSeriesColors().get(0));
 			
+			DRDesignComponent barcode = titleList.getComponents().get(2);
+			Assert.assertEquals("barcode width", new Integer(110), barcode.getWidth());
+			Assert.assertEquals("barcode height", new Integer(120), barcode.getHeight());
+			
 			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBand().getSplitType());
 		} catch (DRException e) {
 			e.printStackTrace();
@@ -175,7 +184,7 @@ public class ReportTemplateTest {
 	
 	@Test
 	public void styleTest() {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb = new ReportBuilder();		
 		TextColumnBuilder<Integer> column1;
 		
@@ -185,7 +194,7 @@ public class ReportTemplateTest {
 						 .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
 						 .setHideColumn(false))
 			.subtotalsAtSummary(sbt.sum(column1))
-			.title(cmp.image(""), cht.areaChart().setCategory("field2", String.class))
+			.title(cmp.image(""), cht.areaChart().setCategory("field2", String.class), bcode.ean128("12345678"))
 			.setTemplate(
 					template()
 						.setColumnStyle(stl.style().setFontSize(1))
@@ -194,7 +203,8 @@ public class ReportTemplateTest {
 						.setGroupTitleStyle(stl.style().setFontSize(4))
 						.setSubtotalStyle(stl.style().setFontSize(5))
 						.setImageStyle(stl.style().setBorder(stl.pen1Point()))
-						.setChartStyle(stl.style().setBorder(stl.pen2Point())));
+						.setChartStyle(stl.style().setBorder(stl.pen2Point()))
+						.setBarcodeStyle(stl.style().setBorder(stl.pen().setLineWidth(3f))));
 		try {
 			DRDesignReport report = new DRDesignReport(rb.getReport());
 			
@@ -219,6 +229,9 @@ public class ReportTemplateTest {
 			
 			DRDesignChart chart = (DRDesignChart) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(1);
 			Assert.assertEquals("chart style", new Float(2), chart.getStyle().getBorder().getTopPen().getLineWidth());
+			
+			DRDesignBarcode barcode = (DRDesignBarcode) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(2);
+			Assert.assertEquals("barcode style", new Float(3), barcode.getStyle().getBorder().getTopPen().getLineWidth());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

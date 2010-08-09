@@ -162,24 +162,25 @@ public class GroupTransform {
 	//title
 	@SuppressWarnings("unchecked")
 	private DRDesignComponent titleComponent(DRIGroup group) throws DRException {
+		@SuppressWarnings("rawtypes")
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(group.getTitleExpression());
 		titleField.setStyle((DRStyle) group.getTitleStyle());
 		titleField.setWidth(group.getTitleWidth());
 		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.GROUP_TITLE);
-		designTitleField.setName("group_" + group.getName() + ".title");
+		designTitleField.setUniqueName("group_" + group.getName() + ".title");
 		return designTitleField;	
 	}
 	
 	//value
 	private DRDesignComponent valueComponent(DRIGroup group) throws DRException {
 		DRDesignTextField designValueField = accessor.getComponentTransform().textField(group.getValueField(), DefaultStyleType.GROUP);
-		designValueField.setName("group_" + group.getName());		
+		designValueField.setUniqueName("group_" + group.getName());		
 		return designValueField;
 	}
 	
 	//group
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private DRDesignGroup group(DRIGroup group) throws DRException {
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
 		DRDesignGroup designGroup = new DRDesignGroup(group.getName());

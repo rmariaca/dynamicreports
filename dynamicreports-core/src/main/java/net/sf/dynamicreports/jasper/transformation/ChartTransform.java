@@ -136,7 +136,7 @@ public class ChartTransform {
 		
 		if (chart.getCustomizer() != null) {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
-			addChartCustomizer(chart.getName(), chart.getCustomizer());
+			addChartCustomizer(chart.getUniqueName(), chart.getCustomizer());
 		}
 		
 		jrChart.setPositionType(JRElement.POSITION_TYPE_FLOAT);

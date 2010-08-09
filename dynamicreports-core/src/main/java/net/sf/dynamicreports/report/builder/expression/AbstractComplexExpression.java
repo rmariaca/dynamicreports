@@ -63,7 +63,7 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 	}
 	
 	protected void addExpression(String fieldName, Class<?> valueClass) {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		DRField<?> field = new DRField(fieldName, valueClass);
 		this.expressions.add(field);
 	}

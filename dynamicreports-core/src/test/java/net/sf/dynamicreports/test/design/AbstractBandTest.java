@@ -38,7 +38,7 @@ public abstract class AbstractBandTest {
 		
 	@Test
 	public void test() {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder rb = new ReportBuilder();
 		configureReport(rb);
 		try {

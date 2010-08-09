@@ -109,8 +109,8 @@ public class Components {
 		return new TextFieldBuilder<String>().setText(text);
 	}
 
-	public static TextFieldBuilder<Number> text(Number number) {
-		return new TextFieldBuilder<Number>().setText(number);
+	public static <T extends Number> TextFieldBuilder<T> text(T number) {
+		return new TextFieldBuilder<T>().setText(number);
 	}
 	
 	public static <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {

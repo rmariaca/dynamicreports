@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -65,6 +66,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRStyle subtotalStyle;
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
+	private DRStyle barcodeStyle;
 	//page
 	private Integer pageWidth;
 	private Integer pageHeight;
@@ -94,6 +96,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Integer chartWidth;
 	private Integer chartHeight;	
 	private List<Color> chartSeriesColors;
+	//barcode
+	private Integer barcodeWidth;
+	private Integer barcodeHeight;	
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -263,6 +268,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 	
 	public void setChartStyle(DRStyle chartStyle) {
 		this.chartStyle = chartStyle;
+	}
+	
+	public DRIStyle getBarcodeStyle() {
+		return barcodeStyle;
+	}
+	
+	public void setBarcodeStyle(DRStyle barcodeStyle) {
+		this.barcodeStyle = barcodeStyle;
 	}
 	
 	public void setPageFormat(PageType pageType, PageOrientation orientation) {
@@ -498,6 +511,28 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.noNullElements(chartSeriesColors, "chartSeriesColors must not contains null chartSeriesColor");
 		}
 		this.chartSeriesColors = chartSeriesColors;
+	}
+	
+	public Integer getBarcodeHeight() {
+		return barcodeHeight;
+	}
+	
+	public void setBarcodeHeight(Integer barcodeHeight) {
+		if (barcodeHeight != null) {
+			Validate.isTrue(barcodeHeight >= 1, "barcodeHeight must be >= 1");
+		}
+		this.barcodeHeight = barcodeHeight;
+	}
+	
+	public Integer getBarcodeWidth() {
+		return barcodeWidth;
+	}
+	
+	public void setBarcodeWidth(Integer barcodeWidth) {
+		if (barcodeWidth != null) {
+			Validate.isTrue(barcodeWidth >= 1, "barcodeWidth must be >= 1");
+		}
+		this.barcodeWidth = barcodeWidth;
 	}
 	
 	public SplitType getDefaultSplitType() {
