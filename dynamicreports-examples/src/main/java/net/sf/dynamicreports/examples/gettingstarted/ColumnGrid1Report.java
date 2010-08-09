@@ -46,14 +46,14 @@ public class ColumnGrid1Report {
 		}
 		columns[columns_count / 2].setFixedWidth(300);
 		
-		try {			
+		try {
 			report()
 			  .setTextStyle(stl.style(stl.pen1Point()))
-			  .columns(columns)	
+			  .columns(columns)
 			  .columnGrid(grid.horizontalFlowColumnGridList(columns))
 			  .detail(cmp.filler().setFixedHeight(10))
 			  .setDataSource(createDataSource())
-			  .show();		
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

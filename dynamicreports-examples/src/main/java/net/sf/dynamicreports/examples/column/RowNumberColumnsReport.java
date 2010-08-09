@@ -37,20 +37,20 @@ public class RowNumberColumnsReport {
 		build();
 	}
 	
-	private void build() {			
+	private void build() {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .setPageColumnsPerPage(2)
 			  .setPageColumnSpace(10)
 			  .columns(
-			  		col.reportRowNumberColumn("Report row"),
-			  		col.pageRowNumberColumn("Page row"),
-			  		col.columnRowNumberColumn("Page column row"))
+			  	col.reportRowNumberColumn("Report row"),
+			  	col.pageRowNumberColumn("Page row"),
+			  	col.columnRowNumberColumn("Page column row"))
 			  .title(Templates.createTitleComponent("RowNumberColumns"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

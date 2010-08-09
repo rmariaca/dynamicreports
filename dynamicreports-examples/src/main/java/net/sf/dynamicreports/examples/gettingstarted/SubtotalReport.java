@@ -44,26 +44,26 @@ public class SubtotalReport {
 		build();
 	}
 	
-	private void build() {	
+	private void build() {
 		boldStyle = stl.style().bold().setHorizontalAlignment(HorizontalAlignment.RIGHT);
 		
 		TextColumnBuilder<String> column1 = col.column("Column1", "column1", type.stringType());
-		column2 = col.column("Column2", "column2", type.integerType());		
+		column2 = col.column("Column2", "column2", type.integerType());
 		ColumnGroupBuilder columnGroup = grp.group(column1);
 		
-		try {			
+		try {
 			report()//create new report design
 			  .setPageColumnsPerPage(2)
 			  .setSubtotalStyle(boldStyle)
 			  .columns(column1, column2)
-			  .groupBy(columnGroup)			  
+			  .groupBy(columnGroup)
 			  
 			  //subtotals
 			  .subtotalsAtTitle(createSubtotal("This is a title sum"))
 			  .subtotalsAtPageHeader(createSubtotal("This is a page header sum"))
 			  .subtotalsAtPageFooter(createSubtotal("This is a page footer sum"))
 			  .subtotalsAtColumnHeader(createSubtotal("This is a column header sum"))
-			  .subtotalsAtColumnFooter(createSubtotal("This is a column footer sum"))			  
+			  .subtotalsAtColumnFooter(createSubtotal("This is a column footer sum"))
 			  .subtotalsAtLastPageFooter(createSubtotal("This is a last page footer sum"))
 			  .subtotalsAtSummary(createSubtotal("This is a summary sum"))
 			  .subtotalsAtGroupHeader(columnGroup, createSubtotal("This is a group header sum"))
@@ -72,7 +72,7 @@ public class SubtotalReport {
 			  .subtotalsOfPercentageAtGroupFooter(columnGroup, createPercSubtotal("This is a group footer perc."))
 			  
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report		
+			  .show();//create and show report
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

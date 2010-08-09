@@ -55,10 +55,10 @@ public class GroupInNewPageReport {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		itemColumn,
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	itemColumn,
+			  	col.column("Order date", "orderdate", type.dateType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(itemGroup)
 			  .title(Templates.createTitleComponent("GroupInNewPage"))
 			  .pageFooter(Templates.footerComponent)

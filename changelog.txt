@@ -1,6 +1,16 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.2.0 (2010-06-29)
+---------------------------------------------------
+ - all exporters can be configured, see EncryptedPdfReport for an example
+ - concatenated reports, reports can be concatenated into one document, see ConcatenatedReport1, ConcatenatedReport2 for an example
+ - minor improvements in subtotals
+ - new examples - examples/subtotals/*
+                  examples/miscellaneous/*
+                  examples/exporter/*
+                  examples/column/CalculatedColumnReport
+
 Changes in version 1.1.1 (2010-06-09)
 ---------------------------------------------------
  - groups can be grouped by data type, see DateGroupReport for an example

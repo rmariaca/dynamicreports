@@ -20,7 +20,7 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.group;
+package net.sf.dynamicreports.examples.subtotal;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
@@ -30,43 +30,38 @@ import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupReport1 {
+public class FieldSubtotalReport {
 	
-	public GroupReport1() {
+	public FieldSubtotalReport() {
 		build();
 	}
 	
 	private void build() {
-		StyleBuilder groupStyle = stl.style().bold();
+		TextColumnBuilder<String> itemColumn      = col.column("Item",       "item",      type.stringType());
+		TextColumnBuilder<Date>   orderDateColumn = col.column("Order Date", "orderdate", type.dateType());
 		
-		CustomGroupBuilder itemGroup = grp.group("item", String.class)
-		                                  .setStyle(groupStyle)
-		                                  .setTitle("Item")
-		                                  .setTitleStyle(groupStyle)
-				                              .setTitleWidth(30)		                                  
-		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
+		AggregationSubtotalBuilder<Integer> quantitySum     = sbt.sum("quantity", Integer.class, itemColumn).setLabel("quantity sum");
+		AggregationSubtotalBuilder<BigDecimal> unitPriceSum = sbt.sum("unitprice", BigDecimal.class, itemColumn).setLabel("unitPrice sum");
 		
-		try {			
+		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .groupBy(itemGroup)
-			  .title(Templates.createTitleComponent("FieldGroup"))
+			  	itemColumn,	orderDateColumn)
+			  .subtotalsAtSummary(
+			  	quantitySum, unitPriceSum)
+			  .title(Templates.createTitleComponent("FieldSubtotal"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -74,13 +69,10 @@ public class GroupReport1 {
 	
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
-		dataSource.add("DVD", toDate(2010, 1, 1), 5, new BigDecimal(30));
-		dataSource.add("DVD", toDate(2010, 1, 3), 1, new BigDecimal(28));
-		dataSource.add("DVD", toDate(2010, 1, 19), 5, new BigDecimal(32));
-		dataSource.add("Book", toDate(2010, 1, 5), 3, new BigDecimal(11));
-		dataSource.add("Book", toDate(2010, 1, 8), 1, new BigDecimal(15));
-		dataSource.add("Book", toDate(2010, 1, 15), 5, new BigDecimal(10));
-		dataSource.add("Book", toDate(2010, 1, 20), 8, new BigDecimal(9));
+		dataSource.add("Book", toDate(2010, 1, 1), 3, new BigDecimal(11));
+		dataSource.add("Book", toDate(2010, 2, 1), 1, new BigDecimal(15));
+		dataSource.add("Book", toDate(2010, 2, 1), 3, new BigDecimal(10));
+		dataSource.add("Book", toDate(2010, 4, 1), 8, new BigDecimal(9));
 		return dataSource;
 	}
 	
@@ -93,6 +85,6 @@ public class GroupReport1 {
 	}
 	
 	public static void main(String[] args) {
-		new GroupReport1();
+		new FieldSubtotalReport();
 	}
 }

@@ -42,7 +42,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SubtotalTest extends AbstractJasperValueTest implements Serializable {
+public class Subtotal1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private AggregationSubtotalBuilder<BigDecimal> subtotal1;

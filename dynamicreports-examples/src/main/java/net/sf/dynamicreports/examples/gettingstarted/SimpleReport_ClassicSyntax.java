@@ -42,7 +42,7 @@ public class SimpleReport_ClassicSyntax {
 		build();
 	}
 	
-	private void build() {	
+	private void build() {
 		try {
 			JasperReportBuilder report = DynamicReports.report();
 			report.addColumn(Columns.column("Item", "item", DataTypes.stringType()));
@@ -51,7 +51,7 @@ public class SimpleReport_ClassicSyntax {
 			report.addTitle(Components.text("Getting started"));
 			report.addPageFooter(Components.pageXofY());
 			report.setDataSource(createDataSource());
-			report.show();		
+			report.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

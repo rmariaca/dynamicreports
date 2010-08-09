@@ -45,21 +45,21 @@ public class ExpressionColumnReport {
 		build();
 	}
 	
-	private void build() {			
+	private void build() {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .fields(
-			  		field("orderdate", Date.class),
-			  		quantityField = field("quantity", Integer.class),
-			  		field("unitprice", BigDecimal.class))
+			  	field("orderdate", Date.class),
+			  	quantityField = field("quantity", Integer.class),
+			  	field("unitprice", BigDecimal.class))
 			  .columns(
-			  		col.column("Item", "item", type.stringType()),
-			  		col.column("Expression column", new ExpressionColumn()))
+			  	col.column("Item", "item", type.stringType()),
+			  	col.column("Expression column", new ExpressionColumn()))
 			  .title(Templates.createTitleComponent("ExpressionColumn"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

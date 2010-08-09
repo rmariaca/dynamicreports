@@ -158,6 +158,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T addScriptlet(DRIScriptlet ...scriptlets) {
 		Validate.notNull(scriptlets, "scriptlets must not be null");
+		Validate.noNullElements(scriptlets, "scriptlets must not contains null scriptlet");
 		for (DRIScriptlet scriptlet : scriptlets) {
 			getObject().addScriptlet(scriptlet);
 		}		
@@ -592,6 +593,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	//group
 	public T groupBy(ColumnBuilder<?, ?> ...groupColumns) {
 		Validate.notNull(groupColumns, "groupColumns must not be null");
+		Validate.noNullElements(groupColumns, "groupColumns must not contains null groupColumn");
 		for (ColumnBuilder<?, ?> groupColumn : groupColumns) {
 			addGroup(Groups.group(groupColumn));
 		}

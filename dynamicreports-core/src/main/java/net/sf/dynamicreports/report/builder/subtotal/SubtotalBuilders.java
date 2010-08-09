@@ -68,6 +68,142 @@ public class SubtotalBuilders {
 		return Subtotals.sum(expression, showInColumn);
 	}
 	
+	//average
+	public <T extends Number> AggregationSubtotalBuilder<Number> avg(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.avg(subtotalColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> avg(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.avg(fieldName, valueClass, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> avg(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.avg(field, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> avg(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.avg(expression, showInColumn);
+	}
+	
+	//count
+	public AggregationSubtotalBuilder<Long> count(ColumnBuilder<?, ?> subtotalColumn) {
+		return Subtotals.count(subtotalColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> count(String fieldName, Class<?> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.count(fieldName, valueClass, showInColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> count(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.count(field, showInColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> count(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.count(expression, showInColumn);
+	}
+	
+	//distinct count
+	public AggregationSubtotalBuilder<Long> distinctCount(ColumnBuilder<?, ?> subtotalColumn) {
+		return Subtotals.distinctCount(subtotalColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> distinctCount(String fieldName, Class<?> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.distinctCount(fieldName, valueClass, showInColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> distinctCount(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.distinctCount(field, showInColumn);
+	}
+
+	public AggregationSubtotalBuilder<Long> distinctCount(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.distinctCount(expression, showInColumn);
+	}
+	
+	//first
+	public <T> AggregationSubtotalBuilder<T> first(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.first(subtotalColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> first(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.first(fieldName, valueClass, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> first(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.first(field, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> first(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.first(expression, showInColumn);
+	}
+	
+	//highest
+	public <T> AggregationSubtotalBuilder<T> max(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.max(subtotalColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> max(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.max(fieldName, valueClass, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> max(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.max(field, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> max(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.max(expression, showInColumn);
+	}
+	
+	//lowest
+	public <T> AggregationSubtotalBuilder<T> min(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.min(subtotalColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> min(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.min(fieldName, valueClass, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> min(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.min(field, showInColumn);
+	}
+
+	public <T> AggregationSubtotalBuilder<T> min(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.min(expression, showInColumn);
+	}
+	
+	//standard deviation
+	public <T extends Number> AggregationSubtotalBuilder<Number> stdDev(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.stdDev(subtotalColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> stdDev(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.stdDev(fieldName, valueClass, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> stdDev(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.stdDev(field, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> stdDev(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.stdDev(expression, showInColumn);
+	}
+	
+	//variance
+	public <T extends Number> AggregationSubtotalBuilder<Number> var(ColumnBuilder<?, T> subtotalColumn) {
+		return Subtotals.var(subtotalColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> var(String fieldName, Class<T> valueClass, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.var(fieldName, valueClass, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> var(FieldBuilder<T> field, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.var(field, showInColumn);
+	}
+
+	public <T extends Number> AggregationSubtotalBuilder<Number> var(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+		return Subtotals.var(expression, showInColumn);
+	}
+	
 	//custom
 	public <T> CustomSubtotalBuilder<T> customValue(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return Subtotals.customValue(expression, showInColumn);	
@@ -90,7 +226,7 @@ public class SubtotalBuilders {
 		return Subtotals.percentage(field, showInColumn);
 	}
 	
-	public PercentageSubtotalBuilder percentage(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
+	/*public PercentageSubtotalBuilder percentage(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
 		return Subtotals.percentage(expression, showInColumn);
-	}
+	}*/
 }

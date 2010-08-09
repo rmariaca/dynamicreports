@@ -30,8 +30,8 @@ import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -39,31 +39,31 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupReport2 {
+public class FieldGroupReport {
 	
-	public GroupReport2() {
+	public FieldGroupReport() {
 		build();
 	}
 	
-	private void build() {		
-		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+	private void build() {
+		StyleBuilder groupStyle = stl.style().bold();
 		
-		ColumnGroupBuilder itemGroup = grp.group(itemColumn)
-				                              .setTitleWidth(30)		                                  
-		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
-		                                  .showColumnHeaderAndFooter();
+		CustomGroupBuilder itemGroup = grp.group("item", String.class)
+		                                  .setStyle(groupStyle)
+		                                  .setTitle("Item")
+		                                  .setTitleStyle(groupStyle)
+		                                  .setTitleWidth(30)
+		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
 		
 		try {			
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setShowColumnTitle(false)
 			  .columns(
-			  		itemColumn,
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	col.column("Order date", "orderdate", type.dateType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(itemGroup)
-			  .title(Templates.createTitleComponent("Group"))
+			  .title(Templates.createTitleComponent("FieldGroup"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();	
@@ -93,6 +93,6 @@ public class GroupReport2 {
 	}
 	
 	public static void main(String[] args) {
-		new GroupReport2();
+		new FieldGroupReport();
 	}
 }

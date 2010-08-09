@@ -49,22 +49,22 @@ public class DateGroupReport {
 		TextColumnBuilder<Date> monthColumn = col.column("Order month", "orderdate", type.dateMonthType());
 		
 		ColumnGroupBuilder yearGroup  = grp.group(yearColumn)
-                                       .groupByDataType();
+		                                   .groupByDataType();
 		ColumnGroupBuilder monthGroup = grp.group(monthColumn)
-                                       .groupByDataType();
+		                                   .groupByDataType();
 		
-		try {			
+		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		yearColumn,
-			  		monthColumn,
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Item",       "item",      type.stringType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	yearColumn,
+			  	monthColumn,
+			  	col.column("Order date", "orderdate", type.dateType()),
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(
-			  		yearGroup, monthGroup)
+			  	yearGroup, monthGroup)
 			  .title(Templates.createTitleComponent("DateGroup"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())

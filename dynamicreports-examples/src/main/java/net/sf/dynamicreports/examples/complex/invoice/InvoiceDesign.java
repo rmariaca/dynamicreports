@@ -61,7 +61,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		                                                     .setFixedWidth(250);
 		TextColumnBuilder<Integer>    quantityColumn    = col.column("Quantity", "quantity", type.integerType())
 		                                                     .setHorizontalAlignment(HorizontalAlignment.CENTER);
-		TextColumnBuilder<BigDecimal> unitPriceColumn   = col.column("Unit Price", "unitprice", Templates.currencyType);		
+		TextColumnBuilder<BigDecimal> unitPriceColumn   = col.column("Unit Price", "unitprice", Templates.currencyType);
 		TextColumnBuilder<String>     taxColumn         = col.column("Tax", exp.text("20%"))
 		                                                     .setFixedColumns(3);
 		//price = unitPrice * quantity
@@ -83,7 +83,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		  .setColumnStyle(columnStyle)
 		  .setSubtotalStyle(subtotalStyle)
 		  //columns
-		  .columns(					
+		  .columns(
 		  	rowNumberColumn, descriptionColumn, quantityColumn, unitPriceColumn, totalColumn, priceColumn, taxColumn, vatColumn)
 		  .columnGrid(
 		  	rowNumberColumn, descriptionColumn, quantityColumn, unitPriceColumn,
@@ -95,7 +95,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		  	totalSum, sbt.sum(priceColumn), sbt.sum(vatColumn))
 		  //band components
 		  .title(
-		  	Templates.createTitleComponent("Invoice No.: " + invoice.getId()),		
+		  	Templates.createTitleComponent("Invoice No.: " + invoice.getId()),
 		  	cmp.horizontalList().setStyle(stl.style(10)).setGap(50).add(
 		  		cmp.hListCell(createCustomerComponent("Bill To", invoice.getBillTo())).heightFixedOnTop(),
 		  		cmp.hListCell(createCustomerComponent("Ship To", invoice.getShipTo())).heightFixedOnTop()),
@@ -122,7 +122,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 							list);
 	}
 	
-	private void addCustomerAttribute(HorizontalListBuilder list, String label, String value) {		
+	private void addCustomerAttribute(HorizontalListBuilder list, String label, String value) {
 		if (value != null) {
 			list.add(cmp.text(label + ":").setFixedColumns(8).setStyle(Templates.boldStyle), cmp.text(value)).newRow();
 		}
@@ -135,6 +135,6 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 			BigDecimal total = reportParameters.getValue(totalSum);
 			BigDecimal shipping = total.add(invoice.getShipping());
 			return "Total payment: " + Templates.currencyType.valueToString(shipping, reportParameters.getLocale());
-		}		
+		}
 	}
 }

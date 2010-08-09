@@ -41,7 +41,7 @@ public class ReportUtils {
 	
 	public static Class<?> getVariableValueClass(Calculation calculation, Class<?> valueClass) {
 		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
-			return Integer.class;
+			return Long.class;
 		}
 		if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
 				calculation.equals(Calculation.VARIANCE)) {

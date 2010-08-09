@@ -49,8 +49,8 @@ public class SimpleReport_Step07 {
 		StyleBuilder boldStyle         = stl.style().bold();
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
-		                                    .setBorder(stl.pen1Point())		                                    
-		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
+		                                    .setBorder(stl.pen1Point())
+		                                    .setBackgroundColor(Color.LIGHT_GRAY);
 		
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
@@ -58,11 +58,11 @@ public class SimpleReport_Step07 {
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
 		//price = unitPrice * quantity
 		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price");
-		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
+		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);		
+		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		Bar3DChartBuilder itemChart = cht.bar3DChart()
 		                                 .setTitle("Sales by item")
 		                                 .setCategory(itemColumn)
@@ -73,30 +73,30 @@ public class SimpleReport_Step07 {
 		                                 .setCategory(itemColumn)
 		                                 .setUseSeriesAsCategory(true)
 		                                 .addSerie(
-		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));		
-		try {			
+		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
+		try {
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
 			  .setSubtotalStyle(boldStyle)
 			  .highlightDetailEvenRows()
-			  .columns(//add columns			  		
-			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
+			  .columns(//add columns
+			  	rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
 			  .columnGrid(
-			  		rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
+			  	rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
 			  .groupBy(itemColumn)
 			  .subtotalsAtSummary(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
+			  	sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
+			  	sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .summary(
-			  		cmp.horizontalList(itemChart, itemChart2))
+			  	cmp.horizontalList(itemChart, itemChart2))
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report						
+			  .show();//create and show report
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

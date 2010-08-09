@@ -44,7 +44,7 @@ public class BandReport {
 		build();
 	}
 	
-	private void build() {	
+	private void build() {
 		boldCenteredStyle = stl.style()
 		                       .bold()
 		                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
@@ -60,7 +60,7 @@ public class BandReport {
 			report()//create new report design
 			  .setPageColumnsPerPage(2)
 			  .columns(column1, column2)
-			  .groupBy(columnGroup)			  
+			  .groupBy(columnGroup)
 			  
 			  //bands
 			  .title(createTextField("This is a title band"))

@@ -44,25 +44,25 @@ public class PercentageColumnsReport {
 		build();
 	}
 	
-	private void build() {			
+	private void build() {
 		try {
 			unitPriceField = field("unitprice", BigDecimal.class);
 			
 			TextColumnBuilder<String>  itemColumn          = col.column("Item", "item", type.stringType());
-			TextColumnBuilder<Integer> quantityColumn      = col.column("Quantity", "quantity", type.integerType());			
+			TextColumnBuilder<Integer> quantityColumn      = col.column("Quantity", "quantity", type.integerType());
 			PercentageColumnBuilder    quantityPercColumn  = col.percentageColumn("Quantity [%]", quantityColumn);
 			PercentageColumnBuilder    unitPricePercColumn = col.percentageColumn("Unit price [%]", unitPriceField);
 			
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .fields(
-			  		unitPriceField)
+			  	unitPriceField)
 			  .columns(
-			  		itemColumn,	quantityColumn,	quantityPercColumn, unitPricePercColumn)
+			  	itemColumn, quantityColumn, quantityPercColumn, unitPricePercColumn)
 			  .title(Templates.createTitleComponent("PercentageColumns"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

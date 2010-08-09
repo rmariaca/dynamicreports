@@ -43,14 +43,14 @@ public class SimpleReport_Step01 {
 		try {
 			report()//create new report design
 			  .columns(//add columns
-			  		//            title,     field name     data type
-			  		col.column("Item",       "item",      type.stringType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	//            title,     field name     data type
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .title(cmp.text("Getting started"))//shows report title
 			  .pageFooter(cmp.pageXofY())//shows number of page at page footer
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report		
+			  .show();//create and show report
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

@@ -34,15 +34,30 @@ import java.util.Collection;
 import javax.imageio.ImageIO;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
-import net.sf.dynamicreports.design.transformation.StyleResolver;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
-import net.sf.dynamicreports.report.base.style.DRFont;
+import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.Exporters;
+import net.sf.dynamicreports.jasper.builder.export.JasperCsvExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperDocxExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperExcelApiXlsExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperOdsExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperOdtExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperRtfExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperTextExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXmlssExporterBuilder;
+import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.QueryBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
-import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -56,23 +71,8 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JExcelApiExporter;
-import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.export.JRRtfExporter;
-import net.sf.jasperreports.engine.export.JRTextExporter;
-import net.sf.jasperreports.engine.export.JRTextExporterParameter;
-import net.sf.jasperreports.engine.export.JRXhtmlExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.engine.export.JRXmlExporter;
-import net.sf.jasperreports.engine.export.oasis.JROdsExporter;
-import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
-import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
-import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
-import net.sf.jasperreports.engine.export.xmlss.JRXmlssExporter;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
 import net.sf.jasperreports.view.JasperDesignViewer;
 import net.sf.jasperreports.view.JasperViewer;
@@ -264,71 +264,138 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 	
+	//csv
 	public JasperReportBuilder toCsv(OutputStream outputStream) throws DRException {
-		return export(new JRCsvExporter(), outputStream);
+		return toCsv(Exporters.csvExporter(outputStream));
+	}
+
+	public JasperReportBuilder toCsv(JasperCsvExporterBuilder csvExporterBuilder) throws DRException {
+		return export(csvExporterBuilder);
 	}
 	
+	//docx
 	public JasperReportBuilder toDocx(OutputStream outputStream) throws DRException {
-		return export(new JRDocxExporter(), outputStream);
+		return toDocx(Exporters.docxExporter(outputStream));
 	}
 
+	public JasperReportBuilder toDocx(JasperDocxExporterBuilder docxExporterBuilder) throws DRException {
+		return export(docxExporterBuilder);
+	}
+	
+	//html
 	public JasperReportBuilder toHtml(OutputStream outputStream) throws DRException {
-		return export(new JRHtmlExporter(), outputStream);
+		return toHtml(Exporters.htmlExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toHtml(JasperHtmlExporterBuilder htmlExporterBuilder) throws DRException {
+		return export(htmlExporterBuilder);
+	}
+	
+	//ods
 	public JasperReportBuilder toOds(OutputStream outputStream) throws DRException {
-		return export(new JROdsExporter(), outputStream);
+		return toOds(Exporters.odsExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toOds(JasperOdsExporterBuilder odsExporterBuilder) throws DRException {
+		return export(odsExporterBuilder);
+	}
+	
+	//odt
 	public JasperReportBuilder toOdt(OutputStream outputStream) throws DRException {
-		return export(new JROdtExporter(), outputStream);
+		return toOdt(Exporters.odtExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toOdt(JasperOdtExporterBuilder odtExporterBuilder) throws DRException {
+		return export(odtExporterBuilder);
+	}
+	
+	//pdf
 	public JasperReportBuilder toPdf(OutputStream outputStream) throws DRException {
-		return export(new JRPdfExporter(), outputStream);
+		return toPdf(Exporters.pdfExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toPdf(JasperPdfExporterBuilder pdfExporterBuilder) throws DRException {
+		return export(pdfExporterBuilder);
+	}
+	
+	//rtf
 	public JasperReportBuilder toRtf(OutputStream outputStream) throws DRException {
-		return export(new JRRtfExporter(), outputStream);
+		return toRtf(Exporters.rtfExporter(outputStream));
 	}
 	
-	public JasperReportBuilder toText(OutputStream outputStream) throws DRException {		
-		DRFont font = Defaults.getDefaults().getFont();
-		JRTextExporter exporter = new JRTextExporter();
-		exporter.setParameter(JRTextExporterParameter.CHARACTER_WIDTH, new Float(StyleResolver.getFontWidth(font)));
-		exporter.setParameter(JRTextExporterParameter.CHARACTER_HEIGHT, new Float(StyleResolver.getFontHeight(font)));
-		return export(exporter, outputStream);
+	public JasperReportBuilder toRtf(JasperRtfExporterBuilder rtfExporterBuilder) throws DRException {
+		return export(rtfExporterBuilder);
 	}
 	
+	//text
+	public JasperReportBuilder toText(OutputStream outputStream) throws DRException {
+		return toText(Exporters.textExporter(outputStream));
+	}
+	
+	public JasperReportBuilder toText(JasperTextExporterBuilder textExporterBuilder) throws DRException {
+		return export(textExporterBuilder);
+	}
+	
+	//xhtml
 	public JasperReportBuilder toXhtml(OutputStream outputStream) throws DRException {
-		return export(new JRXhtmlExporter(), outputStream);
+		return toXhtml(Exporters.xhtmlExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toXhtml(JasperXhtmlExporterBuilder xhtmlExporterBuilder) throws DRException {
+		return export(xhtmlExporterBuilder);
+	}
+	
+	//excelApiXls
 	public JasperReportBuilder toExcelApiXls(OutputStream outputStream) throws DRException {
-		return export(new JExcelApiExporter(), outputStream);
+		return toExcelApiXls(Exporters.excelApiXlsExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toExcelApiXls(JasperExcelApiXlsExporterBuilder excelApiXlsExporterBuilder) throws DRException {
+		return export(excelApiXlsExporterBuilder);
+	}
+	
+	//xls
 	public JasperReportBuilder toXls(OutputStream outputStream) throws DRException {
-		return export(new JRXlsExporter(), outputStream);
+		return toXls(Exporters.xlsExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toXls(JasperXlsExporterBuilder xlsExporterBuilder) throws DRException {
+		return export(xlsExporterBuilder);
+	}
+	
+	//xlsx
 	public JasperReportBuilder toXlsx(OutputStream outputStream) throws DRException {
-		return export(new JRXlsxExporter(), outputStream);
+		return toXlsx(Exporters.xlsxExporter(outputStream));
 	}
 	
+	public JasperReportBuilder toXlsx(JasperXlsxExporterBuilder xlsxExporterBuilder) throws DRException {
+		return export(xlsxExporterBuilder);
+	}
+	
+	//xml
 	public JasperReportBuilder toXml(OutputStream outputStream) throws DRException {
-		return export(new JRXmlExporter(), outputStream);
+		return toXml(Exporters.xmlExporter(outputStream));
 	}
 
-	public JasperReportBuilder toXmlss(OutputStream outputStream) throws DRException {
-		return export(new JRXmlssExporter(), outputStream);
+	public JasperReportBuilder toXml(JasperXmlExporterBuilder xmlExporterBuilder) throws DRException {
+		return export(xmlExporterBuilder);
 	}
 	
-	private JasperReportBuilder export(JRExporter exporter, OutputStream outputStream) throws DRException {
-		Validate.notNull(outputStream, "outputStream must not be null");
+	//xmlss
+	public JasperReportBuilder toXmlss(OutputStream outputStream) throws DRException {
+		return toXmlss(Exporters.xmlssExporter(outputStream));
+	}
+	
+	public JasperReportBuilder toXmlss(JasperXmlssExporterBuilder xmlssExporterBuilder) throws DRException {
+		return export(xmlssExporterBuilder);
+	}
+	
+	private JasperReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
+		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {
+			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
+			JRExporter exporter = exporterTransform.transform();
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, toJasperPrint());
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
 			exporter.exportReport();
 		} catch (JRException e) {
 			throw new DRException(e);

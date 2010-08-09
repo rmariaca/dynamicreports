@@ -49,7 +49,7 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 	protected AggregationSubtotalBuilder(ColumnBuilder<?, ?> column, Calculation calculation) {
 		this(column.getColumn(), column, calculation);
 		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
-			setDataType(DataTypes.integerType());
+			setDataType(DataTypes.longType());
 		}
 		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
 				calculation.equals(Calculation.VARIANCE)) {

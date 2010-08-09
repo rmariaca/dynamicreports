@@ -24,8 +24,6 @@ package net.sf.dynamicreports.examples.group;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
@@ -48,23 +46,20 @@ public class CustomGroupReport {
 	private void build() {				
 		CustomGroupBuilder yearGroup = grp.group(new YearExpression());
 		
-		try {			
+		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		col.column("Order date", "orderdate", type.stringType()),
-			  		col.column("Item",       "item",      type.stringType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	col.column("Order date", "orderdate", type.stringType()),
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(yearGroup)
 			  .title(Templates.createTitleComponent("CustomGroup"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .toJrXml(new FileOutputStream("c:/report.jrxml"))
 			  .show();	
 		} catch (DRException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

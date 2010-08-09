@@ -22,8 +22,13 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.List;
+
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.jasper.constant.PdfPermission;
+import net.sf.dynamicreports.jasper.constant.PdfVersion;
+import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -49,6 +54,8 @@ import net.sf.jasperreports.engine.JRReport;
 import net.sf.jasperreports.engine.JRTextElement;
 import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignChart;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
+import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJdbcQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
@@ -63,6 +70,8 @@ import org.jfree.data.time.Quarter;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Week;
 import org.jfree.data.time.Year;
+
+import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -375,5 +384,62 @@ class ConstantTransform {
 		default:
 			throw new JasperDesignException("Calculation " + calculation.name() + " not supported");
 		}
+	}
+	
+	protected static String sizeUnit(SizeUnit sizeUnit) {
+		switch (sizeUnit) {
+		case PIXEL:
+			return JRHtmlExporterParameter.SIZE_UNIT_PIXEL;
+		case POINT:
+			return JRHtmlExporterParameter.SIZE_UNIT_POINT;
+		default:
+			throw new JasperDesignException("SizeUnit " + sizeUnit.name() + " not supported");
+		}
+	}
+	
+	protected static Character pdfVersion(PdfVersion pdfVersion) {
+		switch (pdfVersion) {
+		case VERION_1_2:
+			return JRPdfExporterParameter.PDF_VERSION_1_2;
+		case VERION_1_3:
+			return JRPdfExporterParameter.PDF_VERSION_1_3;
+		case VERION_1_4:
+			return JRPdfExporterParameter.PDF_VERSION_1_4;
+		case VERION_1_5:
+			return JRPdfExporterParameter.PDF_VERSION_1_5;
+		case VERION_1_6:
+			return JRPdfExporterParameter.PDF_VERSION_1_6;
+		case VERION_1_7:
+			return JRPdfExporterParameter.PDF_VERSION_1_7;
+		default:
+			throw new JasperDesignException("PdfVersion " + pdfVersion.name() + " not supported");
+		}
+	}
+
+	protected static Integer pdfPermission(List<PdfPermission> permissions) {
+		int permission = 0;
+		for (PdfPermission pdfPermission : permissions) {
+			switch (pdfPermission) {
+			case PRINTING:
+				return permission | PdfWriter.ALLOW_PRINTING;
+			case MODIFY_CONTENTS:
+				return permission | PdfWriter.ALLOW_MODIFY_CONTENTS;
+			case COPY:
+				return permission | PdfWriter.ALLOW_COPY;
+			case MODIFY_ANNOTATIONS:
+				return permission | PdfWriter.ALLOW_MODIFY_ANNOTATIONS;
+			case FILL_IN:
+				return permission | PdfWriter.ALLOW_FILL_IN;
+			case SCREEN_READERS:
+				return permission | PdfWriter.ALLOW_SCREENREADERS;
+			case ASSEMBLY:
+				return permission | PdfWriter.ALLOW_ASSEMBLY;
+			case DEGRADED_PRINTING:
+				return permission | PdfWriter.ALLOW_DEGRADED_PRINTING;
+			default:
+				throw new JasperDesignException("PdfPermission " + pdfPermission.name() + " not supported");
+			}
+		}
+		return permission;
 	}
 }

@@ -45,16 +45,16 @@ public class ColumnGrid2Report {
 			columns[i - 1] = col.column("Column" + i, "column" + i, type.stringType());
 		}
 		
-		try {			
+		try {
 			report()
 			  .setTextStyle(stl.style(stl.pen1Point()))
-			  .columns(columns)	
+			  .columns(columns)
 			  .columnGrid(
 			  	grid.horizontalColumnGridList(
 			  		columns[0],
 			  		grid.verticalColumnGridList(
-			  			columns[1], 
-			  			grid.horizontalColumnGridList(columns[2], columns[3]), 
+			  			columns[1],
+			  			grid.horizontalColumnGridList(columns[2], columns[3]),
 			  			columns[4]),
 			  		grid.verticalColumnGridList(columns[5], columns[6]))
 			  	.newRow()

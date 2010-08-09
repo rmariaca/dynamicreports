@@ -36,7 +36,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class Columns {
 	
-	//text
+	//text	
 	public static <T> TextColumnBuilder<T> column(String fieldName, Class<T> valueClass) {
 		return column(DynamicReports.field(fieldName, valueClass));
 	}

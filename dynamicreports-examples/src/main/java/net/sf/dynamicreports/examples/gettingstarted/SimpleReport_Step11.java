@@ -55,7 +55,7 @@ public class SimpleReport_Step11 {
 		StyleBuilder boldStyle         = stl.style().bold();
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
-		                                    .setBorder(stl.pen1Point())		                                    
+		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);
 		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
 		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
@@ -68,11 +68,11 @@ public class SimpleReport_Step11 {
 		//price = unitPrice * quantity
 		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
 		                                                               .setDataType(currencyType);
-		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
+		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);		
+		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		Bar3DChartBuilder itemChart = cht.bar3DChart()
 		                                 .setTitle("Sales by item")
 		                                 .setCategory(itemColumn)
@@ -87,26 +87,26 @@ public class SimpleReport_Step11 {
 		ColumnGroupBuilder itemGroup = grp.group(itemColumn);
 		itemGroup.setPrintSubtotalsWhenExpression(exp.printWhenGroupHasMoreThanOneRow(itemGroup));
 		
-		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(priceColumn, 150))		
+		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(priceColumn, 150))
 		                                        .setBackgroundColor(new Color(210, 255, 210));
 		ConditionalStyleBuilder condition2 = stl.conditionalStyle(cnd.smaller(priceColumn, 30))
 		                                        .setBackgroundColor(new Color(255, 210, 210));
-		try {			
+		try {
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
 			  .setSubtotalStyle(boldStyle)
 			  .highlightDetailEvenRows()
-			  .columns(//add columns			  		
-			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
+			  .columns(//add columns
+			  	rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
 			  .columnGrid(
-			  		rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
+			  	rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
 			  .groupBy(itemGroup)
 			  .subtotalsAtSummary(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
+			  	sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			
+			  	sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .detailRowHighlighters(
-			  		condition1, condition2)
+			  	condition1, condition2)
 			  .title(//shows report title
 			  	cmp.horizontalList()
 			  		.add(
@@ -114,15 +114,15 @@ public class SimpleReport_Step11 {
 			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
 			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
 			  		.newRow()
-			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))			
+			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .summary(
-			  		cmp.horizontalList(itemChart, itemChart2))
+			  	cmp.horizontalList(itemChart, itemChart2))
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report						
+			  .show();//create and show report
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private class CurrencyType extends BigDecimalType {

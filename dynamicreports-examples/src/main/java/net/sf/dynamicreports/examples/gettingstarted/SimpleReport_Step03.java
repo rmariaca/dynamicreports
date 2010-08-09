@@ -48,7 +48,7 @@ public class SimpleReport_Step03 {
 		StyleBuilder boldStyle         = stl.style().bold();
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
-		                                    .setBorder(stl.pen1Point())		                                    
+		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
 				
 		//                                                           title,     field name     data type
@@ -66,14 +66,14 @@ public class SimpleReport_Step03 {
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
 			  .highlightDetailEvenRows()
-			  .columns(//add columns			  		
-			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
+			  .columns(//add columns
+			  	rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
 			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report						
+			  .show();//create and show report
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
 	

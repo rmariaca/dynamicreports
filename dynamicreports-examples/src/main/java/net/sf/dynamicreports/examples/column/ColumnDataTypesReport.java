@@ -41,23 +41,23 @@ public class ColumnDataTypesReport {
 		build();
 	}
 	
-	private void build() {			
+	private void build() {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		col.column("Item",        "item",      type.stringType()),
-			  		col.column("Quantity",    "quantity",  type.integerType()),
-			  		col.column("Unit price",  "unitprice", type.bigDecimalType()),
-			  		col.column("Order date",  "orderdate", type.dateType()),
-			  		col.column("Order date",  "orderdate", type.dateYearToFractionType()),
-			  		col.column("Order year",  "orderdate", type.dateYearType()),
-			  		col.column("Order month", "orderdate", type.dateMonthType()),
-			  		col.column("Order day",   "orderdate", type.dateDayType()))
+			  	col.column("Item",        "item",      type.stringType()),
+			  	col.column("Quantity",    "quantity",  type.integerType()),
+			  	col.column("Unit price",  "unitprice", type.bigDecimalType()),
+			  	col.column("Order date",  "orderdate", type.dateType()),
+			  	col.column("Order date",  "orderdate", type.dateYearToFractionType()),
+			  	col.column("Order year",  "orderdate", type.dateYearType()),
+			  	col.column("Order month", "orderdate", type.dateMonthType()),
+			  	col.column("Order day",   "orderdate", type.dateDayType()))
 			  .title(Templates.createTitleComponent("ColumnDataTypes"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
