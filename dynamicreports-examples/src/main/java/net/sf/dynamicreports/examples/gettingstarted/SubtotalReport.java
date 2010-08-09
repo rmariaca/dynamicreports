@@ -59,17 +59,17 @@ public class SubtotalReport {
 			  .groupBy(columnGroup)			  
 			  
 			  //subtotals
-			  .subtotalsAtTitle(createSubtotal("This is title sum"))
-			  .subtotalsAtPageHeader(createSubtotal("This is page header sum"))
-			  .subtotalsAtPageFooter(createSubtotal("This is page footer sum"))
-			  .subtotalsAtColumnHeader(createSubtotal("This is column header sum"))
-			  .subtotalsAtColumnFooter(createSubtotal("This is column footer sum"))			  
-			  .subtotalsAtLastPageFooter(createSubtotal("This is last page footer sum"))
-			  .subtotalsAtSummary(createSubtotal("This is summary sum"))
-			  .subtotalsAtGroupHeader(columnGroup, createSubtotal("This is group header sum"))
-			  .subtotalsAtGroupFooter(columnGroup, createSubtotal("This is group footer sum"))
-			  .subtotalsOfPercentageAtGroupHeader(columnGroup, createPercSubtotal("This is group header perc."))
-			  .subtotalsOfPercentageAtGroupFooter(columnGroup, createPercSubtotal("This is group footer perc."))
+			  .subtotalsAtTitle(createSubtotal("This is a title sum"))
+			  .subtotalsAtPageHeader(createSubtotal("This is a page header sum"))
+			  .subtotalsAtPageFooter(createSubtotal("This is a page footer sum"))
+			  .subtotalsAtColumnHeader(createSubtotal("This is a column header sum"))
+			  .subtotalsAtColumnFooter(createSubtotal("This is a column footer sum"))			  
+			  .subtotalsAtLastPageFooter(createSubtotal("This is a last page footer sum"))
+			  .subtotalsAtSummary(createSubtotal("This is a summary sum"))
+			  .subtotalsAtGroupHeader(columnGroup, createSubtotal("This is a group header sum"))
+			  .subtotalsAtGroupFooter(columnGroup, createSubtotal("This is a group footer sum"))
+			  .subtotalsOfPercentageAtGroupHeader(columnGroup, createPercSubtotal("This is a group header perc."))
+			  .subtotalsOfPercentageAtGroupFooter(columnGroup, createPercSubtotal("This is a group footer perc."))
 			  
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report		

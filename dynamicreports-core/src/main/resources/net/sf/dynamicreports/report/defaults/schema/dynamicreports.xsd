@@ -22,6 +22,9 @@
 			<xs:element name="dateYearToMinuteType" type="DataType" minOccurs="0"/>			
 			<xs:element name="dateYearToSecondType" type="DataType" minOccurs="0"/>
 			<xs:element name="dateYearToFractionType" type="DataType" minOccurs="0"/>			
+			<xs:element name="dateYearType" type="DataType" minOccurs="0"/>
+			<xs:element name="dateMonthType" type="DataType" minOccurs="0"/>
+			<xs:element name="dateDayType" type="DataType" minOccurs="0"/>						
 			<xs:element name="timeHourToMinuteType" type="DataType" minOccurs="0"/>
 			<xs:element name="timeHourToSecondType" type="DataType" minOccurs="0"/>
 			<xs:element name="timeHourToFractionType" type="DataType" minOccurs="0"/>

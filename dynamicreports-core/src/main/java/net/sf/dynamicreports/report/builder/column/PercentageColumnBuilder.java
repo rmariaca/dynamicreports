@@ -33,7 +33,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.PercentageTotalType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
 import org.apache.commons.lang.Validate;
@@ -59,10 +58,10 @@ public class PercentageColumnBuilder extends ColumnBuilder<PercentageColumnBuild
 		this.actualExpression = field.getField();
 	}	
 	
-	protected PercentageColumnBuilder(DRISimpleExpression<? extends Number> valueExpression) {
+	/*protected PercentageColumnBuilder(DRISimpleExpression<? extends Number> valueExpression) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.actualExpression = valueExpression;
-	}
+	}*/
 	
 	public PercentageColumnBuilder setTotalType(PercentageTotalType totalType) {
 		this.totalType = totalType;

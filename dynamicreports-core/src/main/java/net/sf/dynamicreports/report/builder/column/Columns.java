@@ -45,11 +45,11 @@ public class Columns {
 		return column(title, DynamicReports.field(fieldName, valueClass));
 	}
 
-	public static <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<T> dataType) {
+	public static <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<? super T, T> dataType) {
 		return column(DynamicReports.field(fieldName, dataType.getValueClass())).setDataType(dataType);
 	}
 
-	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<T> dataType) {
+	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {
 		Validate.notNull(dataType, "dataType must not be null");
 		return column(title, DynamicReports.field(fieldName, dataType.getValueClass())).setDataType(dataType);
 	}
@@ -96,13 +96,13 @@ public class Columns {
 		return percentageColumn(field).setTitle(title);
 	}	
 	
-	public static PercentageColumnBuilder percentageColumn(DRISimpleExpression<? extends Number> expression) {
+	/*public static PercentageColumnBuilder percentageColumn(DRISimpleExpression<? extends Number> expression) {
 		return new PercentageColumnBuilder(expression);
 	}
 	
 	public static PercentageColumnBuilder percentageColumn(String title, DRISimpleExpression<? extends Number> expression) {
 		return percentageColumn(expression).setTitle(title);
-	}		
+	}	*/	
 	
 	//column row number
 	public static TextColumnBuilder<Integer> columnRowNumberColumn() {

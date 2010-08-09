@@ -40,7 +40,10 @@ public class DataTypes {
 	private static final DateYearToHourType dateYearToHourType = new DateYearToHourType();
 	private static final DateYearToMinuteType dateYearToMinuteType = new DateYearToMinuteType();	
 	private static final DateYearToSecondType dateYearToSecondType = new DateYearToSecondType();
-	private static final DateYearToFractionType dateYearToFractionType = new DateYearToFractionType();
+	private static final DateYearToFractionType dateYearToFractionType = new DateYearToFractionType();	
+	private static final DateYearType dateYearType = new DateYearType();
+	private static final DateMonthType dateMonthType = new DateMonthType();
+	private static final DateDayType dateDayType = new DateDayType();	
 	private static final TimeHourToMinuteType timeHourToMinuteType = new TimeHourToMinuteType();
 	private static final TimeHourToSecondType timeHourToSecondType = new TimeHourToSecondType();
 	private static final TimeHourToFractionType timeHourToFractionType = new TimeHourToFractionType();	
@@ -71,6 +74,18 @@ public class DataTypes {
 	
 	public static DateYearToFractionType dateYearToFractionType() {
 		return dateYearToFractionType;
+	}
+	
+	public static DateYearType dateYearType() {
+		return dateYearType;
+	}
+	
+	public static DateMonthType dateMonthType() {
+		return dateMonthType;
+	}
+	
+	public static DateDayType dateDayType() {
+		return dateDayType;
 	}
 	
 	public static DateYearToHourType dateYearToHourType() {

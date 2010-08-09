@@ -20,14 +20,14 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.sales;
+package net.sf.dynamicreports.examples.complex.sales;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
-import net.sf.dynamicreports.examples.ReportData;
+import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**

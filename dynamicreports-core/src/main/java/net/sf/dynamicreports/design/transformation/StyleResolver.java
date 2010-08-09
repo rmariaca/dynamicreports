@@ -27,11 +27,12 @@ import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.report.base.style.DRFont;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-class StyleResolver {
+public class StyleResolver {
 	private static FontRenderContext context = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).createGraphics().getFontRenderContext();
 	
 	protected static int getFontWidth(DRDesignStyle style, int columns) {
@@ -44,18 +45,31 @@ class StyleResolver {
 		return (int) Math.ceil(height * rows) + getVerticalPadding(style);
 	}
 
+	public static double getFontWidth(DRFont font) {
+		Font fnt = getFont(font.getFontName(), font.getBold(), font.getItalic(), font.getFontSize());
+		return fnt.getStringBounds("m", context).getWidth();
+	}
+	
+	public static double getFontHeight(DRFont font) {
+		Font fnt = getFont(font.getFontName(), font.getBold(), font.getItalic(), font.getFontSize());
+		return fnt.getMaxCharBounds(context).getHeight();
+	}
+	
 	private static Font getFont(DRDesignStyle style) {
 		String fontName = getFontName(style);	
 		Integer fontSize = getFontSize(style);
 		Boolean bold = getFontBold(style);
+		Boolean italic = getFontItalic(style);
+		return getFont(fontName, bold, italic, fontSize);
+	}
+	
+	private static Font getFont(String fontName, Boolean bold, Boolean italic, Integer fontSize) {
 		if (bold == null) {
 			bold = false;
 		}
-		Boolean italic = getFontItalic(style);
 		if (italic == null) {
 			italic = false;
 		}
-		
 		int fontStyle;
 		if (bold && italic) {
 			fontStyle = Font.BOLD | Font.ITALIC;

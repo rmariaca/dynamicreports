@@ -26,6 +26,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
 
@@ -33,14 +34,20 @@ import net.sf.dynamicreports.report.constant.Constants;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public abstract class NumberType<T extends Number> extends AbstractDataType<T> {
+public abstract class NumberType<T extends Number> extends AbstractDataType<Number, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	@Override
-	public String toString(Object value, Locale locale) {		
+	public String valueToString(Number value, Locale locale) {		
 		if (value != null) {
 			return new DecimalFormat(getPattern(), new DecimalFormatSymbols(locale)).format(value);
 		}
 		return null;
+	}
+		
+	@SuppressWarnings("unchecked")
+	@Override
+	public Class<T> getValueClass() {
+		return (Class<T>) ReportUtils.getGenericClass(this, 0);
 	}
 }

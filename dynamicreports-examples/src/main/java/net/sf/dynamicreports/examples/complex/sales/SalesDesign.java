@@ -20,15 +20,15 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.sales;
+package net.sf.dynamicreports.examples.complex.sales;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.ReportDesign;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.examples.complex.ReportDesign;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.PieChartBuilder;
@@ -111,6 +111,6 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		  		itemChart, cmp.verticalList(dateChart, stateChart)),
 		  	cmp.filler().setFixedHeight(10))
 		  .pageFooter(
-		  	cmp.pageXofY().setStyle(stl.style(Templates.boldCenteredStyle).setTopBorder(stl.pen1Point())));
+		  	Templates.footerComponent);
 	}
 }

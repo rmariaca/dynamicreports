@@ -20,16 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.invoice;
+package net.sf.dynamicreports.examples.complex.invoice;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.ReportDesign;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.invoice.InvoiceData.Customer;
-import net.sf.dynamicreports.examples.invoice.InvoiceData.Invoice;
+import net.sf.dynamicreports.examples.complex.ReportDesign;
+import net.sf.dynamicreports.examples.complex.invoice.InvoiceData.Customer;
+import net.sf.dynamicreports.examples.complex.invoice.InvoiceData.Invoice;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -101,7 +101,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		  		cmp.hListCell(createCustomerComponent("Ship To", invoice.getShipTo())).heightFixedOnTop()),
 		  	cmp.filler().setFixedHeight(10))
 		  .pageFooter(
-		  	cmp.pageXofY().setStyle(Templates.boldCenteredStyle))
+		  	Templates.footerComponent)
 		  .summary(
 		  	cmp.text(invoice.getShipping()).setValueFormatter(Templates.createCurrencyValueFormatter("Shipping:")).setStyle(shippingStyle),
 		  	cmp.horizontalList(
@@ -134,7 +134,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		public String evaluate(ReportParameters reportParameters) {
 			BigDecimal total = reportParameters.getValue(totalSum);
 			BigDecimal shipping = total.add(invoice.getShipping());
-			return "Total payment: " + Templates.currencyType.toString(shipping, reportParameters.getLocale());
+			return "Total payment: " + Templates.currencyType.valueToString(shipping, reportParameters.getLocale());
 		}		
 	}
 }

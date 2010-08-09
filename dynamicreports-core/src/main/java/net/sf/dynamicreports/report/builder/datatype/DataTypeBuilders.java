@@ -68,6 +68,18 @@ public class DataTypeBuilders {
 		return DataTypes.dateYearToSecondType();
 	}
 	
+	public DateYearType dateYearType() {
+		return DataTypes.dateYearType();
+	}
+	
+	public DateMonthType dateMonthType() {
+		return DataTypes.dateMonthType();
+	}
+	
+	public DateDayType dateDayType() {
+		return DataTypes.dateDayType();
+	}
+	
 	public DoubleType doubleType() {
 		return DataTypes.doubleType();
 	}

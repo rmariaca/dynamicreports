@@ -20,26 +20,26 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.invoice;
+package net.sf.dynamicreports.report.builder.datatype;
 
-import net.sf.dynamicreports.examples.AbstractReportMain;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class InvoiceMain extends AbstractReportMain<InvoiceDesign, InvoiceData> {
+@SuppressWarnings("ucd")
+public class DateDayType extends DateType {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	@Override
-	protected InvoiceDesign getReportDesign() {
-		return new InvoiceDesign();
+	public String getPattern() {
+		return Defaults.getDefaults().getDateDayType().getPattern();
 	}
 	
 	@Override
-	protected InvoiceData getReportData() {
-		return new InvoiceData();
-	}
-	
-	public static void main(String[] args) {
-		new InvoiceMain();
+	public HorizontalAlignment getHorizontalAlignment() {
+		return Defaults.getDefaults().getDateDayType().getHorizontalAlignment();
 	}
 }

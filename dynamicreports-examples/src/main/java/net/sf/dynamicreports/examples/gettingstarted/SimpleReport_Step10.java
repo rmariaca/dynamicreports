@@ -28,7 +28,6 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
-import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -67,7 +66,7 @@ public class SimpleReport_Step10 {
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", currencyType);
 		//price = unitPrice * quantity
 		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
-		                                                               .setDataType(Templates.currencyType);
+		                                                               .setDataType(currencyType);
 		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width

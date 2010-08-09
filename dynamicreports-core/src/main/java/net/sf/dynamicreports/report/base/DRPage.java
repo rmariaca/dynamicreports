@@ -44,14 +44,20 @@ public class DRPage implements DRIPage {
 	
 	public void setPageFormat(PageType pageType, PageOrientation orientation) {
 		Validate.notNull(pageType, "pageType must not be null");
+		setPageFormat(pageType.getWidth(), pageType.getHeight(), orientation);
+	}
+	
+	public void setPageFormat(Integer width, Integer height, PageOrientation orientation) {
+		Validate.isTrue(width >= 1, "width must be >= 1");
+		Validate.isTrue(height >= 1, "height must be >= 1");
 		Validate.notNull(orientation, "orientation must not be null");		
 		if (orientation.equals(PageOrientation.PORTRAIT)) {
-			setWidth(pageType.getWidth());
-			setHeight(pageType.getHeight());
+			setWidth(width);
+			setHeight(height);
 		}
 		else {
-			setWidth(pageType.getHeight());
-			setHeight(pageType.getWidth());
+			setWidth(height);
+			setHeight(width);
 		}
 		setOrientation(orientation);
 	}
@@ -72,7 +78,7 @@ public class DRPage implements DRIPage {
    * @param width the page width >= 1
    * @exception IllegalArgumentException if <code>width</code> is < 1
    */
-	private void setWidth(Integer width) {
+	public void setWidth(Integer width) {
 		if (width != null) {
 			Validate.isTrue(width >= 1, "width must be >= 1");
 		}
@@ -95,7 +101,7 @@ public class DRPage implements DRIPage {
    * @param height the page height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
-	private void setHeight(Integer height) {
+	public void setHeight(Integer height) {
 		if (height != null) {
 			Validate.isTrue(height >= 1, "height must be >= 1");
 		}
@@ -106,7 +112,7 @@ public class DRPage implements DRIPage {
 		return orientation;
 	}
 
-	private void setOrientation(PageOrientation orientation) {
+	public void setOrientation(PageOrientation orientation) {
 		this.orientation = orientation;
 	}
 

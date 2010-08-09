@@ -98,7 +98,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U> extends Ab
 		return (T) this;
 	}
 	
-	public T setDataType(DRIDataType<U> dataType) {
+	public T setDataType(DRIDataType<? super U, U> dataType) {
 		getObject().getValueField().setDataType(dataType);
 		return (T) this;
 	}	

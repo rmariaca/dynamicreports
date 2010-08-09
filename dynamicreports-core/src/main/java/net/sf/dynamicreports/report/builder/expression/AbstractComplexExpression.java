@@ -99,7 +99,7 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 	
 	@SuppressWarnings("unchecked")
 	public Class<T> getValueClass() {
-		return (Class<T>) ReportUtils.getGenericClass(this);
+		return (Class<T>) ReportUtils.getGenericClass(this, 0);
 	}
 	
 	public abstract T evaluate(List<?> values, ReportParameters reportParameters);

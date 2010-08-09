@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.defaults.Defaults;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class BooleanType extends AbstractDataType<Boolean> {
+public class BooleanType extends AbstractDataType<Boolean, Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	@Override

@@ -20,26 +20,29 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.sales;
+package net.sf.dynamicreports.report.builder.condition;
 
-import net.sf.dynamicreports.examples.AbstractReportMain;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.DRIValue;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SalesMain extends AbstractReportMain<SalesDesign, SalesData> {
-	
-	@Override
-	protected SalesDesign getReportDesign() {
-		return new SalesDesign();
+@SuppressWarnings("ucd")
+public class UnEqualValueExpression<T extends Number> extends AbstractValuesExpression<T> {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+			
+	public UnEqualValueExpression(DRIValue<T> value, Number ...numbers) {
+		super(value, numbers);		
 	}
-	
+
 	@Override
-	protected SalesData getReportData() {
-		return new SalesData();
-	}
-	
-	public static void main(String[] args) {
-		new SalesMain();
+	protected Boolean compare(Number actualValue, Number[] numbers) {
+		for (Number number : numbers) {
+			if (actualValue.doubleValue() == number.doubleValue()) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

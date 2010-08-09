@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DynamicReports>
-	<!-- DEFAULT FONT
+	<!-- DEFAULT FONT -->
+	<!--
 	<font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/>
 	-->
 	
-	<!-- DEFAULT DATA TYPES
+	<!-- DEFAULT DATA TYPES -->
+	<!--
 	<bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/>
 	<bigIntegerType pattern="#,##0" horizontalAlignment="RIGHT"/>   
 	<byteType pattern="#,##0" horizontalAlignment="RIGHT"/>
@@ -18,7 +20,10 @@
 	<dateYearToHourType pattern="MM/dd/yyyy h a" horizontalAlignment="RIGHT"/>
 	<dateYearToMinuteType pattern="MM/dd/yyyy h:mm a" horizontalAlignment="RIGHT"/>
 	<dateYearToSecondType pattern="MM/dd/yyyy h:mm:ss a" horizontalAlignment="RIGHT"/>
-	<dateYearToFractionType pattern="MM/dd/yyyy h:mm:ss,SSS a" horizontalAlignment="RIGHT"/>   
+	<dateYearToFractionType pattern="MM/dd/yyyy h:mm:ss,SSS a" horizontalAlignment="RIGHT"/>	
+	<dateYearType pattern="yyyy" horizontalAlignment="RIGHT"/>
+	<dateMonthType pattern="MMMM" horizontalAlignment="RIGHT"/> 
+	<dateDayType pattern="dd" horizontalAlignment="RIGHT"/>  	   
 	<timeHourToMinuteType pattern="h:mm a" horizontalAlignment="RIGHT"/>
 	<timeHourToSecondType pattern="h:mm:ss a" horizontalAlignment="RIGHT"/>
 	<timeHourToFractionType pattern="h:mm:ss,SSS a" horizontalAlignment="RIGHT"/>  

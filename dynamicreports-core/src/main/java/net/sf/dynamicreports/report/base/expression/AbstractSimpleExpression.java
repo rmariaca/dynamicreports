@@ -52,6 +52,6 @@ public abstract class AbstractSimpleExpression<T> implements DRISimpleExpression
 	
 	@SuppressWarnings("unchecked")
 	public Class<T> getValueClass() {
-		return (Class<T>) ReportUtils.getGenericClass(this);
+		return (Class<T>) ReportUtils.getGenericClass(this, 0);
 	}
 }

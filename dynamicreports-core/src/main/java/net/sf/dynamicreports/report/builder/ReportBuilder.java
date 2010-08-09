@@ -89,6 +89,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		getObject().getPage().setPageFormat(pageType, orientation);
 		return (T) this;		
 	}	
+
+	public T setPageFormat(Integer width, Integer height, PageOrientation orientation) {
+		getObject().getPage().setPageFormat(width, height, orientation);
+		return (T) this;		
+	}	
 	
 	public T setPageMargin(MarginBuilder margin) {
 		Validate.notNull(margin, "margin must not be null");

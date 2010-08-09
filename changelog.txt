@@ -1,6 +1,17 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.1.0 (2010-05-12)
+---------------------------------------------------
+ - new exporters - toDocx, toHtml, toOds, toOdt, toRtf, toText, toXhtml, toXlsx, toXml, toXmlss
+ - DynamicReports.cnd.* - conditions expression builder, see SimpleReport_Step12 for an example
+ - new data types - dateYear, dateMonth, dateDay
+ - data types can convert value to string (see ExpressionColumnReport for an example)  
+ - fixed bug 2997586 - the height in setDimension(Integer width, Integer height) of the DimensionComponentBuilder class is set with the width
+ - new examples - examples/gettingstarted/SimpleReport_ClassicSyntax
+                  examples/column/*
+ - updated SimpleReport_Step11, SimpleReport_Step12 due to the new feature (conditions expression builder) 
+
 Changes in version 1.0.1 (2010-04-21)
 ---------------------------------------------------
  - added exporter - to png

@@ -54,7 +54,7 @@ public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U exten
 		return (T) this;
 	}	
 	
-	public DRComponent getComponent() {
+	public U getComponent() {
 		return build();
 	}
 }

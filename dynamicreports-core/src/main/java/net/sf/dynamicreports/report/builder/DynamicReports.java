@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
+import net.sf.dynamicreports.report.builder.condition.ConditionBuilders;
 import net.sf.dynamicreports.report.builder.datatype.DataTypeBuilders;
 import net.sf.dynamicreports.report.builder.expression.ExpressionBuilders;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
@@ -51,6 +52,7 @@ public class DynamicReports {
 	public static final StyleBuilders stl = new StyleBuilders();
 	public static final ComponentBuilders cmp = new ComponentBuilders();
 	public static final ExpressionBuilders exp = new ExpressionBuilders();
+	public static final ConditionBuilders cnd = new ConditionBuilders();
 	public static final DataTypeBuilders type = new DataTypeBuilders();
 	public static final ChartBuilders cht = new ChartBuilders();
 	

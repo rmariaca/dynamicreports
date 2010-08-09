@@ -50,12 +50,12 @@ public class ReportUtils {
 		return valueClass;
 	}
 	
-	public static Class<?> getGenericClass(Object object) {
+	public static Class<?> getGenericClass(Object object, int index) {
 		ParameterizedType genericSuperclass = getParameterizedType(object.getClass());
-		return getRawType(genericSuperclass.getActualTypeArguments()[0]);
+		return getRawType(genericSuperclass.getActualTypeArguments()[index]);
 	}
 	
-		private static ParameterizedType getParameterizedType(Class<?> classs) {
+	private static ParameterizedType getParameterizedType(Class<?> classs) {
 		if (classs.getGenericSuperclass() instanceof ParameterizedType) {
 			return (ParameterizedType) classs.getGenericSuperclass();
 		}

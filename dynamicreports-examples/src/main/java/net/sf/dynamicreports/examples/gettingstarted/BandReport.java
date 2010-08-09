@@ -63,17 +63,17 @@ public class BandReport {
 			  .groupBy(columnGroup)			  
 			  
 			  //bands
-			  .title(createTextField("This is title band"))
-			  .pageHeader(createTextField("This is page header band"))
-			  .pageFooter(createTextField("This is page footer band"))
-			  .columnHeader(createTextField("This is column header band"))
-			  .columnFooter(createTextField("This is column footer band"))			  
-			  .lastPageFooter(createTextField("This is last page footer band"))
-			  .summary(createTextField("This is summary band"))
-			  //.detail(createTextField("This is detail band"))
-			  .groupHeader(columnGroup, createTextField("This is group header band"))
-			  .groupFooter(columnGroup, createTextField("This is group footer band"))
-			  .background(createTextField("This is background band").setHeight(800).setStyle(backgroundStyle))
+			  .title(createTextField("This is a title band"))
+			  .pageHeader(createTextField("This is a page header band"))
+			  .pageFooter(createTextField("This is a page footer band"))
+			  .columnHeader(createTextField("This is a column header band"))
+			  .columnFooter(createTextField("This is a column footer band"))			  
+			  .lastPageFooter(createTextField("This is a last page footer band"))
+			  .summary(createTextField("This is a summary band"))
+			  //.detail(createTextField("This is a detail band"))
+			  .groupHeader(columnGroup, createTextField("This is a group header band"))
+			  .groupFooter(columnGroup, createTextField("This is a group footer band"))
+			  .background(createTextField("This is a background band").setHeight(800).setStyle(backgroundStyle))
 			  
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report		

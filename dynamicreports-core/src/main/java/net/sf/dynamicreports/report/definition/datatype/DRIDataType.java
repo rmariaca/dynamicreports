@@ -26,20 +26,26 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.DRIValue;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDataType<T> extends Serializable {
+public interface DRIDataType<U, T extends U> extends Serializable {
 	
 	public String getPattern();
 
-	public DRIValueFormatter<?, ? super T> getValueFormatter();
+	public DRIValueFormatter<?, ? extends U> getValueFormatter();
 
 	public HorizontalAlignment getHorizontalAlignment();
 	
-	public String toString(Object value, Locale locale);
+	public String valueToString(U value, Locale locale);
+	
+	public String valueToString(DRIValue<? extends U> value, ReportParameters reportParameters);
+	
+	public String valueToString(String name, ReportParameters reportParameters);
 	
 	public Class<T> getValueClass();
 }

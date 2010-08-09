@@ -33,9 +33,9 @@ import net.sf.dynamicreports.report.exception.DRReportException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-class DefaultBinder {
+public class DefaultBinder {
 	
-	protected static Default bind(XmlDynamicReports xmlDynamicReports) {
+	public static Default bind(XmlDynamicReports xmlDynamicReports) {
 		Default defaults = new Default();
 		//font
 		bind(defaults.getFont(), xmlDynamicReports.getFont());
@@ -53,7 +53,10 @@ class DefaultBinder {
 		bind(defaults.getDateYearToHourType(), xmlDynamicReports.getDateYearToHourType());
 		bind(defaults.getDateYearToMinuteType(), xmlDynamicReports.getDateYearToMinuteType());
 		bind(defaults.getDateYearToSecondType(), xmlDynamicReports.getDateYearToSecondType());
-		bind(defaults.getDateYearToFractionType(), xmlDynamicReports.getDateYearToFractionType());
+		bind(defaults.getDateYearToFractionType(), xmlDynamicReports.getDateYearToFractionType());		
+		bind(defaults.getDateYearType(), xmlDynamicReports.getDateYearType());
+		bind(defaults.getDateMonthType(), xmlDynamicReports.getDateMonthType());
+		bind(defaults.getDateDayType(), xmlDynamicReports.getDateDayType());		
 		bind(defaults.getTimeHourToMinuteType(), xmlDynamicReports.getTimeHourToMinuteType());
 		bind(defaults.getTimeHourToSecondType(), xmlDynamicReports.getTimeHourToSecondType());
 		bind(defaults.getTimeHourToFractionType(), xmlDynamicReports.getTimeHourToFractionType());
@@ -64,7 +67,7 @@ class DefaultBinder {
 		return defaults;
 	}
 	
-	private static void bind(DRDataType<?> dataType, XmlDataType xmlDataType) {
+	private static void bind(DRDataType<?, ?> dataType, XmlDataType xmlDataType) {
 		if (xmlDataType == null) {
 			return;
 		}
@@ -97,6 +100,9 @@ class DefaultBinder {
 		}	
 		if (xmlFont.getPdfEncoding() != null) {
 			font.setPdfEncoding(xmlFont.getPdfEncoding());
+		}
+		if (xmlFont.isPdfEmbedded() != null) {
+			font.setPdfEmbedded(xmlFont.isPdfEmbedded());
 		}	
 	}
 }

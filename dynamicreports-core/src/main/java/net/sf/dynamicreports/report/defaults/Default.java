@@ -123,27 +123,30 @@ public class Default {
 	//font
   private DRFont font;
   //datatype
-  private DRDataType<BigDecimal> bigDecimalType;
-  private DRDataType<BigInteger> bigIntegerType;
-  private DRDataType<Byte> byteType;
-  private DRDataType<Double> doubleType;
-  private DRDataType<Float> floatType;
-  private DRDataType<Integer> integerType;
-  private DRDataType<Long> longType;
-  private DRDataType<Short> shortType;
-  private DRDataType<Date> dateType;
-  private DRDataType<Date> dateYearToMonthType;
-  private DRDataType<Date> dateYearToHourType;
-  private DRDataType<Date> dateYearToMinuteType;
-  private DRDataType<Date> dateYearToSecondType;
-  private DRDataType<Date> dateYearToFractionType;
-  private DRDataType<Date> timeHourToMinuteType;
-  private DRDataType<Date> timeHourToSecondType;
-  private DRDataType<Date> timeHourToFractionType;
-  private DRDataType<Double> percentageType;
-  private DRDataType<Boolean> booleanType;
-  private DRDataType<Character> characterType;
-  private DRDataType<String> stringType;
+  private DRDataType<Number, BigDecimal> bigDecimalType;
+  private DRDataType<Number, BigInteger> bigIntegerType;
+  private DRDataType<Number, Byte> byteType;
+  private DRDataType<Number, Double> doubleType;
+  private DRDataType<Number, Float> floatType;
+  private DRDataType<Number, Integer> integerType;
+  private DRDataType<Number, Long> longType;
+  private DRDataType<Number, Short> shortType;
+  private DRDataType<Date, Date> dateType;
+  private DRDataType<Date, Date> dateYearToMonthType;
+  private DRDataType<Date, Date> dateYearToHourType;
+  private DRDataType<Date, Date> dateYearToMinuteType;
+  private DRDataType<Date, Date> dateYearToSecondType;
+  private DRDataType<Date, Date> dateYearToFractionType;
+  private DRDataType<Date, Date> dateYearType;
+  private DRDataType<Date, Date> dateMonthType;
+  private DRDataType<Date, Date> dateDayType;
+  private DRDataType<Date, Date> timeHourToMinuteType;
+  private DRDataType<Date, Date> timeHourToSecondType;
+  private DRDataType<Date, Date> timeHourToFractionType;
+  private DRDataType<Number, Double> percentageType;
+  private DRDataType<Boolean, Boolean> booleanType;
+  private DRDataType<Character, Character> characterType;
+  private DRDataType<String, String> stringType;
 	
 	public Default() {
 		init();
@@ -232,27 +235,30 @@ public class Default {
 		font.setPdfEncoding("Cp1252");
 		font.setPdfEmbedded(false);
 		
-		this.bigDecimalType = new DRDataType<BigDecimal>("#,##0.00#", HorizontalAlignment.RIGHT);
-		this.bigIntegerType = new DRDataType<BigInteger>("#,##0", HorizontalAlignment.RIGHT);
-		this.byteType = new DRDataType<Byte>("#,##0", HorizontalAlignment.RIGHT);
-		this.doubleType = new DRDataType<Double>("#,##0.#", HorizontalAlignment.RIGHT);
-		this.floatType = new DRDataType<Float>("#,##0.#", HorizontalAlignment.RIGHT);
-		this.integerType = new DRDataType<Integer>("#,##0", HorizontalAlignment.RIGHT);
-		this.longType = new DRDataType<Long>("#,##0", HorizontalAlignment.RIGHT);
-		this.shortType = new DRDataType<Short>("#,##0", HorizontalAlignment.RIGHT);
-		this.dateType = new DRDataType<Date>("MM/dd/yyyy", HorizontalAlignment.RIGHT);
-		this.dateYearToMonthType = new DRDataType<Date>("MM/yyyy", HorizontalAlignment.RIGHT);
-		this.dateYearToHourType = new DRDataType<Date>("MM/dd/yyyy h a", HorizontalAlignment.RIGHT);
-		this.dateYearToMinuteType = new DRDataType<Date>("MM/dd/yyyy h:mm a", HorizontalAlignment.RIGHT);
-		this.dateYearToSecondType = new DRDataType<Date>("MM/dd/yyyy h:mm:ss a", HorizontalAlignment.RIGHT);
-		this.dateYearToFractionType = new DRDataType<Date>("MM/dd/yyyy h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
-		this.timeHourToMinuteType = new DRDataType<Date>("h:mm a", HorizontalAlignment.RIGHT);
-		this.timeHourToSecondType = new DRDataType<Date>("h:mm:ss a", HorizontalAlignment.RIGHT);
-		this.timeHourToFractionType = new DRDataType<Date>("h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
-		this.percentageType = new DRDataType<Double>("#,##0.00%", HorizontalAlignment.RIGHT);
-		this.booleanType = new DRDataType<Boolean>(null, HorizontalAlignment.CENTER);
-		this.characterType = new DRDataType<Character>(null, HorizontalAlignment.LEFT);
-		this.stringType = new DRDataType<String>(null, HorizontalAlignment.LEFT);
+		this.bigDecimalType = new DRDataType<Number, BigDecimal>("#,##0.00#", HorizontalAlignment.RIGHT);
+		this.bigIntegerType = new DRDataType<Number, BigInteger>("#,##0", HorizontalAlignment.RIGHT);
+		this.byteType = new DRDataType<Number, Byte>("#,##0", HorizontalAlignment.RIGHT);
+		this.doubleType = new DRDataType<Number, Double>("#,##0.#", HorizontalAlignment.RIGHT);
+		this.floatType = new DRDataType<Number, Float>("#,##0.#", HorizontalAlignment.RIGHT);
+		this.integerType = new DRDataType<Number, Integer>("#,##0", HorizontalAlignment.RIGHT);
+		this.longType = new DRDataType<Number, Long>("#,##0", HorizontalAlignment.RIGHT);
+		this.shortType = new DRDataType<Number, Short>("#,##0", HorizontalAlignment.RIGHT);
+		this.dateType = new DRDataType<Date, Date>("MM/dd/yyyy", HorizontalAlignment.RIGHT);
+		this.dateYearToMonthType = new DRDataType<Date, Date>("MM/yyyy", HorizontalAlignment.RIGHT);
+		this.dateYearToHourType = new DRDataType<Date, Date>("MM/dd/yyyy h a", HorizontalAlignment.RIGHT);
+		this.dateYearToMinuteType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm a", HorizontalAlignment.RIGHT);
+		this.dateYearToSecondType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss a", HorizontalAlignment.RIGHT);
+		this.dateYearToFractionType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
+		this.dateYearType = new DRDataType<Date, Date>("yyyy", HorizontalAlignment.RIGHT);
+		this.dateMonthType = new DRDataType<Date, Date>("MMMM", HorizontalAlignment.RIGHT);
+		this.dateDayType = new DRDataType<Date, Date>("dd", HorizontalAlignment.RIGHT);
+		this.timeHourToMinuteType = new DRDataType<Date, Date>("h:mm a", HorizontalAlignment.RIGHT);
+		this.timeHourToSecondType = new DRDataType<Date, Date>("h:mm:ss a", HorizontalAlignment.RIGHT);
+		this.timeHourToFractionType = new DRDataType<Date, Date>("h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
+		this.percentageType = new DRDataType<Number, Double>("#,##0.00%", HorizontalAlignment.RIGHT);
+		this.booleanType = new DRDataType<Boolean, Boolean>(null, HorizontalAlignment.CENTER);
+		this.characterType = new DRDataType<Character, Character>(null, HorizontalAlignment.LEFT);
+		this.stringType = new DRDataType<String, String>(null, HorizontalAlignment.LEFT);
 	}
 
 	public Locale getLocale() {
@@ -495,87 +501,99 @@ public class Default {
 		return font;
 	}
 
-	public DRDataType<BigDecimal> getBigDecimalType() {
+	public DRDataType<Number, BigDecimal> getBigDecimalType() {
 		return bigDecimalType;
 	}
 
-	public DRDataType<BigInteger> getBigIntegerType() {
+	public DRDataType<Number, BigInteger> getBigIntegerType() {
 		return bigIntegerType;
 	}
 
-	public DRDataType<Byte> getByteType() {
+	public DRDataType<Number, Byte> getByteType() {
 		return byteType;
 	}
 
-	public DRDataType<Double> getDoubleType() {
+	public DRDataType<Number, Double> getDoubleType() {
 		return doubleType;
 	}
 
-	public DRDataType<Float> getFloatType() {
+	public DRDataType<Number, Float> getFloatType() {
 		return floatType;
 	}
 
-	public DRDataType<Integer> getIntegerType() {
+	public DRDataType<Number, Integer> getIntegerType() {
 		return integerType;
 	}
 
-	public DRDataType<Long> getLongType() {
+	public DRDataType<Number, Long> getLongType() {
 		return longType;
 	}
 
-	public DRDataType<Short> getShortType() {
+	public DRDataType<Number, Short> getShortType() {
 		return shortType;
 	}
 
-	public DRDataType<Date> getDateType() {
+	public DRDataType<Date, Date> getDateType() {
 		return dateType;
 	}
 
-	public DRDataType<Date> getDateYearToMonthType() {
+	public DRDataType<Date, Date> getDateYearToMonthType() {
 		return dateYearToMonthType;
 	}
 
-	public DRDataType<Date> getDateYearToHourType() {
+	public DRDataType<Date, Date> getDateYearToHourType() {
 		return dateYearToHourType;
 	}
 
-	public DRDataType<Date> getDateYearToMinuteType() {
+	public DRDataType<Date, Date> getDateYearToMinuteType() {
 		return dateYearToMinuteType;
 	}
 
-	public DRDataType<Date> getDateYearToSecondType() {
+	public DRDataType<Date, Date> getDateYearToSecondType() {
 		return dateYearToSecondType;
 	}
 
-	public DRDataType<Date> getDateYearToFractionType() {
+	public DRDataType<Date, Date> getDateYearToFractionType() {
 		return dateYearToFractionType;
 	}
 
-	public DRDataType<Date> getTimeHourToMinuteType() {
+	public DRDataType<Date, Date> getDateYearType() {
+		return dateYearType;
+	}
+	
+	public DRDataType<Date, Date> getDateMonthType() {
+		return dateMonthType;
+	}
+	
+	public DRDataType<Date, Date> getDateDayType() {
+		return dateDayType;
+	}
+	
+	public DRDataType<Date, Date> getTimeHourToMinuteType() {
 		return timeHourToMinuteType;
 	}
 
-	public DRDataType<Date> getTimeHourToSecondType() {
+	public DRDataType<Date, Date> getTimeHourToSecondType() {
 		return timeHourToSecondType;
 	}
 
-	public DRDataType<Date> getTimeHourToFractionType() {
+	public DRDataType<Date, Date> getTimeHourToFractionType() {
 		return timeHourToFractionType;
 	}
 
-	public DRDataType<Double> getPercentageType() {
+	public DRDataType<Number, Double> getPercentageType() {
 		return percentageType;
 	}
 
-	public DRDataType<Boolean> getBooleanType() {
+	public DRDataType<Boolean, Boolean> getBooleanType() {
 		return booleanType;
 	}
 
-	public DRDataType<Character> getCharacterType() {
+	public DRDataType<Character, Character> getCharacterType() {
 		return characterType;
 	}
 
-	public DRDataType<String> getStringType() {
+	public DRDataType<String, String> getStringType() {
 		return stringType;
 	}	
 }

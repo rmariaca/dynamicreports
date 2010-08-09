@@ -41,7 +41,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private String pattern;	
 	private HorizontalAlignment horizontalAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;	
-	private DRIDataType<T> dataType;
+	private DRIDataType<? super T, T> dataType;
 	private Integer columns;
 	private Integer rows;
 	
@@ -78,11 +78,11 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.valueFormatter = valueFormatter;
 	}
 
-	public DRIDataType<T> getDataType() {
+	public DRIDataType<? super T, T> getDataType() {
 		return dataType;
 	}
 
-	public void setDataType(DRIDataType<T> dataType) {
+	public void setDataType(DRIDataType<? super T, T> dataType) {
 		this.dataType = dataType;
 	}
 

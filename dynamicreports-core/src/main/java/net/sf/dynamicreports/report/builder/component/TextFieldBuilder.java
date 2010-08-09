@@ -90,7 +90,7 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		return this;
 	}
 	
-	public TextFieldBuilder<T> setDataType(DRIDataType<T> dataType) {
+	public TextFieldBuilder<T> setDataType(DRIDataType<? super T, T> dataType) {
 		getObject().setDataType(dataType);
 		return this;
 	}	

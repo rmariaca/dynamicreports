@@ -30,12 +30,12 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class DRDataType<T> extends AbstractDataType<T> {
+public class DRDataType<U, T extends U> extends AbstractDataType<U, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private String pattern;
 	private HorizontalAlignment horizontalAlignment;
-	private DRIValueFormatter<?, ? super T> valueFormatter;
+	private DRIValueFormatter<?, ? extends U> valueFormatter;
 
 	public DRDataType() {		
 	}
@@ -67,12 +67,12 @@ public class DRDataType<T> extends AbstractDataType<T> {
 		return horizontalAlignment;
 	}
 	
-	public void setValueFormatter(DRIValueFormatter<?, ? super T> valueFormatter) {
+	public void setValueFormatter(DRIValueFormatter<?, ? extends U> valueFormatter) {
 		this.valueFormatter = valueFormatter;
 	}
 	
 	@Override
-	public DRIValueFormatter<?, ? super T> getValueFormatter() {
+	public DRIValueFormatter<?, ? extends U> getValueFormatter() {
 		return valueFormatter;
 	}
 
