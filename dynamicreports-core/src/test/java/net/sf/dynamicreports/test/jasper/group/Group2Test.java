@@ -70,12 +70,19 @@ public class Group2Test extends AbstractJasperValueTest {
 		
 		numberOfPagesTest(3);
 		
-		columnTitleCountTest(column2, 6);
-		columnTitleValueTest(column2, "Column2", "Column2", "Column2", "Column2", "Column2", "Column2");
-		columnTitleCountTest(column3, 6);
-		columnTitleValueTest(column3, "Column3", "Column3", "Column3", "Column3", "Column3", "Column3");
-		columnTitleCountTest(column4, 6);
-		columnTitleValueTest(column4, "Column4", "Column4", "Column4", "Column4", "Column4", "Column4");
+		columnTitleCountTest(column2, 3);
+		columnTitleValueTest(column2, "Column2", "Column2", "Column2");
+		columnTitleCountTest(column3, 3);
+		columnTitleValueTest(column3, "Column3", "Column3", "Column3");
+		columnTitleCountTest(column4, 3);
+		columnTitleValueTest(column4, "Column4", "Column4", "Column4");
+		
+		elementCountTest("columnHeaderForGroup.column_field2.title1", 3);
+		elementValueTest("columnHeaderForGroup.column_field2.title1", "Column2", "Column2", "Column2");
+		elementCountTest("columnHeaderForGroup.column_field3.title1", 3);
+		elementValueTest("columnHeaderForGroup.column_field3.title1", "Column3", "Column3", "Column3");
+		elementCountTest("columnHeaderForGroup.column_field4.title1", 3);
+		elementValueTest("columnHeaderForGroup.column_field4.title1", "Column4", "Column4", "Column4");
 		
 		elementCountTest("groupHeader.textField1", 2);
 		elementValueTest("groupHeader.textField1", "header1", "header1");

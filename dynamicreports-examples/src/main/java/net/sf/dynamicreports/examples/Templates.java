@@ -47,6 +47,7 @@ public class Templates {
 	public static final StyleBuilder bold18CenteredStyle;
 	public static final StyleBuilder columnStyle;
 	public static final StyleBuilder columnTitleStyle;
+	public static final StyleBuilder groupStyle;
 	public static final StyleBuilder subtotalStyle;
 	
 	public static final ReportTemplateBuilder reportTemplate;
@@ -68,6 +69,8 @@ public class Templates {
 		                         .setHorizontalAlignment(HorizontalAlignment.CENTER)
 		                         .setBackgroundColor(Color.LIGHT_GRAY)
 		                         .bold();		
+		groupStyle          = stl.style(boldStyle)
+		                         .setHorizontalAlignment(HorizontalAlignment.LEFT);
 		subtotalStyle       = stl.style(boldStyle)
 		                         .setTopBorder(stl.pen1Point());
 		
@@ -75,6 +78,8 @@ public class Templates {
 		                   .setLocale(Locale.ENGLISH)
 		                   .setColumnStyle(columnStyle)
 		                   .setColumnTitleStyle(columnTitleStyle)
+		                   .setGroupStyle(groupStyle)
+		                   .setGroupTitleStyle(groupStyle)
 		                   .setSubtotalStyle(subtotalStyle)
 		                   .highlightDetailEvenRows();
 		currencyType = new CurrencyType();

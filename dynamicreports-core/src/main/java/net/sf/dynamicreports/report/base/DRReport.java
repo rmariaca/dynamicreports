@@ -75,6 +75,8 @@ public class DRReport implements DRIReport {
 	private DRStyle textStyle;
 	private DRStyle columnTitleStyle;
 	private DRStyle columnStyle;
+	private DRStyle groupTitleStyle;
+	private DRStyle groupStyle;
 	private DRStyle subtotalStyle;
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
@@ -368,6 +370,22 @@ public class DRReport implements DRIReport {
 		this.columnStyle = columnStyle;
 	}
 
+	public DRStyle getGroupTitleStyle() {
+		return groupTitleStyle;
+	}
+
+	public void setGroupTitleStyle(DRStyle groupTitleStyle) {
+		this.groupTitleStyle = groupTitleStyle;
+	}
+
+	public DRStyle getGroupStyle() {
+		return groupStyle;
+	}
+
+	public void setGroupStyle(DRStyle groupStyle) {
+		this.groupStyle = groupStyle;
+	}
+	
 	public DRStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}

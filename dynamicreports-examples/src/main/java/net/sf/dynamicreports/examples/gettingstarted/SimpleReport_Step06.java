@@ -31,7 +31,6 @@ import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -40,9 +39,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step8 {
+public class SimpleReport_Step06 {
 	
-	public SimpleReport_Step8() {
+	public SimpleReport_Step06() {
 		build();
 	}
 	
@@ -74,9 +73,7 @@ public class SimpleReport_Step8 {
 		                                 .setCategory(itemColumn)
 		                                 .setUseSeriesAsCategory(true)
 		                                 .addSerie(
-		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
-		ColumnGroupBuilder itemGroup = grp.group(itemColumn);
-		itemGroup.setPrintSubtotalsWhenExpression(exp.printWhenGroupHasMoreThanOneRow(itemGroup));		
+		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));		
 		try {			
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
@@ -84,17 +81,14 @@ public class SimpleReport_Step8 {
 			  .highlightDetailEvenRows()
 			  .columns(//add columns			  		
 			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
-			  .columnGrid(
-			  		rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
-			  .groupBy(itemGroup)
+			  .groupBy(itemColumn)
 			  .subtotalsAtSummary(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
 			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
-			  .summary(
-			  		cmp.horizontalList(itemChart, itemChart2))
+			  .summary(itemChart, itemChart2)
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report						
 		} catch (DRException e) {
@@ -116,6 +110,6 @@ public class SimpleReport_Step8 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step8();
+		new SimpleReport_Step06();
 	}
 }

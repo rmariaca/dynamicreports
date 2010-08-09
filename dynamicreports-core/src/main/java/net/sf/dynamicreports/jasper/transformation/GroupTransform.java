@@ -54,12 +54,17 @@ public class GroupTransform {
 	
 	private JRDesignGroup group(DRIDesignGroup group) {
 		JRDesignGroup jrGroup = new JRDesignGroup();
-		jrGroup.setName(group.getName());
-		jrGroup.setExpression(accessor.getExpressionTransform().getExpression(group.getGroupExpression()));
+		jrGroup.setName(group.getName());		
 		jrGroup.setReprintHeaderOnEachPage(group.isReprintHeaderOnEachPage());
 		jrGroup.setStartNewColumn(group.isStartInNewColumn());
 		jrGroup.setStartNewPage(group.isStartInNewPage());	
 		return jrGroup;
+	}
+	
+	public void transformExpressions() {
+		for (DRIDesignGroup group : accessor.getReport().getGroups()) {
+			getGroup(group).setExpression(accessor.getExpressionTransform().getExpression(group.getGroupExpression()));
+		}		
 	}
 	
 	protected JRDesignGroup getGroup(DRIDesignGroup group) {

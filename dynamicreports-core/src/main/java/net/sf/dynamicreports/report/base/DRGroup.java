@@ -43,8 +43,10 @@ public class DRGroup implements DRIGroup {
 	private DRTextField<?> valueField;	
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
+	private Integer titleWidth;
 	private GroupHeaderLayout headerLayout;
 	private Boolean hideColumn;
+	private Boolean groupByDataType;
 	private Boolean showColumnHeaderAndFooter;
 	private DRISimpleExpression<Boolean> printSubtotalsWhenExpression;
 	private Integer padding;
@@ -95,6 +97,14 @@ public class DRGroup implements DRIGroup {
 		this.titleStyle = titleStyle;
 	}
 	
+	public Integer getTitleWidth() {
+		return titleWidth;
+	}
+	
+	public void setTitleWidth(Integer titleWidth) {
+		this.titleWidth = titleWidth;
+	}
+	
 	public GroupHeaderLayout getHeaderLayout() {
 		return headerLayout;
 	}
@@ -109,6 +119,14 @@ public class DRGroup implements DRIGroup {
 
 	public void setHideColumn(Boolean hideColumn) {
 		this.hideColumn = hideColumn;
+	}
+	
+	public Boolean getGroupByDataType() {
+		return groupByDataType;
+	}
+	
+	public void setGroupByDataType(Boolean groupByDataType) {
+		this.groupByDataType = groupByDataType;
 	}
 	
 	public Boolean getShowColumnHeaderAndFooter() {

@@ -217,6 +217,32 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 	
+	protected DRIStyle getGroupTitleStyle() {
+		if (report.getGroupTitleStyle() != null) {
+			return report.getGroupTitleStyle();
+		}		
+		if (template.getGroupTitleStyle() != null) {
+			return template.getGroupTitleStyle();
+		}
+		if (Defaults.getDefaults().getGroupTitleStyle() != null) {
+			return Defaults.getDefaults().getGroupTitleStyle();
+		}
+		return getTextStyle();
+	}
+	
+	protected DRIStyle getGroupStyle() {
+		if (report.getGroupStyle() != null) {
+			return report.getGroupStyle();
+		}
+		if (template.getGroupStyle() != null) {
+			return template.getGroupStyle();
+		}
+		if (Defaults.getDefaults().getGroupStyle() != null) {
+			return Defaults.getDefaults().getGroupStyle();
+		}
+		return getTextStyle();
+	}
+	
 	protected DRIStyle getSubtotalStyle() {
 		if (report.getSubtotalStyle() != null) {
 			return report.getSubtotalStyle();
@@ -406,6 +432,13 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isGroupReprintHeaderOnEachPage();
 	}
 	
+	protected boolean isGroupByDataType(DRIGroup group) {
+		if (group.getGroupByDataType() != null) {
+			return group.getGroupByDataType();
+		}
+		return Defaults.getDefaults().isGroupByDataType();
+	}
+	
 	//text field		
 	protected int getTextFieldWidth(DRITextField<?> textField, DRDesignStyle style) {
 		if (textField.getWidth() != null) {
@@ -434,9 +467,9 @@ public class TemplateTransform {
 		if (textField.getPattern() != null) {
 			return textField.getPattern();
 		}
-		/*if (StyleResolver.getPattern(style) != null) {
-			return null;
-		}*/
+		if (StyleResolver.getPattern(style) != null) {
+			return null;//StyleResolver.getPattern(style);
+		}
 		if (textField.getDataType() != null) {
 			return textField.getDataType().getPattern();
 		}
@@ -447,9 +480,9 @@ public class TemplateTransform {
 		if (textField.getHorizontalAlignment() != null) {
 			return textField.getHorizontalAlignment();
 		}
-		/*if (StyleResolver.getHorizontalAlignment(style) != null) {
-			return null;
-		}*/
+		if (StyleResolver.getHorizontalAlignment(style) != null) {
+			return null;//StyleResolver.getHorizontalAlignment(style);
+		}
 		if (textField.getDataType() != null) {
 			return textField.getDataType().getHorizontalAlignment();
 		}

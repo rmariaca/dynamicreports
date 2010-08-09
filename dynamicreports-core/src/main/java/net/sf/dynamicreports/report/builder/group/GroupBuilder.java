@@ -26,8 +26,10 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -60,6 +62,10 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T showColumnHeaderAndFooter() {
+		return setShowColumnHeaderAndFooter(true);
+	}
+	
 	public T setShowColumnHeaderAndFooter(Boolean showColumnHeaderAndFooter) {
 		getObject().setShowColumnHeaderAndFooter(showColumnHeaderAndFooter);
 		return (T) this;
@@ -75,18 +81,69 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T startInNewPage() {
+		return setStartInNewPage(true);
+	}
+	
 	public T setStartInNewPage(Boolean startInNewPage) {
 		getObject().setStartInNewPage(startInNewPage);
 		return (T) this;
 	}
 
+	public T startInNewColumn() {
+		return setStartInNewColumn(true);
+	}
+	
 	public T setStartInNewColumn(Boolean startInNewColumn) {
 		getObject().setStartInNewColumn(startInNewColumn);
 		return (T) this;
 	}
 
+	public T reprintHeaderOnEachPage() {
+		return setReprintHeaderOnEachPage(true);
+	}
+	
 	public T setReprintHeaderOnEachPage(Boolean reprintHeaderOnEachPage) {
 		getObject().setReprintHeaderOnEachPage(reprintHeaderOnEachPage);
+		return (T) this;
+	}
+
+	public T groupByDataType() {
+		return setGroupByDataType(true);
+	}
+	
+	public T setGroupByDataType(Boolean groupByDataType) {
+		getObject().setGroupByDataType(groupByDataType);
+		return (T) this;
+	}
+	
+	public T setStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getValueField().setStyle(style.getStyle());
+		}
+		else {
+			getObject().getValueField().setStyle(null);
+		}
+		return (T) this;
+	}
+	
+	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		getObject().getValueField().setHorizontalAlignment(horizontalAlignment);
+		return (T) this;
+	}
+	
+	public T setTitleStyle(StyleBuilder titleStyle) {
+		if (titleStyle != null) {
+			getObject().setTitleStyle(titleStyle.getStyle());
+		}
+		else {
+			getObject().setTitleStyle(null);
+		}
+		return (T) this;
+	}
+	
+	public T setTitleWidth(Integer titleWidth) {
+		getObject().setTitleWidth(titleWidth);
 		return (T) this;
 	}
 	

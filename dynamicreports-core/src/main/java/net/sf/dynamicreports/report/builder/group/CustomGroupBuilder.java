@@ -24,7 +24,6 @@ package net.sf.dynamicreports.report.builder.group;
 
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
@@ -74,16 +73,6 @@ public class CustomGroupBuilder extends GroupBuilder<CustomGroupBuilder> {
 	public CustomGroupBuilder setTitle(String title) {
 		getObject().setTitleExpression(Expressions.text(title));
 		getObject().setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
-		return this;
-	}
-	
-	public CustomGroupBuilder setTitleStyle(StyleBuilder titleStyle) {
-		if (titleStyle != null) {
-			getObject().setTitleStyle(titleStyle.getStyle());
-		}
-		else {
-			getObject().setTitleStyle(null);
-		}
 		return this;
 	}
 }

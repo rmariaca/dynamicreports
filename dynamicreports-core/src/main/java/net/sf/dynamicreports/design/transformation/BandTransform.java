@@ -37,6 +37,7 @@ import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
+import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -52,6 +53,7 @@ public class BandTransform {
 	private DRDesignBand pageHeaderBand;
 	private DRDesignBand pageFooterBand;
 	private DRDesignBand columnHeaderBand;
+	private DRDesignBand columnHeaderForGroupBand;
 	private DRDesignBand columnFooterBand;
 	private DRDesignBand detailBand;
 	private DRDesignBand lastPageFooterBand;
@@ -90,6 +92,14 @@ public class BandTransform {
 		
 		band = report.getColumnHeaderBand();
 		columnHeaderBand = band("columnHeader", band, templateTransform.getColumnHeaderSplitType(band), ResetType.COLUMN, null);
+		
+		for (DRIGroup group : report.getGroups()) {
+			if (templateTransform.isGroupShowColumnHeaderAndFooter(group)) {
+				band = report.getColumnHeaderBand();
+				columnHeaderForGroupBand = band("columnHeaderForGroup", band, templateTransform.getColumnHeaderSplitType(band), ResetType.COLUMN, null);
+				break;
+			}
+		}
 		
 		band = report.getColumnFooterBand();
 		columnFooterBand = band("columnFooter", band, templateTransform.getColumnFooterSplitType(band), ResetType.COLUMN, null);
@@ -142,6 +152,9 @@ public class BandTransform {
 	}
 	
 	private DRDesignBand prepareBand(DRDesignBand band, int maxWidth) throws DRException {
+		if (band == null) {
+			return null;
+		}
 		if (band.getBandComponent() != null) {
 			return band;
 		}
@@ -266,6 +279,10 @@ public class BandTransform {
 	
 	public DRDesignBand getColumnHeaderBand() {
 		return columnHeaderBand;
+	}
+	
+	public DRDesignBand getColumnHeaderForGroupBand() {
+		return columnHeaderForGroupBand;
 	}
 	
 	public DRDesignBand getColumnFooterBand() {

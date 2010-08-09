@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.group;
 import net.sf.dynamicreports.report.base.DRColumn;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 import org.apache.commons.lang.Validate;
 
@@ -40,25 +41,35 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 	protected ColumnGroupBuilder(ColumnBuilder<?, ?> column) {
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
+		init();
 	}
 	
 	protected ColumnGroupBuilder(String name, ColumnBuilder<?, ?> column) {
 		super(name);
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
+		init();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void init() {
+		DRIDataType dataType = column.getValueField().getDataType();
+		getObject().getValueField().setDataType(dataType);
+		getObject().getValueField().setStyle(column.getValueField().getStyle());
+		getObject().getValueField().setHorizontalAlignment(column.getValueField().getHorizontalAlignment());
+		getObject().setTitleExpression(column.getTitleExpression());
+		getObject().setTitleStyle(column.getTitleStyle());
+		getObject().setTitleWidth(column.getValueField().getWidth());
 	}
 	
 	public ColumnGroupBuilder setHideColumn(Boolean hideColumn) {
 		getObject().setHideColumn(hideColumn);
 		return this;
 	}
-	
+		
 	@Override
 	protected void configure() {
 		setValueExpression(column);
-		getObject().getValueField().setStyle(column.getValueField().getStyle());
-		getObject().setTitleExpression(column.getTitleExpression());
-		getObject().setTitleStyle(column.getTitleStyle());
 		super.configure();
 	}
 }

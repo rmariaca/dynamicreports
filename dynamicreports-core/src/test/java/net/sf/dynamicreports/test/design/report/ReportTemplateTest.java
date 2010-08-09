@@ -25,6 +25,7 @@ package net.sf.dynamicreports.test.design.report;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import junit.framework.Assert;
@@ -32,6 +33,7 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
+import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
@@ -51,7 +53,7 @@ import org.junit.Test;
  */
 public class ReportTemplateTest {
 
-	public void configureReport(ReportBuilder<?> rb) {
+	private void configureReport(ReportBuilder<?> rb) {
 		TextColumnBuilder<Integer> column1;
 		
 		rb.columns(column1 = col.column("Column1", "field1", Integer.class))
@@ -86,6 +88,7 @@ public class ReportTemplateTest {
 						.setPageColumnSpace(20)						
 						
 						.setColumnPrintRepeatedDetailValues(false)
+						.setColumnWidth(250)
 						
 						.setGroupHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
 						.setGroupHideColumn(false)
@@ -138,6 +141,7 @@ public class ReportTemplateTest {
 			Assert.assertEquals("page columns spac", 20, report.getPage().getColumnSpace());
 			
 			Assert.assertFalse("column print repeated detail values", columnTextField.isPrintRepeatedValues());
+			Assert.assertEquals("column width", new Integer(261), columnTextField.getWidth());
 			
 			DRDesignGroup group = (DRDesignGroup) report.getGroups().toArray()[0];
 			DRDesignComponent textField = group.getHeaderBands().get(1).getBandComponent();
@@ -163,6 +167,58 @@ public class ReportTemplateTest {
 			Assert.assertEquals("chart colors", Color.BLUE, ((DRDesignChart) chart).getPlot().getSeriesColors().get(0));
 			
 			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBand().getSplitType());
+		} catch (DRException e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void styleTest() {
+		@SuppressWarnings("unchecked")
+		ReportBuilder<?> rb = new ReportBuilder();		
+		TextColumnBuilder<Integer> column1;
+		
+		rb.columns(column1 = col.column("Column1", "field1", Integer.class))
+			.groupBy(
+					grp.group(column1)
+						 .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
+						 .setHideColumn(false))
+			.subtotalsAtSummary(sbt.sum(column1))
+			.title(cmp.image(""), cht.areaChart().setCategory("field2", String.class))
+			.setTemplate(
+					template()
+						.setColumnStyle(stl.style().setFontSize(1))
+						.setColumnTitleStyle(stl.style().setFontSize(2))
+						.setGroupStyle(stl.style().setFontSize(3))
+						.setGroupTitleStyle(stl.style().setFontSize(4))
+						.setSubtotalStyle(stl.style().setFontSize(5))
+						.setImageStyle(stl.style().setBorder(stl.pen1Point()))
+						.setChartStyle(stl.style().setBorder(stl.pen2Point())));
+		try {
+			DRDesignReport report = new DRDesignReport(rb.getReport());
+			
+			DRDesignTextField textField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
+			Assert.assertEquals("column style", new Integer(1), textField.getStyle().getFont().getFontSize());
+			
+			textField = (DRDesignTextField) ((DRDesignList) report.getColumnHeaderBand().getBandComponent()).getComponents().get(1);
+			Assert.assertEquals("column title style", new Integer(2), textField.getStyle().getFont().getFontSize());
+			
+			DRDesignList groupHeaderComponent = (DRDesignList) new ArrayList<DRDesignGroup>(report.getGroups()).get(0).getHeaderBands().get(0).getBandComponent();
+			textField = (DRDesignTextField) groupHeaderComponent.getComponents().get(1);
+			Assert.assertEquals("group style", new Integer(3), textField.getStyle().getFont().getFontSize());
+			
+			textField = (DRDesignTextField) groupHeaderComponent.getComponents().get(0);
+			Assert.assertEquals("group title style", new Integer(4), textField.getStyle().getFont().getFontSize());
+			
+			textField = (DRDesignTextField) ((DRDesignList) report.getSummaryBand().getBandComponent()).getComponents().get(0);
+			Assert.assertEquals("subtotal style", new Integer(5), textField.getStyle().getFont().getFontSize());
+			
+			DRDesignImage image = (DRDesignImage) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(0);
+			Assert.assertEquals("image style", new Float(1), image.getStyle().getBorder().getTopPen().getLineWidth());
+			
+			DRDesignChart chart = (DRDesignChart) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(1);
+			Assert.assertEquals("chart style", new Float(2), chart.getStyle().getBorder().getTopPen().getLineWidth());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

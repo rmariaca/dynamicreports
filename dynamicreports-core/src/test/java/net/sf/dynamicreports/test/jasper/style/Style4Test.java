@@ -20,46 +20,48 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.report;
+package net.sf.dynamicreports.test.jasper.style;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.awt.Color;
 import java.io.Serializable;
+import java.util.Date;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
+import net.sf.jasperreports.engine.JRAlignment;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Style2Test extends AbstractJasperStyleTest implements Serializable {
+public class Style4Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private TextColumnBuilder<Integer> column1;
-	private TextColumnBuilder<String> column2;
+	private TextColumnBuilder<Date> column1;
 	private ColumnGroupBuilder group1;
-	private AggregationSubtotalBuilder<Integer> subtotal1;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		StyleBuilder textStyle = stl.style().setPadding(2);
-		StyleBuilder titleStyle = stl.style(textStyle).bold();	
-		StyleBuilder subtotalStyle = stl.style(2).setTopBorder(stl.pen1Point()).bold();
+		StyleBuilder groupStyle = stl.style()
+		                             .bold()
+                                 .setHorizontalAlignment(HorizontalAlignment.LEFT);
+
+		column1  = col.column("field1", type.dateYearType());
+
+		group1  = grp.group(column1)
+		             .setHideColumn(false)
+                 .groupByDataType()
+                 .setStyle(groupStyle);
 		
-		rb.setTextStyle(textStyle)
-			.setColumnTitleStyle(titleStyle)
-			.setSubtotalStyle(subtotalStyle)
-			.columns(
-					column1 = col.column("Column1", "field1", type.integerType()),
-					column2 = col.column("Column2", "field2", type.stringType()).setStyle(stl.style().bold()))
-			.groupBy(group1 = grp.group(column2))
-			.subtotalsAtSummary(subtotal1 = sbt.sum(column1).setLabel("total").setLabelStyle(stl.style().bold()));
+		rb.columns(column1)
+		  .groupBy(group1);
 	}
 
 	@Override
@@ -69,24 +71,18 @@ public class Style2Test extends AbstractJasperStyleTest implements Serializable 
 		numberOfPagesTest(1);
 		
 		//column1		
-		columnTitleStyleTest(column1, 0, null, null, "Arial", 10, true, null);
-		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
-				
-		columnDetailStyleTest(column1, 0, null, null, "Arial", 10, null, null);
-		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
+		columnDetailStyleTest(column1, 0, Color.BLACK, null, "Arial", 10, null, null);
+		columnDetailAlignmentTest(column1, 0, JRAlignment.HORIZONTAL_ALIGN_RIGHT);
 		
-		//column2
+		//group1
 		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, true, null);
-		
-		//subtotal
-		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10, true, null);
-		subtotalLabelBorderTest(subtotal1, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0);
+		groupHeaderAlignmentTest(group1, 0, JRAlignment.HORIZONTAL_ALIGN_LEFT);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
-		dataSource.add(1, "1");
+		DataSource dataSource = new DataSource("field1");
+		dataSource.add(new Date());
 		return dataSource;
 	}
 }

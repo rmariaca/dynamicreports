@@ -287,6 +287,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;	
 	}
 	
+	public T setGroupTitleStyle(StyleBuilder groupTitleStyle) {
+		if (groupTitleStyle != null) {
+			getObject().setGroupTitleStyle(groupTitleStyle.build());
+		}
+		else {
+			getObject().setGroupTitleStyle(null);
+		}				
+		return (T) this;	
+	}
+	
+	public T setGroupStyle(StyleBuilder groupStyle) {
+		if (groupStyle != null) {
+			getObject().setGroupStyle(groupStyle.build());
+		}
+		else {
+			getObject().setGroupStyle(null);
+		}				
+		return (T) this;	
+	}
+	
 	public T setSubtotalStyle(StyleBuilder subtotalStyle) {
 		if (subtotalStyle != null) {
 			getObject().setSubtotalStyle(subtotalStyle.build());

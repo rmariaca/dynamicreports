@@ -50,7 +50,7 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		//init styles
 		FontBuilder  boldFont         = stl.fontArialBold();
 		//init columns
-		TextColumnBuilder<String>     stateColumn     = col.column("State", "state", type.stringType()).setStyle(Templates.boldStyle);
+		TextColumnBuilder<String>     stateColumn     = col.column("State", "state", type.stringType());
 		TextColumnBuilder<String>     itemColumn      = col.column("Item", "item", type.stringType()).setPrintRepeatedDetailValues(false);
 		TextColumnBuilder<Date>       orderDateColumn = col.column("Order date", "orderdate", type.dateType());
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity", "quantity", type.integerType());

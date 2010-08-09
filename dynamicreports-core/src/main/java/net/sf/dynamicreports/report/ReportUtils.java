@@ -36,7 +36,7 @@ public class ReportUtils {
 		if (counter == Integer.MAX_VALUE) {
 			counter = 0;
 		}
-		return name + "_" + counter++;
+		return name + "_" + counter++ + "_";
 	}
 	
 	public static Class<?> getVariableValueClass(Calculation calculation, Class<?> valueClass) {

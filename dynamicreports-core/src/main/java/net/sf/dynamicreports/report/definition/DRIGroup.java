@@ -43,9 +43,13 @@ public interface DRIGroup extends Serializable {
 
 	public DRIStyle getTitleStyle();
 	
+	public Integer getTitleWidth();
+	
 	public GroupHeaderLayout getHeaderLayout();
 	
 	public Boolean getHideColumn();
+	
+	public Boolean getGroupByDataType();
 	
 	public Boolean getShowColumnHeaderAndFooter();
 

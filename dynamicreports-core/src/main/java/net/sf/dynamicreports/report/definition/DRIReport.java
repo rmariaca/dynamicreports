@@ -85,6 +85,10 @@ public interface DRIReport extends Serializable {
 
 	public DRIStyle getColumnStyle();
 
+	public DRIStyle getGroupTitleStyle();
+
+	public DRIStyle getGroupStyle();
+	
 	public DRIStyle getSubtotalStyle();
 	
 	public DRIStyle getImageStyle();

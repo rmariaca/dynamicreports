@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -238,7 +239,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	/*public static String getPattern(DRDesignStyle style) {
+	public static String getPattern(DRDesignStyle style) {
 		if (style == null) {
 			return null;
 		}
@@ -262,5 +263,5 @@ public class StyleResolver {
 			return getHorizontalAlignment(style.getParentStyle());
 		}
 		return null;
-	}*/
+	}
 }

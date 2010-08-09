@@ -80,9 +80,9 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	
 	private void transform() {						
 		reportTransform.transform();
-		expressionTransform.transform();		
 		groupTransform.transform();
-		expressionTransform.transformVariables();
+		expressionTransform.transform();		
+		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();
 	}	

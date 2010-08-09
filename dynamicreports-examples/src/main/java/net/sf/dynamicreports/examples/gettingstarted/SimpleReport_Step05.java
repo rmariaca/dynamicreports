@@ -38,9 +38,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step5 {
+public class SimpleReport_Step05 {
 	
-	public SimpleReport_Step5() {
+	public SimpleReport_Step05() {
 		build();
 	}
 	
@@ -97,6 +97,6 @@ public class SimpleReport_Step5 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step5();
+		new SimpleReport_Step05();
 	}
 }

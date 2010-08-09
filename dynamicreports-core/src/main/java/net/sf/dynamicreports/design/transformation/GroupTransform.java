@@ -37,14 +37,21 @@ import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIColumn;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -133,7 +140,7 @@ public class GroupTransform {
 		band = group.getFooterBand();
 		designGroup.addFooterBand(groupBand("groupFooter", band, templateTransform.getGroupFooterSplitType(band), groupPadding, designGroup));
 		if (templateTransform.isGroupShowColumnHeaderAndFooter(group)) {
-			designGroup.addHeaderBand(accessor.getBandTransform().getColumnHeaderBand());
+			designGroup.addHeaderBand(accessor.getBandTransform().getColumnHeaderForGroupBand());
 			designGroup.addFooterBand(accessor.getBandTransform().getColumnFooterBand());
 		}
 	}
@@ -158,26 +165,35 @@ public class GroupTransform {
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(group.getTitleExpression());
 		titleField.setStyle((DRStyle) group.getTitleStyle());
-		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.COLUMN_TITLE);
+		titleField.setWidth(group.getTitleWidth());
+		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.GROUP_TITLE);
 		designTitleField.setName("group_" + group.getName() + ".title");
 		return designTitleField;	
 	}
 	
 	//value
 	private DRDesignComponent valueComponent(DRIGroup group) throws DRException {
-		DRDesignTextField designValueField = accessor.getComponentTransform().textField(group.getValueField(), DefaultStyleType.COLUMN);
+		DRDesignTextField designValueField = accessor.getComponentTransform().textField(group.getValueField(), DefaultStyleType.GROUP);
 		designValueField.setName("group_" + group.getName());		
 		return designValueField;
 	}
 	
 	//group
+	@SuppressWarnings("unchecked")
 	private DRDesignGroup group(DRIGroup group) throws DRException {
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
 		DRDesignGroup designGroup = new DRDesignGroup(group.getName());
 		designGroup.setStartInNewPage(templateTransform.isGroupStartInNewPage(group));
 		designGroup.setStartInNewColumn(templateTransform.isGroupStartInNewColumn(group));
 		designGroup.setReprintHeaderOnEachPage(templateTransform.isGroupReprintHeaderOnEachPage(group));
-		designGroup.setGroupExpression(accessor.getExpressionTransform().transformExpression(group.getValueField().getValueExpression()));		
+		DRIExpression<?> groupExpression = group.getValueField().getValueExpression();
+		if (templateTransform.isGroupByDataType(group) && group.getValueField().getDataType() != null) {
+			accessor.getExpressionTransform().transformExpression(groupExpression);
+			DRIDataType<?, ?> dataType = group.getValueField().getDataType();
+			groupExpression = new GroupByDataTypeExpression(groupExpression, dataType);
+		}
+		groupExpression = new DRVariable(groupExpression, Calculation.NOTHING);
+		designGroup.setGroupExpression(accessor.getExpressionTransform().transformExpression(groupExpression));		
 		return designGroup;
 	}
 	
@@ -216,5 +232,21 @@ public class GroupTransform {
 	
 	public Collection<DRDesignGroup> getGroups() {
 		return designGroups.values();
+	}
+	
+	private class GroupByDataTypeExpression extends AbstractSimpleExpression<String> {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+		
+		private DRIExpression<?> valueExpression;
+		DRIDataType<?, ?> dataType;
+				
+		public GroupByDataTypeExpression(DRIExpression<?> valueExpression, DRIDataType<?, ?> dataType) {
+			this.valueExpression = valueExpression;
+			this.dataType = dataType;
+		}
+
+		public String evaluate(ReportParameters reportParameters) {
+			return dataType.valueToString(valueExpression.getName(), reportParameters);
+		}		
 	}
 }

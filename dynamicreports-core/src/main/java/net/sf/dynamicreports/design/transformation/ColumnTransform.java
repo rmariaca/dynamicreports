@@ -54,21 +54,38 @@ public class ColumnTransform {
 	
 	//columns
 	public void transform() throws DRException {
-		ColumnGrid columnTitle = accessor.getColumnGridTransform().createColumnGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
+		boolean showColumnTitle = accessor.getTemplateTransform().isShowColumnTitle();
+		boolean showColumnTitleForGroup = accessor.getBandTransform().getColumnHeaderForGroupBand() != null;
+		
+		ColumnGrid columnTitle = null;
+		if (showColumnTitle) {
+			columnTitle = accessor.getColumnGridTransform().createColumnGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
+		}
+		ColumnGrid columnTitleForGroup = null;
+		if (showColumnTitleForGroup) {
+			columnTitleForGroup = accessor.getColumnGridTransform().createColumnGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
+		}
 		ColumnGrid detail = accessor.getColumnGridTransform().createColumnGrid();
 		
 		for (DRIColumn<?> column : accessor.getReport().getColumns()) {
 			if (!accessor.getGroupTransform().getHideGroupColumns().contains(column)) {
 				if (column.getTitleExpression() != null) {
-					columnTitle.addComponent(column, titleComponent(column));
+					if (showColumnTitle) {
+						columnTitle.addComponent(column, titleComponent(column));
+					}
+					if (showColumnTitleForGroup) {
+						columnTitleForGroup.addComponent(column, titleComponent(column));
+					}
 				}
 				detail.addComponent(column, valueComponent(column));
 			}
 		}		
 		
-		
-		if (!columnTitle.isEmpty() && accessor.getTemplateTransform().isShowColumnTitle()) {
+		if (showColumnTitle && !columnTitle.isEmpty()) {
 			accessor.getBandTransform().getColumnHeaderBand().addComponent(0, columnTitle.getList());
+		}		
+		if (showColumnTitleForGroup && !columnTitleForGroup.isEmpty()) {
+			accessor.getBandTransform().getColumnHeaderForGroupBand().addComponent(0, columnTitleForGroup.getList());
 		}
 		accessor.getBandTransform().getDetailBand().addComponent(detail.getList());
 	}

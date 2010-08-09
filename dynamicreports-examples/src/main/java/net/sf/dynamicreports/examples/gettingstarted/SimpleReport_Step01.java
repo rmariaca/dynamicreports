@@ -24,45 +24,35 @@ package net.sf.dynamicreports.examples.gettingstarted;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step2 {
+public class SimpleReport_Step01 {
 	
-	public SimpleReport_Step2() {
+	public SimpleReport_Step01() {
 		build();
 	}
 	
-	private void build() {
-		StyleBuilder boldStyle         = stl.style().bold();
-		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
-		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
-		                                    .setBorder(stl.pen1Point())		                                    
-		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
+	private void build() {	
 		try {
 			report()//create new report design
-			  .setColumnTitleStyle(columnTitleStyle)
-			  .highlightDetailEvenRows()
 			  .columns(//add columns
 			  		//            title,     field name     data type
 			  		col.column("Item",       "item",      type.stringType()),
 			  		col.column("Quantity",   "quantity",  type.integerType()),
 			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
-			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
+			  .title(cmp.text("Getting started"))//shows report title
+			  .pageFooter(cmp.pageXofY())//shows number of page at page footer
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report						
+			  .show();//create and show report		
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
 	
@@ -80,6 +70,6 @@ public class SimpleReport_Step2 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step2();
+		new SimpleReport_Step01();
 	}
 }
