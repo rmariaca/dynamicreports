@@ -22,8 +22,6 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
-import java.io.InputStream;
-
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -32,16 +30,33 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class ImageInputStreamExpression extends AbstractSimpleExpression<InputStream> {
+public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private InputStream image;
+	private T value;
+	private Class<? super T> valueClass;
 
-	public ImageInputStreamExpression(InputStream image) {
-		this.image = image;		
+	public ValueExpression(T value) {
+		this(value, null);		
+	}
+
+	@SuppressWarnings("unchecked")
+	public ValueExpression(T value, Class<? super T> valueClass) {
+		this.value = value;
+		if (valueClass == null) {
+			this.valueClass = (Class<? super T>) value.getClass();
+		}
+		else {
+			this.valueClass = valueClass;
+		}
 	}
 	
-	public InputStream evaluate(ReportParameters reportParameters) {
-		return image;
+	public T evaluate(ReportParameters reportParameters) {
+		return value;
+	}
+	
+	@Override
+	public Class<? super T> getValueClass() {
+		return valueClass;
 	}
 }

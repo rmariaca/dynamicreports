@@ -353,6 +353,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 	
+	public ReportTemplateBuilder setSubreportHeight(Integer subreportHeight) {
+		getObject().setSubreportHeight(subreportHeight);
+		return this;
+	}
+
+	public ReportTemplateBuilder setSubreportWidth(Integer subreportWidth) {
+		getObject().setSubreportWidth(subreportWidth);
+		return this;
+	}
+	
 	public ReportTemplateBuilder setDefaultSplitType(SplitType defaultSplitType) {
 		getObject().setDefaultSplitType(defaultSplitType);
 		return this;

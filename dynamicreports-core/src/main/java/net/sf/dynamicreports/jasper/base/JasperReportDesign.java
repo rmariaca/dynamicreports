@@ -35,7 +35,7 @@ import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
-import net.sf.jasperreports.engine.JRParameter;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -53,15 +53,21 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private BarcodeTransform barcodeTransform;
 	
 	private JasperDesign design;
-	private JasperScriptlet scriptlet;
+	private JasperCustomValues customValues;
 	private Map<String, Object> parameters;	
+	private ReportParameters masterReportParameters;
 	
 	public JasperReportDesign(DRIDesignReport report) {		
+		this(report, null);
+	}
+
+	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) {		
 		this.report = report;
+		this.masterReportParameters = masterReportParameters;
 		init();
 		transform();
 	}
-
+	
 	private void init() {		
 		reportTransform = new ReportTransform(this);
 		expressionTransform = new ExpressionTransform(this);
@@ -75,10 +81,9 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		this.design = new JasperDesign();
 		design.setName("Report");
 		this.parameters = new HashMap<String, Object>();		
+		this.customValues = new JasperCustomValues();
 		
-		this.scriptlet = new JasperScriptlet();
-		this.design.setScriptletClass(scriptlet.getClass().getName());
-		this.parameters.put(JRParameter.REPORT_SCRIPTLET, this.scriptlet);
+		this.design.setScriptletClass(JasperScriptlet.class.getName());
 	}
 	
 	private void transform() {						
@@ -118,8 +123,8 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return report;
 	}
 
-	public JasperScriptlet getScriptlet() {
-		return scriptlet;
+	public JasperCustomValues getCustomValues() {
+		return customValues;
 	}
 	
 	public JasperDesign getDesign() {
@@ -128,5 +133,9 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	
 	public Map<String, Object> getParameters() {
 		return parameters;
+	}
+	
+	public ReportParameters getMasterReportParameters() {
+		return masterReportParameters;
 	}
 }

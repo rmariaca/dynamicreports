@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
@@ -57,6 +58,7 @@ import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
+import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -89,6 +91,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIBarcode) {
 			return barcode((DRIBarcode) component, resetType, resetGroup);
+		}
+		else if (component instanceof DRISubreport) {
+			return subreport((DRISubreport) component);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -221,6 +226,19 @@ public class ComponentTransform {
 		designBarcode.setEvaluationTime(evaluationTimeFromResetType(resetType));
 		designBarcode.setEvaluationGroup(resetGroup);
 		return designBarcode;
+	}
+	
+	//subreport
+	protected DRDesignSubreport subreport(DRISubreport subreport) throws DRException {
+		DRDesignSubreport designSubreport = new DRDesignSubreport();
+		component(designSubreport, subreport, false, DefaultStyleType.NONE);
+		designSubreport.setWidth(accessor.getTemplateTransform().getSubreportWidth(subreport));
+		designSubreport.setHeight(accessor.getTemplateTransform().getSubreportHeight(subreport));
+		designSubreport.setReportExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getReportExpression()));
+		designSubreport.setConnectionExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getConnectionExpression()));
+		designSubreport.setDataSourceExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getDataSourceExpression()));
+		designSubreport.setRunToBottom(subreport.getRunToBottom());
+		return designSubreport;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {

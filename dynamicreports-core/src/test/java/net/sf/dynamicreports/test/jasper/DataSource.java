@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.test.jasper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,7 +36,9 @@ import net.sf.jasperreports.engine.JRField;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DataSource implements JRDataSource {
+public class DataSource implements JRDataSource, Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String[] columns;
 	private List<Map<String, Object>> values;
 	private Iterator<Map<String, Object>> iterator;

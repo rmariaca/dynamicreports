@@ -150,6 +150,10 @@ public class ConditionsTest {
 		public <T> T getValue(DRIValue<T> value) {
 			return (T) this.value;
 		}
+
+		public ReportParameters getMasterParameters() {
+			return null;
+		}
 		
 	}
 }

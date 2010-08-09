@@ -48,6 +48,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRIList;
+import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -58,10 +59,12 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
  */
 public class TemplateTransform {
 	private DRIReport report;
+	private Integer pageWidth;
 	private DRIReportTemplate template;
 	
 	public TemplateTransform(DesignTransformAccessor accessor) {		
 		this.report = accessor.getReport();
+		this.pageWidth = accessor.getPageWidth();
 		this.template = report.getTemplate();
 	}
 	
@@ -289,6 +292,9 @@ public class TemplateTransform {
 	
 	//page
 	protected int getPageWidth() {
+		if (pageWidth != null) {
+			return pageWidth;
+		}
 		if (report.getPage().getWidth() != null) {
 			return report.getPage().getWidth();
 		}
@@ -621,6 +627,27 @@ public class TemplateTransform {
 			return template.getBarcodeHeight();
 		}
 		return Defaults.getDefaults().getBarcodeHeight();
+	}
+	
+	//subreport
+	protected int getSubreportWidth(DRISubreport subreport) {
+		if (subreport.getWidth() != null) {
+			return subreport.getWidth();
+		}
+		if (template.getSubreportWidth() != null) {
+			return template.getSubreportWidth();
+		}
+		return Defaults.getDefaults().getSubreportWidth();
+	}
+	
+	protected int getSubreportHeight(DRISubreport subreport) {
+		if (subreport.getHeight() != null) {
+			return subreport.getHeight();
+		}
+		if (template.getSubreportHeight() != null) {
+			return template.getSubreportHeight();
+		}
+		return Defaults.getDefaults().getSubreportHeight();
 	}
 	
 	//split

@@ -43,6 +43,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -175,6 +176,17 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setQuery(String sql) {	
+		Validate.notNull(sql, "sql must not be null");
+		return setQuery(DynamicReports.query(sql, QueryLanguage.SQL));
+	}
+	
+	public T setQuery(QueryBuilder query) {	
+		Validate.notNull(query, "query must not be null");
+		getObject().setQuery(query.build());
+		return (T) this;
+	}
+	
 	public T columnGrid(ListType type) {
 		getObject().setColumnGrid(new DRColumnGrid(type));
 		return (T) this;

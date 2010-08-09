@@ -71,17 +71,17 @@ public class ExpressionTransform {
 		}	
 	}
 	
-	private void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {		
+	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {		
 		if (simpleExpression == null)
 			return;		
-		accessor.getScriptlet().addSimpleExpression(simpleExpression);
+		accessor.getCustomValues().addSimpleExpression(simpleExpression);
 		addExpression(simpleExpression);
 	}
 	
 	private void addField(DRIDesignField field) {				
 		try {
 			accessor.getDesign().addField(field(field));
-			accessor.getScriptlet().addValueType(field.getName(), ValueType.FIELD);
+			accessor.getCustomValues().addValueType(field.getName(), ValueType.FIELD);
 			addExpression(field);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for field \"" + field.getName() + "\"", e);
@@ -91,7 +91,7 @@ public class ExpressionTransform {
 	private void addVariable(DRIDesignVariable variable) {		
 		try {
 			accessor.getDesign().addVariable(variable(variable));		
-			accessor.getScriptlet().addValueType(variable.getName(), ValueType.VARIABLE);
+			accessor.getCustomValues().addValueType(variable.getName(), ValueType.VARIABLE);
 			addExpression(variable);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for variable \"" + variable.getName() + "\"", e);
@@ -101,7 +101,7 @@ public class ExpressionTransform {
 	private void addComplexExpression(DRIDesignComplexExpression complexExpression) {		
 		if (complexExpression == null)
 			return;		
-		accessor.getScriptlet().addComplexExpression(complexExpression);
+		accessor.getCustomValues().addComplexExpression(complexExpression);
 		addExpression(complexExpression);
 	}
 	

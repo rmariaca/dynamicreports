@@ -20,35 +20,20 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.design.definition.component;
 
-import org.apache.commons.lang.Validate;
-
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class NumberExpression<T extends Number> extends AbstractSimpleExpression<T> { 
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private T number;
+public interface DRIDesignSubreport extends DRIDesignComponent {
 
-	public NumberExpression(T number) {
-		Validate.notNull(number, "number must not be null");
-		this.number = number;		
-	}
+	public DRIDesignSimpleExpression getReportExpression();
 	
-	public T evaluate(ReportParameters reportParameters) {
-		return number;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<T> getValueClass() {
-		return (Class<T>) number.getClass();
-	}
+	public DRIDesignSimpleExpression getConnectionExpression();
+
+	public DRIDesignSimpleExpression getDataSourceExpression();	
+
+	public Boolean getRunToBottom();
 }

@@ -137,7 +137,7 @@ public class DRColumn<T> implements DRIColumn<T> {
 		return valueField.getValueExpression().getName();
 	}
 	
-	public Class<T> getValueClass() {
+	public Class<? super T> getValueClass() {
 		return valueField.getValueExpression().getValueClass();
 	}
 }

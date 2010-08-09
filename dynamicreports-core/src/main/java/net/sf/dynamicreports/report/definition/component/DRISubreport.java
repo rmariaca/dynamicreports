@@ -20,26 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.report.definition.component;
 
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
+import java.sql.Connection;
+
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class StringExpression extends AbstractSimpleExpression<String> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private String text;
+public interface DRISubreport extends DRIDimensionComponent {
 
-	public StringExpression(String text) {
-		this.text = text;		
-	}
+	public DRISimpleExpression<?> getReportExpression();
 	
-	public String evaluate(ReportParameters reportParameters) {
-		return text;
-	}
+	public DRISimpleExpression<Connection> getConnectionExpression();
+
+	public DRISimpleExpression<?> getDataSourceExpression();	
+
+	public Boolean getRunToBottom();
 }

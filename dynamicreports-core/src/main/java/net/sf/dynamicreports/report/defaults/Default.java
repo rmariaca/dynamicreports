@@ -113,6 +113,9 @@ public class Default {
 	//barcode
 	private int barcodeWidth;
 	private int barcodeHeight;	
+	//subreport
+	private int subreportWidth;
+	private int subreportHeight;	
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -229,6 +232,9 @@ public class Default {
 		
 		this.barcodeWidth = 100;
 		this.barcodeHeight = 100;
+		
+		this.subreportWidth = 200;
+		this.subreportHeight = 0;
 		
 		this.defaultSplitType = null;		
 		this.titleSplitType = null;
@@ -481,6 +487,14 @@ public class Default {
 
 	public int getBarcodeHeight() {
 		return barcodeHeight;
+	}
+	
+	public int getSubreportWidth() {
+		return subreportWidth;
+	}
+
+	public int getSubreportHeight() {
+		return subreportHeight;
 	}
 	
 	public SplitType getDefaultSplitType() {

@@ -34,9 +34,9 @@ public class DRField<T> implements DRIField<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private String name;
-	private Class<T> valueClass;
+	private Class<? super T> valueClass;
 	
-	public DRField(String name, Class<T> valueClass) {
+	public DRField(String name, Class<? super T> valueClass) {
 		Validate.notEmpty(name, "name must not be empty");
 		Validate.notNull(valueClass, "valueClass must not be null");
 		this.name = name;
@@ -47,7 +47,7 @@ public class DRField<T> implements DRIField<T> {
 		return name;
 	}
 
-	public Class<T> getValueClass() {
+	public Class<? super T> getValueClass() {
 		return valueClass;
 	}
 }

@@ -32,9 +32,12 @@ import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignQuery;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.base.CustomScriptlet;
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
+import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
@@ -58,6 +61,9 @@ public class ReportTransform {
 		JasperDesign design = accessor.getDesign();		
 		Map<String, Object> parameters = accessor.getParameters();
 		
+		addParameter(JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, accessor.getCustomValues());
+		addParameter(JasperReportParameters.MASTER_REPORT_PARAMETERS, ReportParameters.class, accessor.getMasterReportParameters());
+		
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
 		design.setResourceBundle(report.getResourceBundleName());
@@ -80,10 +86,22 @@ public class ReportTransform {
 		}
 	}
 	
+	private <T> void addParameter(String name, Class<T> parameterClass, T value) {
+		JRDesignParameter jrParameter = new JRDesignParameter();
+		jrParameter.setName(name);
+		jrParameter.setValueClass(parameterClass);
+		try {
+			accessor.getDesign().addParameter(jrParameter);
+		} catch (JRException e) {
+			throw new JasperDesignException("Registration failed for parameter \"" + name + "\"", e);
+		}		
+		accessor.getParameters().put(jrParameter.getName(), value);
+	}
+	
 	private void addParameter(DRIDesignParameter parameter) {
 		try {
 			accessor.getDesign().addParameter(parameter(parameter));		
-			accessor.getScriptlet().addValueType(parameter.getName(), ValueType.PARAMETER);
+			accessor.getCustomValues().addValueType(parameter.getName(), ValueType.PARAMETER);
 			accessor.getParameters().put(parameter.getName(), parameter.getValue());
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for parameter \"" + parameter.getName() + "\"", e);

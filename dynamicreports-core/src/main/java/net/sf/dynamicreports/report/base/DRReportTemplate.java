@@ -99,6 +99,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	//barcode
 	private Integer barcodeWidth;
 	private Integer barcodeHeight;	
+	//subreport
+	private Integer subreportWidth;
+	private Integer subreportHeight;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -533,6 +536,28 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.isTrue(barcodeWidth >= 1, "barcodeWidth must be >= 1");
 		}
 		this.barcodeWidth = barcodeWidth;
+	}
+	
+	public Integer getSubreportHeight() {
+		return subreportHeight;
+	}
+	
+	public void setSubreportHeight(Integer subreportHeight) {
+		if (subreportHeight != null) {
+			Validate.isTrue(subreportHeight >= 1, "subreportHeight must be >= 1");
+		}
+		this.subreportHeight = subreportHeight;
+	}
+	
+	public Integer getSubreportWidth() {
+		return subreportWidth;
+	}
+	
+	public void setSubreportWidth(Integer subreportWidth) {
+		if (subreportWidth != null) {
+			Validate.isTrue(subreportWidth >= 1, "subreportWidth must be >= 1");
+		}
+		this.subreportWidth = subreportWidth;
 	}
 	
 	public SplitType getDefaultSplitType() {

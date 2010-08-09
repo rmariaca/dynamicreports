@@ -58,6 +58,7 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport {
 	private DRIReport report;
+	private Integer pageWidth;
 	private ReportTransform reportTransform;
 	private TemplateTransform templateTransform;
 	private PageTransform pageTransform;
@@ -73,7 +74,12 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private BarcodeTransform barcodeTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
+		this(report, null);
+	}
+
+	public DRDesignReport(DRIReport report, Integer pageWidth) throws DRException {
 		this.report = report;
+		this.pageWidth = pageWidth;
 		init();
 		transform();
 	}
@@ -112,6 +118,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return report;
 	}
 
+	public Integer getPageWidth() {
+		return pageWidth;
+	}
+	
 	public TemplateTransform getTemplateTransform() {
 		return templateTransform;
 	}

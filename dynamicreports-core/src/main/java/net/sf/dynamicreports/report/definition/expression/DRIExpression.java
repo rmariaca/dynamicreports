@@ -31,5 +31,5 @@ public interface DRIExpression<T> extends Serializable {
 	
 	public String getName();
 	
-	public Class<T> getValueClass();
+	public Class<? super T> getValueClass();
 }

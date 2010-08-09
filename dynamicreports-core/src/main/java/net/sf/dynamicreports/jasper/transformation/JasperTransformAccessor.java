@@ -25,7 +25,8 @@ package net.sf.dynamicreports.jasper.transformation;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperScriptlet;
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -37,9 +38,11 @@ public interface JasperTransformAccessor {
 	
 	public JasperDesign getDesign();
 	
-	public JasperScriptlet getScriptlet();
+	public JasperCustomValues getCustomValues();
 	
 	public Map<String, Object> getParameters();
+	
+	public ReportParameters getMasterReportParameters();
 	
 	public ExpressionTransform getExpressionTransform();
 

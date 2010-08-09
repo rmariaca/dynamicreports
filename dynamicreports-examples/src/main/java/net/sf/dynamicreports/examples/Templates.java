@@ -28,6 +28,7 @@ import java.awt.Color;
 import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
@@ -42,9 +43,11 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 public class Templates {
 	public static final StyleBuilder rootStyle;
 	public static final StyleBuilder boldStyle;
+	public static final StyleBuilder italicStyle;
 	public static final StyleBuilder boldCenteredStyle;
 	public static final StyleBuilder bold12CenteredStyle;
 	public static final StyleBuilder bold18CenteredStyle;
+	public static final StyleBuilder bold22CenteredStyle;
 	public static final StyleBuilder columnStyle;
 	public static final StyleBuilder columnTitleStyle;
 	public static final StyleBuilder groupStyle;
@@ -52,17 +55,21 @@ public class Templates {
 	
 	public static final ReportTemplateBuilder reportTemplate;
 	public static final CurrencyType currencyType;
+	public static final ComponentBuilder<?, ?> dynamicReportsComponent;
 	public static final ComponentBuilder<?, ?> footerComponent;
 	
 	static {
 		rootStyle           = stl.style().setPadding(2);
 		boldStyle           = stl.style(rootStyle).bold();
+		italicStyle         = stl.style(rootStyle).italic();
 		boldCenteredStyle   = stl.style(boldStyle)
 		                         .setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
 		bold12CenteredStyle = stl.style(boldCenteredStyle)
 		                         .setFontSize(12);
-		bold18CenteredStyle = stl.style(bold12CenteredStyle)
+		bold18CenteredStyle = stl.style(boldCenteredStyle)
 		                         .setFontSize(18);
+		bold22CenteredStyle = stl.style(boldCenteredStyle)
+                             .setFontSize(22);
 		columnStyle         = stl.style(rootStyle).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		columnTitleStyle    = stl.style(columnStyle)
 		                         .setBorder(stl.pen1Point())
@@ -84,6 +91,14 @@ public class Templates {
 		                   .highlightDetailEvenRows();
 		currencyType = new CurrencyType();
 		
+		HyperLinkBuilder link = hyperLink("http://dynamicreports.sourceforge.net");
+		dynamicReportsComponent =
+		  cmp.horizontalList(
+		  	cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(60, 60),
+		  	cmp.verticalList(
+		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
+		  		cmp.text("http://dynamicreports.sourceforge.net").setStyle(italicStyle).setHyperLink(link)));
+		
 		footerComponent = cmp.pageXofY()
 		                     .setStyle(
 		                     	stl.style(boldCenteredStyle)
@@ -91,16 +106,16 @@ public class Templates {
 	}
 	
 	/**
-	 * Creates custom component which is possible to add to any report band component  
+	 * Creates custom component which is possible to add to any report band component
 	 */
 	public static ComponentBuilder<?, ?> createTitleComponent(String label) {
 		return cmp.horizontalList()
 		        .add(
-		        	cmp.image(Templates.class.getResourceAsStream("images/dynamicreports.png")).setFixedDimension(80, 80),
-		        	cmp.text("DynamicReports").setStyle(bold18CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
+		        	dynamicReportsComponent,
 		        	cmp.text(label).setStyle(bold18CenteredStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
 		        .newRow()
-		        .add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10));	         	
+		        .add(
+		        	cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10));
 	}
 	
 	public static CurrencyValueFormatter createCurrencyValueFormatter(String label) {

@@ -31,6 +31,8 @@ public interface DesignTransformAccessor {
 
 	public DRIReport getReport();
 	
+	public Integer getPageWidth();
+	
 	public TemplateTransform getTemplateTransform();
 	
 	public ExpressionTransform getExpressionTransform();

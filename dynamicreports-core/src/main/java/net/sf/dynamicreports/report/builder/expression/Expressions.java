@@ -101,24 +101,32 @@ public class Expressions {
 		return groupRowNumber(group.getGroup().getName());
 	}
 	
-	public static DateExpression date(Date date) {
-		return new DateExpression(date);
+	public static ValueExpression<Date> date(Date date) {
+		return value(date);
 	}
 	
-	public static <T extends Number> NumberExpression<T> number(T number) {
-		return new NumberExpression<T>(number);
+	public static ValueExpression<Number> number(Number number) {
+		return value(number);
 	}
 
-	public static ImageExpression image(Image image) {
-		return new ImageExpression(image);
+	public static ValueExpression<Image> image(Image image) {
+		return value(image, Image.class);
 	}
 
-	public static ImageInputStreamExpression image(InputStream image) {
-		return new ImageInputStreamExpression(image);
+	public static ValueExpression<InputStream> inputStream(InputStream inputStream) {
+		return value(inputStream, InputStream.class);
+	}
+
+	public static <T> ValueExpression<T> value(T value) {
+		return new ValueExpression<T>(value);
+	}
+
+	public static <T> ValueExpression<T> value(T value, Class<? super T> valueClass) {
+		return new ValueExpression<T>(value, valueClass);
 	}
 	
-	public static StringExpression text(String text) {
-		return new StringExpression(text);
+	public static ValueExpression<String> text(String text) {
+		return value(text);
 	}
 
 	public static MessageExpression message(String key) {

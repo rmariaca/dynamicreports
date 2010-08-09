@@ -24,9 +24,12 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URL;
 
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -101,6 +104,7 @@ public class ComponentBuilders {
 		return Components.totalPages();
 	}
 	
+	//text
 	public TextFieldBuilder<String> text(String text) {
 		return Components.text(text);
 	}
@@ -117,10 +121,12 @@ public class ComponentBuilders {
 		return Components.text(textExpression);
 	}
 	
+	//filler
 	public FillerBuilder filler() {
 		return Components.filler();
 	}
 	
+	//image
 	public ImageBuilder image(DRISimpleExpression<?> imageExpression) {
 		return Components.image(imageExpression);
 	}
@@ -133,7 +139,24 @@ public class ComponentBuilders {
 		return Components.image(image);
 	}
 	
-	public ImageBuilder image(InputStream image) {
-		return Components.image(image);
+	public ImageBuilder image(InputStream imageInputStream) {
+		return Components.image(imageInputStream);
+	}
+	
+	public ImageBuilder image(URL imageUrl) {
+		return Components.image(imageUrl);
+	}
+	
+	//subreport
+	public SubreportBuilder subreport(JasperReportBuilder reportBuilder) {
+		return Components.subreport(reportBuilder);
+	}
+
+	public SubreportBuilder subreport(JasperReport jasperReport) {
+		return Components.subreport(jasperReport);
+	}
+	
+	public SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
+		return Components.subreport(reportExpression);
 	}
 }

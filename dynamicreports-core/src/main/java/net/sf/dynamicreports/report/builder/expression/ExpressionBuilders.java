@@ -86,23 +86,31 @@ public class ExpressionBuilders {
 		return Expressions.groupRowNumber(group);
 	}
 	
-	public DateExpression date(Date date) {
+	public ValueExpression<Date> date(Date date) {
 		return Expressions.date(date);
 	}
 	
-	public <T extends Number> NumberExpression<T> number(T number) {
+	public ValueExpression<Number> number(Number number) {
 		return Expressions.number(number);
 	}
 
-	public ImageExpression image(Image image) {
+	public ValueExpression<Image> image(Image image) {
 		return Expressions.image(image);
 	}
 
-	public ImageInputStreamExpression image(InputStream image) {
-		return Expressions.image(image);
+	public ValueExpression<InputStream> inputStream(InputStream inputStream) {
+		return Expressions.inputStream(inputStream);
 	}
 	
-	public StringExpression text(String text) {
+	public <T> ValueExpression<T> value(T value) {
+		return Expressions.value(value);
+	}
+	
+	public <T> ValueExpression<T> value(T value, Class<? super T> valueClass) {
+		return Expressions.value(value, valueClass);
+	}
+	
+	public ValueExpression<String> text(String text) {
 		return Expressions.text(text);
 	}
 

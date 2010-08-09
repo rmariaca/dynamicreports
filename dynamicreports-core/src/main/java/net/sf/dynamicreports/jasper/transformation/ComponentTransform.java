@@ -22,6 +22,10 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
@@ -30,16 +34,29 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
+import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.jasper.base.JasperReportDesign;
+import net.sf.dynamicreports.jasper.base.JasperReportParameters;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRElement;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRHyperlink;
 import net.sf.jasperreports.engine.JRImage;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
 import net.sf.jasperreports.engine.design.JRDesignImage;
 import net.sf.jasperreports.engine.design.JRDesignStaticText;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.design.JRDesignSubreport;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
 
 import org.apache.commons.lang.StringUtils;
@@ -73,6 +90,9 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignImage) {
 			jrElement = image((DRIDesignImage) component);
+		}
+		else if (component instanceof DRIDesignSubreport) {
+			jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
 		}
 		else {
 			throw new JasperDesignException("Component " + component.getClass().getName() + " not supported");
@@ -162,5 +182,113 @@ public class ComponentTransform {
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
 		
 		return jrImage;
+	}
+	
+	//subreport
+	private JRDesignElement subreport(DRIDesignSubreport subreport, Integer width) {
+		JRDesignSubreport jrSubreport = new JRDesignSubreport(new JRDesignStyle().getDefaultStyleProvider());		
+		jrSubreport.setConnectionExpression(accessor.getExpressionTransform().getExpression(subreport.getConnectionExpression()));
+		jrSubreport.setDataSourceExpression(accessor.getExpressionTransform().getExpression(subreport.getDataSourceExpression()));
+		jrSubreport.setRunToBottom(subreport.getRunToBottom());
+		
+		if (ReportBuilder.class.isAssignableFrom(subreport.getReportExpression().getValueClass())) {
+			SubreportExpression subreportExpression = new SubreportExpression(subreport.getReportExpression(), width);
+			accessor.getExpressionTransform().addSimpleExpression(subreportExpression);
+			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreportExpression));
+			
+			SubreportParametersExpression parametersExpression = new SubreportParametersExpression(subreportExpression);
+			accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
+		}
+		else {
+			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreport.getReportExpression()));
+			
+			JasperSubreportParametersExpression parametersExpression = new JasperSubreportParametersExpression();
+			accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
+		}
+		
+		jrSubreport.setPositionType(JRElement.POSITION_TYPE_FLOAT); 
+		jrSubreport.setStretchType(JRElement.STRETCH_TYPE_NO_STRETCH);
+		return jrSubreport;
+	}
+	
+	private class SubreportExpression implements DRIDesignSimpleExpression {
+		private String name;
+		private DRIDesignSimpleExpression reportExpression;
+		private Integer pageWidth;
+		private JasperReportDesign reportDesign;
+		
+		public SubreportExpression(DRIDesignSimpleExpression reportExpression, Integer pageWidth) {
+			this.reportExpression = reportExpression;
+			this.pageWidth = pageWidth;
+			this.name = ReportUtils.generateUniqueName("subreportExpression");
+		}
+
+		public Object evaluate(ReportParameters reportParameters) throws DRException {
+			ReportBuilder<?> reportBuilder = (JasperReportBuilder) reportExpression.evaluate(reportParameters);
+			reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
+			try {
+				return JasperCompileManager.compileReport(reportDesign.getDesign());
+			} catch (JRException e) {
+				throw new DRException(e);
+			}
+		}
+		
+		public JasperReportDesign getReportDesign() {
+			return reportDesign;
+		}
+		
+		public String getName() {
+			return name;
+		}
+
+		public Class<?> getValueClass() {
+			return JasperReport.class;
+		}
+	}
+	
+	private class SubreportParametersExpression implements DRIDesignSimpleExpression {
+		private String name;
+		private SubreportExpression subreportExpression;
+		
+		public SubreportParametersExpression(SubreportExpression subreportExpression) {
+			this.subreportExpression = subreportExpression;
+			this.name = ReportUtils.generateUniqueName("subreportParametersExpression");
+		}
+
+		public Object evaluate(ReportParameters reportParameters) throws DRException {
+			return subreportExpression.getReportDesign().getParameters();
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Class<?> getValueClass() {
+			return Map.class;
+		}
+	}
+	
+	private class JasperSubreportParametersExpression implements DRIDesignSimpleExpression {
+		private String name;
+		
+		public JasperSubreportParametersExpression() {
+			this.name = ReportUtils.generateUniqueName("jasperSubreportParametersExpression");
+		}
+
+		public Object evaluate(ReportParameters reportParameters) throws DRException {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
+			return map;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Class<?> getValueClass() {
+			return Map.class;
+		}
 	}
 }

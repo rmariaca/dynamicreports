@@ -35,6 +35,7 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptletException;
 import net.sf.jasperreports.engine.JRVariable;
@@ -42,7 +43,9 @@ import net.sf.jasperreports.engine.JRVariable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-class JasperReportParameters implements ReportParameters {	
+public class JasperReportParameters implements ReportParameters {	
+	public static final String MASTER_REPORT_PARAMETERS = "MASTER_REPORT_PARAMETERS";
+	
 	private JasperScriptlet jasperScriptlet;
 	
 	protected JasperReportParameters(JasperScriptlet jasperScriptlet) {
@@ -146,7 +149,11 @@ class JasperReportParameters implements ReportParameters {
 	
 	//simple expression	
 	private Object getSimpleExpressionValue(String name) {
+		try {
 		return jasperScriptlet.getSimpleExpression(name).evaluate(this);
+		} catch (DRException e) {
+		}
+		return null;
 	}
 
 	//complex expression	
@@ -157,5 +164,9 @@ class JasperReportParameters implements ReportParameters {
 			values.add(getValue(valueExpression.getName()));
 		}		
 		return complexExpression.evaluate(values, this);
+	}
+
+	public ReportParameters getMasterParameters() {
+		return (ReportParameters) getParameterValue(MASTER_REPORT_PARAMETERS);
 	}
 }
