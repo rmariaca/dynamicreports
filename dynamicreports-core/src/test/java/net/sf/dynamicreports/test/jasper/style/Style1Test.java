@@ -38,7 +38,7 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRPen;
+import net.sf.jasperreports.engine.type.LineStyleEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -101,7 +101,7 @@ public class Style1Test extends AbstractJasperStyleTest implements Serializable 
 		
 		//column1		
 		columnTitleStyleTest(column1, 0, Color.BLACK, null, "Arial", 10, true, null);
-		columnTitleBorderTest(column1, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0);
+		columnTitleBorderTest(column1, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
 		
 		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
@@ -115,7 +115,7 @@ public class Style1Test extends AbstractJasperStyleTest implements Serializable 
 		
 		//column2
 		columnTitleStyleTest(column2, 0, Color.BLACK, null, "Arial", 10, true, null);
-		columnTitleBorderTest(column2, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0);
+		columnTitleBorderTest(column2, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		columnTitlePaddingTest(column2, 0, 2, 2, 2, 2);
 		
 		columnDetailPaddingTest(column2, 0, 2, 2, 2, 2);
@@ -129,7 +129,7 @@ public class Style1Test extends AbstractJasperStyleTest implements Serializable 
 		
 		//column3
 		columnTitleStyleTest(column3, 0, Color.BLACK, null, "Arial", 10, true, null);
-		columnTitleBorderTest(column3, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2, Color.BLACK, JRPen.LINE_STYLE_SOLID, 2);
+		columnTitleBorderTest(column3, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2);
 		columnTitlePaddingTest(column3, 0, 2, 2, 2, 2);
 		
 		columnDetailPaddingTest(column3, 0, 2, 2, 2, 2);
@@ -143,12 +143,12 @@ public class Style1Test extends AbstractJasperStyleTest implements Serializable 
 		
 		//subtotal1
 		subtotalStyleTest(subtotal1, 0, Color.BLACK, Color.YELLOW, "Arial", 10, true, null);
-		subtotalBorderTest(subtotal1, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 1, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0, Color.BLACK, JRPen.LINE_STYLE_SOLID, 0);
+		subtotalBorderTest(subtotal1, 0, Color.BLACK, LineStyleEnum.SOLID, 1, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		subtotalPaddingTest(subtotal1, 0, 2, 2, 2, 2);
 		
 		//title
 		styleTest("title.list1", 0, null, null, "SansSerif", null, null, null);
-		borderTest("title.list1", 0, null, JRPen.LINE_STYLE_SOLID, 1, null, JRPen.LINE_STYLE_SOLID, 1, null, JRPen.LINE_STYLE_SOLID, 1, null, JRPen.LINE_STYLE_SOLID, 1);
+		borderTest("title.list1", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 		paddingTest("title.list1", 0, 0, 0, 0, 0);
 		styleTest("title.textField1", 0, Color.BLACK, null, "Arial", 15, true, null);
 	}

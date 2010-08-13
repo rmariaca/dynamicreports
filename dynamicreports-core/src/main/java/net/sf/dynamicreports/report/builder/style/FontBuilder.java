@@ -74,16 +74,28 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 		return setItalic(true);
 	}
 	
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public FontBuilder setPdfEmbedded(Boolean pdfEmbedded) {
 		getObject().setPdfEmbedded(pdfEmbedded);
 		return this;
 	}
 
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public FontBuilder setPdfEncoding(String pdfEncoding) {
 		getObject().setPdfEncoding(pdfEncoding);
 		return this;
 	}
 
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public FontBuilder setPdfFontName(String pdfFontName) {
 		getObject().setPdfFontName(pdfFontName);
 		return this;

@@ -39,9 +39,9 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRImage;
 import net.sf.jasperreports.engine.JRPrintImage;
 import net.sf.jasperreports.engine.JRRenderable;
+import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.util.JRImageLoader;
 
 /**
@@ -69,7 +69,7 @@ public class ImageTest extends AbstractJasperTest implements Serializable {
 			byte[] imageData = JRImageLoader.loadImageDataFromAWTImage(image, JRRenderable.IMAGE_TYPE_JPEG);
 			JRPrintImage jrImage = (JRPrintImage) getElementAt("title.image1", 0);
 			Assert.assertTrue("image data", Arrays.equals(imageData, jrImage.getRenderer().getImageData()));
-			Assert.assertEquals("scale image", JRImage.SCALE_IMAGE_CLIP, jrImage.getScaleImage());
+			Assert.assertEquals("scale image", ScaleImageEnum.CLIP, jrImage.getScaleImageValue());
 		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

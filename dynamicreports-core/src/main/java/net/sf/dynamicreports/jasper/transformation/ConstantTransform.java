@@ -49,22 +49,25 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
-import net.sf.jasperreports.engine.JRAlignment;
-import net.sf.jasperreports.engine.JRBand;
-import net.sf.jasperreports.engine.JRChart;
-import net.sf.jasperreports.engine.JRExpression;
-import net.sf.jasperreports.engine.JRImage;
-import net.sf.jasperreports.engine.JRPen;
-import net.sf.jasperreports.engine.JRReport;
-import net.sf.jasperreports.engine.JRTextElement;
-import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJdbcQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
+import net.sf.jasperreports.engine.type.CalculationEnum;
+import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
+import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.LineStyleEnum;
+import net.sf.jasperreports.engine.type.OrientationEnum;
+import net.sf.jasperreports.engine.type.ResetTypeEnum;
+import net.sf.jasperreports.engine.type.RotationEnum;
+import net.sf.jasperreports.engine.type.ScaleImageEnum;
+import net.sf.jasperreports.engine.type.SplitTypeEnum;
+import net.sf.jasperreports.engine.type.VerticalAlignEnum;
+import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.time.Day;
@@ -88,94 +91,94 @@ import com.lowagie.text.pdf.PdfWriter;
  */
 class ConstantTransform {
 	
-	protected static Byte lineStyle(LineStyle lineStyle) {
+	protected static LineStyleEnum lineStyle(LineStyle lineStyle) {
 		if (lineStyle == null) {
 			return null;
 		}
 		
 		switch (lineStyle) {
 		case SOLID:			
-			return JRPen.LINE_STYLE_SOLID;
+			return LineStyleEnum.SOLID;
 		case DASHED:			
-			return JRPen.LINE_STYLE_DASHED;
+			return LineStyleEnum.DASHED;
 		case DOTTED:			
-			return JRPen.LINE_STYLE_DOTTED;
+			return LineStyleEnum.DOTTED;
 		case DOUBLE:			
-			return JRPen.LINE_STYLE_DOUBLE;
+			return LineStyleEnum.DOUBLE;
 		default:
 			throw new JasperDesignException("Line style " + lineStyle.name() + " not supported");
 		}		
 	}
 
-	protected static Byte imageScale(ImageScale imageScale) {
+	protected static ScaleImageEnum imageScale(ImageScale imageScale) {
 		if (imageScale == null) {
 			return null;
 		}
 		
 		switch (imageScale) {
 		case NO_RESIZE:			
-			return JRImage.SCALE_IMAGE_CLIP;
+			return ScaleImageEnum.CLIP;
 		case FILL:			
-			return JRImage.SCALE_IMAGE_FILL_FRAME;
+			return ScaleImageEnum.FILL_FRAME;
 		case FILL_PROPORTIONALLY:			
-			return JRImage.SCALE_IMAGE_RETAIN_SHAPE;
+			return ScaleImageEnum.RETAIN_SHAPE;
 		default:
 			throw new JasperDesignException("Image scale " + imageScale.name() + " not supported");
 		}
 	}
 
-	protected static Byte horizontalAlignment(HorizontalAlignment horizontalAlignment) {
+	protected static HorizontalAlignEnum horizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		if (horizontalAlignment == null) {
 			return null;
 		}
 		
 		switch (horizontalAlignment) {
 		case LEFT:			
-			return JRAlignment.HORIZONTAL_ALIGN_LEFT;
+			return HorizontalAlignEnum.LEFT;
 		case CENTER:			
-			return JRAlignment.HORIZONTAL_ALIGN_CENTER;
+			return HorizontalAlignEnum.CENTER;
 		case RIGHT:			
-			return JRAlignment.HORIZONTAL_ALIGN_RIGHT;
+			return HorizontalAlignEnum.RIGHT;
 		case JUSTIFIED:			
-			return JRAlignment.HORIZONTAL_ALIGN_JUSTIFIED;
+			return HorizontalAlignEnum.JUSTIFIED;
 		default:
 			throw new JasperDesignException("Horizontal alignment " + horizontalAlignment.name() + " not supported");
 		}
 	}
 
-	protected static Byte verticalAlignment(VerticalAlignment verticalAlignment) {
+	protected static VerticalAlignEnum verticalAlignment(VerticalAlignment verticalAlignment) {
 		if (verticalAlignment == null) {
 			return null;
 		}
 		
 		switch (verticalAlignment) {
 		case TOP:			
-			return JRAlignment.VERTICAL_ALIGN_TOP;
+			return VerticalAlignEnum.TOP;
 		case MIDDLE:			
-			return JRAlignment.VERTICAL_ALIGN_MIDDLE;
+			return VerticalAlignEnum.MIDDLE;
 		case BOTTOM:			
-			return JRAlignment.VERTICAL_ALIGN_BOTTOM;
+			return VerticalAlignEnum.BOTTOM;
 		case JUSTIFIED:			
-			return JRAlignment.VERTICAL_ALIGN_JUSTIFIED;
+			return VerticalAlignEnum.JUSTIFIED;
 		default:
 			throw new JasperDesignException("Vertical alignment " + verticalAlignment.name() + " not supported");
 		}
 	}
 
-	protected static Byte rotation(Rotation rotation) {
+	protected static RotationEnum rotation(Rotation rotation) {
 		if (rotation == null) {
 			return null;
 		}
 		
 		switch (rotation) {
 		case NONE:			
-			return JRTextElement.ROTATION_NONE;
+			return RotationEnum.NONE;
 		case LEFT:			
-			return JRTextElement.ROTATION_LEFT;
+			return RotationEnum.LEFT;
 		case RIGHT:			
-			return JRTextElement.ROTATION_RIGHT;
+			return RotationEnum.RIGHT;
 		case UPSIDE_DOWN:			
-			return JRTextElement.ROTATION_UPSIDE_DOWN;
+			return RotationEnum.UPSIDE_DOWN;
 		default:
 			throw new JasperDesignException("Rotation " + rotation.name() + " not supported");
 		}
@@ -233,83 +236,83 @@ class ConstantTransform {
 		}
 	}
 	
-	protected static byte whenNoDataType(WhenNoDataType whenNoDataType) {		
+	protected static WhenNoDataTypeEnum whenNoDataType(WhenNoDataType whenNoDataType) {		
 		switch (whenNoDataType) {
 		case NO_PAGES:			
-			return JRReport.WHEN_NO_DATA_TYPE_NO_PAGES;
+			return WhenNoDataTypeEnum.NO_PAGES;
 		case BLANK_PAGE:			
-			return JRReport.WHEN_NO_DATA_TYPE_BLANK_PAGE;
+			return WhenNoDataTypeEnum.BLANK_PAGE;
 		case ALL_SECTIONS_NO_DETAIL:
-			return JRReport.WHEN_NO_DATA_TYPE_ALL_SECTIONS_NO_DETAIL;
+			return WhenNoDataTypeEnum.ALL_SECTIONS_NO_DETAIL;
 		case NO_DATA_SECTION:
-			return JRReport.WHEN_NO_DATA_TYPE_NO_DATA_SECTION;
+			return WhenNoDataTypeEnum.NO_DATA_SECTION;
 		default:
 			throw new JasperDesignException("When no data type " + whenNoDataType.name() + " not supported");
 		}
 	}
 	
-	protected static byte pageOrientation(PageOrientation orientation) {
+	protected static OrientationEnum pageOrientation(PageOrientation orientation) {
 		switch (orientation) {
 		case PORTRAIT:			
-			return JRReport.ORIENTATION_PORTRAIT;
+			return OrientationEnum.PORTRAIT;
 		case LANDSCAPE:
-			return JRReport.ORIENTATION_LANDSCAPE;
+			return OrientationEnum.LANDSCAPE;
 		default:
 			throw new JasperDesignException("Page orientation " + orientation.name() + " not supported");
 		}
 	}
 
-	protected static byte variableResetType(ResetType resetType) {
+	protected static ResetTypeEnum variableResetType(ResetType resetType) {
 		switch (resetType) {
 		case REPORT:			
-			return JRVariable.RESET_TYPE_REPORT;
+			return ResetTypeEnum.REPORT;
 		case PAGE:
-			return JRVariable.RESET_TYPE_PAGE;
+			return ResetTypeEnum.PAGE;
 		case COLUMN:
-			return JRVariable.RESET_TYPE_COLUMN;
+			return ResetTypeEnum.COLUMN;
 		case GROUP:
-			return JRVariable.RESET_TYPE_GROUP;
+			return ResetTypeEnum.GROUP;
 		default:
 			throw new JasperDesignException("Variable reset type " + resetType.name() + " not supported");
 		}
 	}
 
-	protected static byte evaluationTime(EvaluationTime evaluationTime) {
+	protected static EvaluationTimeEnum evaluationTime(EvaluationTime evaluationTime) {
 		if (evaluationTime == null) {
-			return JRExpression.EVALUATION_TIME_NOW;
+			return EvaluationTimeEnum.NOW;
 		}
 		
 		switch (evaluationTime) {
 		case NOW:
-			return JRExpression.EVALUATION_TIME_NOW;
+			return EvaluationTimeEnum.NOW;
 		case REPORT:
-			return JRExpression.EVALUATION_TIME_REPORT;
+			return EvaluationTimeEnum.REPORT;
 		case PAGE:
-			return JRExpression.EVALUATION_TIME_PAGE;
+			return EvaluationTimeEnum.PAGE;
 		case COLUMN:
-			return JRExpression.EVALUATION_TIME_COLUMN;
+			return EvaluationTimeEnum.COLUMN;
 		case GROUP:
-			return JRExpression.EVALUATION_TIME_GROUP;
+			return EvaluationTimeEnum.GROUP;
 		case BAND:
-			return JRExpression.EVALUATION_TIME_BAND;
+			return EvaluationTimeEnum.BAND;
 		case AUTO:
-			return JRExpression.EVALUATION_TIME_AUTO;
+			return EvaluationTimeEnum.AUTO;
 		default:
 			throw new JasperDesignException("Evaluation time " + evaluationTime.name() + " not supported");
 		}
 	}
 	
-	protected static Byte splitType(SplitType splitType) {
+	protected static SplitTypeEnum splitType(SplitType splitType) {
 		if (splitType == null) {
 			return null;
 		}
 		switch (splitType) {
 		case IMMEDIATE:			
-			return JRBand.SPLIT_TYPE_IMMEDIATE;
+			return SplitTypeEnum.IMMEDIATE;
 		case PREVENT:
-			return JRBand.SPLIT_TYPE_PREVENT;
+			return SplitTypeEnum.PREVENT;
 		case STRETCH:
-			return JRBand.SPLIT_TYPE_STRETCH;
+			return SplitTypeEnum.STRETCH;
 		default:
 			throw new JasperDesignException("Split type " + splitType.name() + " not supported");
 		}
@@ -351,47 +354,47 @@ class ConstantTransform {
 		}
 	}
 
-	protected static Byte chartPosition(Position position) {
+	protected static EdgeEnum chartPosition(Position position) {
 		if (position == null) {
 			return null;
 		}
 		
 		switch (position) {
 		case TOP:			
-			return JRChart.EDGE_TOP;
+			return EdgeEnum.TOP;
 		case BOTTOM:
-			return JRChart.EDGE_BOTTOM;
+			return EdgeEnum.BOTTOM;
 		case LEFT:			
-			return JRChart.EDGE_LEFT;
+			return EdgeEnum.LEFT;
 		case RIGHT:
-			return JRChart.EDGE_RIGHT;
+			return EdgeEnum.RIGHT;
 		default:
 			throw new JasperDesignException("Position " + position.name() + " not supported");
 		}
 	}
 
-	protected static byte calculation(Calculation calculation) {
+	protected static CalculationEnum calculation(Calculation calculation) {
 		switch (calculation) {
 		case NOTHING:
-			return JRVariable.CALCULATION_NOTHING;
+			return CalculationEnum.NOTHING;
 		case COUNT:
-			return JRVariable.CALCULATION_COUNT;
+			return CalculationEnum.COUNT;
 		case SUM:
-			return JRVariable.CALCULATION_SUM;			
+			return CalculationEnum.SUM;			
 		case AVERAGE:			
-			return JRVariable.CALCULATION_AVERAGE;
+			return CalculationEnum.AVERAGE;
 		case LOWEST:
-			return JRVariable.CALCULATION_LOWEST;
+			return CalculationEnum.LOWEST;
 		case HIGHEST:
-			return JRVariable.CALCULATION_HIGHEST;
+			return CalculationEnum.HIGHEST;
 		case STANDARD_DEVIATION:
-			return JRVariable.CALCULATION_STANDARD_DEVIATION;
+			return CalculationEnum.STANDARD_DEVIATION;
 		case VARIANCE:
-			return JRVariable.CALCULATION_VARIANCE;		
+			return CalculationEnum.VARIANCE;		
 		case FIRST:
-			return JRVariable.CALCULATION_FIRST;
+			return CalculationEnum.FIRST;
 		case DISTINCT_COUNT:
-			return JRVariable.CALCULATION_DISTINCT_COUNT;
+			return CalculationEnum.DISTINCT_COUNT;
 		default:
 			throw new JasperDesignException("Calculation " + calculation.name() + " not supported");
 		}

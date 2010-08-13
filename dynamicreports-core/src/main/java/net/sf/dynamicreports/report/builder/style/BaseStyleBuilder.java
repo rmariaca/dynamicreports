@@ -145,16 +145,28 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		return setItalic(true);
 	}
 	
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public T setPdfEmbedded(Boolean pdfEmbedded) {
 		getObject().getFont().setPdfEmbedded(pdfEmbedded);
 		return (T) this;
 	}
 
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public T setPdfEncoding(String pdfEncoding) {
 		getObject().getFont().setPdfEncoding(pdfEncoding);
 		return (T) this;
 	}
 
+	@Deprecated
+	/**
+	 * You should configure the fonts.xml file 
+	 */
 	public T setPdfFontName(String pdfFontName) {
 		getObject().getFont().setPdfFontName(pdfFontName);
 		return (T) this;

@@ -2,7 +2,7 @@
 <DynamicReports>
 	<!-- DEFAULT FONT -->
 	<!--
-	<font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/>
+	<font fontName="SansSerif" fontSize="10"/>
 	-->
 	
 	<!-- DEFAULT DATA TYPES -->

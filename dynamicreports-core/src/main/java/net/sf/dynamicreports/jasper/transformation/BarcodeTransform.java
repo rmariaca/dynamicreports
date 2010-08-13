@@ -55,10 +55,11 @@ import net.sf.jasperreports.components.barcode4j.RoyalMailCustomerComponent;
 import net.sf.jasperreports.components.barcode4j.UPCAComponent;
 import net.sf.jasperreports.components.barcode4j.UPCEComponent;
 import net.sf.jasperreports.components.barcode4j.USPSIntelligentMailComponent;
-import net.sf.jasperreports.engine.JRElement;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignComponentElement;
 import net.sf.jasperreports.engine.design.JRDesignElement;
+import net.sf.jasperreports.engine.type.PositionTypeEnum;
+import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -74,8 +75,8 @@ public class BarcodeTransform {
 		JRDesignComponentElement jrComponent = new JRDesignComponentElement();
 		jrComponent.setComponent(barcodeComponent(barcode));
 		jrComponent.setComponentKey(new ComponentKey(ComponentsExtensionsRegistryFactory.NAMESPACE, "jr", barcode.getName()));
-		jrComponent.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		jrComponent.setStretchType(JRElement.STRETCH_TYPE_RELATIVE_TO_TALLEST_OBJECT);
+		jrComponent.setPositionType(PositionTypeEnum.FLOAT);
+		jrComponent.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		return jrComponent;
 	}
 	
@@ -129,7 +130,7 @@ public class BarcodeTransform {
 	
 	private void barcode(BarcodeComponent jrBarcode, DRIDesignBarcode barcode) {
 		EvaluationTime evaluationTime = barcode.getEvaluationTime();
-		jrBarcode.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
+		jrBarcode.setEvaluationTimeValue(ConstantTransform.evaluationTime(evaluationTime));
 		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && barcode.getEvaluationGroup() != null) {
 			jrBarcode.setEvaluationGroup(accessor.getGroupTransform().getGroup(barcode.getEvaluationGroup()).getName());
 		}	

@@ -31,8 +31,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRReport;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.type.OrientationEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -55,7 +55,7 @@ public class IgnorePaginationTest extends AbstractJasperValueTest implements Ser
 		numberOfPagesTest(1);
 		
 		JasperPrint jasperPrint = getJasperPrint();
-		Assert.assertEquals(JRReport.ORIENTATION_PORTRAIT, jasperPrint.getOrientation());
+		Assert.assertEquals(OrientationEnum.PORTRAIT, jasperPrint.getOrientationValue());
 		Assert.assertEquals(595, jasperPrint.getPageWidth());
 		Assert.assertEquals(1636, jasperPrint.getPageHeight());
 	}

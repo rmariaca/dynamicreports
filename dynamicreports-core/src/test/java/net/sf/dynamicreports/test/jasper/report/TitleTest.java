@@ -28,8 +28,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRHyperlink;
 import net.sf.jasperreports.engine.JRPrintText;
+import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -59,7 +59,7 @@ public class TitleTest extends AbstractJasperValueTest {
 		JRPrintText textField = (JRPrintText) getElementAt("title.textField1", 0);
 		Assert.assertEquals("hyperlink reference", "link", textField.getHyperlinkReference());
 		Assert.assertEquals("hyperlink tooltip", "tooltip", textField.getHyperlinkTooltip());
-		Assert.assertEquals("hyperlink type reference", JRHyperlink.HYPERLINK_TYPE_REFERENCE, textField.getHyperlinkType());
+		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.REFERENCE, textField.getHyperlinkTypeValue());
 		
 		elementCountTest("title.textField2", 1);
 		elementValueTest("title.textField2", "title 2");

@@ -30,7 +30,6 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignPadding;
 import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
-import net.sf.jasperreports.engine.JRElement;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRLineBox;
 import net.sf.jasperreports.engine.JRPen;
@@ -38,6 +37,7 @@ import net.sf.jasperreports.engine.base.JRBaseStyle;
 import net.sf.jasperreports.engine.design.JRDesignConditionalStyle;
 import net.sf.jasperreports.engine.design.JRDesignFont;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.type.ModeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -93,7 +93,7 @@ public class StyleTransform {
 		baseStyle.setForecolor(style.getForegroundColor());
 		baseStyle.setBackcolor(style.getBackgroundColor());
 		if (style.getBackgroundColor() != null) {
-			baseStyle.setMode(JRElement.MODE_OPAQUE);		
+			baseStyle.setMode(ModeEnum.OPAQUE);		
 		}
 		baseStyle.setRadius(style.getRadius());
 		baseStyle.setScaleImage(ConstantTransform.imageScale(style.getImageScale()));

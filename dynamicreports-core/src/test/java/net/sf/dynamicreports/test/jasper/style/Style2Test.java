@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.type.LineStyleEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -80,7 +81,7 @@ public class Style2Test extends AbstractJasperStyleTest implements Serializable 
 		
 		//subtotal
 		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10, true, null);
-		subtotalLabelBorderTest(subtotal1, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0, null, (byte) 0, 0);
+		subtotalLabelBorderTest(subtotal1, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0);
 	}
 	
 	@Override

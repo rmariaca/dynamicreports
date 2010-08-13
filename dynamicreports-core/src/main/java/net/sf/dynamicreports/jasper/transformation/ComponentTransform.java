@@ -45,10 +45,7 @@ import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JRElement;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRHyperlink;
-import net.sf.jasperreports.engine.JRImage;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignElement;
@@ -58,6 +55,10 @@ import net.sf.jasperreports.engine.design.JRDesignStaticText;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.design.JRDesignSubreport;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
+import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
+import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
+import net.sf.jasperreports.engine.type.PositionTypeEnum;
+import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -113,8 +114,8 @@ public class ComponentTransform {
 	private JRDesignElement list(DRIDesignList list) {
 		JRDesignFrame frame = new JRDesignFrame();
 		
-		frame.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		frame.setStretchType(JRElement.STRETCH_TYPE_NO_STRETCH);
+		frame.setPositionType(PositionTypeEnum.FLOAT);
+		frame.setStretchType(StretchTypeEnum.NO_STRETCH);
 		
 		for (DRIDesignComponent element : list.getComponents()) {
 			frame.addElement(component(element));
@@ -130,7 +131,7 @@ public class ComponentTransform {
 		DRIDesignHyperLink hyperLink = textField.getHyperLink();
 		if (hyperLink != null) {
 			jrTextField.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrTextField.setHyperlinkType(JRHyperlink.HYPERLINK_TYPE_REFERENCE);
+			jrTextField.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
 			jrTextField.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
 		}
 		
@@ -140,8 +141,8 @@ public class ComponentTransform {
 			jrTextField.setEvaluationGroup(accessor.getGroupTransform().getGroup(textField.getEvaluationGroup()));
 		}
 		
-		jrTextField.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		jrTextField.setStretchType(JRElement.STRETCH_TYPE_RELATIVE_TO_TALLEST_OBJECT);
+		jrTextField.setPositionType(PositionTypeEnum.FLOAT);
+		jrTextField.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		jrTextField.setStretchWithOverflow(true);
 		
 		String pattern = textField.getPattern();
@@ -159,8 +160,8 @@ public class ComponentTransform {
 	//filler
 	private JRDesignElement filler(DRIDesignFiller filler) {
 		JRDesignStaticText jrDesignStaticText = new JRDesignStaticText();
-		jrDesignStaticText.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		jrDesignStaticText.setStretchType(JRElement.STRETCH_TYPE_RELATIVE_TO_TALLEST_OBJECT);
+		jrDesignStaticText.setPositionType(PositionTypeEnum.FLOAT);
+		jrDesignStaticText.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		return jrDesignStaticText;
 	}
 	
@@ -171,13 +172,13 @@ public class ComponentTransform {
 		DRIDesignHyperLink hyperLink = image.getHyperLink();
 		if (hyperLink != null) {
 			jrImage.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrImage.setHyperlinkType(JRHyperlink.HYPERLINK_TYPE_REFERENCE);
+			jrImage.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
 			jrImage.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
 		}
 		
-		jrImage.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		jrImage.setStretchType(JRElement.STRETCH_TYPE_RELATIVE_TO_TALLEST_OBJECT);
-		jrImage.setOnErrorType(JRImage.ON_ERROR_TYPE_BLANK);
+		jrImage.setPositionType(PositionTypeEnum.FLOAT);
+		jrImage.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
+		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);
 		jrImage.setScaleImage(ConstantTransform.imageScale(image.getImageScale()));
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
 		
@@ -208,8 +209,8 @@ public class ComponentTransform {
 			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
 		}
 		
-		jrSubreport.setPositionType(JRElement.POSITION_TYPE_FLOAT); 
-		jrSubreport.setStretchType(JRElement.STRETCH_TYPE_NO_STRETCH);
+		jrSubreport.setPositionType(PositionTypeEnum.FLOAT); 
+		jrSubreport.setStretchType(StretchTypeEnum.NO_STRETCH);
 		return jrSubreport;
 	}
 	

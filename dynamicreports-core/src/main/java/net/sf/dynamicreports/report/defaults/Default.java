@@ -251,9 +251,6 @@ public class Default {
 		this.backgroundSplitType = null;
 		
 		this.font = new DRFont("SansSerif", 10);
-		font.setPdfFontName("Helvetica");
-		font.setPdfEncoding("Cp1252");
-		font.setPdfEmbedded(false);
 		
 		this.bigDecimalType = new DRDataType<Number, BigDecimal>("#,##0.00#", HorizontalAlignment.RIGHT);
 		this.bigIntegerType = new DRDataType<Number, BigInteger>("#,##0", HorizontalAlignment.RIGHT);

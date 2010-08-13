@@ -39,8 +39,8 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRReport;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.type.OrientationEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -72,7 +72,7 @@ public class Report1Test extends AbstractJasperValueTest implements Serializable
 		columnTitleCountTest(column1, 0);
 		
 		JasperPrint jasperPrint = getJasperPrint();
-		Assert.assertEquals(JRReport.ORIENTATION_LANDSCAPE, jasperPrint.getOrientation());
+		Assert.assertEquals(OrientationEnum.LANDSCAPE, jasperPrint.getOrientationValue());
 		Assert.assertEquals(1190, jasperPrint.getPageWidth());
 		Assert.assertEquals(842, jasperPrint.getPageHeight());
 		

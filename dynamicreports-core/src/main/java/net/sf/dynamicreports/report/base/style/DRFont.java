@@ -113,6 +113,7 @@ public class DRFont implements DRIFont {
 		return pdfFontName;
 	}
 	
+	@Deprecated
 	public void setPdfFontName(String pdfFontName) {
 		this.pdfFontName = pdfFontName;
 	}
@@ -121,6 +122,7 @@ public class DRFont implements DRIFont {
 		return pdfEncoding;
 	}
 	
+	@Deprecated
 	public void setPdfEncoding(String pdfEncoding) {
 		this.pdfEncoding = pdfEncoding;
 	}
@@ -129,6 +131,7 @@ public class DRFont implements DRIFont {
 		return pdfEmbedded;
 	}
 	
+	@Deprecated
 	public void setPdfEmbedded(Boolean pdfEmbedded) {
 		this.pdfEmbedded = pdfEmbedded;
 	}	

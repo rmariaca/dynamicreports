@@ -66,8 +66,6 @@ import net.sf.jasperreports.charts.design.JRDesignTimeSeriesPlot;
 import net.sf.jasperreports.charts.design.JRDesignXyDataset;
 import net.sf.jasperreports.charts.design.JRDesignXySeries;
 import net.sf.jasperreports.engine.JRChartPlot;
-import net.sf.jasperreports.engine.JRElement;
-import net.sf.jasperreports.engine.JRHyperlink;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot.JRBaseSeriesColor;
 import net.sf.jasperreports.engine.design.JRDesignChart;
@@ -75,6 +73,9 @@ import net.sf.jasperreports.engine.design.JRDesignChartDataset;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
+import net.sf.jasperreports.engine.type.PositionTypeEnum;
+import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -109,7 +110,7 @@ public class ChartTransform {
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
 			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrChart.setHyperlinkType(JRHyperlink.HYPERLINK_TYPE_REFERENCE);
+			jrChart.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
 			jrChart.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
 		}
 		
@@ -139,8 +140,8 @@ public class ChartTransform {
 			addChartCustomizer(chart.getUniqueName(), chart.getCustomizer());
 		}
 		
-		jrChart.setPositionType(JRElement.POSITION_TYPE_FLOAT);
-		jrChart.setStretchType(JRElement.STRETCH_TYPE_RELATIVE_TO_TALLEST_OBJECT);
+		jrChart.setPositionType(PositionTypeEnum.FLOAT);
+		jrChart.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 	}
 	
 	private void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {
