@@ -57,6 +57,8 @@ public interface DRIDesignReport {
 	public boolean isTitleOnANewPage();
 
 	public boolean isSummaryOnANewPage();
+	
+	public boolean isSummaryWithPageHeaderAndFooter();
 
 	public boolean isFloatColumnFooter();	
 	

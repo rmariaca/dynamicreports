@@ -76,6 +76,7 @@ public class ReportTransform {
 		design.setWhenNoDataType(ConstantTransform.whenNoDataType(report.getWhenNoDataType()));
 		design.setTitleNewPage(report.isTitleOnANewPage());
 		design.setSummaryNewPage(report.isSummaryOnANewPage());
+		design.setSummaryWithPageHeaderAndFooter(report.isSummaryWithPageHeaderAndFooter());
 		design.setFloatColumnFooter(report.isFloatColumnFooter());
 		
 		for (DRIDesignParameter parameter : report.getParameters()) {

@@ -198,6 +198,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return templateTransform.isSummaryOnANewPage();
 	}
 
+	public boolean isSummaryWithPageHeaderAndFooter() {
+		return templateTransform.isSummaryWithPageHeaderAndFooter();
+	}
+	
 	public boolean isFloatColumnFooter() {
 		return templateTransform.isFloatColumnFooter();
 	}

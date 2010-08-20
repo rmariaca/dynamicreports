@@ -50,6 +50,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getTitleOnANewPage();
 
 	public Boolean getSummaryOnANewPage();
+	
+	public Boolean getSummaryWithPageHeaderAndFooter();
 
 	public Boolean getFloatColumnFooter();
 

@@ -144,6 +144,15 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 	
+	public T summaryWithPageHeaderAndFooter() {
+		return setSummaryWithPageHeaderAndFooter(true);
+	}
+	
+	public T setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
+		getObject().setSummaryWithPageHeaderAndFooter(summaryWithPageHeaderAndFooter);
+		return (T) this;
+	}
+	
 	public T floatColumnFooter() {
 		return setFloatColumnFooter(true);
 	}

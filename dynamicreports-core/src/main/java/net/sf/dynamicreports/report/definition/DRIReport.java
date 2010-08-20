@@ -77,6 +77,8 @@ public interface DRIReport extends Serializable {
 	
 	public Boolean getSummaryOnANewPage();
 	
+	public Boolean getSummaryWithPageHeaderAndFooter();
+	
 	public Boolean getFloatColumnFooter();
 	
 	public DRIStyle getTextStyle();

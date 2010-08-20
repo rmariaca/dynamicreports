@@ -57,6 +57,7 @@ public class Default {
 	private WhenNoDataType whenNoDataType;
 	private boolean titleOnANewPage;
 	private boolean summaryOnANewPage;
+	private boolean summaryWithPageHeaderAndFooter;
 	private boolean floatColumnFooter;	
 	//style
 	private boolean highlightDetailOddRows;
@@ -169,6 +170,7 @@ public class Default {
 		this.whenNoDataType = WhenNoDataType.NO_PAGES;		
 		this.titleOnANewPage = false;
 		this.summaryOnANewPage = false;
+		this.summaryWithPageHeaderAndFooter = false;
 		this.floatColumnFooter = false;
 		
 		this.highlightDetailOddRows = false;
@@ -302,6 +304,10 @@ public class Default {
 		return summaryOnANewPage;
 	}
 
+	public boolean isSummaryWithPageHeaderAndFooter() {
+		return summaryWithPageHeaderAndFooter;
+	}
+	
 	public boolean isFloatColumnFooter() {
 		return floatColumnFooter;
 	}

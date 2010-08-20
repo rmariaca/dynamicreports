@@ -128,6 +128,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isSummaryOnANewPage();
 	}
 
+	public boolean isSummaryWithPageHeaderAndFooter() {
+		if (report.getSummaryWithPageHeaderAndFooter() != null) {
+			return report.getSummaryWithPageHeaderAndFooter();
+		}
+		if (template.getSummaryWithPageHeaderAndFooter() != null) {
+			return template.getSummaryWithPageHeaderAndFooter();
+		}
+		return Defaults.getDefaults().isSummaryWithPageHeaderAndFooter();
+	}
+	
 	public boolean isFloatColumnFooter() {
 		if (report.getFloatColumnFooter() != null) {
 			return report.getFloatColumnFooter();

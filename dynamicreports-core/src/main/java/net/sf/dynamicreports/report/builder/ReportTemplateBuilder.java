@@ -90,6 +90,15 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder summaryWithPageHeaderAndFooter() {
+		return setSummaryWithPageHeaderAndFooter(true);
+	}
+	
+	public ReportTemplateBuilder setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
+		getObject().setSummaryWithPageHeaderAndFooter(summaryWithPageHeaderAndFooter);
+		return this;
+	}
+	
 	public ReportTemplateBuilder floatColumnFooter() {
 		return setFloatColumnFooter(true);
 	}

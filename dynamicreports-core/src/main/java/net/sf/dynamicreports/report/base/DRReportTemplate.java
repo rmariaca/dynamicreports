@@ -52,6 +52,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private WhenNoDataType whenNoDataType;
 	private Boolean titleOnANewPage;
 	private Boolean summaryOnANewPage;
+	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;	
 	//style
 	private Boolean highlightDetailOddRows;
@@ -169,6 +170,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.summaryOnANewPage = summaryOnANewPage;
 	}
 
+	public Boolean getSummaryWithPageHeaderAndFooter() {
+		return summaryWithPageHeaderAndFooter;
+	}
+	
+	public void setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
+		this.summaryWithPageHeaderAndFooter = summaryWithPageHeaderAndFooter;
+	}
+	
 	public Boolean getFloatColumnFooter() {
 		return floatColumnFooter;
 	}

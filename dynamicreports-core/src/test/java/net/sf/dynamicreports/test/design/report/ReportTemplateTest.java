@@ -76,6 +76,7 @@ public class ReportTemplateTest {
 						.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 						.setTitleOnANewPage(true)
 						.setSummaryOnANewPage(true)
+						.setSummaryWithPageHeaderAndFooter(true)
 						.setFloatColumnFooter(true)
 						
 						.setHighlightDetailOddRows(true)
@@ -130,6 +131,7 @@ public class ReportTemplateTest {
 			Assert.assertEquals("when no data type", WhenNoDataType.ALL_SECTIONS_NO_DETAIL, report.getWhenNoDataType());
 			Assert.assertTrue("title on a new page", report.isTitleOnANewPage());
 			Assert.assertTrue("summary on a new page", report.isSummaryOnANewPage());
+			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());
 			Assert.assertTrue("float column footer", report.isFloatColumnFooter());
 			
 			DRDesignTextField columnTextField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);

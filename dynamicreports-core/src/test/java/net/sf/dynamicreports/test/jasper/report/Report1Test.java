@@ -41,6 +41,7 @@ import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.type.OrientationEnum;
+import net.sf.jasperreports.engine.util.JRFontUtil;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -70,6 +71,8 @@ public class Report1Test extends AbstractJasperValueTest implements Serializable
 		
 		numberOfPagesTest(1);
 		columnTitleCountTest(column1, 0);
+		
+		Assert.assertFalse("fonts", JRFontUtil.getFontFamilyNames().isEmpty());
 		
 		JasperPrint jasperPrint = getJasperPrint();
 		Assert.assertEquals(OrientationEnum.LANDSCAPE, jasperPrint.getOrientationValue());
