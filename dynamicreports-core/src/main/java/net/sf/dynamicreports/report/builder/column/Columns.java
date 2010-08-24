@@ -24,9 +24,11 @@ package net.sf.dynamicreports.report.builder.column;
 
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang.Validate;
 
@@ -46,16 +48,27 @@ public class Columns {
 	}
 
 	public static <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<? super T, T> dataType) {
-		return column(DynamicReports.field(fieldName, dataType.getValueClass())).setDataType(dataType);
+		Validate.notNull(dataType, "dataType must not be null");		
+		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(DynamicReports.field(fieldName, dataType.getValueClass()));
+		textColumnBuilder.setDataType(dataType);
+		return textColumnBuilder;
 	}
 
-	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {
-		Validate.notNull(dataType, "dataType must not be null");
-		return column(title, DynamicReports.field(fieldName, dataType.getValueClass())).setDataType(dataType);
+	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {				
+		TextColumnBuilder<T> textColumnBuilder = column(fieldName, dataType);
+		textColumnBuilder.setTitle(title);
+		return textColumnBuilder;
 	}
 	
 	public static <T> TextColumnBuilder<T> column(FieldBuilder<T> field) {
-		return new TextColumnBuilder<T>(field);
+		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(field);
+		try {
+			@SuppressWarnings("unchecked")
+			DRIDataType<? super T, T> datatType = (DRIDataType<? super T, T>) DataTypes.detectType(field.getField().getValueClass());
+			textColumnBuilder.setDataType(datatType);
+		} catch (DRException e) {
+		}
+		return textColumnBuilder;
 	}	
 
 	public static <T> TextColumnBuilder<T> column(String title, FieldBuilder<T> field) {

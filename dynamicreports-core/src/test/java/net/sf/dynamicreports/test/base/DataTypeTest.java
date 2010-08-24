@@ -22,25 +22,81 @@
 
 package net.sf.dynamicreports.test.base;
 
-
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import junit.framework.Assert;
+import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
+import net.sf.dynamicreports.report.builder.datatype.StringType;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import org.junit.Test;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DataTypeValueToStringTest {
+public class DataTypeTest {
 	
 	@Test
-	public void test() {
+	public void detectTypeTest() {		
+		try {
+			detectTypeTest(type.bigDecimalType(), BigDecimal.class);
+			detectTypeTest(type.bigIntegerType(), BigInteger.class);
+			detectTypeTest(type.byteType(), Byte.class);
+			detectTypeTest(type.doubleType(), Double.class);
+			detectTypeTest(type.floatType(), Float.class);
+			detectTypeTest(type.integerType(), Integer.class);
+			detectTypeTest(type.longType(), Long.class);
+			detectTypeTest(type.shortType(), Short.class);
+			detectTypeTest(type.dateType(), Date.class);
+			detectTypeTest(type.dateYearToMonthType(), "DateYearToMonth");
+			detectTypeTest(type.dateYearToHourType(), "DateYearToHour");
+			detectTypeTest(type.dateYearToMinuteType(), "DateYearToMinute");
+			detectTypeTest(type.dateYearToSecondType(), "DateYearToSecond");
+			detectTypeTest(type.dateYearToFractionType(), "DateYearToFraction");
+			detectTypeTest(type.dateYearType(), "DateYear");
+			detectTypeTest(type.dateMonthType(), "DateMonth");
+			detectTypeTest(type.dateDayType(), "DateDay");
+			detectTypeTest(type.timeHourToMinuteType(), "TimeHourToMinute");
+			detectTypeTest(type.timeHourToSecondType(), "TimeHourToSecond");
+			detectTypeTest(type.timeHourToFractionType(), "TimeHourToFraction");
+			detectTypeTest(type.percentageType(), "Percentage");
+			detectTypeTest(type.booleanType(), Boolean.class);
+			detectTypeTest(type.characterType(), Character.class);
+			detectTypeTest(type.stringType(), String.class);
+			detectTypeTest(type.stringType(), "Text");		
+
+			@SuppressWarnings("unused")
+			BigDecimalType bigDecimalType = type.detectType(BigDecimal.class);
+			@SuppressWarnings("unused")
+			StringType stringType = type.detectType(String.class);
+		} catch (DRException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	public <U, T extends U> void detectTypeTest(DRIDataType<U, T> dataType, Class<T> valueClass) throws DRException {
+		detectTypeTest(dataType, valueClass.getSimpleName());
+		Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(valueClass.getName()).getClass());
+		Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(valueClass).getClass());
+	}
+	
+	public <U, T extends U> void detectTypeTest(DRIDataType<U, T> dataType, String ...dataTypes) throws DRException {
+		for (String stringDataType : dataTypes) {
+			Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(stringDataType).getClass());
+			Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(stringDataType.toLowerCase()).getClass());
+			Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(stringDataType.toUpperCase()).getClass());
+		}
+	}
+	
+	@Test
+	public void valueToStringTest() {
 		valueToStringTest("BigDecimal", type.bigDecimalType(), 1000, "1,000.00");
 		valueToStringTest("BigInteger", type.bigIntegerType(), 1000, "1,000");
 		valueToStringTest("Byte", type.byteType(), 1000, "1,000");

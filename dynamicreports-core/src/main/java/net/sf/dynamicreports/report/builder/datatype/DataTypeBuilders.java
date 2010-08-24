@@ -22,11 +22,22 @@
 
 package net.sf.dynamicreports.report.builder.datatype;
 
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.exception.DRException;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
 public class DataTypeBuilders {
+
+	public <U, T extends DRIDataType<? super U, U>> T detectType(Class<U> dataType) throws DRException {
+		return DataTypes.detectType(dataType);
+	}
+	
+	public <T extends DRIDataType<?, ?>> T detectType(String dataType) throws DRException {
+		return DataTypes.detectType(dataType);
+	}
 	
 	public BigDecimalType bigDecimalType() {
 		return DataTypes.bigDecimalType();

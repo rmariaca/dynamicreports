@@ -22,6 +22,15 @@
 
 package net.sf.dynamicreports.report.builder.datatype;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
+import org.apache.commons.lang.Validate;
+
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.exception.DRException;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -51,6 +60,91 @@ public class DataTypes {
 	private static final BooleanType booleanType = new BooleanType();
 	private static final CharacterType characterType = new CharacterType();
 	private static final StringType stringType = new StringType();
+
+	public static <U, T extends DRIDataType<? super U, U>> T detectType(Class<U> dataType) throws DRException {
+		return detectType(dataType.getName());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends DRIDataType<?, ?>> T detectType(String dataType) throws DRException {
+		Validate.notNull(dataType, "dataType must not be null");
+			
+		String dataTypeLC = dataType.toLowerCase().trim();
+		if (dataTypeLC.equals("bigdecimal") || dataType.equals(BigDecimal.class.getName())) {
+			return (T) bigDecimalType;
+		}
+		if (dataTypeLC.equals("biginteger") || dataType.equals(BigInteger.class.getName())) {
+			return (T) bigIntegerType;
+		}
+		if (dataTypeLC.equals("byte") || dataType.equals(Byte.class.getName())) {
+			return (T) byteType;
+		}
+		if (dataTypeLC.equals("double") || dataType.equals(Double.class.getName())) {
+			return (T) doubleType;
+		}
+		if (dataTypeLC.equals("float") || dataType.equals(Float.class.getName())) {
+			return (T) floatType;
+		}
+		if (dataTypeLC.equals("integer") || dataType.equals(Integer.class.getName())) {
+			return (T) integerType;
+		}
+		if (dataTypeLC.equals("long") || dataType.equals(Long.class.getName())) {
+			return (T) longType;
+		}
+		if (dataTypeLC.equals("short") || dataType.equals(Short.class.getName())) {
+			return (T) shortType;
+		}
+		if (dataTypeLC.equals("date") || dataType.equals(Date.class.getName())) {
+			return (T) dateType;
+		}
+		if (dataTypeLC.equals("dateyeartomonth")) {
+			return (T) dateYearToMonthType;
+		}
+		if (dataTypeLC.equals("dateyeartohour")) {
+			return (T) dateYearToHourType;
+		}
+		if (dataTypeLC.equals("dateyeartominute")) {
+			return (T) dateYearToMinuteType;
+		}
+		if (dataTypeLC.equals("dateyeartosecond")) {
+			return (T) dateYearToSecondType;
+		}
+		if (dataTypeLC.equals("dateyeartofraction")) {
+			return (T) dateYearToFractionType;
+		}
+		if (dataTypeLC.equals("dateyear")) {
+			return (T) dateYearType;
+		}
+		if (dataTypeLC.equals("datemonth")) {
+			return (T) dateMonthType;
+		}
+		if (dataTypeLC.equals("dateday")) {
+			return (T) dateDayType;
+		}
+		if (dataTypeLC.equals("timehourtominute")) {
+			return (T) timeHourToMinuteType;
+		}
+		if (dataTypeLC.equals("timehourtosecond")) {
+			return (T) timeHourToSecondType;
+		}
+		if (dataTypeLC.equals("timehourtofraction")) {
+			return (T) timeHourToFractionType;
+		}
+		if (dataTypeLC.equals("percentage")) {
+			return (T) percentageType;
+		}
+		if (dataTypeLC.equals("boolean") || dataType.equals(Boolean.class.getName())) {
+			return (T) booleanType;
+		}
+		if (dataTypeLC.equals("character") || dataType.equals(Character.class.getName())) {
+			return (T) characterType;
+		}
+		if (dataTypeLC.equals("string") || dataTypeLC.equals("text") || dataType.equals(String.class.getName())) {
+			return (T) stringType;
+		}		
+		
+		throw new DRException("Data type \"" + dataType + "\" is not supported");
+	}
 	
 	public static BigDecimalType bigDecimalType() {
 		return bigDecimalType;

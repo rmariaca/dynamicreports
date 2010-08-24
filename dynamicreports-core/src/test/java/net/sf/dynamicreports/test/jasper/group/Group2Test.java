@@ -23,6 +23,9 @@
 package net.sf.dynamicreports.test.jasper.group;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.util.Locale;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
@@ -45,7 +48,8 @@ public class Group2Test extends AbstractJasperValueTest {
 		TextColumnBuilder<String> column1;		
 		ColumnGroupBuilder group1;
 		
-		rb.columns(				
+		rb.setLocale(Locale.ENGLISH)
+		  .columns(				
 				column1 = col.column("Column1", "field1", String.class),	
 				column2 = col.column("Column2", "field2", Integer.class),
 				column3 = col.column("Column3", "field3", Integer.class),
@@ -97,7 +101,7 @@ public class Group2Test extends AbstractJasperValueTest {
 		elementValueTest("groupFooter.textField2", "footer2", "footer2");
 		
 		subtotalCountTest(subtotal1, 1);
-		subtotalValueTest(subtotal1, "1225");
+		subtotalValueTest(subtotal1, "1,225");
 	}
 	
 	@Override
