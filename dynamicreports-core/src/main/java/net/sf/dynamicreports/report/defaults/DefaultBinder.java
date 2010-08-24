@@ -37,33 +37,35 @@ public class DefaultBinder {
 	
 	public static Default bind(XmlDynamicReports xmlDynamicReports) {
 		Default defaults = new Default();
-		//font
-		bind(defaults.getFont(), xmlDynamicReports.getFont());
-		//data type
-		bind(defaults.getBigDecimalType(), xmlDynamicReports.getBigDecimalType());
-		bind(defaults.getBigIntegerType(), xmlDynamicReports.getBigIntegerType());
-		bind(defaults.getByteType(), xmlDynamicReports.getByteType());
-		bind(defaults.getDoubleType(), xmlDynamicReports.getDoubleType());
-		bind(defaults.getFloatType(), xmlDynamicReports.getFloatType());
-		bind(defaults.getIntegerType(), xmlDynamicReports.getIntegerType());
-		bind(defaults.getLongType(), xmlDynamicReports.getLongType());
-		bind(defaults.getShortType(), xmlDynamicReports.getShortType());
-		bind(defaults.getDateType(), xmlDynamicReports.getDateType());
-		bind(defaults.getDateYearToMonthType(), xmlDynamicReports.getDateYearToMonthType());
-		bind(defaults.getDateYearToHourType(), xmlDynamicReports.getDateYearToHourType());
-		bind(defaults.getDateYearToMinuteType(), xmlDynamicReports.getDateYearToMinuteType());
-		bind(defaults.getDateYearToSecondType(), xmlDynamicReports.getDateYearToSecondType());
-		bind(defaults.getDateYearToFractionType(), xmlDynamicReports.getDateYearToFractionType());		
-		bind(defaults.getDateYearType(), xmlDynamicReports.getDateYearType());
-		bind(defaults.getDateMonthType(), xmlDynamicReports.getDateMonthType());
-		bind(defaults.getDateDayType(), xmlDynamicReports.getDateDayType());		
-		bind(defaults.getTimeHourToMinuteType(), xmlDynamicReports.getTimeHourToMinuteType());
-		bind(defaults.getTimeHourToSecondType(), xmlDynamicReports.getTimeHourToSecondType());
-		bind(defaults.getTimeHourToFractionType(), xmlDynamicReports.getTimeHourToFractionType());
-		bind(defaults.getPercentageType(), xmlDynamicReports.getPercentageType());
-		bind(defaults.getBooleanType(), xmlDynamicReports.getBooleanType());
-		bind(defaults.getCharacterType(), xmlDynamicReports.getCharacterType());
-		bind(defaults.getStringType(), xmlDynamicReports.getStringType());
+		if (xmlDynamicReports != null) {
+			// font
+			bind(defaults.getFont(), xmlDynamicReports.getFont());
+			// data type
+			bind(defaults.getBigDecimalType(), xmlDynamicReports.getBigDecimalType());
+			bind(defaults.getBigIntegerType(), xmlDynamicReports.getBigIntegerType());
+			bind(defaults.getByteType(), xmlDynamicReports.getByteType());
+			bind(defaults.getDoubleType(), xmlDynamicReports.getDoubleType());
+			bind(defaults.getFloatType(), xmlDynamicReports.getFloatType());
+			bind(defaults.getIntegerType(), xmlDynamicReports.getIntegerType());
+			bind(defaults.getLongType(), xmlDynamicReports.getLongType());
+			bind(defaults.getShortType(), xmlDynamicReports.getShortType());
+			bind(defaults.getDateType(), xmlDynamicReports.getDateType());
+			bind(defaults.getDateYearToMonthType(), xmlDynamicReports.getDateYearToMonthType());
+			bind(defaults.getDateYearToHourType(), xmlDynamicReports.getDateYearToHourType());
+			bind(defaults.getDateYearToMinuteType(), xmlDynamicReports.getDateYearToMinuteType());
+			bind(defaults.getDateYearToSecondType(), xmlDynamicReports.getDateYearToSecondType());
+			bind(defaults.getDateYearToFractionType(), xmlDynamicReports.getDateYearToFractionType());
+			bind(defaults.getDateYearType(), xmlDynamicReports.getDateYearType());
+			bind(defaults.getDateMonthType(), xmlDynamicReports.getDateMonthType());
+			bind(defaults.getDateDayType(), xmlDynamicReports.getDateDayType());
+			bind(defaults.getTimeHourToMinuteType(), xmlDynamicReports.getTimeHourToMinuteType());
+			bind(defaults.getTimeHourToSecondType(), xmlDynamicReports.getTimeHourToSecondType());
+			bind(defaults.getTimeHourToFractionType(), xmlDynamicReports.getTimeHourToFractionType());
+			bind(defaults.getPercentageType(), xmlDynamicReports.getPercentageType());
+			bind(defaults.getBooleanType(), xmlDynamicReports.getBooleanType());
+			bind(defaults.getCharacterType(), xmlDynamicReports.getCharacterType());
+			bind(defaults.getStringType(), xmlDynamicReports.getStringType());
+		}
 		return defaults;
 	}
 	

@@ -38,30 +38,31 @@ import net.sf.dynamicreports.report.defaults.Default;
 import net.sf.dynamicreports.report.defaults.DefaultBinder;
 import net.sf.dynamicreports.report.defaults.xml.XmlDynamicReports;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DefaultsTest {
-	private Default defaults;
 	
-	@Before
-	public void init() {
+	private Default load() {
 		InputStream is = DefaultsTest.class.getResourceAsStream("dynamicreports-defaults.xml");
 		try {
 			Unmarshaller unmarshaller = JAXBContext.newInstance(XmlDynamicReports.class).createUnmarshaller();						
 			JAXBElement<XmlDynamicReports> root = unmarshaller.unmarshal(new StreamSource(is), XmlDynamicReports.class);
-			defaults = DefaultBinder.bind(root.getValue()); 
+			return DefaultBinder.bind(root.getValue()); 
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+		return null;
 	}
 	
 	@Test
 	public void test() {
+		DefaultBinder.bind(null);
+		Default defaults = load();
+		
 		DRFont font = defaults.getFont();
 		Assert.assertEquals("Font name", "Arial", font.getFontName());
 		Assert.assertEquals("Font size", new Integer(15), font.getFontSize());

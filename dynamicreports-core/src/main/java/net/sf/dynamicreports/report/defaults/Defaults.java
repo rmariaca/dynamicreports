@@ -33,10 +33,15 @@ import javax.xml.transform.stream.StreamSource;
 import net.sf.dynamicreports.report.defaults.xml.XmlDynamicReports;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Defaults {
+	private static final Log log = LogFactory.getLog(Defaults.class);
+	
 	private static Default defaults;
 	
 	static {
@@ -44,10 +49,27 @@ public class Defaults {
 	}
 	
 	private static XmlDynamicReports load() {
-		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("dynamicreports-defaults.xml");
-		if (is == null) {
-			throw new DRReportException("Dynamic reports defaults xml file not found");
+		String resource = "dynamicreports-defaults.xml";
+		InputStream is = null;
+		
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();		
+		if (classLoader != null) {
+			is = classLoader.getResourceAsStream(resource);
 		}
+		if (is == null)	{
+			classLoader = Defaults.class.getClassLoader();
+			if (classLoader != null) {
+				is = classLoader.getResourceAsStream(resource);
+			}		
+			if (is == null) {
+				is = Defaults.class.getResourceAsStream("/" + resource);
+			}
+		}
+		if (is == null) {
+			log.error("dynamicreports-defaults.xml file not found");
+			return null;
+		}
+
 		try {
 			Unmarshaller unmarshaller = JAXBContext.newInstance(XmlDynamicReports.class).createUnmarshaller();						
 			JAXBElement<XmlDynamicReports> root = unmarshaller.unmarshal(new StreamSource(is), XmlDynamicReports.class);
