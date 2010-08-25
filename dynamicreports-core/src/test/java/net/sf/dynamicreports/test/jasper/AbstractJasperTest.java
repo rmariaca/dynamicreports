@@ -22,8 +22,11 @@
 
 package net.sf.dynamicreports.test.jasper;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -53,8 +56,10 @@ public abstract class AbstractJasperTest {
 	public void init() {
 		try {
 			JasperReportBuilder reportBuilder = DynamicReports.report();
-			configureReport(reportBuilder);		
-			serializableTest(reportBuilder);
+			configureReport(reportBuilder);	
+			if (serializableTest()) {
+				reportBuilder = serializableTest(reportBuilder);
+			}
 			jasperReport = reportBuilder.toJasperReport();
 			jasperPrint = reportBuilder
 											.setDataSource(createDataSource())
@@ -69,12 +74,20 @@ public abstract class AbstractJasperTest {
 	public void test() {		
 	}
 	
-	private void serializableTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
+	protected boolean serializableTest() {
+		return true;
+	}
+	
+	private JasperReportBuilder serializableTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.writeObject(report);
 		oos.flush();
 		oos.close();
+		
+    InputStream stream = new ByteArrayInputStream((byte[])bos.toByteArray());
+    ObjectInputStream ois = new ObjectInputStream(stream);
+    return (JasperReportBuilder) ois.readObject();
 	}
 	
 	public JasperReport getJasperReport() {

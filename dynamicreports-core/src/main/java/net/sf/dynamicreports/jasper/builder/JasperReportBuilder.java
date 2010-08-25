@@ -30,6 +30,8 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -63,7 +65,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JRVirtualizer;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -92,6 +96,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private JasperPrint jasperPrint;	
 	private JRDataSource dataSource;
 	private Connection connection;
+	private JRVirtualizer virtualizer;
 	
 	public JasperReportBuilder() {		
 	}
@@ -162,12 +167,18 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	
 	public JasperPrint toJasperPrint() throws DRException {
 		if (jasperPrint == null) {
+			Map<String, Object> parameters = toJasperReportDesign().getParameters();
+			if (virtualizer != null) {
+				parameters = new HashMap<String, Object>(parameters);
+				parameters.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			}
+			
 			try {
 				if (connection != null && getObject().getQuery() != null) {
-					jasperPrint = JasperFillManager.fillReport(toJasperReport(), toJasperReportDesign().getParameters(), connection);
+					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, connection);
 				}
 				else {
-					jasperPrint = JasperFillManager.fillReport(toJasperReport(), toJasperReportDesign().getParameters(), dataSource);
+					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, dataSource);
 				}
 			}
 			catch (JRException e) {
@@ -211,6 +222,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		} catch (JRException e) {
 			throw new DRException(e);
 		}
+		return this;
+	}
+	
+	public JasperReportBuilder setVirtualizer(JRVirtualizer virtualizer) {		
+		this.virtualizer = virtualizer;
 		return this;
 	}
 	

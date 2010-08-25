@@ -24,7 +24,6 @@ package net.sf.dynamicreports.test.jasper.report;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ListResourceBundle;
 import java.util.Locale;
@@ -46,9 +45,7 @@ import net.sf.jasperreports.engine.util.JRFontUtil;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Report1Test extends AbstractJasperValueTest implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class Report1Test extends AbstractJasperValueTest {	
 	private TextColumnBuilder<Integer> column1;
 	private ReportScriptlet scriptlet;
 	private BigDecimal parameter;
@@ -83,6 +80,11 @@ public class Report1Test extends AbstractJasperValueTest implements Serializable
 	}
 	
 	@Override
+	protected boolean serializableTest() {
+		return false;
+	}
+	
+	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		for (int i = 0; i < 50; i++) {
@@ -91,8 +93,7 @@ public class Report1Test extends AbstractJasperValueTest implements Serializable
 		return dataSource;
 	}
 	
-	private class ResourceBundle extends ListResourceBundle implements Serializable {
-		private static final long serialVersionUID = 1L;
+	private class ResourceBundle extends ListResourceBundle {
 
 		@Override
 		protected Object[][] getContents() {
@@ -100,9 +101,7 @@ public class Report1Test extends AbstractJasperValueTest implements Serializable
 		}		
 	}
 	
-	private class ReportScriptlet extends AbstractScriptlet implements Serializable {
-		private static final long serialVersionUID = 1L;
-		
+	private class ReportScriptlet extends AbstractScriptlet {		
 		private int count;		
 		
 		@Override

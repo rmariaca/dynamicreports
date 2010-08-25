@@ -47,9 +47,7 @@ import net.sf.jasperreports.engine.util.JRImageLoader;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ImageTest extends AbstractJasperTest implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class ImageTest extends AbstractJasperTest {	
 	private Image image;
 	
 	@Override
@@ -74,6 +72,11 @@ public class ImageTest extends AbstractJasperTest implements Serializable {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}		
+	}
+	
+	@Override
+	protected boolean serializableTest() {
+		return false;
 	}
 	
 	private class TestImage extends BufferedImage implements Serializable {
