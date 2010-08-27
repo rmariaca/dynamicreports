@@ -158,6 +158,7 @@ public class Default {
   private DRDataType<Boolean, Boolean> booleanType;
   private DRDataType<Character, Character> characterType;
   private DRDataType<String, String> stringType;
+	private HorizontalAlignment pageXofYHorizontalAlignment;
 	
 	public Default() {
 		init();
@@ -237,6 +238,8 @@ public class Default {
 		
 		this.subreportWidth = 200;
 		this.subreportHeight = 0;
+		
+		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 		
 		this.defaultSplitType = null;		
 		this.titleSplitType = null;
@@ -650,5 +653,9 @@ public class Default {
 
 	public DRDataType<String, String> getStringType() {
 		return stringType;
+	}
+
+	public HorizontalAlignment getPageXofYHorizontalAlignment() {
+		return pageXofYHorizontalAlignment;
 	}	
 }

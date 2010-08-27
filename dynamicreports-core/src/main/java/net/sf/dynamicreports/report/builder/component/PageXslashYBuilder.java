@@ -22,22 +22,34 @@
 
 package net.sf.dynamicreports.report.builder.component;
 
-import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.base.component.DRPageXofY;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class PageXslashYBuilder extends HyperLinkComponentBuilder<PageXslashYBuilder, DRTextField<String>> {
+public class PageXslashYBuilder extends HyperLinkComponentBuilder<PageXslashYBuilder, DRPageXofY> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	protected PageXslashYBuilder() {
-		super(new DRTextField<String>());
+		super(new DRPageXofY());
 	}
 
+	public PageXslashYBuilder setFormatExpression(String format) {
+		getObject().setFormatExpression(Expressions.text(format));
+		return this;
+	}
+	
+	public PageXslashYBuilder setFormatExpression(DRISimpleExpression<String> formatExpression) {
+		getObject().setFormatExpression(formatExpression);
+		return this;
+	}
+	
 	public PageXslashYBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
@@ -45,7 +57,9 @@ public class PageXslashYBuilder extends HyperLinkComponentBuilder<PageXslashYBui
 	
 	@Override
 	protected void configure() {
-		getObject().setValueExpression(Expressions.pageXslashY());		
-		super.configure();		
+		if (getObject().getFormatExpression() == null) {
+			setFormatExpression(new SystemMessageExpression("page_x_slash_y"));
+		}
+		super.configure();
 	}
 }

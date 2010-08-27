@@ -23,10 +23,7 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -49,8 +46,8 @@ public class TotalPagesBuilder extends HyperLinkComponentBuilder<TotalPagesBuild
 	
 	@Override
 	protected void configure() {
-		VariableBuilder<Integer> variable = DynamicReports.variable(Expressions.pageNumber(), Calculation.NOTHING);
-		getObject().setValueExpression(variable.setResetType(Evaluation.REPORT).build());		
+		getObject().setValueExpression(Expressions.pageNumber());
+		getObject().setEvaluationTime(Evaluation.REPORT);
 		super.configure();		
 	}
 }

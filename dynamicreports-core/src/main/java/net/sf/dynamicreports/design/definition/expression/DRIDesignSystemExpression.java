@@ -20,22 +20,11 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.design.definition.expression;
 
-import java.util.List;
-
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class PageXslashYExpression extends PageXofYExpression {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-	@Override
-	public String evaluate(List<?> values, ReportParameters reportParameters) {
-		return ((Number) values.get(0)).intValue()  + "/"  + ((Number) values.get(1)).intValue();
-	}
+public interface DRIDesignSystemExpression extends DRIDesignExpression {
 }

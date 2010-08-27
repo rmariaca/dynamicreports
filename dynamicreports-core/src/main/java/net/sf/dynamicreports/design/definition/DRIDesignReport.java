@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -68,6 +69,8 @@ public interface DRIDesignReport {
 
 	public Collection<DRIDesignField> getFields();
 
+	public Collection<DRIDesignSystemExpression> getSystemExpressions();
+	
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions();
 	
 	public Collection<DRIDesignStyle> getStyles();

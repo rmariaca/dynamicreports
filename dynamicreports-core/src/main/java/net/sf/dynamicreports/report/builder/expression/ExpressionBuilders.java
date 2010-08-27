@@ -70,14 +70,6 @@ public class ExpressionBuilders {
 		return Expressions.columnNumber();
 	}
 	
-	public PageXofYExpression pageXofY() {		
-		return Expressions.pageXofY();
-	}
-	
-	public PageXslashYExpression pageXslashY() {		
-		return Expressions.pageXslashY();
-	}
-	
 	public GroupRowNumberExpression groupRowNumber(String groupName) {		
 		return Expressions.groupRowNumber(groupName);
 	}

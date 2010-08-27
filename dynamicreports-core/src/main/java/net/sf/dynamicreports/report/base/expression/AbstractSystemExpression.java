@@ -20,32 +20,34 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.report.base.expression;
 
-import java.util.List;
-import java.util.ResourceBundle;
-
-import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.Evaluation;
-import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class PageXofYExpression extends AbstractComplexExpression<String> {
+public abstract class AbstractSystemExpression<T> implements DRISystemExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-	public PageXofYExpression() {
-		addExpression(DynamicReports.variable(Expressions.pageNumber(), Calculation.NOTHING).setResetType(Evaluation.PAGE));
-		addExpression(DynamicReports.variable(Expressions.pageNumber(), Calculation.NOTHING).setResetType(Evaluation.REPORT));
+	
+	private String name;
+		
+	protected AbstractSystemExpression(String name) {
+		Validate.notEmpty(name, "name must not be empty");
+		this.name = name;
 	}
-
-	@Override
-	public String evaluate(List<?> values, ReportParameters reportParameters) {
-		String label = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_NAME, reportParameters.getLocale()).getString("of");
-		return ((Number) values.get(0)).intValue()  + " " + label  + " " + ((Number) values.get(1)).intValue();
+	
+	public String getName() {
+		return name;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Class<? super T> getValueClass() {
+		return (Class<T>) ReportUtils.getGenericClass(this, 0);
 	}
 }

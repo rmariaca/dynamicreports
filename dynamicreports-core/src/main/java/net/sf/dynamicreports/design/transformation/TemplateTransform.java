@@ -48,6 +48,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRIList;
+import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -524,6 +525,34 @@ public class TemplateTransform {
 			return textField.getDataType().getValueFormatter();
 		}
 		return null;
+	}
+	
+	//page x of y
+	protected int getPageXofYWidth(DRIPageXofY pageXofY, DRDesignStyle style) {
+		if (pageXofY.getWidth() != null) {
+			return pageXofY.getWidth();
+		}
+		if (template.getTextFieldWidth() != null) {
+			return template.getTextFieldWidth();
+		}
+		return Defaults.getDefaults().getTextFieldWidth();
+	}
+	
+	protected int getPageXofYHeight(DRIPageXofY pageXofY, DRDesignStyle style) {
+		if (pageXofY.getHeight() != null) {
+			return pageXofY.getHeight();
+		}
+		return StyleResolver.getFontHeight(style, 1);
+	}
+
+	protected HorizontalAlignment getPageXofYHorizontalAlignment(DRIPageXofY pageXofY, DRDesignStyle style) {
+		if (pageXofY.getHorizontalAlignment() != null) {
+			return pageXofY.getHorizontalAlignment();
+		}
+		if (StyleResolver.getHorizontalAlignment(style) != null) {
+			return StyleResolver.getHorizontalAlignment(style);
+		}
+		return Defaults.getDefaults().getPageXofYHorizontalAlignment();
 	}
 	
 	//image	

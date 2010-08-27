@@ -42,8 +42,6 @@ public class Expressions {
 	private static final ColumnRowNumberExpression columnRowNumber = new ColumnRowNumberExpression();
 	private static final PageNumberExpression pageNumber = new PageNumberExpression();
 	private static final ColumnNumberExpression columnNumber = new ColumnNumberExpression();
-	private static final PageXofYExpression pageXofY = new PageXofYExpression();
-	private static final PageXslashYExpression pageXslashY = new PageXslashYExpression();
 	private static final PrintInOddRowExpression printInOddRow = new PrintInOddRowExpression();
 	private static final PrintInEvenRowExpression printInEvenRow = new PrintInEvenRowExpression();	
 	
@@ -82,14 +80,6 @@ public class Expressions {
 
 	public static ColumnNumberExpression columnNumber() {		
 		return columnNumber;
-	}
-	
-	public static PageXofYExpression pageXofY() {		
-		return pageXofY;
-	}
-	
-	public static PageXslashYExpression pageXslashY() {		
-		return pageXslashY;
 	}
 	
 	public static GroupRowNumberExpression groupRowNumber(String groupName) {		

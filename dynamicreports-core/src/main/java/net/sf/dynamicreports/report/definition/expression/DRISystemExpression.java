@@ -20,20 +20,11 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.report.definition.expression;
 
-import net.sf.dynamicreports.report.base.expression.AbstractSystemExpression;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.SystemExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public final class PageNumberExpression extends AbstractSystemExpression<Integer> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	protected PageNumberExpression() {
-		super(SystemExpression.PAGE_NUMBER.name());
-	}
+public interface DRISystemExpression<T> extends DRIExpression<T> {
 }

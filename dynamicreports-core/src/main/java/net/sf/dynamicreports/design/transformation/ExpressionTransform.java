@@ -31,12 +31,14 @@ import net.sf.dynamicreports.design.base.DRDesignField;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.expression.DRDesignComplexExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSimpleExpression;
+import net.sf.dynamicreports.design.base.expression.DRDesignSystemExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignValueFormatter;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.definition.DRIColumn;
 import net.sf.dynamicreports.report.definition.DRIField;
@@ -46,6 +48,7 @@ import net.sf.dynamicreports.report.definition.DRIVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -56,6 +59,7 @@ public class ExpressionTransform {
 	private DesignTransformAccessor accessor;
 	private Map<String, DRIDesignField> fields;
 	private Map<String, DRIDesignVariable> variables;
+	private Map<String, DRIDesignSystemExpression> systemExpressions;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<DRIExpression<?>, DRIDesignExpression> expressions;
@@ -68,6 +72,7 @@ public class ExpressionTransform {
 	private void init() {
 		fields = new LinkedHashMap<String, DRIDesignField>();
 		variables = new LinkedHashMap<String, DRIDesignVariable>();
+		systemExpressions = new HashMap<String, DRIDesignSystemExpression>();
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
 		expressions = new HashMap<DRIExpression<?>, DRIDesignExpression>();
@@ -100,7 +105,10 @@ public class ExpressionTransform {
 		}		
 		
 		DRIDesignExpression express;
-		if (expression instanceof DRISimpleExpression<?>) {
+		if (expression instanceof DRISystemExpression<?>) {
+			express = new DRDesignSystemExpression((DRISystemExpression<?>) expression);
+		}
+		else if (expression instanceof DRISimpleExpression<?>) {
 			express = new DRDesignSimpleExpression((DRISimpleExpression<?>) expression);
 		}
 		else if (expression instanceof DRIComplexExpression<?>) {
@@ -110,7 +118,7 @@ public class ExpressionTransform {
 			express = transformField((DRIField<?>) expression);
 		}
 		else if (expression instanceof DRIVariable<?>) {
-			express = VariableTransform.variable((DRIVariable<?>) expression, accessor);
+			express = transformVariable((DRIVariable<?>) expression);
 		}
 		else if (expression instanceof DRIColumn<?>) {
 			express = transformExpression(((DRIColumn<?>) expression).getValueField().getValueExpression());
@@ -143,6 +151,15 @@ public class ExpressionTransform {
 		return designComplexExpression;
 	}
 
+	private DRIDesignExpression transformVariable(DRIVariable<?> variable) throws DRException {
+		DRDesignVariable designVariable = new DRDesignVariable(variable.getName());
+		designVariable.setValueExpression(accessor.getExpressionTransform().transformExpression(variable.getExpression()));
+		designVariable.setCalculation(variable.getCalculation());
+		designVariable.setResetType(ConstantTransform.variableResetType(variable.getResetType(), variable.getResetGroup(), accessor));
+		designVariable.setResetGroup(accessor.getGroupTransform().getGroup(ConstantTransform.variableResetGroup(variable.getName(), variable.getResetType(), variable.getResetGroup(), accessor)));		
+		return designVariable;
+	}
+	
 	private DRIDesignExpression addExpression(DRIDesignExpression expression) {
 		if (expression == null) {
 			return null;
@@ -152,6 +169,9 @@ public class ExpressionTransform {
 		}
 		else if (expression instanceof DRIDesignVariable) {
 			addVariable((DRDesignVariable) expression);
+		}
+		else if (expression instanceof DRIDesignSystemExpression) {
+			addSystemExpression((DRIDesignSystemExpression) expression);
 		}
 		else if (expression instanceof DRIDesignSimpleExpression) {
 			addSimpleExpression((DRIDesignSimpleExpression) expression);
@@ -187,6 +207,13 @@ public class ExpressionTransform {
 		return field;
 	}
 	
+	private void addSystemExpression(DRIDesignSystemExpression systemExpression) {
+		if (systemExpressions.containsKey(systemExpression.getName())) {
+			return;
+		}
+		systemExpressions.put(systemExpression.getName(), systemExpression);
+	}
+	
 	private void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
 		if (simpleExpressions.containsKey(simpleExpression.getName())) {
 			if (!simpleExpressions.get(simpleExpression.getName()).equals(simpleExpression)) {
@@ -213,6 +240,10 @@ public class ExpressionTransform {
 	
 	public Collection<DRIDesignVariable> getVariables() {
 		return variables.values();
+	}
+
+	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
+		return systemExpressions.values();
 	}
 	
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {

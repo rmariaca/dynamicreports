@@ -32,9 +32,12 @@ import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.constant.SystemExpression;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignField;
 import net.sf.jasperreports.engine.design.JRDesignVariable;
@@ -60,6 +63,9 @@ public class ExpressionTransform {
 		for (DRIDesignField field : accessor.getReport().getFields()) {
 			addField(field);
 		}
+		for (DRIDesignSystemExpression expression : accessor.getReport().getSystemExpressions()) {
+			addSystemExpression(expression);
+		}	
 		for (DRIDesignSimpleExpression expression : accessor.getReport().getSimpleExpressions()) {
 			addSimpleExpression(expression);
 		}	
@@ -69,6 +75,12 @@ public class ExpressionTransform {
 		for (DRIDesignVariable variable : accessor.getReport().getVariables()) {
 			addVariable(variable);
 		}	
+	}
+
+	public void addSystemExpression(DRIDesignSystemExpression systemExpression) {		
+		if (systemExpression == null)
+			return;		
+		addExpression(systemExpression);
 	}
 	
 	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {		
@@ -165,6 +177,13 @@ public class ExpressionTransform {
 		}
 		else if (expression instanceof DRIDesignSimpleExpression) {
 			return MessageFormat.format(VALUE, expression.getName());
+		}
+		else if (expression instanceof DRIDesignSystemExpression) {
+			String name = ((DRIDesignSystemExpression) expression).getName();
+			if (name.equals(SystemExpression.PAGE_NUMBER.name())) {
+				return "$V{" + JRVariable.PAGE_NUMBER + "}";
+			}
+			throw new JasperDesignException("System expression \"" + name + "\" not supported");
 		}
 		else {
 			throw new JasperDesignException("Expression " + expression.getClass().getName() + " not supported");

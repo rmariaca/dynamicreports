@@ -33,6 +33,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.design.transformation.BandTransform;
 import net.sf.dynamicreports.design.transformation.BarcodeTransform;
@@ -216,6 +217,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	
 	public Collection<DRIDesignField> getFields() {
 		return expressionTransform.getFields();
+	}
+
+	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
+		return expressionTransform.getSystemExpressions();
 	}
 	
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {

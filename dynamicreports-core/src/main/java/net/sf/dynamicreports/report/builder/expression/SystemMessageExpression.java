@@ -22,18 +22,26 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
-import net.sf.dynamicreports.report.base.expression.AbstractSystemExpression;
+import java.util.ResourceBundle;
+
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.SystemExpression;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public final class PageNumberExpression extends AbstractSystemExpression<Integer> {
+public class SystemMessageExpression extends AbstractSimpleExpression<String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	protected PageNumberExpression() {
-		super(SystemExpression.PAGE_NUMBER.name());
+	private String key;
+
+	public SystemMessageExpression(String key) {
+		this.key = key;		
+	}
+	
+	public String evaluate(ReportParameters reportParameters) {
+		return ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_NAME, reportParameters.getLocale()).getString(key);
 	}
 }

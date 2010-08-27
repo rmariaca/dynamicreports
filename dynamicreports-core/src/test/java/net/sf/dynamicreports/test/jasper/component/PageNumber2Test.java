@@ -23,11 +23,6 @@
 package net.sf.dynamicreports.test.jasper.component;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
@@ -36,53 +31,50 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ComponentTest extends AbstractJasperValueTest {
+public class PageNumber2Test extends AbstractJasperValueTest {
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.setLocale(Locale.ENGLISH)
-			.columns(
-					col.column("Column1", "field1", Integer.class))
-			.pageFooter(
-					cmp.pageXofY(), 
-					cmp.pageXslashY(), 
-					cmp.currentDate().setPattern("dd.MM.yyyy"), 
-					cmp.totalPages(), 
-					cmp.pageNumber());
+		rb.columns(
+				col.column("Column1", "field1", Integer.class))
+			.summaryOnANewPage()
+			.summaryWithPageHeaderAndFooter()
+			.summary(cmp.text("summary"))
+		  .pageFooter(
+		  		cmp.pageNumber(),
+		  		cmp.totalPages(),					
+					cmp.pageXslashY(),
+					cmp.pageXofY());
 	}
 
 	@Override
 	public void test() {
 		super.test();
 		
-		numberOfPagesTest(3);
-		elementCountTest("pageFooter.textField1", 3);
-		elementValueTest("pageFooter.textField1", "1", "2", "3");
+		numberOfPagesTest(2);
+		elementCountTest("pageFooter.textField1", 2);
+		elementValueTest("pageFooter.textField1", "1", "2");
+		
+		elementCountTest("pageFooter.textField2", 2);
+		elementValueTest("pageFooter.textField2", "2", "2");
+		
+		elementCountTest("pageFooter.textField3", 2);
+		elementValueTest("pageFooter.textField3", "1", "2");
 
-		elementCountTest("pageFooter.textField2", 3);
-		elementValueTest("pageFooter.textField2", " of 3", " of 3", " of 3");
+		elementCountTest("pageFooter.textField4", 2);
+		elementValueTest("pageFooter.textField4", "/2", "/2");
 		
-		elementCountTest("pageFooter.textField3", 3);
-		elementValueTest("pageFooter.textField3", "1", "2", "3");
-
-		elementCountTest("pageFooter.textField4", 3);
-		elementValueTest("pageFooter.textField4", "/3", "/3", "/3");
+		elementCountTest("pageFooter.textField5", 2);
+		elementValueTest("pageFooter.textField5", "1", "2");
 		
-		elementCountTest("pageFooter.textField5", 3);
-		String date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		elementValueTest("pageFooter.textField5", date, date, date);
-		
-		elementCountTest("pageFooter.textField6", 3);
-		elementValueTest("pageFooter.textField6", "3", "3", "3");
-		
-		elementCountTest("pageFooter.textField7", 3);
-		elementValueTest("pageFooter.textField7", "1", "2", "3");
+		elementCountTest("pageFooter.textField6", 2);
+		elementValueTest("pageFooter.textField6", " of 2", " of 2");
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			dataSource.add(i);
 		}		
 		return dataSource;

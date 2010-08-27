@@ -20,20 +20,39 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.report.base.component;
 
-import net.sf.dynamicreports.report.base.expression.AbstractSystemExpression;
+import org.apache.commons.lang.Validate;
+
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.SystemExpression;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public final class PageNumberExpression extends AbstractSystemExpression<Integer> {
+public class DRPageXofY extends DRHyperLinkComponent implements DRIPageXofY {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	protected PageNumberExpression() {
-		super(SystemExpression.PAGE_NUMBER.name());
+	private DRISimpleExpression<String> formatExpression;
+	private HorizontalAlignment horizontalAlignment;	
+	
+	public DRISimpleExpression<String> getFormatExpression() {
+		return formatExpression;
+	}
+	
+	public void setFormatExpression(DRISimpleExpression<String> formatExpression) {
+		Validate.notNull(formatExpression, "formatExpression must not be null");
+		this.formatExpression = formatExpression;
+	}
+	
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
 	}
 }
+
