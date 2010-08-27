@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.4.1
+---------------------------------------------------
+ - updated JasperReports to 3.7.2
+ - support for detecting the data type (type.detectType(...)), see ColumnDetectDataTypeReport for an example
+ - support for virtualizer, useful for very large reports, see VirtualizerReport for an example
+ - summaryWithPageHeaderAndFooter attribute was added to allow to print page header and footer on a summary page
+ - minor bug fixes
+
 Changes in version 1.4.0 (2010-08-10)
 ---------------------------------------------------
  - subreports support, see TitleSubreport, DetailDynamicSubreport for an example
