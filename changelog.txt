@@ -1,7 +1,7 @@
 DynamicReports Change Log
 =========================
 
-Changes in version 1.4.1
+Changes in version 1.4.1 (2010-09-02)
 ---------------------------------------------------
  - updated JasperReports to 3.7.2
  - support for detecting the data type (type.detectType(...)), see ColumnDetectDataTypeReport for an example
