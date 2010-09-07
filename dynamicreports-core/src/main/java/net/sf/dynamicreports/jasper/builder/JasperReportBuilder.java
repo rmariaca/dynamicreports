@@ -193,6 +193,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 	
+	public JasperReportBuilder show(boolean exitOnClose) throws DRException {
+		JasperViewer.viewReport(toJasperPrint(), exitOnClose, null);
+		return this;
+	}
+	
 	public JasperReportBuilder showJrXml() throws DRException {		
 		try {
 			JasperDesignViewer.viewReportDesign(toJasperDesign());

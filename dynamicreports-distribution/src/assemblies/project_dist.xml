@@ -17,6 +17,8 @@
 			<outputDirectory>projects</outputDirectory>
 			<excludes>
 				<exclude>**/${project.build.directory}/**</exclude>
+				<exclude>src/**</exclude>
+				<exclude>dynamicreports-distribution/**</exclude>
 			</excludes>
 		</fileSet>
 
