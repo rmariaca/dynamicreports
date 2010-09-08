@@ -1,0 +1,112 @@
+<h2>Tips & tricks</h2>
+
+<!-- DSL or classic code syntax -->
+<h3>DSL or classic code syntax</h3>
+<p>
+If you don't like the DSL syntax like code below
+<@java_code>
+	report()
+	  .columns(
+		col.column("Item",       "item",      type.stringType()),
+		col.column("Quantity",   "quantity",  type.integerType()),
+		col.column("Unit price", "unitprice", type.bigDecimalType()))
+	  .title(cmp.text("Getting started"))
+	  .pageFooter(cmp.pageXofY())
+	  .setDataSource(createDataSource())
+	  .show();
+</@java_code>
+you can use the classic syntax as shown below
+<@java_code>
+	JasperReportBuilder report = DynamicReports.report();
+	report.addColumn(Columns.column("Item",       "item",      DataTypes.stringType()));
+	report.addColumn(Columns.column("Quantity",   "quantity",  DataTypes.integerType()));
+	report.addColumn(Columns.column("Unit price", "unitprice", DataTypes.bigDecimalType()));
+	report.addTitle(Components.text("Getting started"));
+	report.addPageFooter(Components.pageXofY());
+	report.setDataSource(createDataSource());
+	report.show();	
+</@java_code>
+the result will be the same.
+</p>
+
+<!-- Default settings -->
+<h3>Default settings</h3>
+<p>
+DynamicReports automatically looks for a file named 
+<a id="dynamicreports-defaults_source" title="dynamicreports-defaults" href="examples/dynamicreports-defaults.html">dynamicreports-defaults.xml</a> 
+on startup.<br/>
+In this file you can change the default settings (default font, pattern and horizontal alignment for all data types).
+<@xml_code>
+	<?xml version="1.0" encoding="UTF-8"?>
+	<DynamicReports>
+		<!-- DEFAULT FONT -->
+		<font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/>
+		  	
+		<!-- DEFAULT DATA TYPES -->
+		<bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/>
+		<dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/>
+		...	
+	</DynamicReports>
+</@xml_code>
+Copy this file in the root of the classpath.
+</p>
+
+<!-- Servlets -->
+<h3>Servlets</h3>
+<p>
+Code below shows using the DynamicReports within a servlet.
+The servlet will display a pdf document on the web browser.
+<@java_code>
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.dynamicreports.report.exception.DRException;
+
+public class PdfReportServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("application/pdf");
+		OutputStream out = resp.getOutputStream();
+		try {
+			report()
+				...
+				.toPdf(out);
+		} catch (DRException e) {
+			throw new ServletException(e);
+		} 
+		out.close();
+	}
+}
+</@java_code>
+</p>
+
+<!-- Maven configuration -->
+<h3>Maven configuration</h3>
+<p>
+DynamicReports is synchronized with Maven Central Repository.<br/>
+Add the dependencies listed below to your pom.xml configuration file.
+JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are using Java 1.6.
+<@xml_code>
+<dependency>
+	<groupId>net.sourceforge.dynamicreports</groupId>
+	<artifactId>dynamicreports-core</artifactId>
+	<version>${page.version}</version>
+</dependency>  
+<dependency>
+	<!-- only for JDK 1.5, not required for JDK 1.6 -->
+	<groupId>com.sun.xml.bind</groupId>
+	<artifactId>jaxb-impl</artifactId>
+	<version>2.2</version>
+	<scope>runtime</scope>
+</dependency>  
+</@xml_code>
+</p>

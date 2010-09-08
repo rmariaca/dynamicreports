@@ -9,12 +9,17 @@
 	</parent>
 
 	<artifactId>dynamicreports-distribution</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>Dynamicreports - distribution</name>
 	<url>http://dynamicreports.sourceforge.net</url>
 	<description>Dynamicreports distribution</description>
 
+	<properties>
+		<siteOutputDirectory>${project.build.directory}/site</siteOutputDirectory>
+		<aspectj.version>1.6.3</aspectj.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
@@ -46,6 +51,11 @@
 			<artifactId>dynamicreports-core</artifactId>
 			<version>${project.version}</version>
 			<classifier>javadoc</classifier>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.dynamicreports</groupId>
+			<artifactId>dynamicreports-examples</artifactId>
+			<version>${project.version}</version>
 		</dependency> 
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
@@ -64,6 +74,21 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-bridge</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>[2.3.16,2.4)</version>
 		</dependency>		 
 	</dependencies>
 
@@ -89,20 +114,83 @@
 						<descriptor>src/assemblies/project_with_dependencies.xml</descriptor>
 					</descriptors>
 				</configuration>
-			</plugin>
-			<!--plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2</version>
 				<executions>
 					<execution>
-						<id>site</id>
+						<phase>package</phase>
 						<goals>
-							<goal>site</goal>
+							<goal>assembly</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin-->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${siteOutputDirectory}/apidoc</outputDirectory>
+					<includeArtifactIds>dynamicreports-core</includeArtifactIds>
+					<classifier>javadoc</classifier>
+					<excludes>**/META-INF/**</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>			
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${siteOutputDirectory}</outputDirectory>
+							<includeEmptyDirs>true</includeEmptyDirs>
+							<resources>          
+								<resource>
+									<directory>src/site/resources</directory>
+								</resource>
+							</resources>              
+						</configuration>            
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<executable>java</executable>															
+					<arguments>
+						<argument>-Xmx512m</argument>
+						<argument>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</argument>
+						<argument>-classpath</argument>
+						<classpath/>			
+						<argument>net.sf.dynamicreports.site.GenerateSite</argument>		
+					</arguments>
+					<environmentVariables>
+						<runExamples>true</runExamples>
+						<version>${project.version}</version>
+						<outputDirectory>${siteOutputDirectory}</outputDirectory>						
+					</environmentVariables>						
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
     

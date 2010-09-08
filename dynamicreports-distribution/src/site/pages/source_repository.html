@@ -1,0 +1,36 @@
+<h2>Overview</h2>
+This project uses <a href="http://subversion.tigris.org/">Subversion</a> to manage its source code. Instructions on Subversion use can be found at <a href="http://svnbook.red-bean.com/">http://svnbook.red-bean.com/</a>.
+
+<h2>Web Access</h2>
+<p>The following is a link to the online source repository.</p>
+<a href="http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/trunk">http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/trunk</a>
+
+<h2>Anonymous access</h2>
+<p>The source can be checked out anonymously from SVN with this command:</p>
+<p>
+<code>$ svn checkout http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk dynamicreports</code>
+</p>
+
+<h2>Developer access</h2>
+<p>Everyone can access the Subversion repository via HTTP, but Committers must checkout the Subversion repository via HTTPS.</p>
+<p>
+<code>$ svn checkout https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk dynamicreports</code>
+</p>
+<p>To commit changes to the repository, execute the following command to commit your changes (svn will prompt you for your password)</p>
+<code>$ svn commit --username your-username -m &quot;A message&quot;</code>
+
+<h2>Access from behind a firewall</h2>
+<p>For those users who are stuck behind a corporate firewall which is blocking HTTP access to the Subversion repository, you can try to access it via the developer connection:</p>
+<p>
+<code>$ svn checkout https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk dynamicreports</code>
+</p>
+
+<h2>Access through a proxy</h2>
+<p>The Subversion client can go through a proxy, if you configure it to do so. First, edit your &quot;servers&quot; configuration file to indicate which proxy to use. The file's location depends on your operating system. On Linux or Unix it is located in the directory &quot;~/.subversion&quot;. On Windows it is in &quot;%APPDATA%\Subversion&quot;. (Try &quot;echo %APPDATA%&quot;, note this is a hidden directory.)</p>
+<p>There are comments in the file explaining what to do. If you don't have that file, get the latest Subversion client and run any command; this will cause the configuration directory and template files to be created.</p>
+<p>Example: Edit the 'servers' file and add something like:</p>
+<code>
+[global]<br/>
+http-proxy-host = your.proxy.name<br/>
+http-proxy-port = 3128<br/>
+</code>
