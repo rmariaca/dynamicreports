@@ -92,23 +92,23 @@
 <a href="${page.path}apidocs/net/sf/dynamicreports/report/builder/expression/ExpressionBuilders.html${method}">${title}</a></#macro>
 <#macro condition_builders title="ConditionBuilders" method="">
 <a href="${page.path}apidocs/net/sf/dynamicreports/report/builder/condition/ConditionBuilders.html${method}">${title}</a></#macro>
-<#macro example_link id preview=true>
-<#if preview == true>
-<tr>
-	<td>
-		<a href="${page.examples}${id?lower_case}.html">${id}</a>
-	</td>
-	<td>
-		<center>
-		<a id="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img class="preview" src="${page.examples}${id?lower_case}_s.png"/></a>
-		</center>
-	</td>
-	<td>
-		<a href="${page.examples}${id?lower_case}.pdf" title="pdf preview"><img class="preview" src="${page.path}images/acrobat.png"/></a>
-		<a id="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png"/></a>
-	</td>
-</tr>
-<#else>
+<#macro example_link id>
 <a href="${page.examples}${id?lower_case}.html">${id}</a>
-</#if>
+</#macro>
+<#macro example_preview id>
+<table class="example">
+	<tbody>
+		<tr>
+			<td>
+				<center>
+				<a id="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img class="preview" src="${page.examples}${id?lower_case}_s.png"/></a>
+				</center>
+			</td>
+			<td>
+				<a href="${page.examples}${id?lower_case}.pdf" title="pdf preview"><img class="preview" src="${page.path}images/acrobat.png"/></a>
+				<a id="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png"/></a>
+			</td>
+		</tr>
+	</tbody>
+</table>
 </#macro>

@@ -1,9 +1,10 @@
 <head>
 
-<meta name="Description" content="DynamicReports open source project" />
+<meta name="Description" content="DynamicReports is an open source Java reporting library based on JasperReports. The main benefit of this library is a dynamic report design and no need for a visual report designer." />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
+<meta name="keywords" content="dynamicreports,jasperreports,dynamic jasper,dynamic report,jasperreports api,dynamic report design,dynamic report for java,runtime generation of jasperreports,dynamic reporting in Java,generate report at runtime">
 
 <link rel="stylesheet" href="${page.path}styles/style.css" type="text/css" />
 <#if page.hasCode == true>

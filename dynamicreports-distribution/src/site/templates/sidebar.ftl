@@ -8,7 +8,7 @@
 	<h3>DynamicReports</h3>
 	<ul class="sidemenu">				
 		<li><a href="${page.path}index.html">Home</a></li>
-		<li><a href="http://sourceforge.net/apps/wordpress/dynamicreports/">News</a><#-- <a href="http://sourceforge.net/apps/wordpress/dynamicreports/feed/#"><img class="preview" src="${page.path}images/rss.png" width="12" height="12"/></a> --></li>
+		<li><a href="http://sourceforge.net/apps/wordpress/dynamicreports/">News </a><a href="http://sourceforge.net/apps/wordpress/dynamicreports/feed/"><img class="preview" src="${page.path}images/rss.png" width="12" height="12"/></a></li>
 		<li><a href="${page.path}screenshots.html">Screenshots</a></li>		
 		<li><a href="${page.path}features.html">Features</a></li>
 		<li><a href="${page.path}roadmap.html">Road map</a></li>
@@ -24,6 +24,7 @@
 			
 	<h3>Support</h3>
 	<ul class="sidemenu">
+		<li><a href="http://sourceforge.net/apps/phpbb/dynamicreports/">Forum</a></li>
 		<li><a href="http://sourceforge.net/tracker/?group_id=313754">Project tracker</a></li>
 		<li><a href="${page.path}contact.html">Contact</a></li>
 	</ul>

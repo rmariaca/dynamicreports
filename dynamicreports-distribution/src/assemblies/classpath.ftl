@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="target/classes"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/dynamicreports-core-1.4.2.jar" sourcepath="lib/dynamicreports-core-1.4.2-sources.jar">
+	<classpathentry kind="lib" path="lib/dynamicreports-core-${version}.jar" sourcepath="lib/dynamicreports-core-${version}-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-core-1.4.2-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-core-${version}-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/activation-1.1.jar"/>

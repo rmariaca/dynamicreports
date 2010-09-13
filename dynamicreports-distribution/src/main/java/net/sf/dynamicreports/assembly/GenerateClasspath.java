@@ -20,31 +20,33 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.site;
+package net.sf.dynamicreports.assembly;
+
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Example {
-	private String name;
-	private String path;
-	private Class<? extends Object> design;
+public class GenerateClasspath {
 	
-	public Example(String name, String path, Class<? extends Object> design) {
-		this.name = name;
-		this.path = path;
-		this.design = design;
+	public static void main(String[] args) throws Exception {
+		String version = System.getenv("version");
+		String outputDirectory = System.getenv("outputDirectory");
+		
+		Configuration cfg = new Configuration();		
+		cfg.setObjectWrapper(new DefaultObjectWrapper());
+		Template temp = cfg.getTemplate("src/assemblies/classpath.ftl");
+		Map<String, Object> root = new HashMap<String, Object>();		
+		root.put("version", version);		
+		Writer out = new FileWriter(outputDirectory + "/.classpath");
+		temp.process(root, out);
+		out.flush();
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public String getPath() {
-		return path;
-	}
-	
-	public Class<? extends Object> getDesign() {
-		return design;
-	}
-}
+} 

@@ -21,7 +21,6 @@
 				<exclude>net.sourceforge.dynamicreports:dynamicreports-examples</exclude>
 				<exclude>net.sourceforge.dynamicreports:dynamicreports-distribution</exclude>
 				<exclude>org.aspectj:aspectjrt</exclude>
-				<exclude>org.aspectj:aspectjweaver</exclude>
 				<exclude>org.freemarker:freemarker</exclude>
 			</excludes>
 		</dependencySet>

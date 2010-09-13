@@ -1,3 +1,25 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.sf.dynamicreports.site;
 
 import java.io.BufferedReader;
@@ -29,6 +51,9 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
 public class GenerateSite {
 	private static final String examples_classpath = "../dynamicreports-examples/target/classes/";
 	private static final String examples_source = "../dynamicreports-examples/src/main/java/";
@@ -121,6 +146,9 @@ public class GenerateSite {
 		String content = "<h2>Examples</h2>\r\n";
 		
 		int index = 0;
+		int count = 0;
+		String text1 = "";
+		String text2 = "";
 		for (Example example : examples) {						
 			Example previous = null;
 			Example next = null;
@@ -133,10 +161,24 @@ public class GenerateSite {
 			
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				content += "<a name=\"" + example.getPath() + "\"></a><b>" + example.getPath() + "</b><br/>\r\n";
-				content += "<ul>\r\n";
-				content += "<table><tbody>\r\n";
+				content += "<ul>\r\n";				
+				content += "<table class=\"example\"><tbody>\r\n";
 			}
-			content += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
+			text1 += "<td><center><@example_link id=\"" + example.getName() + "\"/></center></td>\r\n";
+			text2 += "<td><center><@example_preview id=\"" + example.getName() + "\"/></center></td>\r\n";
+			if (count == 2 || next == null || !next.getPath().equals(example.getPath())) {	
+				content += "<tr>\r\n";
+				content += text1;
+				content += "</tr><tr>\r\n";
+				content += text2;
+				content += "</tr>\r\n";
+				count = 0;
+				text1 = "";
+				text2 = "";
+			}
+			else {
+				count++;
+			}						
 			if (next == null || !next.getPath().equals(example.getPath())) {
 				content += "</tbody></table>\r\n";
 				content += "</ul>\r\n";
@@ -145,7 +187,7 @@ public class GenerateSite {
 			generateExampleHtml(example.getName(), (next != null ? next.getName() : ""), (previous != null ? previous.getName() : ""), example.getDesign());
 			index++;
 		}
-		content += "<@example_link id=\"" + Templates.class.getSimpleName() + "\" preview=false/><br/>\r\n";
+		content += "<@example_link id=\"" + Templates.class.getSimpleName() + "\"/><br/>\r\n";
 		
     loader.putTemplate(name, content);
     
@@ -165,7 +207,7 @@ public class GenerateSite {
 	}
 
 	public static void generateExampleImage(String name, JasperReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Exception {
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), -1, 0.05f);
+		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), -1, 0.08f);
 		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), -1, 0.15f);
 		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), -1, 1.1f);		
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
@@ -175,7 +217,7 @@ public class GenerateSite {
 	}
 	
 	public static void generateExampleImage(String name, JasperConcatenatedReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Throwable {
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), 0.05f);
+		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), 0.08f);
 		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), 0.15f);
 		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), 1.1f);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);

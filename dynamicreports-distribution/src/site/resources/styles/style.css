@@ -101,6 +101,10 @@ table {
 	border-collapse: collapse;
 	margin: 10px;	
 }
+table.example {
+	border-collapse: collapse;
+	margin: 0px;	
+}
 th strong {
 	color: #fff;
 }
