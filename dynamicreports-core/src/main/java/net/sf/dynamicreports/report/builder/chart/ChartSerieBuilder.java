@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.chart;
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartSerie;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChartSerie> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	protected ChartSerieBuilder(ColumnBuilder<?, ? extends Number> column) {
+	protected ChartSerieBuilder(ValueColumnBuilder<?, ? extends Number> column) {
 		super(new DRChartSerie());
 		Validate.notNull(column, "column must not be null");
 		getObject().setValueExpression(column.getColumn());

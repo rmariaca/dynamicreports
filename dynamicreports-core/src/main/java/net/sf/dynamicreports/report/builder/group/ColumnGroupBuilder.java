@@ -22,8 +22,9 @@
 
 package net.sf.dynamicreports.report.builder.group;
 
-import net.sf.dynamicreports.report.base.DRColumn;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.base.DRValueColumn;
+import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
@@ -36,15 +37,15 @@ import org.apache.commons.lang.Validate;
 public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {	
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private DRColumn<?> column;
+	private DRValueColumn<?> column;
 	
-	protected ColumnGroupBuilder(ColumnBuilder<?, ?> column) {
+	protected ColumnGroupBuilder(ValueColumnBuilder<?, ?> column) {
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
 		init();
 	}
 	
-	protected ColumnGroupBuilder(String name, ColumnBuilder<?, ?> column) {
+	protected ColumnGroupBuilder(String name, ValueColumnBuilder<?, ?> column) {
 		super(name);
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
@@ -54,13 +55,13 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 	@SuppressWarnings("unchecked")
 	private void init() {
 		@SuppressWarnings("rawtypes")
-		DRIDataType dataType = column.getValueField().getDataType();
+		DRIDataType dataType = column.getComponent().getDataType();
 		getObject().getValueField().setDataType(dataType);
-		getObject().getValueField().setStyle(column.getValueField().getStyle());
-		getObject().getValueField().setHorizontalAlignment(column.getValueField().getHorizontalAlignment());
+		getObject().getValueField().setStyle((DRStyle) column.getComponent().getStyle());
+		getObject().getValueField().setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
 		getObject().setTitleExpression(column.getTitleExpression());
 		getObject().setTitleStyle(column.getTitleStyle());
-		getObject().setTitleWidth(column.getValueField().getWidth());
+		getObject().setTitleWidth(column.getComponent().getWidth());
 	}
 	
 	public ColumnGroupBuilder setHideColumn(Boolean hideColumn) {

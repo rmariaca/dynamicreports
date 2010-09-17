@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -77,7 +78,14 @@ public class ColumnTransform {
 						columnTitleForGroup.addComponent(column, titleComponent(column));
 					}
 				}
-				detail.addComponent(column, valueComponent(column));
+				DRDesignComponent detailComponent = null;
+				if (column instanceof DRIValueColumn<?>) {
+					detailComponent = detailValueComponent((DRIValueColumn<?>) column);
+				}
+				else {
+					detailComponent = detailComponent(column);
+				}
+				detail.addComponent(column, detailComponent);
 			}
 		}		
 		
@@ -106,11 +114,16 @@ public class ColumnTransform {
 		return designTitleField;	
 	}
 	
-	//value
-	private DRDesignComponent valueComponent(DRIColumn<?> column) throws DRException {
-		DRDesignTextField designValueField = accessor.getComponentTransform().textField(column.getValueField(), DefaultStyleType.COLUMN);	
-		designValueField.setUniqueName("column_" + column.getName());
-		designValueField.setPrintRepeatedValues(accessor.getTemplateTransform().isColumnPrintRepeatedDetailValues(column));
+	//detail
+	private DRDesignComponent detailValueComponent(DRIValueColumn<?> column) throws DRException {
+		DRDesignComponent detailComponent = detailComponent(column);
+		((DRDesignTextField) detailComponent).setPrintRepeatedValues(accessor.getTemplateTransform().isColumnPrintRepeatedDetailValues(column));
+		return detailComponent;
+	}
+	
+	private DRDesignComponent detailComponent(DRIColumn<?> column) throws DRException {
+		DRDesignComponent designComponent = accessor.getComponentTransform().component(column.getComponent(), DefaultStyleType.COLUMN, null, null);	
+		designComponent.setUniqueName("column_" + column.getName());		
 
 		List<DRIConditionalStyle> rowHighlighters = new ArrayList<DRIConditionalStyle>();
 		rowHighlighters.addAll(getDetailRowHighlighters());
@@ -123,7 +136,7 @@ public class ColumnTransform {
 			rowHighlighters.add(detailRowConditionalStyle(detailEvenRowStyle, Expressions.printInEvenRow()));
 		}
 		if (!rowHighlighters.isEmpty()) {
-			DRIStyle style = column.getValueField().getStyle();
+			DRIStyle style = column.getComponent().getStyle();
 			if (style == null) {
 				style = accessor.getTemplateTransform().getColumnStyle();
 			}
@@ -135,10 +148,10 @@ public class ColumnTransform {
 			for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
 				newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
 			}			
-			designValueField.setStyle(accessor.getStyleTransform().transformStyle(newStyle, true, DefaultStyleType.COLUMN));
+			designComponent.setStyle(accessor.getStyleTransform().transformStyle(newStyle, true, DefaultStyleType.COLUMN));
 		}
 		
-		return designValueField;
+		return designComponent;
 	}
 	
 	private List<? extends DRIConditionalStyle> getDetailRowHighlighters() {

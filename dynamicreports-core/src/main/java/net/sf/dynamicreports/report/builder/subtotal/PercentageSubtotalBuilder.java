@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.PercentageExpression;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
@@ -49,21 +50,21 @@ public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSub
 	private DRGroup totalGroup;
 
 	//column
-	protected PercentageSubtotalBuilder(ColumnBuilder<?, ? extends Number> column) {
+	protected PercentageSubtotalBuilder(ValueColumnBuilder<?, ? extends Number> column) {
 		this(column.build(), column);
 	}
 
 	//simple expression
-	protected PercentageSubtotalBuilder(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
+	protected PercentageSubtotalBuilder(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?, ?> showInColumn) {
 		this((DRIExpression<? extends Number>) expression, showInColumn);
 	}
 	
 	//field	
-	protected PercentageSubtotalBuilder(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?> showInColumn) {
+	protected PercentageSubtotalBuilder(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?, ?> showInColumn) {
 		this(field.getField(), showInColumn);
 	}
 
-	private PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
+	private PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?, ?> showInColumn) {
 		super(showInColumn);
 		this.expression = expression;
 	}

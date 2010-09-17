@@ -20,34 +20,39 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.subtotal;
+package net.sf.dynamicreports.report.base;
 
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.DRIValueColumn;
+import net.sf.dynamicreports.report.definition.component.DRITextField;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class CustomSubtotalBuilder<T> extends SubtotalBuilder<CustomSubtotalBuilder<T>, T> implements DRIValue<T> {	
+public class DRValueColumn<T> extends DRColumn<DRITextField<T>> implements DRIValueColumn<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	//simple expression
-	protected CustomSubtotalBuilder(DRISimpleExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
-		super(showInColumn);
-		setValueExpression(expression);
+	private Boolean printRepeatedDetailValues;
+	
+	public DRValueColumn(DRTextField<T> valueField) {
+		super(valueField);	
 	}
 
-	//complex expression
-	protected CustomSubtotalBuilder(DRIComplexExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
-		super(showInColumn);
-		setValueExpression(expression);
+	public Boolean getPrintRepeatedDetailValues() {
+		return printRepeatedDetailValues;
+	}
+
+	public void setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues) {
+		this.printRepeatedDetailValues = printRepeatedDetailValues;
 	}
 	
+	@Override
 	public String getName() {
-		return getSubtotal().getName();
+		return getComponent().getValueExpression().getName();
+	}
+	
+	public Class<? super T> getValueClass() {
+		return getComponent().getValueExpression().getValueClass();
 	}
 }

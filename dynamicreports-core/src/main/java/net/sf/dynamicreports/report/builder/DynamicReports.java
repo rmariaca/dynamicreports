@@ -27,7 +27,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.ExporterBuilders;
 import net.sf.dynamicreports.report.builder.barcode.BarcodeBuilders;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.condition.ConditionBuilders;
@@ -76,12 +76,12 @@ public class DynamicReports {
 	}
 	
 	//variable
-	public static <T> VariableBuilder<T> variable(ColumnBuilder<?, ?> column, Calculation calculation) {
+	public static <T> VariableBuilder<T> variable(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		Validate.notNull(column, "column must not be null");
 		return new VariableBuilder<T>(column, calculation);
 	}
 
-	public static <T> VariableBuilder<T> variable(String name, ColumnBuilder<?, ?> column, Calculation calculation) {
+	public static <T> VariableBuilder<T> variable(String name, ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		Validate.notNull(column, "column must not be null");
 		return new VariableBuilder<T>(name, column, calculation);
 	}

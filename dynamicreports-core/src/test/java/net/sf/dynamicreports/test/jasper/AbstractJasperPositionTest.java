@@ -42,12 +42,12 @@ public abstract class AbstractJasperPositionTest extends AbstractJasperTest {
 	}
 	
 	//column detail
-	protected void columnDetailPositionTest(ColumnBuilder<?, ?> column, int index, int x, int y, int width, int height) {
+	protected void columnDetailPositionTest(ColumnBuilder<?, ?, ?> column, int index, int x, int y, int width, int height) {
 		elementPositionTest(JasperTestUtils.getColumnDetailName(column), index, x, y, width, height);
 	}
 	
 	//column title
-	protected void columnTitlePositionTest(ColumnBuilder<?, ?> column, int index, int x, int y, int width, int height) {
+	protected void columnTitlePositionTest(ColumnBuilder<?, ?, ?> column, int index, int x, int y, int width, int height) {
 		elementPositionTest(JasperTestUtils.getColumnTitleName(column), index, x, y, width, height);
 	}
 	

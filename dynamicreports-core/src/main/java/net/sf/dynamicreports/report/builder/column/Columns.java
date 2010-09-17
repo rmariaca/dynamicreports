@@ -22,8 +22,10 @@
 
 package net.sf.dynamicreports.report.builder.column;
 
+import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -85,11 +87,11 @@ public class Columns {
 	}
 	
 	//percentage
-	public static PercentageColumnBuilder percentageColumn(ColumnBuilder<?, ? extends Number> column) {
+	public static PercentageColumnBuilder percentageColumn(ValueColumnBuilder<?, ? extends Number> column) {
 		return new PercentageColumnBuilder(column);
 	}	
 	
-	public static PercentageColumnBuilder percentageColumn(String title, ColumnBuilder<?, ? extends Number> column) {
+	public static PercentageColumnBuilder percentageColumn(String title, ValueColumnBuilder<?, ? extends Number> column) {
 		return percentageColumn(column).setTitle(title);
 	}	
 	
@@ -142,5 +144,15 @@ public class Columns {
 	
 	public static TextColumnBuilder<Integer> reportRowNumberColumn(String title) {
 		return reportRowNumberColumn().setTitle(title);
+	}
+	
+	//component
+	public static <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(ComponentBuilder<?, T> component) {
+		Validate.notNull(component, "component must not be null");
+		return new ComponentColumnBuilder<T>(component);
+	}
+	
+	public static <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(String title, ComponentBuilder<?, T> component) {
+		return componentColumn(component).setTitle(title);
 	}
 }

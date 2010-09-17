@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.group;
 
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
@@ -33,11 +33,11 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 public class GroupBuilders {
 
 	//column
-	public ColumnGroupBuilder group(ColumnBuilder<?, ?> groupColumn) {
+	public ColumnGroupBuilder group(ValueColumnBuilder<?, ?> groupColumn) {
 		return Groups.group(groupColumn);	
 	}
 
-	public ColumnGroupBuilder group(String name, ColumnBuilder<?, ?> groupColumn) {
+	public ColumnGroupBuilder group(String name, ValueColumnBuilder<?, ?> groupColumn) {
 		return Groups.group(name, groupColumn);	
 	}
 	

@@ -20,34 +20,21 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.subtotal;
+package net.sf.dynamicreports.report.builder.column;
 
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.base.DRColumn;
+import net.sf.dynamicreports.report.base.component.DRComponent;
+import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CustomSubtotalBuilder<T> extends SubtotalBuilder<CustomSubtotalBuilder<T>, T> implements DRIValue<T> {	
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public class ComponentColumnBuilder<T extends DRComponent> extends ColumnBuilder<ComponentColumnBuilder<T>, DRColumn<T>, T> {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;	
 	
-	//simple expression
-	protected CustomSubtotalBuilder(DRISimpleExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
-		super(showInColumn);
-		setValueExpression(expression);
-	}
-
-	//complex expression
-	protected CustomSubtotalBuilder(DRIComplexExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
-		super(showInColumn);
-		setValueExpression(expression);
-	}
-	
-	public String getName() {
-		return getSubtotal().getName();
-	}
+	protected ComponentColumnBuilder(ComponentBuilder<?, T> component) {
+		super(new DRColumn<T>(component.getComponent()));
+	}	
 }

@@ -22,28 +22,13 @@
 
 package net.sf.dynamicreports.report.definition;
 
-import net.sf.dynamicreports.report.constant.ComponentDimensionType;
-import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIColumn<T extends DRIComponent> extends DRIColumnGridComponent {
-		
-	public T getComponent();
-
-	public DRIExpression<?> getTitleExpression();
-
-	public DRIStyle getTitleStyle();
+public interface DRIValueColumn<T> extends DRIExpression<T>, DRIColumn<DRITextField<T>>, DRIValue<T> {
 	
-	public Integer getTitleHeight();
-
-	public ComponentDimensionType getTitleHeightType();
-
-	public Integer getTitleRows();
-	
-	public String getName();
+	public Boolean getPrintRepeatedDetailValues();
 }

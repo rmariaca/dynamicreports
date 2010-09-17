@@ -26,7 +26,10 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Locale;
 
+import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.design.constant.DefaultStyleType;
+import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -40,11 +43,14 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRIList;
@@ -54,18 +60,19 @@ import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TemplateTransform {
 	private DRIReport report;
-	private Integer pageWidth;
+	private DesignTransformAccessor accessor;
 	private DRIReportTemplate template;
 	
-	public TemplateTransform(DesignTransformAccessor accessor) {		
+	public TemplateTransform(DesignTransformAccessor accessor) {	
+		this.accessor = accessor;
 		this.report = accessor.getReport();
-		this.pageWidth = accessor.getPageWidth();
 		this.template = report.getTemplate();
 	}
 	
@@ -303,8 +310,8 @@ public class TemplateTransform {
 	
 	//page
 	protected int getPageWidth() {
-		if (pageWidth != null) {
-			return pageWidth;
+		if (accessor.getPageWidth() != null) {
+			return accessor.getPageWidth();
 		}
 		if (report.getPage().getWidth() != null) {
 			return report.getPage().getWidth();
@@ -366,7 +373,7 @@ public class TemplateTransform {
 	}
 	
 	//column
-	protected boolean isColumnPrintRepeatedDetailValues(DRIColumn<?> column) {
+	protected boolean isColumnPrintRepeatedDetailValues(DRIValueColumn<?> column) {
 		if (column.getPrintRepeatedDetailValues() != null) {
 			return column.getPrintRepeatedDetailValues();
 		}
@@ -376,12 +383,25 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isColumnPrintRepeatedDetailValues();
 	}
 	
-	protected int getColumnWidth(DRIColumn<?> column, DRDesignStyle style) {
-		if (column.getValueField().getWidth() != null) {
-			return column.getValueField().getWidth();
+	protected int getColumnWidth(DRIColumn<?> column, DRDesignStyle style) throws DRException {
+		DRIComponent component = column.getComponent();
+		if (component instanceof DRIDimensionComponent) {
+			if (((DRIDimensionComponent) component).getWidth() != null) {
+				return ((DRIDimensionComponent) component).getWidth();
+			}
+			if (component instanceof DRITextField<?>) {
+				if (((DRITextField<?>) component).getColumns() != null) {
+					return StyleResolver.getFontWidth(style, ((DRITextField<?>) component).getColumns());
+				}
+			}
 		}
-		if (column.getValueField().getColumns() != null) {
-			return StyleResolver.getFontWidth(style, column.getValueField().getColumns());
+		else if (component instanceof DRIList) {
+			DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
+			ComponentPosition.width(list);
+			return list.getWidth();
+		}
+		else {
+			throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 		}
 		if (template.getColumnWidth() != null) {
 			return template.getColumnWidth();

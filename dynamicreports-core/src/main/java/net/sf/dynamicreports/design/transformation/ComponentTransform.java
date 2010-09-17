@@ -90,7 +90,7 @@ public class ComponentTransform {
 	}
 	
 	//component
-	private DRDesignComponent component(DRIComponent component, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	protected DRDesignComponent component(DRIComponent component, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		if (component instanceof DRITextField<?>) {
 			return textField((DRITextField<?>) component, defaultStyleType);
 		}

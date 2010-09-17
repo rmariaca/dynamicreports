@@ -49,7 +49,7 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 	
 	private DRIExpression<U> valueExpression;
 	
-	protected BaseSubtotalBuilder(ColumnBuilder<?, ?> showInColumn) {
+	protected BaseSubtotalBuilder(ColumnBuilder<?, ?, ?> showInColumn) {
 		super(new DRSubtotal<U>(showInColumn.build()));
 	}
 	
@@ -57,7 +57,7 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		this.valueExpression = valueExpression;
 	}
 
-	public T setShowInColumn(ColumnBuilder<?, ?> showInColumn) {
+	public T setShowInColumn(ColumnBuilder<?, ?, ?> showInColumn) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		getObject().setShowInColumn(showInColumn.build());
 		return (T) this;

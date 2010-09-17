@@ -40,7 +40,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRISubtotal;
@@ -120,8 +120,8 @@ public class ExpressionTransform {
 		else if (expression instanceof DRIVariable<?>) {
 			express = transformVariable((DRIVariable<?>) expression);
 		}
-		else if (expression instanceof DRIColumn<?>) {
-			express = transformExpression(((DRIColumn<?>) expression).getValueField().getValueExpression());
+		else if (expression instanceof DRIValueColumn<?>) {
+			express = transformExpression(((DRIValueColumn<?>) expression).getComponent().getValueExpression());
 		}
 		else if (expression instanceof DRISubtotal<?>) {
 			express = transformExpression(((DRISubtotal<?>) expression).getValueField().getValueExpression());

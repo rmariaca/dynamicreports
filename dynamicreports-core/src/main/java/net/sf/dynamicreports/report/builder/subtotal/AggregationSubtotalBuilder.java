@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.subtotal;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -46,7 +47,7 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 	private Calculation calculation;
 	
 	//column
-	protected AggregationSubtotalBuilder(ColumnBuilder<?, ?> column, Calculation calculation) {
+	protected AggregationSubtotalBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		this(column.getColumn(), column, calculation);
 		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
 			setDataType(DataTypes.longType());
@@ -56,22 +57,22 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 			setDataType(DataTypes.doubleType());
 		}
 		else {
-			setDataType(column.getColumn().getValueField().getDataType());
-			setPattern(column.getColumn().getValueField().getPattern());
+			setDataType(column.getColumn().getComponent().getDataType());
+			setPattern(column.getColumn().getComponent().getPattern());
 		}
 	}
 	
 	//simple expression
-	protected AggregationSubtotalBuilder(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
+	protected AggregationSubtotalBuilder(DRISimpleExpression<?> expression, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
 		this((DRIExpression<?>) expression, showInColumn, calculation);
 	}
 	
 	//field	
-	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
+	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
 		this(field.build(), showInColumn, calculation);
 	}
 
-	private AggregationSubtotalBuilder(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
+	private AggregationSubtotalBuilder(DRIExpression<?> expression, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
 		super(showInColumn);
 		this.expression = expression;
 		this.calculation = calculation;

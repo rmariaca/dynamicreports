@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.chart;
 
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
@@ -37,7 +37,7 @@ public class Charts {
 		return new AxisFormatBuilder();
 	}
 
-	public static ChartSerieBuilder serie(ColumnBuilder<?, ? extends Number> column) {
+	public static ChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
 		return new ChartSerieBuilder(column);
 	}
 

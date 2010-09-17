@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder;
 
 import net.sf.dynamicreports.report.base.DRVariable;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -39,11 +39,11 @@ public class VariableBuilder<T> extends AbstractBuilder<VariableBuilder<T>, DRVa
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	//column
-	protected VariableBuilder(ColumnBuilder<?, ?> column, Calculation calculation) {
+	protected VariableBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		super(new DRVariable<T>(column.build(), calculation));
 	}
 
-	protected VariableBuilder(String name, ColumnBuilder<?, ?> column, Calculation calculation) {
+	protected VariableBuilder(String name, ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		super(new DRVariable<T>(name, column.build(), calculation));
 	}
 

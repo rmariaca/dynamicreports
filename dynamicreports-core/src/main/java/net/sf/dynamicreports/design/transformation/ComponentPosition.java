@@ -53,7 +53,7 @@ class ComponentPosition {
 		list.setX(0);
 		list.setY(0);
 		alignment(list);
-		width(list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
+		width(list);//, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
 		recalculateWidth(name, list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
 		height(list);
 		
@@ -150,7 +150,7 @@ class ComponentPosition {
 		}
 	}
 	
-	private static void width(DRDesignList list, int availableWidth) {
+	protected static void width(DRDesignList list) {
 		int maxWidth = 0;
 		ListType type = list.getType();
 		
@@ -159,7 +159,7 @@ class ComponentPosition {
 		case HORIZONTAL_FLOW:	
 			for (DRDesignComponent component : list.getComponents()) {
 				if (component instanceof DRDesignList) {
-					width((DRDesignList) component, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
+					width((DRDesignList) component);//, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
 				}
 				if (component.getWidth() == null) {
 					throw new DRDesignReportException("Component has null width");
@@ -173,7 +173,7 @@ class ComponentPosition {
 		case VERTICAL:	
 			for (DRDesignComponent component : list.getComponents()) {
 				if (component instanceof DRDesignList) {
-					width((DRDesignList) component, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
+					width((DRDesignList) component);//, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
 				}
 				if (component.getWidth() == null) {
 					throw new DRDesignReportException("Component has null width");

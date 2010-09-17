@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.DRIColumn;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridList;
@@ -120,13 +121,15 @@ public class ColumnGridTransform {
 			HorizontalCellComponentAlignment horizontalAlignment = cell.getHorizontalAlignment();
 			VerticalCellComponentAlignment verticalAlignment = cell.getVerticalAlignment();
 			if (component instanceof DRIColumn<?>) {
-				DRIColumn<?> column = (DRIColumn<?>) component;				
-				if (horizontalAlignment == null) {
-					horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(column.getValueField().getWidthType());
-				}				
-				if (verticalAlignment == null) {
-					verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(column.getValueField().getHeightType());
-				}		
+				DRIColumn<?> column = (DRIColumn<?>) component;
+				if (column.getComponent() instanceof DRIDimensionComponent) {
+					if (horizontalAlignment == null) {
+						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIDimensionComponent) column.getComponent()).getWidthType());
+					}				
+					if (verticalAlignment == null) {
+						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIDimensionComponent) column.getComponent()).getHeightType());
+					}		
+				}
 			}
 			list.addComponent(horizontalAlignment, cell.getVerticalAlignment(), list(component, columnGrid));
 		}	

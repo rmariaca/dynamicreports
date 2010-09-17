@@ -46,7 +46,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
-import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -61,7 +61,7 @@ public class GroupTransform {
 	private DesignTransformAccessor accessor;
 	private List<? extends DRIGroup> groups;
 	private Map<DRIGroup, DRDesignGroup> designGroups;
-	private List<DRIColumn<?>> hideGroupColumns;
+	private List<DRIValueColumn<?>> hideGroupColumns;
 	private int groupPadding;	
 	
 	public GroupTransform(DesignTransformAccessor accessor) {		
@@ -73,7 +73,7 @@ public class GroupTransform {
 		DRIReport report = accessor.getReport();
 		groups = report.getGroups();
 		designGroups = new LinkedHashMap<DRIGroup, DRDesignGroup>();
-		hideGroupColumns = new ArrayList<DRIColumn<?>>();
+		hideGroupColumns = new ArrayList<DRIValueColumn<?>>();
 		groupPadding = 0;		
 	}
 	
@@ -85,8 +85,8 @@ public class GroupTransform {
 	}
 	
 	private void addGroup(DRIGroup group, DRDesignGroup designGroup) {		
-		if (accessor.getTemplateTransform().isGroupHideColumn(group) && group.getValueField().getValueExpression() instanceof DRIColumn<?>) {
-			hideGroupColumns.add((DRIColumn<?>) group.getValueField().getValueExpression());
+		if (accessor.getTemplateTransform().isGroupHideColumn(group) && group.getValueField().getValueExpression() instanceof DRIValueColumn<?>) {
+			hideGroupColumns.add((DRIValueColumn<?>) group.getValueField().getValueExpression());
 		}
 		designGroups.put(group, designGroup);
 		groupPadding += accessor.getTemplateTransform().getGroupPadding(group);
@@ -227,7 +227,7 @@ public class GroupTransform {
 		return groupPadding;
 	}
 	
-	protected List<DRIColumn<?>> getHideGroupColumns() {
+	protected List<DRIValueColumn<?>> getHideGroupColumns() {
 		return hideGroupColumns;
 	}
 	

@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -45,7 +45,7 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 	}
 
 	//dataset
-	public T setCategory(ColumnBuilder<?, String> column) {
+	public T setCategory(ValueColumnBuilder<?, String> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
 		return (T) this;

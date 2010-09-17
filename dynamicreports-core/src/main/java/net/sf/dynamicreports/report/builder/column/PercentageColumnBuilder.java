@@ -41,14 +41,14 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class PercentageColumnBuilder extends ColumnBuilder<PercentageColumnBuilder, Double> {
+public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumnBuilder, Double> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private DRIExpression<? extends Number> actualExpression;
 	private PercentageTotalType totalType;
 	private DRGroup totalGroup;
 	
-	protected PercentageColumnBuilder(ColumnBuilder<?, ? extends Number> column) {
+	protected PercentageColumnBuilder(ValueColumnBuilder<?, ? extends Number> column) {
 		Validate.notNull(column, "column must not be null");
 		this.actualExpression = column.build();
 	}	
@@ -82,8 +82,8 @@ public class PercentageColumnBuilder extends ColumnBuilder<PercentageColumnBuild
 	
 	@Override
 	protected void configure() {		
-		if (getObject().getValueField().getDataType() == null) {
-			getObject().getValueField().setDataType(DataTypes.percentageType());
+		if (getComponent().getDataType() == null) {
+			getComponent().setDataType(DataTypes.percentageType());
 		}
 		
 		DRVariable<Number> totalExpression = new DRVariable<Number>(actualExpression, Calculation.SUM);

@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -45,7 +45,7 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 	}
 
 	//dataset
-	public T setKey(ColumnBuilder<?, String> column) {
+	public T setKey(ValueColumnBuilder<?, String> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
 		return (T) this;

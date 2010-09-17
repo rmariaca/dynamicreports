@@ -30,6 +30,7 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRReport;
 import net.sf.dynamicreports.report.base.grid.DRColumnGrid;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
@@ -265,14 +266,14 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 	
 	//column
-	public T columns(ColumnBuilder<?, ?> ...columns) {
+	public T columns(ColumnBuilder<?, ?, ?> ...columns) {
 		return addColumn(columns);
 	}
 	
-	public T addColumn(ColumnBuilder<?, ?> ...columns) {
+	public T addColumn(ColumnBuilder<?, ?, ?> ...columns) {
 		Validate.notNull(columns, "columns must not be null");
 		Validate.noNullElements(columns, "columns must not contains null column");
-		for (ColumnBuilder<?, ?> column : columns) {
+		for (ColumnBuilder<?, ?, ?> column : columns) {
 			getObject().addColumn(column.build());
 		}		
 		return (T) this;
@@ -622,10 +623,10 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 	
 	//group
-	public T groupBy(ColumnBuilder<?, ?> ...groupColumns) {
+	public T groupBy(ValueColumnBuilder<?, ?> ...groupColumns) {
 		Validate.notNull(groupColumns, "groupColumns must not be null");
 		Validate.noNullElements(groupColumns, "groupColumns must not contains null groupColumn");
-		for (ColumnBuilder<?, ?> groupColumn : groupColumns) {
+		for (ValueColumnBuilder<?, ?> groupColumn : groupColumns) {
 			addGroup(Groups.group(groupColumn));
 		}
 		return (T) this;	

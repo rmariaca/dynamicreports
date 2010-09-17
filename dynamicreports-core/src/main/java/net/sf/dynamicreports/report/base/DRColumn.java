@@ -22,11 +22,12 @@
 
 package net.sf.dynamicreports.report.base;
 
-import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -34,11 +35,11 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRColumn<T> implements DRIColumn<T> {
+public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		
-	private DRTextField<T> valueField;
-	private Boolean printRepeatedDetailValues;
+	private String name;
+	private T component;	
 
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
@@ -46,21 +47,14 @@ public class DRColumn<T> implements DRIColumn<T> {
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
 	
-	public DRColumn(DRTextField<T> valueField) {
-		Validate.notNull(valueField, "valueField must not be null");
-		this.valueField = valueField;	
-	}
-		
-	public Boolean getPrintRepeatedDetailValues() {
-		return printRepeatedDetailValues;
-	}
-
-	public void setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues) {
-		this.printRepeatedDetailValues = printRepeatedDetailValues;
+	public DRColumn(T component) {
+		Validate.notNull(component, "component must not be null");
+		this.name = ReportUtils.generateUniqueName("column");
+		this.component = component;	
 	}
 	
-	public DRTextField<T> getValueField() {
-		return valueField;
+	public T getComponent() {
+		return component;
 	}
 
 	public DRIExpression<?> getTitleExpression() {
@@ -132,12 +126,8 @@ public class DRColumn<T> implements DRIColumn<T> {
 		}
 		this.titleRows = titleRows;
 	}
-
-	public String getName() {
-		return valueField.getValueExpression().getName();
-	}
 	
-	public Class<? super T> getValueClass() {
-		return valueField.getValueExpression().getValueClass();
+	public String getName() {
+		return name;
 	}
 }
