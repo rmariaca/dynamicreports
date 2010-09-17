@@ -55,16 +55,16 @@ public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSub
 	}
 
 	//simple expression
-	protected PercentageSubtotalBuilder(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?, ?> showInColumn) {
+	protected PercentageSubtotalBuilder(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
 		this((DRIExpression<? extends Number>) expression, showInColumn);
 	}
 	
 	//field	
-	protected PercentageSubtotalBuilder(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?, ?> showInColumn) {
+	protected PercentageSubtotalBuilder(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?> showInColumn) {
 		this(field.getField(), showInColumn);
 	}
 
-	private PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?, ?> showInColumn) {
+	private PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 		this.expression = expression;
 	}

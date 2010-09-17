@@ -22,7 +22,6 @@
 
 package net.sf.dynamicreports.report.builder.column;
 
-import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
@@ -147,12 +146,12 @@ public class Columns {
 	}
 	
 	//component
-	public static <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(ComponentBuilder<?, T> component) {
+	public static ComponentColumnBuilder componentColumn(ComponentBuilder<?, ?> component) {
 		Validate.notNull(component, "component must not be null");
-		return new ComponentColumnBuilder<T>(component);
+		return new ComponentColumnBuilder(component);
 	}
 	
-	public static <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(String title, ComponentBuilder<?, T> component) {
+	public static ComponentColumnBuilder componentColumn(String title, ComponentBuilder<?, ?> component) {
 		return componentColumn(component).setTitle(title);
 	}
 }

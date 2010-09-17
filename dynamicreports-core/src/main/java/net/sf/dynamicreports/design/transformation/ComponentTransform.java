@@ -331,6 +331,10 @@ public class ComponentTransform {
 	}
 	
 	private EvaluationTime evaluationTimeFromResetType(ResetType resetType) {
+		if (resetType == null) {
+			return null;
+		}
+		
 		switch (resetType) {
 		case REPORT:
 			return EvaluationTime.REPORT;

@@ -36,7 +36,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings({"unchecked", "ucd"})
-public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> extends ColumnBuilder<T, DRValueColumn<U>, DRTextField<U>> {
+public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> extends ColumnBuilder<T, DRValueColumn<U>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	protected ValueColumnBuilder() {
@@ -235,5 +235,10 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeight(height);
 		getComponent().setHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
+	}
+	
+	@Override
+	protected DRTextField<U> getComponent() {
+		return (DRTextField<U>) getObject().getComponent();
 	}
 }

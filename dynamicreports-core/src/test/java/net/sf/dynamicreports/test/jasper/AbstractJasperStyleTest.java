@@ -25,7 +25,7 @@ package net.sf.dynamicreports.test.jasper;
 import java.awt.Color;
 
 import junit.framework.Assert;
-import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
 import net.sf.jasperreports.engine.JRAlignment;
@@ -90,32 +90,32 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	}
 	
 	//column detail
-	protected void columnDetailStyleTest(ValueColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void columnDetailStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnDetailName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 	
-	protected void columnDetailPaddingTest(ValueColumnBuilder<?, ?> column, int index, Integer top, Integer bottom, Integer left, Integer right) {
+	protected void columnDetailPaddingTest(ColumnBuilder<?, ?> column, int index, Integer top, Integer bottom, Integer left, Integer right) {
 		paddingTest(JasperTestUtils.getColumnDetailName(column), index, top, bottom, left, right);
 	}
 
-	protected void columnDetailAlignmentTest(ValueColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, horizontalAlignment);
 	}
 	
 	//column title
-	protected void columnTitleBorderTest(ValueColumnBuilder<?, ?> column, int index, Color topColor, LineStyleEnum topLineStyle, float top, Color bottomColor, LineStyleEnum bottomLineStyle, float bottom, Color leftColor, LineStyleEnum leftLineStyle, float left, Color rightColor, LineStyleEnum rightLineStyle, float right) {
+	protected void columnTitleBorderTest(ColumnBuilder<?, ?> column, int index, Color topColor, LineStyleEnum topLineStyle, float top, Color bottomColor, LineStyleEnum bottomLineStyle, float bottom, Color leftColor, LineStyleEnum leftLineStyle, float left, Color rightColor, LineStyleEnum rightLineStyle, float right) {
 		borderTest(JasperTestUtils.getColumnTitleName(column), index, topColor, topLineStyle, top, bottomColor, bottomLineStyle, bottom, leftColor, leftLineStyle, left, rightColor, rightLineStyle, right);
 	}
 	
-	protected void columnTitlePaddingTest(ValueColumnBuilder<?, ?> column, int index, Integer top, Integer bottom, Integer left, Integer right) {
+	protected void columnTitlePaddingTest(ColumnBuilder<?, ?> column, int index, Integer top, Integer bottom, Integer left, Integer right) {
 		paddingTest(JasperTestUtils.getColumnTitleName(column), index, top, bottom, left, right);
 	}
 	
-	protected void columnTitleStyleTest(ValueColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void columnTitleStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnTitleName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 	
-	protected void columnTitleAlignmentTest(ValueColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void columnTitleAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getColumnTitleName(column), index, horizontalAlignment);
 	}
 	

@@ -31,10 +31,10 @@ import net.sf.dynamicreports.report.constant.Constants;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class ComponentColumnBuilder<T extends DRComponent> extends ColumnBuilder<ComponentColumnBuilder<T>, DRColumn<T>, T> {
+public class ComponentColumnBuilder extends ColumnBuilder<ComponentColumnBuilder, DRColumn<DRComponent>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;	
 	
-	protected ComponentColumnBuilder(ComponentBuilder<?, T> component) {
-		super(new DRColumn<T>(component.getComponent()));
+	protected ComponentColumnBuilder(ComponentBuilder<?, ?> component) {
+		super(new DRColumn<DRComponent>(component.getComponent()));
 	}	
 }

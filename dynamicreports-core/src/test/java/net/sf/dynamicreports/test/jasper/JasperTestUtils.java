@@ -34,12 +34,12 @@ import net.sf.dynamicreports.report.builder.subtotal.BaseSubtotalBuilder;
 public class JasperTestUtils {
 	
 	//column detail	
-	public static String getColumnDetailName(ColumnBuilder<?, ?, ?> column) {
+	public static String getColumnDetailName(ColumnBuilder<?, ?> column) {
 		return "detail.column_" + column.build().getName() + "1";
 	}
 	
 	//column title	
-	public static String getColumnTitleName(ColumnBuilder<?, ?, ?> column) {
+	public static String getColumnTitleName(ColumnBuilder<?, ?> column) {
 		return "columnHeader.column_" + column.build().getName() + ".title1";
 	}
 	

@@ -27,7 +27,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.builder.column.ComponentColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.CustomSubtotalBuilder;
@@ -42,7 +41,7 @@ public class ComponentColumnPositionTest extends AbstractJasperPositionTest impl
 	private static final long serialVersionUID = 1L;
 	
 	private TextColumnBuilder<String> column1;
-	private ComponentColumnBuilder<DRList> column3;
+	private ComponentColumnBuilder column3;
 	private CustomSubtotalBuilder<String> subtotal1;
 	
 	@Override

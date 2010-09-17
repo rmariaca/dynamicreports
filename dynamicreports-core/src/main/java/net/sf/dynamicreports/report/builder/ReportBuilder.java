@@ -266,14 +266,14 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 	
 	//column
-	public T columns(ColumnBuilder<?, ?, ?> ...columns) {
+	public T columns(ColumnBuilder<?, ?> ...columns) {
 		return addColumn(columns);
 	}
 	
-	public T addColumn(ColumnBuilder<?, ?, ?> ...columns) {
+	public T addColumn(ColumnBuilder<?, ?> ...columns) {
 		Validate.notNull(columns, "columns must not be null");
 		Validate.noNullElements(columns, "columns must not contains null column");
-		for (ColumnBuilder<?, ?, ?> column : columns) {
+		for (ColumnBuilder<?, ?> column : columns) {
 			getObject().addColumn(column.build());
 		}		
 		return (T) this;

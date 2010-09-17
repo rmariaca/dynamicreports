@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 public abstract class SubtotalBuilder<T extends SubtotalBuilder<T, U>, U> extends BaseSubtotalBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	protected SubtotalBuilder(ColumnBuilder<?, ?, ?> showInColumn) {
+	protected SubtotalBuilder(ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 	}
 }

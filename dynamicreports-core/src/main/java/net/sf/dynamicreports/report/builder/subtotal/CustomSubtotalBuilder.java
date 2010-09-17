@@ -36,13 +36,13 @@ public class CustomSubtotalBuilder<T> extends SubtotalBuilder<CustomSubtotalBuil
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	//simple expression
-	protected CustomSubtotalBuilder(DRISimpleExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
+	protected CustomSubtotalBuilder(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 		setValueExpression(expression);
 	}
 
 	//complex expression
-	protected CustomSubtotalBuilder(DRIComplexExpression<T> expression, ColumnBuilder<?, ?, ?> showInColumn) {
+	protected CustomSubtotalBuilder(DRIComplexExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 		setValueExpression(expression);
 	}

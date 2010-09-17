@@ -63,16 +63,16 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 	}
 	
 	//simple expression
-	protected AggregationSubtotalBuilder(DRISimpleExpression<?> expression, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
+	protected AggregationSubtotalBuilder(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		this((DRIExpression<?>) expression, showInColumn, calculation);
 	}
 	
 	//field	
-	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
+	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		this(field.build(), showInColumn, calculation);
 	}
 
-	private AggregationSubtotalBuilder(DRIExpression<?> expression, ColumnBuilder<?, ?, ?> showInColumn, Calculation calculation) {
+	private AggregationSubtotalBuilder(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		super(showInColumn);
 		this.expression = expression;
 		this.calculation = calculation;

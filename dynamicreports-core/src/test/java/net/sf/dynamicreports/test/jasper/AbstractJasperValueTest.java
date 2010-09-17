@@ -25,7 +25,7 @@ package net.sf.dynamicreports.test.jasper;
 import java.util.List;
 
 import junit.framework.Assert;
-import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.BaseSubtotalBuilder;
 import net.sf.jasperreports.engine.JRPrintElement;
@@ -57,28 +57,28 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 	}
 	
 	//column detail
-	protected void columnDetailCountTest(ValueColumnBuilder<?, ?> column, int expectedNumberOfElements) {
+	protected void columnDetailCountTest(ColumnBuilder<?, ?> column, int expectedNumberOfElements) {
 		elementCountTest(JasperTestUtils.getColumnDetailName(column), expectedNumberOfElements);
 	}
 
-	protected void columnDetailValueTest(ValueColumnBuilder<?, ?> column, int index, String value) {
+	protected void columnDetailValueTest(ColumnBuilder<?, ?> column, int index, String value) {
 		elementValueTest(JasperTestUtils.getColumnDetailName(column), index, value);
 	}
 
-	protected void columnDetailValueTest(ValueColumnBuilder<?, ?> column, String ...values) {
+	protected void columnDetailValueTest(ColumnBuilder<?, ?> column, String ...values) {
 		elementValueTest(JasperTestUtils.getColumnDetailName(column), values);
 	}
 	
 	//column title
-	protected void columnTitleCountTest(ValueColumnBuilder<?, ?> column, int expectedNumberOfElements) {
+	protected void columnTitleCountTest(ColumnBuilder<?, ?> column, int expectedNumberOfElements) {
 		elementCountTest(JasperTestUtils.getColumnTitleName(column), expectedNumberOfElements);
 	}
 
-	protected void columnTitleValueTest(ValueColumnBuilder<?, ?> column, int index, String value) {
+	protected void columnTitleValueTest(ColumnBuilder<?, ?> column, int index, String value) {
 		elementValueTest(JasperTestUtils.getColumnTitleName(column), index, value);
 	}
 
-	protected void columnTitleValueTest(ValueColumnBuilder<?, ?> column, String ...values) {
+	protected void columnTitleValueTest(ColumnBuilder<?, ?> column, String ...values) {
 		elementValueTest(JasperTestUtils.getColumnTitleName(column), values);
 	}
 	

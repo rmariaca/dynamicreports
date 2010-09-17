@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.4.2
+---------------------------------------------------
+ - component column, see ComponentColumnReport for an example
+ - new examples - examples/column/ComponentColumnReport
+                  examples/exporter/HtmlReport
+
 Changes in version 1.4.1 (2010-09-02)
 ---------------------------------------------------
  - updated JasperReports to 3.7.2

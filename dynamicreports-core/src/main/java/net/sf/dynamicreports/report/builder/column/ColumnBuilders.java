@@ -22,7 +22,6 @@
 
 package net.sf.dynamicreports.report.builder.column;
 
-import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -129,11 +128,11 @@ public class ColumnBuilders {
 	}
 	
 	//component
-	public <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(ComponentBuilder<?, T> component) {
+	public ComponentColumnBuilder componentColumn(ComponentBuilder<?, ?> component) {
 		return Columns.componentColumn(component);
 	}
 	
-	public <T extends DRComponent> ComponentColumnBuilder<T> componentColumn(String title, ComponentBuilder<?, T> component) {
+	public ComponentColumnBuilder componentColumn(String title, ComponentBuilder<?, ?> component) {
 		return Columns.componentColumn(title, component);
 	}
 }
