@@ -306,6 +306,9 @@ public class ExporterTransform {
 		if (jasperExporter.getImagesDirName() != null) {
 			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_DIR_NAME, jasperExporter.getImagesDirName());
 		}
+		if (jasperExporter.getImagesURI() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, jasperExporter.getImagesURI());
+		}
 		if (jasperExporter.getHtmlHeader() != null) {
 			jrExporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, jasperExporter.getHtmlHeader());
 		}

@@ -27,7 +27,6 @@ import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -44,8 +43,8 @@ public class DetailDynamicSubreport {
 	}
 	
 	private void build() {
-		SubreportBuilder subreport = Components.subreport(new SubreportExpression())
-		                                       .setDataSource(new SubreportDataSourceExpression());
+		SubreportBuilder subreport = cmp.subreport(new SubreportExpression())
+		                                .setDataSource(new SubreportDataSourceExpression());
 		
 		try {			
 			report()

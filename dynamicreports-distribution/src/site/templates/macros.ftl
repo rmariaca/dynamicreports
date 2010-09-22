@@ -24,7 +24,7 @@
 	</tbody>
 </table>
 </#macro>
-<#macro example id title=false source_code=true>
+<#macro example id title=false source_code=true file="pdf" file_ext="">
 <center>
 <#if title == true>
 <h3>${id}</h3>
@@ -36,7 +36,7 @@
 				<a id="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img src="${page.examples}${id?lower_case}_m.png"/></a>
 			</td>
 			<td>
-				<a href="${page.examples}${id?lower_case}.pdf" title="pdf preview"><img class="preview" src="${page.path}images/acrobat.png"/></a>
+				<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" width="16" height="16"/></a>
 				<a id="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png"/></a>
 			</td>
 			<#if source_code == true>
@@ -95,7 +95,7 @@
 <#macro example_link id>
 <a href="${page.examples}${id?lower_case}.html">${id}</a>
 </#macro>
-<#macro example_preview id>
+<#macro example_preview id file="pdf" file_ext="">
 <table class="example">
 	<tbody>
 		<tr>
@@ -105,7 +105,7 @@
 				</center>
 			</td>
 			<td>
-				<a href="${page.examples}${id?lower_case}.pdf" title="pdf preview"><img class="preview" src="${page.path}images/acrobat.png"/></a>
+				<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" width="16" height="16"/></a>
 				<a id="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png"/></a>
 			</td>
 		</tr>

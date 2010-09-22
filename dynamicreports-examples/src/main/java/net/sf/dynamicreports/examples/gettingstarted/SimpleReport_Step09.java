@@ -28,6 +28,7 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -98,7 +99,7 @@ public class SimpleReport_Step09 {
 			  .title(//shows report title
 			  	cmp.horizontalList()
 			  		.add(
-			  			cmp.image(getClass().getResourceAsStream("../images/dynamicreports.png")).setFixedDimension(80, 80),
+			  			cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(80, 80),
 			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
 			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
 			  		.newRow()

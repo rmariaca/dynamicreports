@@ -29,36 +29,35 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DetailJasperSubreport {
+public class JasperSubreport {
 	
-	public DetailJasperSubreport() {
+	public JasperSubreport() {
 		build();
 	}
 	
 	private void build() {
-		try {
-			SubreportBuilder subreport = cmp.subreport(getJasperSubreport())
-			                                .setDataSource(new SubreportDataSourceExpression());
-			
+		try {			
 			report()
-			  .title(Templates.createTitleComponent("DetailJasperSubreport"))
-			  .detail(
-			  	subreport,
-			  	cmp.filler().setFixedHeight(20))
+			  .setTemplate(Templates.reportTemplate)
+			  .title(
+			  	Templates.createTitleComponent("JasperSubreport"),
+			  	cmp.subreport(getJasperTitleSubreport()))
+			  .columns(
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .pageFooter(Templates.footerComponent)
+			  .summary(cmp.subreport(getJasperSummarySubreport()))
 			  .setDataSource(createDataSource())
 			  .show();
 		} catch (DRException e) {
@@ -69,27 +68,24 @@ public class DetailJasperSubreport {
 	}
 	
 	private JRDataSource createDataSource() {
-		return new JREmptyDataSource(3);
+		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		for (int i = 0; i < 10; i++) {
+			dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
+		}
+		return dataSource;
 	}
 	
-	private JasperReport getJasperSubreport() throws JRException {
-		InputStream is = DetailJasperSubreport.class.getResourceAsStream("subreport.jrxml");
+	private JasperReport getJasperTitleSubreport() throws JRException {
+		InputStream is = JasperSubreport.class.getResourceAsStream("titlesubreport.jrxml");
 		return JasperCompileManager.compileReport(is);
 	}
-	
-	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
-		private static final long serialVersionUID = 1L;
 
-		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("item", "quantity", "unitprice");
-			for (int i = 0; i < 5; i++) {
-				dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
-			}
-			return dataSource;
-		}
+	private JasperReport getJasperSummarySubreport() throws JRException {
+		InputStream is = JasperSubreport.class.getResourceAsStream("summarysubreport.jasper");
+		return (JasperReport)JRLoader.loadObject(is);
 	}
 	
 	public static void main(String[] args) {
-		new DetailJasperSubreport();
+		new JasperSubreport();
 	}
 }

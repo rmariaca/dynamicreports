@@ -46,6 +46,11 @@ public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		this.getObject().setImagesDirName(imagesDirName);
 		return this;
 	}
+
+	public JasperHtmlExporterBuilder setImagesURI(String imagesURI) {
+		this.getObject().setImagesURI(imagesURI);
+		return this;
+	}
 	
 	public JasperHtmlExporterBuilder setHtmlHeader(String htmlHeader) {
 		this.getObject().setHtmlHeader(htmlHeader);

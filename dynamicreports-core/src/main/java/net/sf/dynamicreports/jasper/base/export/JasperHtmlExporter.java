@@ -34,6 +34,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	
 	private Boolean outputImagesToDir;
 	private String imagesDirName;
+	private String imagesURI;
 	private String htmlHeader;
 	private String betweenPagesHtml;
 	private String htmlFooter;
@@ -59,6 +60,14 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	public void setImagesDirName(String imagesDirName) {
 		this.imagesDirName = imagesDirName;
 	}
+	
+	public void setImagesURI(String imagesURI) {
+		this.imagesURI = imagesURI;
+	}
+	
+	public String getImagesURI() {
+		return imagesURI;
+	}	
 	
 	public String getHtmlHeader() {
 		return htmlHeader;

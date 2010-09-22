@@ -33,6 +33,8 @@ public interface JasperIHtmlExporter extends JasperIExporter {
 	
 	public String getImagesDirName();
 	
+	public String getImagesURI();
+	
 	public String getHtmlHeader();
 	
 	public String getBetweenPagesHtml();
@@ -49,5 +51,5 @@ public interface JasperIHtmlExporter extends JasperIExporter {
 	
 	public SizeUnit getSizeUnit();
 	
-	public Boolean getFramesAsNestedTables();
+	public Boolean getFramesAsNestedTables();	
 }

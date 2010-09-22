@@ -36,6 +36,9 @@
 			<source>${project.build.directory}/.classpath</source>
 			<outputDirectory>examples/dynamicreports-examples</outputDirectory>
 		</file>
+		<file>
+			<source>src/assemblies/readme.txt</source>
+		</file>
  	</files>
         
 	<dependencySets>

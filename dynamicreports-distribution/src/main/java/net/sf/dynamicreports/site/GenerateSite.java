@@ -44,6 +44,7 @@ import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
+import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -165,7 +166,7 @@ public class GenerateSite {
 				content += "<table class=\"example\"><tbody>\r\n";
 			}
 			text1 += "<td><center><@example_link id=\"" + example.getName() + "\"/></center></td>\r\n";
-			text2 += "<td><center><@example_preview id=\"" + example.getName() + "\"/></center></td>\r\n";
+			text2 += "<td><center><@example_preview id=\"" + example.getName() + "\" file=\"" + getFileType(example.getName()) + "\" file_ext=\"" + getFileExt(example.getName()) + "\"/></center></td>\r\n";
 			if (count == 2 || next == null || !next.getPath().equals(example.getPath())) {	
 				content += "<tr>\r\n";
 				content += text1;
@@ -212,7 +213,10 @@ public class GenerateSite {
 		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), -1, 1.1f);		
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);
-		jasperExporterBuilder.getExporter().setOutputFileName(examples_path + name.toLowerCase() + ".pdf");
+		if (jasperExporterBuilder instanceof JasperHtmlExporterBuilder) {
+			((JasperHtmlExporterBuilder) jasperExporterBuilder).getExporter().setImagesDirName(examples_path + "/images");			
+		}
+		jasperExporterBuilder.getExporter().setOutputFileName(examples_path + name.toLowerCase() + getFileExt(name) + "." + getFileType(name));
 		method.invoke(reportBuilder, jasperExporterBuilder);
 	}
 	
@@ -230,11 +234,25 @@ public class GenerateSite {
 		generateExampleHtml(name, next, previous, new FileInputStream(examples_source + design.getName().replaceAll("\\.", "/") + ".java"), "java");
 	}
 	
+	private static String getFileType(String name) {		
+		if (name.toLowerCase().indexOf("html") > -1) {
+			return "html";
+		}
+		return "pdf";
+	}
+	
+	private static String getFileExt(String name) {		
+		if (name.toLowerCase().indexOf("html") > -1) {
+			return "html";
+		}
+		return "";
+	}
+	
 	private static void generateExampleHtml(String name, String next, String previous, InputStream file, String type) throws Exception {
 		String content = "";
 		if (!next.equals("") || !previous.equals("")) {
 			content += "<@examples previous=\"" + previous + "\" next=\"" + next + "\"/>\r\n";
-			content += "<@example id=\"" + name + "\" title=true source_code=false/>\r\n";
+			content += "<@example id=\"" + name + "\" title=true source_code=false file=\"" + getFileType(name) + "\" file_ext=\"" + getFileExt(name) + "\"/>\r\n";
 		}
 		content += "<@" + type + "_code>\r\n";
     content += loadFile(new InputStreamReader(file));

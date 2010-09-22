@@ -26,6 +26,7 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.AbstractReportMain;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -76,6 +77,17 @@ public class ExamplesAspect {
 	
 	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toPdf(*))")
 	public void toPdf() {
+	}
+	
+	@Around("toHtml()")
+	public JasperReportBuilder toHtml(ProceedingJoinPoint pjp) throws Throwable {
+		JasperReportBuilder reportBuilder = (JasperReportBuilder) pjp.getTarget();
+		GenerateSite.generateExampleImage(name, reportBuilder, (JasperHtmlExporterBuilder) pjp.getArgs()[0]);
+		return reportBuilder;
+	}
+	
+	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toHtml(*))")
+	public void toHtml() {
 	}
 	
 	@Around("toConcatenatedPdf()")
