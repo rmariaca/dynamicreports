@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.sourceforge.dynamicreports</groupId>
 		<artifactId>dynamicreports-parent</artifactId>
-		<version>1.4.2-SNAPSHOT</version>
+		<version>1.4.2</version>
 	</parent>
 
 	<artifactId>dynamicreports-distribution</artifactId>
@@ -116,7 +116,7 @@
 							<executable>java</executable>															
 							<arguments>
 								<argument>-classpath</argument>
-								<classpath/>			
+								<classpath />			
 								<argument>net.sf.dynamicreports.assembly.GenerateClasspath</argument>		
 							</arguments>
 							<environmentVariables>
@@ -231,7 +231,7 @@
 								<argument>-Xmx512m</argument>
 								<argument>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</argument>
 								<argument>-classpath</argument>
-								<classpath/>			
+								<classpath />			
 								<argument>net.sf.dynamicreports.site.GenerateSite</argument>		
 							</arguments>
 							<environmentVariables>
