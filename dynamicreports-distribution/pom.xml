@@ -57,6 +57,10 @@
 			<artifactId>batik-bridge</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>		
+		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
@@ -185,7 +189,7 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-dependency-plugin</artifactId>
 						<configuration>
-							<outputDirectory>${siteOutputDirectory}/apidoc</outputDirectory>
+							<outputDirectory>${siteOutputDirectory}/apidocs</outputDirectory>
 							<includeArtifactIds>dynamicreports-core</includeArtifactIds>
 							<classifier>javadoc</classifier>
 							<excludes>**/META-INF/**</excludes>

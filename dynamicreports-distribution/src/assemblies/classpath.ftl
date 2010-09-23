@@ -31,8 +31,8 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/itext-2.1.7.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-api-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api-2.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-impl-2.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.15.jar"/>
 	<classpathentry kind="lib" path="lib/jdtcore-3.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.12.jar"/>
