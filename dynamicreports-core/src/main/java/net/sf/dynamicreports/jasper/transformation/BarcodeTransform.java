@@ -58,8 +58,6 @@ import net.sf.jasperreports.components.barcode4j.USPSIntelligentMailComponent;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignComponentElement;
 import net.sf.jasperreports.engine.design.JRDesignElement;
-import net.sf.jasperreports.engine.type.PositionTypeEnum;
-import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -75,8 +73,6 @@ public class BarcodeTransform {
 		JRDesignComponentElement jrComponent = new JRDesignComponentElement();
 		jrComponent.setComponent(barcodeComponent(barcode));
 		jrComponent.setComponentKey(new ComponentKey(ComponentsExtensionsRegistryFactory.NAMESPACE, "jr", barcode.getName()));
-		jrComponent.setPositionType(PositionTypeEnum.FLOAT);
-		jrComponent.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		return jrComponent;
 	}
 	

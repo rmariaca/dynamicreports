@@ -239,9 +239,9 @@ class ComponentPosition {
 					}		
 				}
 				maxWidth += component.getWidth() + list.getGap();
-				if (!list.getComponents().isEmpty()) {
-					maxWidth -= list.getGap();
-				}
+			}
+			if (!list.getComponents().isEmpty()) {
+				maxWidth -= list.getGap();
 			}
 			break;
 		case HORIZONTAL_FLOW:	

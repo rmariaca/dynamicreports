@@ -239,8 +239,9 @@
 								<argument>net.sf.dynamicreports.site.GenerateSite</argument>		
 							</arguments>
 							<environmentVariables>
-								<runExamples>true</runExamples>
+								<runExamples>${runExamples}</runExamples>
 								<version>${project.version}</version>
+								<developmentVersion>${developmentVersion}</developmentVersion>
 								<outputDirectory>${siteOutputDirectory}</outputDirectory>						
 							</environmentVariables>						
 						</configuration>

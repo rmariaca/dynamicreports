@@ -24,10 +24,14 @@ package net.sf.dynamicreports.design.definition.component;
 
 import java.util.List;
 
+import net.sf.dynamicreports.report.constant.ListType;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignList extends DRIDesignComponent {
 
 	public List<? extends DRIDesignComponent> getComponents();
+	
+	public ListType getType();
 }

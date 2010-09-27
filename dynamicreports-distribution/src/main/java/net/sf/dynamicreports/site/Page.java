@@ -31,6 +31,7 @@ import java.util.Set;
  */
 public class Page {
 	private String version;
+	private String developmentVersion;
 	private Date date;
 	private String path;
 	private String examples;
@@ -48,6 +49,7 @@ public class Page {
 	
 	private void init() throws Exception {		
 		version = System.getenv("version");
+		developmentVersion = System.getenv("developmentVersion");
 		date = new Date();
 		path = "";
 		examples = "examples/";
@@ -79,6 +81,14 @@ public class Page {
 		this.version = version;
 	}
 
+	public String getDevelopmentVersion() {
+		return developmentVersion;
+	}
+	
+	public void setDevelopmentVersion(String developmentVersion) {
+		this.developmentVersion = developmentVersion;
+	}
+	
 	public Date getDate() {
 		return date;
 	}

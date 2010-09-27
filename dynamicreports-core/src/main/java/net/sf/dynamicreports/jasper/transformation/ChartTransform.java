@@ -74,8 +74,6 @@ import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
-import net.sf.jasperreports.engine.type.PositionTypeEnum;
-import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -138,10 +136,7 @@ public class ChartTransform {
 		if (chart.getCustomizer() != null) {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
 			addChartCustomizer(chart.getUniqueName(), chart.getCustomizer());
-		}
-		
-		jrChart.setPositionType(PositionTypeEnum.FLOAT);
-		jrChart.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
+		}		
 	}
 	
 	private void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {

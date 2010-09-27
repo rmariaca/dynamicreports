@@ -43,6 +43,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
@@ -72,8 +73,9 @@ public class ComponentTransform {
 		this.accessor = accessor;
 	}
 	
-	protected JRDesignElement component(DRIDesignComponent component) {
+	protected JRDesignElement component(DRIDesignComponent component, ListType listType) {
 		JRDesignElement jrElement;
+		StretchTypeEnum stretchType = detectStretchType(listType);
 		if (component instanceof DRIDesignChart) {
 			jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
 		}
@@ -81,23 +83,30 @@ public class ComponentTransform {
 			jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
 		}
 		else if (component instanceof DRIDesignList) {
+			stretchType = StretchTypeEnum.NO_STRETCH;
 			jrElement = list((DRIDesignList) component);
 		}
 		else if (component instanceof DRIDesignTextField) {
+			stretchType = detectStretchType(listType);
 			jrElement = textField((DRIDesignTextField) component);
 		}
 		else if (component instanceof DRIDesignFiller) {
+			stretchType = detectStretchType(listType);
 			jrElement = filler((DRIDesignFiller) component);
 		}
 		else if (component instanceof DRIDesignImage) {
+			stretchType = detectStretchType(listType);
 			jrElement = image((DRIDesignImage) component);
 		}
 		else if (component instanceof DRIDesignSubreport) {
+			stretchType = StretchTypeEnum.NO_STRETCH;
 			jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
 		}
 		else {
 			throw new JasperDesignException("Component " + component.getClass().getName() + " not supported");
 		}
+		jrElement.setPositionType(PositionTypeEnum.FLOAT);		
+		jrElement.setStretchType(stretchType);		
 		jrElement.setKey(component.getUniqueName());
 		jrElement.setX(component.getX());
 		jrElement.setY(component.getY());		
@@ -110,15 +119,20 @@ public class ComponentTransform {
 		return jrElement;
 	}
 
+	private StretchTypeEnum detectStretchType(ListType listType) {
+		if (listType.equals(ListType.VERTICAL)) {
+			return StretchTypeEnum.NO_STRETCH;
+		}
+		
+		return StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT;
+	}
+	
 	//list
 	private JRDesignElement list(DRIDesignList list) {
 		JRDesignFrame frame = new JRDesignFrame();
 		
-		frame.setPositionType(PositionTypeEnum.FLOAT);
-		frame.setStretchType(StretchTypeEnum.NO_STRETCH);
-		
 		for (DRIDesignComponent element : list.getComponents()) {
-			frame.addElement(component(element));
+			frame.addElement(component(element, list.getType()));
 		}
 		
 		return frame;
@@ -141,8 +155,6 @@ public class ComponentTransform {
 			jrTextField.setEvaluationGroup(accessor.getGroupTransform().getGroup(textField.getEvaluationGroup()));
 		}
 		
-		jrTextField.setPositionType(PositionTypeEnum.FLOAT);
-		jrTextField.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		jrTextField.setStretchWithOverflow(true);
 		
 		String pattern = textField.getPattern();
@@ -160,8 +172,6 @@ public class ComponentTransform {
 	//filler
 	private JRDesignElement filler(DRIDesignFiller filler) {
 		JRDesignStaticText jrDesignStaticText = new JRDesignStaticText();
-		jrDesignStaticText.setPositionType(PositionTypeEnum.FLOAT);
-		jrDesignStaticText.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		return jrDesignStaticText;
 	}
 	
@@ -176,8 +186,6 @@ public class ComponentTransform {
 			jrImage.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
 		}
 		
-		jrImage.setPositionType(PositionTypeEnum.FLOAT);
-		jrImage.setStretchType(StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT);
 		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);
 		jrImage.setScaleImage(ConstantTransform.imageScale(image.getImageScale()));
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
@@ -209,8 +217,6 @@ public class ComponentTransform {
 			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
 		}
 		
-		jrSubreport.setPositionType(PositionTypeEnum.FLOAT); 
-		jrSubreport.setStretchType(StretchTypeEnum.NO_STRETCH);
 		return jrSubreport;
 	}
 	

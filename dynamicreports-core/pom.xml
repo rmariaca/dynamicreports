@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<!-- only for JDK 1.5, not required for JDK 1.6 -->
 			<groupId>com.sun.xml.bind</groupId>
@@ -63,7 +63,7 @@
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.7.2</version>
+				<version>0.7.4</version>
 				<configuration>
 					<schemaIncludes>
 						<schemaInclude>**/*.xsd</schemaInclude>
@@ -84,6 +84,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>	
+	</build>
 
 </project>
