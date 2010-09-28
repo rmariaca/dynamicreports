@@ -47,12 +47,23 @@
 		</developer>		
 	</developers>
 	
+	<properties>
+		<jasperreportsVersion>3.7.2</jasperreportsVersion>
+		<commonslangVersion>2.5</commonslangVersion>
+		<jaxbimplVersion>2.2.1</jaxbimplVersion>
+		<barcode4jVersion>2.0</barcode4jVersion>
+		<batikbridgeVersion>1.7</batikbridgeVersion>
+		<poiVersion>3.5-FINAL</poiVersion>
+		<jxlVersion>2.6</jxlVersion>
+		<junitVersion>4.0</junitVersion>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports</artifactId>
-				<version>3.7.2</version>
+				<version>${jasperreportsVersion}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>bouncycastle</groupId>
@@ -67,26 +78,26 @@
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
-				<version>2.5</version>
-			</dependency>		
+				<version>${commonslangVersion}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
-				<version>2.2.1</version>
+				<version>${jaxbimplVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.barcode4j</groupId>
 				<artifactId>barcode4j</artifactId>
-				<version>2.0</version>
+				<version>${barcode4jVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>			
 			</dependency>
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
 				<artifactId>batik-bridge</artifactId>
-				<version>1.7</version>
+				<version>${batikbridgeVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 				<exclusions>
@@ -99,21 +110,21 @@
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
-				<version>3.5-FINAL</version>
+				<version>${poiVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>		
 			<dependency>
 				<groupId>net.sourceforge.jexcelapi</groupId>
 				<artifactId>jxl</artifactId>
-				<version>2.6</version>
+				<version>${jxlVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>			
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.0</version>
+				<version>${junitVersion}</version>
 				<scope>test</scope>	
 			</dependency>			
 		</dependencies>

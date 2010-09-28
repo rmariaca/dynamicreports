@@ -9,7 +9,7 @@
 	</p>		
 	</div>		
 	<div id="header-links2">
-		Site updated on ${page.date?string("yyyy-MM-dd")}
+		Site updated on ${project.date?string("yyyy-MM-dd")}
 	</div>		
 						
 </div>

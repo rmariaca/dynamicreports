@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.dynamicreports.Project;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -67,6 +68,7 @@ public class GenerateSite {
 	private static boolean runExamples;
 	private static String site_path;	
 	private static String examples_path;
+	private static Project project;
 	
 	static {		
 		runExamples = new Boolean(System.getenv("runExamples"));
@@ -83,6 +85,7 @@ public class GenerateSite {
 		cfg.setTemplateLoader(new MultiTemplateLoader(loaders));		
 
 		try {			
+			project = new Project();
 			temp = cfg.getTemplate(templates_path + "site.ftl");			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,6 +106,7 @@ public class GenerateSite {
 		String[] children = dir.list(new PageFilesFilter());
 		for (String file : children) {
 			Map<String, Object> root = new HashMap<String, Object>();
+			root.put("project", project);
 			root.put("page", new Page(pages_path + file, loadFile(new FileReader(pages_path + file))));
 			
 			Writer out = new FileWriter(site_path + file);
@@ -196,6 +200,7 @@ public class GenerateSite {
 		Page page = new Page(name, content);
 		page.setPath("../");
 		page.setExamples("");
+		root.put("project", project);
 		root.put("page", page);
 
 		Writer out = new FileWriter(examples_path + name.toLowerCase() + ".html");
@@ -264,6 +269,7 @@ public class GenerateSite {
 		page.setPath("../");
 		page.setExamples("");
 		page.setSideBar(false);
+		root.put("project", project);
 		root.put("page", page);
 
 		Writer out = new FileWriter(examples_path + name.toLowerCase() + ".html");

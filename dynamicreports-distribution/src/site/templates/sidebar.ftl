@@ -1,7 +1,7 @@
 <div id="sidebar">
 			
 	<center>
-		<h3>Current version ${page.version}</h3>	
+		<h3>Current version ${project.version}</h3>	
 		<a href="${page.path}download.html" class="download" title="Download" target="_blank"></a>
 	</center>
 			

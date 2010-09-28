@@ -22,17 +22,13 @@
 
 package net.sf.dynamicreports.site;
 
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Page {
-	private String version;
-	private String developmentVersion;
-	private Date date;
+public class Page {	
 	private String path;
 	private String examples;
 	private boolean sideBar;
@@ -47,10 +43,7 @@ public class Page {
 		setPage(name, pageContent);
 	}
 	
-	private void init() throws Exception {		
-		version = System.getenv("version");
-		developmentVersion = System.getenv("developmentVersion");
-		date = new Date();
+	private void init() throws Exception {
 		path = "";
 		examples = "examples/";
 		sideBar = true;
@@ -71,30 +64,6 @@ public class Page {
     hasImage = pageContent.indexOf("<@example") != -1;
     hasImageGroup = pageContent.indexOf("<@image_group") != -1;	
     content = "/" + name;
-	}
-	
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getDevelopmentVersion() {
-		return developmentVersion;
-	}
-	
-	public void setDevelopmentVersion(String developmentVersion) {
-		this.developmentVersion = developmentVersion;
-	}
-	
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getPath() {

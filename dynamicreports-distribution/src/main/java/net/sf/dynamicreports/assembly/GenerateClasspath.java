@@ -27,6 +27,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.dynamicreports.Project;
+
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -37,15 +39,13 @@ import freemarker.template.Template;
 public class GenerateClasspath {
 	
 	public static void main(String[] args) throws Exception {
-		String version = System.getenv("version");
-		String outputDirectory = System.getenv("outputDirectory");
-		
+		Project project = new Project();
 		Configuration cfg = new Configuration();		
 		cfg.setObjectWrapper(new DefaultObjectWrapper());
 		Template temp = cfg.getTemplate("src/assemblies/classpath.ftl");
 		Map<String, Object> root = new HashMap<String, Object>();		
-		root.put("version", version);		
-		Writer out = new FileWriter(outputDirectory + "/.classpath");
+		root.put("project", project);		
+		Writer out = new FileWriter(project.getOutputDirectory() + "/.classpath");
 		temp.process(root, out);
 		out.flush();
 	}

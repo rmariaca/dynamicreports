@@ -3,43 +3,43 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="target/classes"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/dynamicreports-core-${version}.jar" sourcepath="lib/dynamicreports-core-${version}-sources.jar">
+	<classpathentry kind="lib" path="lib/dynamicreports-core-${project.version}.jar" sourcepath="lib/dynamicreports-core-${project.version}-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-core-${version}-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-core-${project.version}-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/avalon-framework-impl-4.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/barcode4j-2.0.jar"/>
-	<classpathentry kind="lib" path="lib/batik-anim-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-awt-util-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-bridge-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-css-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-dom-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-ext-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-gvt-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-parser-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-script-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-svg-dom-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-util-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/batik-xml-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-jdk14-138.jar"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/itext-2.1.7.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-3.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-api-2.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-2.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-1.0.15.jar"/>
-	<classpathentry kind="lib" path="lib/jdtcore-3.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.12.jar"/>
-	<classpathentry kind="lib" path="lib/jxl-2.6.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-3.5-FINAL.jar"/>
-	<classpathentry kind="lib" path="lib/stax-api-1.0-2.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis-1.3.04.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis-ext-1.3.04.jar"/>
+	<classpathentry kind="lib" path="lib/activation-${project.activationVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/avalon-framework-impl-${project.avalonframeworkimplVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/barcode4j-${project.barcode4jVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-anim-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-awt-util-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-bridge-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-css-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-dom-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-ext-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-gvt-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-parser-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-script-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-svg-dom-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-util-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/batik-xml-${project.batikbridgeVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk14-${project.bcprovjdk14Version}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-${project.commonsbeanutilsVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-${project.commonscollectionsVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-${project.commonsdigesterVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-${project.commonslangVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-${project.commonsloggingVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/itext-${project.itextVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-${project.jasperreportsVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api-${project.jaxbimplVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-impl-${project.jaxbimplVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-${project.jcommonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jdtcore-${project.jdtcoreVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-${project.jfreechartVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jxl-${project.jxlVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-${project.log4jVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/poi-${project.poiVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/stax-api-${project.staxapiVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-${project.xmlapisVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-ext-${project.xmlapisVersion}.jar"/>
 </classpath>

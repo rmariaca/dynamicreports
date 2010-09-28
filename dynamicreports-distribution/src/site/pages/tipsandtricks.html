@@ -106,13 +106,13 @@ JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are u
 <dependency>
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-core</artifactId>
-	<version>${page.version}</version>
+	<version>${project.version}</version>
 </dependency>  
 <dependency>
 	<!-- only for JDK 1.5, not required for JDK 1.6 -->
 	<groupId>com.sun.xml.bind</groupId>
 	<artifactId>jaxb-impl</artifactId>
-	<version>2.2.1</version>
+	<version>${project.jaxbimplVersion}</version>
 	<scope>runtime</scope>
 </dependency>  
 </@xml_code>
@@ -122,18 +122,18 @@ JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are u
 <a name="maven_snapshot"></a><h3>Maven snapshot repository configuration</h3>
 <p>
 To use the development snapshots of DynamicReports, change your pom.xml configuration:<br/>
-Add the dependencies listed below
+update dynamicreports-core version to ${project.developmentVersion}
 <@xml_code>
 <dependency>
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-core</artifactId>
-	<version>${page.developmentVersion}</version>
+	<version>${project.developmentVersion}</version>
 </dependency>  
 <dependency>
 	<!-- only for JDK 1.5, not required for JDK 1.6 -->
 	<groupId>com.sun.xml.bind</groupId>
 	<artifactId>jaxb-impl</artifactId>
-	<version>2.2.1</version>
+	<version>${project.jaxbimplVersion}</version>
 	<scope>runtime</scope>
 </dependency>  
 </@xml_code>
