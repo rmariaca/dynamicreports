@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
@@ -73,38 +75,49 @@ public class ComponentTransform {
 		this.accessor = accessor;
 	}
 	
-	protected JRDesignElement component(DRIDesignComponent component, ListType listType) {
-		JRDesignElement jrElement;
-		StretchTypeEnum stretchType = detectStretchType(listType);
+	protected JRDesignElement[] component(DRIDesignComponent component, ListType listType) {
+		JRDesignElement[] jrElements;
 		if (component instanceof DRIDesignChart) {
-			jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
+			JRDesignElement jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
+			component(jrElement, component, detectStretchType(listType));
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignBarcode) {
-			jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
+			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
+			component(jrElement, component, detectStretchType(listType));
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignList) {
-			stretchType = StretchTypeEnum.NO_STRETCH;
-			jrElement = list((DRIDesignList) component);
+			jrElements = list((DRIDesignList) component);
 		}
 		else if (component instanceof DRIDesignTextField) {
-			stretchType = detectStretchType(listType);
-			jrElement = textField((DRIDesignTextField) component);
+			JRDesignElement jrElement = textField((DRIDesignTextField) component);
+			component(jrElement, component, detectStretchType(listType));
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignFiller) {
-			stretchType = detectStretchType(listType);
-			jrElement = filler((DRIDesignFiller) component);
+			JRDesignElement jrElement = filler((DRIDesignFiller) component);
+			component(jrElement, component, detectStretchType(listType));
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignImage) {
-			stretchType = detectStretchType(listType);
-			jrElement = image((DRIDesignImage) component);
+			JRDesignElement jrElement = image((DRIDesignImage) component);
+			component(jrElement, component, detectStretchType(listType));
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignSubreport) {
-			stretchType = StretchTypeEnum.NO_STRETCH;
-			jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
+			JRDesignElement jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
+			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else {
 			throw new JasperDesignException("Component " + component.getClass().getName() + " not supported");
 		}
+
+		return jrElements;
+	}
+
+	private void component(JRDesignElement jrElement, DRIDesignComponent component, StretchTypeEnum stretchType) {		
 		jrElement.setPositionType(PositionTypeEnum.FLOAT);		
 		jrElement.setStretchType(stretchType);		
 		jrElement.setKey(component.getUniqueName());
@@ -112,13 +125,12 @@ public class ComponentTransform {
 		jrElement.setY(component.getY());		
 		jrElement.setWidth(component.getWidth());
 		jrElement.setHeight(component.getHeight());
-		
+	
 		if (component.getStyle() != null)
 			jrElement.setStyle(accessor.getStyleTransform().getStyle(component.getStyle()));
 		jrElement.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(component.getPrintWhenExpression()));
-		return jrElement;
 	}
-
+	
 	private StretchTypeEnum detectStretchType(ListType listType) {
 		if (listType.equals(ListType.VERTICAL)) {
 			return StretchTypeEnum.NO_STRETCH;
@@ -128,14 +140,30 @@ public class ComponentTransform {
 	}
 	
 	//list
-	private JRDesignElement list(DRIDesignList list) {
-		JRDesignFrame frame = new JRDesignFrame();
-		
-		for (DRIDesignComponent element : list.getComponents()) {
-			frame.addElement(component(element, list.getType()));
+	private JRDesignElement[] list(DRIDesignList list) {		
+		switch (list.getComponentGroupType()) {
+		case FRAME:			
+			JRDesignFrame frame = new JRDesignFrame();
+			component(frame, list, StretchTypeEnum.NO_STRETCH);
+			for (DRIDesignComponent element : list.getComponents()) {			
+				JRDesignElement[] jrElements = component(element, list.getType());
+				for (JRDesignElement jrElement : jrElements) {
+					frame.addElement(jrElement);
+				}
+			}
+			return new JRDesignElement[] {frame};
+		case NONE:
+			List<JRDesignElement> jrElementList = new ArrayList<JRDesignElement>();
+			for (DRIDesignComponent element : list.getComponents()) {			
+				JRDesignElement[] jrElements = component(element, list.getType());
+				for (JRDesignElement jrElement : jrElements) {
+					jrElementList.add(jrElement);
+				}
+			}
+			return jrElementList.toArray(new JRDesignElement[jrElementList.size()]);
+		default:
+			throw new JasperDesignException("ComponentGroupType " + list.getComponentGroupType().getClass().getName() + " not supported");
 		}
-		
-		return frame;
 	}
 	
 	//textField

@@ -118,8 +118,8 @@ public class SubtotalPositionTest extends AbstractBandTest {
 		Assert.assertTrue(list.getComponents().get(1) instanceof DRDesignTextField);
 		
 		//column3
-		componentPositionTest(list.getComponents().get(0), 0, 0, 192, 16);
-		componentPositionTest(list.getComponents().get(1), 0, 16, 192, 16);
+		componentPositionTest(list.getComponents().get(0), 383, 0, 192, 16);
+		componentPositionTest(list.getComponents().get(1), 383, 16, 192, 16);
 	}
 	
 	protected void testBand(DRDesignBand band) {		

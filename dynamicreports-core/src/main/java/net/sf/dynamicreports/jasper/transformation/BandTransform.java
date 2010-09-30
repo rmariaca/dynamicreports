@@ -27,6 +27,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.jasperreports.engine.design.JRDesignBand;
+import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignSection;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
@@ -85,7 +86,10 @@ public class BandTransform {
 		JRDesignBand jrBand = new JRDesignBand();
 		jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getBandComponent().getPrintWhenExpression()));
 		jrBand.setSplitType(ConstantTransform.splitType(band.getSplitType()));
-		jrBand.addElement(accessor.getComponentTransform().component(band.getBandComponent(), ListType.VERTICAL));
+		JRDesignElement[] jrElements = accessor.getComponentTransform().component(band.getBandComponent(), ListType.VERTICAL);
+		for (JRDesignElement jrElement : jrElements) {
+			jrBand.addElement(jrElement);
+		}
 		jrBand.setHeight(band.getBandComponent().getHeight());
 		return jrBand;
 	}

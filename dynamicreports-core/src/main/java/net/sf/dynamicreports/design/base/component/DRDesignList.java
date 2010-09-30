@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.component;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
@@ -37,6 +38,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private List<DRDesignListCell> listCells;
 	private List<DRDesignComponent> components;
 	private ListType type;
+	private ComponentGroupType componentGroupType;
 	private int gap;
 	
 	public DRDesignList() {
@@ -95,6 +97,14 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		return type;
 	}
 
+	public void setComponentGroupType(ComponentGroupType componentGroupType) {
+		this.componentGroupType = componentGroupType;
+	}
+	
+	public ComponentGroupType getComponentGroupType() {
+		return componentGroupType;
+	}
+	
 	public int getGap() {
 		return gap;
 	}

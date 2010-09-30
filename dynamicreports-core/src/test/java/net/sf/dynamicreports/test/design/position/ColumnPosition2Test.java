@@ -76,14 +76,14 @@ public class ColumnPosition2Test extends ColumnPosition1Test {
 		DRDesignList list3 = (DRDesignList) list2.getComponents().get(0);
 		Assert.assertEquals(ListType.HORIZONTAL, list3.getType());
 		Assert.assertEquals(2, list3.getComponents().size());
-		componentPositionTest(list3, 0, 0, 384, 16);
+		componentPositionTest(list3, 191, 0, 384, 16);
 		Assert.assertTrue(list3.getComponents().get(0) instanceof DRDesignTextField);
 		Assert.assertTrue(list3.getComponents().get(1) instanceof DRDesignTextField);
 		
 		DRDesignList list4 = (DRDesignList) list2.getComponents().get(1);
 		Assert.assertEquals(ListType.HORIZONTAL, list4.getType());
 		Assert.assertEquals(2, list4.getComponents().size());
-		componentPositionTest(list4, 0, 16, 384, 16);
+		componentPositionTest(list4, 191, 16, 384, 16);
 		Assert.assertTrue(list4.getComponents().get(0) instanceof DRDesignTextField);
 		Assert.assertTrue(list4.getComponents().get(1) instanceof DRDesignTextField);
 		

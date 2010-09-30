@@ -71,11 +71,11 @@ public class ComponentColumnPositionTest extends AbstractJasperPositionTest impl
 		
 		//column3
 		columnTitlePositionTest(column3, 0, 198, 0, 377, 16);
-		columnDetailPositionTest(column3, 0, 198, 0, 377, 32);
-		columnDetailPositionTest(column3, 1, 198, 0, 377, 32);
+		//columnDetailPositionTest(column3, 0, 198, 0, 377, 32);
+		//columnDetailPositionTest(column3, 1, 198, 0, 377, 32);
 		
-		elementPositionTest("detail.list2", 0, 0, 0, 377, 16);
-		elementPositionTest("detail.list2", 1, 0, 0, 377, 16);
+		elementPositionTest("detail.list2", 0, 198, 0, 377, 16);
+		elementPositionTest("detail.list2", 1, 198, 0, 377, 16);
 		
 		elementPositionTest("detail.textField1", 0, 0, 0, 188, 16);
 		elementPositionTest("detail.textField1", 1, 0, 0, 188, 16);
@@ -83,8 +83,8 @@ public class ComponentColumnPositionTest extends AbstractJasperPositionTest impl
 		elementPositionTest("detail.textField2", 0, 188, 0, 189, 16);
 		elementPositionTest("detail.textField2", 1, 188, 0, 189, 16);
 		
-		elementPositionTest("detail.textField3", 0, 0, 16, 377, 16);
-		elementPositionTest("detail.textField3", 1, 0, 16, 377, 16);
+		elementPositionTest("detail.textField3", 0, 198, 16, 377, 16);
+		elementPositionTest("detail.textField3", 1, 198, 16, 377, 16);
 		
 		//summary
 		elementPositionTest("summary.list1", 0, 10, 90, 575, 16);

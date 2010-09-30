@@ -20,21 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.component;
-
-import java.util.List;
-
-import net.sf.dynamicreports.design.constant.ComponentGroupType;
-import net.sf.dynamicreports.report.constant.ListType;
+package net.sf.dynamicreports.design.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignList extends DRIDesignComponent {
-
-	public List<? extends DRIDesignComponent> getComponents();
-	
-	public ListType getType();
-	
-	public ComponentGroupType getComponentGroupType();
+public enum ComponentGroupType {
+	FRAME,
+	NONE
 }

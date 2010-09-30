@@ -25,43 +25,40 @@ package net.sf.dynamicreports.test.jasper.component;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class VerticalListTest extends AbstractJasperPositionTest {
+public class ListComponentGroupTypeTest extends AbstractJasperPositionTest {
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setPageFormat(PageType.A8)
 		  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
-			.title(
-				cmp.text("text"), 
-				cmp.text("text text text text text text text"),
-				cmp.horizontalList(
-					cmp.verticalList(cmp.text("text"), cmp.text("text text text text text text"), cmp.text("text")), 
-					cmp.text("text")),
-				cmp.text("text"));
+		  .title(cmp.text("title").setFixedHeight(130))
+		  .summary(
+		  		cmp.text("text1"), cmp.text("text2"), 
+		  		cmp.horizontalList(cmp.verticalList(cmp.text("text3"), cmp.text("text4")), cmp.text("text5")),
+		  		cmp.text("text6"))
+		  .setSummarySplitType(SplitType.IMMEDIATE);
 	}
 
 	@Override
 	public void test() {
 		super.test();
 		
-		numberOfPagesTest(1);
+		numberOfPagesTest(2);
 		
-		//elementPositionTest("title.list1", 0, 10, 10, 128, 116);
-		elementPositionTest("title.list2", 0, 10, 52, 128, 58);
-		//elementPositionTest("title.list3", 0, 0, 0, 64, 58);
+		elementPositionTest("summary.list2", 0, 10, 10, 128, 32);
 		
-		elementPositionTest("title.textField1", 0, 10, 10, 128, 16);
-		elementPositionTest("title.textField2", 0, 10, 26, 128, 26);
-		elementPositionTest("title.textField3", 0, 0, 0, 64, 16);
-		elementPositionTest("title.textField4", 0, 0, 16, 64, 26);
-		elementPositionTest("title.textField5", 0, 0, 42, 64, 16);
-		elementPositionTest("title.textField6", 0, 64, 0, 64, 58);
-		elementPositionTest("title.textField7", 0, 10, 110, 128, 16);
+		elementPositionTest("summary.textField1", 0, 10, 140, 128, 16);
+		elementPositionTest("summary.textField2", 0, 10, 156, 128, 16);
+		elementPositionTest("summary.textField3", 0, 0, 0, 64, 16);
+		elementPositionTest("summary.textField4", 0, 0, 16, 64, 16);
+		elementPositionTest("summary.textField5", 0, 64, 0, 64, 32);
+		elementPositionTest("summary.textField6", 0, 10, 42, 128, 16);
 	}
 }

@@ -32,9 +32,11 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -168,6 +170,8 @@ public class BandTransform {
 		if (component == null) {
 			return null;
 		}
+		componentGroupType(component);
+		
 		generateComponentNames(component, band.getName());		
 		band.setBandComponent(component);
 		
@@ -236,6 +240,26 @@ public class BandTransform {
 			return null;
 		}
 		return component;
+	}
+	
+	private void componentGroupType(DRDesignComponent component) {
+		if (component instanceof DRDesignList) {
+			DRDesignList list = (DRDesignList) component;
+			if (list.getType().equals(ListType.VERTICAL) && list.getStyle() == null && list.getPrintWhenExpression() == null) {
+				list.setComponentGroupType(ComponentGroupType.NONE);
+				for (DRDesignComponent listComponent : list.getComponents()) {
+					listComponent.setX(list.getX() + listComponent.getX());
+					listComponent.setY(list.getY() + listComponent.getY());
+				}
+			}
+			else {
+				list.setComponentGroupType(ComponentGroupType.FRAME);
+			}
+			
+			for (DRDesignComponent listComponent : list.getComponents()) {
+				componentGroupType(listComponent);
+			}
+		}
 	}
 	
 	//band

@@ -61,19 +61,19 @@ public class ColumnPosition2Test extends AbstractJasperPositionTest {
 		
 		numberOfPagesTest(1);
 		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 42);
-		elementPositionTest("columnHeader.list2", 0, 191, 0, 384, 42);
-		elementPositionTest("columnHeader.list3", 0, 0, 0, 384, 26);
-		elementPositionTest("columnHeader.list4", 0, 0, 26, 384, 16);
+		//elementPositionTest("columnHeader.list2", 0, 191, 0, 384, 42);		
+		elementPositionTest("columnHeader.list3", 0, 191, 0, 384, 26);
+		elementPositionTest("columnHeader.list4", 0, 191, 26, 384, 16);
 		
 		elementPositionTest("detail.list1", 0, 10, 52, 575, 32);
-		elementPositionTest("detail.list2", 0, 191, 0, 384, 32);
-		elementPositionTest("detail.list3", 0, 0, 0, 384, 16);
-		elementPositionTest("detail.list4", 0, 0, 16, 384, 16);
+		//elementPositionTest("detail.list2", 0, 191, 0, 384, 32);
+		elementPositionTest("detail.list3", 0, 191, 0, 384, 16);
+		elementPositionTest("detail.list4", 0, 191, 16, 384, 16);
 
 		elementPositionTest("detail.list1", 1, 10, 84, 575, 42);
-		elementPositionTest("detail.list2", 1, 191, 0, 384, 42);
-		elementPositionTest("detail.list3", 1, 0, 0, 384, 26);
-		elementPositionTest("detail.list4", 1, 0, 26, 384, 16);
+		//elementPositionTest("detail.list2", 1, 191, 0, 384, 42);
+		elementPositionTest("detail.list3", 1, 191, 0, 384, 26);
+		elementPositionTest("detail.list4", 1, 191, 26, 384, 16);
 		
 		//column1
 		columnTitlePositionTest(column1, 0, 0, 0, 191, 42);

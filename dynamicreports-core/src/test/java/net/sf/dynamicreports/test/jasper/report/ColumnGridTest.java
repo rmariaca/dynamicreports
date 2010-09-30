@@ -83,49 +83,49 @@ public class ColumnGridTest extends AbstractJasperPositionTest implements Serial
 		super.test();
 		
 		numberOfPagesTest(1);
-		//column header
-		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 28);
+		//column header		
+		//elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 28);
 		
-		elementPositionTest("columnHeader.list2", 0, 0, 0, 575, 14);		
+		elementPositionTest("columnHeader.list2", 0, 10, 10, 575, 14);		
 		columnTitlePositionTest(column1, 0, 0, 0, 115, 14);
 		columnTitlePositionTest(column2, 0, 115, 0, 115, 14);
 		columnTitlePositionTest(column3, 0, 230, 0, 115, 14);
 		columnTitlePositionTest(column4, 0, 345, 0, 115, 14);
 		columnTitlePositionTest(column5, 0, 460, 0, 115, 14);
 		
-		elementPositionTest("columnHeader.list3", 0, 0, 14, 575, 14);
+		elementPositionTest("columnHeader.list3", 0, 10, 24, 575, 14);
 		columnTitlePositionTest(column6, 0, 0, 0, 191, 14);
 		columnTitlePositionTest(column7, 0, 191, 0, 192, 14);
 		columnTitlePositionTest(column8, 0, 383, 0, 192, 14);
 		
-		//detail
-		elementPositionTest("detail.list1", 0, 10, 38, 575, 28);
+		//detail		
+		//elementPositionTest("detail.list1", 0, 10, 38, 575, 28);
 		
-		elementPositionTest("detail.list2", 0, 0, 0, 575, 14);		
+		elementPositionTest("detail.list2", 0, 10, 38, 575, 14);		
 		columnDetailPositionTest(column1, 0, 0, 0, 115, 14);
 		columnDetailPositionTest(column2, 0, 115, 0, 115, 14);
 		columnDetailPositionTest(column3, 0, 230, 0, 115, 14);
 		columnDetailPositionTest(column4, 0, 345, 0, 115, 14);
 		columnDetailPositionTest(column5, 0, 460, 0, 115, 14);
 		
-		elementPositionTest("detail.list3", 0, 0, 14, 575, 14);
+		elementPositionTest("detail.list3", 0, 10, 52, 575, 14);
 		columnDetailPositionTest(column6, 0, 0, 0, 191, 14);
 		columnDetailPositionTest(column7, 0, 191, 0, 192, 14);
 		columnDetailPositionTest(column8, 0, 383, 0, 192, 14);
 		
-		//subtotal
-		elementPositionTest("summary.list1", 0, 10, 318, 575, 56);
+		//subtotal		
+		//elementPositionTest("summary.list1", 0, 10, 318, 575, 56);
 		
-		elementPositionTest("summary.list2", 0, 0, 0, 575, 28);
+		elementPositionTest("summary.list2", 0, 10, 318, 575, 28);
 		subtotalPositionTest(subtotal1, 0, 0, 0, 115, 14);
-		elementPositionTest("summary.list3", 0, 460, 0, 115, 28);
-		subtotalPositionTest(subtotal2, 0, 0, 0, 115, 14);
-		subtotalIndexPositionTest(subtotal3, 2, 0, 0, 14, 115, 14);
+		//elementPositionTest("summary.list3", 0, 460, 0, 115, 28);
+		subtotalPositionTest(subtotal2, 0, 460, 0, 115, 14);
+		subtotalIndexPositionTest(subtotal3, 2, 0, 460, 14, 115, 14);
 		
-		elementPositionTest("summary.list4", 0, 0, 28, 575, 28);
-		elementPositionTest("summary.list5", 0, 191, 0, 192, 28);
-		subtotalPositionTest(subtotal4, 0, 0, 0, 192, 14);
-		subtotalIndexPositionTest(subtotal5, 2, 0, 0, 14, 192, 14);
+		elementPositionTest("summary.list4", 0, 10, 346, 575, 28);
+		//elementPositionTest("summary.list5", 0, 191, 0, 192, 28);
+		subtotalPositionTest(subtotal4, 0, 191, 0, 192, 14);
+		subtotalIndexPositionTest(subtotal5, 2, 0, 191, 14, 192, 14);
 	}
 	
 	@Override

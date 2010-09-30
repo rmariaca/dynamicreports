@@ -55,8 +55,8 @@ public class SubtotalPosition1Test extends AbstractJasperPositionTest {
 		
 		numberOfPagesTest(1);
 		//summary
-		subtotalPositionTest(subtotal1, 0, 0, 0, 575, 16);
-		subtotalIndexPositionTest(subtotal2, 2, 0, 0, 16, 575, 16);
+		subtotalPositionTest(subtotal1, 0, 10, 42, 575, 16);
+		subtotalIndexPositionTest(subtotal2, 2, 0, 10, 58, 575, 16);
 	}
 	
 	@Override
