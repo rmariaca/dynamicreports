@@ -25,11 +25,9 @@ package net.sf.dynamicreports.report.builder.column;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
-import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang.Validate;
 
@@ -63,11 +61,8 @@ public class Columns {
 	
 	public static <T> TextColumnBuilder<T> column(FieldBuilder<T> field) {
 		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(field);
-		try {
-			@SuppressWarnings("unchecked")
-			DRIDataType<? super T, T> datatType = (DRIDataType<? super T, T>) DataTypes.detectType(field.getField().getValueClass());
-			textColumnBuilder.setDataType(datatType);
-		} catch (DRException e) {
+		if (field.getField().getDataType() != null) {
+			textColumnBuilder.setDataType(field.getField().getDataType());
 		}
 		return textColumnBuilder;
 	}	

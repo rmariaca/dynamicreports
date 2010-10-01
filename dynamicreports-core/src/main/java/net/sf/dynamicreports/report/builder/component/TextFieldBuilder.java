@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
@@ -50,6 +51,15 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 	public TextFieldBuilder<T> setText(VariableBuilder<T> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		getObject().setValueExpression(variable.getVariable());
+		return this;
+	}
+	
+	public TextFieldBuilder<T> setText(FieldBuilder<T> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setValueExpression(field.getField());
+		if (getObject().getDataType() == null) {
+			getObject().setDataType(field.getField().getDataType());
+		}
 		return this;
 	}
 	

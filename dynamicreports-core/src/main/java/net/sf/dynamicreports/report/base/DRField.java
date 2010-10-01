@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIField;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 import org.apache.commons.lang.Validate;
 
@@ -35,6 +36,7 @@ public class DRField<T> implements DRIField<T> {
 	
 	private String name;
 	private Class<? super T> valueClass;
+	private DRIDataType<? super T, T> dataType;	
 	
 	public DRField(String name, Class<? super T> valueClass) {
 		Validate.notEmpty(name, "name must not be empty");
@@ -43,6 +45,14 @@ public class DRField<T> implements DRIField<T> {
 		this.valueClass = valueClass;
 	}
 
+	public void setDataType(DRIDataType<? super T, T> dataType) {
+		this.dataType = dataType;
+	}
+	
+	public DRIDataType<? super T, T> getDataType() {
+		return dataType;
+	}
+	
 	public String getName() {
 		return name;
 	}

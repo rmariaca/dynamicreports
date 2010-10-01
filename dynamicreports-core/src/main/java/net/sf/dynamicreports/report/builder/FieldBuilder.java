@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder;
 import net.sf.dynamicreports.report.base.DRField;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,9 +33,14 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 public class FieldBuilder<T> extends AbstractBuilder<FieldBuilder<T>, DRField<T>> implements DRIValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected FieldBuilder(String name, Class<T> valueClass) {
+	protected FieldBuilder(String name, Class<? super T> valueClass) {
 		super(new DRField<T>(name, valueClass));
 	}
+	
+	public FieldBuilder<T> setDataType(DRIDataType<? super T, T> dataType) {
+		getObject().setDataType(dataType);
+		return this;
+	}	
 	
 	public DRField<T> getField() {
 		return build();

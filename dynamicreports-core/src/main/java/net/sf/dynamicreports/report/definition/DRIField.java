@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.definition;
 
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -29,4 +30,5 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  */
 public interface DRIField<T> extends DRIExpression<T>, DRIValue<T> {
 	
+	public DRIDataType<? super T, T> getDataType();
 }

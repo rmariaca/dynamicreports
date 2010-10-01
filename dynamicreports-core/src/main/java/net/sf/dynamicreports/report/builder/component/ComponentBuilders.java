@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.jasperreports.engine.JasperReport;
@@ -111,6 +112,10 @@ public class ComponentBuilders {
 
 	public <T extends Number> TextFieldBuilder<T> text(T number) {
 		return Components.text(number);
+	}
+	
+	public <T> TextFieldBuilder<T> text(FieldBuilder<T> field) {
+		return Components.text(field);
 	}
 	
 	public <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {

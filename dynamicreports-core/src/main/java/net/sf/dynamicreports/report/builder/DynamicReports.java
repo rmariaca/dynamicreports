@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.condition.ConditionBuilders;
 import net.sf.dynamicreports.report.builder.datatype.DataTypeBuilders;
+import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.ExpressionBuilders;
 import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.group.GroupBuilders;
@@ -39,7 +40,9 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang.Validate;
 
@@ -72,7 +75,19 @@ public class DynamicReports {
 	
 	//field
 	public static <T> FieldBuilder<T> field(String name, Class<T> valueClass) {
-		return new FieldBuilder<T>(name, valueClass);
+		FieldBuilder<T> fieldBuilder = new FieldBuilder<T>(name, valueClass);
+		try {
+			DRIDataType<? super T, T> dataType = (DRIDataType<? super T, T>) DataTypes.detectType(valueClass);
+			fieldBuilder.setDataType(dataType);
+		} catch (DRException e) {
+		}
+		return fieldBuilder;
+	}
+
+	public static <T> FieldBuilder<T> field(String name, DRIDataType<? super T, T> dataType) {
+		FieldBuilder<T> fieldBuilder = new FieldBuilder<T>(name, dataType.getValueClass());
+		fieldBuilder.setDataType(dataType);
+		return fieldBuilder;
 	}
 	
 	//variable
