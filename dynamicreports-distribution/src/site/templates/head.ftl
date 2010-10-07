@@ -4,33 +4,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
-<meta name="keywords" content="dynamicreports,jasperreports,dynamic jasper,dynamic report,jasperreports api,dynamic report design,dynamic report for java,runtime generation of jasperreports,dynamic reporting in Java,generate report at runtime">
+<meta name="keywords" content="dynamicreports,jasperreports,dynamic jasper,dynamic report,jasperreports api,dynamic report design,dynamic report for java,runtime generation of jasperreports,dynamic reporting in Java,generate report at runtime" />
 
 <link rel="stylesheet" href="${page.path}styles/style.css" type="text/css" />
+<script type="text/javascript" src="scripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('a[href$="download.html"]').click(function(){
+        window.open(this.href);
+        return false;
+    });
+});
+</script>
+
 <#if page.hasCode == true>
 <link type="text/css" rel="stylesheet" href="${page.path}styles/SyntaxHighlighter.css"/>
 </#if>
+
 <#if page.hasImage == true>
 <link rel="stylesheet" type="text/css" href="${page.path}fancybox/jquery.fancybox-1.3.1.css" media="screen" />  
-
 <script type="text/javascript" src="${page.path}scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="${page.path}fancybox/jquery.fancybox-1.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("a#image").fancybox({
+		$("a[rel=image]").fancybox({
+			'showNavArrows'	: false,
 			'transitionIn'	: 'elastic',
 			'transitionOut'	: 'elastic'
 		});
 	});
 </script>
 </#if>
+
 <#if page.hasImageGroup == true>
 <link rel="stylesheet" type="text/css" href="${page.path}fancybox/jquery.fancybox-1.3.1.css" media="screen" />  
-
 <script type="text/javascript" src="${page.path}scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="${page.path}fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
 <script type="text/javascript" src="${page.path}fancybox/jquery.fancybox-1.3.1.js"></script>
 <script type="text/javascript">
+//<![CDATA[
 	$(document).ready(function() {
 		$("a[rel=image_group]").fancybox({
 			'transitionIn'		: 'elastic',
@@ -40,6 +52,7 @@
 			}
 		});
 	});
+//]]>
 </script>
 </#if>
 

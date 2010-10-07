@@ -44,16 +44,16 @@ DynamicReports automatically looks for a file named
 on startup.<br/>
 In this file you can change the default settings (default font, pattern and horizontal alignment for all data types).
 <@xml_code>
-	<?xml version="1.0" encoding="UTF-8"?>
-	<DynamicReports>
-		<!-- DEFAULT FONT -->
-		<font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;DynamicReports&gt;
+		&lt;!-- DEFAULT FONT --&gt;
+		&lt;font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/&gt;
 		  	
-		<!-- DEFAULT DATA TYPES -->
-		<bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/>
-		<dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/>
+		&lt;!-- DEFAULT DATA TYPES --&gt;
+		&lt;bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/&gt;
+		&lt;dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/&gt;
 		...	
-	</DynamicReports>
+	&lt;/DynamicReports&gt;
 </@xml_code>
 Copy this file in the root of the classpath.
 </p>
@@ -103,18 +103,18 @@ DynamicReports is synchronized with Maven Central Repository.<br/>
 Add the dependencies listed below to your pom.xml configuration file.
 JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are using Java 1.6.
 <@xml_code>
-<dependency>
-	<groupId>net.sourceforge.dynamicreports</groupId>
-	<artifactId>dynamicreports-core</artifactId>
-	<version>${project.version}</version>
-</dependency>  
-<dependency>
-	<!-- only for JDK 1.5, not required for JDK 1.6 -->
-	<groupId>com.sun.xml.bind</groupId>
-	<artifactId>jaxb-impl</artifactId>
-	<version>${project.jaxbimplVersion}</version>
-	<scope>runtime</scope>
-</dependency>  
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-core&lt;/artifactId&gt;
+	&lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt;  
+&lt;dependency&gt;
+	&lt;!-- only for JDK 1.5, not required for JDK 1.6 --&gt;
+	&lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
+	&lt;artifactId&gt;jaxb-impl&lt;/artifactId&gt;
+	&lt;version&gt;${project.jaxbimplVersion}&lt;/version&gt;
+	&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
 </@xml_code>
 </p>
 
@@ -124,33 +124,33 @@ JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are u
 To use the development snapshots of DynamicReports, change your pom.xml configuration:<br/>
 update dynamicreports-core version to ${project.developmentVersion}
 <@xml_code>
-<dependency>
-	<groupId>net.sourceforge.dynamicreports</groupId>
-	<artifactId>dynamicreports-core</artifactId>
-	<version>${project.developmentVersion}</version>
-</dependency>  
-<dependency>
-	<!-- only for JDK 1.5, not required for JDK 1.6 -->
-	<groupId>com.sun.xml.bind</groupId>
-	<artifactId>jaxb-impl</artifactId>
-	<version>${project.jaxbimplVersion}</version>
-	<scope>runtime</scope>
-</dependency>  
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-core&lt;/artifactId&gt;
+	&lt;version&gt;${project.developmentVersion}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;!-- only for JDK 1.5, not required for JDK 1.6 --&gt;
+	&lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
+	&lt;artifactId&gt;jaxb-impl&lt;/artifactId&gt;
+	&lt;version&gt;${project.jaxbimplVersion}&lt;/version&gt;
+	&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
 </@xml_code>
 and add the Sonatype Nexus snapshot repository
 <@xml_code>
-<repositories>
-	<repository>
-		<id>sonatype-nexus-snapshots</id>
-		<name>Sonatype Nexus Snapshots</name>
-		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		<releases>
-			<enabled>false</enabled>
-		</releases>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
-</repositories>
+&lt;repositories&gt;
+	&lt;repository&gt;
+		&lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+		&lt;name&gt;Sonatype Nexus Snapshots&lt;/name&gt;
+		&lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
+		&lt;releases&gt;
+			&lt;enabled&gt;false&lt;/enabled&gt;
+		&lt;/releases&gt;
+		&lt;snapshots&gt;
+			&lt;enabled&gt;true&lt;/enabled&gt;
+		&lt;/snapshots&gt;
+	&lt;/repository&gt;
+&lt;/repositories&gt;
 </@xml_code>
 </p>

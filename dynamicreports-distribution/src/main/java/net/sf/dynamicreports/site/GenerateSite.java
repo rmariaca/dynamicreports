@@ -107,7 +107,7 @@ public class GenerateSite {
 		for (String file : children) {
 			Map<String, Object> root = new HashMap<String, Object>();
 			root.put("project", project);
-			root.put("page", new Page(pages_path + file, loadFile(new FileReader(pages_path + file))));
+			root.put("page", new Page(file, pages_path + file, loadFile(new FileReader(pages_path + file))));
 			
 			Writer out = new FileWriter(site_path + file);
 			temp.process(root, out);
@@ -166,11 +166,10 @@ public class GenerateSite {
 			
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				content += "<a name=\"" + example.getPath() + "\"></a><b>" + example.getPath() + "</b><br/>\r\n";
-				content += "<ul>\r\n";				
-				content += "<table class=\"example\"><tbody>\r\n";
+				content += "<table class=\"example\">\r\n";
 			}
-			text1 += "<td><center><@example_link id=\"" + example.getName() + "\"/></center></td>\r\n";
-			text2 += "<td><center><@example_preview id=\"" + example.getName() + "\" file=\"" + getFileType(example.getName()) + "\" file_ext=\"" + getFileExt(example.getName()) + "\"/></center></td>\r\n";
+			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
+			text2 += "<@example_preview id=\"" + example.getName() + "\" file=\"" + getFileType(example.getName()) + "\" file_ext=\"" + getFileExt(example.getName()) + "\"/>\r\n";
 			if (count == 2 || next == null || !next.getPath().equals(example.getPath())) {	
 				content += "<tr>\r\n";
 				content += text1;
@@ -185,19 +184,18 @@ public class GenerateSite {
 				count++;
 			}						
 			if (next == null || !next.getPath().equals(example.getPath())) {
-				content += "</tbody></table>\r\n";
-				content += "</ul>\r\n";
+				content += "</table><br/>\r\n";
 			}
 			
 			generateExampleHtml(example.getName(), (next != null ? next.getName() : ""), (previous != null ? previous.getName() : ""), example.getDesign());
 			index++;
 		}
-		content += "<@example_link id=\"" + Templates.class.getSimpleName() + "\"/><br/>\r\n";
+		content += "<@example_link id=\"" + Templates.class.getSimpleName() + "\" table=false/><br/>\r\n";
 		
     loader.putTemplate(name, content);
     
 		Map<String, Object> root = new HashMap<String, Object>();
-		Page page = new Page(name, content);
+		Page page = new Page("examples/" + name.toLowerCase() + ".html", name, content);
 		page.setPath("../");
 		page.setExamples("");
 		root.put("project", project);
@@ -260,12 +258,12 @@ public class GenerateSite {
 			content += "<@example id=\"" + name + "\" title=true source_code=false file=\"" + getFileType(name) + "\" file_ext=\"" + getFileExt(name) + "\"/>\r\n";
 		}
 		content += "<@" + type + "_code>\r\n";
-    content += loadFile(new InputStreamReader(file));
+    content += loadFile(new InputStreamReader(file)).replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     content += "\r\n</@" + type + "_code>";
     loader.putTemplate(name, content);
     
 		Map<String, Object> root = new HashMap<String, Object>();
-		Page page = new Page(name, content);
+		Page page = new Page("examples/" + name.toLowerCase() + ".html", name, content);
 		page.setPath("../");
 		page.setExamples("");
 		page.setSideBar(false);
@@ -287,7 +285,7 @@ public class GenerateSite {
     String line = reader.readLine();
     while (line != null) {
     	content += "\r\n" + line;
-    	line = reader.readLine();				
+    	line = reader.readLine();
 		}
     if (content.length() > 0) {
     	content = content.substring(2);

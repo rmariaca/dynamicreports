@@ -70,6 +70,16 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 	//field	
 	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		this(field.build(), showInColumn, calculation);
+		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
+			setDataType(DataTypes.longType());
+		}
+		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
+				calculation.equals(Calculation.VARIANCE)) {
+			setDataType(DataTypes.doubleType());
+		}
+		else {
+			setDataType(field.getField().getDataType());
+		}
 	}
 
 	private AggregationSubtotalBuilder(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {

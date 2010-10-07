@@ -29,6 +29,7 @@ import java.util.Set;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Page {	
+	private String page;
 	private String path;
 	private String examples;
 	private boolean sideBar;
@@ -38,7 +39,8 @@ public class Page {
 	private boolean hasImage;
 	private boolean hasImageGroup;
 	
-	public Page(String name, String pageContent) throws Exception {		
+	public Page(String page, String name, String pageContent) throws Exception {	
+		this.page = page;
 		init();
 		setPage(name, pageContent);
 	}
@@ -66,6 +68,14 @@ public class Page {
     content = "/" + name;
 	}
 
+	public String getPage() {
+		return page;
+	}
+	
+	public void setPage(String page) {
+		this.page = page;
+	}
+	
 	public String getPath() {
 		return path;
 	}
