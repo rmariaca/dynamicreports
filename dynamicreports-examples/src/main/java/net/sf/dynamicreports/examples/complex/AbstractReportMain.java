@@ -24,6 +24,7 @@ package net.sf.dynamicreports.examples.complex;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -43,7 +44,7 @@ public abstract class AbstractReportMain<T extends ReportDesign<U>, U extends Re
 			}
 			getReportDesign().configureReport(reportBuilder, data);
 			reportBuilder.show();						
-		} catch (Exception e) {
+		} catch (DRException e) {
 			e.printStackTrace();	
 		}
 	}
