@@ -241,6 +241,9 @@ public class GenerateSite {
 		if (name.toLowerCase().indexOf("html") > -1) {
 			return "html";
 		}
+		if (name.toLowerCase().indexOf("excel") > -1) {
+			return "xls";
+		}
 		return "pdf";
 	}
 	

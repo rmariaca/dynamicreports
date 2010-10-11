@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
+import org.apache.commons.lang.Validate;
+
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -42,6 +44,7 @@ public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 
 	@SuppressWarnings("unchecked")
 	public ValueExpression(T value, Class<? super T> valueClass) {
+		Validate.notNull(value, "value must not be null");
 		this.value = value;
 		if (valueClass == null) {
 			this.valueClass = (Class<? super T>) value.getClass();

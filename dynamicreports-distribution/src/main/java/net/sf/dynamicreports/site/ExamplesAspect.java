@@ -26,7 +26,7 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.AbstractReportMain;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -68,26 +68,18 @@ public class ExamplesAspect {
 	public void build() {
 	}
 	
-	@Around("toPdf()")
-	public JasperReportBuilder toPdf(ProceedingJoinPoint pjp) throws Throwable {
+	@Around("export()")
+	public JasperReportBuilder to(ProceedingJoinPoint pjp) throws Throwable {
 		JasperReportBuilder reportBuilder = (JasperReportBuilder) pjp.getTarget();
-		GenerateSite.generateExampleImage(name, reportBuilder, (JasperPdfExporterBuilder) pjp.getArgs()[0]);
+		GenerateSite.generateExampleImage(name, reportBuilder, (AbstractJasperExporterBuilder<?, ?>) pjp.getArgs()[0]);
 		return reportBuilder;
 	}
 	
-	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toPdf(*))")
-	public void toPdf() {
-	}
-	
-	@Around("toHtml()")
-	public JasperReportBuilder toHtml(ProceedingJoinPoint pjp) throws Throwable {
-		JasperReportBuilder reportBuilder = (JasperReportBuilder) pjp.getTarget();
-		GenerateSite.generateExampleImage(name, reportBuilder, (JasperHtmlExporterBuilder) pjp.getArgs()[0]);
-		return reportBuilder;
-	}
-	
-	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toHtml(*))")
-	public void toHtml() {
+	@Pointcut(
+			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toPdf(*)) || " +
+			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toHtml(*)) || " +
+			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toXls(*))")
+	public void export() {
 	}
 	
 	@Around("toConcatenatedPdf()")

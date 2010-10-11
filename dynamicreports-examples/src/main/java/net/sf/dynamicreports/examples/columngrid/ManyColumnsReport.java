@@ -29,17 +29,17 @@ import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnGridReport {
+public class ManyColumnsReport {
 	
-	public ColumnGridReport() {
+	public ManyColumnsReport() {
 		build();
 	}
 	
@@ -47,31 +47,22 @@ public class ColumnGridReport {
 		StyleBuilder textStyle = stl.style(Templates.columnStyle)
 		                            .setBorder(stl.pen1Point());
 		
-		TextColumnBuilder<String>     itemColumn       = col.column("Item",        "item",      type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn   = col.column("Quantity",    "quantity",  type.integerType());
-		TextColumnBuilder<BigDecimal> unitPriceColumn  = col.column("Unit price",  "unitprice", type.bigDecimalType());
-		TextColumnBuilder<Date>       orderDateColumn  = col.column("Order date",  "orderdate", type.dateType());
-		TextColumnBuilder<Date>       orderDateFColumn = col.column("Order date",  "orderdate", type.dateYearToFractionType());
-		TextColumnBuilder<Date>       orderYearColumn  = col.column("Order year",  "orderdate", type.dateYearType());
-		TextColumnBuilder<Date>       orderMonthColumn = col.column("Order month", "orderdate", type.dateMonthType());
-		TextColumnBuilder<Date>       orderDayColumn   = col.column("Order day",   "orderdate", type.dateDayType());
-		
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .setColumnStyle(textStyle)
+			  .columnGrid(ListType.HORIZONTAL_FLOW)
 			  .columns(
-			  	itemColumn,	quantityColumn,	unitPriceColumn, orderDateColumn,
-			  	orderDateFColumn, orderYearColumn,	orderMonthColumn,	orderDayColumn)
-			  .columnGrid(
-			  	grid.verticalColumnGridList(
-			  		itemColumn,
-			  		grid.horizontalColumnGridList(quantityColumn,	unitPriceColumn)),
-			  	grid.verticalColumnGridList(
-			  		orderDateColumn,
-			  		grid.horizontalColumnGridList(orderDateFColumn, orderYearColumn),
-			  		grid.horizontalColumnGridList(orderMonthColumn,	orderDayColumn)))
-			  .title(Templates.createTitleComponent("ColumnGrid"))
+			  	col.column("ID",          "id",        type.integerType()),
+			  	col.column("Item",        "item",      type.stringType()),
+			  	col.column("Quantity",    "quantity",  type.integerType()),
+			  	col.column("Unit price",  "unitprice", type.bigDecimalType()),
+			  	col.column("Order date",  "orderdate", type.dateType()),
+			  	col.column("Order date",  "orderdate", type.dateYearToFractionType()),
+			  	col.column("Order year",  "orderdate", type.dateYearType()),
+			  	col.column("Order month", "orderdate", type.dateMonthType()),
+			  	col.column("Order day",   "orderdate", type.dateDayType()))
+			  .title(Templates.createTitleComponent("ManyColumns"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
@@ -81,14 +72,14 @@ public class ColumnGridReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
-		dataSource.add("Notebook", new Date(), 1, new BigDecimal(500));
-		dataSource.add("Book", new Date(), 7, new BigDecimal(300));
-		dataSource.add("PDA", new Date(), 2, new BigDecimal(250));
+		DataSource dataSource = new DataSource("id", "item", "orderdate", "quantity", "unitprice");
+		dataSource.add(5, "Notebook", new Date(), 1, new BigDecimal(500));
+		dataSource.add(8, "Book", new Date(), 7, new BigDecimal(300));
+		dataSource.add(15, "PDA", new Date(), 2, new BigDecimal(250));
 		return dataSource;
 	}
 	
 	public static void main(String[] args) {
-		new ColumnGridReport();
+		new ManyColumnsReport();
 	}
 }
