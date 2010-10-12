@@ -114,8 +114,9 @@ public class Templates {
 		        	dynamicReportsComponent,
 		        	cmp.text(label).setStyle(bold18CenteredStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
 		        .newRow()
-		        .add(
-		        	cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10));
+		        .add(cmp.line())
+		        .newRow()
+		        .add(cmp.filler().setFixedHeight(10));
 	}
 	
 	public static CurrencyValueFormatter createCurrencyValueFormatter(String label) {

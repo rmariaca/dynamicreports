@@ -34,6 +34,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
+import net.sf.dynamicreports.design.base.component.DRDesignLine;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
@@ -70,6 +71,7 @@ import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
+import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
@@ -114,6 +116,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIPageXofY) {
 			return pageXofY((DRIPageXofY) component, defaultStyleType);
+		}
+		if (component instanceof DRILine) {
+			return line((DRILine) component);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -314,6 +319,16 @@ public class ComponentTransform {
 		listPageXofY.addComponent(pageXField);
 		listPageXofY.addComponent(pageYField);
 		return list(listPageXofY, DefaultStyleType.TEXT, null, null);
+	}
+	
+	//line
+	protected DRDesignLine line(DRILine line) throws DRException {
+		DRDesignLine designLine = new DRDesignLine();
+		component(designLine, line, line.getStyle(), false, DefaultStyleType.NONE);
+		designLine.setDirection(line.getDirection());
+		designLine.setWidth(accessor.getTemplateTransform().getLineWidth(line));
+		designLine.setHeight(accessor.getTemplateTransform().getLineHeight(line));
+		return designLine;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {

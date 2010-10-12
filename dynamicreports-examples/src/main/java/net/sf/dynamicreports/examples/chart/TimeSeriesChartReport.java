@@ -83,6 +83,8 @@ public class TimeSeriesChartReport {
 		dataSource.add(toDate(2010, 3), 70, new BigDecimal(280));
 		dataSource.add(toDate(2010, 4), 250, new BigDecimal(620));
 		dataSource.add(toDate(2010, 5), 100, new BigDecimal(400));
+		dataSource.add(toDate(2010, 6), 80, new BigDecimal(320));
+		dataSource.add(toDate(2010, 7), 180, new BigDecimal(490));
 		return dataSource;
 	}
 	

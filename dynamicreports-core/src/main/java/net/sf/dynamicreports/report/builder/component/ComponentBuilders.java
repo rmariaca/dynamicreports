@@ -164,4 +164,9 @@ public class ComponentBuilders {
 	public SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
 		return Components.subreport(reportExpression);
 	}
+	
+	//line
+	public LineBuilder line() {
+		return Components.line();
+	}
 }

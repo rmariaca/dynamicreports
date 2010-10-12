@@ -176,4 +176,9 @@ public class Components {
 	public static SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
 		return new SubreportBuilder().setReport(reportExpression);
 	}
+	
+	//line
+	public static LineBuilder line() {
+		return new LineBuilder();
+	}
 }

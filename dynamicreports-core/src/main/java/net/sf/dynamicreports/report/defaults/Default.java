@@ -101,6 +101,9 @@ public class Default {
 	//filler
 	private int fillerWidth;
 	private int fillerHeight;
+	//line
+	private int lineWidth;
+	private int lineHeight;
 	//list
 	private int listgap;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
@@ -222,6 +225,9 @@ public class Default {
 		
 		this.fillerWidth = 0;
 		this.fillerHeight = 0;	
+
+		this.lineWidth = 1;
+		this.lineHeight = 1;	
 		
 		this.listgap = 0;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
@@ -453,6 +459,14 @@ public class Default {
 	
 	public int getFillerHeight() {
 		return fillerHeight;
+	}
+	
+	public int getLineWidth() {
+		return lineWidth;
+	}
+	
+	public int getLineHeight() {
+		return lineHeight;
 	}
 	
 	public int getListgap() {

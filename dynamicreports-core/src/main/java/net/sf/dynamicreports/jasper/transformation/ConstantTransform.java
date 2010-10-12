@@ -39,6 +39,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -60,6 +61,7 @@ import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.LineDirectionEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
@@ -537,6 +539,21 @@ class ConstantTransform {
 			return BaselineAlignment.ALIGN_BOTTOM;
 		default:
 			throw new JasperDesignException("BarcodeBaselinePosition " + baselinePosition.name() + " not supported");
+		}
+	}
+	
+	public static LineDirectionEnum lineDirection(LineDirection lineDirection) {
+		if (lineDirection == null) {
+			return null;
+		}
+		
+		switch (lineDirection) {
+		case TOP_DOWN:
+			return LineDirectionEnum.TOP_DOWN;
+		case BOTTOM_UP:
+			return LineDirectionEnum.BOTTOM_UP;
+		default:
+			throw new JasperDesignException("LineDirection " + lineDirection.name() + " not supported");
 		}
 	}
 }

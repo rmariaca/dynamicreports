@@ -53,6 +53,7 @@ import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
+import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
@@ -609,6 +610,21 @@ public class TemplateTransform {
 			return filler.getHeight();
 		}
 		return Defaults.getDefaults().getFillerHeight();
+	}
+	
+	//line
+	protected int getLineWidth(DRILine line) {
+		if (line.getWidth() != null) {
+			return line.getWidth();
+		}
+		return Defaults.getDefaults().getLineWidth();
+	}
+	
+	protected int getLineHeight(DRILine line) {
+		if (line.getHeight() != null) {
+			return line.getHeight();
+		}
+		return Defaults.getDefaults().getLineHeight();
 	}
 	
 	//list

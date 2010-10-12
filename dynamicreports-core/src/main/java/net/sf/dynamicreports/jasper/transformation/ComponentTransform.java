@@ -35,6 +35,7 @@ import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
+import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
@@ -54,6 +55,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
 import net.sf.jasperreports.engine.design.JRDesignImage;
+import net.sf.jasperreports.engine.design.JRDesignLine;
 import net.sf.jasperreports.engine.design.JRDesignStaticText;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.design.JRDesignSubreport;
@@ -107,6 +109,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignSubreport) {
 			JRDesignElement jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
+			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignLine) {
+			JRDesignElement jrElement = line((DRIDesignLine) component);
 			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
@@ -246,6 +253,13 @@ public class ComponentTransform {
 		}
 		
 		return jrSubreport;
+	}
+	
+	//line
+	private JRDesignElement line(DRIDesignLine line) {
+		JRDesignLine jrDesignLine = new JRDesignLine();
+		jrDesignLine.setDirection(ConstantTransform.lineDirection(line.getDirection()));
+		return jrDesignLine;
 	}
 	
 	private class SubreportExpression implements DRIDesignSimpleExpression {

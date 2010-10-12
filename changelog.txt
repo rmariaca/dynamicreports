@@ -1,6 +1,16 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.4.3 (2010-10-12)
+---------------------------------------------------
+ - line component
+ - updated jaxb to 2.2.1
+ - minor bug fixes and improvements
+ - new examples - examples/columngrid/*
+                  examples/chart/*
+                  examples/miscellaneous/CardReport, InheritanceReport
+                  examples/exporter/ExcelReport
+
 Changes in version 1.4.2 (2010-09-22)
 ---------------------------------------------------
  - component column, see ComponentColumnReport for an example
