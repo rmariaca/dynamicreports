@@ -104,6 +104,7 @@ public class StyleTransform {
 		font(baseStyle, style.getFont());
 		baseStyle.setRotation(ConstantTransform.rotation(style.getRotation()));
 		baseStyle.setPattern(style.getPattern());
+		baseStyle.setMarkup(ConstantTransform.markup(style.getMarkup()));
 		baseStyle.setBlankWhenNull(true);
 	}
 

@@ -199,6 +199,7 @@ public class ComponentTransform {
 		jrTextField.setHorizontalAlignment(ConstantTransform.horizontalAlignment(textField.getHorizontalAlignment()));
 		jrTextField.setExpression(accessor.getExpressionTransform().getExpression(textField.getValueExpression()));
 		jrTextField.setPrintRepeatedValues(textField.isPrintRepeatedValues());
+		jrTextField.setMarkup(ConstantTransform.markup(textField.getMarkup()));
 		jrTextField.setBlankWhenNull(true);
 		
 		return jrTextField;

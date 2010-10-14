@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -48,6 +49,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private Integer rows;
 	private Evaluation evaluationTime;
 	private DRGroup evaluationGroup;	
+	private Markup markup; 
 	
 	public DRIExpression<T> getValueExpression() {
 		return valueExpression;
@@ -151,6 +153,14 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	
 	public void setEvaluationGroup(DRGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
+	}
+	
+	public Markup getMarkup() {
+		return markup;
+	}
+	
+	public void setMarkup(Markup markup) {
+		this.markup = markup;
 	}
 }
 

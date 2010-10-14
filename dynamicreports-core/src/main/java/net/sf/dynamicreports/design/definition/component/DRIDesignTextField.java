@@ -26,6 +26,7 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Markup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -43,4 +44,6 @@ public interface DRIDesignTextField extends DRIDesignHyperLinkComponent {
 	public EvaluationTime getEvaluationTime();
 
 	public DRIDesignGroup getEvaluationGroup();
+
+	public Markup getMarkup();
 }

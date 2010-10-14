@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineStyle;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
@@ -554,6 +555,25 @@ class ConstantTransform {
 			return LineDirectionEnum.BOTTOM_UP;
 		default:
 			throw new JasperDesignException("LineDirection " + lineDirection.name() + " not supported");
+		}
+	}
+	
+	public static String markup(Markup markup) {
+		if (markup == null) {
+			return null;
+		}
+		
+		switch (markup) {
+		case NONE:
+			return "none";
+		case STYLED:
+			return "styled";
+		case RTF:
+			return "rtf";
+		case HTML:
+			return "html";
+		default:
+			throw new JasperDesignException("Markup " + markup.name() + " not supported");
 		}
 	}
 }

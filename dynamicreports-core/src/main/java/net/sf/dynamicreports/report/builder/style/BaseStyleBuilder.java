@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 
@@ -262,6 +263,11 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 	
 	public T setVerticalAlignment(VerticalAlignment verticalAlignment) {
 		getObject().setVerticalAlignment(verticalAlignment);
+		return (T) this;
+	}
+	
+	public T setMarkup(Markup markup) {
+		getObject().setMarkup(markup);
 		return (T) this;
 	}
 	

@@ -27,6 +27,7 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Markup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,6 +39,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	private boolean printRepeatedValues;
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
+	private Markup markup; 
 	
 	public DRDesignTextField() {
 		super("textField");
@@ -89,5 +91,13 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 
 	public void setEvaluationGroup(DRDesignGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
+	}
+	
+	public Markup getMarkup() {
+		return markup;
+	}
+	
+	public void setMarkup(Markup markup) {
+		this.markup = markup;
 	}
 }

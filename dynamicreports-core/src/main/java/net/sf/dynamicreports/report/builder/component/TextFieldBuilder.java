@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -181,6 +182,11 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 	public TextFieldBuilder<T> setMinRows(Integer rows) {
 		getObject().setRows(rows);
 		getObject().setHeightType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+	
+	public TextFieldBuilder<T> setMarkup(Markup markup) {
+		getObject().setMarkup(markup);
 		return this;
 	}
 }

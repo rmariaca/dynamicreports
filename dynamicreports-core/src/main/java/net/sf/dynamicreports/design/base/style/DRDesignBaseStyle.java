@@ -28,6 +28,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 
@@ -48,6 +49,7 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	private DRDesignFont font;	
 	private Rotation rotation;
 	private String pattern;
+	private Markup markup; 
 
 	public Color getForegroundColor() {
 		return foregroundColor;
@@ -135,5 +137,13 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+	
+	public Markup getMarkup() {
+		return markup;
+	}
+	
+	public void setMarkup(Markup markup) {
+		this.markup = markup;
 	}
 }

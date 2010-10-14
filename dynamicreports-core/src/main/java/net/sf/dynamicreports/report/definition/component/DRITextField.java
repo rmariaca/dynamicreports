@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -51,5 +52,7 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 	public Evaluation getEvaluationTime();
 	
 	public DRIGroup getEvaluationGroup();
+	
+	public Markup getMarkup();
 }
 

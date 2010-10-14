@@ -149,6 +149,7 @@ public class StyleTransform {
 		designBaseStyle.setFont(transformFont(baseStyle.getFont()));
 		designBaseStyle.setRotation(baseStyle.getRotation());
 		designBaseStyle.setPattern(baseStyle.getPattern());
+		designBaseStyle.setMarkup(baseStyle.getMarkup());
 	}
 	
 	private DRDesignBorder border(DRIBorder border) {

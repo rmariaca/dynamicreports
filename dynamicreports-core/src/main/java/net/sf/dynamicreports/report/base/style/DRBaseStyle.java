@@ -27,6 +27,7 @@ import java.awt.Color;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.style.DRIBaseStyle;
@@ -48,6 +49,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 	private DRFont font;	
 	private Rotation rotation;
 	private String pattern;
+	private Markup markup; 
 	
 	public DRBaseStyle() {
 		init();
@@ -145,5 +147,13 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+	
+	public Markup getMarkup() {
+		return markup;
+	}
+	
+	public void setMarkup(Markup markup) {
+		this.markup = markup;
 	}
 }
