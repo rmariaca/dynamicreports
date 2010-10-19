@@ -148,7 +148,7 @@ public class GenerateSite {
 	
 	private void generateExamplesHtml() throws Exception {
 		String name = "examples";
-		String content = "<h2>Examples</h2>\r\n";
+		String content = "<h1>Examples</h1>\r\n";
 		
 		int index = 0;
 		int count = 0;
@@ -165,7 +165,7 @@ public class GenerateSite {
 			}
 			
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
-				content += "<a name=\"" + example.getPath() + "\"></a><b>" + example.getPath() + "</b><br/>\r\n";
+				content += "<a name=\"" + example.getPath() + "\"></a><h2>" + example.getPath() + "</h2><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
