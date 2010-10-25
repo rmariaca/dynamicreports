@@ -42,7 +42,6 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
@@ -276,7 +275,7 @@ public class ComponentTransform {
 		}
 
 		public Object evaluate(ReportParameters reportParameters) throws DRException {
-			ReportBuilder<?> reportBuilder = (JasperReportBuilder) reportExpression.evaluate(reportParameters);
+			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportExpression.evaluate(reportParameters);
 			reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
 			try {
 				return JasperCompileManager.compileReport(reportDesign.getDesign());

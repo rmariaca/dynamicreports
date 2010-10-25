@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -67,21 +68,15 @@ public class BandTransform {
 	
 	public BandTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
-		init();
-	}
-	
-	private void init() {		
-		componentNames = new HashMap<String, Integer>();
-		TemplateTransform templateTransform = accessor.getTemplateTransform();
-		maxWidth = templateTransform.getPageWidth() - templateTransform.getPageMargin().getLeft() - templateTransform.getPageMargin().getRight();
-		maxColumnWidth = maxWidth;
-		int columnsPerPage = templateTransform.getPageColumnsPerPage();
-		maxColumnWidth = (maxColumnWidth - templateTransform.getPageColumnSpace() * (columnsPerPage - 1)) / columnsPerPage;
+		componentNames = new HashMap<String, Integer>();		
 	}
 	
 	public void transform() throws DRException {
-		DRIReport report = accessor.getReport();
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
+		maxWidth = templateTransform.getPageWidth() - templateTransform.getPageMargin().getLeft() - templateTransform.getPageMargin().getRight();
+		maxColumnWidth = accessor.getPage().getColumnWidth();
+		
+		DRIReport report = accessor.getReport();
 		
 		DRIBand band = report.getTitleBand();		
 		titleBand = band("title", band, templateTransform.getTitleSplitType(band), ResetType.REPORT, null);
@@ -123,20 +118,22 @@ public class BandTransform {
 	}
 	
 	public void prepareBands() throws DRException {
-		titleBand = prepareBand(titleBand, maxWidth);
-		pageHeaderBand = prepareBand(pageHeaderBand, maxWidth);
-		pageFooterBand = prepareBand(pageFooterBand, maxWidth);
-		columnHeaderBand = prepareBand(columnHeaderBand, maxColumnWidth);
-		columnFooterBand = prepareBand(columnFooterBand, maxColumnWidth);
-		detailBand = prepareBand(detailBand, maxColumnWidth);
-		lastPageFooterBand = prepareBand(lastPageFooterBand, maxWidth);
-		summaryBand = prepareBand(summaryBand, maxWidth);
-		noDataBand = prepareBand(noDataBand, maxWidth);
-		backgroundBand = prepareBand(backgroundBand, maxWidth);
+		DRITemplateDesign<?> templateDesign = accessor.getReport().getTemplateDesign();
+		
+		titleBand = prepareBand(titleBand, maxWidth, templateDesign.getTitleComponentsCount());
+		pageHeaderBand = prepareBand(pageHeaderBand, maxWidth, templateDesign.getPageHeaderComponentsCount());
+		pageFooterBand = prepareBand(pageFooterBand, maxWidth, templateDesign.getPageFooterComponentsCount());
+		columnHeaderBand = prepareBand(columnHeaderBand, maxColumnWidth, templateDesign.getColumnHeaderComponentsCount());
+		columnFooterBand = prepareBand(columnFooterBand, maxColumnWidth, templateDesign.getColumnFooterComponentsCount());
+		detailBand = prepareBand(detailBand, maxColumnWidth, 0);
+		lastPageFooterBand = prepareBand(lastPageFooterBand, maxWidth, templateDesign.getLastPageFooterComponentsCount());
+		summaryBand = prepareBand(summaryBand, maxWidth, templateDesign.getSummaryComponentsCount());
+		noDataBand = prepareBand(noDataBand, maxWidth, templateDesign.getNoDataComponentsCount());
+		backgroundBand = prepareBand(backgroundBand, maxWidth, templateDesign.getBackgroundComponentsCount());
 		for (DRDesignGroup group : accessor.getGroupTransform().getGroups()) {
 			List<DRDesignBand> bands = new ArrayList<DRDesignBand>();
 			for (DRDesignBand band : group.getHeaderBands()) {
-				DRDesignBand newBand = prepareBand(band, maxColumnWidth);
+				DRDesignBand newBand = prepareBand(band, maxColumnWidth, 0);
 				if (newBand != null) {
 					bands.add(newBand);
 				}
@@ -144,16 +141,16 @@ public class BandTransform {
 			group.setHeaderBands(bands);
 			bands = new ArrayList<DRDesignBand>();
 			for (DRDesignBand band : group.getFooterBands()) {
-				DRDesignBand newBand = prepareBand(band, maxColumnWidth);
+				DRDesignBand newBand = prepareBand(band, maxColumnWidth, 0);
 				if (newBand != null) {
 					bands.add(newBand);
 				}
 			}
 			group.setFooterBands(bands);
-		}
+		}				
 	}
 	
-	private DRDesignBand prepareBand(DRDesignBand band, int maxWidth) throws DRException {
+	private DRDesignBand prepareBand(DRDesignBand band, int maxWidth, int templateDesignComponents) throws DRException {
 		if (band == null) {
 			return null;
 		}
@@ -174,6 +171,10 @@ public class BandTransform {
 		
 		generateComponentNames(component, band.getName());		
 		band.setBandComponent(component);
+		
+		if (band.getBandComponent() != null && templateDesignComponents > 0) {
+			throw new DRException("Band " + band.getName() + " must not be defined at once in jrxml template design and in dynamic design");
+		}
 		
 		return band;
 	}

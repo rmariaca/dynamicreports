@@ -39,6 +39,8 @@ import net.sf.dynamicreports.report.definition.DRIScriptlet;
  */
 public interface DRIDesignReport {
 
+	public DRIDesignTemplateDesign getTemplateDesign();
+	
 	public Locale getLocale();
 
 	public ResourceBundle getResourceBundle();

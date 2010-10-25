@@ -25,7 +25,9 @@ package net.sf.dynamicreports.jasper.builder;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,6 +40,8 @@ import javax.imageio.ImageIO;
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import net.sf.dynamicreports.jasper.base.templatedesign.JasperEmptyTemplateDesign;
+import net.sf.dynamicreports.jasper.base.templatedesign.JasperTemplateDesign;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperCsvExporterBuilder;
@@ -60,6 +64,7 @@ import net.sf.dynamicreports.report.builder.QueryBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
+import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -98,7 +103,8 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private Connection connection;
 	private JRVirtualizer virtualizer;
 	
-	public JasperReportBuilder() {		
+	public JasperReportBuilder() {	
+		setTemplateDesign(new JasperEmptyTemplateDesign());
 	}
 	
 	public JasperReportBuilder setDataSource(Collection<?> collection) {
@@ -127,6 +133,27 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		this.dataSource = dataSource;
 		getObject().setQuery(null);
 		connection = null;
+		return this;
+	}
+	
+	public JasperReportBuilder setTemplateDesign(InputStream inputStream) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(inputStream));
+	}
+	
+	public JasperReportBuilder setTemplateDesign(File file) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(file));
+	}
+	
+	public JasperReportBuilder setTemplateDesign(String fileName) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(fileName));
+	}
+	
+	public JasperReportBuilder setTemplateDesign(JasperDesign jasperDesign) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(jasperDesign));
+	}
+	
+	private JasperReportBuilder setTemplateDesign(DRITemplateDesign<JasperDesign> templateDesign) {	
+		getObject().setTemplateDesign(templateDesign);
 		return this;
 	}
 	

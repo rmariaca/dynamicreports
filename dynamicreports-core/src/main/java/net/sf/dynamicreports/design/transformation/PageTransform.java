@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.transformation;
 import net.sf.dynamicreports.design.base.DRDesignMargin;
 import net.sf.dynamicreports.design.base.DRDesignPage;
 import net.sf.dynamicreports.report.definition.DRIMargin;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,14 +39,14 @@ public class PageTransform {
 		this.page = new DRDesignPage();
 	}
 	
-	public void transform() {
+	public void transform() throws DRException {
 		this.page.setWidth(templateTransform.getPageWidth());
 		this.page.setHeight(templateTransform.getPageHeight());
 		this.page.setOrientation(templateTransform.getPageOrientation());
 		this.page.setMargin(margin(templateTransform.getPageMargin()));
 		this.page.setColumnsPerPage(templateTransform.getPageColumnsPerPage());
 		this.page.setColumnSpace(templateTransform.getPageColumnSpace());		
-		this.page.setColumnWidth((this.page.getWidth() - this.page.getMargin().getLeft() - this.page.getMargin().getRight() - this.page.getColumnSpace() * (this.page.getColumnsPerPage() - 1)) / this.page.getColumnsPerPage());
+		this.page.setColumnWidth(templateTransform.getPageColumnWidth(this.page));
 	}
 	
 	private DRDesignMargin margin(DRIMargin margin) {

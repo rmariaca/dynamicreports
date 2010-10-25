@@ -31,6 +31,7 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.jasperreports.engine.JRDefaultScriptlet;
+import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.JRScriptletException;
 import net.sf.jasperreports.engine.fill.JRFillGroup;
 
@@ -38,6 +39,9 @@ import net.sf.jasperreports.engine.fill.JRFillGroup;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperScriptlet extends JRDefaultScriptlet {
+	public static final String NAME = "DYNAMICREPORTS";
+	public static final String SCRIPTLET_NAME = NAME + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX;
+	
 	private JasperReportParameters reportParameters;
 	
 	@SuppressWarnings("ucd")

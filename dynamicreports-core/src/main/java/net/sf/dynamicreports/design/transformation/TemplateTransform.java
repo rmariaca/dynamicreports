@@ -29,6 +29,7 @@ import java.util.Locale;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
+import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -43,6 +44,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
@@ -70,11 +72,13 @@ public class TemplateTransform {
 	private DRIReport report;
 	private DesignTransformAccessor accessor;
 	private DRIReportTemplate template;
+	private DRITemplateDesign<?> templateDesign;
 	
 	public TemplateTransform(DesignTransformAccessor accessor) {	
 		this.accessor = accessor;
 		this.report = accessor.getReport();
 		this.template = report.getTemplate();
+		this.templateDesign = report.getTemplateDesign();
 	}
 	
 	public Locale getLocale() {
@@ -96,10 +100,23 @@ public class TemplateTransform {
 		}
 		return Defaults.getDefaults().isShowColumnTitle();
 	}
+
+	public String getResourceBundleName() {
+		if (report.getResourceBundleName() != null) {
+			return report.getResourceBundleName();
+		}
+		if (templateDesign.getResourceBundleName() != null) {
+			return templateDesign.getResourceBundleName();
+		}
+		return null;
+	}
 	
 	public boolean isIgnorePagination() {
 		if (report.getIgnorePagination() != null) {
 			return report.getIgnorePagination();
+		}
+		if (templateDesign.getIgnorePagination() != null) {
+			return templateDesign.getIgnorePagination();
 		}
 		if (template.getIgnorePagination() != null) {
 			return template.getIgnorePagination();
@@ -111,6 +128,9 @@ public class TemplateTransform {
 		if (report.getWhenNoDataType() != null) {
 			return report.getWhenNoDataType();
 		}
+		if (templateDesign.getWhenNoDataType() != null) {
+			return templateDesign.getWhenNoDataType();
+		}
 		if (template.getWhenNoDataType() != null) {
 			return template.getWhenNoDataType();
 		}
@@ -120,6 +140,9 @@ public class TemplateTransform {
 	public boolean isTitleOnANewPage() {
 		if (report.getTitleOnANewPage() != null) {
 			return report.getTitleOnANewPage();
+		}
+		if (templateDesign.getTitleOnANewPage() != null) {
+			return templateDesign.getTitleOnANewPage();
 		}
 		if (template.getTitleOnANewPage() != null) {
 			return template.getTitleOnANewPage();
@@ -131,6 +154,9 @@ public class TemplateTransform {
 		if (report.getSummaryOnANewPage() != null) {
 			return report.getSummaryOnANewPage();
 		}
+		if (templateDesign.getSummaryOnANewPage() != null) {
+			return templateDesign.getSummaryOnANewPage();
+		}
 		if (template.getSummaryOnANewPage() != null) {
 			return template.getSummaryOnANewPage();
 		}
@@ -141,6 +167,9 @@ public class TemplateTransform {
 		if (report.getSummaryWithPageHeaderAndFooter() != null) {
 			return report.getSummaryWithPageHeaderAndFooter();
 		}
+		if (templateDesign.getSummaryWithPageHeaderAndFooter() != null) {
+			return templateDesign.getSummaryWithPageHeaderAndFooter();
+		}
 		if (template.getSummaryWithPageHeaderAndFooter() != null) {
 			return template.getSummaryWithPageHeaderAndFooter();
 		}
@@ -150,6 +179,9 @@ public class TemplateTransform {
 	public boolean isFloatColumnFooter() {
 		if (report.getFloatColumnFooter() != null) {
 			return report.getFloatColumnFooter();
+		}
+		if (templateDesign.getFloatColumnFooter() != null) {
+			return templateDesign.getFloatColumnFooter();
 		}
 		if (template.getFloatColumnFooter() != null) {
 			return template.getFloatColumnFooter();
@@ -310,12 +342,15 @@ public class TemplateTransform {
 	}
 	
 	//page
-	protected int getPageWidth() {
+	protected int getPageWidth() throws DRException {
 		if (accessor.getPageWidth() != null) {
-			return accessor.getPageWidth();
+			return pageWidth(accessor.getPageWidth());
 		}
 		if (report.getPage().getWidth() != null) {
-			return report.getPage().getWidth();
+			return pageWidth(report.getPage().getWidth());
+		}
+		if (templateDesign.getPageWidth() != null) {
+			return templateDesign.getPageWidth();
 		}
 		if (template.getPageWidth() != null) {
 			return template.getPageWidth();
@@ -323,19 +358,40 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getPageWidth();
 	}
 
-	protected int getPageHeight() {
+	private int pageWidth(int width) throws DRException {
+		if (templateDesign.getPageWidth() != null && templateDesign.getPageWidth() != width) {
+			throw new DRException("Page width must not be different from page width of template design");
+		}
+		return width;
+	}
+	
+	protected int getPageHeight() throws DRException {
 		if (report.getPage().getHeight() != null) {
-			return report.getPage().getHeight();
+			Integer height = report.getPage().getHeight();
+			if (templateDesign.getPageHeight() != null && templateDesign.getPageHeight() != height) {
+				throw new DRException("Page height must not be different from page height of template design");
+			}
+			return height;
+		}
+		if (templateDesign.getPageHeight() != null) {
+			return templateDesign.getPageHeight();
 		}
 		if (template.getPageHeight() != null) {
 			return template.getPageHeight();
 		}
 		return Defaults.getDefaults().getPageHeight();
 	}
-
-	protected PageOrientation getPageOrientation() {
+	
+	protected PageOrientation getPageOrientation() throws DRException {
 		if (report.getPage().getOrientation() != null) {
-			return report.getPage().getOrientation();
+			PageOrientation orientation = report.getPage().getOrientation();
+			if (templateDesign.getPageOrientation() != null && templateDesign.getPageOrientation() != orientation) {
+				throw new DRException("Page orientation must not be different from page orientation of template design");
+			}
+			return orientation;
+		}
+		if (templateDesign.getPageOrientation() != null) {
+			return templateDesign.getPageOrientation();
 		}
 		if (template.getPageOrientation() != null) {
 			return template.getPageOrientation();
@@ -343,9 +399,28 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getPageOrientation();
 	}
 
-	protected DRIMargin getPageMargin() {
+	protected DRIMargin getPageMargin() throws DRException {
 		if (report.getPage().getMargin() != null) {
-			return report.getPage().getMargin();
+			DRIMargin margin = report.getPage().getMargin();
+			if (templateDesign.getPageMargin() != null) {
+				DRIMargin templateMargin = templateDesign.getPageMargin(); 
+				if (templateMargin.getLeft() != margin.getLeft()) {
+					throw new DRException("Page left margin must not be different from page left margin of template design");
+				}
+				if (templateMargin.getRight() != margin.getRight()) {
+					throw new DRException("Page right margin must not be different from page right margin of template design");
+				}
+				if (templateMargin.getTop() != margin.getTop()) {
+					throw new DRException("Page top margin must not be different from page top margin of template design");
+				}
+				if (templateMargin.getBottom() != margin.getBottom()) {
+					throw new DRException("Page bottom margin must not be different from page bottom margin of template design");
+				}
+			}
+			return margin;
+		}
+		if (templateDesign.getPageMargin() != null) {
+			return templateDesign.getPageMargin();
 		}
 		if (template.getPageMargin() != null) {
 			return template.getPageMargin();
@@ -353,9 +428,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getPageMargin();
 	}
 
-	protected int getPageColumnsPerPage() {
+	protected int getPageColumnsPerPage() throws DRException {
 		if (report.getPage().getColumnsPerPage() != null) {
-			return report.getPage().getColumnsPerPage();
+			Integer columnsPerPage = report.getPage().getColumnsPerPage();
+			if (templateDesign.getPageColumnsPerPage() != null && templateDesign.getPageColumnsPerPage() != columnsPerPage) {
+				throw new DRException("Page columns per page must not be different from page column count of template design");
+			}
+			return columnsPerPage;
+		}
+		if (templateDesign.getPageColumnsPerPage() != null) {
+			return templateDesign.getPageColumnsPerPage();
 		}
 		if (template.getPageColumnsPerPage() != null) {
 			return template.getPageColumnsPerPage();
@@ -363,14 +445,31 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getPageColumnsPerPage();
 	}
 
-	protected int getPageColumnSpace() {
+	protected int getPageColumnSpace() throws DRException {
 		if (report.getPage().getColumnSpace() != null) {
-			return report.getPage().getColumnSpace();
+			Integer columnSpace = report.getPage().getColumnSpace();
+			if (templateDesign.getPageColumnSpace() != null && templateDesign.getPageColumnSpace() != columnSpace) {
+				throw new DRException("Page column space must not be different from page column spacing of template design");
+			}
+			return columnSpace;
+		}
+		if (templateDesign.getPageColumnSpace() != null) {
+			return templateDesign.getPageColumnSpace();
 		}
 		if (template.getPageColumnSpace() != null) {
 			return template.getPageColumnSpace();
 		}
 		return Defaults.getDefaults().getPageColumnSpace();
+	}
+	
+	protected int getPageColumnWidth(DRIDesignPage page) {
+		if (templateDesign.getPageColumnWidth() != null) {
+			return templateDesign.getPageColumnWidth();
+		}
+		int columnWidth = page.getWidth() - page.getMargin().getLeft() - page.getMargin().getRight();
+		columnWidth -= page.getColumnSpace() * (page.getColumnsPerPage() - 1);
+		columnWidth = columnWidth / page.getColumnsPerPage();
+		return columnWidth;
 	}
 	
 	//column

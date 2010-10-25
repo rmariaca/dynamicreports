@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import net.sf.dynamicreports.design.base.DRDesignPage;
 import net.sf.dynamicreports.report.definition.DRIReport;
 
 /**
@@ -50,4 +51,6 @@ public interface DesignTransformAccessor {
 	public ChartTransform getChartTransform();
 
 	public BarcodeTransform getBarcodeTransform();
+	
+	public DRDesignPage getPage();
 }

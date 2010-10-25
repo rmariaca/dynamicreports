@@ -24,7 +24,6 @@ package net.sf.dynamicreports.jasper.base;
 
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
-import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptletException;
 
 /**
@@ -91,7 +90,7 @@ public class CustomScriptlet extends JRAbstractScriptlet {
 	private JasperReportParameters getReportParameters() {
 		if (reportParameters == null) {
 			try {
-				reportParameters = ((JasperScriptlet) getParameterValue(JRParameter.REPORT_SCRIPTLET)).getReportParameters();
+				reportParameters = ((JasperScriptlet) getParameterValue(JasperScriptlet.SCRIPTLET_NAME)).getReportParameters();
 			} catch (JRScriptletException e) {			
 			}
 		}

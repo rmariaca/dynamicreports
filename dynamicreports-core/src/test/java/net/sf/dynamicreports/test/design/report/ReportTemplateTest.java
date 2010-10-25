@@ -46,6 +46,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.dynamicreports.test.design.TestReportBuilder;
 
 import org.junit.Test;
 
@@ -121,7 +122,7 @@ public class ReportTemplateTest {
 	@Test
 	public void test() {
 		@SuppressWarnings("rawtypes")
-		ReportBuilder rb = new ReportBuilder();
+		ReportBuilder rb = new TestReportBuilder();
 		configureReport(rb);
 		try {
 			DRDesignReport report = new DRDesignReport(rb.getReport());
@@ -186,8 +187,7 @@ public class ReportTemplateTest {
 	
 	@Test
 	public void styleTest() {
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb = new ReportBuilder();		
+		ReportBuilder<?> rb = new TestReportBuilder();		
 		TextColumnBuilder<Integer> column1;
 		
 		rb.columns(column1 = col.column("Column1", "field1", Integer.class))

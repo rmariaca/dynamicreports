@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
@@ -47,6 +48,7 @@ public class DRReport implements DRIReport {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRReportTemplate template;
+	private DRITemplateDesign<?> templateDesign;
 	private Locale locale;
 	private ResourceBundle resourceBundle;
 	private String resourceBundleName;
@@ -133,6 +135,15 @@ public class DRReport implements DRIReport {
 		this.template = template;
 	}
 
+	public DRITemplateDesign<?> getTemplateDesign() {
+		return templateDesign;
+	}
+	
+	public void setTemplateDesign(DRITemplateDesign<?> templateDesign) {
+		Validate.notNull(templateDesign, "templateDesign must not be null");
+		this.templateDesign = templateDesign;
+	}
+	
 	public Locale getLocale() {
 		return locale;
 	}

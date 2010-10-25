@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
+import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
@@ -159,6 +160,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return barcodeTransform;
 	}
 	
+	public DRIDesignTemplateDesign getTemplateDesign() {
+		return reportTransform.getTemplateDesign();
+	}
+	
 	public Locale getLocale() {
 		return templateTransform.getLocale();
 	}
@@ -168,7 +173,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public String getResourceBundleName() {
-		return report.getResourceBundleName();
+		return templateTransform.getResourceBundleName();
 	}
 	
 	public boolean isIgnorePagination() {

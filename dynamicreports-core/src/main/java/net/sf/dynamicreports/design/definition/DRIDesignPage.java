@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
  */
 public interface DRIDesignPage {
 	
-	public int getWidth();;
+	public int getWidth();
 
 	public int getHeight();
 

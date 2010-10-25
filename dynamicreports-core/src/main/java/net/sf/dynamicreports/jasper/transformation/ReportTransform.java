@@ -34,6 +34,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.base.CustomScriptlet;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
+import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -41,6 +42,7 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JRDesignScriptlet;
@@ -82,6 +84,8 @@ public class ReportTransform {
 		for (DRIDesignParameter parameter : report.getParameters()) {
 			addParameter(parameter);
 		}
+		
+		addScriptlet(JasperScriptlet.NAME, new JasperScriptlet());
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
 			addScriptlet(scriptlet);
 		}
@@ -117,23 +121,29 @@ public class ReportTransform {
 	}
 
 	private void addScriptlet(DRIScriptlet scriptlet) {
+		addScriptlet(scriptlet.getName(), new CustomScriptlet(scriptlet));
+	}
+	
+	private void addScriptlet(String name, JRAbstractScriptlet scriptlet) {
 		try {
-			accessor.getDesign().addScriptlet(scriptlet(scriptlet));	
-			accessor.getParameters().put(scriptlet.getName() + "_SCRIPTLET", new CustomScriptlet(scriptlet));
+			accessor.getDesign().addScriptlet(scriptlet(name, scriptlet));	
+			if (scriptlet instanceof CustomScriptlet) {
+				accessor.getParameters().put(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, scriptlet);
+			}
 		} catch (JRException e) {
-			throw new JasperDesignException("Registration failed for scriptlet \"" + scriptlet.getName() + "\"", e);
+			throw new JasperDesignException("Registration failed for scriptlet \"" + name + "\"", e);
 		}	
 	}
 	
 	//page
 	private void page() {
 		DRIDesignPage page = accessor.getReport().getPage();
+		DRIDesignMargin margin = page.getMargin();
 		JasperDesign design = accessor.getDesign();
-		
+
 		design.setPageWidth(page.getWidth());
 		design.setPageHeight(page.getHeight());
-		design.setOrientation(ConstantTransform.pageOrientation(page.getOrientation()));
-		DRIDesignMargin margin = page.getMargin();
+		design.setOrientation(ConstantTransform.pageOrientation(page.getOrientation()));			
 		design.setLeftMargin(margin.getLeft());
 		design.setRightMargin(margin.getRight());
 		design.setTopMargin(margin.getTop());
@@ -152,10 +162,10 @@ public class ReportTransform {
 	}
 	
 	//scriptlet
-	private JRDesignScriptlet scriptlet(DRIScriptlet scriptlet) {
+	private JRDesignScriptlet scriptlet(String name, JRAbstractScriptlet scriptlet) {
 		JRDesignScriptlet jrScriptlet = new JRDesignScriptlet();
-		jrScriptlet.setName(scriptlet.getName());
-		jrScriptlet.setValueClass(JRAbstractScriptlet.class);
+		jrScriptlet.setName(name);
+		jrScriptlet.setValueClass(scriptlet.getClass());
 		return jrScriptlet;
 	}
 	

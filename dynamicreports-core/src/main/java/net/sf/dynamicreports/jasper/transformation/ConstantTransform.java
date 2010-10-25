@@ -92,7 +92,7 @@ import com.lowagie.text.pdf.PdfWriter;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-class ConstantTransform {
+public class ConstantTransform {
 	
 	protected static LineStyleEnum lineStyle(LineStyle lineStyle) {
 		if (lineStyle == null) {
@@ -254,6 +254,21 @@ class ConstantTransform {
 		}
 	}
 	
+	public static WhenNoDataType whenNoDataType(WhenNoDataTypeEnum whenNoDataType) {		
+		switch (whenNoDataType) {
+		case NO_PAGES:			
+			return WhenNoDataType.NO_PAGES;
+		case BLANK_PAGE:			
+			return WhenNoDataType.BLANK_PAGE;
+		case ALL_SECTIONS_NO_DETAIL:
+			return WhenNoDataType.ALL_SECTIONS_NO_DETAIL;
+		case NO_DATA_SECTION:
+			return WhenNoDataType.NO_DATA_SECTION;
+		default:
+			throw new JasperDesignException("When no data type " + whenNoDataType.name() + " not supported");
+		}
+	}
+	
 	protected static OrientationEnum pageOrientation(PageOrientation orientation) {
 		switch (orientation) {
 		case PORTRAIT:			
@@ -265,6 +280,17 @@ class ConstantTransform {
 		}
 	}
 
+	public static PageOrientation pageOrientation(OrientationEnum orientation) {
+		switch (orientation) {
+		case PORTRAIT:			
+			return PageOrientation.PORTRAIT;
+		case LANDSCAPE:
+			return PageOrientation.LANDSCAPE;
+		default:
+			throw new JasperDesignException("Page orientation " + orientation.name() + " not supported");
+		}
+	}
+	
 	protected static ResetTypeEnum variableResetType(ResetType resetType) {
 		switch (resetType) {
 		case REPORT:			

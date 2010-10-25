@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.dynamicreports.test.design.TestReportBuilder;
 
 import org.junit.Test;
 
@@ -41,8 +42,7 @@ public class ExceptionTest {
 
 	@Test
 	public void testComponentFixedWidth() {
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb1 = new ReportBuilder();		
+		ReportBuilder<?> rb1 = new TestReportBuilder();	
 		rb1.title(cmp.text("").setFixedWidth(600));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -50,8 +50,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb2 = new ReportBuilder();		
+		ReportBuilder<?> rb2 = new TestReportBuilder();	
 		rb2.title(cmp.horizontalList(cmp.text("").setFixedWidth(600)));
 		try {
 			new DRDesignReport(rb2.getReport());
@@ -59,8 +58,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb3 = new ReportBuilder();		
+		ReportBuilder<?> rb3 = new TestReportBuilder();		
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setFixedWidth(600)));
 		try {
 			new DRDesignReport(rb3.getReport());
@@ -71,8 +69,7 @@ public class ExceptionTest {
 	
 	@Test
 	public void testComponentMinimumWidth() {
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb1 = new ReportBuilder();		
+		ReportBuilder<?> rb1 = new TestReportBuilder();	
 		rb1.title(cmp.text("").setMinWidth(600));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -80,8 +77,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb2 = new ReportBuilder();		
+		ReportBuilder<?> rb2 = new TestReportBuilder();		
 		rb2.title(cmp.horizontalList(cmp.text("").setMinWidth(600)));
 		try {
 			new DRDesignReport(rb2.getReport());
@@ -89,8 +85,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("rawtypes")
-		ReportBuilder<?> rb3 = new ReportBuilder();		
+		ReportBuilder<?> rb3 = new TestReportBuilder();	
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setMinWidth(600)));
 		try {
 			new DRDesignReport(rb3.getReport());
@@ -103,8 +98,7 @@ public class ExceptionTest {
 	public void testVariable() {
 		TextColumnBuilder<Object> column = col.column("fieldName", Object.class);
 		ColumnGroupBuilder group = grp.group(column);
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		ReportBuilder<?> rb1 = new ReportBuilder()
+		ReportBuilder<?> rb1 = new TestReportBuilder()
 			.columns(column)
 			.groupBy(group)
 			.variables(variable("fieldName", Object.class, Calculation.SUM).setResetGroup(group).setResetType(Evaluation.REPORT));
@@ -114,8 +108,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		ReportBuilder<?> rb2 = new ReportBuilder()
+		ReportBuilder<?> rb2 = new TestReportBuilder()
 			.columns(column)
 			.groupBy(group)
 			.variables(variable("fieldName", Object.class, Calculation.SUM).setResetType(Evaluation.GROUP));

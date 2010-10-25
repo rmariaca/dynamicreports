@@ -37,6 +37,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.JRScriptletException;
 import net.sf.jasperreports.engine.JRVariable;
 
@@ -140,7 +141,7 @@ public class JasperReportParameters implements ReportParameters {
 	
 	@SuppressWarnings("ucd")
 	public DRIScriptlet getScriptlet(String name) {
-		return ((CustomScriptlet) getParameterValue(name + "_SCRIPTLET")).getScriptlet();
+		return ((CustomScriptlet) getParameterValue(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX)).getScriptlet();
 	}
 	
 	public String getMessage(String key) {

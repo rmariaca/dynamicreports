@@ -36,6 +36,7 @@ import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -57,18 +58,19 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private Map<String, Object> parameters;	
 	private ReportParameters masterReportParameters;
 	
-	public JasperReportDesign(DRIDesignReport report) {		
+	public JasperReportDesign(DRIDesignReport report) throws DRException {		
 		this(report, null);
 	}
 
-	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) {		
+	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) throws DRException {		
 		this.report = report;
-		this.masterReportParameters = masterReportParameters;
+		this.masterReportParameters = masterReportParameters;				
 		init();
 		transform();
 	}
 	
-	private void init() {		
+	private void init() throws DRException {		
+		this.design = (JasperDesign) report.getTemplateDesign().getDesign();
 		reportTransform = new ReportTransform(this);
 		expressionTransform = new ExpressionTransform(this);
 		groupTransform = new GroupTransform(this);
@@ -78,12 +80,8 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
 		
-		this.design = new JasperDesign();
-		design.setName("Report");
 		this.parameters = new HashMap<String, Object>();		
-		this.customValues = new JasperCustomValues();
-		
-		this.design.setScriptletClass(JasperScriptlet.class.getName());
+		this.customValues = new JasperCustomValues();		
 	}
 	
 	private void transform() {						

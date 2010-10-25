@@ -27,7 +27,9 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.base.DRDesignParameter;
 import net.sf.dynamicreports.design.base.DRDesignQuery;
+import net.sf.dynamicreports.design.base.DRDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
+import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.report.definition.DRIParameter;
 import net.sf.dynamicreports.report.definition.DRIQuery;
 import net.sf.dynamicreports.report.definition.DRIReport;
@@ -37,6 +39,7 @@ import net.sf.dynamicreports.report.definition.DRIReport;
  */
 public class ReportTransform {
 	private DRIReport report;
+	private DRIDesignTemplateDesign templateDesign; 
 	private DRDesignQuery query;
 	private List<DRIDesignParameter> parameters;
 	
@@ -46,6 +49,7 @@ public class ReportTransform {
 	}
 	
 	public void transform() {
+		templateDesign = new DRDesignTemplateDesign(report.getTemplateDesign());
 		if (report.getQuery() != null) {
 			query = query(report.getQuery());
 		}
@@ -66,6 +70,10 @@ public class ReportTransform {
 		designParameter.setName(parameter.getName());
 		designParameter.setValue(parameter.getValue());
 		return designParameter;
+	}
+	
+	public DRIDesignTemplateDesign getTemplateDesign() {
+		return templateDesign;
 	}
 	
 	public DRDesignQuery getQuery() {
