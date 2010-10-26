@@ -30,7 +30,12 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 public class DRDesignField implements DRIDesignField {		
 	private String name;
 	private Class<?> valueClass;
+	private boolean external;
 
+	public DRDesignField() {
+		this.external = false;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -45,5 +50,13 @@ public class DRDesignField implements DRIDesignField {
 
 	public void setValueClass(Class<?> valueClass) {
 		this.valueClass = valueClass;
+	}
+		
+	public boolean isExternal() {
+		return external;
+	}
+	
+	public void setExternal(boolean external) {
+		this.external = external;
 	}
 }

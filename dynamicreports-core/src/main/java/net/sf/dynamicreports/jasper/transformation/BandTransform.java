@@ -25,6 +25,7 @@ package net.sf.dynamicreports.jasper.transformation;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
+import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignElement;
@@ -43,13 +44,24 @@ public class BandTransform {
 	
 	public void transform() {
 		DRIDesignReport report = accessor.getReport();
-		JasperDesign design = accessor.getDesign();
+		JasperDesign design = accessor.getDesign();		
+		DRIDesignTemplateDesign templateDesign = report.getTemplateDesign();
 		
-		design.setTitle(band(report.getTitleBand()));	
-		design.setPageHeader(band(report.getPageHeaderBand()));
-		design.setPageFooter(band(report.getPageFooterBand()));
-		design.setColumnHeader(band(report.getColumnHeaderBand()));
-		design.setColumnFooter(band(report.getColumnFooterBand()));
+		if (templateDesign.getTitleComponentsCount() == 0 && report.getTitleBand() != null) {
+			design.setTitle(band(report.getTitleBand()));	
+		}
+		if (templateDesign.getPageHeaderComponentsCount() == 0 && report.getPageHeaderBand() != null) {
+			design.setPageHeader(band(report.getPageHeaderBand()));
+		}
+		if (templateDesign.getPageFooterComponentsCount() == 0 && report.getPageFooterBand() != null) {
+			design.setPageFooter(band(report.getPageFooterBand()));
+		}
+		if (templateDesign.getColumnHeaderComponentsCount() == 0 && report.getColumnHeaderBand() != null) {
+			design.setColumnHeader(band(report.getColumnHeaderBand()));
+		}
+		if (templateDesign.getColumnFooterComponentsCount() == 0 && report.getColumnFooterBand() != null) {
+			design.setColumnFooter(band(report.getColumnFooterBand()));
+		}
 		for (DRIDesignGroup group : report.getGroups()) {
 			if (group.getHeaderBands() != null) {
 				for (DRIDesignBand band : group.getHeaderBands()) {
@@ -72,10 +84,18 @@ public class BandTransform {
 		if (jrBand != null) {
 			((JRDesignSection) design.getDetailSection()).addBand(jrBand);
 		}
-		design.setLastPageFooter(band(report.getLastPageFooterBand()));
-		design.setSummary(band(report.getSummaryBand()));
-		design.setNoData(band(report.getNoDataBand()));		
-		design.setBackground(band(report.getBackgroundBand()));		
+		if (templateDesign.getLastPageFooterComponentsCount() == 0 && report.getLastPageFooterBand() != null) {
+			design.setLastPageFooter(band(report.getLastPageFooterBand()));
+		}
+		if (templateDesign.getSummaryComponentsCount() == 0 && report.getSummaryBand() != null) {
+			design.setSummary(band(report.getSummaryBand()));
+		}
+		if (templateDesign.getNoDataComponentsCount() == 0 && report.getNoDataBand() != null) {
+			design.setNoData(band(report.getNoDataBand()));
+		}
+		if (templateDesign.getBackgroundComponentsCount() == 0 && report.getBackgroundBand() != null) {
+			design.setBackground(band(report.getBackgroundBand()));
+		}
 	}
 	
 	//band

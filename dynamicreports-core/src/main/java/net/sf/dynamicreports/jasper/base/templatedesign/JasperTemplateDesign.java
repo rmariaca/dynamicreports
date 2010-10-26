@@ -1,31 +1,64 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.sf.dynamicreports.jasper.base.templatedesign;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.dynamicreports.jasper.transformation.ConstantTransform;
+import net.sf.dynamicreports.report.base.DRField;
 import net.sf.dynamicreports.report.base.DRMargin;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
 
 import org.apache.commons.lang.Validate;
 
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
 public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private JasperDesign jasperDesign;
-	private ByteArrayOutputStream templateDesign;
-
+	private List<DRIField<?>> fields;
+	private DRMargin margin;
+	private transient ByteArrayOutputStream templateDesign;	
+	
 	public JasperTemplateDesign(JasperDesign jasperDesign) throws DRException {
 		init(jasperDesign);
 	}
@@ -60,12 +93,23 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	private void init(JasperDesign jasperDesign) throws DRException {
 		Validate.notNull(jasperDesign, "jasperDesign must not be null");
 		this.jasperDesign = jasperDesign;
-		templateDesign = new ByteArrayOutputStream();
-		try {
-			JRXmlWriter.writeReport(jasperDesign, templateDesign, "UTF-8");
-		} catch (JRException e) {
-			throw new DRException(e);
+		
+		this.fields = new ArrayList<DRIField<?>>();
+		for (JRField jrField : jasperDesign.getFields()) {
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			DRField<?> field = new DRField(jrField.getName(), jrField.getValueClass());
+			fields.add(field);
 		}
+		
+		this.margin = new DRMargin();
+		margin.setTop(jasperDesign.getTopMargin());
+		margin.setLeft(jasperDesign.getLeftMargin());
+		margin.setBottom(jasperDesign.getBottomMargin());
+		margin.setRight(jasperDesign.getRightMargin());
+	}
+	
+	public List<DRIField<?>> getFields() {
+		return fields;
 	}
 	
 	public String getResourceBundleName() {
@@ -109,11 +153,6 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	}
 
 	public DRIMargin getPageMargin() {
-		DRMargin margin = new DRMargin();
-		margin.setTop(jasperDesign.getTopMargin());
-		margin.setLeft(jasperDesign.getLeftMargin());
-		margin.setBottom(jasperDesign.getBottomMargin());
-		margin.setRight(jasperDesign.getRightMargin());
 		return margin;
 	}
 
@@ -130,43 +169,55 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	}
 
 	public int getTitleComponentsCount() {
-		return jasperDesign.getTitle().getElements().length;
+		return getBandComponentsCount(jasperDesign.getTitle());
 	}
 
 	public int getPageHeaderComponentsCount() {
-		return jasperDesign.getPageHeader().getElements().length;
+		return getBandComponentsCount(jasperDesign.getPageHeader());
 	}
 
 	public int getPageFooterComponentsCount() {
-		return jasperDesign.getPageFooter().getElements().length;
+		return getBandComponentsCount(jasperDesign.getPageFooter());
 	}
 
 	public int getColumnHeaderComponentsCount() {
-		return jasperDesign.getColumnHeader().getElements().length;
+		return getBandComponentsCount(jasperDesign.getColumnHeader());
 	}
 
 	public int getColumnFooterComponentsCount() {
-		return jasperDesign.getColumnFooter().getElements().length;
+		return getBandComponentsCount(jasperDesign.getColumnFooter());
 	}
 
 	public int getLastPageFooterComponentsCount() {
-		return jasperDesign.getLastPageFooter().getElements().length;
+		return getBandComponentsCount(jasperDesign.getLastPageFooter());
 	}
 
 	public int getSummaryComponentsCount() {
-		return jasperDesign.getSummary().getElements().length;
+		return getBandComponentsCount(jasperDesign.getSummary());
 	}
 
 	public int getNoDataComponentsCount() {
-		return jasperDesign.getNoData().getElements().length;
+		return getBandComponentsCount(jasperDesign.getNoData());
 	}
 
 	public int getBackgroundComponentsCount() {
-		return jasperDesign.getBackground().getElements().length;
+		return getBandComponentsCount(jasperDesign.getBackground());
+	}
+	
+	private int getBandComponentsCount(JRBand band) {
+		if (band != null) {
+			return band.getElements().length;
+		}
+		return 0;
 	}
 	
 	public JasperDesign getDesign() throws DRException {
 		try {
+			if (templateDesign == null) {
+				templateDesign = new ByteArrayOutputStream();
+				JRXmlWriter.writeReport(jasperDesign, templateDesign, "UTF-8");
+			}
+			
 			return JRXmlLoader.load(new ByteArrayInputStream(templateDesign.toByteArray()));
 		} catch (JRException e) {
 			throw new DRException(e);

@@ -35,6 +35,7 @@ import java.util.List;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.JRPrintFrame;
@@ -143,5 +144,5 @@ public abstract class AbstractJasperTest {
 		return null;
 	}
 	
-	protected abstract void configureReport(JasperReportBuilder rb);	
+	protected abstract void configureReport(JasperReportBuilder rb) throws DRException;	
 }

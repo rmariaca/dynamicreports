@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.transformation;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignField;
@@ -80,6 +81,13 @@ public class ExpressionTransform {
 	
 	public void transform() throws DRException {
 		DRIReport report = accessor.getReport();
+		List<DRIField<?>> templateDesignFields = report.getTemplateDesign().getFields();
+		if (templateDesignFields != null) {
+			for (DRIField<?> field : templateDesignFields) {
+				DRDesignField designField = (DRDesignField) transformExpression(field);
+				designField.setExternal(true);
+			}
+		}
 		for (DRIField<?> field : report.getFields()) {
 			transformExpression(field);
 		}

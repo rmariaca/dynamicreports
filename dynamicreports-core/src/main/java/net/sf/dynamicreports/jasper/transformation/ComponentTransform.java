@@ -65,11 +65,15 @@ import net.sf.jasperreports.engine.type.PositionTypeEnum;
 import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ComponentTransform {
+	private static final Log log = LogFactory.getLog(SubreportExpression.class);
+	
 	private JasperTransformAccessor accessor;
 	
 	public ComponentTransform(JasperTransformAccessor accessor) {
@@ -262,7 +266,7 @@ public class ComponentTransform {
 		return jrDesignLine;
 	}
 	
-	private class SubreportExpression implements DRIDesignSimpleExpression {
+	private class SubreportExpression implements DRIDesignSimpleExpression {		
 		private String name;
 		private DRIDesignSimpleExpression reportExpression;
 		private Integer pageWidth;
@@ -274,14 +278,21 @@ public class ComponentTransform {
 			this.name = ReportUtils.generateUniqueName("subreportExpression");
 		}
 
-		public Object evaluate(ReportParameters reportParameters) throws DRException {
-			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportExpression.evaluate(reportParameters);
-			reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
+		public Object evaluate(ReportParameters reportParameters) {
+			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportExpression.evaluate(reportParameters);			
 			try {
+				reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
 				return JasperCompileManager.compileReport(reportDesign.getDesign());
 			} catch (JRException e) {
-				throw new DRException(e);
+				if (log.isErrorEnabled()) {
+					log.error("Error encountered while creating subreport design", e);
+				}
+			} catch (DRException e) {
+				if (log.isErrorEnabled()) {
+					log.error("Error encountered while creating subreport design", e);
+				}
 			}
+			return null;
 		}
 		
 		public JasperReportDesign getReportDesign() {
@@ -306,7 +317,7 @@ public class ComponentTransform {
 			this.name = ReportUtils.generateUniqueName("subreportParametersExpression");
 		}
 
-		public Object evaluate(ReportParameters reportParameters) throws DRException {
+		public Object evaluate(ReportParameters reportParameters) {
 			return subreportExpression.getReportDesign().getParameters();
 		}
 
@@ -326,7 +337,7 @@ public class ComponentTransform {
 			this.name = ReportUtils.generateUniqueName("jasperSubreportParametersExpression");
 		}
 
-		public Object evaluate(ReportParameters reportParameters) throws DRException {
+		public Object evaluate(ReportParameters reportParameters) {
 			Map<Object, Object> map = new HashMap<Object, Object>();
 			map.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return map;

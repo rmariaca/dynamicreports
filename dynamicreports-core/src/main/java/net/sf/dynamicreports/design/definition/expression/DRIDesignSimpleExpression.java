@@ -23,12 +23,11 @@
 package net.sf.dynamicreports.design.definition.expression;
 
 import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignSimpleExpression extends DRIDesignExpression {
 	
-	public Object evaluate(ReportParameters reportParameters) throws DRException;
+	public Object evaluate(ReportParameters reportParameters);
 }

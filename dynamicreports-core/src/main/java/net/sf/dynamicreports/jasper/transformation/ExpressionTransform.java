@@ -91,9 +91,11 @@ public class ExpressionTransform {
 		addExpression(simpleExpression);
 	}
 	
-	private void addField(DRIDesignField field) {				
+	private void addField(DRIDesignField field) {
 		try {
-			accessor.getDesign().addField(field(field));
+			if (!field.isExternal()) {
+				accessor.getDesign().addField(field(field));
+			}
 			accessor.getCustomValues().addValueType(field.getName(), ValueType.FIELD);
 			addExpression(field);
 		} catch (JRException e) {

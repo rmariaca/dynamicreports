@@ -28,4 +28,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignField extends DRIDesignExpression {
+	
+	public boolean isExternal();
 }
