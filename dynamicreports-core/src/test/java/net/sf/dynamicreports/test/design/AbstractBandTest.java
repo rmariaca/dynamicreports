@@ -38,7 +38,7 @@ public abstract class AbstractBandTest {
 		
 	@Test
 	public void test() {
-		ReportBuilder<?> rb = new TestReportBuilder();
+		ReportBuilder<?> rb = new DesignReportBuilder();
 		configureReport(rb);
 		try {
 			DRDesignReport report = new DRDesignReport(rb.getReport());

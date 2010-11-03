@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.dynamicreports.test.design.TestReportBuilder;
+import net.sf.dynamicreports.test.design.DesignReportBuilder;
 
 import org.junit.Test;
 
@@ -43,14 +43,14 @@ public class TemplateDesignTest {
 
 	@Test
 	public void testComponentFixedWidth() {
-		ReportBuilder<?> rb1 = new TestReportBuilder(new TestTemplateDesign());	
+		ReportBuilder<?> rb1 = new DesignReportBuilder(new TestTemplateDesign());	
 		try {
 			new DRDesignReport(rb1.getReport());			
 		} catch (DRException e) {
 			Assert.fail("template design failed");
 		}		
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.setPageFormat(100, 100, PageOrientation.LANDSCAPE);
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -58,7 +58,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {			
 		}
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.setPageFormat(50, 200, PageOrientation.LANDSCAPE);
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -66,7 +66,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}		
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.setPageFormat(200, 100, PageOrientation.PORTRAIT);
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -74,7 +74,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());		
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());		
 		MarginBuilder margin = margin();
 		margin.setLeft(10).setRight(6).setTop(7).setBottom(8);
 		rb1.setPageMargin(margin);
@@ -84,7 +84,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());		
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());		
 		margin = margin();
 		margin.setLeft(5).setRight(10).setTop(7).setBottom(8);
 		rb1.setPageMargin(margin);
@@ -94,7 +94,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());		
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());		
 		margin = margin();
 		margin.setLeft(5).setRight(6).setTop(10).setBottom(8);
 		rb1.setPageMargin(margin);
@@ -104,7 +104,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());		
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());		
 		margin = margin();
 		margin.setLeft(5).setRight(6).setTop(7).setBottom(10);
 		rb1.setPageMargin(margin);
@@ -114,7 +114,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.setPageColumnsPerPage(5);
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -122,7 +122,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.setPageColumnSpace(5);
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -130,7 +130,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.title(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -138,7 +138,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.pageHeader(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -146,7 +146,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.pageFooter(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -154,7 +154,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.columnHeader(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -162,7 +162,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.columnFooter(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -170,7 +170,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.pageFooter(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -178,7 +178,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.summary(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -186,7 +186,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.noData(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -194,7 +194,7 @@ public class TemplateDesignTest {
 		} catch (DRException e) {
 		}	
 		
-		rb1 = new TestReportBuilder(new TestTemplateDesign());
+		rb1 = new DesignReportBuilder(new TestTemplateDesign());
 		rb1.background(cmp.text(""));
 		try {
 			new DRDesignReport(rb1.getReport());

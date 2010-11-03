@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.base.AbstractTemplateDesign;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TestTemplateDesign extends AbstractTemplateDesign<Object>  {
+public class DesignTestTemplateDesign extends AbstractTemplateDesign<Object>  {
 	private static final long serialVersionUID = 1L;
 
 }

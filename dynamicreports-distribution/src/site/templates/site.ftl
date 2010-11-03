@@ -26,6 +26,7 @@
 		<#else>	
 			<div id="main" class="code">
 		</#if>	
+			<h2>${page.title}</h2>
 			<#include page.content>
 
 			</div>

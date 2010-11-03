@@ -1,6 +1,8 @@
 <div id="header">			
 				
-	<h1 id="logo-text"><a href="${page.path}index.html">DynamicReports</a></h1>		
+	<h1 id="logo-text"><a href="${page.path}index.html">DynamicReports</a></h1>
+	<h1 id="slogan"><a href="${page.path}index.html">free and open source Java reporting tool</a></h1>
+					
 			
 	<div id="header-links">
 	<p>
@@ -9,7 +11,7 @@
 	</p>		
 	</div>		
 	<div id="header-links2">
-		Site updated on ${project.date?string("yyyy-MM-dd")}
+		Last published: ${project.date?string("yyyy-MM-dd")}
 	</div>		
 						
 </div>

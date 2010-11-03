@@ -8,7 +8,7 @@
 			<staticText>
 				<reportElement x="30" y="27" width="515" height="20"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Title subreport loaded from jrxml file]]></text>
+				<text><![CDATA[Title subreport defined in jrxml file]]></text>
 			</staticText>
 		</band>
 	</title>

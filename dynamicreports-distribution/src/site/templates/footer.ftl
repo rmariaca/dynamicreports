@@ -7,7 +7,7 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 	<a href="${page.path}index.html">Home</a> |
-	<a href="http://sourceforge.net/apps/wordpress/dynamicreports/feed/">RSS Feed <img style="vertical-align:middle" class="preview" src="${page.path}images/rss.png" alt="RSS" width="12" height="12"/></a>
+	<a href="http://sourceforge.net/apps/wordpress/dynamicreports/feed/">RSS Feed <img style="vertical-align:middle" class="preview" src="${page.path}images/rss.png" alt="RSS Feed" width="12" height="12"/></a>
 
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 

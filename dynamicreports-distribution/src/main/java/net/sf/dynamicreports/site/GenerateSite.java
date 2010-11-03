@@ -28,7 +28,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -102,12 +101,25 @@ public class GenerateSite {
 	}
 	
 	private void generatePages() throws Exception {
-		File dir = new File(pages_path);
-		String[] children = dir.list(new PageFilesFilter());
-		for (String file : children) {
+		BufferedReader reader = new BufferedReader(new FileReader(pages_path + "pages.txt"));
+    String line = reader.readLine();
+    while (line != null) {
+    	String[] p = line.split("\\|");
+    	line = reader.readLine();
+    	String file = p[0] + ".html";
+    	
+			Page page = new Page(file, pages_path + file, loadFile(new FileReader(pages_path + file)));
+			page.setTitle(p[1]);
+			if (p.length > 2) {
+				page.setDescription(p[2]);
+			}
+			if (p.length > 3) {
+				page.setKeywords(p[3]);
+			}
+			
 			Map<String, Object> root = new HashMap<String, Object>();
-			root.put("project", project);
-			root.put("page", new Page(file, pages_path + file, loadFile(new FileReader(pages_path + file))));
+			root.put("project", project);			
+			root.put("page", page);
 			
 			Writer out = new FileWriter(site_path + file);
 			temp.process(root, out);
@@ -148,7 +160,7 @@ public class GenerateSite {
 	
 	private void generateExamplesHtml() throws Exception {
 		String name = "examples";
-		String content = "<h1>Examples</h1>\r\n";
+		String content = "";
 		
 		int index = 0;
 		int count = 0;
@@ -165,7 +177,7 @@ public class GenerateSite {
 			}
 			
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
-				content += "<a name=\"" + example.getPath() + "\"></a><h2>" + example.getPath() + "</h2><br/>\r\n";
+				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + example.getPath() + "</h2><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
@@ -198,6 +210,7 @@ public class GenerateSite {
 		Page page = new Page("examples/" + name.toLowerCase() + ".html", name, content);
 		page.setPath("../");
 		page.setExamples("");
+		page.setTitle("Examples");
 		root.put("project", project);
 		root.put("page", page);
 
@@ -270,6 +283,7 @@ public class GenerateSite {
 		page.setPath("../");
 		page.setExamples("");
 		page.setSideBar(false);
+		page.setTitle(name);
 		root.put("project", project);
 		root.put("page", page);
 
@@ -294,13 +308,6 @@ public class GenerateSite {
     	content = content.substring(2);
     }
     return content;
-	}
-	
-	private class PageFilesFilter implements FilenameFilter {
-
-		public boolean accept(File dir, String name) {
-			return name.endsWith(".html");
-		}		
 	}
 	
 	public static void main(String[] args) throws Exception {

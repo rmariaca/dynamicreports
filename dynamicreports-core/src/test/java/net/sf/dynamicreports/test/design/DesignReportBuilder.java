@@ -28,14 +28,14 @@ import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TestReportBuilder extends ReportBuilder<TestReportBuilder> {
+public class DesignReportBuilder extends ReportBuilder<DesignReportBuilder> {
 	private static final long serialVersionUID = 1L;
 
-	public TestReportBuilder() {
-		getObject().setTemplateDesign(new TestTemplateDesign());
+	public DesignReportBuilder() {
+		getObject().setTemplateDesign(new DesignTestTemplateDesign());
 	}
 	
-	public TestReportBuilder(DRITemplateDesign<?> templateDesign) {
+	public DesignReportBuilder(DRITemplateDesign<?> templateDesign) {
 		getObject().setTemplateDesign(templateDesign);
 	}
 }

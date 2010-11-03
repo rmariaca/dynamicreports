@@ -1,10 +1,12 @@
 <head>
 
-<meta name="Description" content="DynamicReports is an open source Java reporting library based on JasperReports. The main benefit of this library is a dynamic report design and no need for a visual report designer." />
+<#if page.description != "">
+<meta name="Description" content="${page.description}" />
+</#if>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="Distribution" content="Global" />
-<meta name="Robots" content="index,follow" />
-<meta name="keywords" content="dynamicreports,jasperreports,dynamic jasper,dynamic report,jasperreports api,dynamic report design,dynamic report for java,runtime generation of jasperreports,dynamic reporting in Java,generate report at runtime" />
+<#if page.keywords != "">
+<meta name="keywords" content="${page.keywords}" />
+</#if>
 
 <link rel="stylesheet" href="${page.path}styles/style.css" type="text/css" />
 <script type="text/javascript" src="scripts/jquery-1.4.2.min.js"></script>
@@ -56,6 +58,6 @@ $(function(){
 </script>
 </#if>
 
-<title>DynamicReports</title>
+<title>DynamicReports - ${page.title}</title>
 	
 </head>

@@ -24,7 +24,7 @@
 </#macro>
 <#macro example id title=false source_code=true file="pdf" file_ext="">
 <#if title == true>
-<h3 style="text-align:center">${id}</h3>
+<h4 style="text-align:center">${id}</h4>
 </#if>
 <table style="margin-left:auto;margin-right:auto">
 	<tr>

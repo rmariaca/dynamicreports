@@ -25,20 +25,25 @@ a:hover {
 }
 
 /* headers */
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	font-family: 'Trebuchet MS', Tahoma, Sans-serif;	 		
 }
 h1 {
 	font-size: 150%;	
-	font-weight: bold;
+	font-weight: normal;
 	color: #006699;
 }
 h2 {
+	font-size: 140%;	
+	font-weight: bold;
+	color: #006699;
+}
+h3 {
 	font-size: 140%;
 	text-transform: uppercase;
 	color: #88ac0b;
 }
-h3 {
+h4 {
 	font-size: 120%;
 	color: #666666; 
 }
@@ -65,7 +70,7 @@ img.preview {
 	padding: 0px;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, h4, p {
 	padding: 10px;		
 	margin: 0;
 }
@@ -253,15 +258,17 @@ a.download:hover, a.download:active {
 	/* change the values of top and left to adjust the position of the logo*/
 	top: 25px; left: 47px;	
 }
-#header p#slogan {
+#header h1#slogan a {
 	position: absolute;
 	margin: 0; padding: 0;
 	font: normal 12px 'Trebuchet MS', Arial, Sans-serif;
-	text-transform: none;
 	color: #FFF;
+	text-transform: none;
+	text-decoration: none;
+	background: transparent;
 	
 	/* change the values of top and left to adjust the position of the slogan*/
-	top: 70px; left: 55px;		
+	top: 72px; left: 55px;		
 }
 
 /* header links */
@@ -340,7 +347,7 @@ a.download:hover, a.download:active {
 	padding: 0; margin: 0px 0px 0px 0px;
 	display: inline;
 }
-#main h2 {
+#main h3 {
 	margin-top: 10px;
 	font: Bold 140% 'Trebuchet MS', Tahoma, Sans-serif;
 	color: #88ac0b; 
@@ -349,7 +356,7 @@ a.download:hover, a.download:active {
 	background: #FFF url(../images/square-green.png) no-repeat 3px 50%;	
 	text-transform: none;
 }
-#main h2 a {
+#main h3 a {
 	background: none;
 	color: #88ac0b;
 	text-decoration: none;
@@ -385,7 +392,7 @@ a.download:hover, a.download:active {
 	padding: 0; margin: 5px;	
 	color: #68774A;	
 }	
-#sidebar h3 {
+#sidebar h4 {
 	margin-top: 10px;
 	padding: 5px 5px; 
 	font: bold 1.4em 'Trebuchet MS', Tahoma, Sans-serif;

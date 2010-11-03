@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.dynamicreports.test.design.TestReportBuilder;
+import net.sf.dynamicreports.test.design.DesignReportBuilder;
 
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class ExceptionTest {
 
 	@Test
 	public void testComponentFixedWidth() {
-		ReportBuilder<?> rb1 = new TestReportBuilder();	
+		ReportBuilder<?> rb1 = new DesignReportBuilder();	
 		rb1.title(cmp.text("").setFixedWidth(600));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -50,7 +50,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		ReportBuilder<?> rb2 = new TestReportBuilder();	
+		ReportBuilder<?> rb2 = new DesignReportBuilder();	
 		rb2.title(cmp.horizontalList(cmp.text("").setFixedWidth(600)));
 		try {
 			new DRDesignReport(rb2.getReport());
@@ -58,7 +58,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		ReportBuilder<?> rb3 = new TestReportBuilder();		
+		ReportBuilder<?> rb3 = new DesignReportBuilder();		
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setFixedWidth(600)));
 		try {
 			new DRDesignReport(rb3.getReport());
@@ -69,7 +69,7 @@ public class ExceptionTest {
 	
 	@Test
 	public void testComponentMinimumWidth() {
-		ReportBuilder<?> rb1 = new TestReportBuilder();	
+		ReportBuilder<?> rb1 = new DesignReportBuilder();	
 		rb1.title(cmp.text("").setMinWidth(600));
 		try {
 			new DRDesignReport(rb1.getReport());
@@ -77,7 +77,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		ReportBuilder<?> rb2 = new TestReportBuilder();		
+		ReportBuilder<?> rb2 = new DesignReportBuilder();		
 		rb2.title(cmp.horizontalList(cmp.text("").setMinWidth(600)));
 		try {
 			new DRDesignReport(rb2.getReport());
@@ -85,7 +85,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		ReportBuilder<?> rb3 = new TestReportBuilder();	
+		ReportBuilder<?> rb3 = new DesignReportBuilder();	
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setMinWidth(600)));
 		try {
 			new DRDesignReport(rb3.getReport());
@@ -98,7 +98,7 @@ public class ExceptionTest {
 	public void testVariable() {
 		TextColumnBuilder<Object> column = col.column("fieldName", Object.class);
 		ColumnGroupBuilder group = grp.group(column);
-		ReportBuilder<?> rb1 = new TestReportBuilder()
+		ReportBuilder<?> rb1 = new DesignReportBuilder()
 			.columns(column)
 			.groupBy(group)
 			.variables(variable("fieldName", Object.class, Calculation.SUM).setResetGroup(group).setResetType(Evaluation.REPORT));
@@ -108,7 +108,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		ReportBuilder<?> rb2 = new TestReportBuilder()
+		ReportBuilder<?> rb2 = new DesignReportBuilder()
 			.columns(column)
 			.groupBy(group)
 			.variables(variable("fieldName", Object.class, Calculation.SUM).setResetType(Evaluation.GROUP));

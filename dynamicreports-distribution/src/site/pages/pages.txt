@@ -1,0 +1,13 @@
+contact|Contact
+faq|Frequently Asked Questions
+features|Features
+getting_started|Getting started
+index|Free and open source Java reporting tool|DynamicReports is an open source Java reporting tool based on JasperReports. It allows to create dynamic designs and it doesn't need a visual report designer.|dynamic report,reporting tool,open source java, java report
+license|License
+requirements|Requirements
+roadmap|Road map
+screenshots|Screenshots
+source_repository|Source repository
+support|Support
+team|Team
+tipsandtricks|Tips &amp; tricks

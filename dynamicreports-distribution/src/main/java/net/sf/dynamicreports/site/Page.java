@@ -38,6 +38,9 @@ public class Page {
 	private Set<String> codeClasses;
 	private boolean hasImage;
 	private boolean hasImageGroup;
+	private String description;
+	private String keywords;
+	private String title;
 	
 	public Page(String page, String name, String pageContent) throws Exception {	
 		this.page = page;
@@ -53,6 +56,9 @@ public class Page {
 		codeClasses = new LinkedHashSet<String>();
 		hasImage = false;
 		hasImageGroup = false;
+		description = "";
+		keywords = "";
+		title = "";
 	}
 	
 	private void setPage(String name, String pageContent) throws Exception {
@@ -138,5 +144,29 @@ public class Page {
 
 	public void setHasImageGroup(boolean hasImageGroup) {
 		this.hasImageGroup = hasImageGroup;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}	
 }

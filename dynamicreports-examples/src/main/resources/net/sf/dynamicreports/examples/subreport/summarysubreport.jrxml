@@ -8,7 +8,7 @@
 			<staticText>
 				<reportElement x="30" y="27" width="515" height="20"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Summary subreport loaded from jasper file]]></text>
+				<text><![CDATA[Summary subreport defined in jrxml file]]></text>
 			</staticText>
 		</band>
 	</title>
