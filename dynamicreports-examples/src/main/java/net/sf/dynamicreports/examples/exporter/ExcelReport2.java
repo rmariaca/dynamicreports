@@ -51,7 +51,8 @@ public class ExcelReport2 {
 			                                             .setRemoveEmptySpaceBetweenColumns(true);
 			
 			TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType())
-			                                          .setStretchWithOverflow(false)
+			                                          .setFixedWidth(30)
+			                                          .setStretchWithOverflow(false)			                                          
 			                                          .addProperty("net.sf.jasperreports.print.keep.full.text", "true");
 			
 			report()
@@ -70,8 +71,8 @@ public class ExcelReport2 {
 	
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
-		for (int i = 0; i < 50; i++) {
-			dataSource.add("Book1 Book2 Book3 Book4 Book5 Book6 Book7 Book8 Book9", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
+		for (int i = 0; i < 5; i++) {
+			dataSource.add("Very long book name", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 		}
 		return dataSource;
 	}
