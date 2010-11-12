@@ -22,8 +22,12 @@
 
 package net.sf.dynamicreports.design.base.component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
@@ -37,7 +41,8 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	private Integer y;
 	private Integer width;
 	private Integer height;
-	private DRIDesignSimpleExpression printWhenExpression;	
+	private DRIDesignSimpleExpression printWhenExpression;
+	private List<DRIDesignPropertyExpression> propertyExpressions;
 
 	protected DRDesignComponent(String name) {
 		this.name = name;
@@ -46,6 +51,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	}
 	
 	protected void init() {
+		propertyExpressions = new ArrayList<DRIDesignPropertyExpression>();
 	}
 		
 	public String getName() {
@@ -107,4 +113,12 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	public void setPrintWhenExpression(DRIDesignSimpleExpression printWhenExpression) {
 		this.printWhenExpression = printWhenExpression;
 	}
+
+	public List<DRIDesignPropertyExpression> getPropertyExpressions() {
+		return propertyExpressions;
+	}
+
+	public void setPropertyExpressions(List<DRIDesignPropertyExpression> propertyExpressions) {
+		this.propertyExpressions = propertyExpressions;
+	}	
 }

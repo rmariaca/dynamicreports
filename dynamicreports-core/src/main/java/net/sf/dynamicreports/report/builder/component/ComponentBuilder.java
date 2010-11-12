@@ -24,8 +24,10 @@ package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
@@ -51,6 +53,21 @@ public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U exten
 	
 	public T setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
 		getObject().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}	
+	
+	public T addProperty(DRIPropertyExpression propertyExpression) {
+		getComponent().addPropertyExpression(propertyExpression);
+		return (T) this;
+	}	
+	
+	public T addProperty(String name, DRISimpleExpression<String> valueExpression) {
+		getComponent().addPropertyExpression(Expressions.property(name, valueExpression));
+		return (T) this;
+	}	
+
+	public T addProperty(String name, String value) {
+		getComponent().addPropertyExpression(Expressions.property(name, value));
 		return (T) this;
 	}	
 	

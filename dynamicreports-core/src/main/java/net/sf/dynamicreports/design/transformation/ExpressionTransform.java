@@ -31,6 +31,7 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.DRDesignField;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.expression.DRDesignComplexExpression;
+import net.sf.dynamicreports.design.base.expression.DRDesignPropertyExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSimpleExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSystemExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignValueFormatter;
@@ -38,6 +39,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
@@ -48,6 +50,7 @@ import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.DRIVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -166,6 +169,13 @@ public class ExpressionTransform {
 		designVariable.setResetType(ConstantTransform.variableResetType(variable.getResetType(), variable.getResetGroup(), accessor));
 		designVariable.setResetGroup(accessor.getGroupTransform().getGroup(ConstantTransform.variableResetGroup(variable.getName(), variable.getResetType(), variable.getResetGroup(), accessor)));		
 		return designVariable;
+	}
+	
+	public DRIDesignPropertyExpression transformPropertyExpression(DRIPropertyExpression propertyExpression) throws DRException {
+		DRDesignPropertyExpression designPropertyExpression = new DRDesignPropertyExpression();
+		designPropertyExpression.setName(propertyExpression.getName());
+		designPropertyExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(propertyExpression.getValueExpression()));
+		return designPropertyExpression;
 	}
 	
 	private DRIDesignExpression addExpression(DRIDesignExpression expression) {

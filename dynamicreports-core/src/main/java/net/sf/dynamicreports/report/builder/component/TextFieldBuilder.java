@@ -189,4 +189,9 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setMarkup(markup);
 		return this;
 	}
+	
+	public TextFieldBuilder<T> setStretchWithOverflow(Boolean stretchWithOverflow) {
+		getObject().setStretchWithOverflow(stretchWithOverflow);
+		return this;
+	}
 }

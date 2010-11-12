@@ -95,6 +95,7 @@ public class Default {
 	//text field
 	private int textFieldWidth;
 	private boolean textFieldPrintRepeatedValues;
+	private boolean textFieldStretchWithOverflow;
 	//image
 	private int imageWidth;
 	private int imageHeight;	
@@ -219,6 +220,7 @@ public class Default {
 		
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
+		this.textFieldStretchWithOverflow = true;
 		
 		this.imageWidth = 100;
 		this.imageHeight = 100;		
@@ -443,6 +445,10 @@ public class Default {
 
 	public boolean isTextFieldPrintRepeatedValues() {
 		return textFieldPrintRepeatedValues;
+	}
+	
+	public boolean isTextFieldStretchWithOverflow() {
+		return textFieldStretchWithOverflow;
 	}
 	
 	public int getImageWidth() {

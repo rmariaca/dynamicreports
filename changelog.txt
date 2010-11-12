@@ -3,7 +3,7 @@ DynamicReports Change Log
 
 Changes in version 1.5.0 (2010-11-03)
 ---------------------------------------------------
- - support for jrxml template design, see JasperTemplateDesignReport, JasperTemplateDesignReport2 for an example
+ - support for jrxml template design, see JasperTemplateDesignReport1, JasperTemplateDesignReport2 for an example
  - markup attribute was added to textfields and styles
  - new examples - examples/templatedesign/*
                 - examples/chart/ChartCustomizerReport

@@ -77,6 +77,7 @@ import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -126,6 +127,9 @@ public class ComponentTransform {
 	private void component(DRDesignComponent designComponent, DRIComponent component, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
 		designComponent.setPrintWhenExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
+		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
+			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
+		}
 	}
 	
 	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
@@ -170,6 +174,7 @@ public class ComponentTransform {
 		hyperlink(designTextField, textField, textField.getStyle(), true, defaultStyleType);
 		TemplateTransform templateTransform = accessor.getTemplateTransform();		
 		designTextField.setPrintRepeatedValues(Defaults.getDefaults().isTextFieldPrintRepeatedValues());
+		designTextField.setStretchWithOverflow(templateTransform.getTextFieldStretchWithOverflow(textField));
 		DRDesignStyle style = designTextField.getStyle();
 		designTextField.setWidth(templateTransform.getTextFieldWidth(textField, style));
 		designTextField.setHeight(templateTransform.getTextFieldHeight(textField, style));

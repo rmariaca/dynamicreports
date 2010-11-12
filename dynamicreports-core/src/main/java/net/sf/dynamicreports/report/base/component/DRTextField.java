@@ -50,6 +50,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private Evaluation evaluationTime;
 	private DRGroup evaluationGroup;	
 	private Markup markup; 
+	private Boolean stretchWithOverflow;
 	
 	public DRIExpression<T> getValueExpression() {
 		return valueExpression;
@@ -162,5 +163,13 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	public void setMarkup(Markup markup) {
 		this.markup = markup;
 	}
+
+	public Boolean getStretchWithOverflow() {
+		return stretchWithOverflow;
+	}
+
+	public void setStretchWithOverflow(Boolean stretchWithOverflow) {
+		this.stretchWithOverflow = stretchWithOverflow;
+	}	
 }
 

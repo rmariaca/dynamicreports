@@ -39,6 +39,7 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
@@ -139,6 +140,10 @@ public class ComponentTransform {
 		if (component.getStyle() != null)
 			jrElement.setStyle(accessor.getStyleTransform().getStyle(component.getStyle()));
 		jrElement.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(component.getPrintWhenExpression()));
+		
+		for (DRIDesignPropertyExpression propertyExpression : component.getPropertyExpressions()) {
+			jrElement.addPropertyExpression(accessor.getExpressionTransform().getPropertyExpression(propertyExpression));
+		}
 	}
 	
 	private StretchTypeEnum detectStretchType(ListType listType) {
@@ -193,7 +198,7 @@ public class ComponentTransform {
 			jrTextField.setEvaluationGroup(accessor.getGroupTransform().getGroup(textField.getEvaluationGroup()));
 		}
 		
-		jrTextField.setStretchWithOverflow(true);
+		jrTextField.setStretchWithOverflow(textField.isStretchWithOverflow());
 		
 		String pattern = textField.getPattern();
 		if (!StringUtils.isBlank(pattern)) {			

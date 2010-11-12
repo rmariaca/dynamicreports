@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
@@ -38,9 +39,11 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.SystemExpression;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRPropertyExpression;
 import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignField;
+import net.sf.jasperreports.engine.design.JRDesignPropertyExpression;
 import net.sf.jasperreports.engine.design.JRDesignVariable;
 
 /**
@@ -200,5 +203,12 @@ public class ExpressionTransform {
 			throw new JasperDesignException("Expression \"" + expression.getName() + "\" is not registered");
 		}			
 		return expressions.get(expression.getName());
+	}
+
+	public JRPropertyExpression getPropertyExpression(DRIDesignPropertyExpression propertyExpression) {
+		JRDesignPropertyExpression jrPropertyExpression = new JRDesignPropertyExpression();
+		jrPropertyExpression.setName(propertyExpression.getName());
+		jrPropertyExpression.setValueExpression(getExpression(propertyExpression.getValueExpression()));
+		return jrPropertyExpression;
 	}
 }

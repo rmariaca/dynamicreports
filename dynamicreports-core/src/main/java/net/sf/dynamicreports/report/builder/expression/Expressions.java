@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.util.Date;
 
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -124,6 +125,14 @@ public class Expressions {
 			return new MessageExpression(key);
 		}
 		return null;
+	}
+	
+	public static PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
+		return new PropertyExpression(name, valueExpression);
+	}
+	
+	public static PropertyExpression property(String name, String value) {
+		return new PropertyExpression(name, text(value));
 	}
 	
 	public static PrintInOddRowExpression printInOddRow() {

@@ -46,4 +46,6 @@ public interface DRIDesignTextField extends DRIDesignHyperLinkComponent {
 	public DRIDesignGroup getEvaluationGroup();
 
 	public Markup getMarkup();
+	
+	public boolean isStretchWithOverflow();	
 }

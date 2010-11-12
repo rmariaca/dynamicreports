@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.design.definition.component;
 
+import java.util.List;
+
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 
@@ -44,4 +47,6 @@ public interface DRIDesignComponent {
 	public Integer getHeight();
 	
 	public DRIDesignSimpleExpression getPrintWhenExpression();
+	
+	public List<DRIDesignPropertyExpression> getPropertyExpressions();
 }

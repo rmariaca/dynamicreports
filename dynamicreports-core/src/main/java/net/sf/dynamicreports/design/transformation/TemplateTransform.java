@@ -647,6 +647,13 @@ public class TemplateTransform {
 		return null;
 	}
 	
+	protected boolean getTextFieldStretchWithOverflow(DRITextField<?> textField) {
+		if (textField.getStretchWithOverflow() != null) {
+			return textField.getStretchWithOverflow();
+		}
+		return Defaults.getDefaults().isTextFieldStretchWithOverflow();
+	}
+	
 	//page x of y
 	protected int getPageXofYWidth(DRIPageXofY pageXofY, DRDesignStyle style) {
 		if (pageXofY.getWidth() != null) {

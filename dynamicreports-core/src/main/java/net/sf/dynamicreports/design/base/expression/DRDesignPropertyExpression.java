@@ -20,23 +20,31 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.component;
+package net.sf.dynamicreports.design.base.expression;
 
-import java.io.Serializable;
-import java.util.List;
-
-import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIComponent extends Serializable {	
+public class DRDesignPropertyExpression implements DRIDesignPropertyExpression {	
+	private String name;
+	private DRIDesignSimpleExpression valueExpression;
 	
-	public DRIStyle getStyle();
-		
-	public DRISimpleExpression<Boolean> getPrintWhenExpression();
+	public String getName() {
+		return name;
+	}
 	
-	public List<DRIPropertyExpression> getPropertyExpressions();
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public DRIDesignSimpleExpression getValueExpression() {
+		return valueExpression;
+	}
+	
+	public void setValueExpression(DRIDesignSimpleExpression valueExpression) {
+		this.valueExpression = valueExpression;
+	}
 }

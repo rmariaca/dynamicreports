@@ -25,11 +25,14 @@ package net.sf.dynamicreports.report.builder.column;
 import net.sf.dynamicreports.report.base.DRValueColumn;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 /**
@@ -236,6 +239,26 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
+	
+	public T setStretchWithOverflow(Boolean stretchWithOverflow) {
+		getComponent().setStretchWithOverflow(stretchWithOverflow);
+		return (T) this;
+	}
+	
+	public T addProperty(DRIPropertyExpression propertyExpression) {
+		getComponent().addPropertyExpression(propertyExpression);
+		return (T) this;
+	}	
+	
+	public T addProperty(String name, DRISimpleExpression<String> valueExpression) {
+		getComponent().addPropertyExpression(Expressions.property(name, valueExpression));
+		return (T) this;
+	}	
+
+	public T addProperty(String name, String value) {
+		getComponent().addPropertyExpression(Expressions.property(name, value));
+		return (T) this;
+	}	
 	
 	@Override
 	protected DRTextField<U> getComponent() {

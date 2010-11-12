@@ -40,6 +40,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
 	private Markup markup; 
+	private boolean stretchWithOverflow;
 	
 	public DRDesignTextField() {
 		super("textField");
@@ -100,4 +101,12 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	public void setMarkup(Markup markup) {
 		this.markup = markup;
 	}
+
+	public boolean isStretchWithOverflow() {
+		return stretchWithOverflow;
+	}
+
+	public void setStretchWithOverflow(boolean stretchWithOverflow) {
+		this.stretchWithOverflow = stretchWithOverflow;
+	}	
 }

@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.util.Date;
 
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -108,6 +109,14 @@ public class ExpressionBuilders {
 
 	public MessageExpression message(String key) {
 		return Expressions.message(key);
+	}
+	
+	public PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
+		return Expressions.property(name, valueExpression);
+	}
+	
+	public PropertyExpression property(String name, String value) {
+		return Expressions.property(name, text(value));
 	}
 	
 	public PrintInOddRowExpression printInOddRow() {

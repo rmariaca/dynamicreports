@@ -54,5 +54,7 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 	public DRIGroup getEvaluationGroup();
 	
 	public Markup getMarkup();
+
+	public Boolean getStretchWithOverflow();
 }
 
