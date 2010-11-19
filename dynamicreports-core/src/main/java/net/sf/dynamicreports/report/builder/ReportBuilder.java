@@ -49,6 +49,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 import org.apache.commons.lang.Validate;
 
@@ -228,6 +229,10 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return addParameter(parameters);
 	}
 	
+	public T addParameter(String name, T value) {
+		return addParameter(DynamicReports.parameter(name, value));
+	}
+	
 	public T addParameter(ParameterBuilder<?> ...parameters) {
 		Validate.notNull(parameters, "parameters must not be null");
 		Validate.noNullElements(parameters, "parameters must not contains null parameter");
@@ -242,6 +247,14 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return addField(fields);
 	}
 
+	public T addField(String name, Class<T> valueClass) {
+		return addField(DynamicReports.field(name, valueClass));
+	}
+	
+	public T addField(String name, DRIDataType<? super T, T> dataType) {
+		return addField(DynamicReports.field(name, dataType));
+	}
+	
 	public T addField(FieldBuilder<?> ...fields) {
 		Validate.notNull(fields, "fields must not be null");
 		Validate.noNullElements(fields, "fields must not contains null field");

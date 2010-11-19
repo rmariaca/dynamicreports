@@ -20,43 +20,46 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.jasper.base.export;
 
 import org.apache.commons.lang.Validate;
 
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.jasper.constant.ImageType;
+import net.sf.dynamicreports.jasper.definition.export.JasperIImageExporter;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class ValueExpression<T> extends AbstractSimpleExpression<T> {
+public class JasperImageExporter extends AbstractJasperExporter implements JasperIImageExporter {	
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private T value;
-	private Class<? super T> valueClass;
-
-	@SuppressWarnings("unchecked")
-	public ValueExpression(T value) {
-		Validate.notNull(value, "value must not be null");
-		this.value = value;
-		this.valueClass = (Class<? super T>) value.getClass();
+	private Integer pageGap;
+	private ImageType imageType;	
+	private Float zoom;
+		
+	public Integer getPageGap() {
+		return pageGap;
 	}
 
-	public ValueExpression(T value, Class<? super T> valueClass) {	
-		Validate.notNull(valueClass, "valueClass must not be null");
-		this.value = value;			
-		this.valueClass = valueClass;
+	public void setPageGap(Integer pageGap) {
+		this.pageGap = pageGap;
+	}
+
+	public ImageType getImageType() {
+		return imageType;
 	}
 	
-	public T evaluate(ReportParameters reportParameters) {
-		return value;
+	public void setImageType(ImageType imageType) {
+		Validate.notNull(imageType, "imageType must not be null");
+		this.imageType = imageType;
 	}
 	
-	@Override
-	public Class<? super T> getValueClass() {
-		return valueClass;
+	public Float getZoom() {
+		return zoom;
 	}
+	
+	public void setZoom(Float zoom) {
+		this.zoom = zoom;
+	}	
 }

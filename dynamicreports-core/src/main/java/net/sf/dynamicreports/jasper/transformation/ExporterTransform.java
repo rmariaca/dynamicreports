@@ -29,6 +29,7 @@ import net.sf.dynamicreports.jasper.definition.export.JasperIExcelApiXlsExporter
 import net.sf.dynamicreports.jasper.definition.export.JasperIExcelExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIHtmlExporter;
+import net.sf.dynamicreports.jasper.definition.export.JasperIImageExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIOdsExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIOdtExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIPdfExporter;
@@ -42,11 +43,15 @@ import net.sf.dynamicreports.jasper.definition.export.JasperIXmlssExporter;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.defaults.Defaults;
+import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.export.JExcelApiExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporterParameter;
+import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
+import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
 import net.sf.jasperreports.engine.export.JRHtmlExporter;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -77,7 +82,7 @@ public class ExporterTransform {
 		this.jasperExporter = jasperExporter;
 	}
 
-	public JRExporter transform() {
+	public JRExporter transform() throws DRException {
 		JRExporter jrExporter;
 		
 		if (jasperExporter instanceof JasperICsvExporter) {
@@ -122,13 +127,16 @@ public class ExporterTransform {
 		else if (jasperExporter instanceof JasperIXmlssExporter) {
 			jrExporter = xmlss((JasperIXmlssExporter) jasperExporter);
 		}
+		else if (jasperExporter instanceof JasperIImageExporter) {
+			jrExporter = image((JasperIImageExporter) jasperExporter);
+		}
 		else {
 			throw new JasperDesignException("Exporter " + jasperExporter.getClass().getName() + " not supported");
 		}
 		
 		return jrExporter;
 	}
-
+	
 	private JRExporter exporter(JRExporter jrExporter, JasperIExporter jasperExporter) {
 		if (jasperExporter.getOutputWriter() != null) {
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_WRITER, jasperExporter.getOutputWriter());
@@ -427,5 +435,26 @@ public class ExporterTransform {
 			jrExporter.setParameter(JRCsvExporterParameter.RECORD_DELIMITER, jasperExporter.getRecordDelimiter());
 		}
 		return jrExporter;
+	}
+	
+	public JRExporter image(JasperIImageExporter jasperExporter) throws DRException {
+		try {
+			JRGraphics2DExporter jrExporter = new JRGraphics2DExporter();
+			if (jasperExporter.getCharacterEncoding() != null) {
+				jrExporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, jasperExporter.getCharacterEncoding());
+			}
+			if (jasperExporter.getOffsetY() != null) {
+				jrExporter.setParameter(JRExporterParameter.OFFSET_Y, jasperExporter.getOffsetY());
+			}
+			if (jasperExporter.getIgnorePageMargins() != null) {
+				jrExporter.setParameter(JRExporterParameter.IGNORE_PAGE_MARGINS, jasperExporter.getIgnorePageMargins());
+			}
+			if (jasperExporter.getZoom() != null) {
+				jrExporter.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO, jasperExporter.getZoom());
+			}
+			return jrExporter;
+		} catch (JRException e) {
+			throw new DRException(e);
+		}
 	}
 }

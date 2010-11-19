@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.jasper.constant.ImageType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -57,7 +58,7 @@ public class ExportTest {
 	public void exportTest() {
 		try {
 			report.toJrXml(new ByteArrayOutputStream());
-			report.toPng(new ByteArrayOutputStream(), -1);
+			report.toImage(new ByteArrayOutputStream(), ImageType.PNG);
 			report.toCsv(new ByteArrayOutputStream());
 			report.toDocx(new ByteArrayOutputStream());
 			report.toHtml(new ByteArrayOutputStream());

@@ -20,43 +20,35 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.jasper.builder.export;
 
-import org.apache.commons.lang.Validate;
-
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.jasper.base.export.JasperImageExporter;
+import net.sf.dynamicreports.jasper.constant.ImageType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class ValueExpression<T> extends AbstractSimpleExpression<T> {
+public class JasperImageExporterBuilder extends AbstractJasperExporterBuilder<JasperImageExporterBuilder, JasperImageExporter> {	
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private T value;
-	private Class<? super T> valueClass;
-
-	@SuppressWarnings("unchecked")
-	public ValueExpression(T value) {
-		Validate.notNull(value, "value must not be null");
-		this.value = value;
-		this.valueClass = (Class<? super T>) value.getClass();
-	}
-
-	public ValueExpression(T value, Class<? super T> valueClass) {	
-		Validate.notNull(valueClass, "valueClass must not be null");
-		this.value = value;			
-		this.valueClass = valueClass;
+	protected JasperImageExporterBuilder() {
+		super(new JasperImageExporter());
 	}
 	
-	public T evaluate(ReportParameters reportParameters) {
-		return value;
+	public JasperImageExporterBuilder setPageGap(Integer pageGap) {
+		this.getObject().setPageGap(pageGap);
+		return this;
 	}
 	
-	@Override
-	public Class<? super T> getValueClass() {
-		return valueClass;
+	public JasperImageExporterBuilder setImageType(ImageType imageType) {
+		this.getObject().setImageType(imageType);
+		return this;
+	}
+	
+	public JasperImageExporterBuilder setZoom(Float zoom) {
+		this.getObject().setZoom(zoom);
+		return this;
 	}
 }

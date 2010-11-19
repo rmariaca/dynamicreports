@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.OutputStream;
 import java.io.Writer;
 
+import net.sf.dynamicreports.jasper.constant.ImageType;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -268,5 +270,18 @@ public class Exporters {
 	
 	public static JasperXmlssExporterBuilder xmlssExporter(String outputFileName) {
 		return new JasperXmlssExporterBuilder().setOutputFileName(outputFileName);
+	}
+	
+	//image	
+	public static JasperImageExporterBuilder imageExporter(OutputStream outputStream, ImageType imageType) {
+		return new JasperImageExporterBuilder().setOutputStream(outputStream).setImageType(imageType);
+	}
+	
+	public static JasperImageExporterBuilder imageExporter(File outputFile, ImageType imageType) {
+		return new JasperImageExporterBuilder().setOutputFile(outputFile).setImageType(imageType);
+	}
+	
+	public static JasperImageExporterBuilder imageExporter(String outputFileName, ImageType imageType) {
+		return new JasperImageExporterBuilder().setOutputFileName(outputFileName).setImageType(imageType);
 	}
 }

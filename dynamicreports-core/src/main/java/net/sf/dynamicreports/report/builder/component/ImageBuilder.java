@@ -64,7 +64,7 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 	}
 
 	public ImageBuilder setImage(URL imageUrl) {
-		getObject().setImageExpression(Expressions.value(imageUrl));
+		getObject().setImageExpression(Expressions.url(imageUrl));
 		return this;
 	}
 	

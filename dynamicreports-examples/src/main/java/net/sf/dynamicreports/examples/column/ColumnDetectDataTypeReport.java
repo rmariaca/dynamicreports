@@ -32,6 +32,7 @@ import java.util.List;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -44,11 +45,12 @@ public class ColumnDetectDataTypeReport {
 		build();
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void build() {
 		try {
 			JasperReportBuilder report = report();
 			for (Column column : createColumns()) {
-				report.addColumn(col.column(column.title, column.field, type.detectType(column.dataType)));
+				report.addColumn(col.column(column.title, column.field, (DRIDataType) type.detectType(column.dataType)));
 			}
 			report
 			  .setTemplate(Templates.reportTemplate)			  

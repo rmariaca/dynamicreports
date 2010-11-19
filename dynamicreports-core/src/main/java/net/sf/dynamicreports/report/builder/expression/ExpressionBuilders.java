@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.builder.expression;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Date;
 
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
@@ -93,6 +94,10 @@ public class ExpressionBuilders {
 
 	public ValueExpression<InputStream> inputStream(InputStream inputStream) {
 		return Expressions.inputStream(inputStream);
+	}
+	
+	public ValueExpression<URL> url(URL url) {
+		return Expressions.url(url);
 	}
 	
 	public <T> ValueExpression<T> value(T value) {

@@ -45,6 +45,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperImageExporterBuilder;
+import net.sf.dynamicreports.jasper.constant.ImageType;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -224,9 +226,15 @@ public class GenerateSite {
 	}
 
 	public static void generateExampleImage(String name, JasperReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Exception {
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), -1, 0.08f);
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), -1, 0.15f);
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), -1, 1.1f);		
+		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), ImageType.PNG);
+		imageExporter.setZoom(0.08f);
+		reportBuilder.toImage(imageExporter);
+		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), ImageType.PNG);
+		imageExporter.setZoom(0.15f);
+		reportBuilder.toImage(imageExporter);
+		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), ImageType.PNG);
+		imageExporter.setZoom(1.1f);
+		reportBuilder.toImage(imageExporter);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);
 		if (jasperExporterBuilder instanceof JasperHtmlExporterBuilder) {

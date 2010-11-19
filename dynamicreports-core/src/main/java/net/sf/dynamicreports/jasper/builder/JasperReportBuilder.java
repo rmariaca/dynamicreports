@@ -40,6 +40,7 @@ import javax.imageio.ImageIO;
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import net.sf.dynamicreports.jasper.base.export.JasperImageExporter;
 import net.sf.dynamicreports.jasper.base.templatedesign.JasperEmptyTemplateDesign;
 import net.sf.dynamicreports.jasper.base.templatedesign.JasperTemplateDesign;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
@@ -48,6 +49,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperCsvExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperDocxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperExcelApiXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperImageExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdtExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
@@ -58,6 +60,8 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlssExporterBuilder;
+import net.sf.dynamicreports.jasper.constant.ImageType;
+import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.QueryBuilder;
@@ -80,7 +84,6 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
 import net.sf.jasperreports.view.JasperDesignViewer;
@@ -105,6 +108,12 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	
 	public JasperReportBuilder() {	
 		setTemplateDesign(new JasperEmptyTemplateDesign());
+	}
+	
+	public JasperReportBuilder setConnection(Connection connection) {	
+		Validate.notNull(connection, "connection must not be null");
+		this.connection = connection;
+		return this;
 	}
 	
 	public JasperReportBuilder setDataSource(Collection<?> collection) {
@@ -262,50 +271,113 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 	
+	@Deprecated
+	/**
+	 * You should use toImage() 
+	 */
 	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex) throws DRException {
-		return toPng(outputStream, pageIndex, 1);
+		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
+		imageExporter.setPageIndex(pageIndex);
+		return toImage(imageExporter);
 	}
 	
+	@Deprecated
+	/**
+	 * You should use toImage() 
+	 */
 	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex, float zoom) throws DRException {
-		Validate.notNull(outputStream, "outputStream must not be null");
-		Validate.isTrue(zoom > 0, "zoom must be > 0");
+		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
+		imageExporter.setPageIndex(pageIndex);
+		imageExporter.setZoom(zoom);
+		return toImage(imageExporter);
+	}
+	
+	//image
+	public JasperReportBuilder toImage(OutputStream outputStream, ImageType imageType) throws DRException {
+		return toImage(Exporters.imageExporter(outputStream, imageType));
+	}
+	
+	public JasperReportBuilder toImage(JasperImageExporterBuilder imageExporterBuilder) throws DRException {
+		Validate.notNull(imageExporterBuilder, "imageExporterBuilder must not be null");
 		
-		JasperPrint jasperPrint = toJasperPrint();		
-		int fromPage;
-		int toPage;		
-		if (pageIndex < 0) {
-			fromPage = 0;
-			toPage = jasperPrint.getPages().size();
+		JasperImageExporter imageExporter = imageExporterBuilder.build();
+		JRExporter exporter = new ExporterTransform(imageExporter).transform();
+		
+		JasperPrint jasperPrint = toJasperPrint();
+		Integer fromPage = null;
+		Integer toPage = null;
+		float zoom = 1;
+		String imageType = imageExporter.getImageType().name().toLowerCase();
+		int offsetX = 0;
+		int offsetY = 0;
+		int pageGap = 0;
+		
+		if (imageExporter.getZoom() != null) {
+			zoom = imageExporter.getZoom();
+		}		
+		if (imageExporter.getOffsetX() != null) {
+			offsetX = imageExporter.getOffsetX();
+		}	
+		if (imageExporter.getOffsetY() != null) {
+			offsetY = imageExporter.getOffsetY();
+		}	
+		if (imageExporter.getPageGap() != null) {
+			pageGap = imageExporter.getPageGap();
+		}	
+		
+		if (imageExporter.getPageIndex() != null && imageExporter.getPageIndex() >= 0) {
+			fromPage = imageExporter.getPageIndex();
+			toPage = imageExporter.getPageIndex() + 1;
 		}
 		else {
-			fromPage = pageIndex;
-			toPage = pageIndex + 1;
+			if (imageExporter.getStartPageIndex() != null) {
+				fromPage = imageExporter.getStartPageIndex();
+			}
+			if (imageExporter.getEndPageIndex() != null) {
+				toPage = imageExporter.getEndPageIndex();
+			}
 		}
+		if (fromPage == null) {
+			fromPage = 0;
+		}
+		if (toPage == null) {
+			toPage = jasperPrint.getPages().size();
+		}
+		
 		int pages = toPage - fromPage;
 		
 		int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
-		int width = pageWidth * pages + (pages - 1) + 2;
-		int height = (int) (jasperPrint.getPageHeight() * zoom) + 2;
+		int width = pageWidth * pages + (pages - 1) + offsetX * 2;
+		int height = (int) (jasperPrint.getPageHeight() * zoom) + offsetY * 2;
 		Image pageImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		
-		int offset = 1;
+		int offset = offsetX;
 		for (int i = 0; i < pages; i++) {			
-			try {
-				JRGraphics2DExporter exporter = new JRGraphics2DExporter();			
+			try {		
 				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 				exporter.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D, pageImage.getGraphics());
 				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_X, offset);
-				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_Y, 1);
+				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_Y, offsetY);
 				exporter.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(fromPage++));
-				exporter.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO, new Float(zoom));
 				exporter.exportReport();
-				offset += pageWidth + 1;				
+				offset += pageWidth + pageGap;				
 			} catch (JRException e) {
 				throw new DRException(e);
 			}
 		}
 		try {
-			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
+			if (imageExporter.getOutputStream() != null) {
+				ImageIO.write((RenderedImage) pageImage, imageType, imageExporter.getOutputStream());
+			}
+			else if (imageExporter.getOutputFileName() != null) {
+				ImageIO.write((RenderedImage) pageImage, imageType, new File(imageExporter.getOutputFileName()));
+			}
+			else if (imageExporter.getOutputFile() != null) {
+				ImageIO.write((RenderedImage) pageImage, imageType, imageExporter.getOutputFile());
+			}
+			else {
+				throw new JasperDesignException("ImageExporter output not supported");
+			}
 		} catch (IOException e) {
 			throw new DRException(e);
 		}
