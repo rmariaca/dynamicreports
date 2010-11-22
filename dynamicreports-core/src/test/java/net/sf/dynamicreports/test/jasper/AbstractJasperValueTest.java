@@ -43,6 +43,10 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 	protected void elementValueTest(String name, int index, String value) {
 		Assert.assertEquals("element value " + name, value, getElementValue(name, index));
 	}
+
+	protected void elementFullValueTest(String name, int index, String value) {
+		Assert.assertEquals("element value " + name, value, getElementFullValue(name, index));
+	}
 	
 	protected void elementValueTest(String name, String ...values) {
 		List<JRPrintElement> elements = findElement(name);
@@ -56,6 +60,10 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 		return ((JRPrintText) getElementAt(key, index)).getText();
 	}
 	
+	private String getElementFullValue(String key, int index) {
+		return ((JRPrintText) getElementAt(key, index)).getFullText();
+	}
+	
 	//column detail
 	protected void columnDetailCountTest(ColumnBuilder<?, ?> column, int expectedNumberOfElements) {
 		elementCountTest(JasperTestUtils.getColumnDetailName(column), expectedNumberOfElements);
@@ -65,6 +73,10 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 		elementValueTest(JasperTestUtils.getColumnDetailName(column), index, value);
 	}
 
+	protected void columnDetailFullValueTest(ColumnBuilder<?, ?> column, int index, String value) {
+		elementFullValueTest(JasperTestUtils.getColumnDetailName(column), index, value);
+	}
+	
 	protected void columnDetailValueTest(ColumnBuilder<?, ?> column, String ...values) {
 		elementValueTest(JasperTestUtils.getColumnDetailName(column), values);
 	}

@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.report.definition.expression;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIPropertyExpression {
+public interface DRIPropertyExpression extends Serializable {
 	
 	public String getName();
 	

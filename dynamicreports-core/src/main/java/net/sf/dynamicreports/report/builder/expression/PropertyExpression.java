@@ -24,13 +24,16 @@ package net.sf.dynamicreports.report.builder.expression;
 
 import org.apache.commons.lang.Validate;
 
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PropertyExpression implements DRIPropertyExpression {	
+public class PropertyExpression implements DRIPropertyExpression {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+	
 	private String name;
 	private DRISimpleExpression<String> valueExpression;
 		

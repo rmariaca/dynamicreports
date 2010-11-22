@@ -25,7 +25,6 @@ package net.sf.dynamicreports.test.jasper.component;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -33,23 +32,16 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TextFieldTest extends AbstractJasperPositionTest {
-	private TextColumnBuilder<Integer> column1;
-	private TextColumnBuilder<Integer> column2;
-	private TextColumnBuilder<Integer> column3;	
-	private AggregationSubtotalBuilder<Integer> subtotal1;
+public class TextField2Test extends AbstractJasperPositionTest {
+	private TextColumnBuilder<String> column1;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(				
-				column1 = col.column("Column1", "field1", Integer.class),
-				column2 = col.column("Column2", "field2", Integer.class).setColumns(20),
-				column3 = col.column("Column3", "field3", Integer.class).setRows(2))
-			.subtotalsAtSummary(
-					subtotal1 = sbt.sum(column2))
+				column1 = col.column("", "field1", String.class).setFixedWidth(25).setStretchWithOverflow(false))
 			.title(					
-					cmp.horizontalList(
-						cmp.hListCell(cmp.text("").setColumns(10).setRows(5)).widthFixed()));
+				cmp.text("test test").setFixedWidth(25).setStretchWithOverflow(false),
+				cmp.text("test test").setFixedWidth(25));
 	}
 
 	@Override
@@ -58,26 +50,16 @@ public class TextFieldTest extends AbstractJasperPositionTest {
 		
 		numberOfPagesTest(1);
 		
-		elementPositionTest("title.textField1", 0, 10, 10, 94, 62);
+		elementPositionTest("title.textField1", 0, 10, 10, 25, 16);
+		elementPositionTest("title.textField2", 0, 10, 26, 25, 26);
 		
-		columnTitlePositionTest(column1, 0, 0, 0, 149, 16);
-		columnDetailPositionTest(column1, 0, 0, 0, 149, 27);
-		
-		columnTitlePositionTest(column2, 0, 149, 0, 276, 16);
-		columnDetailPositionTest(column2, 0, 149, 0, 276, 27);
-		
-		columnTitlePositionTest(column3, 0, 425, 0, 150, 16);
-		columnDetailPositionTest(column3, 0, 425, 0, 150, 27);
-		
-		subtotalPositionTest(subtotal1, 0, 149, 0, 276, 16);
+		columnDetailPositionTest(column1, 0, 10, 68, 25, 16);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
-		for (int i = 0; i < 10; i++) {
-			dataSource.add(i, i, i);
-		}		
+		DataSource dataSource = new DataSource("field1");
+		dataSource.add("test test");
 		return dataSource;
 	}
 }

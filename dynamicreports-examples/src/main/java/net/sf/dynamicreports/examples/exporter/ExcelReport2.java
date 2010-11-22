@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
+import net.sf.dynamicreports.jasper.constant.JasperProperty;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -53,7 +54,7 @@ public class ExcelReport2 {
 			TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType())
 			                                          .setFixedWidth(30)
 			                                          .setStretchWithOverflow(false)			                                          
-			                                          .addProperty("net.sf.jasperreports.print.keep.full.text", "true");
+			                                          .addProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true");
 			
 			report()
 			  .setColumnTitleStyle(Templates.columnTitleStyle)
