@@ -227,12 +227,21 @@ public class GenerateSite {
 
 	public static void generateExampleImage(String name, JasperReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Exception {
 		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), ImageType.PNG);
+		imageExporter.setOffsetX(1);
+		imageExporter.setOffsetY(1);
+		imageExporter.setPageGap(1);
 		imageExporter.setZoom(0.08f);
 		reportBuilder.toImage(imageExporter);
 		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), ImageType.PNG);
+		imageExporter.setOffsetX(1);
+		imageExporter.setOffsetY(1);
+		imageExporter.setPageGap(1);
 		imageExporter.setZoom(0.15f);
 		reportBuilder.toImage(imageExporter);
 		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), ImageType.PNG);
+		imageExporter.setOffsetX(1);
+		imageExporter.setOffsetY(1);
+		imageExporter.setPageGap(1);
 		imageExporter.setZoom(1.1f);
 		reportBuilder.toImage(imageExporter);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);

@@ -42,10 +42,20 @@ public class GenerateClasspath {
 		Project project = new Project();
 		Configuration cfg = new Configuration();		
 		cfg.setObjectWrapper(new DefaultObjectWrapper());
-		Template temp = cfg.getTemplate("src/assemblies/classpath.ftl");
+		Template temp = cfg.getTemplate("src/assemblies/eclipse_classpath.ftl");
 		Map<String, Object> root = new HashMap<String, Object>();		
 		root.put("project", project);		
-		Writer out = new FileWriter(project.getOutputDirectory() + "/.classpath");
+		Writer out = new FileWriter(project.getOutputDirectory() + "/eclipse_classpath");
+		temp.process(root, out);
+		out.flush();
+		
+		project = new Project();
+		cfg = new Configuration();		
+		cfg.setObjectWrapper(new DefaultObjectWrapper());
+		temp = cfg.getTemplate("src/assemblies/netbeans_classpath.ftl");
+		root = new HashMap<String, Object>();		
+		root.put("project", project);		
+		out = new FileWriter(project.getOutputDirectory() + "/netbeans_classpath");
 		temp.process(root, out);
 		out.flush();
 	}

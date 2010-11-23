@@ -33,8 +33,14 @@
         
 	<files>
 		<file>
-			<source>${project.build.directory}/.classpath</source>
-			<outputDirectory>examples/dynamicreports-examples</outputDirectory>
+			<source>${project.build.directory}/eclipse_classpath</source>
+			<destName>.classpath</destName>
+			<outputDirectory>examples/eclipse/dynamicreports-examples</outputDirectory>
+		</file>
+		<file>
+			<source>${project.build.directory}/netbeans_classpath</source>
+			<destName>project.properties</destName>
+			<outputDirectory>examples/netbeans/dynamicreports-examples/nbproject</outputDirectory>
 		</file>
 		<file>
 			<source>src/assemblies/readme.txt</source>
@@ -66,7 +72,20 @@
 			<includes>
 				<include>net.sourceforge.dynamicreports:dynamicreports-examples:*:sources</include>
 			</includes>
-			<outputDirectory>examples/dynamicreports-examples/src</outputDirectory>  
+			<outputDirectory>examples/eclipse/dynamicreports-examples/src</outputDirectory>  
+			<unpack>true</unpack>    
+			<unpackOptions>
+				<excludes>
+					<exclude>**/META-INF/**</exclude>
+				</excludes>
+			</unpackOptions>      
+		</dependencySet>  
+
+		<dependencySet>
+			<includes>
+				<include>net.sourceforge.dynamicreports:dynamicreports-examples:*:sources</include>
+			</includes>
+			<outputDirectory>examples/netbeans/dynamicreports-examples/src</outputDirectory>  
 			<unpack>true</unpack>    
 			<unpackOptions>
 				<excludes>
