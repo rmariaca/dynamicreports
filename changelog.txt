@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.5.1 (2010-11-24)
+---------------------------------------------------
+ - stretchWithOverflow attribute was added to textfields and columns
+ - support for properties in columns and components
+ - new example - examples/exporter/ExcelReport2
+
 Changes in version 1.5.0 (2010-11-03)
 ---------------------------------------------------
  - support for jrxml template design, see JasperTemplateDesignReport1, JasperTemplateDesignReport2 for an example
