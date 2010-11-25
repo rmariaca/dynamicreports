@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
+import net.sf.dynamicreports.design.definition.component.DRIDesignBreak;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
@@ -52,6 +53,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignBreak;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
 import net.sf.jasperreports.engine.design.JRDesignImage;
@@ -118,6 +120,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignLine) {
 			JRDesignElement jrElement = line((DRIDesignLine) component);
+			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignBreak) {
+			JRDesignElement jrElement = breakComponent((DRIDesignBreak) component);
 			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
@@ -269,6 +276,13 @@ public class ComponentTransform {
 		JRDesignLine jrDesignLine = new JRDesignLine();
 		jrDesignLine.setDirection(ConstantTransform.lineDirection(line.getDirection()));
 		return jrDesignLine;
+	}
+	
+	//break
+	private JRDesignElement breakComponent(DRIDesignBreak breakComponent) {
+		JRDesignBreak jrDesignBreak = new JRDesignBreak();
+		jrDesignBreak.setType(ConstantTransform.breakType(breakComponent.getType()));
+		return jrDesignBreak;
 	}
 	
 	private class SubreportExpression implements DRIDesignSimpleExpression {		

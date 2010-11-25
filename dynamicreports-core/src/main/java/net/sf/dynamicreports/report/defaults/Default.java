@@ -105,6 +105,9 @@ public class Default {
 	//line
 	private int lineWidth;
 	private int lineHeight;
+	//break
+	private int breakWidth;
+	private int breakHeight;
 	//list
 	private int listgap;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
@@ -230,6 +233,9 @@ public class Default {
 
 		this.lineWidth = 1;
 		this.lineHeight = 1;	
+		
+		this.breakWidth = 1;
+		this.breakHeight = 1;	
 		
 		this.listgap = 0;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
@@ -473,6 +479,14 @@ public class Default {
 	
 	public int getLineHeight() {
 		return lineHeight;
+	}
+	
+	public int getBreakWidth() {
+		return breakWidth;
+	}
+	
+	public int getBreakHeight() {
+		return breakHeight;
 	}
 	
 	public int getListgap() {

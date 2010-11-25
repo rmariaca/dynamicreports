@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeShape;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
+import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -59,6 +60,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJdbcQueryExecuterFactory;
 import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
+import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
@@ -600,6 +602,21 @@ public class ConstantTransform {
 			return "html";
 		default:
 			throw new JasperDesignException("Markup " + markup.name() + " not supported");
+		}
+	}
+
+	public static BreakTypeEnum breakType(BreakType breakType) {
+		if (breakType == null) {
+			return null;
+		}
+		
+		switch (breakType) {
+		case PAGE:
+			return BreakTypeEnum.PAGE;
+		case COLUMN:
+			return BreakTypeEnum.COLUMN;
+		default:
+			throw new JasperDesignException("BreakType " + breakType.name() + " not supported");
 		}
 	}
 }

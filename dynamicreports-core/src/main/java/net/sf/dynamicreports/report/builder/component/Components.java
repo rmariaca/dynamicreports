@@ -28,6 +28,7 @@ import java.net.URL;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.jasperreports.engine.JasperReport;
@@ -180,5 +181,14 @@ public class Components {
 	//line
 	public static LineBuilder line() {
 		return new LineBuilder();
+	}
+	
+	//break
+	public static BreakBuilder pageBreak() {
+		return new BreakBuilder().setType(BreakType.PAGE);
+	}
+	
+	public static BreakBuilder columnBreak() {
+		return new BreakBuilder().setType(BreakType.COLUMN);
 	}
 }

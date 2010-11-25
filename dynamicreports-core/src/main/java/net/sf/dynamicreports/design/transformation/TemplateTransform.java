@@ -51,6 +51,7 @@ import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
@@ -717,7 +718,7 @@ public class TemplateTransform {
 		}
 		return Defaults.getDefaults().getFillerHeight();
 	}
-	
+		
 	//line
 	protected int getLineWidth(DRILine line) {
 		if (line.getWidth() != null) {
@@ -731,6 +732,15 @@ public class TemplateTransform {
 			return line.getHeight();
 		}
 		return Defaults.getDefaults().getLineHeight();
+	}
+	
+	//break
+	protected int getBreakWidth(DRIBreak breakComponent) {
+		return Defaults.getDefaults().getBreakWidth();
+	}
+	
+	protected int getBreakHeight(DRIBreak breakComponent) {
+		return Defaults.getDefaults().getBreakHeight();
 	}
 	
 	//list

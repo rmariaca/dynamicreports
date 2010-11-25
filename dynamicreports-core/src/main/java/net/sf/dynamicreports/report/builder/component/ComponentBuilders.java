@@ -169,4 +169,13 @@ public class ComponentBuilders {
 	public LineBuilder line() {
 		return Components.line();
 	}
+	
+	//break
+	public BreakBuilder pageBreak() {
+		return Components.pageBreak();
+	}
+	
+	public BreakBuilder columnBreak() {
+		return Components.columnBreak();
+	}
 }

@@ -30,6 +30,7 @@ import net.sf.dynamicreports.design.base.DRDesignHyperLink;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
+import net.sf.dynamicreports.design.base.component.DRDesignBreak;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
@@ -66,6 +67,7 @@ import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
+import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
@@ -120,6 +122,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRILine) {
 			return line((DRILine) component);
+		}
+		if (component instanceof DRIBreak) {
+			return breakComponent((DRIBreak) component);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -335,6 +340,16 @@ public class ComponentTransform {
 		designLine.setWidth(accessor.getTemplateTransform().getLineWidth(line));
 		designLine.setHeight(accessor.getTemplateTransform().getLineHeight(line));
 		return designLine;
+	}
+	
+	//break
+	protected DRDesignBreak breakComponent(DRIBreak breakComponent) throws DRException {
+		DRDesignBreak designBreak = new DRDesignBreak();
+		component(designBreak, breakComponent, null, false, DefaultStyleType.NONE);
+		designBreak.setType(breakComponent.getType());
+		designBreak.setWidth(accessor.getTemplateTransform().getBreakWidth(breakComponent));
+		designBreak.setHeight(accessor.getTemplateTransform().getBreakHeight(breakComponent));
+		return designBreak;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
