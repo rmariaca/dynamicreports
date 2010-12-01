@@ -85,6 +85,15 @@ public class ConditionsTest {
 		conditionFalse("notBetween", cnd.notBetween(value, 10, 20));
 		conditionTrue("notBetween", cnd.notBetween(value, 5, 9));
 		conditionTrue("notBetween", cnd.notBetween(value, 11, 20));
+		
+		//equal object
+		FieldBuilder<Object> value2 = field("name", Object.class);
+		conditionTrue("equal", cnd.equal(value2, Type.A, Type.C, Type.F), Type.C);
+		conditionFalse("equal", cnd.equal(value2, Type.B, Type.C), Type.E);
+
+		//unequal object
+		conditionFalse("unequal", cnd.unEqual(value2, Type.A, Type.C, Type.F), Type.C);
+		conditionTrue("unequal", cnd.unEqual(value2, Type.B, Type.C), Type.E);
 	}
 	
 	private void conditionTrue(String name, DRISimpleExpression<Boolean> condition) {
@@ -95,10 +104,18 @@ public class ConditionsTest {
 		Assert.assertFalse(name + " condition", condition.evaluate(new TestReportParameters(10)));
 	}
 	
+	private void conditionTrue(String name, DRISimpleExpression<Boolean> condition, Object actualValue) {
+		Assert.assertTrue(name + " condition", condition.evaluate(new TestReportParameters(actualValue)));
+	}
+
+	private void conditionFalse(String name, DRISimpleExpression<Boolean> condition, Object actualValue) {
+		Assert.assertFalse(name + " condition", condition.evaluate(new TestReportParameters(actualValue)));
+	}
+	
 	private class TestReportParameters implements ReportParameters {
-		private Number value;
+		private Object value;
 		
-		public TestReportParameters(Number value) {
+		public TestReportParameters(Object value) {
 			this.value = value;
 		}
 		
@@ -153,7 +170,15 @@ public class ConditionsTest {
 
 		public ReportParameters getMasterParameters() {
 			return null;
-		}
-		
+		}		
+	}
+	
+	private enum Type {
+		A,
+		B,
+		C,
+		D,
+		E,
+		F
 	}
 }

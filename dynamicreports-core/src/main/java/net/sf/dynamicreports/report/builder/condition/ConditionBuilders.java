@@ -30,8 +30,16 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 @SuppressWarnings("ucd")
 public class ConditionBuilders {
 	
+	public <T> EqualExpression equal(DRIValue<T> value, T ...values) {		
+		return Conditions.equal(value, values);
+	}
+	
 	public <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {		
 		return Conditions.equal(value, number);
+	}
+	
+	public <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {		
+		return Conditions.unEqual(value, values);
 	}
 	
 	public <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {		

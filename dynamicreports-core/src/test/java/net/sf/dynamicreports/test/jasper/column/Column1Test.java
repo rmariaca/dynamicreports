@@ -52,8 +52,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setLocale(Locale.ENGLISH)
-			.fields(
-					field("field1", Integer.class))
+			.addField("field1", Integer.class)
 			.columns(					
 					column2 = col.column("Column2", "field2", String.class),
 					column3 = col.column("Column3", "field3", Date.class).setPattern("dd.MM.yyyy"), 

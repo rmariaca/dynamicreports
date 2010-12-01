@@ -48,7 +48,8 @@ import net.sf.jasperreports.engine.util.JRFontUtil;
 public class Report1Test extends AbstractJasperValueTest {	
 	private TextColumnBuilder<Integer> column1;
 	private ReportScriptlet scriptlet;
-	private BigDecimal parameter;
+	private BigDecimal parameter1;
+	private BigDecimal parameter2;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -59,7 +60,8 @@ public class Report1Test extends AbstractJasperValueTest {
 			.setShowColumnTitle(false)
 			.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
 			.scriptlets(scriptlet = new ReportScriptlet())
-			.parameters(parameter("parameter", parameter = new BigDecimal(10)));
+			.parameters(parameter("parameter1", parameter1 = new BigDecimal(10)))
+			.addParameter("parameter2", parameter2 = new BigDecimal(20));
 	}
 
 	@Override
@@ -109,7 +111,8 @@ public class Report1Test extends AbstractJasperValueTest {
 			super.afterReportInit(reportParameters);
 			Assert.assertEquals(Locale.ENGLISH, reportParameters.getLocale());
 			Assert.assertEquals("bundleValue", reportParameters.getMessage("bundleKey"));
-			Assert.assertEquals(parameter, reportParameters.getValue("parameter"));
+			Assert.assertEquals(parameter1, reportParameters.getValue("parameter1"));
+			Assert.assertEquals(parameter2, reportParameters.getValue("parameter2"));
 			Assert.assertEquals(this, reportParameters.getScriptlet(getName()));
 		}
 		

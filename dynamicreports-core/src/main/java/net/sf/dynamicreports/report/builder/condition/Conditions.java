@@ -29,9 +29,17 @@ import net.sf.dynamicreports.report.definition.DRIValue;
  */
 @SuppressWarnings("ucd")
 public class Conditions {
+
+	public static <T> EqualExpression equal(DRIValue<T> value, T ...values) {		
+		return new EqualExpression(value, values);
+	}
 	
 	public static <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {		
 		return new EqualValueExpression<T>(value, number);
+	}
+	
+	public static <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {		
+		return new UnEqualExpression(value, values);
 	}
 	
 	public static <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {		

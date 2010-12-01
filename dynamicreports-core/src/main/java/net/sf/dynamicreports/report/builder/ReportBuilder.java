@@ -229,7 +229,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return addParameter(parameters);
 	}
 	
-	public T addParameter(String name, T value) {
+	public T addParameter(String name, Object value) {
 		return addParameter(DynamicReports.parameter(name, value));
 	}
 	
@@ -247,11 +247,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return addField(fields);
 	}
 
-	public T addField(String name, Class<T> valueClass) {
+	public T addField(String name, Class<?> valueClass) {
 		return addField(DynamicReports.field(name, valueClass));
 	}
 	
-	public T addField(String name, DRIDataType<? super T, T> dataType) {
+	public <U> T addField(String name, DRIDataType<? super U, U> dataType) {
 		return addField(DynamicReports.field(name, dataType));
 	}
 	

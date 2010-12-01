@@ -54,7 +54,7 @@ public class ImageTest extends AbstractJasperTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			.setImageStyle(stl.style().setImageScale(ImageScale.NO_RESIZE))
-			.title(cmp.image(image = new TestImage()));
+			.title(cmp.image(image = new TestImage()), cmp.image(ImageTest.class.getResource("noimage")));
 	}
 	
 	@Override

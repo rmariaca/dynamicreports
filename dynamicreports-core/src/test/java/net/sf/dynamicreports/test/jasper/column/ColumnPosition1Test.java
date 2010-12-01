@@ -40,8 +40,7 @@ public class ColumnPosition1Test extends AbstractJasperPositionTest {
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.fields(
-				field("field1", Integer.class))
+		rb.addField("field1", type.integerType())
 			.columns(					
 					column2 = col.column("Very long Column2 title", "field2", String.class).setFixedWidth(70),
 					column3 = col.column("Column3", "field3", Integer.class),
