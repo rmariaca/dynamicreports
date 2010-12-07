@@ -20,41 +20,24 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.transformation;
+package net.sf.dynamicreports.design.definition.crosstab;
 
-import java.util.Map;
-
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
-	
-	public DRIDesignReport getReport(); 
-	
-	public JasperDesign getDesign();
-	
-	public JasperCustomValues getCustomValues();
-	
-	public Map<String, Object> getParameters();
-	
-	public ReportParameters getMasterReportParameters();
-	
-	public ExpressionTransform getExpressionTransform();
+public interface DRIDesignCrosstabMeasure {
 
-	public GroupTransform getGroupTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
+	public String getName();
 
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
+	public Class<?> getValueClass();
+	
+	public DRIDesignExpression getValueExpression();
+	
+	public Calculation getCalculation();
+	
+	public CrosstabPercentageType getPercentageType();
 }

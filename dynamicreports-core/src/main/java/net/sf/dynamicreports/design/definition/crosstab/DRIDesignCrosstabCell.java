@@ -20,41 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.transformation;
-
-import java.util.Map;
-
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.design.JasperDesign;
+package net.sf.dynamicreports.design.definition.crosstab;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
+public interface DRIDesignCrosstabCell {
 	
-	public DRIDesignReport getReport(); 
+	public String getName();
 	
-	public JasperDesign getDesign();
+	public Integer getWidth();
 	
-	public JasperCustomValues getCustomValues();
+	public Integer getHeight();
 	
-	public Map<String, Object> getParameters();
+	public String getRowTotalGroup();
 	
-	public ReportParameters getMasterReportParameters();
+	public String getColumnTotalGroup();
 	
-	public ExpressionTransform getExpressionTransform();
-
-	public GroupTransform getGroupTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
+	public DRIDesignCrosstabCellContent getContent();
 }

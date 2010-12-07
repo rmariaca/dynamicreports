@@ -20,41 +20,31 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.transformation;
+package net.sf.dynamicreports.design.base.crosstab;
 
-import java.util.Map;
-
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabColumnGroup;
+import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
+public class DRDesignCrosstabColumnGroup extends DRDesignCrosstabGroup implements DRIDesignCrosstabColumnGroup {	
+	private int height;	
+	private CrosstabColumnPosition position;
 	
-	public DRIDesignReport getReport(); 
+	public int getHeight() {
+		return height;
+	}
 	
-	public JasperDesign getDesign();
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	
-	public JasperCustomValues getCustomValues();
+	public CrosstabColumnPosition getPosition() {
+		return position;
+	}
 	
-	public Map<String, Object> getParameters();
-	
-	public ReportParameters getMasterReportParameters();
-	
-	public ExpressionTransform getExpressionTransform();
-
-	public GroupTransform getGroupTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
+	public void setPosition(CrosstabColumnPosition position) {
+		this.position = position;
+	}
 }

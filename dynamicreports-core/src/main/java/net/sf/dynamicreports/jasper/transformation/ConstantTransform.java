@@ -38,22 +38,32 @@ import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
+import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
+import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.Markup;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.constant.Rotation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
+import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
+import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
+import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
+import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
@@ -69,7 +79,9 @@ import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
 import net.sf.jasperreports.engine.type.RotationEnum;
+import net.sf.jasperreports.engine.type.RunDirectionEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
+import net.sf.jasperreports.engine.type.SortOrderEnum;
 import net.sf.jasperreports.engine.type.SplitTypeEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
@@ -617,6 +629,106 @@ public class ConstantTransform {
 			return BreakTypeEnum.COLUMN;
 		default:
 			throw new JasperDesignException("BreakType " + breakType.name() + " not supported");
+		}
+	}
+	
+	public static RunDirectionEnum runDirection(RunDirection runDirection) {
+		if (runDirection == null) {
+			return null;
+		}
+		
+		switch (runDirection) {
+		case LEFT_TO_RIGHT:
+			return RunDirectionEnum.LTR;
+		case RIGHT_TO_LEFT:
+			return RunDirectionEnum.RTL;
+		default:
+			throw new JasperDesignException("RunDirection " + runDirection.name() + " not supported");
+		}
+	}
+
+	public static CrosstabTotalPositionEnum crosstabTotalPosition(CrosstabTotalPosition totalPosition) {
+		if (totalPosition == null) {
+			return null;
+		}
+		
+		switch (totalPosition) {
+		case NONE:
+			return CrosstabTotalPositionEnum.NONE;
+		case START:
+			return CrosstabTotalPositionEnum.START;
+		case END:
+			return CrosstabTotalPositionEnum.END;
+		default:
+			throw new JasperDesignException("CrosstabTotalPosition " + totalPosition.name() + " not supported");
+		}
+	}
+
+	public static CrosstabColumnPositionEnum crosstabColumnPosition(CrosstabColumnPosition position) {
+		if (position == null) {
+			return null;
+		}
+		
+		switch (position) {
+		case LEFT:
+			return CrosstabColumnPositionEnum.LEFT;
+		case CENTER:
+			return CrosstabColumnPositionEnum.CENTER;
+		case RIGHT:
+			return CrosstabColumnPositionEnum.RIGHT;
+		case STRETCH:
+			return CrosstabColumnPositionEnum.STRETCH;
+		default:
+			throw new JasperDesignException("CrosstabColumnPosition " + position.name() + " not supported");
+		}
+	}
+
+	public static CrosstabRowPositionEnum crosstabRowPosition(CrosstabRowPosition position) {
+		if (position == null) {
+			return null;
+		}
+		
+		switch (position) {
+		case TOP:
+			return CrosstabRowPositionEnum.TOP;
+		case MIDDLE:
+			return CrosstabRowPositionEnum.MIDDLE;
+		case BOTTOM:
+			return CrosstabRowPositionEnum.BOTTOM;
+		case STRETCH:
+			return CrosstabRowPositionEnum.STRETCH;
+		default:
+			throw new JasperDesignException("CrosstabRowPosition " + position.name() + " not supported");
+		}
+	}
+
+	public static CrosstabPercentageEnum crosstabPercentageType(CrosstabPercentageType percentageType) {
+		if (percentageType == null) {
+			return null;
+		}
+		
+		switch (percentageType) {
+		case NONE:
+			return CrosstabPercentageEnum.NONE;
+		case GRAND_TOTAL:
+			return CrosstabPercentageEnum.GRAND_TOTAL;
+		default:
+			throw new JasperDesignException("CrosstabPercentageType " + percentageType.name() + " not supported");
+		}
+	}
+	
+	public static SortOrderEnum orderType(OrderType orderType) {
+		if (orderType == null) {
+			return null;
+		}
+		
+		switch (orderType) {
+		case ASCENDING:
+			return SortOrderEnum.ASCENDING;
+		case DESCENDING:
+			return SortOrderEnum.DESCENDING;
+		default:
+			throw new JasperDesignException("OrderType " + orderType.name() + " not supported");
 		}
 	}
 }

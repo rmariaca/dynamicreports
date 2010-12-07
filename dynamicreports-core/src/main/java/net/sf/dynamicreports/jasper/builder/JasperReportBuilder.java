@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -159,6 +160,10 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	
 	public JasperReportBuilder setTemplateDesign(JasperDesign jasperDesign) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(jasperDesign));
+	}
+	
+	public JasperReportBuilder setTemplateDesign(URL jasperDesignUrl) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(jasperDesignUrl));
 	}
 	
 	private JasperReportBuilder setTemplateDesign(DRITemplateDesign<JasperDesign> templateDesign) {	

@@ -20,41 +20,37 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.transformation;
+package net.sf.dynamicreports.design.definition.crosstab;
 
-import java.util.Map;
+import java.util.List;
 
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.report.constant.RunDirection;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
-	
-	public DRIDesignReport getReport(); 
-	
-	public JasperDesign getDesign();
-	
-	public JasperCustomValues getCustomValues();
-	
-	public Map<String, Object> getParameters();
-	
-	public ReportParameters getMasterReportParameters();
-	
-	public ExpressionTransform getExpressionTransform();
+public interface DRIDesignCrosstab extends DRIDesignComponent {
 
-	public GroupTransform getGroupTransform();
+	public boolean isRepeatColumnHeaders();
 	
-	public ComponentTransform getComponentTransform();
+	public boolean isRepeatRowHeaders();
 	
-	public StyleTransform getStyleTransform();
+	public int getColumnBreakOffset();
 	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
+	public Boolean getIgnoreWidth();
+	
+	public RunDirection getRunDirection();
+	
+	public DRIDesignCrosstabCellContent getWhenNoDataCell();
+	
+	public DRIDesignCrosstabCellContent getHeaderCell();
+	
+	public List<DRIDesignCrosstabColumnGroup> getColumnGroups();
+	
+	public List<DRIDesignCrosstabRowGroup> getRowGroups();
+	
+	public List<DRIDesignCrosstabCell> getCells();
+	
+	public List<DRIDesignCrosstabMeasure> getMeasures();
 }

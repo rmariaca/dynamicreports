@@ -25,7 +25,9 @@ package net.sf.dynamicreports.jasper.base.templatedesign;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +88,17 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 		try {
 			init(JRXmlLoader.load(inputStream));
 		} catch (JRException e) {
+			throw new DRException(e);
+		}
+	}
+
+	public JasperTemplateDesign(URL url) throws DRException {
+		Validate.notNull(url, "url must not be null");
+		try {
+			init(JRXmlLoader.load(url.openStream()));
+		} catch (JRException e) {
+			throw new DRException(e);
+		} catch (IOException e) {
 			throw new DRException(e);
 		}
 	}

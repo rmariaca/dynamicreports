@@ -20,41 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.transformation;
-
-import java.util.Map;
-
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.design.JasperDesign;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
-	
-	public DRIDesignReport getReport(); 
-	
-	public JasperDesign getDesign();
-	
-	public JasperCustomValues getCustomValues();
-	
-	public Map<String, Object> getParameters();
-	
-	public ReportParameters getMasterReportParameters();
-	
-	public ExpressionTransform getExpressionTransform();
-
-	public GroupTransform getGroupTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
+public enum RunDirection {
+	LEFT_TO_RIGHT,
+	RIGHT_TO_LEFT
 }

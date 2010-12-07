@@ -40,6 +40,7 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
@@ -125,6 +126,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignBreak) {
 			JRDesignElement jrElement = breakComponent((DRIDesignBreak) component);
+			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignCrosstab) {
+			JRDesignElement jrElement = accessor.getCrosstabTransform().transform((DRIDesignCrosstab) component);
 			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
