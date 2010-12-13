@@ -178,4 +178,9 @@ public class ComponentBuilders {
 	public BreakBuilder columnBreak() {
 		return Components.columnBreak();
 	}
+	
+	//generic element
+	public GenericElementBuilder genericElement(String namespace, String name) {
+		return Components.genericElement(namespace, name);
+	}
 }

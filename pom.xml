@@ -53,6 +53,7 @@
 		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
+		<springframeworkVersion>2.5</springframeworkVersion>
 		<poiVersion>3.5-FINAL</poiVersion>
 		<jxlVersion>2.6</jxlVersion>
 		<junitVersion>4.0</junitVersion>
@@ -106,6 +107,20 @@
 						<artifactId>xalan</artifactId>
 					</exclusion>				
 				</exclusions>
+			</dependency>	
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${springframeworkVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${springframeworkVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
 			</dependency>				  
 			<dependency>
 				<groupId>org.apache.poi</groupId>

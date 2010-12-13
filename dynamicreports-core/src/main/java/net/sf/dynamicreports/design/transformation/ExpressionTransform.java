@@ -31,6 +31,7 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.DRDesignField;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.expression.DRDesignComplexExpression;
+import net.sf.dynamicreports.design.base.expression.DRDesignParameterExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignPropertyExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSimpleExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSystemExpression;
@@ -39,6 +40,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
@@ -50,6 +52,7 @@ import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.DRIVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
@@ -176,6 +179,13 @@ public class ExpressionTransform {
 		designPropertyExpression.setName(propertyExpression.getName());
 		designPropertyExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(propertyExpression.getValueExpression()));
 		return designPropertyExpression;
+	}
+	
+	public DRIDesignParameterExpression transformParameterExpression(DRIParameterExpression parameterExpression) throws DRException {
+		DRDesignParameterExpression designParameterExpression = new DRDesignParameterExpression();
+		designParameterExpression.setName(parameterExpression.getName());
+		designParameterExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(parameterExpression.getValueExpression()));
+		return designParameterExpression;
 	}
 	
 	private DRIDesignExpression addExpression(DRIDesignExpression expression) {

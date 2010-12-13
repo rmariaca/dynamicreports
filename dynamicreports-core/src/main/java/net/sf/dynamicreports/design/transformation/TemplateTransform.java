@@ -55,6 +55,7 @@ import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
+import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
@@ -741,6 +742,21 @@ public class TemplateTransform {
 	
 	protected int getBreakHeight(DRIBreak breakComponent) {
 		return Defaults.getDefaults().getBreakHeight();
+	}
+	
+	//generic element
+	protected Integer getGenericElementWidth(DRIGenericElement genericElement) {
+		if (genericElement.getWidth() != null) {
+			return genericElement.getWidth();
+		}
+		return Defaults.getDefaults().getGenericElementWidth();
+	}
+
+	protected Integer getGenericElementHeight(DRIGenericElement genericElement) {
+		if (genericElement.getHeight() != null) {
+			return genericElement.getHeight();
+		}
+		return Defaults.getDefaults().getGenericElementHeight();
 	}
 	
 	//list

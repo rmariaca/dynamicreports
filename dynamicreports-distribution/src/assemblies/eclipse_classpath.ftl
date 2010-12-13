@@ -42,4 +42,6 @@
 	<classpathentry kind="lib" path="lib/stax-api-${project.staxapiVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-${project.xmlapisVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-ext-${project.xmlapisVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-${project.springframeworkVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-${project.springframeworkVersion}.jar"/>
 </classpath>

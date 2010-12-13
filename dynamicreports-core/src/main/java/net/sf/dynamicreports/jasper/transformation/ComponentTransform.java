@@ -35,11 +35,13 @@ import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.component.DRIDesignBreak;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
+import net.sf.dynamicreports.design.definition.component.DRIDesignGenericElement;
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
@@ -51,11 +53,13 @@ import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRGenericElementType;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignBreak;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
+import net.sf.jasperreports.engine.design.JRDesignGenericElement;
 import net.sf.jasperreports.engine.design.JRDesignImage;
 import net.sf.jasperreports.engine.design.JRDesignLine;
 import net.sf.jasperreports.engine.design.JRDesignStaticText;
@@ -126,6 +130,11 @@ public class ComponentTransform {
 		else if (component instanceof DRIDesignBreak) {
 			JRDesignElement jrElement = breakComponent((DRIDesignBreak) component);
 			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignGenericElement) {
+			JRDesignElement jrElement = genericElement((DRIDesignGenericElement) component);
+			component(jrElement, component, detectStretchType(listType));
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else {
@@ -283,6 +292,22 @@ public class ComponentTransform {
 		JRDesignBreak jrDesignBreak = new JRDesignBreak();
 		jrDesignBreak.setType(ConstantTransform.breakType(breakComponent.getType()));
 		return jrDesignBreak;
+	}
+	
+	//generic element
+	private JRDesignElement genericElement(DRIDesignGenericElement genericElement) {
+		JRDesignGenericElement jrDesignGenericElement = new JRDesignGenericElement(new JRDesignStyle().getDefaultStyleProvider());
+		JRGenericElementType genericType = new JRGenericElementType(genericElement.getGenericElementNamespace(), genericElement.getGenericElementName());
+		jrDesignGenericElement.setGenericType(genericType);
+		EvaluationTime evaluationTime = genericElement.getEvaluationTime();
+		jrDesignGenericElement.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
+		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && genericElement.getEvaluationGroup() != null) {
+			jrDesignGenericElement.setEvaluationGroupName(accessor.getGroupTransform().getGroup(genericElement.getEvaluationGroup()).getName());
+		}
+		for (DRIDesignParameterExpression parameterExpression : genericElement.getParameterExpressions()) {
+			jrDesignGenericElement.addParameter(accessor.getExpressionTransform().getGenericElementParameterExpression(parameterExpression));
+		}
+		return jrDesignGenericElement;
 	}
 	
 	private class SubreportExpression implements DRIDesignSimpleExpression {		
