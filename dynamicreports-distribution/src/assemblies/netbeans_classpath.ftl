@@ -60,6 +60,8 @@ file.reference.poi-${project.poiVersion}.jar=lib\\poi-${project.poiVersion}.jar
 file.reference.stax-api-${project.staxapiVersion}.jar=lib\\stax-api-${project.staxapiVersion}.jar
 file.reference.xml-apis-${project.xmlapisVersion}.jar=lib\\xml-apis-${project.xmlapisVersion}.jar
 file.reference.xml-apis-ext-${project.xmlapisVersion}.jar=lib\\xml-apis-ext-${project.xmlapisVersion}.jar
+file.reference.spring-core-${project.springframeworkVersion}.jar=lib\\spring-core-${project.springframeworkVersion}.jar
+file.reference.spring-beans-${project.springframeworkVersion}.jar=lib\\spring-beans-${project.springframeworkVersion}.jar
 includes=**
 jar.compress=false
 javac.classpath=\
@@ -97,7 +99,9 @@ javac.classpath=\
     ${r"${"}file.reference.poi-${project.poiVersion}.jar${r"}"}:\
     ${r"${"}file.reference.stax-api-${project.staxapiVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xml-apis-${project.xmlapisVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.xml-apis-ext-${project.xmlapisVersion}.jar${r"}"}
+    ${r"${"}file.reference.xml-apis-ext-${project.xmlapisVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.spring-core-${project.springframeworkVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.spring-beans-${project.springframeworkVersion}.jar${r"}"}
 # Space-separated list of extra javac options
 javac.compilerargs=
 javac.deprecation=false

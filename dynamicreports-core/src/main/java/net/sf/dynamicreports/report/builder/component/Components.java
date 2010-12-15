@@ -191,4 +191,9 @@ public class Components {
 	public static BreakBuilder columnBreak() {
 		return new BreakBuilder().setType(BreakType.COLUMN);
 	}
+	
+	//generic element
+	public static GenericElementBuilder genericElement(String namespace, String name) {
+		return new GenericElementBuilder(namespace, name);
+	}
 }

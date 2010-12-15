@@ -108,6 +108,9 @@ public class Default {
 	//break
 	private int breakWidth;
 	private int breakHeight;
+	//generic element	
+	private int genericElementWidth;
+	private int genericElementHeight;
 	//list
 	private int listgap;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
@@ -236,6 +239,9 @@ public class Default {
 		
 		this.breakWidth = 1;
 		this.breakHeight = 1;	
+		
+		this.genericElementWidth = 100;
+		this.genericElementHeight = 100;	
 		
 		this.listgap = 0;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
@@ -489,6 +495,14 @@ public class Default {
 		return breakHeight;
 	}
 	
+	public Integer getGenericElementWidth() {
+		return genericElementWidth;
+	}
+
+	public Integer getGenericElementHeight() {
+		return genericElementHeight;
+	}	
+	
 	public int getListgap() {
 		return listgap;
 	}
@@ -691,5 +705,5 @@ public class Default {
 
 	public HorizontalAlignment getPageXofYHorizontalAlignment() {
 		return pageXofYHorizontalAlignment;
-	}	
+	}
 }

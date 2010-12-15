@@ -132,12 +132,22 @@ public class Expressions {
 		return null;
 	}
 	
+	//property
 	public static PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
 		return new PropertyExpression(name, valueExpression);
 	}
 	
 	public static PropertyExpression property(String name, String value) {
 		return new PropertyExpression(name, text(value));
+	}
+
+	//parameter
+	public static ParameterExpression parameter(String name, DRISimpleExpression<?> valueExpression) {
+		return new ParameterExpression(name, valueExpression);
+	}
+	
+	public static ParameterExpression parameter(String name, Object value) {
+		return new ParameterExpression(name, value(value));
 	}
 	
 	public static PrintInOddRowExpression printInOddRow() {

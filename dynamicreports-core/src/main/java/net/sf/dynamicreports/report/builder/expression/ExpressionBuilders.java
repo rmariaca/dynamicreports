@@ -116,12 +116,22 @@ public class ExpressionBuilders {
 		return Expressions.message(key);
 	}
 	
+	//property
 	public PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
 		return Expressions.property(name, valueExpression);
 	}
 	
 	public PropertyExpression property(String name, String value) {
-		return Expressions.property(name, text(value));
+		return Expressions.property(name, value);
+	}
+	
+	//parameter
+	public ParameterExpression parameter(String name, DRISimpleExpression<?> valueExpression) {
+		return Expressions.parameter(name, valueExpression);
+	}
+	
+	public ParameterExpression parameter(String name, Object value) {
+		return Expressions.parameter(name, value);
 	}
 	
 	public PrintInOddRowExpression printInOddRow() {

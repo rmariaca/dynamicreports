@@ -56,6 +56,7 @@ public class Project {
 	private String poiVersion;
 	private String staxapiVersion;
 	private String xmlapisVersion;
+	private String springframeworkVersion;
 			
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -90,6 +91,7 @@ public class Project {
 		poiVersion = properties.getProperty("poiVersion");
 		staxapiVersion = properties.getProperty("staxapiVersion");
 		xmlapisVersion = properties.getProperty("xmlapisVersion");
+		springframeworkVersion = properties.getProperty("springframeworkVersion");
 	}
 
 	public String getVersion() {
@@ -290,5 +292,13 @@ public class Project {
 
 	public void setXmlapisVersion(String xmlapisVersion) {
 		this.xmlapisVersion = xmlapisVersion;
+	}
+
+	public String getSpringframeworkVersion() {
+		return springframeworkVersion;
+	}
+
+	public void setSpringframeworkVersion(String springframeworkVersion) {
+		this.springframeworkVersion = springframeworkVersion;
 	}	
 }

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.sourceforge.dynamicreports</groupId>
 		<artifactId>dynamicreports-parent</artifactId>
-		<version>1.5.2-SNAPSHOT</version>
+		<version>1.5.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>dynamicreports-distribution</artifactId>
@@ -70,6 +70,14 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-bridge</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>	
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>

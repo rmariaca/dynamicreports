@@ -33,6 +33,7 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.component.DRDesignBreak;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
+import net.sf.dynamicreports.design.base.component.DRDesignGenericElement;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignLine;
@@ -71,6 +72,7 @@ import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
+import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
@@ -79,6 +81,7 @@ import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -125,6 +128,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIBreak) {
 			return breakComponent((DRIBreak) component);
+		}
+		if (component instanceof DRIGenericElement) {
+			return genericElement((DRIGenericElement) component, resetType, resetGroup);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -350,6 +356,22 @@ public class ComponentTransform {
 		designBreak.setWidth(accessor.getTemplateTransform().getBreakWidth(breakComponent));
 		designBreak.setHeight(accessor.getTemplateTransform().getBreakHeight(breakComponent));
 		return designBreak;
+	}
+	
+	//generic element
+	protected DRDesignGenericElement genericElement(DRIGenericElement genericElement, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignGenericElement designGenericElement = new DRDesignGenericElement();
+		component(designGenericElement, genericElement, null, false, DefaultStyleType.NONE);
+		designGenericElement.setGenericElementNamespace(genericElement.getGenericElementNamespace());
+		designGenericElement.setGenericElementName(genericElement.getGenericElementName());
+		designGenericElement.setEvaluationTime(evaluationTimeFromResetType(resetType));
+		designGenericElement.setEvaluationGroup(resetGroup);
+		designGenericElement.setWidth(accessor.getTemplateTransform().getGenericElementWidth(genericElement));
+		designGenericElement.setHeight(accessor.getTemplateTransform().getGenericElementHeight(genericElement));
+		for (DRIParameterExpression parameterExpression : genericElement.getParameterExpressions()) {
+			designGenericElement.getParameterExpressions().add(accessor.getExpressionTransform().transformParameterExpression(parameterExpression));
+		}
+		return designGenericElement;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
