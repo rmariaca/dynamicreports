@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.5.2 (2010-12-15)
+---------------------------------------------------
+ - support for generic element
+ - support for page break, column break 
+ - minor improvements
+ 
 Changes in version 1.5.1 (2010-11-24)
 ---------------------------------------------------
  - stretchWithOverflow attribute was added to textfields and columns
