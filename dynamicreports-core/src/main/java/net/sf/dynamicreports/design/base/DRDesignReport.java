@@ -42,6 +42,7 @@ import net.sf.dynamicreports.design.transformation.ChartTransform;
 import net.sf.dynamicreports.design.transformation.ColumnGridTransform;
 import net.sf.dynamicreports.design.transformation.ColumnTransform;
 import net.sf.dynamicreports.design.transformation.ComponentTransform;
+import net.sf.dynamicreports.design.transformation.CrosstabTransform;
 import net.sf.dynamicreports.design.transformation.DesignTransformAccessor;
 import net.sf.dynamicreports.design.transformation.ExpressionTransform;
 import net.sf.dynamicreports.design.transformation.GroupTransform;
@@ -74,6 +75,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private StyleTransform styleTransform;
 	private ChartTransform chartTransform;
 	private BarcodeTransform barcodeTransform;
+	private CrosstabTransform crosstabTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
 		this(report, null);
@@ -100,6 +102,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		styleTransform = new StyleTransform(this);
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
+		crosstabTransform = new CrosstabTransform(this);
 	}
 	
 	private void transform() throws DRException {		
@@ -158,6 +161,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
+	}
+	
+	public CrosstabTransform getCrosstabTransform() {
+		return crosstabTransform;
 	}
 	
 	public DRIDesignTemplateDesign getTemplateDesign() {

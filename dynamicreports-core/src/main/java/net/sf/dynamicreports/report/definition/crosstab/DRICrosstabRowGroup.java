@@ -20,39 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
+public interface DRICrosstabRowGroup extends DRICrosstabGroup {
 
-	public DRIReport getReport();
+	public int getWidth();
 	
-	public Integer getPageWidth();
-	
-	public TemplateTransform getTemplateTransform();
-	
-	public ExpressionTransform getExpressionTransform();
-	
-	public BandTransform getBandTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public GroupTransform getGroupTransform();
-	
-	public ColumnGridTransform getColumnGridTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-	
-	public CrosstabTransform getCrosstabTransform();
-	
-	public DRDesignPage getPage();	
+	public CrosstabRowPosition getPosition();
 }

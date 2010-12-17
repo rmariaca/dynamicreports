@@ -20,39 +20,26 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
+public interface DRICrosstabMeasure extends Serializable {
 
-	public DRIReport getReport();
-	
-	public Integer getPageWidth();
-	
-	public TemplateTransform getTemplateTransform();
-	
-	public ExpressionTransform getExpressionTransform();
-	
-	public BandTransform getBandTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public GroupTransform getGroupTransform();
-	
-	public ColumnGridTransform getColumnGridTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
+	public String getName();
 
-	public BarcodeTransform getBarcodeTransform();
+	public Class<?> getValueClass();
 	
-	public CrosstabTransform getCrosstabTransform();
+	public DRIExpression<?> getValueExpression();
 	
-	public DRDesignPage getPage();	
+	public Calculation getCalculation();
+	
+	public CrosstabPercentageType getPercentageType();
 }

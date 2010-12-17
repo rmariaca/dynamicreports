@@ -20,39 +20,34 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.base.crosstab;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
-
-	public DRIReport getReport();
+public class DRCrosstabColumnGroup extends DRCrosstabGroup implements DRICrosstabColumnGroup {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	public Integer getPageWidth();
+	private int height;	
+	private CrosstabColumnPosition position;
 	
-	public TemplateTransform getTemplateTransform();
+	public int getHeight() {
+		return height;
+	}
 	
-	public ExpressionTransform getExpressionTransform();
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	
-	public BandTransform getBandTransform();
+	public CrosstabColumnPosition getPosition() {
+		return position;
+	}
 	
-	public ComponentTransform getComponentTransform();
-	
-	public GroupTransform getGroupTransform();
-	
-	public ColumnGridTransform getColumnGridTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-	
-	public CrosstabTransform getCrosstabTransform();
-	
-	public DRDesignPage getPage();	
+	public void setPosition(CrosstabColumnPosition position) {
+		this.position = position;
+	}
 }

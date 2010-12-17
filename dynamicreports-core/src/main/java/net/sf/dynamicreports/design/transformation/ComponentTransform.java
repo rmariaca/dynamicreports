@@ -40,6 +40,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignLine;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
@@ -81,6 +82,7 @@ import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -131,6 +133,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIGenericElement) {
 			return genericElement((DRIGenericElement) component, resetType, resetGroup);
+		}
+		if (component instanceof DRICrosstab) {
+			return crosstab((DRICrosstab) component);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -361,7 +366,7 @@ public class ComponentTransform {
 	//generic element
 	protected DRDesignGenericElement genericElement(DRIGenericElement genericElement, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignGenericElement designGenericElement = new DRDesignGenericElement();
-		component(designGenericElement, genericElement, null, false, DefaultStyleType.NONE);
+		component(designGenericElement, genericElement, genericElement.getStyle(), false, DefaultStyleType.NONE);
 		designGenericElement.setGenericElementNamespace(genericElement.getGenericElementNamespace());
 		designGenericElement.setGenericElementName(genericElement.getGenericElementName());
 		designGenericElement.setEvaluationTime(evaluationTimeFromResetType(resetType));
@@ -372,6 +377,13 @@ public class ComponentTransform {
 			designGenericElement.getParameterExpressions().add(accessor.getExpressionTransform().transformParameterExpression(parameterExpression));
 		}
 		return designGenericElement;
+	}
+	
+	//crosstab
+	private DRDesignCrosstab crosstab(DRICrosstab crosstab) throws DRException {
+		DRDesignCrosstab designCrosstab = accessor.getCrosstabTransform().transform(crosstab);
+		component(designCrosstab, crosstab, crosstab.getStyle(), false, DefaultStyleType.NONE);
+		return designCrosstab;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {

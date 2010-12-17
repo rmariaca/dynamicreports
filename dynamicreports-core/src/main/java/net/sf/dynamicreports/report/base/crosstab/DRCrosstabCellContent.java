@@ -20,39 +20,25 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.base.crosstab;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.base.component.DRComponent;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
+public class DRCrosstabCellContent implements DRICrosstabCellContent {	
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+	
+	private DRComponent component;
 
-	public DRIReport getReport();
-	
-	public Integer getPageWidth();
-	
-	public TemplateTransform getTemplateTransform();
-	
-	public ExpressionTransform getExpressionTransform();
-	
-	public BandTransform getBandTransform();
-	
-	public ComponentTransform getComponentTransform();
-	
-	public GroupTransform getGroupTransform();
-	
-	public ColumnGridTransform getColumnGridTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
+	public DRComponent getComponent() {
+		return component;
+	}
 
-	public BarcodeTransform getBarcodeTransform();
-	
-	public CrosstabTransform getCrosstabTransform();
-	
-	public DRDesignPage getPage();	
+	public void setComponent(DRComponent component) {
+		this.component = component;
+	}
 }

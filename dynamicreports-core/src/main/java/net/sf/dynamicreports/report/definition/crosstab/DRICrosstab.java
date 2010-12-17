@@ -20,39 +20,37 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import java.util.List;
+
+import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
+public interface DRICrosstab extends DRIDimensionComponent {
 
-	public DRIReport getReport();
+	public Boolean isRepeatColumnHeaders();
 	
-	public Integer getPageWidth();
+	public Boolean isRepeatRowHeaders();
 	
-	public TemplateTransform getTemplateTransform();
+	public Integer getColumnBreakOffset();
 	
-	public ExpressionTransform getExpressionTransform();
+	public Boolean getIgnoreWidth();
 	
-	public BandTransform getBandTransform();
+	public RunDirection getRunDirection();
 	
-	public ComponentTransform getComponentTransform();
+	public DRICrosstabCellContent getWhenNoDataCell();
 	
-	public GroupTransform getGroupTransform();
+	public DRICrosstabCellContent getHeaderCell();
 	
-	public ColumnGridTransform getColumnGridTransform();
+	public List<DRICrosstabColumnGroup> getColumnGroups();
 	
-	public StyleTransform getStyleTransform();
+	public List<DRICrosstabRowGroup> getRowGroups();
 	
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
+	public List<DRICrosstabCell> getCells();
 	
-	public CrosstabTransform getCrosstabTransform();
-	
-	public DRDesignPage getPage();	
+	public List<DRICrosstabMeasure> getMeasures();
 }
