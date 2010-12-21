@@ -32,9 +32,14 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabColumnGroup;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -157,26 +162,109 @@ public class BandTransform {
 		if (band.getBandComponent() != null) {
 			return band;
 		}
-		if (band.getList().isEmpty()) {
-			return null;
-		}
 
-		ComponentPosition.component(band.getName(), band.getList(), maxWidth);
-		
-		DRDesignComponent component = removeEmptyComponents(band.getList());
+		DRDesignComponent component = prepareList(band.getName(), band.getList(), maxWidth);
 		if (component == null) {
 			return null;
 		}
-		componentGroupType(component);
-		
-		generateComponentNames(component, band.getName());		
 		band.setBandComponent(component);
 		
 		if (band.getBandComponent() != null && templateDesignComponents > 0) {
 			throw new DRException("Band " + band.getName() + " must not be defined at once in jrxml template design and in dynamic design");
 		}
 		
+		prepareCrosstabs(component);
+		
 		return band;
+	}
+	
+	private DRDesignComponent prepareList(String name, DRDesignList list, int maxWidth) throws DRException {
+		if (list == null) {
+			return null;
+		}
+		if (list.isEmpty()) {
+			return null;
+		}
+
+		ComponentPosition.component(name, list, maxWidth);
+		
+		DRDesignComponent component = removeEmptyComponents(list);
+		if (component == null) {
+			return null;
+		}
+		componentGroupType(component);
+		
+		generateComponentNames(component, name);
+		
+		return component;
+	}
+	
+	private void prepareCrosstabs(DRDesignComponent component) throws DRException {
+		if (component instanceof DRDesignList) {
+			DRDesignList list = (DRDesignList) component;
+			for (DRDesignComponent listComponent : list.getComponents()) {
+				prepareCrosstabs(listComponent);
+			}
+		}
+		else if (component instanceof DRDesignCrosstab) {
+			prepareCrosstab((DRDesignCrosstab) component);
+		}
+	}
+	
+	private void prepareCrosstab(DRDesignCrosstab crosstab) throws DRException {
+		DRDesignCrosstabCellContent whenNoDataCell = crosstab.getWhenNoDataCell();
+		
+		int index = 0;
+		int totalWidth = 0;
+		for (DRIDesignCrosstabColumnGroup columnGroup : crosstab.getColumnGroups()) {
+			DRDesignCrosstabCellContent header = (DRDesignCrosstabCellContent) columnGroup.getHeader();
+			if (header != null) {				
+				int width = 0;
+				header.setComponent(prepareList(crosstab.getName() + ".columnGroup_header" + index, header.getList(), width));
+			}
+			DRDesignCrosstabCellContent totalHeader = (DRDesignCrosstabCellContent) columnGroup.getTotalHeader();
+			if (totalHeader != null) {				
+				int width = 0;
+				totalHeader.setComponent(prepareList(crosstab.getName() + ".columnGroup_totalheader" + index, totalHeader.getList(), width));
+			}
+			index++;
+		}
+		
+		index = 0;
+		totalWidth = 0;
+		for (int i = crosstab.getRowGroups().size(); i == 0; i--) {
+			DRIDesignCrosstabRowGroup rowGroup = crosstab.getRowGroups().get(i);
+			DRDesignCrosstabCellContent header = (DRDesignCrosstabCellContent) rowGroup.getHeader();
+			if (header != null) {				
+				int width = rowGroup.getWidth();
+				header.setComponent(prepareList(crosstab.getName() + ".rowGroup_header" + index, header.getList(), width));
+			}
+			totalWidth += rowGroup.getWidth();
+			DRDesignCrosstabCellContent totalHeader = (DRDesignCrosstabCellContent) rowGroup.getTotalHeader();
+			if (totalHeader != null) {				
+				totalHeader.setComponent(prepareList(crosstab.getName() + ".rowGroup_header" + index, totalHeader.getList(), totalWidth));
+			}
+			index++;
+		}
+
+		if (whenNoDataCell != null) {			
+			whenNoDataCell.setComponent(prepareList(crosstab.getName() + ".whennodatacell", whenNoDataCell.getList(), totalWidth));
+		}
+		
+		DRDesignCrosstabCellContent headerCell = crosstab.getHeaderCell();
+		if (headerCell != null) {			
+			crosstab.getHeaderCell().setComponent(prepareList(crosstab.getName() + ".headercell", headerCell.getList(), totalWidth));
+		}
+		
+		index = 0;
+		for (DRIDesignCrosstabCell cell : crosstab.getCells()) {
+			DRDesignCrosstabCellContent content = (DRDesignCrosstabCellContent) cell.getContent();
+			if (content != null) {				
+				Integer width = cell.getWidth();
+				content.setComponent(prepareList(crosstab.getName() + ".cell_content" + index, content.getList(), width));
+			}
+			index++;
+		}
 	}
 	
 	private void generateComponentNames(DRDesignComponent component, String bandName) {

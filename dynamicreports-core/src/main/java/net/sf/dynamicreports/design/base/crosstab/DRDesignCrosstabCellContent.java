@@ -23,14 +23,24 @@
 package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
+import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCellContent;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent {	
+	private DRDesignList list;
 	private DRDesignComponent component;
 
+	public void setList(DRDesignList list) {
+		this.list = list;
+	}
+	
+	public DRDesignList getList() {
+		return list;
+	}
+	
 	public DRDesignComponent getComponent() {
 		return component;
 	}

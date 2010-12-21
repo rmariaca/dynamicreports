@@ -135,7 +135,7 @@ public class ComponentTransform {
 			return genericElement((DRIGenericElement) component, resetType, resetGroup);
 		}
 		if (component instanceof DRICrosstab) {
-			return crosstab((DRICrosstab) component);
+			return crosstab((DRICrosstab) component, defaultStyleType, resetType, resetGroup);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -380,8 +380,8 @@ public class ComponentTransform {
 	}
 	
 	//crosstab
-	private DRDesignCrosstab crosstab(DRICrosstab crosstab) throws DRException {
-		DRDesignCrosstab designCrosstab = accessor.getCrosstabTransform().transform(crosstab);
+	private DRDesignCrosstab crosstab(DRICrosstab crosstab, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignCrosstab designCrosstab = accessor.getCrosstabTransform().transform(crosstab, defaultStyleType, resetType, resetGroup);
 		component(designCrosstab, crosstab, crosstab.getStyle(), false, DefaultStyleType.NONE);
 		return designCrosstab;
 	}

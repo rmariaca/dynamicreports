@@ -23,7 +23,9 @@
 package net.sf.dynamicreports.report.base.crosstab;
 
 import net.sf.dynamicreports.report.base.component.DRComponent;
+import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
 
 /**
@@ -32,13 +34,17 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
 public class DRCrosstabCellContent implements DRICrosstabCellContent {	
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	private DRComponent component;
+	private DRList list;
 
-	public DRComponent getComponent() {
-		return component;
+	public DRCrosstabCellContent() {
+		this.list = new DRList(ListType.VERTICAL);
 	}
-
-	public void setComponent(DRComponent component) {
-		this.component = component;
+	
+	public DRList getList() {
+		return list;
+	}
+	
+	public void addComponent(DRComponent component) {
+		list.addComponent(component);
 	}
 }
