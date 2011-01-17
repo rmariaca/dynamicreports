@@ -20,43 +20,35 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.crosstab;
+package net.sf.dynamicreports.report.builder.crosstab;
 
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabRowGroup;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
+import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabColumnGroup extends DRCrosstabGroup implements DRICrosstabColumnGroup {
+@SuppressWarnings("ucd")
+public class CrosstabRowGroupBuilder extends AbstractCrosstabGroupBuilder<CrosstabRowGroupBuilder, DRCrosstabRowGroup> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private Integer headerHeight;
-	private Integer totalHeaderWidth;
-	private CrosstabColumnPosition position;
-
-	public Integer getHeaderHeight() {
-		return headerHeight;
+	protected CrosstabRowGroupBuilder() {
+		super(new DRCrosstabRowGroup());
 	}
 
-	public void setHeaderHeight(Integer headerHeight) {
-		this.headerHeight = headerHeight;
+	public CrosstabRowGroupBuilder setHeaderWidth(Integer headerWidth) {
+		getObject().setHeaderWidth(headerWidth);
+		return this;
 	}
 
-	public Integer getTotalHeaderWidth() {
-		return totalHeaderWidth;
+	public CrosstabRowGroupBuilder setTotalHeaderHeight(Integer totalHeaderHeight) {
+		getObject().setTotalHeaderHeight(totalHeaderHeight);
+		return this;
 	}
 
-	public void setTotalHeaderWidth(Integer totalHeaderWidth) {
-		this.totalHeaderWidth = totalHeaderWidth;
-	}
-
-	public CrosstabColumnPosition getPosition() {
-		return position;
-	}
-
-	public void setPosition(CrosstabColumnPosition position) {
-		this.position = position;
+	public CrosstabRowGroupBuilder setPosition(CrosstabRowPosition position) {
+		getObject().setPosition(position);
+		return this;
 	}
 }

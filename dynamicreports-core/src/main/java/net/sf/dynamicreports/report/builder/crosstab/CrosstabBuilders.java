@@ -20,24 +20,27 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.crosstab;
-
-import java.io.Serializable;
+package net.sf.dynamicreports.report.builder.crosstab;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabCell extends Serializable {
-	
-	public String getName();
-	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
-	public String getRowTotalGroup();
-	
-	public String getColumnTotalGroup();
-	
-	public DRICrosstabCellContent getContent();
+@SuppressWarnings("ucd")
+public class CrosstabBuilders {
+
+	public CrosstabBuilder crosstab() {
+		return Crosstabs.crosstab();
+	}
+
+	public CrosstabColumnGroupBuilder columnGroup() {
+		return Crosstabs.columnGroup();
+	}
+
+	public CrosstabRowGroupBuilder rowGroup() {
+		return Crosstabs.rowGroup();
+	}
+
+	public CrosstabMeasureBuilder measure() {
+		return Crosstabs.measure();
+	}
 }

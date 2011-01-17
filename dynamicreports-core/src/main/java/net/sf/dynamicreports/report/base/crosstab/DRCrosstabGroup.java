@@ -22,59 +22,90 @@
 
 package net.sf.dynamicreports.report.base.crosstab;
 
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class DRCrosstabGroup implements DRICrosstabGroup {	
+public abstract class DRCrosstabGroup implements DRICrosstabGroup {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private String name;	
-	private CrosstabTotalPosition totalPosition;	
-	private DRCrosstabBucket bucket;	
-	private DRCrosstabCellContent header;	
-	private DRCrosstabCellContent totalHeader;
-	
+
+	private String name;
+	private Boolean showTotal;
+	private CrosstabTotalPosition totalPosition;
+	private DRIExpression<?> totalHeaderExpression;
+	private OrderType orderType;
+	private DRIExpression<?> expression;
+	private DRISimpleExpression<?> orderByExpression;
+	private DRISimpleExpression<?> comparatorExpression;
+
+	public DRCrosstabGroup() {
+		this.name = ReportUtils.generateUniqueName("crosstabGroup");
+	}
+
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public Boolean getShowTotal() {
+		return showTotal;
 	}
-	
+
+	public void setShowTotal(Boolean showTotal) {
+		this.showTotal = showTotal;
+	}
+
 	public CrosstabTotalPosition getTotalPosition() {
 		return totalPosition;
 	}
-	
+
 	public void setTotalPosition(CrosstabTotalPosition totalPosition) {
 		this.totalPosition = totalPosition;
 	}
-	
-	public DRCrosstabBucket getBucket() {
-		return bucket;
+
+	public DRIExpression<?> getTotalHeaderExpression() {
+		return totalHeaderExpression;
 	}
-	
-	public void setBucket(DRCrosstabBucket bucket) {
-		this.bucket = bucket;
+
+	public void setTotalHeaderExpression(DRIExpression<?> totalHeaderExpression) {
+		this.totalHeaderExpression = totalHeaderExpression;
 	}
-	
-	public DRCrosstabCellContent getHeader() {
-		return header;
+
+	public OrderType getOrderType() {
+		return orderType;
 	}
-	
-	public void setHeader(DRCrosstabCellContent header) {
-		this.header = header;
+
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
 	}
-	
-	public DRCrosstabCellContent getTotalHeader() {
-		return totalHeader;
+
+	public DRIExpression<?> getExpression() {
+		return expression;
 	}
-	
-	public void setTotalHeader(DRCrosstabCellContent totalHeader) {
-		this.totalHeader = totalHeader;
+
+	public void setExpression(DRIExpression<?> expression) {
+		this.expression = expression;
+	}
+
+	public DRISimpleExpression<?> getOrderByExpression() {
+		return orderByExpression;
+	}
+
+	public void setOrderByExpression(DRISimpleExpression<?> orderByExpression) {
+		this.orderByExpression = orderByExpression;
+	}
+
+	public DRISimpleExpression<?> getComparatorExpression() {
+		return comparatorExpression;
+	}
+
+	public void setComparatorExpression(DRISimpleExpression<?> comparatorExpression) {
+		this.comparatorExpression = comparatorExpression;
 	}
 }

@@ -28,6 +28,10 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignCrosstabCellContent {
-	
+
+	public int getWidth();
+
+	public int getHeight();
+
 	public DRIDesignComponent getComponent();
 }

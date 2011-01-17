@@ -32,25 +32,25 @@ import net.sf.dynamicreports.report.constant.RunDirection;
  */
 public interface DRIDesignCrosstab extends DRIDesignComponent {
 
-	public boolean isRepeatColumnHeaders();
-	
-	public boolean isRepeatRowHeaders();
-	
-	public int getColumnBreakOffset();
-	
+	public Boolean isRepeatColumnHeaders();
+
+	public Boolean isRepeatRowHeaders();
+
+	public Integer getColumnBreakOffset();
+
 	public Boolean getIgnoreWidth();
-	
+
 	public RunDirection getRunDirection();
-	
+
 	public DRIDesignCrosstabCellContent getWhenNoDataCell();
-	
+
 	public DRIDesignCrosstabCellContent getHeaderCell();
-	
-	public List<DRIDesignCrosstabColumnGroup> getColumnGroups();
-	
-	public List<DRIDesignCrosstabRowGroup> getRowGroups();
-	
-	public List<DRIDesignCrosstabCell> getCells();
-	
+
+	public List<? extends DRIDesignCrosstabColumnGroup> getColumnGroups();
+
+	public List<? extends DRIDesignCrosstabRowGroup> getRowGroups();
+
+	public List<? extends DRIDesignCrosstabCell> getCells();
+
 	public List<DRIDesignCrosstabMeasure> getMeasures();
 }

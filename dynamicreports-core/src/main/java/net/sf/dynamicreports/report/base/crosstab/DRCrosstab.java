@@ -29,123 +29,130 @@ import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCell;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Boolean repeatColumnHeaders;	
-	private Boolean repeatRowHeaders;	
-	private Integer columnBreakOffset;	
-	private Boolean ignoreWidth;	
-	private RunDirection runDirection;	
-	private DRCrosstabCellContent whenNoDataCell;	
-	private DRCrosstabCellContent headerCell;	
-	private List<DRICrosstabColumnGroup> columnGroups;	
-	private List<DRICrosstabRowGroup> rowGroups;	
-	private List<DRICrosstabCell> cells;	
+
+	private Boolean repeatColumnHeaders;
+	private Boolean repeatRowHeaders;
+	private Integer columnBreakOffset;
+	private Boolean ignoreWidth;
+	private RunDirection runDirection;
+	private Integer cellWidth;
+	private Integer cellHeight;
+	private DRCrosstabCellContent whenNoDataCell;
+	private DRCrosstabCellContent headerCell;
+	private List<DRICrosstabColumnGroup> columnGroups;
+	private List<DRICrosstabRowGroup> rowGroups;
 	private List<DRICrosstabMeasure> measures;
-		
+
 	@Override
 	protected void init() {
 		super.init();
 		columnGroups = new ArrayList<DRICrosstabColumnGroup>();
 		rowGroups = new ArrayList<DRICrosstabRowGroup>();
-		cells = new ArrayList<DRICrosstabCell>();
 		measures = new ArrayList<DRICrosstabMeasure>();
+
+		whenNoDataCell = new DRCrosstabCellContent();
+		headerCell = new DRCrosstabCellContent();
 	}
-	
+
 	public Boolean isRepeatColumnHeaders() {
 		return repeatColumnHeaders;
 	}
-	
+
 	public void setRepeatColumnHeaders(Boolean repeatColumnHeaders) {
 		this.repeatColumnHeaders = repeatColumnHeaders;
 	}
-	
+
 	public Boolean isRepeatRowHeaders() {
 		return repeatRowHeaders;
 	}
-	
+
 	public void setRepeatRowHeaders(Boolean repeatRowHeaders) {
 		this.repeatRowHeaders = repeatRowHeaders;
 	}
-	
+
 	public Integer getColumnBreakOffset() {
 		return columnBreakOffset;
 	}
-	
+
 	public void setColumnBreakOffset(Integer columnBreakOffset) {
 		this.columnBreakOffset = columnBreakOffset;
 	}
-	
+
 	public Boolean getIgnoreWidth() {
 		return ignoreWidth;
 	}
-	
+
 	public void setIgnoreWidth(Boolean ignoreWidth) {
 		this.ignoreWidth = ignoreWidth;
 	}
-	
+
 	public RunDirection getRunDirection() {
 		return runDirection;
 	}
-	
+
 	public void setRunDirection(RunDirection runDirection) {
 		this.runDirection = runDirection;
 	}
-	
+
 	public DRCrosstabCellContent getWhenNoDataCell() {
 		return whenNoDataCell;
 	}
-	
-	public void setWhenNoDataCell(DRCrosstabCellContent whenNoDataCell) {
-		this.whenNoDataCell = whenNoDataCell;
-	}
-	
+
 	public DRCrosstabCellContent getHeaderCell() {
 		return headerCell;
 	}
-	
-	public void setHeaderCell(DRCrosstabCellContent headerCell) {
-		this.headerCell = headerCell;
-	}
-	
+
 	public List<DRICrosstabColumnGroup> getColumnGroups() {
 		return columnGroups;
 	}
-	
-	public void setColumnGroups(List<DRICrosstabColumnGroup> columnGroups) {
-		this.columnGroups = columnGroups;
+
+	public Integer getCellWidth() {
+		return cellWidth;
 	}
-	
+
+	public void setCellWidth(Integer cellWidth) {
+		this.cellWidth = cellWidth;
+	}
+
+	public Integer getCellHeight() {
+		return cellHeight;
+	}
+
+	public void setCellHeight(Integer cellHeight) {
+		this.cellHeight = cellHeight;
+	}
+
+	public void addColumnGroup(DRICrosstabColumnGroup columnGroup) {
+		Validate.notNull(columnGroup, "columnGroup must not be null");
+		this.columnGroups.add(columnGroup);
+	}
+
 	public List<DRICrosstabRowGroup> getRowGroups() {
 		return rowGroups;
 	}
-	
-	public void setRowGroups(List<DRICrosstabRowGroup> rowGroups) {
-		this.rowGroups = rowGroups;
+
+	public void addRowGroup(DRICrosstabRowGroup rowGroup) {
+		Validate.notNull(rowGroup, "rowGroup must not be null");
+		this.rowGroups.add(rowGroup);
 	}
-	
-	public List<DRICrosstabCell> getCells() {
-		return cells;
-	}
-	
-	public void setCells(List<DRICrosstabCell> cells) {
-		this.cells = cells;
-	}
-	
+
 	public List<DRICrosstabMeasure> getMeasures() {
 		return measures;
 	}
-	
-	public void setMeasures(List<DRICrosstabMeasure> measures) {
-		this.measures = measures;
+
+	public void addMeasure(DRICrosstabMeasure measure) {
+		Validate.notNull(measure, "measure must not be null");
+		this.measures.add(measure);
 	}
 }

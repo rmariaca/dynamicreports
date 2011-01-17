@@ -45,7 +45,7 @@ import org.apache.commons.lang.Validate;
  */
 public class DRReportTemplate implements DRIReportTemplate {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Locale locale;
 	private Boolean showColumnTitle;
 	private Boolean ignorePagination;
@@ -53,7 +53,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean titleOnANewPage;
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
-	private Boolean floatColumnFooter;	
+	private Boolean floatColumnFooter;
 	//style
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -90,19 +90,22 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Integer textFieldWidth;
 	//image
 	private Integer imageWidth;
-	private Integer imageHeight;	
+	private Integer imageHeight;
 	//list
 	private Integer listgap;
 	//chart
 	private Integer chartWidth;
-	private Integer chartHeight;	
+	private Integer chartHeight;
 	private List<Color> chartSeriesColors;
 	//barcode
 	private Integer barcodeWidth;
-	private Integer barcodeHeight;	
+	private Integer barcodeHeight;
 	//subreport
 	private Integer subreportWidth;
 	private Integer subreportHeight;
+	//crosstab
+	private Integer crosstabWidth;
+	private Integer crosstabHeight;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -121,7 +124,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public DRReportTemplate() {
 		this.chartSeriesColors = new ArrayList<Color>();
 	}
-	
+
 	public Locale getLocale() {
 		return locale;
 	}
@@ -173,11 +176,11 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public Boolean getSummaryWithPageHeaderAndFooter() {
 		return summaryWithPageHeaderAndFooter;
 	}
-	
+
 	public void setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
 		this.summaryWithPageHeaderAndFooter = summaryWithPageHeaderAndFooter;
 	}
-	
+
 	public Boolean getFloatColumnFooter() {
 		return floatColumnFooter;
 	}
@@ -189,7 +192,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public Boolean getHighlightDetailOddRows() {
 		return highlightDetailOddRows;
 	}
-	
+
 	public void setHighlightDetailOddRows(Boolean highlightDetailOddRows) {
 		this.highlightDetailOddRows = highlightDetailOddRows;
 	}
@@ -205,7 +208,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public Boolean getHighlightDetailEvenRows() {
 		return highlightDetailEvenRows;
 	}
-	
+
 	public void setHighlightDetailEvenRows(Boolean highlightDetailEvenRows) {
 		this.highlightDetailEvenRows = highlightDetailEvenRows;
 	}
@@ -257,7 +260,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public void setGroupStyle(DRStyle groupStyle) {
 		this.groupStyle = groupStyle;
 	}
-	
+
 	public DRStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
@@ -265,7 +268,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public void setSubtotalStyle(DRStyle subtotalStyle) {
 		this.subtotalStyle = subtotalStyle;
 	}
-	
+
 	public DRStyle getImageStyle() {
 		return imageStyle;
 	}
@@ -277,19 +280,19 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public DRStyle getChartStyle() {
 		return chartStyle;
 	}
-	
+
 	public void setChartStyle(DRStyle chartStyle) {
 		this.chartStyle = chartStyle;
 	}
-	
+
 	public DRIStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
-	
+
 	public void setBarcodeStyle(DRStyle barcodeStyle) {
 		this.barcodeStyle = barcodeStyle;
 	}
-	
+
 	public void setPageFormat(PageType pageType, PageOrientation orientation) {
 		Validate.notNull(pageType, "pageType must not be null");
 		Validate.notNull(orientation, "orientation must not be null");
@@ -303,7 +306,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 		}
 		setPageOrientation(orientation);
 	}
-	
+
 	public Integer getPageWidth() {
 		return pageWidth;
 	}
@@ -441,11 +444,11 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public void setGroupReprintHeaderOnEachPage(Boolean groupReprintHeaderOnEachPage) {
 		this.groupReprintHeaderOnEachPage = groupReprintHeaderOnEachPage;
 	}
-	
+
 	public Integer getTextFieldWidth() {
 		return textFieldWidth;
 	}
-	
+
 	public void setTextFieldWidth(Integer textFieldWidth) {
 		if (textFieldWidth != null) {
 			Validate.isTrue(textFieldWidth >= 1, "textFieldWidth must be >= 1");
@@ -511,12 +514,12 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public List<Color> getChartSeriesColors() {
 		return chartSeriesColors;
 	}
-	
+
 	public void addChartSeriesColor(Color color) {
 		Validate.notNull(color, "color must not be null");
 		this.chartSeriesColors.add(color);
 	}
-	
+
 	@SuppressWarnings("ucd")
 	public void setChartSeriesColors(List<Color> chartSeriesColors) {
 		if (chartSeriesColors != null) {
@@ -524,51 +527,73 @@ public class DRReportTemplate implements DRIReportTemplate {
 		}
 		this.chartSeriesColors = chartSeriesColors;
 	}
-	
+
 	public Integer getBarcodeHeight() {
 		return barcodeHeight;
 	}
-	
+
 	public void setBarcodeHeight(Integer barcodeHeight) {
 		if (barcodeHeight != null) {
 			Validate.isTrue(barcodeHeight >= 1, "barcodeHeight must be >= 1");
 		}
 		this.barcodeHeight = barcodeHeight;
 	}
-	
+
 	public Integer getBarcodeWidth() {
 		return barcodeWidth;
 	}
-	
+
 	public void setBarcodeWidth(Integer barcodeWidth) {
 		if (barcodeWidth != null) {
 			Validate.isTrue(barcodeWidth >= 1, "barcodeWidth must be >= 1");
 		}
 		this.barcodeWidth = barcodeWidth;
 	}
-	
+
 	public Integer getSubreportHeight() {
 		return subreportHeight;
 	}
-	
+
 	public void setSubreportHeight(Integer subreportHeight) {
 		if (subreportHeight != null) {
 			Validate.isTrue(subreportHeight >= 1, "subreportHeight must be >= 1");
 		}
 		this.subreportHeight = subreportHeight;
 	}
-	
+
 	public Integer getSubreportWidth() {
 		return subreportWidth;
 	}
-	
+
 	public void setSubreportWidth(Integer subreportWidth) {
 		if (subreportWidth != null) {
 			Validate.isTrue(subreportWidth >= 1, "subreportWidth must be >= 1");
 		}
 		this.subreportWidth = subreportWidth;
 	}
-	
+
+	public Integer getCrosstabHeight() {
+		return crosstabHeight;
+	}
+
+	public void setCrosstabHeight(Integer crosstabHeight) {
+		if (crosstabHeight != null) {
+			Validate.isTrue(crosstabHeight >= 1, "crosstabHeight must be >= 1");
+		}
+		this.crosstabHeight = crosstabHeight;
+	}
+
+	public Integer getCrosstabWidth() {
+		return crosstabWidth;
+	}
+
+	public void setCrosstabWidth(Integer crosstabWidth) {
+		if (crosstabWidth != null) {
+			Validate.isTrue(crosstabWidth >= 1, "crosstabWidth must be >= 1");
+		}
+		this.crosstabWidth = crosstabWidth;
+	}
+
 	public SplitType getDefaultSplitType() {
 		return defaultSplitType;
 	}

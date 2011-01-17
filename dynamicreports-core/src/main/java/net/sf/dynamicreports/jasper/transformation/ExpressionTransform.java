@@ -56,47 +56,48 @@ public class ExpressionTransform {
 	private static final String VALUE = "$P'{'" + JasperScriptlet.SCRIPTLET_NAME + "'}'.getValue(\"{0}\")";
 	private static final String FIELD_VALUE = "$F'{'{0}'}'";
 	private static final String VARIABLE_VALUE = "$V'{'{0}'}'";
+	private static final String PARAMETER_VALUE = "$P'{'{0}'}'";
 	private static final String COMPLEX_VALUE = "$P'{'" + JasperScriptlet.SCRIPTLET_NAME + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
-	
-	private JasperTransformAccessor accessor;	
+
+	private JasperTransformAccessor accessor;
 	private Map<String, JRDesignExpression> expressions;
-	
+
 	public ExpressionTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 		this.expressions = new HashMap<String, JRDesignExpression>();
 	}
-	
-	public void transform() {	
+
+	public void transform() {
 		for (DRIDesignField field : accessor.getReport().getFields()) {
 			addField(field);
 		}
 		for (DRIDesignSystemExpression expression : accessor.getReport().getSystemExpressions()) {
 			addSystemExpression(expression);
-		}	
+		}
 		for (DRIDesignSimpleExpression expression : accessor.getReport().getSimpleExpressions()) {
 			addSimpleExpression(expression);
-		}	
+		}
 		for (DRIDesignComplexExpression complexExpression : accessor.getReport().getComplexExpressions()) {
 			addComplexExpression(complexExpression);
 		}
 		for (DRIDesignVariable variable : accessor.getReport().getVariables()) {
 			addVariable(variable);
-		}	
+		}
 	}
 
-	public void addSystemExpression(DRIDesignSystemExpression systemExpression) {		
+	public void addSystemExpression(DRIDesignSystemExpression systemExpression) {
 		if (systemExpression == null)
-			return;		
+			return;
 		addExpression(systemExpression);
 	}
-	
-	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {		
+
+	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
 		if (simpleExpression == null)
-			return;		
+			return;
 		accessor.getCustomValues().addSimpleExpression(simpleExpression);
 		addExpression(simpleExpression);
 	}
-	
+
 	private void addField(DRIDesignField field) {
 		try {
 			if (!field.isExternal()) {
@@ -106,12 +107,12 @@ public class ExpressionTransform {
 			addExpression(field);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for field \"" + field.getName() + "\"", e);
-		}		
+		}
 	}
-	
-	private void addVariable(DRIDesignVariable variable) {		
+
+	private void addVariable(DRIDesignVariable variable) {
 		try {
-			accessor.getDesign().addVariable(variable(variable));		
+			accessor.getDesign().addVariable(variable(variable));
 			accessor.getCustomValues().addValueType(variable.getName(), ValueType.VARIABLE);
 			addExpression(variable);
 		} catch (JRException e) {
@@ -119,20 +120,20 @@ public class ExpressionTransform {
 		}
 	}
 
-	private void addComplexExpression(DRIDesignComplexExpression complexExpression) {		
+	private void addComplexExpression(DRIDesignComplexExpression complexExpression) {
 		if (complexExpression == null)
-			return;		
+			return;
 		accessor.getCustomValues().addComplexExpression(complexExpression);
 		addExpression(complexExpression);
 	}
-	
+
 	private void addExpression(DRIDesignExpression expression) {
 		if (expressions.containsKey(expression.getName())) {
-			throw new JasperDesignException("Duplicate declaration of expression \"" + expression.getName() + "\"");			
+			throw new JasperDesignException("Duplicate declaration of expression \"" + expression.getName() + "\"");
 		}
-		expressions.put(expression.getName(), expression(expression));		
+		expressions.put(expression.getName(), expression(expression));
 	}
-	
+
 	//field
 	private JRDesignField field(DRIDesignField field) {
 		JRDesignField jrField = new JRDesignField();
@@ -140,11 +141,11 @@ public class ExpressionTransform {
 		jrField.setValueClass(field.getValueClass());
 		return jrField;
 	}
-	
+
 	//variable
 	private JRDesignVariable variable(DRIDesignVariable variable) {
 		JRDesignExpression expression = getExpression(variable.getValueExpression());
-		
+
 		JRDesignVariable jrVariable = new JRDesignVariable();
 		jrVariable.setName(variable.getName());
 		jrVariable.setExpression(expression);
@@ -157,21 +158,21 @@ public class ExpressionTransform {
 		}
 		return jrVariable;
 	}
-	
+
 	//simple expression
-	private JRDesignExpression expression(DRIDesignExpression simpleExpression) {	
+	private JRDesignExpression expression(DRIDesignExpression simpleExpression) {
 		JRDesignExpression expression = new JRDesignExpression();
 		expression.setText(getExpressionText(simpleExpression));
 		expression.setValueClass(simpleExpression.getValueClass());
 		return expression;
 	}
-	
-	private static String getExpressionText(DRIDesignExpression expression) {
+
+	private String getExpressionText(DRIDesignExpression expression) {
 		if (expression instanceof DRIDesignField) {
-			return MessageFormat.format(FIELD_VALUE, expression.getName());
+			return toFieldValue(expression.getName());
 		}
 		else if (expression instanceof DRIDesignVariable) {
-			return MessageFormat.format(VARIABLE_VALUE, expression.getName());
+			return toVariableValue(expression.getName());
 		}
 		else if (expression instanceof DRIDesignComplexExpression) {
 			DRIDesignComplexExpression complexExpression = (DRIDesignComplexExpression) expression;
@@ -190,21 +191,36 @@ public class ExpressionTransform {
 		else if (expression instanceof DRIDesignSystemExpression) {
 			String name = ((DRIDesignSystemExpression) expression).getName();
 			if (name.equals(SystemExpression.PAGE_NUMBER.name())) {
-				return "$V{" + JRVariable.PAGE_NUMBER + "}";
+				return toVariableValue(JRVariable.PAGE_NUMBER);
 			}
-			throw new JasperDesignException("System expression \"" + name + "\" not supported");
+			else {
+				return toVariableValue(name);
+			}
+			//throw new JasperDesignException("System expression \"" + name + "\" not supported");
 		}
 		else {
 			throw new JasperDesignException("Expression " + expression.getClass().getName() + " not supported");
 		}
 	}
-	
+
+	public String toFieldValue(String expression) {
+		return MessageFormat.format(FIELD_VALUE, expression);
+	}
+
+	public String toVariableValue(String expression) {
+		return MessageFormat.format(VARIABLE_VALUE, expression);
+	}
+
+	public String toParameterValue(String expression) {
+		return MessageFormat.format(PARAMETER_VALUE, expression);
+	}
+
 	protected JRDesignExpression getExpression(DRIDesignExpression expression) {
 		if (expression == null)
 			return null;
 		if (!expressions.containsKey(expression.getName())) {
 			throw new JasperDesignException("Expression \"" + expression.getName() + "\" is not registered");
-		}			
+		}
 		return expressions.get(expression.getName());
 	}
 

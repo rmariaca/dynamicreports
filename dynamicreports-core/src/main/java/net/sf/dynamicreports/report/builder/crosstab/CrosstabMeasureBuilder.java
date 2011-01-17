@@ -20,43 +20,38 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.crosstab;
+package net.sf.dynamicreports.report.builder.crosstab;
 
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabMeasure;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabColumnGroup extends DRCrosstabGroup implements DRICrosstabColumnGroup {
+@SuppressWarnings("ucd")
+public class CrosstabMeasureBuilder extends AbstractBuilder<CrosstabMeasureBuilder, DRCrosstabMeasure> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private Integer headerHeight;
-	private Integer totalHeaderWidth;
-	private CrosstabColumnPosition position;
-
-	public Integer getHeaderHeight() {
-		return headerHeight;
+	protected CrosstabMeasureBuilder() {
+		super(new DRCrosstabMeasure());
 	}
 
-	public void setHeaderHeight(Integer headerHeight) {
-		this.headerHeight = headerHeight;
+	public CrosstabMeasureBuilder setValueExpression(DRIExpression<?> valueExpression) {
+		getObject().setValueExpression(valueExpression);
+		return this;
 	}
 
-	public Integer getTotalHeaderWidth() {
-		return totalHeaderWidth;
+	public CrosstabMeasureBuilder setCalculation(Calculation calculation) {
+		getObject().setCalculation(calculation);
+		return this;
 	}
 
-	public void setTotalHeaderWidth(Integer totalHeaderWidth) {
-		this.totalHeaderWidth = totalHeaderWidth;
-	}
-
-	public CrosstabColumnPosition getPosition() {
-		return position;
-	}
-
-	public void setPosition(CrosstabColumnPosition position) {
-		this.position = position;
+	public CrosstabMeasureBuilder setPercentageType(CrosstabPercentageType percentageType) {
+		getObject().setPercentageType(percentageType);
+		return this;
 	}
 }

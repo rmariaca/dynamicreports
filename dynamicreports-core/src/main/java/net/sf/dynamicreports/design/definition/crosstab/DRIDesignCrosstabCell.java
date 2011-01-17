@@ -26,16 +26,12 @@ package net.sf.dynamicreports.design.definition.crosstab;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignCrosstabCell {
-	
+
 	public String getName();
-	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
+
 	public String getRowTotalGroup();
-	
+
 	public String getColumnTotalGroup();
-	
+
 	public DRIDesignCrosstabCellContent getContent();
 }

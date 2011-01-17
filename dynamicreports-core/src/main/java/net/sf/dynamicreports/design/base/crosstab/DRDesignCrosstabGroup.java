@@ -23,54 +23,84 @@
 package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.OrderType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {	
-	private String name;	
-	private CrosstabTotalPosition totalPosition;	
-	private DRDesignCrosstabBucket bucket;	
-	private DRDesignCrosstabCellContent header;	
+public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
+	private String name;
+	private CrosstabTotalPosition totalPosition;
+	private OrderType orderType;
+	private DRIDesignExpression expression;
+	private DRIDesignSimpleExpression orderByExpression;
+	private DRIDesignSimpleExpression comparatorExpression;
+	private DRDesignCrosstabCellContent header;
 	private DRDesignCrosstabCellContent totalHeader;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public CrosstabTotalPosition getTotalPosition() {
 		return totalPosition;
 	}
-	
+
 	public void setTotalPosition(CrosstabTotalPosition totalPosition) {
 		this.totalPosition = totalPosition;
 	}
-	
-	public DRDesignCrosstabBucket getBucket() {
-		return bucket;
+
+	public OrderType getOrderType() {
+		return orderType;
 	}
-	
-	public void setBucket(DRDesignCrosstabBucket bucket) {
-		this.bucket = bucket;
+
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
 	}
-	
+
+	public DRIDesignExpression getExpression() {
+		return expression;
+	}
+
+	public void setExpression(DRIDesignExpression expression) {
+		this.expression = expression;
+	}
+
+	public DRIDesignSimpleExpression getOrderByExpression() {
+		return orderByExpression;
+	}
+
+	public void setOrderByExpression(DRIDesignSimpleExpression orderByExpression) {
+		this.orderByExpression = orderByExpression;
+	}
+
+	public DRIDesignSimpleExpression getComparatorExpression() {
+		return comparatorExpression;
+	}
+
+	public void setComparatorExpression(DRIDesignSimpleExpression comparatorExpression) {
+		this.comparatorExpression = comparatorExpression;
+	}
+
 	public DRDesignCrosstabCellContent getHeader() {
 		return header;
 	}
-	
+
 	public void setHeader(DRDesignCrosstabCellContent header) {
 		this.header = header;
 	}
-	
+
 	public DRDesignCrosstabCellContent getTotalHeader() {
 		return totalHeader;
 	}
-	
+
 	public void setTotalHeader(DRDesignCrosstabCellContent totalHeader) {
 		this.totalHeader = totalHeader;
 	}

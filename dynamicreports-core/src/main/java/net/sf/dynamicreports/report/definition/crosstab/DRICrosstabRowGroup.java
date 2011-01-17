@@ -29,7 +29,9 @@ import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
  */
 public interface DRICrosstabRowGroup extends DRICrosstabGroup {
 
-	public int getWidth();
-	
+	public Integer getHeaderWidth();
+
+	public Integer getTotalHeaderHeight();
+
 	public CrosstabRowPosition getPosition();
 }

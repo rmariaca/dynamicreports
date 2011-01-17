@@ -29,18 +29,36 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCellCon
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent {	
+public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent {
+	private int width;
+	private int height;
 	private DRDesignList list;
 	private DRDesignComponent component;
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
 	public void setList(DRDesignList list) {
 		this.list = list;
 	}
-	
+
 	public DRDesignList getList() {
 		return list;
 	}
-	
+
 	public DRDesignComponent getComponent() {
 		return component;
 	}

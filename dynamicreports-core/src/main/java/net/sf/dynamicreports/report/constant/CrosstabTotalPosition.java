@@ -26,7 +26,6 @@ package net.sf.dynamicreports.report.constant;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public enum CrosstabTotalPosition {
-	NONE,
 	START,
 	END
 }

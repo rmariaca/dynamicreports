@@ -27,125 +27,122 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
-import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
-import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabColumnGroup;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
-import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
 import net.sf.dynamicreports.report.constant.RunDirection;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignCrosstab extends DRDesignComponent implements DRIDesignCrosstab {
-	private boolean repeatColumnHeaders;	
-	private boolean repeatRowHeaders;	
-	private int columnBreakOffset;	
-	private Boolean ignoreWidth;	
-	private RunDirection runDirection;	
-	private DRDesignCrosstabCellContent whenNoDataCell;	
-	private DRDesignCrosstabCellContent headerCell;	
-	private List<DRIDesignCrosstabColumnGroup> columnGroups;	
-	private List<DRIDesignCrosstabRowGroup> rowGroups;	
-	private List<DRIDesignCrosstabCell> cells;	
+	private Boolean repeatColumnHeaders;
+	private Boolean repeatRowHeaders;
+	private Integer columnBreakOffset;
+	private Boolean ignoreWidth;
+	private RunDirection runDirection;
+	private DRDesignCrosstabCellContent whenNoDataCell;
+	private DRDesignCrosstabCellContent headerCell;
+	private List<DRDesignCrosstabColumnGroup> columnGroups;
+	private List<DRDesignCrosstabRowGroup> rowGroups;
+	private List<DRDesignCrosstabCell> cells;
 	private List<DRIDesignCrosstabMeasure> measures;
-	
+
 	public DRDesignCrosstab() {
 		super("crosstab");
 	}
-	
+
 	@Override
 	protected void init() {
 		super.init();
-		columnGroups = new ArrayList<DRIDesignCrosstabColumnGroup>();
-		rowGroups = new ArrayList<DRIDesignCrosstabRowGroup>();
-		cells = new ArrayList<DRIDesignCrosstabCell>();
+		columnGroups = new ArrayList<DRDesignCrosstabColumnGroup>();
+		rowGroups = new ArrayList<DRDesignCrosstabRowGroup>();
+		cells = new ArrayList<DRDesignCrosstabCell>();
 		measures = new ArrayList<DRIDesignCrosstabMeasure>();
 	}
-	
-	public boolean isRepeatColumnHeaders() {
+
+	public Boolean isRepeatColumnHeaders() {
 		return repeatColumnHeaders;
 	}
-	
-	public void setRepeatColumnHeaders(boolean repeatColumnHeaders) {
+
+	public void setRepeatColumnHeaders(Boolean repeatColumnHeaders) {
 		this.repeatColumnHeaders = repeatColumnHeaders;
 	}
-	
-	public boolean isRepeatRowHeaders() {
+
+	public Boolean isRepeatRowHeaders() {
 		return repeatRowHeaders;
 	}
-	
-	public void setRepeatRowHeaders(boolean repeatRowHeaders) {
+
+	public void setRepeatRowHeaders(Boolean repeatRowHeaders) {
 		this.repeatRowHeaders = repeatRowHeaders;
 	}
-	
-	public int getColumnBreakOffset() {
+
+	public Integer getColumnBreakOffset() {
 		return columnBreakOffset;
 	}
-	
-	public void setColumnBreakOffset(int columnBreakOffset) {
+
+	public void setColumnBreakOffset(Integer columnBreakOffset) {
 		this.columnBreakOffset = columnBreakOffset;
 	}
-	
+
 	public Boolean getIgnoreWidth() {
 		return ignoreWidth;
 	}
-	
+
 	public void setIgnoreWidth(Boolean ignoreWidth) {
 		this.ignoreWidth = ignoreWidth;
 	}
-	
+
 	public RunDirection getRunDirection() {
 		return runDirection;
 	}
-	
+
 	public void setRunDirection(RunDirection runDirection) {
 		this.runDirection = runDirection;
 	}
-	
+
 	public DRDesignCrosstabCellContent getWhenNoDataCell() {
 		return whenNoDataCell;
 	}
-	
+
 	public void setWhenNoDataCell(DRDesignCrosstabCellContent whenNoDataCell) {
 		this.whenNoDataCell = whenNoDataCell;
 	}
-	
+
 	public DRDesignCrosstabCellContent getHeaderCell() {
 		return headerCell;
 	}
-	
+
 	public void setHeaderCell(DRDesignCrosstabCellContent headerCell) {
 		this.headerCell = headerCell;
 	}
-	
-	public List<DRIDesignCrosstabColumnGroup> getColumnGroups() {
+
+	public List<DRDesignCrosstabColumnGroup> getColumnGroups() {
 		return columnGroups;
 	}
-	
-	public void setColumnGroups(List<DRIDesignCrosstabColumnGroup> columnGroups) {
+
+	public void setColumnGroups(List<DRDesignCrosstabColumnGroup> columnGroups) {
 		this.columnGroups = columnGroups;
 	}
-	
-	public List<DRIDesignCrosstabRowGroup> getRowGroups() {
+
+	public List<DRDesignCrosstabRowGroup> getRowGroups() {
 		return rowGroups;
 	}
-	
-	public void setRowGroups(List<DRIDesignCrosstabRowGroup> rowGroups) {
+
+	public void setRowGroups(List<DRDesignCrosstabRowGroup> rowGroups) {
 		this.rowGroups = rowGroups;
 	}
-	
-	public List<DRIDesignCrosstabCell> getCells() {
+
+	public List<DRDesignCrosstabCell> getCells() {
 		return cells;
 	}
-	
-	public void setCells(List<DRIDesignCrosstabCell> cells) {
+
+	public void setCells(List<DRDesignCrosstabCell> cells) {
 		this.cells = cells;
 	}
-	
+
 	public List<DRIDesignCrosstabMeasure> getMeasures() {
 		return measures;
 	}
-	
+
 	public void setMeasures(List<DRIDesignCrosstabMeasure> measures) {
 		this.measures = measures;
 	}

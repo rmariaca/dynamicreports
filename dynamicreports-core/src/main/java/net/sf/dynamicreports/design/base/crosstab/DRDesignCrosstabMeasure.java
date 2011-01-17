@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 
@@ -32,48 +33,43 @@ import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
  */
 public class DRDesignCrosstabMeasure implements DRIDesignCrosstabMeasure {
 	private String name;
-	private Class<?> valueClass;	
-	private DRIDesignExpression valueExpression;	
-	private Calculation calculation;	
+	private DRIDesignExpression valueExpression;
+	private Calculation calculation;
 	private CrosstabPercentageType percentageType;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Class<?> getValueClass() {
-		return valueClass;
-	}
-	
-	public void setValueClass(Class<?> valueClass) {
-		this.valueClass = valueClass;
-	}
-	
+
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public Calculation getCalculation() {
 		return calculation;
 	}
-	
+
 	public void setCalculation(Calculation calculation) {
 		this.calculation = calculation;
 	}
-	
+
 	public CrosstabPercentageType getPercentageType() {
 		return percentageType;
 	}
-	
+
 	public void setPercentageType(CrosstabPercentageType percentageType) {
 		this.percentageType = percentageType;
+	}
+
+	public Class<?> getValueClass() {
+		return ReportUtils.getVariableValueClass(calculation, valueExpression.getValueClass());
 	}
 }

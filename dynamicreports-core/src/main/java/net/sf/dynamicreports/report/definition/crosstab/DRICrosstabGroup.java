@@ -25,19 +25,28 @@ package net.sf.dynamicreports.report.definition.crosstab;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRICrosstabGroup extends Serializable {
-	
+
 	public String getName();
-	
+
+	public Boolean getShowTotal();
+
 	public CrosstabTotalPosition getTotalPosition();
-	
-	public DRICrosstabBucket getBucket();
-	
-	public DRICrosstabCellContent getHeader();
-	
-	public DRICrosstabCellContent getTotalHeader();
+
+	public DRIExpression<?> getTotalHeaderExpression();
+
+	public OrderType getOrderType();
+
+	public DRIExpression<?> getExpression();
+
+	public DRISimpleExpression<?> getOrderByExpression();
+
+	public DRISimpleExpression<?> getComparatorExpression();
 }

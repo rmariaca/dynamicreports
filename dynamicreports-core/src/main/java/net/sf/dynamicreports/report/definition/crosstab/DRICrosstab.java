@@ -33,24 +33,26 @@ import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 public interface DRICrosstab extends DRIDimensionComponent {
 
 	public Boolean isRepeatColumnHeaders();
-	
+
 	public Boolean isRepeatRowHeaders();
-	
+
 	public Integer getColumnBreakOffset();
-	
+
 	public Boolean getIgnoreWidth();
-	
+
 	public RunDirection getRunDirection();
-	
+
+	public Integer getCellWidth();
+
+	public Integer getCellHeight();
+
 	public DRICrosstabCellContent getWhenNoDataCell();
-	
+
 	public DRICrosstabCellContent getHeaderCell();
-	
+
 	public List<DRICrosstabColumnGroup> getColumnGroups();
-	
+
 	public List<DRICrosstabRowGroup> getRowGroups();
-	
-	public List<DRICrosstabCell> getCells();
-	
+
 	public List<DRICrosstabMeasure> getMeasures();
 }

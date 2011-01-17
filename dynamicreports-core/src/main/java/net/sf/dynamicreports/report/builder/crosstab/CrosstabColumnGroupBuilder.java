@@ -20,43 +20,35 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.crosstab;
+package net.sf.dynamicreports.report.builder.crosstab;
 
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabColumnGroup;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabColumnGroup extends DRCrosstabGroup implements DRICrosstabColumnGroup {
+@SuppressWarnings("ucd")
+public class CrosstabColumnGroupBuilder extends AbstractCrosstabGroupBuilder<CrosstabColumnGroupBuilder, DRCrosstabColumnGroup> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private Integer headerHeight;
-	private Integer totalHeaderWidth;
-	private CrosstabColumnPosition position;
-
-	public Integer getHeaderHeight() {
-		return headerHeight;
+	protected CrosstabColumnGroupBuilder() {
+		super(new DRCrosstabColumnGroup());
 	}
 
-	public void setHeaderHeight(Integer headerHeight) {
-		this.headerHeight = headerHeight;
+	public CrosstabColumnGroupBuilder setHeaderHeight(Integer headerHeight) {
+		getObject().setHeaderHeight(headerHeight);
+		return this;
 	}
 
-	public Integer getTotalHeaderWidth() {
-		return totalHeaderWidth;
+	public CrosstabColumnGroupBuilder setTotalHeaderWidth(Integer totalHeaderWidth) {
+		getObject().setTotalHeaderWidth(totalHeaderWidth);
+		return this;
 	}
 
-	public void setTotalHeaderWidth(Integer totalHeaderWidth) {
-		this.totalHeaderWidth = totalHeaderWidth;
-	}
-
-	public CrosstabColumnPosition getPosition() {
-		return position;
-	}
-
-	public void setPosition(CrosstabColumnPosition position) {
-		this.position = position;
+	public CrosstabColumnGroupBuilder setPosition(CrosstabColumnPosition position) {
+		getObject().setPosition(position);
+		return this;
 	}
 }

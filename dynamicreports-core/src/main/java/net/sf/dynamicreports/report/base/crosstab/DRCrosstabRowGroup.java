@@ -31,22 +31,31 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
  */
 public class DRCrosstabRowGroup extends DRCrosstabGroup implements DRICrosstabRowGroup {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private int width;	
+
+	private Integer headerWidth;
+	private Integer totalHeaderHeight;
 	private CrosstabRowPosition position;
-	
-	public int getWidth() {
-		return width;
+
+	public Integer getHeaderWidth() {
+		return headerWidth;
 	}
-	
-	public void setWidth(int width) {
-		this.width = width;
+
+	public void setHeaderWidth(Integer headerWidth) {
+		this.headerWidth = headerWidth;
 	}
-	
+
+	public Integer getTotalHeaderHeight() {
+		return totalHeaderHeight;
+	}
+
+	public void setTotalHeaderHeight(Integer totalHeaderHeight) {
+		this.totalHeaderHeight = totalHeaderHeight;
+	}
+
 	public CrosstabRowPosition getPosition() {
 		return position;
 	}
-	
+
 	public void setPosition(CrosstabRowPosition position) {
 		this.position = position;
 	}

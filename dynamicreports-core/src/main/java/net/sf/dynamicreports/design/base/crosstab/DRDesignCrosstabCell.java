@@ -27,58 +27,40 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {	
-	private String name;	
-	private Integer width;	
-	private Integer height;	
-	private String rowTotalGroup;	
-	private String columnTotalGroup;	
+public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {
+	private String name;
+	private String rowTotalGroup;
+	private String columnTotalGroup;
 	private DRDesignCrosstabCellContent content;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Integer getWidth() {
-		return width;
-	}
-	
-	public void setWidth(Integer width) {
-		this.width = width;
-	}
-	
-	public Integer getHeight() {
-		return height;
-	}
-	
-	public void setHeight(Integer height) {
-		this.height = height;
-	}
-	
+
 	public String getRowTotalGroup() {
 		return rowTotalGroup;
 	}
-	
+
 	public void setRowTotalGroup(String rowTotalGroup) {
 		this.rowTotalGroup = rowTotalGroup;
 	}
-	
+
 	public String getColumnTotalGroup() {
 		return columnTotalGroup;
 	}
-	
+
 	public void setColumnTotalGroup(String columnTotalGroup) {
 		this.columnTotalGroup = columnTotalGroup;
 	}
-	
+
 	public DRDesignCrosstabCellContent getContent() {
 		return content;
 	}
-	
+
 	public void setContent(DRDesignCrosstabCellContent content) {
 		this.content = content;
 	}

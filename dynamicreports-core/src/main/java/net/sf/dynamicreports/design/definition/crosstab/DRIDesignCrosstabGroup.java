@@ -22,20 +22,29 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.OrderType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignCrosstabGroup {
-	
+
 	public String getName();
-	
+
 	public CrosstabTotalPosition getTotalPosition();
-	
-	public DRIDesignCrosstabBucket getBucket();
-	
+
+	public OrderType getOrderType();
+
+	public DRIDesignExpression getExpression();
+
+	public DRIDesignSimpleExpression getOrderByExpression();
+
+	public DRIDesignSimpleExpression getComparatorExpression();
+
 	public DRIDesignCrosstabCellContent getHeader();
-	
+
 	public DRIDesignCrosstabCellContent getTotalHeader();
 }

@@ -20,21 +20,27 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.crosstab;
-
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.report.constant.OrderType;
+package net.sf.dynamicreports.report.builder.crosstab;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstabBucket {
-	
-	public OrderType getOrderType();
-	
-	public DRIDesignSimpleExpression getExpression();
-	
-	public DRIDesignSimpleExpression getOrderByExpression();
-	
-	public DRIDesignSimpleExpression getComparatorExpression();
+@SuppressWarnings("ucd")
+public class Crosstabs {
+
+	public static CrosstabBuilder crosstab() {
+		return new CrosstabBuilder();
+	}
+
+	public static CrosstabColumnGroupBuilder columnGroup() {
+		return new CrosstabColumnGroupBuilder();
+	}
+
+	public static CrosstabRowGroupBuilder rowGroup() {
+		return new CrosstabRowGroupBuilder();
+	}
+
+	public static CrosstabMeasureBuilder measure() {
+		return new CrosstabMeasureBuilder();
+	}
 }
