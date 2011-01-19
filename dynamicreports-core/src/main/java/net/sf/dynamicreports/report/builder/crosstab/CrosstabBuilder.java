@@ -102,40 +102,40 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder columnGroups(CrosstabColumnGroupBuilder ...columnGroups) {
+	public CrosstabBuilder columnGroups(CrosstabColumnGroupBuilder<?> ...columnGroups) {
 		return addColumnGroup(columnGroups);
 	}
 
-	public CrosstabBuilder addColumnGroup(CrosstabColumnGroupBuilder ...columnGroups) {
+	public CrosstabBuilder addColumnGroup(CrosstabColumnGroupBuilder<?> ...columnGroups) {
 		Validate.notNull(columnGroups, "columnGroups must not be null");
 		Validate.noNullElements(columnGroups, "columnGroups must not contains null columnGroup");
-		for (CrosstabColumnGroupBuilder columnGroup : columnGroups) {
+		for (CrosstabColumnGroupBuilder<?> columnGroup : columnGroups) {
 			getObject().addColumnGroup(columnGroup.build());
 		}
 		return this;
 	}
 
-	public CrosstabBuilder rowGroups(CrosstabRowGroupBuilder ...rowGroups) {
+	public CrosstabBuilder rowGroups(CrosstabRowGroupBuilder<?> ...rowGroups) {
 		return addRowGroup(rowGroups);
 	}
 
-	public CrosstabBuilder addRowGroup(CrosstabRowGroupBuilder ...rowGroups) {
+	public CrosstabBuilder addRowGroup(CrosstabRowGroupBuilder<?> ...rowGroups) {
 		Validate.notNull(rowGroups, "rowGroups must not be null");
 		Validate.noNullElements(rowGroups, "rowGroups must not contains null rowGroup");
-		for (CrosstabRowGroupBuilder rowGroup : rowGroups) {
+		for (CrosstabRowGroupBuilder<?> rowGroup : rowGroups) {
 			getObject().addRowGroup(rowGroup.build());
 		}
 		return this;
 	}
 
-	public CrosstabBuilder measures(CrosstabMeasureBuilder ...measures) {
+	public CrosstabBuilder measures(CrosstabMeasureBuilder<?> ...measures) {
 		return addMeasure(measures);
 	}
 
-	public CrosstabBuilder addMeasure(CrosstabMeasureBuilder ...measures) {
+	public CrosstabBuilder addMeasure(CrosstabMeasureBuilder<?> ...measures) {
 		Validate.notNull(measures, "measures must not be null");
 		Validate.noNullElements(measures, "measures must not contains null measure");
-		for (CrosstabMeasureBuilder measure : measures) {
+		for (CrosstabMeasureBuilder<?> measure : measures) {
 			getObject().addMeasure(measure.build());
 		}
 		return this;

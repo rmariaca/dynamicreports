@@ -23,31 +23,42 @@
 package net.sf.dynamicreports.report.builder.crosstab;
 
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabColumnGroup;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CrosstabColumnGroupBuilder extends AbstractCrosstabGroupBuilder<CrosstabColumnGroupBuilder, DRCrosstabColumnGroup> {
+public class CrosstabColumnGroupBuilder<T> extends AbstractCrosstabGroupBuilder<CrosstabColumnGroupBuilder<T>, DRCrosstabColumnGroup<T>, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CrosstabColumnGroupBuilder() {
-		super(new DRCrosstabColumnGroup());
+	protected CrosstabColumnGroupBuilder(ValueColumnBuilder<?, T> column) {
+		super(column, new DRCrosstabColumnGroup<T>());
 	}
 
-	public CrosstabColumnGroupBuilder setHeaderHeight(Integer headerHeight) {
+	protected CrosstabColumnGroupBuilder(FieldBuilder<T> field) {
+		super(field, new DRCrosstabColumnGroup<T>());
+	}
+
+	protected CrosstabColumnGroupBuilder(DRISimpleExpression<T> expression) {
+		super(expression, new DRCrosstabColumnGroup<T>());
+	}
+
+	public CrosstabColumnGroupBuilder<T> setHeaderHeight(Integer headerHeight) {
 		getObject().setHeaderHeight(headerHeight);
 		return this;
 	}
 
-	public CrosstabColumnGroupBuilder setTotalHeaderWidth(Integer totalHeaderWidth) {
+	public CrosstabColumnGroupBuilder<T> setTotalHeaderWidth(Integer totalHeaderWidth) {
 		getObject().setTotalHeaderWidth(totalHeaderWidth);
 		return this;
 	}
 
-	public CrosstabColumnGroupBuilder setPosition(CrosstabColumnPosition position) {
+	public CrosstabColumnGroupBuilder<T> setPosition(CrosstabColumnPosition position) {
 		getObject().setPosition(position);
 		return this;
 	}

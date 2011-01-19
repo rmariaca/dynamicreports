@@ -23,34 +23,65 @@
 package net.sf.dynamicreports.test.jasper.crosstab;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.util.Locale;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabTest extends AbstractJasperTest {
+public class CrosstabTest extends AbstractJasperCrosstabValueTest {
 	private static final long serialVersionUID = 1L;
+
+	private CrosstabRowGroupBuilder<String> rowGroup;
+	private CrosstabColumnGroupBuilder<String> columnGroup;
+	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureBuilder<Integer> measure2;
+	private CrosstabMeasureBuilder<Double> measure3;
+	private CrosstabMeasureBuilder<Double> measure4;
+	private CrosstabMeasureBuilder<Integer> measure5;
+	private CrosstabMeasureBuilder<Integer> measure6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<String> column1 = col.column("Column1", "field1", String.class);
 		TextColumnBuilder<String> column2 = col.column("Column2", "field2", String.class);
 		TextColumnBuilder<Integer> column3 = col.column("Column3", "field3", Integer.class);
-		TextColumnBuilder<Integer> column4 = col.column("Column4", "field4", Integer.class);
+		TextColumnBuilder<Double> column4 = col.column("Column4", "field4", Double.class);
+		TextColumnBuilder<String> column5 = col.column("Column5", "field5", String.class);
 
-		CrosstabBuilder crosstab = ctab.crosstab();
-		crosstab.addRowGroup(ctab.rowGroup().setExpression(column1.build()));
-		crosstab.addColumnGroup(ctab.columnGroup().setExpression(column2.build()));
-		crosstab.addMeasure(ctab.measure().setValueExpression(column3.build()).setCalculation(Calculation.SUM));
-		crosstab.addMeasure(ctab.measure().setValueExpression(column4.build()).setCalculation(Calculation.SUM));
+		measure1 = ctab.measure(column3, Calculation.SUM);
+		measure2 = ctab.measure(column3, Calculation.SUM);
+		measure2.setPercentageType(CrosstabPercentageType.GRAND_TOTAL);
+		measure3 = ctab.measure(column4, Calculation.SUM);
+		measure4 = ctab.measure(column4, Calculation.SUM);
+		measure4.setPercentageType(CrosstabPercentageType.GRAND_TOTAL);
+		measure5 = ctab.measure(column5, Calculation.COUNT);
+		measure6 = ctab.measure(column5, Calculation.COUNT);
+		measure6.setPercentageType(CrosstabPercentageType.GRAND_TOTAL);
 
-		rb.columns(column1, column2,	column3,	column4)
+		CrosstabBuilder crosstab = ctab.crosstab()
+			.headerCell(cmp.text("Header"))
+			.rowGroups(
+				rowGroup = ctab.rowGroup(column1).setTotalHeader("Total for rowgroup"))
+			.columnGroups(
+				columnGroup = ctab.columnGroup(column2))
+			.measures(
+				measure1, measure2, measure3, measure4, measure5, measure6);
+
+		rb.setLocale(Locale.ENGLISH)
+			.columns(column1, column2, column3, column4, column5)
 			.summary(crosstab);
 	}
 
@@ -59,19 +90,99 @@ public class CrosstabTest extends AbstractJasperTest {
 		super.test();
 
 		numberOfPagesTest(1);
+
+		setCrosstabBand("summary");
+
+		crosstabHeaderElementValueTest("textField1", "Header");
+
+		//column group
+		crosstabGroupHeaderCountTest(columnGroup, 2);
+		crosstabGroupHeaderValueTest(columnGroup, "c", "d");
+		crosstabGroupTotalHeaderCountTest(columnGroup, 1);
+		crosstabGroupTotalHeaderValueTest(columnGroup, "Total");
+
+		//row group
+		crosstabGroupHeaderCountTest(rowGroup, 3);
+		crosstabGroupHeaderValueTest(rowGroup, "a", "b", "c");
+		crosstabGroupTotalHeaderCountTest(rowGroup, 1);
+		crosstabGroupTotalHeaderValueTest(rowGroup, "Total for rowgroup");
+
+		//measure1
+		crosstabCellCountTest(measure1, null, null, 6);
+		crosstabCellValueTest(measure1, null, null, "358", "768", "1,193", "1,602", "1,193", "1,602");
+		crosstabCellCountTest(measure1, null, columnGroup, 3);
+		crosstabCellValueTest(measure1, null, columnGroup, "1,126", "2,795", "2,795");
+		crosstabCellCountTest(measure1, rowGroup, null, 2);
+		crosstabCellValueTest(measure1, rowGroup, null, "2,744", "3,972");
+		crosstabCellCountTest(measure1, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure1, rowGroup, columnGroup, "6,716");
+
+		//measure2
+		crosstabCellCountTest(measure2, null, null, 6);
+		crosstabCellValueTest(measure2, null, null, "5", "11", "17", "23", "17", "23");
+		crosstabCellCountTest(measure2, null, columnGroup, 3);
+		crosstabCellValueTest(measure2, null, columnGroup, "16", "41", "41");
+		crosstabCellCountTest(measure2, rowGroup, null, 2);
+		crosstabCellValueTest(measure2, rowGroup, null, "40", "59");
+		crosstabCellCountTest(measure2, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure2, rowGroup, columnGroup, "100");
+
+		//measure3
+		crosstabCellCountTest(measure3, null, null, 6);
+		crosstabCellValueTest(measure3, null, null, "5", "9", "13", "17", "13", "17");
+		crosstabCellCountTest(measure3, null, columnGroup, 3);
+		crosstabCellValueTest(measure3, null, columnGroup, "14", "30", "30");
+		crosstabCellCountTest(measure3, rowGroup, null, 2);
+		crosstabCellValueTest(measure3, rowGroup, null, "31", "43");
+		crosstabCellCountTest(measure3, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure3, rowGroup, columnGroup, "74");
+
+		//measure4
+		crosstabCellCountTest(measure4, null, null, 6);
+		crosstabCellValueTest(measure4, null, null, "6.8", "12.2", "17.6", "23", "17.6", "23");
+		crosstabCellCountTest(measure4, null, columnGroup, 3);
+		crosstabCellValueTest(measure4, null, columnGroup, "18.9", "40.5", "40.5");
+		crosstabCellCountTest(measure4, rowGroup, null, 2);
+		crosstabCellValueTest(measure4, rowGroup, null, "41.9", "58.1");
+		crosstabCellCountTest(measure4, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure4, rowGroup, columnGroup, "100");
+
+		//measure5
+		crosstabCellCountTest(measure5, null, null, 6);
+		crosstabCellValueTest(measure5, null, null, "2", "2", "2", "2", "2", "2");
+		crosstabCellCountTest(measure5, null, columnGroup, 3);
+		crosstabCellValueTest(measure5, null, columnGroup, "4", "4", "4");
+		crosstabCellCountTest(measure5, rowGroup, null, 2);
+		crosstabCellValueTest(measure5, rowGroup, null, "6", "6");
+		crosstabCellCountTest(measure5, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure5, rowGroup, columnGroup, "12");
+
+		//measure6
+		crosstabCellCountTest(measure6, null, null, 6);
+		crosstabCellValueTest(measure6, null, null, "16", "16", "16", "16", "16", "16");
+		crosstabCellCountTest(measure6, null, columnGroup, 3);
+		crosstabCellValueTest(measure6, null, columnGroup, "33", "33", "33");
+		crosstabCellCountTest(measure6, rowGroup, null, 2);
+		crosstabCellValueTest(measure6, rowGroup, null, "50", "50");
+		crosstabCellCountTest(measure6, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure6, rowGroup, columnGroup, "100");
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
-		dataSource.add("a", "c", 1, 2);
-		dataSource.add("a", "c", 2, 3);
-		dataSource.add("a", "d", 3, 4);
-		dataSource.add("a", "d", 4, 5);
-		dataSource.add("b", "c", 5, 6);
-		dataSource.add("b", "c", 6, 7);
-		dataSource.add("b", "d", 7, 8);
-		dataSource.add("b", "d", 8, 9);
+		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5");
+		dataSource.add("a", "c", 106, 2d, "1");
+		dataSource.add("a", "c", 252, 3d, "1");
+		dataSource.add("a", "d", 312, 4d, "1");
+		dataSource.add("a", "d", 456, 5d, "4");
+		dataSource.add("b", "c", 515, 6d, "5");
+		dataSource.add("b", "c", 678, 7d, "6");
+		dataSource.add("b", "d", 779, 8d, "7");
+		dataSource.add("b", "d", 823, 9d, "8");
+		dataSource.add("c", "c", 515, 6d, "5");
+		dataSource.add("c", "c", 678, 7d, "6");
+		dataSource.add("c", "d", 779, 8d, "7");
+		dataSource.add("c", "d", 823, 9d, "8");
 		return dataSource;
 	}
 }

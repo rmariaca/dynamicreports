@@ -218,48 +218,42 @@ public class BandTransform {
 	private void prepareCrosstab(DRDesignCrosstab crosstab) throws DRException {
 		DRDesignCrosstabCellContent whenNoDataCell = crosstab.getWhenNoDataCell();
 
-		int index = 0;
 		for (DRDesignCrosstabColumnGroup columnGroup : crosstab.getColumnGroups()) {
 			DRDesignCrosstabCellContent header = columnGroup.getHeader();
 			if (header != null) {
-				header.setComponent(prepareCrosstabCell(crosstab.getName() + ".columnGroup_header" + index, header));
+				header.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), header));
 			}
 			DRDesignCrosstabCellContent totalHeader = columnGroup.getTotalHeader();
 			if (totalHeader != null) {
-				totalHeader.setComponent(prepareCrosstabCell(crosstab.getName() + ".columnGroup_totalheader" + index, totalHeader));
+				totalHeader.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), totalHeader));
 			}
-			index++;
 		}
 
-		index = 0;
 		for (DRDesignCrosstabRowGroup rowGroup : crosstab.getRowGroups()) {
 			DRDesignCrosstabCellContent header = rowGroup.getHeader();
 			if (header != null) {
-				header.setComponent(prepareCrosstabCell(crosstab.getName() + ".rowGroup_header" + index, header));
+				header.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), header));
 			}
 			DRDesignCrosstabCellContent totalHeader = rowGroup.getTotalHeader();
 			if (totalHeader != null) {
-				totalHeader.setComponent(prepareCrosstabCell(crosstab.getName() + ".rowGroup_totalheader" + index, totalHeader));
+				totalHeader.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), totalHeader));
 			}
-			index++;
 		}
 
 		if (whenNoDataCell != null) {
-			whenNoDataCell.setComponent(prepareCrosstabCell(crosstab.getName() + ".whennodatacell", whenNoDataCell));
+			whenNoDataCell.setComponent(prepareCrosstabCell(crosstab.getUniqueName() + ".whennodatacell", whenNoDataCell));
 		}
 
 		DRDesignCrosstabCellContent headerCell = crosstab.getHeaderCell();
 		if (headerCell != null) {
-			crosstab.getHeaderCell().setComponent(prepareCrosstabCell(crosstab.getName() + ".headercell", headerCell));
+			crosstab.getHeaderCell().setComponent(prepareCrosstabCell(crosstab.getUniqueName() + ".headercell", headerCell));
 		}
 
-		index = 0;
 		for (DRDesignCrosstabCell cell : crosstab.getCells()) {
 			DRDesignCrosstabCellContent content = cell.getContent();
 			if (content != null) {
-				content.setComponent(prepareCrosstabCell(crosstab.getName() + ".cell_content" + index, content));
+				content.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), content));
 			}
-			index++;
 		}
 	}
 

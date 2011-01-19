@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabColumnGroup extends DRICrosstabGroup {
+public interface DRICrosstabColumnGroup<T> extends DRICrosstabGroup<T> {
 
 	public Integer getHeaderHeight();
 

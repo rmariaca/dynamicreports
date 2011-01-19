@@ -23,31 +23,42 @@
 package net.sf.dynamicreports.report.builder.crosstab;
 
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabRowGroup;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CrosstabRowGroupBuilder extends AbstractCrosstabGroupBuilder<CrosstabRowGroupBuilder, DRCrosstabRowGroup> {
+public class CrosstabRowGroupBuilder<T> extends AbstractCrosstabGroupBuilder<CrosstabRowGroupBuilder<T>, DRCrosstabRowGroup<T>, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CrosstabRowGroupBuilder() {
-		super(new DRCrosstabRowGroup());
+	protected CrosstabRowGroupBuilder(ValueColumnBuilder<?, T> column) {
+		super(column, new DRCrosstabRowGroup<T>());
 	}
 
-	public CrosstabRowGroupBuilder setHeaderWidth(Integer headerWidth) {
+	protected CrosstabRowGroupBuilder(FieldBuilder<T> field) {
+		super(field, new DRCrosstabRowGroup<T>());
+	}
+
+	protected CrosstabRowGroupBuilder(DRISimpleExpression<T> expression) {
+		super(expression, new DRCrosstabRowGroup<T>());
+	}
+
+	public CrosstabRowGroupBuilder<T> setHeaderWidth(Integer headerWidth) {
 		getObject().setHeaderWidth(headerWidth);
 		return this;
 	}
 
-	public CrosstabRowGroupBuilder setTotalHeaderHeight(Integer totalHeaderHeight) {
+	public CrosstabRowGroupBuilder<T> setTotalHeaderHeight(Integer totalHeaderHeight) {
 		getObject().setTotalHeaderHeight(totalHeaderHeight);
 		return this;
 	}
 
-	public CrosstabRowGroupBuilder setPosition(CrosstabRowPosition position) {
+	public CrosstabRowGroupBuilder<T> setPosition(CrosstabRowPosition position) {
 		getObject().setPosition(position);
 		return this;
 	}

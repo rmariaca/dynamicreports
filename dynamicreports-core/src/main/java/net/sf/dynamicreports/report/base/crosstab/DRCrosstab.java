@@ -50,16 +50,16 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private Integer cellHeight;
 	private DRCrosstabCellContent whenNoDataCell;
 	private DRCrosstabCellContent headerCell;
-	private List<DRICrosstabColumnGroup> columnGroups;
-	private List<DRICrosstabRowGroup> rowGroups;
-	private List<DRICrosstabMeasure> measures;
+	private List<DRICrosstabColumnGroup<?>> columnGroups;
+	private List<DRICrosstabRowGroup<?>> rowGroups;
+	private List<DRICrosstabMeasure<?>> measures;
 
 	@Override
 	protected void init() {
 		super.init();
-		columnGroups = new ArrayList<DRICrosstabColumnGroup>();
-		rowGroups = new ArrayList<DRICrosstabRowGroup>();
-		measures = new ArrayList<DRICrosstabMeasure>();
+		columnGroups = new ArrayList<DRICrosstabColumnGroup<?>>();
+		rowGroups = new ArrayList<DRICrosstabRowGroup<?>>();
+		measures = new ArrayList<DRICrosstabMeasure<?>>();
 
 		whenNoDataCell = new DRCrosstabCellContent();
 		headerCell = new DRCrosstabCellContent();
@@ -113,7 +113,7 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 		return headerCell;
 	}
 
-	public List<DRICrosstabColumnGroup> getColumnGroups() {
+	public List<DRICrosstabColumnGroup<?>> getColumnGroups() {
 		return columnGroups;
 	}
 
@@ -133,25 +133,25 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 		this.cellHeight = cellHeight;
 	}
 
-	public void addColumnGroup(DRICrosstabColumnGroup columnGroup) {
+	public void addColumnGroup(DRICrosstabColumnGroup<?> columnGroup) {
 		Validate.notNull(columnGroup, "columnGroup must not be null");
 		this.columnGroups.add(columnGroup);
 	}
 
-	public List<DRICrosstabRowGroup> getRowGroups() {
+	public List<DRICrosstabRowGroup<?>> getRowGroups() {
 		return rowGroups;
 	}
 
-	public void addRowGroup(DRICrosstabRowGroup rowGroup) {
+	public void addRowGroup(DRICrosstabRowGroup<?> rowGroup) {
 		Validate.notNull(rowGroup, "rowGroup must not be null");
 		this.rowGroups.add(rowGroup);
 	}
 
-	public List<DRICrosstabMeasure> getMeasures() {
+	public List<DRICrosstabMeasure<?>> getMeasures() {
 		return measures;
 	}
 
-	public void addMeasure(DRICrosstabMeasure measure) {
+	public void addMeasure(DRICrosstabMeasure<?> measure) {
 		Validate.notNull(measure, "measure must not be null");
 		this.measures.add(measure);
 	}

@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabRowGroup extends DRCrosstabGroup implements DRICrosstabRowGroup {
+public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICrosstabRowGroup<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private Integer headerWidth;

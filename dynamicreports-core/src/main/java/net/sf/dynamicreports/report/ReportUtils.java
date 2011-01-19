@@ -29,16 +29,16 @@ import net.sf.dynamicreports.report.constant.Calculation;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ReportUtils {	
+public class ReportUtils {
 	private static int counter = 0;
-	
+
 	public static String generateUniqueName(String name) {
 		if (counter == Integer.MAX_VALUE) {
 			counter = 0;
 		}
 		return name + "_" + counter++ + "_";
 	}
-	
+
 	public static Class<?> getVariableValueClass(Calculation calculation, Class<?> valueClass) {
 		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
 			return Long.class;
@@ -49,19 +49,19 @@ public class ReportUtils {
 		}
 		return valueClass;
 	}
-	
+
 	public static Class<?> getGenericClass(Object object, int index) {
 		ParameterizedType genericSuperclass = getParameterizedType(object.getClass());
 		return getRawType(genericSuperclass.getActualTypeArguments()[index]);
 	}
-	
+
 	private static ParameterizedType getParameterizedType(Class<?> classs) {
 		if (classs.getGenericSuperclass() instanceof ParameterizedType) {
 			return (ParameterizedType) classs.getGenericSuperclass();
 		}
 		return getParameterizedType((Class<?>) classs.getGenericSuperclass());
 	}
-	
+
 	private static Class<?> getRawType(Object typeArgument) {
 		if (typeArgument instanceof ParameterizedType) {
 			return getRawType(((ParameterizedType) typeArgument).getRawType());

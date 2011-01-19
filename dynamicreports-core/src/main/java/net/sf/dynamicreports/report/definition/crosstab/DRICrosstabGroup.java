@@ -25,16 +25,30 @@ package net.sf.dynamicreports.report.definition.crosstab;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabGroup extends Serializable {
+public interface DRICrosstabGroup<T> extends Serializable {
 
 	public String getName();
+
+	public String getHeaderPattern();
+
+	public HorizontalAlignment getHeaderHorizontalAlignment();
+
+	public DRIValueFormatter<?, ? super T> getHeaderValueFormatter();
+
+	public Boolean getHeaderStretchWithOverflow();
+
+	public DRIStyle getHeaderStyle();
 
 	public Boolean getShowTotal();
 
@@ -42,11 +56,15 @@ public interface DRICrosstabGroup extends Serializable {
 
 	public DRIExpression<?> getTotalHeaderExpression();
 
+	public DRIStyle getTotalHeaderStyle();
+
+	public DRIExpression<T> getExpression();
+
+	public DRIDataType<? super T, T> getDataType();
+
+	public DRISimpleExpression<T> getOrderByExpression();
+
 	public OrderType getOrderType();
 
-	public DRIExpression<?> getExpression();
-
-	public DRISimpleExpression<?> getOrderByExpression();
-
-	public DRISimpleExpression<?> getComparatorExpression();
+	public DRISimpleExpression<T> getComparatorExpression();
 }

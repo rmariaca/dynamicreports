@@ -22,6 +22,11 @@
 
 package net.sf.dynamicreports.report.builder.crosstab;
 
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -32,15 +37,54 @@ public class CrosstabBuilders {
 		return Crosstabs.crosstab();
 	}
 
-	public CrosstabColumnGroupBuilder columnGroup() {
-		return Crosstabs.columnGroup();
+	//column group
+	public <T> CrosstabColumnGroupBuilder<T> columnGroup(ValueColumnBuilder<?, T> column) {
+		return Crosstabs.columnGroup(column);
 	}
 
-	public CrosstabRowGroupBuilder rowGroup() {
-		return Crosstabs.rowGroup();
+	public <T> CrosstabColumnGroupBuilder<T> columnGroup(FieldBuilder<T> field) {
+		return Crosstabs.columnGroup(field);
 	}
 
-	public CrosstabMeasureBuilder measure() {
-		return Crosstabs.measure();
+	public <T> CrosstabColumnGroupBuilder<T> columnGroup(String fieldName, Class<T> valueClass) {
+		return Crosstabs.columnGroup(fieldName, valueClass);
+	}
+
+	public <T> CrosstabColumnGroupBuilder<T> columnGroup(DRISimpleExpression<T> expression) {
+		return Crosstabs.columnGroup(expression);
+	}
+
+	//row group
+	public <T> CrosstabRowGroupBuilder<T> rowGroup(ValueColumnBuilder<?, T> column) {
+		return Crosstabs.rowGroup(column);
+	}
+
+	public <T> CrosstabRowGroupBuilder<T> rowGroup(FieldBuilder<T> field) {
+		return Crosstabs.rowGroup(field);
+	}
+
+	public <T> CrosstabRowGroupBuilder<T> rowGroup(String fieldName, Class<T> valueClass) {
+		return Crosstabs.rowGroup(fieldName, valueClass);
+	}
+
+	public <T> CrosstabRowGroupBuilder<T> rowGroup(DRISimpleExpression<T> expression) {
+		return Crosstabs.rowGroup(expression);
+	}
+
+	//measure
+	public <T> CrosstabMeasureBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+		return Crosstabs.measure(column, calculation);
+	}
+
+	public <T> CrosstabMeasureBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
+		return Crosstabs.measure(field, calculation);
+	}
+
+	public <T> CrosstabMeasureBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
+		return Crosstabs.measure(fieldName, valueClass, calculation);
+	}
+
+	public <T> CrosstabMeasureBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
+		return Crosstabs.measure(expression, calculation);
 	}
 }

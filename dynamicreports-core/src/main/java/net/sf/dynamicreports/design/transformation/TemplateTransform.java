@@ -882,7 +882,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getCrosstabHeight();
 	}
 
-	public CrosstabTotalPosition getCrosstabColumnGroupTotalPosition(DRICrosstabColumnGroup columnGroup) {
+	public CrosstabTotalPosition getCrosstabColumnGroupTotalPosition(DRICrosstabColumnGroup<?> columnGroup) {
 		if (!isCrosstabColumnGroupShowTotal(columnGroup)) {
 			return null;
 		}
@@ -892,7 +892,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getCrosstabColumnGroupTotalPosition();
 	}
 
-	public CrosstabTotalPosition getCrosstabRowGroupTotalPosition(DRICrosstabRowGroup rowGroup) {
+	public CrosstabTotalPosition getCrosstabRowGroupTotalPosition(DRICrosstabRowGroup<?> rowGroup) {
 		if (!isCrosstabRowGroupShowTotal(rowGroup)) {
 			return null;
 		}
@@ -902,42 +902,42 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getCrosstabRowGroupTotalPosition();
 	}
 
-	public boolean isCrosstabColumnGroupShowTotal(DRICrosstabColumnGroup columnGroup) {
+	public boolean isCrosstabColumnGroupShowTotal(DRICrosstabColumnGroup<?> columnGroup) {
 		if (columnGroup.getShowTotal() != null) {
 			return columnGroup.getShowTotal();
 		}
 		return Defaults.getDefaults().isCrosstabColumnGroupShowTotal();
 	}
 
-	public boolean isCrosstabRowGroupShowTotal(DRICrosstabRowGroup rowGroup) {
+	public boolean isCrosstabRowGroupShowTotal(DRICrosstabRowGroup<?> rowGroup) {
 		if (rowGroup.getShowTotal() != null) {
 			return rowGroup.getShowTotal();
 		}
 		return Defaults.getDefaults().isCrosstabRowGroupShowTotal();
 	}
 
-	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup columnGroup) {
+	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup<?> columnGroup) {
 		if (columnGroup.getHeaderHeight() != null) {
 			return columnGroup.getHeaderHeight();
 		}
 		return Defaults.getDefaults().getCrosstabColumnGroupHeaderHeight();
 	}
 
-	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup columnGroup) {
+	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup<?> columnGroup) {
 		if (columnGroup.getTotalHeaderWidth() != null) {
 			return columnGroup.getTotalHeaderWidth();
 		}
 		return Defaults.getDefaults().getCrosstabColumnGroupTotalHeaderWidth();
 	}
 
-	public int getCrosstabRowGroupHeaderWidth(DRICrosstabRowGroup rowGroup) {
+	public int getCrosstabRowGroupHeaderWidth(DRICrosstabRowGroup<?> rowGroup) {
 		if (rowGroup.getHeaderWidth() != null) {
 			return rowGroup.getHeaderWidth();
 		}
 		return Defaults.getDefaults().getCrosstabRowGroupHeaderWidth();
 	}
 
-	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup rowGroup) {
+	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup<?> rowGroup) {
 		if (rowGroup.getTotalHeaderHeight() != null) {
 			return rowGroup.getTotalHeaderHeight();
 		}

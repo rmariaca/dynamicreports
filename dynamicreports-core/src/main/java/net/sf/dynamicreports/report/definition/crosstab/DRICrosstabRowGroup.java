@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabRowGroup extends DRICrosstabGroup {
+public interface DRICrosstabRowGroup<T> extends DRICrosstabGroup<T> {
 
 	public Integer getHeaderWidth();
 

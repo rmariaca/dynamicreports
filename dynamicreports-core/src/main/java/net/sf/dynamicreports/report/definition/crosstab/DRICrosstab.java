@@ -50,9 +50,9 @@ public interface DRICrosstab extends DRIDimensionComponent {
 
 	public DRICrosstabCellContent getHeaderCell();
 
-	public List<DRICrosstabColumnGroup> getColumnGroups();
+	public List<DRICrosstabColumnGroup<?>> getColumnGroups();
 
-	public List<DRICrosstabRowGroup> getRowGroups();
+	public List<DRICrosstabRowGroup<?>> getRowGroups();
 
-	public List<DRICrosstabMeasure> getMeasures();
+	public List<DRICrosstabMeasure<?>> getMeasures();
 }
