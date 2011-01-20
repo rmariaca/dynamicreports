@@ -37,6 +37,10 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 		this.crosstabBand = crosstabBand;
 	}
 
+	protected void crosstabHeaderElementCountTest(String name, int expectedNumberOfElements) {
+		elementCountTest(getPreix(1) + "headercell." + name, expectedNumberOfElements);
+	}
+
 	protected void crosstabHeaderElementValueTest(String name, String ...values) {
 		elementValueTest(getPreix(1) + "headercell." + name, values);
 	}

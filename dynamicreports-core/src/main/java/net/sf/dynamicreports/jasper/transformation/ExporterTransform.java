@@ -39,7 +39,6 @@ import net.sf.dynamicreports.jasper.definition.export.JasperIXhtmlExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIXlsExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIXlsxExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIXmlExporter;
-import net.sf.dynamicreports.jasper.definition.export.JasperIXmlssExporter;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.defaults.Defaults;
@@ -70,12 +69,11 @@ import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
-import net.sf.jasperreports.engine.export.xmlss.JRXmlssExporter;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ExporterTransform {		
+public class ExporterTransform {
 	private JasperIExporter jasperExporter;
 
 	public ExporterTransform(JasperIExporter jasperExporter) {
@@ -84,7 +82,7 @@ public class ExporterTransform {
 
 	public JRExporter transform() throws DRException {
 		JRExporter jrExporter;
-		
+
 		if (jasperExporter instanceof JasperICsvExporter) {
 			jrExporter = csv((JasperICsvExporter) jasperExporter);
 		}
@@ -124,19 +122,16 @@ public class ExporterTransform {
 		else if (jasperExporter instanceof JasperIXmlExporter) {
 			jrExporter = xml((JasperIXmlExporter) jasperExporter);
 		}
-		else if (jasperExporter instanceof JasperIXmlssExporter) {
-			jrExporter = xmlss((JasperIXmlssExporter) jasperExporter);
-		}
 		else if (jasperExporter instanceof JasperIImageExporter) {
 			jrExporter = image((JasperIImageExporter) jasperExporter);
 		}
 		else {
 			throw new JasperDesignException("Exporter " + jasperExporter.getClass().getName() + " not supported");
 		}
-		
+
 		return jrExporter;
 	}
-	
+
 	private JRExporter exporter(JRExporter jrExporter, JasperIExporter jasperExporter) {
 		if (jasperExporter.getOutputWriter() != null) {
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_WRITER, jasperExporter.getOutputWriter());
@@ -172,12 +167,6 @@ public class ExporterTransform {
 			jrExporter.setParameter(JRExporterParameter.IGNORE_PAGE_MARGINS, jasperExporter.getIgnorePageMargins());
 		}
 		return null;
-	}
-	
-	private JRExporter xmlss(JasperIXmlssExporter jasperExporter) {
-		JRExporter jrExporter = new JRXmlssExporter();
-		exporter(jrExporter, jasperExporter);
-		return jrExporter;
 	}
 
 	private JRExporter xml(JasperIXmlExporter jasperExporter) {
@@ -339,7 +328,7 @@ public class ExporterTransform {
 			jrExporter.setParameter(JRHtmlExporterParameter.IS_WRAP_BREAK_WORD, jasperExporter.getWrapBreakWord());
 		}
 		if (jasperExporter.getSizeUnit() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.SIZE_UNIT, ConstantTransform.sizeUnit(jasperExporter.getSizeUnit()));		
+			jrExporter.setParameter(JRHtmlExporterParameter.SIZE_UNIT, ConstantTransform.sizeUnit(jasperExporter.getSizeUnit()));
 		}
 		if (jasperExporter.getFramesAsNestedTables() != null) {
 			jrExporter.setParameter(JRHtmlExporterParameter.FRAMES_AS_NESTED_TABLES, jasperExporter.getFramesAsNestedTables());
@@ -394,7 +383,7 @@ public class ExporterTransform {
 		}
 		return jrExporter;
 	}
-	
+
 	private JRExporter xlsx(JasperIXlsxExporter jasperExporter) {
 		JRXlsAbstractExporter jrExporter = new JRXlsxExporter();
 		excel(jrExporter, jasperExporter);
@@ -436,7 +425,7 @@ public class ExporterTransform {
 		}
 		return jrExporter;
 	}
-	
+
 	public JRExporter image(JasperIImageExporter jasperExporter) throws DRException {
 		try {
 			JRGraphics2DExporter jrExporter = new JRGraphics2DExporter();

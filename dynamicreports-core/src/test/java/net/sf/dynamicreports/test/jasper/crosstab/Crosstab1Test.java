@@ -41,7 +41,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabTest extends AbstractJasperCrosstabValueTest {
+public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 	private static final long serialVersionUID = 1L;
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
@@ -93,6 +93,7 @@ public class CrosstabTest extends AbstractJasperCrosstabValueTest {
 
 		setCrosstabBand("summary");
 
+		crosstabHeaderElementCountTest("textField1", 1);
 		crosstabHeaderElementValueTest("textField1", "Header");
 
 		//column group

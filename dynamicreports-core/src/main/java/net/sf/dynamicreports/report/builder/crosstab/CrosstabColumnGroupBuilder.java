@@ -26,7 +26,6 @@ import net.sf.dynamicreports.report.base.crosstab.DRCrosstabColumnGroup;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
@@ -58,8 +57,8 @@ public class CrosstabColumnGroupBuilder<T> extends AbstractCrosstabGroupBuilder<
 		return this;
 	}
 
-	public CrosstabColumnGroupBuilder<T> setPosition(CrosstabColumnPosition position) {
+	/*public CrosstabColumnGroupBuilder<T> setPosition(CrosstabColumnPosition position) {
 		getObject().setPosition(position);
 		return this;
-	}
+	}*/
 }
