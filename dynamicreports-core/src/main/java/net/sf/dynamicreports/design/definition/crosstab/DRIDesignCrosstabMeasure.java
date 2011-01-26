@@ -20,14 +20,24 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.base.export;
+package net.sf.dynamicreports.design.definition.crosstab;
 
-import net.sf.dynamicreports.jasper.definition.export.JasperIXmlssExporter;
-import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class JasperXmlssExporter extends AbstractJasperExporter implements JasperIXmlssExporter {	
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public interface DRIDesignCrosstabMeasure {
+
+	public String getName();
+
+	public Class<?> getValueClass();
+	
+	public DRIDesignExpression getValueExpression();
+	
+	public Calculation getCalculation();
+	
+	public CrosstabPercentageType getPercentageType();
 }

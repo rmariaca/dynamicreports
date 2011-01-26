@@ -50,7 +50,7 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getTitleOnANewPage();
 
 	public Boolean getSummaryOnANewPage();
-	
+
 	public Boolean getSummaryWithPageHeaderAndFooter();
 
 	public Boolean getFloatColumnFooter();
@@ -72,15 +72,15 @@ public interface DRIReportTemplate extends Serializable {
 	public DRIStyle getGroupTitleStyle();
 
 	public DRIStyle getGroupStyle();
-	
+
 	public DRIStyle getSubtotalStyle();
-	
+
 	public DRIStyle getImageStyle();
 
 	public DRIStyle getChartStyle();
-	
+
 	public DRIStyle getBarcodeStyle();
-	
+
 	public Integer getPageWidth();
 
 	public Integer getPageHeight();
@@ -110,7 +110,7 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getGroupStartInNewColumn();
 
 	public Boolean getGroupReprintHeaderOnEachPage();
-	
+
 	public Integer getTextFieldWidth();
 
 	public Integer getImageHeight();
@@ -126,13 +126,17 @@ public interface DRIReportTemplate extends Serializable {
 	public Integer getBarcodeHeight();
 
 	public Integer getBarcodeWidth();
-	
+
 	public Integer getSubreportHeight();
 
 	public Integer getSubreportWidth();
-	
+
+	public Integer getCrosstabHeight();
+
+	public Integer getCrosstabWidth();
+
 	public List<Color> getChartSeriesColors();
-	
+
 	public SplitType getDefaultSplitType();
 
 	public SplitType getTitleSplitType();

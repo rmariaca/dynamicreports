@@ -27,10 +27,11 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.ExporterBuilders;
 import net.sf.dynamicreports.report.builder.barcode.BarcodeBuilders;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
-import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.condition.ConditionBuilders;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilders;
 import net.sf.dynamicreports.report.builder.datatype.DataTypeBuilders;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.ExpressionBuilders;
@@ -63,21 +64,22 @@ public class DynamicReports {
 	public static final ChartBuilders cht = new ChartBuilders();
 	public static final ExporterBuilders export = new ExporterBuilders();
 	public static final BarcodeBuilders bcode = new BarcodeBuilders();
-	
+	public static final CrosstabBuilders ctab = new CrosstabBuilders();
+
 	//report
 	public static JasperReportBuilder report() {
 		return new JasperReportBuilder();
-	}	
+	}
 
 	public static JasperConcatenatedReportBuilder concatenatedReport() {
 		return new JasperConcatenatedReportBuilder();
 	}
-	
+
 	//field
 	public static <T> FieldBuilder<T> field(String name, Class<T> valueClass) {
 		FieldBuilder<T> fieldBuilder = new FieldBuilder<T>(name, valueClass);
 		try {
-			DRIDataType<? super T, T> dataType = (DRIDataType<? super T, T>) DataTypes.detectType(valueClass);
+			DRIDataType<? super T, T> dataType = DataTypes.detectType(valueClass);
 			fieldBuilder.setDataType(dataType);
 		} catch (DRException e) {
 		}
@@ -89,7 +91,7 @@ public class DynamicReports {
 		fieldBuilder.setDataType(dataType);
 		return fieldBuilder;
 	}
-	
+
 	//variable
 	public static <T> VariableBuilder<T> variable(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		Validate.notNull(column, "column must not be null");
@@ -109,7 +111,7 @@ public class DynamicReports {
 	public static <T> VariableBuilder<T> variable(String name, FieldBuilder<T> field, Calculation calculation) {
 		return new VariableBuilder<T>(name, field, calculation);
 	}
-	
+
 	public static <T> VariableBuilder<T> variable(String fieldName, Class<?> valueClass, Calculation calculation) {
 		return new VariableBuilder<T>(field(fieldName, valueClass), calculation);
 	}
@@ -117,7 +119,7 @@ public class DynamicReports {
 	public static <T> VariableBuilder<T> variable(String name, String fieldName, Class<?> valueClass, Calculation calculation) {
 		return new VariableBuilder<T>(name, field(fieldName, valueClass), calculation);
 	}
-	
+
 	public static <T> VariableBuilder<T> variable(DRISimpleExpression<?> expression, Calculation calculation) {
 		return new VariableBuilder<T>(expression, calculation);
 	}
@@ -125,25 +127,25 @@ public class DynamicReports {
 	public static <T> VariableBuilder<T> variable(String name, DRISimpleExpression<?> expression, Calculation calculation) {
 		return new VariableBuilder<T>(name, expression, calculation);
 	}
-	
+
 	//hyperLink
 	public static HyperLinkBuilder hyperLink(String link) {
 		return new HyperLinkBuilder(link);
 	}
-	
+
 	public static HyperLinkBuilder hyperLink(DRISimpleExpression<String> linkExpression) {
 		return new HyperLinkBuilder(linkExpression);
 	}
-	
+
 	//margin
 	public static MarginBuilder margin() {
 		return new MarginBuilder();
 	}
-	
+
 	public static MarginBuilder margin(int margin) {
 		return new MarginBuilder(margin);
 	}
-	
+
 	//parameter
 	public static <T> ParameterBuilder<T> parameter(String name, T value) {
 		return new ParameterBuilder<T>(name, value);
@@ -153,20 +155,20 @@ public class DynamicReports {
 	public static QueryBuilder query(String text, QueryLanguage language) {
 		return new QueryBuilder(text, language);
 	}
-	
+
 	//units
 	public static int cm(Number value) {
 		return Units.cm(value);
 	}
-	
+
 	public static int inch(Number value) {
 		return Units.inch(value);
 	}
-	
+
 	public static int mm(Number value) {
 		return Units.mm(value);
 	}
-	
+
 	//template
 	public static ReportTemplateBuilder template() {
 		return new ReportTemplateBuilder();

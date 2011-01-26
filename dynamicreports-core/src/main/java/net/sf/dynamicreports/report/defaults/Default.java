@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
@@ -50,7 +51,7 @@ import net.sf.dynamicreports.report.constant.WhenNoDataType;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Default {  
+public class Default {
 	private Locale locale;
 	private boolean showColumnTitle;
 	private boolean ignorePagination;
@@ -58,7 +59,7 @@ public class Default {
 	private boolean titleOnANewPage;
 	private boolean summaryOnANewPage;
 	private boolean summaryWithPageHeaderAndFooter;
-	private boolean floatColumnFooter;	
+	private boolean floatColumnFooter;
 	//style
 	private boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -98,7 +99,7 @@ public class Default {
 	private boolean textFieldStretchWithOverflow;
 	//image
 	private int imageWidth;
-	private int imageHeight;	
+	private int imageHeight;
 	//filler
 	private int fillerWidth;
 	private int fillerHeight;
@@ -108,7 +109,7 @@ public class Default {
 	//break
 	private int breakWidth;
 	private int breakHeight;
-	//generic element	
+	//generic element
 	private int genericElementWidth;
 	private int genericElementHeight;
 	//list
@@ -117,16 +118,26 @@ public class Default {
 	private VerticalCellComponentAlignment verticalCellComponentAlignment;
 	//chart
 	private int chartWidth;
-	private int chartHeight;	
+	private int chartHeight;
 	private List<Color> chartSeriesColors;
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
 	//barcode
 	private int barcodeWidth;
-	private int barcodeHeight;	
+	private int barcodeHeight;
 	//subreport
 	private int subreportWidth;
-	private int subreportHeight;	
+	private int subreportHeight;
+	//crosstab
+	private int crosstabWidth;
+	private int crosstabHeight;
+	private CrosstabTotalPosition crosstabColumnGroupTotalPosition;
+	private CrosstabTotalPosition crosstabRowGroupTotalPosition;
+	private boolean crosstabColumnGroupShowTotal;
+	private boolean crosstabRowGroupShowTotal;
+	private int crosstabColumnGroupTotalHeaderMaxWidth;
+	private int crosstabRowGroupHeaderMaxWidth;
+	private int crosstabCellMaxWidth;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -169,32 +180,32 @@ public class Default {
   private DRDataType<Character, Character> characterType;
   private DRDataType<String, String> stringType;
 	private HorizontalAlignment pageXofYHorizontalAlignment;
-	
+
 	public Default() {
 		init();
 	}
-	
+
 	private void init() {
 		this.locale = Locale.getDefault();
 		this.showColumnTitle = true;
 		this.ignorePagination =  false;
-		this.whenNoDataType = WhenNoDataType.NO_PAGES;		
+		this.whenNoDataType = WhenNoDataType.NO_PAGES;
 		this.titleOnANewPage = false;
 		this.summaryOnANewPage = false;
 		this.summaryWithPageHeaderAndFooter = false;
 		this.floatColumnFooter = false;
-		
+
 		this.highlightDetailOddRows = false;
 		this.detailOddRowStyle = new DRSimpleStyle();
 		detailOddRowStyle.setBackgroundColor(new Color(200,200,200));
 		this.highlightDetailEvenRows = false;
 		this.detailEvenRowStyle = new DRSimpleStyle();
 		detailEvenRowStyle.setBackgroundColor(new Color(240,240,240));
-				
+
 		this.textStyle = new DRStyle();
 		textStyle.setForegroundColor(Color.BLACK);
 		textStyle.setPadding(new DRPadding(2));
-		
+
 		this.columnTitleStyle = null;
 		this.columnStyle = null;
 		this.groupTitleStyle = null;
@@ -204,45 +215,48 @@ public class Default {
 		imageStyle.setImageScale(ImageScale.FILL_PROPORTIONALLY);
 		this.chartStyle = null;
 		this.barcodeStyle = null;
-		
+
 		this.pageWidth = PageType.A4.getWidth();
 		this.pageHeight = PageType.A4.getHeight();
 		this.pageOrientation = PageOrientation.PORTRAIT;
 		this.pageMargin = new DRMargin(10);
 		this.pageColumnsPerPage = 1;
 		this.pageColumnSpace = 0;
-				
+
 		this.columnPrintRepeatedDetailValues = true;
 		this.columnWidth = 100;
-		
+
 		this.groupHeaderLayout = GroupHeaderLayout.VALUE;
 		this.groupHideColumn = true;
 		this.groupShowColumnHeaderAndFooter = false;
 		this.groupPadding = 10;
 		this.groupStartInNewPage = false;
 		this.groupStartInNewColumn = false;
-		this.groupReprintHeaderOnEachPage = false;		
+		this.groupReprintHeaderOnEachPage = false;
 		this.groupByDataType = false;
-		
+
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
 		this.textFieldStretchWithOverflow = true;
-		
+
 		this.imageWidth = 100;
-		this.imageHeight = 100;		
-		
+		this.imageHeight = 100;
+
 		this.fillerWidth = 0;
-		this.fillerHeight = 0;	
+		this.fillerHeight = 0;
 
 		this.lineWidth = 1;
-		this.lineHeight = 1;	
-		
+		this.lineHeight = 1;
+
 		this.breakWidth = 1;
-		this.breakHeight = 1;	
-		
+		this.breakHeight = 1;
+
 		this.genericElementWidth = 100;
-		this.genericElementHeight = 100;	
-		
+		this.genericElementHeight = 100;
+
+		this.genericElementWidth = 100;
+		this.genericElementHeight = 100;
+
 		this.listgap = 0;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
 		this.verticalCellComponentAlignment = VerticalCellComponentAlignment.EXPAND;
@@ -252,31 +266,41 @@ public class Default {
 		this.chartSeriesColors = new ArrayList<Color>();
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
-		
+
 		this.barcodeWidth = 100;
 		this.barcodeHeight = 100;
-		
+
 		this.subreportWidth = 200;
 		this.subreportHeight = 0;
-		
+
+		this.crosstabWidth = 200;
+		this.crosstabHeight = 0;
+		this.crosstabColumnGroupTotalPosition = CrosstabTotalPosition.END;
+		this.crosstabRowGroupTotalPosition = CrosstabTotalPosition.END;
+		this.crosstabColumnGroupShowTotal = true;
+		this.crosstabRowGroupShowTotal = true;
+		this.crosstabColumnGroupTotalHeaderMaxWidth = 150;
+		this.crosstabRowGroupHeaderMaxWidth = 150;
+		this.crosstabCellMaxWidth = 150;
+
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
-		
-		this.defaultSplitType = null;		
+
+		this.defaultSplitType = null;
 		this.titleSplitType = null;
-		this.pageHeaderSplitType = null;	
+		this.pageHeaderSplitType = null;
 		this.pageFooterSplitType = null;
 		this.columnHeaderSplitType = null;
-		this.columnFooterSplitType = null;		
-		this.groupHeaderSplitType = null;		
-		this.groupFooterSplitType = null;		
+		this.columnFooterSplitType = null;
+		this.groupHeaderSplitType = null;
+		this.groupFooterSplitType = null;
 		this.detailSplitType = null;
-		this.lastPageFooterSplitType = null;		
+		this.lastPageFooterSplitType = null;
 		this.summarySplitType = null;
 		this.noDataSplitType = null;
 		this.backgroundSplitType = null;
-		
+
 		this.font = new DRFont("SansSerif", 10);
-		
+
 		this.bigDecimalType = new DRDataType<Number, BigDecimal>("#,##0.00#", HorizontalAlignment.RIGHT);
 		this.bigIntegerType = new DRDataType<Number, BigInteger>("#,##0", HorizontalAlignment.RIGHT);
 		this.byteType = new DRDataType<Number, Byte>("#,##0", HorizontalAlignment.RIGHT);
@@ -330,7 +354,7 @@ public class Default {
 	public boolean isSummaryWithPageHeaderAndFooter() {
 		return summaryWithPageHeaderAndFooter;
 	}
-	
+
 	public boolean isFloatColumnFooter() {
 		return floatColumnFooter;
 	}
@@ -370,7 +394,7 @@ public class Default {
 	public DRStyle getGroupStyle() {
 		return groupStyle;
 	}
-	
+
 	public DRStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
@@ -386,7 +410,7 @@ public class Default {
 	public DRStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
-	
+
 	public int getPageWidth() {
 		return pageWidth;
 	}
@@ -450,7 +474,7 @@ public class Default {
 	public boolean isGroupByDataType() {
 		return groupByDataType;
 	}
-	
+
 	public int getTextFieldWidth() {
 		return textFieldWidth;
 	}
@@ -458,11 +482,11 @@ public class Default {
 	public boolean isTextFieldPrintRepeatedValues() {
 		return textFieldPrintRepeatedValues;
 	}
-	
+
 	public boolean isTextFieldStretchWithOverflow() {
 		return textFieldStretchWithOverflow;
 	}
-	
+
 	public int getImageWidth() {
 		return imageWidth;
 	}
@@ -474,43 +498,43 @@ public class Default {
 	public int getFillerWidth() {
 		return fillerWidth;
 	}
-	
+
 	public int getFillerHeight() {
 		return fillerHeight;
 	}
-	
+
 	public int getLineWidth() {
 		return lineWidth;
 	}
-	
+
 	public int getLineHeight() {
 		return lineHeight;
 	}
-	
+
 	public int getBreakWidth() {
 		return breakWidth;
 	}
-	
+
 	public int getBreakHeight() {
 		return breakHeight;
 	}
-	
+
 	public Integer getGenericElementWidth() {
 		return genericElementWidth;
 	}
 
 	public Integer getGenericElementHeight() {
 		return genericElementHeight;
-	}	
-	
+	}
+
 	public int getListgap() {
 		return listgap;
 	}
-	
+
 	public HorizontalCellComponentAlignment getHorizontalCellComponentAlignment() {
 		return horizontalCellComponentAlignment;
 	}
-	
+
 	public VerticalCellComponentAlignment getVerticalCellComponentAlignment() {
 		return verticalCellComponentAlignment;
 	}
@@ -530,11 +554,11 @@ public class Default {
 	public boolean isChartCategoryDatasetUseSeriesAsCategory() {
 		return chartCategoryDatasetUseSeriesAsCategory;
 	}
-	
+
 	public TimePeriod getChartTimeSeriesDatasetTimePeriodType() {
 		return chartTimeSeriesDatasetTimePeriodType;
 	}
-	
+
 	public int getBarcodeWidth() {
 		return barcodeWidth;
 	}
@@ -542,7 +566,7 @@ public class Default {
 	public int getBarcodeHeight() {
 		return barcodeHeight;
 	}
-	
+
 	public int getSubreportWidth() {
 		return subreportWidth;
 	}
@@ -550,7 +574,43 @@ public class Default {
 	public int getSubreportHeight() {
 		return subreportHeight;
 	}
-	
+
+	public int getCrosstabWidth() {
+		return crosstabWidth;
+	}
+
+	public int getCrosstabHeight() {
+		return crosstabHeight;
+	}
+
+	public CrosstabTotalPosition getCrosstabColumnGroupTotalPosition() {
+		return crosstabColumnGroupTotalPosition;
+	}
+
+	public CrosstabTotalPosition getCrosstabRowGroupTotalPosition() {
+		return crosstabRowGroupTotalPosition;
+	}
+
+	public boolean isCrosstabColumnGroupShowTotal() {
+		return crosstabColumnGroupShowTotal;
+	}
+
+	public boolean isCrosstabRowGroupShowTotal() {
+		return crosstabRowGroupShowTotal;
+	}
+
+	public int getCrosstabColumnGroupTotalHeaderMaxWidth() {
+		return crosstabColumnGroupTotalHeaderMaxWidth;
+	}
+
+	public int getCrosstabRowGroupHeaderMaxWidth() {
+		return crosstabRowGroupHeaderMaxWidth;
+	}
+
+	public int getCrosstabCellMaxWidth() {
+		return crosstabCellMaxWidth;
+	}
+
 	public SplitType getDefaultSplitType() {
 		return defaultSplitType;
 	}
@@ -666,15 +726,15 @@ public class Default {
 	public DRDataType<Date, Date> getDateYearType() {
 		return dateYearType;
 	}
-	
+
 	public DRDataType<Date, Date> getDateMonthType() {
 		return dateMonthType;
 	}
-	
+
 	public DRDataType<Date, Date> getDateDayType() {
 		return dateDayType;
 	}
-	
+
 	public DRDataType<Date, Date> getTimeHourToMinuteType() {
 		return timeHourToMinuteType;
 	}

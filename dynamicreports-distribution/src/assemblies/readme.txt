@@ -5,9 +5,9 @@ DynamicReports
 http://dynamicreports.sourceforge.net
 
 
-DynamicReports is a Java reporting library. The main benefit of this library is a 
-dynamic report design and no need for a visual report designer. 
-You can very quickly  create reports and produce documents which can be displayed, 
-printed or exported to many popular formats such as PDF, Excel, Word and others.
+DynamicReports is an open source Java reporting library based on JasperReports. 
+It allows to create dynamic report designs and it doesn't need a visual report designer. 
+You can very quickly create reports and produce documents that can be displayed, 
+printed or exported into many popular formats such as PDF, Excel, Word and others.
 
 

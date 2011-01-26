@@ -49,60 +49,60 @@ import org.junit.Test;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractJasperTest {	
+public abstract class AbstractJasperTest {
 	private JasperReport jasperReport;
 	private JasperPrint jasperPrint;
-	
+
 	@Before
 	public void init() {
 		try {
 			JasperReportBuilder reportBuilder = DynamicReports.report();
-			configureReport(reportBuilder);	
+			configureReport(reportBuilder);
 			if (serializableTest()) {
 				reportBuilder = serializableTest(reportBuilder);
 			}
 			jasperReport = reportBuilder.toJasperReport();
 			jasperPrint = reportBuilder
 											.setDataSource(createDataSource())
-											.toJasperPrint();						
+											.toJasperPrint();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());	
+			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
-	public void test() {		
+	public void test() {
 	}
-	
+
 	protected boolean serializableTest() {
 		return true;
 	}
-	
+
 	private JasperReportBuilder serializableTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.writeObject(report);
 		oos.flush();
 		oos.close();
-		
-    InputStream stream = new ByteArrayInputStream((byte[])bos.toByteArray());
+
+    InputStream stream = new ByteArrayInputStream(bos.toByteArray());
     ObjectInputStream ois = new ObjectInputStream(stream);
     return (JasperReportBuilder) ois.readObject();
 	}
-	
+
 	public JasperReport getJasperReport() {
 		return jasperReport;
 	}
-	
+
 	public JasperPrint getJasperPrint() {
 		return jasperPrint;
 	}
-	
+
 	protected void numberOfPagesTest(int expectedNumberOfPages) {
 		Assert.assertEquals("pages", expectedNumberOfPages, getNumberOfPages());
 	}
-	
+
 	private int getNumberOfPages() {
 		return jasperPrint.getPages().size();
 	}
@@ -115,19 +115,19 @@ public abstract class AbstractJasperTest {
 		}
 		return elements.get(index);
 	}
-	
+
 	protected List<JRPrintElement> findElement(String key) {
 		List<JRPrintElement> elements = new ArrayList<JRPrintElement>();
 		for (Iterator<?> iterator = jasperPrint.getPages().iterator(); iterator.hasNext();) {
 			JRPrintPage page = (JRPrintPage) iterator.next();
 			for (Iterator<?> iterator2 = page.getElements().iterator(); iterator2.hasNext();) {
-				JRPrintElement element = (JRPrintElement) iterator2.next();			
+				JRPrintElement element = (JRPrintElement) iterator2.next();
 				findElement(key, elements, element);
 			}
-		}		
+		}
 		return elements;
 	}
-	
+
 	private void findElement(String key, List<JRPrintElement> elements, JRPrintElement element) {
 		if (key.equals(element.getKey())) {
 			elements.add(element);
@@ -139,10 +139,10 @@ public abstract class AbstractJasperTest {
 			}
 		}
 	}
-	
+
 	protected JRDataSource createDataSource() {
 		return null;
 	}
-	
-	protected abstract void configureReport(JasperReportBuilder rb) throws DRException;	
+
+	protected abstract void configureReport(JasperReportBuilder rb) throws DRException;
 }

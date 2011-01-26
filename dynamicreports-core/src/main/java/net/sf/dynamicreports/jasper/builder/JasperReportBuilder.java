@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -59,7 +60,6 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
-import net.sf.dynamicreports.jasper.builder.export.JasperXmlssExporterBuilder;
 import net.sf.dynamicreports.jasper.constant.ImageType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
@@ -97,39 +97,39 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private JasperReportDesign reportDesign;
 	private JasperDesign jasperDesign;
 	private JasperReport jasperReport;
-	private JasperPrint jasperPrint;	
+	private JasperPrint jasperPrint;
 	private JRDataSource dataSource;
 	private Connection connection;
 	private JRVirtualizer virtualizer;
-	
-	public JasperReportBuilder() {	
+
+	public JasperReportBuilder() {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
 	}
-	
-	public JasperReportBuilder setConnection(Connection connection) {	
+
+	public JasperReportBuilder setConnection(Connection connection) {
 		Validate.notNull(connection, "connection must not be null");
 		this.connection = connection;
 		return this;
 	}
-	
+
 	public JasperReportBuilder setDataSource(Collection<?> collection) {
 		return setDataSource(new JRBeanCollectionDataSource(collection));
 	}
-	
+
 	public JasperReportBuilder setDataSource(ResultSet resultSet) {
 		return setDataSource(new JRResultSetDataSource(resultSet));
 	}
-	
-	public JasperReportBuilder setDataSource(String sql, Connection connection) {	
+
+	public JasperReportBuilder setDataSource(String sql, Connection connection) {
 		Validate.notNull(sql, "sql must not be null");
 		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);
 	}
-	
-	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {	
+
+	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {
 		Validate.notNull(query, "query must not be null");
 		Validate.notNull(connection, "connection must not be null");
 		getObject().setQuery(query.build());
@@ -137,35 +137,39 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		dataSource = null;
 		return this;
 	}
-	
+
 	public JasperReportBuilder setDataSource(JRDataSource dataSource) {
 		this.dataSource = dataSource;
 		getObject().setQuery(null);
 		connection = null;
 		return this;
 	}
-	
+
 	public JasperReportBuilder setTemplateDesign(InputStream inputStream) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(inputStream));
 	}
-	
+
 	public JasperReportBuilder setTemplateDesign(File file) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(file));
 	}
-	
+
 	public JasperReportBuilder setTemplateDesign(String fileName) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(fileName));
 	}
-	
+
 	public JasperReportBuilder setTemplateDesign(JasperDesign jasperDesign) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(jasperDesign));
 	}
-	
-	private JasperReportBuilder setTemplateDesign(DRITemplateDesign<JasperDesign> templateDesign) {	
+
+	public JasperReportBuilder setTemplateDesign(URL jasperDesignUrl) throws DRException {
+		return setTemplateDesign(new JasperTemplateDesign(jasperDesignUrl));
+	}
+
+	private JasperReportBuilder setTemplateDesign(DRITemplateDesign<JasperDesign> templateDesign) {
 		getObject().setTemplateDesign(templateDesign);
 		return this;
 	}
-	
+
 	public JasperReportBuilder rebuild() {
 		builded = false;
 		reportDesign = null;
@@ -174,22 +178,22 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		jasperPrint = null;
 		return this;
 	}
-	
+
 	private JasperReportDesign toJasperReportDesign() throws DRException {
 		if (reportDesign == null) {
 			reportDesign = new JasperReportDesign(new DRDesignReport(build()));
 		}
 		return reportDesign;
 	}
-	
+
 	public JasperDesign toJasperDesign() throws DRException {
 		if (jasperDesign == null) {
 			jasperDesign = toJasperReportDesign().getDesign();
 		}
 		return jasperDesign;
 	}
-		
-	public JasperReport toJasperReport() throws DRException {		
+
+	public JasperReport toJasperReport() throws DRException {
 		if (jasperReport == null) {
 			try {
 				jasperReport = JasperCompileManager.compileReport(toJasperDesign());
@@ -200,7 +204,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return jasperReport;
 	}
-	
+
 	public JasperPrint toJasperPrint() throws DRException {
 		if (jasperPrint == null) {
 			Map<String, Object> parameters = toJasperReportDesign().getParameters();
@@ -208,7 +212,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 				parameters = new HashMap<String, Object>(parameters);
 				parameters.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			}
-			
+
 			try {
 				if (connection != null && getObject().getQuery() != null) {
 					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, connection);
@@ -223,18 +227,18 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return jasperPrint;
 	}
-	
+
 	public JasperReportBuilder show() throws DRException {
 		JasperViewer.viewReport(toJasperPrint());
 		return this;
 	}
-	
+
 	public JasperReportBuilder show(boolean exitOnClose) throws DRException {
 		JasperViewer.viewReport(toJasperPrint(), exitOnClose, null);
 		return this;
 	}
-	
-	public JasperReportBuilder showJrXml() throws DRException {		
+
+	public JasperReportBuilder showJrXml() throws DRException {
 		try {
 			JasperDesignViewer.viewReportDesign(toJasperDesign());
 		} catch (JRException e) {
@@ -242,7 +246,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
-	
+
 	public JasperReportBuilder toJrXml(OutputStream outputStream) throws DRException {
 		Validate.notNull(outputStream, "outputStream must not be null");
 		try {
@@ -252,11 +256,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
-	
+
 	public JasperReportBuilder print() throws DRException {
 		return print(true);
 	}
-	
+
 	public JasperReportBuilder print(boolean withPrintDialog) throws DRException {
 		try {
 			JasperPrintManager.printReport(toJasperPrint(), withPrintDialog);
@@ -265,25 +269,25 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
-	
-	public JasperReportBuilder setVirtualizer(JRVirtualizer virtualizer) {		
+
+	public JasperReportBuilder setVirtualizer(JRVirtualizer virtualizer) {
 		this.virtualizer = virtualizer;
 		return this;
 	}
-	
+
 	@Deprecated
 	/**
-	 * You should use toImage() 
+	 * You should use toImage()
 	 */
 	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex) throws DRException {
 		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
 		imageExporter.setPageIndex(pageIndex);
 		return toImage(imageExporter);
 	}
-	
+
 	@Deprecated
 	/**
-	 * You should use toImage() 
+	 * You should use toImage()
 	 */
 	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex, float zoom) throws DRException {
 		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
@@ -291,18 +295,18 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		imageExporter.setZoom(zoom);
 		return toImage(imageExporter);
 	}
-	
+
 	//image
 	public JasperReportBuilder toImage(OutputStream outputStream, ImageType imageType) throws DRException {
 		return toImage(Exporters.imageExporter(outputStream, imageType));
 	}
-	
+
 	public JasperReportBuilder toImage(JasperImageExporterBuilder imageExporterBuilder) throws DRException {
 		Validate.notNull(imageExporterBuilder, "imageExporterBuilder must not be null");
-		
+
 		JasperImageExporter imageExporter = imageExporterBuilder.build();
 		JRExporter exporter = new ExporterTransform(imageExporter).transform();
-		
+
 		JasperPrint jasperPrint = toJasperPrint();
 		Integer fromPage = null;
 		Integer toPage = null;
@@ -311,20 +315,20 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		int offsetX = 0;
 		int offsetY = 0;
 		int pageGap = 0;
-		
+
 		if (imageExporter.getZoom() != null) {
 			zoom = imageExporter.getZoom();
-		}		
+		}
 		if (imageExporter.getOffsetX() != null) {
 			offsetX = imageExporter.getOffsetX();
-		}	
+		}
 		if (imageExporter.getOffsetY() != null) {
 			offsetY = imageExporter.getOffsetY();
-		}	
+		}
 		if (imageExporter.getPageGap() != null) {
 			pageGap = imageExporter.getPageGap();
-		}	
-		
+		}
+
 		if (imageExporter.getPageIndex() != null && imageExporter.getPageIndex() >= 0) {
 			fromPage = imageExporter.getPageIndex();
 			toPage = imageExporter.getPageIndex() + 1;
@@ -343,24 +347,24 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		if (toPage == null) {
 			toPage = jasperPrint.getPages().size();
 		}
-		
+
 		int pages = toPage - fromPage;
-		
+
 		int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 		int width = pageWidth * pages + (pages - 1) + offsetX * 2;
 		int height = (int) (jasperPrint.getPageHeight() * zoom) + offsetY * 2;
 		Image pageImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		
+
 		int offset = offsetX;
-		for (int i = 0; i < pages; i++) {			
-			try {		
+		for (int i = 0; i < pages; i++) {
+			try {
 				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 				exporter.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D, pageImage.getGraphics());
 				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_X, offset);
 				exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_Y, offsetY);
 				exporter.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(fromPage++));
 				exporter.exportReport();
-				offset += pageWidth + pageGap;				
+				offset += pageWidth + pageGap;
 			} catch (JRException e) {
 				throw new DRException(e);
 			}
@@ -383,7 +387,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
-	
+
 	//csv
 	public JasperReportBuilder toCsv(OutputStream outputStream) throws DRException {
 		return toCsv(Exporters.csvExporter(outputStream));
@@ -392,7 +396,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public JasperReportBuilder toCsv(JasperCsvExporterBuilder csvExporterBuilder) throws DRException {
 		return export(csvExporterBuilder);
 	}
-	
+
 	//docx
 	public JasperReportBuilder toDocx(OutputStream outputStream) throws DRException {
 		return toDocx(Exporters.docxExporter(outputStream));
@@ -401,97 +405,97 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public JasperReportBuilder toDocx(JasperDocxExporterBuilder docxExporterBuilder) throws DRException {
 		return export(docxExporterBuilder);
 	}
-	
+
 	//html
 	public JasperReportBuilder toHtml(OutputStream outputStream) throws DRException {
 		return toHtml(Exporters.htmlExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toHtml(JasperHtmlExporterBuilder htmlExporterBuilder) throws DRException {
 		return export(htmlExporterBuilder);
 	}
-	
+
 	//ods
 	public JasperReportBuilder toOds(OutputStream outputStream) throws DRException {
 		return toOds(Exporters.odsExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toOds(JasperOdsExporterBuilder odsExporterBuilder) throws DRException {
 		return export(odsExporterBuilder);
 	}
-	
+
 	//odt
 	public JasperReportBuilder toOdt(OutputStream outputStream) throws DRException {
 		return toOdt(Exporters.odtExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toOdt(JasperOdtExporterBuilder odtExporterBuilder) throws DRException {
 		return export(odtExporterBuilder);
 	}
-	
+
 	//pdf
 	public JasperReportBuilder toPdf(OutputStream outputStream) throws DRException {
 		return toPdf(Exporters.pdfExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toPdf(JasperPdfExporterBuilder pdfExporterBuilder) throws DRException {
 		return export(pdfExporterBuilder);
 	}
-	
+
 	//rtf
 	public JasperReportBuilder toRtf(OutputStream outputStream) throws DRException {
 		return toRtf(Exporters.rtfExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toRtf(JasperRtfExporterBuilder rtfExporterBuilder) throws DRException {
 		return export(rtfExporterBuilder);
 	}
-	
+
 	//text
 	public JasperReportBuilder toText(OutputStream outputStream) throws DRException {
 		return toText(Exporters.textExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toText(JasperTextExporterBuilder textExporterBuilder) throws DRException {
 		return export(textExporterBuilder);
 	}
-	
+
 	//xhtml
 	public JasperReportBuilder toXhtml(OutputStream outputStream) throws DRException {
 		return toXhtml(Exporters.xhtmlExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toXhtml(JasperXhtmlExporterBuilder xhtmlExporterBuilder) throws DRException {
 		return export(xhtmlExporterBuilder);
 	}
-	
+
 	//excelApiXls
 	public JasperReportBuilder toExcelApiXls(OutputStream outputStream) throws DRException {
 		return toExcelApiXls(Exporters.excelApiXlsExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toExcelApiXls(JasperExcelApiXlsExporterBuilder excelApiXlsExporterBuilder) throws DRException {
 		return export(excelApiXlsExporterBuilder);
 	}
-	
+
 	//xls
 	public JasperReportBuilder toXls(OutputStream outputStream) throws DRException {
 		return toXls(Exporters.xlsExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toXls(JasperXlsExporterBuilder xlsExporterBuilder) throws DRException {
 		return export(xlsExporterBuilder);
 	}
-	
+
 	//xlsx
 	public JasperReportBuilder toXlsx(OutputStream outputStream) throws DRException {
 		return toXlsx(Exporters.xlsxExporter(outputStream));
 	}
-	
+
 	public JasperReportBuilder toXlsx(JasperXlsxExporterBuilder xlsxExporterBuilder) throws DRException {
 		return export(xlsxExporterBuilder);
 	}
-	
+
 	//xml
 	public JasperReportBuilder toXml(OutputStream outputStream) throws DRException {
 		return toXml(Exporters.xmlExporter(outputStream));
@@ -500,16 +504,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public JasperReportBuilder toXml(JasperXmlExporterBuilder xmlExporterBuilder) throws DRException {
 		return export(xmlExporterBuilder);
 	}
-	
-	//xmlss
-	public JasperReportBuilder toXmlss(OutputStream outputStream) throws DRException {
-		return toXmlss(Exporters.xmlssExporter(outputStream));
-	}
-	
-	public JasperReportBuilder toXmlss(JasperXmlssExporterBuilder xmlssExporterBuilder) throws DRException {
-		return export(xmlssExporterBuilder);
-	}
-	
+
 	private JasperReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
 		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {
@@ -522,11 +517,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
-	
+
 	public Connection getConnection() {
 		return connection;
 	}
-	
+
 	public JRDataSource getDataSource() {
 		return dataSource;
 	}

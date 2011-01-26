@@ -30,6 +30,7 @@ import net.sf.dynamicreports.jasper.transformation.BandTransform;
 import net.sf.dynamicreports.jasper.transformation.BarcodeTransform;
 import net.sf.dynamicreports.jasper.transformation.ChartTransform;
 import net.sf.dynamicreports.jasper.transformation.ComponentTransform;
+import net.sf.dynamicreports.jasper.transformation.CrosstabTransform;
 import net.sf.dynamicreports.jasper.transformation.ExpressionTransform;
 import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
@@ -52,6 +53,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private StyleTransform styleTransform;
 	private ChartTransform chartTransform;
 	private BarcodeTransform barcodeTransform;
+	private CrosstabTransform crosstabTransform;
 	
 	private JasperDesign design;
 	private JasperCustomValues customValues;
@@ -79,6 +81,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		styleTransform = new StyleTransform(this);
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
+		crosstabTransform = new CrosstabTransform(this);
 		
 		this.parameters = new HashMap<String, Object>();		
 		this.customValues = new JasperCustomValues();		
@@ -99,6 +102,10 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
+	}
+	
+	public CrosstabTransform getCrosstabTransform() {
+		return crosstabTransform;
 	}
 	
 	public ComponentTransform getComponentTransform() {

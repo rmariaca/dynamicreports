@@ -43,13 +43,13 @@ import org.junit.Test;
 public class ExportTest {
 	JasperReportBuilder report;
 	JasperConcatenatedReportBuilder concatenatedReport;
-	
+
 	@Before
-	public void init() {		
+	public void init() {
 		report = report();
 		report.columns(col.column("Column1", "field1", String.class));
 		report.setDataSource(createDataSource());
-		
+
 		concatenatedReport = concatenatedReport();
 		concatenatedReport.concatenate(report, report, report);
 	}
@@ -72,13 +72,12 @@ public class ExportTest {
 			report.toXls(new ByteArrayOutputStream());
 			report.toXlsx(new ByteArrayOutputStream());
 			report.toXml(new ByteArrayOutputStream());
-			report.toXmlss(new ByteArrayOutputStream());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void concatenatedExportTest() {
 		try {
@@ -96,16 +95,15 @@ public class ExportTest {
 			concatenatedReport.toXls(new ByteArrayOutputStream());
 			concatenatedReport.toXlsx(new ByteArrayOutputStream());
 			concatenatedReport.toXml(new ByteArrayOutputStream());
-			concatenatedReport.toXmlss(new ByteArrayOutputStream());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
-		dataSource.add("field1");	
+		dataSource.add("field1");
 		return dataSource;
 	}
 }

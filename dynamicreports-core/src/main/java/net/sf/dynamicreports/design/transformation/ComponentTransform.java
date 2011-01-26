@@ -40,6 +40,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignLine;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
@@ -81,6 +82,7 @@ import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -92,11 +94,11 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class ComponentTransform {
 	private DesignTransformAccessor accessor;
-	
+
 	public ComponentTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
+
 	//component
 	protected DRDesignComponent component(DRIComponent component, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		if (component instanceof DRITextField<?>) {
@@ -132,6 +134,9 @@ public class ComponentTransform {
 		if (component instanceof DRIGenericElement) {
 			return genericElement((DRIGenericElement) component, resetType, resetGroup);
 		}
+		if (component instanceof DRICrosstab) {
+			return crosstab((DRICrosstab) component, defaultStyleType, resetType, resetGroup);
+		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
 
@@ -142,7 +147,7 @@ public class ComponentTransform {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}
 	}
-	
+
 	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		component(designHyperlinkComponent, hyperlinkComponent, style, textStyle, defaultStyleType);
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
@@ -151,9 +156,9 @@ public class ComponentTransform {
 			designHyperLink.setLinkExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getLinkExpression()));
 			designHyperLink.setTooltipExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
 			designHyperlinkComponent.setHyperLink(designHyperLink);
-		}		
+		}
 	}
-	
+
 	//list
 	protected DRDesignList list(DRIList list, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignList designList = new DRDesignList();
@@ -161,36 +166,36 @@ public class ComponentTransform {
 		designList.setType(list.getType());
 		designList.setGap(accessor.getTemplateTransform().getListGap(list));
 		for (DRIListCell innerComponent : list.getListCells()) {
-			DRIComponent component = innerComponent.getComponent();			
+			DRIComponent component = innerComponent.getComponent();
 			HorizontalCellComponentAlignment horizontalAlignment = innerComponent.getHorizontalAlignment();
 			VerticalCellComponentAlignment verticalAlignment = innerComponent.getVerticalAlignment();
 			if (component instanceof DRIDimensionComponent) {
-				DRIDimensionComponent dimComponent = (DRIDimensionComponent) component;				
+				DRIDimensionComponent dimComponent = (DRIDimensionComponent) component;
 				if (horizontalAlignment == null) {
 					horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(dimComponent.getWidthType());
-				}				
+				}
 				if (verticalAlignment == null) {
 					verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(dimComponent.getHeightType());
 				}
 			}
 			designList.addComponent(horizontalAlignment, verticalAlignment, component(component, defaultStyleType, resetType, resetGroup));
 		}
-		
+
 		return designList;
 	}
-	
+
 	//text field
 	protected DRDesignTextField textField(DRITextField<?> textField, DefaultStyleType defaultStyleType) throws DRException {
 		DRDesignTextField designTextField = new DRDesignTextField();
 		hyperlink(designTextField, textField, textField.getStyle(), true, defaultStyleType);
-		TemplateTransform templateTransform = accessor.getTemplateTransform();		
+		TemplateTransform templateTransform = accessor.getTemplateTransform();
 		designTextField.setPrintRepeatedValues(Defaults.getDefaults().isTextFieldPrintRepeatedValues());
 		designTextField.setStretchWithOverflow(templateTransform.getTextFieldStretchWithOverflow(textField));
 		DRDesignStyle style = designTextField.getStyle();
 		designTextField.setWidth(templateTransform.getTextFieldWidth(textField, style));
 		designTextField.setHeight(templateTransform.getTextFieldHeight(textField, style));
 		designTextField.setPattern(templateTransform.getTextFieldPattern(textField, style));
-		designTextField.setHorizontalAlignment(templateTransform.getTextFieldHorizontalAlignment(textField, style));	
+		designTextField.setHorizontalAlignment(templateTransform.getTextFieldHorizontalAlignment(textField, style));
 		designTextField.setValueExpression(accessor.getExpressionTransform().transformExpression(textField.getValueExpression(), templateTransform.getTextFieldValueFormatter(textField)));
 		designTextField.setMarkup(textField.getMarkup());
 		if (textField.getEvaluationTime() != null) {
@@ -207,7 +212,7 @@ public class ComponentTransform {
 		}
 		return designTextField;
 	}
-	
+
 	//filler
 	protected DRDesignFiller filler(DRIFiller filler) throws DRException {
 		DRDesignFiller designFiller = new DRDesignFiller();
@@ -216,7 +221,7 @@ public class ComponentTransform {
 		designFiller.setHeight(accessor.getTemplateTransform().getFillerHeight(filler));
 		return designFiller;
 	}
-	
+
 	//image
 	private DRDesignImage image(DRIImage image) throws DRException {
 		DRDesignImage designImage = new DRDesignImage();
@@ -227,7 +232,7 @@ public class ComponentTransform {
 		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image));
 		return designImage;
 	}
-	
+
 	//chart
 	private DRDesignChart chart(DRIChart chart, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignChart designChart = accessor.getChartTransform().transform(chart, resetType, resetGroup);
@@ -236,7 +241,7 @@ public class ComponentTransform {
 		designChart.setEvaluationGroup(resetGroup);
 		return designChart;
 	}
-	
+
 	//barcode
 	private DRDesignBarcode barcode(DRIBarcode barcode, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignBarcode designBarcode = accessor.getBarcodeTransform().transform(barcode);
@@ -245,7 +250,7 @@ public class ComponentTransform {
 		designBarcode.setEvaluationGroup(resetGroup);
 		return designBarcode;
 	}
-	
+
 	//subreport
 	private DRDesignSubreport subreport(DRISubreport subreport) throws DRException {
 		DRDesignSubreport designSubreport = new DRDesignSubreport();
@@ -258,9 +263,9 @@ public class ComponentTransform {
 		designSubreport.setRunToBottom(subreport.getRunToBottom());
 		return designSubreport;
 	}
-	
+
 	//page x of y
-	private DRDesignList pageXofY(DRIPageXofY pageXofY, DefaultStyleType defaultStyleType) throws DRException {		
+	private DRDesignList pageXofY(DRIPageXofY pageXofY, DefaultStyleType defaultStyleType) throws DRException {
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
 		DRIStyle pageXofYStyle = pageXofY.getStyle();
 		if (pageXofYStyle == null) {
@@ -269,7 +274,7 @@ public class ComponentTransform {
 		DRDesignStyle style = accessor.getStyleTransform().transformStyle(pageXofYStyle, true, defaultStyleType);
 		Integer height = templateTransform.getPageXofYHeight(pageXofY, style);
 		HorizontalAlignment horizontalAlignment = templateTransform.getPageXofYHorizontalAlignment(pageXofY, style);
-		
+
 		DRStyle newStylePageX = new DRStyle();
 		newStylePageX.setParentStyle((DRStyle) pageXofYStyle);
 		newStylePageX.getPadding().setRight(0);
@@ -279,15 +284,15 @@ public class ComponentTransform {
 		DRStyle newStylePageY = new DRStyle();
 		newStylePageY.setParentStyle((DRStyle) pageXofYStyle);
 		newStylePageY.getPadding().setLeft(0);
-		newStylePageY.getBorder().setLeftPen(pen);		
-		
+		newStylePageY.getBorder().setLeftPen(pen);
+
 		DRTextField<String> pageXField = new DRTextField<String>();
 		pageXField.setHyperLink((DRHyperLink) pageXofY.getHyperLink());
 		pageXField.setPrintWhenExpression(pageXofY.getPrintWhenExpression());
 		pageXField.setStyle(newStylePageX);
 		pageXField.setHeight(height);
 		pageXField.setHeightType(pageXofY.getHeightType());
-		pageXField.setHorizontalAlignment(HorizontalAlignment.RIGHT);	
+		pageXField.setHorizontalAlignment(HorizontalAlignment.RIGHT);
 		pageXField.setValueExpression(new PageNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 0));
 
 		DRTextField<String> pageYField = new DRTextField<String>();
@@ -296,10 +301,10 @@ public class ComponentTransform {
 		pageYField.setStyle(newStylePageY);
 		pageYField.setHeight(height);
 		pageYField.setHeightType(pageXofY.getHeightType());
-		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);	
+		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);
 		pageYField.setValueExpression(new PageNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 1));
 		pageYField.setEvaluationTime(Evaluation.REPORT);
-		
+
 		int pageXofYWidth = templateTransform.getPageXofYWidth(pageXofY, style);
 		switch (horizontalAlignment) {
 		case LEFT:
@@ -331,13 +336,13 @@ public class ComponentTransform {
 			pageYField.setWidthType(pageXofY.getWidthType());
 			break;
 		}
-		
+
 		DRList listPageXofY = new DRList();
 		listPageXofY.addComponent(pageXField);
 		listPageXofY.addComponent(pageYField);
 		return list(listPageXofY, DefaultStyleType.TEXT, null, null);
 	}
-	
+
 	//line
 	protected DRDesignLine line(DRILine line) throws DRException {
 		DRDesignLine designLine = new DRDesignLine();
@@ -347,7 +352,7 @@ public class ComponentTransform {
 		designLine.setHeight(accessor.getTemplateTransform().getLineHeight(line));
 		return designLine;
 	}
-	
+
 	//break
 	protected DRDesignBreak breakComponent(DRIBreak breakComponent) throws DRException {
 		DRDesignBreak designBreak = new DRDesignBreak();
@@ -357,11 +362,11 @@ public class ComponentTransform {
 		designBreak.setHeight(accessor.getTemplateTransform().getBreakHeight(breakComponent));
 		return designBreak;
 	}
-	
+
 	//generic element
 	protected DRDesignGenericElement genericElement(DRIGenericElement genericElement, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignGenericElement designGenericElement = new DRDesignGenericElement();
-		component(designGenericElement, genericElement, null, false, DefaultStyleType.NONE);
+		component(designGenericElement, genericElement, genericElement.getStyle(), false, DefaultStyleType.NONE);
 		designGenericElement.setGenericElementNamespace(genericElement.getGenericElementNamespace());
 		designGenericElement.setGenericElementName(genericElement.getGenericElementName());
 		designGenericElement.setEvaluationTime(evaluationTimeFromResetType(resetType));
@@ -373,40 +378,47 @@ public class ComponentTransform {
 		}
 		return designGenericElement;
 	}
-	
+
+	//crosstab
+	private DRDesignCrosstab crosstab(DRICrosstab crosstab, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignCrosstab designCrosstab = accessor.getCrosstabTransform().transform(crosstab, defaultStyleType, resetType, resetGroup);
+		component(designCrosstab, crosstab, crosstab.getStyle(), false, DefaultStyleType.NONE);
+		return designCrosstab;
+	}
+
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
-		if (expression instanceof DRIDesignField || expression instanceof DRIDesignSystemExpression || 
+		if (expression instanceof DRIDesignField || expression instanceof DRIDesignSystemExpression ||
 				expression instanceof DRIDesignSimpleExpression) {
 			return EvaluationTime.NOW;
 		}
 		if (expression instanceof DRIDesignVariable) {
 			return evaluationTimeFromResetType(((DRIDesignVariable) expression).getResetType());
-		}	
-		if (expression instanceof DRIDesignComplexExpression) {			
-			return detectComplexExpressionEvaluationTime((DRIDesignComplexExpression) expression);			
+		}
+		if (expression instanceof DRIDesignComplexExpression) {
+			return detectComplexExpressionEvaluationTime((DRIDesignComplexExpression) expression);
 		}
 		throw new DRDesignReportException("Expression " + expression.getClass().getName() + " not supported");
 	}
-	
+
 	private EvaluationTime evaluationTimeFromResetType(ResetType resetType) {
 		if (resetType == null) {
 			return null;
 		}
-		
+
 		switch (resetType) {
 		case REPORT:
 			return EvaluationTime.REPORT;
 		case PAGE:
 			return EvaluationTime.PAGE;
 		case COLUMN:
-			return EvaluationTime.COLUMN;		
+			return EvaluationTime.COLUMN;
 		case GROUP:
 			return EvaluationTime.GROUP;
 		default:
 			throw new DRDesignReportException("Reset type " + resetType.name() + " not supported");
 		}
 	}
-	
+
 	private EvaluationTime detectComplexExpressionEvaluationTime(DRIDesignComplexExpression complexExpression) {
 		EvaluationTime evaluationTime = null;
 		for (DRIDesignExpression expression : complexExpression.getExpressions()) {
@@ -416,11 +428,11 @@ public class ComponentTransform {
 			}
 			else if (evaluationTime != evalTime || evaluationTime.equals(EvaluationTime.GROUP) && evalTime.equals(EvaluationTime.GROUP)) {
 				return EvaluationTime.AUTO;
-			}			
+			}
 		}
 		return evaluationTime;
 	}
-	
+
 	private DRDesignGroup detectEvaluationGroup(EvaluationTime evaluationTime, DRIDesignExpression expression) {
 		if (evaluationTime.equals(EvaluationTime.GROUP)) {
 			DRDesignGroup evaluationGroup = detectEvaluationGroup(expression);
@@ -431,20 +443,20 @@ public class ComponentTransform {
 		}
 		return null;
 	}
-	
+
 	private DRDesignGroup detectEvaluationGroup(DRIDesignExpression expression) {
 		if (expression instanceof DRIDesignField || expression instanceof DRIDesignSimpleExpression) {
 			return null;
 		}
 		if (expression instanceof DRDesignVariable) {
 			return ((DRDesignVariable) expression).getResetGroup();
-		}	
-		if (expression instanceof DRIDesignComplexExpression) {			
-			return detectComplexExpressionEvaluationGroup((DRIDesignComplexExpression) expression);			
+		}
+		if (expression instanceof DRIDesignComplexExpression) {
+			return detectComplexExpressionEvaluationGroup((DRIDesignComplexExpression) expression);
 		}
 		throw new DRDesignReportException("Expression " + expression.getClass().getName() + " not supported");
 	}
-	
+
 	private DRDesignGroup detectComplexExpressionEvaluationGroup(DRIDesignComplexExpression complexExpression) {
 		DRDesignGroup evaluationGroup = null;
 		for (DRIDesignExpression expression : complexExpression.getExpressions()) {
@@ -454,17 +466,17 @@ public class ComponentTransform {
 			}
 			else if (evaluationGroup != group) {
 				throw new DRDesignReportException("Can not detect evaluation group");
-			}			
+			}
 		}
 		return evaluationGroup;
 	}
-	
+
 	private class PageNumberExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		private HorizontalAlignment horizontalAlignment;
-		private int index;		
-		
+		private int index;
+
 		public PageNumberExpression(DRISimpleExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
 			addExpression(pageNumberFormatExpression);
 			this.horizontalAlignment = horizontalAlignment;
@@ -490,7 +502,7 @@ public class ComponentTransform {
 				}
 				else {
 					pattern = pattern.substring(index1 + 3);
-				}				
+				}
 			}
 			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
 			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});

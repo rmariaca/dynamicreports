@@ -20,19 +20,43 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.jasper.builder.export;
+package net.sf.dynamicreports.report.base.crosstab;
 
-import net.sf.dynamicreports.jasper.base.export.JasperXmlssExporter;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class JasperXmlssExporterBuilder extends AbstractJasperExporterBuilder<JasperXmlssExporterBuilder, JasperXmlssExporter> {	
+public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICrosstabRowGroup<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	protected JasperXmlssExporterBuilder() {
-		super(new JasperXmlssExporter());
+
+	private Integer headerWidth;
+	private Integer totalHeaderHeight;
+	private CrosstabRowPosition position;
+
+	public Integer getHeaderWidth() {
+		return headerWidth;
+	}
+
+	public void setHeaderWidth(Integer headerWidth) {
+		this.headerWidth = headerWidth;
+	}
+
+	public Integer getTotalHeaderHeight() {
+		return totalHeaderHeight;
+	}
+
+	public void setTotalHeaderHeight(Integer totalHeaderHeight) {
+		this.totalHeaderHeight = totalHeaderHeight;
+	}
+
+	public CrosstabRowPosition getPosition() {
+		return position;
+	}
+
+	public void setPosition(CrosstabRowPosition position) {
+		this.position = position;
 	}
 }

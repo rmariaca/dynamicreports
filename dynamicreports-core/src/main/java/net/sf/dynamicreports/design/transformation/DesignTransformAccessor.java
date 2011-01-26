@@ -52,5 +52,7 @@ public interface DesignTransformAccessor {
 
 	public BarcodeTransform getBarcodeTransform();
 	
-	public DRDesignPage getPage();
+	public CrosstabTransform getCrosstabTransform();
+	
+	public DRDesignPage getPage();	
 }

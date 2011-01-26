@@ -52,7 +52,6 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
-import net.sf.dynamicreports.jasper.builder.export.JasperXmlssExporterBuilder;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -71,49 +70,49 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class JasperConcatenatedReportBuilder implements Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private List<JasperReportBuilder> jasperReportBuilders;
-	
+
 	public JasperConcatenatedReportBuilder() {
 		this.jasperReportBuilders = new ArrayList<JasperReportBuilder>();
 	}
-	
+
 	public JasperConcatenatedReportBuilder concatenate(JasperReportBuilder ...jasperReportBuilders) {
 		Validate.notNull(jasperReportBuilders, "jasperReportBuilders must not be null");
 		Validate.noNullElements(jasperReportBuilders, "jasperReportBuilders must not contains null jasperReportBuilder");
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
 			this.jasperReportBuilders.add(jasperReportBuilder);
-		}		
+		}
 		return this;
 	}
-	
+
 	public JasperConcatenatedReportBuilder toPng(OutputStream outputStream) throws DRException {
 		return toPng(outputStream, 1);
 	}
-	
+
 	public JasperConcatenatedReportBuilder toPng(OutputStream outputStream, float zoom) throws DRException {
 		Validate.notNull(outputStream, "outputStream must not be null");
 		Validate.isTrue(zoom > 0, "zoom must be > 0");
-		
+
 		int maxWidth = 0;
 		int maxHeight = 0;
-		
+
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
 			int pages = jasperPrint.getPages().size();
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			maxWidth += pageWidth * pages + (pages - 1) + 2;
-			int height = (int) (jasperPrint.getPageHeight() * zoom) + 2;	
+			int height = (int) (jasperPrint.getPageHeight() * zoom) + 2;
 			if (height > maxHeight) {
 				maxHeight = height;
 			}
 		}
-				
+
 		Image pageImage = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2d = (Graphics2D) pageImage.getGraphics(); 
-		g2d.setColor(Color.LIGHT_GRAY); 
+		Graphics2D g2d = (Graphics2D) pageImage.getGraphics();
+		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.fill(new Rectangle2D.Float(1, 1, maxWidth - 1, maxHeight - 1));
-		
+
 		int offset = 1;
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
@@ -141,7 +140,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		}
 		return this;
 	}
-	
+
 	//csv
 	public JasperConcatenatedReportBuilder toCsv(OutputStream outputStream) throws DRException {
 		return toCsv(Exporters.csvExporter(outputStream));
@@ -150,7 +149,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	public JasperConcatenatedReportBuilder toCsv(JasperCsvExporterBuilder csvExporterBuilder) throws DRException {
 		return export(csvExporterBuilder);
 	}
-	
+
 	//docx
 	public JasperConcatenatedReportBuilder toDocx(OutputStream outputStream) throws DRException {
 		return toDocx(Exporters.docxExporter(outputStream));
@@ -159,97 +158,97 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	public JasperConcatenatedReportBuilder toDocx(JasperDocxExporterBuilder docxExporterBuilder) throws DRException {
 		return export(docxExporterBuilder);
 	}
-	
+
 	//html
 	public JasperConcatenatedReportBuilder toHtml(OutputStream outputStream) throws DRException {
 		return toHtml(Exporters.htmlExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toHtml(JasperHtmlExporterBuilder htmlExporterBuilder) throws DRException {
 		return export(htmlExporterBuilder);
 	}
-	
+
 	//ods
 	public JasperConcatenatedReportBuilder toOds(OutputStream outputStream) throws DRException {
 		return toOds(Exporters.odsExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toOds(JasperOdsExporterBuilder odsExporterBuilder) throws DRException {
 		return export(odsExporterBuilder);
 	}
-	
+
 	//odt
 	public JasperConcatenatedReportBuilder toOdt(OutputStream outputStream) throws DRException {
 		return toOdt(Exporters.odtExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toOdt(JasperOdtExporterBuilder odtExporterBuilder) throws DRException {
 		return export(odtExporterBuilder);
 	}
-	
+
 	//pdf
 	public JasperConcatenatedReportBuilder toPdf(OutputStream outputStream) throws DRException {
 		return toPdf(Exporters.pdfExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toPdf(JasperPdfExporterBuilder pdfExporterBuilder) throws DRException {
 		return export(pdfExporterBuilder);
 	}
-	
+
 	//rtf
 	public JasperConcatenatedReportBuilder toRtf(OutputStream outputStream) throws DRException {
 		return toRtf(Exporters.rtfExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toRtf(JasperRtfExporterBuilder rtfExporterBuilder) throws DRException {
 		return export(rtfExporterBuilder);
 	}
-	
+
 	//text
 	public JasperConcatenatedReportBuilder toText(OutputStream outputStream) throws DRException {
 		return toText(Exporters.textExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toText(JasperTextExporterBuilder textExporterBuilder) throws DRException {
 		return export(textExporterBuilder);
 	}
-	
+
 	//xhtml
 	public JasperConcatenatedReportBuilder toXhtml(OutputStream outputStream) throws DRException {
 		return toXhtml(Exporters.xhtmlExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toXhtml(JasperXhtmlExporterBuilder xhtmlExporterBuilder) throws DRException {
 		return export(xhtmlExporterBuilder);
 	}
-	
+
 	//excelApiXls
 	public JasperConcatenatedReportBuilder toExcelApiXls(OutputStream outputStream) throws DRException {
 		return toExcelApiXls(Exporters.excelApiXlsExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toExcelApiXls(JasperExcelApiXlsExporterBuilder excelApiXlsExporterBuilder) throws DRException {
 		return export(excelApiXlsExporterBuilder);
 	}
-	
+
 	//xls
 	public JasperConcatenatedReportBuilder toXls(OutputStream outputStream) throws DRException {
 		return toXls(Exporters.xlsExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toXls(JasperXlsExporterBuilder xlsExporterBuilder) throws DRException {
 		return export(xlsExporterBuilder);
 	}
-	
+
 	//xlsx
 	public JasperConcatenatedReportBuilder toXlsx(OutputStream outputStream) throws DRException {
 		return toXlsx(Exporters.xlsxExporter(outputStream));
 	}
-	
+
 	public JasperConcatenatedReportBuilder toXlsx(JasperXlsxExporterBuilder xlsxExporterBuilder) throws DRException {
 		return export(xlsxExporterBuilder);
 	}
-	
+
 	//xml
 	public JasperConcatenatedReportBuilder toXml(OutputStream outputStream) throws DRException {
 		return toXml(Exporters.xmlExporter(outputStream));
@@ -258,16 +257,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	public JasperConcatenatedReportBuilder toXml(JasperXmlExporterBuilder xmlExporterBuilder) throws DRException {
 		return export(xmlExporterBuilder);
 	}
-	
-	//xmlss
-	public JasperConcatenatedReportBuilder toXmlss(OutputStream outputStream) throws DRException {
-		return toXmlss(Exporters.xmlssExporter(outputStream));
-	}
-	
-	public JasperConcatenatedReportBuilder toXmlss(JasperXmlssExporterBuilder xmlssExporterBuilder) throws DRException {
-		return export(xmlssExporterBuilder);
-	}
-	
+
 	private JasperConcatenatedReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
 		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {

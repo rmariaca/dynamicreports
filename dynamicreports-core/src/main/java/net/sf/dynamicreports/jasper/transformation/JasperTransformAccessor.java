@@ -55,4 +55,6 @@ public interface JasperTransformAccessor {
 	public ChartTransform getChartTransform();
 
 	public BarcodeTransform getBarcodeTransform();
+
+	public CrosstabTransform getCrosstabTransform();
 }
