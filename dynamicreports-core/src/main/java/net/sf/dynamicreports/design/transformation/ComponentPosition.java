@@ -328,7 +328,7 @@ class ComponentPosition {
 		return maxWidth;
 	}
 
-	private static void height(DRDesignList list) {
+	protected static void height(DRDesignList list) {
 		int maxHeight = 0;
 		ListType type = list.getType();
 

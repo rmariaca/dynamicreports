@@ -135,12 +135,9 @@ public class Default {
 	private CrosstabTotalPosition crosstabRowGroupTotalPosition;
 	private boolean crosstabColumnGroupShowTotal;
 	private boolean crosstabRowGroupShowTotal;
-	private int crosstabColumnGroupHeaderHeight;
-	private int crosstabColumnGroupTotalHeaderWidth;
-	private int crosstabRowGroupHeaderWidth;
-	private int crosstabRowGroupTotalHeaderHeight;
-	private int crosstabCellWidth;
-	private int crosstabCellHeight;
+	private int crosstabColumnGroupTotalHeaderMaxWidth;
+	private int crosstabRowGroupHeaderMaxWidth;
+	private int crosstabCellMaxWidth;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -279,12 +276,9 @@ public class Default {
 		this.crosstabRowGroupTotalPosition = CrosstabTotalPosition.END;
 		this.crosstabColumnGroupShowTotal = true;
 		this.crosstabRowGroupShowTotal = true;
-		this.crosstabColumnGroupHeaderHeight = 20;
-		this.crosstabColumnGroupTotalHeaderWidth = 100;
-		this.crosstabRowGroupHeaderWidth = 100;
-		this.crosstabRowGroupTotalHeaderHeight = 20;
-		this.crosstabCellWidth = 100;
-		this.crosstabCellHeight = 20;
+		this.crosstabColumnGroupTotalHeaderMaxWidth = 150;
+		this.crosstabRowGroupHeaderMaxWidth = 150;
+		this.crosstabCellMaxWidth = 150;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 
@@ -602,28 +596,16 @@ public class Default {
 		return crosstabRowGroupShowTotal;
 	}
 
-	public int getCrosstabColumnGroupHeaderHeight() {
-		return crosstabColumnGroupHeaderHeight;
+	public int getCrosstabColumnGroupTotalHeaderMaxWidth() {
+		return crosstabColumnGroupTotalHeaderMaxWidth;
 	}
 
-	public int getCrosstabColumnGroupTotalHeaderWidth() {
-		return crosstabColumnGroupTotalHeaderWidth;
+	public int getCrosstabRowGroupHeaderMaxWidth() {
+		return crosstabRowGroupHeaderMaxWidth;
 	}
 
-	public int getCrosstabRowGroupHeaderWidth() {
-		return crosstabRowGroupHeaderWidth;
-	}
-
-	public int getCrosstabRowGroupTotalHeaderHeight() {
-		return crosstabRowGroupTotalHeaderHeight;
-	}
-
-	public int getCrosstabCellWidth() {
-		return crosstabCellWidth;
-	}
-
-	public int getCrosstabCellHeight() {
-		return crosstabCellHeight;
+	public int getCrosstabCellMaxWidth() {
+		return crosstabCellMaxWidth;
 	}
 
 	public SplitType getDefaultSplitType() {

@@ -27,6 +27,10 @@ import java.util.List;
 import java.util.Locale;
 
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCell;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
@@ -503,8 +507,7 @@ public class TemplateTransform {
 		}
 		else if (component instanceof DRIList) {
 			DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
-			ComponentPosition.width(list);
-			return list.getWidth();
+			return detectWidth(list);
 		}
 		else {
 			throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
@@ -916,46 +919,149 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isCrosstabRowGroupShowTotal();
 	}
 
-	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup<?> columnGroup) {
+	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup<?> columnGroup, DRDesignCrosstab designCrosstab) {
 		if (columnGroup.getHeaderHeight() != null) {
 			return columnGroup.getHeaderHeight();
 		}
-		return Defaults.getDefaults().getCrosstabColumnGroupHeaderHeight();
+		int maxHeight = 0;
+		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
+			if (designColumnGroup.getName().equals(columnGroup.getName())) {
+				int height = detectHeight(designColumnGroup.getHeader().getList());
+				if (maxHeight < height) {
+					maxHeight = height;
+				}
+				height = detectHeight(designColumnGroup.getTotalHeader().getList());
+				if (maxHeight < height) {
+					maxHeight = height;
+				}
+				break;
+			}
+		}
+		return maxHeight;
 	}
 
-	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup<?> columnGroup) {
+	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup<?> columnGroup, DRDesignCrosstab designCrosstab) {
 		if (columnGroup.getTotalHeaderWidth() != null) {
 			return columnGroup.getTotalHeaderWidth();
 		}
-		return Defaults.getDefaults().getCrosstabColumnGroupTotalHeaderWidth();
+		int maxWidth = 0;
+		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
+			if (designColumnGroup.getName().equals(columnGroup.getName())) {
+				int height = detectWidth(designColumnGroup.getTotalHeader().getList());
+				if (maxWidth < height) {
+					maxWidth = height;
+				}
+				break;
+			}
+		}
+		for (DRDesignCrosstabCell designCell : designCrosstab.getCells()) {
+			if (designCell.getColumnTotalGroup() == columnGroup.getName()) {
+				int height = detectWidth(designCell.getContent().getList());
+				if (maxWidth < height) {
+					maxWidth = height;
+				}
+			}
+		}
+		if (maxWidth > Defaults.getDefaults().getCrosstabColumnGroupTotalHeaderMaxWidth()) {
+			return Defaults.getDefaults().getCrosstabColumnGroupTotalHeaderMaxWidth();
+		}
+		return maxWidth;
 	}
 
-	public int getCrosstabRowGroupHeaderWidth(DRICrosstabRowGroup<?> rowGroup) {
+	public int getCrosstabRowGroupHeaderWidth(DRICrosstabRowGroup<?> rowGroup, DRDesignCrosstab designCrosstab) {
 		if (rowGroup.getHeaderWidth() != null) {
 			return rowGroup.getHeaderWidth();
 		}
-		return Defaults.getDefaults().getCrosstabRowGroupHeaderWidth();
+		int maxWidth = 0;
+		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {
+			if (designRowGroup.getName().equals(rowGroup.getName())) {
+				int width = detectWidth(designRowGroup.getHeader().getList());
+				if (maxWidth < width) {
+					maxWidth = width;
+				}
+				width = detectWidth(designRowGroup.getTotalHeader().getList());
+				if (maxWidth < width) {
+					maxWidth = width;
+				}
+				break;
+			}
+		}
+		if (maxWidth > Defaults.getDefaults().getCrosstabRowGroupHeaderMaxWidth()) {
+			return Defaults.getDefaults().getCrosstabRowGroupHeaderMaxWidth();
+		}
+		return maxWidth;
 	}
 
-	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup<?> rowGroup) {
+	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup<?> rowGroup, DRDesignCrosstab designCrosstab) {
 		if (rowGroup.getTotalHeaderHeight() != null) {
 			return rowGroup.getTotalHeaderHeight();
 		}
-		return Defaults.getDefaults().getCrosstabRowGroupTotalHeaderHeight();
+		int maxHeight = 0;
+		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {
+			if (designRowGroup.getName().equals(rowGroup.getName())) {
+				int height = detectHeight(designRowGroup.getTotalHeader().getList());
+				if (maxHeight < height) {
+					maxHeight = height;
+				}
+				break;
+			}
+		}
+		for (DRDesignCrosstabCell designCell : designCrosstab.getCells()) {
+			if (designCell.getRowTotalGroup() == rowGroup.getName()) {
+				int height = detectHeight(designCell.getContent().getList());
+				if (maxHeight < height) {
+					maxHeight = height;
+				}
+			}
+		}
+		return maxHeight;
 	}
 
-	public int getCrosstabCellWidth(DRICrosstab crosstab) {
+	public int getCrosstabCellWidth(DRICrosstab crosstab, DRDesignCrosstab designCrosstab) {
 		if (crosstab.getCellWidth() != null) {
 			return crosstab.getCellWidth();
 		}
-		return Defaults.getDefaults().getCrosstabCellWidth();
+		int maxWidth = 0;
+		for (DRDesignCrosstabCell designCell : designCrosstab.getCells()) {
+			if (designCell.getColumnTotalGroup() == null) {
+				int width = detectWidth(designCell.getContent().getList());
+				if (maxWidth < width) {
+					maxWidth = width;
+				}
+			}
+		}
+		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
+			int width = detectWidth(designColumnGroup.getHeader().getList());
+			if (maxWidth < width) {
+				maxWidth = width;
+			}
+		}
+		if (maxWidth > Defaults.getDefaults().getCrosstabCellMaxWidth()) {
+			return Defaults.getDefaults().getCrosstabCellMaxWidth();
+		}
+		return maxWidth;
 	}
 
-	public int getCrosstabCellHeight(DRICrosstab crosstab) {
+	public int getCrosstabCellHeight(DRICrosstab crosstab, DRDesignCrosstab designCrosstab) {
 		if (crosstab.getCellHeight() != null) {
 			return crosstab.getCellHeight();
 		}
-		return Defaults.getDefaults().getCrosstabCellHeight();
+		int maxHeight = 0;
+		for (DRDesignCrosstabCell designCell : designCrosstab.getCells()) {
+			if (designCell.getRowTotalGroup() == null) {
+				int height = detectHeight(designCell.getContent().getList());
+				if (maxHeight < height) {
+					maxHeight = height;
+				}
+			}
+		}
+		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {
+			int height = detectHeight(designRowGroup.getHeader().getList());
+			if (maxHeight < height) {
+				maxHeight = height;
+			}
+		}
+		return maxHeight;
 	}
 
 	//split
@@ -1021,5 +1127,15 @@ public class TemplateTransform {
 			return template.getDefaultSplitType();
 		}
 		return Defaults.getDefaults().getDefaultSplitType();
+	}
+
+	private int detectWidth(DRDesignList designList) {
+		ComponentPosition.width(designList);
+		return designList.getWidth();
+	}
+
+	private int detectHeight(DRDesignList designList) {
+		ComponentPosition.height(designList);
+		return designList.getHeight();
 	}
 }

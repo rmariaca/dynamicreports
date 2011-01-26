@@ -39,7 +39,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabPositionTest extends AbstractJasperCrosstabPositionTest {
+public class CrosstabPosition2Test extends AbstractJasperCrosstabPositionTest {
 	private static final long serialVersionUID = 1L;
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
@@ -59,11 +59,10 @@ public class CrosstabPositionTest extends AbstractJasperCrosstabPositionTest {
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.headerCell(cmp.text("Header"))
-			.setCellWidth(200)
 			.rowGroups(
-				rowGroup = ctab.rowGroup(column1).setHeaderWidth(50))
+				rowGroup = ctab.rowGroup(column1))
 			.columnGroups(
-				columnGroup = ctab.columnGroup(column2).setTotalHeaderWidth(210))
+				columnGroup = ctab.columnGroup(column2))
 			.measures(
 				measure1, measure2);
 
@@ -80,34 +79,34 @@ public class CrosstabPositionTest extends AbstractJasperCrosstabPositionTest {
 
 		setCrosstabBand("summary");
 
-		crosstabHeaderElementPositionTest("textField1", 0, 0, 0, 50, 16);
+		crosstabHeaderElementPositionTest("textField1", 0, 0, 0, 100, 16);
 
 		//column group
-		crosstabGroupHeaderPositionTest(columnGroup, 0, 0, 0, 200, 16);
-		crosstabGroupHeaderPositionTest(columnGroup, 1, 0, 0, 200, 16);
-		crosstabGroupTotalHeaderPositionTest(columnGroup, 0, 0, 0, 210, 16);
+		crosstabGroupHeaderPositionTest(columnGroup, 0, 0, 0, 150, 16);
+		crosstabGroupHeaderPositionTest(columnGroup, 1, 0, 0, 150, 16);
+		crosstabGroupTotalHeaderPositionTest(columnGroup, 0, 0, 0, 150, 16);
 
 		//row group
-		crosstabGroupHeaderPositionTest(rowGroup, 0, 0, 0, 50, 16);
-		crosstabGroupHeaderPositionTest(rowGroup, 1, 0, 0, 50, 16);
-		crosstabGroupHeaderPositionTest(rowGroup, 2, 0, 0, 50, 16);
-		crosstabGroupTotalHeaderPositionTest(rowGroup, 0, 0, 0, 50, 16);
+		crosstabGroupHeaderPositionTest(rowGroup, 0, 0, 0, 100, 16);
+		crosstabGroupHeaderPositionTest(rowGroup, 1, 0, 0, 100, 16);
+		crosstabGroupHeaderPositionTest(rowGroup, 2, 0, 0, 100, 16);
+		crosstabGroupTotalHeaderPositionTest(rowGroup, 0, 0, 0, 100, 16);
 
 		//measures
 		for (int i = 0; i < 6; i++) {
-			crosstabCellPositionTest(measure1, null, null, i, 0, 0, 100, 16);
-			crosstabCellPositionTest(measure2, null, null, i, 100, 0, 100, 16);
+			crosstabCellPositionTest(measure1, null, null, i, 0, 0, 75, 16);
+			crosstabCellPositionTest(measure2, null, null, i, 75, 0, 75, 16);
 		}
 		for (int i = 0; i < 3; i++) {
-			crosstabCellPositionTest(measure1, null, columnGroup, i, 0, 0, 105, 16);
-			crosstabCellPositionTest(measure2, null, columnGroup, i, 105, 0, 105, 16);
+			crosstabCellPositionTest(measure1, null, columnGroup, i, 0, 0, 75, 16);
+			crosstabCellPositionTest(measure2, null, columnGroup, i, 75, 0, 75, 16);
 		}
 		for (int i = 0; i < 2; i++) {
-			crosstabCellPositionTest(measure1, rowGroup, null, i, 0, 0, 100, 16);
-			crosstabCellPositionTest(measure2, rowGroup, null, i, 100, 0, 100, 16);
+			crosstabCellPositionTest(measure1, rowGroup, null, i, 0, 0, 75, 16);
+			crosstabCellPositionTest(measure2, rowGroup, null, i, 75, 0, 75, 16);
 		}
-		crosstabCellPositionTest(measure1, rowGroup, columnGroup, 0, 0, 0, 105, 16);
-		crosstabCellPositionTest(measure2, rowGroup, columnGroup, 0, 105, 0, 105, 16);
+		crosstabCellPositionTest(measure1, rowGroup, columnGroup, 0, 0, 0, 75, 16);
+		crosstabCellPositionTest(measure2, rowGroup, columnGroup, 0, 75, 0, 75, 16);
 	}
 
 	@Override

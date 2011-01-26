@@ -59,9 +59,15 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class CrosstabTransform {
 	private DesignTransformAccessor accessor;
+	private Map<DRDesignCrosstab, DRICrosstab> crosstabs;
 
 	public CrosstabTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
+		init();
+	}
+
+	private void init() {
+		crosstabs = new HashMap<DRDesignCrosstab, DRICrosstab>();
 	}
 
 	protected DRDesignCrosstab transform(DRICrosstab crosstab, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
@@ -85,7 +91,7 @@ public class CrosstabTransform {
 		for (DRICrosstabMeasure<?> measure : crosstab.getMeasures()) {
 			addMeasure(designCrosstab, measure);
 		}
-		calculateCellDimensions(crosstab, designCrosstab);
+		crosstabs.put(designCrosstab, crosstab);
 
 		return designCrosstab;
 	}
@@ -230,170 +236,8 @@ public class CrosstabTransform {
 		designCrosstab.getMeasures().add(designMeasure);
 	}
 
-	private void calculateCellDimensions(DRICrosstab crosstab, DRDesignCrosstab designCrosstab) {
-		int cellWidth = accessor.getTemplateTransform().getCrosstabCellWidth(crosstab);
-		int cellHeight = accessor.getTemplateTransform().getCrosstabCellHeight(crosstab);
-		Map<String, GroupCellDimension> columnGroups = new HashMap<String, GroupCellDimension>();
-		Map<String, GroupCellDimension> rowGroups = new HashMap<String, GroupCellDimension>();
-		int groupWidth = 0;
-		int groupHeight = 0;
-
-		GroupCellDimension previousCellDimension = null;
-		for (int i = crosstab.getColumnGroups().size() - 1; i >= 0; i--) {
-			DRICrosstabColumnGroup<?> columnGroup = crosstab.getColumnGroups().get(i);
-			int headerWidth = 0;
-			int headerHeight = 0;
-			int totalHeaderWidth = 0;
-			int totalHeaderHeight = 0;
-
-			if (previousCellDimension == null) {
-				headerWidth = cellWidth;
-			}
-			else {
-				headerWidth = previousCellDimension.getHeaderWidth() + previousCellDimension.getTotalHeaderWidth();
-			}
-			headerHeight = accessor.getTemplateTransform().getCrosstabColumnGroupHeaderHeight(columnGroup);
-			if (accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup)) {
-				totalHeaderWidth = accessor.getTemplateTransform().getCrosstabColumnGroupTotalHeaderWidth(columnGroup);
-				totalHeaderHeight = headerHeight;
-				if (previousCellDimension != null) {
-					totalHeaderHeight += previousCellDimension.getTotalHeaderHeight();
-				}
-			}
-
-			GroupCellDimension groupCellDimension = new GroupCellDimension();
-			groupCellDimension.setHeaderWidth(headerWidth);
-			groupCellDimension.setHeaderHeight(headerHeight);
-			groupCellDimension.setTotalHeaderWidth(totalHeaderWidth);
-			groupCellDimension.setTotalHeaderHeight(totalHeaderHeight);
-			columnGroups.put(columnGroup.getName(), groupCellDimension);
-			previousCellDimension = groupCellDimension;
-
-			groupHeight += groupCellDimension.getHeaderHeight();
-		}
-
-		previousCellDimension = null;
-		for (int i = crosstab.getRowGroups().size() - 1; i >= 0; i--) {
-			DRICrosstabRowGroup<?> rowGroup = crosstab.getRowGroups().get(i);
-			int headerWidth = 0;
-			int headerHeight = 0;
-			int totalHeaderWidth = 0;
-			int totalHeaderHeight = 0;
-
-			headerWidth = accessor.getTemplateTransform().getCrosstabRowGroupHeaderWidth(rowGroup);
-			if (previousCellDimension == null) {
-				headerHeight = cellHeight;
-			}
-			else {
-				headerHeight = previousCellDimension.getHeaderHeight() + previousCellDimension.getTotalHeaderHeight();
-			}
-			if (accessor.getTemplateTransform().isCrosstabRowGroupShowTotal(rowGroup)) {
-				totalHeaderWidth = headerWidth;
-				if (previousCellDimension != null) {
-					totalHeaderWidth += previousCellDimension.getTotalHeaderWidth();
-				}
-				totalHeaderHeight = accessor.getTemplateTransform().getCrosstabRowGroupTotalHeaderHeight(rowGroup);
-			}
-
-			GroupCellDimension groupCellDimension = new GroupCellDimension();
-			groupCellDimension.setHeaderWidth(headerWidth);
-			groupCellDimension.setHeaderHeight(headerHeight);
-			groupCellDimension.setTotalHeaderWidth(totalHeaderWidth);
-			groupCellDimension.setTotalHeaderHeight(totalHeaderHeight);
-			rowGroups.put(rowGroup.getName(), groupCellDimension);
-			previousCellDimension = groupCellDimension;
-
-			groupWidth += groupCellDimension.getHeaderWidth();
-		}
-
-		designCrosstab.getWhenNoDataCell().setWidth(groupWidth);
-		designCrosstab.getWhenNoDataCell().setHeight(groupHeight);
-		designCrosstab.getHeaderCell().setWidth(groupWidth);
-		designCrosstab.getHeaderCell().setHeight(groupHeight);
-
-		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
-			GroupCellDimension groupCellDimension = columnGroups.get(designColumnGroup.getName());
-			designColumnGroup.setHeight(groupCellDimension.getHeaderHeight());
-			designColumnGroup.getHeader().setWidth(groupCellDimension.getHeaderWidth());
-			designColumnGroup.getHeader().setHeight(groupCellDimension.getHeaderHeight());
-			if (designColumnGroup.getTotalHeader() != null) {
-				designColumnGroup.getTotalHeader().setWidth(groupCellDimension.getTotalHeaderWidth());
-				designColumnGroup.getTotalHeader().setHeight(groupCellDimension.getTotalHeaderHeight());
-			}
-		}
-
-		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {
-			GroupCellDimension groupCellDimension = rowGroups.get(designRowGroup.getName());
-			designRowGroup.setWidth(groupCellDimension.getHeaderWidth());
-			designRowGroup.getHeader().setWidth(groupCellDimension.getHeaderWidth());
-			designRowGroup.getHeader().setHeight(groupCellDimension.getHeaderHeight());
-			if (designRowGroup.getTotalHeader() != null) {
-				designRowGroup.getTotalHeader().setWidth(groupCellDimension.getTotalHeaderWidth());
-				designRowGroup.getTotalHeader().setHeight(groupCellDimension.getTotalHeaderHeight());
-			}
-		}
-
-		for (DRDesignCrosstabCell designCell : designCrosstab.getCells()) {
-			if (designCell.getColumnTotalGroup() == null && designCell.getRowTotalGroup() == null) {
-				designCell.getContent().setWidth(cellWidth);
-				designCell.getContent().setHeight(cellHeight);
-			}
-			else if (designCell.getColumnTotalGroup() != null && designCell.getRowTotalGroup() == null) {
-				GroupCellDimension groupCellDimension = columnGroups.get(designCell.getColumnTotalGroup());
-				designCell.getContent().setWidth(groupCellDimension.getTotalHeaderWidth());
-				designCell.getContent().setHeight(cellHeight);
-			}
-			else if (designCell.getColumnTotalGroup() == null && designCell.getRowTotalGroup() != null) {
-				GroupCellDimension groupCellDimension = rowGroups.get(designCell.getRowTotalGroup());
-				designCell.getContent().setWidth(cellWidth);
-				designCell.getContent().setHeight(groupCellDimension.getTotalHeaderHeight());
-			}
-			else {
-				GroupCellDimension groupCellDimension = columnGroups.get(designCell.getColumnTotalGroup());
-				designCell.getContent().setWidth(groupCellDimension.getTotalHeaderWidth());
-				groupCellDimension = rowGroups.get(designCell.getRowTotalGroup());
-				designCell.getContent().setHeight(groupCellDimension.getTotalHeaderHeight());
-			}
-		}
-	}
-
-	private class GroupCellDimension {
-		private int headerWidth;
-		private int headerHeight;
-		private int totalHeaderWidth;
-		private int totalHeaderHeight;
-
-		public int getHeaderWidth() {
-			return headerWidth;
-		}
-
-		public void setHeaderWidth(int headerWidth) {
-			this.headerWidth = headerWidth;
-		}
-
-		public int getHeaderHeight() {
-			return headerHeight;
-		}
-
-		public void setHeaderHeight(int headerHeight) {
-			this.headerHeight = headerHeight;
-		}
-
-		public int getTotalHeaderWidth() {
-			return totalHeaderWidth;
-		}
-
-		public void setTotalHeaderWidth(int totalHeaderWidth) {
-			this.totalHeaderWidth = totalHeaderWidth;
-		}
-
-		public int getTotalHeaderHeight() {
-			return totalHeaderHeight;
-		}
-
-		public void setTotalHeaderHeight(int totalHeaderHeight) {
-			this.totalHeaderHeight = totalHeaderHeight;
-		}
+	protected DRICrosstab getCrosstab(DRDesignCrosstab designCrosstab) {
+		return crosstabs.get(designCrosstab);
 	}
 
 	@SuppressWarnings("rawtypes")

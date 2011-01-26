@@ -23,25 +23,14 @@
 package net.sf.dynamicreports.design.transformation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignBand;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
-import net.sf.dynamicreports.design.base.component.DRDesignComponent;
-import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
-import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
-import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCell;
-import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
-import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
-import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
-import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -69,11 +58,8 @@ public class BandTransform {
 	private DRDesignBand noDataBand;
 	private DRDesignBand backgroundBand;
 
-	private Map<String, Integer> componentNames;
-
 	public BandTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
-		componentNames = new HashMap<String, Integer>();
 	}
 
 	public void transform() throws DRException {
@@ -123,22 +109,23 @@ public class BandTransform {
 	}
 
 	public void prepareBands() throws DRException {
+		BandComponentsTransform bandComponents = new BandComponentsTransform(accessor);
 		DRITemplateDesign<?> templateDesign = accessor.getReport().getTemplateDesign();
 
-		titleBand = prepareBand(titleBand, maxWidth, templateDesign.getTitleComponentsCount());
-		pageHeaderBand = prepareBand(pageHeaderBand, maxWidth, templateDesign.getPageHeaderComponentsCount());
-		pageFooterBand = prepareBand(pageFooterBand, maxWidth, templateDesign.getPageFooterComponentsCount());
-		columnHeaderBand = prepareBand(columnHeaderBand, maxColumnWidth, templateDesign.getColumnHeaderComponentsCount());
-		columnFooterBand = prepareBand(columnFooterBand, maxColumnWidth, templateDesign.getColumnFooterComponentsCount());
-		detailBand = prepareBand(detailBand, maxColumnWidth, 0);
-		lastPageFooterBand = prepareBand(lastPageFooterBand, maxWidth, templateDesign.getLastPageFooterComponentsCount());
-		summaryBand = prepareBand(summaryBand, maxWidth, templateDesign.getSummaryComponentsCount());
-		noDataBand = prepareBand(noDataBand, maxWidth, templateDesign.getNoDataComponentsCount());
-		backgroundBand = prepareBand(backgroundBand, maxWidth, templateDesign.getBackgroundComponentsCount());
+		titleBand = bandComponents.prepareBand(titleBand, maxWidth, templateDesign.getTitleComponentsCount());
+		pageHeaderBand = bandComponents.prepareBand(pageHeaderBand, maxWidth, templateDesign.getPageHeaderComponentsCount());
+		pageFooterBand = bandComponents.prepareBand(pageFooterBand, maxWidth, templateDesign.getPageFooterComponentsCount());
+		columnHeaderBand = bandComponents.prepareBand(columnHeaderBand, maxColumnWidth, templateDesign.getColumnHeaderComponentsCount());
+		columnFooterBand = bandComponents.prepareBand(columnFooterBand, maxColumnWidth, templateDesign.getColumnFooterComponentsCount());
+		detailBand = bandComponents.prepareBand(detailBand, maxColumnWidth, 0);
+		lastPageFooterBand = bandComponents.prepareBand(lastPageFooterBand, maxWidth, templateDesign.getLastPageFooterComponentsCount());
+		summaryBand = bandComponents.prepareBand(summaryBand, maxWidth, templateDesign.getSummaryComponentsCount());
+		noDataBand = bandComponents.prepareBand(noDataBand, maxWidth, templateDesign.getNoDataComponentsCount());
+		backgroundBand = bandComponents.prepareBand(backgroundBand, maxWidth, templateDesign.getBackgroundComponentsCount());
 		for (DRDesignGroup group : accessor.getGroupTransform().getGroups()) {
 			List<DRDesignBand> bands = new ArrayList<DRDesignBand>();
 			for (DRDesignBand band : group.getHeaderBands()) {
-				DRDesignBand newBand = prepareBand(band, maxColumnWidth, 0);
+				DRDesignBand newBand = bandComponents.prepareBand(band, maxColumnWidth, 0);
 				if (newBand != null) {
 					bands.add(newBand);
 				}
@@ -146,202 +133,12 @@ public class BandTransform {
 			group.setHeaderBands(bands);
 			bands = new ArrayList<DRDesignBand>();
 			for (DRDesignBand band : group.getFooterBands()) {
-				DRDesignBand newBand = prepareBand(band, maxColumnWidth, 0);
+				DRDesignBand newBand = bandComponents.prepareBand(band, maxColumnWidth, 0);
 				if (newBand != null) {
 					bands.add(newBand);
 				}
 			}
 			group.setFooterBands(bands);
-		}
-	}
-
-	private DRDesignBand prepareBand(DRDesignBand band, int maxWidth, int templateDesignComponents) throws DRException {
-		if (band == null) {
-			return null;
-		}
-		if (band.getBandComponent() != null) {
-			return band;
-		}
-
-		DRDesignComponent component = prepareList(band.getName(), band.getList(), maxWidth);
-		if (component == null) {
-			return null;
-		}
-		band.setBandComponent(component);
-
-		if (band.getBandComponent() != null && templateDesignComponents > 0) {
-			throw new DRException("Band " + band.getName() + " must not be defined at once in jrxml template design and in dynamic design");
-		}
-
-		prepareCrosstabs(component);
-
-		return band;
-	}
-
-	private DRDesignComponent prepareList(String name, DRDesignList list, int maxWidth) throws DRException {
-		return prepareList(name, list, maxWidth, -1);
-	}
-
-	private DRDesignComponent prepareList(String name, DRDesignList list, int maxWidth, int maxHeight) throws DRException {
-		if (list == null) {
-			return null;
-		}
-		if (list.isEmpty()) {
-			return null;
-		}
-
-		ComponentPosition.component(name, list, maxWidth, maxHeight);
-
-		DRDesignComponent component = removeEmptyComponents(list);
-		if (component == null) {
-			return null;
-		}
-		componentGroupType(component);
-
-		generateComponentNames(component, name);
-
-		return component;
-	}
-
-	private void prepareCrosstabs(DRDesignComponent component) throws DRException {
-		if (component instanceof DRDesignList) {
-			DRDesignList list = (DRDesignList) component;
-			for (DRDesignComponent listComponent : list.getComponents()) {
-				prepareCrosstabs(listComponent);
-			}
-		}
-		else if (component instanceof DRDesignCrosstab) {
-			prepareCrosstab((DRDesignCrosstab) component);
-		}
-	}
-
-	private void prepareCrosstab(DRDesignCrosstab crosstab) throws DRException {
-		DRDesignCrosstabCellContent whenNoDataCell = crosstab.getWhenNoDataCell();
-
-		for (DRDesignCrosstabColumnGroup columnGroup : crosstab.getColumnGroups()) {
-			DRDesignCrosstabCellContent header = columnGroup.getHeader();
-			if (header != null) {
-				header.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), header));
-			}
-			DRDesignCrosstabCellContent totalHeader = columnGroup.getTotalHeader();
-			if (totalHeader != null) {
-				totalHeader.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), totalHeader));
-			}
-		}
-
-		for (DRDesignCrosstabRowGroup rowGroup : crosstab.getRowGroups()) {
-			DRDesignCrosstabCellContent header = rowGroup.getHeader();
-			if (header != null) {
-				header.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), header));
-			}
-			DRDesignCrosstabCellContent totalHeader = rowGroup.getTotalHeader();
-			if (totalHeader != null) {
-				totalHeader.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), totalHeader));
-			}
-		}
-
-		if (whenNoDataCell != null) {
-			whenNoDataCell.setComponent(prepareCrosstabCell(crosstab.getUniqueName() + ".whennodatacell", whenNoDataCell));
-		}
-
-		DRDesignCrosstabCellContent headerCell = crosstab.getHeaderCell();
-		if (headerCell != null) {
-			crosstab.getHeaderCell().setComponent(prepareCrosstabCell(crosstab.getUniqueName() + ".headercell", headerCell));
-		}
-
-		for (DRDesignCrosstabCell cell : crosstab.getCells()) {
-			DRDesignCrosstabCellContent content = cell.getContent();
-			if (content != null) {
-				content.setComponent(prepareCrosstabCell(crosstab.getUniqueName(), content));
-			}
-		}
-	}
-
-	private DRDesignComponent prepareCrosstabCell(String name, DRDesignCrosstabCellContent cell) throws DRException {
-		return prepareList(name, cell.getList(), cell.getWidth(), cell.getHeight());
-	}
-
-	private void generateComponentNames(DRDesignComponent component, String bandName) {
-		String componentName = bandName + "." + component.getUniqueName();
-		if (!componentNames.containsKey(componentName)) {
-			componentNames.put(componentName, new Integer(1));
-		}
-		else {
-			componentNames.put(componentName, componentNames.get(componentName) + 1);
-		}
-		component.setUniqueName(componentName + componentNames.get(componentName));
-		if (component instanceof DRDesignList) {
-			for (DRDesignComponent lComponent : ((DRDesignList) component).getComponents()) {
-				generateComponentNames(lComponent, bandName);
-			}
-		}
-	}
-
-	private DRDesignComponent removeEmptyComponents(DRDesignComponent component) {
-		if (component instanceof DRDesignList) {
-			DRDesignList list = (DRDesignList) component;
-			if (list.getComponents().isEmpty()) {
-				return null;
-			}
-			else if (list.getComponents().size() == 1) {
-				DRDesignComponent lComponent = list.getComponents().get(0);
-				DRDesignComponent elm = removeEmptyComponents(lComponent);
-				if (elm == null) {
-					return null;
-				}
-				elm.setX(lComponent.getX() + elm.getX());
-				elm.setY(lComponent.getY() + elm.getY());
-
-				if (list.getStyle() == null && list.getPrintWhenExpression() == null) {
-					elm.setX(list.getX() + elm.getX());
-					elm.setY(list.getY() + elm.getY());
-					return elm;
-				}
-				else {
-					list.getComponents().clear();
-					list.getComponents().add(elm);
-					return list;
-				}
-			}
-			else {
-				List<DRDesignComponent> components = new ArrayList<DRDesignComponent>();
-				for (DRDesignComponent listComponent : list.getComponents()) {
-					DRDesignComponent comp = removeEmptyComponents(listComponent);
-					if (comp != null) {
-						components.add(comp);
-					}
-				}
-				if (components.isEmpty()) {
-					return null;
-				}
-				list.getComponents().clear();
-				list.getComponents().addAll(components);
-				return list;
-			}
-		}
-		else if (component instanceof DRDesignFiller && component.getStyle() == null) {
-			return null;
-		}
-		return component;
-	}
-
-	private void componentGroupType(DRDesignComponent component) {
-		if (component instanceof DRDesignList) {
-			DRDesignList list = (DRDesignList) component;
-			if (list.getType().equals(ListType.VERTICAL) && list.getStyle() == null && list.getPrintWhenExpression() == null) {
-				list.setComponentGroupType(ComponentGroupType.NONE);
-				for (DRDesignComponent listComponent : list.getComponents()) {
-					listComponent.setX(list.getX() + listComponent.getX());
-					listComponent.setY(list.getY() + listComponent.getY());
-				}
-			}
-			else {
-				list.setComponentGroupType(ComponentGroupType.FRAME);
-			}
-
-			for (DRDesignComponent listComponent : list.getComponents()) {
-				componentGroupType(listComponent);
-			}
 		}
 	}
 
