@@ -71,10 +71,10 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setCellHeight(Integer cellHeight) {
+	/*public CrosstabBuilder setCellHeight(Integer cellHeight) {
 		getObject().setCellHeight(cellHeight);
 		return this;
-	}
+	}*/
 
 	/*public CrosstabBuilder whenNoDataCell(ComponentBuilder<?, ?> ...components) {
 		return addWhenNoDataCell(components);

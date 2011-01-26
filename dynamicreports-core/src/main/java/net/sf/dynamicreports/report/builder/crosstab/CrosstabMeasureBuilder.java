@@ -44,7 +44,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBuilder<T>, DRCrosstabMeasure<T>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	@SuppressWarnings("unchecked")
 	protected CrosstabMeasureBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		super(new DRCrosstabMeasure<T>(column.build(), calculation));
 		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
@@ -58,10 +57,6 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 			DRITextField<?> columnComponent = column.getColumn().getComponent();
 			setDataType(columnComponent.getDataType());
 			setPattern(columnComponent.getPattern());
-			setHorizontalAlignment(columnComponent.getHorizontalAlignment());
-			setValueFormatter((DRIValueFormatter<?, ? super T>) columnComponent.getValueFormatter());
-			setStretchWithOverflow(columnComponent.getStretchWithOverflow());
-			getObject().setStyle(columnComponent.getStyle());
 		}
 	}
 

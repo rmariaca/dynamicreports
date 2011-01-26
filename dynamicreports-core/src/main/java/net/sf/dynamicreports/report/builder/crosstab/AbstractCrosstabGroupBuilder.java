@@ -53,10 +53,6 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		getObject().setExpression(col);
 		getObject().setDataType(col.getComponent().getDataType());
 		getObject().setHeaderPattern(col.getComponent().getPattern());
-		getObject().setHeaderHorizontalAlignment(col.getComponent().getHorizontalAlignment());
-		getObject().setHeaderValueFormatter(col.getComponent().getValueFormatter());
-		getObject().setHeaderStretchWithOverflow(col.getComponent().getStretchWithOverflow());
-		getObject().setHeaderStyle(col.getComponent().getStyle());
 	}
 
 	protected AbstractCrosstabGroupBuilder(FieldBuilder<V> field, U crosstabGroup) {
