@@ -1,7 +1,7 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 Ricardo Mariaca
+ * Copyright (C) 2010 - 2011 Ricardo Mariaca
  * http://dynamicreports.sourceforge.net
  *
  * This file is part of DynamicReports.
@@ -273,27 +273,6 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public JasperReportBuilder setVirtualizer(JRVirtualizer virtualizer) {
 		this.virtualizer = virtualizer;
 		return this;
-	}
-
-	@Deprecated
-	/**
-	 * You should use toImage()
-	 */
-	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex) throws DRException {
-		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
-		imageExporter.setPageIndex(pageIndex);
-		return toImage(imageExporter);
-	}
-
-	@Deprecated
-	/**
-	 * You should use toImage()
-	 */
-	public JasperReportBuilder toPng(OutputStream outputStream, int pageIndex, float zoom) throws DRException {
-		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(outputStream, ImageType.PNG);
-		imageExporter.setPageIndex(pageIndex);
-		imageExporter.setZoom(zoom);
-		return toImage(imageExporter);
 	}
 
 	//image

@@ -1,7 +1,7 @@
 <div id="footer">
 			
 	<p>
-	&copy; 2010 <strong>Ricardo Mariaca</strong> | 
+	&copy; 2010 - 2011 <strong>Ricardo Mariaca</strong> | 
 	Design by: <a href="http://www.styleshout.com/">styleshout</a>
 			
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
