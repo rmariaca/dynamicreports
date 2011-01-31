@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.0.0-beta1 (2011-01-31)
+---------------------------------------------------
+ - support for crosstab, see CrosstabReport1 for an example
+ - updated JasperReports to 4.0.0
+ - minor improvements
+ 
 Changes in version 1.5.2 (2010-12-15)
 ---------------------------------------------------
  - support for generic element
