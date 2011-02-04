@@ -29,6 +29,7 @@ import java.util.Locale;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCell;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
@@ -875,14 +876,22 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getCrosstabWidth();
 	}
 
-	protected int getCrosstabHeight(DRICrosstab crosstab) {
+	protected int getCrosstabHeight(DRICrosstab crosstab, DRDesignCrosstabCellContent whenNoDataCell) {
+		int height;
 		if (crosstab.getHeight() != null) {
-			return crosstab.getHeight();
+			height = crosstab.getHeight();
 		}
-		if (template.getCrosstabHeight() != null) {
-			return template.getCrosstabHeight();
+		else if (template.getCrosstabHeight() != null) {
+			height = template.getCrosstabHeight();
 		}
-		return Defaults.getDefaults().getCrosstabHeight();
+		else {
+			height = Defaults.getDefaults().getCrosstabHeight();
+		}
+		int whenNoDataCellHeight = getCrosstabWhenNoDataCellHeight(whenNoDataCell);
+		if (height == 0 && whenNoDataCellHeight > 0) {
+			return whenNoDataCellHeight;
+		}
+		return height;
 	}
 
 	public CrosstabTotalPosition getCrosstabColumnGroupTotalPosition(DRICrosstabColumnGroup<?> columnGroup) {
@@ -1062,6 +1071,10 @@ public class TemplateTransform {
 			}
 		}
 		return maxHeight;
+	}
+
+	public int getCrosstabWhenNoDataCellHeight(DRDesignCrosstabCellContent whenNoDataCell) {
+		return detectHeight(whenNoDataCell.getList());
 	}
 
 	//split

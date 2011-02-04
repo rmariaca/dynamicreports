@@ -86,7 +86,6 @@ public class CrosstabTransform {
 		}
 
 		registerScriptletCrosstabParameter(jrCrosstab);
-		//jrCrosstab.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));//TODO
 
 		return jrCrosstab;
 	}
@@ -145,9 +144,6 @@ public class CrosstabTransform {
 		JRDesignCrosstabColumnGroup jrColumnGroup = new JRDesignCrosstabColumnGroup();
 		group(jrColumnGroup, columnGroup);
 		jrColumnGroup.setHeight(columnGroup.getHeight());
-		if (columnGroup.getPosition() != null) {
-			jrColumnGroup.setPosition(ConstantTransform.crosstabColumnPosition(columnGroup.getPosition()));
-		}
 
 		try {
 			jrCrosstab.addColumnGroup(jrColumnGroup);
@@ -160,9 +156,6 @@ public class CrosstabTransform {
 		JRDesignCrosstabRowGroup jrRowGroup = new JRDesignCrosstabRowGroup();
 		group(jrRowGroup, rowGroup);
 		jrRowGroup.setWidth(rowGroup.getWidth());
-		if (rowGroup.getPosition() != null) {
-			jrRowGroup.setPosition(ConstantTransform.crosstabRowPosition(rowGroup.getPosition()));
-		}
 
 		try {
 			jrCrosstab.addRowGroup(jrRowGroup);

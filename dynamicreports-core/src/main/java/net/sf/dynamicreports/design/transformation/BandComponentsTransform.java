@@ -324,8 +324,8 @@ class BandComponentsTransform {
 			groupWidth += groupCellDimension.getHeaderWidth();
 		}
 
-		designCrosstab.getWhenNoDataCell().setWidth(groupWidth);
-		designCrosstab.getWhenNoDataCell().setHeight(groupHeight);
+		designCrosstab.getWhenNoDataCell().setWidth(designCrosstab.getWidth());
+		designCrosstab.getWhenNoDataCell().setHeight(designCrosstab.getHeight());
 		designCrosstab.getHeaderCell().setWidth(groupWidth);
 		designCrosstab.getHeaderCell().setHeight(groupHeight);
 

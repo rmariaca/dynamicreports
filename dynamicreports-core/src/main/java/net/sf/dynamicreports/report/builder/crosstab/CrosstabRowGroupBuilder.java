@@ -52,13 +52,8 @@ public class CrosstabRowGroupBuilder<T> extends AbstractCrosstabGroupBuilder<Cro
 		return this;
 	}
 
-	/*public CrosstabRowGroupBuilder<T> setTotalHeaderHeight(Integer totalHeaderHeight) {
+	public CrosstabRowGroupBuilder<T> setTotalHeaderHeight(Integer totalHeaderHeight) {
 		getObject().setTotalHeaderHeight(totalHeaderHeight);
 		return this;
-	}*/
-
-	/*public CrosstabRowGroupBuilder<T> setPosition(CrosstabRowPosition position) {
-		getObject().setPosition(position);
-		return this;
-	}*/
+	}
 }

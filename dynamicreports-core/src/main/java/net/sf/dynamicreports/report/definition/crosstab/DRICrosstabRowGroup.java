@@ -22,8 +22,6 @@
 
 package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -32,6 +30,4 @@ public interface DRICrosstabRowGroup<T> extends DRICrosstabGroup<T> {
 	public Integer getHeaderWidth();
 
 	public Integer getTotalHeaderHeight();
-
-	public CrosstabRowPosition getPosition();
 }

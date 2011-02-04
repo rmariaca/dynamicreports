@@ -22,14 +22,10 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
-import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignCrosstabRowGroup extends DRIDesignCrosstabGroup {
 
 	public int getWidth();
-	
-	public CrosstabRowPosition getPosition();
 }

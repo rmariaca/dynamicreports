@@ -23,28 +23,18 @@
 package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
-import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignCrosstabRowGroup extends DRDesignCrosstabGroup implements DRIDesignCrosstabRowGroup {
-	private int width;	
-	private CrosstabRowPosition position;
-	
+	private int width;
+
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public void setWidth(int width) {
 		this.width = width;
-	}
-	
-	public CrosstabRowPosition getPosition() {
-		return position;
-	}
-	
-	public void setPosition(CrosstabRowPosition position) {
-		this.position = position;
 	}
 }

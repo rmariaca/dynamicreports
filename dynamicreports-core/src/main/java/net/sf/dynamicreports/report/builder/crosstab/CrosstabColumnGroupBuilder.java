@@ -47,18 +47,13 @@ public class CrosstabColumnGroupBuilder<T> extends AbstractCrosstabGroupBuilder<
 		super(expression, new DRCrosstabColumnGroup<T>());
 	}
 
-	/*public CrosstabColumnGroupBuilder<T> setHeaderHeight(Integer headerHeight) {
+	public CrosstabColumnGroupBuilder<T> setHeaderHeight(Integer headerHeight) {
 		getObject().setHeaderHeight(headerHeight);
 		return this;
-	}*/
+	}
 
 	public CrosstabColumnGroupBuilder<T> setTotalHeaderWidth(Integer totalHeaderWidth) {
 		getObject().setTotalHeaderWidth(totalHeaderWidth);
 		return this;
 	}
-
-	/*public CrosstabColumnGroupBuilder<T> setPosition(CrosstabColumnPosition position) {
-		getObject().setPosition(position);
-		return this;
-	}*/
 }

@@ -72,14 +72,15 @@ public class CrosstabTransform {
 
 	protected DRDesignCrosstab transform(DRICrosstab crosstab, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignCrosstab designCrosstab = new DRDesignCrosstab();
+		DRDesignCrosstabCellContent whenNoDataCell = cellContent(crosstab.getWhenNoDataCell(), defaultStyleType, resetType, resetGroup);
 		designCrosstab.setWidth(accessor.getTemplateTransform().getCrosstabWidth(crosstab));
-		designCrosstab.setHeight(accessor.getTemplateTransform().getCrosstabHeight(crosstab));
+		designCrosstab.setHeight(accessor.getTemplateTransform().getCrosstabHeight(crosstab, whenNoDataCell));
 		designCrosstab.setRepeatColumnHeaders(crosstab.isRepeatColumnHeaders());
 		designCrosstab.setRepeatRowHeaders(crosstab.isRepeatRowHeaders());
 		designCrosstab.setColumnBreakOffset(crosstab.getColumnBreakOffset());
 		designCrosstab.setIgnoreWidth(crosstab.getIgnoreWidth());
 		designCrosstab.setRunDirection(crosstab.getRunDirection());
-		designCrosstab.setWhenNoDataCell(cellContent(crosstab.getWhenNoDataCell(), defaultStyleType, resetType, resetGroup));
+		designCrosstab.setWhenNoDataCell(whenNoDataCell);
 		designCrosstab.setHeaderCell(cellContent(crosstab.getHeaderCell(), defaultStyleType, resetType, resetGroup));
 		for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
 			addColumnGroup(designCrosstab, columnGroup, defaultStyleType, resetType, resetGroup);
@@ -145,7 +146,6 @@ public class CrosstabTransform {
 		boolean showTotal = accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup);
 		group(designColumnGroup, columnGroup, showTotal, defaultStyleType, resetType, resetGroup);
 		designColumnGroup.setTotalPosition(accessor.getTemplateTransform().getCrosstabColumnGroupTotalPosition(columnGroup));
-		designColumnGroup.setPosition(columnGroup.getPosition());
 		designCrosstab.getColumnGroups().add(designColumnGroup);
 	}
 
@@ -154,7 +154,6 @@ public class CrosstabTransform {
 		boolean showTotal = accessor.getTemplateTransform().isCrosstabRowGroupShowTotal(rowGroup);
 		group(designRowGroup, rowGroup, showTotal, defaultStyleType, resetType, resetGroup);
 		designRowGroup.setTotalPosition(accessor.getTemplateTransform().getCrosstabRowGroupTotalPosition(rowGroup));
-		designRowGroup.setPosition(rowGroup.getPosition());
 		designCrosstab.getRowGroups().add(designRowGroup);
 	}
 

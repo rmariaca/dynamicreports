@@ -38,9 +38,7 @@ import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
-import net.sf.dynamicreports.report.constant.CrosstabColumnPosition;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
-import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
@@ -60,9 +58,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
-import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
-import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
@@ -659,44 +655,6 @@ public class ConstantTransform {
 			return CrosstabTotalPositionEnum.END;
 		default:
 			throw new JasperDesignException("CrosstabTotalPosition " + totalPosition.name() + " not supported");
-		}
-	}
-
-	public static CrosstabColumnPositionEnum crosstabColumnPosition(CrosstabColumnPosition position) {
-		if (position == null) {
-			return null;
-		}
-
-		switch (position) {
-		case LEFT:
-			return CrosstabColumnPositionEnum.LEFT;
-		case CENTER:
-			return CrosstabColumnPositionEnum.CENTER;
-		case RIGHT:
-			return CrosstabColumnPositionEnum.RIGHT;
-		case STRETCH:
-			return CrosstabColumnPositionEnum.STRETCH;
-		default:
-			throw new JasperDesignException("CrosstabColumnPosition " + position.name() + " not supported");
-		}
-	}
-
-	public static CrosstabRowPositionEnum crosstabRowPosition(CrosstabRowPosition position) {
-		if (position == null) {
-			return null;
-		}
-
-		switch (position) {
-		case TOP:
-			return CrosstabRowPositionEnum.TOP;
-		case MIDDLE:
-			return CrosstabRowPositionEnum.MIDDLE;
-		case BOTTOM:
-			return CrosstabRowPositionEnum.BOTTOM;
-		case STRETCH:
-			return CrosstabRowPositionEnum.STRETCH;
-		default:
-			throw new JasperDesignException("CrosstabRowPosition " + position.name() + " not supported");
 		}
 	}
 

@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.report.base.crosstab;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.CrosstabRowPosition;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 
 /**
@@ -34,7 +33,6 @@ public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICros
 
 	private Integer headerWidth;
 	private Integer totalHeaderHeight;
-	private CrosstabRowPosition position;
 
 	public Integer getHeaderWidth() {
 		return headerWidth;
@@ -50,13 +48,5 @@ public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICros
 
 	public void setTotalHeaderHeight(Integer totalHeaderHeight) {
 		this.totalHeaderHeight = totalHeaderHeight;
-	}
-
-	public CrosstabRowPosition getPosition() {
-		return position;
-	}
-
-	public void setPosition(CrosstabRowPosition position) {
-		this.position = position;
 	}
 }

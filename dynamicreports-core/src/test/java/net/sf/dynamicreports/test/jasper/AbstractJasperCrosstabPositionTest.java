@@ -37,6 +37,10 @@ public abstract class AbstractJasperCrosstabPositionTest extends AbstractJasperP
 		this.crosstabBand = crosstabBand;
 	}
 
+	protected void crosstabWhenNoDataElementPositionTest(String name, int index, int x, int y, int width, int height) {
+		elementPositionTest(getPrefix(1) + "whennodatacell." + name, index, x, y, width, height);
+	}
+
 	protected void crosstabHeaderElementPositionTest(String name, int index, int x, int y, int width, int height) {
 		elementPositionTest(getPrefix(1) + "headercell." + name, index, x, y, width, height);
 	}

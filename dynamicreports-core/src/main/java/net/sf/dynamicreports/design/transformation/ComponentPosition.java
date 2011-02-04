@@ -56,15 +56,20 @@ class ComponentPosition {
 		width(list);
 		recalculateWidth(name, list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
 		height(list);
-		if (maxHeight > 0) {
-			recalculateHeight(name, list, maxHeight - StyleResolver.getVerticalPadding(list.getStyle()));
-		}
 
 		int availableWidth = maxWidth - list.getWidth();
 		if (availableWidth < 0) {
 			throw new DRException(name + " components reaches outside available width, available width = " + maxWidth + ", components width = " + list.getWidth());
 		}
 		list.setWidth(list.getWidth() + availableWidth);
+
+		if (maxHeight > 0) {
+			int availableHeight = maxHeight - list.getHeight();
+			if (availableHeight < 0) {
+				throw new DRException(name + " components reaches outside available height, available height = " + maxHeight + ", components height = " + list.getHeight());
+			}
+			list.setHeight(list.getHeight() + availableHeight);
+		}
 
 		listCellWidth(list, availableWidth);
 		listCellX(list);
@@ -369,10 +374,6 @@ class ComponentPosition {
 		maxHeight += StyleResolver.getVerticalPadding(list.getStyle());
 
 		list.setHeight(maxHeight);
-	}
-
-	private static void recalculateHeight(String name, DRDesignList list, int availableHeight) {
-		// TODO
 	}
 
 	private static void listCellWidth(DRDesignList list, int availableWidth) {
