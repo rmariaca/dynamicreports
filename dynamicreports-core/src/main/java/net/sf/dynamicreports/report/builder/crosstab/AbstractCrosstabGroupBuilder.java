@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.crosstab;
 
+import java.util.Comparator;
+
 import net.sf.dynamicreports.report.base.DRValueColumn;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabGroup;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
@@ -137,12 +139,12 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setOrderByExpression(DRISimpleExpression<V> orderByExpression) {
+	public T setOrderByExpression(DRISimpleExpression<Comparator<?>> orderByExpression) {
 		getObject().setOrderByExpression(orderByExpression);
 		return (T) this;
 	}
 
-	public T setComparatorExpression(DRISimpleExpression<V> comparatorExpression) {
+	public T setComparatorExpression(DRISimpleExpression<Comparator<?>> comparatorExpression) {
 		getObject().setComparatorExpression(comparatorExpression);
 		return (T) this;
 	}

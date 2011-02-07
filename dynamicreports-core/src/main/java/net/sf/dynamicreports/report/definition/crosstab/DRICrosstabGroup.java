@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.crosstab;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -62,9 +63,9 @@ public interface DRICrosstabGroup<T> extends Serializable {
 
 	public DRIDataType<? super T, T> getDataType();
 
-	public DRISimpleExpression<T> getOrderByExpression();
+	public DRISimpleExpression<Comparator<?>> getOrderByExpression();
 
 	public OrderType getOrderType();
 
-	public DRISimpleExpression<T> getComparatorExpression();
+	public DRISimpleExpression<Comparator<?>> getComparatorExpression();
 }

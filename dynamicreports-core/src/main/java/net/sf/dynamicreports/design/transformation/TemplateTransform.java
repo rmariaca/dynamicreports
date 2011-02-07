@@ -939,9 +939,11 @@ public class TemplateTransform {
 				if (maxHeight < height) {
 					maxHeight = height;
 				}
-				height = detectHeight(designColumnGroup.getTotalHeader().getList());
-				if (maxHeight < height) {
-					maxHeight = height;
+				if (designColumnGroup.getTotalHeader() != null) {
+					height = detectHeight(designColumnGroup.getTotalHeader().getList());
+					if (maxHeight < height) {
+						maxHeight = height;
+					}
 				}
 				break;
 			}
@@ -956,9 +958,11 @@ public class TemplateTransform {
 		int maxWidth = 0;
 		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
 			if (designColumnGroup.getName().equals(columnGroup.getName())) {
-				int height = detectWidth(designColumnGroup.getTotalHeader().getList());
-				if (maxWidth < height) {
-					maxWidth = height;
+				if (designColumnGroup.getTotalHeader() != null) {
+					int height = detectWidth(designColumnGroup.getTotalHeader().getList());
+					if (maxWidth < height) {
+						maxWidth = height;
+					}
 				}
 				break;
 			}
@@ -988,9 +992,11 @@ public class TemplateTransform {
 				if (maxWidth < width) {
 					maxWidth = width;
 				}
-				width = detectWidth(designRowGroup.getTotalHeader().getList());
-				if (maxWidth < width) {
-					maxWidth = width;
+				if (designRowGroup.getTotalHeader() != null) {
+					width = detectWidth(designRowGroup.getTotalHeader().getList());
+					if (maxWidth < width) {
+						maxWidth = width;
+					}
 				}
 				break;
 			}
@@ -1008,9 +1014,11 @@ public class TemplateTransform {
 		int maxHeight = 0;
 		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {
 			if (designRowGroup.getName().equals(rowGroup.getName())) {
-				int height = detectHeight(designRowGroup.getTotalHeader().getList());
-				if (maxHeight < height) {
-					maxHeight = height;
+				if (designRowGroup.getTotalHeader() != null) {
+					int height = detectHeight(designRowGroup.getTotalHeader().getList());
+					if (maxHeight < height) {
+						maxHeight = height;
+					}
 				}
 				break;
 			}

@@ -109,7 +109,7 @@ public class CrosstabTransform {
 	}
 
 	private JRDesignCellContents cellContent(DRIDesignCrosstabCellContent cellContent) {
-		if (cellContent.getComponent() == null) {
+		if (cellContent == null || cellContent.getComponent() == null) {
 			return null;
 		}
 

@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.base.crosstab;
 
+import java.util.Comparator;
+
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
@@ -54,9 +56,9 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private DRIStyle totalHeaderStyle;
 	private DRIExpression<T> expression;
 	private DRIDataType<? super T, T> dataType;
-	private DRISimpleExpression<T> orderByExpression;
+	private DRISimpleExpression<Comparator<?>> orderByExpression;
 	private OrderType orderType;
-	private DRISimpleExpression<T> comparatorExpression;
+	private DRISimpleExpression<Comparator<?>> comparatorExpression;
 
 	public DRCrosstabGroup() {
 		this.name = ReportUtils.generateUniqueName("crosstabGroup");
@@ -155,11 +157,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.dataType = dataType;
 	}
 
-	public DRISimpleExpression<T> getOrderByExpression() {
+	public DRISimpleExpression<Comparator<?>> getOrderByExpression() {
 		return orderByExpression;
 	}
 
-	public void setOrderByExpression(DRISimpleExpression<T> orderByExpression) {
+	public void setOrderByExpression(DRISimpleExpression<Comparator<?>> orderByExpression) {
 		this.orderByExpression = orderByExpression;
 	}
 
@@ -171,11 +173,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.orderType = orderType;
 	}
 
-	public DRISimpleExpression<T> getComparatorExpression() {
+	public DRISimpleExpression<Comparator<?>> getComparatorExpression() {
 		return comparatorExpression;
 	}
 
-	public void setComparatorExpression(DRISimpleExpression<T> comparatorExpression) {
+	public void setComparatorExpression(DRISimpleExpression<Comparator<?>> comparatorExpression) {
 		this.comparatorExpression = comparatorExpression;
 	}
 }
