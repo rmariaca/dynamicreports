@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.constant.ValueType;
+import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -43,15 +44,15 @@ import net.sf.jasperreports.engine.JRVariable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class JasperReportParameters implements ReportParameters {	
+public class JasperReportParameters implements ReportParameters {
 	public static final String MASTER_REPORT_PARAMETERS = "MASTER_REPORT_PARAMETERS";
-	
+
 	private JasperScriptlet jasperScriptlet;
-	
+
 	protected JasperReportParameters(JasperScriptlet jasperScriptlet) {
 		this.jasperScriptlet = jasperScriptlet;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <T> T getValue(String name) {
 		ValueType type = jasperScriptlet.getValueType(name);
@@ -67,19 +68,25 @@ public class JasperReportParameters implements ReportParameters {
 				return (T) getSimpleExpressionValue(name);
 			case COMPLEX_EXPRESSION:
 				return (T) getComplexExpressionValue(name);
+			case SYSTEM_EXPRESSION:
+				return (T) getSystemExpressionValue(name);
 			default:
 				break;
 			}
 		}
+
+		if (name.equals(DRIReportScriptlet.NAME)) {
+			return (T) getParameterValue(DRIReportScriptlet.NAME + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX);
+		}
 		return null;
-	}	
-	
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> T getValue(DRIValue<T> value) {
 		return (T) getValue(value.getName());
 	}
-	
-	//field	
+
+	//field
 	private Object getFieldValue(String name) {
 		try {
 			return jasperScriptlet.getFieldValue(name);
@@ -87,8 +94,8 @@ public class JasperReportParameters implements ReportParameters {
 		}
 		return null;
 	}
-	
-	//variable	
+
+	//variable
 	private Object getVariableValue(String name) {
 		try {
 			return jasperScriptlet.getVariableValue(name);
@@ -96,7 +103,7 @@ public class JasperReportParameters implements ReportParameters {
 		}
 		return null;
 	}
-	
+
 	public Integer getPageNumber() {
 		return (Integer) getVariableValue(JRVariable.PAGE_NUMBER);
 	}
@@ -104,7 +111,7 @@ public class JasperReportParameters implements ReportParameters {
 	public Integer getColumnNumber() {
 		return (Integer) getVariableValue(JRVariable.COLUMN_NUMBER);
 	}
-	
+
 	public Integer getReportRowNumber() {
 		return (Integer) getVariableValue(JRVariable.REPORT_COUNT);
 	}
@@ -116,12 +123,12 @@ public class JasperReportParameters implements ReportParameters {
 	public Integer getColumnRowNumber() {
 		return (Integer) getVariableValue(JRVariable.COLUMN_COUNT);
 	}
-	
+
 	public Integer getGroupCount(String groupName) {
 		return (Integer) getVariableValue(groupName + "_COUNT");
 	}
-	
-	//parameter	
+
+	//parameter
 	private Object getParameterValue(String name) {
 		try {
 			return ((Map<?, ?>) jasperScriptlet.getParameterValue(JRParameter.REPORT_PARAMETERS_MAP)).get(name);
@@ -129,37 +136,41 @@ public class JasperReportParameters implements ReportParameters {
 		}
 		return null;
 	}
-	
+
 	public Connection getConnection() {
 		return (Connection) getParameterValue(JRParameter.REPORT_CONNECTION);
 	}
-	
+
 	public Locale getLocale() {
 		return (Locale) getParameterValue(JRParameter.REPORT_LOCALE);
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public DRIScriptlet getScriptlet(String name) {
 		return ((CustomScriptlet) getParameterValue(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX)).getScriptlet();
 	}
-	
+
 	public String getMessage(String key) {
 		return ((ResourceBundle) getParameterValue(JRParameter.REPORT_RESOURCE_BUNDLE)).getString(key);
 	}
-	
-	//simple expression	
+
+	//simple expression
 	private Object getSimpleExpressionValue(String name) {
 		return jasperScriptlet.getSimpleExpression(name).evaluate(this);
 	}
 
-	//complex expression	
+	//complex expression
 	private Object getComplexExpressionValue(String name) {
 		List<Object> values = new ArrayList<Object>();
 		DRIDesignComplexExpression complexExpression = jasperScriptlet.getComplexExpression(name);
 		for (DRIDesignExpression valueExpression : complexExpression.getExpressions()) {
 			values.add(getValue(valueExpression.getName()));
-		}		
+		}
 		return complexExpression.evaluate(values, this);
+	}
+
+	//system expression
+	private Object getSystemExpressionValue(String name) {
+		return jasperScriptlet.getSystemValue(name);
 	}
 
 	public ReportParameters getMasterParameters() {

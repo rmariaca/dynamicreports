@@ -22,22 +22,23 @@
 
 package net.sf.dynamicreports.report.definition.crosstab;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabGroup<T> extends Serializable {
+public interface DRICrosstabGroup<T> extends DRISystemExpression<T>, DRIValue<T> {
 
 	public String getName();
 
@@ -63,9 +64,9 @@ public interface DRICrosstabGroup<T> extends Serializable {
 
 	public DRIDataType<? super T, T> getDataType();
 
-	public DRISimpleExpression<Comparator<?>> getOrderByExpression();
+	public DRISimpleExpression<? extends Comparable<?>> getOrderByExpression();
 
 	public OrderType getOrderType();
 
-	public DRISimpleExpression<Comparator<?>> getComparatorExpression();
+	public DRISimpleExpression<? extends Comparator<?>> getComparatorExpression();
 }

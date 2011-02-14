@@ -27,7 +27,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -44,8 +44,8 @@ public class CrosstabPosition2Test extends AbstractJasperCrosstabPositionTest {
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureBuilder<Integer> measure1;
-	private CrosstabMeasureBuilder<Double> measure2;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
+	private CrosstabMeasureVariableCellBuilder<Double> measure2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

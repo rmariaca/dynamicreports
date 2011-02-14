@@ -26,7 +26,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,12 +42,12 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class FieldDataTypeTest extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<BigDecimal> column1;
 	private TextColumnBuilder<Integer> column2;
 	private TextColumnBuilder<String> column3;
 	private TextColumnBuilder<Date> column4;
-	
+
 	private AggregationSubtotalBuilder<BigDecimal> subtotal1;
 	private AggregationSubtotalBuilder<Number> subtotal2;
 	private AggregationSubtotalBuilder<Long> subtotal3;
@@ -58,7 +57,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 	private AggregationSubtotalBuilder<BigDecimal> subtotal7;
 	private AggregationSubtotalBuilder<Number> subtotal8;
 	private AggregationSubtotalBuilder<Number> subtotal9;
-	
+
 	private AggregationSubtotalBuilder<Integer> subtotal10;
 	private AggregationSubtotalBuilder<Number> subtotal11;
 	private AggregationSubtotalBuilder<Long> subtotal12;
@@ -68,26 +67,26 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 	private AggregationSubtotalBuilder<Integer> subtotal16;
 	private AggregationSubtotalBuilder<Number> subtotal17;
 	private AggregationSubtotalBuilder<Number> subtotal18;
-	
+
 	private AggregationSubtotalBuilder<Long> subtotal19;
 	private AggregationSubtotalBuilder<Long> subtotal20;
 	private AggregationSubtotalBuilder<String> subtotal21;
 	private AggregationSubtotalBuilder<String> subtotal22;
 	private AggregationSubtotalBuilder<String> subtotal23;
-	
+
 	private AggregationSubtotalBuilder<Long> subtotal24;
 	private AggregationSubtotalBuilder<Long> subtotal25;
 	private AggregationSubtotalBuilder<Date> subtotal26;
 	private AggregationSubtotalBuilder<Date> subtotal27;
 	private AggregationSubtotalBuilder<Date> subtotal28;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		FieldBuilder<BigDecimal> field1;
 		FieldBuilder<Integer> field2;
 		FieldBuilder<String> field3;
 		FieldBuilder<Date> field4;
-		
+
 		rb.setLocale(Locale.ENGLISH)
 			.fields(
 					field1 = field("field1", type.bigDecimalType()),
@@ -119,13 +118,13 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 					subtotal16 = sbt.max(field2, column2),
 					subtotal17 = sbt.stdDev(field2, column2),
 					subtotal18 = sbt.var(field2, column2),
-					
+
 					subtotal19 = sbt.count(field3, column3),
 					subtotal20 = sbt.distinctCount(field3, column3),
 					subtotal21 = sbt.first(field3, column3),
 					subtotal22 = sbt.min(field3, column3),
 					subtotal23 = sbt.max(field3, column3),
-					
+
 					subtotal24 = sbt.count(field4, column4),
 					subtotal25 = sbt.distinctCount(field4, column4),
 					subtotal26 = sbt.first(field4, column4),
@@ -136,9 +135,9 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		//column
 		columnDetailCountTest(column1, 5);
 		columnDetailValueTest(column1, "1.01", "2.01", "9.01", "11.01", "2.01");
@@ -148,7 +147,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		columnDetailValueTest(column3, "value8", "value2", "value3", "value3", "value1");
 		columnDetailCountTest(column4, 5);
 		columnDetailValueTest(column4, "01/01/2010", "02/01/2010", "02/01/2010", "03/01/2010", "04/01/2010");
-		
+
 		//summary
 		subtotalIndexCountTest(subtotal1, 1, 1);
 		subtotalIndexValueTest(subtotal1, 1, "25.05");
@@ -168,7 +167,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		subtotalIndexValueTest(subtotal8, 8, "4.1");
 		subtotalIndexCountTest(subtotal9, 9, 1);
 		subtotalIndexValueTest(subtotal9, 9, "17.2");
-		
+
 		subtotalIndexCountTest(subtotal10, 1, 1);
 		subtotalIndexValueTest(subtotal10, 1, "36");
 		subtotalIndexCountTest(subtotal11, 2, 1);
@@ -187,7 +186,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		subtotalIndexValueTest(subtotal17, 8, "2.6");
 		subtotalIndexCountTest(subtotal18, 9, 1);
 		subtotalIndexValueTest(subtotal18, 9, "7");
-		
+
 		subtotalIndexCountTest(subtotal19, 1, 1);
 		subtotalIndexValueTest(subtotal19, 1, "5");
 		subtotalIndexCountTest(subtotal20, 2, 1);
@@ -198,7 +197,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		subtotalIndexValueTest(subtotal22, 4, "value1");
 		subtotalIndexCountTest(subtotal23, 5, 1);
 		subtotalIndexValueTest(subtotal23, 5, "value8");
-		
+
 		subtotalIndexCountTest(subtotal24, 1, 1);
 		subtotalIndexValueTest(subtotal24, 1, "5");
 		subtotalIndexCountTest(subtotal25, 2, 1);
@@ -210,7 +209,7 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		subtotalIndexCountTest(subtotal28, 5, 1);
 		subtotalIndexValueTest(subtotal28, 5, "04/01/2010");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
@@ -220,13 +219,5 @@ public class FieldDataTypeTest extends AbstractJasperValueTest implements Serial
 		dataSource.add(new BigDecimal(11.01), 12, "value3", toDate(2010, 3, 1));
 		dataSource.add(new BigDecimal(2.01), 6, "value1", toDate(2010, 4, 1));
 		return dataSource;
-	}
-	
-	private Date toDate(int year, int month, int day) {
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.YEAR, year);
-		c.set(Calendar.MONTH, month - 1);
-		c.set(Calendar.DAY_OF_MONTH, day);
-		return c.getTime();
 	}
 }

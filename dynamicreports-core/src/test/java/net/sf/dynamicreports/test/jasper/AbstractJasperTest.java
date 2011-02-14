@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -138,6 +140,14 @@ public abstract class AbstractJasperTest {
 				findElement(key, elements, element2);
 			}
 		}
+	}
+
+	protected Date toDate(int year, int month, int day) {
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.YEAR, year);
+		c.set(Calendar.MONTH, month - 1);
+		c.set(Calendar.DAY_OF_MONTH, day);
+		return c.getTime();
 	}
 
 	protected JRDataSource createDataSource() {

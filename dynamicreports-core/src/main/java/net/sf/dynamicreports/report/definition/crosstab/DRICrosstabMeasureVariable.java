@@ -20,30 +20,24 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.crosstab;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
-import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.definition.DRIValue;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstabGroup {
+public interface DRICrosstabMeasureVariable<T> extends DRICrosstabMeasure<T>, DRISystemExpression<T>, DRIValue<T> {
 
-	public String getName();
+	public Class<? super T> getValueClass();
 
-	public CrosstabTotalPosition getTotalPosition();
+	public DRIExpression<?> getValueExpression();
 
-	public OrderType getOrderType();
+	public Calculation getCalculation();
 
-	public DRIDesignExpression getExpression();
-
-	public DRIDesignExpression getOrderByExpression();
-
-	public DRIDesignExpression getComparatorExpression();
-
-	public DRIDesignCrosstabCellContent getHeader();
-
-	public DRIDesignCrosstabCellContent getTotalHeader();
+	public CrosstabPercentageType getPercentageType();
 }

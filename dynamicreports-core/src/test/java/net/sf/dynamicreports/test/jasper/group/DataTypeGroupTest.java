@@ -24,7 +24,6 @@ package net.sf.dynamicreports.test.jasper.group;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -38,15 +37,15 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DataTypeGroupTest extends AbstractJasperValueTest {	
+public class DataTypeGroupTest extends AbstractJasperValueTest {
 	private TextColumnBuilder<Date> column1;
 	private TextColumnBuilder<Date> column2;
 	private ColumnGroupBuilder group1;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		rb.setLocale(Locale.ENGLISH)
-		  .columns(				
+		  .columns(
 		  	column1 = col.column("Column1", "field1", type.dateMonthType()),
 				column2 = col.column("Column2", "field1", type.dateType()))
 			.groupBy(
@@ -57,36 +56,28 @@ public class DataTypeGroupTest extends AbstractJasperValueTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		//column2
 		columnTitleCountTest(column2, 1);
 		columnTitleValueTest(column2, "Column2");
 		columnDetailCountTest(column2, 2);
 		columnDetailValueTest(column2, "01/01/2010", "02/01/2010");
-		
+
 		//group1
 		groupHeaderTitleCountTest(group1, 0);
 		groupHeaderCountTest(group1, 2);
 		groupHeaderValueTest(group1, "January", "February");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		for (int i = 0; i < 1; i++) {
 			dataSource.add(toDate(2010, 1, 1));
 			dataSource.add(toDate(2010, 2, 1));
-		}	
+		}
 		return dataSource;
-	}
-	
-	private Date toDate(int year, int month, int day) {
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.YEAR, year);
-		c.set(Calendar.MONTH, month - 1);
-		c.set(Calendar.DAY_OF_MONTH, day);
-		return c.getTime();
 	}
 }

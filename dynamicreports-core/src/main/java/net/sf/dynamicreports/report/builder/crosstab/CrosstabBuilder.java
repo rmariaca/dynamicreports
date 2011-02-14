@@ -128,14 +128,14 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder measures(CrosstabMeasureBuilder<?> ...measures) {
+	public CrosstabBuilder measures(CrosstabMeasureBuilder<?, ?> ...measures) {
 		return addMeasure(measures);
 	}
 
-	public CrosstabBuilder addMeasure(CrosstabMeasureBuilder<?> ...measures) {
+	public CrosstabBuilder addMeasure(CrosstabMeasureBuilder<?, ?> ...measures) {
 		Validate.notNull(measures, "measures must not be null");
 		Validate.noNullElements(measures, "measures must not contains null measure");
-		for (CrosstabMeasureBuilder<?> measure : measures) {
+		for (CrosstabMeasureBuilder<?, ?> measure : measures) {
 			getObject().addMeasure(measure.build());
 		}
 		return this;

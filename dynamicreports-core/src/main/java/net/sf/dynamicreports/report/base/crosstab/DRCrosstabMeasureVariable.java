@@ -26,33 +26,23 @@ import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
-import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
+public class DRCrosstabMeasureVariable<T> implements DRICrosstabMeasureVariable<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String name;
 	private DRIExpression<?> valueExpression;
-	private DRIDataType<? super T, T> dataType;
 	private Calculation calculation;
 	private CrosstabPercentageType percentageType;
-	private String pattern;
-	private HorizontalAlignment horizontalAlignment;
-	private DRIValueFormatter<?, ? super T> valueFormatter;
-	private Boolean stretchWithOverflow;
-	private DRIStyle style;
 
-	public DRCrosstabMeasure(DRIExpression<?> valueExpression, Calculation calculation) {
+	public DRCrosstabMeasureVariable(DRIExpression<?> valueExpression, Calculation calculation) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		Validate.notNull(calculation, "calculation must not be null");
 		this.valueExpression = valueExpression;
@@ -68,14 +58,6 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		return valueExpression;
 	}
 
-	public DRIDataType<? super T, T> getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(DRIDataType<? super T, T> dataType) {
-		this.dataType = dataType;
-	}
-
 	public Calculation getCalculation() {
 		return calculation;
 	}
@@ -86,46 +68,6 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 
 	public void setPercentageType(CrosstabPercentageType percentageType) {
 		this.percentageType = percentageType;
-	}
-
-	public String getPattern() {
-		return pattern;
-	}
-
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
-	}
-
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
-	}
-
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
-	}
-
-	public DRIValueFormatter<?, ? super T> getValueFormatter() {
-		return valueFormatter;
-	}
-
-	public void setValueFormatter(DRIValueFormatter<?, ? super T> valueFormatter) {
-		this.valueFormatter = valueFormatter;
-	}
-
-	public Boolean getStretchWithOverflow() {
-		return stretchWithOverflow;
-	}
-
-	public void setStretchWithOverflow(Boolean stretchWithOverflow) {
-		this.stretchWithOverflow = stretchWithOverflow;
-	}
-
-	public DRIStyle getStyle() {
-		return style;
-	}
-
-	public void setStyle(DRIStyle style) {
-		this.style = style;
 	}
 
 	@SuppressWarnings("unchecked")

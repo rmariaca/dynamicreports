@@ -24,38 +24,10 @@ package net.sf.dynamicreports.report.definition.crosstab;
 
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRICrosstabMeasure<T> extends Serializable {
 
 	public String getName();
-
-	public Class<? super T> getValueClass();
-
-	public DRIDataType<? super T, T> getDataType();
-
-	public DRIExpression<?> getValueExpression();
-
-	public Calculation getCalculation();
-
-	public CrosstabPercentageType getPercentageType();
-
-	public String getPattern();
-
-	public HorizontalAlignment getHorizontalAlignment();
-
-	public DRIValueFormatter<?, ? super T> getValueFormatter();
-
-	public Boolean getStretchWithOverflow();
-
-	public DRIStyle getStyle();
 }

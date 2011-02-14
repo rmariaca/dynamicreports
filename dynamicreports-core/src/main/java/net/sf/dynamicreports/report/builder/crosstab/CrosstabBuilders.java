@@ -72,19 +72,39 @@ public class CrosstabBuilders {
 	}
 
 	//measure
-	public <T> CrosstabMeasureBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+	public <T> CrosstabMeasureVariableBuilder<T> measureVariable(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+		return Crosstabs.measureVariable(column, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableBuilder<T> measureVariable(FieldBuilder<T> field, Calculation calculation) {
+		return Crosstabs.measureVariable(field, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableBuilder<T> measureVariable(String fieldName, Class<?> valueClass, Calculation calculation) {
+		return Crosstabs.measureVariable(fieldName, valueClass, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableBuilder<T> measureVariable(DRISimpleExpression<?> expression, Calculation calculation) {
+		return Crosstabs.measureVariable(expression, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		return Crosstabs.measure(column, calculation);
 	}
 
-	public <T> CrosstabMeasureBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
 		return Crosstabs.measure(field, calculation);
 	}
 
-	public <T> CrosstabMeasureBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
 		return Crosstabs.measure(fieldName, valueClass, calculation);
 	}
 
-	public <T> CrosstabMeasureBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
 		return Crosstabs.measure(expression, calculation);
+	}
+
+	public <T> CrosstabMeasureCellBuilder<T> measure(DRISimpleExpression<?> expression) {
+		return Crosstabs.measure(expression);
 	}
 }

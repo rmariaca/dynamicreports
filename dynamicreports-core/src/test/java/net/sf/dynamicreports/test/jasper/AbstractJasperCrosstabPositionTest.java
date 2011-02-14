@@ -56,7 +56,7 @@ public abstract class AbstractJasperCrosstabPositionTest extends AbstractJasperP
 	}
 
 	//cell
-	protected void crosstabCellPositionTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, int x, int y, int width, int height) {
+	protected void crosstabCellPositionTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, int x, int y, int width, int height) {
 		elementPositionTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, x, y, width, height);
 	}
 

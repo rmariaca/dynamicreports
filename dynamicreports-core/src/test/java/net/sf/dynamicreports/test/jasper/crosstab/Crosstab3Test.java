@@ -31,7 +31,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -47,7 +47,7 @@ public class Crosstab3Test extends AbstractJasperCrosstabValueTest implements Se
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

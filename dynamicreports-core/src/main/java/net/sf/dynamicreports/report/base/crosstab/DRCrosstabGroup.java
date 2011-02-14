@@ -56,9 +56,9 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private DRIStyle totalHeaderStyle;
 	private DRIExpression<T> expression;
 	private DRIDataType<? super T, T> dataType;
-	private DRISimpleExpression<Comparator<?>> orderByExpression;
+	private DRISimpleExpression<? extends Comparable<?>> orderByExpression;
 	private OrderType orderType;
-	private DRISimpleExpression<Comparator<?>> comparatorExpression;
+	private DRISimpleExpression<? extends Comparator<?>> comparatorExpression;
 
 	public DRCrosstabGroup() {
 		this.name = ReportUtils.generateUniqueName("crosstabGroup");
@@ -157,11 +157,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.dataType = dataType;
 	}
 
-	public DRISimpleExpression<Comparator<?>> getOrderByExpression() {
+	public DRISimpleExpression<? extends Comparable<?>> getOrderByExpression() {
 		return orderByExpression;
 	}
 
-	public void setOrderByExpression(DRISimpleExpression<Comparator<?>> orderByExpression) {
+	public void setOrderByExpression(DRISimpleExpression<? extends Comparable<?>> orderByExpression) {
 		this.orderByExpression = orderByExpression;
 	}
 
@@ -173,11 +173,15 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.orderType = orderType;
 	}
 
-	public DRISimpleExpression<Comparator<?>> getComparatorExpression() {
+	public DRISimpleExpression<? extends Comparator<?>> getComparatorExpression() {
 		return comparatorExpression;
 	}
 
-	public void setComparatorExpression(DRISimpleExpression<Comparator<?>> comparatorExpression) {
+	public void setComparatorExpression(DRISimpleExpression<? extends Comparator<?>> comparatorExpression) {
 		this.comparatorExpression = comparatorExpression;
+	}
+
+	public Class<? super T> getValueClass() {
+		return getExpression().getValueClass();
 	}
 }

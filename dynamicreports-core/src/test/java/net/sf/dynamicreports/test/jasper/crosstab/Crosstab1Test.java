@@ -30,7 +30,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
@@ -46,12 +46,12 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureBuilder<Integer> measure1;
-	private CrosstabMeasureBuilder<Integer> measure2;
-	private CrosstabMeasureBuilder<Double> measure3;
-	private CrosstabMeasureBuilder<Double> measure4;
-	private CrosstabMeasureBuilder<Integer> measure5;
-	private CrosstabMeasureBuilder<Integer> measure6;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure2;
+	private CrosstabMeasureVariableCellBuilder<Double> measure3;
+	private CrosstabMeasureVariableCellBuilder<Double> measure4;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure5;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

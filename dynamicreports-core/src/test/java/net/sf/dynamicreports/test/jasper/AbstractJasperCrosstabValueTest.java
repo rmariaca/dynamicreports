@@ -64,11 +64,11 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 	}
 
 	//cell
-	protected void crosstabCellCountTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int expectedNumberOfElements) {
+	protected void crosstabCellCountTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int expectedNumberOfElements) {
 		elementCountTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), expectedNumberOfElements);
 	}
 
-	protected void crosstabCellValueTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, String ...values) {
+	protected void crosstabCellValueTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, String ...values) {
 		elementValueTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), values);
 	}
 

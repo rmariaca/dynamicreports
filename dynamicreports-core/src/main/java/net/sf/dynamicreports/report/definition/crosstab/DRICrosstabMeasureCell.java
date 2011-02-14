@@ -20,30 +20,30 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.crosstab;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
-import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstabGroup {
+public interface DRICrosstabMeasureCell<T> extends DRICrosstabMeasure<T> {
 
-	public String getName();
+	public DRIDataType<? super T, T> getDataType();
 
-	public CrosstabTotalPosition getTotalPosition();
+	public DRISimpleExpression<?> getCellExpression();
 
-	public OrderType getOrderType();
+	public String getPattern();
 
-	public DRIDesignExpression getExpression();
+	public HorizontalAlignment getHorizontalAlignment();
 
-	public DRIDesignExpression getOrderByExpression();
+	public DRIValueFormatter<?, ? super T> getValueFormatter();
 
-	public DRIDesignExpression getComparatorExpression();
+	public Boolean getStretchWithOverflow();
 
-	public DRIDesignCrosstabCellContent getHeader();
-
-	public DRIDesignCrosstabCellContent getTotalHeader();
+	public DRIStyle getStyle();
 }

@@ -24,15 +24,18 @@ package net.sf.dynamicreports.test.jasper.crosstab;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,12 +43,12 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Crosstab4Test extends AbstractJasperCrosstabValueTest {
+public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -55,7 +58,7 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest {
 			.rowGroups(
 				rowGroup = ctab.rowGroup("field1", String.class).setOrderType(OrderType.DESCENDING).setShowTotal(false))
 			.columnGroups(
-				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false))
+				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).setOrderByExpression(new OrderByExpression()))
 			.measures(
 				measure1);
 
@@ -73,7 +76,7 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest {
 
 		//column group
 		crosstabGroupHeaderCountTest(columnGroup, 2);
-		crosstabGroupHeaderValueTest(columnGroup, "c", "d");
+		crosstabGroupHeaderValueTest(columnGroup, "d", "c");
 		crosstabGroupTotalHeaderCountTest(columnGroup, 0);
 
 		//row group
@@ -83,7 +86,7 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest {
 
 		//measure1
 		crosstabCellCountTest(measure1, null, null, 4);
-		crosstabCellValueTest(measure1, null, null, "7", "3", "15", "11");
+		crosstabCellValueTest(measure1, null, null, "3", "7", "11", "15");
 		crosstabCellCountTest(measure1, null, columnGroup, 0);
 		crosstabCellCountTest(measure1, rowGroup, null, 0);
 		crosstabCellCountTest(measure1, rowGroup, columnGroup, 0);
@@ -101,5 +104,13 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest {
 		dataSource.add("b", "d", 2);
 		dataSource.add("b", "d", 1);
 		return dataSource;
+	}
+
+	private class OrderByExpression extends AbstractSimpleExpression<Integer> {
+		private static final long serialVersionUID = 1L;
+
+		public Integer evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(measure1);
+		}
 	}
 }

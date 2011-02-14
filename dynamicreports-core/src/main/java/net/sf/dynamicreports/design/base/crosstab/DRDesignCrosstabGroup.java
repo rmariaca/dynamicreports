@@ -24,7 +24,6 @@ package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.OrderType;
 
@@ -36,8 +35,8 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 	private CrosstabTotalPosition totalPosition;
 	private OrderType orderType;
 	private DRIDesignExpression expression;
-	private DRIDesignSimpleExpression orderByExpression;
-	private DRIDesignSimpleExpression comparatorExpression;
+	private DRIDesignExpression orderByExpression;
+	private DRIDesignExpression comparatorExpression;
 	private DRDesignCrosstabCellContent header;
 	private DRDesignCrosstabCellContent totalHeader;
 
@@ -73,19 +72,19 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.expression = expression;
 	}
 
-	public DRIDesignSimpleExpression getOrderByExpression() {
+	public DRIDesignExpression getOrderByExpression() {
 		return orderByExpression;
 	}
 
-	public void setOrderByExpression(DRIDesignSimpleExpression orderByExpression) {
+	public void setOrderByExpression(DRIDesignExpression orderByExpression) {
 		this.orderByExpression = orderByExpression;
 	}
 
-	public DRIDesignSimpleExpression getComparatorExpression() {
+	public DRIDesignExpression getComparatorExpression() {
 		return comparatorExpression;
 	}
 
-	public void setComparatorExpression(DRIDesignSimpleExpression comparatorExpression) {
+	public void setComparatorExpression(DRIDesignExpression comparatorExpression) {
 		this.comparatorExpression = comparatorExpression;
 	}
 

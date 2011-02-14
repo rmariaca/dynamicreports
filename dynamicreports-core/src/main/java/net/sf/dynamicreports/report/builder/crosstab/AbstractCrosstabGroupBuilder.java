@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -45,7 +46,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGroupBuilder<T, U, V>, U extends DRCrosstabGroup<V>, V> extends AbstractBuilder<T, U> {
+public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGroupBuilder<T, U, V>, U extends DRCrosstabGroup<V>, V> extends AbstractBuilder<T, U> implements DRIValue<V> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractCrosstabGroupBuilder(ValueColumnBuilder<?, V> column, U crosstabGroup) {
@@ -139,13 +140,17 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setOrderByExpression(DRISimpleExpression<Comparator<?>> orderByExpression) {
+	public T setOrderByExpression(DRISimpleExpression<? extends Comparable<?>> orderByExpression) {
 		getObject().setOrderByExpression(orderByExpression);
 		return (T) this;
 	}
 
-	public T setComparatorExpression(DRISimpleExpression<Comparator<?>> comparatorExpression) {
+	public  T setComparatorExpression(DRISimpleExpression<? extends Comparator<?>> comparatorExpression) {
 		getObject().setComparatorExpression(comparatorExpression);
 		return (T) this;
+	}
+
+	public String getName() {
+		return build().getName();
 	}
 }

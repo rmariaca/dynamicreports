@@ -119,7 +119,7 @@ public class JasperTestUtils {
 	}
 
 	//crosstab cell
-	public static String getCrosstabCellName(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+	public static String getCrosstabCellName(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
 		String name = "cell_measure[" + measure.build().getName() + "]";
 		if (rowGroup != null) {
 			name += "_rowgroup[" + rowGroup.build().getName() + "]";

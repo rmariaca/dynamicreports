@@ -30,7 +30,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
@@ -48,7 +48,7 @@ public class CrosstabStyleTest extends AbstractJasperCrosstabStyleTest {
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

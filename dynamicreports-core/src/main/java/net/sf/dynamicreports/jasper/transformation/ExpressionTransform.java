@@ -88,6 +88,7 @@ public class ExpressionTransform {
 	public void addSystemExpression(DRIDesignSystemExpression systemExpression) {
 		if (systemExpression == null)
 			return;
+		accessor.getCustomValues().addValueType(systemExpression.getName(), ValueType.SYSTEM_EXPRESSION);
 		addExpression(systemExpression);
 	}
 

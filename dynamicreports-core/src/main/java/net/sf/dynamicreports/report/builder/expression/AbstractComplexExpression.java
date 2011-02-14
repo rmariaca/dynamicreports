@@ -44,35 +44,35 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public abstract class AbstractComplexExpression<T> implements DRIComplexExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
 	private List<DRIExpression<?>> expressions;
-	
+
 	protected AbstractComplexExpression() {
 		this.name = ReportUtils.generateUniqueName("complexExpression");
 		this.expressions = new ArrayList<DRIExpression<?>>();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	protected void addExpression(FieldBuilder<?> field) {
 		Validate.notNull(field, "field must not be null");
 		this.expressions.add(field.getField());
 	}
-	
+
 	protected void addExpression(String fieldName, Class<?> valueClass) {
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		DRField<?> field = new DRField(fieldName, valueClass);
 		this.expressions.add(field);
 	}
-	
+
 	protected void addExpression(TextColumnBuilder<?> column) {
 		Validate.notNull(column, "column must not be null");
 		this.expressions.add(column.build());
 	}
-	
+
 	protected void addExpression(VariableBuilder<?> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		this.expressions.add(variable.getVariable());
@@ -82,25 +82,25 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 		Validate.notNull(expression, "expression must not be null");
 		this.expressions.add(expression);
 	}
-	
+
 	protected void addExpression(DRIComplexExpression<?> expression) {
 		Validate.notNull(expression, "expression must not be null");
 		this.expressions.add(expression);
 	}
-	
+
 	protected void addExpression(DRIExpression<?> expression) {
 		Validate.notNull(expression, "expression must not be null");
 		this.expressions.add(expression);
 	}
-	
+
 	public List<DRIExpression<?>> getExpressions() {
 		return expressions;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
 		return (Class<? super T>) ReportUtils.getGenericClass(this, 0);
 	}
-	
+
 	public abstract T evaluate(List<?> values, ReportParameters reportParameters);
 }

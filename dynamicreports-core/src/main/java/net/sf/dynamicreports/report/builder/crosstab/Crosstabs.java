@@ -75,21 +75,43 @@ public class Crosstabs {
 	}
 
 	//measure
-	public static <T> CrosstabMeasureBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+	public static <T> CrosstabMeasureVariableBuilder<T> measureVariable(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		Validate.notNull(column, "column must not be null");
-		return new CrosstabMeasureBuilder<T>(column, calculation);
+		return new CrosstabMeasureVariableBuilder<T>(column, calculation);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
+	public static <T> CrosstabMeasureVariableBuilder<T> measureVariable(FieldBuilder<T> field, Calculation calculation) {
 		Validate.notNull(field, "field must not be null");
-		return new CrosstabMeasureBuilder<T>(field, calculation);
+		return new CrosstabMeasureVariableBuilder<T>(field, calculation);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
-		return new CrosstabMeasureBuilder<T>(DynamicReports.field(fieldName, valueClass), calculation);
+	public static <T> CrosstabMeasureVariableBuilder<T> measureVariable(String fieldName, Class<?> valueClass, Calculation calculation) {
+		return new CrosstabMeasureVariableBuilder<T>(DynamicReports.field(fieldName, valueClass), calculation);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
-		return new CrosstabMeasureBuilder<T>(expression, calculation);
+	public static <T> CrosstabMeasureVariableBuilder<T> measureVariable(DRISimpleExpression<?> expression, Calculation calculation) {
+		return new CrosstabMeasureVariableBuilder<T>(expression, calculation);
+	}
+
+	public static <T> CrosstabMeasureVariableCellBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+		Validate.notNull(column, "column must not be null");
+		return new CrosstabMeasureVariableCellBuilder<T>(column, calculation);
+	}
+
+	public static <T> CrosstabMeasureVariableCellBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
+		Validate.notNull(field, "field must not be null");
+		return new CrosstabMeasureVariableCellBuilder<T>(field, calculation);
+	}
+
+	public static <T> CrosstabMeasureVariableCellBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
+		return new CrosstabMeasureVariableCellBuilder<T>(DynamicReports.field(fieldName, valueClass), calculation);
+	}
+
+	public static <T> CrosstabMeasureVariableCellBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
+		return new CrosstabMeasureVariableCellBuilder<T>(expression, calculation);
+	}
+
+	public static <T> CrosstabMeasureCellBuilder<T> measure(DRISimpleExpression<?> expression) {
+		return new CrosstabMeasureCellBuilder<T>(expression);
 	}
 }
