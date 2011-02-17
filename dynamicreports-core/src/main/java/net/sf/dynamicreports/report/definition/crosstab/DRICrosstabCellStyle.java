@@ -22,29 +22,18 @@
 
 package net.sf.dynamicreports.report.definition.crosstab;
 
-import java.util.List;
+import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabMeasureCell<T> extends DRICrosstabMeasure<T> {
+public interface DRICrosstabCellStyle extends Serializable {
 
-	public DRIDataType<? super T, T> getDataType();
+	public DRICrosstabRowGroup<?> getRowGroup();
 
-	public DRISimpleExpression<?> getCellExpression();
+	public DRICrosstabColumnGroup<?> getColumnGroup();
 
-	public String getPattern();
-
-	public HorizontalAlignment getHorizontalAlignment();
-
-	public DRIValueFormatter<?, ? super T> getValueFormatter();
-
-	public Boolean getStretchWithOverflow();
-
-	public List<DRICrosstabCellStyle> getStyles();
+	public DRIStyle getStyle();
 }

@@ -22,18 +22,21 @@
 
 package net.sf.dynamicreports.report.base.crosstab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureCell;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureVariable;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -52,7 +55,7 @@ public class DRCrosstabMeasureVariableCell<T> implements DRICrosstabMeasureVaria
 	private HorizontalAlignment horizontalAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
-	private DRIStyle style;
+	private List<DRICrosstabCellStyle> styles;
 
 	public DRCrosstabMeasureVariableCell(DRIExpression<?> valueExpression, Calculation calculation) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
@@ -60,6 +63,7 @@ public class DRCrosstabMeasureVariableCell<T> implements DRICrosstabMeasureVaria
 		this.valueExpression = valueExpression;
 		this.calculation = calculation;
 		this.name = ReportUtils.generateUniqueName("crosstabMeasure");
+		this.styles = new ArrayList<DRICrosstabCellStyle>();
 	}
 
 	public String getName() {
@@ -126,12 +130,12 @@ public class DRCrosstabMeasureVariableCell<T> implements DRICrosstabMeasureVaria
 		this.stretchWithOverflow = stretchWithOverflow;
 	}
 
-	public DRIStyle getStyle() {
-		return style;
+	public List<DRICrosstabCellStyle> getStyles() {
+		return styles;
 	}
 
-	public void setStyle(DRIStyle style) {
-		this.style = style;
+	public void setStyle(List<DRICrosstabCellStyle> styles) {
+		this.styles = styles;
 	}
 
 	@SuppressWarnings("unchecked")

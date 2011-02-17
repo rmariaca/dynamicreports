@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.crosstab;
 
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellStyle;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabMeasureVariableCell;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
@@ -36,6 +37,8 @@ import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -110,12 +113,30 @@ public class CrosstabMeasureVariableCellBuilder<T> extends CrosstabMeasureBuilde
 	}
 
 	public CrosstabMeasureVariableCellBuilder<T> setStyle(StyleBuilder style) {
-		if (style != null) {
-			getObject().setStyle(style.getStyle());
-		}
-		else {
-			getObject().setStyle(null);
-		}
+		Validate.notNull(style, "style must not be null");
+		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle()));
+		return this;
+	}
+
+	public CrosstabMeasureVariableCellBuilder<T> setStyle(StyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup) {
+		Validate.notNull(style, "style must not be null");
+		Validate.notNull(rowGroup, "rowGroup must not be null");
+		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), rowGroup.build(), null));
+		return this;
+	}
+
+	public CrosstabMeasureVariableCellBuilder<T> setStyle(StyleBuilder style, CrosstabColumnGroupBuilder<?> columnGroup) {
+		Validate.notNull(style, "style must not be null");
+		Validate.notNull(columnGroup, "columnGroup must not be null");
+		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), null, columnGroup.build()));
+		return this;
+	}
+
+	public CrosstabMeasureVariableCellBuilder<T> setStyle(StyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+		Validate.notNull(style, "style must not be null");
+		Validate.notNull(rowGroup, "rowGroup must not be null");
+		Validate.notNull(columnGroup, "columnGroup must not be null");
+		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), rowGroup.build(), columnGroup.build()));
 		return this;
 	}
 

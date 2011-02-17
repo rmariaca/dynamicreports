@@ -22,14 +22,17 @@
 
 package net.sf.dynamicreports.report.base.crosstab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureCell;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -46,12 +49,13 @@ public class DRCrosstabMeasureCell<T> implements DRICrosstabMeasureCell<T> {
 	private HorizontalAlignment horizontalAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
-	private DRIStyle style;
+	private List<DRICrosstabCellStyle> styles;
 
 	public DRCrosstabMeasureCell(DRISimpleExpression<?> cellExpression) {
 		Validate.notNull(cellExpression, "cellExpression must not be null");
 		this.cellExpression = cellExpression;
 		this.name = ReportUtils.generateUniqueName("crosstabMeasure");
+		this.styles = new ArrayList<DRICrosstabCellStyle>();
 	}
 
 	public String getName() {
@@ -102,11 +106,11 @@ public class DRCrosstabMeasureCell<T> implements DRICrosstabMeasureCell<T> {
 		this.stretchWithOverflow = stretchWithOverflow;
 	}
 
-	public DRIStyle getStyle() {
-		return style;
+	public List<DRICrosstabCellStyle> getStyles() {
+		return styles;
 	}
 
-	public void setStyle(DRIStyle style) {
-		this.style = style;
+	public void setStyle(List<DRICrosstabCellStyle> styles) {
+		this.styles = styles;
 	}
 }
