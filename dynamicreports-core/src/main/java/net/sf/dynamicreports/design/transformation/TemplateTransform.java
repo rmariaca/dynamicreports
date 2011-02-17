@@ -34,6 +34,7 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
+import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
@@ -135,7 +136,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isIgnorePagination();
 	}
 
-	public WhenNoDataType getWhenNoDataType() {
+	public WhenNoDataType getWhenNoDataType(DRIDesignBand noDataBand) {
 		if (report.getWhenNoDataType() != null) {
 			return report.getWhenNoDataType();
 		}
@@ -144,6 +145,9 @@ public class TemplateTransform {
 		}
 		if (template.getWhenNoDataType() != null) {
 			return template.getWhenNoDataType();
+		}
+		if (noDataBand != null) {
+			return WhenNoDataType.NO_DATA_SECTION;
 		}
 		return Defaults.getDefaults().getWhenNoDataType();
 	}

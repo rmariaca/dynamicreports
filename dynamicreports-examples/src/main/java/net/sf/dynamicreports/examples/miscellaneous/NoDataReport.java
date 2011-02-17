@@ -29,7 +29,6 @@ import java.math.BigDecimal;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -52,7 +51,6 @@ public class NoDataReport {
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
 			  	itemColumn, quantityColumn, priceColumn)
-			  .setWhenNoDataType(WhenNoDataType.NO_DATA_SECTION)
 			  .noData(Templates.createTitleComponent("NoData"), cmp.text("There is no data"))
 			  .setDataSource(createDataSource())
 			  .show();

@@ -87,14 +87,14 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		init();
 		transform();
 	}
-	
-	private void init() {		
+
+	private void init() {
 		reportTransform = new ReportTransform(this);
 		templateTransform = new TemplateTransform(this);
 		pageTransform = new PageTransform(this);
 		expressionTransform = new ExpressionTransform(this);
 		groupTransform = new GroupTransform(this);
-		bandTransform = new BandTransform(this);	
+		bandTransform = new BandTransform(this);
 		componentTransform = new ComponentTransform(this);
 		columnGridTransform = new ColumnGridTransform(this);
 		columnTransform = new ColumnTransform(this);
@@ -104,8 +104,8 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
 	}
-	
-	private void transform() throws DRException {		
+
+	private void transform() throws DRException {
 		reportTransform.transform();
 		pageTransform.transform();
 		groupTransform.transform();
@@ -114,11 +114,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		columnGridTransform.transform();
 		columnTransform.transform();
 		groupTransform.transformHeaderAndFooter();
-		subtotalTransform.transform();		
-		
+		subtotalTransform.transform();
+
 		bandTransform.prepareBands();
 	}
-	
+
 	public DRIReport getReport() {
 		return report;
 	}
@@ -126,51 +126,51 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	public Integer getPageWidth() {
 		return pageWidth;
 	}
-	
+
 	public TemplateTransform getTemplateTransform() {
 		return templateTransform;
 	}
-	
+
 	public ExpressionTransform getExpressionTransform() {
 		return expressionTransform;
 	}
-	
+
 	public BandTransform getBandTransform() {
 		return bandTransform;
 	}
-	
+
 	public ComponentTransform getComponentTransform() {
 		return componentTransform;
 	}
-	
+
 	public GroupTransform getGroupTransform() {
 		return groupTransform;
 	}
-	
+
 	public ColumnGridTransform getColumnGridTransform() {
 		return columnGridTransform;
 	}
-	
+
 	public StyleTransform getStyleTransform() {
 		return styleTransform;
 	}
-	
+
 	public ChartTransform getChartTransform() {
 		return chartTransform;
 	}
-	
+
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
 	}
-	
+
 	public CrosstabTransform getCrosstabTransform() {
 		return crosstabTransform;
 	}
-	
+
 	public DRIDesignTemplateDesign getTemplateDesign() {
 		return reportTransform.getTemplateDesign();
 	}
-	
+
 	public Locale getLocale() {
 		return templateTransform.getLocale();
 	}
@@ -182,7 +182,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	public String getResourceBundleName() {
 		return templateTransform.getResourceBundleName();
 	}
-	
+
 	public boolean isIgnorePagination() {
 		return templateTransform.isIgnorePagination();
 	}
@@ -200,7 +200,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public WhenNoDataType getWhenNoDataType() {
-		return templateTransform.getWhenNoDataType();
+		return templateTransform.getWhenNoDataType(getNoDataBand());
 	}
 
 	public boolean isTitleOnANewPage() {
@@ -214,11 +214,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	public boolean isSummaryWithPageHeaderAndFooter() {
 		return templateTransform.isSummaryWithPageHeaderAndFooter();
 	}
-	
+
 	public boolean isFloatColumnFooter() {
 		return templateTransform.isFloatColumnFooter();
 	}
-	
+
 	public Collection<DRIDesignParameter> getParameters() {
 		return reportTransform.getParameters();
 	}
@@ -226,7 +226,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	public Collection<DRIScriptlet> getScriptlets() {
 		return report.getScriptlets();
 	}
-	
+
 	public Collection<DRIDesignField> getFields() {
 		return expressionTransform.getFields();
 	}
@@ -234,63 +234,63 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
 		return expressionTransform.getSystemExpressions();
 	}
-	
+
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
 		return expressionTransform.getSimpleExpressions();
 	}
-	
+
 	public Collection<DRIDesignStyle> getStyles() {
 		return styleTransform.getStyles();
 	}
-	
+
 	public Collection<DRDesignGroup> getGroups() {
 		return groupTransform.getGroups();
 	}
-	
+
 	public Collection<DRIDesignVariable> getVariables() {
 		return expressionTransform.getVariables();
 	}
-	
+
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return expressionTransform.getComplexExpressions();
-	}	
-	
+	}
+
 	public DRDesignBand getTitleBand() {
 		return bandTransform.getTitleBand();
 	}
-	
+
 	public DRDesignBand getPageHeaderBand() {
 		return bandTransform.getPageHeaderBand();
 	}
-	
+
 	public DRDesignBand getPageFooterBand() {
 		return bandTransform.getPageFooterBand();
 	}
-	
+
 	public DRDesignBand getColumnHeaderBand() {
 		return bandTransform.getColumnHeaderBand();
 	}
-	
+
 	public DRDesignBand getColumnFooterBand() {
 		return bandTransform.getColumnFooterBand();
 	}
-	
+
 	public DRDesignBand getDetailBand() {
 		return bandTransform.getDetailBand();
 	}
-	
+
 	public DRDesignBand getLastPageFooterBand() {
 		return bandTransform.getLastPageFooterBand();
 	}
-	
+
 	public DRDesignBand getSummaryBand() {
 		return bandTransform.getSummaryBand();
 	}
-	
+
 	public DRDesignBand getNoDataBand() {
 		return bandTransform.getNoDataBand();
 	}
-	
+
 	public DRDesignBand getBackgroundBand() {
 		return bandTransform.getBackgroundBand();
 	}

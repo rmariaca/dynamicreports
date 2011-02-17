@@ -24,25 +24,23 @@ package net.sf.dynamicreports.test.jasper.report;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class NoDataSectionTest extends AbstractJasperValueTest {
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.setWhenNoDataType(WhenNoDataType.NO_DATA_SECTION)
-			.noData(
-					cmp.text("Empty data"));
+		rb.noData(
+				cmp.text("Empty data"));
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
 		elementCountTest("noData.textField1", 1);
 		elementValueTest("noData.textField1", "Empty data");
