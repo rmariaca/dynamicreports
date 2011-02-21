@@ -32,7 +32,6 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -43,14 +42,14 @@ import net.sf.jasperreports.engine.JasperReport;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperTemplateDesignReport2 {
-	
+
 	public JasperTemplateDesignReport2() {
 		build();
 	}
-	
+
 	private void build() {
 		InputStream is = JasperTemplateDesignReport2.class.getResourceAsStream("templatedesign2.jrxml");
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -72,24 +71,24 @@ public class JasperTemplateDesignReport2 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JasperReportBuilder createDynamicSubreport() {
 		return createSubreport("Subreport - dynamic design");
 	}
-	
+
 	private JasperReportBuilder createStaticAndDynamicSubreport() throws DRException {
 		InputStream is = JasperTemplateDesignReport2.class.getResourceAsStream("subreporttemplatedesign.jrxml");
-		JasperReportBuilder report = createSubreport("Subreport - static and dynamic design");	
+		JasperReportBuilder report = createSubreport("Subreport - static and dynamic design");
 		report.setTemplateDesign(is);
 		return report;
 	}
-	
+
 	private JasperReportBuilder createSubreport(String title) {
 		StyleBuilder style = stl.style()
 		                        .setHorizontalAlignment(HorizontalAlignment.CENTER)
 		                        .setVerticalAlignment(VerticalAlignment.MIDDLE)
 		                        .setBorder(stl.pen1Point());
-		
+
 		JasperReportBuilder report = report();
 		report
 		  .setTemplate(Templates.reportTemplate)
@@ -98,17 +97,16 @@ public class JasperTemplateDesignReport2 {
 		  	cmp.horizontalList(
 		  		cmp.filler().setFixedDimension(30, 47),
 		  		cmp.text(title).setStyle(style),
-		  		cmp.filler().setFixedDimension(30, 47)))
-		  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL);
-		
+		  		cmp.filler().setFixedDimension(30, 47)));
+
 		return report;
 	}
-	
+
 	private JasperReport createStaticSubreport() throws JRException {
 		InputStream is = JasperTemplateDesignReport2.class.getResourceAsStream("subreport.jrxml");
 		return JasperCompileManager.compileReport(is);
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 5; i++) {
@@ -116,7 +114,7 @@ public class JasperTemplateDesignReport2 {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new JasperTemplateDesignReport2();
 	}

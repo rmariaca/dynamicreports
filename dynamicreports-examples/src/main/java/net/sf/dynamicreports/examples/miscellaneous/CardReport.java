@@ -30,50 +30,48 @@ import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.PageType;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CardReport {
-	
+
 	public CardReport() {
 		build();
 	}
-	
-	private void build() {			
+
+	private void build() {
 		ComponentBuilder<?, ?> cardComponent = createCardComponent();
 		HorizontalListBuilder cards = cmp.horizontalFlowList();
 		for (int i = 0; i < 10; i++) {
 			cards.add(cardComponent);
 		}
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .setTextStyle(stl.style())
 			  .setPageFormat(PageType.A5)
-			  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			  .title(
 			  	Templates.createTitleComponent("Card"),
-			  	cards)			
+			  	cards)
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private ComponentBuilder<?, ?> createCardComponent() {
 		HorizontalListBuilder cardComponent = cmp.horizontalList();
 		StyleBuilder cardStyle = stl.style(stl.pen1Point())
 		                            .setPadding(10);
 		cardComponent.setStyle(cardStyle);
-		
+
 		ImageBuilder image = cmp.image(Templates.class.getResource("images/user_male.png")).setFixedDimension(60, 60);
 		cardComponent.add(cmp.hListCell(image).heightFixedOnMiddle());
 		cardComponent.add(cmp.filler().setFixedWidth(10));
-		
+
 		StyleBuilder boldStyle = stl.style().bold();
 		VerticalListBuilder content = cmp.verticalList(
 			cmp.text("Name:").setStyle(boldStyle),
@@ -82,11 +80,11 @@ public class CardReport {
 			cmp.text("23 Baden Av."),
 			cmp.text("City:").setStyle(boldStyle),
 			cmp.text("New York"));
-		
+
 		cardComponent.add(content);
 		return cardComponent;
 	}
-	
+
 	public static void main(String[] args) {
 		new CardReport();
 	}

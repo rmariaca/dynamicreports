@@ -24,6 +24,8 @@ package net.sf.dynamicreports.report.base.crosstab;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -32,33 +34,33 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
 public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRCrosstabRowGroup<?> rowGroup;
-	private DRCrosstabColumnGroup<?> columnGroup;
+	private DRICrosstabRowGroup<?> rowGroup;
+	private DRICrosstabColumnGroup<?> columnGroup;
 	private DRIStyle style;
 
 	public DRCrosstabCellStyle(DRIStyle style) {
 		this(style, null, null);
 	}
 
-	public DRCrosstabCellStyle(DRIStyle style, DRCrosstabRowGroup<?> rowGroup, DRCrosstabColumnGroup<?> columnGroup) {
+	public DRCrosstabCellStyle(DRIStyle style, DRICrosstabRowGroup<?> rowGroup, DRICrosstabColumnGroup<?> columnGroup) {
 		this.style = style;
 		this.rowGroup = rowGroup;
 		this.columnGroup = columnGroup;
 	}
 
-	public DRCrosstabRowGroup<?> getRowGroup() {
+	public DRICrosstabRowGroup<?> getRowGroup() {
 		return rowGroup;
 	}
 
-	public void setRowGroup(DRCrosstabRowGroup<?> rowGroup) {
+	public void setRowGroup(DRICrosstabRowGroup<?> rowGroup) {
 		this.rowGroup = rowGroup;
 	}
 
-	public DRCrosstabColumnGroup<?> getColumnGroup() {
+	public DRICrosstabColumnGroup<?> getColumnGroup() {
 		return columnGroup;
 	}
 
-	public void setColumnGroup(DRCrosstabColumnGroup<?> columnGroup) {
+	public void setColumnGroup(DRICrosstabColumnGroup<?> columnGroup) {
 		this.columnGroup = columnGroup;
 	}
 

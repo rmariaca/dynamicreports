@@ -39,14 +39,13 @@ import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageType;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 	private StyleBuilder bold14Style;
-	
+
 	public void configureReport(ReportBuilder<?> rb, ShippingLabelData invoiceData) {
 		ShippingLabel shippingLabel = invoiceData.getShippingLabel();
 
@@ -56,7 +55,7 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 		                                       .setFontSize(30)
 		                                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder boldCentered100Style = stl.style(boldCentered30Style).setFontSize(100);
-		
+
 		Ean128BarcodeBuilder shippingContainerCode = bcode.ean128("100264835710351")
 		                                                  .setModuleWidth(2.5)
 		                                                  .setStyle(bold14Style);
@@ -71,9 +70,8 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 		                                        .setDataType(type.dateType());
 		TextFieldBuilder<String> po = cmp.text(shippingLabel.getPo())
 		                                 .setStyle(boldCentered30Style);
-		
+
 		rb.setTemplate(Templates.reportTemplate)
-		  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 		  .setPageFormat(PageType.A5)
 		  .setTextStyle(textStyle)
 		  .title(
@@ -104,7 +102,7 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 			cmp.text(customer.getCity()));
 		return createCellComponent(label, content);
 	}
-	
+
 	private ComponentBuilder<?, ?> createCellComponent(String label, ComponentBuilder<?, ?> content) {
 		VerticalListBuilder cell = cmp.verticalList(
 			cmp.text(label).setStyle(bold14Style),
@@ -114,5 +112,5 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 				cmp.filler().setFixedWidth(5)));
 		cell.setStyle(stl.style(stl.pen2Point()));
 		return cell;
-	}	
+	}
 }

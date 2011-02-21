@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.base.style;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 
 import org.apache.commons.lang.Validate;
@@ -31,17 +31,17 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRConditionalStyle extends DRBaseStyle implements DRIConditionalStyle {	
+public class DRConditionalStyle extends DRBaseStyle implements DRIConditionalStyle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRISimpleExpression<Boolean> conditionExpression;
 
-	public DRConditionalStyle(DRISimpleExpression<Boolean> conditionExpression) {
+	private DRIExpression<Boolean> conditionExpression;
+
+	public DRConditionalStyle(DRIExpression<Boolean> conditionExpression) {
 		Validate.notNull(conditionExpression, "conditionExpression must not be null");
 		this.conditionExpression = conditionExpression;
 	}
 
-	public DRISimpleExpression<Boolean> getConditionExpression() {
+	public DRIExpression<Boolean> getConditionExpression() {
 		return conditionExpression;
 	}
 }

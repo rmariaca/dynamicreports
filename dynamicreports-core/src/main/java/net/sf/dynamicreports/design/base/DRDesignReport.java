@@ -200,7 +200,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public WhenNoDataType getWhenNoDataType() {
-		return templateTransform.getWhenNoDataType(getNoDataBand());
+		return templateTransform.getWhenNoDataType(getDetailBand(), getNoDataBand());
 	}
 
 	public boolean isTitleOnANewPage() {

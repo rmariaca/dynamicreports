@@ -29,7 +29,6 @@ import java.math.BigDecimal;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -37,15 +36,14 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TitleSubreport {
-	
+
 	public TitleSubreport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			report()
-			  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			  .title(
 			  	Templates.createTitleComponent("TitleSubreport"),
 			  	cmp.subreport(createSubreport()))
@@ -55,7 +53,7 @@ public class TitleSubreport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JasperReportBuilder createSubreport() {
 		JasperReportBuilder report = report();
 		report
@@ -67,10 +65,10 @@ public class TitleSubreport {
 		  	col.column("Quantity",   "quantity",  type.integerType()),
 		  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 		  .setDataSource(createSubreportDataSource());
-		
+
 		return report;
 	}
-	
+
 	private JRDataSource createSubreportDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 10; i++) {
@@ -78,7 +76,7 @@ public class TitleSubreport {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new TitleSubreport();
 	}

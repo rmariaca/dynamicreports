@@ -20,14 +20,29 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.style;
+package net.sf.dynamicreports.test.jasper.report;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignConditionalStyle extends DRIDesignBaseStyle {
+public class NoDetailSectionTest extends AbstractJasperValueTest {
 
-	public DRIDesignExpression getConditionExpression();
+	@Override
+	protected void configureReport(JasperReportBuilder rb) {
+		rb.title(
+				cmp.text("Empty data"));
+	}
+
+	@Override
+	public void test() {
+		super.test();
+
+		numberOfPagesTest(1);
+		elementCountTest("title.textField1", 1);
+		elementValueTest("title.textField1", "Empty data");
+	}
 }

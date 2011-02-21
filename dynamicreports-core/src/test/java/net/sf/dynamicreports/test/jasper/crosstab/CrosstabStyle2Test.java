@@ -25,8 +25,12 @@ package net.sf.dynamicreports.test.jasper.crosstab;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
@@ -34,16 +38,15 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCell
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabStyleTest extends AbstractJasperCrosstabStyleTest {
+public class CrosstabStyle2Test extends AbstractJasperCrosstabStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
@@ -55,25 +58,17 @@ public class CrosstabStyleTest extends AbstractJasperCrosstabStyleTest {
 		FieldBuilder<String> field1 = field("field1", String.class);
 		FieldBuilder<String> field2 = field("field2", String.class);
 
-		StyleBuilder titleStyle1 = stl.style().setFontSize(12).bold();
-		StyleBuilder titleStyle2 = stl.style(titleStyle1).setBackgroundColor(Color.LIGHT_GRAY);
-		StyleBuilder titleStyle3 = stl.style(titleStyle2).setBorder(stl.pen1Point()).setHorizontalAlignment(HorizontalAlignment.CENTER);
-		StyleBuilder cellStyle = stl.style().bold();
-		StyleBuilder rowGroupCellStyle = stl.style(cellStyle).setBackgroundColor(Color.BLUE);
-		StyleBuilder columnGroupCellStyle = stl.style(cellStyle).setBackgroundColor(Color.ORANGE);
-		StyleBuilder rowColumnGroupCellStyle = stl.style(cellStyle).setBackgroundColor(Color.RED);
+		StyleBuilder cellStyle = stl.style()
+			.conditionalStyles(
+				stl.conditionalStyle(new ConditionExpression(10, 15, 14, 36)).setBackgroundColor(Color.ORANGE));
 
-		rowGroup = ctab.rowGroup(field1).setHeaderStyle(titleStyle2).setTotalHeaderStyle(titleStyle3);
-		columnGroup = ctab.columnGroup(field2).setHeaderStyle(titleStyle2).setTotalHeaderStyle(titleStyle3);
+		rowGroup = ctab.rowGroup(field1);
+		columnGroup = ctab.columnGroup(field2);
 
 		measure1 = ctab.measure("field3", Integer.class, Calculation.SUM);
 		measure1.setStyle(cellStyle);
-		measure1.setStyle(rowGroupCellStyle, rowGroup);
-		measure1.setStyle(columnGroupCellStyle, columnGroup);
-		measure1.setStyle(rowColumnGroupCellStyle, rowGroup, columnGroup);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
-			.headerCell(cmp.text("Header").setStyle(titleStyle1))
 			.rowGroups(
 				rowGroup)
 			.columnGroups(
@@ -92,25 +87,24 @@ public class CrosstabStyleTest extends AbstractJasperCrosstabStyleTest {
 
 		setCrosstabBand("summary");
 
-		crosstabHeaderElementStyleTest("textField1", 0, null, null, "Arial", 12, true, null);
+		crosstabCellStyleTest(measure1, null, null, 0, null, null, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 1, null, null, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 2, null, null, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 3, null, Color.ORANGE, "Arial", 10, null, null);
 
-		crosstabGroupHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderHorizontalAlignmentTest(rowGroup, 0, HorizontalAlignEnum.CENTER);
+		crosstabCellStyleTest(measure1, rowGroup, null, 0, null, Color.ORANGE, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, rowGroup, null, 1, null, null, "Arial", 10, null, null);
 
-		crosstabGroupHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderHorizontalAlignmentTest(columnGroup, 0, HorizontalAlignEnum.CENTER);
+		crosstabCellStyleTest(measure1, null, columnGroup, 0, null, Color.ORANGE, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, columnGroup, 1, null, null, "Arial", 10, null, null);
 
-		crosstabCellStyleTest(measure1, null, null, 0, null, null, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup, null, 0, null, Color.BLUE, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, null, columnGroup, 0, null, Color.ORANGE, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.RED, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.ORANGE, "Arial", 10, null, null);
+
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5");
+		DataSource dataSource = new DataSource("field1", "field2", "field3");
 		dataSource.add("a", "c", 1);
 		dataSource.add("a", "c", 2);
 		dataSource.add("a", "d", 3);
@@ -120,5 +114,20 @@ public class CrosstabStyleTest extends AbstractJasperCrosstabStyleTest {
 		dataSource.add("b", "d", 7);
 		dataSource.add("b", "d", 8);
 		return dataSource;
+	}
+
+	private class ConditionExpression extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		private List<Integer> values;
+
+		private ConditionExpression(Integer ...values) {
+			this.values = Arrays.asList(values);
+		}
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			Integer value = reportParameters.getValue(measure1);
+			return values.contains(value);
+		}
 	}
 }

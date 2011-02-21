@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,8 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellContent;
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellStyle;
+import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
@@ -56,6 +59,8 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureVariab
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -170,24 +175,26 @@ public class CrosstabTransform {
 	}
 
 	private void addCells(DRICrosstab crosstab, DRDesignCrosstab designCrosstab, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
-		DRDesignCrosstabCell designCell = cell(crosstab, null, null, defaultStyleType, resetType, resetGroup);
+		Map<DRICrosstabMeasure<?>, List<DRICrosstabCellStyle>> measuresStyle = measuresStyle(crosstab);
+
+		DRDesignCrosstabCell designCell = cell(crosstab, measuresStyle, null, null, defaultStyleType, resetType, resetGroup);
 		designCrosstab.getCells().add(designCell);
 
 		for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
 			if (accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup)) {
-				designCell = cell(crosstab, null, columnGroup, defaultStyleType, resetType, resetGroup);
+				designCell = cell(crosstab, measuresStyle, null, columnGroup, defaultStyleType, resetType, resetGroup);
 				designCrosstab.getCells().add(designCell);
 			}
 		}
 
 		for (DRICrosstabRowGroup<?> rowGroup : crosstab.getRowGroups()) {
 			if (accessor.getTemplateTransform().isCrosstabRowGroupShowTotal(rowGroup)) {
-				designCell = cell(crosstab, rowGroup, null, defaultStyleType, resetType, resetGroup);
+				designCell = cell(crosstab, measuresStyle, rowGroup, null, defaultStyleType, resetType, resetGroup);
 				designCrosstab.getCells().add(designCell);
 
 				for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
 					if (accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup)) {
-						designCell = cell(crosstab, rowGroup, columnGroup, defaultStyleType, resetType, resetGroup);
+						designCell = cell(crosstab, measuresStyle, rowGroup, columnGroup, defaultStyleType, resetType, resetGroup);
 						designCrosstab.getCells().add(designCell);
 					}
 				}
@@ -195,8 +202,46 @@ public class CrosstabTransform {
 		}
 	}
 
+	private Map<DRICrosstabMeasure<?>, List<DRICrosstabCellStyle>> measuresStyle(DRICrosstab crosstab) {
+		Map<DRICrosstabMeasure<?>, List<DRICrosstabCellStyle>> measuresStyle = new HashMap<DRICrosstabMeasure<?>, List<DRICrosstabCellStyle>>();
+
+		for (DRICrosstabMeasure<?> measure : crosstab.getMeasures()) {
+			if (!(measure instanceof DRICrosstabMeasureCell<?>)) {
+				continue;
+			}
+			DRICrosstabMeasureCell<?> measureCell = (DRICrosstabMeasureCell<?>) measure;
+			List<DRICrosstabCellStyle> styles = new ArrayList<DRICrosstabCellStyle>();
+			measuresStyle.put(measure, styles);
+
+			for (DRICrosstabCellStyle cellStyle : measureCell.getStyles()) {
+				DRStyle newStyle = cellStyle(crosstab, cellStyle.getStyle());
+				styles.add(new DRCrosstabCellStyle(newStyle, cellStyle.getRowGroup(), cellStyle.getColumnGroup()));
+			}
+		}
+
+		return measuresStyle;
+	}
+
+	private DRStyle cellStyle(DRICrosstab crosstab, DRIStyle style) {
+		if (!style.getConditionalStyles().isEmpty()) {
+			DRStyle newStyle = new DRStyle();
+			if (style.getParentStyle() != null) {
+				newStyle.setParentStyle(cellStyle(crosstab, style.getParentStyle()));
+			}
+			accessor.getStyleTransform().copyStyle(newStyle, style);
+			for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
+				CrosstabExpression<Boolean> conditionalStyleExpression = new CrosstabExpression<Boolean>(crosstab, conditionalStyle.getConditionExpression());
+				DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyleExpression);
+				accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
+				newStyle.addConditionalStyle(newConditionalStyle);
+			}
+			return newStyle;
+		}
+		return (DRStyle) style;
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private DRDesignCrosstabCell cell(DRICrosstab crosstab, DRICrosstabRowGroup<?> rowGroup, DRICrosstabColumnGroup<?> columnGroup, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignCrosstabCell cell(DRICrosstab crosstab, Map<DRICrosstabMeasure<?>, List<DRICrosstabCellStyle>> measuresStyle, DRICrosstabRowGroup<?> rowGroup, DRICrosstabColumnGroup<?> columnGroup, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignCrosstabCell designCell = new DRDesignCrosstabCell();
 		String rowTotalGroup = null;
 		String columnTotalGroup = null;
@@ -230,7 +275,7 @@ public class CrosstabTransform {
 			textField.setValueFormatter(measureCell.getValueFormatter());
 			textField.setDataType(measureCell.getDataType());
 			textField.setStretchWithOverflow(measureCell.getStretchWithOverflow());
-			textField.setStyle(getCellStyle(measureCell.getStyles(), rowGroup, columnGroup));
+			textField.setStyle(getCellStyle(measuresStyle.get(measure), rowGroup, columnGroup));
 			DRDesignTextField designTextField = accessor.getComponentTransform().textField(textField, DefaultStyleType.TEXT);
 			String name = "cell_measure[" + measureCell.getName() + "]";
 			if (rowTotalGroup != null) {
@@ -294,12 +339,12 @@ public class CrosstabTransform {
 		return crosstabs.get(designCrosstab);
 	}
 
-	private class CrosstabExpression extends AbstractComplexExpression<Object> {
+	private class CrosstabExpression<T> extends AbstractComplexExpression<T> {
 		private static final long serialVersionUID = 1L;
 
-		private DRISimpleExpression<?> expression;
+		private DRIExpression<T> expression;
 
-		public CrosstabExpression(DRICrosstab crosstab, DRISimpleExpression<?> expression) {
+		public CrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) {
 			this.expression = expression;
 			for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
 				addExpression(columnGroup);
@@ -315,12 +360,15 @@ public class CrosstabTransform {
 		}
 
 		@Override
-		public Object evaluate(List<?> values, ReportParameters reportParameters) {
+		public T evaluate(List<?> values, ReportParameters reportParameters) {
 			DRIReportScriptlet scriptlet = (DRIReportScriptlet) reportParameters.getValue(DRIReportScriptlet.NAME);
 			for (int i = 0; i < getExpressions().size(); i++) {
 				scriptlet.setSystemValue(getExpressions().get(i).getName(), values.get(i));
 			}
-			return expression.evaluate(reportParameters);
+			if (expression instanceof DRIExpression) {
+				return ((DRISimpleExpression<T>) expression).evaluate(reportParameters);
+			}
+			return null;
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })

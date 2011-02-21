@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -38,20 +37,19 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class ContainerReport {
 	private StyleBuilder boldCenteredStyle;
 	private StyleBuilder borderedStyle;
-	
+
 	public ContainerReport() {
 		build();
 	}
-	
-	private void build() {	
+
+	private void build() {
 		boldCenteredStyle = stl.style()
 		                       .bold()
 		                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		borderedStyle     = stl.style(stl.pen1Point());
-		
+
 		try {
 			report()//create new report design
-			  .setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			  .title(
 			  	createTextField("Horizontal list (contains 10 textfields)"),
 			  	createHorizontalList(),
@@ -67,16 +65,16 @@ public class ContainerReport {
 			  	cmp.filler().setFixedHeight(20),
 			  	createTextField("Nested list (contains 1 horizontal and 3 vertical lists)"),
 			  	createNestedList())
-			  .show();//create and show report		
+			  .show();//create and show report
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private TextFieldBuilder<String> createTextField(String label) {
 		return cmp.text(label).setStyle(boldCenteredStyle);
 	}
-	
+
 	private ComponentBuilder<?, ?> createHorizontalList() {
 		HorizontalListBuilder horizontalList = cmp.horizontalList();
 		for (int i = 0; i < 10; i++) {
@@ -96,7 +94,7 @@ public class ContainerReport {
 		}
 		return horizontalList;
 	}
-	
+
 	private ComponentBuilder<?, ?> createHorizontalFlowList() {
 		HorizontalListBuilder horizontalList = cmp.horizontalFlowList();
 		for (int i = 0; i < 9; i++) {
@@ -104,7 +102,7 @@ public class ContainerReport {
 		}
 		return horizontalList;
 	}
-	
+
 	private ComponentBuilder<?, ?> createVerticalList() {
 		VerticalListBuilder verticalList = cmp.verticalList();
 		for (int i = 0; i < 4; i++) {
@@ -112,7 +110,7 @@ public class ContainerReport {
 		}
 		return verticalList;
 	}
-	
+
 	private ComponentBuilder<?, ?> createNestedList() {
 		HorizontalListBuilder horizontalList = cmp.horizontalList();
 		for (int i = 0; i < 3; i++) {
@@ -120,7 +118,7 @@ public class ContainerReport {
 		}
 		return horizontalList;
 	}
-	
+
 	public static void main(String[] args) {
 		new ContainerReport();
 	}

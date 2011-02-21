@@ -22,12 +22,12 @@
 
 package net.sf.dynamicreports.report.definition.style;
 
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIConditionalStyle extends DRIBaseStyle {
 
-	public DRISimpleExpression<Boolean> getConditionExpression();
+	public DRIExpression<Boolean> getConditionExpression();
 }
