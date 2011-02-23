@@ -31,6 +31,8 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
 import net.sf.jasperreports.crosstabs.base.JRBaseCrosstab;
+import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
+import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
 import net.sf.jasperreports.engine.type.RunDirectionEnum;
 
 /**
@@ -73,5 +75,7 @@ public class CrosstabTest extends AbstractJasperTest {
 		Assert.assertEquals("Crosstab columnBreakOffset", 100, crosstab.getColumnBreakOffset());
 		Assert.assertTrue("Crosstab ignoreWidth", crosstab.getIgnoreWidth());
 		Assert.assertEquals("Crosstab runDirection", RunDirectionEnum.RTL, crosstab.getRunDirectionValue());
+		Assert.assertEquals("Crosstab row group position", CrosstabRowPositionEnum.STRETCH, crosstab.getRowGroups()[0].getPositionValue());
+		Assert.assertEquals("Crosstab column group position", CrosstabColumnPositionEnum.STRETCH, crosstab.getColumnGroups()[0].getPositionValue());
 	}
 }

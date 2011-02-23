@@ -40,9 +40,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabReport1 {
+public class CrosstabReport {
 
-	public CrosstabReport1() {
+	public CrosstabReport() {
 		build();
 	}
 
@@ -52,23 +52,21 @@ public class CrosstabReport1 {
 		                                               .setHeaderStyle(Templates.columnTitleStyle)
 		                                               .setTotalHeaderStyle(Templates.columnTitleStyle);
 
-		CrosstabColumnGroupBuilder<String> setHeaderStyle = ctab.columnGroup("item", String.class)
-		                                                        .setHeaderStyle(Templates.columnTitleStyle)
-		                                                        .setTotalHeaderStyle(Templates.columnTitleStyle);
+		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class)
+		                                                     .setHeaderStyle(Templates.columnTitleStyle)
+		                                                     .setTotalHeaderStyle(Templates.columnTitleStyle);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
-		.headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
-		.rowGroups(
-			rowGroup)
-		.columnGroups(
-			setHeaderStyle)
-		.measures(
-			ctab.measure("quantity",  Integer.class,    Calculation.SUM),
-			ctab.measure("unitprice", BigDecimal.class, Calculation.SUM));
+		                               .headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
+		                               .rowGroups(rowGroup)
+		                               .columnGroups(columnGroup)
+		                               .measures(
+		                              		ctab.measure("quantity",  Integer.class,    Calculation.SUM),
+		                              		ctab.measure("unitprice", BigDecimal.class, Calculation.SUM));
 
 		try {
 			report()
-				.setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
+			  .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 			  .setTemplate(Templates.reportTemplate)
 			  .title(Templates.createTitleComponent("Crosstab"))
 			  .summary(crosstab)
@@ -113,6 +111,6 @@ public class CrosstabReport1 {
 	}
 
 	public static void main(String[] args) {
-		new CrosstabReport1();
+		new CrosstabReport();
 	}
 }

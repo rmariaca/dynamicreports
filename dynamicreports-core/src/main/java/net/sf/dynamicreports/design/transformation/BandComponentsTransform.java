@@ -272,7 +272,7 @@ class BandComponentsTransform {
 			}
 			headerHeight = accessor.getTemplateTransform().getCrosstabColumnGroupHeaderHeight(columnGroup, designCrosstab);
 			if (accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup)) {
-				totalHeaderWidth = accessor.getTemplateTransform().getCrosstabColumnGroupTotalHeaderWidth(columnGroup, designCrosstab);
+				totalHeaderWidth = accessor.getTemplateTransform().getCrosstabColumnGroupTotalHeaderWidth(columnGroup, crosstab.getCellWidth(), designCrosstab);
 				totalHeaderHeight = headerHeight;
 				if (previousCellDimension != null) {
 					totalHeaderHeight += previousCellDimension.getTotalHeaderHeight();
@@ -310,7 +310,7 @@ class BandComponentsTransform {
 				if (previousCellDimension != null) {
 					totalHeaderWidth += previousCellDimension.getTotalHeaderWidth();
 				}
-				totalHeaderHeight = accessor.getTemplateTransform().getCrosstabRowGroupTotalHeaderHeight(rowGroup, designCrosstab);
+				totalHeaderHeight = accessor.getTemplateTransform().getCrosstabRowGroupTotalHeaderHeight(rowGroup, crosstab.getCellHeight(), designCrosstab);
 			}
 
 			GroupCellDimension groupCellDimension = new GroupCellDimension();

@@ -958,9 +958,12 @@ public class TemplateTransform {
 		return maxHeight;
 	}
 
-	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup<?> columnGroup, DRDesignCrosstab designCrosstab) {
+	public int getCrosstabColumnGroupTotalHeaderWidth(DRICrosstabColumnGroup<?> columnGroup, Integer cellWidth, DRDesignCrosstab designCrosstab) {
 		if (columnGroup.getTotalHeaderWidth() != null) {
 			return columnGroup.getTotalHeaderWidth();
+		}
+		if (cellWidth != null) {
+			return cellWidth;
 		}
 		int maxWidth = 0;
 		for (DRDesignCrosstabColumnGroup designColumnGroup : designCrosstab.getColumnGroups()) {
@@ -1014,9 +1017,12 @@ public class TemplateTransform {
 		return maxWidth;
 	}
 
-	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup<?> rowGroup, DRDesignCrosstab designCrosstab) {
+	public int getCrosstabRowGroupTotalHeaderHeight(DRICrosstabRowGroup<?> rowGroup, Integer cellHeight, DRDesignCrosstab designCrosstab) {
 		if (rowGroup.getTotalHeaderHeight() != null) {
 			return rowGroup.getTotalHeaderHeight();
+		}
+		if (cellHeight != null) {
+			return cellHeight;
 		}
 		int maxHeight = 0;
 		for (DRDesignCrosstabRowGroup designRowGroup : designCrosstab.getRowGroups()) {

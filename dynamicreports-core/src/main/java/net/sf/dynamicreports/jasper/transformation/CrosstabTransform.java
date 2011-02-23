@@ -41,6 +41,8 @@ import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabGroup;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabMeasure;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabParameter;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabRowGroup;
+import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
+import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
@@ -144,6 +146,7 @@ public class CrosstabTransform {
 		JRDesignCrosstabColumnGroup jrColumnGroup = new JRDesignCrosstabColumnGroup();
 		group(jrColumnGroup, columnGroup);
 		jrColumnGroup.setHeight(columnGroup.getHeight());
+		jrColumnGroup.setPosition(CrosstabColumnPositionEnum.STRETCH);
 
 		try {
 			jrCrosstab.addColumnGroup(jrColumnGroup);
@@ -156,6 +159,7 @@ public class CrosstabTransform {
 		JRDesignCrosstabRowGroup jrRowGroup = new JRDesignCrosstabRowGroup();
 		group(jrRowGroup, rowGroup);
 		jrRowGroup.setWidth(rowGroup.getWidth());
+		jrRowGroup.setPosition(CrosstabRowPositionEnum.STRETCH);
 
 		try {
 			jrCrosstab.addRowGroup(jrRowGroup);
