@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition.crosstab;
 
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -34,4 +35,6 @@ public interface DRIDesignCrosstabCellContent {
 	public int getHeight();
 
 	public DRIDesignComponent getComponent();
+
+	public DRIDesignStyle getStyle();
 }

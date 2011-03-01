@@ -30,6 +30,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
 
 /**
@@ -50,11 +51,11 @@ public class ComponentBuilders {
 	public HorizontalListBuilder horizontalList(HorizontalListCellBuilder ...cells) {
 		return Components.horizontalList(cells);
 	}
-	
+
 	public HorizontalListCellBuilder hListCell(ComponentBuilder<?, ?> component) {
 		return Components.hListCell(component);
 	}
-	
+
 	//horizontal flow
 	public HorizontalListBuilder horizontalFlowList() {
 		return Components.horizontalFlowList();
@@ -67,8 +68,8 @@ public class ComponentBuilders {
 	public HorizontalListBuilder horizontalFlowList(HorizontalListCellBuilder ...cells) {
 		return Components.horizontalFlowList(cells);
 	}
-	
-	//vertical	
+
+	//vertical
 	public VerticalListBuilder verticalList() {
 		return Components.verticalList();
 	}
@@ -80,23 +81,23 @@ public class ComponentBuilders {
 	public VerticalListBuilder verticalList(VerticalListCellBuilder ...cells) {
 		return Components.verticalList(cells);
 	}
-	
+
 	public VerticalListCellBuilder vListCell(ComponentBuilder<?, ?> component) {
 		return Components.vListCell(component);
 	}
-	
+
 	public CurrentDateBuilder currentDate() {
 		return Components.currentDate();
 	}
-	
+
 	public PageNumberBuilder pageNumber() {
 		return Components.pageNumber();
 	}
-	
+
 	public PageXofYBuilder pageXofY() {
 		return Components.pageXofY();
 	}
-	
+
 	public PageXslashYBuilder pageXslashY() {
 		return Components.pageXslashY();
 	}
@@ -104,7 +105,7 @@ public class ComponentBuilders {
 	public TotalPagesBuilder totalPages() {
 		return Components.totalPages();
 	}
-	
+
 	//text
 	public TextFieldBuilder<String> text(String text) {
 		return Components.text(text);
@@ -113,45 +114,49 @@ public class ComponentBuilders {
 	public <T extends Number> TextFieldBuilder<T> text(T number) {
 		return Components.text(number);
 	}
-	
+
 	public <T> TextFieldBuilder<T> text(FieldBuilder<T> field) {
 		return Components.text(field);
 	}
-	
+
 	public <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {
 		return Components.text(textExpression);
 	}
-	
+
 	public <T> TextFieldBuilder<T> text(DRIComplexExpression<T> textExpression) {
 		return Components.text(textExpression);
 	}
-	
+
 	//filler
 	public FillerBuilder filler() {
 		return Components.filler();
 	}
-	
+
 	//image
 	public ImageBuilder image(DRISimpleExpression<?> imageExpression) {
 		return Components.image(imageExpression);
 	}
-	
+
 	public ImageBuilder image(String imagePath) {
 		return Components.image(imagePath);
 	}
-	
+
 	public ImageBuilder image(Image image) {
 		return Components.image(image);
 	}
-	
+
 	public ImageBuilder image(InputStream imageInputStream) {
 		return Components.image(imageInputStream);
 	}
-	
+
 	public ImageBuilder image(URL imageUrl) {
 		return Components.image(imageUrl);
 	}
-	
+
+	public ImageBuilder image(JRRenderable image) {
+		return Components.image(image);
+	}
+
 	//subreport
 	public SubreportBuilder subreport(JasperReportBuilder reportBuilder) {
 		return Components.subreport(reportBuilder);
@@ -160,25 +165,25 @@ public class ComponentBuilders {
 	public SubreportBuilder subreport(JasperReport jasperReport) {
 		return Components.subreport(jasperReport);
 	}
-	
+
 	public SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
 		return Components.subreport(reportExpression);
 	}
-	
+
 	//line
 	public LineBuilder line() {
 		return Components.line();
 	}
-	
+
 	//break
 	public BreakBuilder pageBreak() {
 		return Components.pageBreak();
 	}
-	
+
 	public BreakBuilder columnBreak() {
 		return Components.columnBreak();
 	}
-	
+
 	//generic element
 	public GenericElementBuilder genericElement(String namespace, String name) {
 		return Components.genericElement(namespace, name);

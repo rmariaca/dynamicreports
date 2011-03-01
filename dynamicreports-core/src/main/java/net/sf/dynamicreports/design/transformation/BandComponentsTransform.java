@@ -161,7 +161,7 @@ class BandComponentsTransform {
 				return list;
 			}
 		}
-		else if (component instanceof DRDesignFiller && component.getStyle() == null) {
+		else if (component instanceof DRDesignFiller && component.getStyle() == null && component.getPrintWhenExpression() == null) {
 			return null;
 		}
 		return component;

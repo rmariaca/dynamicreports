@@ -25,11 +25,14 @@ package net.sf.dynamicreports.report.definition.crosstab;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.report.definition.component.DRIList;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRICrosstabCellContent extends Serializable {
-	
+
 	public DRIList getList();
+
+	public DRIStyle getStyle();
 }

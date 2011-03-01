@@ -138,6 +138,10 @@ public class Default {
 	private int crosstabColumnGroupTotalHeaderMaxWidth;
 	private int crosstabRowGroupHeaderMaxWidth;
 	private int crosstabCellMaxWidth;
+	private boolean crosstabHighlightOddRows;
+	private DRSimpleStyle crosstabOddRowStyle;
+	private boolean crosstabHighlightEvenRows;
+	private DRSimpleStyle crosstabEvenRowStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -282,6 +286,12 @@ public class Default {
 		this.crosstabColumnGroupTotalHeaderMaxWidth = 150;
 		this.crosstabRowGroupHeaderMaxWidth = 150;
 		this.crosstabCellMaxWidth = 150;
+		this.crosstabHighlightOddRows = false;
+		this.crosstabOddRowStyle = new DRSimpleStyle();
+		crosstabOddRowStyle.setBackgroundColor(new Color(200,200,200));
+		this.crosstabHighlightEvenRows = false;
+		this.crosstabEvenRowStyle = new DRSimpleStyle();
+		crosstabEvenRowStyle.setBackgroundColor(new Color(240,240,240));
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 
@@ -609,6 +619,22 @@ public class Default {
 
 	public int getCrosstabCellMaxWidth() {
 		return crosstabCellMaxWidth;
+	}
+
+	public DRSimpleStyle getCrosstabOddRowStyle() {
+		return crosstabOddRowStyle;
+	}
+
+	public DRSimpleStyle getCrosstabEvenRowStyle() {
+		return crosstabEvenRowStyle;
+	}
+
+	public boolean isCrosstabHighlightOddRows() {
+		return crosstabHighlightOddRows;
+	}
+
+	public boolean isCrosstabHighlightEvenRows() {
+		return crosstabHighlightEvenRows;
 	}
 
 	public SplitType getDefaultSplitType() {

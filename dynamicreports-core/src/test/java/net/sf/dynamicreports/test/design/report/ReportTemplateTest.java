@@ -37,9 +37,11 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
-import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
+import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -57,7 +59,7 @@ public class ReportTemplateTest {
 
 	private void configureReport(ReportBuilder<?> rb) {
 		TextColumnBuilder<Integer> column1;
-		
+
 		rb.columns(column1 = col.column("Column1", "field1", Integer.class))
 			.groupBy(
 					grp.group(column1)
@@ -68,7 +70,13 @@ public class ReportTemplateTest {
 				cmp.horizontalList(
 					cmp.hListCell(cmp.image("")).widthFixed().heightFixedOnTop(),
 					cmp.hListCell(cht.barChart()).widthFixed().heightFixedOnTop(),
-					cmp.hListCell(bcode.ean128("12345678")).widthFixed().heightFixedOnTop()))
+					cmp.hListCell(bcode.ean128("12345678")).widthFixed().heightFixedOnTop(),
+					cmp.hListCell(
+							ctab.crosstab()
+								.rowGroups(ctab.rowGroup("f1", String.class))
+								.columnGroups(ctab.columnGroup("f2", String.class))
+								.measures(ctab.measure("f3", Integer.class, Calculation.SUM))
+							).widthFixed().heightFixedOnTop()))
 			.setTemplate(
 					template()
 						.setLocale(Locale.ENGLISH)
@@ -79,46 +87,53 @@ public class ReportTemplateTest {
 						.setSummaryOnANewPage(true)
 						.setSummaryWithPageHeaderAndFooter(true)
 						.setFloatColumnFooter(true)
-						
+
 						.setHighlightDetailOddRows(true)
 						.setDetailOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.BLUE))
 						.setHighlightDetailEvenRows(true)
 						.setDetailEvenRowStyle(stl.simpleStyle().setBackgroundColor(Color.CYAN))
 						.setTextStyle(stl.style().bold())
-						
+
 						.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
 						.setPageMargin(margin(3))
 						.setPageColumnsPerPage(3)
-						.setPageColumnSpace(20)						
-						
+						.setPageColumnSpace(20)
+
 						.setColumnPrintRepeatedDetailValues(false)
 						.setColumnWidth(250)
-						
+
 						.setGroupHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
 						.setGroupHideColumn(false)
 						.setGroupShowColumnHeaderAndFooter(true)
 						.setGroupPadding(20)
 						.setGroupStartInNewPage(true)
 						.setGroupStartInNewColumn(true)
-						.setGroupReprintHeaderOnEachPage(true)						
-						
+						.setGroupReprintHeaderOnEachPage(true)
+
 						.setTextFieldWidth(150)
-						
+
 						.setImageWidth(110)
 						.setImageHeight(120)
 
 						.setListgap(10)
-						
+
 						.setChartWidth(210)
 						.setChartHeight(220)
 						.chartSeriesColors(Color.BLUE)
-						
+
 						.setBarcodeWidth(110)
 						.setBarcodeHeight(120)
-						
+
+						.setCrosstabWidth(90)
+						.setCrosstabHeight(101)
+						.setCrosstabHighlightOddRows(true)
+						.setCrosstabOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.ORANGE))
+						.setCrosstabHighlightEvenRows(true)
+						.setCrosstabEvenRowStyle(stl.simpleStyle().setBackgroundColor(Color.MAGENTA))
+
 						.setDetailSplitType(SplitType.IMMEDIATE));
 	}
-	
+
 	@Test
 	public void test() {
 		@SuppressWarnings("rawtypes")
@@ -134,62 +149,69 @@ public class ReportTemplateTest {
 			Assert.assertTrue("summary on a new page", report.isSummaryOnANewPage());
 			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());
 			Assert.assertTrue("float column footer", report.isFloatColumnFooter());
-			
+
 			DRDesignTextField columnTextField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
-			DRDesignStyle style = columnTextField.getStyle();
+			DRIDesignStyle style = columnTextField.getStyle();
 			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
 			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
 			Assert.assertTrue("text style bold", style.getParentStyle().getFont().getBold());
-			
+
 			Assert.assertEquals("page width", 1190, report.getPage().getWidth());
 			Assert.assertEquals("page height", 842, report.getPage().getHeight());
 			Assert.assertEquals("page orientation", PageOrientation.LANDSCAPE, report.getPage().getOrientation());
 			Assert.assertEquals("page margin", 3, report.getPage().getMargin().getLeft());
 			Assert.assertEquals("page columns per page", 3, report.getPage().getColumnsPerPage());
 			Assert.assertEquals("page columns spac", 20, report.getPage().getColumnSpace());
-			
+
 			Assert.assertFalse("column print repeated detail values", columnTextField.isPrintRepeatedValues());
 			Assert.assertEquals("column width", new Integer(261), columnTextField.getWidth());
-			
+
 			DRDesignGroup group = (DRDesignGroup) report.getGroups().toArray()[0];
 			DRDesignComponent textField = group.getHeaderBands().get(1).getBandComponent();
-			Assert.assertEquals("group header layout", 2, ((DRDesignList) group.getHeaderBands().get(0).getBandComponent()).getComponents().size());		
+			Assert.assertEquals("group header layout", 2, ((DRDesignList) group.getHeaderBands().get(0).getBandComponent()).getComponents().size());
 			Assert.assertEquals("group header layout", "groupHeader.textField1", textField.getUniqueName());
 			Assert.assertEquals("group padding", new Integer(20), columnTextField.getX());
 			Assert.assertTrue("group start in new page", group.isStartInNewPage());
 			Assert.assertTrue("group start in new column", group.isStartInNewColumn());
 			Assert.assertTrue("group reprint header on each page", group.isReprintHeaderOnEachPage());
-			
+
 			Assert.assertEquals("text field width", new Integer(150), textField.getWidth());
-			
+
 			DRDesignList titleList = (DRDesignList) report.getTitleBand().getBandComponent();
 			Assert.assertEquals("list gap", 10, titleList.getGap());
-			
+
 			DRDesignComponent image = titleList.getComponents().get(0);
 			Assert.assertEquals("image width", new Integer(110), image.getWidth());
 			Assert.assertEquals("image height", new Integer(120), image.getHeight());
-					
+
 			DRDesignComponent chart = titleList.getComponents().get(1);
 			Assert.assertEquals("chart width", new Integer(210), chart.getWidth());
 			Assert.assertEquals("chart height", new Integer(220), chart.getHeight());
 			Assert.assertEquals("chart colors", Color.BLUE, ((DRDesignChart) chart).getPlot().getSeriesColors().get(0));
-			
+
 			DRDesignComponent barcode = titleList.getComponents().get(2);
 			Assert.assertEquals("barcode width", new Integer(110), barcode.getWidth());
 			Assert.assertEquals("barcode height", new Integer(120), barcode.getHeight());
-			
+
+			DRDesignCrosstab crosstab = (DRDesignCrosstab) titleList.getComponents().get(3);
+			Assert.assertEquals("crosstab width", new Integer(90), crosstab.getWidth());
+			Assert.assertEquals("crosstab height", new Integer(101), crosstab.getHeight());
+			style = crosstab.getCells().get(0).getContent().getStyle();
+			Assert.assertEquals("crosstab odd row style", Color.ORANGE, style.getConditionalStyles().get(0).getBackgroundColor());
+			Assert.assertEquals("crosstab even row style", Color.MAGENTA, style.getConditionalStyles().get(1).getBackgroundColor());
+
 			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBand().getSplitType());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void styleTest() {
-		ReportBuilder<?> rb = new DesignReportBuilder();		
+		ReportBuilder<?> rb = new DesignReportBuilder();
 		TextColumnBuilder<Integer> column1;
-		
+
 		rb.columns(column1 = col.column("Column1", "field1", Integer.class))
 			.groupBy(
 					grp.group(column1)
@@ -209,29 +231,29 @@ public class ReportTemplateTest {
 						.setBarcodeStyle(stl.style().setBorder(stl.pen().setLineWidth(3f))));
 		try {
 			DRDesignReport report = new DRDesignReport(rb.getReport());
-			
+
 			DRDesignTextField textField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
 			Assert.assertEquals("column style", new Integer(1), textField.getStyle().getFont().getFontSize());
-			
+
 			textField = (DRDesignTextField) ((DRDesignList) report.getColumnHeaderBand().getBandComponent()).getComponents().get(1);
 			Assert.assertEquals("column title style", new Integer(2), textField.getStyle().getFont().getFontSize());
-			
+
 			DRDesignList groupHeaderComponent = (DRDesignList) new ArrayList<DRDesignGroup>(report.getGroups()).get(0).getHeaderBands().get(0).getBandComponent();
 			textField = (DRDesignTextField) groupHeaderComponent.getComponents().get(1);
 			Assert.assertEquals("group style", new Integer(3), textField.getStyle().getFont().getFontSize());
-			
+
 			textField = (DRDesignTextField) groupHeaderComponent.getComponents().get(0);
 			Assert.assertEquals("group title style", new Integer(4), textField.getStyle().getFont().getFontSize());
-			
+
 			textField = (DRDesignTextField) ((DRDesignList) report.getSummaryBand().getBandComponent()).getComponents().get(0);
 			Assert.assertEquals("subtotal style", new Integer(5), textField.getStyle().getFont().getFontSize());
-			
+
 			DRDesignImage image = (DRDesignImage) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(0);
 			Assert.assertEquals("image style", new Float(1), image.getStyle().getBorder().getTopPen().getLineWidth());
-			
+
 			DRDesignChart chart = (DRDesignChart) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(1);
 			Assert.assertEquals("chart style", new Float(2), chart.getStyle().getBorder().getTopPen().getLineWidth());
-			
+
 			DRDesignBarcode barcode = (DRDesignBarcode) ((DRDesignList) report.getTitleBand().getBandComponent()).getComponents().get(2);
 			Assert.assertEquals("barcode style", new Float(3), barcode.getStyle().getBorder().getTopPen().getLineWidth());
 		} catch (DRException e) {

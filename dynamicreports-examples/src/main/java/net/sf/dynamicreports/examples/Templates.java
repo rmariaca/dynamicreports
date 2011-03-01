@@ -52,12 +52,12 @@ public class Templates {
 	public static final StyleBuilder columnTitleStyle;
 	public static final StyleBuilder groupStyle;
 	public static final StyleBuilder subtotalStyle;
-	
+
 	public static final ReportTemplateBuilder reportTemplate;
 	public static final CurrencyType currencyType;
 	public static final ComponentBuilder<?, ?> dynamicReportsComponent;
 	public static final ComponentBuilder<?, ?> footerComponent;
-	
+
 	static {
 		rootStyle           = stl.style().setPadding(2);
 		boldStyle           = stl.style(rootStyle).bold();
@@ -75,12 +75,12 @@ public class Templates {
 		                         .setBorder(stl.pen1Point())
 		                         .setHorizontalAlignment(HorizontalAlignment.CENTER)
 		                         .setBackgroundColor(Color.LIGHT_GRAY)
-		                         .bold();		
+		                         .bold();
 		groupStyle          = stl.style(boldStyle)
 		                         .setHorizontalAlignment(HorizontalAlignment.LEFT);
 		subtotalStyle       = stl.style(boldStyle)
 		                         .setTopBorder(stl.pen1Point());
-		
+
 		reportTemplate = template()
 		                   .setLocale(Locale.ENGLISH)
 		                   .setColumnStyle(columnStyle)
@@ -88,9 +88,10 @@ public class Templates {
 		                   .setGroupStyle(groupStyle)
 		                   .setGroupTitleStyle(groupStyle)
 		                   .setSubtotalStyle(subtotalStyle)
-		                   .highlightDetailEvenRows();
+		                   .highlightDetailEvenRows()
+		                   .crosstabHighlightEvenRows();
 		currencyType = new CurrencyType();
-		
+
 		HyperLinkBuilder link = hyperLink("http://dynamicreports.sourceforge.net");
 		dynamicReportsComponent =
 		  cmp.horizontalList(
@@ -98,13 +99,13 @@ public class Templates {
 		  	cmp.verticalList(
 		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
 		  		cmp.text("http://dynamicreports.sourceforge.net").setStyle(italicStyle).setHyperLink(link)));
-		
+
 		footerComponent = cmp.pageXofY()
 		                     .setStyle(
 		                     	stl.style(boldCenteredStyle)
 		                     	   .setTopBorder(stl.pen1Point()));
 	}
-	
+
 	/**
 	 * Creates custom component which is possible to add to any report band component
 	 */
@@ -118,31 +119,31 @@ public class Templates {
 		        .newRow()
 		        .add(cmp.filler().setFixedHeight(10));
 	}
-	
+
 	public static CurrencyValueFormatter createCurrencyValueFormatter(String label) {
 		return new CurrencyValueFormatter(label);
-	}	
-	
+	}
+
 	public static class CurrencyType extends BigDecimalType {
 		private static final long serialVersionUID = 1L;
-		
+
 		@Override
 		public String getPattern() {
 			return "$ #,###.00";
 		}
 	}
-	
+
 	private static class CurrencyValueFormatter extends AbstractValueFormatter<String, Number> {
 		private static final long serialVersionUID = 1L;
-		
+
 		private String label;
 
 		public CurrencyValueFormatter(String label) {
 			this.label = label;
 		}
-		
+
 		public String format(Number value, ReportParameters reportParameters) {
 			return label + currencyType.valueToString(value, reportParameters.getLocale());
-		}	
+		}
 	}
 }

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
+import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -48,6 +49,10 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private RunDirection runDirection;
 	private Integer cellWidth;
 	private Integer cellHeight;
+	private Boolean highlightOddRows;
+	private DRSimpleStyle oddRowStyle;
+	private Boolean highlightEvenRows;
+	private DRSimpleStyle evenRowStyle;
 	private DRCrosstabCellContent whenNoDataCell;
 	private DRCrosstabCellContent headerCell;
 	private List<DRICrosstabColumnGroup<?>> columnGroups;
@@ -131,6 +136,38 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 
 	public void setCellHeight(Integer cellHeight) {
 		this.cellHeight = cellHeight;
+	}
+
+	public Boolean getHighlightOddRows() {
+		return highlightOddRows;
+	}
+
+	public void setHighlightOddRows(Boolean highlightOddRows) {
+		this.highlightOddRows = highlightOddRows;
+	}
+
+	public DRSimpleStyle getOddRowStyle() {
+		return oddRowStyle;
+	}
+
+	public void setOddRowStyle(DRSimpleStyle oddRowStyle) {
+		this.oddRowStyle = oddRowStyle;
+	}
+
+	public Boolean getHighlightEvenRows() {
+		return highlightEvenRows;
+	}
+
+	public void setHighlightEvenRows(Boolean highlightEvenRows) {
+		this.highlightEvenRows = highlightEvenRows;
+	}
+
+	public DRSimpleStyle getEvenRowStyle() {
+		return evenRowStyle;
+	}
+
+	public void setEvenRowStyle(DRSimpleStyle evenRowStyle) {
+		this.evenRowStyle = evenRowStyle;
 	}
 
 	public void addColumnGroup(DRICrosstabColumnGroup<?> columnGroup) {

@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.crosstab;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstab;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
+import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 
@@ -73,6 +74,44 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 
 	public CrosstabBuilder setCellHeight(Integer cellHeight) {
 		getObject().setCellHeight(cellHeight);
+		return this;
+	}
+
+	public CrosstabBuilder highlightOddRows() {
+		return setHighlightOddRows(true);
+	}
+
+	public CrosstabBuilder setHighlightOddRows(Boolean highlightOddRows) {
+		getObject().setHighlightOddRows(highlightOddRows);
+		return this;
+	}
+
+	public CrosstabBuilder setOddRowStyle(SimpleStyleBuilder oddRowStyle) {
+		if (oddRowStyle != null) {
+			getObject().setOddRowStyle(oddRowStyle.build());
+		}
+		else {
+			getObject().setOddRowStyle(null);
+		}
+		return this;
+	}
+
+	public CrosstabBuilder highlightEvenRows() {
+		return setHighlightEvenRows(true);
+	}
+
+	public CrosstabBuilder setHighlightEvenRows(Boolean highlightEvenRows) {
+		getObject().setHighlightEvenRows(highlightEvenRows);
+		return this;
+	}
+
+	public CrosstabBuilder setEvenRowStyle(SimpleStyleBuilder evenRowStyle) {
+		if (evenRowStyle != null) {
+			getObject().setEvenRowStyle(evenRowStyle.build());
+		}
+		else {
+			getObject().setEvenRowStyle(null);
+		}
 		return this;
 	}
 

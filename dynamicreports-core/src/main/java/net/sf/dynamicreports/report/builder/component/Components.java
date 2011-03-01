@@ -28,9 +28,11 @@ import java.net.URL;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
 
 import org.apache.commons.lang.Validate;
@@ -53,12 +55,12 @@ public class Components {
 	public static HorizontalListBuilder horizontalList(HorizontalListCellBuilder ...cells) {
 		return new HorizontalListBuilder().add(cells);
 	}
-	
+
 	public static HorizontalListCellBuilder hListCell(ComponentBuilder<?, ?> component) {
 		Validate.notNull(component, "component must not be null");
 		return new HorizontalListCellBuilder(component);
 	}
-	
+
 	//horizontal flow
 	public static HorizontalListBuilder horizontalFlowList() {
 		return new HorizontalFlowListBuilder();
@@ -71,8 +73,8 @@ public class Components {
 	public static HorizontalListBuilder horizontalFlowList(HorizontalListCellBuilder ...cells) {
 		return new HorizontalFlowListBuilder().add(cells);
 	}
-	
-	//vertical	
+
+	//vertical
 	public static VerticalListBuilder verticalList() {
 		return new VerticalListBuilder();
 	}
@@ -84,24 +86,24 @@ public class Components {
 	public static VerticalListBuilder verticalList(VerticalListCellBuilder ...cells) {
 		return new VerticalListBuilder().add(cells);
 	}
-	
+
 	public static VerticalListCellBuilder vListCell(ComponentBuilder<?, ?> component) {
 		Validate.notNull(component, "component must not be null");
 		return new VerticalListCellBuilder(component);
 	}
-	
+
 	public static CurrentDateBuilder currentDate() {
 		return new CurrentDateBuilder();
 	}
-	
+
 	public static PageNumberBuilder pageNumber() {
 		return new PageNumberBuilder();
 	}
-	
+
 	public static PageXofYBuilder pageXofY() {
 		return new PageXofYBuilder();
 	}
-	
+
 	public static PageXslashYBuilder pageXslashY() {
 		return new PageXslashYBuilder();
 	}
@@ -109,7 +111,7 @@ public class Components {
 	public static TotalPagesBuilder totalPages() {
 		return new TotalPagesBuilder();
 	}
-	
+
 	//text
 	public static TextFieldBuilder<String> text(String text) {
 		return new TextFieldBuilder<String>().setText(text);
@@ -118,45 +120,49 @@ public class Components {
 	public static <T extends Number> TextFieldBuilder<T> text(T number) {
 		return new TextFieldBuilder<T>().setText(number);
 	}
-	
+
 	public static <T> TextFieldBuilder<T> text(FieldBuilder<T> field) {
 		return new TextFieldBuilder<T>().setText(field);
 	}
-	
+
 	public static <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {
 		return new TextFieldBuilder<T>().setText(textExpression);
 	}
-	
+
 	public static <T> TextFieldBuilder<T> text(DRIComplexExpression<T> textExpression) {
 		return new TextFieldBuilder<T>().setText(textExpression);
 	}
-	
+
 	//filler
 	public static FillerBuilder filler() {
 		return new FillerBuilder();
 	}
-	
+
 	//image
 	public static ImageBuilder image(DRISimpleExpression<?> imageExpression) {
 		return new ImageBuilder().setImage(imageExpression);
 	}
-	
+
 	public static ImageBuilder image(String imagePath) {
 		return new ImageBuilder().setImage(imagePath);
 	}
-	
+
 	public static ImageBuilder image(Image image) {
 		return new ImageBuilder().setImage(image);
 	}
-	
+
 	public static ImageBuilder image(InputStream imageInputStream) {
 		return new ImageBuilder().setImage(imageInputStream);
 	}
-	
+
 	public static ImageBuilder image(URL imageUrl) {
 		return new ImageBuilder().setImage(imageUrl);
 	}
-	
+
+	public static ImageBuilder image(JRRenderable image) {
+		return new ImageBuilder().setImage(Expressions.value(image, JRRenderable.class));
+	}
+
 	//subreport
 	public static SubreportBuilder subreport(JasperReportBuilder reportBuilder) {
 		SubreportBuilder subreport = new SubreportBuilder();
@@ -173,25 +179,25 @@ public class Components {
 	public static SubreportBuilder subreport(JasperReport jasperReport) {
 		return new SubreportBuilder().setReport(jasperReport);
 	}
-	
+
 	public static SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
 		return new SubreportBuilder().setReport(reportExpression);
 	}
-	
+
 	//line
 	public static LineBuilder line() {
 		return new LineBuilder();
 	}
-	
+
 	//break
 	public static BreakBuilder pageBreak() {
 		return new BreakBuilder().setType(BreakType.PAGE);
 	}
-	
+
 	public static BreakBuilder columnBreak() {
 		return new BreakBuilder().setType(BreakType.COLUMN);
 	}
-	
+
 	//generic element
 	public static GenericElementBuilder genericElement(String namespace, String name) {
 		return new GenericElementBuilder(namespace, name);

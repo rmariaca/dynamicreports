@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.crosstab;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCellContent;
+import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -34,6 +35,7 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 	private int height;
 	private DRDesignList list;
 	private DRDesignComponent component;
+	private DRIDesignStyle style;
 
 	public int getWidth() {
 		return width;
@@ -65,5 +67,13 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 
 	public void setComponent(DRDesignComponent component) {
 		this.component = component;
+	}
+
+	public DRIDesignStyle getStyle() {
+		return style;
+	}
+
+	public void setStyle(DRIDesignStyle style) {
+		this.style = style;
 	}
 }

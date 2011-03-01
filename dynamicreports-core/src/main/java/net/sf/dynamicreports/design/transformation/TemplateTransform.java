@@ -1098,6 +1098,52 @@ public class TemplateTransform {
 		return detectHeight(whenNoDataCell.getList());
 	}
 
+	protected DRISimpleStyle getCrosstabOddRowStyle(DRICrosstab crosstab) {
+		if (isCrosstabHighlightOddRows(crosstab)) {
+			if (crosstab.getOddRowStyle() != null) {
+				return crosstab.getOddRowStyle();
+			}
+			if (template.getCrosstabOddRowStyle() != null) {
+				return template.getCrosstabOddRowStyle();
+			}
+			return Defaults.getDefaults().getCrosstabOddRowStyle();
+		}
+		return null;
+	}
+
+	protected DRISimpleStyle getCrosstabEvenRowStyle(DRICrosstab crosstab) {
+		if (isCrosstabHighlightEvenRows(crosstab)) {
+			if (crosstab.getEvenRowStyle() != null) {
+				return crosstab.getEvenRowStyle();
+			}
+			if (template.getCrosstabEvenRowStyle() != null) {
+				return template.getCrosstabEvenRowStyle();
+			}
+			return Defaults.getDefaults().getCrosstabEvenRowStyle();
+		}
+		return null;
+	}
+
+	private boolean isCrosstabHighlightOddRows(DRICrosstab crosstab) {
+		if (crosstab.getHighlightOddRows() != null) {
+			return crosstab.getHighlightOddRows();
+		}
+		if (template.getCrosstabHighlightOddRows() != null) {
+			return template.getCrosstabHighlightOddRows();
+		}
+		return Defaults.getDefaults().isCrosstabHighlightOddRows();
+	}
+
+	private boolean isCrosstabHighlightEvenRows(DRICrosstab crosstab) {
+		if (crosstab.getHighlightEvenRows() != null) {
+			return crosstab.getHighlightEvenRows();
+		}
+		if (template.getCrosstabHighlightEvenRows() != null) {
+			return template.getCrosstabHighlightEvenRows();
+		}
+		return Defaults.getDefaults().isCrosstabHighlightEvenRows();
+	}
+
 	//split
 	protected SplitType getTitleSplitType(DRIBand band) {
 		return getSplitType(band, template.getTitleSplitType(), Defaults.getDefaults().getTitleSplitType());

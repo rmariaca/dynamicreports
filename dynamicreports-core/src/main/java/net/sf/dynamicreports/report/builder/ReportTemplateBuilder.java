@@ -61,7 +61,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder ignorePagination() {
 		return setIgnorePagination(true);
 	}
-	
+
 	public ReportTemplateBuilder setIgnorePagination(Boolean ignorePagination) {
 		getObject().setIgnorePagination(ignorePagination);
 		return this;
@@ -75,7 +75,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder titleOnANewPage() {
 		return setTitleOnANewPage(true);
 	}
-	
+
 	public ReportTemplateBuilder setTitleOnANewPage(Boolean titleOnANewPage) {
 		getObject().setTitleOnANewPage(titleOnANewPage);
 		return this;
@@ -84,7 +84,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder summaryOnANewPage() {
 		return setSummaryOnANewPage(true);
 	}
-	
+
 	public ReportTemplateBuilder setSummaryOnANewPage(Boolean summaryOnANewPage) {
 		getObject().setSummaryOnANewPage(summaryOnANewPage);
 		return this;
@@ -93,16 +93,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder summaryWithPageHeaderAndFooter() {
 		return setSummaryWithPageHeaderAndFooter(true);
 	}
-	
+
 	public ReportTemplateBuilder setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
 		getObject().setSummaryWithPageHeaderAndFooter(summaryWithPageHeaderAndFooter);
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder floatColumnFooter() {
 		return setFloatColumnFooter(true);
 	}
-	
+
 	public ReportTemplateBuilder setFloatColumnFooter(Boolean floatColumnFooter) {
 		getObject().setFloatColumnFooter(floatColumnFooter);
 		return this;
@@ -111,7 +111,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder highlightDetailOddRows() {
 		return setHighlightDetailOddRows(true);
 	}
-	
+
 	public ReportTemplateBuilder setHighlightDetailOddRows(Boolean highlightDetailOddRows) {
 		getObject().setHighlightDetailOddRows(highlightDetailOddRows);
 		return this;
@@ -130,7 +130,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder highlightDetailEvenRows() {
 		return setHighlightDetailEvenRows(true);
 	}
-	
+
 	public ReportTemplateBuilder setHighlightDetailEvenRows(Boolean highlightDetailEvenRows) {
 		getObject().setHighlightDetailEvenRows(highlightDetailEvenRows);
 		return this;
@@ -142,7 +142,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setDetailEvenRowStyle(null);
-		}		
+		}
 		return this;
 	}
 
@@ -152,7 +152,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setTextStyle(null);
-		}		
+		}
 		return this;
 	}
 
@@ -162,7 +162,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setColumnTitleStyle(null);
-		}		
+		}
 		return this;
 	}
 
@@ -172,7 +172,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setColumnStyle(null);
-		}		
+		}
 		return this;
 	}
 
@@ -182,27 +182,27 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setGroupTitleStyle(null);
-		}				
-		return this;	
+		}
+		return this;
 	}
-	
+
 	public ReportTemplateBuilder setGroupStyle(StyleBuilder groupStyle) {
 		if (groupStyle != null) {
 			getObject().setGroupStyle(groupStyle.build());
 		}
 		else {
 			getObject().setGroupStyle(null);
-		}				
-		return this;	
+		}
+		return this;
 	}
-	
+
 	public ReportTemplateBuilder setSubtotalStyle(StyleBuilder subtotalStyle) {
 		if (subtotalStyle != null) {
 			getObject().setSubtotalStyle(subtotalStyle.build());
 		}
 		else {
 			getObject().setSubtotalStyle(null);
-		}		
+		}
 		return this;
 	}
 
@@ -212,46 +212,46 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setImageStyle(null);
-		}		
+		}
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setChartStyle(StyleBuilder chartStyle) {
 		if (chartStyle != null) {
 			getObject().setChartStyle(chartStyle.build());
 		}
 		else {
 			getObject().setChartStyle(null);
-		}		
+		}
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setBarcodeStyle(StyleBuilder barcodeStyle) {
 		if (barcodeStyle != null) {
 			getObject().setBarcodeStyle(barcodeStyle.build());
 		}
 		else {
 			getObject().setBarcodeStyle(null);
-		}		
+		}
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setPageFormat(PageType pageType) {
-		return setPageFormat(pageType, PageOrientation.PORTRAIT);		
-	}	
-	
+		return setPageFormat(pageType, PageOrientation.PORTRAIT);
+	}
+
 	public ReportTemplateBuilder setPageFormat(PageType pageType, PageOrientation orientation) {
 		getObject().setPageFormat(pageType, orientation);
-		return this;		
-	}	
-	
+		return this;
+	}
+
 	public ReportTemplateBuilder setPageMargin(MarginBuilder pageMargin) {
 		if (pageMargin != null) {
 			getObject().setPageMargin(pageMargin.build());
 		}
 		else {
 			getObject().setPageMargin(null);
-		}		
+		}
 		return this;
 	}
 
@@ -309,7 +309,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		getObject().setGroupReprintHeaderOnEachPage(groupReprintHeaderOnEachPage);
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setTextFieldWidth(Integer textFieldWidth) {
 		getObject().setTextFieldWidth(textFieldWidth);
 		return this;
@@ -339,19 +339,19 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		getObject().setChartWidth(chartWidth);
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder chartSeriesColors(Color ...seriesColors) {
 		return addChartSeriesColor(seriesColors);
 	}
-	
+
 	public ReportTemplateBuilder addChartSeriesColor(Color ...seriesColors) {
 		Validate.notNull(seriesColors, "seriesColors must not be null");
 		for (Color seriesColor : seriesColors) {
 			getObject().addChartSeriesColor(seriesColor);
-		}		
+		}
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setBarcodeHeight(Integer barcodeHeight) {
 		getObject().setBarcodeHeight(barcodeHeight);
 		return this;
@@ -361,7 +361,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		getObject().setBarcodeWidth(barcodeWidth);
 		return this;
 	}
-	
+
 	public ReportTemplateBuilder setSubreportHeight(Integer subreportHeight) {
 		getObject().setSubreportHeight(subreportHeight);
 		return this;
@@ -371,7 +371,55 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		getObject().setSubreportWidth(subreportWidth);
 		return this;
 	}
-	
+
+	public ReportTemplateBuilder setCrosstabHeight(Integer crosstabHeight) {
+		getObject().setCrosstabHeight(crosstabHeight);
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabWidth(Integer crosstabWidth) {
+		getObject().setCrosstabWidth(crosstabWidth);
+		return this;
+	}
+
+	public ReportTemplateBuilder crosstabHighlightOddRows() {
+		return setCrosstabHighlightOddRows(true);
+	}
+
+	public ReportTemplateBuilder setCrosstabHighlightOddRows(Boolean crosstabHighlightOddRows) {
+		getObject().setCrosstabHighlightOddRows(crosstabHighlightOddRows);
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabOddRowStyle(SimpleStyleBuilder crosstabOddRowStyle) {
+		if (crosstabOddRowStyle != null) {
+			getObject().setCrosstabOddRowStyle(crosstabOddRowStyle.build());
+		}
+		else {
+			getObject().setCrosstabOddRowStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder crosstabHighlightEvenRows() {
+		return setCrosstabHighlightEvenRows(true);
+	}
+
+	public ReportTemplateBuilder setCrosstabHighlightEvenRows(Boolean crosstabHighlightEvenRows) {
+		getObject().setCrosstabHighlightEvenRows(crosstabHighlightEvenRows);
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabEvenRowStyle(SimpleStyleBuilder crosstabEvenRowStyle) {
+		if (crosstabEvenRowStyle != null) {
+			getObject().setCrosstabEvenRowStyle(crosstabEvenRowStyle.build());
+		}
+		else {
+			getObject().setCrosstabEvenRowStyle(null);
+		}
+		return this;
+	}
+
 	public ReportTemplateBuilder setDefaultSplitType(SplitType defaultSplitType) {
 		getObject().setDefaultSplitType(defaultSplitType);
 		return this;
@@ -435,8 +483,8 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	public ReportTemplateBuilder setBackgroundSplitType(SplitType backgroundSplitType) {
 		getObject().setBackgroundSplitType(backgroundSplitType);
 		return this;
-	}	
-	
+	}
+
 	public DRReportTemplate getReportTemplate() {
 		return build();
 	}

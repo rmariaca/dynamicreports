@@ -106,6 +106,10 @@ public class DRReportTemplate implements DRIReportTemplate {
 	//crosstab
 	private Integer crosstabWidth;
 	private Integer crosstabHeight;
+	private Boolean crosstabHighlightOddRows;
+	private DRSimpleStyle crosstabOddRowStyle;
+	private Boolean crosstabHighlightEvenRows;
+	private DRSimpleStyle crosstabEvenRowStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -592,6 +596,38 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.isTrue(crosstabWidth >= 1, "crosstabWidth must be >= 1");
 		}
 		this.crosstabWidth = crosstabWidth;
+	}
+
+	public Boolean getCrosstabHighlightOddRows() {
+		return crosstabHighlightOddRows;
+	}
+
+	public void setCrosstabHighlightOddRows(Boolean crosstabHighlightOddRows) {
+		this.crosstabHighlightOddRows = crosstabHighlightOddRows;
+	}
+
+	public DRSimpleStyle getCrosstabOddRowStyle() {
+		return crosstabOddRowStyle;
+	}
+
+	public void setCrosstabOddRowStyle(DRSimpleStyle crosstabOddRowStyle) {
+		this.crosstabOddRowStyle = crosstabOddRowStyle;
+	}
+
+	public Boolean getCrosstabHighlightEvenRows() {
+		return crosstabHighlightEvenRows;
+	}
+
+	public void setCrosstabHighlightEvenRows(Boolean crosstabHighlightEvenRows) {
+		this.crosstabHighlightEvenRows = crosstabHighlightEvenRows;
+	}
+
+	public DRSimpleStyle getCrosstabEvenRowStyle() {
+		return crosstabEvenRowStyle;
+	}
+
+	public void setCrosstabEvenRowStyle(DRSimpleStyle crosstabEvenRowStyle) {
+		this.crosstabEvenRowStyle = crosstabEvenRowStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

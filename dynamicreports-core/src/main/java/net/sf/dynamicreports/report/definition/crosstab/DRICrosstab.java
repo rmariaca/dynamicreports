@@ -26,6 +26,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
+import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -45,6 +46,14 @@ public interface DRICrosstab extends DRIDimensionComponent {
 	public Integer getCellWidth();
 
 	public Integer getCellHeight();
+
+	public Boolean getHighlightOddRows();
+
+	public DRISimpleStyle getOddRowStyle();
+
+	public Boolean getHighlightEvenRows();
+
+	public DRISimpleStyle getEvenRowStyle();
 
 	public DRICrosstabCellContent getWhenNoDataCell();
 

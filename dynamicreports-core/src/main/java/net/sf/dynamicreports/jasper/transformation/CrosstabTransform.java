@@ -120,6 +120,7 @@ public class CrosstabTransform {
 		for (JRDesignElement jrElement : jrElements) {
 			jrCellContents.addElement(jrElement);
 		}
+		jrCellContents.setStyle(accessor.getStyleTransform().getStyle(cellContent.getStyle()));
 		return jrCellContents;
 	}
 
