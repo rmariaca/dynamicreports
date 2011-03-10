@@ -38,6 +38,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
+import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -74,8 +75,8 @@ public class ReportTemplateTest {
 					cmp.hListCell(
 							ctab.crosstab()
 								.rowGroups(ctab.rowGroup("f1", String.class))
-								.columnGroups(ctab.columnGroup("f2", String.class))
-								.measures(ctab.measure("f3", Integer.class, Calculation.SUM))
+								.columnGroups(ctab.columnGroup("f2", String.class), ctab.columnGroup("f3", String.class))
+								.measures(ctab.measure("f4", Integer.class, Calculation.SUM))
 							).widthFixed().heightFixedOnTop()))
 			.setTemplate(
 					template()
@@ -130,6 +131,10 @@ public class ReportTemplateTest {
 						.setCrosstabOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.ORANGE))
 						.setCrosstabHighlightEvenRows(true)
 						.setCrosstabEvenRowStyle(stl.simpleStyle().setBackgroundColor(Color.MAGENTA))
+						.setCrosstabGroupStyle(stl.style().setBackgroundColor(Color.RED))
+						.setCrosstabGroupTotalStyle(stl.style().setBackgroundColor(Color.ORANGE))
+						.setCrosstabGrandTotalStyle(stl.style().setBackgroundColor(Color.BLUE))
+						.setCrosstabCellStyle(stl.style().setBackgroundColor(Color.CYAN))
 
 						.setDetailSplitType(SplitType.IMMEDIATE));
 	}
@@ -196,9 +201,35 @@ public class ReportTemplateTest {
 			DRDesignCrosstab crosstab = (DRDesignCrosstab) titleList.getComponents().get(3);
 			Assert.assertEquals("crosstab width", new Integer(90), crosstab.getWidth());
 			Assert.assertEquals("crosstab height", new Integer(101), crosstab.getHeight());
-			style = crosstab.getCells().get(0).getContent().getStyle();
-			Assert.assertEquals("crosstab odd row style", Color.ORANGE, style.getConditionalStyles().get(0).getBackgroundColor());
-			Assert.assertEquals("crosstab even row style", Color.MAGENTA, style.getConditionalStyles().get(1).getBackgroundColor());
+			style = crosstab.getCells().get(0).getContent().getComponent().getStyle();
+			Assert.assertEquals("crosstab odd row style", new Color(102, 233, 153), style.getConditionalStyles().get(0).getBackgroundColor());
+			Assert.assertEquals("crosstab even row style", new Color(102, 153, 255), style.getConditionalStyles().get(1).getBackgroundColor());
+			Assert.assertEquals("crosstab cell style", Color.CYAN, style.getParentStyle().getBackgroundColor());
+			style = crosstab.getColumnGroups().get(0).getHeader().getComponent().getStyle();
+			Assert.assertEquals("crosstab column header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(0).getTotalHeader().getComponent().getStyle();
+			Assert.assertEquals("crosstab column total header style", Color.BLUE, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(1).getHeader().getComponent().getStyle();
+			Assert.assertEquals("crosstab column header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(1).getTotalHeader().getComponent().getStyle();
+			Assert.assertEquals("crosstab column total header style", Color.ORANGE, style.getBackgroundColor());
+			style = ((DRIDesignList) crosstab.getRowGroups().get(0).getHeader().getComponent()).getComponents().get(0).getStyle();
+			Assert.assertEquals("crosstab row header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getRowGroups().get(0).getTotalHeader().getComponent().getStyle();
+			Assert.assertEquals("crosstab row total header style", Color.BLUE, style.getBackgroundColor());
+
+			style = crosstab.getColumnGroups().get(0).getHeader().getStyle();
+			Assert.assertEquals("crosstab column header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(0).getTotalHeader().getStyle();
+			Assert.assertEquals("crosstab column total header style", Color.BLUE, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(1).getHeader().getStyle();
+			Assert.assertEquals("crosstab column header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getColumnGroups().get(1).getTotalHeader().getStyle();
+			Assert.assertEquals("crosstab column total header style", Color.ORANGE, style.getBackgroundColor());
+			style = crosstab.getRowGroups().get(0).getHeader().getStyle();
+			Assert.assertEquals("crosstab row header style", Color.RED, style.getBackgroundColor());
+			style = crosstab.getRowGroups().get(0).getTotalHeader().getStyle();
+			Assert.assertEquals("crosstab row total header style", Color.BLUE, style.getBackgroundColor());
 
 			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBand().getSplitType());
 		} catch (DRException e) {

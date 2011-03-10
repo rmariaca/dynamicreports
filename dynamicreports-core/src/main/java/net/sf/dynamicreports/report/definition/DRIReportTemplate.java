@@ -143,6 +143,14 @@ public interface DRIReportTemplate extends Serializable {
 
 	public DRISimpleStyle getCrosstabEvenRowStyle();
 
+	public DRIStyle getCrosstabGroupStyle();
+
+	public DRIStyle getCrosstabGroupTotalStyle();
+
+	public DRIStyle getCrosstabGrandTotalStyle();
+
+	public DRIStyle getCrosstabCellStyle();
+
 	public List<Color> getChartSeriesColors();
 
 	public SplitType getDefaultSplitType();

@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
+import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -53,6 +54,10 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private DRSimpleStyle oddRowStyle;
 	private Boolean highlightEvenRows;
 	private DRSimpleStyle evenRowStyle;
+	private DRStyle groupStyle;
+	private DRStyle groupTotalStyle;
+	private DRStyle grandTotalStyle;
+	private DRStyle cellStyle;
 	private DRCrosstabCellContent whenNoDataCell;
 	private DRCrosstabCellContent headerCell;
 	private List<DRICrosstabColumnGroup<?>> columnGroups;
@@ -168,6 +173,38 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 
 	public void setEvenRowStyle(DRSimpleStyle evenRowStyle) {
 		this.evenRowStyle = evenRowStyle;
+	}
+
+	public DRStyle getGroupStyle() {
+		return groupStyle;
+	}
+
+	public void setGroupStyle(DRStyle groupStyle) {
+		this.groupStyle = groupStyle;
+	}
+
+	public DRStyle getGroupTotalStyle() {
+		return groupTotalStyle;
+	}
+
+	public void setGroupTotalStyle(DRStyle groupTotalStyle) {
+		this.groupTotalStyle = groupTotalStyle;
+	}
+
+	public DRStyle getGrandTotalStyle() {
+		return grandTotalStyle;
+	}
+
+	public void setGrandTotalStyle(DRStyle grandTotalStyle) {
+		this.grandTotalStyle = grandTotalStyle;
+	}
+
+	public DRStyle getCellStyle() {
+		return cellStyle;
+	}
+
+	public void setCellStyle(DRStyle cellStyle) {
+		this.cellStyle = cellStyle;
 	}
 
 	public void addColumnGroup(DRICrosstabColumnGroup<?> columnGroup) {

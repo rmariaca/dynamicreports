@@ -420,6 +420,46 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setCrosstabGroupStyle(StyleBuilder crosstabGroupStyle) {
+		if (crosstabGroupStyle != null) {
+			getObject().setCrosstabGroupStyle(crosstabGroupStyle.build());
+		}
+		else {
+			getObject().setCrosstabGroupStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabGroupTotalStyle(StyleBuilder crosstabGroupTotalStyle) {
+		if (crosstabGroupTotalStyle != null) {
+			getObject().setCrosstabGroupTotalStyle(crosstabGroupTotalStyle.build());
+		}
+		else {
+			getObject().setCrosstabGroupTotalStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabGrandTotalStyle(StyleBuilder crosstabGrandTotalStyle) {
+		if (crosstabGrandTotalStyle != null) {
+			getObject().setCrosstabGrandTotalStyle(crosstabGrandTotalStyle.build());
+		}
+		else {
+			getObject().setCrosstabGrandTotalStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setCrosstabCellStyle(StyleBuilder crosstabCellStyle) {
+		if (crosstabCellStyle != null) {
+			getObject().setCrosstabCellStyle(crosstabCellStyle.build());
+		}
+		else {
+			getObject().setCrosstabCellStyle(null);
+		}
+		return this;
+	}
+
 	public ReportTemplateBuilder setDefaultSplitType(SplitType defaultSplitType) {
 		getObject().setDefaultSplitType(defaultSplitType);
 		return this;

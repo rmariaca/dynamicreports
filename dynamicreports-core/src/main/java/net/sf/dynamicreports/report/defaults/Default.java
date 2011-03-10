@@ -142,6 +142,10 @@ public class Default {
 	private DRSimpleStyle crosstabOddRowStyle;
 	private boolean crosstabHighlightEvenRows;
 	private DRSimpleStyle crosstabEvenRowStyle;
+	private DRStyle crosstabGroupStyle;
+	private DRStyle crosstabGroupTotalStyle;
+	private DRStyle crosstabGrandTotalStyle;
+	private DRStyle crosstabCellStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -292,6 +296,10 @@ public class Default {
 		this.crosstabHighlightEvenRows = false;
 		this.crosstabEvenRowStyle = new DRSimpleStyle();
 		crosstabEvenRowStyle.setBackgroundColor(new Color(240,240,240));
+		this.crosstabGroupStyle = null;
+		this.crosstabGroupTotalStyle = null;
+		this.crosstabGrandTotalStyle = null;
+		this.crosstabCellStyle = null;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 
@@ -635,6 +643,22 @@ public class Default {
 
 	public boolean isCrosstabHighlightEvenRows() {
 		return crosstabHighlightEvenRows;
+	}
+
+	public DRStyle getCrosstabGroupStyle() {
+		return crosstabGroupStyle;
+	}
+
+	public DRStyle getCrosstabGroupTotalStyle() {
+		return crosstabGroupTotalStyle;
+	}
+
+	public DRStyle getCrosstabGrandTotalStyle() {
+		return crosstabGrandTotalStyle;
+	}
+
+	public DRStyle getCrosstabCellStyle() {
+		return crosstabCellStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

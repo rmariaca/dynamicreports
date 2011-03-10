@@ -1144,6 +1144,58 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isCrosstabHighlightEvenRows();
 	}
 
+	protected DRIStyle getCrosstabGroupStyle(DRICrosstab crosstab) {
+		if (crosstab.getGroupStyle() != null) {
+			return crosstab.getGroupStyle();
+		}
+		if (template.getCrosstabGroupStyle() != null) {
+			return template.getCrosstabGroupStyle();
+		}
+		if (Defaults.getDefaults().getCrosstabGroupStyle() != null) {
+			return Defaults.getDefaults().getCrosstabGroupStyle();
+		}
+		return getTextStyle();
+	}
+
+	protected DRIStyle getCrosstabGroupTotalStyle(DRICrosstab crosstab) {
+		if (crosstab.getGroupTotalStyle() != null) {
+			return crosstab.getGroupTotalStyle();
+		}
+		if (template.getCrosstabGroupTotalStyle() != null) {
+			return template.getCrosstabGroupTotalStyle();
+		}
+		if (Defaults.getDefaults().getCrosstabGroupTotalStyle() != null) {
+			return Defaults.getDefaults().getCrosstabGroupTotalStyle();
+		}
+		return getTextStyle();
+	}
+
+	protected DRIStyle getCrosstabGrandTotalStyle(DRICrosstab crosstab) {
+		if (crosstab.getGrandTotalStyle() != null) {
+			return crosstab.getGrandTotalStyle();
+		}
+		if (template.getCrosstabGrandTotalStyle() != null) {
+			return template.getCrosstabGrandTotalStyle();
+		}
+		if (Defaults.getDefaults().getCrosstabGrandTotalStyle() != null) {
+			return Defaults.getDefaults().getCrosstabGrandTotalStyle();
+		}
+		return getTextStyle();
+	}
+
+	protected DRIStyle getCrosstabCellStyle(DRICrosstab crosstab) {
+		if (crosstab.getCellStyle() != null) {
+			return crosstab.getCellStyle();
+		}
+		if (template.getCrosstabCellStyle() != null) {
+			return template.getCrosstabCellStyle();
+		}
+		if (Defaults.getDefaults().getCrosstabCellStyle() != null) {
+			return Defaults.getDefaults().getCrosstabCellStyle();
+		}
+		return getTextStyle();
+	}
+
 	//split
 	protected SplitType getTitleSplitType(DRIBand band) {
 		return getSplitType(band, template.getTitleSplitType(), Defaults.getDefaults().getTitleSplitType());

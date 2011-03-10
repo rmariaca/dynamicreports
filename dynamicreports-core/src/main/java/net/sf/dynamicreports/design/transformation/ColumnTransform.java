@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,11 +140,25 @@ public class ColumnTransform {
 			}
 			DRStyle newStyle = new DRStyle();
 			newStyle.setParentStyle((DRStyle) style);
+			List<DRIConditionalStyle> conditionalStyles = new ArrayList<DRIConditionalStyle>();
 			for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
-				newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
+				conditionalStyles.add(conditionalStyle);
 			}
 			for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
-				newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
+				conditionalStyles.add(conditionalStyle);
+			}
+			Color backgroundColor = StyleResolver.getBackgroundColor(style);
+			for (DRIConditionalStyle conditionalStyle : conditionalStyles) {
+				if (backgroundColor != null) {
+					DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
+					accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
+					Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.4f);
+					newConditionalStyle.setBackgroundColor(mergedColor);
+					newStyle.addConditionalStyle(newConditionalStyle);
+				}
+				else {
+					newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
+				}
 			}
 			designComponent.setStyle(accessor.getStyleTransform().transformStyle(newStyle, true, DefaultStyleType.COLUMN));
 		}

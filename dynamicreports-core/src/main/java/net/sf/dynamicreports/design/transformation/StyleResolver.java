@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
@@ -29,18 +30,19 @@ import java.awt.image.BufferedImage;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class StyleResolver {
 	private static FontRenderContext context = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).createGraphics().getFontRenderContext();
-	
+
 	protected static int getFontWidth(DRDesignStyle style, int columns) {
 		double width = getFont(style).getStringBounds("m", context).getWidth();
 		return (int) Math.ceil(width * columns) + getHorizontalPadding(style);
 	}
-	
+
 	protected static int getFontHeight(DRDesignStyle style, int rows) {
 		double height = getFont(style).getMaxCharBounds(context).getHeight();
 		return (int) Math.ceil(height * rows) + getVerticalPadding(style);
@@ -50,20 +52,20 @@ public class StyleResolver {
 		Font fnt = getFont(font.getFontName(), font.getBold(), font.getItalic(), font.getFontSize());
 		return fnt.getStringBounds("m", context).getWidth();
 	}
-	
+
 	public static double getFontHeight(DRFont font) {
 		Font fnt = getFont(font.getFontName(), font.getBold(), font.getItalic(), font.getFontSize());
 		return fnt.getMaxCharBounds(context).getHeight();
 	}
-	
+
 	private static Font getFont(DRDesignStyle style) {
-		String fontName = getFontName(style);	
+		String fontName = getFontName(style);
 		Integer fontSize = getFontSize(style);
 		Boolean bold = getFontBold(style);
 		Boolean italic = getFontItalic(style);
 		return getFont(fontName, bold, italic, fontSize);
 	}
-	
+
 	private static Font getFont(String fontName, Boolean bold, Boolean italic, Integer fontSize) {
 		if (bold == null) {
 			bold = false;
@@ -84,10 +86,10 @@ public class StyleResolver {
 		else {
 			fontStyle = Font.PLAIN;
 		}
-		
+
 		return new Font(fontName, fontStyle, fontSize);
 	}
-	
+
 	protected static String getFontName(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -100,7 +102,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	protected static Integer getFontSize(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -113,7 +115,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	private static Boolean getFontBold(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -126,7 +128,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	private static Boolean getFontItalic(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -139,7 +141,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	protected static String getPdfFontName(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -152,7 +154,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	protected static String getPdfEncoding(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -165,7 +167,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	protected static Boolean getPdfEmbedded(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -178,15 +180,15 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	protected static int getHorizontalPadding(DRDesignStyle style) {
-		return getLeftPadding(style) + getRightPadding(style); 
+		return getLeftPadding(style) + getRightPadding(style);
 	}
 
 	protected static int getVerticalPadding(DRDesignStyle style) {
-		return getTopPadding(style) + getBottomPadding(style); 
+		return getTopPadding(style) + getBottomPadding(style);
 	}
-	
+
 	private static Integer getTopPadding(DRDesignStyle style) {
 		if (style == null) {
 			return 0;
@@ -199,7 +201,7 @@ public class StyleResolver {
 		}
 		return 0;
 	}
-	
+
 	private static Integer getBottomPadding(DRDesignStyle style) {
 		if (style == null) {
 			return 0;
@@ -212,7 +214,7 @@ public class StyleResolver {
 		}
 		return 0;
 	}
-	
+
 	private static Integer getLeftPadding(DRDesignStyle style) {
 		if (style == null) {
 			return 0;
@@ -225,7 +227,7 @@ public class StyleResolver {
 		}
 		return 0;
 	}
-	
+
 	private static Integer getRightPadding(DRDesignStyle style) {
 		if (style == null) {
 			return 0;
@@ -251,7 +253,7 @@ public class StyleResolver {
 		}
 		return null;
 	}
-	
+
 	public static HorizontalAlignment getHorizontalAlignment(DRDesignStyle style) {
 		if (style == null) {
 			return null;
@@ -263,5 +265,27 @@ public class StyleResolver {
 			return getHorizontalAlignment(style.getParentStyle());
 		}
 		return null;
+	}
+
+	public static Color getBackgroundColor(DRIStyle style) {
+		if (style == null) {
+			return null;
+		}
+		if (style.getBackgroundColor() != null) {
+			return style.getBackgroundColor();
+		}
+		if (style.getParentStyle() != null) {
+			return getBackgroundColor(style.getParentStyle());
+		}
+		return null;
+	}
+
+	public static Color mergeColors(Color color1, Color color2, float percent) {
+		float amount = 1.0f - percent;
+		int r = (int) (color1.getRed() * amount + color2.getRed() * percent);
+		int g = (int) (color1.getGreen() * amount + color2.getGreen() * percent);
+		int b = (int) (color1.getBlue() * amount + color2.getBlue() * percent);
+		int a = (int) (color1.getAlpha() * amount + color2.getAlpha() * percent);
+	  return new Color(r, g, b, a);
 	}
 }

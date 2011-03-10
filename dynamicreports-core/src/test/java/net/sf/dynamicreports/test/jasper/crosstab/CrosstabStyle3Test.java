@@ -37,8 +37,6 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRPrintPage;
-import net.sf.jasperreports.engine.fill.JRTemplatePrintFrame;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -84,16 +82,9 @@ public class CrosstabStyle3Test extends AbstractJasperCrosstabStyleTest implemen
 		Color color1 = new Color(240, 240, 240);
 		Color color2 = new Color(200, 200, 200);
 
-		JRPrintPage page = (JRPrintPage) getJasperPrint().getPages().get(0);
-
-		JRTemplatePrintFrame element = (JRTemplatePrintFrame) page.getElements().get(3);
-		styleTest(element.getStyle(), null, color2, "SansSerif", null, null, null);
-
-		element = (JRTemplatePrintFrame) page.getElements().get(5);
-		styleTest(element.getStyle(), null, color1, "SansSerif", null, null, null);
-
-		element = (JRTemplatePrintFrame) page.getElements().get(7);
-		styleTest(element.getStyle(), null, color2, "SansSerif", null, null, null);
+		crosstabCellStyleTest(measure1, null, null, 0, Color.BLACK, color2, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 1, Color.BLACK, color1, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 2, Color.BLACK, color2, "Arial", 10, null, null);
 	}
 
 	@Override

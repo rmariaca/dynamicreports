@@ -110,6 +110,10 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRSimpleStyle crosstabOddRowStyle;
 	private Boolean crosstabHighlightEvenRows;
 	private DRSimpleStyle crosstabEvenRowStyle;
+	private DRStyle crosstabGroupStyle;
+	private DRStyle crosstabGroupTotalStyle;
+	private DRStyle crosstabGrandTotalStyle;
+	private DRStyle crosstabCellStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -628,6 +632,38 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setCrosstabEvenRowStyle(DRSimpleStyle crosstabEvenRowStyle) {
 		this.crosstabEvenRowStyle = crosstabEvenRowStyle;
+	}
+
+	public DRStyle getCrosstabGroupStyle() {
+		return crosstabGroupStyle;
+	}
+
+	public void setCrosstabGroupStyle(DRStyle crosstabGroupStyle) {
+		this.crosstabGroupStyle = crosstabGroupStyle;
+	}
+
+	public DRStyle getCrosstabGroupTotalStyle() {
+		return crosstabGroupTotalStyle;
+	}
+
+	public void setCrosstabGroupTotalStyle(DRStyle crosstabGroupTotalStyle) {
+		this.crosstabGroupTotalStyle = crosstabGroupTotalStyle;
+	}
+
+	public DRStyle getCrosstabGrandTotalStyle() {
+		return crosstabGrandTotalStyle;
+	}
+
+	public void setCrosstabGrandTotalStyle(DRStyle crosstabGrandTotalStyle) {
+		this.crosstabGrandTotalStyle = crosstabGrandTotalStyle;
+	}
+
+	public DRStyle getCrosstabCellStyle() {
+		return crosstabCellStyle;
+	}
+
+	public void setCrosstabCellStyle(DRStyle crosstabCellStyle) {
+		this.crosstabCellStyle = crosstabCellStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.crosstab.DRCrosstab;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 
@@ -92,6 +93,46 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		}
 		else {
 			getObject().setOddRowStyle(null);
+		}
+		return this;
+	}
+
+	public CrosstabBuilder setGroupStyle(StyleBuilder groupStyle) {
+		if (groupStyle != null) {
+			getObject().setGroupStyle(groupStyle.build());
+		}
+		else {
+			getObject().setGroupStyle(null);
+		}
+		return this;
+	}
+
+	public CrosstabBuilder setGroupTotalStyle(StyleBuilder groupTotalStyle) {
+		if (groupTotalStyle != null) {
+			getObject().setGroupTotalStyle(groupTotalStyle.build());
+		}
+		else {
+			getObject().setGroupTotalStyle(null);
+		}
+		return this;
+	}
+
+	public CrosstabBuilder setGrandTotalStyle(StyleBuilder grandTotalStyle) {
+		if (grandTotalStyle != null) {
+			getObject().setGrandTotalStyle(grandTotalStyle.build());
+		}
+		else {
+			getObject().setGrandTotalStyle(null);
+		}
+		return this;
+	}
+
+	public CrosstabBuilder setCellStyle(StyleBuilder cellStyle) {
+		if (cellStyle != null) {
+			getObject().setCellStyle(cellStyle.build());
+		}
+		else {
+			getObject().setCellStyle(null);
 		}
 		return this;
 	}
