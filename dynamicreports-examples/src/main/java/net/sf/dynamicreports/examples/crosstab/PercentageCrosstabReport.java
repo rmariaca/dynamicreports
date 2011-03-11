@@ -65,8 +65,8 @@ public class PercentageCrosstabReport {
 		                               .rowGroups(rowGroup)
 		                               .columnGroups(columnGroup)
 		                               .measures(
-		                              		ctab.measure(quantityField, Calculation.SUM),
-		                              		ctab.measure(quantityField, Calculation.SUM).setPercentageType(CrosstabPercentageType.GRAND_TOTAL));
+		                              		ctab.measure("Unit price", quantityField, Calculation.SUM),
+		                              		ctab.measure("%", quantityField, Calculation.SUM).setPercentageType(CrosstabPercentageType.GRAND_TOTAL));
 
 		try {
 			report()

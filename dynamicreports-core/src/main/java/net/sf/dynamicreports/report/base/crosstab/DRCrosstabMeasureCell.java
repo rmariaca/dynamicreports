@@ -26,11 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureCell;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
@@ -50,6 +52,8 @@ public class DRCrosstabMeasureCell<T> implements DRICrosstabMeasureCell<T> {
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
 	private List<DRICrosstabCellStyle> styles;
+	private DRIExpression<?> titleExpression;
+	private DRStyle titleStyle;
 
 	public DRCrosstabMeasureCell(DRISimpleExpression<?> cellExpression) {
 		Validate.notNull(cellExpression, "cellExpression must not be null");
@@ -112,5 +116,21 @@ public class DRCrosstabMeasureCell<T> implements DRICrosstabMeasureCell<T> {
 
 	public void setStyle(List<DRICrosstabCellStyle> styles) {
 		this.styles = styles;
+	}
+
+	public DRIExpression<?> getTitleExpression() {
+		return titleExpression;
+	}
+
+	public void setTitleExpression(DRIExpression<?> titleExpression) {
+		this.titleExpression = titleExpression;
+	}
+
+	public DRStyle getTitleStyle() {
+		return titleStyle;
+	}
+
+	public void setTitleStyle(DRStyle titleStyle) {
+		this.titleStyle = titleStyle;
 	}
 }

@@ -71,6 +71,7 @@ import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureCell;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -935,7 +936,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isCrosstabRowGroupShowTotal();
 	}
 
-	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup<?> columnGroup, DRDesignCrosstab designCrosstab) {
+	public int getCrosstabColumnGroupHeaderHeight(DRICrosstabColumnGroup<?> columnGroup, DRDesignCrosstab designCrosstab, int availableHeight) {
 		if (columnGroup.getHeaderHeight() != null) {
 			return columnGroup.getHeaderHeight();
 		}
@@ -948,7 +949,7 @@ public class TemplateTransform {
 				}
 				if (designColumnGroup.getTotalHeader() != null) {
 					height = detectHeight(designColumnGroup.getTotalHeader().getList());
-					if (maxHeight < height) {
+					if (maxHeight < height && height > availableHeight) {
 						maxHeight = height;
 					}
 				}
@@ -1194,6 +1195,19 @@ public class TemplateTransform {
 			return Defaults.getDefaults().getCrosstabCellStyle();
 		}
 		return getTextStyle();
+	}
+
+	public DRIStyle getCrosstabMeasureTitleStyle(DRICrosstab crosstab, DRICrosstabMeasureCell<?> measureCell) {
+		if (measureCell.getTitleStyle() != null) {
+			return measureCell.getTitleStyle();
+		}
+		if (crosstab.getMeasureTitleStyle() != null) {
+			return crosstab.getMeasureTitleStyle();
+		}
+		if (template.getCrosstabMeasureTitleStyle() != null) {
+			return template.getCrosstabMeasureTitleStyle();
+		}
+		return Defaults.getDefaults().getCrosstabMeasureTitleStyle();
 	}
 
 	//split

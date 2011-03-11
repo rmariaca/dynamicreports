@@ -26,8 +26,10 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -47,4 +49,8 @@ public interface DRICrosstabMeasureCell<T> extends DRICrosstabMeasure<T> {
 	public Boolean getStretchWithOverflow();
 
 	public List<DRICrosstabCellStyle> getStyles();
+
+	public DRIExpression<?> getTitleExpression();
+
+	public DRIStyle getTitleStyle();
 }

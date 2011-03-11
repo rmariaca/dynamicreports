@@ -64,6 +64,8 @@ public interface DRICrosstab extends DRIDimensionComponent {
 
 	public DRIStyle getCellStyle();
 
+	public DRIStyle getMeasureTitleStyle();
+
 	public DRICrosstabCellContent getWhenNoDataCell();
 
 	public DRICrosstabCellContent getHeaderCell();

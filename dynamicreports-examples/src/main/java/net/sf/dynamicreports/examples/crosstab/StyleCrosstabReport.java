@@ -60,8 +60,8 @@ public class StyleCrosstabReport {
 		                                                     .setHeaderStyle(Templates.columnTitleStyle)
 		                                                     .setTotalHeaderStyle(Templates.columnTitleStyle);
 
-		CrosstabMeasureVariableCellBuilder<Integer>    quantityMeasure  = ctab.measure("quantity",  Integer.class,    Calculation.SUM);
-		CrosstabMeasureVariableCellBuilder<BigDecimal> unitPriceMeasure = ctab.measure("unitprice", BigDecimal.class, Calculation.SUM);
+		CrosstabMeasureVariableCellBuilder<Integer>    quantityMeasure  = ctab.measure("Quantity",   "quantity",  Integer.class,    Calculation.SUM);
+		CrosstabMeasureVariableCellBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM);
 
 		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(unitPriceMeasure, 600))
 		                                        .setBackgroundColor(new Color(210, 255, 210));

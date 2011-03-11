@@ -460,6 +460,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setCrosstabMeasureTitleStyle(StyleBuilder crosstabMeasureTitleStyle) {
+		if (crosstabMeasureTitleStyle != null) {
+			getObject().setCrosstabMeasureTitleStyle(crosstabMeasureTitleStyle.build());
+		}
+		else {
+			getObject().setCrosstabMeasureTitleStyle(null);
+		}
+		return this;
+	}
+
 	public ReportTemplateBuilder setDefaultSplitType(SplitType defaultSplitType) {
 		getObject().setDefaultSplitType(defaultSplitType);
 		return this;

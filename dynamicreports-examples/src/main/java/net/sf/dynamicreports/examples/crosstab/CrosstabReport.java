@@ -61,8 +61,8 @@ public class CrosstabReport {
 		                               .rowGroups(rowGroup)
 		                               .columnGroups(columnGroup)
 		                               .measures(
-		                              		ctab.measure("quantity",  Integer.class,    Calculation.SUM),
-		                              		ctab.measure("unitprice", BigDecimal.class, Calculation.SUM));
+		                              		ctab.measure("Quantity",   "quantity",  Integer.class,    Calculation.SUM),
+		                              		ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM));
 
 		try {
 			report()

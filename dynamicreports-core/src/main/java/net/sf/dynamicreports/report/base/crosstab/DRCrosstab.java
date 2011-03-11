@@ -58,6 +58,7 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private DRStyle groupTotalStyle;
 	private DRStyle grandTotalStyle;
 	private DRStyle cellStyle;
+	private DRStyle measureTitleStyle;
 	private DRCrosstabCellContent whenNoDataCell;
 	private DRCrosstabCellContent headerCell;
 	private List<DRICrosstabColumnGroup<?>> columnGroups;
@@ -205,6 +206,14 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 
 	public void setCellStyle(DRStyle cellStyle) {
 		this.cellStyle = cellStyle;
+	}
+
+	public DRStyle getMeasureTitleStyle() {
+		return measureTitleStyle;
+	}
+
+	public void setMeasureTitleStyle(DRStyle measureTitleStyle) {
+		this.measureTitleStyle = measureTitleStyle;
 	}
 
 	public void addColumnGroup(DRICrosstabColumnGroup<?> columnGroup) {

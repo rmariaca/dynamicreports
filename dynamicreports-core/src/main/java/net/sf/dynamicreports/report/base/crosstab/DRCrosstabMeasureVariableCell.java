@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
@@ -56,6 +57,8 @@ public class DRCrosstabMeasureVariableCell<T> implements DRICrosstabMeasureVaria
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
 	private List<DRICrosstabCellStyle> styles;
+	private DRIExpression<?> titleExpression;
+	private DRStyle titleStyle;
 
 	public DRCrosstabMeasureVariableCell(DRIExpression<?> valueExpression, Calculation calculation) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
@@ -136,6 +139,22 @@ public class DRCrosstabMeasureVariableCell<T> implements DRICrosstabMeasureVaria
 
 	public void setStyle(List<DRICrosstabCellStyle> styles) {
 		this.styles = styles;
+	}
+
+	public DRIExpression<?> getTitleExpression() {
+		return titleExpression;
+	}
+
+	public void setTitleExpression(DRIExpression<?> titleExpression) {
+		this.titleExpression = titleExpression;
+	}
+
+	public DRStyle getTitleStyle() {
+		return titleStyle;
+	}
+
+	public void setTitleStyle(DRStyle titleStyle) {
+		this.titleStyle = titleStyle;
 	}
 
 	@SuppressWarnings("unchecked")

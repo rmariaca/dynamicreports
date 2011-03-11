@@ -151,6 +151,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public DRIStyle getCrosstabCellStyle();
 
+	public DRIStyle getCrosstabMeasureTitleStyle();
+
 	public List<Color> getChartSeriesColors();
 
 	public SplitType getDefaultSplitType();

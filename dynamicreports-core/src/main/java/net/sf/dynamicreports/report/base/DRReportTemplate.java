@@ -114,6 +114,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRStyle crosstabGroupTotalStyle;
 	private DRStyle crosstabGrandTotalStyle;
 	private DRStyle crosstabCellStyle;
+	private DRStyle crosstabMeasureTitleStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -664,6 +665,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setCrosstabCellStyle(DRStyle crosstabCellStyle) {
 		this.crosstabCellStyle = crosstabCellStyle;
+	}
+
+	public DRStyle getCrosstabMeasureTitleStyle() {
+		return crosstabMeasureTitleStyle;
+	}
+
+	public void setCrosstabMeasureTitleStyle(DRStyle crosstabMeasureTitleStyle) {
+		this.crosstabMeasureTitleStyle = crosstabMeasureTitleStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

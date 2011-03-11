@@ -71,7 +71,7 @@ public class CrosstabBuilders {
 		return Crosstabs.rowGroup(expression);
 	}
 
-	//measure
+	//measure variable
 	public <T> CrosstabMeasureVariableBuilder<T> measureVariable(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		return Crosstabs.measureVariable(column, calculation);
 	}
@@ -88,23 +88,45 @@ public class CrosstabBuilders {
 		return Crosstabs.measureVariable(expression, calculation);
 	}
 
+	//measure variable cell
 	public <T> CrosstabMeasureVariableCellBuilder<T> measure(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		return Crosstabs.measure(column, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String title, ValueColumnBuilder<?, ?> column, Calculation calculation) {
+		return Crosstabs.measure(title, column, calculation);
 	}
 
 	public <T> CrosstabMeasureVariableCellBuilder<T> measure(FieldBuilder<T> field, Calculation calculation) {
 		return Crosstabs.measure(field, calculation);
 	}
 
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String title, FieldBuilder<T> field, Calculation calculation) {
+		return Crosstabs.measure(title, field, calculation);
+	}
+
 	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String fieldName, Class<?> valueClass, Calculation calculation) {
 		return Crosstabs.measure(fieldName, valueClass, calculation);
+	}
+
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String title, String fieldName, Class<?> valueClass, Calculation calculation) {
+		return Crosstabs.measure(title, fieldName, valueClass, calculation);
 	}
 
 	public <T> CrosstabMeasureVariableCellBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
 		return Crosstabs.measure(expression, calculation);
 	}
 
+	public <T> CrosstabMeasureVariableCellBuilder<T> measure(String title, DRISimpleExpression<?> expression, Calculation calculation) {
+		return Crosstabs.measure(title, expression, calculation);
+	}
+
+	//measure cell
 	public <T> CrosstabMeasureCellBuilder<T> measure(DRISimpleExpression<?> expression) {
 		return Crosstabs.measure(expression);
+	}
+
+	public <T> CrosstabMeasureCellBuilder<T> measure(String title, DRISimpleExpression<?> expression) {
+		return Crosstabs.measure(title, expression);
 	}
 }

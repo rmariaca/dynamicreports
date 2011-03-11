@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.builder.crosstab;
 
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellStyle;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabMeasureCell;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -95,6 +96,26 @@ public class CrosstabMeasureCellBuilder<T> extends CrosstabMeasureBuilder<Crosst
 		Validate.notNull(rowGroup, "rowGroup must not be null");
 		Validate.notNull(columnGroup, "columnGroup must not be null");
 		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), rowGroup.build(), columnGroup.build()));
+		return this;
+	}
+
+	public CrosstabMeasureCellBuilder<T> setTitle(DRISimpleExpression<?> titleExpression) {
+		getObject().setTitleExpression(titleExpression);
+		return this;
+	}
+
+	public CrosstabMeasureCellBuilder<T> setTitle(String title) {
+		getObject().setTitleExpression(Expressions.text(title));
+		return this;
+	}
+
+	public CrosstabMeasureCellBuilder<T> setTitleStyle(StyleBuilder titleStyle) {
+		if (titleStyle != null) {
+			getObject().setTitleStyle(titleStyle.getStyle());
+		}
+		else {
+			getObject().setTitleStyle(null);
+		}
 		return this;
 	}
 

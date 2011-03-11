@@ -137,6 +137,16 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
+	public CrosstabBuilder setMeasureTitleStyle(StyleBuilder measureTitleStyle) {
+		if (measureTitleStyle != null) {
+			getObject().setMeasureTitleStyle(measureTitleStyle.build());
+		}
+		else {
+			getObject().setMeasureTitleStyle(null);
+		}
+		return this;
+	}
+
 	public CrosstabBuilder highlightEvenRows() {
 		return setHighlightEvenRows(true);
 	}
