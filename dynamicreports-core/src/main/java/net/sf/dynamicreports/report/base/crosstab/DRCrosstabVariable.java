@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureVariable;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -34,7 +34,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCrosstabMeasureVariable<T> implements DRICrosstabMeasureVariable<T> {
+public class DRCrosstabVariable<T> implements DRICrosstabVariable<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String name;
@@ -42,7 +42,7 @@ public class DRCrosstabMeasureVariable<T> implements DRICrosstabMeasureVariable<
 	private Calculation calculation;
 	private CrosstabPercentageType percentageType;
 
-	public DRCrosstabMeasureVariable(DRIExpression<?> valueExpression, Calculation calculation) {
+	public DRCrosstabVariable(DRIExpression<?> valueExpression, Calculation calculation) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		Validate.notNull(calculation, "calculation must not be null");
 		this.valueExpression = valueExpression;

@@ -55,8 +55,18 @@ public abstract class AbstractJasperCrosstabPositionTest extends AbstractJasperP
 		elementPositionTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, x, y, width, height);
 	}
 
+	//group title header
+	protected void crosstabGroupTitleHeaderPositionTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, int x, int y, int width, int height) {
+		elementPositionTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleHeaderName(group, measure), index, x, y, width, height);
+	}
+
+	//group title total header
+	protected void crosstabGroupTitleTotalHeaderPositionTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, int x, int y, int width, int height) {
+		elementPositionTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleTotalHeaderName(group, measure), index, x, y, width, height);
+	}
+
 	//cell
-	protected void crosstabCellPositionTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, int x, int y, int width, int height) {
+	protected void crosstabCellPositionTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, int x, int y, int width, int height) {
 		elementPositionTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, x, y, width, height);
 	}
 

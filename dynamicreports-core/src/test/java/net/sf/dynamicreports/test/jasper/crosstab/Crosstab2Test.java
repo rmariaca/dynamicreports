@@ -30,7 +30,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -49,7 +49,8 @@ public class Crosstab2Test extends AbstractJasperCrosstabValueTest {
 	private CrosstabRowGroupBuilder<String> rowGroup2;
 	private CrosstabColumnGroupBuilder<String> columnGroup1;
 	private CrosstabColumnGroupBuilder<String> columnGroup2;
-	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
+	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureBuilder<Integer> measure2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -59,16 +60,18 @@ public class Crosstab2Test extends AbstractJasperCrosstabValueTest {
 		TextColumnBuilder<String> column4 = col.column("Column4", "field4", String.class);
 		TextColumnBuilder<Integer> column5 = col.column("Column5", "field5", Integer.class);
 
-		measure1 = ctab.measure(column5, Calculation.SUM);
+		measure1 = ctab.measure("measure1", column5, Calculation.SUM);
+		measure2 = ctab.measure("measure2", column5, Calculation.SUM);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.headerCell(cmp.text("Header"))
+			.setCellWidth(20)
 			.rowGroups(
 				rowGroup1 = ctab.rowGroup(column1), rowGroup2 = ctab.rowGroup(column2))
 			.columnGroups(
 				columnGroup1 = ctab.columnGroup(column3), columnGroup2 = ctab.columnGroup(column4))
 			.measures(
-				 measure1);
+				 measure1, measure2);
 
 		rb.setLocale(Locale.ENGLISH)
 			.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
@@ -96,6 +99,23 @@ public class Crosstab2Test extends AbstractJasperCrosstabValueTest {
 		crosstabGroupHeaderValueTest(columnGroup2, "i", "j", "k", "l");
 		crosstabGroupTotalHeaderCountTest(columnGroup2, 2);
 		crosstabGroupTotalHeaderValueTest(columnGroup2, "Total", "Total");
+
+		//column group title
+		crosstabGroupTitleHeaderCountTest(columnGroup1, measure1, 0);
+		crosstabGroupTitleTotalHeaderCountTest(columnGroup1, measure1, 1);
+		crosstabGroupTitleTotalHeaderValueTest(columnGroup1, measure1, "measure1");
+		crosstabGroupTitleHeaderCountTest(columnGroup2, measure1, 4);
+		crosstabGroupTitleHeaderValueTest(columnGroup2, measure1, "measure1", "measure1", "measure1", "measure1");
+		crosstabGroupTitleTotalHeaderCountTest(columnGroup2, measure1, 2);
+		crosstabGroupTitleTotalHeaderValueTest(columnGroup2, measure1, "measure1", "measure1");
+
+		crosstabGroupTitleHeaderCountTest(columnGroup1, measure2, 0);
+		crosstabGroupTitleTotalHeaderCountTest(columnGroup1, measure2, 1);
+		crosstabGroupTitleTotalHeaderValueTest(columnGroup1, measure2, "measure2");
+		crosstabGroupTitleHeaderCountTest(columnGroup2, measure2, 4);
+		crosstabGroupTitleHeaderValueTest(columnGroup2, measure2, "measure2", "measure2", "measure2", "measure2");
+		crosstabGroupTitleTotalHeaderCountTest(columnGroup2, measure2, 2);
+		crosstabGroupTitleTotalHeaderValueTest(columnGroup2, measure2, "measure2", "measure2");
 
 		//row group
 		crosstabGroupHeaderCountTest(rowGroup1, 2);

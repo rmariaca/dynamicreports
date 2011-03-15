@@ -75,6 +75,10 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), index, horizontalAlignment);
 	}
 
+	protected void crosstabGroupTitleHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleHeaderName(group, measure), index, foreColor, backColor, fontName, fontSize, bold, italic);
+	}
+
 	//group total header
 	protected void crosstabGroupTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
@@ -92,20 +96,24 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, horizontalAlignment);
 	}
 
+	protected void crosstabGroupTitleTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleTotalHeaderName(group, measure), index, foreColor, backColor, fontName, fontSize, bold, italic);
+	}
+
 	//cell
-	protected void crosstabCellStyleTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabCellStyleTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
-	protected void crosstabCellBorderTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color topColor, LineStyleEnum topLineStyle, float top, Color bottomColor, LineStyleEnum bottomLineStyle, float bottom, Color leftColor, LineStyleEnum leftLineStyle, float left, Color rightColor, LineStyleEnum rightLineStyle, float right) {
+	protected void crosstabCellBorderTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color topColor, LineStyleEnum topLineStyle, float top, Color bottomColor, LineStyleEnum bottomLineStyle, float bottom, Color leftColor, LineStyleEnum leftLineStyle, float left, Color rightColor, LineStyleEnum rightLineStyle, float right) {
 		borderTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, topColor, topLineStyle, top, bottomColor, bottomLineStyle, bottom, leftColor, leftLineStyle, left, rightColor, rightLineStyle, right);
 	}
 
-	protected void crosstabCellPaddingTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Integer top, Integer bottom, Integer left, Integer right) {
+	protected void crosstabCellPaddingTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Integer top, Integer bottom, Integer left, Integer right) {
 		paddingTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, top, bottom, left, right);
 	}
 
-	protected void crosstabCellHorizontalAlignmentTest(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void crosstabCellHorizontalAlignmentTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, HorizontalAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, horizontalAlignment);
 	}
 

@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
 
 import org.apache.commons.lang.Validate;
 
@@ -63,6 +64,7 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private DRCrosstabCellContent headerCell;
 	private List<DRICrosstabColumnGroup<?>> columnGroups;
 	private List<DRICrosstabRowGroup<?>> rowGroups;
+	private List<DRICrosstabVariable<?>> variables;
 	private List<DRICrosstabMeasure<?>> measures;
 
 	@Override
@@ -70,6 +72,7 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 		super.init();
 		columnGroups = new ArrayList<DRICrosstabColumnGroup<?>>();
 		rowGroups = new ArrayList<DRICrosstabRowGroup<?>>();
+		variables = new ArrayList<DRICrosstabVariable<?>>();
 		measures = new ArrayList<DRICrosstabMeasure<?>>();
 
 		whenNoDataCell = new DRCrosstabCellContent();
@@ -228,6 +231,15 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	public void addRowGroup(DRICrosstabRowGroup<?> rowGroup) {
 		Validate.notNull(rowGroup, "rowGroup must not be null");
 		this.rowGroups.add(rowGroup);
+	}
+
+	public List<DRICrosstabVariable<?>> getVariables() {
+		return variables;
+	}
+
+	public void addVariable(DRICrosstabVariable<?> variable) {
+		Validate.notNull(variable, "variable must not be null");
+		this.variables.add(variable);
 	}
 
 	public List<DRICrosstabMeasure<?>> getMeasures() {

@@ -24,46 +24,59 @@ package net.sf.dynamicreports.test.jasper.crosstab;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.Serializable;
-import java.util.Locale;
+import java.awt.Color;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.OrderType;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
+import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implements Serializable {
+public class CrosstabStyle5Test extends AbstractJasperCrosstabStyleTest {
 	private static final long serialVersionUID = 1L;
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
-	private CrosstabColumnGroupBuilder<String> columnGroup;
+	private CrosstabColumnGroupBuilder<String> columnGroup1;
+	private CrosstabColumnGroupBuilder<String> columnGroup2;
 	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureBuilder<Integer> measure2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		measure1 = ctab.measure("field3", Integer.class, Calculation.SUM);
+		FieldBuilder<String> field1 = field("field1", String.class);
+		FieldBuilder<String> field2 = field("field2", String.class);
+
+		StyleBuilder headerStyle = stl.style().setBackgroundColor(Color.LIGHT_GRAY);
+		StyleBuilder cellStyle = stl.style().bold();
+		StyleBuilder titleStyle = stl.style(cellStyle).setBackgroundColor(Color.BLUE);
+
+		rowGroup = ctab.rowGroup(field1).setHeaderStyle(headerStyle).setTotalHeaderStyle(headerStyle);
+		columnGroup1 = ctab.columnGroup(field1).setHeaderStyle(headerStyle).setTotalHeaderStyle(headerStyle);
+		columnGroup2 = ctab.columnGroup(field2).setHeaderStyle(headerStyle).setTotalHeaderStyle(headerStyle);
+
+		measure1 = ctab.measure("m1", "field3", Integer.class, Calculation.SUM);
+		measure1.setTitleStyle(titleStyle);
+		measure2 = ctab.measure("m2", "field3", Integer.class, Calculation.SUM);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
+			.setCellWidth(50)
 			.rowGroups(
-				rowGroup = ctab.rowGroup("field1", String.class).setOrderType(OrderType.DESCENDING).setShowTotal(false))
+				rowGroup)
 			.columnGroups(
-				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).setOrderByExpression(new OrderByExpression()))
+				columnGroup1, columnGroup2)
 			.measures(
-				measure1);
+				measure1, measure2);
 
-		rb.setLocale(Locale.ENGLISH)
-			.summary(crosstab);
+		rb.summary(crosstab);
 	}
 
 	@Override
@@ -74,43 +87,22 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 
 		setCrosstabBand("summary");
 
-		//column group
-		crosstabGroupHeaderCountTest(columnGroup, 2);
-		crosstabGroupHeaderValueTest(columnGroup, "d", "c");
-		crosstabGroupTotalHeaderCountTest(columnGroup, 0);
+		crosstabGroupTitleTotalHeaderStyleTest(columnGroup1, measure1, 0, null, Color.BLUE, "Arial", 10, true, null);
+		crosstabGroupTitleTotalHeaderStyleTest(columnGroup1, measure2, 0, null, Color.LIGHT_GRAY, "Arial", 10, null, null);
 
-		//row group
-		crosstabGroupHeaderCountTest(rowGroup, 2);
-		crosstabGroupHeaderValueTest(rowGroup, "b", "a");
-		crosstabGroupTotalHeaderCountTest(rowGroup, 0);
-
-		//measure1
-		crosstabCellCountTest(measure1, null, null, 4);
-		crosstabCellValueTest(measure1, null, null, "3", "7", "11", "15");
-		crosstabCellCountTest(measure1, null, columnGroup, 0);
-		crosstabCellCountTest(measure1, rowGroup, null, 0);
-		crosstabCellCountTest(measure1, rowGroup, columnGroup, 0);
+		crosstabGroupTitleHeaderStyleTest(columnGroup2, measure1, 0, null, Color.BLUE, "Arial", 10, true, null);
+		crosstabGroupTitleTotalHeaderStyleTest(columnGroup2, measure1, 0, null, Color.BLUE, "Arial", 10, true, null);
+		crosstabGroupTitleHeaderStyleTest(columnGroup2, measure2, 0, null, Color.LIGHT_GRAY, "Arial", 10, null, null);
+		crosstabGroupTitleTotalHeaderStyleTest(columnGroup2, measure2, 0, null, Color.LIGHT_GRAY, "Arial", 10, null, null);
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2", "field3");
-		dataSource.add("a", "c", 8);
-		dataSource.add("a", "c", 7);
-		dataSource.add("a", "d", 6);
-		dataSource.add("a", "d", 5);
-		dataSource.add("b", "c", 4);
-		dataSource.add("b", "c", 3);
-		dataSource.add("b", "d", 2);
-		dataSource.add("b", "d", 1);
+		dataSource.add("a", "c", 1);
+		dataSource.add("a", "c", 2);
+		dataSource.add("a", "d", 3);
+		dataSource.add("a", "d", 4);
 		return dataSource;
-	}
-
-	private class OrderByExpression extends AbstractSimpleExpression<Integer> {
-		private static final long serialVersionUID = 1L;
-
-		public Integer evaluate(ReportParameters reportParameters) {
-			return reportParameters.getValue(measure1);
-		}
 	}
 }

@@ -71,7 +71,7 @@ import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
-import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasureCell;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -1197,9 +1197,9 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	public DRIStyle getCrosstabMeasureTitleStyle(DRICrosstab crosstab, DRICrosstabMeasureCell<?> measureCell) {
-		if (measureCell.getTitleStyle() != null) {
-			return measureCell.getTitleStyle();
+	public DRIStyle getCrosstabMeasureTitleStyle(DRICrosstab crosstab, DRICrosstabMeasure<?> measure) {
+		if (measure.getTitleStyle() != null) {
+			return measure.getTitleStyle();
 		}
 		if (crosstab.getMeasureTitleStyle() != null) {
 			return crosstab.getMeasureTitleStyle();

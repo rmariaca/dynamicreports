@@ -118,8 +118,18 @@ public class JasperTestUtils {
 		return "group_" + group.build().getName() + ".totalheader1";
 	}
 
+	//crosstab group title header
+	public static String getCrosstabGroupTitleHeaderName(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure) {
+		return "group_" + group.build().getName() + ".titleheader." + measure.build().getName() + "1";
+	}
+
+	//crosstab group title total header
+	public static String getCrosstabGroupTitleTotalHeaderName(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure) {
+		return "group_" + group.build().getName() + ".titletotalheader." + measure.build().getName() + "1";
+	}
+
 	//crosstab cell
-	public static String getCrosstabCellName(CrosstabMeasureBuilder<?, ?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+	public static String getCrosstabCellName(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
 		String name = "cell_measure[" + measure.build().getName() + "]";
 		if (rowGroup != null) {
 			name += "_rowgroup[" + rowGroup.build().getName() + "]";

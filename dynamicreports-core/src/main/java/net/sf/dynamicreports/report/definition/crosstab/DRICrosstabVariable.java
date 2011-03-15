@@ -22,35 +22,22 @@
 
 package net.sf.dynamicreports.report.definition.crosstab;
 
-import java.util.List;
-
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRICrosstabMeasureCell<T> extends DRICrosstabMeasure<T> {
+public interface DRICrosstabVariable<T> extends DRISystemExpression<T>, DRIValue<T> {
 
-	public DRIDataType<? super T, T> getDataType();
+	public Class<? super T> getValueClass();
 
-	public DRISimpleExpression<?> getCellExpression();
+	public DRIExpression<?> getValueExpression();
 
-	public String getPattern();
+	public Calculation getCalculation();
 
-	public HorizontalAlignment getHorizontalAlignment();
-
-	public DRIValueFormatter<?, ? super T> getValueFormatter();
-
-	public Boolean getStretchWithOverflow();
-
-	public List<DRICrosstabCellStyle> getStyles();
-
-	public DRIExpression<?> getTitleExpression();
-
-	public DRIStyle getTitleStyle();
+	public CrosstabPercentageType getPercentageType();
 }

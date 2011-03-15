@@ -74,5 +74,7 @@ public interface DRICrosstab extends DRIDimensionComponent {
 
 	public List<DRICrosstabRowGroup<?>> getRowGroups();
 
+	public List<DRICrosstabVariable<?>> getVariables();
+
 	public List<DRICrosstabMeasure<?>> getMeasures();
 }

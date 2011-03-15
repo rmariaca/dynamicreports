@@ -31,7 +31,7 @@ import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -60,8 +60,8 @@ public class StyleCrosstabReport {
 		                                                     .setHeaderStyle(Templates.columnTitleStyle)
 		                                                     .setTotalHeaderStyle(Templates.columnTitleStyle);
 
-		CrosstabMeasureVariableCellBuilder<Integer>    quantityMeasure  = ctab.measure("Quantity",   "quantity",  Integer.class,    Calculation.SUM);
-		CrosstabMeasureVariableCellBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM);
+		CrosstabMeasureBuilder<Integer>    quantityMeasure  = ctab.measure("Quantity",   "quantity",  Integer.class,    Calculation.SUM);
+		CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM);
 
 		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(unitPriceMeasure, 600))
 		                                        .setBackgroundColor(new Color(210, 255, 210));

@@ -31,10 +31,9 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureCellBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableBuilder;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureVariableCellBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabVariableBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
@@ -49,25 +48,27 @@ public class ExpressionCrosstabTest extends AbstractJasperCrosstabValueTest impl
 
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
-	private CrosstabMeasureVariableCellBuilder<Integer> measure1;
-	private CrosstabMeasureVariableBuilder<Integer> measure2;
-	private CrosstabMeasureVariableCellBuilder<Double> measure3;
-	private CrosstabMeasureCellBuilder<Double> measure4;
+	private CrosstabVariableBuilder<Integer> variable1;
+	private CrosstabMeasureBuilder<Integer> measure1;
+	private CrosstabMeasureBuilder<Double> measure2;
+	private CrosstabMeasureBuilder<Double> measure3;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
+		variable1 = ctab.variable("field4", Integer.class, Calculation.SUM);
 		measure1 = ctab.measure("field3", Integer.class, Calculation.SUM);
-		measure2 = ctab.measureVariable("field4", Integer.class, Calculation.SUM);
-		measure3 = ctab.measure(new MeasureExpression1(), Calculation.SUM);
-		measure4 = ctab.measure(new MeasureExpression2());
+		measure2 = ctab.measure(new MeasureExpression1(), Calculation.SUM);
+		measure3 = ctab.measure(new MeasureExpression2());
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.rowGroups(
 				rowGroup = ctab.rowGroup("field1", String.class))
 			.columnGroups(
 				columnGroup = ctab.columnGroup("field2", String.class))
+			.variables(
+				variable1)
 			.measures(
-				measure1, measure2, measure3, measure4);
+				measure1, measure2, measure3);
 
 		rb.setLocale(Locale.ENGLISH)
 			.summary(crosstab);
@@ -104,30 +105,24 @@ public class ExpressionCrosstabTest extends AbstractJasperCrosstabValueTest impl
 		crosstabCellValueTest(measure1, rowGroup, columnGroup, "36");
 
 		//measure2
-		crosstabCellCountTest(measure2, null, null, 0);
-		crosstabCellCountTest(measure2, null, columnGroup, 0);
-		crosstabCellCountTest(measure2, rowGroup, null, 0);
-		crosstabCellCountTest(measure2, rowGroup, columnGroup, 0);
+		crosstabCellCountTest(measure2, null, null, 4);
+		crosstabCellValueTest(measure2, null, null, "15.0", "11.0", "7.0", "3.0");
+		crosstabCellCountTest(measure2, null, columnGroup, 2);
+		crosstabCellValueTest(measure2, null, columnGroup, "26.0", "10.0");
+		crosstabCellCountTest(measure2, rowGroup, null, 2);
+		crosstabCellValueTest(measure2, rowGroup, null, "22.0", "14.0");
+		crosstabCellCountTest(measure2, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure2, rowGroup, columnGroup, "36.0");
 
 		//measure3
 		crosstabCellCountTest(measure3, null, null, 4);
-		crosstabCellValueTest(measure3, null, null, "15.0", "11.0", "7.0", "3.0");
+		crosstabCellValueTest(measure3, null, null, "7.5", "5.5", "3.5", "1.5");
 		crosstabCellCountTest(measure3, null, columnGroup, 2);
-		crosstabCellValueTest(measure3, null, columnGroup, "26.0", "10.0");
+		crosstabCellValueTest(measure3, null, columnGroup, "6.5", "2.5");
 		crosstabCellCountTest(measure3, rowGroup, null, 2);
-		crosstabCellValueTest(measure3, rowGroup, null, "22.0", "14.0");
+		crosstabCellValueTest(measure3, rowGroup, null, "5.5", "3.5");
 		crosstabCellCountTest(measure3, rowGroup, columnGroup, 1);
-		crosstabCellValueTest(measure3, rowGroup, columnGroup, "36.0");
-
-		//measure4
-		crosstabCellCountTest(measure4, null, null, 4);
-		crosstabCellValueTest(measure4, null, null, "7.5", "5.5", "3.5", "1.5");
-		crosstabCellCountTest(measure4, null, columnGroup, 2);
-		crosstabCellValueTest(measure4, null, columnGroup, "6.5", "2.5");
-		crosstabCellCountTest(measure4, rowGroup, null, 2);
-		crosstabCellValueTest(measure4, rowGroup, null, "5.5", "3.5");
-		crosstabCellCountTest(measure4, rowGroup, columnGroup, 1);
-		crosstabCellValueTest(measure4, rowGroup, columnGroup, "4.5");
+		crosstabCellValueTest(measure3, rowGroup, columnGroup, "4.5");
 	}
 
 	@Override
@@ -159,7 +154,7 @@ public class ExpressionCrosstabTest extends AbstractJasperCrosstabValueTest impl
 
 		public Double evaluate(ReportParameters reportParameters) {
 			Integer value1 = reportParameters.getValue(measure1);
-			Integer value2 = reportParameters.getValue(measure2);
+			Integer value2 = reportParameters.getValue(variable1);
 			return value1.doubleValue() / value2.doubleValue();
 		}
 	}

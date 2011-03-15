@@ -151,6 +151,6 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 	}
 
 	public String getName() {
-		return build().getName();
+		return build().getExpression().getName();
 	}
 }

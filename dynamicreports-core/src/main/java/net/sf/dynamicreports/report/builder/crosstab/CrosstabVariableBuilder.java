@@ -22,7 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.crosstab;
 
-import net.sf.dynamicreports.report.base.crosstab.DRCrosstabMeasureVariable;
+import net.sf.dynamicreports.report.base.crosstab.DRCrosstabVariable;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
@@ -35,22 +36,22 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CrosstabMeasureVariableBuilder<T> extends CrosstabMeasureBuilder<CrosstabMeasureVariableBuilder<T>, DRCrosstabMeasureVariable<T>> implements DRIValue<T> {
+public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariableBuilder<T>, DRCrosstabVariable<T>> implements DRIValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CrosstabMeasureVariableBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
-		super(new DRCrosstabMeasureVariable<T>(column.build(), calculation));
+	protected CrosstabVariableBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
+		super(new DRCrosstabVariable<T>(column.build(), calculation));
 	}
 
-	protected CrosstabMeasureVariableBuilder(FieldBuilder<?> field, Calculation calculation) {
-		super(new DRCrosstabMeasureVariable<T>(field.getField(), calculation));
+	protected CrosstabVariableBuilder(FieldBuilder<?> field, Calculation calculation) {
+		super(new DRCrosstabVariable<T>(field.getField(), calculation));
 	}
 
-	protected CrosstabMeasureVariableBuilder(DRISimpleExpression<?> expression, Calculation calculation) {
-		super(new DRCrosstabMeasureVariable<T>(expression, calculation));
+	protected CrosstabVariableBuilder(DRISimpleExpression<?> expression, Calculation calculation) {
+		super(new DRCrosstabVariable<T>(expression, calculation));
 	}
 
-	public CrosstabMeasureVariableBuilder<T> setPercentageType(CrosstabPercentageType percentageType) {
+	public CrosstabVariableBuilder<T> setPercentageType(CrosstabPercentageType percentageType) {
 		getObject().setPercentageType(percentageType);
 		return this;
 	}
