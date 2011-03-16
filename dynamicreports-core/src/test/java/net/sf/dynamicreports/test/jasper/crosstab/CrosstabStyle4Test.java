@@ -87,9 +87,9 @@ public class CrosstabStyle4Test extends AbstractJasperCrosstabStyleTest {
 
 		setCrosstabBand("summary");
 
-		Color color1 = new Color(229, 229, 76);
-		Color color2 = new Color(229, 76, 229);
-		Color color3 = new Color(229, 76, 76);
+		Color color1 = new Color(239, 239, 48);
+		Color color2 = new Color(239, 48, 239);
+		Color color3 = new Color(239, 48, 48);
 
 		crosstabGroupHeaderStyleTest(rowGroup1, 0, null, Color.BLUE, "Arial", 10, true, null);
 		crosstabGroupTotalHeaderStyleTest(rowGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);

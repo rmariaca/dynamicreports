@@ -363,7 +363,7 @@ public class CrosstabTransform {
 	}
 
 	private DRStyle cellStyle(DRICrosstab crosstab, List<DRIConditionalStyle> rowHighlighters, DRIStyle style) throws DRException {
-		if (!rowHighlighters.isEmpty() || !style.getConditionalStyles().isEmpty()) {
+		if (rowHighlighters != null && !rowHighlighters.isEmpty() || !style.getConditionalStyles().isEmpty()) {
 			DRStyle newStyle = new DRStyle();
 			if (style != null) {
 				newStyle.setParentStyle((DRStyle) style);
@@ -374,17 +374,19 @@ public class CrosstabTransform {
 					newStyle.addConditionalStyle(newConditionalStyle);
 				}
 			}
-			Color backgroundColor = StyleResolver.getBackgroundColor(style);
-			for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
-				if (backgroundColor != null) {
-					DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
-					accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
-					Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.4f);
-					newConditionalStyle.setBackgroundColor(mergedColor);
-					newStyle.addConditionalStyle(newConditionalStyle);
-				}
-				else {
-					newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
+			if (rowHighlighters != null && !rowHighlighters.isEmpty()) {
+				Color backgroundColor = StyleResolver.getBackgroundColor(style);
+				for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
+					if (backgroundColor != null) {
+						DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
+						accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
+						Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.25f);
+						newConditionalStyle.setBackgroundColor(mergedColor);
+						newStyle.addConditionalStyle(newConditionalStyle);
+					}
+					else {
+						newStyle.addConditionalStyle((DRConditionalStyle) conditionalStyle);
+					}
 				}
 			}
 			return newStyle;
@@ -566,6 +568,8 @@ public class CrosstabTransform {
 		private DRStyle defaultCellStyle;
 		private DRStyle defaultGroupTotalStyle;
 		private DRStyle defaultGrandTotalStyle;
+		private DRStyle defaultRowGroupTotalStyle;
+		private DRStyle defaultRowGrandTotalStyle;
 		private DRICrosstabGroup<?> firstColumnGroup;
 		private DRICrosstabGroup<?> firstRowGroup;
 
@@ -609,6 +613,12 @@ public class CrosstabTransform {
 			}
 			defaultGroupTotalStyle = cellStyle(crosstab, rowHighlighters, groupTotalStyle);
 			defaultGrandTotalStyle = cellStyle(crosstab, rowHighlighters, grandTotalStyle);
+			if (StyleResolver.getBackgroundColor(groupTotalStyle) != null) {
+				defaultRowGroupTotalStyle = cellStyle(crosstab, null, groupTotalStyle);
+			}
+			if (StyleResolver.getBackgroundColor(grandTotalStyle) != null) {
+				defaultRowGrandTotalStyle = cellStyle(crosstab, null, grandTotalStyle);
+			}
 			defaultCellStyle = cellStyle(crosstab, rowHighlighters, cellStyle);
 			firstColumnGroup = getFirstValue(crosstab.getColumnGroups());
 			firstRowGroup = getFirstValue(crosstab.getRowGroups());
@@ -630,6 +640,14 @@ public class CrosstabTransform {
 
 			if (rowGroup == null && columnGroup == null) {
 				return defaultCellStyle;
+			}
+			if (rowGroup != null) {
+				if ((columnGroup == firstColumnGroup || rowGroup == firstRowGroup) && defaultRowGrandTotalStyle != null) {
+					return defaultRowGrandTotalStyle;
+				}
+				if (defaultRowGroupTotalStyle != null) {
+					return defaultRowGroupTotalStyle;
+				}
 			}
 			if (columnGroup == firstColumnGroup || rowGroup == firstRowGroup) {
 				return defaultGrandTotalStyle;

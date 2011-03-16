@@ -48,13 +48,9 @@ public class CrosstabReport {
 
 	private void build() {
 		CrosstabRowGroupBuilder<String> rowGroup = ctab.rowGroup("state", String.class)
-		                                               .setTotalHeader("Total for state")
-		                                               .setHeaderStyle(Templates.columnTitleStyle)
-		                                               .setTotalHeaderStyle(Templates.columnTitleStyle);
+		                                               .setTotalHeader("Total for state");
 
-		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class)
-		                                                     .setHeaderStyle(Templates.columnTitleStyle)
-		                                                     .setTotalHeaderStyle(Templates.columnTitleStyle);
+		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 		                               .headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))

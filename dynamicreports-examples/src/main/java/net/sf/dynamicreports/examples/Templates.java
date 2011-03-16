@@ -81,6 +81,14 @@ public class Templates {
 		subtotalStyle       = stl.style(boldStyle)
 		                         .setTopBorder(stl.pen1Point());
 
+		StyleBuilder crosstabGroupStyle      = stl.style(columnTitleStyle);
+		StyleBuilder crosstabGroupTotalStyle = stl.style(columnTitleStyle)
+		                                          .setBackgroundColor(new Color(170, 170, 170));
+		StyleBuilder crosstabGrandTotalStyle = stl.style(columnTitleStyle)
+		                                          .setBackgroundColor(new Color(140, 140, 140));
+		StyleBuilder crosstabCellStyle       = stl.style(columnStyle)
+		                                          .setBorder(stl.pen1Point());
+
 		reportTemplate = template()
 		                   .setLocale(Locale.ENGLISH)
 		                   .setColumnStyle(columnStyle)
@@ -89,7 +97,12 @@ public class Templates {
 		                   .setGroupTitleStyle(groupStyle)
 		                   .setSubtotalStyle(subtotalStyle)
 		                   .highlightDetailEvenRows()
-		                   .crosstabHighlightEvenRows();
+		                   .crosstabHighlightEvenRows()
+		                   .setCrosstabGroupStyle(crosstabGroupStyle)
+		                   .setCrosstabGroupTotalStyle(crosstabGroupTotalStyle)
+		                   .setCrosstabGrandTotalStyle(crosstabGrandTotalStyle)
+		                   .setCrosstabCellStyle(crosstabCellStyle);
+
 		currencyType = new CurrencyType();
 
 		HyperLinkBuilder link = hyperLink("http://dynamicreports.sourceforge.net");

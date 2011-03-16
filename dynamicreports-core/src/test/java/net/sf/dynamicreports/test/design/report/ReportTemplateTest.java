@@ -203,8 +203,8 @@ public class ReportTemplateTest {
 			Assert.assertEquals("crosstab width", new Integer(90), crosstab.getWidth());
 			Assert.assertEquals("crosstab height", new Integer(101), crosstab.getHeight());
 			style = crosstab.getCells().get(0).getContent().getComponent().getStyle();
-			Assert.assertEquals("crosstab odd row style", new Color(102, 233, 153), style.getConditionalStyles().get(0).getBackgroundColor());
-			Assert.assertEquals("crosstab even row style", new Color(102, 153, 255), style.getConditionalStyles().get(1).getBackgroundColor());
+			Assert.assertEquals("crosstab odd row style", new Color(63, 241, 191), style.getConditionalStyles().get(0).getBackgroundColor());
+			Assert.assertEquals("crosstab even row style", new Color(63, 191, 255), style.getConditionalStyles().get(1).getBackgroundColor());
 			Assert.assertEquals("crosstab cell style", Color.CYAN, style.getParentStyle().getBackgroundColor());
 			style = crosstab.getColumnGroups().get(0).getHeader().getComponent().getStyle();
 			Assert.assertEquals("crosstab column header style", Color.RED, style.getBackgroundColor());

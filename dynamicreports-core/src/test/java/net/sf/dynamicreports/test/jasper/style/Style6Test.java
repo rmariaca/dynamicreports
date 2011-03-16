@@ -56,7 +56,7 @@ public class Style6Test extends AbstractJasperStyleTest implements Serializable 
 
 		numberOfPagesTest(1);
 
-		Color color1 = new Color(96, 96, 249);
+		Color color1 = new Color(60, 60, 251);
 		Color color2 = new Color(240, 240, 240);
 
 		//column1

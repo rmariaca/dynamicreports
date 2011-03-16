@@ -152,7 +152,7 @@ public class ColumnTransform {
 				if (backgroundColor != null) {
 					DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
 					accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
-					Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.4f);
+					Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.25f);
 					newConditionalStyle.setBackgroundColor(mergedColor);
 					newStyle.addConditionalStyle(newConditionalStyle);
 				}

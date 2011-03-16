@@ -24,29 +24,32 @@ package net.sf.dynamicreports.examples.crosstab;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
-import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabVariableBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class StyleCrosstabReport {
+public class MeasureExpressionCrosstabReport {
+	private CrosstabMeasureBuilder<Integer> quantityMeasure;
+	private CrosstabVariableBuilder<BigDecimal> unitPriceVariable;
 
-	public StyleCrosstabReport() {
+	public MeasureExpressionCrosstabReport() {
 		build();
 	}
 
@@ -56,46 +59,40 @@ public class StyleCrosstabReport {
 
 		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class);
 
-		CrosstabMeasureBuilder<Integer>    quantityMeasure  = ctab.measure("Quantity",   "quantity",  Integer.class,    Calculation.SUM);
-		CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM);
-
-		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(unitPriceMeasure, 600))
-		                                        .setBackgroundColor(new Color(210, 255, 210))
-		                                        .setBorder(stl.pen1Point());
-		ConditionalStyleBuilder condition2 = stl.conditionalStyle(cnd.smaller(unitPriceMeasure, 150))
-		                                        .setBackgroundColor(new Color(255, 210, 210))
-		                                        .setBorder(stl.pen1Point());
-
-		StyleBuilder unitPriceStyle = stl.style()
-		                                 .conditionalStyles(condition1, condition2)
-		                                 .setBorder(stl.pen1Point());
-		StyleBuilder totalCellStyle = stl.style()
-		                                 .setBackgroundColor(new Color(200, 200, 255))
-		                                 .setBorder(stl.pen1Point());
-
-		unitPriceMeasure.setStyle(unitPriceStyle)
-		                .setStyle(totalCellStyle, rowGroup)
-		                .setStyle(totalCellStyle, rowGroup, columnGroup);
-		quantityMeasure.setStyle(totalCellStyle, rowGroup)
-		               .setStyle(totalCellStyle, rowGroup, columnGroup);
+		unitPriceVariable = ctab.variable("unitprice", BigDecimal.class, Calculation.SUM);
+		quantityMeasure = ctab.measure("Quantity", "quantity", Integer.class, Calculation.SUM);
+		CrosstabMeasureBuilder<BigDecimal> priceMeasure = ctab.measure("Price", new PriceMeasureExpression());
+		priceMeasure.setDataType(type.bigDecimalType());
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 		                               .headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
 		                               .rowGroups(rowGroup)
 		                               .columnGroups(columnGroup)
-		                               .measures(quantityMeasure, unitPriceMeasure);
+		                               .variables(unitPriceVariable)
+		                               .measures(quantityMeasure, priceMeasure);
 
 		try {
 			report()
+			  .fields(field("orderdate", Date.class))
 			  .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 			  .setTemplate(Templates.reportTemplate)
-			  .title(Templates.createTitleComponent("StyleCrosstab"))
+			  .title(Templates.createTitleComponent("MeasureExpressionCrosstab"))
 			  .summary(crosstab)
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private class PriceMeasureExpression extends AbstractSimpleExpression<BigDecimal> {
+		private static final long serialVersionUID = 1L;
+
+		public BigDecimal evaluate(ReportParameters reportParameters) {
+			Integer quantity = reportParameters.getValue(quantityMeasure);
+			BigDecimal unitPrice = reportParameters.getValue(unitPriceVariable);
+			return unitPrice.multiply(new BigDecimal(quantity));
 		}
 	}
 
@@ -132,6 +129,6 @@ public class StyleCrosstabReport {
 	}
 
 	public static void main(String[] args) {
-		new StyleCrosstabReport();
+		new MeasureExpressionCrosstabReport();
 	}
 }

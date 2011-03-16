@@ -50,17 +50,11 @@ public class GroupExpressionCrosstabReport {
 	}
 
 	private void build() {
-		CrosstabRowGroupBuilder<String> rowGroup = ctab.rowGroup("state", String.class)
-		                                               .setHeaderStyle(Templates.columnTitleStyle)
-		                                               .setTotalHeaderStyle(Templates.columnTitleStyle);
+		CrosstabRowGroupBuilder<String> rowGroup = ctab.rowGroup("state", String.class);
 
-		CrosstabColumnGroupBuilder<Integer> columnYearGroup = ctab.columnGroup(new YearExpression())
-		                                                          .setHeaderStyle(Templates.columnTitleStyle)
-		                                                          .setTotalHeaderStyle(Templates.columnTitleStyle);
+		CrosstabColumnGroupBuilder<Integer> columnYearGroup = ctab.columnGroup(new YearExpression());
 
-		CrosstabColumnGroupBuilder<String> columnQuarterGroup = ctab.columnGroup(new QuarterExpression())
-		                                                            .setHeaderStyle(Templates.columnTitleStyle)
-		                                                            .setTotalHeaderStyle(Templates.columnTitleStyle);
+		CrosstabColumnGroupBuilder<String> columnQuarterGroup = ctab.columnGroup(new QuarterExpression());
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 		                               .setCellWidth(50)
