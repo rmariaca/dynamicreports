@@ -37,27 +37,30 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SplitType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIBand;
-import net.sf.dynamicreports.report.definition.DRIColumn;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
-import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
+import net.sf.dynamicreports.report.definition.column.DRIColumn;
+import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
@@ -503,24 +506,30 @@ public class TemplateTransform {
 	}
 
 	protected int getColumnWidth(DRIColumn<?> column, DRDesignStyle style) throws DRException {
-		DRIComponent component = column.getComponent();
-		if (component instanceof DRIDimensionComponent) {
-			if (((DRIDimensionComponent) component).getWidth() != null) {
-				return ((DRIDimensionComponent) component).getWidth();
-			}
-			if (component instanceof DRITextField<?>) {
-				if (((DRITextField<?>) component).getColumns() != null) {
-					return StyleResolver.getFontWidth(style, ((DRITextField<?>) component).getColumns());
+		DRIComponent component = accessor.getColumnTransform().getColumnComponent(column);
+		if (component != null) {
+			if (component instanceof DRIDimensionComponent) {
+				if (((DRIDimensionComponent) component).getWidth() != null) {
+					return ((DRIDimensionComponent) component).getWidth();
+				}
+				if (component instanceof DRITextField<?>) {
+					if (((DRITextField<?>) component).getColumns() != null) {
+						return StyleResolver.getFontWidth(style, ((DRITextField<?>) component).getColumns());
+					}
 				}
 			}
+			else if (component instanceof DRIList) {
+				DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
+				return detectWidth(list);
+			}
+			else {
+				throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
+			}
 		}
-		else if (component instanceof DRIList) {
-			DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
-			return detectWidth(list);
-		}
-		else {
-			throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
-		}
+		return getColumnWidth();
+	}
+
+	protected int getColumnWidth() {
 		if (template.getColumnWidth() != null) {
 			return template.getColumnWidth();
 		}
@@ -784,6 +793,13 @@ public class TemplateTransform {
 			return template.getListgap();
 		}
 		return Defaults.getDefaults().getListgap();
+	}
+
+	protected StretchType getListStretchType(DRIList list) {
+		if (list.getStretchType() != null) {
+			return list.getStretchType();
+		}
+		return Defaults.getDefaults().getListStretchType();
 	}
 
 	//chart
@@ -1208,6 +1224,53 @@ public class TemplateTransform {
 			return template.getCrosstabMeasureTitleStyle();
 		}
 		return Defaults.getDefaults().getCrosstabMeasureTitleStyle();
+	}
+
+	public BooleanComponentType getBooleanComponentType(DRIBooleanColumn column) {
+		if (column.getComponentType() != null) {
+			return column.getComponentType();
+		}
+		if (template.getBooleanComponentType() != null) {
+			return template.getBooleanComponentType();
+		}
+		return Defaults.getDefaults().getBooleanComponentType();
+	}
+
+	public Integer getBooleanImageWidth(DRIBooleanColumn column) {
+		if (column.getImageWidth() != null) {
+			return column.getImageWidth();
+		}
+		if (template.getBooleanImageWidth() != null) {
+			return template.getBooleanImageWidth();
+		}
+		return Defaults.getDefaults().getBooleanImageWidth();
+	}
+
+	public Integer getBooleanImageHeight(DRIBooleanColumn column) {
+		if (column.getImageHeight() != null) {
+			return column.getImageHeight();
+		}
+		if (template.getBooleanImageHeight() != null) {
+			return template.getBooleanImageHeight();
+		}
+		return Defaults.getDefaults().getBooleanImageHeight();
+	}
+
+	public DRIStyle getBooleanStyle(DRIBooleanColumn column) {
+		if (column.getStyle() != null) {
+			return column.getStyle();
+		}
+		if (template.getBooleanStyle() != null) {
+			return template.getBooleanStyle();
+		}
+		return Defaults.getDefaults().getBooleanStyle();
+	}
+
+	public Integer getBooleanImageColumnWidth(DRIBooleanColumn column) {
+		if (column.getWidth() != null) {
+			return column.getWidth();
+		}
+		return Defaults.getDefaults().getColumnWidth();
 	}
 
 	//split

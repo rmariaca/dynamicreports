@@ -53,6 +53,7 @@ import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -79,6 +80,7 @@ import net.sf.jasperreports.engine.type.RunDirectionEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.type.SortOrderEnum;
 import net.sf.jasperreports.engine.type.SplitTypeEnum;
+import net.sf.jasperreports.engine.type.StretchTypeEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
@@ -685,6 +687,23 @@ public class ConstantTransform {
 			return SortOrderEnum.DESCENDING;
 		default:
 			throw new JasperDesignException("OrderType " + orderType.name() + " not supported");
+		}
+	}
+
+	public static StretchTypeEnum stretchType(StretchType stretchType) {
+		if (stretchType == null) {
+			return StretchTypeEnum.NO_STRETCH;
+		}
+
+		switch (stretchType) {
+		case NO_STRETCH:
+			return StretchTypeEnum.NO_STRETCH;
+		case RELATIVE_TO_BAND_HEIGHT:
+			return StretchTypeEnum.RELATIVE_TO_BAND_HEIGHT;
+		case RELATIVE_TO_TALLEST_OBJECT:
+			return StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT;
+		default:
+			throw new JasperDesignException("StretchType " + stretchType.name() + " not supported");
 		}
 	}
 }

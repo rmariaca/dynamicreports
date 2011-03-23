@@ -20,41 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
-
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
-
-	public DRIReport getReport();
-
-	public Integer getPageWidth();
-
-	public TemplateTransform getTemplateTransform();
-
-	public ExpressionTransform getExpressionTransform();
-
-	public BandTransform getBandTransform();
-
-	public ComponentTransform getComponentTransform();
-
-	public GroupTransform getGroupTransform();
-
-	public ColumnTransform getColumnTransform();
-
-	public ColumnGridTransform getColumnGridTransform();
-
-	public StyleTransform getStyleTransform();
-
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
-
-	public DRDesignPage getPage();
+public enum StretchType {
+	NO_STRETCH,
+	RELATIVE_TO_TALLEST_OBJECT,
+	RELATIVE_TO_BAND_HEIGHT;
 }

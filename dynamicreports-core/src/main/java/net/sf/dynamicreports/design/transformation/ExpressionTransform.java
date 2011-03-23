@@ -45,11 +45,12 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpre
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.report.definition.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.DRIVariable;
+import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
+import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
@@ -62,7 +63,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ExpressionTransform {	
+public class ExpressionTransform {
 	private DesignTransformAccessor accessor;
 	private Map<String, DRIDesignField> fields;
 	private Map<String, DRIDesignVariable> variables;
@@ -70,12 +71,12 @@ public class ExpressionTransform {
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<DRIExpression<?>, DRIDesignExpression> expressions;
-	
-	public ExpressionTransform(DesignTransformAccessor accessor) {		
+
+	public ExpressionTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
 		init();
 	}
-	
+
 	private void init() {
 		fields = new LinkedHashMap<String, DRIDesignField>();
 		variables = new LinkedHashMap<String, DRIDesignVariable>();
@@ -84,7 +85,7 @@ public class ExpressionTransform {
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
 		expressions = new HashMap<DRIExpression<?>, DRIDesignExpression>();
 	}
-	
+
 	public void transform() throws DRException {
 		DRIReport report = accessor.getReport();
 		List<DRIField<?>> templateDesignFields = report.getTemplateDesign().getFields();
@@ -99,25 +100,25 @@ public class ExpressionTransform {
 		}
 		for (DRIVariable<?> variable : report.getVariables()) {
 			transformExpression(variable);
-		}	
+		}
 	}
-	
+
 	protected DRIDesignExpression transformExpression(DRIExpression<?> expression) throws DRException {
 		return transformExpression(expression, null);
 	}
-	
+
 	protected DRIDesignExpression transformExpression(DRIExpression<?> expression, DRIValueFormatter<?, ?> valueFormatter) throws DRException {
 		if (expression == null) {
 			return null;
 		}
-				
+
 		if (valueFormatter != null) {
 			return addExpression(new DRDesignValueFormatter(valueFormatter, transformExpression(expression)));
 		}
 		if (expressions.containsKey(expression)) {
 			return expressions.get(expression);
-		}		
-		
+		}
+
 		DRIDesignExpression express;
 		if (expression instanceof DRISystemExpression<?>) {
 			express = new DRDesignSystemExpression((DRISystemExpression<?>) expression);
@@ -137,6 +138,9 @@ public class ExpressionTransform {
 		else if (expression instanceof DRIValueColumn<?>) {
 			express = transformExpression(((DRIValueColumn<?>) expression).getComponent().getValueExpression());
 		}
+		else if (expression instanceof DRIBooleanColumn) {
+			express = transformExpression(((DRIBooleanColumn) expression).getValueExpression());
+		}
 		else if (expression instanceof DRISubtotal<?>) {
 			express = transformExpression(((DRISubtotal<?>) expression).getValueField().getValueExpression());
 		}
@@ -149,14 +153,14 @@ public class ExpressionTransform {
 		}
 		return express;
 	}
-	
+
 	private DRDesignField transformField(DRIField<?> field) {
 		DRDesignField designField = new DRDesignField();
 		designField.setName(field.getName());
 		designField.setValueClass(field.getValueClass());
 		return designField;
 	}
-	
+
 	private DRIDesignExpression transformComplexExpression(DRIComplexExpression<?> complexExpression) throws DRException {
 		DRDesignComplexExpression designComplexExpression = new DRDesignComplexExpression(complexExpression);
 		for (DRIExpression<?> expression : complexExpression.getExpressions()) {
@@ -170,24 +174,24 @@ public class ExpressionTransform {
 		designVariable.setValueExpression(accessor.getExpressionTransform().transformExpression(variable.getExpression()));
 		designVariable.setCalculation(variable.getCalculation());
 		designVariable.setResetType(ConstantTransform.variableResetType(variable.getResetType(), variable.getResetGroup(), accessor));
-		designVariable.setResetGroup(accessor.getGroupTransform().getGroup(ConstantTransform.variableResetGroup(variable.getName(), variable.getResetType(), variable.getResetGroup(), accessor)));		
+		designVariable.setResetGroup(accessor.getGroupTransform().getGroup(ConstantTransform.variableResetGroup(variable.getName(), variable.getResetType(), variable.getResetGroup(), accessor)));
 		return designVariable;
 	}
-	
+
 	public DRIDesignPropertyExpression transformPropertyExpression(DRIPropertyExpression propertyExpression) throws DRException {
 		DRDesignPropertyExpression designPropertyExpression = new DRDesignPropertyExpression();
 		designPropertyExpression.setName(propertyExpression.getName());
 		designPropertyExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(propertyExpression.getValueExpression()));
 		return designPropertyExpression;
 	}
-	
+
 	public DRIDesignParameterExpression transformParameterExpression(DRIParameterExpression parameterExpression) throws DRException {
 		DRDesignParameterExpression designParameterExpression = new DRDesignParameterExpression();
 		designParameterExpression.setName(parameterExpression.getName());
 		designParameterExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(parameterExpression.getValueExpression()));
 		return designParameterExpression;
 	}
-	
+
 	private DRIDesignExpression addExpression(DRIDesignExpression expression) {
 		if (expression == null) {
 			return null;
@@ -205,67 +209,67 @@ public class ExpressionTransform {
 			addSimpleExpression((DRIDesignSimpleExpression) expression);
 		}
 		else if (expression instanceof DRIDesignComplexExpression) {
-			addComplexExpression((DRIDesignComplexExpression) expression);			
+			addComplexExpression((DRIDesignComplexExpression) expression);
 		}
 		else {
 			throw new DRDesignReportException("Expression " + expression.getClass().getName() + " not supported");
 		}
 		return expression;
 	}
-	
+
 	private void addVariable(DRDesignVariable variable) {
 		if (variables.containsKey(variable.getName())) {
 			if (!variables.get(variable.getName()).equals(variable)) {
-				throw new DRDesignReportException("Duplicate declaration of variable \"" + variable.getName() + "\"");	
+				throw new DRDesignReportException("Duplicate declaration of variable \"" + variable.getName() + "\"");
 			}
-			return;				
-		}	
-		variables.put(variable.getName(), variable);	
+			return;
+		}
+		variables.put(variable.getName(), variable);
 	}
-	
+
 	private DRIDesignField addField(DRIDesignField field) {
 		if (fields.containsKey(field.getName())) {
 			DRIDesignField fld = fields.get(field.getName());
 			if (!fld.getValueClass().equals(field.getValueClass())) {
-				throw new DRDesignReportException("Duplicate declaration of field \"" + field.getName() + "\"");	
+				throw new DRDesignReportException("Duplicate declaration of field \"" + field.getName() + "\"");
 			}
 			return fld;
 		}
 		fields.put(field.getName(), field);
 		return field;
 	}
-	
+
 	private void addSystemExpression(DRIDesignSystemExpression systemExpression) {
 		if (systemExpressions.containsKey(systemExpression.getName())) {
 			return;
 		}
 		systemExpressions.put(systemExpression.getName(), systemExpression);
 	}
-	
+
 	private void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
 		if (simpleExpressions.containsKey(simpleExpression.getName())) {
 			if (!simpleExpressions.get(simpleExpression.getName()).equals(simpleExpression)) {
-				throw new DRDesignReportException("Duplicate declaration of simple expression \"" + simpleExpression.getName() + "\"");	
+				throw new DRDesignReportException("Duplicate declaration of simple expression \"" + simpleExpression.getName() + "\"");
 			}
 			return;
 		}
 		simpleExpressions.put(simpleExpression.getName(), simpleExpression);
 	}
-	
+
 	private void addComplexExpression(DRIDesignComplexExpression complexExpression) {
 		if (complexExpressions.containsKey(complexExpression.getName())) {
 			if (!complexExpressions.get(complexExpression.getName()).equals(complexExpression)) {
 				throw new DRDesignReportException("Duplicate declaration of complex expression \"" + complexExpression.getName() + "\"");
 			}
 			return;
-		}	
+		}
 		complexExpressions.put(complexExpression.getName(), complexExpression);
 	}
-	
+
 	public Collection<DRIDesignField> getFields() {
 		return fields.values();
 	}
-	
+
 	public Collection<DRIDesignVariable> getVariables() {
 		return variables.values();
 	}
@@ -273,11 +277,11 @@ public class ExpressionTransform {
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
 		return systemExpressions.values();
 	}
-	
+
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
 		return simpleExpressions.values();
 	}
-	
+
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return complexExpressions.values();
 	}

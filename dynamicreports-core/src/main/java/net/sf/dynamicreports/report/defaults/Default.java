@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -44,9 +45,11 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -114,6 +117,7 @@ public class Default {
 	private int genericElementHeight;
 	//list
 	private int listgap;
+	private StretchType listStretchType;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
 	private VerticalCellComponentAlignment verticalCellComponentAlignment;
 	//chart
@@ -147,6 +151,11 @@ public class Default {
 	private DRStyle crosstabGrandTotalStyle;
 	private DRStyle crosstabCellStyle;
 	private DRStyle crosstabMeasureTitleStyle;
+	//boolean
+	private BooleanComponentType booleanComponentType;
+	private Integer booleanImageWidth;
+	private Integer booleanImageHeight;
+	private DRStyle booleanStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -267,6 +276,7 @@ public class Default {
 		this.genericElementHeight = 100;
 
 		this.listgap = 0;
+		this.listStretchType = StretchType.NO_STRETCH;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
 		this.verticalCellComponentAlignment = VerticalCellComponentAlignment.EXPAND;
 
@@ -302,6 +312,11 @@ public class Default {
 		this.crosstabGrandTotalStyle = null;
 		this.crosstabCellStyle = null;
 		this.crosstabMeasureTitleStyle = null;
+
+		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
+		this.booleanImageWidth = 15;
+		this.booleanImageHeight = 15;
+		this.booleanStyle = null;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 
@@ -551,6 +566,10 @@ public class Default {
 		return listgap;
 	}
 
+	public StretchType getListStretchType() {
+		return listStretchType;
+	}
+
 	public HorizontalCellComponentAlignment getHorizontalCellComponentAlignment() {
 		return horizontalCellComponentAlignment;
 	}
@@ -665,6 +684,22 @@ public class Default {
 
 	public DRStyle getCrosstabMeasureTitleStyle() {
 		return crosstabMeasureTitleStyle;
+	}
+
+	public BooleanComponentType getBooleanComponentType() {
+		return booleanComponentType;
+	}
+
+	public Integer getBooleanImageWidth() {
+		return booleanImageWidth;
+	}
+
+	public Integer getBooleanImageHeight() {
+		return booleanImageHeight;
+	}
+
+	public DRIStyle getBooleanStyle() {
+		return booleanStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

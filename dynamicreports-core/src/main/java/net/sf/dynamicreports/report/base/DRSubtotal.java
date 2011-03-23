@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.base;
 
+import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;

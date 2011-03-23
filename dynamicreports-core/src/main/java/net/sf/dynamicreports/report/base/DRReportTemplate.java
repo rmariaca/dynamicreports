@@ -29,6 +29,7 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -115,6 +116,11 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRStyle crosstabGrandTotalStyle;
 	private DRStyle crosstabCellStyle;
 	private DRStyle crosstabMeasureTitleStyle;
+	//boolean
+	private BooleanComponentType booleanComponentType;
+	private Integer booleanImageWidth;
+	private Integer booleanImageHeight;
+	private DRIStyle booleanStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -673,6 +679,38 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setCrosstabMeasureTitleStyle(DRStyle crosstabMeasureTitleStyle) {
 		this.crosstabMeasureTitleStyle = crosstabMeasureTitleStyle;
+	}
+
+	public BooleanComponentType getBooleanComponentType() {
+		return booleanComponentType;
+	}
+
+	public void setBooleanComponentType(BooleanComponentType booleanComponentType) {
+		this.booleanComponentType = booleanComponentType;
+	}
+
+	public Integer getBooleanImageWidth() {
+		return booleanImageWidth;
+	}
+
+	public void setBooleanImageWidth(Integer booleanImageWidth) {
+		this.booleanImageWidth = booleanImageWidth;
+	}
+
+	public Integer getBooleanImageHeight() {
+		return booleanImageHeight;
+	}
+
+	public void setBooleanImageHeight(Integer booleanImageHeight) {
+		this.booleanImageHeight = booleanImageHeight;
+	}
+
+	public DRIStyle getBooleanStyle() {
+		return booleanStyle;
+	}
+
+	public void setBooleanStyle(DRIStyle booleanStyle) {
+		this.booleanStyle = booleanStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

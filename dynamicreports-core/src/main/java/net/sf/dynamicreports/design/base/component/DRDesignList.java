@@ -29,6 +29,7 @@ import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
 /**
@@ -40,7 +41,8 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private ListType type;
 	private ComponentGroupType componentGroupType;
 	private int gap;
-	
+	private StretchType stretchType;
+
 	public DRDesignList() {
 		this(ListType.HORIZONTAL);
 	}
@@ -49,18 +51,18 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		super("list");
 		this.type = type;
 	}
-	
+
 	@Override
 	protected void init() {
 		super.init();
 		this.listCells = new ArrayList<DRDesignListCell>();
 		this.components = new ArrayList<DRDesignComponent>();
 	}
-	
+
 	public List<DRDesignComponent> getComponents() {
 		return components;
 	}
-	
+
 	public void addComponent(DRDesignComponent component) {
 		components.add(component);
 		listCells.add(new DRDesignListCell(component));
@@ -70,29 +72,29 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		components.add(index, component);
 		listCells.add(index, new DRDesignListCell(component));
 	}
-	
+
 	public void addComponent(int index, HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRDesignComponent component) {
 		components.add(index, component);
 		listCells.add(index, new DRDesignListCell(horizontalAlignment, verticalAlignment, component));
 	}
-	
+
 	public void addComponent(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRDesignComponent component) {
 		components.add(component);
 		listCells.add(new DRDesignListCell(horizontalAlignment, verticalAlignment, component));
 	}
-	
+
 	public List<DRDesignListCell> getListCells() {
 		return listCells;
 	}
-	
+
 	public boolean isEmpty() {
 		return components.isEmpty();
 	}
-	
+
 	public void setType(ListType type) {
 		this.type = type;
 	}
-	
+
 	public ListType getType() {
 		return type;
 	}
@@ -100,16 +102,24 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	public void setComponentGroupType(ComponentGroupType componentGroupType) {
 		this.componentGroupType = componentGroupType;
 	}
-	
+
 	public ComponentGroupType getComponentGroupType() {
 		return componentGroupType;
 	}
-	
+
 	public int getGap() {
 		return gap;
 	}
 
 	public void setGap(int gap) {
 		this.gap = gap;
+	}
+
+	public StretchType getStretchType() {
+		return stretchType;
+	}
+
+	public void setStretchType(StretchType stretchType) {
+		this.stretchType = stretchType;
 	}
 }

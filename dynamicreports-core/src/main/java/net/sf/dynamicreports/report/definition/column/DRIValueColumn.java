@@ -20,39 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base;
+package net.sf.dynamicreports.report.definition.column;
 
-import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.DRIValueColumn;
+import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRValueColumn<T> extends DRColumn<DRITextField<T>> implements DRIValueColumn<T> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Boolean printRepeatedDetailValues;
-	
-	public DRValueColumn(DRTextField<T> valueField) {
-		super(valueField);	
-	}
+public interface DRIValueColumn<T> extends DRIExpression<T>, DRIColumn<DRITextField<T>>, DRIValue<T> {
 
-	public Boolean getPrintRepeatedDetailValues() {
-		return printRepeatedDetailValues;
-	}
-
-	public void setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues) {
-		this.printRepeatedDetailValues = printRepeatedDetailValues;
-	}
-	
-	@Override
-	public String getName() {
-		return getComponent().getValueExpression().getName();
-	}
-	
-	public Class<? super T> getValueClass() {
-		return getComponent().getValueExpression().getValueClass();
-	}
+	public Boolean getPrintRepeatedDetailValues();
 }

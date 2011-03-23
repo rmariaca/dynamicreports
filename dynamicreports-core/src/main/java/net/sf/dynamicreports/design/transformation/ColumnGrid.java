@@ -29,7 +29,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
-import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.column.DRIColumn;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

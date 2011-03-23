@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.column;
 
-import net.sf.dynamicreports.report.base.DRColumn;
+import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;

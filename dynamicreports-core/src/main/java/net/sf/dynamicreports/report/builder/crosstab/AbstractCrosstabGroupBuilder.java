@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.crosstab;
 
 import java.util.Comparator;
 
-import net.sf.dynamicreports.report.base.DRValueColumn;
+import net.sf.dynamicreports.report.base.column.DRValueColumn;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabGroup;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;

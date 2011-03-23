@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
 import org.apache.commons.lang.Validate;
@@ -37,18 +38,18 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilder, DRList> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRList row; 
-	
+
+	private DRList row;
+
 	protected HorizontalListBuilder() {
 		super(new DRList(ListType.VERTICAL));
 		init();
 	}
-	
+
 	protected void init() {
 		newRow();
 	}
-	
+
 	public HorizontalListBuilder add(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -66,7 +67,7 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 		}
 		return this;
 	}
-	
+
 	public HorizontalListBuilder add(HorizontalListCellBuilder ...cells) {
 		Validate.notNull(cells, "cells must not be null");
 		Validate.noNullElements(cells, "cells must not contains null cell");
@@ -75,15 +76,15 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 		}
 		return this;
 	}
-	
+
 	public HorizontalListBuilder add(int gap, HorizontalListCellBuilder ...cells) {
-		Validate.notNull(cells, "cells must not be null");	
+		Validate.notNull(cells, "cells must not be null");
 		for (HorizontalListCellBuilder cell : cells) {
 			add(Components.hListCell(Components.filler().setWidth(gap)).widthFixed(), cell);
 		}
 		return this;
 	}
-	
+
 	public HorizontalListBuilder newRow() {
 		return newRow(0);
 	}
@@ -91,7 +92,7 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 	public HorizontalListBuilder newRow(Integer verticalGap) {
 		return newRow(verticalGap, ListType.HORIZONTAL);
 	}
-	
+
 	public HorizontalListBuilder newFlowRow() {
 		return newFlowRow(0);
 	}
@@ -99,7 +100,7 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 	public HorizontalListBuilder newFlowRow(Integer verticalGap) {
 		return newRow(verticalGap, ListType.HORIZONTAL_FLOW);
 	}
-	
+
 	private HorizontalListBuilder newRow(Integer verticalGap, ListType listType) {
 		if (verticalGap != null) {
 			Validate.isTrue(verticalGap >= 0, "verticalGap must be >= 0");
@@ -111,7 +112,7 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 		getObject().addComponent(row);
 		return this;
 	}
-	
+
 	public HorizontalListBuilder setGap(Integer gap) {
 		row.setGap(gap);
 		return this;
@@ -127,8 +128,13 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 		}
 		return this;
 	}
-	
-	public HorizontalListBuilder setBaseGap(Integer gap) {		
+
+	public HorizontalListBuilder setBaseStretchType(StretchType stretchType) {
+		row.setStretchType(stretchType);
+		return this;
+	}
+
+	public HorizontalListBuilder setBaseGap(Integer gap) {
 		getObject().setGap(gap);
 		return this;
 	}
@@ -139,10 +145,15 @@ public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilde
 		}
 		else {
 			getObject().setStyle(null);
-		}		
+		}
 		return this;
 	}
-	
+
+	public HorizontalListBuilder setStretchType(StretchType stretchType) {
+		getObject().setStretchType(stretchType);
+		return this;
+	}
+
 	public DRList getList() {
 		return build();
 	}

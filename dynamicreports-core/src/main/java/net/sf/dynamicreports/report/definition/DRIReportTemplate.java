@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -154,6 +155,14 @@ public interface DRIReportTemplate extends Serializable {
 	public DRIStyle getCrosstabMeasureTitleStyle();
 
 	public List<Color> getChartSeriesColors();
+
+	public BooleanComponentType getBooleanComponentType();
+
+	public Integer getBooleanImageWidth();
+
+	public Integer getBooleanImageHeight();
+
+	public DRIStyle getBooleanStyle();
 
 	public SplitType getDefaultSplitType();
 

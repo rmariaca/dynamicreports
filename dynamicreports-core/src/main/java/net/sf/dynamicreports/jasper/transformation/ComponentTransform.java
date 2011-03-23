@@ -181,7 +181,7 @@ public class ComponentTransform {
 		switch (list.getComponentGroupType()) {
 		case FRAME:
 			JRDesignFrame frame = new JRDesignFrame();
-			component(frame, list, StretchTypeEnum.NO_STRETCH);
+			component(frame, list, ConstantTransform.stretchType(list.getStretchType()));
 			for (DRIDesignComponent element : list.getComponents()) {
 				JRDesignElement[] jrElements = component(element, list.getType());
 				for (JRDesignElement jrElement : jrElements) {

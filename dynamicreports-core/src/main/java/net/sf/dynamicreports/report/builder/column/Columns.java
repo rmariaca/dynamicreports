@@ -36,8 +36,8 @@ import org.apache.commons.lang.Validate;
  */
 @SuppressWarnings("ucd")
 public class Columns {
-	
-	//text	
+
+	//text
 	public static <T> TextColumnBuilder<T> column(String fieldName, Class<T> valueClass) {
 		return column(DynamicReports.field(fieldName, valueClass));
 	}
@@ -47,30 +47,30 @@ public class Columns {
 	}
 
 	public static <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<? super T, T> dataType) {
-		Validate.notNull(dataType, "dataType must not be null");		
+		Validate.notNull(dataType, "dataType must not be null");
 		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(DynamicReports.field(fieldName, dataType.getValueClass()));
 		textColumnBuilder.setDataType(dataType);
 		return textColumnBuilder;
 	}
 
-	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {				
+	public static <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {
 		TextColumnBuilder<T> textColumnBuilder = column(fieldName, dataType);
 		textColumnBuilder.setTitle(title);
 		return textColumnBuilder;
 	}
-	
+
 	public static <T> TextColumnBuilder<T> column(FieldBuilder<T> field) {
 		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(field);
 		if (field.getField().getDataType() != null) {
 			textColumnBuilder.setDataType(field.getField().getDataType());
 		}
 		return textColumnBuilder;
-	}	
+	}
 
 	public static <T> TextColumnBuilder<T> column(String title, FieldBuilder<T> field) {
 		return column(field).setTitle(title);
 	}
-	
+
 	//expression
 	public static <T> TextColumnBuilder<T> column(DRISimpleExpression<T> expression) {
 		return new TextColumnBuilder<T>(expression);
@@ -79,74 +79,99 @@ public class Columns {
 	public static <T> TextColumnBuilder<T> column(String title, DRISimpleExpression<T> expression) {
 		return column(expression).setTitle(title);
 	}
-	
+
 	//percentage
 	public static PercentageColumnBuilder percentageColumn(ValueColumnBuilder<?, ? extends Number> column) {
 		return new PercentageColumnBuilder(column);
-	}	
-	
+	}
+
 	public static PercentageColumnBuilder percentageColumn(String title, ValueColumnBuilder<?, ? extends Number> column) {
 		return percentageColumn(column).setTitle(title);
-	}	
-	
+	}
+
 	public static PercentageColumnBuilder percentageColumn(String fieldName, Class<? extends Number> valueClass) {
 		return percentageColumn(DynamicReports.field(fieldName, valueClass));
 	}
 
 	public static PercentageColumnBuilder percentageColumn(String title, String fieldName, Class<? extends Number> valueClass) {
 		return percentageColumn(fieldName, valueClass).setTitle(title);
-	}	
-	
+	}
+
 	public static PercentageColumnBuilder percentageColumn(FieldBuilder<? extends Number> field) {
 		return new PercentageColumnBuilder(field);
-	}	
-	
+	}
+
 	public static PercentageColumnBuilder percentageColumn(String title, FieldBuilder<? extends Number> field) {
 		return percentageColumn(field).setTitle(title);
-	}	
-	
+	}
+
 	/*public static PercentageColumnBuilder percentageColumn(DRISimpleExpression<? extends Number> expression) {
 		return new PercentageColumnBuilder(expression);
 	}
-	
+
 	public static PercentageColumnBuilder percentageColumn(String title, DRISimpleExpression<? extends Number> expression) {
 		return percentageColumn(expression).setTitle(title);
-	}	*/	
-	
+	}	*/
+
 	//column row number
 	public static TextColumnBuilder<Integer> columnRowNumberColumn() {
 		return column(Expressions.columnRowNumber());
 	}
-	
+
 	public static TextColumnBuilder<Integer> columnRowNumberColumn(String title) {
 		return columnRowNumberColumn().setTitle(title);
 	}
-	
+
 	//page row number
 	public static TextColumnBuilder<Integer> pageRowNumberColumn() {
 		return column(Expressions.pageRowNumber());
 	}
-	
+
 	public static TextColumnBuilder<Integer> pageRowNumberColumn(String title) {
 		return pageRowNumberColumn().setTitle(title);
 	}
-	
+
 	//report row number
 	public static TextColumnBuilder<Integer> reportRowNumberColumn() {
 		return column(Expressions.reportRowNumber());
 	}
-	
+
 	public static TextColumnBuilder<Integer> reportRowNumberColumn(String title) {
 		return reportRowNumberColumn().setTitle(title);
 	}
-	
+
 	//component
 	public static ComponentColumnBuilder componentColumn(ComponentBuilder<?, ?> component) {
 		Validate.notNull(component, "component must not be null");
 		return new ComponentColumnBuilder(component);
 	}
-	
+
 	public static ComponentColumnBuilder componentColumn(String title, ComponentBuilder<?, ?> component) {
 		return componentColumn(component).setTitle(title);
+	}
+
+	//boolean
+	public static BooleanColumnBuilder booleanColumn(String fieldName) {
+		return booleanColumn(DynamicReports.field(fieldName, Boolean.class));
+	}
+
+	public static BooleanColumnBuilder booleanColumn(String title, String fieldName) {
+		return booleanColumn(title, DynamicReports.field(fieldName, Boolean.class));
+	}
+
+	public static BooleanColumnBuilder booleanColumn(FieldBuilder<Boolean> field) {
+		return new BooleanColumnBuilder(field);
+	}
+
+	public static BooleanColumnBuilder booleanColumn(String title, FieldBuilder<Boolean> field) {
+		return booleanColumn(field).setTitle(title);
+	}
+
+	public static BooleanColumnBuilder booleanColumn(DRISimpleExpression<Boolean> expression) {
+		return new BooleanColumnBuilder(expression);
+	}
+
+	public static BooleanColumnBuilder booleanColumn(String title, DRISimpleExpression<Boolean> expression) {
+		return booleanColumn(expression).setTitle(title);
 	}
 }

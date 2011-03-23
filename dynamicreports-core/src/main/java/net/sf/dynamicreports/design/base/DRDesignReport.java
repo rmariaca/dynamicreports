@@ -147,6 +147,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return groupTransform;
 	}
 
+	public ColumnTransform getColumnTransform() {
+		return columnTransform;
+	}
+
 	public ColumnGridTransform getColumnGridTransform() {
 		return columnGridTransform;
 	}

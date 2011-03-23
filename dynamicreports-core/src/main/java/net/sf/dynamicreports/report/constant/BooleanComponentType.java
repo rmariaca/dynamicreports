@@ -20,15 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
-
-import net.sf.dynamicreports.report.definition.component.DRITextField;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIValueColumn<T> extends DRIExpression<T>, DRIColumn<DRITextField<T>>, DRIValue<T> {
-	
-	public Boolean getPrintRepeatedDetailValues();
+public enum BooleanComponentType {
+	TEXT_TRUE_FALSE,
+	TEXT_YES_NO,
+	IMAGE_STYLE_1
 }

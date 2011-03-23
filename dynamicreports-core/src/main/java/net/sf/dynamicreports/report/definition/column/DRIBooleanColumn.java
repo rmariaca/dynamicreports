@@ -20,30 +20,38 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.report.definition.column;
 
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIColumn<T extends DRIComponent> extends DRIColumnGridComponent {
-		
-	public T getComponent();
+public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIComponent>, DRIValue<Boolean> {
 
-	public DRIExpression<?> getTitleExpression();
+	public Integer getWidth();
 
-	public DRIStyle getTitleStyle();
-	
-	public Integer getTitleHeight();
+	public Integer getHeight();
 
-	public ComponentDimensionType getTitleHeightType();
+	public ComponentDimensionType getWidthType();
 
-	public Integer getTitleRows();
-	
-	public String getName();
+	public ComponentDimensionType getHeightType();
+
+	public DRIExpression<Boolean> getValueExpression();
+
+	public BooleanComponentType getComponentType();
+
+	public Integer getImageWidth();
+
+	public Integer getImageHeight();
+
+	public DRIStyle getStyle();
+
+	public DRISimpleExpression<Boolean> getPrintWhenExpression();
 }

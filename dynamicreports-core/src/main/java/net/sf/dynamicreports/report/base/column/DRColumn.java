@@ -20,13 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base;
+package net.sf.dynamicreports.report.base.column;
 
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.DRIColumn;
+import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -37,22 +37,26 @@ import org.apache.commons.lang.Validate;
  */
 public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	private String name;
-	private T component;	
+	private T component;
 
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
 	private Integer titleHeight;
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
-	
+
+	protected DRColumn() {
+		this.name = ReportUtils.generateUniqueName("column");
+	}
+
 	public DRColumn(T component) {
 		Validate.notNull(component, "component must not be null");
 		this.name = ReportUtils.generateUniqueName("column");
-		this.component = component;	
+		this.component = component;
 	}
-	
+
 	public T getComponent() {
 		return component;
 	}
@@ -72,7 +76,7 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	public void setTitleStyle(DRStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
-	
+
   /**
    * Returns the column title height.
    *
@@ -83,9 +87,9 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	}
 
   /**
-   * Sets the column title height. 
+   * Sets the column title height.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param titleHeight the column title height >= 1
    * @exception IllegalArgumentException if <code>titleHeight</code> is < 1
    */
@@ -116,7 +120,7 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
   /**
    * This method is used to define the height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -126,7 +130,7 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 		}
 		this.titleRows = titleRows;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

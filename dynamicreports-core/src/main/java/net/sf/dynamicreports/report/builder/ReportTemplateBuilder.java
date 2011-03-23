@@ -28,6 +28,7 @@ import java.util.Locale;
 import net.sf.dynamicreports.report.base.DRReportTemplate;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -466,6 +467,31 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setCrosstabMeasureTitleStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setBooleanComponentType(BooleanComponentType booleanComponentType) {
+		getObject().setBooleanComponentType(booleanComponentType);
+		return this;
+	}
+
+	public ReportTemplateBuilder setBooleanImageWidth(Integer width) {
+		getObject().setBooleanImageWidth(width);
+		return this;
+	}
+
+	public ReportTemplateBuilder setBooleanImageHeight(Integer height) {
+		getObject().setBooleanImageHeight(height);
+		return this;
+	}
+
+	public ReportTemplateBuilder setBooleanStyle(StyleBuilder booleanStyle) {
+		if (booleanStyle != null) {
+			getObject().setBooleanStyle(booleanStyle.build());
+		}
+		else {
+			getObject().setBooleanStyle(null);
 		}
 		return this;
 	}

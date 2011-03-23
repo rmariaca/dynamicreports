@@ -165,6 +165,7 @@ public class ComponentTransform {
 		component(designList, list, list.getStyle(), false, DefaultStyleType.NONE);
 		designList.setType(list.getType());
 		designList.setGap(accessor.getTemplateTransform().getListGap(list));
+		designList.setStretchType(accessor.getTemplateTransform().getListStretchType(list));
 		for (DRIListCell innerComponent : list.getListCells()) {
 			DRIComponent component = innerComponent.getComponent();
 			HorizontalCellComponentAlignment horizontalAlignment = innerComponent.getHorizontalAlignment();

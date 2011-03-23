@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.component;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 
 import org.apache.commons.lang.Validate;
 
@@ -34,11 +35,11 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class VerticalListBuilder extends ComponentBuilder<VerticalListBuilder, DRList> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	protected VerticalListBuilder() {
 		super(new DRList(ListType.VERTICAL));
 	}
-	
+
 	public VerticalListBuilder add(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -56,7 +57,7 @@ public class VerticalListBuilder extends ComponentBuilder<VerticalListBuilder, D
 		}
 		return this;
 	}
-	
+
 	public VerticalListBuilder add(VerticalListCellBuilder ...cells) {
 		Validate.notNull(cells, "cells must not be null");
 		Validate.noNullElements(cells, "cells must not contains null cell");
@@ -65,7 +66,7 @@ public class VerticalListBuilder extends ComponentBuilder<VerticalListBuilder, D
 		}
 		return this;
 	}
-	
+
 	public VerticalListBuilder add(Integer gap, VerticalListCellBuilder ...cells) {
 		Validate.notNull(cells, "cells must not be null");
 		for (VerticalListCellBuilder cell : cells) {
@@ -73,12 +74,17 @@ public class VerticalListBuilder extends ComponentBuilder<VerticalListBuilder, D
 		}
 		return this;
 	}
-	
+
 	public VerticalListBuilder setGap(Integer gap) {
 		getObject().setGap(gap);
 		return this;
 	}
-	
+
+	public VerticalListBuilder setStretchType(StretchType stretchType) {
+		getObject().setStretchType(stretchType);
+		return this;
+	}
+
 	public DRList getList() {
 		return build();
 	}

@@ -31,8 +31,9 @@ import net.sf.dynamicreports.report.base.grid.DRColumnGridList;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
-import net.sf.dynamicreports.report.definition.DRIColumn;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.definition.column.DRIColumn;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
@@ -46,11 +47,11 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class ColumnGridTransform {
 	private DesignTransformAccessor accessor;
 	private DRIColumnGridList columnGridList;
-	
+
 	public ColumnGridTransform(DesignTransformAccessor accessor) {
-		this.accessor = accessor;	
+		this.accessor = accessor;
 	}
-	
+
 	public void transform() {
 		DRIReport report = accessor.getReport();
 		DRIColumnGrid columnGrid = report.getColumnGrid();
@@ -58,9 +59,9 @@ public class ColumnGridTransform {
 			this.columnGridList = columnGrid.getList();
 			return;
 		}
-		
+
 		DRColumnGridList columnGridList = new DRColumnGridList();
-		if (columnGrid != null) {		
+		if (columnGrid != null) {
 			columnGridList.setGap(columnGrid.getList().getGap());
 			columnGridList.setType(columnGrid.getList().getType());
 		}
@@ -76,11 +77,11 @@ public class ColumnGridTransform {
 			}
 		}
 	}
-	
+
 	protected ColumnGrid createColumnGrid() throws DRException {
 		return createColumnGrid(null);
 	}
-	
+
 	protected ColumnGrid createColumnGrid(DRDesignStyle groupPaddingStyle) throws DRException {
 		ColumnGrid columnGrid = new ColumnGrid();
 		DRDesignList list = list(columnGridList, columnGrid);
@@ -95,8 +96,8 @@ public class ColumnGridTransform {
 		columnGrid.setList(list);
 		return columnGrid;
 	}
-	
-	private DRDesignList list(DRIColumnGridComponent columnGridComponent, ColumnGrid columnGrid) throws DRException {		
+
+	private DRDesignList list(DRIColumnGridComponent columnGridComponent, ColumnGrid columnGrid) throws DRException {
 		if (columnGridComponent instanceof DRIColumn<?>) {
 			DRDesignList list = new DRDesignList(ListType.VERTICAL);
 			DRIColumn<?> column = (DRIColumn<?>) columnGridComponent;
@@ -109,9 +110,9 @@ public class ColumnGridTransform {
 		}
 		else {
 			throw new DRDesignReportException("Column grid component " + columnGridComponent.getClass().getName() + " not supported");
-		}		
+		}
 	}
-	
+
 	private DRDesignList columnGridList(DRIColumnGridList columnGridList, ColumnGrid columnGrid) throws DRException {
 		DRDesignList list = new DRDesignList();
 		list.setType(columnGridList.getType());
@@ -122,17 +123,18 @@ public class ColumnGridTransform {
 			VerticalCellComponentAlignment verticalAlignment = cell.getVerticalAlignment();
 			if (component instanceof DRIColumn<?>) {
 				DRIColumn<?> column = (DRIColumn<?>) component;
-				if (column.getComponent() instanceof DRIDimensionComponent) {
+				DRIComponent columnComponent = accessor.getColumnTransform().getColumnComponent(column);
+				if (columnComponent instanceof DRIDimensionComponent) {
 					if (horizontalAlignment == null) {
-						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIDimensionComponent) column.getComponent()).getWidthType());
-					}				
+						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getWidthType());
+					}
 					if (verticalAlignment == null) {
-						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIDimensionComponent) column.getComponent()).getHeightType());
-					}		
+						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getHeightType());
+					}
 				}
 			}
 			list.addComponent(horizontalAlignment, cell.getVerticalAlignment(), list(component, columnGrid));
-		}	
+		}
 		return list;
 	}
 }

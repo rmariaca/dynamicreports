@@ -20,41 +20,30 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.transformation;
+package net.sf.dynamicreports.report.definition.column;
 
-import net.sf.dynamicreports.design.base.DRDesignPage;
-import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DesignTransformAccessor {
+public interface DRIColumn<T extends DRIComponent> extends DRIColumnGridComponent {
+		
+	public T getComponent();
 
-	public DRIReport getReport();
+	public DRIExpression<?> getTitleExpression();
 
-	public Integer getPageWidth();
+	public DRIStyle getTitleStyle();
+	
+	public Integer getTitleHeight();
 
-	public TemplateTransform getTemplateTransform();
+	public ComponentDimensionType getTitleHeightType();
 
-	public ExpressionTransform getExpressionTransform();
-
-	public BandTransform getBandTransform();
-
-	public ComponentTransform getComponentTransform();
-
-	public GroupTransform getGroupTransform();
-
-	public ColumnTransform getColumnTransform();
-
-	public ColumnGridTransform getColumnGridTransform();
-
-	public StyleTransform getStyleTransform();
-
-	public ChartTransform getChartTransform();
-
-	public BarcodeTransform getBarcodeTransform();
-
-	public CrosstabTransform getCrosstabTransform();
-
-	public DRDesignPage getPage();
+	public Integer getTitleRows();
+	
+	public String getName();
 }

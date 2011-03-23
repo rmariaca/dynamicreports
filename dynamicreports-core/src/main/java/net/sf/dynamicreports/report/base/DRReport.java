@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.grid.DRColumnGrid;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;

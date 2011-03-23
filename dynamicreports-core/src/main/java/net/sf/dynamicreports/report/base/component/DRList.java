@@ -28,6 +28,7 @@ import java.util.List;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 
@@ -36,13 +37,14 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRList extends DRComponent implements DRIList {	
+public class DRList extends DRComponent implements DRIList {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private List<DRListCell> listCells;
 	private ListType type;
 	private Integer gap;
-	
+	private StretchType stretchType;
+
 	public DRList() {
 		this(ListType.HORIZONTAL);
 	}
@@ -50,21 +52,21 @@ public class DRList extends DRComponent implements DRIList {
 	public DRList(ListType type) {
 		setType(type);
 	}
-	
+
 	@Override
 	protected void init() {
 		super.init();
 		this.listCells = new ArrayList<DRListCell>();
 	}
-	
+
 	public List<DRListCell> getListCells() {
 		return listCells;
 	}
-	
+
 	public void addComponent(DRComponent component) {
 		listCells.add(new DRListCell(component));
 	}
-		
+
 	public void addCell(DRListCell cell) {
 		Validate.notNull(cell, "cell must not be null");
 		listCells.add(cell);
@@ -73,13 +75,13 @@ public class DRList extends DRComponent implements DRIList {
 	public void addComponent(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRComponent component) {
 		listCells.add(new DRListCell(horizontalAlignment, verticalAlignment, component));
 	}
-	
+
 	@SuppressWarnings("ucd")
 	public void setType(ListType type) {
 		Validate.notNull(type, "type must not be null");
 		this.type = type;
 	}
-	
+
 	public ListType getType() {
 		return type;
 	}
@@ -88,10 +90,18 @@ public class DRList extends DRComponent implements DRIList {
 		return gap;
 	}
 
-	public void setGap(Integer gap) {		
+	public void setGap(Integer gap) {
 		if (gap != null) {
 			Validate.isTrue(gap >= 0, "gap must be >= 0");
 		}
 		this.gap = gap;
-	}	
+	}
+
+	public StretchType getStretchType() {
+		return stretchType;
+	}
+
+	public void setStretchType(StretchType stretchType) {
+		this.stretchType = stretchType;
+	}
 }

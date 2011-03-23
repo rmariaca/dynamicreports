@@ -25,15 +25,18 @@ package net.sf.dynamicreports.report.definition.component;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIList extends DRIComponent {
-	
+
 	public List<? extends DRIListCell> getListCells();
-	
+
 	public ListType getType();
 
 	public Integer getGap();
+
+	public StretchType getStretchType();
 }
