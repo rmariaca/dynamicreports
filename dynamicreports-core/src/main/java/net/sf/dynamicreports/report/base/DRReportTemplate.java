@@ -118,9 +118,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRStyle crosstabMeasureTitleStyle;
 	//boolean
 	private BooleanComponentType booleanComponentType;
-	private Integer booleanImageWidth;
-	private Integer booleanImageHeight;
-	private DRIStyle booleanStyle;
+	private Integer booleanColumnImageWidth;
+	private Integer booleanColumnImageHeight;
+	private DRIStyle booleanColumnStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -689,28 +689,28 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.booleanComponentType = booleanComponentType;
 	}
 
-	public Integer getBooleanImageWidth() {
-		return booleanImageWidth;
+	public Integer getBooleanColumnImageWidth() {
+		return booleanColumnImageWidth;
 	}
 
-	public void setBooleanImageWidth(Integer booleanImageWidth) {
-		this.booleanImageWidth = booleanImageWidth;
+	public void setBooleanColumnImageWidth(Integer booleanColumnImageWidth) {
+		this.booleanColumnImageWidth = booleanColumnImageWidth;
 	}
 
-	public Integer getBooleanImageHeight() {
-		return booleanImageHeight;
+	public Integer getBooleanColumnImageHeight() {
+		return booleanColumnImageHeight;
 	}
 
-	public void setBooleanImageHeight(Integer booleanImageHeight) {
-		this.booleanImageHeight = booleanImageHeight;
+	public void setBooleanColumnImageHeight(Integer booleanColumnImageHeight) {
+		this.booleanColumnImageHeight = booleanColumnImageHeight;
 	}
 
-	public DRIStyle getBooleanStyle() {
-		return booleanStyle;
+	public DRIStyle getBooleanColumnStyle() {
+		return booleanColumnStyle;
 	}
 
-	public void setBooleanStyle(DRIStyle booleanStyle) {
-		this.booleanStyle = booleanStyle;
+	public void setBooleanColumnStyle(DRIStyle booleanColumnStyle) {
+		this.booleanColumnStyle = booleanColumnStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

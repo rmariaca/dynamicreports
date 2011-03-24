@@ -158,11 +158,11 @@ public interface DRIReportTemplate extends Serializable {
 
 	public BooleanComponentType getBooleanComponentType();
 
-	public Integer getBooleanImageWidth();
+	public Integer getBooleanColumnImageWidth();
 
-	public Integer getBooleanImageHeight();
+	public Integer getBooleanColumnImageHeight();
 
-	public DRIStyle getBooleanStyle();
+	public DRIStyle getBooleanColumnStyle();
 
 	public SplitType getDefaultSplitType();
 

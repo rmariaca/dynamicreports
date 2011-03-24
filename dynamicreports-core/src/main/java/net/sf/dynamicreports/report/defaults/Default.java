@@ -153,9 +153,9 @@ public class Default {
 	private DRStyle crosstabMeasureTitleStyle;
 	//boolean
 	private BooleanComponentType booleanComponentType;
-	private Integer booleanImageWidth;
-	private Integer booleanImageHeight;
-	private DRStyle booleanStyle;
+	private Integer booleanColumnImageWidth;
+	private Integer booleanColumnImageHeight;
+	private DRStyle booleanColumnStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -314,9 +314,9 @@ public class Default {
 		this.crosstabMeasureTitleStyle = null;
 
 		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
-		this.booleanImageWidth = 15;
-		this.booleanImageHeight = 15;
-		this.booleanStyle = null;
+		this.booleanColumnImageWidth = 15;
+		this.booleanColumnImageHeight = 15;
+		this.booleanColumnStyle = null;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
 
@@ -690,16 +690,16 @@ public class Default {
 		return booleanComponentType;
 	}
 
-	public Integer getBooleanImageWidth() {
-		return booleanImageWidth;
+	public Integer getBooleanColumnImageWidth() {
+		return booleanColumnImageWidth;
 	}
 
-	public Integer getBooleanImageHeight() {
-		return booleanImageHeight;
+	public Integer getBooleanColumnImageHeight() {
+		return booleanColumnImageHeight;
 	}
 
-	public DRIStyle getBooleanStyle() {
-		return booleanStyle;
+	public DRIStyle getBooleanColumnStyle() {
+		return booleanColumnStyle;
 	}
 
 	public SplitType getDefaultSplitType() {

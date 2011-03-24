@@ -61,6 +61,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
+import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
@@ -681,6 +682,24 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isTextFieldStretchWithOverflow();
 	}
 
+	//text field
+	protected int getBooleanFieldWidth(DRIBooleanField booleanField, DRDesignStyle style) {
+		if (booleanField.getWidth() != null) {
+			return booleanField.getWidth();
+		}
+		if (template.getTextFieldWidth() != null) {
+			return template.getTextFieldWidth();
+		}
+		return Defaults.getDefaults().getTextFieldWidth();
+	}
+
+	protected int getBooleanFieldHeight(DRIBooleanField booleanField, DRDesignStyle style) {
+		if (booleanField.getHeight() != null) {
+			return booleanField.getHeight();
+		}
+		return StyleResolver.getFontHeight(style, 1);
+	}
+
 	//page x of y
 	protected int getPageXofYWidth(DRIPageXofY pageXofY, DRDesignStyle style) {
 		if (pageXofY.getWidth() != null) {
@@ -1226,9 +1245,9 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getCrosstabMeasureTitleStyle();
 	}
 
-	public BooleanComponentType getBooleanComponentType(DRIBooleanColumn column) {
-		if (column.getComponentType() != null) {
-			return column.getComponentType();
+	public BooleanComponentType getBooleanComponentType(DRIBooleanField booleanField) {
+		if (booleanField.getComponentType() != null) {
+			return booleanField.getComponentType();
 		}
 		if (template.getBooleanComponentType() != null) {
 			return template.getBooleanComponentType();
@@ -1236,34 +1255,34 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getBooleanComponentType();
 	}
 
-	public Integer getBooleanImageWidth(DRIBooleanColumn column) {
+	public Integer getBooleanColumnImageWidth(DRIBooleanColumn column) {
 		if (column.getImageWidth() != null) {
 			return column.getImageWidth();
 		}
-		if (template.getBooleanImageWidth() != null) {
-			return template.getBooleanImageWidth();
+		if (template.getBooleanColumnImageWidth() != null) {
+			return template.getBooleanColumnImageWidth();
 		}
-		return Defaults.getDefaults().getBooleanImageWidth();
+		return Defaults.getDefaults().getBooleanColumnImageWidth();
 	}
 
-	public Integer getBooleanImageHeight(DRIBooleanColumn column) {
+	public Integer getBooleanColumnImageHeight(DRIBooleanColumn column) {
 		if (column.getImageHeight() != null) {
 			return column.getImageHeight();
 		}
-		if (template.getBooleanImageHeight() != null) {
-			return template.getBooleanImageHeight();
+		if (template.getBooleanColumnImageHeight() != null) {
+			return template.getBooleanColumnImageHeight();
 		}
-		return Defaults.getDefaults().getBooleanImageHeight();
+		return Defaults.getDefaults().getBooleanColumnImageHeight();
 	}
 
-	public DRIStyle getBooleanStyle(DRIBooleanColumn column) {
+	public DRIStyle getBooleanColumnStyle(DRIBooleanColumn column) {
 		if (column.getStyle() != null) {
 			return column.getStyle();
 		}
-		if (template.getBooleanStyle() != null) {
-			return template.getBooleanStyle();
+		if (template.getBooleanColumnStyle() != null) {
+			return template.getBooleanColumnStyle();
 		}
-		return Defaults.getDefaults().getBooleanStyle();
+		return Defaults.getDefaults().getBooleanColumnStyle();
 	}
 
 	public Integer getBooleanImageColumnWidth(DRIBooleanColumn column) {

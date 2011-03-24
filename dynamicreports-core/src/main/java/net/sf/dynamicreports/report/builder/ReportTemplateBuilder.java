@@ -476,22 +476,22 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setBooleanImageWidth(Integer width) {
-		getObject().setBooleanImageWidth(width);
+	public ReportTemplateBuilder setBooleanColumnImageWidth(Integer booleanColumnImageWidth) {
+		getObject().setBooleanColumnImageWidth(booleanColumnImageWidth);
 		return this;
 	}
 
-	public ReportTemplateBuilder setBooleanImageHeight(Integer height) {
-		getObject().setBooleanImageHeight(height);
+	public ReportTemplateBuilder setBooleanColumnImageHeight(Integer booleanColumnImageHeight) {
+		getObject().setBooleanColumnImageHeight(booleanColumnImageHeight);
 		return this;
 	}
 
-	public ReportTemplateBuilder setBooleanStyle(StyleBuilder booleanStyle) {
-		if (booleanStyle != null) {
-			getObject().setBooleanStyle(booleanStyle.build());
+	public ReportTemplateBuilder setBooleanColumnStyle(StyleBuilder cooleanColumnStyle) {
+		if (cooleanColumnStyle != null) {
+			getObject().setBooleanColumnStyle(cooleanColumnStyle.build());
 		}
 		else {
-			getObject().setBooleanStyle(null);
+			getObject().setBooleanColumnStyle(null);
 		}
 		return this;
 	}

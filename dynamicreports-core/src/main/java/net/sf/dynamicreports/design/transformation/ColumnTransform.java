@@ -27,32 +27,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.component.DRBooleanField;
 import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.component.DRFiller;
-import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.base.component.DRListCell;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
-import net.sf.dynamicreports.report.builder.datatype.DataTypes;
-import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
-import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
@@ -62,9 +55,6 @@ import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRRenderable;
-import net.sf.jasperreports.renderers.BatikRenderer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -141,31 +131,20 @@ public class ColumnTransform {
 	}
 
 	private DRIComponent createBooleanComponent(DRIBooleanColumn column) throws DRException {
-		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(column);
+		DRBooleanField booleanField = new DRBooleanField();
+		booleanField.setComponentType(column.getComponentType());
+		booleanField.setValueExpression(column.getValueExpression());
+		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
 		DRComponent component = null;
 
 		switch (componentType) {
 		case TEXT_TRUE_FALSE:
 		case TEXT_YES_NO:
-			String keyTrue;
-			String keyFalse;
-			if (componentType.equals(BooleanComponentType.TEXT_TRUE_FALSE)) {
-				keyTrue = "true";
-				keyFalse = "false";
-			}
-			else {
-				keyTrue = "yes";
-				keyFalse = "no";
-			}
-			DRTextField<Boolean> textField = new DRTextField<Boolean>();
-			textField.setValueExpression(column);
-			textField.setDataType(DataTypes.booleanType());
-			textField.setValueFormatter(new BooleanTextValueFormatter(keyTrue, keyFalse));
-			textField.setWidth(column.getWidth());
-			textField.setWidthType(column.getWidthType());
-			textField.setHeight(column.getHeight());
-			textField.setHeightType(column.getHeightType());
-			component = textField;
+			booleanField.setWidth(column.getWidth());
+			booleanField.setWidthType(column.getWidthType());
+			booleanField.setHeight(column.getHeight());
+			booleanField.setHeightType(column.getHeightType());
+			component = booleanField;
 			break;
 		case IMAGE_STYLE_1:
 		case IMAGE_STYLE_2:
@@ -181,13 +160,11 @@ public class ColumnTransform {
 			filler.setHeightType(column.getHeightType());
 			hList.addComponent(filler);
 
-			DRImage image = new DRImage();
-			image.setWidth(accessor.getTemplateTransform().getBooleanImageWidth(column));
-			image.setHeight(accessor.getTemplateTransform().getBooleanImageHeight(column));
-			image.setWidthType(ComponentDimensionType.FIXED);
-			image.setHeightType(ComponentDimensionType.FIXED);
-			image.setImageExpression(new BooleanImageExpression(column));
-			DRListCell cell = new DRListCell(image);
+			booleanField.setWidth(accessor.getTemplateTransform().getBooleanColumnImageWidth(column));
+			booleanField.setHeight(accessor.getTemplateTransform().getBooleanColumnImageHeight(column));
+			booleanField.setWidthType(ComponentDimensionType.FIXED);
+			booleanField.setHeightType(ComponentDimensionType.FIXED);
+			DRListCell cell = new DRListCell(booleanField);
 			cell.setVerticalAlignment(VerticalCellComponentAlignment.MIDDLE);
 			hList.addCell(cell);
 
@@ -208,7 +185,7 @@ public class ColumnTransform {
 			throw new DRDesignReportException("Boolean component type " + componentType.name() + " not supported");
 		}
 
-		component.setStyle((DRStyle) accessor.getTemplateTransform().getBooleanStyle(column));
+		component.setStyle((DRStyle) accessor.getTemplateTransform().getBooleanColumnStyle(column));
 		component.setPrintWhenExpression(column.getPrintWhenExpression());
 
 		return component;
@@ -302,64 +279,5 @@ public class ColumnTransform {
 
 	public DRIComponent getColumnComponent(DRIColumn<?> column) {
 		return columnComponents.get(column);
-	}
-
-	private class BooleanTextValueFormatter extends AbstractValueFormatter<String, Boolean> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private String keyTrue;
-		private String keyFalse;
-
-		private BooleanTextValueFormatter(String keyTrue, String keyFalse) {
-			this.keyTrue = keyTrue;
-			this.keyFalse = keyFalse;
-		}
-
-		public String format(Boolean value, ReportParameters reportParameters) {
-			String key;
-			if (value != null && value) {
-				key = keyTrue;
-			} else {
-				key = keyFalse;
-			}
-			return ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_NAME, reportParameters.getLocale()).getString(key);
-		}
-	}
-
-	private class BooleanImageExpression extends AbstractComplexExpression<JRRenderable> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private JRRenderable imageTrue;
-		private JRRenderable imageFalse;
-
-		private BooleanImageExpression(DRIBooleanColumn column) throws DRException {
-			addExpression(column);
-			String fileNameTrue = column.getComponentType().name().toLowerCase();
-			String fileNameFalse = column.getComponentType().name().toLowerCase();
-			switch (column.getComponentType()) {
-			case IMAGE_STYLE_5:
-				fileNameFalse = BooleanComponentType.IMAGE_STYLE_4.name().toLowerCase();
-				break;
-			case IMAGE_STYLE_7:
-				fileNameTrue = BooleanComponentType.IMAGE_STYLE_1.name().toLowerCase();
-				break;
-			}
-			fileNameTrue = "boolean_" + fileNameTrue + "_true";
-			fileNameFalse = "boolean_" + fileNameFalse + "_false";
-			try {
-				imageTrue = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"));
-				imageFalse = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"));
-			} catch (JRException e) {
-				throw new DRException(e);
-			}
-		}
-
-		@Override
-		public JRRenderable evaluate(List<?> values, ReportParameters reportParameters) {
-			Boolean value = (Boolean) values.get(0);
-			if (value != null && value) {
-				return imageTrue;
-			} else {
-				return imageFalse;
-			}
-		}
 	}
 }

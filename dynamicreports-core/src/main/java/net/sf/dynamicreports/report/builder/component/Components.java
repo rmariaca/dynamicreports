@@ -202,4 +202,17 @@ public class Components {
 	public static GenericElementBuilder genericElement(String namespace, String name) {
 		return new GenericElementBuilder(namespace, name);
 	}
+
+	//boolean
+	public static BooleanFieldBuilder booleanField(Boolean value) {
+		return new BooleanFieldBuilder().setValue(value);
+	}
+
+	public static BooleanFieldBuilder booleanField(FieldBuilder<Boolean> field) {
+		return new BooleanFieldBuilder().setValue(field);
+	}
+
+	public static BooleanFieldBuilder booleanField(DRISimpleExpression<Boolean> valueExpression) {
+		return new BooleanFieldBuilder().setValue(valueExpression);
+	}
 }
