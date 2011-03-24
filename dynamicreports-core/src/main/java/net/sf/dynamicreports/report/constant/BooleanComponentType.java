@@ -28,5 +28,11 @@ package net.sf.dynamicreports.report.constant;
 public enum BooleanComponentType {
 	TEXT_TRUE_FALSE,
 	TEXT_YES_NO,
-	IMAGE_STYLE_1
+	IMAGE_STYLE_1,
+	IMAGE_STYLE_2,
+	IMAGE_STYLE_3,
+	IMAGE_STYLE_4,
+	IMAGE_STYLE_5,
+	IMAGE_STYLE_6,
+	IMAGE_STYLE_7
 }

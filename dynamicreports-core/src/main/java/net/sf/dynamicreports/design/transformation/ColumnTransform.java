@@ -168,6 +168,12 @@ public class ColumnTransform {
 			component = textField;
 			break;
 		case IMAGE_STYLE_1:
+		case IMAGE_STYLE_2:
+		case IMAGE_STYLE_3:
+		case IMAGE_STYLE_4:
+		case IMAGE_STYLE_5:
+		case IMAGE_STYLE_6:
+		case IMAGE_STYLE_7:
 			DRList hList = new DRList();
 			DRFiller filler = new DRFiller();
 			filler.setWidth(1);
@@ -326,9 +332,21 @@ public class ColumnTransform {
 
 		private BooleanImageExpression(DRIBooleanColumn column) throws DRException {
 			addExpression(column);
+			String fileNameTrue = column.getComponentType().name().toLowerCase();
+			String fileNameFalse = column.getComponentType().name().toLowerCase();
+			switch (column.getComponentType()) {
+			case IMAGE_STYLE_5:
+				fileNameFalse = BooleanComponentType.IMAGE_STYLE_4.name().toLowerCase();
+				break;
+			case IMAGE_STYLE_7:
+				fileNameTrue = BooleanComponentType.IMAGE_STYLE_1.name().toLowerCase();
+				break;
+			}
+			fileNameTrue = "boolean_" + fileNameTrue + "_true";
+			fileNameFalse = "boolean_" + fileNameFalse + "_false";
 			try {
-				imageTrue = BatikRenderer.getInstance(ReportUtils.class.getResource("images/ok.svg"));
-				imageFalse = BatikRenderer.getInstance(ReportUtils.class.getResource("images/cancel.svg"));
+				imageTrue = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"));
+				imageFalse = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"));
 			} catch (JRException e) {
 				throw new DRException(e);
 			}

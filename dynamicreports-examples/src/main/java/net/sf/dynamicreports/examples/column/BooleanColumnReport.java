@@ -26,6 +26,8 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -42,11 +44,18 @@ public class BooleanColumnReport {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
+			  .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 			  .columns(
 			  	col.booleanColumn("Boolean\ndefault", "boolean"),
 			  	col.booleanColumn("Boolean\ntrue-false", "boolean").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
 			  	col.booleanColumn("Boolean\nyes-no", "boolean").setComponentType(BooleanComponentType.TEXT_YES_NO),
-			  	col.booleanColumn("Boolean\nimage style 1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1))
+			  	col.booleanColumn("Boolean\nimage style 1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
+			  	col.booleanColumn("Boolean\nimage style 2", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_2),
+			  	col.booleanColumn("Boolean\nimage style 3", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_3),
+			  	col.booleanColumn("Boolean\nimage style 4", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_4),
+			  	col.booleanColumn("Boolean\nimage style 5", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_5),
+			  	col.booleanColumn("Boolean\nimage style 6", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_6),
+			  	col.booleanColumn("Boolean\nimage style 7", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_7))
 			  .title(Templates.createTitleComponent("BooleanColumn"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
