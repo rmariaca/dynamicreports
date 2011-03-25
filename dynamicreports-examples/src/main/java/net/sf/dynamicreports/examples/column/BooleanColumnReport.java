@@ -44,18 +44,18 @@ public class BooleanColumnReport {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
+			  .setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
 			  .columns(
 			  	col.booleanColumn("Boolean\ndefault", "boolean"),
-			  	col.booleanColumn("Boolean\ntrue-false", "boolean").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
-			  	col.booleanColumn("Boolean\nyes-no", "boolean").setComponentType(BooleanComponentType.TEXT_YES_NO),
-			  	col.booleanColumn("Boolean\nimage style 1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
-			  	col.booleanColumn("Boolean\nimage style 2", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_2),
-			  	col.booleanColumn("Boolean\nimage style 3", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_3),
-			  	col.booleanColumn("Boolean\nimage style 4", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_4),
-			  	col.booleanColumn("Boolean\nimage style 5", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_5),
-			  	col.booleanColumn("Boolean\nimage style 6", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_6),
-			  	col.booleanColumn("Boolean\nimage style 7", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_7))
+			  	col.booleanColumn("Boolean\nTEXT_TRUE_FALSE", "boolean").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
+			  	col.booleanColumn("Boolean\nTEXT_YES_NO", "boolean").setComponentType(BooleanComponentType.TEXT_YES_NO),
+			  	col.booleanColumn("Boolean\nIMAGE_STYLE_1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
+			  	col.booleanColumn("Boolean\nIMAGE_STYLE_2", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_2),
+			  	col.booleanColumn("Boolean\nIMAGE_STYLE_3", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_3),
+			  	col.booleanColumn("Boolean\nIMAGE_STYLE_4", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_4),
+			  	col.booleanColumn("Boolean\nIMAGE_CHECKBOX_1", "boolean").setComponentType(BooleanComponentType.IMAGE_CHECKBOX_1),
+			  	col.booleanColumn("Boolean\nIMAGE_CHECKBOX_2", "boolean").setComponentType(BooleanComponentType.IMAGE_CHECKBOX_2),
+			  	col.booleanColumn("Boolean\nIMAGE_BALL", "boolean").setComponentType(BooleanComponentType.IMAGE_BALL))
 			  .title(Templates.createTitleComponent("BooleanColumn"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())

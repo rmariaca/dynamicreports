@@ -150,9 +150,9 @@ public class ColumnTransform {
 		case IMAGE_STYLE_2:
 		case IMAGE_STYLE_3:
 		case IMAGE_STYLE_4:
-		case IMAGE_STYLE_5:
-		case IMAGE_STYLE_6:
-		case IMAGE_STYLE_7:
+		case IMAGE_CHECKBOX_1:
+		case IMAGE_CHECKBOX_2:
+		case IMAGE_BALL:
 			DRList hList = new DRList();
 			DRFiller filler = new DRFiller();
 			filler.setWidth(1);

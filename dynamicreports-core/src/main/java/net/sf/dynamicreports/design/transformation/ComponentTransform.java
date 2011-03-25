@@ -398,9 +398,9 @@ public class ComponentTransform {
 		case IMAGE_STYLE_2:
 		case IMAGE_STYLE_3:
 		case IMAGE_STYLE_4:
-		case IMAGE_STYLE_5:
-		case IMAGE_STYLE_6:
-		case IMAGE_STYLE_7:
+		case IMAGE_CHECKBOX_1:
+		case IMAGE_CHECKBOX_2:
+		case IMAGE_BALL:
 			defaultStyleType = DefaultStyleType.NONE;
 			DRImage image = new DRImage();
 			image.setImageExpression(new BooleanImageExpression(booleanField));
@@ -611,18 +611,40 @@ public class ComponentTransform {
 
 		private BooleanImageExpression(DRIBooleanField booleanField) throws DRException {
 			addExpression(booleanField.getValueExpression());
-			String fileNameTrue = booleanField.getComponentType().name().toLowerCase();
-			String fileNameFalse = booleanField.getComponentType().name().toLowerCase();
+			String fileNameTrue;
+			String fileNameFalse;
 			switch (booleanField.getComponentType()) {
-			case IMAGE_STYLE_5:
-				fileNameFalse = BooleanComponentType.IMAGE_STYLE_4.name().toLowerCase();
+			case IMAGE_STYLE_1:
+				fileNameTrue = "boolean1_true";
+				fileNameFalse = "boolean1_false";
 				break;
-			case IMAGE_STYLE_7:
-				fileNameTrue = BooleanComponentType.IMAGE_STYLE_1.name().toLowerCase();
+			case IMAGE_STYLE_2:
+				fileNameTrue = "boolean2_true";
+				fileNameFalse = "boolean2_false";
 				break;
+			case IMAGE_STYLE_3:
+				fileNameTrue = "boolean3_true";
+				fileNameFalse = "boolean3_false";
+				break;
+			case IMAGE_STYLE_4:
+				fileNameTrue = "boolean1_true";
+				fileNameFalse = "boolean4_false";
+				break;
+			case IMAGE_CHECKBOX_1:
+				fileNameTrue = "checkbox1_true";
+				fileNameFalse = "checkbox_false";
+				break;
+			case IMAGE_CHECKBOX_2:
+				fileNameTrue = "checkbox2_true";
+				fileNameFalse = "checkbox_false";
+				break;
+			case IMAGE_BALL:
+				fileNameTrue = "ball_green";
+				fileNameFalse = "ball_red";
+				break;
+			default:
+				throw new DRDesignReportException("BooleanComponentType " + booleanField.getComponentType().name() + " not supported");
 			}
-			fileNameTrue = "boolean_" + fileNameTrue + "_true";
-			fileNameFalse = "boolean_" + fileNameFalse + "_false";
 			try {
 				imageTrue = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"));
 				imageFalse = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"));

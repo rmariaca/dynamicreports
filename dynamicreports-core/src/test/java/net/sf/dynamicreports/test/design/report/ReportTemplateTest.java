@@ -61,7 +61,9 @@ public class ReportTemplateTest {
 	private void configureReport(ReportBuilder<?> rb) {
 		TextColumnBuilder<Integer> column1;
 
-		rb.columns(column1 = col.column("Column1", "field1", Integer.class))
+		rb.columns(
+				column1 = col.column("Column1", "field1", Integer.class),
+				col.booleanColumn("Column2", "field2"))
 			.groupBy(
 					grp.group(column1)
 						.header(
@@ -137,6 +139,8 @@ public class ReportTemplateTest {
 						.setCrosstabCellStyle(stl.style().setBackgroundColor(Color.CYAN))
 						.setCrosstabMeasureTitleStyle(stl.style().setBackgroundColor(Color.YELLOW))
 
+						.setBooleanColumnStyle(stl.style(stl.pen1Point()))
+
 						.setDetailSplitType(SplitType.IMMEDIATE));
 	}
 
@@ -156,8 +160,8 @@ public class ReportTemplateTest {
 			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());
 			Assert.assertTrue("float column footer", report.isFloatColumnFooter());
 
-			DRDesignTextField columnTextField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
-			DRIDesignStyle style = columnTextField.getStyle();
+			DRDesignTextField columnTextField1 = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
+			DRIDesignStyle style = columnTextField1.getStyle();
 			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
 			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
 			Assert.assertTrue("text style bold", style.getParentStyle().getFont().getBold());
@@ -169,14 +173,21 @@ public class ReportTemplateTest {
 			Assert.assertEquals("page columns per page", 3, report.getPage().getColumnsPerPage());
 			Assert.assertEquals("page columns spac", 20, report.getPage().getColumnSpace());
 
-			Assert.assertFalse("column print repeated detail values", columnTextField.isPrintRepeatedValues());
-			Assert.assertEquals("column width", new Integer(261), columnTextField.getWidth());
+			Assert.assertFalse("column print repeated detail values", columnTextField1.isPrintRepeatedValues());
+			Assert.assertEquals("column width", new Integer(180), columnTextField1.getWidth());
+
+			DRDesignTextField columnTextField2 = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(1);
+			style = columnTextField2.getStyle();
+			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
+			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
+			Assert.assertEquals("boolean border", 1f, style.getParentStyle().getBorder().getTopPen().getLineWidth());
+			Assert.assertEquals("column width", new Integer(181), columnTextField2.getWidth());
 
 			DRDesignGroup group = (DRDesignGroup) report.getGroups().toArray()[0];
 			DRDesignComponent textField = group.getHeaderBands().get(1).getBandComponent();
 			Assert.assertEquals("group header layout", 2, ((DRDesignList) group.getHeaderBands().get(0).getBandComponent()).getComponents().size());
 			Assert.assertEquals("group header layout", "groupHeader.textField1", textField.getUniqueName());
-			Assert.assertEquals("group padding", new Integer(20), columnTextField.getX());
+			Assert.assertEquals("group padding", new Integer(20), columnTextField1.getX());
 			Assert.assertTrue("group start in new page", group.isStartInNewPage());
 			Assert.assertTrue("group start in new column", group.isStartInNewColumn());
 			Assert.assertTrue("group reprint header on each page", group.isReprintHeaderOnEachPage());
