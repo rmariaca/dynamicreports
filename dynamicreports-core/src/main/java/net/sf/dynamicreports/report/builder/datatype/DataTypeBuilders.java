@@ -34,104 +34,108 @@ public class DataTypeBuilders {
 	public <U, T extends DRIDataType<? super U, U>> T detectType(Class<U> dataType) throws DRException {
 		return DataTypes.detectType(dataType);
 	}
-	
+
 	public <T extends DRIDataType<?, ?>> T detectType(String dataType) throws DRException {
 		return DataTypes.detectType(dataType);
 	}
-	
+
 	public BigDecimalType bigDecimalType() {
 		return DataTypes.bigDecimalType();
 	}
-	
+
 	public BigIntegerType bigIntegerType() {
 		return DataTypes.bigIntegerType();
 	}
-	
+
 	public BooleanType booleanType() {
 		return DataTypes.booleanType();
 	}
-	
+
 	public ByteType byteType() {
 		return DataTypes.byteType();
 	}
-	
+
 	public DateType dateType() {
 		return DataTypes.dateType();
 	}
-	
+
 	public DateYearToFractionType dateYearToFractionType() {
 		return DataTypes.dateYearToFractionType();
 	}
-	
+
 	public DateYearToHourType dateYearToHourType() {
 		return DataTypes.dateYearToHourType();
 	}
-	
+
 	public DateYearToMinuteType dateYearToMinuteType() {
 		return DataTypes.dateYearToMinuteType();
 	}
-	
+
 	public DateYearToMonthType dateYearToMonthType() {
 		return DataTypes.dateYearToMonthType();
 	}
-	
+
 	public DateYearToSecondType dateYearToSecondType() {
 		return DataTypes.dateYearToSecondType();
 	}
-	
+
 	public DateYearType dateYearType() {
 		return DataTypes.dateYearType();
 	}
-	
+
 	public DateMonthType dateMonthType() {
 		return DataTypes.dateMonthType();
 	}
-	
+
 	public DateDayType dateDayType() {
 		return DataTypes.dateDayType();
 	}
-	
+
 	public DoubleType doubleType() {
 		return DataTypes.doubleType();
 	}
-	
+
 	public FloatType floatType() {
 		return DataTypes.floatType();
 	}
-	
+
 	public CharacterType characterType() {
 		return DataTypes.characterType();
 	}
-	
+
 	public IntegerType integerType() {
 		return DataTypes.integerType();
 	}
-	
+
 	public LongType longType() {
 		return DataTypes.longType();
 	}
-	
+
 	public ShortType shortType() {
 		return DataTypes.shortType();
 	}
-	
+
 	public StringType stringType() {
 		return DataTypes.stringType();
 	}
-	
+
+	public ListType listType() {
+		return DataTypes.listType();
+	}
+
 	public TimeHourToFractionType timeHourToFractionType() {
 		return DataTypes.timeHourToFractionType();
 	}
-	
+
 	public TimeHourToMinuteType timeHourToMinuteType() {
 		return DataTypes.timeHourToMinuteType();
 	}
-	
+
 	public TimeHourToSecondType timeHourToSecondType() {
 		return DataTypes.timeHourToSecondType();
-	}	
-	
+	}
+
 	public PercentageType percentageType() {
 		return DataTypes.percentageType();
-	}	
+	}
 }

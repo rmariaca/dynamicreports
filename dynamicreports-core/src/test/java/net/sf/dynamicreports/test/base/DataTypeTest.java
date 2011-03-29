@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import junit.framework.Assert;
@@ -42,9 +43,9 @@ import org.junit.Test;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DataTypeTest {
-	
+
 	@Test
-	public void detectTypeTest() {		
+	public void detectTypeTest() {
 		try {
 			detectTypeTest(type.bigDecimalType(), BigDecimal.class);
 			detectTypeTest(type.bigIntegerType(), BigInteger.class);
@@ -70,7 +71,8 @@ public class DataTypeTest {
 			detectTypeTest(type.booleanType(), Boolean.class);
 			detectTypeTest(type.characterType(), Character.class);
 			detectTypeTest(type.stringType(), String.class);
-			detectTypeTest(type.stringType(), "Text");		
+			detectTypeTest(type.stringType(), "Text");
+			detectTypeTest(type.listType(), List.class);
 
 			@SuppressWarnings("unused")
 			BigDecimalType bigDecimalType = type.detectType(BigDecimal.class);
@@ -80,13 +82,13 @@ public class DataTypeTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	public <U, T extends U> void detectTypeTest(DRIDataType<U, T> dataType, Class<T> valueClass) throws DRException {
 		detectTypeTest(dataType, valueClass.getSimpleName());
 		Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(valueClass.getName()).getClass());
 		Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(valueClass).getClass());
 	}
-	
+
 	public <U, T extends U> void detectTypeTest(DRIDataType<U, T> dataType, String ...dataTypes) throws DRException {
 		for (String stringDataType : dataTypes) {
 			Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(stringDataType).getClass());
@@ -94,7 +96,7 @@ public class DataTypeTest {
 			Assert.assertEquals("Detect data type", dataType.getClass(), type.detectType(stringDataType.toUpperCase()).getClass());
 		}
 	}
-	
+
 	@Test
 	public void valueToStringTest() {
 		valueToStringTest("BigDecimal", type.bigDecimalType(), 1000, "1,000.00");
@@ -105,7 +107,7 @@ public class DataTypeTest {
 		valueToStringTest("Integer", type.integerType(), 1000, "1,000");
 		valueToStringTest("Long", type.longType(), 1000, "1,000");
 		valueToStringTest("Short", type.shortType(), 1000, "1,000");
-		
+
 		Calendar c = Calendar.getInstance();
 		c.set(2010, 0, 2, 15, 5, 20);
 		c.set(Calendar.MILLISECOND, 100);
@@ -122,13 +124,13 @@ public class DataTypeTest {
 		valueToStringTest("TimeHourToMinute", type.timeHourToMinuteType(), date, "3:05 PM");
 		valueToStringTest("TimeHourToSecond", type.timeHourToSecondType(), date, "3:05:20 PM");
 		valueToStringTest("TimeHourToFraction", type.timeHourToFractionType(), date, "3:05:20,100 PM");
-		
+
 		valueToStringTest("Percentage", type.percentageType(), 0.89156, "89.16%");
 		valueToStringTest("Boolean", type.booleanType(), true, "true");
 		valueToStringTest("Character", type.characterType(), 'a', "a");
 		valueToStringTest("String", type.stringType(), "text", "text");
 	}
-	
+
 	private <U, T extends U> void valueToStringTest(String name, DRIDataType<U, T> dataType, U value, String result) {
 		Assert.assertEquals(name + " valueToString", result, dataType.valueToString(value, Locale.ENGLISH));
 	}

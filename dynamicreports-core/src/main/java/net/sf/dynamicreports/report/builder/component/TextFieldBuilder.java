@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.component;
 
+import java.util.Date;
+
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
@@ -44,17 +46,17 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuilder<T>, DRTextField<T>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected TextFieldBuilder() {
 		super(new DRTextField<T>());
 	}
-	
+
 	public TextFieldBuilder<T> setText(VariableBuilder<T> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		getObject().setValueExpression(variable.getVariable());
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setText(FieldBuilder<T> field) {
 		Validate.notNull(field, "field must not be null");
 		getObject().setValueExpression(field.getField());
@@ -63,7 +65,7 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		}
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setText(DRISimpleExpression<T> textExpression) {
 		getObject().setValueExpression(textExpression);
 		return this;
@@ -73,7 +75,7 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setValueExpression(textExpression);
 		return this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public TextFieldBuilder<T> setText(String text) {
 		getObject().setValueExpression((DRIExpression<T>) Expressions.text(text));
@@ -85,7 +87,13 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setValueExpression((DRIExpression<T>) Expressions.number(number));
 		return this;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public TextFieldBuilder<T> setText(Date date) {
+		getObject().setValueExpression((DRIExpression<T>) Expressions.date(date));
+		return this;
+	}
+
 	public TextFieldBuilder<T> setPattern(String pattern) {
 		getObject().setPattern(pattern);
 		return this;
@@ -95,22 +103,22 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setValueFormatter(DRIValueFormatter<?, ? super T> valueFormatter) {
 		getObject().setValueFormatter(valueFormatter);
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setDataType(DRIDataType<? super T, T> dataType) {
 		getObject().setDataType(dataType);
 		return this;
-	}	
-	
+	}
+
   /**
    * This method is used to define the preferred width of a textField.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of preferred columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -118,12 +126,12 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setColumns(columns);
 		return this;
 	}
-	
+
   /**
    * This method is used to define the fixed width of a textField.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of fixed columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -137,7 +145,7 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * This method is used to define the minimum width of a textField.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of minimum columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -146,23 +154,23 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setWidthType(ComponentDimensionType.EXPAND);
 		return this;
 	}
-	
+
   /**
    * This method is used to define the preferred height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of preferred rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
 	public TextFieldBuilder<T> setRows(Integer rows) {
 		getObject().setRows(rows);
 		return this;
-	}	
-	
+	}
+
   /**
    * This method is used to define the fixed height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of fixed rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -171,11 +179,11 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setHeightType(ComponentDimensionType.FIXED);
 		return this;
 	}
-		
+
   /**
    * This method is used to define the minimum height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of minimum rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -184,12 +192,12 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		getObject().setHeightType(ComponentDimensionType.EXPAND);
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setMarkup(Markup markup) {
 		getObject().setMarkup(markup);
 		return this;
 	}
-	
+
 	public TextFieldBuilder<T> setStretchWithOverflow(Boolean stretchWithOverflow) {
 		getObject().setStretchWithOverflow(stretchWithOverflow);
 		return this;
