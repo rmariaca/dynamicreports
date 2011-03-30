@@ -70,6 +70,10 @@ public class DRDesignCrosstabMeasure implements DRIDesignCrosstabMeasure {
 	}
 
 	public Class<?> getValueClass() {
+		if (percentageType != null && percentageType.equals(CrosstabPercentageType.GRAND_TOTAL) &&
+				!calculation.equals(Calculation.COUNT) && !calculation.equals(Calculation.DISTINCT_COUNT)) {
+			return Double.class;
+		}
 		return ReportUtils.getVariableValueClass(calculation, valueExpression.getValueClass());
 	}
 }

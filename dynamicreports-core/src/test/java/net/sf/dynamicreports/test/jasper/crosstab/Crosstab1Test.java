@@ -47,11 +47,11 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
 	private CrosstabMeasureBuilder<Integer> measure1;
-	private CrosstabMeasureBuilder<Integer> measure2;
+	private CrosstabMeasureBuilder<Double> measure2;
 	private CrosstabMeasureBuilder<Double> measure3;
 	private CrosstabMeasureBuilder<Double> measure4;
 	private CrosstabMeasureBuilder<Integer> measure5;
-	private CrosstabMeasureBuilder<Integer> measure6;
+	private CrosstabMeasureBuilder<Double> measure6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -120,11 +120,11 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 
 		//measure2
 		crosstabCellCountTest(measure2, null, null, 6);
-		crosstabCellValueTest(measure2, null, null, "5", "11", "17", "23", "17", "23");
+		crosstabCellValueTest(measure2, null, null, "5.3", "11.4", "17.8", "23.9", "17.8", "23.9");
 		crosstabCellCountTest(measure2, null, columnGroup, 3);
-		crosstabCellValueTest(measure2, null, columnGroup, "16", "41", "41");
+		crosstabCellValueTest(measure2, null, columnGroup, "16.8", "41.6", "41.6");
 		crosstabCellCountTest(measure2, rowGroup, null, 2);
-		crosstabCellValueTest(measure2, rowGroup, null, "40", "59");
+		crosstabCellValueTest(measure2, rowGroup, null, "40.9", "59.1");
 		crosstabCellCountTest(measure2, rowGroup, columnGroup, 1);
 		crosstabCellValueTest(measure2, rowGroup, columnGroup, "100");
 

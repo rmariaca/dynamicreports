@@ -51,6 +51,8 @@ import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -471,7 +473,15 @@ public class CrosstabTransform {
 	private void addMeasure(DRDesignCrosstab designCrosstab, DRICrosstabVariable<?> variable) throws DRException {
 		DRDesignCrosstabMeasure designMeasure = new DRDesignCrosstabMeasure();
 		designMeasure.setName(variable.getName());
-		designMeasure.setValueExpression(accessor.getExpressionTransform().transformExpression(variable.getValueExpression()));
+		DRIExpression<?> expression;
+		if (variable.getPercentageType() != null && variable.getPercentageType().equals(CrosstabPercentageType.GRAND_TOTAL) &&
+				!variable.getCalculation().equals(Calculation.COUNT) && !variable.getCalculation().equals(Calculation.DISTINCT_COUNT)) {
+			expression = new CrosstabMeasureExpression(variable.getValueExpression());
+		}
+		else {
+			expression = variable.getValueExpression();
+		}
+		designMeasure.setValueExpression(accessor.getExpressionTransform().transformExpression(expression));
 		designMeasure.setCalculation(variable.getCalculation());
 		designMeasure.setPercentageType(variable.getPercentageType());
 
@@ -480,6 +490,23 @@ public class CrosstabTransform {
 
 	protected DRICrosstab getCrosstab(DRDesignCrosstab designCrosstab) {
 		return crosstabs.get(designCrosstab);
+	}
+
+	private class CrosstabMeasureExpression extends AbstractComplexExpression<Double> {
+		private static final long serialVersionUID = 1L;
+
+		public CrosstabMeasureExpression(DRIExpression<?> expression) {
+			addExpression(expression);
+		}
+
+		@Override
+		public Double evaluate(List<?> values, ReportParameters reportParameters) {
+			Number value = (Number) values.get(0);
+			if (value != null) {
+				return value.doubleValue();
+			}
+			return null;
+		}
 	}
 
 	private class CrosstabExpression<T> extends AbstractComplexExpression<T> {

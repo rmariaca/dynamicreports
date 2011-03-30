@@ -97,7 +97,12 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 
 	public CrosstabMeasureBuilder<T> setPercentageType(CrosstabPercentageType percentageType) {
 		if (getObject().getExpression() instanceof DRCrosstabVariable<?>) {
-			((DRCrosstabVariable<?>) getObject().getExpression()).setPercentageType(percentageType);
+			DRCrosstabVariable<?> variable = ((DRCrosstabVariable<?>) getObject().getExpression());
+			if (percentageType != null && percentageType.equals(CrosstabPercentageType.GRAND_TOTAL) &&
+					!variable.getCalculation().equals(Calculation.COUNT) && !variable.getCalculation().equals(Calculation.DISTINCT_COUNT)) {
+				setDataType(DataTypes.doubleType());
+			}
+			variable.setPercentageType(percentageType);
 		}
 		else {
 			throw new DRReportException("Percentage is not supported in this type of measure");
