@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.0.1 (2011-04-12)
+---------------------------------------------------
+ - support for boolean column, see BooleanColumnReport for an example
+ - new data type - list, see ColumnListDataTypeReport for an example
+ - minor bug fixes
+
 Changes in version 2.0.0 (2011-03-16)
 ---------------------------------------------------
  - crosstab measure can have expression, see MeasureExpressionCrosstabReport for an example
