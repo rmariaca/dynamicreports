@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.component;
 import java.awt.Image;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Date;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -115,6 +116,10 @@ public class Components {
 	//text
 	public static TextFieldBuilder<String> text(String text) {
 		return new TextFieldBuilder<String>().setText(text);
+	}
+
+	public static TextFieldBuilder<Date> text(Date date) {
+		return new TextFieldBuilder<Date>().setText(date);
 	}
 
 	public static <T extends Number> TextFieldBuilder<T> text(T number) {
