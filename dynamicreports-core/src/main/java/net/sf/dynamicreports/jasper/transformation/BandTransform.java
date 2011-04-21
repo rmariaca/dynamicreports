@@ -37,18 +37,18 @@ import net.sf.jasperreports.engine.design.JasperDesign;
  */
 public class BandTransform {
 	private JasperTransformAccessor accessor;
-	
+
 	public BandTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
+
 	public void transform() {
 		DRIDesignReport report = accessor.getReport();
-		JasperDesign design = accessor.getDesign();		
+		JasperDesign design = accessor.getDesign();
 		DRIDesignTemplateDesign templateDesign = report.getTemplateDesign();
-		
+
 		if (templateDesign.getTitleComponentsCount() == 0 && report.getTitleBand() != null) {
-			design.setTitle(band(report.getTitleBand()));	
+			design.setTitle(band(report.getTitleBand()));
 		}
 		if (templateDesign.getPageHeaderComponentsCount() == 0 && report.getPageHeaderBand() != null) {
 			design.setPageHeader(band(report.getPageHeaderBand()));
@@ -69,7 +69,7 @@ public class BandTransform {
 					if (jrBand != null) {
 						((JRDesignSection) accessor.getGroupTransform().getGroup(group).getGroupHeaderSection()).addBand(jrBand);
 					}
-				}				
+				}
 			}
 			if (group.getFooterBands() != null) {
 				for (DRIDesignBand band : group.getFooterBands()) {
@@ -77,12 +77,14 @@ public class BandTransform {
 					if (jrBand != null) {
 						((JRDesignSection) accessor.getGroupTransform().getGroup(group).getGroupFooterSection()).addBand(jrBand);
 					}
-				}				
-			}			
+				}
+			}
 		}
-		JRDesignBand jrBand = band(report.getDetailBand());
-		if (jrBand != null) {
-			((JRDesignSection) design.getDetailSection()).addBand(jrBand);
+		for (DRIDesignBand band : report.getDetailBands()) {
+			JRDesignBand jrBand = band(band);
+			if (jrBand != null) {
+				((JRDesignSection) design.getDetailSection()).addBand(jrBand);
+			}
 		}
 		if (templateDesign.getLastPageFooterComponentsCount() == 0 && report.getLastPageFooterBand() != null) {
 			design.setLastPageFooter(band(report.getLastPageFooterBand()));
@@ -97,20 +99,22 @@ public class BandTransform {
 			design.setBackground(band(report.getBackgroundBand()));
 		}
 	}
-	
+
 	//band
 	private JRDesignBand band(DRIDesignBand band) {
 		if (band == null) {
 			return null;
 		}
 		JRDesignBand jrBand = new JRDesignBand();
-		jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getBandComponent().getPrintWhenExpression()));
-		jrBand.setSplitType(ConstantTransform.splitType(band.getSplitType()));
-		JRDesignElement[] jrElements = accessor.getComponentTransform().component(band.getBandComponent(), ListType.VERTICAL);
-		for (JRDesignElement jrElement : jrElements) {
-			jrBand.addElement(jrElement);
+		if (band.getBandComponent() != null) {
+			jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getBandComponent().getPrintWhenExpression()));
+			jrBand.setSplitType(ConstantTransform.splitType(band.getSplitType()));
+			JRDesignElement[] jrElements = accessor.getComponentTransform().component(band.getBandComponent(), ListType.VERTICAL);
+			for (JRDesignElement jrElement : jrElements) {
+				jrBand.addElement(jrElement);
+			}
 		}
-		jrBand.setHeight(band.getBandComponent().getHeight());
+		jrBand.setHeight(band.getHeight());
 		return jrBand;
 	}
 }

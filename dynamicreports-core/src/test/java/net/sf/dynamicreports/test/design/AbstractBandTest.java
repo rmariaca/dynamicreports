@@ -35,7 +35,7 @@ import org.junit.Test;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractBandTest {
-		
+
 	@Test
 	public void test() {
 		ReportBuilder<?> rb = new DesignReportBuilder();
@@ -47,7 +47,9 @@ public abstract class AbstractBandTest {
 			pageFooterBandTest(report.getPageFooterBand());
 			columnHeaderBandTest(report.getColumnHeaderBand());
 			columnFooterBandTest(report.getColumnFooterBand());
-			detailBandTest(report.getDetailBand());
+			for (DRDesignBand designBand : report.getDetailBands()) {
+				detailBandTest(designBand);
+			}
 			lastPageFooterBandTest(report.getLastPageFooterBand());
 			summaryBandTest(report.getSummaryBand());
 			noDataBandTest(report.getNoDataBand());
@@ -57,7 +59,7 @@ public abstract class AbstractBandTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	protected void titleBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
@@ -65,39 +67,39 @@ public abstract class AbstractBandTest {
 	protected void pageHeaderBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void pageFooterBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void columnHeaderBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void columnFooterBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void detailBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void lastPageFooterBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void summaryBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void noDataBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void backgroundBandTest(DRDesignBand band) {
 		Assert.assertNull(band);
 	}
-	
+
 	protected void componentPositionTest(DRDesignComponent component, int x, int y, int width, int height) {
 		Assert.assertNotNull("width", component.getWidth());
 		Assert.assertEquals("width", new Integer(width), component.getWidth());
@@ -108,6 +110,6 @@ public abstract class AbstractBandTest {
 		Assert.assertNotNull("y", component.getY());
 		Assert.assertEquals("y", new Integer(y), component.getY());
 	}
-	
+
 	public abstract void configureReport(ReportBuilder<?> rb);
 }

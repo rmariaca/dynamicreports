@@ -31,8 +31,10 @@ import net.sf.dynamicreports.report.constant.SplitType;
 public interface DRIDesignBand {
 
 	public String getName();
-	
+
 	public SplitType getSplitType();
-	
+
 	public DRIDesignComponent getBandComponent();
+
+	public Integer getHeight();
 }

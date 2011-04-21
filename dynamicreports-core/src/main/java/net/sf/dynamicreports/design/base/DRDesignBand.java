@@ -35,31 +35,32 @@ public class DRDesignBand implements DRIDesignBand {
 	private SplitType splitType;
 	private DRDesignList list;
 	private DRDesignComponent bandComponent;
-	
+	private Integer height;
+
 	public DRDesignBand(String name) {
-		this.name = name;		
+		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public SplitType getSplitType() {
 		return splitType;
 	}
-	
+
 	public void setSplitType(SplitType splitType) {
 		this.splitType = splitType;
 	}
-		
+
 	public void setList(DRDesignList list) {
 		this.list = list;
 	}
-	
+
 	public DRDesignList getList() {
 		return list;
 	}
-	
+
 	public void addComponent(DRDesignComponent component) {
 		list.addComponent(component);
 	}
@@ -67,12 +68,20 @@ public class DRDesignBand implements DRIDesignBand {
 	public void addComponent(int index, DRDesignComponent component) {
 		list.addComponent(index, component);
 	}
-	
+
 	public DRDesignComponent getBandComponent() {
 		return bandComponent;
 	}
 
 	public void setBandComponent(DRDesignComponent component) {
 		this.bandComponent = component;
-	}	
+	}
+
+	public Integer getHeight() {
+		return height;
+	}
+
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
 }

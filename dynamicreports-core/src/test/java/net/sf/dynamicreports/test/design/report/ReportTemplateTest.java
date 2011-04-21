@@ -160,7 +160,7 @@ public class ReportTemplateTest {
 			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());
 			Assert.assertTrue("float column footer", report.isFloatColumnFooter());
 
-			DRDesignTextField columnTextField1 = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
+			DRDesignTextField columnTextField1 = (DRDesignTextField) ((DRDesignList) report.getDetailBands().get(0).getBandComponent()).getComponents().get(0);
 			DRIDesignStyle style = columnTextField1.getStyle();
 			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
 			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
@@ -176,7 +176,7 @@ public class ReportTemplateTest {
 			Assert.assertFalse("column print repeated detail values", columnTextField1.isPrintRepeatedValues());
 			Assert.assertEquals("column width", new Integer(180), columnTextField1.getWidth());
 
-			DRDesignTextField columnTextField2 = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(1);
+			DRDesignTextField columnTextField2 = (DRDesignTextField) ((DRDesignList) report.getDetailBands().get(0).getBandComponent()).getComponents().get(1);
 			style = columnTextField2.getStyle();
 			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
 			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
@@ -250,7 +250,7 @@ public class ReportTemplateTest {
 			style = ((DRIDesignList) crosstab.getColumnGroups().get(1).getTotalHeader().getComponent()).getComponents().get(1).getStyle();
 			Assert.assertEquals("crosstab measure title header style", Color.YELLOW, style.getBackgroundColor());
 
-			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBand().getSplitType());
+			Assert.assertEquals("detail split type", SplitType.IMMEDIATE, report.getDetailBands().get(0).getSplitType());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -282,7 +282,7 @@ public class ReportTemplateTest {
 		try {
 			DRDesignReport report = new DRDesignReport(rb.getReport());
 
-			DRDesignTextField textField = (DRDesignTextField) ((DRDesignList) report.getDetailBand().getBandComponent()).getComponents().get(0);
+			DRDesignTextField textField = (DRDesignTextField) ((DRDesignList) report.getDetailBands().get(0).getBandComponent()).getComponents().get(0);
 			Assert.assertEquals("column style", new Integer(1), textField.getStyle().getFont().getFontSize());
 
 			textField = (DRDesignTextField) ((DRDesignList) report.getColumnHeaderBand().getBandComponent()).getComponents().get(1);

@@ -44,54 +44,54 @@ import net.sf.jasperreports.engine.JasperReport;
  */
 public class JasperSubreportTest extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder subreport = Components.subreport(new SubreportExpression())
     .setDataSource(new SubreportDataSourceExpression());
-		
+
 		rb.detail(subreport);
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		elementCountTest("detail.subreport1", 3);
-		
+
+		elementCountTest("detailHeader.subreport1", 3);
+
 		//title
 		elementCountTest("title.textField1", 3);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3");
-		
+
 		//column title
 		elementCountTest("columnHeader.column_column1.title1", 3);
 		elementValueTest("columnHeader.column_column1.title1", "Column1", "Column1", "Column1");
-		
+
 		elementCountTest("columnHeader.column_column2.title1", 2);
 		elementValueTest("columnHeader.column_column2.title1", "Column2", "Column2");
-		
+
 		elementCountTest("columnHeader.column_column3.title1", 1);
 		elementValueTest("columnHeader.column_column3.title1", "Column3");
-		
+
 		//column detail
 		elementCountTest("detail.column_column11", 6);
-		elementValueTest("detail.column_column11", 
-				"row1_column1", 
-				"row1_column1", "row2_column1", 
+		elementValueTest("detail.column_column11",
+				"row1_column1",
+				"row1_column1", "row2_column1",
 				"row1_column1", "row2_column1", "row3_column1");
-		
+
 		elementCountTest("detail.column_column21", 5);
 		elementValueTest("detail.column_column21",
-				"row1_column2", "row2_column2", 
+				"row1_column2", "row2_column2",
 				"row1_column2", "row2_column2", "row3_column2");
-		
+
 		elementCountTest("detail.column_column31", 3);
-		elementValueTest("detail.column_column31", 
+		elementValueTest("detail.column_column31",
 				"row1_column3", "row2_column3", "row3_column3");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		return new JREmptyDataSource(3);
@@ -111,7 +111,7 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 			}
 		}
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
@@ -122,15 +122,15 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 				columns[i - 1] = "column" + i;
 			}
 			DataSource dataSource = new DataSource(columns);
-			
+
 			for (int i = 1; i <= masterRowNumber; i++) {
 				Object[] values = new Object[masterRowNumber];
 				for (int j = 1; j <= masterRowNumber; j++) {
 					values[j - 1] = "row" + i + "_column" + j;
-				}	
+				}
 				dataSource.add(values);
 			}
-			
+
 			return dataSource;
 		}
 	}

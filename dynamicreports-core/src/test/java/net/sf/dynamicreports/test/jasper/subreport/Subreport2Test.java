@@ -41,15 +41,15 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
  */
 public class Subreport2Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder detailSubreport = cmp.subreport(detailSubreport())
     .setDataSource(new SubreportDataSourceExpression());
-		
+
 		rb.title(cmp.subreport(titleSubreport()))
 		  .detail(detailSubreport);
 	}
@@ -57,28 +57,28 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		elementCountTest("detail.subreport1", 3);
+
+		elementCountTest("detailHeader.subreport1", 3);
 
 		//title subreport
 		columnDetailCountTest(column1, 3);
 		columnDetailValueTest(column1,	"value1", "value2", "value3");
-		
+
 		//detail subreport
 		elementCountTest("title.textField1", 3);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3");
-		
+
 		columnDetailCountTest(column2, 6);
 		columnDetailValueTest(column2,	"1_1", "1_2", "2_1", "2_2", "3_1", "3_2");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		return new JREmptyDataSource(3);
 	}
-	
+
 	private JasperReportBuilder titleSubreport() {
 		JasperReportBuilder report = report();
 		column1 = col.column("Column1", "field1", type.stringType());
@@ -87,16 +87,16 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 		  .setDataSource(titleSubreportDataSource());
 		return report;
 	}
-	
+
 	private JasperReportBuilder detailSubreport() {
 		JasperReportBuilder report = report();
 		column2 = col.column(new ValueExpression());
-		report		   
+		report
 		  .columns(column2)
 		  .title(cmp.text(new SubreportTitleExpression()));
 		return report;
 	}
-	
+
 	private JRDataSource titleSubreportDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		dataSource.add("value1");
@@ -104,7 +104,7 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 		dataSource.add("value3");
 		return dataSource;
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
@@ -112,20 +112,20 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 			return new JREmptyDataSource(2);
 		}
 	}
-	
+
 	private class SubreportTitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
-		public String evaluate(ReportParameters reportParameters) {			
+		public String evaluate(ReportParameters reportParameters) {
 			return "Subreport" + reportParameters.getMasterParameters().getReportRowNumber();
 		}
 	}
-	
+
 	private class ValueExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getMasterParameters().getReportRowNumber() + "_" + reportParameters.getReportRowNumber();
-		}		
+		}
 	}
 }

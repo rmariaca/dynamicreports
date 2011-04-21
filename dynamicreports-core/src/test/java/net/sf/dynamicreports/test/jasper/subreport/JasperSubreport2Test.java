@@ -45,15 +45,15 @@ import net.sf.jasperreports.engine.JasperReport;
  */
 public class JasperSubreport2Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder detailSubreport = cmp.subreport(detailSubreport())
     .setDataSource(new SubreportDataSourceExpression());
-		
+
 		SubreportBuilder titleSubreport = cmp.subreport(titleSubreport())
 		.setDataSource(titleSubreportDataSource());
-		
+
 		rb.title(titleSubreport)
 		  .detail(detailSubreport);
 	}
@@ -61,28 +61,28 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		elementCountTest("detail.subreport1", 3);
+
+		elementCountTest("detailHeader.subreport1", 3);
 
 		//title subreport
 		elementCountTest("detail.column_field11", 3);
 		elementValueTest("detail.column_field11",	"value1", "value2", "value3");
-		
+
 		//detail subreport
 		elementCountTest("title.textField1", 3);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3");
-		
+
 		elementCountTest("detail.column_simpleExpression_0_1", 6);
 		elementValueTest("detail.column_simpleExpression_0_1",	"1_1", "1_2", "2_1", "2_2", "3_1", "3_2");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		return new JREmptyDataSource(3);
 	}
-	
+
 	private JasperReport titleSubreport() {
 		try {
 			InputStream is = JasperSubreportTest.class.getResourceAsStream("titlesubreport.jrxml");
@@ -93,7 +93,7 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 			return null;
 		}
 	}
-	
+
 	private JasperReport detailSubreport() {
 		try {
 			InputStream is = JasperSubreportTest.class.getResourceAsStream("detailsubreport.jrxml");
@@ -104,7 +104,7 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 			return null;
 		}
 	}
-	
+
 	private JRDataSource titleSubreportDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		dataSource.add("value1");
@@ -112,7 +112,7 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 		dataSource.add("value3");
 		return dataSource;
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 

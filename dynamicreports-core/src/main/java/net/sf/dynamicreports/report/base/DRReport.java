@@ -64,19 +64,19 @@ public class DRReport implements DRIReport {
 	private List<DRIScriptlet> scriptlets;
 	private Properties properties;
 	private DRQuery query;
-	private DRPage page;	
-	private WhenNoDataType whenNoDataType;	
+	private DRPage page;
+	private WhenNoDataType whenNoDataType;
 	private Boolean titleOnANewPage;
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;
-	private Boolean highlightDetailOddRows;	
+	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
-	private Boolean highlightDetailEvenRows;	
-	private DRSimpleStyle detailEvenRowStyle;	
-	private List<DRConditionalStyle> detailRowHighlighters;	
+	private Boolean highlightDetailEvenRows;
+	private DRSimpleStyle detailEvenRowStyle;
+	private List<DRConditionalStyle> detailRowHighlighters;
 	private DRColumnGrid columnGrid;
-	
+
 	private DRStyle textStyle;
 	private DRStyle columnTitleStyle;
 	private DRStyle columnStyle;
@@ -86,47 +86,49 @@ public class DRReport implements DRIReport {
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
 	private DRStyle barcodeStyle;
-	
-	private DRBand titleBand;	
+
+	private DRBand titleBand;
 	private DRBand pageHeaderBand;
-	private DRBand pageFooterBand;	
+	private DRBand pageFooterBand;
 	private DRBand columnHeaderBand;
 	private DRBand columnFooterBand;
-	private DRBand detailBand;
-	private DRBand lastPageFooterBand;	
+	private DRBand detailHeaderBand;
+	private DRBand detailFooterBand;
+	private DRBand lastPageFooterBand;
 	private DRBand summaryBand;
 	private DRBand noDataBand;
 	private DRBand backgroundBand;
-	
+
 	public DRReport() {
 		init();
 	}
-	
+
 	private void init() {
 		this.template = new DRReportTemplate();
 		this.columns = new ArrayList<DRColumn<?>>();
 		this.groups = new ArrayList<DRGroup>();
 		this.subtotals = new ArrayList<DRSubtotal<?>>();
-		this.fields = new ArrayList<DRField<?>>(); 
+		this.fields = new ArrayList<DRField<?>>();
 		this.variables = new ArrayList<DRVariable<?>>();
 		this.parameters = new ArrayList<DRParameter<?>>();
 		this.scriptlets = new ArrayList<DRIScriptlet>();
 		this.detailRowHighlighters = new ArrayList<DRConditionalStyle>();
 		this.properties = new Properties();
-		this.page = new DRPage();		
-		
+		this.page = new DRPage();
+
 		titleBand = new DRBand();
 		pageHeaderBand = new DRBand();
 		pageFooterBand = new DRBand();
 		columnHeaderBand = new DRBand();
 		columnFooterBand = new DRBand();
-		detailBand = new DRBand();
+		detailHeaderBand = new DRBand();
+		detailFooterBand = new DRBand();
 		lastPageFooterBand = new DRBand();
 		summaryBand = new DRBand();
 		noDataBand = new DRBand();
 		backgroundBand = new DRBand();
 	}
-	
+
 	public DRReportTemplate getTemplate() {
 		return template;
 	}
@@ -139,12 +141,12 @@ public class DRReport implements DRIReport {
 	public DRITemplateDesign<?> getTemplateDesign() {
 		return templateDesign;
 	}
-	
+
 	public void setTemplateDesign(DRITemplateDesign<?> templateDesign) {
 		Validate.notNull(templateDesign, "templateDesign must not be null");
 		this.templateDesign = templateDesign;
 	}
-	
+
 	public Locale getLocale() {
 		return locale;
 	}
@@ -152,11 +154,11 @@ public class DRReport implements DRIReport {
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
-	
+
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
-	
+
 	public void setResourceBundle(ResourceBundle resourceBundle) {
 		this.resourceBundle = resourceBundle;
 	}
@@ -164,11 +166,11 @@ public class DRReport implements DRIReport {
 	public String getResourceBundleName() {
 		return resourceBundleName;
 	}
-	
+
 	public void setResourceBundleName(String resourceBundleName) {
 		this.resourceBundleName = resourceBundleName;
 	}
-	
+
 	public Boolean getShowColumnTitle() {
 		return showColumnTitle;
 	}
@@ -192,7 +194,7 @@ public class DRReport implements DRIReport {
 		Validate.notNull(column, "column must not be null");
 		this.columns.add(column);
 	}
-	
+
 	public List<DRGroup> getGroups() {
 		return groups;
 	}
@@ -208,7 +210,7 @@ public class DRReport implements DRIReport {
 		Validate.notNull(group, "group must not be null");
 		this.groups.add(group);
 	}
-	
+
 	public List<DRField<?>> getFields() {
 		return fields;
 	}
@@ -224,7 +226,7 @@ public class DRReport implements DRIReport {
 		Validate.notNull(field, "field must not be null");
 		this.fields.add(field);
 	}
-	
+
 	public List<DRVariable<?>> getVariables() {
 		return variables;
 	}
@@ -244,7 +246,7 @@ public class DRReport implements DRIReport {
 	public List<DRSubtotal<?>> getSubtotals() {
 		return subtotals;
 	}
-	
+
 	@SuppressWarnings("ucd")
 	public void setSubtotals(List<DRSubtotal<?>> subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
@@ -256,11 +258,11 @@ public class DRReport implements DRIReport {
 		Validate.notNull(subtotal, "subtotal must not be null");
 		this.subtotals.add(subtotal);
 	}
-	
+
 	public List<DRParameter<?>> getParameters() {
 		return parameters;
 	}
-	
+
 	@SuppressWarnings("ucd")
 	public void setParameters(List<DRParameter<?>> parameters) {
 		Validate.notNull(parameters, "parameters must not be null");
@@ -272,11 +274,11 @@ public class DRReport implements DRIReport {
 		Validate.notNull(parameter, "parameter must not be null");
 		this.parameters.add(parameter);
 	}
-	
+
 	public List<DRIScriptlet> getScriptlets() {
 		return scriptlets;
 	}
-	
+
 	@SuppressWarnings("ucd")
 	public void setScriptlets(List<DRIScriptlet> scriptlets) {
 		Validate.notNull(scriptlets, "scriptlets must not be null");
@@ -288,11 +290,11 @@ public class DRReport implements DRIReport {
 		Validate.notNull(scriptlet, "scriptlet must not be null");
 		this.scriptlets.add(scriptlet);
 	}
-		
+
 	public Properties getProperties() {
 		return properties;
 	}
-	
+
 	public void setProperties(Properties properties) {
 		Validate.notNull(properties, "properties must not be null");
 		this.properties = properties;
@@ -302,7 +304,7 @@ public class DRReport implements DRIReport {
 		Validate.notNull(key, "key must not be null");
 		this.properties.setProperty(key, value);
 	}
-	
+
 	public DRQuery getQuery() {
 		return query;
 	}
@@ -310,7 +312,7 @@ public class DRReport implements DRIReport {
 	public void setQuery(DRQuery query) {
 		this.query = query;
 	}
-	
+
 	public DRPage getPage() {
 		return page;
 	}
@@ -336,7 +338,7 @@ public class DRReport implements DRIReport {
 	public void setWhenNoDataType(WhenNoDataType whenNoDataType) {
 		this.whenNoDataType = whenNoDataType;
 	}
-	
+
 	public Boolean getTitleOnANewPage() {
 		return titleOnANewPage;
 	}
@@ -344,7 +346,7 @@ public class DRReport implements DRIReport {
 	public void setTitleOnANewPage(Boolean titleOnANewPage) {
 		this.titleOnANewPage = titleOnANewPage;
 	}
-	
+
 	public Boolean getSummaryOnANewPage() {
 		return summaryOnANewPage;
 	}
@@ -352,23 +354,23 @@ public class DRReport implements DRIReport {
 	public void setSummaryOnANewPage(Boolean summaryOnANewPage) {
 		this.summaryOnANewPage = summaryOnANewPage;
 	}
-	
+
 	public Boolean getSummaryWithPageHeaderAndFooter() {
 		return summaryWithPageHeaderAndFooter;
 	}
-	
+
 	public void setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
 		this.summaryWithPageHeaderAndFooter = summaryWithPageHeaderAndFooter;
 	}
-	
+
 	public Boolean getFloatColumnFooter() {
 		return floatColumnFooter;
-	}	
-	
+	}
+
 	public void setFloatColumnFooter(Boolean floatColumnFooter) {
 		this.floatColumnFooter = floatColumnFooter;
 	}
-	
+
 	public DRStyle getTextStyle() {
 		return textStyle;
 	}
@@ -376,7 +378,7 @@ public class DRReport implements DRIReport {
 	public void setTextStyle(DRStyle textStyle) {
 		this.textStyle = textStyle;
 	}
-	
+
 	public DRStyle getColumnTitleStyle() {
 		return columnTitleStyle;
 	}
@@ -408,7 +410,7 @@ public class DRReport implements DRIReport {
 	public void setGroupStyle(DRStyle groupStyle) {
 		this.groupStyle = groupStyle;
 	}
-	
+
 	public DRStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
@@ -416,7 +418,7 @@ public class DRReport implements DRIReport {
 	public void setSubtotalStyle(DRStyle subtotalStyle) {
 		this.subtotalStyle = subtotalStyle;
 	}
-	
+
 	public DRStyle getImageStyle() {
 		return imageStyle;
 	}
@@ -428,19 +430,19 @@ public class DRReport implements DRIReport {
 	public DRStyle getChartStyle() {
 		return chartStyle;
 	}
-	
+
 	public void setChartStyle(DRStyle chartStyle) {
 		this.chartStyle = chartStyle;
 	}
-	
+
 	public DRIStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
-	
+
 	public void setBarcodeStyle(DRStyle barcodeStyle) {
 		this.barcodeStyle = barcodeStyle;
 	}
-	
+
 	public Boolean getHighlightDetailOddRows() {
 		return highlightDetailOddRows;
 	}
@@ -448,7 +450,7 @@ public class DRReport implements DRIReport {
 	public void setHighlightDetailOddRows(Boolean highlightDetailOddRows) {
 		this.highlightDetailOddRows = highlightDetailOddRows;
 	}
-	
+
 	public DRSimpleStyle getDetailOddRowStyle() {
 		return detailOddRowStyle;
 	}
@@ -464,7 +466,7 @@ public class DRReport implements DRIReport {
 	public void setHighlightDetailEvenRows(Boolean highlightDetailEvenRows) {
 		this.highlightDetailEvenRows = highlightDetailEvenRows;
 	}
-	
+
 	public DRSimpleStyle getDetailEvenRowStyle() {
 		return detailEvenRowStyle;
 	}
@@ -488,7 +490,7 @@ public class DRReport implements DRIReport {
 		Validate.notNull(detailRowHighlighter, "detailRowHighlighter must not be null");
 		this.detailRowHighlighters.add(detailRowHighlighter);
 	}
-	
+
 	public DRColumnGrid getColumnGrid() {
 		return columnGrid;
 	}
@@ -517,8 +519,12 @@ public class DRReport implements DRIReport {
 		return columnFooterBand;
 	}
 
-	public DRBand getDetailBand() {
-		return detailBand;
+	public DRBand getDetailHeaderBand() {
+		return detailHeaderBand;
+	}
+
+	public DRBand getDetailFooterBand() {
+		return detailFooterBand;
 	}
 
 	public DRBand getLastPageFooterBand() {

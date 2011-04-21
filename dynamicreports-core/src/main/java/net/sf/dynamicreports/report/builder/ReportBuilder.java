@@ -59,56 +59,56 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "ucd"})
 public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T, DRReport> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	public ReportBuilder() {
 		super(new DRReport());
 	}
-	
+
 	public T setLocale(Locale locale) {
 		getObject().setLocale(locale);
 		return (T) this;
 	}
-	
+
 	public T setResourceBundle(ResourceBundle resourceBundle) {
 		getObject().setResourceBundle(resourceBundle);
 		return (T) this;
 	}
-	
+
 	public T setResourceBundle(String resourceBundleName) {
 		getObject().setResourceBundleName(resourceBundleName);
 		return (T) this;
 	}
-	
+
 	public T setShowColumnTitle(Boolean showColumnTitle) {
 		getObject().setShowColumnTitle(showColumnTitle);
-		return (T) this;		
+		return (T) this;
 	}
 
 	public T setPageFormat(PageType pageType) {
-		return setPageFormat(pageType, PageOrientation.PORTRAIT);		
-	}	
-	
+		return setPageFormat(pageType, PageOrientation.PORTRAIT);
+	}
+
 	public T setPageFormat(PageType pageType, PageOrientation orientation) {
 		getObject().getPage().setPageFormat(pageType, orientation);
-		return (T) this;		
-	}	
+		return (T) this;
+	}
 
 	public T setPageFormat(Integer width, Integer height, PageOrientation orientation) {
 		getObject().getPage().setPageFormat(width, height, orientation);
-		return (T) this;		
-	}	
-	
+		return (T) this;
+	}
+
 	public T setPageMargin(MarginBuilder margin) {
 		Validate.notNull(margin, "margin must not be null");
 		getObject().getPage().setMargin(margin.build());
-		return (T) this;		
-	}	
+		return (T) this;
+	}
 
 	public T setPageColumnsPerPage(Integer columnsPerPage) {
 		getObject().getPage().setColumnsPerPage(columnsPerPage);
 		return (T) this;
 	}
-	
+
 	public T setPageColumnSpace(Integer columnSpace) {
 		getObject().getPage().setColumnSpace(columnSpace);
 		return (T) this;
@@ -117,12 +117,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T ignorePagination() {
 		return setIgnorePagination(true);
 	}
-	
+
 	public T setIgnorePagination(Boolean ignorePagination) {
 		getObject().setIgnorePagination(ignorePagination);
 		return (T) this;
 	}
-	
+
 	public T setWhenNoDataType(WhenNoDataType whenNoDataType) {
 		getObject().setWhenNoDataType(whenNoDataType);
 		return (T) this;
@@ -131,7 +131,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T titleOnANewPage() {
 		return setTitleOnANewPage(true);
 	}
-	
+
 	public T setTitleOnANewPage(Boolean titleOnANewPage) {
 		getObject().setTitleOnANewPage(titleOnANewPage);
 		return (T) this;
@@ -140,30 +140,30 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T summaryOnANewPage() {
 		return setSummaryOnANewPage(true);
 	}
-	
+
 	public T setSummaryOnANewPage(Boolean summaryOnANewPage) {
 		getObject().setSummaryOnANewPage(summaryOnANewPage);
 		return (T) this;
 	}
-	
+
 	public T summaryWithPageHeaderAndFooter() {
 		return setSummaryWithPageHeaderAndFooter(true);
 	}
-	
+
 	public T setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
 		getObject().setSummaryWithPageHeaderAndFooter(summaryWithPageHeaderAndFooter);
 		return (T) this;
 	}
-	
+
 	public T floatColumnFooter() {
 		return setFloatColumnFooter(true);
 	}
-	
+
 	public T setFloatColumnFooter(Boolean floatColumnFooter) {
 		getObject().setFloatColumnFooter(floatColumnFooter);
 		return (T) this;
 	}
-	
+
 	public T scriptlets(DRIScriptlet ...scriptlets) {
 		return addScriptlet(scriptlets);
 	}
@@ -173,39 +173,39 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(scriptlets, "scriptlets must not contains null scriptlet");
 		for (DRIScriptlet scriptlet : scriptlets) {
 			getObject().addScriptlet(scriptlet);
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public T setProperties(Properties properties) {
 		getObject().setProperties(properties);
 		return (T) this;
 	}
-	
+
 	public T addProperty(String key, String value) {
 		getObject().addProperty(key, value);
 		return (T) this;
 	}
 
-	public T setQuery(String sql) {	
+	public T setQuery(String sql) {
 		Validate.notNull(sql, "sql must not be null");
 		return setQuery(DynamicReports.query(sql, QueryLanguage.SQL));
 	}
-	
-	public T setQuery(QueryBuilder query) {	
+
+	public T setQuery(QueryBuilder query) {
 		Validate.notNull(query, "query must not be null");
 		getObject().setQuery(query.build());
 		return (T) this;
 	}
-	
+
 	public T columnGrid(ListType type) {
 		getObject().setColumnGrid(new DRColumnGrid(type));
 		return (T) this;
 	}
-	
+
 	public T columnGrid(ColumnGridComponentBuilder ...components) {
 		return columnGrid(ListType.HORIZONTAL, components);
-	}	
+	}
 
 	public T columnGrid(ListType type, ColumnGridComponentBuilder ...components) {
 		Validate.notNull(components, "components must not be null");
@@ -213,26 +213,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		DRColumnGrid columnGrid = new DRColumnGrid(type);
 		for (ColumnGridComponentBuilder component : components) {
 			columnGrid.addComponent(component.build());
-		}		
+		}
 		getObject().setColumnGrid(columnGrid);
 		return (T) this;
-	}	
-	
+	}
+
 	public T setTemplate(ReportTemplateBuilder template) {
 		Validate.notNull(template, "template must not be null");
 		getObject().setTemplate(template.build());
 		return (T) this;
 	}
-	
+
 	//parameter
 	public T parameters(ParameterBuilder<?> ...parameters) {
 		return addParameter(parameters);
 	}
-	
+
 	public T addParameter(String name, Object value) {
 		return addParameter(DynamicReports.parameter(name, value));
 	}
-	
+
 	public T addParameter(ParameterBuilder<?> ...parameters) {
 		Validate.notNull(parameters, "parameters must not be null");
 		Validate.noNullElements(parameters, "parameters must not contains null parameter");
@@ -241,7 +241,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	//field
 	public T fields(FieldBuilder<?> ...fields) {
 		return addField(fields);
@@ -250,11 +250,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T addField(String name, Class<?> valueClass) {
 		return addField(DynamicReports.field(name, valueClass));
 	}
-	
+
 	public <U> T addField(String name, DRIDataType<? super U, U> dataType) {
 		return addField(DynamicReports.field(name, dataType));
 	}
-	
+
 	public T addField(FieldBuilder<?> ...fields) {
 		Validate.notNull(fields, "fields must not be null");
 		Validate.noNullElements(fields, "fields must not contains null field");
@@ -263,7 +263,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	//variable
 	public T variables(VariableBuilder<?> ...variables) {
 		return addVariable(variables);
@@ -277,30 +277,30 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	//column
 	public T columns(ColumnBuilder<?, ?> ...columns) {
 		return addColumn(columns);
 	}
-	
+
 	public T addColumn(ColumnBuilder<?, ?> ...columns) {
 		Validate.notNull(columns, "columns must not be null");
 		Validate.noNullElements(columns, "columns must not contains null column");
 		for (ColumnBuilder<?, ?> column : columns) {
 			getObject().addColumn(column.build());
-		}		
+		}
 		return (T) this;
 	}
-	
-	//style	
+
+	//style
 	public T setTextStyle(StyleBuilder textStyle) {
 		if (textStyle != null) {
 			getObject().setTextStyle(textStyle.build());
 		}
 		else {
 			getObject().setTextStyle(null);
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
 
 	public T setColumnTitleStyle(StyleBuilder columnTitleStyle) {
@@ -309,48 +309,48 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		else {
 			getObject().setColumnTitleStyle(null);
-		}				
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T setColumnStyle(StyleBuilder columnStyle) {
 		if (columnStyle != null) {
 			getObject().setColumnStyle(columnStyle.build());
 		}
 		else {
 			getObject().setColumnStyle(null);
-		}				
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T setGroupTitleStyle(StyleBuilder groupTitleStyle) {
 		if (groupTitleStyle != null) {
 			getObject().setGroupTitleStyle(groupTitleStyle.build());
 		}
 		else {
 			getObject().setGroupTitleStyle(null);
-		}				
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T setGroupStyle(StyleBuilder groupStyle) {
 		if (groupStyle != null) {
 			getObject().setGroupStyle(groupStyle.build());
 		}
 		else {
 			getObject().setGroupStyle(null);
-		}				
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T setSubtotalStyle(StyleBuilder subtotalStyle) {
 		if (subtotalStyle != null) {
 			getObject().setSubtotalStyle(subtotalStyle.build());
 		}
 		else {
 			getObject().setSubtotalStyle(null);
-		}				
-		return (T) this;	
+		}
+		return (T) this;
 	}
 
 	public T setImageStyle(StyleBuilder imageStyle) {
@@ -359,8 +359,8 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		else {
 			getObject().setImageStyle(null);
-		}			
-		return (T) this;	
+		}
+		return (T) this;
 	}
 
 	public T setChartStyle(StyleBuilder chartStyle) {
@@ -369,30 +369,30 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		else {
 			getObject().setChartStyle(null);
-		}			
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T setBarcodeStyle(StyleBuilder barcodeStyle) {
 		if (barcodeStyle != null) {
 			getObject().setBarcodeStyle(barcodeStyle.build());
 		}
 		else {
 			getObject().setBarcodeStyle(null);
-		}			
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	//row highlighter
 	public T highlightDetailOddRows() {
 		return setHighlightDetailOddRows(true);
 	}
-	
+
 	public T setHighlightDetailOddRows(Boolean highlightDetailOddRows) {
 		getObject().setHighlightDetailOddRows(highlightDetailOddRows);
 		return (T) this;
 	}
-	
+
 	public T setDetailOddRowStyle(SimpleStyleBuilder detailOddRowStyle) {
 		if (detailOddRowStyle != null) {
 			getObject().setDetailOddRowStyle(detailOddRowStyle.build());
@@ -406,22 +406,22 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T highlightDetailEvenRows() {
 		return setHighlightDetailEvenRows(true);
 	}
-	
+
 	public T setHighlightDetailEvenRows(Boolean highlightDetailEvenRows) {
 		getObject().setHighlightDetailEvenRows(highlightDetailEvenRows);
 		return (T) this;
 	}
-	
+
 	public T setDetailEvenRowStyle(SimpleStyleBuilder detailEvenRowStyle) {
 		if (detailEvenRowStyle != null) {
 			getObject().setDetailEvenRowStyle(detailEvenRowStyle.build());
 		}
 		else {
 			getObject().setDetailEvenRowStyle(null);
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public T detailRowHighlighters(ConditionalStyleBuilder ...detailRowHighlighters) {
 		return addDetailRowHighlighter(detailRowHighlighters);
 	}
@@ -431,13 +431,13 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(detailRowHighlighters, "detailRowHighlighters must not contains null detailRowHighlighter");
 		for (ConditionalStyleBuilder conditionalStyleBuilder : detailRowHighlighters) {
 			getObject().addDetailRowHighlighter(conditionalStyleBuilder.build());
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	//subtotal
 	public T subtotalsAtTitle(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtTitle(subtotals);	
+		return addSubtotalAtTitle(subtotals);
 	}
 
 	public T addSubtotalAtTitle(SubtotalBuilder<?, ?> ...subtotals) {
@@ -445,25 +445,25 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.TITLE).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtPageHeader(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtPageHeader(subtotals);	
+		return addSubtotalAtPageHeader(subtotals);
 	}
-		
+
 	public T addSubtotalAtPageHeader(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.PAGE_HEADER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtPageFooter(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtPageFooter(subtotals);	
+		return addSubtotalAtPageFooter(subtotals);
 	}
 
 	public T addSubtotalAtPageFooter(SubtotalBuilder<?, ?> ...subtotals) {
@@ -471,25 +471,25 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.PAGE_FOOTER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtColumnHeader(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtColumnHeader(subtotals);	
+		return addSubtotalAtColumnHeader(subtotals);
 	}
-	
+
 	public T addSubtotalAtColumnHeader(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.COLUMN_HEADER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtColumnFooter(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtColumnFooter(subtotals);	
+		return addSubtotalAtColumnFooter(subtotals);
 	}
 
 	public T addSubtotalAtColumnFooter(SubtotalBuilder<?, ?> ...subtotals) {
@@ -497,144 +497,144 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.COLUMN_FOOTER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtGroupHeader(GroupBuilder<?> group, SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtGroupHeader(group, subtotals);	
+		return addSubtotalAtGroupHeader(group, subtotals);
 	}
-	
+
 	public T addSubtotalAtGroupHeader(GroupBuilder<?> group, SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(group, "group must not be null");
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.GROUP_HEADER).setGroup(group).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtGroupFooter(GroupBuilder<?> group, SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtGroupFooter(group, subtotals);	
+		return addSubtotalAtGroupFooter(group, subtotals);
 	}
-	
+
 	public T addSubtotalAtGroupFooter(GroupBuilder<?> group, SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(group, "group must not be null");
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.GROUP_FOOTER).setGroup(group).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtFirstGroupHeader(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtFirstGroupHeader(subtotals);	
+		return addSubtotalAtFirstGroupHeader(subtotals);
 	}
-	
+
 	public T addSubtotalAtFirstGroupHeader(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.FIRST_GROUP_HEADER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtFirstGroupFooter(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtFirstGroupFooter(subtotals);	
+		return addSubtotalAtFirstGroupFooter(subtotals);
 	}
-	
+
 	public T addSubtotalAtFirstGroupFooter(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.FIRST_GROUP_FOOTER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtLastGroupHeader(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtLastGroupHeader(subtotals);	
+		return addSubtotalAtLastGroupHeader(subtotals);
 	}
-	
+
 	public T addSubtotalAtLastGroupHeader(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.LAST_GROUP_HEADER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtLastGroupFooter(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtLastGroupFooter(subtotals);	
+		return addSubtotalAtLastGroupFooter(subtotals);
 	}
-	
+
 	public T addSubtotalAtLastGroupFooter(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.LAST_GROUP_FOOTER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtLastPageFooter(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtLastPageFooter(subtotals);	
+		return addSubtotalAtLastPageFooter(subtotals);
 	}
-	
+
 	public T addSubtotalAtLastPageFooter(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.LAST_PAGE_FOOTER).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsAtSummary(SubtotalBuilder<?, ?> ...subtotals) {
-		return addSubtotalAtSummary(subtotals);	
+		return addSubtotalAtSummary(subtotals);
 	}
-	
+
 	public T addSubtotalAtSummary(SubtotalBuilder<?, ?> ...subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (SubtotalBuilder<?, ?> subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.SUMMARY).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsOfPercentageAtGroupHeader(GroupBuilder<?> group, PercentageSubtotalBuilder ...subtotals) {
-		return addSubtotalOfPercentageAtGroupHeader(group, subtotals);	
+		return addSubtotalOfPercentageAtGroupHeader(group, subtotals);
 	}
-	
+
 	public T addSubtotalOfPercentageAtGroupHeader(GroupBuilder<?> group, PercentageSubtotalBuilder ...subtotals) {
 		Validate.notNull(group, "group must not be null");
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (PercentageSubtotalBuilder subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.GROUP_HEADER).setGroup(group).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	public T subtotalsOfPercentageAtGroupFooter(GroupBuilder<?> group, PercentageSubtotalBuilder ...subtotals) {
-		return addSubtotalOfPercentageAtGroupFooter(group, subtotals);	
+		return addSubtotalOfPercentageAtGroupFooter(group, subtotals);
 	}
-	
+
 	public T addSubtotalOfPercentageAtGroupFooter(GroupBuilder<?> group, PercentageSubtotalBuilder ...subtotals) {
 		Validate.notNull(group, "group must not be null");
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
 		for (PercentageSubtotalBuilder subtotal : subtotals) {
 			getObject().addSubtotal(subtotal.setPosition(SubtotalPosition.GROUP_FOOTER).setGroup(group).build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	//group
 	public T groupBy(ValueColumnBuilder<?, ?> ...groupColumns) {
 		Validate.notNull(groupColumns, "groupColumns must not be null");
@@ -642,50 +642,50 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		for (ValueColumnBuilder<?, ?> groupColumn : groupColumns) {
 			addGroup(Groups.group(groupColumn));
 		}
-		return (T) this;	
+		return (T) this;
 	}
-	
+
 	public T groupBy(GroupBuilder<?> ...groups) {
-		return addGroup(groups);	
+		return addGroup(groups);
 	}
-	
+
 	public T addGroup(GroupBuilder<?> ...groups) {
 		Validate.notNull(groups, "groups must not be null");
 		Validate.noNullElements(groups, "groups must not contains null group");
 		for (GroupBuilder<?> group : groups) {
 			getObject().addGroup(group.build());
-		}		
-		return (T) this;	
+		}
+		return (T) this;
 	}
-	
+
 	//band
 	public T setTitleSplitType(SplitType splitType) {
 		getObject().getTitleBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T title(ComponentBuilder<?, ?> ...components) {
 		return addTitle(components);
 	}
-	
+
 	public T addTitle(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
 		for (ComponentBuilder<?, ?> component : components) {
-			getObject().getTitleBand().addComponent(component.build());	
-		}		
+			getObject().getTitleBand().addComponent(component.build());
+		}
 		return (T) this;
 	}
-		
+
 	public T setPageHeaderSplitType(SplitType splitType) {
 		getObject().getPageHeaderBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T pageHeader(ComponentBuilder<?, ?> ...components) {
 		return addPageHeader(components);
 	}
-	
+
 	public T addPageHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -694,16 +694,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setPageFooterSplitType(SplitType splitType) {
 		getObject().getPageFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T pageFooter(ComponentBuilder<?, ?> ...components) {
 		return addPageFooter(components);
 	}
-	
+
 	public T addPageFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -712,16 +712,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setColumnHeaderSplitType(SplitType splitType) {
 		getObject().getColumnHeaderBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T columnHeader(ComponentBuilder<?, ?> ...components) {
 		return addColumnHeader(components);
 	}
-	
+
 	public T addColumnHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -730,16 +730,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setColumnFooterSplitType(SplitType splitType) {
 		getObject().getColumnFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T columnFooter(ComponentBuilder<?, ?> ...components) {
 		return addColumnFooter(components);
 	}
-	
+
 	public T addColumnFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -748,20 +748,20 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setGroupHeaderSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
 		DRGroup drGroup = getObject().getGroups().get(index);
 		drGroup.getHeaderBand().setSplitType(splitType);
-		return (T) this;	
+		return (T) this;
 	}
-	
+
 	public T groupHeader(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
-		return addGroupHeader(group, components);	
+		return addGroupHeader(group, components);
 	}
-	
+
 	public T addGroupHeader(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -772,22 +772,22 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		for (ComponentBuilder<?, ?> component : components) {
 			drGroup.getHeaderBand().addComponent(component.build());
 		}
-		return (T) this;	
+		return (T) this;
 	}
-	
+
 	public T setGroupFooterSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
 		DRGroup drGroup = getObject().getGroups().get(index);
 		drGroup.getFooterBand().setSplitType(splitType);
-		return (T) this;	
+		return (T) this;
 	}
-	
+
 	public T groupFooter(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
-		return addGroupFooter(group, components);	
+		return addGroupFooter(group, components);
 	}
-	
+
 	public T addGroupFooter(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -798,36 +798,66 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		for (ComponentBuilder<?, ?> component : components) {
 			drGroup.getFooterBand().addComponent(component.build());
 		}
-		return (T) this;	
-	}
-	
-	public T setDetailSplitType(SplitType splitType) {
-		getObject().getDetailBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
-	public T detail(ComponentBuilder<?, ?> ...components) {
-		return addDetail(components);
+
+	public T setDetailSplitType(SplitType splitType) {
+		return setDetailHeaderSplitType(splitType);
 	}
-	
+
+	public T detail(ComponentBuilder<?, ?> ...components) {
+		return detailHeader(components);
+	}
+
 	public T addDetail(ComponentBuilder<?, ?> ...components) {
+		return addDetailHeader(components);
+	}
+
+	public T setDetailHeaderSplitType(SplitType splitType) {
+		getObject().getDetailHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T detailHeader(ComponentBuilder<?, ?> ...components) {
+		return addDetailHeader(components);
+	}
+
+	public T addDetailHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
 		for (ComponentBuilder<?, ?> component : components) {
-			getObject().getDetailBand().addComponent(component.build());
+			getObject().getDetailHeaderBand().addComponent(component.build());
 		}
 		return (T) this;
 	}
-	
+
+	public T setDetailFooterSplitType(SplitType splitType) {
+		getObject().getDetailFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T detailFooter(ComponentBuilder<?, ?> ...components) {
+		return addDetailFooter(components);
+	}
+
+	public T addDetailFooter(ComponentBuilder<?, ?> ...components) {
+		Validate.notNull(components, "components must not be null");
+		Validate.noNullElements(components, "components must not contains null component");
+		for (ComponentBuilder<?, ?> component : components) {
+			getObject().getDetailFooterBand().addComponent(component.build());
+		}
+		return (T) this;
+	}
+
 	public T setLastPageFooterSplitType(SplitType splitType) {
 		getObject().getLastPageFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T lastPageFooter(ComponentBuilder<?, ?> ...components) {
 		return addLastPageFooter(components);
 	}
-	
+
 	public T addLastPageFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -836,16 +866,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setSummarySplitType(SplitType splitType) {
 		getObject().getSummaryBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T summary(ComponentBuilder<?, ?> ...components) {
 		return addSummary(components);
 	}
-		
+
 	public T addSummary(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -854,16 +884,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setNoDataSplitType(SplitType splitType) {
 		getObject().getNoDataBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T noData(ComponentBuilder<?, ?> ...components) {
 		return addNoData(components);
 	}
-	
+
 	public T addNoData(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -872,16 +902,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public T setBackgroundSplitType(SplitType splitType) {
 		getObject().getBackgroundBand().setSplitType(splitType);
 		return (T) this;
 	}
-	
+
 	public T background(ComponentBuilder<?, ?> ...components) {
 		return addBackground(components);
 	}
-	
+
 	public T addBackground(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -890,7 +920,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		}
 		return (T) this;
 	}
-	
+
 	public DRReport getReport() {
 		return build();
 	}

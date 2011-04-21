@@ -39,11 +39,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class BandReport {
 	private StyleBuilder boldCenteredStyle;
-	
+
 	public BandReport() {
 		build();
 	}
-	
+
 	private void build() {
 		boldCenteredStyle = stl.style()
 		                       .bold()
@@ -51,52 +51,53 @@ public class BandReport {
 		StyleBuilder backgroundStyle = stl.style(boldCenteredStyle)
 		                                  .setVerticalAlignment(VerticalAlignment.MIDDLE)
 		                                  .setRotation(Rotation.LEFT);
-		
+
 		TextColumnBuilder<String> column1 = col.column("Column1", "column1", type.stringType());
 		TextColumnBuilder<String> column2 = col.column("Column2", "column2", type.stringType());
 		ColumnGroupBuilder columnGroup = grp.group(column1);
-		
-		try {			
+
+		try {
 			report()//create new report design
 			  .setPageColumnsPerPage(2)
 			  .columns(column1, column2)
 			  .groupBy(columnGroup)
-			  
+
 			  //bands
 			  .title(createTextField("This is a title band"))
 			  .pageHeader(createTextField("This is a page header band"))
 			  .pageFooter(createTextField("This is a page footer band"))
 			  .columnHeader(createTextField("This is a column header band"))
-			  .columnFooter(createTextField("This is a column footer band"))			  
+			  .columnFooter(createTextField("This is a column footer band"))
 			  .lastPageFooter(createTextField("This is a last page footer band"))
 			  .summary(createTextField("This is a summary band"))
-			  //.detail(createTextField("This is a detail band"))
+			  //.detailHeader(createTextField("This is a detail header band"))
+			  //.detailFooter(createTextField("This is a detail footer band"))
 			  .groupHeader(columnGroup, createTextField("This is a group header band"))
 			  .groupFooter(columnGroup, createTextField("This is a group footer band"))
 			  .background(createTextField("This is a background band").setHeight(800).setStyle(backgroundStyle))
-			  
+
 			  .setDataSource(createDataSource())//set datasource
-			  .show();//create and show report		
+			  .show();//create and show report
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private TextFieldBuilder<String> createTextField(String label) {
 		return cmp.text(label).setStyle(boldCenteredStyle);
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("column1", "column2");
 		int row = 1;
 		for (int i = 1; i <= 2; i++) {
 			for (int j = 0; j < 50; j++) {
 				dataSource.add("group" + i, "row " + row++);
-			}			
+			}
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new BandReport();
 	}

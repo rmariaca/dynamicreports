@@ -141,7 +141,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isIgnorePagination();
 	}
 
-	public WhenNoDataType getWhenNoDataType(DRIDesignBand detailBand, DRIDesignBand noDataBand) {
+	public WhenNoDataType getWhenNoDataType(boolean emptyDetail, DRIDesignBand noDataBand) {
 		if (report.getWhenNoDataType() != null) {
 			return report.getWhenNoDataType();
 		}
@@ -154,7 +154,7 @@ public class TemplateTransform {
 		if (noDataBand != null) {
 			return WhenNoDataType.NO_DATA_SECTION;
 		}
-		if (detailBand == null) {
+		if (emptyDetail) {
 			return WhenNoDataType.ALL_SECTIONS_NO_DETAIL;
 		}
 		return Defaults.getDefaults().getWhenNoDataType();

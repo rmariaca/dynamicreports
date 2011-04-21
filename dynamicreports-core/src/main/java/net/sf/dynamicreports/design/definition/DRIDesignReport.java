@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -40,13 +41,13 @@ import net.sf.dynamicreports.report.definition.DRIScriptlet;
 public interface DRIDesignReport {
 
 	public DRIDesignTemplateDesign getTemplateDesign();
-	
+
 	public Locale getLocale();
 
 	public ResourceBundle getResourceBundle();
 
 	public String getResourceBundleName();
-	
+
 	public boolean isIgnorePagination();
 
 	public Properties getProperties();
@@ -60,11 +61,11 @@ public interface DRIDesignReport {
 	public boolean isTitleOnANewPage();
 
 	public boolean isSummaryOnANewPage();
-	
+
 	public boolean isSummaryWithPageHeaderAndFooter();
 
-	public boolean isFloatColumnFooter();	
-	
+	public boolean isFloatColumnFooter();
+
 	public Collection<DRIDesignParameter> getParameters();
 
 	public Collection<DRIScriptlet> getScriptlets();
@@ -72,17 +73,17 @@ public interface DRIDesignReport {
 	public Collection<DRIDesignField> getFields();
 
 	public Collection<DRIDesignSystemExpression> getSystemExpressions();
-	
+
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions();
-	
+
 	public Collection<DRIDesignStyle> getStyles();
 
 	public Collection<? extends DRIDesignGroup> getGroups();
 
 	public Collection<DRIDesignVariable> getVariables();
-	
+
 	public Collection<DRIDesignComplexExpression> getComplexExpressions();
-	
+
 	public DRIDesignBand getTitleBand();
 
 	public DRIDesignBand getPageHeaderBand();
@@ -93,7 +94,7 @@ public interface DRIDesignReport {
 
 	public DRIDesignBand getColumnFooterBand();
 
-	public DRIDesignBand getDetailBand();
+	public List<? extends DRIDesignBand> getDetailBands();
 
 	public DRIDesignBand getLastPageFooterBand();
 
@@ -101,5 +102,5 @@ public interface DRIDesignReport {
 
 	public DRIDesignBand getNoDataBand();
 
-	public DRIDesignBand getBackgroundBand();		
+	public DRIDesignBand getBackgroundBand();
 }

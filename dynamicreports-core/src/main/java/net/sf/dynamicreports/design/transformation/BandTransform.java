@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.report.base.DRBand;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -52,7 +53,8 @@ public class BandTransform {
 	private DRDesignBand columnHeaderBand;
 	private DRDesignBand columnHeaderForGroupBand;
 	private DRDesignBand columnFooterBand;
-	private DRDesignBand detailBand;
+	private List<DRDesignBand> detailBands;
+	private DRDesignBand columnDetailBand;
 	private DRDesignBand lastPageFooterBand;
 	private DRDesignBand summaryBand;
 	private DRDesignBand noDataBand;
@@ -60,6 +62,7 @@ public class BandTransform {
 
 	public BandTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
+		this.detailBands = new ArrayList<DRDesignBand>();
 	}
 
 	public void transform() throws DRException {
@@ -92,8 +95,14 @@ public class BandTransform {
 		band = report.getColumnFooterBand();
 		columnFooterBand = band("columnFooter", band, templateTransform.getColumnFooterSplitType(band), ResetType.COLUMN, null);
 
-		band = report.getDetailBand();
-		detailBand = band("detail", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null);
+		band = report.getDetailHeaderBand();
+		detailBands.add(band("detailHeader", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
+
+		columnDetailBand = band("detail", new DRBand(), templateTransform.getDetailSplitType(band), ResetType.REPORT, null);
+		detailBands.add(columnDetailBand);
+
+		band = report.getDetailFooterBand();
+		detailBands.add(band("detailFooter", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
 
 		band = report.getLastPageFooterBand();
 		lastPageFooterBand = band("lastPageFooter", band, templateTransform.getLastPageFooterSplitType(band), ResetType.PAGE, null);
@@ -117,7 +126,13 @@ public class BandTransform {
 		pageFooterBand = bandComponents.prepareBand(pageFooterBand, maxWidth, templateDesign.getPageFooterComponentsCount());
 		columnHeaderBand = bandComponents.prepareBand(columnHeaderBand, maxColumnWidth, templateDesign.getColumnHeaderComponentsCount());
 		columnFooterBand = bandComponents.prepareBand(columnFooterBand, maxColumnWidth, templateDesign.getColumnFooterComponentsCount());
-		detailBand = bandComponents.prepareBand(detailBand, maxColumnWidth, 0);
+		List<DRDesignBand> removeDetailBands = new ArrayList<DRDesignBand>();
+		for (DRDesignBand detailBand : detailBands) {
+			if (bandComponents.prepareBand(detailBand, maxColumnWidth, 0) == null) {
+				removeDetailBands.add(detailBand);
+			}
+		}
+		detailBands.removeAll(removeDetailBands);
 		lastPageFooterBand = bandComponents.prepareBand(lastPageFooterBand, maxWidth, templateDesign.getLastPageFooterComponentsCount());
 		summaryBand = bandComponents.prepareBand(summaryBand, maxWidth, templateDesign.getSummaryComponentsCount());
 		noDataBand = bandComponents.prepareBand(noDataBand, maxWidth, templateDesign.getNoDataComponentsCount());
@@ -194,8 +209,12 @@ public class BandTransform {
 		return columnFooterBand;
 	}
 
-	public DRDesignBand getDetailBand() {
-		return detailBand;
+	public List<DRDesignBand> getDetailBands() {
+		return detailBands;
+	}
+
+	public DRDesignBand getColumnDetailBand() {
+		return columnDetailBand;
 	}
 
 	public DRDesignBand getLastPageFooterBand() {

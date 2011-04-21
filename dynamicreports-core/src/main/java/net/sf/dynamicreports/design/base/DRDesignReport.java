@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.base;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -204,7 +205,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public WhenNoDataType getWhenNoDataType() {
-		return templateTransform.getWhenNoDataType(getDetailBand(), getNoDataBand());
+		return templateTransform.getWhenNoDataType(getDetailBands().isEmpty(), getNoDataBand());
 	}
 
 	public boolean isTitleOnANewPage() {
@@ -279,8 +280,8 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return bandTransform.getColumnFooterBand();
 	}
 
-	public DRDesignBand getDetailBand() {
-		return bandTransform.getDetailBand();
+	public List<DRDesignBand> getDetailBands() {
+		return bandTransform.getDetailBands();
 	}
 
 	public DRDesignBand getLastPageFooterBand() {

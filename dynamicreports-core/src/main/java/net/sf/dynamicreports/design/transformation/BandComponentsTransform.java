@@ -65,8 +65,11 @@ class BandComponentsTransform {
 
 		DRDesignComponent component = prepareList(band.getName(), band.getList(), maxWidth);
 		if (component == null) {
-			return null;
+			if (band.getList() == null || band.getList().getHeight() == null || band.getList().getHeight() == 0) {
+				return null;
+			}
 		}
+		band.setHeight(band.getList().getHeight());
 		band.setBandComponent(component);
 
 		if (band.getBandComponent() != null && templateDesignComponents > 0) {

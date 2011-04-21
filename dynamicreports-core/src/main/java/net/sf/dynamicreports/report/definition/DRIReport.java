@@ -39,53 +39,53 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIReport extends Serializable {
-	
+
 	public DRIReportTemplate getTemplate();
 
 	public DRITemplateDesign<?> getTemplateDesign();
-	
+
 	public Locale getLocale();
-	
+
 	public ResourceBundle getResourceBundle();
 
 	public String getResourceBundleName();
-	
+
 	public Boolean getShowColumnTitle();
 
 	public List<? extends DRIColumn<?>> getColumns();
-	
+
 	public List<? extends DRIGroup> getGroups();
-	
+
 	public List<? extends DRIField<?>> getFields();
-	
+
 	public List<? extends DRIVariable<?>> getVariables();
 
 	public List<? extends DRISubtotal<?>> getSubtotals();
-	
+
 	public List<? extends DRIParameter<?>> getParameters();
-	
+
 	public List<DRIScriptlet> getScriptlets();
-		
+
 	public Properties getProperties();
-	
+
 	public DRIQuery getQuery();
-	
+
 	public DRIPage getPage();
 
 	public Boolean getIgnorePagination();
 
 	public WhenNoDataType getWhenNoDataType();
-	
+
 	public Boolean getTitleOnANewPage();
-	
+
 	public Boolean getSummaryOnANewPage();
-	
+
 	public Boolean getSummaryWithPageHeaderAndFooter();
-	
+
 	public Boolean getFloatColumnFooter();
-	
+
 	public DRIStyle getTextStyle();
-	
+
 	public DRIStyle getColumnTitleStyle();
 
 	public DRIStyle getColumnStyle();
@@ -93,15 +93,15 @@ public interface DRIReport extends Serializable {
 	public DRIStyle getGroupTitleStyle();
 
 	public DRIStyle getGroupStyle();
-	
+
 	public DRIStyle getSubtotalStyle();
-	
+
 	public DRIStyle getImageStyle();
 
 	public DRIStyle getChartStyle();
-	
+
 	public DRIStyle getBarcodeStyle();
-	
+
 	public Boolean getHighlightDetailOddRows();
 
 	public DRISimpleStyle getDetailOddRowStyle();
@@ -111,7 +111,7 @@ public interface DRIReport extends Serializable {
 	public DRISimpleStyle getDetailEvenRowStyle();
 
 	public List<? extends DRIConditionalStyle> getDetailRowHighlighters();
-	
+
 	public DRIColumnGrid getColumnGrid();
 
 	public DRIBand getTitleBand();
@@ -124,7 +124,9 @@ public interface DRIReport extends Serializable {
 
 	public DRIBand getColumnFooterBand();
 
-	public DRIBand getDetailBand();
+	public DRIBand getDetailHeaderBand();
+
+	public DRIBand getDetailFooterBand();
 
 	public DRIBand getLastPageFooterBand();
 
