@@ -60,7 +60,7 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 
 		numberOfPagesTest(1);
 
-		elementCountTest("detailHeader.subreport1", 3);
+		elementCountTest("detail.subreport1", 3);
 
 		//title subreport
 		columnDetailCountTest(column1, 3);

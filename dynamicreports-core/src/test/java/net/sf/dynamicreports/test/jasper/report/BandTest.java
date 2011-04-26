@@ -140,14 +140,14 @@ public class BandTest extends AbstractJasperPositionTest implements Serializable
 		subtotalPositionTest(subtotal6, 0, 10, 0, 277, 16);
 
 		//group footer
-		elementPositionTest("subtotalGroupFooter.list1", 0, 297, 330, 287, 16);
+		elementPositionTest("subtotalGroupFooter.list1", 0, 297, 346, 287, 16);
 		subtotalPositionTest(subtotal7, 0, 10, 0, 277, 16);
-		elementPositionTest("groupFooter.textField1", 0, 297, 346, 287, 16);
+		elementPositionTest("groupFooter.textField1", 0, 297, 362, 287, 16);
 
 		//detail
 		//elementPositionTest("detail.list1", 0, 10, 170, 287, 32);
-		elementPositionTest("detailHeader.textField1", 0, 10, 170, 287, 16);
-		elementPositionTest("detail.list1", 0, 10, 186, 287, 16);
+		elementPositionTest("detail.textField1", 0, 10, 170, 287, 16);
+		elementPositionTest("detail.list2", 0, 10, 186, 287, 16);
 		columnDetailPositionTest(column2, 0, 10, 0, 277, 16);
 
 		//last page footer
@@ -158,9 +158,9 @@ public class BandTest extends AbstractJasperPositionTest implements Serializable
 
 		//summary
 		//elementPositionTest("summary.list1", 0, 10, 602, 575, 32);
-		elementPositionTest("summary.list2", 0, 10, 570, 575, 16);
+		elementPositionTest("summary.list2", 0, 10, 602, 575, 16);
 		subtotalPositionTest(subtotal9, 0, 10, 0, 277, 16);
-		elementPositionTest("summary.textField1", 0, 10, 586, 575, 16);
+		elementPositionTest("summary.textField1", 0, 10, 618, 575, 16);
 
 		//background
 		elementPositionTest("background.textField1", 0, 10, 10, 575, 16);

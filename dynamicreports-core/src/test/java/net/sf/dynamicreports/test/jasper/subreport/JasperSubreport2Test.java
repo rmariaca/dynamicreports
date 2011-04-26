@@ -64,7 +64,7 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 
 		numberOfPagesTest(1);
 
-		elementCountTest("detailHeader.subreport1", 3);
+		elementCountTest("detail.subreport1", 3);
 
 		//title subreport
 		elementCountTest("detail.column_field11", 3);

@@ -31,7 +31,6 @@ import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.report.base.DRBand;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -54,7 +53,7 @@ public class BandTransform {
 	private DRDesignBand columnHeaderForGroupBand;
 	private DRDesignBand columnFooterBand;
 	private List<DRDesignBand> detailBands;
-	private DRDesignBand columnDetailBand;
+	private DRDesignBand detailBand;
 	private DRDesignBand lastPageFooterBand;
 	private DRDesignBand summaryBand;
 	private DRDesignBand noDataBand;
@@ -98,8 +97,9 @@ public class BandTransform {
 		band = report.getDetailHeaderBand();
 		detailBands.add(band("detailHeader", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
 
-		columnDetailBand = band("detail", new DRBand(), templateTransform.getDetailSplitType(band), ResetType.REPORT, null);
-		detailBands.add(columnDetailBand);
+		band = report.getDetailBand();
+		detailBand = band("detail", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null);
+		detailBands.add(detailBand);
 
 		band = report.getDetailFooterBand();
 		detailBands.add(band("detailFooter", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
@@ -213,8 +213,8 @@ public class BandTransform {
 		return detailBands;
 	}
 
-	public DRDesignBand getColumnDetailBand() {
-		return columnDetailBand;
+	public DRDesignBand getDetailBand() {
+		return detailBand;
 	}
 
 	public DRDesignBand getLastPageFooterBand() {

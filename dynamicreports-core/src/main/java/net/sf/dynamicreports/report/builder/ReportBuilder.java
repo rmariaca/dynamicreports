@@ -802,15 +802,21 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	public T setDetailSplitType(SplitType splitType) {
-		return setDetailHeaderSplitType(splitType);
+		getObject().getDetailBand().setSplitType(splitType);
+		return (T) this;
 	}
 
 	public T detail(ComponentBuilder<?, ?> ...components) {
-		return detailHeader(components);
+		return addDetail(components);
 	}
 
 	public T addDetail(ComponentBuilder<?, ?> ...components) {
-		return addDetailHeader(components);
+		Validate.notNull(components, "components must not be null");
+		Validate.noNullElements(components, "components must not contains null component");
+		for (ComponentBuilder<?, ?> component : components) {
+			getObject().getDetailBand().addComponent(component.build());
+		}
+		return (T) this;
 	}
 
 	public T setDetailHeaderSplitType(SplitType splitType) {

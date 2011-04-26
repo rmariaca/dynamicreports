@@ -92,6 +92,7 @@ public class DRReport implements DRIReport {
 	private DRBand pageFooterBand;
 	private DRBand columnHeaderBand;
 	private DRBand columnFooterBand;
+	private DRBand detailBand;
 	private DRBand detailHeaderBand;
 	private DRBand detailFooterBand;
 	private DRBand lastPageFooterBand;
@@ -121,6 +122,7 @@ public class DRReport implements DRIReport {
 		pageFooterBand = new DRBand();
 		columnHeaderBand = new DRBand();
 		columnFooterBand = new DRBand();
+		detailBand = new DRBand();
 		detailHeaderBand = new DRBand();
 		detailFooterBand = new DRBand();
 		lastPageFooterBand = new DRBand();
@@ -517,6 +519,10 @@ public class DRReport implements DRIReport {
 
 	public DRBand getColumnFooterBand() {
 		return columnFooterBand;
+	}
+
+	public DRBand getDetailBand() {
+		return detailBand;
 	}
 
 	public DRBand getDetailHeaderBand() {

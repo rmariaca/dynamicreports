@@ -59,13 +59,13 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 		numberOfPagesTest(1);
 
 		//elementPositionTest("detail.list1", 0, 10, 10, 575, 68);
-		elementPositionTest("detailHeader.subreport1", 0, 10, 10, 575, 48);
+		elementPositionTest("detail.subreport1", 0, 10, 10, 575, 48);
 
 		//elementPositionTest("detail.list1", 1, 10, 78, 575, 84);
-		elementPositionTest("detailHeader.subreport1", 1, 10, 78, 575, 64);
+		elementPositionTest("detail.subreport1", 1, 10, 78, 575, 64);
 
 		//elementPositionTest("detail.list1", 4, 10, 162, 575, 100);
-		elementPositionTest("detailHeader.subreport1", 2, 10, 162, 575, 80);
+		elementPositionTest("detail.subreport1", 2, 10, 162, 575, 80);
 
 		//title
 		elementPositionTest("title.textField1", 0, 10, 10, 575, 16);

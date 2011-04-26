@@ -124,6 +124,8 @@ public interface DRIReport extends Serializable {
 
 	public DRIBand getColumnFooterBand();
 
+	public DRIBand getDetailBand();
+
 	public DRIBand getDetailHeaderBand();
 
 	public DRIBand getDetailFooterBand();
