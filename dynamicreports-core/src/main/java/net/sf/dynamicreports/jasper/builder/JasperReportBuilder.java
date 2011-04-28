@@ -205,9 +205,13 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return jasperReport;
 	}
 
+	public Map<String, Object> getJasperParameters() throws DRException {
+		return toJasperReportDesign().getParameters();
+	}
+
 	public JasperPrint toJasperPrint() throws DRException {
 		if (jasperPrint == null) {
-			Map<String, Object> parameters = toJasperReportDesign().getParameters();
+			Map<String, Object> parameters = getJasperParameters();
 			if (virtualizer != null) {
 				parameters = new HashMap<String, Object>(parameters);
 				parameters.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);

@@ -31,7 +31,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
 import net.sf.dynamicreports.report.defaults.xml.XmlDynamicReports;
-import net.sf.dynamicreports.report.exception.DRReportException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,18 +40,18 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Defaults {
 	private static final Log log = LogFactory.getLog(Defaults.class);
-	
+
 	private static Default defaults;
-	
+
 	static {
 		defaults = DefaultBinder.bind(load());
 	}
-	
+
 	private static XmlDynamicReports load() {
 		String resource = "dynamicreports-defaults.xml";
 		InputStream is = null;
-		
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();		
+
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		if (classLoader != null) {
 			is = classLoader.getResourceAsStream(resource);
 		}
@@ -60,7 +59,7 @@ public class Defaults {
 			classLoader = Defaults.class.getClassLoader();
 			if (classLoader != null) {
 				is = classLoader.getResourceAsStream(resource);
-			}		
+			}
 			if (is == null) {
 				is = Defaults.class.getResourceAsStream("/" + resource);
 			}
@@ -71,14 +70,15 @@ public class Defaults {
 		}
 
 		try {
-			Unmarshaller unmarshaller = JAXBContext.newInstance(XmlDynamicReports.class).createUnmarshaller();						
+			Unmarshaller unmarshaller = JAXBContext.newInstance(XmlDynamicReports.class).createUnmarshaller();
 			JAXBElement<XmlDynamicReports> root = unmarshaller.unmarshal(new StreamSource(is), XmlDynamicReports.class);
-			return root.getValue(); 
+			return root.getValue();
 		} catch (JAXBException e) {
-			throw new DRReportException("Could not load dynamic reports defaults", e);
+			log.error("Could not load dynamic reports defaults", e);
+			return null;
 		}
 	}
-	
+
 	public static Default getDefaults() {
 		return defaults;
 	}
