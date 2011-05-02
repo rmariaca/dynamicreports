@@ -24,11 +24,13 @@ package net.sf.dynamicreports.report.builder.datatype;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.Locale;
 
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,15 +38,27 @@ import net.sf.dynamicreports.report.constant.Constants;
 @SuppressWarnings("ucd")
 public abstract class NumberType<T extends Number> extends AbstractDataType<Number, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
-	public String valueToString(Number value, Locale locale) {		
+	public String valueToString(Number value, Locale locale) {
 		if (value != null) {
 			return new DecimalFormat(getPattern(), new DecimalFormatSymbols(locale)).format(value);
 		}
 		return null;
 	}
-		
+
+	@Override
+	public Number stringToValue(String value, Locale locale) throws DRException {
+		if (value != null) {
+			try {
+				return new DecimalFormat(getPattern(), new DecimalFormatSymbols(locale)).parse(value);
+			} catch (ParseException e) {
+				throw new DRException("Unable to convert string value to date", e);
+			}
+		}
+		return null;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<T> getValueClass() {

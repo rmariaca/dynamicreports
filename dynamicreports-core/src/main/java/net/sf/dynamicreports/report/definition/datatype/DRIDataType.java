@@ -29,23 +29,30 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDataType<U, T extends U> extends Serializable {
-	
+
 	public String getPattern();
 
 	public DRIValueFormatter<?, ? extends U> getValueFormatter();
 
 	public HorizontalAlignment getHorizontalAlignment();
-	
+
 	public String valueToString(U value, Locale locale);
-	
+
 	public String valueToString(DRIValue<? extends U> value, ReportParameters reportParameters);
-	
+
 	public String valueToString(String name, ReportParameters reportParameters);
-	
+
+	public U stringToValue(String value, Locale locale) throws DRException;
+
+	public U stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException;
+
+	public U stringToValue(String name, ReportParameters reportParameters) throws DRException;
+
 	public Class<T> getValueClass();
 }

@@ -98,40 +98,48 @@ public class DataTypeTest {
 	}
 
 	@Test
-	public void valueToStringTest() {
-		valueToStringTest("BigDecimal", type.bigDecimalType(), 1000, "1,000.00");
-		valueToStringTest("BigInteger", type.bigIntegerType(), 1000, "1,000");
-		valueToStringTest("Byte", type.byteType(), 1000, "1,000");
-		valueToStringTest("Double", type.doubleType(), 1000.1, "1,000.1");
-		valueToStringTest("Float", type.floatType(), 1000.1, "1,000.1");
-		valueToStringTest("Integer", type.integerType(), 1000, "1,000");
-		valueToStringTest("Long", type.longType(), 1000, "1,000");
-		valueToStringTest("Short", type.shortType(), 1000, "1,000");
+	public void valueConversionTest() {
+		valueConversionTest("BigDecimal", type.bigDecimalType(), 1000, "1,000.00");
+		valueConversionTest("BigInteger", type.bigIntegerType(), 1000, "1,000");
+		valueConversionTest("Byte", type.byteType(), 1000, "1,000");
+		valueConversionTest("Double", type.doubleType(), 1000.1, "1,000.1");
+		valueConversionTest("Float", type.floatType(), 1000.1, "1,000.1");
+		valueConversionTest("Integer", type.integerType(), 1000, "1,000");
+		valueConversionTest("Long", type.longType(), 1000, "1,000");
+		valueConversionTest("Short", type.shortType(), 1000, "1,000");
 
 		Calendar c = Calendar.getInstance();
 		c.set(2010, 0, 2, 15, 5, 20);
 		c.set(Calendar.MILLISECOND, 100);
 		Date date = c.getTime();
-		valueToStringTest("Date", type.dateType(), date, "01/02/2010");
-		valueToStringTest("DateYearToMonth", type.dateYearToMonthType(), date, "01/2010");
-		valueToStringTest("DateYearToHour", type.dateYearToHourType(), date, "01/02/2010 3 PM");
-		valueToStringTest("DateYearToMinute", type.dateYearToMinuteType(), date, "01/02/2010 3:05 PM");
-		valueToStringTest("DateYearToSecond", type.dateYearToSecondType(), date, "01/02/2010 3:05:20 PM");
-		valueToStringTest("DateYearToFraction", type.dateYearToFractionType(), date, "01/02/2010 3:05:20,100 PM");
-		valueToStringTest("DateYear", type.dateYearType(), date, "2010");
-		valueToStringTest("DateMonth", type.dateMonthType(), date, "January");
-		valueToStringTest("DateDay", type.dateDayType(), date, "02");
-		valueToStringTest("TimeHourToMinute", type.timeHourToMinuteType(), date, "3:05 PM");
-		valueToStringTest("TimeHourToSecond", type.timeHourToSecondType(), date, "3:05:20 PM");
-		valueToStringTest("TimeHourToFraction", type.timeHourToFractionType(), date, "3:05:20,100 PM");
+		valueConversionTest("Date", type.dateType(), date, "01/02/2010");
+		valueConversionTest("DateYearToMonth", type.dateYearToMonthType(), date, "01/2010");
+		valueConversionTest("DateYearToHour", type.dateYearToHourType(), date, "01/02/2010 3 PM");
+		valueConversionTest("DateYearToMinute", type.dateYearToMinuteType(), date, "01/02/2010 3:05 PM");
+		valueConversionTest("DateYearToSecond", type.dateYearToSecondType(), date, "01/02/2010 3:05:20 PM");
+		valueConversionTest("DateYearToFraction", type.dateYearToFractionType(), date, "01/02/2010 3:05:20,100 PM");
+		valueConversionTest("DateYear", type.dateYearType(), date, "2010");
+		valueConversionTest("DateMonth", type.dateMonthType(), date, "January");
+		valueConversionTest("DateDay", type.dateDayType(), date, "02");
+		valueConversionTest("TimeHourToMinute", type.timeHourToMinuteType(), date, "3:05 PM");
+		valueConversionTest("TimeHourToSecond", type.timeHourToSecondType(), date, "3:05:20 PM");
+		valueConversionTest("TimeHourToFraction", type.timeHourToFractionType(), date, "3:05:20,100 PM");
 
-		valueToStringTest("Percentage", type.percentageType(), 0.89156, "89.16%");
-		valueToStringTest("Boolean", type.booleanType(), true, "true");
-		valueToStringTest("Character", type.characterType(), 'a', "a");
-		valueToStringTest("String", type.stringType(), "text", "text");
+		valueConversionTest("Percentage", type.percentageType(), 0.89156, "89.16%");
+		valueConversionTest("Boolean", type.booleanType(), true, "true");
+		valueConversionTest("Character", type.characterType(), 'a', "a");
+		valueConversionTest("String", type.stringType(), "text", "text");
 	}
 
-	private <U, T extends U> void valueToStringTest(String name, DRIDataType<U, T> dataType, U value, String result) {
-		Assert.assertEquals(name + " valueToString", result, dataType.valueToString(value, Locale.ENGLISH));
+	private <U, T extends U> void valueConversionTest(String name, DRIDataType<U, T> dataType, U value, String stringValue) {
+		Assert.assertEquals(name + " valueToString", stringValue, dataType.valueToString(value, Locale.ENGLISH));
+
+		try {
+			String stringResult = dataType.valueToString(value, Locale.ENGLISH);
+			U stringToValue = dataType.stringToValue(stringValue, Locale.ENGLISH);
+			Assert.assertEquals(name + " stringToValue", stringResult, dataType.valueToString(stringToValue, Locale.ENGLISH));
+		} catch (DRException e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 }

@@ -22,10 +22,13 @@
 
 package net.sf.dynamicreports.report.builder.datatype;
 
+import java.util.Locale;
+
 import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,14 +36,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class StringType extends AbstractDataType<String, String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getStringType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getStringType().getHorizontalAlignment();
+	}
+
+	@Override
+	public String stringToValue(String value, Locale locale) throws DRException {
+		return value;
 	}
 }

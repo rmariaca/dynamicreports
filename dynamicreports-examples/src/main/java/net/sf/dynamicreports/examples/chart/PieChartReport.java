@@ -37,18 +37,18 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PieChartReport {
-		
+
 	public PieChartReport() {
 		build();
 	}
-	
+
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-		
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
+
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -68,15 +68,15 @@ public class PieChartReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");		
+		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 70, new BigDecimal(100));
 		dataSource.add("Notebook", 25, new BigDecimal(500));
 		dataSource.add("PDA", 40, new BigDecimal(250));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new PieChartReport();
 	}

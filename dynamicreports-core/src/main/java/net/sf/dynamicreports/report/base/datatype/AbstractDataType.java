@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,11 +39,11 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 @SuppressWarnings("ucd")
 public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	public String getPattern() {
 		return null;
 	}
-	
+
 	public DRIValueFormatter<?, ? extends U> getValueFormatter() {
 		return null;
 	}
@@ -50,7 +51,7 @@ public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U,
 	public HorizontalAlignment getHorizontalAlignment() {
 		return null;
 	}
-	
+
 	public String valueToString(U value, Locale locale) {
 		if (value != null) {
 			return value.toString();
@@ -59,14 +60,26 @@ public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U,
 	}
 
 	public String valueToString(DRIValue<? extends U> value, ReportParameters reportParameters) {
-		return valueToString((U) reportParameters.getValue(value), reportParameters.getLocale());
+		return valueToString(reportParameters.getValue(value), reportParameters.getLocale());
 	}
 
 	@SuppressWarnings("unchecked")
 	public String valueToString(String name, ReportParameters reportParameters) {
 		return valueToString((U) reportParameters.getValue(name), reportParameters.getLocale());
 	}
-	
+
+	public U stringToValue(String value, Locale locale) throws DRException {
+		return null;
+	}
+
+	public U stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException {
+		return stringToValue(reportParameters.getValue(value), reportParameters.getLocale());
+	}
+
+	public U stringToValue(String name, ReportParameters reportParameters) throws DRException {
+		return stringToValue((String) reportParameters.getValue(name), reportParameters.getLocale());
+	}
+
 	@SuppressWarnings("unchecked")
 	public Class<T> getValueClass() {
 		return (Class<T>) ReportUtils.getGenericClass(this, 1);

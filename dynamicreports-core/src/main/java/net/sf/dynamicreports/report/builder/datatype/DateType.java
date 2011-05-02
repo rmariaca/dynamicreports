@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.datatype;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -30,6 +31,7 @@ import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -37,21 +39,33 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class DateType extends AbstractDataType<Date, Date> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getDateType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getDateType().getHorizontalAlignment();
 	}
-		
+
 	@Override
-	public String valueToString(Date value, Locale locale) {		
+	public String valueToString(Date value, Locale locale) {
 		if (value != null) {
 			return new SimpleDateFormat(getPattern(), locale).format(value);
+		}
+		return null;
+	}
+
+	@Override
+	public Date stringToValue(String value, Locale locale) throws DRException {
+		if (value != null) {
+			try {
+				return new SimpleDateFormat(getPattern(), locale).parse(value);
+			} catch (ParseException e) {
+				throw new DRException("Unable to convert string value to date", e);
+			}
 		}
 		return null;
 	}
