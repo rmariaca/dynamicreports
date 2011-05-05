@@ -68,15 +68,15 @@ public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U,
 		return valueToString((U) reportParameters.getValue(name), reportParameters.getLocale());
 	}
 
-	public U stringToValue(String value, Locale locale) throws DRException {
+	public T stringToValue(String value, Locale locale) throws DRException {
 		return null;
 	}
 
-	public U stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException {
+	public T stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException {
 		return stringToValue(reportParameters.getValue(value), reportParameters.getLocale());
 	}
 
-	public U stringToValue(String name, ReportParameters reportParameters) throws DRException {
+	public T stringToValue(String name, ReportParameters reportParameters) throws DRException {
 		return stringToValue((String) reportParameters.getValue(name), reportParameters.getLocale());
 	}
 

@@ -34,14 +34,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class BigDecimalType extends NumberType<BigDecimal> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getBigDecimalType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getBigDecimalType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected BigDecimal numberToValue(Number number) {
+		return new BigDecimal(number.doubleValue());
 	}
 }

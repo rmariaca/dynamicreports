@@ -136,8 +136,7 @@ public class ConversionColumnReport {
 
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			try {
-				Number number = type.doubleType().stringToValue("quantity", reportParameters);
-				return new BigDecimal(number.doubleValue());
+				return type.bigDecimalType().stringToValue("quantity", reportParameters);
 			} catch (DRException e) {
 				e.printStackTrace();
 			}

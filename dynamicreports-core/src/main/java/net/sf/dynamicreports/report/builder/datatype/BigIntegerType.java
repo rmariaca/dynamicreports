@@ -34,14 +34,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class BigIntegerType extends NumberType<BigInteger> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getBigIntegerType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getBigIntegerType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected BigInteger numberToValue(Number number) {
+		return BigInteger.valueOf(number.longValue());
 	}
 }

@@ -32,14 +32,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class IntegerType extends NumberType<Integer> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getIntegerType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getIntegerType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected Integer numberToValue(Number number) {
+		return new Integer(number.intValue());
 	}
 }

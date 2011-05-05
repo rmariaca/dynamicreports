@@ -32,14 +32,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class LongType extends NumberType<Long> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getLongType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getLongType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected Long numberToValue(Number number) {
+		return new Long(number.longValue());
 	}
 }

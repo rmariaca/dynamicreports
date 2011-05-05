@@ -32,14 +32,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class ByteType extends NumberType<Byte> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getByteType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getByteType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected Byte numberToValue(Number number) {
+		return new Byte(number.byteValue());
 	}
 }

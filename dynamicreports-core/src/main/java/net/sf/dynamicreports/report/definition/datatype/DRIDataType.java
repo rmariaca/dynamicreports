@@ -48,11 +48,11 @@ public interface DRIDataType<U, T extends U> extends Serializable {
 
 	public String valueToString(String name, ReportParameters reportParameters);
 
-	public U stringToValue(String value, Locale locale) throws DRException;
+	public T stringToValue(String value, Locale locale) throws DRException;
 
-	public U stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException;
+	public T stringToValue(DRIValue<String> value, ReportParameters reportParameters) throws DRException;
 
-	public U stringToValue(String name, ReportParameters reportParameters) throws DRException;
+	public T stringToValue(String name, ReportParameters reportParameters) throws DRException;
 
 	public Class<T> getValueClass();
 }

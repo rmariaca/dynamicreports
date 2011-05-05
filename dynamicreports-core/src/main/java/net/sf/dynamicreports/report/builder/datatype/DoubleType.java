@@ -31,14 +31,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
  */
 public class DoubleType extends NumberType<Double> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getDoubleType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getDoubleType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected Double numberToValue(Number number) {
+		return new Double(number.doubleValue());
 	}
 }

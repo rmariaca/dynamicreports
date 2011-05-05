@@ -32,14 +32,19 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 @SuppressWarnings("ucd")
 public class FloatType extends NumberType<Float> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	@Override
 	public String getPattern() {
 		return Defaults.getDefaults().getFloatType().getPattern();
 	}
-	
+
 	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return Defaults.getDefaults().getFloatType().getHorizontalAlignment();
+	}
+
+	@Override
+	protected Float numberToValue(Number number) {
+		return new Float(number.floatValue());
 	}
 }

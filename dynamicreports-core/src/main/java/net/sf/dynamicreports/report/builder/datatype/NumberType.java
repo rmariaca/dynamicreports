@@ -48,16 +48,18 @@ public abstract class NumberType<T extends Number> extends AbstractDataType<Numb
 	}
 
 	@Override
-	public Number stringToValue(String value, Locale locale) throws DRException {
+	public T stringToValue(String value, Locale locale) throws DRException {
 		if (value != null) {
 			try {
-				return new DecimalFormat(getPattern(), new DecimalFormatSymbols(locale)).parse(value);
+				return numberToValue(new DecimalFormat(getPattern(), new DecimalFormatSymbols(locale)).parse(value));
 			} catch (ParseException e) {
 				throw new DRException("Unable to convert string value to date", e);
 			}
 		}
 		return null;
 	}
+
+	protected abstract T numberToValue(Number number);
 
 	@SuppressWarnings("unchecked")
 	@Override

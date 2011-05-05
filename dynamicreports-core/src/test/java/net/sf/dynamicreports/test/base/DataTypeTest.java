@@ -101,7 +101,7 @@ public class DataTypeTest {
 	public void valueConversionTest() {
 		valueConversionTest("BigDecimal", type.bigDecimalType(), 1000, "1,000.00");
 		valueConversionTest("BigInteger", type.bigIntegerType(), 1000, "1,000");
-		valueConversionTest("Byte", type.byteType(), 1000, "1,000");
+		valueConversionTest("Byte", type.byteType(), 100, "100");
 		valueConversionTest("Double", type.doubleType(), 1000.1, "1,000.1");
 		valueConversionTest("Float", type.floatType(), 1000.1, "1,000.1");
 		valueConversionTest("Integer", type.integerType(), 1000, "1,000");
@@ -137,6 +137,7 @@ public class DataTypeTest {
 		try {
 			String stringResult = dataType.valueToString(value, Locale.ENGLISH);
 			U stringToValue = dataType.stringToValue(stringValue, Locale.ENGLISH);
+			Assert.assertTrue(name + " stringToValue class ", stringToValue.getClass().equals(dataType.getValueClass()));
 			Assert.assertEquals(name + " stringToValue", stringResult, dataType.valueToString(stringToValue, Locale.ENGLISH));
 		} catch (DRException e) {
 			Assert.fail(e.getMessage());
