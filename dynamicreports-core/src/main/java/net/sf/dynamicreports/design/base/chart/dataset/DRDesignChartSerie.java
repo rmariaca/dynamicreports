@@ -28,23 +28,32 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignChartSerie implements DRIDesignChartSerie {	
+public class DRDesignChartSerie implements DRIDesignChartSerie {
+	private DRIDesignExpression seriesExpression;
 	private DRIDesignExpression valueExpression;
 	private DRIDesignExpression labelExpression;
-	
+
+	public DRIDesignExpression getSeriesExpression() {
+		return seriesExpression;
+	}
+
+	public void setSeriesExpression(DRIDesignExpression seriesExpression) {
+		this.seriesExpression = seriesExpression;
+	}
+
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public DRIDesignExpression getLabelExpression() {
 		return labelExpression;
 	}
-	
+
 	public void setLabelExpression(DRIDesignExpression labelExpression) {
 		this.labelExpression = labelExpression;
-	}	
+	}
 }

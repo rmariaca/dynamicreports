@@ -80,12 +80,12 @@ import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
  */
 public class ChartTransform {
 	private JasperTransformAccessor accessor;
-	
+
 	public ChartTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
-	//chart	
+
+	//chart
 	protected JRDesignElement transform(DRIDesignChart chart) {
 		JRDesignChart jrChart = new JRDesignChart(new JRDesignStyle().getDefaultStyleProvider(), ConstantTransform.chartType(chart.getChartType()));
 		EvaluationTime evaluationTime = chart.getEvaluationTime();
@@ -93,38 +93,38 @@ public class ChartTransform {
 		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && chart.getEvaluationGroup() != null) {
 			jrChart.setEvaluationGroup(accessor.getGroupTransform().getGroup(chart.getEvaluationGroup()));
 		}
-		
+
 		if (chart.getChartType().equals(ChartType.XYBAR)) {
 			jrChart.setDataset(new JRDesignXyDataset(null));
 		}
-		
-		chart(chart, jrChart);		
+
+		chart(chart, jrChart);
 		dataset(chart.getDataset(), (JRDesignChartDataset) jrChart.getDataset());
 		plot(chart.getPlot(), jrChart.getPlot());
-		return jrChart;	
+		return jrChart;
 	}
 
-	private void chart(DRIDesignChart chart, JRDesignChart jrChart) {				
+	private void chart(DRIDesignChart chart, JRDesignChart jrChart) {
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
 			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
 			jrChart.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
 			jrChart.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
 		}
-		
+
 		DRIDesignChartTitle title = chart.getTitle();
 		jrChart.setTitleColor(title.getColor());
 		if (title.getFont() != null)
 			jrChart.setTitleFont(accessor.getStyleTransform().font(title.getFont()));
 		jrChart.setTitleExpression(accessor.getExpressionTransform().getExpression(title.getTitle()));
-		jrChart.setTitlePosition(ConstantTransform.chartPosition(title.getPosition()));		
-		
+		jrChart.setTitlePosition(ConstantTransform.chartPosition(title.getPosition()));
+
 		DRIDesignChartSubtitle subtitle = chart.getSubtitle();
 		jrChart.setSubtitleColor(subtitle.getColor());
 		if (subtitle.getFont() != null)
 			jrChart.setSubtitleFont(accessor.getStyleTransform().font(subtitle.getFont()));
-		jrChart.setSubtitleExpression(accessor.getExpressionTransform().getExpression(subtitle.getTitle()));	
-		
+		jrChart.setSubtitleExpression(accessor.getExpressionTransform().getExpression(subtitle.getTitle()));
+
 		DRIDesignChartLegend legend = chart.getLegend();
 		jrChart.setLegendColor(legend.getColor());
 		jrChart.setLegendBackgroundColor(legend.getBackgroundColor());
@@ -132,25 +132,25 @@ public class ChartTransform {
 		if (legend.getFont() != null)
 			jrChart.setLegendFont(accessor.getStyleTransform().font(legend.getFont()));
 		jrChart.setLegendPosition(ConstantTransform.chartPosition(legend.getPosition()));
-		
+
 		if (chart.getCustomizer() != null) {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
 			addChartCustomizer(chart.getUniqueName(), chart.getCustomizer());
-		}		
+		}
 	}
-	
+
 	private void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {
 		accessor.getCustomValues().addChartCustomizer(name, chartCustomizer);
 	}
-	
+
 	//dataset
-	private void dataset(DRIDesignChartDataset dataset, JRDesignChartDataset jrDataset) {	
+	private void dataset(DRIDesignChartDataset dataset, JRDesignChartDataset jrDataset) {
 		ResetType resetType = dataset.getResetType();
 		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
 		if (resetType.equals(ResetType.GROUP) && dataset.getResetGroup() != null) {
 			jrDataset.setResetGroup(accessor.getGroupTransform().getGroup(dataset.getResetGroup()));
 		}
-		
+
 		if (jrDataset instanceof JRDesignCategoryDataset) {
 			categoryDataset((DRIDesignCategoryDataset) dataset, (JRDesignCategoryDataset) jrDataset);
 		}
@@ -167,27 +167,38 @@ public class ChartTransform {
 			throw new JasperDesignException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
 	}
-	
+
 	private void categoryDataset(DRIDesignCategoryDataset dataset, JRDesignCategoryDataset jrDataset) {
 		JRDesignExpression exp1 = accessor.getExpressionTransform().getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
-			JRDesignCategorySeries jrSerie = new JRDesignCategorySeries();			
+			JRDesignCategorySeries jrSerie = new JRDesignCategorySeries();
 			jrSerie.setValueExpression(accessor.getExpressionTransform().getExpression(serie.getValueExpression()));
-							
-			JRDesignExpression exp2 = accessor.getExpressionTransform().getExpression(serie.getLabelExpression());			
+
+			JRDesignExpression exp2 = accessor.getExpressionTransform().getExpression(serie.getLabelExpression());
+			JRDesignExpression seriesExpression = accessor.getExpressionTransform().getExpression(serie.getSeriesExpression());
 			if (dataset.isUseSeriesAsCategory()) {
 				jrSerie.setCategoryExpression(exp2);
-				jrSerie.setSeriesExpression(exp1);
-				jrSerie.setLabelExpression(exp1);				
+				if (seriesExpression != null) {
+					jrSerie.setSeriesExpression(seriesExpression);
+				}
+				else {
+					jrSerie.setSeriesExpression(exp1);
+				}
+				jrSerie.setLabelExpression(exp1);
 			} else {
-				jrSerie.setCategoryExpression(exp1);				
-				jrSerie.setSeriesExpression(exp2);
+				jrSerie.setCategoryExpression(exp1);
+				if (seriesExpression != null) {
+					jrSerie.setSeriesExpression(seriesExpression);
+				}
+				else {
+					jrSerie.setSeriesExpression(exp2);
+				}
 				jrSerie.setLabelExpression(exp2);
 			}
 			jrDataset.addCategorySeries(jrSerie);
 		}
 	}
-	
+
 	private void pieDataset(DRIDesignChartDataset dataset, JRDesignPieDataset jrDataset) {
 		JRDesignExpression exp1 = accessor.getExpressionTransform().getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
@@ -197,7 +208,7 @@ public class ChartTransform {
 			jrDataset.addPieSeries(jrSerie);
 		}
 	}
-	
+
 	private void timeSeriesDataset(DRIDesignTimeSeriesDataset dataset, JRDesignTimeSeriesDataset jrDataset) {
 		if (dataset.getTimePeriodType() != null) {
 			jrDataset.setTimePeriod(ConstantTransform.timePeriodType(dataset.getTimePeriodType()));
@@ -205,27 +216,41 @@ public class ChartTransform {
 
 		JRDesignExpression exp1 = accessor.getExpressionTransform().getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
-			JRDesignTimeSeries jrSerie = new JRDesignTimeSeries();			
+			JRDesignTimeSeries jrSerie = new JRDesignTimeSeries();
 			jrSerie.setTimePeriodExpression(exp1);
-			jrSerie.setValueExpression(accessor.getExpressionTransform().getExpression(serie.getValueExpression()));							
-			jrSerie.setSeriesExpression(accessor.getExpressionTransform().getExpression(serie.getLabelExpression()));
-			jrSerie.setLabelExpression(jrSerie.getSeriesExpression());
+			jrSerie.setValueExpression(accessor.getExpressionTransform().getExpression(serie.getValueExpression()));
+			JRDesignExpression seriesExpression = accessor.getExpressionTransform().getExpression(serie.getSeriesExpression());
+			JRDesignExpression labelExpression = accessor.getExpressionTransform().getExpression(serie.getLabelExpression());
+			if (seriesExpression != null) {
+				jrSerie.setSeriesExpression(seriesExpression);
+			}
+			else {
+				jrSerie.setSeriesExpression(labelExpression);
+			}
+			jrSerie.setLabelExpression(labelExpression);
 			jrDataset.addTimeSeries(jrSerie);
 		}
 	}
-	
+
 	private void xyDataset(DRIDesignChartDataset dataset, JRDesignXyDataset jrDataset) {
 		JRDesignExpression exp1 = accessor.getExpressionTransform().getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			JRDesignXySeries jrSerie = new JRDesignXySeries();
 			jrSerie.setXValueExpression(exp1);
-			jrSerie.setYValueExpression(accessor.getExpressionTransform().getExpression(serie.getValueExpression()));							
-			jrSerie.setSeriesExpression(accessor.getExpressionTransform().getExpression(serie.getLabelExpression()));
-			jrSerie.setLabelExpression(jrSerie.getSeriesExpression());				
+			jrSerie.setYValueExpression(accessor.getExpressionTransform().getExpression(serie.getValueExpression()));
+			JRDesignExpression seriesExpression = accessor.getExpressionTransform().getExpression(serie.getSeriesExpression());
+			JRDesignExpression labelExpression = accessor.getExpressionTransform().getExpression(serie.getLabelExpression());
+			if (seriesExpression != null) {
+				jrSerie.setSeriesExpression(seriesExpression);
+			}
+			else {
+				jrSerie.setSeriesExpression(labelExpression);
+			}
+			jrSerie.setLabelExpression(labelExpression);
 			jrDataset.addXySeries(jrSerie);
 		}
 	}
-	
+
 	//plot
 	private void plot(DRIDesignPlot plot, JRChartPlot jrPlot) {
 		if (plot.getOrientation() != null) {
@@ -239,7 +264,7 @@ public class ChartTransform {
 			}
 			jrPlot.setSeriesColors(colors);
 		}
-		
+
 		if (jrPlot instanceof JRDesignAreaPlot) {
 			areaPlot((DRIDesignAxisPlot) plot, (JRDesignAreaPlot) jrPlot);
 		}
@@ -268,8 +293,8 @@ public class ChartTransform {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
 		}
 	}
-	
-	private void areaPlot(DRIDesignAxisPlot plot, JRDesignAreaPlot jrPlot) {		
+
+	private void areaPlot(DRIDesignAxisPlot plot, JRDesignAreaPlot jrPlot) {
 		//category
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setCategoryAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
@@ -286,7 +311,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//value
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
@@ -303,7 +328,7 @@ public class ChartTransform {
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
 	}
-	
+
 	private void bar3DPlot(DRIDesignBar3DPlot plot, JRDesignBar3DPlot jrPlot) {
 		//category
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
@@ -321,7 +346,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//value
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
@@ -337,12 +362,12 @@ public class ChartTransform {
 		}
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
-		
+
 		jrPlot.setShowLabels(plot.getShowLabels());
 		jrPlot.setXOffset(plot.getXOffset());
 		jrPlot.setYOffset(plot.getYOffset());
 	}
-	
+
 	private void barPlot(DRIDesignBarPlot plot, JRDesignBarPlot jrPlot) {
 		//category
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
@@ -360,7 +385,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//value
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
@@ -376,12 +401,12 @@ public class ChartTransform {
 		}
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
-		
+
 		jrPlot.setShowLabels(plot.getShowLabels());
 		jrPlot.setShowTickLabels(plot.getShowTickLabels());
 		jrPlot.setShowTickMarks(plot.getShowTickMarks());
 	}
-	
+
 	private void linePlot(DRIDesignLinePlot plot, JRDesignLinePlot jrPlot) {
 		//category
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
@@ -399,7 +424,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//value
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
@@ -415,24 +440,24 @@ public class ChartTransform {
 		}
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
-		
+
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
 	}
-	
+
 	private void piePlot(DRIDesignPiePlot plot, JRDesignPiePlot jrPlot) {
 		jrPlot.setCircular(plot.getCircular());
 		jrPlot.setLabelFormat(plot.getLabelFormat());
 		jrPlot.setLegendLabelFormat(plot.getLegendLabelFormat());
 	}
-	
+
 	private void pie3DPlot(DRIDesignPie3DPlot plot, JRDesignPie3DPlot jrPlot) {
 		jrPlot.setCircular(plot.getCircular());
 		jrPlot.setLabelFormat(plot.getLabelFormat());
 		jrPlot.setLegendLabelFormat(plot.getLegendLabelFormat());
 		jrPlot.setDepthFactor(plot.getDepthFactor());
 	}
-	
+
 	private void scatterPlot(DRIDesignLinePlot plot, JRDesignScatterPlot jrPlot) {
 		//x
 		DRIDesignAxisFormat xAxisFormat = plot.getXAxisFormat();
@@ -449,7 +474,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(xAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(xAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//y
 		DRIDesignAxisFormat yAxisFormat = plot.getYAxisFormat();
 		jrPlot.setYAxisLabelExpression(accessor.getExpressionTransform().getExpression(yAxisFormat.getLabelExpression()));
@@ -465,11 +490,11 @@ public class ChartTransform {
 		}
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(yAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(yAxisFormat.getRangeMaxValueExpression()));
-		
+
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
 	}
-	
+
 	private void timeSeriesPlot(DRIDesignLinePlot plot, JRDesignTimeSeriesPlot jrPlot) {
 		//time
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
@@ -486,7 +511,7 @@ public class ChartTransform {
 		}
 		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
-		
+
 		//value
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
@@ -502,7 +527,7 @@ public class ChartTransform {
 		}
 		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
-		
+
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
 	}

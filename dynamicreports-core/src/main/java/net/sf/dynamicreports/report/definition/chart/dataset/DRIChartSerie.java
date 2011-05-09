@@ -30,8 +30,10 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIChartSerie extends Serializable {
-	
+
+	public DRIExpression<?> getSeriesExpression();
+
 	public DRIExpression<?> getValueExpression();
-	
+
 	public DRIExpression<?> getLabelExpression();
 }

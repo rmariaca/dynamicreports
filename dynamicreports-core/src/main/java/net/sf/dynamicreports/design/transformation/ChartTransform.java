@@ -43,6 +43,7 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
@@ -72,11 +73,11 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class ChartTransform {
 	private DesignTransformAccessor accessor;
-	
+
 	public ChartTransform(DesignTransformAccessor accessor) {
-		this.accessor = accessor;	
+		this.accessor = accessor;
 	}
-	
+
 	//chart
 	protected DRDesignChart transform(DRIChart chart, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignChart designChart = new DRDesignChart();
@@ -84,19 +85,19 @@ public class ChartTransform {
 		designChart.setHeight(accessor.getTemplateTransform().getChartHeight(chart));
 		designChart.setChartType(chart.getChartType());
 		designChart.setDataset(dataset(chart.getDataset(), resetType, resetGroup));
-		designChart.setPlot(plot(chart.getPlot()));		
+		designChart.setPlot(plot(chart.getPlot()));
 		designChart.setCustomizer(chart.getCustomizer());
 		designChart.setTitle(title(chart.getTitle()));
 		designChart.setSubtitle(subtitle(chart.getSubtitle()));
 		designChart.setLegend(legend(chart.getLegend()));
-		
+
 		return designChart;
 	}
-	
+
 	//plot
 	private AbstractDesignPlot plot(DRIPlot plot) throws DRException {
 		AbstractDesignPlot designPlot;
-		
+
 		if (plot instanceof DRIBar3DPlot) {
 			designPlot = bar3DPlot((DRIBar3DPlot) plot);
 		}
@@ -118,13 +119,13 @@ public class ChartTransform {
 		else {
 			throw new DRDesignReportException("Chart plot " + plot.getClass().getName() + " not supported");
 		}
-		
+
 		designPlot.setOrientation(plot.getOrientation());
 		designPlot.setSeriesColors(accessor.getTemplateTransform().getChartSeriesColors(plot));
-		
+
 		return designPlot;
-	}	
-	
+	}
+
 	private DRDesignBar3DPlot bar3DPlot(DRIBar3DPlot bar3DPlot) throws DRException {
 		DRDesignBar3DPlot designBar3DPlot = new DRDesignBar3DPlot();
 		axisPlot(designBar3DPlot, bar3DPlot);
@@ -142,7 +143,7 @@ public class ChartTransform {
 		designBarPlot.setShowLabels(barPlot.getShowLabels());
 		return designBarPlot;
 	}
-	
+
 	private DRDesignLinePlot linePlot(DRILinePlot linePlot) throws DRException {
 		DRDesignLinePlot designLinePlot = new DRDesignLinePlot();
 		axisPlot(designLinePlot, linePlot);
@@ -150,7 +151,7 @@ public class ChartTransform {
 		designLinePlot.setShowLines(linePlot.getShowLines());
 		return designLinePlot;
 	}
-	
+
 	private DRDesignPie3DPlot pie3DPlot(DRIPie3DPlot pie3DPlot) {
 		DRDesignPie3DPlot designPie3DPlot = new DRDesignPie3DPlot();
 		piePlot(designPie3DPlot, pie3DPlot);
@@ -163,11 +164,11 @@ public class ChartTransform {
 		piePlot(designPiePlot, piePlot);
 		return designPiePlot;
 	}
-	
+
 	private void piePlot(DRDesignPiePlot designPiePlot, DRIPiePlot piePlot) {
 		designPiePlot.setCircular(piePlot.getCircular());
 		designPiePlot.setLabelFormat(piePlot.getLabelFormat());
-		designPiePlot.setLegendLabelFormat(piePlot.getLegendLabelFormat());		
+		designPiePlot.setLegendLabelFormat(piePlot.getLegendLabelFormat());
 	}
 
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
@@ -175,12 +176,12 @@ public class ChartTransform {
 		axisPlot(designAxisPlot, axisPlot);
 		return designAxisPlot;
 	}
-	
+
 	private void axisPlot(DRDesignAxisPlot designAxisPlot, DRIAxisPlot axisPlot) throws DRException {
 		designAxisPlot.setXAxisFormat(axisFormat(axisPlot.getXAxisFormat()));
-		designAxisPlot.setYAxisFormat(axisFormat(axisPlot.getYAxisFormat()));			
+		designAxisPlot.setYAxisFormat(axisFormat(axisPlot.getYAxisFormat()));
 	}
-	
+
 	//axis format
 	private DRDesignAxisFormat axisFormat(DRIAxisFormat axisFormat) throws DRException {
 		DRDesignAxisFormat designAxisFormat = new DRDesignAxisFormat();
@@ -204,23 +205,23 @@ public class ChartTransform {
 		designTitle.setPosition(title.getPosition());
 		return designTitle;
 	}
-	
+
 	//subtitle
 	private DRDesignChartSubtitle subtitle(DRIChartSubtitle subtitle) throws DRException {
 		DRDesignChartSubtitle designSubtitle = new DRDesignChartSubtitle();
 		subtitle(designSubtitle, subtitle);
 		return designSubtitle;
 	}
-	
+
 	private void subtitle(DRDesignChartSubtitle designSubtitle, DRIChartSubtitle subtitle) throws DRException {
 		designSubtitle.setColor(subtitle.getColor());
 		designSubtitle.setFont(accessor.getStyleTransform().transformFont(subtitle.getFont()));
 		designSubtitle.setTitle((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subtitle.getTitle()));
 	}
-	
+
 	//legend
 	private DRDesignChartLegend legend(DRIChartLegend legend) {
-		DRDesignChartLegend designLegend = new DRDesignChartLegend(); 
+		DRDesignChartLegend designLegend = new DRDesignChartLegend();
 		designLegend.setColor(legend.getColor());
 		designLegend.setBackgroundColor(legend.getBackgroundColor());
 		designLegend.setShowLegend(legend.getShowLegend());
@@ -228,7 +229,7 @@ public class ChartTransform {
 		designLegend.setPosition(legend.getPosition());
 		return designLegend;
 	}
-	
+
 	//dataset
 	private DRDesignChartDataset dataset(DRIChartDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignChartDataset designDataset;
@@ -241,15 +242,15 @@ public class ChartTransform {
 		else {
 			designDataset = new DRDesignChartDataset();
 		}
-		
+
 		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
 		designDataset.setValueExpression(valueExpression);
 		for (DRIChartSerie serie : dataset.getSeries()) {
 			designDataset.addSerie(serie(serie, valueExpression, resetType, resetGroup));
 		}
 		designDataset.setResetType(resetType);
-		designDataset.setResetGroup(resetGroup);		
-		
+		designDataset.setResetGroup(resetGroup);
+
 		return designDataset;
 	}
 
@@ -258,46 +259,58 @@ public class ChartTransform {
 		designDataset.setUseSeriesAsCategory(accessor.getTemplateTransform().isChartCategoryDatasetUseSeriesAsCategory(dataset));
 		return designDataset;
 	}
-	
+
 	private DRDesignTimeSeriesDataset timeSeriesDataset(DRITimeSeriesDataset dataset) {
 		DRDesignTimeSeriesDataset designDataset = new DRDesignTimeSeriesDataset();
 		designDataset.setTimePeriodType(accessor.getTemplateTransform().getChartTimeSeriesDatasetTimePeriodType(dataset));
-		return designDataset;		
-	}	
-	
+		return designDataset;
+	}
+
 	//serie
 	private DRDesignChartSerie serie(DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignChartSerie designSerie = new DRDesignChartSerie();
-		
+
 		ExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		DRIDesignExpression serieExpression = expressionTransform.transformExpression(serie.getValueExpression());
-		designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieExpression, resetType, resetGroup)));
+		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
+		designSerie.setSeriesExpression(seriesExpression);
+		DRIDesignExpression serieValueExpression = expressionTransform.transformExpression(serie.getValueExpression());
+		if (serieValueExpression instanceof DRIDesignVariable) {
+			designSerie.setValueExpression(serieValueExpression);
+		}
+		else {
+			if (seriesExpression == null) {
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup)));
+			}
+			else {
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(serieValueExpression, serieValueExpression, resetType, resetGroup)));
+			}
+		}
 		designSerie.setLabelExpression(expressionTransform.transformExpression(serie.getLabelExpression()));
 		return designSerie;
 	}
-	
+
 	private class SerieValueExpression extends AbstractSimpleExpression<Number> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 		private DRIDesignExpression valueExpression;
 		private DRIDesignExpression serieExpression;
 		private ResetType resetType;
 		private DRDesignGroup resetGroup;
 		private Object resetValue;
 		private Map<Object, Double> values;
-				
+
 		public SerieValueExpression(DRIDesignExpression valueExpression, DRIDesignExpression serieExpression, ResetType resetType, DRDesignGroup resetGroup) {
 			this.valueExpression = valueExpression;
 			this.serieExpression = serieExpression;
 			this.resetType = resetType;
-			this.resetGroup = resetGroup;			
+			this.resetGroup = resetGroup;
 			this.values = new HashMap<Object, Double>();
 		}
 
 		public Number evaluate(ReportParameters reportParameters) {
 			Object resetValue = null;
 			switch (resetType) {
-			case REPORT:			
+			case REPORT:
 				break;
 			case PAGE:
 				resetValue = reportParameters.getPageNumber();
@@ -315,15 +328,15 @@ public class ChartTransform {
 				this.values = new HashMap<Object, Double>();
 			}
 			this.resetValue = resetValue;
-			
+
 			Object keyValue = reportParameters.getValue(valueExpression.getName());
 			if (!values.containsKey(keyValue)) {
 				values.put(keyValue, 0d);
 			}
 			double value = values.get(keyValue).doubleValue() + ((Number) reportParameters.getValue(serieExpression.getName())).doubleValue();
 			values.put(keyValue, value);
-			
+
 			return value;
-		}		
+		}
 	}
 }

@@ -28,8 +28,10 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignChartSerie {
-	
+
+	public DRIDesignExpression getSeriesExpression();
+
 	public DRIDesignExpression getValueExpression();
-	
+
 	public DRIDesignExpression getLabelExpression();
 }

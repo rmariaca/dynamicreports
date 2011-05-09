@@ -33,24 +33,34 @@ import org.apache.commons.lang.Validate;
  */
 public class DRChartSerie implements DRIChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
+	private DRIExpression<?> seriesExpression;
 	private DRIExpression<?> valueExpression;
 	private DRIExpression<?> labelExpression;
-	
+
+	public DRIExpression<?> getSeriesExpression() {
+		return seriesExpression;
+	}
+
+	public void setSeriesExpression(DRIExpression<?> seriesExpression) {
+		Validate.notNull(seriesExpression, "seriesExpression must not be null");
+		this.seriesExpression = seriesExpression;
+	}
+
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIExpression<?> valueExpression) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}
-	
+
 	public void setLabelExpression(DRIExpression<?> labelExpression) {
 		this.labelExpression = labelExpression;
-	}	
+	}
 }

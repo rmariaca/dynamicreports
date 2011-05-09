@@ -24,7 +24,9 @@ package net.sf.dynamicreports.report.builder.chart;
 
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartSerie;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -38,7 +40,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChartSerie> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected ChartSerieBuilder(ValueColumnBuilder<?, ? extends Number> column) {
 		super(new DRChartSerie());
 		Validate.notNull(column, "column must not be null");
@@ -51,22 +53,49 @@ public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChar
 		Validate.notNull(field, "field must not be null");
 		getObject().setValueExpression(field.build());
 	}
-	
+
 	protected ChartSerieBuilder(DRISimpleExpression<? extends Number> valueExpression) {
 		super(new DRChartSerie());
 		getObject().setValueExpression(valueExpression);
 	}
 
+	protected ChartSerieBuilder(VariableBuilder<? extends Number> variable) {
+		super(new DRChartSerie());
+		Validate.notNull(variable, "variable must not be null");
+		getObject().setValueExpression(variable.build());
+	}
+
 	public ChartSerieBuilder setLabel(String label) {
 		getObject().setLabelExpression(Expressions.text(label));
 		return this;
-	}	
-	
+	}
+
 	public ChartSerieBuilder setLabel(DRISimpleExpression<String> labelExpression) {
 		getObject().setLabelExpression(labelExpression);
 		return this;
 	}
-	
+
+	public ChartSerieBuilder setSeries(ValueColumnBuilder<?, ?> column) {
+		Validate.notNull(column, "column must not be null");
+		getObject().setSeriesExpression(column.getColumn());
+		return this;
+	}
+
+	public ChartSerieBuilder setSeries(String fieldName, Class<?> valueClass) {
+		return setSeries(DynamicReports.field(fieldName, valueClass));
+	}
+
+	public ChartSerieBuilder setSeries(FieldBuilder<?> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setSeriesExpression(field.build());
+		return this;
+	}
+
+	public ChartSerieBuilder setSeries(DRISimpleExpression<?> expression) {
+		getObject().setSeriesExpression(expression);
+		return this;
+	}
+
 	public DRChartSerie getChartSerie() {
 		return build();
 	}

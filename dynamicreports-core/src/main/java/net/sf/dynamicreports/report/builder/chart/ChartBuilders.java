@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder.chart;
 
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
@@ -43,15 +44,19 @@ public class ChartBuilders {
 	public ChartSerieBuilder serie(String fieldName, Class<? extends Number> valueClass) {
 		return Charts.serie(fieldName, valueClass);
 	}
-	
+
 	public ChartSerieBuilder serie(FieldBuilder<? extends Number> field) {
 		return Charts.serie(field);
 	}
-	
+
 	public ChartSerieBuilder serie(DRISimpleExpression<? extends Number> valueExpression) {
 		return Charts.serie(valueExpression);
 	}
-	
+
+	public ChartSerieBuilder serie(VariableBuilder<? extends Number> variable) {
+		return Charts.serie(variable);
+	}
+
 	public AreaChartBuilder areaChart() {
 		return Charts.areaChart();
 	}
@@ -59,51 +64,51 @@ public class ChartBuilders {
 	public StackedAreaChartBuilder stackedAreaChart() {
 		return Charts.stackedAreaChart();
 	}
-	
+
 	public BarChartBuilder barChart() {
 		return Charts.barChart();
 	}
-	
+
 	public StackedBarChartBuilder stackedBarChart() {
 		return Charts.stackedBarChart();
 	}
-	
+
 	public Bar3DChartBuilder bar3DChart() {
 		return Charts.bar3DChart();
 	}
-	
+
 	public StackedBar3DChartBuilder stackedBar3DChart() {
 		return Charts.stackedBar3DChart();
 	}
-	
+
 	public LineChartBuilder lineChart() {
 		return Charts.lineChart();
 	}
-	
+
 	public PieChartBuilder pieChart() {
 		return Charts.pieChart();
 	}
-	
+
 	public Pie3DChartBuilder pie3DChart() {
 		return Charts.pie3DChart();
 	}
-	
+
 	public TimeSeriesChartBuilder timeSeriesChart() {
 		return Charts.timeSeriesChart();
 	}
-	
+
 	public XyAreaChartBuilder xyAreaChart() {
 		return Charts.xyAreaChart();
 	}
-	
+
 	public XyBarChartBuilder xyBarChart() {
 		return Charts.xyBarChart();
 	}
-	
+
 	public XyLineChartBuilder xyLineChart() {
 		return Charts.xyLineChart();
 	}
-	
+
 	public ScatterChartBuilder scatterChart() {
 		return Charts.scatterChart();
 	}
