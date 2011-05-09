@@ -32,14 +32,20 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 @SuppressWarnings("ucd")
 public class MessageExpression extends AbstractSimpleExpression<String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String key;
+	private Object[] arguments;
 
 	public MessageExpression(String key) {
-		this.key = key;		
+		this(key, null);
 	}
-	
+
+	public MessageExpression(String key, Object[] arguments) {
+		this.key = key;
+		this.arguments = arguments;
+	}
+
 	public String evaluate(ReportParameters reportParameters) {
-		return reportParameters.getMessage(key);
+		return reportParameters.getMessage(key, arguments);
 	}
 }

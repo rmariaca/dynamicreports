@@ -31,9 +31,9 @@ import java.util.Locale;
 public interface ReportParameters {
 
 	public <T> T getValue(String name);
-			
+
 	public <T> T getValue(DRIValue<T> value);
-	
+
 	public Integer getPageNumber();
 
 	public Integer getColumnNumber();
@@ -43,7 +43,7 @@ public interface ReportParameters {
 	public Integer getPageRowNumber();
 
 	public Integer getColumnRowNumber();
-	
+
 	public Integer getGroupCount(String groupName);
 
 	@SuppressWarnings("ucd")
@@ -52,9 +52,11 @@ public interface ReportParameters {
 	public Locale getLocale();
 
 	@SuppressWarnings("ucd")
-	public DRIScriptlet getScriptlet(String name);	
-	
+	public DRIScriptlet getScriptlet(String name);
+
 	public String getMessage(String key);
-	
+
+	public String getMessage(String key, Object[] arguments);
+
 	public ReportParameters getMasterParameters();
 }

@@ -45,15 +45,15 @@ import net.sf.jasperreports.engine.util.JRFontUtil;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Report1Test extends AbstractJasperValueTest {	
+public class Report1Test extends AbstractJasperValueTest {
 	private TextColumnBuilder<Integer> column1;
 	private ReportScriptlet scriptlet;
 	private BigDecimal parameter1;
 	private BigDecimal parameter2;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.columns(				
+		rb.columns(
 				column1 = col.column("Column1", "field1", Integer.class))
 			.setLocale(Locale.ENGLISH)
 			.setResourceBundle(new ResourceBundle())
@@ -67,59 +67,60 @@ public class Report1Test extends AbstractJasperValueTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
 		columnTitleCountTest(column1, 0);
-		
+
 		Assert.assertFalse("fonts", JRFontUtil.getFontFamilyNames().isEmpty());
-		
+
 		JasperPrint jasperPrint = getJasperPrint();
 		Assert.assertEquals(OrientationEnum.LANDSCAPE, jasperPrint.getOrientationValue());
 		Assert.assertEquals(1190, jasperPrint.getPageWidth());
 		Assert.assertEquals(842, jasperPrint.getPageHeight());
-		
+
 		Assert.assertEquals(50, scriptlet.count);
 	}
-	
+
 	@Override
 	protected boolean serializableTest() {
 		return false;
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
-		}		
+		}
 		return dataSource;
 	}
-	
+
 	private class ResourceBundle extends ListResourceBundle {
 
 		@Override
 		protected Object[][] getContents() {
-			return new Object[][] {{"bundleKey", "bundleValue"}};
-		}		
+			return new Object[][] {{"bundleKey1", "bundleValue"}, {"bundleKey2", "bundleValue {0} - {1}"}};
+		}
 	}
-	
-	private class ReportScriptlet extends AbstractScriptlet {		
-		private int count;		
-		
+
+	private class ReportScriptlet extends AbstractScriptlet {
+		private int count;
+
 		@Override
 		public void afterReportInit(ReportParameters reportParameters) {
 			super.afterReportInit(reportParameters);
 			Assert.assertEquals(Locale.ENGLISH, reportParameters.getLocale());
-			Assert.assertEquals("bundleValue", reportParameters.getMessage("bundleKey"));
+			Assert.assertEquals("bundleValue", reportParameters.getMessage("bundleKey1"));
+			Assert.assertEquals("bundleValue a - b", reportParameters.getMessage("bundleKey2", new Object[] {"a", "b"}));
 			Assert.assertEquals(parameter1, reportParameters.getValue("parameter1"));
 			Assert.assertEquals(parameter2, reportParameters.getValue("parameter2"));
 			Assert.assertEquals(this, reportParameters.getScriptlet(getName()));
 		}
-		
+
 		@Override
 		public void afterDetailEval(ReportParameters reportParameters) {
 			super.afterDetailEval(reportParameters);
 			count++;
-		}		
+		}
 	}
 }

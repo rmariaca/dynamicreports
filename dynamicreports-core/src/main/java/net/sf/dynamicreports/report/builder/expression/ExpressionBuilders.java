@@ -35,11 +35,11 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
  */
 @SuppressWarnings("ucd")
 public class ExpressionBuilders {
-	
+
 	public PrintInFirstPageExpression printInFirstPage() {
 		return Expressions.printInFirstPage();
 	}
-	
+
 	public PrintNotInFirstPageExpression printNotInFirstPage() {
 		return Expressions.printNotInFirstPage();
 	}
@@ -51,39 +51,39 @@ public class ExpressionBuilders {
 	public PrintWhenGroupHasMoreThanOneRowExpression printWhenGroupHasMoreThanOneRow(GroupBuilder<?> group) {
 		return Expressions.printWhenGroupHasMoreThanOneRow(group);
 	}
-	
-	public ReportRowNumberExpression reportRowNumber() {		
+
+	public ReportRowNumberExpression reportRowNumber() {
 		return Expressions.reportRowNumber();
 	}
 
-	public PageRowNumberExpression pageRowNumber() {		
+	public PageRowNumberExpression pageRowNumber() {
 		return Expressions.pageRowNumber();
 	}
-	
-	public ColumnRowNumberExpression columnRowNumber() {		
+
+	public ColumnRowNumberExpression columnRowNumber() {
 		return Expressions.columnRowNumber();
 	}
-	
-	public PageNumberExpression pageNumber() {		
+
+	public PageNumberExpression pageNumber() {
 		return Expressions.pageNumber();
 	}
 
-	public ColumnNumberExpression columnNumber() {		
+	public ColumnNumberExpression columnNumber() {
 		return Expressions.columnNumber();
 	}
-	
-	public GroupRowNumberExpression groupRowNumber(String groupName) {		
+
+	public GroupRowNumberExpression groupRowNumber(String groupName) {
 		return Expressions.groupRowNumber(groupName);
 	}
-	
+
 	public GroupRowNumberExpression groupRowNumber(GroupBuilder<?> group) {
 		return Expressions.groupRowNumber(group);
 	}
-	
+
 	public ValueExpression<Date> date(Date date) {
 		return Expressions.date(date);
 	}
-	
+
 	public ValueExpression<Number> number(Number number) {
 		return Expressions.number(number);
 	}
@@ -95,19 +95,19 @@ public class ExpressionBuilders {
 	public ValueExpression<InputStream> inputStream(InputStream inputStream) {
 		return Expressions.inputStream(inputStream);
 	}
-	
+
 	public ValueExpression<URL> url(URL url) {
 		return Expressions.url(url);
 	}
-	
+
 	public <T> ValueExpression<T> value(T value) {
 		return Expressions.value(value);
 	}
-	
+
 	public <T> ValueExpression<T> value(T value, Class<? super T> valueClass) {
 		return Expressions.value(value, valueClass);
 	}
-	
+
 	public ValueExpression<String> text(String text) {
 		return Expressions.text(text);
 	}
@@ -115,29 +115,33 @@ public class ExpressionBuilders {
 	public MessageExpression message(String key) {
 		return Expressions.message(key);
 	}
-	
+
+	public MessageExpression message(String key, Object[] arguments) {
+		return Expressions.message(key, arguments);
+	}
+
 	//property
 	public PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
 		return Expressions.property(name, valueExpression);
 	}
-	
+
 	public PropertyExpression property(String name, String value) {
 		return Expressions.property(name, value);
 	}
-	
+
 	//parameter
 	public ParameterExpression parameter(String name, DRISimpleExpression<?> valueExpression) {
 		return Expressions.parameter(name, valueExpression);
 	}
-	
+
 	public ParameterExpression parameter(String name, Object value) {
 		return Expressions.parameter(name, value);
 	}
-	
+
 	public PrintInOddRowExpression printInOddRow() {
 		return Expressions.printInOddRow();
 	}
-	
+
 	public PrintInEvenRowExpression printInEvenRow() {
 		return Expressions.printInEvenRow();
 	}

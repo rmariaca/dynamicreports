@@ -45,12 +45,12 @@ public class Expressions {
 	private static final PageNumberExpression pageNumber = new PageNumberExpression();
 	private static final ColumnNumberExpression columnNumber = new ColumnNumberExpression();
 	private static final PrintInOddRowExpression printInOddRow = new PrintInOddRowExpression();
-	private static final PrintInEvenRowExpression printInEvenRow = new PrintInEvenRowExpression();	
-	
+	private static final PrintInEvenRowExpression printInEvenRow = new PrintInEvenRowExpression();
+
 	public static PrintInFirstPageExpression printInFirstPage() {
 		return printInFirstPage;
 	}
-	
+
 	public static PrintNotInFirstPageExpression printNotInFirstPage() {
 		return printNotInFirstPage;
 	}
@@ -63,40 +63,40 @@ public class Expressions {
 		Validate.notNull(group, "group must not be null");
 		return printWhenGroupHasMoreThanOneRow(group.getGroup().getName());
 	}
-	
-	public static ReportRowNumberExpression reportRowNumber() {		
+
+	public static ReportRowNumberExpression reportRowNumber() {
 		return reportRowNumber;
 	}
 
-	public static PageRowNumberExpression pageRowNumber() {		
+	public static PageRowNumberExpression pageRowNumber() {
 		return pageRowNumber;
 	}
-	
-	public static ColumnRowNumberExpression columnRowNumber() {		
+
+	public static ColumnRowNumberExpression columnRowNumber() {
 		return columnRowNumber;
 	}
-	
-	public static PageNumberExpression pageNumber() {		
+
+	public static PageNumberExpression pageNumber() {
 		return pageNumber;
 	}
 
-	public static ColumnNumberExpression columnNumber() {		
+	public static ColumnNumberExpression columnNumber() {
 		return columnNumber;
 	}
-	
-	public static GroupRowNumberExpression groupRowNumber(String groupName) {		
+
+	public static GroupRowNumberExpression groupRowNumber(String groupName) {
 		return new GroupRowNumberExpression(groupName);
 	}
-	
+
 	public static GroupRowNumberExpression groupRowNumber(GroupBuilder<?> group) {
 		Validate.notNull(group, "group must not be null");
 		return groupRowNumber(group.getGroup().getName());
 	}
-	
+
 	public static ValueExpression<Date> date(Date date) {
 		return value(date, Date.class);
 	}
-	
+
 	public static ValueExpression<Number> number(Number number) {
 		return value(number, Number.class);
 	}
@@ -112,7 +112,7 @@ public class Expressions {
 	public static ValueExpression<URL> url(URL url) {
 		return value(url, URL.class);
 	}
-	
+
 	public static <T> ValueExpression<T> value(T value) {
 		return new ValueExpression<T>(value);
 	}
@@ -120,7 +120,7 @@ public class Expressions {
 	public static <T> ValueExpression<T> value(T value, Class<? super T> valueClass) {
 		return new ValueExpression<T>(value, valueClass);
 	}
-	
+
 	public static ValueExpression<String> text(String text) {
 		return value(text, String.class);
 	}
@@ -131,12 +131,19 @@ public class Expressions {
 		}
 		return null;
 	}
-	
+
+	public static MessageExpression message(String key, Object[] arguments) {
+		if (key != null) {
+			return new MessageExpression(key, arguments);
+		}
+		return null;
+	}
+
 	//property
 	public static PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
 		return new PropertyExpression(name, valueExpression);
 	}
-	
+
 	public static PropertyExpression property(String name, String value) {
 		return new PropertyExpression(name, text(value));
 	}
@@ -145,15 +152,15 @@ public class Expressions {
 	public static ParameterExpression parameter(String name, DRISimpleExpression<?> valueExpression) {
 		return new ParameterExpression(name, valueExpression);
 	}
-	
+
 	public static ParameterExpression parameter(String name, Object value) {
 		return new ParameterExpression(name, value(value));
 	}
-	
+
 	public static PrintInOddRowExpression printInOddRow() {
 		return printInOddRow;
 	}
-	
+
 	public static PrintInEvenRowExpression printInEvenRow() {
 		return printInEvenRow;
 	}

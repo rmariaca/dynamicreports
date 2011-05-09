@@ -61,31 +61,31 @@ public class ConditionsTest {
 		conditionFalse("smallerOrEquals", cnd.smallerOrEquals(value, 5));
 		conditionTrue("smallerOrEquals", cnd.smallerOrEquals(value, 10));
 		conditionTrue("smallerOrEquals", cnd.smallerOrEquals(value, 15));
-		
+
 		//greater
 		conditionTrue("greater", cnd.greater(value, 5));
 		conditionFalse("greater", cnd.greater(value, 10));
 		conditionFalse("greater", cnd.greater(value, 15));
-		
+
 		//greaterOrEquals
 		conditionTrue("greaterOrEquals", cnd.greaterOrEquals(value, 5));
 		conditionTrue("greaterOrEquals", cnd.greaterOrEquals(value, 10));
 		conditionFalse("greaterOrEquals", cnd.greaterOrEquals(value, 15));
-		
+
 		//between
 		conditionTrue("between", cnd.between(value, 5, 15));
 		conditionTrue("between", cnd.between(value, 5, 10));
 		conditionTrue("between", cnd.between(value, 10, 20));
 		conditionFalse("between", cnd.between(value, 5, 9));
 		conditionFalse("between", cnd.between(value, 11, 20));
-		
+
 		//notBetween
 		conditionFalse("notBetween", cnd.notBetween(value, 5, 15));
 		conditionFalse("notBetween", cnd.notBetween(value, 5, 10));
 		conditionFalse("notBetween", cnd.notBetween(value, 10, 20));
 		conditionTrue("notBetween", cnd.notBetween(value, 5, 9));
 		conditionTrue("notBetween", cnd.notBetween(value, 11, 20));
-		
+
 		//equal object
 		FieldBuilder<Object> value2 = field("name", Object.class);
 		conditionTrue("equal", cnd.equal(value2, Type.A, Type.C, Type.F), Type.C);
@@ -95,7 +95,7 @@ public class ConditionsTest {
 		conditionFalse("unequal", cnd.unEqual(value2, Type.A, Type.C, Type.F), Type.C);
 		conditionTrue("unequal", cnd.unEqual(value2, Type.B, Type.C), Type.E);
 	}
-	
+
 	private void conditionTrue(String name, DRISimpleExpression<Boolean> condition) {
 		Assert.assertTrue(name + " condition", condition.evaluate(new TestReportParameters(10)));
 	}
@@ -103,7 +103,7 @@ public class ConditionsTest {
 	private void conditionFalse(String name, DRISimpleExpression<Boolean> condition) {
 		Assert.assertFalse(name + " condition", condition.evaluate(new TestReportParameters(10)));
 	}
-	
+
 	private void conditionTrue(String name, DRISimpleExpression<Boolean> condition, Object actualValue) {
 		Assert.assertTrue(name + " condition", condition.evaluate(new TestReportParameters(actualValue)));
 	}
@@ -111,14 +111,14 @@ public class ConditionsTest {
 	private void conditionFalse(String name, DRISimpleExpression<Boolean> condition, Object actualValue) {
 		Assert.assertFalse(name + " condition", condition.evaluate(new TestReportParameters(actualValue)));
 	}
-	
+
 	private class TestReportParameters implements ReportParameters {
 		private Object value;
-		
+
 		public TestReportParameters(Object value) {
 			this.value = value;
 		}
-		
+
 		public Integer getColumnNumber() {
 			return null;
 		}
@@ -140,6 +140,10 @@ public class ConditionsTest {
 		}
 
 		public String getMessage(String key) {
+			return null;
+		}
+
+		public String getMessage(String key, Object[] arguments) {
 			return null;
 		}
 
@@ -170,9 +174,9 @@ public class ConditionsTest {
 
 		public ReportParameters getMasterParameters() {
 			return null;
-		}		
+		}
 	}
-	
+
 	private enum Type {
 		A,
 		B,

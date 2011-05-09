@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.jasper.base;
 
 import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -151,6 +152,15 @@ public class JasperReportParameters implements ReportParameters {
 
 	public String getMessage(String key) {
 		return ((ResourceBundle) getParameterValue(JRParameter.REPORT_RESOURCE_BUNDLE)).getString(key);
+	}
+
+	public String getMessage(String key, Object[] arguments) {
+		String message = getMessage(key);
+		if (arguments != null) {
+			MessageFormat format = new MessageFormat(message, getLocale());
+			message = format.format(arguments);
+		}
+		return message;
 	}
 
 	//simple expression
