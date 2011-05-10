@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.0.2 (2011-05-10)
+---------------------------------------------------
+ - new bands - detail header, detail footer
+ - ability to set the series expression in charts, see SeriesBarChartReport for an example
+ - new examples - ConversionColumnReport, GroupCountChartReport, SeriesBarChartReport, 
+                  ResourceBundleReport, JasperTemplateDesignReport3
+ - minor improvements
+
 Changes in version 2.0.1 (2011-04-12)
 ---------------------------------------------------
  - support for boolean column, see BooleanColumnReport for an example
