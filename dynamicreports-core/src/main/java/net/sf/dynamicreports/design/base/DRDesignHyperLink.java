@@ -24,27 +24,64 @@ package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.report.constant.HyperLinkType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignHyperLink implements DRIDesignHyperLink {
-	private DRIDesignSimpleExpression linkExpression;	
+	private DRIDesignSimpleExpression anchorNameExpression;
+	private DRIDesignSimpleExpression anchorExpression;
+	private DRIDesignSimpleExpression pageExpression;
+	private DRIDesignSimpleExpression referenceExpression;
 	private DRIDesignSimpleExpression tooltipExpression;
-	
-	public DRIDesignSimpleExpression getLinkExpression() {
-		return linkExpression;
+	private HyperLinkType hyperLinkType;
+
+	public DRIDesignSimpleExpression getAnchorNameExpression() {
+		return anchorNameExpression;
 	}
-	
-	public void setLinkExpression(DRIDesignSimpleExpression linkExpression) {
-		this.linkExpression = linkExpression;
+
+	public void setAnchorNameExpression(DRIDesignSimpleExpression anchorNameExpression) {
+		this.anchorNameExpression = anchorNameExpression;
+	}
+
+	public DRIDesignSimpleExpression getAnchorExpression() {
+		return anchorExpression;
+	}
+
+	public void setAnchorExpression(DRIDesignSimpleExpression anchorExpression) {
+		this.anchorExpression = anchorExpression;
+	}
+
+	public DRIDesignSimpleExpression getPageExpression() {
+		return pageExpression;
+	}
+
+	public void setPageExpression(DRIDesignSimpleExpression pageExpression) {
+		this.pageExpression = pageExpression;
+	}
+
+	public DRIDesignSimpleExpression getReferenceExpression() {
+		return referenceExpression;
+	}
+
+	public void setReferenceExpression(DRIDesignSimpleExpression referenceExpression) {
+		this.referenceExpression = referenceExpression;
 	}
 
 	public DRIDesignSimpleExpression getTooltipExpression() {
 		return tooltipExpression;
 	}
-	
+
 	public void setTooltipExpression(DRIDesignSimpleExpression tooltipExpression) {
 		this.tooltipExpression = tooltipExpression;
+	}
+
+	public HyperLinkType getType() {
+		return hyperLinkType;
+	}
+
+	public void setType(HyperLinkType hyperLinkType) {
+		this.hyperLinkType = hyperLinkType;
 	}
 }

@@ -36,8 +36,10 @@ import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
+import net.sf.dynamicreports.report.definition.DRITableOfContents;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -54,48 +56,48 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private ChartTransform chartTransform;
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
-	
+
 	private JasperDesign design;
 	private JasperCustomValues customValues;
-	private Map<String, Object> parameters;	
+	private Map<String, Object> parameters;
 	private ReportParameters masterReportParameters;
-	
-	public JasperReportDesign(DRIDesignReport report) throws DRException {		
+
+	public JasperReportDesign(DRIDesignReport report) throws DRException {
 		this(report, null);
 	}
 
-	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) throws DRException {		
+	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) throws DRException {
 		this.report = report;
-		this.masterReportParameters = masterReportParameters;				
+		this.masterReportParameters = masterReportParameters;
 		init();
 		transform();
 	}
-	
-	private void init() throws DRException {		
+
+	private void init() throws DRException {
 		this.design = (JasperDesign) report.getTemplateDesign().getDesign();
 		reportTransform = new ReportTransform(this);
 		expressionTransform = new ExpressionTransform(this);
 		groupTransform = new GroupTransform(this);
-		bandTransform = new BandTransform(this);	
+		bandTransform = new BandTransform(this);
 		componentTransform = new ComponentTransform(this);
 		styleTransform = new StyleTransform(this);
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
-		
-		this.parameters = new HashMap<String, Object>();		
-		this.customValues = new JasperCustomValues();		
+
+		this.parameters = new HashMap<String, Object>();
+		this.customValues = new JasperCustomValues();
 	}
-	
-	private void transform() {						
+
+	private void transform() {
 		reportTransform.transform();
 		groupTransform.transform();
-		expressionTransform.transform();		
+		expressionTransform.transform();
 		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();
-	}	
-	
+	}
+
 	public ChartTransform getChartTransform() {
 		return chartTransform;
 	}
@@ -103,11 +105,11 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
 	}
-	
+
 	public CrosstabTransform getCrosstabTransform() {
 		return crosstabTransform;
 	}
-	
+
 	public ComponentTransform getComponentTransform() {
 		return componentTransform;
 	}
@@ -122,7 +124,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public StyleTransform getStyleTransform() {
 		return styleTransform;
-	}	
+	}
 
 	public DRIDesignReport getReport() {
 		return report;
@@ -131,16 +133,28 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	public JasperCustomValues getCustomValues() {
 		return customValues;
 	}
-	
+
 	public JasperDesign getDesign() {
 		return design;
 	}
-	
+
 	public Map<String, Object> getParameters() {
 		return parameters;
 	}
-	
+
 	public ReportParameters getMasterReportParameters() {
 		return masterReportParameters;
+	}
+
+	public boolean isTableOfContents() {
+		return report.isTableOfContents();
+	}
+
+	public DRITableOfContents getTableOfContents() {
+		return report.getTableOfContents();
+	}
+
+	public JRAbstractScriptlet getScriptlet() {
+		return reportTransform.getScriptlet();
 	}
 }

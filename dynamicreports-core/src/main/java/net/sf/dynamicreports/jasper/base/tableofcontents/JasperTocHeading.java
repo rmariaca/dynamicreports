@@ -20,27 +20,46 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
-
-import java.io.Serializable;
-
-import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+package net.sf.dynamicreports.jasper.base.tableofcontents;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIHyperLink extends Serializable {
+public class JasperTocHeading {
+	private Integer level;
+	private String text;
+	private String reference;
+	private Integer pageIndex;
 
-	public DRISimpleExpression<String> getAnchorNameExpression();
+	public Integer getLevel() {
+		return level;
+	}
 
-	public DRISimpleExpression<String> getAnchorExpression();
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
-	public DRISimpleExpression<String> getPageExpression();
+	public String getText() {
+		return text;
+	}
 
-	public DRISimpleExpression<String> getReferenceExpression();
+	public void setText(String text) {
+		this.text = text;
+	}
 
-	public DRISimpleExpression<String> getTooltipExpression();
+	public String getReference() {
+		return reference;
+	}
 
-	public HyperLinkType getType();
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
 }

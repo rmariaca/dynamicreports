@@ -167,8 +167,12 @@ public class ComponentTransform {
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
 		if (hyperLink != null) {
 			DRDesignHyperLink designHyperLink = new DRDesignHyperLink();
-			designHyperLink.setLinkExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getLinkExpression()));
+			designHyperLink.setAnchorNameExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
+			designHyperLink.setAnchorExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
+			designHyperLink.setPageExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
+			designHyperLink.setReferenceExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
 			designHyperLink.setTooltipExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
+			designHyperLink.setType(hyperLink.getType());
 			designHyperlinkComponent.setHyperLink(designHyperLink);
 		}
 	}

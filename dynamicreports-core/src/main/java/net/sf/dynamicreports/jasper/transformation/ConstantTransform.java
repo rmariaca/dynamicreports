@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineStyle;
@@ -71,6 +72,7 @@ import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.LineDirectionEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
@@ -704,6 +706,29 @@ public class ConstantTransform {
 			return StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT;
 		default:
 			throw new JasperDesignException("StretchType " + stretchType.name() + " not supported");
+		}
+	}
+
+	public static HyperlinkTypeEnum hyperLinkType(HyperLinkType hyperLinkType) {
+		if (hyperLinkType == null) {
+			return null;
+		}
+
+		switch (hyperLinkType) {
+		case NONE:
+			return HyperlinkTypeEnum.NONE;
+		case REFERENCE:
+			return HyperlinkTypeEnum.REFERENCE;
+		case LOCAL_ANCHOR:
+			return HyperlinkTypeEnum.LOCAL_ANCHOR;
+		case LOCAL_PAGE:
+			return HyperlinkTypeEnum.LOCAL_PAGE;
+		case REMOTE_ANCHOR:
+			return HyperlinkTypeEnum.REMOTE_ANCHOR;
+		case REMOTE_PAGE:
+			return HyperlinkTypeEnum.REMOTE_PAGE;
+		default:
+			throw new JasperDesignException("HyperLinkType " + hyperLinkType.name() + " not supported");
 		}
 	}
 }

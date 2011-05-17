@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -49,6 +50,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.DRITableOfContents;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 import org.apache.commons.lang.Validate;
@@ -655,6 +657,21 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		for (GroupBuilder<?> group : groups) {
 			getObject().addGroup(group.build());
 		}
+		return (T) this;
+	}
+
+	public T tableOfContents() {
+		getObject().setTableOfContents(DynamicReports.tableOfContents().build());
+		return (T) this;
+	}
+
+	public T setTableOfContents(TableOfContentsBuilder tableOfContents) {
+		getObject().setTableOfContents(tableOfContents.build());
+		return (T) this;
+	}
+
+	public T setTableOfContents(DRITableOfContents tableOfContents) {
+		getObject().setTableOfContents(tableOfContents);
 		return (T) this;
 	}
 

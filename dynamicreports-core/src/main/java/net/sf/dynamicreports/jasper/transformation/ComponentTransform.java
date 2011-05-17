@@ -209,9 +209,15 @@ public class ComponentTransform {
 
 		DRIDesignHyperLink hyperLink = textField.getHyperLink();
 		if (hyperLink != null) {
-			jrTextField.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrTextField.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
+			jrTextField.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
+			jrTextField.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
+			jrTextField.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
+			jrTextField.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrTextField.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
+			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+			if (hyperLinkType != null) {
+				jrTextField.setHyperlinkType(hyperLinkType);
+			}
 		}
 
 		EvaluationTime evaluationTime = textField.getEvaluationTime();
@@ -247,9 +253,15 @@ public class ComponentTransform {
 
 		DRIDesignHyperLink hyperLink = image.getHyperLink();
 		if (hyperLink != null) {
-			jrImage.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrImage.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
+			jrImage.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
+			jrImage.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
+			jrImage.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
+			jrImage.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrImage.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
+			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+			if (hyperLinkType != null) {
+				jrImage.setHyperlinkType(hyperLinkType);
+			}
 		}
 
 		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);

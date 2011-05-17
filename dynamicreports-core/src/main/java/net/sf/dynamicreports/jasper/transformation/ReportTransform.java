@@ -35,6 +35,7 @@ import net.sf.dynamicreports.jasper.base.CustomScriptlet;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocScriptlet;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -51,27 +52,28 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ReportTransform {		
+public class ReportTransform {
 	private JasperTransformAccessor accessor;
-	
+	private JRAbstractScriptlet scriptlet;
+
 	public ReportTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
+
 	public void transform() {
 		DRIDesignReport report = accessor.getReport();
-		JasperDesign design = accessor.getDesign();		
+		JasperDesign design = accessor.getDesign();
 		Map<String, Object> parameters = accessor.getParameters();
-		
+
 		addParameter(JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, accessor.getCustomValues());
 		addParameter(JasperReportParameters.MASTER_REPORT_PARAMETERS, ReportParameters.class, accessor.getMasterReportParameters());
-		
+
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
 		design.setResourceBundle(report.getResourceBundleName());
 		design.setIgnorePagination(report.isIgnorePagination());
 		setProperties(report.getProperties());
-		if (report.getQuery() != null) { 
+		if (report.getQuery() != null) {
 			design.setQuery(query(report.getQuery()));
 		}
 		page();
@@ -80,17 +82,23 @@ public class ReportTransform {
 		design.setSummaryNewPage(report.isSummaryOnANewPage());
 		design.setSummaryWithPageHeaderAndFooter(report.isSummaryWithPageHeaderAndFooter());
 		design.setFloatColumnFooter(report.isFloatColumnFooter());
-		
+
 		for (DRIDesignParameter parameter : report.getParameters()) {
 			addParameter(parameter);
 		}
-		
-		addScriptlet(JasperScriptlet.NAME, new JasperScriptlet());
+
+		if (report.isTableOfContents()) {
+			scriptlet = new JasperTocScriptlet();
+		}
+		else {
+			scriptlet = new JasperScriptlet();
+		}
+		addScriptlet(JasperScriptlet.NAME, scriptlet);
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
 			addScriptlet(scriptlet);
 		}
 	}
-	
+
 	private <T> void addParameter(String name, Class<T> parameterClass, T value) {
 		JRDesignParameter jrParameter = new JRDesignParameter();
 		jrParameter.setName(name);
@@ -99,18 +107,18 @@ public class ReportTransform {
 			accessor.getDesign().addParameter(jrParameter);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for parameter \"" + name + "\"", e);
-		}		
+		}
 		accessor.getParameters().put(jrParameter.getName(), value);
 	}
-	
+
 	private void addParameter(DRIDesignParameter parameter) {
 		try {
-			accessor.getDesign().addParameter(parameter(parameter));		
+			accessor.getDesign().addParameter(parameter(parameter));
 			accessor.getCustomValues().addValueType(parameter.getName(), ValueType.PARAMETER);
 			accessor.getParameters().put(parameter.getName(), parameter.getValue());
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for parameter \"" + parameter.getName() + "\"", e);
-		}	
+		}
 	}
 
 	private void setProperties(Properties properties) {
@@ -123,18 +131,16 @@ public class ReportTransform {
 	private void addScriptlet(DRIScriptlet scriptlet) {
 		addScriptlet(scriptlet.getName(), new CustomScriptlet(scriptlet));
 	}
-	
+
 	private void addScriptlet(String name, JRAbstractScriptlet scriptlet) {
 		try {
-			accessor.getDesign().addScriptlet(scriptlet(name, scriptlet));	
-			if (scriptlet instanceof CustomScriptlet) {
-				accessor.getParameters().put(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, scriptlet);
-			}
+			accessor.getDesign().addScriptlet(scriptlet(name, scriptlet));
+			accessor.getParameters().put(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, scriptlet);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for scriptlet \"" + name + "\"", e);
-		}	
+		}
 	}
-	
+
 	//page
 	private void page() {
 		DRIDesignPage page = accessor.getReport().getPage();
@@ -143,7 +149,7 @@ public class ReportTransform {
 
 		design.setPageWidth(page.getWidth());
 		design.setPageHeight(page.getHeight());
-		design.setOrientation(ConstantTransform.pageOrientation(page.getOrientation()));			
+		design.setOrientation(ConstantTransform.pageOrientation(page.getOrientation()));
 		design.setLeftMargin(margin.getLeft());
 		design.setRightMargin(margin.getRight());
 		design.setTopMargin(margin.getTop());
@@ -152,7 +158,7 @@ public class ReportTransform {
 		design.setColumnSpacing(page.getColumnSpace());
 		design.setColumnWidth(page.getColumnWidth());
 	}
-	
+
 	//parameter
 	private JRDesignParameter parameter(DRIDesignParameter parameter) {
 		JRDesignParameter jrParameter = new JRDesignParameter();
@@ -160,7 +166,7 @@ public class ReportTransform {
 		jrParameter.setValueClass(parameter.getValue().getClass());
 		return jrParameter;
 	}
-	
+
 	//scriptlet
 	private JRDesignScriptlet scriptlet(String name, JRAbstractScriptlet scriptlet) {
 		JRDesignScriptlet jrScriptlet = new JRDesignScriptlet();
@@ -168,12 +174,16 @@ public class ReportTransform {
 		jrScriptlet.setValueClass(scriptlet.getClass());
 		return jrScriptlet;
 	}
-	
+
 	//query
 	private JRDesignQuery query(DRIDesignQuery query) {
 		JRDesignQuery jrQuery = new JRDesignQuery();
 		jrQuery.setText(query.getText());
 		jrQuery.setLanguage(ConstantTransform.queryLanguage(query.getLanguage()));
 		return jrQuery;
+	}
+
+	public JRAbstractScriptlet getScriptlet() {
+		return scriptlet;
 	}
 }

@@ -39,6 +39,7 @@ import net.sf.dynamicreports.report.builder.grid.GridBuilders;
 import net.sf.dynamicreports.report.builder.group.GroupBuilders;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -130,6 +131,10 @@ public class DynamicReports {
 	}
 
 	//hyperLink
+	public static HyperLinkBuilder hyperLink() {
+		return new HyperLinkBuilder();
+	}
+
 	public static HyperLinkBuilder hyperLink(String link) {
 		return new HyperLinkBuilder(link);
 	}
@@ -173,5 +178,10 @@ public class DynamicReports {
 	//template
 	public static ReportTemplateBuilder template() {
 		return new ReportTemplateBuilder();
+	}
+
+	//table of contents
+	public static TableOfContentsBuilder tableOfContents() {
+		return new TableOfContentsBuilder();
 	}
 }

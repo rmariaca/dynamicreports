@@ -23,13 +23,22 @@
 package net.sf.dynamicreports.design.definition;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.report.constant.HyperLinkType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignHyperLink {
 
-	public DRIDesignSimpleExpression getLinkExpression();
+	public DRIDesignSimpleExpression getAnchorNameExpression();
+
+	public DRIDesignSimpleExpression getAnchorExpression();
+
+	public DRIDesignSimpleExpression getPageExpression();
+
+	public DRIDesignSimpleExpression getReferenceExpression();
 
 	public DRIDesignSimpleExpression getTooltipExpression();
+
+	public HyperLinkType getType();
 }

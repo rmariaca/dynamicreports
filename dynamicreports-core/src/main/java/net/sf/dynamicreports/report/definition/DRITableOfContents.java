@@ -24,23 +24,18 @@ package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.builder.ReportBuilder;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIHyperLink extends Serializable {
+public interface DRITableOfContents extends Serializable {
 
-	public DRISimpleExpression<String> getAnchorNameExpression();
+	public void setReport(ReportBuilder<?> report);
 
-	public DRISimpleExpression<String> getAnchorExpression();
+	public void setHeadings(int headings);
 
-	public DRISimpleExpression<String> getPageExpression();
+	public void setLevels(int levels);
 
-	public DRISimpleExpression<String> getReferenceExpression();
-
-	public DRISimpleExpression<String> getTooltipExpression();
-
-	public HyperLinkType getType();
+	public void configure();
 }

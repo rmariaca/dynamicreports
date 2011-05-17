@@ -42,6 +42,7 @@ import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
 import net.sf.dynamicreports.jasper.base.export.JasperImageExporter;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocReport;
 import net.sf.dynamicreports.jasper.base.templatedesign.JasperEmptyTemplateDesign;
 import net.sf.dynamicreports.jasper.base.templatedesign.JasperTemplateDesign;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
@@ -224,10 +225,15 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 				else {
 					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, dataSource);
 				}
+
+				if (toJasperReportDesign().isTableOfContents()) {
+					JasperTocReport.createTocReport(toJasperReportDesign(), jasperPrint);
+				}
 			}
 			catch (JRException e) {
 				throw new DRException(e);
 			}
+
 		}
 		return jasperPrint;
 	}

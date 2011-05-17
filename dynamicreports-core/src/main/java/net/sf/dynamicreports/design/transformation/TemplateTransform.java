@@ -212,6 +212,10 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isFloatColumnFooter();
 	}
 
+	public boolean isTableOfContents() {
+		return report.getTableOfContents() != null;
+	}
+
 	//style
 	protected DRISimpleStyle getDetailOddRowStyle() {
 		if (isHighlightDetailOddRows()) {

@@ -20,27 +20,23 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.report.builder.tableofcontents;
 
-import java.io.Serializable;
-
-import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIHyperLink extends Serializable {
+@SuppressWarnings("ucd")
+public class TableOfContentsBuilder extends AbstractBuilder<TableOfContentsBuilder, TableOfContents> {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public DRISimpleExpression<String> getAnchorNameExpression();
+	public TableOfContentsBuilder() {
+		super(new TableOfContents());
+	}
 
-	public DRISimpleExpression<String> getAnchorExpression();
-
-	public DRISimpleExpression<String> getPageExpression();
-
-	public DRISimpleExpression<String> getReferenceExpression();
-
-	public DRISimpleExpression<String> getTooltipExpression();
-
-	public HyperLinkType getType();
+	public TableOfContents getTableOfContents() {
+		return build();
+	}
 }

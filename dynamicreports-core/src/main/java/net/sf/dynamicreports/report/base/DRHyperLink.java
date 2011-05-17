@@ -23,10 +23,9 @@
 package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-
-import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -34,23 +33,58 @@ import org.apache.commons.lang.Validate;
 public class DRHyperLink implements DRIHyperLink {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRISimpleExpression<String> linkExpression;	
+	private DRISimpleExpression<String> anchorNameExpression;
+	private DRISimpleExpression<String> anchorExpression;
+	private DRISimpleExpression<String> pageExpression;
+	private DRISimpleExpression<String> referenceExpression;
 	private DRISimpleExpression<String> tooltipExpression;
-	
-	public DRISimpleExpression<String> getLinkExpression() {
-		return linkExpression;
+	private HyperLinkType hyperLinkType;
+
+	public DRISimpleExpression<String> getAnchorNameExpression() {
+		return anchorNameExpression;
 	}
-	
-	public void setLinkExpression(DRISimpleExpression<String> linkExpression) {
-		Validate.notNull(linkExpression, "linkExpression must not be null");
-		this.linkExpression = linkExpression;
+
+	public void setAnchorNameExpression(DRISimpleExpression<String> anchorNameExpression) {
+		this.anchorNameExpression = anchorNameExpression;
+	}
+
+	public DRISimpleExpression<String> getAnchorExpression() {
+		return anchorExpression;
+	}
+
+	public void setAnchorExpression(DRISimpleExpression<String> anchorExpression) {
+		this.anchorExpression = anchorExpression;
+	}
+
+	public DRISimpleExpression<String> getPageExpression() {
+		return pageExpression;
+	}
+
+	public void setPageExpression(DRISimpleExpression<String> pageExpression) {
+		this.pageExpression = pageExpression;
+	}
+
+	public DRISimpleExpression<String> getReferenceExpression() {
+		return referenceExpression;
+	}
+
+	public void setReferenceExpression(DRISimpleExpression<String> referenceExpression) {
+		this.referenceExpression = referenceExpression;
 	}
 
 	public DRISimpleExpression<String> getTooltipExpression() {
 		return tooltipExpression;
 	}
-	
+
 	public void setTooltipExpression(DRISimpleExpression<String> tooltipExpression) {
 		this.tooltipExpression = tooltipExpression;
+	}
+
+	public HyperLinkType getType() {
+		return hyperLinkType;
+	}
+
+	public void setType(HyperLinkType hyperLinkType) {
+		this.hyperLinkType = hyperLinkType;
 	}
 }

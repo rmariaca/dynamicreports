@@ -107,9 +107,15 @@ public class ChartTransform {
 	private void chart(DRIDesignChart chart, JRDesignChart jrChart) {
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
-			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getLinkExpression()));
-			jrChart.setHyperlinkType(HyperlinkTypeEnum.REFERENCE);
+			jrChart.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
+			jrChart.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
+			jrChart.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
+			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrChart.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
+			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+			if (hyperLinkType != null) {
+				jrChart.setHyperlinkType(hyperLinkType);
+			}
 		}
 
 		DRIDesignChartTitle title = chart.getTitle();

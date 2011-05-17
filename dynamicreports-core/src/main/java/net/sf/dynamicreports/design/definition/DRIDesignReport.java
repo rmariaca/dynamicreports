@@ -34,6 +34,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpress
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
+import net.sf.dynamicreports.report.definition.DRITableOfContents;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -65,6 +66,10 @@ public interface DRIDesignReport {
 	public boolean isSummaryWithPageHeaderAndFooter();
 
 	public boolean isFloatColumnFooter();
+
+	public boolean isTableOfContents();
+
+	public DRITableOfContents getTableOfContents();
 
 	public Collection<DRIDesignParameter> getParameters();
 
