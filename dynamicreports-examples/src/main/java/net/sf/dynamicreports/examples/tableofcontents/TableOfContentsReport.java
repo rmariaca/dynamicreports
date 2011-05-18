@@ -31,8 +31,6 @@ import java.util.Date;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
-import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -46,24 +44,20 @@ public class TableOfContentsReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
-
-		ColumnGroupBuilder itemGroup = grp.group(itemColumn)
-		                                  .setTitleWidth(30)
-		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
-		                                  .showColumnHeaderAndFooter();
+		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn    = col.column("Item",    "item",    type.stringType());
 
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setShowColumnTitle(false)
 			  .tableOfContents()
 			  .columns(
+			  	countryColumn,
 			  	itemColumn,
 			  	col.column("Order date", "orderdate", type.dateType()),
 			  	col.column("Quantity",   "quantity",  type.integerType()),
 			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .groupBy(itemGroup)
+			  .groupBy(countryColumn, itemColumn)
 			  .title(Templates.createTitleComponent("TableOfContents"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
@@ -74,14 +68,16 @@ public class TableOfContentsReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
-		dataSource.add("DVD", toDate(2010, 1, 1), 5, new BigDecimal(30));
-		dataSource.add("DVD", toDate(2010, 1, 3), 1, new BigDecimal(28));
-		dataSource.add("DVD", toDate(2010, 1, 19), 5, new BigDecimal(32));
-		dataSource.add("Book", toDate(2010, 1, 5), 3, new BigDecimal(11));
-		dataSource.add("Book", toDate(2010, 1, 8), 1, new BigDecimal(15));
-		dataSource.add("Book", toDate(2010, 1, 15), 5, new BigDecimal(10));
-		dataSource.add("Book", toDate(2010, 1, 20), 8, new BigDecimal(9));
+		String[] countries = new String[]{"USA", "Canada", "Mexico"};
+		String[] items = new String[]{"Book", "Notebook", "PDA"};
+		DataSource dataSource = new DataSource("country", "item", "orderdate", "quantity", "unitprice");
+		for (String country : countries) {
+			for (String item : items) {
+				for (int i = 0; i < 8; i++) {
+					dataSource.add(country, item, toDate(2010, 1, (int) (Math.random() * 10) + 1), (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
+				}
+			}
+		}
 		return dataSource;
 	}
 

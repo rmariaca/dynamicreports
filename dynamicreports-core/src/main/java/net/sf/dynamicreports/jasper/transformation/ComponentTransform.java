@@ -162,6 +162,7 @@ public class ComponentTransform {
 		if (component.getStyle() != null)
 			jrElement.setStyle(accessor.getStyleTransform().getStyle(component.getStyle()));
 		jrElement.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(component.getPrintWhenExpression()));
+		jrElement.setRemoveLineWhenBlank(component.isRemoveLineWhenBlank());
 
 		for (DRIDesignPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			jrElement.addPropertyExpression(accessor.getExpressionTransform().getPropertyExpression(propertyExpression));

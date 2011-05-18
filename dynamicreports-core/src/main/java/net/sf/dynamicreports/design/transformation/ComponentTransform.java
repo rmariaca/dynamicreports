@@ -157,6 +157,7 @@ public class ComponentTransform {
 	private void component(DRDesignComponent designComponent, DRIComponent component, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
 		designComponent.setPrintWhenExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
+		designComponent.setRemoveLineWhenBlank(accessor.getTemplateTransform().getRemoveLineWhenBlank(component));
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}

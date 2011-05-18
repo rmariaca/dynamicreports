@@ -49,6 +49,21 @@ public class JasperTocReport {
 		List<JasperTocHeading> headings = scriptlet.getHeadings();
 		if (headings != null && !headings.isEmpty()) {
 			JasperReportBuilder tocReport = report();
+
+			int levels = 0;
+			for (JasperTocHeading heading : headings) {
+				if (heading.getLevel() > levels) {
+					levels = heading.getLevel();
+				}
+			}
+			levels++;
+
+			DRITableOfContents tableOfContents = jasperReportDesign.getTableOfContents();
+			tableOfContents.setReport(tocReport);
+			tableOfContents.setHeadings(headings.size());
+			tableOfContents.setLevels(levels);
+			tableOfContents.configure();
+
 			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			tocReport.setPageFormat(designPage.getWidth(), designPage.getHeight(), designPage.getOrientation());
 			MarginBuilder tocMargin = DynamicReports.margin();
@@ -57,12 +72,8 @@ public class JasperTocReport {
 			tocMargin.setTop(designPage.getMargin().getTop());
 			tocMargin.setBottom(designPage.getMargin().getBottom());
 			tocReport.setPageMargin(tocMargin);
-			DRITableOfContents tableOfContents = jasperReportDesign.getTableOfContents();
-			tableOfContents.setReport(tocReport);
-			tableOfContents.setHeadings(headings.size());
-			tableOfContents.setLevels(headings.size());
-			tableOfContents.configure();
 			tocReport.setDataSource(new JRBeanCollectionDataSource(headings));
+
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();
 			for (int i = 0; i < tocJasperPrint.getPages().size(); i++) {
 				JRPrintPage page = (JRPrintPage) tocJasperPrint.getPages().get(i);

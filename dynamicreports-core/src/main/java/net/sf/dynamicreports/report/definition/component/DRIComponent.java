@@ -32,11 +32,13 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIComponent extends Serializable {	
-	
+public interface DRIComponent extends Serializable {
+
 	public DRIStyle getStyle();
-		
+
 	public DRISimpleExpression<Boolean> getPrintWhenExpression();
-	
+
+	public Boolean getRemoveLineWhenBlank();
+
 	public List<DRIPropertyExpression> getPropertyExpressions();
 }

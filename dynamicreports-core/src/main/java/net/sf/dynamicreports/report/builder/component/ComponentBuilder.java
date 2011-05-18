@@ -36,11 +36,11 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U extends DRComponent> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	protected ComponentBuilder(U object) {
 		super(object);
 	}
-	
+
 	public T setStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().setStyle(style.getStyle());
@@ -50,27 +50,36 @@ public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U exten
 		}
 		return (T) this;
 	}
-	
+
 	public T setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
 		getObject().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
-	}	
-	
+	}
+
+	public T removeLineWhenBlank() {
+		return setRemoveLineWhenBlank(true);
+	}
+
+	public T setRemoveLineWhenBlank(Boolean removeLineWhenBlank) {
+		getObject().setRemoveLineWhenBlank(removeLineWhenBlank);
+		return (T) this;
+	}
+
 	public T addProperty(DRIPropertyExpression propertyExpression) {
 		getComponent().addPropertyExpression(propertyExpression);
 		return (T) this;
-	}	
-	
+	}
+
 	public T addProperty(String name, DRISimpleExpression<String> valueExpression) {
 		getComponent().addPropertyExpression(Expressions.property(name, valueExpression));
 		return (T) this;
-	}	
+	}
 
 	public T addProperty(String name, String value) {
 		getComponent().addPropertyExpression(Expressions.property(name, value));
 		return (T) this;
-	}	
-	
+	}
+
 	public U getComponent() {
 		return build();
 	}

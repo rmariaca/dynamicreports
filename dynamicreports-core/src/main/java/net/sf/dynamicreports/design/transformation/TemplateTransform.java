@@ -541,6 +541,14 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getColumnWidth();
 	}
 
+	//component
+	protected boolean getRemoveLineWhenBlank(DRIComponent component) {
+		if (component.getRemoveLineWhenBlank() != null) {
+			return component.getRemoveLineWhenBlank();
+		}
+		return Defaults.getDefaults().isRemoveLineWhenBlank();
+	}
+
 	//group
 	protected GroupHeaderLayout getGroupHeaderLayout(DRIGroup group) {
 		if (group.getHeaderLayout() != null) {

@@ -87,6 +87,8 @@ public class Default {
 	//column
 	private boolean columnPrintRepeatedDetailValues;
 	private int columnWidth;
+	//component
+	private boolean removeLineWhenBlank;
 	//group
 	private GroupHeaderLayout groupHeaderLayout;
 	private boolean groupHideColumn;
@@ -243,6 +245,8 @@ public class Default {
 
 		this.columnPrintRepeatedDetailValues = true;
 		this.columnWidth = 100;
+
+		this.removeLineWhenBlank = false;
 
 		this.groupHeaderLayout = GroupHeaderLayout.VALUE;
 		this.groupHideColumn = true;
@@ -476,6 +480,10 @@ public class Default {
 
 	public int getColumnWidth() {
 		return columnWidth;
+	}
+
+	public boolean isRemoveLineWhenBlank() {
+		return removeLineWhenBlank;
 	}
 
 	public GroupHeaderLayout getGroupHeaderLayout() {

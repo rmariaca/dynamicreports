@@ -33,20 +33,22 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
  */
 public interface DRIDesignComponent {
 	public String getName();
-	
+
 	public String getUniqueName();
-	
+
 	public DRIDesignStyle getStyle();
 
 	public Integer getX();
 
 	public Integer getY();
-	
+
 	public Integer getWidth();
-	
+
 	public Integer getHeight();
-	
+
 	public DRIDesignSimpleExpression getPrintWhenExpression();
-	
+
+	public boolean isRemoveLineWhenBlank();
+
 	public List<DRIDesignPropertyExpression> getPropertyExpressions();
 }

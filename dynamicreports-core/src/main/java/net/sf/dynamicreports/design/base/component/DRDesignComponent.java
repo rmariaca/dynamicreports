@@ -33,7 +33,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class DRDesignComponent implements DRIDesignComponent {	
+public abstract class DRDesignComponent implements DRIDesignComponent {
 	private String name;
 	private String uniqueName;
 	private DRDesignStyle style;
@@ -42,6 +42,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	private Integer width;
 	private Integer height;
 	private DRIDesignSimpleExpression printWhenExpression;
+	private boolean isRemoveLineWhenBlank;
 	private List<DRIDesignPropertyExpression> propertyExpressions;
 
 	protected DRDesignComponent(String name) {
@@ -49,11 +50,11 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.uniqueName = name;
 		init();
 	}
-	
+
 	protected void init() {
 		propertyExpressions = new ArrayList<DRIDesignPropertyExpression>();
 	}
-		
+
 	public String getName() {
 		return name;
 	}
@@ -61,15 +62,15 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	public String getUniqueName() {
 		return uniqueName;
 	}
-	
+
 	public void setUniqueName(String uniqueName) {
 		this.uniqueName = uniqueName;
 	}
-	
+
 	public DRDesignStyle getStyle() {
 		return style;
 	}
-	
+
 	public void setStyle(DRDesignStyle style) {
 		this.style = style;
 	}
@@ -89,29 +90,37 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	public void setY(Integer y) {
 		this.y = y;
 	}
-	
+
 	public Integer getWidth() {
 		return width;
 	}
-	
+
 	public void setWidth(Integer width) {
 		this.width = width;
 	}
-	
+
 	public Integer getHeight() {
 		return height;
 	}
-	
+
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
-	
+
 	public DRIDesignSimpleExpression getPrintWhenExpression() {
 		return printWhenExpression;
 	}
-	
+
 	public void setPrintWhenExpression(DRIDesignSimpleExpression printWhenExpression) {
 		this.printWhenExpression = printWhenExpression;
+	}
+
+	public boolean isRemoveLineWhenBlank() {
+		return isRemoveLineWhenBlank;
+	}
+
+	public void setRemoveLineWhenBlank(boolean isRemoveLineWhenBlank) {
+		this.isRemoveLineWhenBlank = isRemoveLineWhenBlank;
 	}
 
 	public List<DRIDesignPropertyExpression> getPropertyExpressions() {
@@ -120,5 +129,5 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 
 	public void setPropertyExpressions(List<DRIDesignPropertyExpression> propertyExpressions) {
 		this.propertyExpressions = propertyExpressions;
-	}	
+	}
 }
