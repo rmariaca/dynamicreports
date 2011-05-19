@@ -109,18 +109,16 @@ public class TableOfContents implements DRITableOfContents {
 		}
 
 		report
-			.title(title())
+			.title(
+				title(),
+				cmp.filler().setFixedHeight(20))
 			.fields(
 				levelField, textField, referenceField, pageIndexField)
 			.detail(detailComponent);
 	}
 
 	protected ComponentBuilder<?, ?> title() {
-		VerticalListBuilder title = cmp.verticalList();
-		title.add(
-			cmp.text(new SystemMessageExpression("table_of_contents")).setStyle(titleStyle),
-			cmp.filler().setFixedHeight(20));
-		return title;
+		return cmp.text(new SystemMessageExpression("table_of_contents")).setStyle(titleStyle);
 	}
 
 	protected ComponentBuilder<?, ?> headingComponent(int level) {
