@@ -31,7 +31,7 @@ import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.MarginBuilder;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintPage;
@@ -58,11 +58,11 @@ public class JasperTocReport {
 			}
 			levels++;
 
-			DRITableOfContents tableOfContents = jasperReportDesign.getTableOfContents();
+			DRITableOfContentsCustomizer tableOfContents = jasperReportDesign.getReport().getTableOfContentsCustomizer();
 			tableOfContents.setReport(tocReport);
 			tableOfContents.setHeadings(headings.size());
 			tableOfContents.setLevels(levels);
-			tableOfContents.configure();
+			tableOfContents.customize();
 
 			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			tocReport.setPageFormat(designPage.getWidth(), designPage.getHeight(), designPage.getOrientation());

@@ -34,7 +34,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpress
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -69,7 +69,7 @@ public interface DRIDesignReport {
 
 	public boolean isTableOfContents();
 
-	public DRITableOfContents getTableOfContents();
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
 
 	public Collection<DRIDesignParameter> getParameters();
 

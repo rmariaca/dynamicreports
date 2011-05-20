@@ -36,7 +36,6 @@ import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
@@ -144,14 +143,6 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public ReportParameters getMasterReportParameters() {
 		return masterReportParameters;
-	}
-
-	public boolean isTableOfContents() {
-		return report.isTableOfContents();
-	}
-
-	public DRITableOfContents getTableOfContents() {
-		return report.getTableOfContents();
 	}
 
 	public JRAbstractScriptlet getScriptlet() {

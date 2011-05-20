@@ -55,7 +55,7 @@ import net.sf.dynamicreports.design.transformation.TemplateTransform;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -229,8 +229,8 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return templateTransform.isTableOfContents();
 	}
 
-	public DRITableOfContents getTableOfContents() {
-		return report.getTableOfContents();
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
+		return templateTransform.getTableOfContentsCustomizer();
 	}
 
 	public Collection<DRIDesignParameter> getParameters() {

@@ -23,6 +23,10 @@
 package net.sf.dynamicreports.report.builder.tableofcontents;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
@@ -36,14 +40,16 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TableOfContents implements DRITableOfContents {
+public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private static String dots;
 
 	private ReportBuilder<?> report;
 	private int headings;
@@ -55,21 +61,28 @@ public class TableOfContents implements DRITableOfContents {
 	private FieldBuilder<Integer> pageIndexField;
 
 	private HyperLinkBuilder referenceHyperLink;
-	private StyleBuilder titleStyle;
 	private int pageIndexDigits;
-	private String dots;
 
-	public TableOfContents() {
-		init();
-	}
+	private StyleBuilder titleStyle;
+	private StyleBuilder headingStyle;
+	private Map<Integer, StyleBuilder> headingStyles;
+	private Integer textFixedWidth;
+	private Integer dotsFixedWidth;
+	private Integer pageIndexFixedWidth;
 
-	protected void init() {
-		StringBuilder dots = new StringBuilder(100);
+	static {
+		StringBuilder dots = new StringBuilder(200);
 		for (int i = 0; i < dots.capacity(); i++) {
 			dots.append(".");
 		}
-		this.dots = dots.toString();
+		TableOfContentsCustomizer.dots = dots.toString();
+	}
 
+	public TableOfContentsCustomizer() {
+		headingStyles = new HashMap<Integer, StyleBuilder>();
+	}
+
+	protected void init() {
 		levelField = field("level", type.integerType());
 		textField = field("text", type.stringType());
 		referenceField = field("reference", type.stringType());
@@ -79,10 +92,14 @@ public class TableOfContents implements DRITableOfContents {
 		referenceHyperLink.setAnchor(new ReferenceExpression());
 		referenceHyperLink.setType(HyperLinkType.LOCAL_ANCHOR);
 
-		titleStyle = stl.style()
-			.bold()
-			.setFontSize(16)
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		pageIndexDigits = String.valueOf(headings).length();
+
+		if (titleStyle == null) {
+			titleStyle = stl.style()
+				.bold()
+				.setFontSize(16)
+				.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		}
 	}
 
 	public void setReport(ReportBuilder<?> report) {
@@ -97,8 +114,8 @@ public class TableOfContents implements DRITableOfContents {
 		this.levels = levels;
 	}
 
-	public void configure() {
-		pageIndexDigits = String.valueOf(headings).length();
+	public void customize() {
+		init();
 
 		VerticalListBuilder detailComponent = cmp.verticalList();
 		for (int i = 0; i < levels; i++) {
@@ -128,27 +145,70 @@ public class TableOfContents implements DRITableOfContents {
 			headingComponent.add(cmp.filler().setFixedWidth(level * 10));
 		}
 
-		TextFieldBuilder<String> labelColumn = cmp.text(textField)
-  		.setWidth(50)
+		TextFieldBuilder<String> textComponent = cmp.text(textField)
   		.setHyperLink(referenceHyperLink);
-		headingComponent.add(labelColumn);
+		if (textFixedWidth != null) {
+			textComponent.setFixedWidth(textFixedWidth);
+		}
+		headingComponent.add(textComponent);
 
 		if (level > 0) {
 			headingComponent.add(cmp.filler().setFixedWidth(level * 10));
 		}
 
-		TextFieldBuilder<String> dotsColumn = cmp.text(dots.toString())
-  		.setWidth(50)
+		TextFieldBuilder<String> dotsComponent = cmp.text(dots.toString())
   		.setStretchWithOverflow(false)
   		.setHyperLink(referenceHyperLink);
-		headingComponent.add(dotsColumn);
+		if (dotsFixedWidth != null) {
+			dotsComponent.setFixedWidth(dotsFixedWidth);
+		}
+		headingComponent.add(dotsComponent);
 
-		TextFieldBuilder<Integer> pageIndexColumn = cmp.text(pageIndexField)
-  		.setFixedColumns(pageIndexDigits)
+		TextFieldBuilder<Integer> pageIndexComponent = cmp.text(pageIndexField)
   		.setHyperLink(referenceHyperLink);
-		headingComponent.add(pageIndexColumn);
+		if (pageIndexFixedWidth != null) {
+			pageIndexComponent.setFixedWidth(pageIndexFixedWidth);
+		}
+		else {
+			pageIndexComponent.setFixedColumns(pageIndexDigits);
+		}
+		headingComponent.add(pageIndexComponent);
+
+		StyleBuilder headingStyle = headingStyles.get(level);
+		if (headingStyle == null) {
+			headingStyle = this.headingStyle;
+		}
+		if (headingStyle != null) {
+			textComponent.setStyle(headingStyle);
+			dotsComponent.setStyle(headingStyle);
+			pageIndexComponent.setStyle(headingStyle);
+		}
 
 		return headingComponent;
+	}
+
+	public void setTitleStyle(StyleBuilder titleStyle) {
+		this.titleStyle = titleStyle;
+	}
+
+	public void setHeadingStyle(StyleBuilder headingStyle) {
+		this.headingStyle = headingStyle;
+	}
+
+	public void setHeadingStyle(int level, StyleBuilder headingStyle) {
+		this.headingStyles.put(level, headingStyle);
+	}
+
+	public void setTextFixedWidth(Integer textFixedWidth) {
+		this.textFixedWidth = textFixedWidth;
+	}
+
+	public void setDotsFixedWidth(Integer dotsFixedWidth) {
+		this.dotsFixedWidth = dotsFixedWidth;
+	}
+
+	public void setPageIndexFixedWidth(Integer pageIndexFixedWidth) {
+		this.pageIndexFixedWidth = pageIndexFixedWidth;
 	}
 
 	private class ReferenceExpression extends AbstractSimpleExpression<String> {

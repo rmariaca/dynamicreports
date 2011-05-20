@@ -37,7 +37,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -77,7 +77,8 @@ public class DRReport implements DRIReport {
 	private DRSimpleStyle detailEvenRowStyle;
 	private List<DRConditionalStyle> detailRowHighlighters;
 	private DRColumnGrid columnGrid;
-	private DRITableOfContents tableOfContents;
+	private Boolean tableOfContents;
+	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
 
 	private DRStyle textStyle;
 	private DRStyle columnTitleStyle;
@@ -503,12 +504,20 @@ public class DRReport implements DRIReport {
 		this.columnGrid = columnGrid;
 	}
 
-	public DRITableOfContents getTableOfContents() {
+	public Boolean getTableOfContents() {
 		return tableOfContents;
 	}
 
-	public void setTableOfContents(DRITableOfContents tableOfContents) {
+	public void setTableOfContents(Boolean tableOfContents) {
 		this.tableOfContents = tableOfContents;
+	}
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
+		return tableOfContentsCustomizer;
+	}
+
+	public void setTableOfContentsCustomizer(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
+		this.tableOfContentsCustomizer = tableOfContentsCustomizer;
 	}
 
 	public DRBand getTitleBand() {

@@ -52,6 +52,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
@@ -212,8 +213,25 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isFloatColumnFooter();
 	}
 
+	//table of contents
 	public boolean isTableOfContents() {
-		return report.getTableOfContents() != null;
+		if (report.getTableOfContents() != null) {
+			return report.getTableOfContents();
+		}
+		if (template.getTableOfContents() != null) {
+			return template.getTableOfContents();
+		}
+		return Defaults.getDefaults().isTableOfContents();
+	}
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
+		if (report.getTableOfContentsCustomizer() != null) {
+			return report.getTableOfContentsCustomizer();
+		}
+		if (template.getTableOfContentsCustomizer() != null) {
+			return template.getTableOfContentsCustomizer();
+		}
+		return Defaults.getDefaults().getTableOfContentsCustomizer();
 	}
 
 	//style

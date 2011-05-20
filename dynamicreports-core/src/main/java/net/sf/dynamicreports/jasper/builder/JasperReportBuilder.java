@@ -226,7 +226,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, dataSource);
 				}
 
-				if (toJasperReportDesign().isTableOfContents()) {
+				if (toJasperReportDesign().getReport().isTableOfContents()) {
 					JasperTocReport.createTocReport(toJasperReportDesign(), jasperPrint);
 				}
 			}

@@ -28,6 +28,7 @@ import java.util.Locale;
 import net.sf.dynamicreports.report.base.DRReportTemplate;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -35,6 +36,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 
 import org.apache.commons.lang.Validate;
 
@@ -308,6 +310,25 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setGroupReprintHeaderOnEachPage(Boolean groupReprintHeaderOnEachPage) {
 		getObject().setGroupReprintHeaderOnEachPage(groupReprintHeaderOnEachPage);
+		return this;
+	}
+
+	public ReportTemplateBuilder tableOfContents() {
+		return setTableOfContents(true);
+	}
+
+	public ReportTemplateBuilder setTableOfContents(Boolean tableOfContents) {
+		getObject().setTableOfContents(tableOfContents);
+		return this;
+	}
+
+	public ReportTemplateBuilder setTableOfContentsCustomizer(TableOfContentsCustomizerBuilder tableOfContentsCustomizer) {
+		getObject().setTableOfContentsCustomizer(tableOfContentsCustomizer.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setTableOfContentsCustomizer(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
+		getObject().setTableOfContentsCustomizer(tableOfContentsCustomizer);
 		return this;
 	}
 

@@ -112,6 +112,10 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getGroupReprintHeaderOnEachPage();
 
+	public Boolean getTableOfContents();
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
+
 	public Integer getTextFieldWidth();
 
 	public Integer getImageHeight();

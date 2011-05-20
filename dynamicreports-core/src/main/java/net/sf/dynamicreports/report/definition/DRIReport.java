@@ -114,7 +114,9 @@ public interface DRIReport extends Serializable {
 
 	public DRIColumnGrid getColumnGrid();
 
-	public DRITableOfContents getTableOfContents();
+	public Boolean getTableOfContents();
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
 
 	public DRIBand getTitleBand();
 

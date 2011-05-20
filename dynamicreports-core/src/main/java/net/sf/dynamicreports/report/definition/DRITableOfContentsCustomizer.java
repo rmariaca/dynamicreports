@@ -20,23 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.tableofcontents;
+package net.sf.dynamicreports.report.definition;
 
-import net.sf.dynamicreports.report.builder.AbstractBuilder;
-import net.sf.dynamicreports.report.constant.Constants;
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.builder.ReportBuilder;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class TableOfContentsBuilder extends AbstractBuilder<TableOfContentsBuilder, TableOfContents> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public interface DRITableOfContentsCustomizer extends Serializable {
 
-	public TableOfContentsBuilder() {
-		super(new TableOfContents());
-	}
+	public void setReport(ReportBuilder<?> report);
 
-	public TableOfContents getTableOfContents() {
-		return build();
-	}
+	public void setHeadings(int headings);
+
+	public void setLevels(int levels);
+
+	public void customize();
 }

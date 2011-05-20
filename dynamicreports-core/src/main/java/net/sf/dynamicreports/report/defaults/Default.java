@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizer;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -49,6 +50,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -98,6 +100,9 @@ public class Default {
 	private boolean groupStartInNewColumn;
 	private boolean groupReprintHeaderOnEachPage;
 	private boolean groupByDataType;
+	//table of contents
+	private boolean tableOfContents;
+	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
 	//text field
 	private int textFieldWidth;
 	private boolean textFieldPrintRepeatedValues;
@@ -256,6 +261,9 @@ public class Default {
 		this.groupStartInNewColumn = false;
 		this.groupReprintHeaderOnEachPage = false;
 		this.groupByDataType = false;
+
+		this.tableOfContents = false;
+		this.tableOfContentsCustomizer = new TableOfContentsCustomizer();
 
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
@@ -516,6 +524,14 @@ public class Default {
 
 	public boolean isGroupByDataType() {
 		return groupByDataType;
+	}
+
+	public boolean isTableOfContents() {
+		return tableOfContents;
+	}
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
+		return tableOfContentsCustomizer;
 	}
 
 	public int getTextFieldWidth() {

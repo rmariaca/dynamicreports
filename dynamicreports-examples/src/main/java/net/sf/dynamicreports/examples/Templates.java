@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -89,6 +90,9 @@ public class Templates {
 		StyleBuilder crosstabCellStyle       = stl.style(columnStyle)
 		                                          .setBorder(stl.pen1Point());
 
+		TableOfContentsCustomizerBuilder tableOfContentsCustomizer = tableOfContentsCustomizer()
+			.setHeadingStyle(0, stl.style(rootStyle).bold());
+
 		reportTemplate = template()
 		                   .setLocale(Locale.ENGLISH)
 		                   .setColumnStyle(columnStyle)
@@ -101,7 +105,8 @@ public class Templates {
 		                   .setCrosstabGroupStyle(crosstabGroupStyle)
 		                   .setCrosstabGroupTotalStyle(crosstabGroupTotalStyle)
 		                   .setCrosstabGrandTotalStyle(crosstabGrandTotalStyle)
-		                   .setCrosstabCellStyle(crosstabCellStyle);
+		                   .setCrosstabCellStyle(crosstabCellStyle)
+		                   .setTableOfContentsCustomizer(tableOfContentsCustomizer);
 
 		currencyType = new CurrencyType();
 

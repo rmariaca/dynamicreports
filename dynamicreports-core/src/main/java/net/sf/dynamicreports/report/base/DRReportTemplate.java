@@ -37,6 +37,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
@@ -87,6 +88,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean groupStartInNewPage;
 	private Boolean groupStartInNewColumn;
 	private Boolean groupReprintHeaderOnEachPage;
+	//table of contents
+	public Boolean tableOfContents;
+	public DRITableOfContentsCustomizer tableOfContentsCustomizer;
 	//text field
 	private Integer textFieldWidth;
 	//image
@@ -458,6 +462,22 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setGroupReprintHeaderOnEachPage(Boolean groupReprintHeaderOnEachPage) {
 		this.groupReprintHeaderOnEachPage = groupReprintHeaderOnEachPage;
+	}
+
+	public Boolean getTableOfContents() {
+		return tableOfContents;
+	}
+
+	public void setTableOfContents(Boolean tableOfContents) {
+		this.tableOfContents = tableOfContents;
+	}
+
+	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
+		return tableOfContentsCustomizer;
+	}
+
+	public void setTableOfContentsCustomizer(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
+		this.tableOfContentsCustomizer = tableOfContentsCustomizer;
 	}
 
 	public Integer getTextFieldWidth() {

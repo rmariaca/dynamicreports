@@ -24,6 +24,7 @@ package net.sf.dynamicreports.examples.tableofcontents;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +34,9 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
-import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContents;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizer;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -50,10 +53,28 @@ public class CustomTableOfContentsReport {
 		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
 		TextColumnBuilder<String> itemColumn    = col.column("Item",    "item",    type.stringType());
 
+		StyleBuilder titleTocStyle = stl.style()
+			.setForegroudColor(Color.BLUE)
+			.setFontSize(18)
+			.bold()
+			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder headingToc0Style = stl.style(Templates.rootStyle)
+			.setFontSize(12)
+			.bold();
+		StyleBuilder headingToc1Style = stl.style(Templates.rootStyle)
+			.italic();
+
+		CustomTableOfContents tableOfContents = new CustomTableOfContents();
+		tableOfContents.setTitleStyle(titleTocStyle);
+		tableOfContents.setHeadingStyle(0, headingToc0Style);
+		tableOfContents.setHeadingStyle(1, headingToc1Style);
+		tableOfContents.setTextFixedWidth(100);
+		tableOfContents.setPageIndexFixedWidth(30);
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setTableOfContents(new CustomTableOfContents())
+			  .setTableOfContents(tableOfContents)
 			  .columns(
 			  	countryColumn,
 			  	itemColumn,
@@ -96,7 +117,7 @@ public class CustomTableOfContentsReport {
 		new CustomTableOfContentsReport();
 	}
 
-	private class CustomTableOfContents extends TableOfContents {
+	private class CustomTableOfContents extends TableOfContentsCustomizer {
 		private static final long serialVersionUID = 1L;
 
 		@Override

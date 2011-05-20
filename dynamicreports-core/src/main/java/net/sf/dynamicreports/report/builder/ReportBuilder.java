@@ -40,7 +40,7 @@ import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
-import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -50,7 +50,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
-import net.sf.dynamicreports.report.definition.DRITableOfContents;
+import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 
 import org.apache.commons.lang.Validate;
@@ -661,18 +661,22 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	public T tableOfContents() {
-		getObject().setTableOfContents(DynamicReports.tableOfContents().build());
-		return (T) this;
+		return setTableOfContents(true);
 	}
 
-	public T setTableOfContents(TableOfContentsBuilder tableOfContents) {
-		getObject().setTableOfContents(tableOfContents.build());
-		return (T) this;
-	}
-
-	public T setTableOfContents(DRITableOfContents tableOfContents) {
+	public T setTableOfContents(Boolean tableOfContents) {
 		getObject().setTableOfContents(tableOfContents);
 		return (T) this;
+	}
+
+	public T setTableOfContents(TableOfContentsCustomizerBuilder tableOfContentsCustomizer) {
+		getObject().setTableOfContentsCustomizer(tableOfContentsCustomizer.build());
+		return setTableOfContents(true);
+	}
+
+	public T setTableOfContents(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
+		getObject().setTableOfContentsCustomizer(tableOfContentsCustomizer);
+		return setTableOfContents(true);
 	}
 
 	//band
