@@ -20,27 +20,32 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.test.jasper.report;
 
-import java.io.Serializable;
-
-import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIHyperLink extends Serializable {
+public class PrintWhenExpressionTest extends AbstractJasperValueTest {
 
-	public DRISimpleExpression<String> getAnchorNameExpression();
+	@Override
+	protected void configureReport(JasperReportBuilder rb) {
+		rb.title(
+			cmp.text("title1").setPrintWhenExpression(exp.value(true)),
+			cmp.text("title2").setPrintWhenExpression(exp.value(false)));
+	}
 
-	public DRISimpleExpression<String> getAnchorExpression();
+	@Override
+	public void test() {
+		super.test();
 
-	public DRISimpleExpression<Integer> getPageExpression();
+		numberOfPagesTest(1);
 
-	public DRISimpleExpression<String> getReferenceExpression();
-
-	public DRISimpleExpression<String> getTooltipExpression();
-
-	public HyperLinkType getType();
+		elementCountTest("title.textField1", 1);
+		elementValueTest("title.textField1", "title1");
+		elementCountTest("title.textField2", 0);
+	}
 }

@@ -26,6 +26,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -33,7 +34,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TableOfContentsPositionTest extends AbstractJasperPositionTest {
+public class TableOfContentsPosition2Test extends AbstractJasperPositionTest {
 	private static final long serialVersionUID = 1L;
 
 	private TextColumnBuilder<String> column1;
@@ -43,7 +44,11 @@ public class TableOfContentsPositionTest extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.tableOfContents()
+		TableOfContentsCustomizerBuilder tableOfContentsCustomizer = tableOfContentsCustomizer()
+			.setTextFixedWidth(100)
+			.setPageIndexFixedWidth(30);
+
+	rb.setTableOfContents(tableOfContentsCustomizer)
 	  	.columns(
 	  		column1 = col.column("Column1", "field1", type.stringType()),
 	  		column2 = col.column("Column2", "field2", type.stringType()),
@@ -63,15 +68,15 @@ public class TableOfContentsPositionTest extends AbstractJasperPositionTest {
 
 		for (int i = 0; i < 3; i++) {
 			elementPositionTest("detail.list3", i, 10, 49 + 64 * i, 575, 16);
-			elementPositionTest("detail.textField1", i, 0, 0, 276, 16);
-			elementPositionTest("detail.textField2", i, 276, 0, 277, 16);
-			elementPositionTest("detail.textField3", i, 553, 0, 22, 16);
+			elementPositionTest("detail.textField1", i, 0, 0, 100, 16);
+			elementPositionTest("detail.textField2", i, 100, 0, 445, 16);
+			elementPositionTest("detail.textField3", i, 545, 0, 30, 16);
 		}
 
 		for (int i = 0; i < 9; i++) {
-			elementPositionTest("detail.textField4", i, 10, 0, 266, 16);
-			elementPositionTest("detail.textField5", i, 286, 0, 267, 16);
-			elementPositionTest("detail.textField6", i, 553, 0, 22, 16);
+			elementPositionTest("detail.textField4", i, 10, 0, 100, 16);
+			elementPositionTest("detail.textField5", i, 120, 0, 425, 16);
+			elementPositionTest("detail.textField6", i, 545, 0, 30, 16);
 		}
 
 		for (int i = 0; i < 3; i++) {
@@ -85,32 +90,6 @@ public class TableOfContentsPositionTest extends AbstractJasperPositionTest {
 		for (int i = 6; i < 9; i++) {
 			elementPositionTest("detail.list5", i, 10, 193 + 16 * index++, 575, 16);
 		}
-
-		String name = "groupHeaderTitleAndValue.group_" + group1.getGroup().getName() + ".tocReference1";
-		for (int i = 0; i < 3; i++) {
-			elementPositionTest(name, i, 0, 0, 0, 16);
-			groupHeaderPositionTest(group1, i, 0, 0, 575, 16);
-		}
-		name = "groupHeaderTitleAndValue.list1";
-		elementPositionTest(name, 0, 10, 26, 575, 16);
-		elementPositionTest(name, 1, 10, 474, 575, 16);
-		elementPositionTest(name, 2, 10, 122, 575, 16);
-
-		name = "groupHeaderTitleAndValue.group_" + group2.getGroup().getName() + ".tocReference1";
-		for (int i = 0; i < 9; i++) {
-			elementPositionTest(name, i, 0, 0, 0, 16);
-			groupHeaderPositionTest(group2, i, 10, 0, 565, 16);
-		}
-		name = "groupHeaderTitleAndValue.list2";
-		elementPositionTest(name, 0, 10, 42, 575, 16);
-		elementPositionTest(name, 1, 10, 186, 575, 16);
-		elementPositionTest(name, 2, 10, 330, 575, 16);
-		elementPositionTest(name, 3, 10, 490, 575, 16);
-		elementPositionTest(name, 4, 10, 634, 575, 16);
-		elementPositionTest(name, 5, 10, 778, 575, 16);
-		elementPositionTest(name, 6, 10, 138, 575, 16);
-		elementPositionTest(name, 7, 10, 282, 575, 16);
-		elementPositionTest(name, 8, 10, 426, 575, 16);
 	}
 
 	@Override

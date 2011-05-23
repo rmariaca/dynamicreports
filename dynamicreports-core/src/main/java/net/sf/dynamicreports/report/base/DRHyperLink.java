@@ -35,7 +35,7 @@ public class DRHyperLink implements DRIHyperLink {
 
 	private DRISimpleExpression<String> anchorNameExpression;
 	private DRISimpleExpression<String> anchorExpression;
-	private DRISimpleExpression<String> pageExpression;
+	private DRISimpleExpression<Integer> pageExpression;
 	private DRISimpleExpression<String> referenceExpression;
 	private DRISimpleExpression<String> tooltipExpression;
 	private HyperLinkType hyperLinkType;
@@ -56,11 +56,11 @@ public class DRHyperLink implements DRIHyperLink {
 		this.anchorExpression = anchorExpression;
 	}
 
-	public DRISimpleExpression<String> getPageExpression() {
+	public DRISimpleExpression<Integer> getPageExpression() {
 		return pageExpression;
 	}
 
-	public void setPageExpression(DRISimpleExpression<String> pageExpression) {
+	public void setPageExpression(DRISimpleExpression<Integer> pageExpression) {
 		this.pageExpression = pageExpression;
 	}
 

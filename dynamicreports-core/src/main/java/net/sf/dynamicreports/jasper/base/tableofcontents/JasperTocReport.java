@@ -29,8 +29,6 @@ import java.util.List;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.builder.MarginBuilder;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
@@ -66,12 +64,6 @@ public class JasperTocReport {
 
 			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			tocReport.setPageFormat(designPage.getWidth(), designPage.getHeight(), designPage.getOrientation());
-			MarginBuilder tocMargin = DynamicReports.margin();
-			tocMargin.setLeft(designPage.getMargin().getLeft());
-			tocMargin.setRight(designPage.getMargin().getRight());
-			tocMargin.setTop(designPage.getMargin().getTop());
-			tocMargin.setBottom(designPage.getMargin().getBottom());
-			tocReport.setPageMargin(tocMargin);
 			tocReport.setDataSource(new JRBeanCollectionDataSource(headings));
 
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();

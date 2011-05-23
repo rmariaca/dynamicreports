@@ -83,12 +83,12 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setPage(String page) {
-		getObject().setPageExpression(Expressions.text(page));
+	public HyperLinkBuilder setPage(Integer page) {
+		getObject().setPageExpression(Expressions.value(page));
 		return this;
 	}
 
-	public HyperLinkBuilder setPage(DRISimpleExpression<String> pageExpression) {
+	public HyperLinkBuilder setPage(DRISimpleExpression<Integer> pageExpression) {
 		getObject().setPageExpression(pageExpression);
 		return this;
 	}

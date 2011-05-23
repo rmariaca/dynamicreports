@@ -64,17 +64,17 @@ public class CustomTableOfContentsReport {
 		StyleBuilder headingToc1Style = stl.style(Templates.rootStyle)
 			.italic();
 
-		CustomTableOfContents tableOfContents = new CustomTableOfContents();
-		tableOfContents.setTitleStyle(titleTocStyle);
-		tableOfContents.setHeadingStyle(0, headingToc0Style);
-		tableOfContents.setHeadingStyle(1, headingToc1Style);
-		tableOfContents.setTextFixedWidth(100);
-		tableOfContents.setPageIndexFixedWidth(30);
+		CustomTableOfContentsCustomizer tableOfContentsCustomizer = new CustomTableOfContentsCustomizer();
+		tableOfContentsCustomizer.setTitleStyle(titleTocStyle);
+		tableOfContentsCustomizer.setHeadingStyle(0, headingToc0Style);
+		tableOfContentsCustomizer.setHeadingStyle(1, headingToc1Style);
+		tableOfContentsCustomizer.setTextFixedWidth(100);
+		tableOfContentsCustomizer.setPageIndexFixedWidth(30);
 
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setTableOfContents(tableOfContents)
+			  .setTableOfContents(tableOfContentsCustomizer)
 			  .columns(
 			  	countryColumn,
 			  	itemColumn,
@@ -117,7 +117,7 @@ public class CustomTableOfContentsReport {
 		new CustomTableOfContentsReport();
 	}
 
-	private class CustomTableOfContents extends TableOfContentsCustomizer {
+	private class CustomTableOfContentsCustomizer extends TableOfContentsCustomizer {
 		private static final long serialVersionUID = 1L;
 
 		@Override
