@@ -26,8 +26,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -35,36 +34,30 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CustomGroupBuilder extends GroupBuilder<CustomGroupBuilder> {	
+public class CustomGroupBuilder extends GroupBuilder<CustomGroupBuilder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected CustomGroupBuilder(FieldBuilder<?> field) {
 		Validate.notNull(field, "field must not be null");
 		setValueExpression(field.build());
-	}	
+	}
 
 	protected CustomGroupBuilder(String name, FieldBuilder<?> field) {
 		super(name);
 		Validate.notNull(field, "field must not be null");
 		setValueExpression(field.build());
-	}	
-	
-	protected CustomGroupBuilder(DRISimpleExpression<?> valueExpression) {
+	}
+
+	protected CustomGroupBuilder(DRIExpression<?> valueExpression) {
 		setValueExpression(valueExpression);
 	}
 
-	protected CustomGroupBuilder(String name, DRISimpleExpression<?> valueExpression) {
+	protected CustomGroupBuilder(String name, DRIExpression<?> valueExpression) {
 		super(name);
 		setValueExpression(valueExpression);
 	}
-	
-	public CustomGroupBuilder setTitle(DRISimpleExpression<?> titleExpression) {
-		getObject().setTitleExpression(titleExpression);
-		getObject().setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
-		return this;
-	}
 
-	public CustomGroupBuilder setTitle(DRIComplexExpression<?> titleExpression) {
+	public CustomGroupBuilder setTitle(DRIExpression<?> titleExpression) {
 		getObject().setTitleExpression(titleExpression);
 		getObject().setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
 		return this;

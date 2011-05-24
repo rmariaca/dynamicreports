@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,13 +36,13 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractBarcodeBuilder<T extends AbstractBarcodeBuilder<T, U>, U extends DRBarcode> extends DimensionComponentBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractBarcodeBuilder(String code, U barcode) {
 		super(barcode);
 		setCode(code);
 	}
 
-	protected AbstractBarcodeBuilder(DRISimpleExpression<String> codeExpression, U barcode) {
+	protected AbstractBarcodeBuilder(DRIExpression<String> codeExpression, U barcode) {
 		super(barcode);
 		setCode(codeExpression);
 	}
@@ -51,8 +51,8 @@ public abstract class AbstractBarcodeBuilder<T extends AbstractBarcodeBuilder<T,
 		getObject().setCodeExpression(Expressions.text(code));
 		return (T) this;
 	}
-	
-	public T setCode(DRISimpleExpression<String> codeExpression) {
+
+	public T setCode(DRIExpression<String> codeExpression) {
 		getObject().setCodeExpression(codeExpression);
 		return (T) this;
 	}
@@ -61,8 +61,8 @@ public abstract class AbstractBarcodeBuilder<T extends AbstractBarcodeBuilder<T,
 		getObject().setPatternExpression(Expressions.text(pattern));
 		return (T) this;
 	}
-	
-	public T setPattern(DRISimpleExpression<String> patternExpression) {
+
+	public T setPattern(DRIExpression<String> patternExpression) {
 		getObject().setPatternExpression(patternExpression);
 		return (T) this;
 	}
@@ -90,5 +90,5 @@ public abstract class AbstractBarcodeBuilder<T extends AbstractBarcodeBuilder<T,
 	public T setVerticalQuietZone(Double verticalQuietZone) {
 		getObject().setVerticalQuietZone(verticalQuietZone);
 		return (T) this;
-	}	
+	}
 }

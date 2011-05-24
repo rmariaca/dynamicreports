@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -50,7 +50,7 @@ public class Charts {
 		return new ChartSerieBuilder(field);
 	}
 
-	public static ChartSerieBuilder serie(DRISimpleExpression<? extends Number> valueExpression) {
+	public static ChartSerieBuilder serie(DRIExpression<? extends Number> valueExpression) {
 		return new ChartSerieBuilder(valueExpression);
 	}
 

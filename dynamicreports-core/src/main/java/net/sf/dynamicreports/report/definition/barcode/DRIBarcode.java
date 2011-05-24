@@ -25,16 +25,16 @@ package net.sf.dynamicreports.report.definition.barcode;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIBarcode extends DRIDimensionComponent {
 
-	public DRISimpleExpression<String> getCodeExpression();
+	public DRIExpression<String> getCodeExpression();
 
-	public DRISimpleExpression<String> getPatternExpression();
+	public DRIExpression<String> getPatternExpression();
 
 	public Double getModuleWidth();
 

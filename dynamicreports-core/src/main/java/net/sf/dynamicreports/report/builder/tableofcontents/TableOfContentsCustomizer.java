@@ -49,26 +49,26 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private static String dots;
+	protected static String dots;
 
-	private ReportBuilder<?> report;
-	private int headings;
-	private int levels;
+	protected ReportBuilder<?> report;
+	protected int headings;
+	protected int levels;
 
-	private FieldBuilder<Integer> levelField;
-	private FieldBuilder<String> textField;
-	private FieldBuilder<String> referenceField;
-	private FieldBuilder<Integer> pageIndexField;
+	protected FieldBuilder<Integer> levelField;
+	protected FieldBuilder<String> textField;
+	protected FieldBuilder<String> referenceField;
+	protected FieldBuilder<Integer> pageIndexField;
 
-	private HyperLinkBuilder referenceHyperLink;
-	private int pageIndexDigits;
+	protected HyperLinkBuilder referenceHyperLink;
+	protected int pageIndexDigits;
 
-	private StyleBuilder titleStyle;
-	private StyleBuilder headingStyle;
-	private Map<Integer, StyleBuilder> headingStyles;
-	private Integer textFixedWidth;
-	private Integer dotsFixedWidth;
-	private Integer pageIndexFixedWidth;
+	protected StyleBuilder titleStyle;
+	protected StyleBuilder headingStyle;
+	protected Map<Integer, StyleBuilder> headingStyles;
+	protected Integer textFixedWidth;
+	protected Integer dotsFixedWidth;
+	protected Integer pageIndexFixedWidth;
 
 	static {
 		StringBuilder dots = new StringBuilder(200);
@@ -211,7 +211,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 		this.pageIndexFixedWidth = pageIndexFixedWidth;
 	}
 
-	private class ReferenceExpression extends AbstractSimpleExpression<String> {
+	protected class ReferenceExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		public String evaluate(ReportParameters reportParameters) {
@@ -219,7 +219,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 		}
 	}
 
-	private class PrintHeadingExpression extends AbstractSimpleExpression<Boolean> {
+	protected class PrintHeadingExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		private int level;

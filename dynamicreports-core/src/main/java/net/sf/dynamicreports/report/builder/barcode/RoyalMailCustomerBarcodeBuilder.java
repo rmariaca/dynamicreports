@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRRoyalMailCustomerBarcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class RoyalMailCustomerBarcodeBuilder extends AbstractChecksumBarcodeBuilder<RoyalMailCustomerBarcodeBuilder, DRRoyalMailCustomerBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected RoyalMailCustomerBarcodeBuilder(String code) {
 		super(code, new DRRoyalMailCustomerBarcode());
 	}
 
-	protected RoyalMailCustomerBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected RoyalMailCustomerBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRRoyalMailCustomerBarcode());
 	}
 
@@ -54,5 +54,5 @@ public class RoyalMailCustomerBarcodeBuilder extends AbstractChecksumBarcodeBuil
 	public RoyalMailCustomerBarcodeBuilder setTrackHeight(Double trackHeight) {
 		getObject().setTrackHeight(trackHeight);
 		return this;
-	}	
+	}
 }

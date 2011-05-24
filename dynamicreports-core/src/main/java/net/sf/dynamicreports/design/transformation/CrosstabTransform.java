@@ -514,8 +514,9 @@ public class CrosstabTransform {
 
 		private DRIExpression<T> expression;
 
-		public CrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) {
+		public CrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) throws DRException {
 			this.expression = expression;
+			accessor.getExpressionTransform().transformExpression(expression);
 			/*for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
 				addExpression(columnGroup);
 			}
@@ -538,10 +539,7 @@ public class CrosstabTransform {
 			for (int i = 0; i < getExpressions().size(); i++) {
 				scriptlet.setSystemValue(getExpressions().get(i).getName(), values.get(i));
 			}
-			if (expression instanceof DRISimpleExpression) {
-				return ((DRISimpleExpression<T>) expression).evaluate(reportParameters);
-			}
-			return null;
+			return reportParameters.getValue(expression.getName());
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })

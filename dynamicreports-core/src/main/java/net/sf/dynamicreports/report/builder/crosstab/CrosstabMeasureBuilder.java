@@ -38,7 +38,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
@@ -81,11 +81,11 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		}
 	}
 
-	protected CrosstabMeasureBuilder(DRISimpleExpression<?> expression, Calculation calculation) {
+	protected CrosstabMeasureBuilder(DRIExpression<?> expression, Calculation calculation) {
 		super(new DRCrosstabMeasure<T>(Crosstabs.variable(expression, calculation).build()));
 	}
 
-	protected CrosstabMeasureBuilder(DRISimpleExpression<?> expression) {
+	protected CrosstabMeasureBuilder(DRIExpression<?> expression) {
 		super(new DRCrosstabMeasure<T>(expression));
 	}
 
@@ -158,7 +158,7 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setTitle(DRISimpleExpression<?> titleExpression) {
+	public CrosstabMeasureBuilder<T> setTitle(DRIExpression<?> titleExpression) {
 		getObject().setTitleExpression(titleExpression);
 		return this;
 	}

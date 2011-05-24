@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 import net.sf.dynamicreports.report.base.barcode.DRPostnetBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeBaselinePosition;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,12 +33,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class PostnetBarcodeBuilder extends AbstractChecksumBarcodeBuilder<PostnetBarcodeBuilder, DRPostnetBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected PostnetBarcodeBuilder(String code) {
 		super(code, new DRPostnetBarcode());
 	}
 
-	protected PostnetBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected PostnetBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRPostnetBarcode());
 	}
 
@@ -60,5 +60,5 @@ public class PostnetBarcodeBuilder extends AbstractChecksumBarcodeBuilder<Postne
 	public PostnetBarcodeBuilder setIntercharGapWidth(Double intercharGapWidth) {
 		getObject().setIntercharGapWidth(intercharGapWidth);
 		return this;
-	}		
+	}
 }

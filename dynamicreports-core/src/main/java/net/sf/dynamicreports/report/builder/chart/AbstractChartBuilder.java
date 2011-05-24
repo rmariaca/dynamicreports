@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -43,7 +43,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> extends HyperLinkComponentBuilder<T, DRChart> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractChartBuilder(ChartType chartType) {
 		super(new DRChart(chartType));
 	}
@@ -58,12 +58,12 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 		getObject().getTitle().setTitle(Expressions.text(title));
 		return (T) this;
 	}
-	
-	public T setTitle(DRISimpleExpression<String> titleExpression) {
+
+	public T setTitle(DRIExpression<String> titleExpression) {
 		getObject().getTitle().setTitle(titleExpression);
 		return (T) this;
 	}
-	
+
 	public T setTitleColor(Color titleColor) {
 		getObject().getTitle().setColor(titleColor);
 		return (T) this;
@@ -74,23 +74,23 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 		getObject().getTitle().setFont(titleFont.build());
 		return (T) this;
 	}
-	
+
 	public T setTitlePosition(Position titlePosition) {
 		getObject().getTitle().setPosition(titlePosition);
 		return (T) this;
 	}
-	
+
 	//subtitle
 	public T setSubtitle(String subtitle) {
 		getObject().getSubtitle().setTitle(Expressions.text(subtitle));
 		return (T) this;
 	}
-	
-	public T setSubtitle(DRISimpleExpression<String> subtitleExpression) {
+
+	public T setSubtitle(DRIExpression<String> subtitleExpression) {
 		getObject().getSubtitle().setTitle(subtitleExpression);
 		return (T) this;
 	}
-	
+
 	public T setSubtitleColor(Color subtitleColor) {
 		getObject().getSubtitle().setColor(subtitleColor);
 		return (T) this;
@@ -112,23 +112,23 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 		getObject().getLegend().setBackgroundColor(legendBackgroundColor);
 		return (T) this;
 	}
-	
+
 	public T setShowLegend(Boolean showLegend) {
 		getObject().getLegend().setShowLegend(showLegend);
 		return (T) this;
 	}
-	
+
 	public T setLegendFont(FontBuilder legendFont) {
 		Validate.notNull(legendFont, "legendFont must not be null");
 		getObject().getLegend().setFont(legendFont.build());
 		return (T) this;
 	}
-	
+
 	public T setLegendPosition(Position legendPosition) {
 		getObject().getLegend().setPosition(legendPosition);
 		return (T) this;
 	}
-	
+
 	//plot
 	public T setOrientation(Orientation orientation) {
 		getObject().getPlot().setOrientation(orientation);
@@ -138,16 +138,16 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 	public T seriesColors(Color ...seriesColors) {
 		return addSeriesColor(seriesColors);
 	}
-	
+
 	public T addSeriesColor(Color ...seriesColors) {
 		Validate.notNull(seriesColors, "seriesColors must not be null");
 		Validate.noNullElements(seriesColors, "seriesColors must not contains null seriesColor");
 		for (Color seriesColor : seriesColors) {
 			getObject().getPlot().addSeriesColor(seriesColor);
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public DRChart getChart() {
 		return build();
 	}

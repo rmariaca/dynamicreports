@@ -26,7 +26,7 @@ import java.sql.Connection;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -35,42 +35,42 @@ import org.apache.commons.lang.Validate;
  */
 public class DRSubreport extends DRDimensionComponent implements DRISubreport {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRISimpleExpression<?> reportExpression;	
-	private DRISimpleExpression<Connection> connectionExpression;
-	private DRISimpleExpression<?> dataSourceExpression;
+
+	private DRIExpression<?> reportExpression;
+	private DRIExpression<Connection> connectionExpression;
+	private DRIExpression<?> dataSourceExpression;
 	private Boolean runToBottom;
-	
-	public DRISimpleExpression<?> getReportExpression() {
+
+	public DRIExpression<?> getReportExpression() {
 		return reportExpression;
 	}
-	
-	public void setReportExpression(DRISimpleExpression<?> reportExpression) {
+
+	public void setReportExpression(DRIExpression<?> reportExpression) {
 		Validate.notNull(reportExpression, "reportExpression must not be null");
 		this.reportExpression = reportExpression;
 	}
-	
-	public DRISimpleExpression<Connection> getConnectionExpression() {
+
+	public DRIExpression<Connection> getConnectionExpression() {
 		return connectionExpression;
 	}
-	
-	public void setConnectionExpression(DRISimpleExpression<Connection> connectionExpression) {
+
+	public void setConnectionExpression(DRIExpression<Connection> connectionExpression) {
 		this.connectionExpression = connectionExpression;
 	}
-	
-	public DRISimpleExpression<?> getDataSourceExpression() {
+
+	public DRIExpression<?> getDataSourceExpression() {
 		return dataSourceExpression;
 	}
-	
-	public void setDataSourceExpression(DRISimpleExpression<?> dataSourceExpression) {
+
+	public void setDataSourceExpression(DRIExpression<?> dataSourceExpression) {
 		this.dataSourceExpression = dataSourceExpression;
 	}
-	
+
 	public Boolean getRunToBottom() {
 		return runToBottom;
 	}
-	
+
 	public void setRunToBottom(Boolean runToBottom) {
 		this.runToBottom = runToBottom;
-	}	
+	}
 }

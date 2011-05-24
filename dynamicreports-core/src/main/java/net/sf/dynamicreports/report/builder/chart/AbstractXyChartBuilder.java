@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractXyChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
@@ -54,14 +54,14 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 	public T setXValue(String fieldName, Class<? extends Number> valueClass) {
 		return setXValue(DynamicReports.field(fieldName, valueClass));
 	}
-	
+
 	public T setXValue(FieldBuilder<? extends Number> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return (T) this;
 	}
-	
-	public T setXValue(DRISimpleExpression<? extends Number> expression) {
+
+	public T setXValue(DRIExpression<? extends Number> expression) {
 		getDataset().setValueExpression(expression);
 		return (T) this;
 	}
@@ -75,27 +75,27 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
 		for (ChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	//plot
 	public T setXAxisFormat(AxisFormatBuilder xAxisFormat) {
 		Validate.notNull(xAxisFormat, "xAxisFormat must not be null");
 		getPlot().setXAxisFormat(xAxisFormat.build());
 		return (T) this;
 	}
-	
+
 	public T setYAxisFormat(AxisFormatBuilder yAxisFormat) {
 		Validate.notNull(yAxisFormat, "yAxisFormat must not be null");
 		getPlot().setYAxisFormat(yAxisFormat.build());
 		return (T) this;
 	}
-	
+
 	private DRChartDataset getDataset() {
 		return getObject().getDataset();
 	}
-	
+
 	protected U getPlot() {
 		return (U) getObject().getPlot();
 	}

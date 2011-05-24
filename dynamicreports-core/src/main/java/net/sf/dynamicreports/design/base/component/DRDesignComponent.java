@@ -27,8 +27,8 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -41,7 +41,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	private Integer y;
 	private Integer width;
 	private Integer height;
-	private DRIDesignSimpleExpression printWhenExpression;
+	private DRIDesignExpression printWhenExpression;
 	private boolean isRemoveLineWhenBlank;
 	private List<DRIDesignPropertyExpression> propertyExpressions;
 
@@ -107,11 +107,11 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.height = height;
 	}
 
-	public DRIDesignSimpleExpression getPrintWhenExpression() {
+	public DRIDesignExpression getPrintWhenExpression() {
 		return printWhenExpression;
 	}
 
-	public void setPrintWhenExpression(DRIDesignSimpleExpression printWhenExpression) {
+	public void setPrintWhenExpression(DRIDesignExpression printWhenExpression) {
 		this.printWhenExpression = printWhenExpression;
 	}
 

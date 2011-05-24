@@ -22,41 +22,41 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PropertyExpression implements DRIPropertyExpression {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
-	private DRISimpleExpression<String> valueExpression;
-		
-	public PropertyExpression(String name, DRISimpleExpression<String> valueExpression) {
+	private DRIExpression<String> valueExpression;
+
+	public PropertyExpression(String name, DRIExpression<String> valueExpression) {
 		Validate.notNull(name, "name must not be null");
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.name = name;
-		this.valueExpression = valueExpression;		
+		this.valueExpression = valueExpression;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public DRISimpleExpression<String> getValueExpression() {
+
+	public DRIExpression<String> getValueExpression() {
 		return valueExpression;
 	}
-	
-	public void setValueExpression(DRISimpleExpression<String> valueExpression) {
+
+	public void setValueExpression(DRIExpression<String> valueExpression) {
 		this.valueExpression = valueExpression;
 	}
 }

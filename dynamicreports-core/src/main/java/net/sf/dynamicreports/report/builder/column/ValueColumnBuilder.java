@@ -32,7 +32,6 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 /**
@@ -41,45 +40,45 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> extends ColumnBuilder<T, DRValueColumn<U>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected ValueColumnBuilder() {
 		super(new DRValueColumn<U>(new DRTextField<U>()));
 	}
-	
+
 	protected void setValueExpression(DRIExpression<U> valueExpression) {
 		getComponent().setValueExpression(valueExpression);
 	}
-	
+
 	public T setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues) {
 		getObject().setPrintRepeatedDetailValues(printRepeatedDetailValues);
 		return (T) this;
 	}
-	
+
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getComponent().setHorizontalAlignment(horizontalAlignment);
 		return (T) this;
 	}
-	
+
 	public T setPattern(String pattern) {
 		getComponent().setPattern(pattern);
 		return (T) this;
 	}
-	
+
 	public T setValueFormatter(DRIValueFormatter<?, ? super U> valueFormatter) {
 		getComponent().setValueFormatter(valueFormatter);
 		return (T) this;
 	}
-	
+
 	public T setDataType(DRIDataType<? super U, U> dataType) {
 		getComponent().setDataType(dataType);
 		return (T) this;
-	}	
-	
+	}
+
   /**
    * This method is used to define the preferred width of a column.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of preferred columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -87,12 +86,12 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setColumns(columns);
 		return (T) this;
 	}
-	
+
   /**
    * This method is used to define the fixed width of a column.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of fixed columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -106,7 +105,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * This method is used to define the minimum width of a column.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
+   *
    * @param columns the number of minimum columns >= 1
    * @exception IllegalArgumentException if <code>columns</code> is < 1
    */
@@ -115,23 +114,23 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setWidthType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
   /**
    * This method is used to define the preferred height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of preferred rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
 	public T setRows(Integer rows) {
 		getComponent().setRows(rows);
 		return (T) this;
-	}	
-	
+	}
+
   /**
    * This method is used to define the fixed height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of fixed rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -140,11 +139,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeightType(ComponentDimensionType.FIXED);
 		return (T) this;
 	}
-		
+
   /**
    * This method is used to define the minimum height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of minimum rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -153,21 +152,21 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
 	public T setHyperLink(HyperLinkBuilder hyperLink) {
 		if (hyperLink != null) {
 			getComponent().setHyperLink(hyperLink.getHyperLink());
 		}
 		else {
-			getComponent().setHyperLink(null);	
+			getComponent().setHyperLink(null);
 		}
 		return (T) this;
-	}	
-	
+	}
+
   /**
-   * Sets the preferred width of a column. 
+   * Sets the preferred width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param width the column preferred width >= 1
    * @exception IllegalArgumentException if <code>width</code> is < 1
    */
@@ -175,11 +174,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setWidth(width);
 		return (T) this;
 	}
-	
+
   /**
-   * Sets the fixed width of a column. 
+   * Sets the fixed width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param width the column fixed width >= 1
    * @exception IllegalArgumentException if <code>width</code> is < 1
    */
@@ -190,9 +189,9 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 	}
 
   /**
-   * Sets the minimum width of a column. 
+   * Sets the minimum width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param width the column minimum width >= 1
    * @exception IllegalArgumentException if <code>width</code> is < 1
    */
@@ -201,11 +200,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setWidthType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
   /**
-   * Sets the preferred height of a column. 
+   * Sets the preferred height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column preferred height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -213,11 +212,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeight(height);
 		return (T) this;
 	}
-		
+
   /**
-   * Sets the fixed height of a column. 
+   * Sets the fixed height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column fixed height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -226,11 +225,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeightType(ComponentDimensionType.FIXED);
 		return (T) this;
 	}
-		
+
   /**
-   * Sets the minimum height of a column. 
+   * Sets the minimum height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column minimum height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -239,27 +238,27 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
 	public T setStretchWithOverflow(Boolean stretchWithOverflow) {
 		getComponent().setStretchWithOverflow(stretchWithOverflow);
 		return (T) this;
 	}
-	
+
 	public T addProperty(DRIPropertyExpression propertyExpression) {
 		getComponent().addPropertyExpression(propertyExpression);
 		return (T) this;
-	}	
-	
-	public T addProperty(String name, DRISimpleExpression<String> valueExpression) {
+	}
+
+	public T addProperty(String name, DRIExpression<String> valueExpression) {
 		getComponent().addPropertyExpression(Expressions.property(name, valueExpression));
 		return (T) this;
-	}	
+	}
 
 	public T addProperty(String name, String value) {
 		getComponent().addPropertyExpression(Expressions.property(name, value));
 		return (T) this;
-	}	
-	
+	}
+
 	@Override
 	protected DRTextField<U> getComponent() {
 		return (DRTextField<U>) getObject().getComponent();

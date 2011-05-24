@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -63,9 +62,9 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
 	public DRIDataType<? super T, T> getDataType();
 
-	public DRISimpleExpression<? extends Comparable<?>> getOrderByExpression();
+	public DRIExpression<? extends Comparable<?>> getOrderByExpression();
 
 	public OrderType getOrderType();
 
-	public DRISimpleExpression<? extends Comparator<?>> getComparatorExpression();
+	public DRIExpression<? extends Comparator<?>> getComparatorExpression();
 }

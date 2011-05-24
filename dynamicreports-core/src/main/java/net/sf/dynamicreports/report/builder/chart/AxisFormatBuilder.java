@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxisFormat> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AxisFormatBuilder() {
 		super(new DRAxisFormat());
 	}
@@ -48,8 +48,8 @@ public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxis
 		getObject().setLabelExpression(Expressions.text(label));
 		return this;
 	}
-	
-	public AxisFormatBuilder setLabel(DRISimpleExpression<String> labelExpression) {
+
+	public AxisFormatBuilder setLabel(DRIExpression<String> labelExpression) {
 		getObject().setLabelExpression(labelExpression);
 		return this;
 	}
@@ -84,8 +84,8 @@ public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxis
 	public AxisFormatBuilder setTickLabelRotation(Double tickLabelRotation) {
 		getObject().setTickLabelRotation(tickLabelRotation);
 		return this;
-	}	
-	
+	}
+
 	public AxisFormatBuilder setLineColor(Color lineColor) {
 		getObject().setLineColor(lineColor);
 		return this;
@@ -95,8 +95,8 @@ public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxis
 		getObject().setRangeMinValueExpression(Expressions.number(rangeMinValue));
 		return this;
 	}
-	
-	public AxisFormatBuilder setRangeMinValueExpression(DRISimpleExpression<? extends Number> rangeMinValueExpression) {
+
+	public AxisFormatBuilder setRangeMinValueExpression(DRIExpression<? extends Number> rangeMinValueExpression) {
 		getObject().setRangeMinValueExpression(rangeMinValueExpression);
 		return this;
 	}
@@ -105,12 +105,12 @@ public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxis
 		getObject().setRangeMaxValueExpression(Expressions.number(rangeMaxValue));
 		return this;
 	}
-	
-	public AxisFormatBuilder setRangeMaxValueExpression(DRISimpleExpression<? extends Number> rangeMaxValueExpression) {
+
+	public AxisFormatBuilder setRangeMaxValueExpression(DRIExpression<? extends Number> rangeMaxValueExpression) {
 		getObject().setRangeMaxValueExpression(rangeMaxValueExpression);
 		return this;
 	}
-	
+
 	public DRAxisFormat getAxisFormat() {
 		return build();
 	}

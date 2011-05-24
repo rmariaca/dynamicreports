@@ -23,42 +23,42 @@
 package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSubreport {
-	private DRIDesignSimpleExpression reportExpression;	
-	private DRIDesignSimpleExpression connectionExpression;
-	private DRIDesignSimpleExpression dataSourceExpression;
+	private DRIDesignExpression reportExpression;
+	private DRIDesignExpression connectionExpression;
+	private DRIDesignExpression dataSourceExpression;
 	private Boolean runToBottom;
-	
+
 	public DRDesignSubreport() {
 		super("subreport");
 	}
 
-	public DRIDesignSimpleExpression getReportExpression() {
+	public DRIDesignExpression getReportExpression() {
 		return reportExpression;
 	}
 
-	public void setReportExpression(DRIDesignSimpleExpression reportExpression) {
+	public void setReportExpression(DRIDesignExpression reportExpression) {
 		this.reportExpression = reportExpression;
 	}
 
-	public DRIDesignSimpleExpression getConnectionExpression() {
+	public DRIDesignExpression getConnectionExpression() {
 		return connectionExpression;
 	}
 
-	public void setConnectionExpression(DRIDesignSimpleExpression connectionExpression) {
+	public void setConnectionExpression(DRIDesignExpression connectionExpression) {
 		this.connectionExpression = connectionExpression;
 	}
 
-	public DRIDesignSimpleExpression getDataSourceExpression() {
+	public DRIDesignExpression getDataSourceExpression() {
 		return dataSourceExpression;
 	}
 
-	public void setDataSourceExpression(DRIDesignSimpleExpression dataSourceExpression) {
+	public void setDataSourceExpression(DRIDesignExpression dataSourceExpression) {
 		this.dataSourceExpression = dataSourceExpression;
 	}
 
@@ -68,5 +68,5 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 
 	public void setRunToBottom(Boolean runToBottom) {
 		this.runToBottom = runToBottom;
-	}	
+	}
 }

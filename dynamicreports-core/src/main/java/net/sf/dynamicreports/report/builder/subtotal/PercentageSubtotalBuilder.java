@@ -35,7 +35,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.PercentageTotalType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
 /**
@@ -44,7 +43,7 @@ import net.sf.dynamicreports.report.exception.DRReportException;
 @SuppressWarnings("ucd")
 public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSubtotalBuilder, Double> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRIExpression<? extends Number> expression;
 	private PercentageTotalType totalType;
 	private DRGroup totalGroup;
@@ -54,26 +53,22 @@ public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSub
 		this(column.build(), column);
 	}
 
-	//simple expression
-	protected PercentageSubtotalBuilder(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
-		this((DRIExpression<? extends Number>) expression, showInColumn);
-	}
-	
-	//field	
+	//field
 	protected PercentageSubtotalBuilder(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?> showInColumn) {
 		this(field.getField(), showInColumn);
 	}
 
-	private PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
+	//expression
+	protected PercentageSubtotalBuilder(DRIExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 		this.expression = expression;
 	}
-	
+
 	public PercentageSubtotalBuilder setTotalType(PercentageTotalType totalType) {
 		this.totalType = totalType;
 		return this;
 	}
-	
+
 	public PercentageSubtotalBuilder setTotalGroup(GroupBuilder<?> totalGroup) {
 		if (totalGroup != null) {
 			this.totalGroup = totalGroup.getGroup();
@@ -84,19 +79,19 @@ public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSub
 		}
 		return this;
 	}
-	
+
 	@Override
-	protected void configure() {		
+	protected void configure() {
 		if (getObject().getValueField().getDataType() == null) {
 			getObject().getValueField().setDataType(DataTypes.percentageType());
 		}
-		
+
 		DRVariable<Number> actualExpression = new DRVariable<Number>(expression, Calculation.SUM);
 		actualExpression.setResetType(Evaluation.GROUP);
 		actualExpression.setResetGroup(getObject().getGroup());
-		
+
 		DRVariable<Number> totalExpression = new DRVariable<Number>(expression, Calculation.SUM);
-		if (totalType != null) {			
+		if (totalType != null) {
 			switch (totalType) {
 			case REPORT:
 				totalExpression.setResetType(Evaluation.REPORT);
@@ -112,16 +107,16 @@ public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSub
 				break;
 			default:
 				throw new DRReportException("Percentage total type " + totalType.name() + " not supported.");
-			}		
+			}
 		}
 		else {
 			totalExpression.setResetType(Evaluation.BEFORE_GROUP);
 			totalGroup = getObject().getGroup();
 		}
 		totalExpression.setResetGroup(totalGroup);
-		
+
 		setValueExpression(new PercentageExpression(actualExpression, totalExpression));
-		
+
 		super.configure();
 	}
 }

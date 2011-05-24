@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.TimePeriod;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -42,7 +42,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class TimeSeriesChartBuilder extends AbstractChartBuilder<TimeSeriesChartBuilder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected TimeSeriesChartBuilder() {
 		super(ChartType.TIMESERIES);
 	}
@@ -57,14 +57,14 @@ public class TimeSeriesChartBuilder extends AbstractChartBuilder<TimeSeriesChart
 	public TimeSeriesChartBuilder setTimePeriod(String fieldName, Class<Date> valueClass) {
 		return setTimePeriod(DynamicReports.field(fieldName, valueClass));
 	}
-	
+
 	public TimeSeriesChartBuilder setTimePeriod(FieldBuilder<Date> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return this;
 	}
-	
-	public TimeSeriesChartBuilder setTimePeriod(DRISimpleExpression<Date> expression) {
+
+	public TimeSeriesChartBuilder setTimePeriod(DRIExpression<Date> expression) {
 		getDataset().setValueExpression(expression);
 		return this;
 	}
@@ -78,28 +78,28 @@ public class TimeSeriesChartBuilder extends AbstractChartBuilder<TimeSeriesChart
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
 		for (ChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
-		}		
+		}
 		return this;
 	}
-	
+
 	public TimeSeriesChartBuilder setTimePeriodType(TimePeriod timePeriodType) {
 		getDataset().setTimePeriodType(timePeriodType);
 		return this;
 	}
-	
+
 	//plot
 	public TimeSeriesChartBuilder setTimeAxisFormat(AxisFormatBuilder timeAxisFormat) {
 		Validate.notNull(timeAxisFormat, "timeAxisFormat must not be null");
 		getPlot().setXAxisFormat(timeAxisFormat.build());
 		return this;
 	}
-	
+
 	public TimeSeriesChartBuilder setValueAxisFormat(AxisFormatBuilder valueAxisFormat) {
 		Validate.notNull(valueAxisFormat, "valueAxisFormat must not be null");
 		getPlot().setYAxisFormat(valueAxisFormat.build());
 		return this;
 	}
-	
+
 	public TimeSeriesChartBuilder setShowShapes(Boolean showShapes) {
 		getPlot().setShowShapes(showShapes);
 		return this;
@@ -109,11 +109,11 @@ public class TimeSeriesChartBuilder extends AbstractChartBuilder<TimeSeriesChart
 		getPlot().setShowLines(showLines);
 		return this;
 	}
-	
+
 	private DRTimeSeriesDataset getDataset() {
 		return (DRTimeSeriesDataset) getObject().getDataset();
 	}
-	
+
 	private DRLinePlot getPlot() {
 		return (DRLinePlot) getObject().getPlot();
 	}

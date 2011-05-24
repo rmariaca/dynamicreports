@@ -28,7 +28,7 @@ import java.net.URL;
 import java.util.Date;
 
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -140,7 +140,7 @@ public class Expressions {
 	}
 
 	//property
-	public static PropertyExpression property(String name, DRISimpleExpression<String> valueExpression) {
+	public static PropertyExpression property(String name, DRIExpression<String> valueExpression) {
 		return new PropertyExpression(name, valueExpression);
 	}
 
@@ -149,7 +149,7 @@ public class Expressions {
 	}
 
 	//parameter
-	public static ParameterExpression parameter(String name, DRISimpleExpression<?> valueExpression) {
+	public static ParameterExpression parameter(String name, DRIExpression<?> valueExpression) {
 		return new ParameterExpression(name, valueExpression);
 	}
 

@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -47,7 +47,7 @@ public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariable
 		super(new DRCrosstabVariable<T>(field.getField(), calculation));
 	}
 
-	protected CrosstabVariableBuilder(DRISimpleExpression<?> expression, Calculation calculation) {
+	protected CrosstabVariableBuilder(DRIExpression<?> expression, Calculation calculation) {
 		super(new DRCrosstabVariable<T>(expression, calculation));
 	}
 

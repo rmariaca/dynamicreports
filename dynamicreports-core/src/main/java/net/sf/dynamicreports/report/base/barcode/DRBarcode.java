@@ -22,43 +22,43 @@
 
 package net.sf.dynamicreports.report.base.barcode;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class DRBarcode extends DRDimensionComponent implements DRIBarcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRISimpleExpression<String> codeExpression;
-	private DRISimpleExpression<String> patternExpression;
+
+	private DRIExpression<String> codeExpression;
+	private DRIExpression<String> patternExpression;
 	private Double moduleWidth;
 	private BarcodeOrientation orientation;
 	private BarcodeTextPosition textPosition;
 	private Double quietZone;
 	private Double verticalQuietZone;
 
-	public DRISimpleExpression<String> getCodeExpression() {
+	public DRIExpression<String> getCodeExpression() {
 		return codeExpression;
 	}
 
-	public void setCodeExpression(DRISimpleExpression<String> codeExpression) {
+	public void setCodeExpression(DRIExpression<String> codeExpression) {
 		Validate.notNull(codeExpression, "codeExpression must not be null");
 		this.codeExpression = codeExpression;
 	}
 
-	public DRISimpleExpression<String> getPatternExpression() {
+	public DRIExpression<String> getPatternExpression() {
 		return patternExpression;
 	}
 
-	public void setPatternExpression(DRISimpleExpression<String> patternExpression) {
+	public void setPatternExpression(DRIExpression<String> patternExpression) {
 		this.patternExpression = patternExpression;
 	}
 
@@ -100,5 +100,5 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 
 	public void setVerticalQuietZone(Double verticalQuietZone) {
 		this.verticalQuietZone = verticalQuietZone;
-	}	
+	}
 }

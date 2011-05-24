@@ -25,8 +25,8 @@ package net.sf.dynamicreports.report.definition.component;
 import java.io.Serializable;
 import java.util.List;
 
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -36,7 +36,7 @@ public interface DRIComponent extends Serializable {
 
 	public DRIStyle getStyle();
 
-	public DRISimpleExpression<Boolean> getPrintWhenExpression();
+	public DRIExpression<Boolean> getPrintWhenExpression();
 
 	public Boolean getRemoveLineWhenBlank();
 

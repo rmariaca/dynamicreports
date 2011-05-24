@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.style;
 
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 public class ConditionalStyleBuilder extends BaseStyleBuilder<ConditionalStyleBuilder, DRConditionalStyle> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected ConditionalStyleBuilder(DRISimpleExpression<Boolean> conditionExpression) {
+	protected ConditionalStyleBuilder(DRIExpression<Boolean> conditionExpression) {
 		super(new DRConditionalStyle(conditionExpression));
 	}
 }

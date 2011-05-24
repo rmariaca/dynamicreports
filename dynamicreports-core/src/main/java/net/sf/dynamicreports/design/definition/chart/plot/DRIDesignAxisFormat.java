@@ -24,7 +24,7 @@ package net.sf.dynamicreports.design.definition.chart.plot;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 
 /**
@@ -32,7 +32,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
  */
 public interface DRIDesignAxisFormat {
 
-	public DRIDesignSimpleExpression getLabelExpression();
+	public DRIDesignExpression getLabelExpression();
 
 	public DRIDesignFont getLabelFont();
 
@@ -43,12 +43,12 @@ public interface DRIDesignAxisFormat {
 	public Color getTickLabelColor();
 
 	public String getTickLabelMask();
-	
+
 	public Double getTickLabelRotation();
 
 	public Color getLineColor();
 
-	public DRIDesignSimpleExpression getRangeMinValueExpression();
+	public DRIDesignExpression getRangeMinValueExpression();
 
-	public DRIDesignSimpleExpression getRangeMaxValueExpression();
+	public DRIDesignExpression getRangeMaxValueExpression();
 }

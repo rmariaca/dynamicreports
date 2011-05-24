@@ -22,29 +22,29 @@
 
 package net.sf.dynamicreports.design.base.expression;
 
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignPropertyExpression implements DRIDesignPropertyExpression {	
+public class DRDesignPropertyExpression implements DRIDesignPropertyExpression {
 	private String name;
-	private DRIDesignSimpleExpression valueExpression;
-	
+	private DRIDesignExpression valueExpression;
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public DRIDesignSimpleExpression getValueExpression() {
+
+	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
-	public void setValueExpression(DRIDesignSimpleExpression valueExpression) {
+
+	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
 }

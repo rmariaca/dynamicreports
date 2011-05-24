@@ -43,7 +43,7 @@ import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCusto
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang.Validate;
@@ -122,11 +122,11 @@ public class DynamicReports {
 		return new VariableBuilder<T>(name, field(fieldName, valueClass), calculation);
 	}
 
-	public static <T> VariableBuilder<T> variable(DRISimpleExpression<?> expression, Calculation calculation) {
+	public static <T> VariableBuilder<T> variable(DRIExpression<?> expression, Calculation calculation) {
 		return new VariableBuilder<T>(expression, calculation);
 	}
 
-	public static <T> VariableBuilder<T> variable(String name, DRISimpleExpression<?> expression, Calculation calculation) {
+	public static <T> VariableBuilder<T> variable(String name, DRIExpression<?> expression, Calculation calculation) {
 		return new VariableBuilder<T>(name, expression, calculation);
 	}
 
@@ -139,7 +139,7 @@ public class DynamicReports {
 		return new HyperLinkBuilder(link);
 	}
 
-	public static HyperLinkBuilder hyperLink(DRISimpleExpression<String> linkExpression) {
+	public static HyperLinkBuilder hyperLink(DRIExpression<String> linkExpression) {
 		return new HyperLinkBuilder(linkExpression);
 	}
 

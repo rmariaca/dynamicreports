@@ -45,7 +45,6 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -185,7 +184,7 @@ public class ChartTransform {
 	//axis format
 	private DRDesignAxisFormat axisFormat(DRIAxisFormat axisFormat) throws DRException {
 		DRDesignAxisFormat designAxisFormat = new DRDesignAxisFormat();
-		designAxisFormat.setLabelExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(axisFormat.getLabelExpression()));
+		designAxisFormat.setLabelExpression(accessor.getExpressionTransform().transformExpression(axisFormat.getLabelExpression()));
 		designAxisFormat.setLabelFont(accessor.getStyleTransform().transformFont(axisFormat.getLabelFont()));
 		designAxisFormat.setLabelColor(axisFormat.getLabelColor());
 		designAxisFormat.setTickLabelFont(accessor.getStyleTransform().transformFont(axisFormat.getTickLabelFont()));
@@ -193,8 +192,8 @@ public class ChartTransform {
 		designAxisFormat.setTickLabelMask(axisFormat.getTickLabelMask());
 		designAxisFormat.setTickLabelRotation(axisFormat.getTickLabelRotation());
 		designAxisFormat.setLineColor(axisFormat.getLineColor());
-		designAxisFormat.setRangeMinValueExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(axisFormat.getRangeMinValueExpression()));
-		designAxisFormat.setRangeMaxValueExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(axisFormat.getRangeMaxValueExpression()));
+		designAxisFormat.setRangeMinValueExpression(accessor.getExpressionTransform().transformExpression(axisFormat.getRangeMinValueExpression()));
+		designAxisFormat.setRangeMaxValueExpression(accessor.getExpressionTransform().transformExpression(axisFormat.getRangeMaxValueExpression()));
 		return designAxisFormat;
 	}
 
@@ -216,7 +215,7 @@ public class ChartTransform {
 	private void subtitle(DRDesignChartSubtitle designSubtitle, DRIChartSubtitle subtitle) throws DRException {
 		designSubtitle.setColor(subtitle.getColor());
 		designSubtitle.setFont(accessor.getStyleTransform().transformFont(subtitle.getFont()));
-		designSubtitle.setTitle((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subtitle.getTitle()));
+		designSubtitle.setTitle(accessor.getExpressionTransform().transformExpression(subtitle.getTitle()));
 	}
 
 	//legend

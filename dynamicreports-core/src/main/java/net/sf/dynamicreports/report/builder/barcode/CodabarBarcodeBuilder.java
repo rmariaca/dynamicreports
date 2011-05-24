@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRCodabarBarcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,15 +32,15 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class CodabarBarcodeBuilder extends AbstractBarcodeBuilder<CodabarBarcodeBuilder, DRCodabarBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected CodabarBarcodeBuilder(String code) {
 		super(code, new DRCodabarBarcode());
 	}
 
-	protected CodabarBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected CodabarBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRCodabarBarcode());
 	}
-	
+
 	public CodabarBarcodeBuilder setWideFactor(Double wideFactor) {
 		getObject().setWideFactor(wideFactor);
 		return this;

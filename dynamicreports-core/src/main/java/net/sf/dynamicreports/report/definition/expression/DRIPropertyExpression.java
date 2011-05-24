@@ -28,8 +28,8 @@ import java.io.Serializable;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIPropertyExpression extends Serializable {
-	
+
 	public String getName();
-	
-	public DRISimpleExpression<String> getValueExpression();
+
+	public DRIExpression<String> getValueExpression();
 }

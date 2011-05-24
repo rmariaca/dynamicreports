@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRPdf417Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class Pdf417BarcodeBuilder extends AbstractBarcodeBuilder<Pdf417BarcodeBuilder, DRPdf417Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected Pdf417BarcodeBuilder(String code) {
 		super(code, new DRPdf417Barcode());
 	}
 
-	protected Pdf417BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected Pdf417BarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRPdf417Barcode());
 	}
 
@@ -69,5 +69,5 @@ public class Pdf417BarcodeBuilder extends AbstractBarcodeBuilder<Pdf417BarcodeBu
 	public Pdf417BarcodeBuilder setErrorCorrectionLevel(Integer errorCorrectionLevel) {
 		getObject().setErrorCorrectionLevel(errorCorrectionLevel);
 		return this;
-	}	
+	}
 }

@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -72,11 +72,11 @@ public class Columns {
 	}
 
 	//expression
-	public static <T> TextColumnBuilder<T> column(DRISimpleExpression<T> expression) {
+	public static <T> TextColumnBuilder<T> column(DRIExpression<T> expression) {
 		return new TextColumnBuilder<T>(expression);
 	}
 
-	public static <T> TextColumnBuilder<T> column(String title, DRISimpleExpression<T> expression) {
+	public static <T> TextColumnBuilder<T> column(String title, DRIExpression<T> expression) {
 		return column(expression).setTitle(title);
 	}
 
@@ -167,11 +167,11 @@ public class Columns {
 		return booleanColumn(field).setTitle(title);
 	}
 
-	public static BooleanColumnBuilder booleanColumn(DRISimpleExpression<Boolean> expression) {
+	public static BooleanColumnBuilder booleanColumn(DRIExpression<Boolean> expression) {
 		return new BooleanColumnBuilder(expression);
 	}
 
-	public static BooleanColumnBuilder booleanColumn(String title, DRISimpleExpression<Boolean> expression) {
+	public static BooleanColumnBuilder booleanColumn(String title, DRIExpression<Boolean> expression) {
 		return booleanColumn(expression).setTitle(title);
 	}
 }

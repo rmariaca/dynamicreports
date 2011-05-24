@@ -26,13 +26,13 @@ import java.awt.Color;
 
 import net.sf.dynamicreports.design.base.style.DRDesignFont;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisFormat;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignAxisFormat implements DRIDesignAxisFormat {	
-	private DRIDesignSimpleExpression labelExpression;
+public class DRDesignAxisFormat implements DRIDesignAxisFormat {
+	private DRIDesignExpression labelExpression;
 	private DRDesignFont labelFont;
 	private Color labelColor;
 	private DRDesignFont tickLabelFont;
@@ -40,14 +40,14 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 	private String tickLabelMask;
 	private Double tickLabelRotation;
 	private Color lineColor;
-	private DRIDesignSimpleExpression rangeMinValueExpression;
-	private DRIDesignSimpleExpression rangeMaxValueExpression;
-	
-	public DRIDesignSimpleExpression getLabelExpression() {
+	private DRIDesignExpression rangeMinValueExpression;
+	private DRIDesignExpression rangeMaxValueExpression;
+
+	public DRIDesignExpression getLabelExpression() {
 		return labelExpression;
 	}
 
-	public void setLabelExpression(DRIDesignSimpleExpression labelExpression) {
+	public void setLabelExpression(DRIDesignExpression labelExpression) {
 		this.labelExpression = labelExpression;
 	}
 
@@ -94,11 +94,11 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 	public Double getTickLabelRotation() {
 		return tickLabelRotation;
 	}
-	
+
 	public void setTickLabelRotation(Double tickLabelRotation) {
 		this.tickLabelRotation = tickLabelRotation;
 	}
-	
+
 	public Color getLineColor() {
 		return lineColor;
 	}
@@ -107,19 +107,19 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.lineColor = lineColor;
 	}
 
-	public void setRangeMinValueExpression(DRIDesignSimpleExpression rangeMinValueExpression) {
+	public void setRangeMinValueExpression(DRIDesignExpression rangeMinValueExpression) {
 		this.rangeMinValueExpression = rangeMinValueExpression;
 	}
 
-	public DRIDesignSimpleExpression getRangeMinValueExpression() {
+	public DRIDesignExpression getRangeMinValueExpression() {
 		return rangeMinValueExpression;
 	}
 
-	public void setRangeMaxValueExpression(DRIDesignSimpleExpression rangeMaxValueExpression) {
+	public void setRangeMaxValueExpression(DRIDesignExpression rangeMaxValueExpression) {
 		this.rangeMaxValueExpression = rangeMaxValueExpression;
 	}
 
-	public DRIDesignSimpleExpression getRangeMaxValueExpression() {
+	public DRIDesignExpression getRangeMaxValueExpression() {
 		return rangeMaxValueExpression;
 	}
 }

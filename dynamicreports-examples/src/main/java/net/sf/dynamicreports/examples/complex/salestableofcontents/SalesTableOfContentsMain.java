@@ -20,31 +20,26 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.base.expression;
+package net.sf.dynamicreports.examples.complex.salestableofcontents;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
+import net.sf.dynamicreports.examples.complex.AbstractReportMain;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignParameterExpression implements DRIDesignParameterExpression {
-	private String name;
-	private DRIDesignExpression valueExpression;
-
-	public String getName() {
-		return name;
+public class SalesTableOfContentsMain extends AbstractReportMain<SalesTableOfContentsDesign, SalesTableOfContentsData> {
+	
+	@Override
+	protected SalesTableOfContentsDesign getReportDesign() {
+		return new SalesTableOfContentsDesign();
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	@Override
+	protected SalesTableOfContentsData getReportData() {
+		return new SalesTableOfContentsData();
 	}
-
-	public DRIDesignExpression getValueExpression() {
-		return valueExpression;
-	}
-
-	public void setValueExpression(DRIDesignExpression valueExpression) {
-		this.valueExpression = valueExpression;
+	
+	public static void main(String[] args) {
+		new SalesTableOfContentsMain();
 	}
 }

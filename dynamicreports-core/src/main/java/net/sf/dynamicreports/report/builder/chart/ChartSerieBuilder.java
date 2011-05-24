@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -54,7 +54,7 @@ public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChar
 		getObject().setValueExpression(field.build());
 	}
 
-	protected ChartSerieBuilder(DRISimpleExpression<? extends Number> valueExpression) {
+	protected ChartSerieBuilder(DRIExpression<? extends Number> valueExpression) {
 		super(new DRChartSerie());
 		getObject().setValueExpression(valueExpression);
 	}
@@ -70,7 +70,7 @@ public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChar
 		return this;
 	}
 
-	public ChartSerieBuilder setLabel(DRISimpleExpression<String> labelExpression) {
+	public ChartSerieBuilder setLabel(DRIExpression<String> labelExpression) {
 		getObject().setLabelExpression(labelExpression);
 		return this;
 	}
@@ -91,7 +91,7 @@ public class ChartSerieBuilder extends AbstractBuilder<ChartSerieBuilder, DRChar
 		return this;
 	}
 
-	public ChartSerieBuilder setSeries(DRISimpleExpression<?> expression) {
+	public ChartSerieBuilder setSeries(DRIExpression<?> expression) {
 		getObject().setSeriesExpression(expression);
 		return this;
 	}

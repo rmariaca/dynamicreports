@@ -27,15 +27,15 @@ import java.awt.Color;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisFormat;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRAxisFormat implements DRIAxisFormat {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRISimpleExpression<String> labelExpression;
+
+	private DRIExpression<String> labelExpression;
 	private DRFont labelFont;
 	private Color labelColor;
 	private DRFont tickLabelFont;
@@ -43,14 +43,14 @@ public class DRAxisFormat implements DRIAxisFormat {
 	private String tickLabelMask;
 	private Double tickLabelRotation;
 	private Color lineColor;
-	private DRISimpleExpression<? extends Number> rangeMinValueExpression;
-	private DRISimpleExpression<? extends Number> rangeMaxValueExpression;
-	
-	public DRISimpleExpression<String> getLabelExpression() {
+	private DRIExpression<? extends Number> rangeMinValueExpression;
+	private DRIExpression<? extends Number> rangeMaxValueExpression;
+
+	public DRIExpression<String> getLabelExpression() {
 		return labelExpression;
 	}
 
-	public void setLabelExpression(DRISimpleExpression<String> labelExpression) {
+	public void setLabelExpression(DRIExpression<String> labelExpression) {
 		this.labelExpression = labelExpression;
 	}
 
@@ -97,11 +97,11 @@ public class DRAxisFormat implements DRIAxisFormat {
 	public Double getTickLabelRotation() {
 		return tickLabelRotation;
 	}
-	
+
 	public void setTickLabelRotation(Double tickLabelRotation) {
 		this.tickLabelRotation = tickLabelRotation;
 	}
-	
+
 	public Color getLineColor() {
 		return lineColor;
 	}
@@ -110,19 +110,19 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.lineColor = lineColor;
 	}
 
-	public void setRangeMinValueExpression(DRISimpleExpression<? extends Number> rangeMinValueExpression) {
+	public void setRangeMinValueExpression(DRIExpression<? extends Number> rangeMinValueExpression) {
 		this.rangeMinValueExpression = rangeMinValueExpression;
 	}
 
-	public DRISimpleExpression<? extends Number> getRangeMinValueExpression() {
+	public DRIExpression<? extends Number> getRangeMinValueExpression() {
 		return rangeMinValueExpression;
 	}
 
-	public void setRangeMaxValueExpression(DRISimpleExpression<? extends Number> rangeMaxValueExpression) {
+	public void setRangeMaxValueExpression(DRIExpression<? extends Number> rangeMaxValueExpression) {
 		this.rangeMaxValueExpression = rangeMaxValueExpression;
 	}
 
-	public DRISimpleExpression<? extends Number> getRangeMaxValueExpression() {
+	public DRIExpression<? extends Number> getRangeMaxValueExpression() {
 		return rangeMaxValueExpression;
 	}
 }

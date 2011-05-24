@@ -28,8 +28,8 @@ import java.util.List;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -40,7 +40,7 @@ public abstract class DRComponent implements DRIComponent {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRStyle style;
-	private DRISimpleExpression<Boolean> printWhenExpression;
+	private DRIExpression<Boolean> printWhenExpression;
 	private Boolean removeLineWhenBlank;
 	private List<DRIPropertyExpression> propertyExpressions;
 
@@ -60,11 +60,11 @@ public abstract class DRComponent implements DRIComponent {
 		this.style = style;
 	}
 
-	public DRISimpleExpression<Boolean> getPrintWhenExpression() {
+	public DRIExpression<Boolean> getPrintWhenExpression() {
 		return printWhenExpression;
 	}
 
-	public void setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
+	public void setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
 		this.printWhenExpression = printWhenExpression;
 	}
 

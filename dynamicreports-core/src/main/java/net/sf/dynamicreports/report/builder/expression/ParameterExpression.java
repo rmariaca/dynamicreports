@@ -23,8 +23,8 @@
 package net.sf.dynamicreports.report.builder.expression;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -33,30 +33,30 @@ import org.apache.commons.lang.Validate;
  */
 public class ParameterExpression implements DRIParameterExpression {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
-	private DRISimpleExpression<?> valueExpression;
-		
-	public ParameterExpression(String name, DRISimpleExpression<?> valueExpression) {
+	private DRIExpression<?> valueExpression;
+
+	public ParameterExpression(String name, DRIExpression<?> valueExpression) {
 		Validate.notNull(name, "name must not be null");
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.name = name;
-		this.valueExpression = valueExpression;		
+		this.valueExpression = valueExpression;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public DRISimpleExpression<?> getValueExpression() {
+
+	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
-	
-	public void setValueExpression(DRISimpleExpression<?> valueExpression) {
+
+	public void setValueExpression(DRIExpression<?> valueExpression) {
 		this.valueExpression = valueExpression;
 	}
 }

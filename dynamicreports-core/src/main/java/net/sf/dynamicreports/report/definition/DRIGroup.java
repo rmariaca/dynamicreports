@@ -27,7 +27,6 @@ import java.io.Serializable;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -38,22 +37,22 @@ public interface DRIGroup extends Serializable {
 	public String getName();
 
 	public DRITextField<?> getValueField();
-	
+
 	public DRIExpression<?> getTitleExpression();
 
 	public DRIStyle getTitleStyle();
-	
+
 	public Integer getTitleWidth();
-	
+
 	public GroupHeaderLayout getHeaderLayout();
-	
+
 	public Boolean getHideColumn();
-	
+
 	public Boolean getGroupByDataType();
-	
+
 	public Boolean getShowColumnHeaderAndFooter();
 
-	public DRISimpleExpression<Boolean> getPrintSubtotalsWhenExpression();
+	public DRIExpression<Boolean> getPrintSubtotalsWhenExpression();
 
 	public Integer getPadding();
 
@@ -62,8 +61,8 @@ public interface DRIGroup extends Serializable {
 	public Boolean getStartInNewColumn();
 
 	public Boolean getReprintHeaderOnEachPage();
-	
+
 	public DRIBand getHeaderBand();
-	
+
 	public DRIBand getFooterBand();
 }

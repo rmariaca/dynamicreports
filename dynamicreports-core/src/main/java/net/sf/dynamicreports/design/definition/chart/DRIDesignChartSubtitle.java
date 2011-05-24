@@ -24,7 +24,7 @@ package net.sf.dynamicreports.design.definition.chart;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 
 /**
@@ -33,8 +33,8 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 public interface DRIDesignChartSubtitle {
 
 	public Color getColor();
-	
+
 	public DRIDesignFont getFont();
-	
-	public DRIDesignSimpleExpression getTitle();
+
+	public DRIDesignExpression getTitle();
 }

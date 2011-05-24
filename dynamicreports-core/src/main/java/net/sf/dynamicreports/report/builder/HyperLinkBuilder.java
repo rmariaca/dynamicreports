@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -46,7 +46,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		setLink(link);
 	}
 
-	protected HyperLinkBuilder(DRISimpleExpression<String> linkExpression) {
+	protected HyperLinkBuilder(DRIExpression<String> linkExpression) {
 		super(new DRHyperLink());
 		setLink(linkExpression);
 	}
@@ -56,7 +56,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return setLink(Expressions.text(link));
 	}
 
-	public HyperLinkBuilder setLink(DRISimpleExpression<String> linkExpression) {
+	public HyperLinkBuilder setLink(DRIExpression<String> linkExpression) {
 		Validate.notNull(linkExpression, "linkExpression must not be null");
 		getObject().setReferenceExpression(linkExpression);
 		getObject().setType(HyperLinkType.REFERENCE);
@@ -68,7 +68,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setAnchorName(DRISimpleExpression<String> anchorNameExpression) {
+	public HyperLinkBuilder setAnchorName(DRIExpression<String> anchorNameExpression) {
 		getObject().setAnchorNameExpression(anchorNameExpression);
 		return this;
 	}
@@ -78,7 +78,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setAnchor(DRISimpleExpression<String> anchorExpression) {
+	public HyperLinkBuilder setAnchor(DRIExpression<String> anchorExpression) {
 		getObject().setAnchorExpression(anchorExpression);
 		return this;
 	}
@@ -88,7 +88,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setPage(DRISimpleExpression<Integer> pageExpression) {
+	public HyperLinkBuilder setPage(DRIExpression<Integer> pageExpression) {
 		getObject().setPageExpression(pageExpression);
 		return this;
 	}
@@ -98,7 +98,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setReference(DRISimpleExpression<String> referenceExpression) {
+	public HyperLinkBuilder setReference(DRIExpression<String> referenceExpression) {
 		getObject().setReferenceExpression(referenceExpression);
 		return this;
 	}
@@ -108,7 +108,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setTooltip(DRISimpleExpression<String> tooltipExpression) {
+	public HyperLinkBuilder setTooltip(DRIExpression<String> tooltipExpression) {
 		getObject().setTooltipExpression(tooltipExpression);
 		return this;
 	}

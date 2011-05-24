@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 import net.sf.dynamicreports.report.base.barcode.DRDataMatrixBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeShape;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,17 +33,17 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class DataMatrixBarcodeBuilder extends AbstractBarcodeBuilder<DataMatrixBarcodeBuilder, DRDataMatrixBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected DataMatrixBarcodeBuilder(String code) {
 		super(code, new DRDataMatrixBarcode());
 	}
 
-	protected DataMatrixBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected DataMatrixBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRDataMatrixBarcode());
 	}
 
 	public DataMatrixBarcodeBuilder setShape(BarcodeShape shape) {
 		getObject().setShape(shape);
 		return this;
-	}	
+	}
 }

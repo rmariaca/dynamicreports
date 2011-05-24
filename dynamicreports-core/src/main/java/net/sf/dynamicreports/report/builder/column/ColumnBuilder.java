@@ -30,8 +30,7 @@ import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -39,26 +38,21 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRColumn<?>> extends AbstractBuilder<T, U> implements ColumnGridComponentBuilder {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected ColumnBuilder(U column) {
 		super(column);
 	}
-	
-	public T setTitle(DRISimpleExpression<?> titleExpression) {
+
+	public T setTitle(DRIExpression<?> titleExpression) {
 		getObject().setTitleExpression(titleExpression);
 		return (T) this;
 	}
 
-	public T setTitle(DRIComplexExpression<?> titleExpression) {
-		getObject().setTitleExpression(titleExpression);
-		return (T) this;
-	}
-	
 	public T setTitle(String title) {
 		getObject().setTitleExpression(Expressions.text(title));
 		return (T) this;
 	}
-	
+
 	public T setTitleStyle(StyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
@@ -68,7 +62,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		}
 		return (T) this;
 	}
-	
+
 	public T setStyle(StyleBuilder style) {
 		if (style != null) {
 			getComponent().setStyle(style.getStyle());
@@ -78,16 +72,16 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		}
 		return (T) this;
 	}
-	
-	public T setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
+
+	public T setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
 		getComponent().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
-	
+
   /**
    * This method is used to define the preferred height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of preferred rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -95,11 +89,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleRows(rows);
 		return (T) this;
 	}
-	
+
   /**
    * This method is used to define the fixed height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of fixed rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -108,11 +102,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleHeightType(ComponentDimensionType.FIXED);
 		return (T) this;
 	}
-		
+
   /**
    * This method is used to define the minimum height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
+   *
    * @param rows the number of minimum rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
@@ -121,11 +115,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
   /**
-   * Sets the preferred height of a column title. 
+   * Sets the preferred height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column title preferred height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -133,11 +127,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleHeight(height);
 		return (T) this;
 	}
-	
+
   /**
-   * Sets the fixed height of a column title. 
+   * Sets the fixed height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column title fixed height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -146,11 +140,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleHeightType(ComponentDimensionType.FIXED);
 		return (T) this;
 	}
-		
+
   /**
-   * Sets the minimum height of a column title. 
+   * Sets the minimum height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the column title minimum height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -159,11 +153,11 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		getObject().setTitleHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
-	
+
 	protected DRComponent getComponent() {
 		return (DRComponent) getObject().getComponent();
 	}
-	
+
 	public U getColumn() {
 		return build();
 	}

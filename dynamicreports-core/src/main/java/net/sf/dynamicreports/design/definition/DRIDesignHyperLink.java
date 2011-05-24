@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.design.definition;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 
 /**
@@ -30,15 +30,15 @@ import net.sf.dynamicreports.report.constant.HyperLinkType;
  */
 public interface DRIDesignHyperLink {
 
-	public DRIDesignSimpleExpression getAnchorNameExpression();
+	public DRIDesignExpression getAnchorNameExpression();
 
-	public DRIDesignSimpleExpression getAnchorExpression();
+	public DRIDesignExpression getAnchorExpression();
 
-	public DRIDesignSimpleExpression getPageExpression();
+	public DRIDesignExpression getPageExpression();
 
-	public DRIDesignSimpleExpression getReferenceExpression();
+	public DRIDesignExpression getReferenceExpression();
 
-	public DRIDesignSimpleExpression getTooltipExpression();
+	public DRIDesignExpression getTooltipExpression();
 
 	public HyperLinkType getType();
 }

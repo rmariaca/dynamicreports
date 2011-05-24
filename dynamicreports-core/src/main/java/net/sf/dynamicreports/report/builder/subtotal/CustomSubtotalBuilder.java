@@ -25,28 +25,20 @@ package net.sf.dynamicreports.report.builder.subtotal;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CustomSubtotalBuilder<T> extends SubtotalBuilder<CustomSubtotalBuilder<T>, T> implements DRIValue<T> {	
+public class CustomSubtotalBuilder<T> extends SubtotalBuilder<CustomSubtotalBuilder<T>, T> implements DRIValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	//simple expression
-	protected CustomSubtotalBuilder(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+
+	protected CustomSubtotalBuilder(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		super(showInColumn);
 		setValueExpression(expression);
 	}
 
-	//complex expression
-	protected CustomSubtotalBuilder(DRIComplexExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
-		super(showInColumn);
-		setValueExpression(expression);
-	}
-	
 	public String getName() {
 		return getSubtotal().getName();
 	}

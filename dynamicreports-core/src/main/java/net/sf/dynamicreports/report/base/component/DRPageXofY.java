@@ -22,31 +22,31 @@
 
 package net.sf.dynamicreports.report.base.component;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRPageXofY extends DRHyperLinkComponent implements DRIPageXofY {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRISimpleExpression<String> formatExpression;
-	private HorizontalAlignment horizontalAlignment;	
-	
-	public DRISimpleExpression<String> getFormatExpression() {
+
+	private DRIExpression<String> formatExpression;
+	private HorizontalAlignment horizontalAlignment;
+
+	public DRIExpression<String> getFormatExpression() {
 		return formatExpression;
 	}
-	
-	public void setFormatExpression(DRISimpleExpression<String> formatExpression) {
+
+	public void setFormatExpression(DRIExpression<String> formatExpression) {
 		Validate.notNull(formatExpression, "formatExpression must not be null");
 		this.formatExpression = formatExpression;
 	}
-	
+
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}

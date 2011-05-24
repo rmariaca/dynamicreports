@@ -32,7 +32,6 @@ import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -56,9 +55,9 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private DRIStyle totalHeaderStyle;
 	private DRIExpression<T> expression;
 	private DRIDataType<? super T, T> dataType;
-	private DRISimpleExpression<? extends Comparable<?>> orderByExpression;
+	private DRIExpression<? extends Comparable<?>> orderByExpression;
 	private OrderType orderType;
-	private DRISimpleExpression<? extends Comparator<?>> comparatorExpression;
+	private DRIExpression<? extends Comparator<?>> comparatorExpression;
 
 	public DRCrosstabGroup() {
 		this.name = ReportUtils.generateUniqueName("crosstabGroup");
@@ -157,11 +156,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.dataType = dataType;
 	}
 
-	public DRISimpleExpression<? extends Comparable<?>> getOrderByExpression() {
+	public DRIExpression<? extends Comparable<?>> getOrderByExpression() {
 		return orderByExpression;
 	}
 
-	public void setOrderByExpression(DRISimpleExpression<? extends Comparable<?>> orderByExpression) {
+	public void setOrderByExpression(DRIExpression<? extends Comparable<?>> orderByExpression) {
 		this.orderByExpression = orderByExpression;
 	}
 
@@ -173,11 +172,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.orderType = orderType;
 	}
 
-	public DRISimpleExpression<? extends Comparator<?>> getComparatorExpression() {
+	public DRIExpression<? extends Comparator<?>> getComparatorExpression() {
 		return comparatorExpression;
 	}
 
-	public void setComparatorExpression(DRISimpleExpression<? extends Comparator<?>> comparatorExpression) {
+	public void setComparatorExpression(DRIExpression<? extends Comparator<?>> comparatorExpression) {
 		this.comparatorExpression = comparatorExpression;
 	}
 

@@ -26,8 +26,8 @@ package net.sf.dynamicreports.design.definition.expression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignPropertyExpression {
-	
+
 	public String getName();
-	
-	public DRIDesignSimpleExpression getValueExpression();
+
+	public DRIDesignExpression getValueExpression();
 }

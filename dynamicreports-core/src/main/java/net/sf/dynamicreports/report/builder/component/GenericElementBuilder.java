@@ -25,8 +25,8 @@ package net.sf.dynamicreports.report.builder.component;
 import net.sf.dynamicreports.report.base.component.DRGenericElement;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -34,23 +34,23 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class GenericElementBuilder extends DimensionComponentBuilder<GenericElementBuilder, DRGenericElement> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected GenericElementBuilder(String namespace, String name) {
 		super(new DRGenericElement(namespace, name));
-	}	
-	
+	}
+
 	public GenericElementBuilder addParameter(DRIParameterExpression parameterExpression) {
 		getComponent().addParameterExpression(parameterExpression);
 		return this;
-	}	
-	
-	public GenericElementBuilder addParameter(String name, DRISimpleExpression<?> valueExpression) {
+	}
+
+	public GenericElementBuilder addParameter(String name, DRIExpression<?> valueExpression) {
 		getComponent().addParameterExpression(Expressions.parameter(name, valueExpression));
 		return this;
-	}	
+	}
 
 	public GenericElementBuilder addParameter(String name, Object value) {
 		getComponent().addParameterExpression(Expressions.parameter(name, value));
 		return this;
-	}	
+	}
 }

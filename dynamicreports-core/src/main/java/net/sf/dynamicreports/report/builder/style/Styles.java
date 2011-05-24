@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.style;
 
 import net.sf.dynamicreports.report.constant.FontName;
 import net.sf.dynamicreports.report.constant.LineStyle;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -42,96 +42,96 @@ public class Styles {
 	public static FontBuilder font(String fontName, boolean bold, boolean italic, int fontSize) {
 		return new FontBuilder(fontName, bold, italic, fontSize);
 	}
-	
+
 	public static FontBuilder fontArial() {
 		return new FontBuilder(FontName.ARIAL, false, false, 10);
 	}
-	
+
 	public static FontBuilder fontArialBold() {
 		return new FontBuilder(FontName.ARIAL, true, false, 10);
 	}
-	
+
 	public static FontBuilder fontTimesNewRoman() {
 		return new FontBuilder(FontName.TIMES_NEW_ROMAN, false, false, 10);
 	}
-	
+
 	public static FontBuilder fontTimesNewRomanBold() {
 		return new FontBuilder(FontName.TIMES_NEW_ROMAN, true, false, 10);
 	}
-	
+
 	public static FontBuilder fontCourierNew() {
 		return new FontBuilder(FontName.COURIER_NEW, false, false, 10);
 	}
-	
+
 	public static FontBuilder fontCourierNewBold() {
 		return new FontBuilder(FontName.COURIER_NEW, true, false, 10);
 	}
-	
+
 	//pen
 	public static PenBuilder pen() {
 		return new PenBuilder();
 	}
-	
+
 	public static PenBuilder pen(Float lineWidth, LineStyle lineStyle) {
 		return new PenBuilder(lineWidth, lineStyle);
 	}
-	
+
 	public static PenBuilder penThin() {
 		return new PenBuilder(0.5f, LineStyle.SOLID);
 	}
-	
+
 	public static PenBuilder pen1Point() {
 		return new PenBuilder(1f, LineStyle.SOLID);
 	}
-	
+
 	public static PenBuilder pen2Point() {
 		return new PenBuilder(2f, LineStyle.SOLID);
 	}
-	
+
 	public static PenBuilder penDotted() {
 		return new PenBuilder(1f, LineStyle.DOTTED);
 	}
-	
+
 	public static PenBuilder penDashed() {
 		return new PenBuilder(1f, LineStyle.DASHED);
 	}
-	
+
 	public static PenBuilder penDouble() {
 		return new PenBuilder(1f, LineStyle.DOUBLE);
 	}
-	
+
 	//border
 	public static BorderBuilder border() {
 		return new BorderBuilder();
 	}
-	
+
 	public static BorderBuilder border(PenBuilder pen) {
 		Validate.notNull(pen, "pen must not be null");
 		return new BorderBuilder(pen);
 	}
-	
+
 	//padding
 	public static PaddingBuilder padding() {
 		return new PaddingBuilder();
 	}
-	
+
 	public static PaddingBuilder padding(int padding) {
 		return new PaddingBuilder(padding);
 	}
-	
+
 	//style
 	public static StyleBuilder style() {
 		return new StyleBuilder();
 	}
-	
+
 	public static StyleBuilder style(StyleBuilder parentStyle) {
 		return new StyleBuilder().setParentStyle(parentStyle);
 	}
-	
+
 	public static StyleBuilder style(FontBuilder font) {
 		return new StyleBuilder().setFont(font);
 	}
-	
+
 	public static StyleBuilder style(PenBuilder borderPen) {
 		return new StyleBuilder().setBorder(borderPen);
 	}
@@ -139,12 +139,12 @@ public class Styles {
 	public static StyleBuilder style(Integer padding) {
 		return new StyleBuilder().setPadding(padding);
 	}
-	
+
 	public static SimpleStyleBuilder simpleStyle() {
 		return new SimpleStyleBuilder();
 	}
-	
-	public static ConditionalStyleBuilder conditionalStyle(DRISimpleExpression<Boolean> conditionExpression) {
+
+	public static ConditionalStyleBuilder conditionalStyle(DRIExpression<Boolean> conditionExpression) {
 		return new ConditionalStyleBuilder(conditionExpression);
 	}
 }

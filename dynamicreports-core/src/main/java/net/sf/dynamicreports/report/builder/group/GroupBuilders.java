@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.group;
 
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -34,13 +34,13 @@ public class GroupBuilders {
 
 	//column
 	public ColumnGroupBuilder group(ValueColumnBuilder<?, ?> groupColumn) {
-		return Groups.group(groupColumn);	
+		return Groups.group(groupColumn);
 	}
 
 	public ColumnGroupBuilder group(String name, ValueColumnBuilder<?, ?> groupColumn) {
-		return Groups.group(name, groupColumn);	
+		return Groups.group(name, groupColumn);
 	}
-	
+
 	//custom
 	public CustomGroupBuilder group(String fieldName, Class<?> valueClass) {
 		return Groups.group(fieldName, valueClass);
@@ -49,7 +49,7 @@ public class GroupBuilders {
 	public CustomGroupBuilder group(String name, String fieldName, Class<?> valueClass) {
 		return Groups.group(name, fieldName, valueClass);
 	}
-	
+
 	public CustomGroupBuilder group(FieldBuilder<?> field) {
 		return Groups.group(field);
 	}
@@ -57,12 +57,12 @@ public class GroupBuilders {
 	public CustomGroupBuilder group(String name, FieldBuilder<?> field) {
 		return Groups.group(name, field);
 	}
-	
-	public CustomGroupBuilder group(DRISimpleExpression<?> expression) {
+
+	public CustomGroupBuilder group(DRIExpression<?> expression) {
 		return Groups.group(expression);
 	}
-	
-	public CustomGroupBuilder group(String name, DRISimpleExpression<?> expression) {
+
+	public CustomGroupBuilder group(String name, DRIExpression<?> expression) {
 		return Groups.group(name, expression);
 	}
 }

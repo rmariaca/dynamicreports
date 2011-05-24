@@ -25,22 +25,22 @@ package net.sf.dynamicreports.report.definition;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIHyperLink extends Serializable {
 
-	public DRISimpleExpression<String> getAnchorNameExpression();
+	public DRIExpression<String> getAnchorNameExpression();
 
-	public DRISimpleExpression<String> getAnchorExpression();
+	public DRIExpression<String> getAnchorExpression();
 
-	public DRISimpleExpression<Integer> getPageExpression();
+	public DRIExpression<Integer> getPageExpression();
 
-	public DRISimpleExpression<String> getReferenceExpression();
+	public DRIExpression<String> getReferenceExpression();
 
-	public DRISimpleExpression<String> getTooltipExpression();
+	public DRIExpression<String> getTooltipExpression();
 
 	public HyperLinkType getType();
 }

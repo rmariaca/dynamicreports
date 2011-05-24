@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRCode39Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class Code39BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Code39BarcodeBuilder, DRCode39Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected Code39BarcodeBuilder(String code) {
 		super(code, new DRCode39Barcode());
 	}
 
-	protected Code39BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected Code39BarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRCode39Barcode());
 	}
 
@@ -64,5 +64,5 @@ public class Code39BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Code39B
 	public Code39BarcodeBuilder setWideFactor(Double wideFactor) {
 		getObject().setWideFactor(wideFactor);
 		return this;
-	}	
+	}
 }

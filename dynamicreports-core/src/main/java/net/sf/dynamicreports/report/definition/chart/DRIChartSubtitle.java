@@ -25,17 +25,17 @@ package net.sf.dynamicreports.report.definition.chart;
 import java.awt.Color;
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIFont;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIChartSubtitle extends Serializable {
-	
+
 	public Color getColor();
-	
+
 	public DRIFont getFont();
-	
-	public DRISimpleExpression<String> getTitle();
+
+	public DRIExpression<String> getTitle();
 }

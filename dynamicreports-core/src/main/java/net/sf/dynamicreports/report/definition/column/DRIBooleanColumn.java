@@ -27,7 +27,6 @@ import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -53,5 +52,5 @@ public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIC
 
 	public DRIStyle getStyle();
 
-	public DRISimpleExpression<Boolean> getPrintWhenExpression();
+	public DRIExpression<Boolean> getPrintWhenExpression();
 }

@@ -27,8 +27,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -53,11 +52,11 @@ public class Subtotals {
 		return new AggregationSubtotalBuilder<T>(field, showInColumn, calculation);
 	}
 
-	public static <T> AggregationSubtotalBuilder<T> aggregate(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
+	public static <T> AggregationSubtotalBuilder<T> aggregate(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		return new AggregationSubtotalBuilder<T>(expression, showInColumn, calculation);
 	}
-	
+
 	//sum
 	public static <T extends Number> AggregationSubtotalBuilder<T> sum(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.SUM);
@@ -71,10 +70,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.SUM);
 	}
 
-	public static <T extends Number> AggregationSubtotalBuilder<T> sum(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T extends Number> AggregationSubtotalBuilder<T> sum(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.SUM);
 	}
-	
+
 	//average
 	public static <T extends Number> AggregationSubtotalBuilder<Number> avg(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.AVERAGE);
@@ -88,10 +87,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.AVERAGE);
 	}
 
-	public static <T extends Number> AggregationSubtotalBuilder<Number> avg(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T extends Number> AggregationSubtotalBuilder<Number> avg(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.AVERAGE);
 	}
-	
+
 	//count
 	public static AggregationSubtotalBuilder<Long> count(ValueColumnBuilder<?, ?> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.COUNT);
@@ -105,10 +104,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.COUNT);
 	}
 
-	public static AggregationSubtotalBuilder<Long> count(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static AggregationSubtotalBuilder<Long> count(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.COUNT);
 	}
-	
+
 	//distinct count
 	public static AggregationSubtotalBuilder<Long> distinctCount(ValueColumnBuilder<?, ?> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.DISTINCT_COUNT);
@@ -122,10 +121,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.DISTINCT_COUNT);
 	}
 
-	public static AggregationSubtotalBuilder<Long> distinctCount(DRISimpleExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static AggregationSubtotalBuilder<Long> distinctCount(DRIExpression<?> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.DISTINCT_COUNT);
 	}
-	
+
 	//first
 	public static <T> AggregationSubtotalBuilder<T> first(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.FIRST);
@@ -139,10 +138,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.FIRST);
 	}
 
-	public static <T> AggregationSubtotalBuilder<T> first(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T> AggregationSubtotalBuilder<T> first(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.FIRST);
 	}
-	
+
 	//highest
 	public static <T> AggregationSubtotalBuilder<T> max(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.HIGHEST);
@@ -156,10 +155,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.HIGHEST);
 	}
 
-	public static <T> AggregationSubtotalBuilder<T> max(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T> AggregationSubtotalBuilder<T> max(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.HIGHEST);
 	}
-	
+
 	//lowest
 	public static <T> AggregationSubtotalBuilder<T> min(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.LOWEST);
@@ -173,10 +172,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.LOWEST);
 	}
 
-	public static <T> AggregationSubtotalBuilder<T> min(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T> AggregationSubtotalBuilder<T> min(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.LOWEST);
 	}
-	
+
 	//standard deviation
 	public static <T extends Number> AggregationSubtotalBuilder<Number> stdDev(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.STANDARD_DEVIATION);
@@ -190,10 +189,10 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.STANDARD_DEVIATION);
 	}
 
-	public static <T extends Number> AggregationSubtotalBuilder<Number> stdDev(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T extends Number> AggregationSubtotalBuilder<Number> stdDev(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.STANDARD_DEVIATION);
 	}
-	
+
 	//variance
 	public static <T extends Number> AggregationSubtotalBuilder<Number> var(ValueColumnBuilder<?, T> subtotalColumn) {
 		return aggregate(subtotalColumn, Calculation.VARIANCE);
@@ -207,36 +206,31 @@ public class Subtotals {
 		return aggregate(field, showInColumn, Calculation.VARIANCE);
 	}
 
-	public static <T extends Number> AggregationSubtotalBuilder<Number> var(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T extends Number> AggregationSubtotalBuilder<Number> var(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		return aggregate(expression, showInColumn, Calculation.VARIANCE);
 	}
-	
+
 	//custom
-	public static <T> CustomSubtotalBuilder<T> customValue(DRISimpleExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
+	public static <T> CustomSubtotalBuilder<T> customValue(DRIExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
-		return new CustomSubtotalBuilder<T>(expression, showInColumn);	
+		return new CustomSubtotalBuilder<T>(expression, showInColumn);
 	}
 
-	public static <T> CustomSubtotalBuilder<T> customValue(DRIComplexExpression<T> expression, ColumnBuilder<?, ?> showInColumn) {
-		Validate.notNull(showInColumn, "showInColumn must not be null");
-		return new CustomSubtotalBuilder<T>(expression, showInColumn);	
-	}
-	
 	//percentage
 	public static PercentageSubtotalBuilder percentage(ValueColumnBuilder<?, ? extends Number> subtotalColumn) {
 		Validate.notNull(subtotalColumn, "subtotalColumn must not be null");
 		return new PercentageSubtotalBuilder(subtotalColumn);
 	}
-	
+
 	public static PercentageSubtotalBuilder percentage(String fieldName, Class<? extends Number> valueClass, ColumnBuilder<?, ?> showInColumn) {
 		return percentage(DynamicReports.field(fieldName, valueClass), showInColumn);
 	}
-	
+
 	public static PercentageSubtotalBuilder percentage(FieldBuilder<? extends Number> field, ColumnBuilder<?, ?> showInColumn) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		return new PercentageSubtotalBuilder(field, showInColumn);
 	}
-	
+
 	/*public static PercentageSubtotalBuilder percentage(DRISimpleExpression<? extends Number> expression, ColumnBuilder<?, ?> showInColumn) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		return new PercentageSubtotalBuilder(expression, showInColumn);

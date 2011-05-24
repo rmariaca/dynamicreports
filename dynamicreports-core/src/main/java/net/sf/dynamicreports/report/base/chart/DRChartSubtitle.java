@@ -27,39 +27,39 @@ import java.awt.Color;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.DRIChartSubtitle;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRChartSubtitle implements DRIChartSubtitle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Color color;
 	private DRFont font;
-	private DRISimpleExpression<String> title;
-	
+	private DRIExpression<String> title;
+
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public DRFont getFont() {
 		return font;
 	}
-	
+
 	public void setFont(DRFont font) {
 		this.font = font;
 	}
-	
-	public DRISimpleExpression<String> getTitle() {
+
+	public DRIExpression<String> getTitle() {
 		return title;
 	}
-	
-	public void setTitle(DRISimpleExpression<String> title) {
+
+	public void setTitle(DRIExpression<String> title) {
 		this.title = title;
-	}	
+	}
 }

@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ImageScale;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,26 +38,26 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImage> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected ImageBuilder() {
 		super(new DRImage());
 	}
-	
-	public ImageBuilder setImage(DRISimpleExpression<?> imageExpression) {
+
+	public ImageBuilder setImage(DRIExpression<?> imageExpression) {
 		getObject().setImageExpression(imageExpression);
 		return this;
 	}
-	
+
 	public ImageBuilder setImage(String imagePath) {
 		getObject().setImageExpression(Expressions.text(imagePath));
 		return this;
 	}
-	
+
 	public ImageBuilder setImage(Image image) {
 		getObject().setImageExpression(Expressions.image(image));
 		return this;
 	}
-	
+
 	public ImageBuilder setImage(InputStream imageInputStream) {
 		getObject().setImageExpression(Expressions.inputStream(imageInputStream));
 		return this;
@@ -67,7 +67,7 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 		getObject().setImageExpression(Expressions.url(imageUrl));
 		return this;
 	}
-	
+
 	public ImageBuilder setImageScale(ImageScale imageScale) {
 		getObject().setImageScale(imageScale);
 		return this;

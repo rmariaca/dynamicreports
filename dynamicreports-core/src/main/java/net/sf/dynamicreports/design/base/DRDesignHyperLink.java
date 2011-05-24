@@ -23,57 +23,57 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignHyperLink implements DRIDesignHyperLink {
-	private DRIDesignSimpleExpression anchorNameExpression;
-	private DRIDesignSimpleExpression anchorExpression;
-	private DRIDesignSimpleExpression pageExpression;
-	private DRIDesignSimpleExpression referenceExpression;
-	private DRIDesignSimpleExpression tooltipExpression;
+	private DRIDesignExpression anchorNameExpression;
+	private DRIDesignExpression anchorExpression;
+	private DRIDesignExpression pageExpression;
+	private DRIDesignExpression referenceExpression;
+	private DRIDesignExpression tooltipExpression;
 	private HyperLinkType hyperLinkType;
 
-	public DRIDesignSimpleExpression getAnchorNameExpression() {
+	public DRIDesignExpression getAnchorNameExpression() {
 		return anchorNameExpression;
 	}
 
-	public void setAnchorNameExpression(DRIDesignSimpleExpression anchorNameExpression) {
+	public void setAnchorNameExpression(DRIDesignExpression anchorNameExpression) {
 		this.anchorNameExpression = anchorNameExpression;
 	}
 
-	public DRIDesignSimpleExpression getAnchorExpression() {
+	public DRIDesignExpression getAnchorExpression() {
 		return anchorExpression;
 	}
 
-	public void setAnchorExpression(DRIDesignSimpleExpression anchorExpression) {
+	public void setAnchorExpression(DRIDesignExpression anchorExpression) {
 		this.anchorExpression = anchorExpression;
 	}
 
-	public DRIDesignSimpleExpression getPageExpression() {
+	public DRIDesignExpression getPageExpression() {
 		return pageExpression;
 	}
 
-	public void setPageExpression(DRIDesignSimpleExpression pageExpression) {
+	public void setPageExpression(DRIDesignExpression pageExpression) {
 		this.pageExpression = pageExpression;
 	}
 
-	public DRIDesignSimpleExpression getReferenceExpression() {
+	public DRIDesignExpression getReferenceExpression() {
 		return referenceExpression;
 	}
 
-	public void setReferenceExpression(DRIDesignSimpleExpression referenceExpression) {
+	public void setReferenceExpression(DRIDesignExpression referenceExpression) {
 		this.referenceExpression = referenceExpression;
 	}
 
-	public DRIDesignSimpleExpression getTooltipExpression() {
+	public DRIDesignExpression getTooltipExpression() {
 		return tooltipExpression;
 	}
 
-	public void setTooltipExpression(DRIDesignSimpleExpression tooltipExpression) {
+	public void setTooltipExpression(DRIDesignExpression tooltipExpression) {
 		this.tooltipExpression = tooltipExpression;
 	}
 

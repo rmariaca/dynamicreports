@@ -91,9 +91,9 @@ import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
@@ -156,7 +156,7 @@ public class ComponentTransform {
 
 	private void component(DRDesignComponent designComponent, DRIComponent component, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
-		designComponent.setPrintWhenExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
+		designComponent.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
 		designComponent.setRemoveLineWhenBlank(accessor.getTemplateTransform().getRemoveLineWhenBlank(component));
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
@@ -168,11 +168,11 @@ public class ComponentTransform {
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
 		if (hyperLink != null) {
 			DRDesignHyperLink designHyperLink = new DRDesignHyperLink();
-			designHyperLink.setAnchorNameExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
-			designHyperLink.setAnchorExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
-			designHyperLink.setPageExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
-			designHyperLink.setReferenceExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
-			designHyperLink.setTooltipExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
+			designHyperLink.setAnchorNameExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
+			designHyperLink.setAnchorExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
+			designHyperLink.setPageExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
+			designHyperLink.setReferenceExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
+			designHyperLink.setTooltipExpression( accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
 			designHyperLink.setType(hyperLink.getType());
 			designHyperlinkComponent.setHyperLink(designHyperLink);
 		}
@@ -277,9 +277,9 @@ public class ComponentTransform {
 		component(designSubreport, subreport, subreport.getStyle(), false, DefaultStyleType.NONE);
 		designSubreport.setWidth(accessor.getTemplateTransform().getSubreportWidth(subreport));
 		designSubreport.setHeight(accessor.getTemplateTransform().getSubreportHeight(subreport));
-		designSubreport.setReportExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getReportExpression()));
-		designSubreport.setConnectionExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getConnectionExpression()));
-		designSubreport.setDataSourceExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(subreport.getDataSourceExpression()));
+		designSubreport.setReportExpression(accessor.getExpressionTransform().transformExpression(subreport.getReportExpression()));
+		designSubreport.setConnectionExpression(accessor.getExpressionTransform().transformExpression(subreport.getConnectionExpression()));
+		designSubreport.setDataSourceExpression(accessor.getExpressionTransform().transformExpression(subreport.getDataSourceExpression()));
 		designSubreport.setRunToBottom(subreport.getRunToBottom());
 		return designSubreport;
 	}
@@ -555,7 +555,7 @@ public class ComponentTransform {
 		private HorizontalAlignment horizontalAlignment;
 		private int index;
 
-		public PageNumberExpression(DRISimpleExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
+		public PageNumberExpression(DRIExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
 			addExpression(pageNumberFormatExpression);
 			this.horizontalAlignment = horizontalAlignment;
 			this.index = index;

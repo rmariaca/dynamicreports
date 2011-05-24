@@ -29,18 +29,17 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRGroup implements DRIGroup {	
+public class DRGroup implements DRIGroup {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private String name;	
-	private DRTextField<?> valueField;	
+	private String name;
+	private DRTextField<?> valueField;
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
 	private Integer titleWidth;
@@ -48,18 +47,18 @@ public class DRGroup implements DRIGroup {
 	private Boolean hideColumn;
 	private Boolean groupByDataType;
 	private Boolean showColumnHeaderAndFooter;
-	private DRISimpleExpression<Boolean> printSubtotalsWhenExpression;
+	private DRIExpression<Boolean> printSubtotalsWhenExpression;
 	private Integer padding;
 	private Boolean startInNewPage;
 	private Boolean startInNewColumn;
 	private Boolean reprintHeaderOnEachPage;
 	private DRBand headerBand;
 	private DRBand footerBand;
-	
+
 	public DRGroup(DRTextField<?> valueField) {
 		this(ReportUtils.generateUniqueName("group"), valueField);
 	}
-	
+
 	public DRGroup(String name, DRTextField<?> valueField) {
 		Validate.notEmpty(name, "name must not be empty");
 		Validate.notNull(valueField, "valueField must not be null");
@@ -67,7 +66,7 @@ public class DRGroup implements DRIGroup {
 		this.valueField = valueField;
 		init();
 	}
-	
+
 	private void init() {
 		headerBand = new DRBand();
 		footerBand = new DRBand();
@@ -80,7 +79,7 @@ public class DRGroup implements DRIGroup {
 	public DRTextField<?> getValueField() {
 		return valueField;
 	}
-	
+
 	public DRIExpression<?> getTitleExpression() {
 		return titleExpression;
 	}
@@ -96,15 +95,15 @@ public class DRGroup implements DRIGroup {
 	public void setTitleStyle(DRStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
-	
+
 	public Integer getTitleWidth() {
 		return titleWidth;
 	}
-	
+
 	public void setTitleWidth(Integer titleWidth) {
 		this.titleWidth = titleWidth;
 	}
-	
+
 	public GroupHeaderLayout getHeaderLayout() {
 		return headerLayout;
 	}
@@ -112,7 +111,7 @@ public class DRGroup implements DRIGroup {
 	public void setHeaderLayout(GroupHeaderLayout headerLayout) {
 		this.headerLayout = headerLayout;
 	}
-	
+
 	public Boolean getHideColumn() {
 		return hideColumn;
 	}
@@ -120,15 +119,15 @@ public class DRGroup implements DRIGroup {
 	public void setHideColumn(Boolean hideColumn) {
 		this.hideColumn = hideColumn;
 	}
-	
+
 	public Boolean getGroupByDataType() {
 		return groupByDataType;
 	}
-	
+
 	public void setGroupByDataType(Boolean groupByDataType) {
 		this.groupByDataType = groupByDataType;
 	}
-	
+
 	public Boolean getShowColumnHeaderAndFooter() {
 		return showColumnHeaderAndFooter;
 	}
@@ -137,11 +136,11 @@ public class DRGroup implements DRIGroup {
 		this.showColumnHeaderAndFooter = showColumnHeaderAndFooter;
 	}
 
-	public DRISimpleExpression<Boolean> getPrintSubtotalsWhenExpression() {
+	public DRIExpression<Boolean> getPrintSubtotalsWhenExpression() {
 		return printSubtotalsWhenExpression;
 	}
 
-	public void setPrintSubtotalsWhenExpression(DRISimpleExpression<Boolean> printSubtotalsWhenExpression) {
+	public void setPrintSubtotalsWhenExpression(DRIExpression<Boolean> printSubtotalsWhenExpression) {
 		this.printSubtotalsWhenExpression = printSubtotalsWhenExpression;
 	}
 
@@ -179,11 +178,11 @@ public class DRGroup implements DRIGroup {
 	public void setReprintHeaderOnEachPage(Boolean reprintHeaderOnEachPage) {
 		this.reprintHeaderOnEachPage = reprintHeaderOnEachPage;
 	}
-	
+
 	public DRBand getHeaderBand() {
 		return headerBand;
 	}
-	
+
 	public DRBand getFooterBand() {
 		return footerBand;
 	}

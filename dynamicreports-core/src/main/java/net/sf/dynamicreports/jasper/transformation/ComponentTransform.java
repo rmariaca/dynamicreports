@@ -42,6 +42,7 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
@@ -331,18 +332,18 @@ public class ComponentTransform {
 
 	private class SubreportExpression implements DRIDesignSimpleExpression {
 		private String name;
-		private DRIDesignSimpleExpression reportExpression;
+		private DRIDesignExpression reportExpression;
 		private Integer pageWidth;
 		private JasperReportDesign reportDesign;
 
-		public SubreportExpression(DRIDesignSimpleExpression reportExpression, Integer pageWidth) {
+		public SubreportExpression(DRIDesignExpression reportExpression, Integer pageWidth) {
 			this.reportExpression = reportExpression;
 			this.pageWidth = pageWidth;
 			this.name = ReportUtils.generateUniqueName("subreportExpression");
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
-			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportExpression.evaluate(reportParameters);
+			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportParameters.getValue(reportExpression.getName());
 			try {
 				reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
 				return JasperCompileManager.compileReport(reportDesign.getDesign());

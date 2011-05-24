@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -48,7 +47,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private Integer imageWidth;
 	private Integer imageHeight;
 	private DRStyle style;
-	private DRISimpleExpression<Boolean> printWhenExpression;
+	private DRIExpression<Boolean> printWhenExpression;
 
   /**
    * Returns the component width.
@@ -159,11 +158,11 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.style = style;
 	}
 
-	public DRISimpleExpression<Boolean> getPrintWhenExpression() {
+	public DRIExpression<Boolean> getPrintWhenExpression() {
 		return printWhenExpression;
 	}
 
-	public void setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
+	public void setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
 		this.printWhenExpression = printWhenExpression;
 	}
 

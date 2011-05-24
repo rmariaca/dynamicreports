@@ -29,8 +29,7 @@ import java.util.Date;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
 
@@ -124,11 +123,7 @@ public class ComponentBuilders {
 		return Components.text(field);
 	}
 
-	public <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {
-		return Components.text(textExpression);
-	}
-
-	public <T> TextFieldBuilder<T> text(DRIComplexExpression<T> textExpression) {
+	public <T> TextFieldBuilder<T> text(DRIExpression<T> textExpression) {
 		return Components.text(textExpression);
 	}
 
@@ -138,7 +133,7 @@ public class ComponentBuilders {
 	}
 
 	//image
-	public ImageBuilder image(DRISimpleExpression<?> imageExpression) {
+	public ImageBuilder image(DRIExpression<?> imageExpression) {
 		return Components.image(imageExpression);
 	}
 
@@ -171,7 +166,7 @@ public class ComponentBuilders {
 		return Components.subreport(jasperReport);
 	}
 
-	public SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
+	public SubreportBuilder subreport(DRIExpression<?> reportExpression) {
 		return Components.subreport(reportExpression);
 	}
 
@@ -203,7 +198,7 @@ public class ComponentBuilders {
 		return Components.booleanField(field);
 	}
 
-	public BooleanFieldBuilder booleanField(DRISimpleExpression<Boolean> valueExpression) {
+	public BooleanFieldBuilder booleanField(DRIExpression<Boolean> valueExpression) {
 		return Components.booleanField(valueExpression);
 	}
 }

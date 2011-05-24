@@ -22,18 +22,18 @@
 
 package net.sf.dynamicreports.design.definition.component;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignSubreport extends DRIDesignComponent {
 
-	public DRIDesignSimpleExpression getReportExpression();
-	
-	public DRIDesignSimpleExpression getConnectionExpression();
+	public DRIDesignExpression getReportExpression();
 
-	public DRIDesignSimpleExpression getDataSourceExpression();	
+	public DRIDesignExpression getConnectionExpression();
+
+	public DRIDesignExpression getDataSourceExpression();
 
 	public Boolean getRunToBottom();
 }

@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 import net.sf.dynamicreports.report.base.barcode.DRChecksumBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,15 +33,15 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractChecksumBarcodeBuilder<T extends AbstractBarcodeBuilder<T, U>, U extends DRChecksumBarcode> extends AbstractBarcodeBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractChecksumBarcodeBuilder(String code, U barcode) {
 		super(code, barcode);
 	}
 
-	protected AbstractChecksumBarcodeBuilder(DRISimpleExpression<String> codeExpression, U barcode) {
+	protected AbstractChecksumBarcodeBuilder(DRIExpression<String> codeExpression, U barcode) {
 		super(codeExpression, barcode);
 	}
-	
+
 	public T setChecksumMode(BarcodeChecksumMode checksumMode) {
 		getObject().setChecksumMode(checksumMode);
 		return (T) this;

@@ -37,7 +37,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 import org.apache.commons.lang.Validate;
@@ -65,7 +65,7 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		getObject().setDataType(field.getField().getDataType());
 	}
 
-	protected AbstractCrosstabGroupBuilder(DRISimpleExpression<V> expression, U crosstabGroup) {
+	protected AbstractCrosstabGroupBuilder(DRIExpression<V> expression, U crosstabGroup) {
 		super(crosstabGroup);
 		getObject().setExpression(expression);
 	}
@@ -110,7 +110,7 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setTotalHeader(DRISimpleExpression<?> totalHeaderExpression) {
+	public T setTotalHeader(DRIExpression<?> totalHeaderExpression) {
 		getObject().setTotalHeaderExpression(totalHeaderExpression);
 		return (T) this;
 	}
@@ -140,12 +140,12 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setOrderByExpression(DRISimpleExpression<? extends Comparable<?>> orderByExpression) {
+	public T setOrderByExpression(DRIExpression<? extends Comparable<?>> orderByExpression) {
 		getObject().setOrderByExpression(orderByExpression);
 		return (T) this;
 	}
 
-	public  T setComparatorExpression(DRISimpleExpression<? extends Comparator<?>> comparatorExpression) {
+	public  T setComparatorExpression(DRIExpression<? extends Comparator<?>> comparatorExpression) {
 		getObject().setComparatorExpression(comparatorExpression);
 		return (T) this;
 	}

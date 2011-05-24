@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -55,21 +55,21 @@ public class VariableBuilder<T> extends AbstractBuilder<VariableBuilder<T>, DRVa
 	protected VariableBuilder(String name, FieldBuilder<?> field, Calculation calculation) {
 		super(new DRVariable<T>(name, field.getField(), calculation));
 	}
-	
+
 	//simple expression
-	protected VariableBuilder(DRISimpleExpression<?> expression, Calculation calculation) {
+	protected VariableBuilder(DRIExpression<?> expression, Calculation calculation) {
 		super(new DRVariable<T>(expression, calculation));
 	}
 
-	protected VariableBuilder(String name, DRISimpleExpression<?> expression, Calculation calculation) {
+	protected VariableBuilder(String name, DRIExpression<?> expression, Calculation calculation) {
 		super(new DRVariable<T>(name, expression, calculation));
 	}
-	
+
 	public VariableBuilder<T> setResetType(Evaluation resetType) {
 		getObject().setResetType(resetType);
 		return this;
 	}
-	
+
 	public VariableBuilder<T> setResetGroup(GroupBuilder<?> resetGroup) {
 		if (resetGroup != null) {
 			getObject().setResetGroup(resetGroup.getGroup());
@@ -79,12 +79,12 @@ public class VariableBuilder<T> extends AbstractBuilder<VariableBuilder<T>, DRVa
 			getObject().setResetGroup(null);
 		}
 		return this;
-	}	
-	
+	}
+
 	public DRVariable<T> getVariable() {
 		return build();
 	}
-	
+
 	public String getName() {
 		return getVariable().getName();
 	}

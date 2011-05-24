@@ -26,37 +26,37 @@ import java.awt.Color;
 
 import net.sf.dynamicreports.design.base.style.DRDesignFont;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChartSubtitle;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {		
+public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {
 	private Color color;
 	private DRDesignFont font;
-	private DRIDesignSimpleExpression title;
-	
+	private DRIDesignExpression title;
+
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public DRDesignFont getFont() {
 		return font;
 	}
-	
+
 	public void setFont(DRDesignFont font) {
 		this.font = font;
 	}
-	
-	public DRIDesignSimpleExpression getTitle() {
+
+	public DRIDesignExpression getTitle() {
 		return title;
 	}
-	
-	public void setTitle(DRIDesignSimpleExpression title) {
+
+	public void setTitle(DRIDesignExpression title) {
 		this.title = title;
-	}	
+	}
 }

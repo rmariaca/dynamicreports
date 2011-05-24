@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DREan128Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class Ean128BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Ean128BarcodeBuilder, DREan128Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected Ean128BarcodeBuilder(String code) {
 		super(code, new DREan128Barcode());
 	}
 
-	protected Ean128BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected Ean128BarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DREan128Barcode());
 	}
 }

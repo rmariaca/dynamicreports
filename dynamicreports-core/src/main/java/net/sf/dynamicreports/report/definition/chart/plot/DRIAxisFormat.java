@@ -25,15 +25,15 @@ package net.sf.dynamicreports.report.definition.chart.plot;
 import java.awt.Color;
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIFont;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIAxisFormat extends Serializable {
-	
-	public DRISimpleExpression<String> getLabelExpression();
+
+	public DRIExpression<String> getLabelExpression();
 
 	public DRIFont getLabelFont();
 
@@ -46,10 +46,10 @@ public interface DRIAxisFormat extends Serializable {
 	public String getTickLabelMask();
 
 	public Double getTickLabelRotation();
-	
+
 	public Color getLineColor();
 
-	public DRISimpleExpression<? extends Number> getRangeMinValueExpression();
+	public DRIExpression<? extends Number> getRangeMinValueExpression();
 
-	public DRISimpleExpression<? extends Number> getRangeMaxValueExpression();
+	public DRIExpression<? extends Number> getRangeMaxValueExpression();
 }

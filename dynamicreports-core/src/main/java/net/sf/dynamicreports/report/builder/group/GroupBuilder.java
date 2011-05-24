@@ -32,7 +32,6 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -42,7 +41,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "rawtypes", "ucd"})
 public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBuilder<T, DRGroup> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRIExpression valueExpression;
 
 	protected GroupBuilder() {
@@ -56,7 +55,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	protected void setValueExpression(DRIExpression<?> valueExpression) {
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public T setHeaderLayout(GroupHeaderLayout headerLayout) {
 		getObject().setHeaderLayout(headerLayout);
 		return (T) this;
@@ -65,13 +64,13 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	public T showColumnHeaderAndFooter() {
 		return setShowColumnHeaderAndFooter(true);
 	}
-	
+
 	public T setShowColumnHeaderAndFooter(Boolean showColumnHeaderAndFooter) {
 		getObject().setShowColumnHeaderAndFooter(showColumnHeaderAndFooter);
 		return (T) this;
 	}
 
-	public T setPrintSubtotalsWhenExpression(DRISimpleExpression<Boolean> printSubtotalsWhenExpression) {
+	public T setPrintSubtotalsWhenExpression(DRIExpression<Boolean> printSubtotalsWhenExpression) {
 		getObject().setPrintSubtotalsWhenExpression(printSubtotalsWhenExpression);
 		return (T) this;
 	}
@@ -84,7 +83,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	public T startInNewPage() {
 		return setStartInNewPage(true);
 	}
-	
+
 	public T setStartInNewPage(Boolean startInNewPage) {
 		getObject().setStartInNewPage(startInNewPage);
 		return (T) this;
@@ -93,7 +92,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	public T startInNewColumn() {
 		return setStartInNewColumn(true);
 	}
-	
+
 	public T setStartInNewColumn(Boolean startInNewColumn) {
 		getObject().setStartInNewColumn(startInNewColumn);
 		return (T) this;
@@ -102,7 +101,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	public T reprintHeaderOnEachPage() {
 		return setReprintHeaderOnEachPage(true);
 	}
-	
+
 	public T setReprintHeaderOnEachPage(Boolean reprintHeaderOnEachPage) {
 		getObject().setReprintHeaderOnEachPage(reprintHeaderOnEachPage);
 		return (T) this;
@@ -111,12 +110,12 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	public T groupByDataType() {
 		return setGroupByDataType(true);
 	}
-	
+
 	public T setGroupByDataType(Boolean groupByDataType) {
 		getObject().setGroupByDataType(groupByDataType);
 		return (T) this;
 	}
-	
+
 	public T setStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getValueField().setStyle(style.getStyle());
@@ -126,12 +125,12 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		}
 		return (T) this;
 	}
-	
+
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getObject().getValueField().setHorizontalAlignment(horizontalAlignment);
 		return (T) this;
 	}
-	
+
 	public T setTitleStyle(StyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
@@ -141,12 +140,12 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		}
 		return (T) this;
 	}
-	
+
 	public T setTitleWidth(Integer titleWidth) {
 		getObject().setTitleWidth(titleWidth);
 		return (T) this;
 	}
-	
+
 	//header
 	public T setHeaderSplitType(SplitType splitType) {
 		getObject().getHeaderBand().setSplitType(splitType);
@@ -161,11 +160,11 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		}
 		return (T) this;
 	}
-	
+
 	public T header(ComponentBuilder<?, ?> ...components) {
 		return addHeaderComponent(components);
 	}
-	
+
 	//footer
 	public T setFooterSplitType(SplitType splitType) {
 		getObject().getFooterBand().setSplitType(splitType);
@@ -180,17 +179,17 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		}
 		return (T) this;
 	}
-	
+
 	public T footer(ComponentBuilder<?, ?> ...components) {
 		return addFooterComponent(components);
 	}
-	
+
 	@Override
 	protected void configure() {
 		super.configure();
 		getObject().getValueField().setValueExpression(valueExpression);
 	}
-	
+
 	public DRGroup getGroup() {
 		return build();
 	}

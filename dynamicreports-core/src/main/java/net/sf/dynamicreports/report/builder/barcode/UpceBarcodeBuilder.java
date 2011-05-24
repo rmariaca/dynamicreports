@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRUpceBarcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class UpceBarcodeBuilder extends AbstractChecksumBarcodeBuilder<UpceBarcodeBuilder, DRUpceBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected UpceBarcodeBuilder(String code) {
 		super(code, new DRUpceBarcode());
 	}
 
-	protected UpceBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected UpceBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRUpceBarcode());
 	}
 }

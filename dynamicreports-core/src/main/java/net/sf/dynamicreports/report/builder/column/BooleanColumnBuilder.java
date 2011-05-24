@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -45,7 +45,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 		getObject().setValueExpression(field.getField());
 	}
 
-	protected BooleanColumnBuilder(DRISimpleExpression<Boolean> valueExpression) {
+	protected BooleanColumnBuilder(DRIExpression<Boolean> valueExpression) {
 		super(new DRBooleanColumn());
 		getObject().setValueExpression(valueExpression);
 	}
@@ -159,7 +159,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	}
 
 	@Override
-	public BooleanColumnBuilder setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
+	public BooleanColumnBuilder setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
 		getObject().setPrintWhenExpression(printWhenExpression);
 		return this;
 	}

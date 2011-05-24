@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.base.component.DRSubreport;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperReport;
 
@@ -38,7 +38,7 @@ import net.sf.jasperreports.engine.JasperReport;
 @SuppressWarnings("ucd")
 public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder, DRSubreport> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected SubreportBuilder() {
 		super(new DRSubreport());
 	}
@@ -53,8 +53,8 @@ public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder
 		getObject().setReportExpression(Expressions.value(jasperReport));
 		return this;
 	}
-	
-	public SubreportBuilder setReport(DRISimpleExpression<?> reportExpression) {
+
+	public SubreportBuilder setReport(DRIExpression<?> reportExpression) {
 		getObject().setReportExpression(reportExpression);
 		return this;
 	}
@@ -64,8 +64,8 @@ public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder
 		getObject().setConnectionExpression(Expressions.value(connection));
 		return this;
 	}
-	
-	public SubreportBuilder setConnection(DRISimpleExpression<Connection> connectionExpression) {
+
+	public SubreportBuilder setConnection(DRIExpression<Connection> connectionExpression) {
 		getObject().setConnectionExpression(connectionExpression);
 		return this;
 	}
@@ -75,14 +75,14 @@ public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder
 		getObject().setDataSourceExpression(Expressions.value(dataSource));
 		return this;
 	}
-	
-	public SubreportBuilder setDataSource(DRISimpleExpression<JRDataSource> dataSourceExpression) {
+
+	public SubreportBuilder setDataSource(DRIExpression<JRDataSource> dataSourceExpression) {
 		getObject().setDataSourceExpression(dataSourceExpression);
 		return this;
 	}
-	
+
 	public SubreportBuilder setRunToBottom(Boolean runToBottom) {
 		getObject().setRunToBottom(runToBottom);
 		return this;
-	}	
+	}
 }

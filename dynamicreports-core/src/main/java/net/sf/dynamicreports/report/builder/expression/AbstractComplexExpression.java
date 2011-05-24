@@ -34,7 +34,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -76,16 +75,6 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 	protected void addExpression(VariableBuilder<?> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		this.expressions.add(variable.getVariable());
-	}
-
-	protected void addExpression(DRISimpleExpression<?> expression) {
-		Validate.notNull(expression, "expression must not be null");
-		this.expressions.add(expression);
-	}
-
-	protected void addExpression(DRIComplexExpression<?> expression) {
-		Validate.notNull(expression, "expression must not be null");
-		this.expressions.add(expression);
 	}
 
 	protected void addExpression(DRIExpression<?> expression) {

@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class PageXslashYBuilder extends HyperLinkComponentBuilder<PageXslashYBuilder, DRPageXofY> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected PageXslashYBuilder() {
 		super(new DRPageXofY());
 	}
@@ -44,17 +44,17 @@ public class PageXslashYBuilder extends HyperLinkComponentBuilder<PageXslashYBui
 		getObject().setFormatExpression(Expressions.text(format));
 		return this;
 	}
-	
-	public PageXslashYBuilder setFormatExpression(DRISimpleExpression<String> formatExpression) {
+
+	public PageXslashYBuilder setFormatExpression(DRIExpression<String> formatExpression) {
 		getObject().setFormatExpression(formatExpression);
 		return this;
 	}
-	
+
 	public PageXslashYBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
-	
+
 	@Override
 	protected void configure() {
 		if (getObject().getFormatExpression() == null) {

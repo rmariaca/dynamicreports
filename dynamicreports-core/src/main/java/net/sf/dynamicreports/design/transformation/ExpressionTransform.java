@@ -181,14 +181,14 @@ public class ExpressionTransform {
 	public DRIDesignPropertyExpression transformPropertyExpression(DRIPropertyExpression propertyExpression) throws DRException {
 		DRDesignPropertyExpression designPropertyExpression = new DRDesignPropertyExpression();
 		designPropertyExpression.setName(propertyExpression.getName());
-		designPropertyExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(propertyExpression.getValueExpression()));
+		designPropertyExpression.setValueExpression(transformExpression(propertyExpression.getValueExpression()));
 		return designPropertyExpression;
 	}
 
 	public DRIDesignParameterExpression transformParameterExpression(DRIParameterExpression parameterExpression) throws DRException {
 		DRDesignParameterExpression designParameterExpression = new DRDesignParameterExpression();
 		designParameterExpression.setName(parameterExpression.getName());
-		designParameterExpression.setValueExpression((DRIDesignSimpleExpression) transformExpression(parameterExpression.getValueExpression()));
+		designParameterExpression.setValueExpression(transformExpression(parameterExpression.getValueExpression()));
 		return designParameterExpression;
 	}
 

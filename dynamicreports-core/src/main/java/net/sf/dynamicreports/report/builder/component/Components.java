@@ -31,8 +31,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BreakType;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
 
@@ -130,11 +129,7 @@ public class Components {
 		return new TextFieldBuilder<T>().setText(field);
 	}
 
-	public static <T> TextFieldBuilder<T> text(DRISimpleExpression<T> textExpression) {
-		return new TextFieldBuilder<T>().setText(textExpression);
-	}
-
-	public static <T> TextFieldBuilder<T> text(DRIComplexExpression<T> textExpression) {
+	public static <T> TextFieldBuilder<T> text(DRIExpression<T> textExpression) {
 		return new TextFieldBuilder<T>().setText(textExpression);
 	}
 
@@ -144,7 +139,7 @@ public class Components {
 	}
 
 	//image
-	public static ImageBuilder image(DRISimpleExpression<?> imageExpression) {
+	public static ImageBuilder image(DRIExpression<?> imageExpression) {
 		return new ImageBuilder().setImage(imageExpression);
 	}
 
@@ -185,7 +180,7 @@ public class Components {
 		return new SubreportBuilder().setReport(jasperReport);
 	}
 
-	public static SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
+	public static SubreportBuilder subreport(DRIExpression<?> reportExpression) {
 		return new SubreportBuilder().setReport(reportExpression);
 	}
 
@@ -217,7 +212,7 @@ public class Components {
 		return new BooleanFieldBuilder().setValue(field);
 	}
 
-	public static BooleanFieldBuilder booleanField(DRISimpleExpression<Boolean> valueExpression) {
+	public static BooleanFieldBuilder booleanField(DRIExpression<Boolean> valueExpression) {
 		return new BooleanFieldBuilder().setValue(valueExpression);
 	}
 }

@@ -24,18 +24,18 @@ package net.sf.dynamicreports.report.definition.component;
 
 import java.sql.Connection;
 
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRISubreport extends DRIDimensionComponent {
 
-	public DRISimpleExpression<?> getReportExpression();
-	
-	public DRISimpleExpression<Connection> getConnectionExpression();
+	public DRIExpression<?> getReportExpression();
 
-	public DRISimpleExpression<?> getDataSourceExpression();	
+	public DRIExpression<Connection> getConnectionExpression();
+
+	public DRIExpression<?> getDataSourceExpression();
 
 	public Boolean getRunToBottom();
 }

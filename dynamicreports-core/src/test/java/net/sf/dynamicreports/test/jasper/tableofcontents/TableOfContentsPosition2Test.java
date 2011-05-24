@@ -25,7 +25,6 @@ package net.sf.dynamicreports.test.jasper.tableofcontents;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
@@ -39,8 +38,6 @@ public class TableOfContentsPosition2Test extends AbstractJasperPositionTest {
 
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
-	private ColumnGroupBuilder group1;
-	private ColumnGroupBuilder group2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -53,9 +50,7 @@ public class TableOfContentsPosition2Test extends AbstractJasperPositionTest {
 	  		column1 = col.column("Column1", "field1", type.stringType()),
 	  		column2 = col.column("Column2", "field2", type.stringType()),
 	  		col.column("Column3", "field3", type.stringType()))
-		  .groupBy(
-		  	group1 = grp.group(column1),
-		  	group2 = grp.group(column2));
+		  .groupBy(column1, column2);
 	}
 
 	@Override

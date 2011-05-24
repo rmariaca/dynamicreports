@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -48,7 +48,7 @@ public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldB
 		return this;
 	}
 
-	public BooleanFieldBuilder setValue(DRISimpleExpression<Boolean> valueExpression) {
+	public BooleanFieldBuilder setValue(DRIExpression<Boolean> valueExpression) {
 		getObject().setValueExpression(valueExpression);
 		return this;
 	}

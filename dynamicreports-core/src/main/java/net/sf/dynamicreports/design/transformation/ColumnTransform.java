@@ -50,7 +50,7 @@ import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -271,7 +271,7 @@ public class ColumnTransform {
 		return accessor.getReport().getDetailRowHighlighters();
 	}
 
-	private DRConditionalStyle detailRowConditionalStyle(DRISimpleStyle style, DRISimpleExpression<Boolean> expression) {
+	private DRConditionalStyle detailRowConditionalStyle(DRISimpleStyle style, DRIExpression<Boolean> expression) {
 		DRConditionalStyle conditionalStyle = new DRConditionalStyle(expression);
 		accessor.getStyleTransform().copyStyle(conditionalStyle, style);
 		return conditionalStyle;

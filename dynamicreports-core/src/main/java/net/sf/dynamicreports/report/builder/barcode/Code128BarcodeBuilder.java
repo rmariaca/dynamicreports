@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRCode128Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class Code128BarcodeBuilder extends AbstractBarcodeBuilder<Code128BarcodeBuilder, DRCode128Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected Code128BarcodeBuilder(String code) {
 		super(code, new DRCode128Barcode());
 	}
 
-	protected Code128BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected Code128BarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRCode128Barcode());
 	}
 }

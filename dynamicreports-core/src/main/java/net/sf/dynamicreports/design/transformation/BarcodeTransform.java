@@ -38,7 +38,6 @@ import net.sf.dynamicreports.design.base.barcode.DRDesignRoyalMailCustomerBarcod
 import net.sf.dynamicreports.design.base.barcode.DRDesignUpcaBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUpceBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUspsIntelligentMailBarcode;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIChecksumBarcode;
@@ -63,12 +62,12 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class BarcodeTransform {
 	private DesignTransformAccessor accessor;
-	
+
 	public BarcodeTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
-	protected DRDesignBarcode transform(DRIBarcode barcode) throws DRException {		
+
+	protected DRDesignBarcode transform(DRIBarcode barcode) throws DRException {
 		if (barcode instanceof DRICodabarBarcode) {
 			return codabar((DRICodabarBarcode) barcode);
 		}
@@ -115,50 +114,50 @@ public class BarcodeTransform {
 			throw new DRDesignReportException("Barcode " + barcode.getClass().getName() + " not supported");
 		}
 	}
-	
+
 	private void barcode(DRDesignBarcode designBarcode, DRIBarcode barcode) throws DRException {
 		designBarcode.setWidth(accessor.getTemplateTransform().getBarcodeWidth(barcode));
 		designBarcode.setHeight(accessor.getTemplateTransform().getBarcodeHeight(barcode));
-		designBarcode.setCodeExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(barcode.getCodeExpression()));
-		designBarcode.setPatternExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(barcode.getPatternExpression()));
+		designBarcode.setCodeExpression(accessor.getExpressionTransform().transformExpression(barcode.getCodeExpression()));
+		designBarcode.setPatternExpression(accessor.getExpressionTransform().transformExpression(barcode.getPatternExpression()));
 		designBarcode.setModuleWidth(barcode.getModuleWidth());
 		designBarcode.setOrientation(barcode.getOrientation());
 		designBarcode.setTextPosition(barcode.getTextPosition());
 		designBarcode.setQuietZone(barcode.getQuietZone());
-		designBarcode.setVerticalQuietZone(barcode.getVerticalQuietZone());		
+		designBarcode.setVerticalQuietZone(barcode.getVerticalQuietZone());
 	}
-	
+
 	private void checksumBarcode(DRDesignChecksumBarcode designBarcode, DRIChecksumBarcode barcode) throws DRException {
 		barcode(designBarcode, barcode);
 		designBarcode.setChecksumMode(barcode.getChecksumMode());
 	}
-	
+
 	private DRDesignCodabarBarcode codabar(DRICodabarBarcode barcode) throws DRException {
 		DRDesignCodabarBarcode designBarcode = new DRDesignCodabarBarcode();
 		barcode(designBarcode, barcode);
 		designBarcode.setWideFactor(barcode.getWideFactor());
 		return designBarcode;
 	}
-	
+
 	private DRDesignCode128Barcode code128(DRICode128Barcode barcode) throws DRException {
 		DRDesignCode128Barcode designBarcode = new DRDesignCode128Barcode();
 		barcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignEan128Barcode ean128(DRIEan128Barcode barcode) throws DRException {
 		DRDesignEan128Barcode designBarcode = new DRDesignEan128Barcode();
 		checksumBarcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignDataMatrixBarcode dataMatrix(DRIDataMatrixBarcode barcode) throws DRException {
 		DRDesignDataMatrixBarcode designBarcode = new DRDesignDataMatrixBarcode();
 		barcode(designBarcode, barcode);
 		designBarcode.setShape(barcode.getShape());
 		return designBarcode;
 	}
-	
+
 	private DRDesignCode39Barcode code39(DRICode39Barcode barcode) throws DRException {
 		DRDesignCode39Barcode designBarcode = new DRDesignCode39Barcode();
 		checksumBarcode(designBarcode, barcode);
@@ -169,7 +168,7 @@ public class BarcodeTransform {
 		designBarcode.setWideFactor(barcode.getWideFactor());
 		return designBarcode;
 	}
-	
+
 	private DRDesignInterleaved2Of5Barcode interleaved2Of5(DRIInterleaved2Of5Barcode barcode) throws DRException {
 		DRDesignInterleaved2Of5Barcode designBarcode = new DRDesignInterleaved2Of5Barcode();
 		checksumBarcode(designBarcode, barcode);
@@ -177,31 +176,31 @@ public class BarcodeTransform {
 		designBarcode.setWideFactor(barcode.getWideFactor());
 		return designBarcode;
 	}
-	
+
 	private DRDesignUpcaBarcode upca(DRIUpcaBarcode barcode) throws DRException {
 		DRDesignUpcaBarcode designBarcode = new DRDesignUpcaBarcode();
 		checksumBarcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignUpceBarcode upce(DRIUpceBarcode barcode) throws DRException {
 		DRDesignUpceBarcode designBarcode = new DRDesignUpceBarcode();
 		checksumBarcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignEan13Barcode ean13(DRIEan13Barcode barcode) throws DRException {
 		DRDesignEan13Barcode designBarcode = new DRDesignEan13Barcode();
 		checksumBarcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignEan8Barcode ean8(DRIEan8Barcode barcode) throws DRException {
 		DRDesignEan8Barcode designBarcode = new DRDesignEan8Barcode();
 		checksumBarcode(designBarcode, barcode);
 		return designBarcode;
 	}
-	
+
 	private DRDesignUspsIntelligentMailBarcode uspsIntelligentMail(DRIUspsIntelligentMailBarcode barcode) throws DRException {
 		DRDesignUspsIntelligentMailBarcode designBarcode = new DRDesignUspsIntelligentMailBarcode();
 		checksumBarcode(designBarcode, barcode);
@@ -210,7 +209,7 @@ public class BarcodeTransform {
 		designBarcode.setTrackHeight(barcode.getTrackHeight());
 		return designBarcode;
 	}
-	
+
 	private DRDesignRoyalMailCustomerBarcode royalMailCustomer(DRIRoyalMailCustomerBarcode barcode) throws DRException {
 		DRDesignRoyalMailCustomerBarcode designBarcode = new DRDesignRoyalMailCustomerBarcode();
 		checksumBarcode(designBarcode, barcode);
@@ -219,7 +218,7 @@ public class BarcodeTransform {
 		designBarcode.setTrackHeight(barcode.getTrackHeight());
 		return designBarcode;
 	}
-	
+
 	private DRDesignPostnetBarcode postnet(DRIPostnetBarcode barcode) throws DRException {
 		DRDesignPostnetBarcode designBarcode = new DRDesignPostnetBarcode();
 		checksumBarcode(designBarcode, barcode);
@@ -229,7 +228,7 @@ public class BarcodeTransform {
 		designBarcode.setIntercharGapWidth(barcode.getIntercharGapWidth());
 		return designBarcode;
 	}
-	
+
 	private DRDesignPdf417Barcode pdf417(DRIPdf417Barcode barcode) throws DRException {
 		DRDesignPdf417Barcode designBarcode = new DRDesignPdf417Barcode();
 		barcode(designBarcode, barcode);

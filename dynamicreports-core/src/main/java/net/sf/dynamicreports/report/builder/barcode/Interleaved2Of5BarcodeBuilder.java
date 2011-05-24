@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRInterleaved2Of5Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class Interleaved2Of5BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Interleaved2Of5BarcodeBuilder, DRInterleaved2Of5Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected Interleaved2Of5BarcodeBuilder(String code) {
 		super(code, new DRInterleaved2Of5Barcode());
 	}
 
-	protected Interleaved2Of5BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected Interleaved2Of5BarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRInterleaved2Of5Barcode());
 	}
 
@@ -49,5 +49,5 @@ public class Interleaved2Of5BarcodeBuilder extends AbstractChecksumBarcodeBuilde
 	public Interleaved2Of5BarcodeBuilder setWideFactor(Double wideFactor) {
 		getObject().setWideFactor(wideFactor);
 		return this;
-	}	
+	}
 }

@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<T, U>, U extends DRPiePlot> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractPieChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
@@ -54,14 +54,14 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 	public T setKey(String fieldName, Class<String> valueClass) {
 		return setKey(DynamicReports.field(fieldName, valueClass));
 	}
-	
+
 	public T setKey(FieldBuilder<String> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return (T) this;
 	}
-	
-	public T setKey(DRISimpleExpression<String> expression) {
+
+	public T setKey(DRIExpression<String> expression) {
 		getDataset().setValueExpression(expression);
 		return (T) this;
 	}
@@ -75,10 +75,10 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
 		for (ChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	//plot
 	public T setCircular(Boolean circular) {
 		getPlot().setCircular(circular);
@@ -94,11 +94,11 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 		getPlot().setLegendLabelFormat(legendLabelFormat);
 		return (T) this;
 	}
-	
+
 	private DRChartDataset getDataset() {
 		return getObject().getDataset();
 	}
-	
+
 	protected U getPlot() {
 		return (U) getObject().getPlot();
 	}

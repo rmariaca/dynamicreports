@@ -30,7 +30,6 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -172,7 +171,7 @@ public class BandTransform {
 		list.setType(band.getList().getType());
 		list.setGap(accessor.getTemplateTransform().getListGap(band.getList()));
 		list.setStretchType(accessor.getTemplateTransform().getListStretchType(band.getList()));
-		list.setPrintWhenExpression((DRIDesignSimpleExpression) accessor.getExpressionTransform().transformExpression(band.getList().getPrintWhenExpression()));
+		list.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(band.getList().getPrintWhenExpression()));
 		designBand.setList(list);
 		return designBand;
 	}

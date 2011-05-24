@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractCategoryChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
@@ -54,14 +54,14 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 	public T setCategory(String fieldName, Class<String> valueClass) {
 		return setCategory(DynamicReports.field(fieldName, valueClass));
 	}
-	
+
 	public T setCategory(FieldBuilder<String> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return (T) this;
 	}
-	
-	public T setCategory(DRISimpleExpression<String> expression) {
+
+	public T setCategory(DRIExpression<String> expression) {
 		getDataset().setValueExpression(expression);
 		return (T) this;
 	}
@@ -75,32 +75,32 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
 		for (ChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public T setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
 		getDataset().setUseSeriesAsCategory(useSeriesAsCategory);
 		return (T) this;
 	}
-	
+
 	//plot
 	public T setCategoryAxisFormat(AxisFormatBuilder categoryAxisFormat) {
 		Validate.notNull(categoryAxisFormat, "categoryAxisFormat must not be null");
 		getPlot().setXAxisFormat(categoryAxisFormat.build());
 		return (T) this;
 	}
-	
+
 	public T setValueAxisFormat(AxisFormatBuilder valueAxisFormat) {
 		Validate.notNull(valueAxisFormat, "valueAxisFormat must not be null");
 		getPlot().setYAxisFormat(valueAxisFormat.build());
 		return (T) this;
 	}
-	
+
 	private DRCategoryDataset getDataset() {
 		return (DRCategoryDataset) getObject().getDataset();
 	}
-	
+
 	protected U getPlot() {
 		return (U) getObject().getPlot();
 	}

@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.crosstab.DRCrosstabColumnGroup;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -43,7 +43,7 @@ public class CrosstabColumnGroupBuilder<T> extends AbstractCrosstabGroupBuilder<
 		super(field, new DRCrosstabColumnGroup<T>());
 	}
 
-	protected CrosstabColumnGroupBuilder(DRISimpleExpression<T> expression) {
+	protected CrosstabColumnGroupBuilder(DRIExpression<T> expression) {
 		super(expression, new DRCrosstabColumnGroup<T>());
 	}
 

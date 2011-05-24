@@ -33,9 +33,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 import org.apache.commons.lang.Validate;
@@ -66,12 +64,7 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		return this;
 	}
 
-	public TextFieldBuilder<T> setText(DRISimpleExpression<T> textExpression) {
-		getObject().setValueExpression(textExpression);
-		return this;
-	}
-
-	public TextFieldBuilder<T> setText(DRIComplexExpression<T> textExpression) {
+	public TextFieldBuilder<T> setText(DRIExpression<T> textExpression) {
 		getObject().setValueExpression(textExpression);
 		return this;
 	}

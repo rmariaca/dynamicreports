@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -53,7 +53,7 @@ public class Crosstabs {
 		return new CrosstabColumnGroupBuilder<T>(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public static <T> CrosstabColumnGroupBuilder<T> columnGroup(DRISimpleExpression<T> expression) {
+	public static <T> CrosstabColumnGroupBuilder<T> columnGroup(DRIExpression<T> expression) {
 		return new CrosstabColumnGroupBuilder<T>(expression);
 	}
 
@@ -70,7 +70,7 @@ public class Crosstabs {
 		return new CrosstabRowGroupBuilder<T>(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public static <T> CrosstabRowGroupBuilder<T> rowGroup(DRISimpleExpression<T> expression) {
+	public static <T> CrosstabRowGroupBuilder<T> rowGroup(DRIExpression<T> expression) {
 		return new CrosstabRowGroupBuilder<T>(expression);
 	}
 
@@ -89,7 +89,7 @@ public class Crosstabs {
 		return new CrosstabVariableBuilder<T>(DynamicReports.field(fieldName, valueClass), calculation);
 	}
 
-	public static <T> CrosstabVariableBuilder<T> variable(DRISimpleExpression<?> expression, Calculation calculation) {
+	public static <T> CrosstabVariableBuilder<T> variable(DRIExpression<?> expression, Calculation calculation) {
 		return new CrosstabVariableBuilder<T>(expression, calculation);
 	}
 
@@ -122,20 +122,20 @@ public class Crosstabs {
 		return measure.setTitle(title);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(DRISimpleExpression<?> expression, Calculation calculation) {
+	public static <T> CrosstabMeasureBuilder<T> measure(DRIExpression<?> expression, Calculation calculation) {
 		return new CrosstabMeasureBuilder<T>(expression, calculation);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(String title, DRISimpleExpression<?> expression, Calculation calculation) {
+	public static <T> CrosstabMeasureBuilder<T> measure(String title, DRIExpression<?> expression, Calculation calculation) {
 		CrosstabMeasureBuilder<T> measure = measure(expression, calculation);
 		return measure.setTitle(title);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(DRISimpleExpression<?> expression) {
+	public static <T> CrosstabMeasureBuilder<T> measure(DRIExpression<?> expression) {
 		return new CrosstabMeasureBuilder<T>(expression);
 	}
 
-	public static <T> CrosstabMeasureBuilder<T> measure(String title, DRISimpleExpression<?> expression) {
+	public static <T> CrosstabMeasureBuilder<T> measure(String title, DRIExpression<?> expression) {
 		CrosstabMeasureBuilder<T> measure = measure(expression);
 		return measure.setTitle(title);
 	}

@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.barcode;
 
 import net.sf.dynamicreports.report.base.barcode.DRUspsIntelligentMailBarcode;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -32,12 +32,12 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 @SuppressWarnings("ucd")
 public class UspsIntelligentMailBarcodeBuilder extends AbstractChecksumBarcodeBuilder<UspsIntelligentMailBarcodeBuilder, DRUspsIntelligentMailBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected UspsIntelligentMailBarcodeBuilder(String code) {
 		super(code, new DRUspsIntelligentMailBarcode());
 	}
 
-	protected UspsIntelligentMailBarcodeBuilder(DRISimpleExpression<String> codeExpression) {
+	protected UspsIntelligentMailBarcodeBuilder(DRIExpression<String> codeExpression) {
 		super(codeExpression, new DRUspsIntelligentMailBarcode());
 	}
 
@@ -54,5 +54,5 @@ public class UspsIntelligentMailBarcodeBuilder extends AbstractChecksumBarcodeBu
 	public UspsIntelligentMailBarcodeBuilder setTrackHeight(Double trackHeight) {
 		getObject().setTrackHeight(trackHeight);
 		return this;
-	}	
+	}
 }

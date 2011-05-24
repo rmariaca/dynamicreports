@@ -26,7 +26,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 
@@ -34,33 +34,33 @@ import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDesignBarcode {
-	private DRIDesignSimpleExpression codeExpression;
-	private DRIDesignSimpleExpression patternExpression;
+	private DRIDesignExpression codeExpression;
+	private DRIDesignExpression patternExpression;
 	private Double moduleWidth;
 	private BarcodeOrientation orientation;
 	private BarcodeTextPosition textPosition;
 	private Double quietZone;
-	private Double verticalQuietZone;	
+	private Double verticalQuietZone;
 	private EvaluationTime evaluationTime;
 	private DRIDesignGroup evaluationGroup;
-	
+
 	public DRDesignBarcode(String name) {
 		super(name);
 	}
 
-	public DRIDesignSimpleExpression getCodeExpression() {
+	public DRIDesignExpression getCodeExpression() {
 		return codeExpression;
 	}
 
-	public void setCodeExpression(DRIDesignSimpleExpression codeExpression) {
+	public void setCodeExpression(DRIDesignExpression codeExpression) {
 		this.codeExpression = codeExpression;
 	}
 
-	public DRIDesignSimpleExpression getPatternExpression() {
+	public DRIDesignExpression getPatternExpression() {
 		return patternExpression;
 	}
 
-	public void setPatternExpression(DRIDesignSimpleExpression patternExpression) {
+	public void setPatternExpression(DRIDesignExpression patternExpression) {
 		this.patternExpression = patternExpression;
 	}
 
@@ -118,5 +118,5 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 
 	public void setEvaluationGroup(DRIDesignGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
-	}	
+	}
 }
