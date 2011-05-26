@@ -274,12 +274,11 @@ class BandComponentsTransform {
 				headerWidth = previousCellDimension.getHeaderWidth() + previousCellDimension.getTotalHeaderWidth();
 			}
 			headerHeight = accessor.getTemplateTransform().getCrosstabColumnGroupHeaderHeight(columnGroup, designCrosstab, groupHeight);
-			if (accessor.getTemplateTransform().isCrosstabColumnGroupShowTotal(columnGroup)) {
-				totalHeaderWidth = accessor.getTemplateTransform().getCrosstabColumnGroupTotalHeaderWidth(columnGroup, crosstab.getCellWidth(), designCrosstab);
-				totalHeaderHeight = headerHeight;
-				if (previousCellDimension != null) {
-					totalHeaderHeight += previousCellDimension.getTotalHeaderHeight();
-				}
+
+			totalHeaderWidth = accessor.getTemplateTransform().getCrosstabColumnGroupTotalHeaderWidth(columnGroup, crosstab.getCellWidth(), designCrosstab);
+			totalHeaderHeight = headerHeight;
+			if (previousCellDimension != null) {
+				totalHeaderHeight += previousCellDimension.getTotalHeaderHeight();
 			}
 
 			GroupCellDimension groupCellDimension = new GroupCellDimension();
@@ -308,13 +307,12 @@ class BandComponentsTransform {
 			else {
 				headerHeight = previousCellDimension.getHeaderHeight() + previousCellDimension.getTotalHeaderHeight();
 			}
-			if (accessor.getTemplateTransform().isCrosstabRowGroupShowTotal(rowGroup)) {
-				totalHeaderWidth = headerWidth;
-				if (previousCellDimension != null) {
-					totalHeaderWidth += previousCellDimension.getTotalHeaderWidth();
-				}
-				totalHeaderHeight = accessor.getTemplateTransform().getCrosstabRowGroupTotalHeaderHeight(rowGroup, crosstab.getCellHeight(), designCrosstab);
+
+			totalHeaderWidth = headerWidth;
+			if (previousCellDimension != null) {
+				totalHeaderWidth += previousCellDimension.getTotalHeaderWidth();
 			}
+			totalHeaderHeight = accessor.getTemplateTransform().getCrosstabRowGroupTotalHeaderHeight(rowGroup, crosstab.getCellHeight(), designCrosstab);
 
 			GroupCellDimension groupCellDimension = new GroupCellDimension();
 			groupCellDimension.setHeaderWidth(headerWidth);
