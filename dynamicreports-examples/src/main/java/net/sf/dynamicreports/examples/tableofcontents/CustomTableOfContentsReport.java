@@ -74,7 +74,7 @@ public class CustomTableOfContentsReport {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .setTableOfContents(tableOfContentsCustomizer)
+			  .tableOfContents(tableOfContentsCustomizer)
 			  .columns(
 			  	countryColumn,
 			  	itemColumn,

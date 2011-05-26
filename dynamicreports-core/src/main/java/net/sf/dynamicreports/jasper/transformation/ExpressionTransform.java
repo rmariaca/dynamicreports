@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
@@ -74,6 +75,9 @@ public class ExpressionTransform {
 		for (DRIDesignSystemExpression expression : accessor.getReport().getSystemExpressions()) {
 			addSystemExpression(expression);
 		}
+		for (DRIDesignJasperExpression expression : accessor.getReport().getJasperExpressions()) {
+			addJasperExpression(expression);
+		}
 		for (DRIDesignSimpleExpression expression : accessor.getReport().getSimpleExpressions()) {
 			addSimpleExpression(expression);
 		}
@@ -90,6 +94,12 @@ public class ExpressionTransform {
 			return;
 		accessor.getCustomValues().addValueType(systemExpression.getName(), ValueType.SYSTEM_EXPRESSION);
 		addExpression(systemExpression);
+	}
+
+	public void addJasperExpression(DRIDesignJasperExpression jasperExpression) {
+		if (jasperExpression == null)
+			return;
+		addExpression(jasperExpression);
 	}
 
 	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
@@ -198,6 +208,9 @@ public class ExpressionTransform {
 				return toVariableValue(name);
 			}
 			//throw new JasperDesignException("System expression \"" + name + "\" not supported");
+		}
+		else if (expression instanceof DRIDesignJasperExpression) {
+			return ((DRIDesignJasperExpression) expression).getExpression();
 		}
 		else {
 			throw new JasperDesignException("Expression " + expression.getClass().getName() + " not supported");

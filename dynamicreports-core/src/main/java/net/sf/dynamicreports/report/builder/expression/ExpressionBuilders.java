@@ -108,7 +108,7 @@ public class ExpressionBuilders {
 		return Expressions.value(value, valueClass);
 	}
 
-	public ValueExpression<String> text(String text) {
+	public JasperExpression<String> text(String text) {
 		return Expressions.text(text);
 	}
 
@@ -118,6 +118,11 @@ public class ExpressionBuilders {
 
 	public MessageExpression message(String key, Object[] arguments) {
 		return Expressions.message(key, arguments);
+	}
+
+	//jasper
+	public <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
+		return Expressions.jasper(expression, valueClass);
 	}
 
 	//property

@@ -50,6 +50,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
@@ -466,7 +467,7 @@ public class ComponentTransform {
 		}
 
 		if (expression instanceof DRIDesignField || expression instanceof DRIDesignSystemExpression ||
-				expression instanceof DRIDesignSimpleExpression) {
+				expression instanceof DRIDesignSimpleExpression || expression instanceof DRIDesignJasperExpression) {
 			return EvaluationTime.NOW;
 		}
 		if (expression instanceof DRIDesignVariable) {

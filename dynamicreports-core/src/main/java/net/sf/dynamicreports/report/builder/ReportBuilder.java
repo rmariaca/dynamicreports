@@ -660,8 +660,17 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//table of contents
 	public T tableOfContents() {
 		return setTableOfContents(true);
+	}
+
+	public T tableOfContents(TableOfContentsCustomizerBuilder tableOfContentsCustomizer) {
+		return setTableOfContents(tableOfContentsCustomizer);
+	}
+
+	public T tableOfContents(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
+		return setTableOfContents(tableOfContentsCustomizer);
 	}
 
 	public T setTableOfContents(Boolean tableOfContents) {

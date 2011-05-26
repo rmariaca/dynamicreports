@@ -29,7 +29,8 @@ import java.util.List;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -45,6 +46,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -89,7 +91,7 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 		public void customize() {
 			super.customize();
 
-			CustomGroupBuilder countryGroup = grp.group(new CountryGroupExpression())
+			CustomGroupBuilder countryGroup = grp.group(new CountryExpression(textField))
 				.setHeaderLayout(GroupHeaderLayout.EMPTY)
 				.header(countryHeadingComponent())
 				.footer(cmp.filler().setFixedHeight(5));
@@ -103,18 +105,22 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 		private ComponentBuilder<?, ?> countryHeadingComponent() {
 			HorizontalListBuilder headingComponent = cmp.horizontalList();
 
+			HyperLinkBuilder countryReferenceHyperLink = hyperLink();
+			countryReferenceHyperLink.setAnchor(new CountryExpression(referenceField));
+			countryReferenceHyperLink.setType(HyperLinkType.LOCAL_ANCHOR);
+
 			StyleBuilder style = stl.style(Templates.rootStyle)
 				.setFontSize(12)
 				.bold()
 				.setBackgroundColor(Color.LIGHT_GRAY);
 
 			TextFieldBuilder<String> textComponent = cmp.text(textField)
-  			.setHyperLink(referenceHyperLink)
+  			.setHyperLink(countryReferenceHyperLink)
   			.setStyle(style);
 			headingComponent.add(textComponent);
 
 			TextFieldBuilder<String> pageIndexComponent = cmp.text(new CountryHeadingExpression())
-				.setHyperLink(referenceHyperLink)
+				.setHyperLink(countryReferenceHyperLink)
 				.setStyle(style)
 				.setHorizontalAlignment(HorizontalAlignment.RIGHT);
 			headingComponent.add(pageIndexComponent);
@@ -139,17 +145,23 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 			return headingComponent;
 		}
 
-		private class CountryGroupExpression extends AbstractSimpleExpression<String> {
+		private class CountryExpression extends AbstractComplexExpression<String> {
 			private static final long serialVersionUID = 1L;
 
-			private String country;
+			private String value;
 
-			public String evaluate(ReportParameters reportParameters) {
-				int level = reportParameters.getValue(levelField);
+			private CountryExpression(FieldBuilder<String> field) {
+				addExpression(levelField);
+				addExpression(field);
+			}
+
+			@Override
+			public String evaluate(List<?> values, ReportParameters reportParameters) {
+				int level = (Integer) values.get(0);
 				if (level == 0) {
-					country = reportParameters.getValue(textField);
+					value = (String) values.get(1);
 				}
-				return country;
+				return value;
 			}
 		}
 

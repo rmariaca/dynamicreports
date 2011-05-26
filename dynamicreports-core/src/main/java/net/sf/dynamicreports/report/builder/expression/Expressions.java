@@ -121,8 +121,8 @@ public class Expressions {
 		return new ValueExpression<T>(value, valueClass);
 	}
 
-	public static ValueExpression<String> text(String text) {
-		return value(text, String.class);
+	public static JasperExpression<String> text(String text) {
+		return jasper("\"" + text + "\"", String.class);
 	}
 
 	public static MessageExpression message(String key) {
@@ -137,6 +137,11 @@ public class Expressions {
 			return new MessageExpression(key, arguments);
 		}
 		return null;
+	}
+
+	//jasper
+	public static <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
+		return new JasperExpression<T>(expression, valueClass);
 	}
 
 	//property

@@ -36,11 +36,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ColumnDataTypesReport {
-	
+
 	public ColumnDataTypesReport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			report()
@@ -62,13 +62,13 @@ public class ColumnDataTypesReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("Notebook", new Date(), 1, new BigDecimal(500));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ColumnDataTypesReport();
 	}

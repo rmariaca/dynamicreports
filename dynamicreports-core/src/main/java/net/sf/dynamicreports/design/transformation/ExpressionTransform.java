@@ -31,6 +31,7 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.DRDesignField;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.expression.DRDesignComplexExpression;
+import net.sf.dynamicreports.design.base.expression.DRDesignJasperExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignParameterExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignPropertyExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSimpleExpression;
@@ -40,6 +41,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
@@ -53,6 +55,7 @@ import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -68,6 +71,7 @@ public class ExpressionTransform {
 	private Map<String, DRIDesignField> fields;
 	private Map<String, DRIDesignVariable> variables;
 	private Map<String, DRIDesignSystemExpression> systemExpressions;
+	private Map<String, DRIDesignJasperExpression> jasperExpressions;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<DRIExpression<?>, DRIDesignExpression> expressions;
@@ -81,6 +85,7 @@ public class ExpressionTransform {
 		fields = new LinkedHashMap<String, DRIDesignField>();
 		variables = new LinkedHashMap<String, DRIDesignVariable>();
 		systemExpressions = new HashMap<String, DRIDesignSystemExpression>();
+		jasperExpressions = new HashMap<String, DRIDesignJasperExpression>();
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
 		expressions = new HashMap<DRIExpression<?>, DRIDesignExpression>();
@@ -122,6 +127,9 @@ public class ExpressionTransform {
 		DRIDesignExpression express;
 		if (expression instanceof DRISystemExpression<?>) {
 			express = new DRDesignSystemExpression((DRISystemExpression<?>) expression);
+		}
+		else if (expression instanceof DRIJasperExpression<?>) {
+			express = new DRDesignJasperExpression((DRIJasperExpression<?>) expression);
 		}
 		else if (expression instanceof DRISimpleExpression<?>) {
 			express = new DRDesignSimpleExpression((DRISimpleExpression<?>) expression);
@@ -205,6 +213,9 @@ public class ExpressionTransform {
 		else if (expression instanceof DRIDesignSystemExpression) {
 			addSystemExpression((DRIDesignSystemExpression) expression);
 		}
+		else if (expression instanceof DRIDesignJasperExpression) {
+			addJasperExpression((DRIDesignJasperExpression) expression);
+		}
 		else if (expression instanceof DRIDesignSimpleExpression) {
 			addSimpleExpression((DRIDesignSimpleExpression) expression);
 		}
@@ -246,6 +257,13 @@ public class ExpressionTransform {
 		systemExpressions.put(systemExpression.getName(), systemExpression);
 	}
 
+	private void addJasperExpression(DRIDesignJasperExpression jasperExpression) {
+		if (jasperExpressions.containsKey(jasperExpression.getName())) {
+			return;
+		}
+		jasperExpressions.put(jasperExpression.getName(), jasperExpression);
+	}
+
 	private void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
 		if (simpleExpressions.containsKey(simpleExpression.getName())) {
 			if (!simpleExpressions.get(simpleExpression.getName()).equals(simpleExpression)) {
@@ -276,6 +294,10 @@ public class ExpressionTransform {
 
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
 		return systemExpressions.values();
+	}
+
+	public Collection<DRIDesignJasperExpression> getJasperExpressions() {
+		return jasperExpressions.values();
 	}
 
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
