@@ -44,17 +44,17 @@ import net.sf.jasperreports.engine.type.ModeEnum;
  */
 public class StyleTransform {
 	private JasperTransformAccessor accessor;
-	
+
 	public StyleTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
+
 	public void transform() {
 		for (DRIDesignStyle style : accessor.getReport().getStyles()) {
 			addStyle(style);
 		}
 	}
-	
+
 	private void addStyle(DRIDesignStyle style) {
 		try {
 			accessor.getDesign().addStyle(style(style));
@@ -62,18 +62,18 @@ public class StyleTransform {
 			throw new JasperDesignException("Registration failed for style \"" + style.getName() + "\"", e);
 		}
 	}
-	
-	//style	
-	private JRDesignStyle style(DRIDesignStyle style) {			
+
+	//style
+	private JRDesignStyle style(DRIDesignStyle style) {
 		JRDesignStyle jrStyle = new JRDesignStyle();
 		abstractStyle(jrStyle, style);
-		
+
 		jrStyle.setName(style.getName());
 		DRIDesignStyle parentStyle = style.getParentStyle();
 		if (parentStyle != null) {
 			style(parentStyle);
-			jrStyle.setParentStyleNameReference(parentStyle.getName());			
-		}	
+			jrStyle.setParentStyleNameReference(parentStyle.getName());
+		}
 		for (DRIDesignConditionalStyle conditionalStyle : style.getConditionalStyles()) {
 			jrStyle.addConditionalStyle(conditionalStyle(conditionalStyle));
 		}
@@ -83,17 +83,17 @@ public class StyleTransform {
 	private JRDesignConditionalStyle conditionalStyle(DRIDesignConditionalStyle conditionalStyle) {
 		JRDesignConditionalStyle jrConditionalStyle = new JRDesignConditionalStyle();
 		abstractStyle(jrConditionalStyle, conditionalStyle);
-		
+
 		jrConditionalStyle.setConditionExpression(accessor.getExpressionTransform().getExpression(conditionalStyle.getConditionExpression()));
-		
+
 		return jrConditionalStyle;
 	}
-	
-	private void abstractStyle(JRBaseStyle baseStyle, DRIDesignBaseStyle style) {		
+
+	private void abstractStyle(JRBaseStyle baseStyle, DRIDesignBaseStyle style) {
 		baseStyle.setForecolor(style.getForegroundColor());
 		baseStyle.setBackcolor(style.getBackgroundColor());
 		if (style.getBackgroundColor() != null) {
-			baseStyle.setMode(ModeEnum.OPAQUE);		
+			baseStyle.setMode(ModeEnum.OPAQUE);
 		}
 		baseStyle.setRadius(style.getRadius());
 		baseStyle.setScaleImage(ConstantTransform.imageScale(style.getImageScale()));
@@ -106,41 +106,43 @@ public class StyleTransform {
 		baseStyle.setPattern(style.getPattern());
 		baseStyle.setMarkup(ConstantTransform.markup(style.getMarkup()));
 		baseStyle.setBlankWhenNull(true);
+		baseStyle.setLineSpacing(ConstantTransform.lineSpacing(style.getLineSpacing()));
+		pen(baseStyle.getLinePen(), style.getLinePen());
 	}
 
 	private void pen(JRPen jrPen, DRIDesignPen pen) {
 		if (pen == null)
 			return;
-		
+
 		jrPen.setLineColor(pen.getLineColor());
 		jrPen.setLineStyle(ConstantTransform.lineStyle(pen.getLineStyle()));
 		jrPen.setLineWidth(pen.getLineWidth());
 	}
-	
+
 	private void border(JRLineBox lineBox, DRIDesignBorder border) {
 		if (border == null)
 			return;
-		
+
 		pen(lineBox.getLeftPen(), border.getLeftPen());
 		pen(lineBox.getRightPen(), border.getRightPen());
 		pen(lineBox.getTopPen(), border.getTopPen());
 		pen(lineBox.getBottomPen(), border.getBottomPen());
 	}
-	
+
 	private void padding(JRLineBox lineBox, DRIDesignPadding padding) {
 		if (padding == null)
 			return;
-		
+
 		lineBox.setLeftPadding(padding.getLeft());
 		lineBox.setRightPadding(padding.getRight());
 		lineBox.setTopPadding(padding.getTop());
 		lineBox.setBottomPadding(padding.getBottom());
 	}
-	
+
 	private void font(JRBaseStyle baseStyle, DRIDesignFont font) {
 		if (font == null)
 			return;
-		
+
 		baseStyle.setFontName(font.getFontName());
 		baseStyle.setBold(font.getBold());
 		baseStyle.setItalic(font.getItalic());
@@ -155,7 +157,7 @@ public class StyleTransform {
 	protected JRDesignFont font(DRIDesignFont font) {
 		if (font == null)
 			return null;
-		
+
 		JRDesignFont jrFont = new JRDesignFont();
 		jrFont.setFontName(font.getFontName());
 		jrFont.setBold(font.getBold());
@@ -168,13 +170,13 @@ public class StyleTransform {
 		jrFont.setPdfEmbedded(font.getPdfEmbedded());
 		return jrFont;
 	}
-	
+
 	protected JRDesignStyle getStyle(DRIDesignStyle style) {
 		if (style == null)
 			return null;
 		if (!accessor.getDesign().getStylesMap().containsKey(style.getName())) {
 			throw new JasperDesignException("Style \"" + style.getName() + "\" is not registered");
-		}			
+		}
 		return (JRDesignStyle) accessor.getDesign().getStylesMap().get(style.getName());
 	}
 }

@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
@@ -39,30 +40,30 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 @SuppressWarnings({"unchecked", "ucd"})
 public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U extends DRBaseStyle> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected BaseStyleBuilder(U baseStyle) {
 		super(baseStyle);
 	}
-	
+
 	public T setBackgroundColor(Color backgroundColor) {
 		getObject().setBackgroundColor(backgroundColor);
 		return (T) this;
 	}
-	
+
 	public T setBorder(BorderBuilder border) {
 		if (border != null) {
 			getObject().setBorder(border.build());
 		}
 		else {
 			getObject().setBorder(null);
-		}		
+		}
 		return (T) this;
 	}
 
 	public T setBorder(PenBuilder pen) {
 		return setBorder(pen != null ? Styles.border(pen) : null);
 	}
-	
+
 	public T setTopBorder(PenBuilder topPen) {
 		if (topPen != null) {
 			getObject().getBorder().setTopPen(topPen.build());
@@ -79,7 +80,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		}
 		else {
 			getObject().getBorder().setLeftPen(null);
-		}		
+		}
 		return (T) this;
 	}
 
@@ -89,7 +90,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		}
 		else {
 			getObject().getBorder().setBottomPen(null);
-		}		
+		}
 		return (T) this;
 	}
 
@@ -99,24 +100,24 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		}
 		else {
 			getObject().getBorder().setRightPen(null);
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public T setFont(FontBuilder font) {
 		if (font != null) {
 			getObject().setFont(font.build());
 		}
 		else {
 			getObject().setFont(null);
-		}		
+		}
 		return (T) this;
 	}
 
 	public T bold() {
 		return setBold(true);
 	}
-	
+
 	public T setBold(Boolean bold) {
 		getObject().getFont().setBold(bold);
 		return (T) this;
@@ -135,7 +136,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 	public T italic() {
 		return setItalic(true);
 	}
-	
+
 	public T setItalic(Boolean italic) {
 		getObject().getFont().setItalic(italic);
 		return (T) this;
@@ -145,10 +146,10 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		setBold(true);
 		return setItalic(true);
 	}
-	
+
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public T setPdfEmbedded(Boolean pdfEmbedded) {
 		getObject().getFont().setPdfEmbedded(pdfEmbedded);
@@ -157,7 +158,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public T setPdfEncoding(String pdfEncoding) {
 		getObject().getFont().setPdfEncoding(pdfEncoding);
@@ -166,7 +167,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public T setPdfFontName(String pdfFontName) {
 		getObject().getFont().setPdfFontName(pdfFontName);
@@ -176,7 +177,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 	public T strikeThrough() {
 		return setStrikeThrough(true);
 	}
-	
+
 	public T setStrikeThrough(Boolean strikeThrough) {
 		getObject().getFont().setStrikeThrough(strikeThrough);
 		return (T) this;
@@ -185,12 +186,12 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 	public T underline() {
 		return setUnderline(true);
 	}
-	
+
 	public T setUnderline(Boolean underline) {
 		getObject().getFont().setUnderline(underline);
 		return (T) this;
 	}
-	
+
 	public T setForegroudColor(Color foregroudColor) {
 		getObject().setForegroundColor(foregroudColor);
 		return (T) this;
@@ -205,21 +206,21 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		getObject().setImageScale(imageScale);
 		return (T) this;
 	}
-	
+
 	public T setPadding(PaddingBuilder padding) {
 		if (padding != null) {
 			getObject().setPadding(padding.build());
 		}
 		else {
 			getObject().setPadding(null);
-		}			
+		}
 		return (T) this;
 	}
 
 	public T setPadding(Integer padding) {
 		return setPadding(Styles.padding(padding));
 	}
-	
+
 	public T setTopPadding(Integer top) {
 		getObject().getPadding().setTop(top);
 		return (T) this;
@@ -239,7 +240,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		getObject().getPadding().setRight(right);
 		return (T) this;
 	}
-	
+
 	public T setPattern(String pattern) {
 		getObject().setPattern(pattern);
 		return (T) this;
@@ -257,20 +258,35 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 
 	public T setAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment) {
 		getObject().setHorizontalAlignment(horizontalAlignment);
-		getObject().setVerticalAlignment(verticalAlignment);		
+		getObject().setVerticalAlignment(verticalAlignment);
 		return (T) this;
 	}
-	
+
 	public T setVerticalAlignment(VerticalAlignment verticalAlignment) {
 		getObject().setVerticalAlignment(verticalAlignment);
 		return (T) this;
 	}
-	
+
 	public T setMarkup(Markup markup) {
 		getObject().setMarkup(markup);
 		return (T) this;
 	}
-	
+
+	public T setLineSpacing(LineSpacing lineSpacing) {
+		getObject().setLineSpacing(lineSpacing);
+		return (T) this;
+	}
+
+	public T setLinePen(PenBuilder linePen) {
+		if (linePen != null) {
+			getObject().setLinePen(linePen.build());
+		}
+		else {
+			getObject().setLinePen(null);
+		}
+		return (T) this;
+	}
+
 	public U getStyle() {
 		return build();
 	}

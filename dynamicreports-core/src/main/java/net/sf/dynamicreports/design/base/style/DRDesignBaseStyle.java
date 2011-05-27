@@ -28,6 +28,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
@@ -35,21 +36,23 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {	
+public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Color foregroundColor;
 	private Color backgroundColor;
 	private Integer radius;
 	private ImageScale imageScale;
 	private HorizontalAlignment horizontalAlignment;
-	private VerticalAlignment verticalAlignment;	
+	private VerticalAlignment verticalAlignment;
 	private DRDesignBorder border;
 	private DRDesignPadding padding;
-	private DRDesignFont font;	
+	private DRDesignFont font;
 	private Rotation rotation;
 	private String pattern;
-	private Markup markup; 
+	private Markup markup;
+	private LineSpacing lineSpacing;
+	private DRDesignPen linePen;
 
 	public Color getForegroundColor() {
 		return foregroundColor;
@@ -138,12 +141,28 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
-	
+
 	public Markup getMarkup() {
 		return markup;
 	}
-	
+
 	public void setMarkup(Markup markup) {
 		this.markup = markup;
+	}
+
+	public LineSpacing getLineSpacing() {
+		return lineSpacing;
+	}
+
+	public void setLineSpacing(LineSpacing lineSpacing) {
+		this.lineSpacing = lineSpacing;
+	}
+
+	public DRDesignPen getLinePen() {
+		return linePen;
+	}
+
+	public void setLinePen(DRDesignPen linePen) {
+		this.linePen = linePen;
 	}
 }

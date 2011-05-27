@@ -65,9 +65,6 @@ public class ReportTransform {
 		JasperDesign design = accessor.getDesign();
 		Map<String, Object> parameters = accessor.getParameters();
 
-		addParameter(JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, accessor.getCustomValues());
-		addParameter(JasperReportParameters.MASTER_REPORT_PARAMETERS, ReportParameters.class, accessor.getMasterReportParameters());
-
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
 		design.setResourceBundle(report.getResourceBundleName());
@@ -87,15 +84,28 @@ public class ReportTransform {
 			addParameter(parameter);
 		}
 
-		if (report.isTableOfContents()) {
-			scriptlet = new JasperTocScriptlet();
-		}
-		else {
-			scriptlet = new JasperScriptlet();
-		}
-		addScriptlet(JasperScriptlet.NAME, scriptlet);
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
 			addScriptlet(scriptlet);
+		}
+	}
+
+	public void addDependencies() {
+		DRIDesignReport report = accessor.getReport();
+		if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty()) {
+			addParameter(JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, accessor.getCustomValues());
+		}
+		if (accessor.getMasterReportParameters() != null) {
+			addParameter(JasperReportParameters.MASTER_REPORT_PARAMETERS, ReportParameters.class, accessor.getMasterReportParameters());
+		}
+		if (report.isTableOfContents()) {
+			scriptlet = new JasperTocScriptlet();
+			addScriptlet(JasperScriptlet.NAME, scriptlet);
+		}
+		else {
+			if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty()) {
+				scriptlet = new JasperScriptlet();
+				addScriptlet(JasperScriptlet.NAME, scriptlet);
+			}
 		}
 	}
 

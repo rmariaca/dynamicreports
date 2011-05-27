@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.base.style.DRBaseStyle;
 import net.sf.dynamicreports.report.base.style.DRBorder;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
+import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.style.DRIBaseStyle;
 import net.sf.dynamicreports.report.definition.style.DRIBorder;
@@ -153,6 +154,8 @@ public class StyleTransform {
 		designBaseStyle.setRotation(baseStyle.getRotation());
 		designBaseStyle.setPattern(baseStyle.getPattern());
 		designBaseStyle.setMarkup(baseStyle.getMarkup());
+		designBaseStyle.setLineSpacing(baseStyle.getLineSpacing());
+		designBaseStyle.setLinePen(pen(baseStyle.getLinePen()));
 	}
 
 	private DRDesignBorder border(DRIBorder border) {
@@ -239,6 +242,8 @@ public class StyleTransform {
 		toStyle.setRotation(fromStyle.getRotation());
 		toStyle.setPattern(fromStyle.getPattern());
 		toStyle.setMarkup(fromStyle.getMarkup());
+		toStyle.setLineSpacing(fromStyle.getLineSpacing());
+		toStyle.setLinePen((DRPen) fromStyle.getLinePen());
 	}
 
 	public Collection<DRIDesignStyle> getStyles() {

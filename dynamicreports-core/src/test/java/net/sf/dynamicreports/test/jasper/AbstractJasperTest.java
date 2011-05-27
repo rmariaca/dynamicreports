@@ -52,13 +52,14 @@ import org.junit.Test;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractJasperTest {
+	private JasperReportBuilder reportBuilder;
 	private JasperReport jasperReport;
 	private JasperPrint jasperPrint;
 
 	@Before
 	public void init() {
 		try {
-			JasperReportBuilder reportBuilder = DynamicReports.report();
+			reportBuilder = DynamicReports.report();
 			configureReport(reportBuilder);
 			if (serializableTest()) {
 				reportBuilder = serializableTest(reportBuilder);
@@ -91,6 +92,10 @@ public abstract class AbstractJasperTest {
     InputStream stream = new ByteArrayInputStream(bos.toByteArray());
     ObjectInputStream ois = new ObjectInputStream(stream);
     return (JasperReportBuilder) ois.readObject();
+	}
+
+	public JasperReportBuilder getReportBuilder() {
+		return reportBuilder;
 	}
 
 	public JasperReport getJasperReport() {

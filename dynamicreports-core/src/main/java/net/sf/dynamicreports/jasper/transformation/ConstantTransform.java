@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
+import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.OrderType;
@@ -74,6 +75,7 @@ import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.LineDirectionEnum;
+import net.sf.jasperreports.engine.type.LineSpacingEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
@@ -614,6 +616,23 @@ public class ConstantTransform {
 			return "html";
 		default:
 			throw new JasperDesignException("Markup " + markup.name() + " not supported");
+		}
+	}
+
+	public static LineSpacingEnum lineSpacing(LineSpacing lineSpacing) {
+		if (lineSpacing == null) {
+			return null;
+		}
+
+		switch (lineSpacing) {
+		case SINGLE:
+			return LineSpacingEnum.SINGLE;
+		case ONE_AND_HALF:
+			return LineSpacingEnum.ONE_AND_HALF;
+		case DOUBLE:
+			return LineSpacingEnum.DOUBLE;
+		default:
+			throw new JasperDesignException("LineSpacing " + lineSpacing.name() + " not supported");
 		}
 	}
 

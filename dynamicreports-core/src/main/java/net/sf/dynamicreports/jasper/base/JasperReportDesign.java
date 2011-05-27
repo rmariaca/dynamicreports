@@ -95,6 +95,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();
+		reportTransform.addDependencies();
 	}
 
 	public ChartTransform getChartTransform() {
