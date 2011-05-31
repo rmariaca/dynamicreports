@@ -240,18 +240,27 @@ public class GenerateSite {
 		imageExporter.setOffsetY(1);
 		imageExporter.setPageGap(1);
 		imageExporter.setZoom(0.08f);
+		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
+			imageExporter.setEndPageIndex(3);
+		}
 		reportBuilder.toImage(imageExporter);
 		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), ImageType.PNG);
 		imageExporter.setOffsetX(1);
 		imageExporter.setOffsetY(1);
 		imageExporter.setPageGap(1);
 		imageExporter.setZoom(0.15f);
+		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
+			imageExporter.setEndPageIndex(3);
+		}
 		reportBuilder.toImage(imageExporter);
 		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), ImageType.PNG);
 		imageExporter.setOffsetX(1);
 		imageExporter.setOffsetY(1);
 		imageExporter.setPageGap(1);
 		imageExporter.setZoom(1.1f);
+		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
+			imageExporter.setEndPageIndex(3);
+		}
 		reportBuilder.toImage(imageExporter);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);

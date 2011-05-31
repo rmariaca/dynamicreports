@@ -43,33 +43,33 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class Column1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<String> column2;
 	private TextColumnBuilder<Date> column3;
 	private TextColumnBuilder<Double> column4;
 	private TextColumnBuilder<BigDecimal> column5;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setLocale(Locale.ENGLISH)
 			.addField("field1", Integer.class)
-			.columns(					
-					column2 = col.column("Column2", "field2", String.class),
-					column3 = col.column("Column3", "field3", Date.class).setPattern("dd.MM.yyyy"), 
-					column4 = col.column("Column4", "field4", Double.class).setPattern("#,###.00"), 
+			.columns(
+					column2 = col.column("Column2\nColumn2", "field2", String.class),
+					column3 = col.column("Column3", "field3", Date.class).setPattern("dd.MM.yyyy"),
+					column4 = col.column("Column4", "field4", Double.class).setPattern("#,###.00"),
 					column5 = col.column("Column5", "field5", BigDecimal.class).setValueFormatter(new ColumnValueFormatter()));
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(3);
 		//column2
 		columnDetailCountTest(column2, 110);
 		columnDetailValueTest(column2, 50, "test");
 		columnTitleCountTest(column2, 3);
-		columnTitleValueTest(column2, "Column2", "Column2", "Column2");
+		columnTitleValueTest(column2, "Column2\nColumn2", "Column2\nColumn2", "Column2\nColumn2");
 		//column3
 		columnDetailCountTest(column3, 110);
 		columnDetailValueTest(column3, 50, new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
@@ -86,21 +86,21 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 		columnTitleCountTest(column5, 3);
 		columnTitleValueTest(column5, "Column5", "Column5", "Column5");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5");
 		for (int i = 0; i < 110; i++) {
 			dataSource.add(1, "test", new Date(), 1d, new BigDecimal(10));
-		}		
+		}
 		return dataSource;
 	}
-	
+
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
 		public String format(BigDecimal value, ReportParameters reportParameters) {
 			return "value = " + value;
-		}		
+		}
 	}
 }
