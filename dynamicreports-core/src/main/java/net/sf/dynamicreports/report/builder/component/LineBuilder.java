@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRLine;
+import net.sf.dynamicreports.report.builder.style.PenBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.LineDirection;
 
@@ -32,13 +33,23 @@ import net.sf.dynamicreports.report.constant.LineDirection;
 @SuppressWarnings("ucd")
 public class LineBuilder extends DimensionComponentBuilder<LineBuilder, DRLine> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected LineBuilder() {
 		super(new DRLine());
 	}
-	
+
 	public LineBuilder setDirection(LineDirection lineDirection) {
 		getObject().setDirection(lineDirection);
+		return this;
+	}
+
+	public LineBuilder setPen(PenBuilder pen) {
+		if (pen != null) {
+			getObject().setPen(pen.build());
+		}
+		else {
+			getObject().setPen(null);
+		}
 		return this;
 	}
 }

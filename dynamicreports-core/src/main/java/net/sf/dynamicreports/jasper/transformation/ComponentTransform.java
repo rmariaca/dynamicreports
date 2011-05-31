@@ -304,6 +304,7 @@ public class ComponentTransform {
 	private JRDesignElement line(DRIDesignLine line) {
 		JRDesignLine jrDesignLine = new JRDesignLine();
 		jrDesignLine.setDirection(ConstantTransform.lineDirection(line.getDirection()));
+		accessor.getStyleTransform().pen(jrDesignLine.getLinePen(), line.getPen());
 		return jrDesignLine;
 	}
 

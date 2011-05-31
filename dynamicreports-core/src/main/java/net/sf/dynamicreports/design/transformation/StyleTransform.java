@@ -176,7 +176,7 @@ public class StyleTransform {
 		return designPadding;
 	}
 
-	private DRDesignPen pen(DRIPen pen) {
+	protected DRDesignPen pen(DRIPen pen) {
 		if (pen == null) {
 			return null;
 		}

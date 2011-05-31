@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.base.component;
 
+import net.sf.dynamicreports.design.base.style.DRDesignPen;
 import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.report.constant.LineDirection;
 
@@ -30,7 +31,8 @@ import net.sf.dynamicreports.report.constant.LineDirection;
  */
 public class DRDesignLine extends DRDesignComponent implements DRIDesignLine {
 	private LineDirection direction;
-	
+	private DRDesignPen pen;
+
 	public DRDesignLine() {
 		super("line");
 	}
@@ -38,8 +40,16 @@ public class DRDesignLine extends DRDesignComponent implements DRIDesignLine {
 	public LineDirection getDirection() {
 		return direction;
 	}
-	
+
 	public void setDirection(LineDirection direction) {
 		this.direction = direction;
+	}
+
+	public DRDesignPen getPen() {
+		return pen;
+	}
+
+	public void setPen(DRDesignPen pen) {
+		this.pen = pen;
 	}
 }

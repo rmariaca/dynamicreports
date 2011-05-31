@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition.component;
 
+import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
 import net.sf.dynamicreports.report.constant.LineDirection;
 
 /**
@@ -30,5 +31,7 @@ import net.sf.dynamicreports.report.constant.LineDirection;
 public interface DRIDesignLine extends DRIDesignComponent {
 
 	public LineDirection getDirection();
+
+	public DRIDesignPen getPen();
 
 }

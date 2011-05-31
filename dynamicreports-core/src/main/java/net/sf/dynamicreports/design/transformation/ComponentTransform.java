@@ -369,6 +369,7 @@ public class ComponentTransform {
 		DRDesignLine designLine = new DRDesignLine();
 		component(designLine, line, line.getStyle(), false, DefaultStyleType.NONE);
 		designLine.setDirection(line.getDirection());
+		designLine.setPen(accessor.getStyleTransform().pen(line.getPen()));
 		designLine.setWidth(accessor.getTemplateTransform().getLineWidth(line));
 		designLine.setHeight(accessor.getTemplateTransform().getLineHeight(line));
 		return designLine;

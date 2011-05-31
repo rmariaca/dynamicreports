@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.LineDirection;
+import net.sf.dynamicreports.report.definition.style.DRIPen;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -30,5 +31,7 @@ import net.sf.dynamicreports.report.constant.LineDirection;
 public interface DRILine extends DRIDimensionComponent {
 
 	public LineDirection getDirection();
+
+	public DRIPen getPen();
 
 }

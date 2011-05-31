@@ -110,7 +110,7 @@ public class StyleTransform {
 		pen(baseStyle.getLinePen(), style.getLinePen());
 	}
 
-	private void pen(JRPen jrPen, DRIDesignPen pen) {
+	protected void pen(JRPen jrPen, DRIDesignPen pen) {
 		if (pen == null)
 			return;
 

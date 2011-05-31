@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.base.component;
 
+import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.definition.component.DRILine;
@@ -31,14 +32,23 @@ import net.sf.dynamicreports.report.definition.component.DRILine;
  */
 public class DRLine extends DRDimensionComponent implements DRILine {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private LineDirection direction;
+	private DRPen pen;
 
 	public LineDirection getDirection() {
 		return direction;
 	}
-	
+
 	public void setDirection(LineDirection direction) {
 		this.direction = direction;
+	}
+
+	public DRPen getPen() {
+		return pen;
+	}
+
+	public void setPen(DRPen pen) {
+		this.pen = pen;
 	}
 }
