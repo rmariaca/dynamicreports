@@ -121,6 +121,10 @@ public class ExpressionBuilders {
 	}
 
 	//jasper
+	public JasperExpression<String> jasper(String expression) {
+		return Expressions.jasper(expression);
+	}
+
 	public <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
 		return Expressions.jasper(expression, valueClass);
 	}

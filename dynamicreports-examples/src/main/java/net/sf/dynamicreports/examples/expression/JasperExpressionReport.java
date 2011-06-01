@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -42,14 +43,17 @@ public class JasperExpressionReport {
 
 	private void build() {
 		try {
+			TextColumnBuilder<String> itemColumn = col.column("item", type.stringType())
+			  .setTitle(exp.jasper("Item"));
+			TextColumnBuilder<BigDecimal> priceColumn = col.column(exp.jasper("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class))
+			  .setTitle(exp.jasper("Price"));
+
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .fields(
 			  	field("quantity", Integer.class),
 			  	field("unitprice", BigDecimal.class))
-			  .columns(
-			  	col.column("Item", "item", type.stringType()),
-			  	col.column("Price", exp.jasper("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class)))
+			  .columns(itemColumn, priceColumn)
 			  .title(Templates.createTitleComponent("JasperExpression"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())

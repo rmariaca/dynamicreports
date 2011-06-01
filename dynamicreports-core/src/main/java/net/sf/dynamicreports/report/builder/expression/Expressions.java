@@ -30,6 +30,7 @@ import java.util.Date;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -140,6 +141,10 @@ public class Expressions {
 	}
 
 	//jasper
+	public static JasperExpression<String> jasper(String expression) {
+		return new JasperExpression<String>("\"" + StringEscapeUtils.escapeJava(expression) + "\"", String.class);
+	}
+
 	public static <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
 		return new JasperExpression<T>(expression, valueClass);
 	}

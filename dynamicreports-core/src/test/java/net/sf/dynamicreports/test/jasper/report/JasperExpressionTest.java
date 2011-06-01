@@ -43,13 +43,15 @@ import org.apache.commons.lang.StringUtils;
 public class JasperExpressionTest extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private TextColumnBuilder<Integer> column1;
+	private TextColumnBuilder<Integer> column2;
 	private TextColumnBuilder<Integer> column3;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
-				col.column("field1", Integer.class).setTitle(exp.jasper("\"Column1\"", String.class)),
-				col.column("field2", Integer.class).setTitle(exp.jasper("\"Column2\"", String.class)),
+				column1 = col.column("field1", Integer.class).setTitle(exp.jasper("Column1\n\"Column1\"")),
+				column2 = col.column("field2", Integer.class).setTitle(exp.jasper("\"Column2\"", String.class)),
 				column3 = col.column(exp.jasper("$F{field1} - $F{field2}", Integer.class)));
 	}
 
@@ -58,6 +60,12 @@ public class JasperExpressionTest extends AbstractJasperValueTest implements Ser
 		super.test();
 
 		numberOfPagesTest(1);
+
+		columnTitleCountTest(column1, 1);
+		columnTitleValueTest(column1, "Column1\n\"Column1\"");
+
+		columnTitleCountTest(column2, 1);
+		columnTitleValueTest(column2, "Column2");
 
 		columnDetailValueTest(column3, "0", "8", "3");
 

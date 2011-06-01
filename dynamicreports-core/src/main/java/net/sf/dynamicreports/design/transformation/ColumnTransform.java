@@ -153,9 +153,15 @@ public class ColumnTransform {
 		case IMAGE_CHECKBOX_1:
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
+			int hFillerWidth = 1;
+			if (column.getWidth() != null) {
+				hFillerWidth = (column.getWidth() - accessor.getTemplateTransform().getBooleanColumnImageWidth(column)) / 2;
+			}
+
 			DRList hList = new DRList();
 			DRFiller filler = new DRFiller();
-			filler.setWidth(1);
+			filler.setWidth(hFillerWidth);
+			filler.setWidthType(column.getWidthType());
 			filler.setHeight(column.getHeight());
 			filler.setHeightType(column.getHeightType());
 			hList.addComponent(filler);
@@ -169,7 +175,8 @@ public class ColumnTransform {
 			hList.addCell(cell);
 
 			filler = new DRFiller();
-			filler.setWidth(1);
+			filler.setWidth(hFillerWidth);
+			filler.setWidthType(column.getWidthType());
 			hList.addComponent(filler);
 
 			DRList vList = new DRList(ListType.VERTICAL);

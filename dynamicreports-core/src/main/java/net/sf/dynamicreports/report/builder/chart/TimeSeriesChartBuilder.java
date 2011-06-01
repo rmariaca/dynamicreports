@@ -48,23 +48,23 @@ public class TimeSeriesChartBuilder extends AbstractChartBuilder<TimeSeriesChart
 	}
 
 	//dataset
-	public TimeSeriesChartBuilder setTimePeriod(ValueColumnBuilder<?, Date> column) {
+	public TimeSeriesChartBuilder setTimePeriod(ValueColumnBuilder<?, ? extends Date> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(String fieldName, Class<Date> valueClass) {
+	public TimeSeriesChartBuilder setTimePeriod(String fieldName, Class<? extends Date> valueClass) {
 		return setTimePeriod(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(FieldBuilder<Date> field) {
+	public TimeSeriesChartBuilder setTimePeriod(FieldBuilder<? extends Date> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(DRIExpression<Date> expression) {
+	public TimeSeriesChartBuilder setTimePeriod(DRIExpression<? extends Date> expression) {
 		getDataset().setValueExpression(expression);
 		return this;
 	}

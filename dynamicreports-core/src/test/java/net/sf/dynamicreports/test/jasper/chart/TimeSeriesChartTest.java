@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,25 +51,27 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
  */
 public class TimeSeriesChartTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-		
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		TextColumnBuilder<Date> column1; 
-		TextColumnBuilder<Integer> column2; 
-		
+		TextColumnBuilder<Date> column1;
+		TextColumnBuilder<Timestamp> column2;
+		TextColumnBuilder<Integer> column3;
+
 		rb.columns(
 				column1 = col.column("Column1", "field1", Date.class),
-				column2 = col.column("Column2", "field2", Integer.class))
+				column2 = col.column("Column2", "field2", Timestamp.class),
+				column3 = col.column("Column3", "field3", Integer.class))
 			.summary(
 					cht.timeSeriesChart()
 						.setTimePeriod(column1)
-						.series(cht.serie(column2))
+						.series(cht.serie(column3))
 						.setTimePeriodType(TimePeriod.DAY)
 						.setShowShapes(false)
 						.setShowLines(false),
 					cht.timeSeriesChart()
 						.setTimePeriod(column1)
-						.series(cht.serie(column2))						
+						.series(cht.serie(column3))
 						.setTimeAxisFormat(
 								cht.axisFormat()
 											.setLabel("time")
@@ -78,8 +81,8 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 											.setTickLabelColor(Color.CYAN)
 											.setLineColor(Color.LIGHT_GRAY)),
 					cht.timeSeriesChart()
-						.setTimePeriod(column1)
-						.series(cht.serie(column2))													
+						.setTimePeriod(column2)
+						.series(cht.serie(column3))
 						.setValueAxisFormat(
 								cht.axisFormat()
 											.setLabel("value")
@@ -92,19 +95,19 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 											.setRangeMinValueExpression(1)
 											.setRangeMaxValueExpression(15)));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		JFreeChart chart = getChart("summary.chart1", 0);
 		XYItemRenderer renderer = chart.getXYPlot().getRenderer();
 		Assert.assertEquals("renderer", XYLineAndShapeRenderer.class, renderer.getClass());
 		Assert.assertFalse("show shapes", ((XYLineAndShapeRenderer) renderer).getBaseShapesVisible());
 		Assert.assertFalse("show lines", ((XYLineAndShapeRenderer) renderer).getBaseLinesVisible());
-		
+
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getXYPlot().getDomainAxis();
 		Assert.assertEquals("category label", "time", axis.getLabel());
@@ -113,28 +116,28 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
-		
+
 		chart = getChart("summary.chart3", 0);
 		axis = chart.getXYPlot().getRangeAxis();
 		Assert.assertEquals("value label", "value", axis.getLabel());
 		Assert.assertEquals("value label color", Color.BLUE, axis.getLabelPaint());
 		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
-		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());		
-		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));		
+		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
+		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
 		//Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 		Assert.assertEquals("range min value", 1d, ((ValueAxis) axis).getLowerBound());
 		Assert.assertEquals("range max value", 15d, ((ValueAxis) axis).getUpperBound());
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DataSource dataSource = new DataSource("field1", "field2", "field3");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		for (int i = 0; i < 4; i++) {
-			dataSource.add(c.getTime(), i + 1);
-			dataSource.add(c.getTime(), i + 1);
+			dataSource.add(c.getTime(), new Timestamp(c.getTimeInMillis()), i + 1);
+			dataSource.add(c.getTime(), new Timestamp(c.getTimeInMillis()), i + 1);
 			c.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		return dataSource;
