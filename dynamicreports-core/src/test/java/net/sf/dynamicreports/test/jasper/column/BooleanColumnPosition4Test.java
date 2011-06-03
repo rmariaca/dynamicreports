@@ -32,13 +32,14 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class BooleanColumnPosition3Test extends AbstractJasperPositionTest {
+public class BooleanColumnPosition4Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
-				col.booleanColumn("C1", "field1").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE).setFixedWidth(100),
-				col.booleanColumn("C2", "field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setFixedWidth(110).setFixedHeight(40));
+				col.booleanColumn("1", "field1"),
+				col.booleanColumn("1", "field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setFixedWidth(50),
+				col.booleanColumn("1", "field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1)).highlightDetailEvenRows();
 	}
 
 	@Override
@@ -47,12 +48,13 @@ public class BooleanColumnPosition3Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		elementPositionTest("columnHeader.list1", 0, 10, 10, 210, 16);
-		elementPositionTest("columnHeader.column_field1.title1", 0, 0, 0, 100, 16);
-		elementPositionTest("columnHeader.column_field1.title2", 0, 100, 0, 110, 16);
+		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 16);
+		elementPositionTest("columnHeader.column_field1.title1", 0, 0, 0, 262, 16);
+		elementPositionTest("columnHeader.column_field1.title2", 0, 262, 0, 50, 16);
+		elementPositionTest("columnHeader.column_field1.title3", 0, 312, 0, 263, 16);
 
-		elementPositionTest("detail.list1", 0, 10, 26, 210, 40);
-		elementPositionTest("detail.column_field11", 0, 0, 0, 100, 40);
+		elementPositionTest("detail.list1", 0, 10, 26, 575, 19);
+		elementPositionTest("detail.column_field11", 0, 0, 0, 262, 40);
 		elementPositionTest("detail.list2", 0, 100, 0, 110, 40);
 		elementPositionTest("detail.image1", 0, 47, 13, 15, 15);
 	}

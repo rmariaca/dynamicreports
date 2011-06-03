@@ -195,7 +195,7 @@ public class StyleTransform {
 		case TEXT:
 			return transformStyle(templateTransform.getTextStyle(), true);
 		case COLUMN:
-			return transformStyle(templateTransform.getColumnStyle(), true);
+			return transformStyle(templateTransform.getColumnStyle(true), true);
 		case COLUMN_TITLE:
 			return transformStyle(templateTransform.getColumnTitleStyle(), true);
 		case GROUP:

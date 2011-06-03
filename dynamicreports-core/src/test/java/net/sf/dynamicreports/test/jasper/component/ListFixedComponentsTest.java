@@ -20,25 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.column;
+package net.sf.dynamicreports.test.jasper.component;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
-import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class BooleanColumnPosition3Test extends AbstractJasperPositionTest {
+public class ListFixedComponentsTest extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.columns(
-				col.booleanColumn("C1", "field1").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE).setFixedWidth(100),
-				col.booleanColumn("C2", "field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setFixedWidth(110).setFixedHeight(40));
+		rb.title(
+			  cmp.horizontalList(
+			  		cmp.text("a").setFixedWidth(50), cmp.text("a").setFixedWidth(100)));
 	}
 
 	@Override
@@ -47,20 +44,9 @@ public class BooleanColumnPosition3Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		elementPositionTest("columnHeader.list1", 0, 10, 10, 210, 16);
-		elementPositionTest("columnHeader.column_field1.title1", 0, 0, 0, 100, 16);
-		elementPositionTest("columnHeader.column_field1.title2", 0, 100, 0, 110, 16);
+		elementPositionTest("title.list1", 0, 10, 10, 150, 16);
 
-		elementPositionTest("detail.list1", 0, 10, 26, 210, 40);
-		elementPositionTest("detail.column_field11", 0, 0, 0, 100, 40);
-		elementPositionTest("detail.list2", 0, 100, 0, 110, 40);
-		elementPositionTest("detail.image1", 0, 47, 13, 15, 15);
-	}
-
-	@Override
-	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
-		dataSource.add(true);
-		return dataSource;
+		elementPositionTest("title.textField1", 0, 0, 0, 50, 16);
+		elementPositionTest("title.textField2", 0, 50, 0, 100, 16);
 	}
 }

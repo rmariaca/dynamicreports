@@ -304,7 +304,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getColumnStyle() {
+	protected DRIStyle getColumnStyle(boolean textStyle) {
 		if (report.getColumnStyle() != null) {
 			return report.getColumnStyle();
 		}
@@ -314,7 +314,10 @@ public class TemplateTransform {
 		if (Defaults.getDefaults().getColumnStyle() != null) {
 			return Defaults.getDefaults().getColumnStyle();
 		}
-		return getTextStyle();
+		if (textStyle) {
+			return getTextStyle();
+		}
+		return null;
 	}
 
 	protected DRIStyle getGroupTitleStyle() {

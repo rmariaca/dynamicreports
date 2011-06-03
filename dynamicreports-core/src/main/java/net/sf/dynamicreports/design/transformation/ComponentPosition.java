@@ -109,7 +109,14 @@ class ComponentPosition {
 		switch (type) {
 		case HORIZONTAL:
 		case HORIZONTAL_FLOW:
-			return null;
+			for (DRDesignListCell listCell : list.getListCells()) {
+				switch (listCell.getHorizontalAlignment()) {
+				case EXPAND:
+				case FLOAT:
+					return null;
+				}
+			}
+			return HorizontalCellComponentAlignment.LEFT;
 		case VERTICAL:
 			HorizontalCellComponentAlignment alignment = null;
 			for (DRDesignListCell listCell : list.getListCells()) {

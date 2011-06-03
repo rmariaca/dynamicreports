@@ -30,6 +30,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
+import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRBooleanField;
@@ -153,14 +154,17 @@ public class ColumnTransform {
 		case IMAGE_CHECKBOX_1:
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
-			int hFillerWidth = 1;
+			int hFillerWidth1 = 1;
+			int hFillerWidth2 = 1;
 			if (column.getWidth() != null) {
-				hFillerWidth = (column.getWidth() - accessor.getTemplateTransform().getBooleanColumnImageWidth(column)) / 2;
+				int width = column.getWidth() - accessor.getTemplateTransform().getBooleanColumnImageWidth(column);
+				hFillerWidth1 = width / 2;
+				hFillerWidth2 = width - hFillerWidth1;
 			}
 
 			DRList hList = new DRList();
 			DRFiller filler = new DRFiller();
-			filler.setWidth(hFillerWidth);
+			filler.setWidth(hFillerWidth1);
 			filler.setWidthType(column.getWidthType());
 			filler.setHeight(column.getHeight());
 			filler.setHeightType(column.getHeightType());
@@ -175,7 +179,7 @@ public class ColumnTransform {
 			hList.addCell(cell);
 
 			filler = new DRFiller();
-			filler.setWidth(hFillerWidth);
+			filler.setWidth(hFillerWidth2);
 			filler.setWidthType(column.getWidthType());
 			hList.addComponent(filler);
 
@@ -244,7 +248,7 @@ public class ColumnTransform {
 		if (!rowHighlighters.isEmpty()) {
 			DRIStyle style = getColumnComponent(column).getStyle();
 			if (style == null) {
-				style = accessor.getTemplateTransform().getColumnStyle();
+				style = accessor.getTemplateTransform().getColumnStyle(column instanceof DRIValueColumn<?>);
 			}
 			DRStyle newStyle = new DRStyle();
 			newStyle.setParentStyle((DRStyle) style);
@@ -269,6 +273,13 @@ public class ColumnTransform {
 				}
 			}
 			designComponent.setStyle(accessor.getStyleTransform().transformStyle(newStyle, true, DefaultStyleType.COLUMN));
+		}
+		else {
+			if (designComponent.getStyle() == null) {
+				DRIStyle columnStyle = accessor.getTemplateTransform().getColumnStyle(false);
+				DRDesignStyle designColumnStyle = accessor.getStyleTransform().transformStyle(columnStyle, false, DefaultStyleType.NONE);
+				designComponent.setStyle(designColumnStyle);
+			}
 		}
 
 		return designComponent;

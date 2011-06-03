@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
@@ -123,13 +124,23 @@ public class ColumnGridTransform {
 			VerticalCellComponentAlignment verticalAlignment = cell.getVerticalAlignment();
 			if (component instanceof DRIColumn<?>) {
 				DRIColumn<?> column = (DRIColumn<?>) component;
-				DRIComponent columnComponent = accessor.getColumnTransform().getColumnComponent(column);
-				if (columnComponent instanceof DRIDimensionComponent) {
+				if (column instanceof DRIBooleanColumn) {
 					if (horizontalAlignment == null) {
-						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getWidthType());
+						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIBooleanColumn) column).getWidthType());
 					}
 					if (verticalAlignment == null) {
-						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getHeightType());
+						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIBooleanColumn) column).getHeightType());
+					}
+				}
+				else {
+					DRIComponent columnComponent = accessor.getColumnTransform().getColumnComponent(column);
+					if (columnComponent instanceof DRIDimensionComponent) {
+						if (horizontalAlignment == null) {
+							horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getWidthType());
+						}
+						if (verticalAlignment == null) {
+							verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIDimensionComponent) columnComponent).getHeightType());
+						}
 					}
 				}
 			}

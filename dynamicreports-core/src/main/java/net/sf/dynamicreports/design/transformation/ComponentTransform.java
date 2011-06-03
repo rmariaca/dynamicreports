@@ -141,7 +141,7 @@ public class ComponentTransform {
 			return line((DRILine) component);
 		}
 		if (component instanceof DRIBooleanField) {
-			return booleanField((DRIBooleanField) component, resetType, resetGroup);
+			return booleanField((DRIBooleanField) component, defaultStyleType, resetType, resetGroup);
 		}
 		if (component instanceof DRIBreak) {
 			return breakComponent((DRIBreak) component);
@@ -376,15 +376,13 @@ public class ComponentTransform {
 	}
 
 	//boolean
-	protected DRDesignComponent booleanField(DRIBooleanField booleanField, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	protected DRDesignComponent booleanField(DRIBooleanField booleanField, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
 		DRHyperLinkComponent component = null;
-		DefaultStyleType defaultStyleType = null;
 
 		switch (componentType) {
 		case TEXT_TRUE_FALSE:
 		case TEXT_YES_NO:
-			defaultStyleType = DefaultStyleType.TEXT;
 			String keyTrue;
 			String keyFalse;
 			if (componentType.equals(BooleanComponentType.TEXT_TRUE_FALSE)) {
@@ -408,7 +406,6 @@ public class ComponentTransform {
 		case IMAGE_CHECKBOX_1:
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
-			defaultStyleType = DefaultStyleType.NONE;
 			DRImage image = new DRImage();
 			image.setImageExpression(new BooleanImageExpression(booleanField));
 			component = image;
