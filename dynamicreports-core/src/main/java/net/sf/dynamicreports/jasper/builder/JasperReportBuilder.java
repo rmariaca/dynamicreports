@@ -219,7 +219,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 			}
 
 			try {
-				if (connection != null && getObject().getQuery() != null) {
+				if (connection != null && toJasperReport().getQuery() != null) {
 					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters, connection);
 				}
 				else {

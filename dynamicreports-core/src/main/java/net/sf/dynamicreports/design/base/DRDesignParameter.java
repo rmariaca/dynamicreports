@@ -27,9 +27,10 @@ import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignParameter implements DRIDesignParameter {		
+public class DRDesignParameter implements DRIDesignParameter {
 	private String name;
 	private Object value;
+	private boolean external;
 
 	public String getName() {
 		return name;
@@ -38,12 +39,20 @@ public class DRDesignParameter implements DRIDesignParameter {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Object getValue() {
 		return value;
 	}
-	
+
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public boolean isExternal() {
+		return external;
+	}
+
+	public void setExternal(boolean external) {
+		this.external = external;
 	}
 }

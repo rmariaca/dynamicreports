@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
@@ -55,16 +56,16 @@ import org.apache.commons.lang.Validate;
  */
 public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private JasperDesign jasperDesign;
 	private List<DRIField<?>> fields;
 	private DRMargin margin;
-	private transient ByteArrayOutputStream templateDesign;	
-	
+	private transient ByteArrayOutputStream templateDesign;
+
 	public JasperTemplateDesign(JasperDesign jasperDesign) throws DRException {
 		init(jasperDesign);
 	}
-	
+
 	public JasperTemplateDesign(File file) throws DRException {
 		Validate.notNull(file, "file must not be null");
 		try {
@@ -73,7 +74,7 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 			throw new DRException(e);
 		}
 	}
-	
+
 	public JasperTemplateDesign(String fileName) throws DRException {
 		Validate.notNull(fileName, "fileName must not be null");
 		try {
@@ -82,7 +83,7 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 			throw new DRException(e);
 		}
 	}
-	
+
 	public JasperTemplateDesign(InputStream inputStream) throws DRException {
 		Validate.notNull(inputStream, "inputStream must not be null");
 		try {
@@ -102,29 +103,34 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 			throw new DRException(e);
 		}
 	}
-	
+
 	private void init(JasperDesign jasperDesign) throws DRException {
 		Validate.notNull(jasperDesign, "jasperDesign must not be null");
 		this.jasperDesign = jasperDesign;
-		
+
 		this.fields = new ArrayList<DRIField<?>>();
 		for (JRField jrField : jasperDesign.getFields()) {
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			DRField<?> field = new DRField(jrField.getName(), jrField.getValueClass());
 			fields.add(field);
 		}
-		
+
 		this.margin = new DRMargin();
 		margin.setTop(jasperDesign.getTopMargin());
 		margin.setLeft(jasperDesign.getLeftMargin());
 		margin.setBottom(jasperDesign.getBottomMargin());
 		margin.setRight(jasperDesign.getRightMargin());
 	}
-	
+
 	public List<DRIField<?>> getFields() {
 		return fields;
 	}
-	
+
+	public boolean isDefinedParameter(String name) {
+		JRParameter parameter = (JRParameter) jasperDesign.getParametersMap().get(name);
+		return parameter != null;
+	}
+
 	public String getResourceBundleName() {
 		return jasperDesign.getResourceBundle();
 	}
@@ -216,21 +222,21 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	public int getBackgroundComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getBackground());
 	}
-	
+
 	private int getBandComponentsCount(JRBand band) {
 		if (band != null) {
 			return band.getElements().length;
 		}
 		return 0;
 	}
-	
+
 	public JasperDesign getDesign() throws DRException {
 		try {
 			if (templateDesign == null) {
 				templateDesign = new ByteArrayOutputStream();
 				JRXmlWriter.writeReport(jasperDesign, templateDesign, "UTF-8");
 			}
-			
+
 			return JRXmlLoader.load(new ByteArrayInputStream(templateDesign.toByteArray()));
 		} catch (JRException e) {
 			throw new DRException(e);

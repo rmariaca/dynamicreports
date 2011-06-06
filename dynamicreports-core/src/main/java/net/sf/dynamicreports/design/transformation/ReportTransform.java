@@ -39,15 +39,15 @@ import net.sf.dynamicreports.report.definition.DRIReport;
  */
 public class ReportTransform {
 	private DRIReport report;
-	private DRIDesignTemplateDesign templateDesign; 
+	private DRIDesignTemplateDesign templateDesign;
 	private DRDesignQuery query;
 	private List<DRIDesignParameter> parameters;
-	
+
 	public ReportTransform(DesignTransformAccessor accessor) {
 		this.report = accessor.getReport();
 		parameters = new ArrayList<DRIDesignParameter>();
 	}
-	
+
 	public void transform() {
 		templateDesign = new DRDesignTemplateDesign(report.getTemplateDesign());
 		if (report.getQuery() != null) {
@@ -57,29 +57,30 @@ public class ReportTransform {
 			parameters.add(parameter(parameter));
 		}
 	}
-	
+
 	private DRDesignQuery query(DRIQuery query) {
 		DRDesignQuery designQuery = new DRDesignQuery();
 		designQuery.setText(query.getText());
 		designQuery.setLanguage(query.getLanguage());
 		return designQuery;
 	}
-	
+
 	private DRDesignParameter parameter(DRIParameter<?> parameter) {
 		DRDesignParameter designParameter = new DRDesignParameter();
 		designParameter.setName(parameter.getName());
 		designParameter.setValue(parameter.getValue());
+		designParameter.setExternal(report.getTemplateDesign().isDefinedParameter(parameter.getName()));
 		return designParameter;
 	}
-	
+
 	public DRIDesignTemplateDesign getTemplateDesign() {
 		return templateDesign;
 	}
-	
+
 	public DRDesignQuery getQuery() {
 		return query;
 	}
-	
+
 	public List<DRIDesignParameter> getParameters() {
 		return parameters;
 	}

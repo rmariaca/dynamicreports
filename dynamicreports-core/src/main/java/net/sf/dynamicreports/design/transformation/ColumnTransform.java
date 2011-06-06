@@ -253,8 +253,10 @@ public class ColumnTransform {
 			DRStyle newStyle = new DRStyle();
 			newStyle.setParentStyle((DRStyle) style);
 			List<DRIConditionalStyle> conditionalStyles = new ArrayList<DRIConditionalStyle>();
-			for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
-				conditionalStyles.add(conditionalStyle);
+			if (style != null) {
+				for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
+					conditionalStyles.add(conditionalStyle);
+				}
 			}
 			for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
 				conditionalStyles.add(conditionalStyle);
@@ -275,7 +277,7 @@ public class ColumnTransform {
 			designComponent.setStyle(accessor.getStyleTransform().transformStyle(newStyle, true, DefaultStyleType.COLUMN));
 		}
 		else {
-			if (designComponent.getStyle() == null) {
+			if (designComponent.getStyle() == null && !(column instanceof DRIValueColumn<?>)) {
 				DRIStyle columnStyle = accessor.getTemplateTransform().getColumnStyle(false);
 				DRDesignStyle designColumnStyle = accessor.getStyleTransform().transformStyle(columnStyle, false, DefaultStyleType.NONE);
 				designComponent.setStyle(designColumnStyle);

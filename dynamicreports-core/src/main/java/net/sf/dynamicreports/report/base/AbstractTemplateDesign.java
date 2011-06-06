@@ -41,7 +41,11 @@ public abstract class AbstractTemplateDesign<T> implements DRITemplateDesign<T> 
 	public List<DRIField<?>> getFields() {
 		return null;
 	}
-	
+
+	public boolean isDefinedParameter(String name) {
+		return false;
+	}
+
 	public String getResourceBundleName() {
 		return null;
 	}

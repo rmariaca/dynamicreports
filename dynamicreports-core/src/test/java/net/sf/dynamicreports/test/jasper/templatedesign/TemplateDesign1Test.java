@@ -40,45 +40,47 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class TemplateDesign1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<Integer> column2;
 	private AggregationSubtotalBuilder<Integer> subtotal1;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) throws DRException {		
+	protected void configureReport(JasperReportBuilder rb) throws DRException {
 		InputStream is = TemplateDesign1Test.class.getResourceAsStream("templatedesign1.jrxml");
 		rb.setTemplateDesign(is)
-		  .columns(				
+			.addParameter("parameter", "parametertest")
+		  .columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class))
 			.subtotalsAtSummary(subtotal1 = sbt.sum(column2));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		columnTitleValueTest(column1, "Column1");
 		columnDetailValueTest(column1, "row0", "row1");
 		columnTitleValueTest(column2, "Column2");
 		columnDetailValueTest(column2, "0", "1");
 		subtotalValueTest(subtotal1, "1");
-		
-		elementValueTest("templateDesign.title", "title");
+
+		elementValueTest("templateDesign.title1", "title");
+		elementValueTest("templateDesign.title2", "parametertest");
 		elementValueTest("templateDesign.pageHeader", "pageHeader");
 		elementValueTest("templateDesign.pageFooter", "pageFooter");
 		elementValueTest("templateDesign.detail", "detail");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");
 		for (int i = 0; i < 2; i++) {
 			dataSource.add("row" + i, i);
-		}		
+		}
 		return dataSource;
 	}
 }

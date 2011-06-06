@@ -123,7 +123,9 @@ public class ReportTransform {
 
 	private void addParameter(DRIDesignParameter parameter) {
 		try {
-			accessor.getDesign().addParameter(parameter(parameter));
+			if (!parameter.isExternal()) {
+				accessor.getDesign().addParameter(parameter(parameter));
+			}
 			accessor.getCustomValues().addValueType(parameter.getName(), ValueType.PARAMETER);
 			accessor.getParameters().put(parameter.getName(), parameter.getValue());
 		} catch (JRException e) {

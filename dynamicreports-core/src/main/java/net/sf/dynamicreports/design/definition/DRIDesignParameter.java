@@ -26,8 +26,10 @@ package net.sf.dynamicreports.design.definition;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignParameter {
-	
+
 	public String getName();
 
 	public Object getValue();
+
+	public boolean isExternal();
 }
