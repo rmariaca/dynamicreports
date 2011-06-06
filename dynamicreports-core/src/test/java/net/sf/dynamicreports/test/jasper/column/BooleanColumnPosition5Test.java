@@ -32,11 +32,12 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class BooleanColumnPosition4Test extends AbstractJasperPositionTest {
+public class BooleanColumnPosition5Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setColumnStyle(stl.style().setPadding(2))
+		  .highlightDetailEvenRows()
 		  .columns(
 				col.booleanColumn("1", "field1"),
 				col.booleanColumn("1", "field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1));

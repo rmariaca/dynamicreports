@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.base.component.DRListCell;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
+import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
@@ -252,6 +253,9 @@ public class ColumnTransform {
 			}
 			DRStyle newStyle = new DRStyle();
 			newStyle.setParentStyle((DRStyle) style);
+			if (!(column instanceof DRIValueColumn<?>)) {
+				newStyle.setPadding(new DRPadding(0));
+			}
 			List<DRIConditionalStyle> conditionalStyles = new ArrayList<DRIConditionalStyle>();
 			if (style != null) {
 				for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
@@ -279,7 +283,13 @@ public class ColumnTransform {
 		else {
 			if (designComponent.getStyle() == null && !(column instanceof DRIValueColumn<?>)) {
 				DRIStyle columnStyle = accessor.getTemplateTransform().getColumnStyle(false);
-				DRDesignStyle designColumnStyle = accessor.getStyleTransform().transformStyle(columnStyle, false, DefaultStyleType.NONE);
+				DRStyle newStyle = null;
+				if (columnStyle != null) {
+					newStyle = new DRStyle();
+					newStyle.setParentStyle((DRStyle) columnStyle);
+					newStyle.setPadding(new DRPadding(0));
+				}
+				DRDesignStyle designColumnStyle = accessor.getStyleTransform().transformStyle(newStyle, false, DefaultStyleType.NONE);
 				designComponent.setStyle(designColumnStyle);
 			}
 		}
