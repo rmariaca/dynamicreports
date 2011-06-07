@@ -1,6 +1,15 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.1.0 (2011-06-07)
+---------------------------------------------------
+ - updated JasperReports to 4.0.1
+ - table of contents - a table of contents generator
+ - support for writing jasper expressions, see JasperExpressionReport for an example
+ - minor bug fixes and improvements
+ - new examples - SalesTableOfContents, TableOfContentsReport, CustomTableOfContentsReport, 
+                  SimpleExpressionReport, ComplexExpressionReport, JasperExpressionReport, ValueFormatterReport
+
 Changes in version 2.0.2 (2011-05-10)
 ---------------------------------------------------
  - new bands - detail header, detail footer
