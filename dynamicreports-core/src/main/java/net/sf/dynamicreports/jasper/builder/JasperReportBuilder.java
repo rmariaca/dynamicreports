@@ -106,9 +106,15 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private JRDataSource dataSource;
 	private Connection connection;
 	private JRVirtualizer virtualizer;
+	private Integer startPageNumber;
 
 	public JasperReportBuilder() {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
+	}
+
+	protected void setStartPageNumber(Integer startPageNumber) {
+		this.startPageNumber = startPageNumber;
+		rebuild();
 	}
 
 	public JasperReportBuilder setConnection(Connection connection) {
@@ -182,7 +188,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 
 	private JasperReportDesign toJasperReportDesign() throws DRException {
 		if (reportDesign == null) {
-			reportDesign = new JasperReportDesign(new DRDesignReport(build()));
+			reportDesign = new JasperReportDesign(new DRDesignReport(build()), startPageNumber);
 		}
 		return reportDesign;
 	}

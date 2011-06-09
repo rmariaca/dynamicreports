@@ -72,9 +72,11 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private List<JasperReportBuilder> jasperReportBuilders;
+	private boolean continuousPageNumbering;
 
 	public JasperConcatenatedReportBuilder() {
 		this.jasperReportBuilders = new ArrayList<JasperReportBuilder>();
+		this.continuousPageNumbering = false;
 	}
 
 	public JasperConcatenatedReportBuilder concatenate(JasperReportBuilder ...jasperReportBuilders) {
@@ -114,8 +116,13 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		g2d.fill(new Rectangle2D.Float(1, 1, maxWidth - 1, maxHeight - 1));
 
 		int offset = 1;
+		int pageNumber = 1;
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
+			if (continuousPageNumbering) {
+				jasperReportBuilder.setStartPageNumber(pageNumber);
+			}
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
+			jasperReportBuilder.setStartPageNumber(null);
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			for (int i = 0; i < jasperPrint.getPages().size(); i++) {
 				try {
@@ -132,12 +139,22 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 					throw new DRException(e);
 				}
 			}
+			pageNumber += jasperPrint.getPages().size();
 		}
 		try {
 			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
 		} catch (IOException e) {
 			throw new DRException(e);
 		}
+		return this;
+	}
+
+	public JasperConcatenatedReportBuilder continuousPageNumbering() {
+		return setContinuousPageNumbering(true);
+	}
+
+	public JasperConcatenatedReportBuilder setContinuousPageNumbering(boolean continuousPageNumbering) {
+		this.continuousPageNumbering = continuousPageNumbering;
 		return this;
 	}
 
@@ -264,8 +281,15 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
 			JRExporter exporter = exporterTransform.transform();
 			List<JasperPrint> jasperPrints = new ArrayList<JasperPrint>();
+			int pageNumber = 1;
 			for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-				jasperPrints.add(jasperReportBuilder.toJasperPrint());
+				if (continuousPageNumbering) {
+					jasperReportBuilder.setStartPageNumber(pageNumber);
+				}
+				JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
+				jasperReportBuilder.setStartPageNumber(null);
+				jasperPrints.add(jasperPrint);
+				pageNumber += jasperPrint.getPages().size();
 			}
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrints);
 			exporter.exportReport();

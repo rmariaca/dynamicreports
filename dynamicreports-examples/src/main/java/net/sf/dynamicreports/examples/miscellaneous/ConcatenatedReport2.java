@@ -38,24 +38,25 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ConcatenatedReport2 {
-	
+
 	public ConcatenatedReport2() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			concatenatedReport()
+				.continuousPageNumbering()
 			  .concatenate(
 			  	createReport(PageType.A4),
 			  	createReport(PageType.A3),
 			  	createReport(PageType.A5))
 			  .toPdf(Exporters.pdfExporter("c:/report.pdf"));
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
-	
+
 	private JasperReportBuilder createReport(PageType pageType) {
 		JasperReportBuilder report = report();
 		report
@@ -66,12 +67,14 @@ public class ConcatenatedReport2 {
 		  	col.column("Quantity",   "quantity",  type.integerType()),
 		  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 		  .title(Templates.createTitleComponent(pageType.name() + "Report"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource());		
-		
+		  .pageFooter(
+		  	cmp.line(),
+		  	cmp.pageNumber().setStyle(Templates.boldCenteredStyle))
+		  .setDataSource(createDataSource());
+
 		return report;
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 20; i++) {
@@ -79,7 +82,7 @@ public class ConcatenatedReport2 {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ConcatenatedReport2();
 	}

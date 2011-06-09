@@ -33,25 +33,27 @@ import net.sf.jasperreports.engine.design.JasperDesign;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface JasperTransformAccessor {
-	
-	public DRIDesignReport getReport(); 
-	
+
+	public DRIDesignReport getReport();
+
 	public JasperDesign getDesign();
-	
+
 	public JasperCustomValues getCustomValues();
-	
+
 	public Map<String, Object> getParameters();
-	
+
+	public Integer getStartPageNumber();
+
 	public ReportParameters getMasterReportParameters();
-	
+
 	public ExpressionTransform getExpressionTransform();
 
 	public GroupTransform getGroupTransform();
-	
+
 	public ComponentTransform getComponentTransform();
-	
+
 	public StyleTransform getStyleTransform();
-	
+
 	public ChartTransform getChartTransform();
 
 	public BarcodeTransform getBarcodeTransform();

@@ -60,14 +60,16 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private JasperCustomValues customValues;
 	private Map<String, Object> parameters;
 	private ReportParameters masterReportParameters;
+	private Integer startPageNumber;
 
-	public JasperReportDesign(DRIDesignReport report) throws DRException {
-		this(report, null);
+	public JasperReportDesign(DRIDesignReport report, Integer startPageNumber) throws DRException {
+		this(report, null, startPageNumber);
 	}
 
-	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) throws DRException {
+	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters, Integer startPageNumber) throws DRException {
 		this.report = report;
 		this.masterReportParameters = masterReportParameters;
+		this.startPageNumber = startPageNumber;
 		init();
 		transform();
 	}
@@ -140,6 +142,10 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public Map<String, Object> getParameters() {
 		return parameters;
+	}
+
+	public Integer getStartPageNumber() {
+		return startPageNumber;
 	}
 
 	public ReportParameters getMasterReportParameters() {

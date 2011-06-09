@@ -346,7 +346,7 @@ public class ComponentTransform {
 		public Object evaluate(ReportParameters reportParameters) {
 			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportParameters.getValue(reportExpression.getName());
 			try {
-				reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
+				reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters, null);
 				return JasperCompileManager.compileReport(reportDesign.getDesign());
 			} catch (JRException e) {
 				if (log.isErrorEnabled()) {

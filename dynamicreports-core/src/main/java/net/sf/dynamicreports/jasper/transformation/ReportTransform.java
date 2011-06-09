@@ -41,9 +41,12 @@ import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
+import net.sf.jasperreports.engine.JRDefaultScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptlet;
+import net.sf.jasperreports.engine.JRScriptletException;
+import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JRDesignScriptlet;
@@ -82,6 +85,10 @@ public class ReportTransform {
 
 		for (DRIDesignParameter parameter : report.getParameters()) {
 			addParameter(parameter);
+		}
+
+		if (accessor.getStartPageNumber() != null) {
+			addScriptlet("startPageNumber", new StartPageNumberScriptlet());
 		}
 
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
@@ -197,5 +204,14 @@ public class ReportTransform {
 
 	public JRAbstractScriptlet getScriptlet() {
 		return scriptlet;
+	}
+
+	private class StartPageNumberScriptlet extends JRDefaultScriptlet {
+
+		@Override
+		public void afterReportInit() throws JRScriptletException {
+			super.afterReportInit();
+			setVariableValue(JRVariable.PAGE_NUMBER, accessor.getStartPageNumber());
+		}
 	}
 }
