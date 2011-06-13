@@ -52,8 +52,8 @@ class ComponentPosition {
 	private static void list(String name, DRDesignList list, int maxWidth, int maxHeight) throws DRException {
 		list.setX(0);
 		list.setY(0);
-		alignment(list);
 		width(list);
+		alignment(list);
 		recalculateWidth(name, list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
 		height(list);
 
@@ -119,6 +119,12 @@ class ComponentPosition {
 			return HorizontalCellComponentAlignment.LEFT;
 		case VERTICAL:
 			HorizontalCellComponentAlignment alignment = null;
+			int maxWidth = 0;
+			for (DRDesignComponent designComponent : list.getComponents()) {
+				if (designComponent.getWidth() > maxWidth) {
+					maxWidth = designComponent.getWidth();
+				}
+			}
 			for (DRDesignListCell listCell : list.getListCells()) {
 				switch (listCell.getHorizontalAlignment()) {
 				case EXPAND:
@@ -129,6 +135,11 @@ class ComponentPosition {
 				default:
 					if (alignment == null) {
 						alignment = HorizontalCellComponentAlignment.LEFT;
+					}
+					else {
+						if (alignment != HorizontalCellComponentAlignment.LEFT && maxWidth == listCell.getComponent().getWidth()) {
+							return HorizontalCellComponentAlignment.EXPAND;
+						}
 					}
 					break;
 				}

@@ -335,19 +335,29 @@ public class ComponentTransform {
 		private String name;
 		private DRIDesignExpression reportExpression;
 		private Integer pageWidth;
-		private JasperReportDesign reportDesign;
+		private ReportBuilder<?> reportBuilder;
+		private Map<ReportBuilder<?>, JasperReportDesign> reportDesigns;
+		private Map<ReportBuilder<?>, JasperReport> jasperReports;
 
 		public SubreportExpression(DRIDesignExpression reportExpression, Integer pageWidth) {
 			this.reportExpression = reportExpression;
 			this.pageWidth = pageWidth;
 			this.name = ReportUtils.generateUniqueName("subreportExpression");
+			reportDesigns = new HashMap<ReportBuilder<?>, JasperReportDesign>();
+			jasperReports = new HashMap<ReportBuilder<?>, JasperReport>();
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
-			ReportBuilder<?> reportBuilder = (ReportBuilder<?>) reportParameters.getValue(reportExpression.getName());
+			reportBuilder = (ReportBuilder<?>) reportParameters.getValue(reportExpression.getName());
+			if (jasperReports.containsKey(reportBuilder)) {
+				return jasperReports.get(reportBuilder);
+			}
 			try {
-				reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters, null);
-				return JasperCompileManager.compileReport(reportDesign.getDesign());
+				JasperReportDesign reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters, null);
+				JasperReport jasperReport = JasperCompileManager.compileReport(reportDesign.getDesign());
+				reportDesigns.put(reportBuilder, reportDesign);
+				jasperReports.put(reportBuilder, jasperReport);
+				return jasperReport;
 			} catch (JRException e) {
 				if (log.isErrorEnabled()) {
 					log.error("Error encountered while creating subreport design", e);
@@ -361,7 +371,7 @@ public class ComponentTransform {
 		}
 
 		public JasperReportDesign getReportDesign() {
-			return reportDesign;
+			return reportDesigns.get(reportBuilder);
 		}
 
 		public String getName() {

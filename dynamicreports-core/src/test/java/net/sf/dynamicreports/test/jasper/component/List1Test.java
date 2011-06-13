@@ -31,7 +31,7 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ListTest extends AbstractJasperPositionTest {
+public class List1Test extends AbstractJasperPositionTest {
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
