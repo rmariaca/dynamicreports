@@ -47,6 +47,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
@@ -65,6 +66,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -244,8 +246,9 @@ public class ChartTransform {
 
 		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
 		designDataset.setValueExpression(valueExpression);
+		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
-			designDataset.addSerie(serie(serie, valueExpression, resetType, resetGroup));
+			designDataset.addSerie(serie(serie, valueExpression, resetType, resetGroup, index++));
 		}
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
@@ -266,7 +269,7 @@ public class ChartTransform {
 	}
 
 	//serie
-	private DRDesignChartSerie serie(DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignChartSerie serie(DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
 		DRDesignChartSerie designSerie = new DRDesignChartSerie();
 
 		ExpressionTransform expressionTransform = accessor.getExpressionTransform();
@@ -284,7 +287,11 @@ public class ChartTransform {
 				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(serieValueExpression, serieValueExpression, resetType, resetGroup)));
 			}
 		}
-		designSerie.setLabelExpression(expressionTransform.transformExpression(serie.getLabelExpression()));
+		DRIExpression<?> labelExpression = serie.getLabelExpression();
+		if (labelExpression == null) {
+			labelExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
 		return designSerie;
 	}
 

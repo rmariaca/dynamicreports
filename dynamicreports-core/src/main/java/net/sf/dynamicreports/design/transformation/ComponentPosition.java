@@ -42,7 +42,10 @@ class ComponentPosition {
 
 	protected static void component(String name, DRDesignComponent component, int maxWidth, int maxHeight) throws DRException {
 		if (component instanceof DRDesignList) {
-			list(name, (DRDesignList) component, maxWidth, maxHeight);
+			DRDesignList list = (DRDesignList) component;
+			list.setX(0);
+			list.setY(0);
+			list(name, list, maxWidth, maxHeight);
 		}
 		else {
 			throw new DRDesignReportException("Component " + component.getClass().getName() + " position not supported");
@@ -50,8 +53,6 @@ class ComponentPosition {
 	}
 
 	private static void list(String name, DRDesignList list, int maxWidth, int maxHeight) throws DRException {
-		list.setX(0);
-		list.setY(0);
 		width(list);
 		alignment(list);
 		recalculateWidth(name, list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
