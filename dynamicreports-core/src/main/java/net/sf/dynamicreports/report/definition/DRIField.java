@@ -29,6 +29,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIField<T> extends DRIExpression<T>, DRIValue<T> {
-	
+
 	public DRIDataType<? super T, T> getDataType();
+
+	public String getDescription();
 }

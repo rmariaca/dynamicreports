@@ -29,6 +29,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignParameter;
  */
 public class DRDesignParameter implements DRIDesignParameter {
 	private String name;
+	private Class<?> valueClass;
 	private Object value;
 	private boolean external;
 
@@ -38,6 +39,14 @@ public class DRDesignParameter implements DRIDesignParameter {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Class<?> getValueClass() {
+		return valueClass;
+	}
+
+	public void setValueClass(Class<?> valueClass) {
+		this.valueClass = valueClass;
 	}
 
 	public Object getValue() {

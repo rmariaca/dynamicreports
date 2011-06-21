@@ -107,9 +107,12 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private Connection connection;
 	private JRVirtualizer virtualizer;
 	private Integer startPageNumber;
+	private Map<String, Object> parameters;
+	private Map<String, Object> additionalParameters;
 
 	public JasperReportBuilder() {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
+		this.additionalParameters = new HashMap<String, Object>();
 	}
 
 	protected void setStartPageNumber(Integer startPageNumber) {
@@ -177,11 +180,26 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
+	public JasperReportBuilder setParameter(String name, Object value) {
+		additionalParameters.put(name, value);
+		parameters = null;
+		jasperPrint = null;
+		return this;
+	}
+
+	public JasperReportBuilder setParameters(Map<String, Object> parameters) {
+		additionalParameters = parameters;
+		this.parameters = null;
+		jasperPrint = null;
+		return this;
+	}
+
 	public JasperReportBuilder rebuild() {
 		builded = false;
 		reportDesign = null;
 		jasperDesign = null;
 		jasperReport = null;
+		parameters = null;
 		jasperPrint = null;
 		return this;
 	}
@@ -213,14 +231,20 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	}
 
 	public Map<String, Object> getJasperParameters() throws DRException {
-		return toJasperReportDesign().getParameters();
+		if (parameters == null) {
+			parameters = new HashMap<String, Object>();
+			parameters.putAll(toJasperReportDesign().getParameters());
+			if (additionalParameters != null) {
+				parameters.putAll(additionalParameters);
+			}
+		}
+		return parameters;
 	}
 
 	public JasperPrint toJasperPrint() throws DRException {
 		if (jasperPrint == null) {
 			Map<String, Object> parameters = getJasperParameters();
 			if (virtualizer != null) {
-				parameters = new HashMap<String, Object>(parameters);
 				parameters.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			}
 

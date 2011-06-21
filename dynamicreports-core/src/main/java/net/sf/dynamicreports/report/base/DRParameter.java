@@ -30,20 +30,35 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRParameter<T> implements DRIParameter<T> {	
+public class DRParameter<T> implements DRIParameter<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
+	private Class<T> valueClass;
 	private T value;
 
+	@SuppressWarnings("unchecked")
 	public DRParameter(String name, T value) {
 		Validate.notEmpty(name, "name must not be empty");
+		Validate.notNull(value, "value must not be null");
 		this.name = name;
+		this.valueClass = (Class<T>) value.getClass();
 		this.value = value;
+	}
+
+	public DRParameter(String name, Class<T> valueClass) {
+		Validate.notEmpty(name, "name must not be empty");
+		Validate.notNull(valueClass, "valueClass must not be null");
+		this.name = name;
+		this.valueClass = valueClass;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Class<T> getValueClass() {
+		return valueClass;
 	}
 
 	public T getValue() {

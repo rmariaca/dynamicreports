@@ -166,6 +166,7 @@ public class ExpressionTransform {
 		DRDesignField designField = new DRDesignField();
 		designField.setName(field.getName());
 		designField.setValueClass(field.getValueClass());
+		designField.setDescription(field.getDescription());
 		return designField;
 	}
 

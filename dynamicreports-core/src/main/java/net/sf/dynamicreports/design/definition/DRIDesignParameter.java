@@ -29,6 +29,8 @@ public interface DRIDesignParameter {
 
 	public String getName();
 
+	public Class<?> getValueClass();
+
 	public Object getValue();
 
 	public boolean isExternal();

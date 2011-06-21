@@ -35,7 +35,11 @@ public class ParameterBuilder<T> extends AbstractBuilder<ParameterBuilder<T>, DR
 	protected ParameterBuilder(String name, T value) {
 		super(new DRParameter<T>(name, value));
 	}
-	
+
+	protected ParameterBuilder(String name, Class<T> valueClass) {
+		super(new DRParameter<T>(name, valueClass));
+	}
+
 	public DRParameter<T> getParameter() {
 		return build();
 	}

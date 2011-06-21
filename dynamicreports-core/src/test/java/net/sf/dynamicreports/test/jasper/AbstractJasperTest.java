@@ -64,14 +64,17 @@ public abstract class AbstractJasperTest {
 			if (serializableTest()) {
 				reportBuilder = serializableTest(reportBuilder);
 			}
-			jasperReport = reportBuilder.toJasperReport();
-			jasperPrint = reportBuilder
-											.setDataSource(createDataSource())
-											.toJasperPrint();
+			reportBuilder.setDataSource(createDataSource());
+			build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	protected void build() throws DRException {
+		jasperReport = reportBuilder.toJasperReport();
+		jasperPrint = reportBuilder.toJasperPrint();
 	}
 
 	@Test

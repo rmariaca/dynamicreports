@@ -31,13 +31,14 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRField<T> implements DRIField<T> {	
+public class DRField<T> implements DRIField<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
 	private Class<? super T> valueClass;
-	private DRIDataType<? super T, T> dataType;	
-	
+	private DRIDataType<? super T, T> dataType;
+	private String description;
+
 	public DRField(String name, Class<? super T> valueClass) {
 		Validate.notEmpty(name, "name must not be empty");
 		Validate.notNull(valueClass, "valueClass must not be null");
@@ -48,16 +49,24 @@ public class DRField<T> implements DRIField<T> {
 	public void setDataType(DRIDataType<? super T, T> dataType) {
 		this.dataType = dataType;
 	}
-	
+
 	public DRIDataType<? super T, T> getDataType() {
 		return dataType;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 
 	public Class<? super T> getValueClass() {
 		return valueClass;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

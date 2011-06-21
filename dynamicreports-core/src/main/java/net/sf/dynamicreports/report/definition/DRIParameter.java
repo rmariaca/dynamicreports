@@ -31,5 +31,7 @@ public interface DRIParameter<T> extends DRIValue<T>, Serializable {
 
 	public String getName();
 
+	public Class<T> getValueClass();
+
 	public T getValue();
 }

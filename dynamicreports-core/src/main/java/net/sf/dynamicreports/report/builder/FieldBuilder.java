@@ -36,16 +36,21 @@ public class FieldBuilder<T> extends AbstractBuilder<FieldBuilder<T>, DRField<T>
 	protected FieldBuilder(String name, Class<? super T> valueClass) {
 		super(new DRField<T>(name, valueClass));
 	}
-	
+
 	public FieldBuilder<T> setDataType(DRIDataType<? super T, T> dataType) {
 		getObject().setDataType(dataType);
 		return this;
-	}	
-	
+	}
+
+	public FieldBuilder<T> setDescription(String description) {
+		getObject().setDescription(description);
+		return this;
+	}
+
 	public DRField<T> getField() {
 		return build();
 	}
-	
+
 	public String getName() {
 		return getField().getName();
 	}

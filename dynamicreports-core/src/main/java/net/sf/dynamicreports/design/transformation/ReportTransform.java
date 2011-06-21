@@ -68,6 +68,7 @@ public class ReportTransform {
 	private DRDesignParameter parameter(DRIParameter<?> parameter) {
 		DRDesignParameter designParameter = new DRDesignParameter();
 		designParameter.setName(parameter.getName());
+		designParameter.setValueClass(parameter.getValueClass());
 		designParameter.setValue(parameter.getValue());
 		designParameter.setExternal(report.getTemplateDesign().isDefinedParameter(parameter.getName()));
 		return designParameter;

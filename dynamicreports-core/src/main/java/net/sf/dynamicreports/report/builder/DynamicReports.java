@@ -157,6 +157,10 @@ public class DynamicReports {
 		return new ParameterBuilder<T>(name, value);
 	}
 
+	public static <T> ParameterBuilder<T> parameter(String name, Class<T> valueClass) {
+		return new ParameterBuilder<T>(name, valueClass);
+	}
+
 	//query
 	public static QueryBuilder query(String text, QueryLanguage language) {
 		return new QueryBuilder(text, language);

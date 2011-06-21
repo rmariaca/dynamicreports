@@ -235,6 +235,10 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return addParameter(DynamicReports.parameter(name, value));
 	}
 
+	public T addParameter(String name, Class<?> valueClass) {
+		return addParameter(DynamicReports.parameter(name, valueClass));
+	}
+
 	public T addParameter(ParameterBuilder<?> ...parameters) {
 		Validate.notNull(parameters, "parameters must not be null");
 		Validate.noNullElements(parameters, "parameters must not contains null parameter");

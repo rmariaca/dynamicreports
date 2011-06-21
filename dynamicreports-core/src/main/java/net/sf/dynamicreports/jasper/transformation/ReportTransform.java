@@ -182,7 +182,7 @@ public class ReportTransform {
 	private JRDesignParameter parameter(DRIDesignParameter parameter) {
 		JRDesignParameter jrParameter = new JRDesignParameter();
 		jrParameter.setName(parameter.getName());
-		jrParameter.setValueClass(parameter.getValue().getClass());
+		jrParameter.setValueClass(parameter.getValueClass());
 		return jrParameter;
 	}
 

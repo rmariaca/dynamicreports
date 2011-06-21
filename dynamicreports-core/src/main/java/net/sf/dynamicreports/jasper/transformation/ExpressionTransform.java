@@ -150,6 +150,7 @@ public class ExpressionTransform {
 		JRDesignField jrField = new JRDesignField();
 		jrField.setName(field.getName());
 		jrField.setValueClass(field.getValueClass());
+		jrField.setDescription(field.getDescription());
 		return jrField;
 	}
 
