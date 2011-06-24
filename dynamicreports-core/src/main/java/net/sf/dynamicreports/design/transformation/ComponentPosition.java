@@ -45,14 +45,15 @@ class ComponentPosition {
 			DRDesignList list = (DRDesignList) component;
 			list.setX(0);
 			list.setY(0);
-			list(name, list, maxWidth, maxHeight);
+			list(name, list, maxWidth, maxHeight, true);
+			list(name, list);
 		}
 		else {
 			throw new DRDesignReportException("Component " + component.getClass().getName() + " position not supported");
 		}
 	}
 
-	private static void list(String name, DRDesignList list, int maxWidth, int maxHeight) throws DRException {
+	private static void list(String name, DRDesignList list, int maxWidth, int maxHeight, boolean stretch) throws DRException {
 		width(list);
 		alignment(list);
 		recalculateWidth(name, list, maxWidth - StyleResolver.getHorizontalPadding(list.getStyle()));
@@ -62,17 +63,21 @@ class ComponentPosition {
 		if (availableWidth < 0) {
 			throw new DRException(name + " components reaches outside available width, available width = " + maxWidth + ", components width = " + list.getWidth());
 		}
-		list.setWidth(list.getWidth() + availableWidth);
+		if (stretch) {
+			list.setWidth(list.getWidth() + availableWidth);
+		}
 
 		if (maxHeight > 0) {
 			int availableHeight = maxHeight - list.getHeight();
 			if (availableHeight < 0) {
 				throw new DRException(name + " components reaches outside available height, available height = " + maxHeight + ", components height = " + list.getHeight());
 			}
-			list.setHeight(list.getHeight() + availableHeight);
+			if (stretch) {
+				list.setHeight(list.getHeight() + availableHeight);
+			}
 		}
 
-		listCellWidth(list, availableWidth);
+		listCellWidth(list, availableWidth, list.getWidth() - StyleResolver.getHorizontalPadding(list.getStyle()));
 		listCellX(list);
 		listCellHeight(list, list.getHeight() - StyleResolver.getVerticalPadding(list.getStyle()));
 		listCellY(list);
@@ -81,6 +86,19 @@ class ComponentPosition {
 		componentY(list);
 		componentWidth(list);
 		componentHeight(list);
+	}
+
+	private static void list(String name, DRDesignList list) throws DRException {
+		for (DRDesignComponent designComponent : list.getComponents()) {
+			if (designComponent instanceof DRDesignList) {
+				DRDesignList listComponent = (DRDesignList) designComponent;
+				if (!listComponent.isCalculateComponents()) {
+					listComponent.setCalculateComponents(true);
+					list(name, listComponent, listComponent.getWidth(), listComponent.getHeight(), false);
+				}
+				list(name, listComponent);
+			}
+		}
 	}
 
 	private static void alignment(DRDesignList list) {
@@ -216,12 +234,15 @@ class ComponentPosition {
 
 		maxWidth += StyleResolver.getHorizontalPadding(list.getStyle());
 
-		if (list.getWidth() == null || maxWidth > list.getWidth()) {
+		if (list.getWidth() == null) {
 			list.setWidth(maxWidth);
 		}
 	}
 
 	private static void recalculateWidth(String name, DRDesignList list, int availableWidth) throws DRException {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
 		if (list.getWidth() <= availableWidth) {
 			return;
 		}
@@ -392,10 +413,16 @@ class ComponentPosition {
 
 		maxHeight += StyleResolver.getVerticalPadding(list.getStyle());
 
-		list.setHeight(maxHeight);
+		if (list.getHeight() == null) {
+			list.setHeight(maxHeight);
+		}
 	}
 
-	private static void listCellWidth(DRDesignList list, int availableWidth) {
+	private static void listCellWidth(DRDesignList list, int availableWidth, int maxWidth) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		ListType type = list.getType();
 		switch (type) {
 		case HORIZONTAL:
@@ -431,40 +458,33 @@ class ComponentPosition {
 
 					listCell.setWidth(component.getWidth() + availableCellWidth);
 					if (component instanceof DRDesignList) {
-						listCellWidth((DRDesignList) component, availableCellWidth);
+						listCellWidth((DRDesignList) component, availableCellWidth, component.getWidth() + availableCellWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
 					}
 					break;
 				default:
 					listCell.setWidth(component.getWidth());
 					if (component instanceof DRDesignList) {
-						listCellWidth((DRDesignList) component, 0);
+						listCellWidth((DRDesignList) component, 0, component.getWidth() - StyleResolver.getHorizontalPadding(component.getStyle()));
 					}
 					break;
 				}
 			}
 			break;
 		case VERTICAL:
-			int maxWidth = 0;
-			for (DRDesignListCell listCell : list.getListCells()) {
-				DRDesignComponent component = listCell.getComponent();
-				if (component.getWidth() > maxWidth) {
-					maxWidth = component.getWidth();
-				}
-			}
 			for (DRDesignListCell listCell : list.getListCells()) {
 				DRDesignComponent component = listCell.getComponent();
 				switch (listCell.getHorizontalAlignment()) {
 				case FLOAT:
 				case EXPAND:
-					listCell.setWidth(maxWidth + availableWidth);
+					listCell.setWidth(maxWidth);
 					if (component instanceof DRDesignList) {
-						listCellWidth((DRDesignList) component, availableWidth + maxWidth - component.getWidth());
+						listCellWidth((DRDesignList) component, maxWidth - component.getWidth(), maxWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
 					}
 					break;
 				default:
-					listCell.setWidth(maxWidth + availableWidth);
+					listCell.setWidth(maxWidth);
 					if (component instanceof DRDesignList) {
-						listCellWidth((DRDesignList) component, 0);
+						listCellWidth((DRDesignList) component, 0, component.getWidth() - StyleResolver.getHorizontalPadding(component.getStyle()));
 					}
 					break;
 				}
@@ -476,6 +496,10 @@ class ComponentPosition {
 	}
 
 	private static void listCellX(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		ListType type = list.getType();
 		switch (type) {
 		case HORIZONTAL:
@@ -503,6 +527,10 @@ class ComponentPosition {
 	}
 
 	private static void listCellHeight(DRDesignList list, int availableHeight) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		ListType type = list.getType();
 		switch (type) {
 		case HORIZONTAL:
@@ -582,6 +610,10 @@ class ComponentPosition {
 	}
 
 	private static void listCellY(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		ListType type = list.getType();
 		switch (type) {
 		case HORIZONTAL:
@@ -609,6 +641,10 @@ class ComponentPosition {
 	}
 
 	private static void componentX(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		for (DRDesignListCell listCell : list.getListCells()) {
 			DRDesignComponent component = listCell.getComponent();
 			HorizontalCellComponentAlignment alignment = listCell.getHorizontalAlignment();
@@ -634,6 +670,10 @@ class ComponentPosition {
 	}
 
 	private static void componentY(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		for (DRDesignListCell listCell : list.getListCells()) {
 			DRDesignComponent component = listCell.getComponent();
 			VerticalCellComponentAlignment alignment = listCell.getVerticalAlignment();
@@ -658,6 +698,10 @@ class ComponentPosition {
 	}
 
 	private static void componentWidth(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		for (DRDesignListCell listCell : list.getListCells()) {
 			DRDesignComponent component = listCell.getComponent();
 			HorizontalCellComponentAlignment alignment = listCell.getHorizontalAlignment();
@@ -680,6 +724,10 @@ class ComponentPosition {
 	}
 
 	private static void componentHeight(DRDesignList list) {
+		if (!list.isCalculateComponents()) {
+			return;
+		}
+
 		for (DRDesignListCell listCell : list.getListCells()) {
 			DRDesignComponent component = listCell.getComponent();
 			VerticalCellComponentAlignment alignment = listCell.getVerticalAlignment();

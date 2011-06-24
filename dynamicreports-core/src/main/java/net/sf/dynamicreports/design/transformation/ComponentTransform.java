@@ -186,6 +186,9 @@ public class ComponentTransform {
 		designList.setType(list.getType());
 		designList.setGap(accessor.getTemplateTransform().getListGap(list));
 		designList.setStretchType(accessor.getTemplateTransform().getListStretchType(list));
+		designList.setWidth(accessor.getTemplateTransform().getListWidth(list));
+		designList.setHeight(accessor.getTemplateTransform().getListHeight(list));
+		designList.setCalculateComponents(designList.getWidth() == null && designList.getHeight() == null);
 		for (DRIListCell innerComponent : list.getListCells()) {
 			DRIComponent component = innerComponent.getComponent();
 			HorizontalCellComponentAlignment horizontalAlignment = innerComponent.getHorizontalAlignment();

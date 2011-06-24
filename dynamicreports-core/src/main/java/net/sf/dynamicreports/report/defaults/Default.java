@@ -123,6 +123,8 @@ public class Default {
 	private int genericElementWidth;
 	private int genericElementHeight;
 	//list
+	private Integer listWidth;
+	private Integer listHeight;
 	private int listgap;
 	private StretchType listStretchType;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
@@ -287,6 +289,8 @@ public class Default {
 		this.genericElementWidth = 100;
 		this.genericElementHeight = 100;
 
+		this.listWidth = null;
+		this.listHeight = null;
 		this.listgap = 0;
 		this.listStretchType = StretchType.NO_STRETCH;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
@@ -584,6 +588,14 @@ public class Default {
 
 	public Integer getGenericElementHeight() {
 		return genericElementHeight;
+	}
+
+	public Integer getListWidth() {
+		return listWidth;
+	}
+
+	public Integer getListHeight() {
+		return listHeight;
 	}
 
 	public int getListgap() {

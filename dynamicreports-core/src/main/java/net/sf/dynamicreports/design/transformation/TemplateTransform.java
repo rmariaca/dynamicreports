@@ -534,7 +534,11 @@ public class TemplateTransform {
 	protected int getColumnWidth(DRIColumn<?> column, DRDesignStyle style) throws DRException {
 		DRIComponent component = accessor.getColumnTransform().getColumnComponent(column);
 		if (component != null) {
-			if (component instanceof DRIDimensionComponent) {
+			if (component instanceof DRIList) {
+				DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
+				return detectWidth(list);
+			}
+			else if (component instanceof DRIDimensionComponent) {
 				if (((DRIDimensionComponent) component).getWidth() != null) {
 					return ((DRIDimensionComponent) component).getWidth();
 				}
@@ -543,10 +547,6 @@ public class TemplateTransform {
 						return StyleResolver.getFontWidth(style, ((DRITextField<?>) component).getColumns());
 					}
 				}
-			}
-			else if (component instanceof DRIList) {
-				DRDesignList list = accessor.getComponentTransform().list((DRIList) component, DefaultStyleType.COLUMN, null, null);
-				return detectWidth(list);
 			}
 			else {
 				throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
@@ -837,6 +837,20 @@ public class TemplateTransform {
 	}
 
 	//list
+	protected Integer getListWidth(DRIList list) {
+		if (list.getWidth() != null) {
+			return list.getWidth();
+		}
+		return Defaults.getDefaults().getListWidth();
+	}
+
+	protected Integer getListHeight(DRIList list) {
+		if (list.getHeight() != null) {
+			return list.getHeight();
+		}
+		return Defaults.getDefaults().getListHeight();
+	}
+
 	protected int getListGap(DRIList list) {
 		if (list.getGap() != null) {
 			return list.getGap();

@@ -42,6 +42,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private ComponentGroupType componentGroupType;
 	private int gap;
 	private StretchType stretchType;
+	private boolean calculateComponents;
 
 	public DRDesignList() {
 		this(ListType.HORIZONTAL);
@@ -50,6 +51,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	public DRDesignList(ListType type) {
 		super("list");
 		this.type = type;
+		this.calculateComponents = true;
 	}
 
 	@Override
@@ -121,5 +123,13 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 
 	public void setStretchType(StretchType stretchType) {
 		this.stretchType = stretchType;
+	}
+
+	public boolean isCalculateComponents() {
+		return calculateComponents;
+	}
+
+	public void setCalculateComponents(boolean calculateComponents) {
+		this.calculateComponents = calculateComponents;
 	}
 }

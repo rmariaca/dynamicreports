@@ -36,7 +36,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class HorizontalListBuilder extends ComponentBuilder<HorizontalListBuilder, DRList> {
+public class HorizontalListBuilder extends DimensionComponentBuilder<HorizontalListBuilder, DRList> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRList row;

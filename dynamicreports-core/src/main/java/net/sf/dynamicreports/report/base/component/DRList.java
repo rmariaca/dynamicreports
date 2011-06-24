@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRList extends DRComponent implements DRIList {
+public class DRList extends DRDimensionComponent implements DRIList {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private List<DRListCell> listCells;

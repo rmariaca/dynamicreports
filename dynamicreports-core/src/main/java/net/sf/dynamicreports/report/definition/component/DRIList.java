@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIList extends DRIComponent {
+public interface DRIList extends DRIDimensionComponent {
 
 	public List<? extends DRIListCell> getListCells();
 
