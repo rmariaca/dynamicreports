@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.1.1 (2011-06-28)
+---------------------------------------------------
+ - ability to set the dimension of a list component
+ - continuous page numbering for concatenated reports, see ConcatenatedReport2 for an example
+ - minor bug fixes and improvements
+ - new examples - ChartLayoutReport, ConditionalStyleReport
+                  
 Changes in version 2.1.0 (2011-06-07)
 ---------------------------------------------------
  - updated JasperReports to 4.0.1
