@@ -118,11 +118,17 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		int offset = 1;
 		int pageNumber = 1;
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-			if (continuousPageNumbering) {
-				jasperReportBuilder.setStartPageNumber(pageNumber);
+			try {
+				if (continuousPageNumbering) {
+					jasperReportBuilder.setStartPageNumber(pageNumber);
+				}
+				else {
+					jasperReportBuilder.setStartPageNumber(null);
+				}
+			} catch (JRException e) {
+				throw new DRException(e);
 			}
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
-			jasperReportBuilder.setStartPageNumber(null);
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			for (int i = 0; i < jasperPrint.getPages().size(); i++) {
 				try {
@@ -286,8 +292,10 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 				if (continuousPageNumbering) {
 					jasperReportBuilder.setStartPageNumber(pageNumber);
 				}
+				else {
+					jasperReportBuilder.setStartPageNumber(null);
+				}
 				JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
-				jasperReportBuilder.setStartPageNumber(null);
 				jasperPrints.add(jasperPrint);
 				pageNumber += jasperPrint.getPages().size();
 			}

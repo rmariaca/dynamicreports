@@ -30,6 +30,8 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.dynamicreports.test.jasper.DataSource;
+import net.sf.jasperreports.engine.JRDataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,20 +39,23 @@ import org.junit.Test;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ConcatenatedReportTest {
+public class ConcatenatedReport2Test {
 	JasperConcatenatedReportBuilder concatenatedReport;
 
 	@Before
 	public void init() {
 		JasperReportBuilder report1 = report()
-			.title(cmp.text("text1"))
-			.pageFooter(cmp.pageNumber());
+			.columns(col.column("field1", String.class))
+			.pageFooter(cmp.pageNumber())
+			.setDataSource(createDataSource("text1"));
 		JasperReportBuilder report2 = report()
-			.title(cmp.text("text2"))
-			.pageFooter(cmp.pageNumber());
+			.columns(col.column("field1", String.class))
+			.pageFooter(cmp.pageNumber())
+			.setDataSource(createDataSource("text2"));
 		JasperReportBuilder report3 = report()
-			.title(cmp.text("text3"))
-			.pageFooter(cmp.pageNumber());
+			.columns(col.column("field1", String.class))
+			.pageFooter(cmp.pageNumber())
+			.setDataSource(createDataSource("text3"));
 
 		concatenatedReport = concatenatedReport();
 		concatenatedReport.concatenate(report1, report2, report3);
@@ -76,5 +81,11 @@ public class ConcatenatedReportTest {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	private JRDataSource createDataSource(String text) {
+		DataSource dataSource = new DataSource("field1");
+		dataSource.add(text);
+		return dataSource;
 	}
 }

@@ -1,7 +1,7 @@
 DynamicReports Change Log
 =========================
 
-Changes in version 2.1.1 (2011-06-28)
+Changes in version 2.1.1 (2011-06-29)
 ---------------------------------------------------
  - ability to set the dimension of a list component
  - continuous page numbering for concatenated reports, see ConcatenatedReport2 for an example

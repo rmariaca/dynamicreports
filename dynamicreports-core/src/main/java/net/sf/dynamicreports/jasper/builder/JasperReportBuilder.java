@@ -77,6 +77,7 @@ import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JRRewindableDataSource;
 import net.sf.jasperreports.engine.JRVirtualizer;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -115,7 +116,10 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		this.additionalParameters = new HashMap<String, Object>();
 	}
 
-	protected void setStartPageNumber(Integer startPageNumber) {
+	protected void setStartPageNumber(Integer startPageNumber) throws JRException {
+		if (this.startPageNumber == startPageNumber) {
+			return;
+		}
 		this.startPageNumber = startPageNumber;
 		rebuild();
 	}
@@ -194,13 +198,16 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
-	public JasperReportBuilder rebuild() {
+	public JasperReportBuilder rebuild() throws JRException {
 		builded = false;
 		reportDesign = null;
 		jasperDesign = null;
 		jasperReport = null;
 		parameters = null;
 		jasperPrint = null;
+		if (dataSource != null && dataSource instanceof JRRewindableDataSource) {
+			((JRRewindableDataSource) dataSource).moveFirst();
+		}
 		return this;
 	}
 
