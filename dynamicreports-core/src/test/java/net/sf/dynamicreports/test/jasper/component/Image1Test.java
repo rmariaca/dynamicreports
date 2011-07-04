@@ -47,14 +47,14 @@ import net.sf.jasperreports.engine.util.JRImageLoader;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ImageTest extends AbstractJasperTest {	
+public class Image1Test extends AbstractJasperTest {	
 	private Image image;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			.setImageStyle(stl.style().setImageScale(ImageScale.NO_RESIZE))
-			.title(cmp.image(image = new TestImage()), cmp.image(ImageTest.class.getResource("noimage")));
+			.title(cmp.image(image = new TestImage()), cmp.image(Image1Test.class.getResource("noimage")));
 	}
 	
 	@Override

@@ -269,6 +269,12 @@ public class ComponentTransform {
 		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);
 		jrImage.setScaleImage(ConstantTransform.imageScale(image.getImageScale()));
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
+		if (image.getUsingCache() != null) {
+			jrImage.setUsingCache(image.getUsingCache());
+		}
+		if (image.getLazy() != null) {
+			jrImage.setLazy(image.getLazy());
+		}
 
 		return jrImage;
 	}
@@ -393,7 +399,9 @@ public class ComponentTransform {
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
-			return subreportExpression.getReportDesign().getParameters();
+			Map<String, Object> parameters = new HashMap<String, Object>(subreportExpression.getReportDesign().getParameters());
+			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
+			return parameters;
 		}
 
 		public String getName() {

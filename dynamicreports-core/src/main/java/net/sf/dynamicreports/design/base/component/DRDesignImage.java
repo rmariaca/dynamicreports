@@ -32,15 +32,17 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 public class DRDesignImage extends DRDesignHyperlinkComponent implements DRIDesignImage {
 	private ImageScale imageScale;
 	private DRIDesignExpression imageExpression;
-	
+	private Boolean usingCache;
+	private Boolean lazy;
+
 	public DRDesignImage() {
 		super("image");
 	}
-	
+
 	public DRIDesignExpression getImageExpression() {
 		return imageExpression;
 	}
-	
+
 	public void setImageExpression(DRIDesignExpression imageExpression) {
 		this.imageExpression = imageExpression;
 	}
@@ -48,8 +50,24 @@ public class DRDesignImage extends DRDesignHyperlinkComponent implements DRIDesi
 	public ImageScale getImageScale() {
 		return imageScale;
 	}
-	
+
 	public void setImageScale(ImageScale imageScale) {
 		this.imageScale = imageScale;
+	}
+
+	public Boolean getUsingCache() {
+		return usingCache;
+	}
+
+	public void setUsingCache(Boolean usingCache) {
+		this.usingCache = usingCache;
+	}
+
+	public Boolean getLazy() {
+		return lazy;
+	}
+
+	public void setLazy(Boolean lazy) {
+		this.lazy = lazy;
 	}
 }

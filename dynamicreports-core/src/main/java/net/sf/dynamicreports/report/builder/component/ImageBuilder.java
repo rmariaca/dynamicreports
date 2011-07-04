@@ -50,26 +50,40 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 
 	public ImageBuilder setImage(String imagePath) {
 		getObject().setImageExpression(Expressions.text(imagePath));
+		getObject().setUsingCache(true);
 		return this;
 	}
 
 	public ImageBuilder setImage(Image image) {
 		getObject().setImageExpression(Expressions.image(image));
+		getObject().setUsingCache(true);
 		return this;
 	}
 
 	public ImageBuilder setImage(InputStream imageInputStream) {
 		getObject().setImageExpression(Expressions.inputStream(imageInputStream));
+		getObject().setUsingCache(true);
 		return this;
 	}
 
 	public ImageBuilder setImage(URL imageUrl) {
 		getObject().setImageExpression(Expressions.url(imageUrl));
+		getObject().setUsingCache(true);
 		return this;
 	}
 
 	public ImageBuilder setImageScale(ImageScale imageScale) {
 		getObject().setImageScale(imageScale);
+		return this;
+	}
+
+	public ImageBuilder setUsingCache(Boolean usingCache) {
+		getObject().setUsingCache(usingCache);
+		return this;
+	}
+
+	public ImageBuilder setLazy(Boolean lazy) {
+		getObject().setLazy(lazy);
 		return this;
 	}
 }

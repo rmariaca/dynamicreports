@@ -34,4 +34,7 @@ public interface DRIDesignImage extends DRIDesignHyperLinkComponent {
 
 	public ImageScale getImageScale();
 
+	public Boolean getUsingCache();
+
+	public Boolean getLazy();
 }

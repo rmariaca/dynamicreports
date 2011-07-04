@@ -29,9 +29,13 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIImage extends DRIHyperLinkComponent {
-	
+
 	public DRIExpression<?> getImageExpression();
 
 	public ImageScale getImageScale();
+
+	public Boolean getUsingCache();
+
+	public Boolean getLazy();
 }
 

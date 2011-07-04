@@ -252,6 +252,8 @@ public class ComponentTransform {
 		hyperlink(designImage, image, image.getStyle(), false, DefaultStyleType.IMAGE);
 		designImage.setImageScale(image.getImageScale());
 		designImage.setImageExpression(accessor.getExpressionTransform().transformExpression(image.getImageExpression()));
+		designImage.setUsingCache(image.getUsingCache());
+		designImage.setLazy(image.getLazy());
 		designImage.setWidth(accessor.getTemplateTransform().getImageWidth(image));
 		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image));
 		return designImage;
