@@ -29,7 +29,7 @@ import org.apache.commons.lang.Validate;
  */
 @SuppressWarnings("ucd")
 public class Grids {
-	
+
 	//horizontal
 	public static HorizontalColumnGridListBuilder horizontalColumnGridList() {
 		return new HorizontalColumnGridListBuilder();
@@ -42,12 +42,12 @@ public class Grids {
 	public static HorizontalColumnGridListBuilder horizontalColumnGridList(HorizontalColumnGridListCellBuilder ...cells) {
 		return new HorizontalColumnGridListBuilder().add(cells);
 	}
-	
+
 	public static HorizontalColumnGridListCellBuilder hColumnGridListCell(ColumnGridComponentBuilder component) {
 		Validate.notNull(component, "component must not be null");
 		return new HorizontalColumnGridListCellBuilder(component);
 	}
-	
+
 	//horizontal flow
 	public static HorizontalColumnGridListBuilder horizontalFlowColumnGridList() {
 		return new HorizontalFlowColumnGridListBuilder();
@@ -60,8 +60,8 @@ public class Grids {
 	public static HorizontalColumnGridListBuilder horizontalFlowColumnGridList(HorizontalColumnGridListCellBuilder ...cells) {
 		return new HorizontalFlowColumnGridListBuilder().add(cells);
 	}
-	
-	//vertical	
+
+	//vertical
 	public static VerticalColumnGridListBuilder verticalColumnGridList() {
 		return new VerticalColumnGridListBuilder();
 	}
@@ -73,9 +73,22 @@ public class Grids {
 	public static VerticalColumnGridListBuilder verticalColumnGridList(VerticalColumnGridListCellBuilder ...cells) {
 		return new VerticalColumnGridListBuilder().add(cells);
 	}
-	
+
 	public static VerticalColumnGridListCellBuilder vColumnGridListCell(ColumnGridComponentBuilder component) {
 		Validate.notNull(component, "component must not be null");
 		return new VerticalColumnGridListCellBuilder(component);
+	}
+
+	//title group
+	public static ColumnTitleGroupBuilder titleGroup() {
+		return new ColumnTitleGroupBuilder();
+	}
+
+	public static ColumnTitleGroupBuilder titleGroup(ColumnGridComponentBuilder ...components) {
+		return new ColumnTitleGroupBuilder().add(components);
+	}
+
+	public static ColumnTitleGroupBuilder titleGroup(String title, ColumnGridComponentBuilder ...components) {
+		return titleGroup(components).setTitle(title);
 	}
 }

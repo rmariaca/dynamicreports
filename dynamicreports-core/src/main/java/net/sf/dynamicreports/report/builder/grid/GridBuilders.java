@@ -28,7 +28,7 @@ package net.sf.dynamicreports.report.builder.grid;
  */
 @SuppressWarnings("ucd")
 public class GridBuilders {
-		
+
 	//horizontal
 	public HorizontalColumnGridListBuilder horizontalColumnGridList() {
 		return Grids.horizontalColumnGridList();
@@ -41,11 +41,11 @@ public class GridBuilders {
 	public HorizontalColumnGridListBuilder horizontalColumnGridList(HorizontalColumnGridListCellBuilder ...cells) {
 		return Grids.horizontalColumnGridList(cells);
 	}
-	
+
 	public HorizontalColumnGridListCellBuilder hColumnGridListCell(ColumnGridComponentBuilder component) {
 		return Grids.hColumnGridListCell(component);
 	}
-	
+
 	//horizontal flow
 	public HorizontalColumnGridListBuilder horizontalFlowColumnGridList() {
 		return Grids.horizontalFlowColumnGridList();
@@ -58,8 +58,8 @@ public class GridBuilders {
 	public HorizontalColumnGridListBuilder horizontalFlowColumnGridList(HorizontalColumnGridListCellBuilder ...cells) {
 		return Grids.horizontalFlowColumnGridList(cells);
 	}
-	
-	//vertical	
+
+	//vertical
 	public VerticalColumnGridListBuilder verticalColumnGridList() {
 		return Grids.verticalColumnGridList();
 	}
@@ -71,8 +71,21 @@ public class GridBuilders {
 	public VerticalColumnGridListBuilder verticalColumnGridList(VerticalColumnGridListCellBuilder ...cells) {
 		return Grids.verticalColumnGridList(cells);
 	}
-	
+
 	public VerticalColumnGridListCellBuilder vColumnGridListCell(ColumnGridComponentBuilder component) {
 		return Grids.vColumnGridListCell(component);
+	}
+
+	//title group
+	public ColumnTitleGroupBuilder titleGroup() {
+		return Grids.titleGroup();
+	}
+
+	public ColumnTitleGroupBuilder titleGroup(ColumnGridComponentBuilder ...components) {
+		return Grids.titleGroup(components);
+	}
+
+	public ColumnTitleGroupBuilder titleGroup(String title, ColumnGridComponentBuilder ...components) {
+		return Grids.titleGroup(title, components);
 	}
 }

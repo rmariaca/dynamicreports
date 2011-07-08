@@ -77,11 +77,11 @@ public class ColumnTransform {
 
 		ColumnGrid columnTitle = null;
 		if (showColumnTitle) {
-			columnTitle = accessor.getColumnGridTransform().createColumnGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
+			columnTitle = accessor.getColumnGridTransform().createColumnTitleGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
 		}
 		ColumnGrid columnTitleForGroup = null;
 		if (showColumnTitleForGroup) {
-			columnTitleForGroup = accessor.getColumnGridTransform().createColumnGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
+			columnTitleForGroup = accessor.getColumnGridTransform().createColumnTitleGrid(accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN_TITLE));
 		}
 		ColumnGrid detail = accessor.getColumnGridTransform().createColumnGrid();
 
