@@ -33,17 +33,21 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class StyleBuilder extends BaseStyleBuilder<StyleBuilder, DRStyle> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected StyleBuilder() {
 		super(new DRStyle());
 	}
 
 	public StyleBuilder conditionalStyles(ConditionalStyleBuilder ...conditionalStyles) {
+		return addConditionalStyle(conditionalStyles);
+	}
+
+	public StyleBuilder addConditionalStyle(ConditionalStyleBuilder ...conditionalStyles) {
 		Validate.notNull(conditionalStyles, "conditionalStyles must not be null");
 		Validate.noNullElements(conditionalStyles, "conditionalStyles must not contains null conditionalStyle");
 		for (ConditionalStyleBuilder conditionalStyle : conditionalStyles) {
-			getObject().addConditionalStyle(conditionalStyle.build());	
-		}		
+			getObject().addConditionalStyle(conditionalStyle.build());
+		}
 		return this;
 	}
 
