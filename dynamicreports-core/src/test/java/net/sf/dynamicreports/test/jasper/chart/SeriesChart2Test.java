@@ -35,7 +35,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SeriesChartTest extends AbstractJasperChartTest implements Serializable {
+public class SeriesChart2Test extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -66,15 +66,17 @@ public class SeriesChartTest extends AbstractJasperChartTest implements Serializ
 		chartCountTest("summary.chart1", 1);
 		chartCategoryCountTest("summary.chart1", 0, 2);
 		chartSeriesCountTest("summary.chart1", 0, 3);
-		chartDataTest("summary.chart1", 0, categories, series, new Number[][]{{5d, 6d, null}, {null, null, 7d}});
+		chartDataTest("summary.chart1", 0, categories, series, new Number[][]{{6d, 6d, null}, {6d, null, 7d}});
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2", "field3");
-		dataSource.add("value1", "value1_1", 5);
+		dataSource.add("value1", "value1_1", 6);
 		dataSource.add("value1", "value1_2", 6);
-		dataSource.add("value2", "value2_1", 7);
+		dataSource.add("value2", "value1_1", 6);
+		dataSource.add("value2", "value2_1", 6);
+		dataSource.add("value2", "value2_1", 1);
 		return dataSource;
 	}
 }

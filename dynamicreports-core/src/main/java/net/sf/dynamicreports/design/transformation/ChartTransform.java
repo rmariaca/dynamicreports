@@ -281,10 +281,10 @@ public class ChartTransform {
 		}
 		else {
 			if (seriesExpression == null) {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup)));
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, null)));
 			}
 			else {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(serieValueExpression, serieValueExpression, resetType, resetGroup)));
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
 			}
 		}
 		DRIExpression<?> labelExpression = serie.getLabelExpression();
@@ -302,14 +302,16 @@ public class ChartTransform {
 		private DRIDesignExpression serieExpression;
 		private ResetType resetType;
 		private DRDesignGroup resetGroup;
+		private String key;
 		private Object resetValue;
 		private Map<Object, Double> values;
 
-		public SerieValueExpression(DRIDesignExpression valueExpression, DRIDesignExpression serieExpression, ResetType resetType, DRDesignGroup resetGroup) {
+		public SerieValueExpression(DRIDesignExpression valueExpression, DRIDesignExpression serieExpression, ResetType resetType, DRDesignGroup resetGroup, String key) {
 			this.valueExpression = valueExpression;
 			this.serieExpression = serieExpression;
 			this.resetType = resetType;
 			this.resetGroup = resetGroup;
+			this.key = key;
 			this.values = new HashMap<Object, Double>();
 		}
 
@@ -335,7 +337,13 @@ public class ChartTransform {
 			}
 			this.resetValue = resetValue;
 
-			Object keyValue = reportParameters.getValue(valueExpression.getName());
+			Object keyValue;
+			if (key != null) {
+				keyValue = reportParameters.getValue(valueExpression.getName()) + "_" + reportParameters.getValue(key);
+			}
+			else {
+				keyValue = reportParameters.getValue(valueExpression.getName());
+			}
 			if (!values.containsKey(keyValue)) {
 				values.put(keyValue, 0d);
 			}
