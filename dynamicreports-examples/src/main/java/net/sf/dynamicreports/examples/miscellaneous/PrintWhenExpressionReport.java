@@ -85,7 +85,9 @@ public class PrintWhenExpressionReport {
 			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(itemGroup)
 			  .title(Templates.createTitleComponent("PrintWhenExpression"))
-			  .detailHeader(groupHeader)
+			  .detailHeader(
+			  	cmp.columnBreak().setPrintWhenExpression(new PrintGroupHeaderColumnBreakExpression()),
+			  	groupHeader)
 			  .pageHeader(
 			  	oddPageHeader, evenPageHeader, cmp.filler().setFixedHeight(10))
 			  .pageFooter(Templates.footerComponent)
@@ -120,6 +122,14 @@ public class PrintWhenExpressionReport {
 
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getColumnRowNumber() == 1 || reportParameters.getGroupCount("itemGroup") == 1;
+		}
+	}
+
+	public class PrintGroupHeaderColumnBreakExpression extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getColumnRowNumber() == 1 && reportParameters.getGroupCount("itemGroup") != 1;
 		}
 	}
 
