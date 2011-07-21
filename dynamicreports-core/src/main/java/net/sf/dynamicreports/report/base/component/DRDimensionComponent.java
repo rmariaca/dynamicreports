@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 
 import org.apache.commons.lang.Validate;
@@ -33,12 +34,13 @@ import org.apache.commons.lang.Validate;
  */
 public abstract class DRDimensionComponent extends DRComponent implements DRIDimensionComponent {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Integer width;
 	private Integer height;
 	private ComponentDimensionType widthType;
 	private ComponentDimensionType heightType;
-	
+	private StretchType stretchType;
+
   /**
    * Returns the component width.
    *
@@ -49,13 +51,13 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
 	}
 
   /**
-   * Sets the component width. 
+   * Sets the component width.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param width the component width >= 1
    * @exception IllegalArgumentException if <code>width</code> is < 1
    */
-	public void setWidth(Integer width) {		
+	public void setWidth(Integer width) {
 		if (width != null) {
 			Validate.isTrue(width >= 1, "width must be >= 1");
 		}
@@ -72,9 +74,9 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
 	}
 
   /**
-   * Sets the component height. 
+   * Sets the component height.
    * @see net.sf.dynamicreports.report.builder.Units
-   * 
+   *
    * @param height the component height >= 1
    * @exception IllegalArgumentException if <code>height</code> is < 1
    */
@@ -99,5 +101,13 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
 
 	public void setHeightType(ComponentDimensionType heightType) {
 		this.heightType = heightType;
-	}	
+	}
+
+	public StretchType getStretchType() {
+		return stretchType;
+	}
+
+	public void setStretchType(StretchType stretchType) {
+		this.stretchType = stretchType;
+	}
 }

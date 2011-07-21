@@ -27,6 +27,7 @@ import java.util.List;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -51,4 +52,6 @@ public interface DRIDesignComponent {
 	public boolean isRemoveLineWhenBlank();
 
 	public List<DRIDesignPropertyExpression> getPropertyExpressions();
+
+	public StretchType getStretchType();
 }

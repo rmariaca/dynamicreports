@@ -53,6 +53,7 @@ import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -157,6 +158,9 @@ public class CrosstabTransform {
 		textField.setValueFormatter(group.getHeaderValueFormatter());
 		textField.setDataType(group.getDataType());
 		textField.setStretchWithOverflow(group.getHeaderStretchWithOverflow());
+		if (group instanceof DRICrosstabRowGroup) {
+			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+		}
 		DRIStyle groupStyle = group.getHeaderStyle();
 		if (groupStyle == null) {
 			groupStyle = accessor.getTemplateTransform().getCrosstabGroupStyle(crosstab);
@@ -195,6 +199,9 @@ public class CrosstabTransform {
 			}
 			textField.setValueExpression(totalHeaderExpression);
 			textField.setStyle((DRStyle) totalStyle);
+			if (group instanceof DRICrosstabRowGroup) {
+				textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+			}
 
 			DRDesignCrosstabCellContent totalHeader = createCellContent(getCellStyle(totalStyle), resetType, resetGroup);
 			designTextField = accessor.getComponentTransform().textField(textField, DefaultStyleType.TEXT);
@@ -412,6 +419,7 @@ public class CrosstabTransform {
 		designCell.setColumnTotalGroup(columnTotalGroup);
 
 		DRDesignList designList = new DRDesignList();
+		designList.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
 		for (DRICrosstabMeasure<?> measure : crosstab.getMeasures()) {
 			DRTextField textField = new DRTextField();
 
@@ -428,6 +436,7 @@ public class CrosstabTransform {
 			textField.setValueFormatter(measure.getValueFormatter());
 			textField.setDataType(measure.getDataType());
 			textField.setStretchWithOverflow(measure.getStretchWithOverflow());
+			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
 			textField.setStyle(measuresStyle.getStyle(measure, rowGroup, columnGroup));
 			DRDesignTextField designTextField = accessor.getComponentTransform().textField(textField, DefaultStyleType.TEXT);
 			String name = "cell_measure[" + measure.getName() + "]";

@@ -30,6 +30,7 @@ import java.util.Date;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.grid.ColumnTitleGroupBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -48,11 +49,14 @@ public class ColumnTitleGroupReport {
   	TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",    "quantity",  type.integerType());
   	TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price",  "unitprice", type.bigDecimalType());
 
+		ColumnTitleGroupBuilder titleGroup2 = grid.titleGroup("Group 2", quantityColumn, unitPriceColumn);
+		ColumnTitleGroupBuilder titleGroup1 = grid.titleGroup("Group 1", orderDateColumn,	titleGroup2);
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columnGrid(
-			  	itemColumn, grid.titleGroup("Group 1", orderDateColumn, grid.titleGroup("Group 2", quantityColumn, unitPriceColumn)))
+			  	itemColumn,	titleGroup1)
 			  .columns(
 			  	itemColumn, orderDateColumn, quantityColumn, unitPriceColumn)
 			  .title(Templates.createTitleComponent("ColumnTitleGroup"))

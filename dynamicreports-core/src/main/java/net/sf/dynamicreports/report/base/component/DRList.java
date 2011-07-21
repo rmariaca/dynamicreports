@@ -28,7 +28,6 @@ import java.util.List;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 
@@ -43,7 +42,6 @@ public class DRList extends DRDimensionComponent implements DRIList {
 	private List<DRListCell> listCells;
 	private ListType type;
 	private Integer gap;
-	private StretchType stretchType;
 
 	public DRList() {
 		this(ListType.HORIZONTAL);
@@ -95,13 +93,5 @@ public class DRList extends DRDimensionComponent implements DRIList {
 			Validate.isTrue(gap >= 0, "gap must be >= 0");
 		}
 		this.gap = gap;
-	}
-
-	public StretchType getStretchType() {
-		return stretchType;
-	}
-
-	public void setStretchType(StretchType stretchType) {
-		this.stretchType = stretchType;
 	}
 }

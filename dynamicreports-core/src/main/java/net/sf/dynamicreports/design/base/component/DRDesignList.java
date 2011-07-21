@@ -29,7 +29,6 @@ import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
 /**
@@ -41,7 +40,6 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private ListType type;
 	private ComponentGroupType componentGroupType;
 	private int gap;
-	private StretchType stretchType;
 	private boolean calculateComponents;
 
 	public DRDesignList() {
@@ -115,14 +113,6 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 
 	public void setGap(int gap) {
 		this.gap = gap;
-	}
-
-	public StretchType getStretchType() {
-		return stretchType;
-	}
-
-	public void setStretchType(StretchType stretchType) {
-		this.stretchType = stretchType;
 	}
 
 	public boolean isCalculateComponents() {

@@ -52,6 +52,7 @@ import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
@@ -71,7 +72,6 @@ import net.sf.jasperreports.engine.design.JRDesignTextField;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
 import net.sf.jasperreports.engine.type.PositionTypeEnum;
-import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -93,12 +93,12 @@ public class ComponentTransform {
 		JRDesignElement[] jrElements;
 		if (component instanceof DRIDesignChart) {
 			JRDesignElement jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignBarcode) {
 			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignList) {
@@ -106,42 +106,42 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignTextField) {
 			JRDesignElement jrElement = textField((DRIDesignTextField) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignFiller) {
 			JRDesignElement jrElement = filler((DRIDesignFiller) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignImage) {
 			JRDesignElement jrElement = image((DRIDesignImage) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignSubreport) {
 			JRDesignElement jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
-			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignLine) {
 			JRDesignElement jrElement = line((DRIDesignLine) component);
-			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignBreak) {
 			JRDesignElement jrElement = breakComponent((DRIDesignBreak) component);
-			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignGenericElement) {
 			JRDesignElement jrElement = genericElement((DRIDesignGenericElement) component);
-			component(jrElement, component, detectStretchType(listType));
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else if (component instanceof DRIDesignCrosstab) {
 			JRDesignElement jrElement = accessor.getCrosstabTransform().transform((DRIDesignCrosstab) component);
-			component(jrElement, component, StretchTypeEnum.NO_STRETCH);
+			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
 		else {
@@ -151,9 +151,23 @@ public class ComponentTransform {
 		return jrElements;
 	}
 
-	private void component(JRDesignElement jrElement, DRIDesignComponent component, StretchTypeEnum stretchType) {
+	private void component(JRDesignElement jrElement, DRIDesignComponent component, ListType listType) {
+		StretchType stretchType = component.getStretchType();
+		if (stretchType == null) {
+			if (component instanceof DRIDesignSubreport ||
+					component instanceof DRIDesignLine ||
+					component instanceof DRIDesignBreak ||
+					component instanceof DRIDesignCrosstab ||
+					component instanceof DRIDesignList) {
+				stretchType = StretchType.NO_STRETCH;
+			}
+			else {
+				stretchType = detectStretchType(listType);
+			}
+		}
+
 		jrElement.setPositionType(PositionTypeEnum.FLOAT);
-		jrElement.setStretchType(stretchType);
+		jrElement.setStretchType(ConstantTransform.stretchType(stretchType));
 		jrElement.setKey(component.getUniqueName());
 		jrElement.setX(component.getX());
 		jrElement.setY(component.getY());
@@ -170,12 +184,12 @@ public class ComponentTransform {
 		}
 	}
 
-	private StretchTypeEnum detectStretchType(ListType listType) {
+	private StretchType detectStretchType(ListType listType) {
 		if (listType.equals(ListType.VERTICAL)) {
-			return StretchTypeEnum.NO_STRETCH;
+			return StretchType.NO_STRETCH;
 		}
 
-		return StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT;
+		return StretchType.RELATIVE_TO_TALLEST_OBJECT;
 	}
 
 	//list
@@ -183,7 +197,7 @@ public class ComponentTransform {
 		switch (list.getComponentGroupType()) {
 		case FRAME:
 			JRDesignFrame frame = new JRDesignFrame();
-			component(frame, list, ConstantTransform.stretchType(list.getStretchType()));
+			component(frame, list, list.getType());
 			for (DRIDesignComponent element : list.getComponents()) {
 				JRDesignElement[] jrElements = component(element, list.getType());
 				for (JRDesignElement jrElement : jrElements) {

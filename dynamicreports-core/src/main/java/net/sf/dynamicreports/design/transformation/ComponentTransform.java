@@ -159,6 +159,7 @@ public class ComponentTransform {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
 		designComponent.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
 		designComponent.setRemoveLineWhenBlank(accessor.getTemplateTransform().getRemoveLineWhenBlank(component));
+		designComponent.setStretchType(accessor.getTemplateTransform().getStretchType(component));
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}
@@ -185,7 +186,6 @@ public class ComponentTransform {
 		component(designList, list, list.getStyle(), false, DefaultStyleType.NONE);
 		designList.setType(list.getType());
 		designList.setGap(accessor.getTemplateTransform().getListGap(list));
-		designList.setStretchType(accessor.getTemplateTransform().getListStretchType(list));
 		designList.setWidth(accessor.getTemplateTransform().getListWidth(list));
 		designList.setHeight(accessor.getTemplateTransform().getListHeight(list));
 		designList.setCalculateComponents(designList.getWidth() == null && designList.getHeight() == null);

@@ -46,7 +46,6 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
-import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -126,7 +125,6 @@ public class Default {
 	private Integer listWidth;
 	private Integer listHeight;
 	private int listgap;
-	private StretchType listStretchType;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
 	private VerticalCellComponentAlignment verticalCellComponentAlignment;
 	//chart
@@ -292,7 +290,6 @@ public class Default {
 		this.listWidth = null;
 		this.listHeight = null;
 		this.listgap = 0;
-		this.listStretchType = StretchType.NO_STRETCH;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
 		this.verticalCellComponentAlignment = VerticalCellComponentAlignment.EXPAND;
 
@@ -600,10 +597,6 @@ public class Default {
 
 	public int getListgap() {
 		return listgap;
-	}
-
-	public StretchType getListStretchType() {
-		return listStretchType;
 	}
 
 	public HorizontalCellComponentAlignment getHorizontalCellComponentAlignment() {

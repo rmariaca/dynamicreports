@@ -23,17 +23,20 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDimensionComponent extends DRIComponent {
-	
+
 	public Integer getWidth();
 
 	public Integer getHeight();
-	
+
 	public ComponentDimensionType getWidthType();
 
 	public ComponentDimensionType getHeightType();
+
+	public StretchType getStretchType();
 }

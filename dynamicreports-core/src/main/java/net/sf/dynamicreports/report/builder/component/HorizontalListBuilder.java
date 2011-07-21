@@ -149,11 +149,6 @@ public class HorizontalListBuilder extends DimensionComponentBuilder<HorizontalL
 		return this;
 	}
 
-	public HorizontalListBuilder setStretchType(StretchType stretchType) {
-		getObject().setStretchType(stretchType);
-		return this;
-	}
-
 	public DRList getList() {
 		return build();
 	}

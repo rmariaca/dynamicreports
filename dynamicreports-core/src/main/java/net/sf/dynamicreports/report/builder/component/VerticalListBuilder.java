@@ -25,7 +25,6 @@ package net.sf.dynamicreports.report.builder.component;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.constant.StretchType;
 
 import org.apache.commons.lang.Validate;
 
@@ -77,11 +76,6 @@ public class VerticalListBuilder extends DimensionComponentBuilder<VerticalListB
 
 	public VerticalListBuilder setGap(Integer gap) {
 		getObject().setGap(gap);
-		return this;
-	}
-
-	public VerticalListBuilder setStretchType(StretchType stretchType) {
-		getObject().setStretchType(stretchType);
 		return this;
 	}
 

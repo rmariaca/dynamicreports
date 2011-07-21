@@ -26,7 +26,6 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,6 +37,4 @@ public interface DRIDesignList extends DRIDesignComponent {
 	public ListType getType();
 
 	public ComponentGroupType getComponentGroupType();
-
-	public StretchType getStretchType();
 }

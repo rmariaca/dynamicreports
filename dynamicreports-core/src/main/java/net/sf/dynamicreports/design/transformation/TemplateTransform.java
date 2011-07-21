@@ -570,6 +570,13 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isRemoveLineWhenBlank();
 	}
 
+	protected StretchType getStretchType(DRIComponent component) {
+		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getStretchType() != null) {
+			return ((DRIDimensionComponent)component).getStretchType();
+		}
+		return null;
+	}
+
 	//group
 	protected GroupHeaderLayout getGroupHeaderLayout(DRIGroup group) {
 		if (group.getHeaderLayout() != null) {
@@ -859,13 +866,6 @@ public class TemplateTransform {
 			return template.getListgap();
 		}
 		return Defaults.getDefaults().getListgap();
-	}
-
-	protected StretchType getListStretchType(DRIList list) {
-		if (list.getStretchType() != null) {
-			return list.getStretchType();
-		}
-		return Defaults.getDefaults().getListStretchType();
 	}
 
 	//chart
