@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.jasper.base;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
@@ -37,7 +38,7 @@ public class JasperCustomValues {
 	private Map<String, ValueType> valueTypes;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
-	private Map<String, DRIChartCustomizer> chartCustomizers;
+	private Map<String, List<DRIChartCustomizer>> chartCustomizers;
 
 	public JasperCustomValues() {
 		init();
@@ -47,7 +48,7 @@ public class JasperCustomValues {
 		valueTypes = new HashMap<String, ValueType>();
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
-		chartCustomizers = new HashMap<String, DRIChartCustomizer>();
+		chartCustomizers = new HashMap<String, List<DRIChartCustomizer>>();
 	}
 
 	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
@@ -60,8 +61,8 @@ public class JasperCustomValues {
 		addValueType(complexExpression.getName(), ValueType.COMPLEX_EXPRESSION);
 	}
 
-	public void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {
-		chartCustomizers.put(name, chartCustomizer);
+	public void addChartCustomizers(String name, List<DRIChartCustomizer> chartCustomizers) {
+		this.chartCustomizers.put(name, chartCustomizers);
 	}
 
 	public void addValueType(String name, ValueType valueType) {
@@ -83,7 +84,7 @@ public class JasperCustomValues {
 		return complexExpressions.get(name);
 	}
 
-	protected DRIChartCustomizer getChartCustomizer(String name) {
+	protected List<DRIChartCustomizer> getChartCustomizers(String name) {
 		return chartCustomizers.get(name);
 	}
 

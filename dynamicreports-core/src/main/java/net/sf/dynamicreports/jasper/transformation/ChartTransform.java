@@ -139,14 +139,14 @@ public class ChartTransform {
 			jrChart.setLegendFont(accessor.getStyleTransform().font(legend.getFont()));
 		jrChart.setLegendPosition(ConstantTransform.chartPosition(legend.getPosition()));
 
-		if (chart.getCustomizer() != null) {
+		if (!chart.getCustomizers().isEmpty()) {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
-			addChartCustomizer(chart.getUniqueName(), chart.getCustomizer());
+			addChartCustomizer(chart.getUniqueName(), chart.getCustomizers());
 		}
 	}
 
-	private void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {
-		accessor.getCustomValues().addChartCustomizer(name, chartCustomizer);
+	private void addChartCustomizer(String name, List<DRIChartCustomizer> chartCustomizers) {
+		accessor.getCustomValues().addChartCustomizers(name, chartCustomizers);
 	}
 
 	//dataset

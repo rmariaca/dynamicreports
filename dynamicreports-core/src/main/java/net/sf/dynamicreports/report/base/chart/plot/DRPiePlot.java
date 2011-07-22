@@ -30,8 +30,9 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
  */
 public class DRPiePlot extends AbstractPlot implements DRIPiePlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Boolean circular;
+	private Boolean showLabels;
 	private String labelFormat;
 	private String legendLabelFormat;
 
@@ -41,6 +42,14 @@ public class DRPiePlot extends AbstractPlot implements DRIPiePlot {
 
 	public void setCircular(Boolean circular) {
 		this.circular = circular;
+	}
+
+	public void setShowLabels(Boolean showLabels) {
+		this.showLabels = showLabels;
+	}
+
+	public Boolean getShowLabels() {
+		return showLabels;
 	}
 
 	public String getLabelFormat() {

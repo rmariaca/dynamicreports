@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition.chart;
 
+import java.util.List;
+
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartDataset;
@@ -41,14 +43,14 @@ public interface DRIDesignChart extends DRIDesignHyperLinkComponent {
 
 	public DRIDesignPlot getPlot();
 
-	public DRIChartCustomizer getCustomizer();
+	public List<DRIChartCustomizer> getCustomizers();
 
 	public DRIDesignChartTitle getTitle();
 
 	public DRIDesignChartSubtitle getSubtitle();
 
 	public DRIDesignChartLegend getLegend();
-	
+
 	public EvaluationTime getEvaluationTime();
 
 	public DRIDesignGroup getEvaluationGroup();

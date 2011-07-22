@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.design.base.chart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
 import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignPlot;
@@ -34,21 +37,22 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesignChart {		
+public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesignChart {
 	private ChartType chartType;
 	private DRDesignChartDataset dataset;
 	private AbstractDesignPlot plot;
-	private DRIChartCustomizer customizer;
+	private List<DRIChartCustomizer> customizers;
 	private DRDesignChartTitle title;
 	private DRDesignChartSubtitle subtitle;
-	private DRDesignChartLegend legend;	
+	private DRDesignChartLegend legend;
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
-	
+
 	public DRDesignChart() {
 		super("chart");
+		customizers = new ArrayList<DRIChartCustomizer>();
 	}
-	
+
 	public ChartType getChartType() {
 		return chartType;
 	}
@@ -56,7 +60,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 	public void setChartType(ChartType chartType) {
 		this.chartType = chartType;
 	}
-	
+
 	public DRDesignChartDataset getDataset() {
 		return dataset;
 	}
@@ -64,7 +68,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 	public void setDataset(DRDesignChartDataset dataset) {
 		this.dataset = dataset;
 	}
-	
+
 	public AbstractDesignPlot getPlot() {
 		return plot;
 	}
@@ -73,12 +77,12 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.plot = plot;
 	}
 
-	public DRIChartCustomizer getCustomizer() {
-		return customizer;
+	public List<DRIChartCustomizer> getCustomizers() {
+		return customizers;
 	}
-	
-	public void setCustomizer(DRIChartCustomizer customizer) {
-		this.customizer = customizer;
+
+	public void setCustomizers(List<DRIChartCustomizer> customizers) {
+		this.customizers = customizers;
 	}
 
 	public DRDesignChartTitle getTitle() {
@@ -103,8 +107,8 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 
 	public void setLegend(DRDesignChartLegend legend) {
 		this.legend = legend;
-	}	
-	
+	}
+
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}

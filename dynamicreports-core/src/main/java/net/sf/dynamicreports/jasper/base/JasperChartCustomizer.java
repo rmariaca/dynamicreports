@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.jasper.base;
 
+import java.util.List;
+
+import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.jasperreports.engine.JRAbstractChartCustomizer;
 import net.sf.jasperreports.engine.JRChart;
 
@@ -31,11 +34,14 @@ import org.jfree.chart.JFreeChart;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperChartCustomizer extends JRAbstractChartCustomizer {
-		
+
 	public void customize(JFreeChart chart, JRChart jasperChart) {
 		String key = jasperChart.getKey();
 		JasperScriptlet scriptlet = (JasperScriptlet) getParameterValue(JasperScriptlet.SCRIPTLET_NAME);
-		scriptlet.getChartCustomizer(key).customize(chart, scriptlet.getReportParameters());
+		List<DRIChartCustomizer> chartCustomizers = scriptlet.getChartCustomizers(key);
+		for (DRIChartCustomizer chartCustomizer : chartCustomizers) {
+			chartCustomizer.customize(chart, scriptlet.getReportParameters());
+		}
 	}
 
 }

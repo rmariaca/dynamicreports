@@ -29,6 +29,8 @@ public interface DRIPiePlot extends DRIPlot {
 
 	public Boolean getCircular();
 
+	public Boolean getShowLabels();
+
 	public String getLabelFormat();
 
 	public String getLegendLabelFormat();

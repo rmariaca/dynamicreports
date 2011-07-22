@@ -44,12 +44,12 @@ import org.jfree.chart.plot.Plot;
  */
 public class Pie3DChartTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-		
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<String> column1;
-		TextColumnBuilder<Integer> column2; 
-		
+		TextColumnBuilder<Integer> column2;
+
 		rb.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class))
@@ -60,15 +60,19 @@ public class Pie3DChartTest extends AbstractJasperChartTest implements Serializa
 						.setCircular(true)
 						.setLabelFormat("label {0}")
 						.setLegendLabelFormat("legend label {0}")
-						.setDepthFactor(0.5));
+						.setDepthFactor(0.5),
+					cht.pie3DChart()
+						.setKey(column1)
+						.series(cht.serie(column2))
+						.setShowLabels(false));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		JFreeChart chart = getChart("summary.chart1", 0);
 		Plot plot = chart.getPlot();
 		Assert.assertEquals("plot", PiePlot3D.class, plot.getClass());
@@ -76,14 +80,18 @@ public class Pie3DChartTest extends AbstractJasperChartTest implements Serializa
 		Assert.assertEquals("label format", "label {0}", ((StandardPieSectionLabelGenerator) ((PiePlot) plot).getLabelGenerator()).getLabelFormat());
 		Assert.assertEquals("legend label format", "legend label {0}", ((StandardPieSectionLabelGenerator) ((PiePlot) plot).getLegendLabelGenerator()).getLabelFormat());
 		Assert.assertEquals("depth factor", 0.5, ((PiePlot3D) plot).getDepthFactor());
+
+		chart = getChart("summary.chart2", 0);
+		plot = chart.getPlot();
+		Assert.assertNull("label format", ((PiePlot) plot).getLabelGenerator());
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add("value" + (i + 1), i + 1);
-			dataSource.add("value" + (i + 1), i + 1);	
+			dataSource.add("value" + (i + 1), i + 1);
 		}
 		return dataSource;
 	}

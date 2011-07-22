@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignGroup;
@@ -51,6 +53,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
+import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.chart.DRIChartLegend;
 import net.sf.dynamicreports.report.definition.chart.DRIChartSubtitle;
 import net.sf.dynamicreports.report.definition.chart.DRIChartTitle;
@@ -69,6 +72,9 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -86,17 +92,20 @@ public class ChartTransform {
 		designChart.setHeight(accessor.getTemplateTransform().getChartHeight(chart));
 		designChart.setChartType(chart.getChartType());
 		designChart.setDataset(dataset(chart.getDataset(), resetType, resetGroup));
-		designChart.setPlot(plot(chart.getPlot()));
-		designChart.setCustomizer(chart.getCustomizer());
+		designChart.setPlot(plot(chart.getPlot(), designChart.getCustomizers()));
 		designChart.setTitle(title(chart.getTitle()));
 		designChart.setSubtitle(subtitle(chart.getSubtitle()));
 		designChart.setLegend(legend(chart.getLegend()));
+
+		if (chart.getCustomizer() != null) {
+			designChart.getCustomizers().add(chart.getCustomizer());
+		}
 
 		return designChart;
 	}
 
 	//plot
-	private AbstractDesignPlot plot(DRIPlot plot) throws DRException {
+	private AbstractDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		AbstractDesignPlot designPlot;
 
 		if (plot instanceof DRIBar3DPlot) {
@@ -109,10 +118,10 @@ public class ChartTransform {
 			designPlot = linePlot((DRILinePlot) plot);
 		}
 		else if (plot instanceof DRIPie3DPlot) {
-			designPlot = pie3DPlot((DRIPie3DPlot) plot);
+			designPlot = pie3DPlot((DRIPie3DPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIPiePlot) {
-			designPlot = piePlot((DRIPiePlot) plot);
+			designPlot = piePlot((DRIPiePlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -153,23 +162,26 @@ public class ChartTransform {
 		return designLinePlot;
 	}
 
-	private DRDesignPie3DPlot pie3DPlot(DRIPie3DPlot pie3DPlot) {
+	private DRDesignPie3DPlot pie3DPlot(DRIPie3DPlot pie3DPlot, List<DRIChartCustomizer> chartCustomizers) {
 		DRDesignPie3DPlot designPie3DPlot = new DRDesignPie3DPlot();
-		piePlot(designPie3DPlot, pie3DPlot);
+		piePlot(designPie3DPlot, pie3DPlot, chartCustomizers);
 		designPie3DPlot.setDepthFactor(pie3DPlot.getDepthFactor());
 		return designPie3DPlot;
 	}
 
-	private DRDesignPiePlot piePlot(DRIPiePlot piePlot) {
+	private DRDesignPiePlot piePlot(DRIPiePlot piePlot, List<DRIChartCustomizer> chartCustomizers) {
 		DRDesignPiePlot designPiePlot = new DRDesignPiePlot();
-		piePlot(designPiePlot, piePlot);
+		piePlot(designPiePlot, piePlot, chartCustomizers);
 		return designPiePlot;
 	}
 
-	private void piePlot(DRDesignPiePlot designPiePlot, DRIPiePlot piePlot) {
+	private void piePlot(DRDesignPiePlot designPiePlot, DRIPiePlot piePlot, List<DRIChartCustomizer> chartCustomizers) {
 		designPiePlot.setCircular(piePlot.getCircular());
 		designPiePlot.setLabelFormat(piePlot.getLabelFormat());
 		designPiePlot.setLegendLabelFormat(piePlot.getLegendLabelFormat());
+		if (piePlot.getShowLabels() != null && !piePlot.getShowLabels()) {
+			chartCustomizers.add(new PieChartShowLabelsCustomizer());
+		}
 	}
 
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
@@ -352,5 +364,14 @@ public class ChartTransform {
 
 			return value;
 		}
+	}
+
+	private class PieChartShowLabelsCustomizer implements DRIChartCustomizer, Serializable {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		public void customize(JFreeChart chart, ReportParameters reportParameters) {
+	    PiePlot plot = (PiePlot) chart.getPlot();
+	    plot.setLabelGenerator(null);
+	  }
 	}
 }

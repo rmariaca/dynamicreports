@@ -24,6 +24,7 @@ package net.sf.dynamicreports.jasper.base;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
@@ -84,8 +85,8 @@ public class JasperScriptlet extends JRDefaultScriptlet implements DRIReportScri
 		return getCustomValues().getComplexExpression(name);
 	}
 
-	protected DRIChartCustomizer getChartCustomizer(String name) {
-		return getCustomValues().getChartCustomizer(name);
+	protected List<DRIChartCustomizer> getChartCustomizers(String name) {
+		return getCustomValues().getChartCustomizers(name);
 	}
 
 	@SuppressWarnings("rawtypes")
