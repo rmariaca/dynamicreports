@@ -55,6 +55,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperImageExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdtExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperPptxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperRtfExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperTextExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
@@ -529,6 +530,15 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 
 	public JasperReportBuilder toXml(JasperXmlExporterBuilder xmlExporterBuilder) throws DRException {
 		return export(xmlExporterBuilder);
+	}
+
+	//pptx
+	public JasperReportBuilder toPptx(OutputStream outputStream) throws DRException {
+		return toPptx(Exporters.pptxExporter(outputStream));
+	}
+
+	public JasperReportBuilder toPptx(JasperPptxExporterBuilder pptxExporterBuilder) throws DRException {
+		return export(pptxExporterBuilder);
 	}
 
 	private JasperReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {

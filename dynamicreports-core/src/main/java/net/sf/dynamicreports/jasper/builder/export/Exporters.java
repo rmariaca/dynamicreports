@@ -255,6 +255,23 @@ public class Exporters {
 		return new JasperXmlExporterBuilder().setOutputFileName(outputFileName);
 	}
 
+	//pptx
+	public static JasperPptxExporterBuilder pptxExporter(Writer outputWriter) {
+		return new JasperPptxExporterBuilder().setOutputWriter(outputWriter);
+	}
+
+	public static JasperPptxExporterBuilder pptxExporter(OutputStream outputStream) {
+		return new JasperPptxExporterBuilder().setOutputStream(outputStream);
+	}
+
+	public static JasperPptxExporterBuilder pptxExporter(File outputFile) {
+		return new JasperPptxExporterBuilder().setOutputFile(outputFile);
+	}
+
+	public static JasperPptxExporterBuilder pptxExporter(String outputFileName) {
+		return new JasperPptxExporterBuilder().setOutputFileName(outputFileName);
+	}
+
 	//image
 	public static JasperImageExporterBuilder imageExporter(OutputStream outputStream, ImageType imageType) {
 		return new JasperImageExporterBuilder().setOutputStream(outputStream).setImageType(imageType);

@@ -46,6 +46,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdtExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperPptxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperRtfExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperTextExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
@@ -279,6 +280,15 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 
 	public JasperConcatenatedReportBuilder toXml(JasperXmlExporterBuilder xmlExporterBuilder) throws DRException {
 		return export(xmlExporterBuilder);
+	}
+
+	//pptx
+	public JasperConcatenatedReportBuilder toPptx(OutputStream outputStream) throws DRException {
+		return toPptx(Exporters.pptxExporter(outputStream));
+	}
+
+	public JasperConcatenatedReportBuilder toPptx(JasperPptxExporterBuilder pptxExporterBuilder) throws DRException {
+		return export(pptxExporterBuilder);
 	}
 
 	private JasperConcatenatedReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {

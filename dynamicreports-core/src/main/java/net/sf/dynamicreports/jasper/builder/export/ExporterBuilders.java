@@ -256,6 +256,23 @@ public class ExporterBuilders {
 		return Exporters.xmlExporter(outputFileName);
 	}
 
+	//pptx
+	public JasperPptxExporterBuilder pptxExporter(Writer outputWriter) {
+		return Exporters.pptxExporter(outputWriter);
+	}
+
+	public JasperPptxExporterBuilder pptxExporter(OutputStream outputStream) {
+		return Exporters.pptxExporter(outputStream);
+	}
+
+	public JasperPptxExporterBuilder pptxExporter(File outputFile) {
+		return Exporters.pptxExporter(outputFile);
+	}
+
+	public JasperPptxExporterBuilder pptxExporter(String outputFileName) {
+		return Exporters.pptxExporter(outputFileName);
+	}
+
 	//image
 	public JasperImageExporterBuilder imageExporter(OutputStream outputStream, ImageType imageType) {
 		return Exporters.imageExporter(outputStream, imageType);

@@ -33,6 +33,7 @@ import net.sf.dynamicreports.jasper.definition.export.JasperIImageExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIOdsExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIOdtExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIPdfExporter;
+import net.sf.dynamicreports.jasper.definition.export.JasperIPptxExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIRtfExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperITextExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIXhtmlExporter;
@@ -68,6 +69,7 @@ import net.sf.jasperreports.engine.export.oasis.JROdsExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporterParameter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
 /**
@@ -122,6 +124,9 @@ public class ExporterTransform {
 		else if (jasperExporter instanceof JasperIXmlExporter) {
 			jrExporter = xml((JasperIXmlExporter) jasperExporter);
 		}
+		else if (jasperExporter instanceof JasperIPptxExporter) {
+			jrExporter = pptx((JasperIPptxExporter) jasperExporter);
+		}
 		else if (jasperExporter instanceof JasperIImageExporter) {
 			jrExporter = image((JasperIImageExporter) jasperExporter);
 		}
@@ -175,6 +180,12 @@ public class ExporterTransform {
 		if (jasperExporter.getEmbeddingImages() != null) {
 			jrExporter.setParameter(JRXmlExporterParameter.IS_EMBEDDING_IMAGES, jasperExporter.getEmbeddingImages());
 		}
+		return jrExporter;
+	}
+
+	private JRExporter pptx(JasperIPptxExporter jasperExporter) {
+		JRExporter jrExporter = new JRPptxExporter();
+		exporter(jrExporter, jasperExporter);
 		return jrExporter;
 	}
 

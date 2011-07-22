@@ -72,6 +72,7 @@ public class ExportTest {
 			report.toXls(new ByteArrayOutputStream());
 			report.toXlsx(new ByteArrayOutputStream());
 			report.toXml(new ByteArrayOutputStream());
+			report.toPptx(new ByteArrayOutputStream());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -95,6 +96,7 @@ public class ExportTest {
 			concatenatedReport.toXls(new ByteArrayOutputStream());
 			concatenatedReport.toXlsx(new ByteArrayOutputStream());
 			concatenatedReport.toXml(new ByteArrayOutputStream());
+			concatenatedReport.toPptx(new ByteArrayOutputStream());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
