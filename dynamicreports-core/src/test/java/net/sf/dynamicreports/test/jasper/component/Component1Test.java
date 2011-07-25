@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ComponentTest extends AbstractJasperValueTest {
+public class Component1Test extends AbstractJasperValueTest {
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

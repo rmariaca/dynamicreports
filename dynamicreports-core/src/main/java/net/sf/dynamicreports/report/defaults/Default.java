@@ -115,6 +115,13 @@ public class Default {
 	//line
 	private int lineWidth;
 	private int lineHeight;
+	//ellipse
+	private int ellipseWidth;
+	private int ellipseHeight;
+	//rectangle
+	private int rectangleRadius;
+	private int rectangleWidth;
+	private int rectangleHeight;
 	//break
 	private int breakWidth;
 	private int breakHeight;
@@ -277,6 +284,13 @@ public class Default {
 
 		this.lineWidth = 1;
 		this.lineHeight = 1;
+
+		this.ellipseWidth = 100;
+		this.ellipseHeight = 100;
+
+		this.rectangleRadius = 0;
+		this.rectangleWidth = 100;
+		this.rectangleHeight = 100;
 
 		this.breakWidth = 1;
 		this.breakHeight = 1;
@@ -569,6 +583,26 @@ public class Default {
 
 	public int getLineHeight() {
 		return lineHeight;
+	}
+
+	public int getEllipseWidth() {
+		return ellipseWidth;
+	}
+
+	public int getEllipseHeight() {
+		return ellipseHeight;
+	}
+
+	public int getRectangleRadius() {
+		return rectangleRadius;
+	}
+
+	public int getRectangleWidth() {
+		return rectangleWidth;
+	}
+
+	public int getRectangleHeight() {
+		return rectangleHeight;
 	}
 
 	public int getBreakWidth() {

@@ -201,4 +201,22 @@ public class ComponentBuilders {
 	public BooleanFieldBuilder booleanField(DRIExpression<Boolean> valueExpression) {
 		return Components.booleanField(valueExpression);
 	}
+
+	//ellipse
+	public EllipseBuilder ellipse() {
+		return Components.ellipse();
+	}
+
+	//rectangle
+	public RectangleBuilder rectangle() {
+		return Components.rectangle();
+	}
+
+	public RectangleBuilder roundRectangle() {
+		return Components.roundRectangle();
+	}
+
+	public RectangleBuilder roundRectangle(int radius) {
+		return Components.roundRectangle(radius);
+	}
 }

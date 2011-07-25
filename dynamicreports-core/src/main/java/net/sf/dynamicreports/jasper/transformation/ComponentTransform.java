@@ -34,11 +34,13 @@ import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.component.DRIDesignBreak;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.component.DRIDesignEllipse;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
 import net.sf.dynamicreports.design.definition.component.DRIDesignGenericElement;
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
+import net.sf.dynamicreports.design.definition.component.DRIDesignRectangle;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
@@ -61,10 +63,12 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignBreak;
 import net.sf.jasperreports.engine.design.JRDesignElement;
+import net.sf.jasperreports.engine.design.JRDesignEllipse;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
 import net.sf.jasperreports.engine.design.JRDesignGenericElement;
 import net.sf.jasperreports.engine.design.JRDesignImage;
 import net.sf.jasperreports.engine.design.JRDesignLine;
+import net.sf.jasperreports.engine.design.JRDesignRectangle;
 import net.sf.jasperreports.engine.design.JRDesignStaticText;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.design.JRDesignSubreport;
@@ -126,6 +130,16 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignLine) {
 			JRDesignElement jrElement = line((DRIDesignLine) component);
+			component(jrElement, component, listType);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignEllipse) {
+			JRDesignElement jrElement = ellipse((DRIDesignEllipse) component);
+			component(jrElement, component, listType);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignRectangle) {
+			JRDesignElement jrElement = rectangle((DRIDesignRectangle) component);
 			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
@@ -326,6 +340,21 @@ public class ComponentTransform {
 		jrDesignLine.setDirection(ConstantTransform.lineDirection(line.getDirection()));
 		accessor.getStyleTransform().pen(jrDesignLine.getLinePen(), line.getPen());
 		return jrDesignLine;
+	}
+
+	//ellipse
+	private JRDesignElement ellipse(DRIDesignEllipse ellipse) {
+		JRDesignEllipse jrDesignEllipse= new JRDesignEllipse(new JRDesignStyle().getDefaultStyleProvider());
+		accessor.getStyleTransform().pen(jrDesignEllipse.getLinePen(), ellipse.getPen());
+		return jrDesignEllipse;
+	}
+
+	//rectangle
+	private JRDesignElement rectangle(DRIDesignRectangle rectangle) {
+		JRDesignRectangle jrDesignRectangle = new JRDesignRectangle();
+		jrDesignRectangle.setRadius(rectangle.getRadius());
+		accessor.getStyleTransform().pen(jrDesignRectangle.getLinePen(), rectangle.getPen());
+		return jrDesignRectangle;
 	}
 
 	//break

@@ -66,12 +66,14 @@ import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
+import net.sf.dynamicreports.report.definition.component.DRIEllipse;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
+import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -817,6 +819,43 @@ public class TemplateTransform {
 			return line.getHeight();
 		}
 		return Defaults.getDefaults().getLineHeight();
+	}
+
+	//ellipse
+	protected int getEllipseWidth(DRIEllipse ellipse) {
+		if (ellipse.getWidth() != null) {
+			return ellipse.getWidth();
+		}
+		return Defaults.getDefaults().getEllipseWidth();
+	}
+
+	protected int getEllipseHeight(DRIEllipse ellipse) {
+		if (ellipse.getHeight() != null) {
+			return ellipse.getHeight();
+		}
+		return Defaults.getDefaults().getEllipseHeight();
+	}
+
+	//rectangle
+	protected int getRectangleRadius(DRIRectangle rectangle) {
+		if (rectangle.getRadius() != null) {
+			return rectangle.getRadius();
+		}
+		return Defaults.getDefaults().getRectangleRadius();
+	}
+
+	protected int getRectangleWidth(DRIRectangle rectangle) {
+		if (rectangle.getWidth() != null) {
+			return rectangle.getWidth();
+		}
+		return Defaults.getDefaults().getRectangleWidth();
+	}
+
+	protected int getRectangleHeight(DRIRectangle rectangle) {
+		if (rectangle.getHeight() != null) {
+			return rectangle.getHeight();
+		}
+		return Defaults.getDefaults().getRectangleHeight();
 	}
 
 	//break

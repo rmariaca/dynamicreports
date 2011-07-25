@@ -33,12 +33,14 @@ import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.component.DRDesignBreak;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
+import net.sf.dynamicreports.design.base.component.DRDesignEllipse;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignGenericElement;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignLine;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.component.DRDesignRectangle;
 import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
@@ -81,6 +83,7 @@ import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
+import net.sf.dynamicreports.report.definition.component.DRIEllipse;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
 import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
@@ -89,6 +92,7 @@ import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
+import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -139,6 +143,12 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRILine) {
 			return line((DRILine) component);
+		}
+		if (component instanceof DRIEllipse) {
+			return ellipse((DRIEllipse) component);
+		}
+		if (component instanceof DRIRectangle) {
+			return rectangle((DRIRectangle) component);
 		}
 		if (component instanceof DRIBooleanField) {
 			return booleanField((DRIBooleanField) component, defaultStyleType, resetType, resetGroup);
@@ -378,6 +388,27 @@ public class ComponentTransform {
 		designLine.setWidth(accessor.getTemplateTransform().getLineWidth(line));
 		designLine.setHeight(accessor.getTemplateTransform().getLineHeight(line));
 		return designLine;
+	}
+
+	//ellipse
+	protected DRDesignEllipse ellipse(DRIEllipse ellipse) throws DRException {
+		DRDesignEllipse designEllipse = new DRDesignEllipse();
+		component(designEllipse, ellipse, ellipse.getStyle(), false, DefaultStyleType.NONE);
+		designEllipse.setPen(accessor.getStyleTransform().pen(ellipse.getPen()));
+		designEllipse.setWidth(accessor.getTemplateTransform().getEllipseWidth(ellipse));
+		designEllipse.setHeight(accessor.getTemplateTransform().getEllipseHeight(ellipse));
+		return designEllipse;
+	}
+
+	//rectangle
+	protected DRDesignRectangle rectangle(DRIRectangle rectangle) throws DRException {
+		DRDesignRectangle designRectangle = new DRDesignRectangle();
+		component(designRectangle, rectangle, rectangle.getStyle(), false, DefaultStyleType.NONE);
+		designRectangle.setRadius(accessor.getTemplateTransform().getRectangleRadius(rectangle));
+		designRectangle.setPen(accessor.getStyleTransform().pen(rectangle.getPen()));
+		designRectangle.setWidth(accessor.getTemplateTransform().getRectangleWidth(rectangle));
+		designRectangle.setHeight(accessor.getTemplateTransform().getRectangleHeight(rectangle));
+		return designRectangle;
 	}
 
 	//boolean
