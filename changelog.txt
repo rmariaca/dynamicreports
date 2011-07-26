@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.1.2 (2011-07-26)
+---------------------------------------------------
+ - ability to group column titles, see ColumnTitleGroupReport for an example
+ - new components - ellipse, rectangle
+ - pptx exporter
+ - minor bug fixes and improvements
+ - new examples - ScriptletReport, FontsReport, PrintWhenExpressionReport, ColumnTitleGroupReport
+ 
 Changes in version 2.1.1 (2011-06-29)
 ---------------------------------------------------
  - ability to set the dimension of a list component
