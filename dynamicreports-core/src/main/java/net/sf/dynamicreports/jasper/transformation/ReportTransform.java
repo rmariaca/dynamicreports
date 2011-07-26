@@ -198,7 +198,7 @@ public class ReportTransform {
 	private JRDesignQuery query(DRIDesignQuery query) {
 		JRDesignQuery jrQuery = new JRDesignQuery();
 		jrQuery.setText(query.getText());
-		jrQuery.setLanguage(ConstantTransform.queryLanguage(query.getLanguage()));
+		jrQuery.setLanguage(query.getLanguage());
 		return jrQuery;
 	}
 

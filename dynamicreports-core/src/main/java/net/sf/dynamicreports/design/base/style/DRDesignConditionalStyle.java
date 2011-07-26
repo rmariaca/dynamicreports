@@ -24,14 +24,11 @@ package net.sf.dynamicreports.design.base.style;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
-import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDesignConditionalStyle {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
 	private DRIDesignExpression conditionExpression;
 
 	public void setConditionExpression(DRIDesignExpression conditionExpression) {

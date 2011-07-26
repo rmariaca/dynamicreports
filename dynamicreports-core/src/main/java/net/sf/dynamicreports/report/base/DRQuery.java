@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.definition.DRIQuery;
 
 import org.apache.commons.lang.Validate;
@@ -34,21 +33,21 @@ import org.apache.commons.lang.Validate;
 public class DRQuery implements DRIQuery {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private String text; 
-	private QueryLanguage language;
-	
-	public DRQuery(String text, QueryLanguage language) {
+	private String text;
+	private String language;
+
+	public DRQuery(String text, String language) {
 		Validate.notNull(text, "text must not be null");
 		Validate.notNull(language, "language must not be null");
 		this.text = text;
 		this.language = language;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
 
-	public QueryLanguage getLanguage() {
+	public String getLanguage() {
 		return language;
 	}
 }

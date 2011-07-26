@@ -35,8 +35,6 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TableOfContentsPosition3Test extends AbstractJasperPositionTest {
-	private static final long serialVersionUID = 1L;
-
 	private TextColumnBuilder<String> column1;
 
 	@Override

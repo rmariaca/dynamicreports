@@ -39,7 +39,6 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TableOfContentsStyleTest extends AbstractJasperStyleTest {
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

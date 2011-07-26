@@ -23,14 +23,11 @@
 package net.sf.dynamicreports.design.base.chart.plot;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisPlot;
-import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignAxisPlot extends AbstractDesignPlot implements DRIDesignAxisPlot {	
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+public class DRDesignAxisPlot extends AbstractDesignPlot implements DRIDesignAxisPlot {
 	private DRDesignAxisFormat xAxisFormat;
 	private DRDesignAxisFormat yAxisFormat;
 
@@ -49,5 +46,5 @@ public class DRDesignAxisPlot extends AbstractDesignPlot implements DRIDesignAxi
 	public void setYAxisFormat(DRDesignAxisFormat yAxisFormat) {
 		this.yAxisFormat = yAxisFormat;
 	}
-	
+
 }

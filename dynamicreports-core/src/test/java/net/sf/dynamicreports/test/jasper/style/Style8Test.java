@@ -36,8 +36,6 @@ import net.sf.jasperreports.engine.type.LineStyleEnum;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Style8Test extends AbstractJasperStyleTest {
-	private static final long serialVersionUID = 1L;
-
 	private BooleanColumnBuilder column1;
 	private BooleanColumnBuilder column2;
 	private BooleanColumnBuilder column3;

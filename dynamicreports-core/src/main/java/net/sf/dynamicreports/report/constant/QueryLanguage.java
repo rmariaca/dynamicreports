@@ -25,8 +25,11 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum QueryLanguage {
-	SQL,
-	HQL,
-	JPA
+public class QueryLanguage {
+	public static final String SQL = "sql";
+	public static final String HQL = "hql";
+	public static final String XPATH = "xPath";
+	public static final String MDX = "mdx";
+	public static final String EJBQL = "ejbql";
+	public static final String CSV = "csv";
 }

@@ -24,14 +24,12 @@ package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.QueryLanguage;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIQuery extends Serializable {
-	
+
 	public String getText();
 
-	public QueryLanguage getLanguage();
+	public String getLanguage();
 }

@@ -34,7 +34,6 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TemplateDesign3Test extends AbstractJasperValueTest {
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) throws DRException {

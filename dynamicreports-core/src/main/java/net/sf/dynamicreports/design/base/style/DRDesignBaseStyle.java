@@ -25,7 +25,6 @@ package net.sf.dynamicreports.design.base.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
-import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineSpacing;
@@ -37,8 +36,6 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
 	private Color foregroundColor;
 	private Color backgroundColor;
 	private Integer radius;

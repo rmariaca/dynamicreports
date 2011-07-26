@@ -24,7 +24,6 @@ package net.sf.dynamicreports.report.builder;
 
 import net.sf.dynamicreports.report.base.DRQuery;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,10 +32,10 @@ import net.sf.dynamicreports.report.constant.QueryLanguage;
 public class QueryBuilder extends AbstractBuilder<QueryBuilder, DRQuery> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected QueryBuilder(String text, QueryLanguage language) {
+	protected QueryBuilder(String text, String language) {
 		super(new DRQuery(text, language));
 	}
-	
+
 	public DRQuery getQuery() {
 		return build();
 	}

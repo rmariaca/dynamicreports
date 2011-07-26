@@ -38,8 +38,6 @@ import org.apache.commons.lang.StringUtils;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TableOfContentsTest extends AbstractJasperValueTest {
-	private static final long serialVersionUID = 1L;
-
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
 	private TextColumnBuilder<String> column3;

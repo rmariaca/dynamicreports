@@ -23,14 +23,11 @@
 package net.sf.dynamicreports.design.base.chart.plot;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
-import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignPie3DPlot extends DRDesignPiePlot implements DRIDesignPie3DPlot {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
 	private Double depthFactor;
 
 	public void setDepthFactor(Double depthFactor) {

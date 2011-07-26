@@ -42,8 +42,6 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CrosstabStyle5Test extends AbstractJasperCrosstabStyleTest {
-	private static final long serialVersionUID = 1L;
-
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup1;
 	private CrosstabColumnGroupBuilder<String> columnGroup2;

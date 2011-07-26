@@ -22,14 +22,13 @@
 
 package net.sf.dynamicreports.design.definition;
 
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignQuery {
-	
+
 	public String getText();
-	
-	public QueryLanguage getLanguage();
+
+	public String getLanguage();
 }

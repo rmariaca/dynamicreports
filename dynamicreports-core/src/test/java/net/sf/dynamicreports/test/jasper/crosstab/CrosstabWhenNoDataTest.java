@@ -34,7 +34,6 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabPositionTest;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CrosstabWhenNoDataTest extends AbstractJasperCrosstabPositionTest {
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

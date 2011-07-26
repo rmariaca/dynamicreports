@@ -40,8 +40,6 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CrosstabPosition4Test extends AbstractJasperCrosstabPositionTest {
-	private static final long serialVersionUID = 1L;
-
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
 	private CrosstabMeasureBuilder<Integer> measure1;

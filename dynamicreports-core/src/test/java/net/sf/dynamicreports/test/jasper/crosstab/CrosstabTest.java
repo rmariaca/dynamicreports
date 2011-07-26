@@ -39,7 +39,6 @@ import net.sf.jasperreports.engine.type.RunDirectionEnum;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CrosstabTest extends AbstractJasperTest {
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {

@@ -27,23 +27,20 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.ReportUtils;
-import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {	
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 	private String name;
 	private DRDesignStyle parentStyle;
 	private List<DRDesignConditionalStyle> conditionalStyles;
-	
+
 	public DRDesignStyle() {
 		this.name = ReportUtils.generateUniqueName("style");
 		this.conditionalStyles = new ArrayList<DRDesignConditionalStyle>();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -67,5 +64,5 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 
 	public void addConditionalStyle(DRDesignConditionalStyle conditionalStyle) {
 		this.conditionalStyles.add(conditionalStyle);
-	}	
+	}
 }

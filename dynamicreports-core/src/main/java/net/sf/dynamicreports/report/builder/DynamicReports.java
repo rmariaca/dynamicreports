@@ -41,7 +41,6 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -162,7 +161,7 @@ public class DynamicReports {
 	}
 
 	//query
-	public static QueryBuilder query(String text, QueryLanguage language) {
+	public static QueryBuilder query(String text, String language) {
 		return new QueryBuilder(text, language);
 	}
 

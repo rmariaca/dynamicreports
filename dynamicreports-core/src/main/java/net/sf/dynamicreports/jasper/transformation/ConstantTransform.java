@@ -51,7 +51,6 @@ import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -66,9 +65,6 @@ import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
-import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
-import net.sf.jasperreports.engine.query.JRJdbcQueryExecuterFactory;
-import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
 import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
@@ -200,23 +196,6 @@ public class ConstantTransform {
 			return RotationEnum.UPSIDE_DOWN;
 		default:
 			throw new JasperDesignException("Rotation " + rotation.name() + " not supported");
-		}
-	}
-
-	protected static String queryLanguage(QueryLanguage language) {
-		if (language == null) {
-			return null;
-		}
-
-		switch (language) {
-		case SQL:
-			return JRJdbcQueryExecuterFactory.QUERY_LANGUAGE_SQL;
-		case HQL:
-			return JRHibernateQueryExecuterFactory.QUERY_LANGUAGE_HQL;
-		case JPA:
-			return JRJpaQueryExecuterFactory.QUERY_LANGUAGE_EJBQL;
-		default:
-			throw new JasperDesignException("Query language " + language.name() + " not supported");
 		}
 	}
 

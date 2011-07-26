@@ -44,8 +44,6 @@ import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CrosstabStyle1Test extends AbstractJasperCrosstabStyleTest {
-	private static final long serialVersionUID = 1L;
-
 	private CrosstabRowGroupBuilder<String> rowGroup;
 	private CrosstabColumnGroupBuilder<String> columnGroup;
 	private CrosstabMeasureBuilder<Integer> measure1;

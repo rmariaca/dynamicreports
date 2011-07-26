@@ -23,15 +23,14 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignQuery;
-import net.sf.dynamicreports.report.constant.QueryLanguage;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignQuery implements DRIDesignQuery {
-	private String text; 
-	private QueryLanguage language;
-		
+	private String text;
+	private String language;
+
 	public String getText() {
 		return text;
 	}
@@ -39,12 +38,12 @@ public class DRDesignQuery implements DRIDesignQuery {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
-	public QueryLanguage getLanguage() {
+
+	public String getLanguage() {
 		return language;
 	}
-	
-	public void setLanguage(QueryLanguage language) {
+
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 }
