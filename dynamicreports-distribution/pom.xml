@@ -36,6 +36,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
+			<artifactId>dynamicreports-examples</artifactId>
+			<version>${project.version}</version>
+		</dependency> 
+		<dependency>
+			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports-core</artifactId>
 			<version>${project.version}</version>
 			<exclusions>
@@ -53,11 +58,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.dynamicreports</groupId>
-			<artifactId>dynamicreports-examples</artifactId>
-			<version>${project.version}</version>
-		</dependency> 
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
