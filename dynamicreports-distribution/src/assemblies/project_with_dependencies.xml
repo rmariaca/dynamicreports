@@ -13,6 +13,16 @@
 		<componentDescriptor>src/assemblies/project_dist.xml</componentDescriptor>
 	</componentDescriptors>
 
+	<fileSets>
+		<fileSet>
+			<directory>src/license</directory>
+			<outputDirectory>lib</outputDirectory>
+			<includes>
+				<include>*.txt</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+
 	<dependencySets>
 		<dependencySet>
 			<outputDirectory>lib</outputDirectory>

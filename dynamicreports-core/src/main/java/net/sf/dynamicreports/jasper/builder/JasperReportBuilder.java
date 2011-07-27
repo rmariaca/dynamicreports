@@ -144,6 +144,12 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);
 	}
 
+	public JasperReportBuilder setDataSource(String sql, String language, Connection connection) {
+		Validate.notNull(sql, "sql must not be null");
+		Validate.notNull(language, "language must not be null");
+		return setDataSource(DynamicReports.query(sql, language), connection);
+	}
+
 	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {
 		Validate.notNull(query, "query must not be null");
 		Validate.notNull(connection, "connection must not be null");
