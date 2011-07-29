@@ -20,7 +20,7 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.report;
+package net.sf.dynamicreports.test.jasper.component;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 

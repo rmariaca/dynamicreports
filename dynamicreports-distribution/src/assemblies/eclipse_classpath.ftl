@@ -11,6 +11,7 @@
 	<classpathentry kind="lib" path="lib/activation-${project.activationVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/avalon-framework-impl-${project.avalonframeworkimplVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/barcode4j-${project.barcode4jVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/barbecue-${project.barbecueVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-anim-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-awt-util-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-bridge-${project.batikbridgeVersion}.jar"/>

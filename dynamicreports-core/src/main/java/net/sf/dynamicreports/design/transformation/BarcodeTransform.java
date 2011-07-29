@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import net.sf.dynamicreports.design.base.barcode.DRDesignBarbecue;
 import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignChecksumBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignCodabarBarcode;
@@ -39,6 +40,7 @@ import net.sf.dynamicreports.design.base.barcode.DRDesignUpcaBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUpceBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUspsIntelligentMailBarcode;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIChecksumBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRICodabarBarcode;
@@ -113,6 +115,21 @@ public class BarcodeTransform {
 		else {
 			throw new DRDesignReportException("Barcode " + barcode.getClass().getName() + " not supported");
 		}
+	}
+
+	protected DRDesignBarbecue transform(DRIBarbecue barbecue) throws DRException {
+		DRDesignBarbecue designBarbecue = new DRDesignBarbecue();
+		designBarbecue.setWidth(accessor.getTemplateTransform().getBarbecueWidth(barbecue));
+		designBarbecue.setHeight(accessor.getTemplateTransform().getBarbecueHeight(barbecue));
+		designBarbecue.setType(barbecue.getType());
+		designBarbecue.setCodeExpression(accessor.getExpressionTransform().transformExpression(barbecue.getCodeExpression()));
+		designBarbecue.setApplicationIdentifierExpression(accessor.getExpressionTransform().transformExpression(barbecue.getApplicationIdentifierExpression()));
+		designBarbecue.setDrawText(barbecue.getDrawText());
+		designBarbecue.setChecksumRequired(barbecue.getChecksumRequired());
+		designBarbecue.setBarWidth(barbecue.getBarWidth());
+		designBarbecue.setBarHeight(barbecue.getBarHeight());
+		designBarbecue.setOrientation(barbecue.getOrientation());
+		return designBarbecue;
 	}
 
 	private void barcode(DRDesignBarcode designBarcode, DRIBarcode barcode) throws DRException {

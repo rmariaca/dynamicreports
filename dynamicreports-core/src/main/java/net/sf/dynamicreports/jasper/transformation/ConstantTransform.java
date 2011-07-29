@@ -30,6 +30,7 @@ import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.constant.BarbecueType;
 import net.sf.dynamicreports.report.constant.BarcodeBaselinePosition;
 import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
@@ -496,6 +497,21 @@ public class ConstantTransform {
 		}
 	}
 
+	public static RotationEnum barbecueRotation(BarcodeOrientation orientation) {
+		switch (orientation) {
+		case NONE:
+			return RotationEnum.NONE;
+		case LEFT:
+			return RotationEnum.LEFT;
+		case RIGHT:
+			return RotationEnum.RIGHT;
+		case UPSIDE_DOWN:
+			return RotationEnum.UPSIDE_DOWN;
+		default:
+			throw new JasperDesignException("BarcodeOrientation " + orientation.name() + " not supported");
+		}
+	}
+
 	public static HumanReadablePlacement barcodeTextPosition(BarcodeTextPosition textPosition) {
 		if (textPosition == null) {
 			return null;
@@ -561,6 +577,73 @@ public class ConstantTransform {
 			return BaselineAlignment.ALIGN_BOTTOM;
 		default:
 			throw new JasperDesignException("BarcodeBaselinePosition " + baselinePosition.name() + " not supported");
+		}
+	}
+
+	public static String barbecueType(BarbecueType barbecueType) {
+		if (barbecueType == null) {
+			return null;
+		}
+
+		switch (barbecueType) {
+		case BARCODE_2OF7:
+			return "2of7";
+		case BARCODE_3OF9:
+			return "3of9";
+		case BOOKLAND:
+			return "Bookland";
+		case CODABAR:
+			return "Codabar";
+		case CODE128:
+			return "Code128";
+		case CODE128A:
+			return "Code128A";
+		case CODE128B:
+			return "Code128B";
+		case CODE128C:
+			return "Code128C";
+		case CODE39:
+			return "Code39";
+		case CODE39_EXTENDED:
+			return "Code39 (Extended)";
+		case EAN128:
+			return "EAN128";
+		case EAN13:
+			return "EAN13";
+		case GLOBAL_TRADE_ITEM_NUMBER:
+			return "GlobalTradeItemNumber";
+		case INT_2OF5:
+			return "Int2of5";
+		case MONARCH:
+			return "Monarch";
+		case NW7:
+			return "NW7";
+		case PDF417:
+			return "PDF417";
+		case POSTNET:
+			return "PostNet";
+		case RANDOM_WEIGHT_UPCA:
+			return "RandomWeightUPCA";
+		case SCC14_SHIPPING_CODE:
+			return "SCC14ShippingCode";
+		case SHIPMENT_IDENTIFICATION_NUMBER:
+			return "ShipmentIdentificationNumber";
+		case SSCC18:
+			return "SSCC18";
+		case STD_2OF5:
+			return "Std2of5";
+		case UCC128:
+			return "UCC128";
+		case UPCA:
+			return "UPCA";
+		case USD3:
+			return "USD3";
+		case USD4:
+			return "USD4";
+		case USPS:
+			return "USPS";
+		default:
+			throw new JasperDesignException("BarbecueType " + barbecueType.name() + " not supported");
 		}
 	}
 

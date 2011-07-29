@@ -54,6 +54,7 @@ import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
+import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
@@ -966,6 +967,27 @@ public class TemplateTransform {
 	protected int getBarcodeHeight(DRIBarcode barcode) {
 		if (barcode.getHeight() != null) {
 			return barcode.getHeight();
+		}
+		if (template.getBarcodeHeight() != null) {
+			return template.getBarcodeHeight();
+		}
+		return Defaults.getDefaults().getBarcodeHeight();
+	}
+
+	//barbecue
+	protected int getBarbecueWidth(DRIBarbecue barbecue) {
+		if (barbecue.getWidth() != null) {
+			return barbecue.getWidth();
+		}
+		if (template.getBarcodeWidth() != null) {
+			return template.getBarcodeWidth();
+		}
+		return Defaults.getDefaults().getBarcodeWidth();
+	}
+
+	protected int getBarbecueHeight(DRIBarbecue barbecue) {
+		if (barbecue.getHeight() != null) {
+			return barbecue.getHeight();
 		}
 		if (template.getBarcodeHeight() != null) {
 			return template.getBarcodeHeight();

@@ -52,6 +52,7 @@
 		<commonslangVersion>2.5</commonslangVersion>
 		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
+		<barbecueVersion>1.5-beta1</barbecueVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
 		<springframeworkVersion>2.5</springframeworkVersion>
 		<poiVersion>3.6</poiVersion>
@@ -94,6 +95,13 @@
 				<version>${barcode4jVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>			
+			</dependency>
+			<dependency>
+				<groupId>net.sourceforge.barbecue</groupId>
+				<artifactId>barbecue</artifactId>
+				<version>${barbecueVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>

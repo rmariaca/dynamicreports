@@ -42,6 +42,11 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.barbecue</groupId>
+			<artifactId>barbecue</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-bridge</artifactId>
 			<scope>test</scope>

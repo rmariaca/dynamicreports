@@ -155,4 +155,256 @@ public class BarcodeBuilders {
 	public Pdf417BarcodeBuilder pdf417(DRIExpression<String> codeExpression) {
 		return Barcodes.pdf417(codeExpression);
 	}
+
+	//barbecue 2of7
+	public BarbecueBuilder barbecue_2of7(String code) {
+		return Barcodes.barbecue_2of7(code);
+	}
+
+	public BarbecueBuilder barbecue_2of7(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_2of7(codeExpression);
+	}
+
+	//barbecue 3of9
+	public BarbecueBuilder barbecue_3of9(String code) {
+		return Barcodes.barbecue_3of9(code);
+	}
+
+	public BarbecueBuilder barbecue_3of9(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_3of9(codeExpression);
+	}
+
+	//barbecue bookland
+	public BarbecueBuilder barbecue_bookland(String code) {
+		return Barcodes.barbecue_bookland(code);
+	}
+
+	public BarbecueBuilder barbecue_bookland(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_bookland(codeExpression);
+	}
+
+	//barbecue codabar
+	public BarbecueBuilder barbecue_codabar(String code) {
+		return Barcodes.barbecue_codabar(code);
+	}
+
+	public BarbecueBuilder barbecue_codabar(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_codabar(codeExpression);
+	}
+
+	//barbecue code128
+	public BarbecueBuilder barbecue_code128(String code) {
+		return Barcodes.barbecue_code128(code);
+	}
+
+	public BarbecueBuilder barbecue_code128(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code128(codeExpression);
+	}
+
+	//barbecue code128A
+	public BarbecueBuilder barbecue_code128A(String code) {
+		return Barcodes.barbecue_code128A(code);
+	}
+
+	public BarbecueBuilder barbecue_code128A(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code128A(codeExpression);
+	}
+
+	//barbecue code128B
+	public BarbecueBuilder barbecue_code128B(String code) {
+		return Barcodes.barbecue_code128B(code);
+	}
+
+	public BarbecueBuilder barbecue_code128B(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code128B(codeExpression);
+	}
+
+	//barbecue code128C
+	public BarbecueBuilder barbecue_code128C(String code) {
+		return Barcodes.barbecue_code128C(code);
+	}
+
+	public BarbecueBuilder barbecue_code128C(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code128C(codeExpression);
+	}
+
+	//barbecue code39
+	public BarbecueBuilder barbecue_code39(String code) {
+		return Barcodes.barbecue_code39(code);
+	}
+
+	public BarbecueBuilder barbecue_code39(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code39(codeExpression);
+	}
+
+	//barbecue code39 extended
+	public BarbecueBuilder barbecue_code39Extended(String code) {
+		return Barcodes.barbecue_code39Extended(code);
+	}
+
+	public BarbecueBuilder barbecue_code39Extended(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_code39Extended(codeExpression);
+	}
+
+	//barbecue ean128
+	public BarbecueBuilder barbecue_ean128(String code) {
+		return Barcodes.barbecue_ean128(code);
+	}
+
+	public BarbecueBuilder barbecue_ean128(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_ean128(codeExpression);
+	}
+
+	//barbecue ean13
+	public BarbecueBuilder barbecue_ean13(String code) {
+		return Barcodes.barbecue_ean13(code);
+	}
+
+	public BarbecueBuilder barbecue_ean13(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_ean13(codeExpression);
+	}
+
+	//barbecue global trade item number
+	public BarbecueBuilder barbecue_globalTradeItemNumber(String code) {
+		return Barcodes.barbecue_globalTradeItemNumber(code);
+	}
+
+	public BarbecueBuilder barbecue_globalTradeItemNumber(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_globalTradeItemNumber(codeExpression);
+	}
+
+	//barbecue int2of5
+	public BarbecueBuilder barbecue_int2of5(String code) {
+		return Barcodes.barbecue_int2of5(code);
+	}
+
+	public BarbecueBuilder barbecue_int2of5(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_int2of5(codeExpression);
+	}
+
+	//barbecue monarch
+	public BarbecueBuilder barbecue_monarch(String code) {
+		return Barcodes.barbecue_monarch(code);
+	}
+
+	public BarbecueBuilder barbecue_monarch(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_monarch(codeExpression);
+	}
+
+	//barbecue nw7
+	public BarbecueBuilder barbecue_nw7(String code) {
+		return Barcodes.barbecue_nw7(code);
+	}
+
+	public BarbecueBuilder barbecue_nw7(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_nw7(codeExpression);
+	}
+
+	//barbecue pdf417
+	public BarbecueBuilder barbecue_pdf417(String code) {
+		return Barcodes.barbecue_pdf417(code);
+	}
+
+	public BarbecueBuilder barbecue_pdf417(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_pdf417(codeExpression);
+	}
+
+	//barbecue postnet
+	public BarbecueBuilder barbecue_postnet(String code) {
+		return Barcodes.barbecue_postnet(code);
+	}
+
+	public BarbecueBuilder barbecue_postnet(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_postnet(codeExpression);
+	}
+
+	//barbecue random weight upca
+	public BarbecueBuilder barbecue_randomWeightUpca(String code) {
+		return Barcodes.barbecue_randomWeightUpca(code);
+	}
+
+	public BarbecueBuilder barbecue_randomWeightUpca(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_randomWeightUpca(codeExpression);
+	}
+
+	//barbecue scc14 shipping code
+	public BarbecueBuilder barbecue_scc14ShippingCode(String code) {
+		return Barcodes.barbecue_scc14ShippingCode(code);
+	}
+
+	public BarbecueBuilder barbecue_scc14ShippingCode(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_scc14ShippingCode(codeExpression);
+	}
+
+	//barbecue shipment identification number
+	public BarbecueBuilder barbecue_shipmentIdentificationNumber(String code) {
+		return Barcodes.barbecue_shipmentIdentificationNumber(code);
+	}
+
+	public BarbecueBuilder barbecue_shipmentIdentificationNumber(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_shipmentIdentificationNumber(codeExpression);
+	}
+
+	//barbecue sscc18
+	public BarbecueBuilder barbecue_sscc18(String code) {
+		return Barcodes.barbecue_sscc18(code);
+	}
+
+	public BarbecueBuilder barbecue_sscc18(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_sscc18(codeExpression);
+	}
+
+	//barbecue std 2of5
+	public BarbecueBuilder barbecue_std2of5(String code) {
+		return Barcodes.barbecue_std2of5(code);
+	}
+
+	public BarbecueBuilder barbecue_std2of5(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_std2of5(codeExpression);
+	}
+
+	//barbecue ucc128
+	public BarbecueBuilder barbecue_ucc128(String code) {
+		return Barcodes.barbecue_ucc128(code);
+	}
+
+	public BarbecueBuilder barbecue_ucc128(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_ucc128(codeExpression);
+	}
+
+	//barbecue upca
+	public BarbecueBuilder barbecue_upca(String code) {
+		return Barcodes.barbecue_upca(code);
+	}
+
+	public BarbecueBuilder barbecue_upca(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_upca(codeExpression);
+	}
+
+	//barbecue usd3
+	public BarbecueBuilder barbecue_usd3(String code) {
+		return Barcodes.barbecue_usd3(code);
+	}
+
+	public BarbecueBuilder barbecue_usd3(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_usd3(codeExpression);
+	}
+
+	//barbecue usd4
+	public BarbecueBuilder barbecue_usd4(String code) {
+		return Barcodes.barbecue_usd4(code);
+	}
+
+	public BarbecueBuilder barbecue_usd4(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_usd4(codeExpression);
+	}
+
+	//barbecue usps
+	public BarbecueBuilder barbecue_usps(String code) {
+		return Barcodes.barbecue_usps(code);
+	}
+
+	public BarbecueBuilder barbecue_usps(DRIExpression<String> codeExpression) {
+		return Barcodes.barbecue_usps(codeExpression);
+	}
 }

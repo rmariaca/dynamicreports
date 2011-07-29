@@ -67,6 +67,10 @@
 			<artifactId>barcode4j</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.barbecue</groupId>
+			<artifactId>barbecue</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-bridge</artifactId>
 		</dependency>

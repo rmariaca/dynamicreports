@@ -30,6 +30,7 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
+import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.component.DRIDesignBreak;
@@ -102,6 +103,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignBarcode) {
 			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
+			component(jrElement, component, listType);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignBarbecue) {
+			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarbecue) component);
 			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}

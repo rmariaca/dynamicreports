@@ -141,8 +141,8 @@ public class Expressions {
 	}
 
 	//jasper
-	public static JasperExpression<String> jasper(String expression) {
-		return new JasperExpression<String>("\"" + StringEscapeUtils.escapeJava(expression) + "\"", String.class);
+	public static JasperExpression<String> jasper(String text) {
+		return new JasperExpression<String>("\"" + StringEscapeUtils.escapeJava(text) + "\"", String.class);
 	}
 
 	public static <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
