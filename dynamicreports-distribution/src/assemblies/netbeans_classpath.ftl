@@ -63,6 +63,7 @@ file.reference.xml-apis-${project.xmlapisVersion}.jar=lib\\xml-apis-${project.xm
 file.reference.xml-apis-ext-${project.xmlapisVersion}.jar=lib\\xml-apis-ext-${project.xmlapisVersion}.jar
 file.reference.spring-core-${project.springframeworkVersion}.jar=lib\\spring-core-${project.springframeworkVersion}.jar
 file.reference.spring-beans-${project.springframeworkVersion}.jar=lib\\spring-beans-${project.springframeworkVersion}.jar
+file.reference.hsqldb-${project.hsqldbVersion}.jar=lib\\hsqldb-${project.hsqldbVersion}.jar
 includes=**
 jar.compress=false
 javac.classpath=\
@@ -103,7 +104,8 @@ javac.classpath=\
     ${r"${"}file.reference.xml-apis-${project.xmlapisVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xml-apis-ext-${project.xmlapisVersion}.jar${r"}"}:\
     ${r"${"}file.reference.spring-core-${project.springframeworkVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.spring-beans-${project.springframeworkVersion}.jar${r"}"}
+    ${r"${"}file.reference.spring-beans-${project.springframeworkVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.hsqldb-${project.hsqldbVersion}.jar${r"}"}
 # Space-separated list of extra javac options
 javac.compilerargs=
 javac.deprecation=false

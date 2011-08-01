@@ -64,7 +64,10 @@ public abstract class AbstractJasperTest {
 			if (serializableTest()) {
 				reportBuilder = serializableTest(reportBuilder);
 			}
-			reportBuilder.setDataSource(createDataSource());
+			JRDataSource dataSource = createDataSource();
+			if (dataSource != null) {
+				reportBuilder.setDataSource(dataSource);
+			}
 			build();
 		} catch (Exception e) {
 			e.printStackTrace();

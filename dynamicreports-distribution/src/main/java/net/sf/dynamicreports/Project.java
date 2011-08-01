@@ -58,19 +58,20 @@ public class Project {
 	private String staxapiVersion;
 	private String xmlapisVersion;
 	private String springframeworkVersion;
-			
+	private String hsqldbVersion;
+
 	public Project() throws IOException {
 		version = System.getenv("version");
 		developmentVersion = System.getenv("developmentVersion");
 		date = new Date();
 		outputDirectory = System.getenv("outputDirectory");
-		
+
 		Properties properties = new Properties();
 		String prop = System.getenv("properties");
 		prop = prop.substring(1, prop.length() - 1);
 		prop = prop.replaceAll(", ", "\n");
 		properties.load(new ByteArrayInputStream(prop.getBytes()));
-		
+
 		activationVersion = properties.getProperty("activationVersion");
 		avalonframeworkimplVersion = properties.getProperty("avalonframeworkimplVersion");
 		barcode4jVersion = properties.getProperty("barcode4jVersion");
@@ -94,6 +95,7 @@ public class Project {
 		staxapiVersion = properties.getProperty("staxapiVersion");
 		xmlapisVersion = properties.getProperty("xmlapisVersion");
 		springframeworkVersion = properties.getProperty("springframeworkVersion");
+		hsqldbVersion = properties.getProperty("hsqldbVersion");
 	}
 
 	public String getVersion() {
@@ -115,11 +117,11 @@ public class Project {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	public String getOutputDirectory() {
 		return outputDirectory;
 	}
@@ -159,7 +161,7 @@ public class Project {
 	public void setBarbecueVersion(String barbecueVersion) {
 		this.barbecueVersion = barbecueVersion;
 	}
-	
+
 	public String getBatikbridgeVersion() {
 		return batikbridgeVersion;
 	}
@@ -310,5 +312,13 @@ public class Project {
 
 	public void setSpringframeworkVersion(String springframeworkVersion) {
 		this.springframeworkVersion = springframeworkVersion;
-	}	
+	}
+
+	public String getHsqldbVersion() {
+		return hsqldbVersion;
+	}
+
+	public void setHsqldbVersion(String hsqldbVersion) {
+		this.hsqldbVersion = hsqldbVersion;
+	}
 }
