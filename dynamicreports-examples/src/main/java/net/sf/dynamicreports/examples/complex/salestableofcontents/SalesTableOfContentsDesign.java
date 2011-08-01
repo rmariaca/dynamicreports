@@ -94,7 +94,7 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 			CustomGroupBuilder countryGroup = grp.group(new CountryExpression(textField))
 				.setHeaderLayout(GroupHeaderLayout.EMPTY)
 				.header(countryHeadingComponent())
-				.footer(cmp.filler().setFixedHeight(5));
+				.footer(cmp.verticalGap(5));
 
 			report
 				.setPageColumnsPerPage(2)

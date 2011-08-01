@@ -95,9 +95,9 @@ public class JasperTemplateDesignReport2 {
 		  .setPageMargin(margin(0))
 		  .title(
 		  	cmp.horizontalList(
-		  		cmp.filler().setFixedDimension(30, 47),
+		  		cmp.gap(30, 47),
 		  		cmp.text(title).setStyle(style),
-		  		cmp.filler().setFixedDimension(30, 47)));
+		  		cmp.gap(30, 47)));
 
 		return report;
 	}

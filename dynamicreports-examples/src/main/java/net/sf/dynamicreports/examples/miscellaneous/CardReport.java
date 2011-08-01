@@ -70,7 +70,7 @@ public class CardReport {
 
 		ImageBuilder image = cmp.image(Templates.class.getResource("images/user_male.png")).setFixedDimension(60, 60);
 		cardComponent.add(cmp.hListCell(image).heightFixedOnMiddle());
-		cardComponent.add(cmp.filler().setFixedWidth(10));
+		cardComponent.add(cmp.horizontalGap(10));
 
 		StyleBuilder boldStyle = stl.style().bold();
 		VerticalListBuilder content = cmp.verticalList(

@@ -37,21 +37,21 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DetailDynamicSubreport {
-	
+
 	public DetailDynamicSubreport() {
 		build();
 	}
-	
+
 	private void build() {
 		SubreportBuilder subreport = cmp.subreport(new SubreportExpression())
 		                                .setDataSource(new SubreportDataSourceExpression());
-		
-		try {			
+
+		try {
 			report()
 			  .title(Templates.createTitleComponent("DetailDynamicSubreport"))
 			  .detail(
 			  	subreport,
-			  	cmp.filler().setFixedHeight(20))
+			  	cmp.verticalGap(20))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
@@ -59,11 +59,11 @@ public class DetailDynamicSubreport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		return new JREmptyDataSource(5);
 	}
-	
+
 	private class SubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
 		private static final long serialVersionUID = 1L;
 
@@ -74,15 +74,15 @@ public class DetailDynamicSubreport {
 			  .setTemplate(Templates.reportTemplate)
 			  .setPageMargin(margin(0))
 			  .title(cmp.text("Subreport" + masterRowNumber).setStyle(Templates.bold12CenteredStyle));
-			
+
 			for (int i = 1; i <= masterRowNumber; i++) {
 			  report.addColumn(col.column("Column" + i, "column" + i, type.stringType()));
 			}
-			
+
 			return report;
 		}
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
@@ -93,7 +93,7 @@ public class DetailDynamicSubreport {
 				columns[i - 1] = "column" + i;
 			}
 			DataSource dataSource = new DataSource(columns);
-			
+
 			for (int i = 1; i <= masterRowNumber; i++) {
 				Object[] values = new Object[masterRowNumber];
 				for (int j = 1; j <= masterRowNumber; j++) {
@@ -101,11 +101,11 @@ public class DetailDynamicSubreport {
 				}
 				dataSource.add(values);
 			}
-			
+
 			return dataSource;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new DetailDynamicSubreport();
 	}

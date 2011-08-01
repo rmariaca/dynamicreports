@@ -107,9 +107,9 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 		VerticalListBuilder cell = cmp.verticalList(
 			cmp.text(label).setStyle(bold14Style),
 			cmp.horizontalList(
-				cmp.filler().setFixedWidth(20),
+				cmp.horizontalGap(20),
 				content,
-				cmp.filler().setFixedWidth(5)));
+				cmp.horizontalGap(5)));
 		cell.setStyle(stl.style(stl.pen2Point()));
 		return cell;
 	}

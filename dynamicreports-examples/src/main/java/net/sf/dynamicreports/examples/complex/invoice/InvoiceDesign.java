@@ -46,8 +46,8 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 public class InvoiceDesign implements ReportDesign<InvoiceData> {
 	private Invoice invoice;
 	private AggregationSubtotalBuilder<BigDecimal> totalSum;
-	
-	public void configureReport(ReportBuilder<?> rb, InvoiceData invoiceData) {		
+
+	public void configureReport(ReportBuilder<?> rb, InvoiceData invoiceData) {
 		invoice = invoiceData.getInvoice();
 		//init styles
 		StyleBuilder columnStyle   = stl.style(Templates.columnStyle).setBorder(stl.pen1Point());
@@ -77,8 +77,8 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		                                                             .setStyle(subtotalStyle);
 		//init subtotals
 		totalSum = sbt.sum(totalColumn).setLabel("Total:").setLabelStyle(Templates.boldStyle);
-		
-		//configure report		
+
+		//configure report
 		rb.setTemplate(Templates.reportTemplate)
 		  .setColumnStyle(columnStyle)
 		  .setSubtotalStyle(subtotalStyle)
@@ -99,7 +99,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		  	cmp.horizontalList().setStyle(stl.style(10)).setGap(50).add(
 		  		cmp.hListCell(createCustomerComponent("Bill To", invoice.getBillTo())).heightFixedOnTop(),
 		  		cmp.hListCell(createCustomerComponent("Ship To", invoice.getShipTo())).heightFixedOnTop()),
-		  	cmp.filler().setFixedHeight(10))
+		  	cmp.verticalGap(10))
 		  .pageFooter(
 		  	Templates.footerComponent)
 		  .summary(
@@ -107,7 +107,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 		  	cmp.horizontalList(
 		  		cmp.text("Payment terms: 30 days").setStyle(Templates.bold12CenteredStyle),
 		  		cmp.text(new TotalPaymentExpression()).setStyle(Templates.bold12CenteredStyle)),
-		  	cmp.filler().setFixedHeight(30),
+		  	cmp.verticalGap(30),
 		  	cmp.text("Thank you for your business").setStyle(Templates.bold12CenteredStyle));
 	}
 
@@ -121,13 +121,13 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 							cmp.text(label).setStyle(Templates.boldStyle),
 							list);
 	}
-	
+
 	private void addCustomerAttribute(HorizontalListBuilder list, String label, String value) {
 		if (value != null) {
 			list.add(cmp.text(label + ":").setFixedColumns(8).setStyle(Templates.boldStyle), cmp.text(value)).newRow();
 		}
 	}
-	
+
 	private class TotalPaymentExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 

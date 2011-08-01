@@ -89,7 +89,7 @@ public class PrintWhenExpressionReport {
 			  	cmp.columnBreak().setPrintWhenExpression(new PrintGroupHeaderColumnBreakExpression()),
 			  	groupHeader)
 			  .pageHeader(
-			  	oddPageHeader, evenPageHeader, cmp.filler().setFixedHeight(10))
+			  	oddPageHeader, evenPageHeader, cmp.verticalGap(10))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();

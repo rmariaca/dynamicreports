@@ -138,6 +138,18 @@ public class Components {
 		return new FillerBuilder();
 	}
 
+	public static FillerBuilder horizontalGap(int width) {
+		return new FillerBuilder().setFixedWidth(width);
+	}
+
+	public static FillerBuilder verticalGap(int height) {
+		return new FillerBuilder().setFixedHeight(height);
+	}
+
+	public static FillerBuilder gap(int width, int height) {
+		return new FillerBuilder().setFixedDimension(width, height);
+	}
+
 	//image
 	public static ImageBuilder image(DRIExpression<?> imageExpression) {
 		return new ImageBuilder().setImage(imageExpression);

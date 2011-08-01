@@ -44,7 +44,7 @@ import net.sf.dynamicreports.report.constant.Orientation;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class SalesDesign implements ReportDesign<SalesData> {
-	
+
 	public void configureReport(ReportBuilder<?> rb, SalesData invoiceData) {
 		//init styles
 		FontBuilder  boldFont = stl.fontArialBold();
@@ -87,12 +87,12 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		                                       .setShowLegend(false)
 		                                       .setKey(stateColumn)
 		                                       .addSerie(
-		                                        	cht.serie(priceColumn));			
-		
-		//configure report		
+		                                        	cht.serie(priceColumn));
+
+		//configure report
 		rb.setTemplate(Templates.reportTemplate)
 		  //columns
-		  .columns(				
+		  .columns(
 		  	stateColumn, itemColumn, orderDateColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
 		  //groups
 		  .groupBy(stateGroup)
@@ -105,10 +105,10 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		  	unitPriceSum, priceSum, priceAvg)
 		  //band components
 		  .title(
-		  	Templates.createTitleComponent("Sales"),	
+		  	Templates.createTitleComponent("Sales"),
 		  	cmp.horizontalList(
 		  		itemChart, cmp.verticalList(dateChart, stateChart)),
-		  	cmp.filler().setFixedHeight(10))
+		  	cmp.verticalGap(10))
 		  .pageFooter(
 		  	Templates.footerComponent);
 	}

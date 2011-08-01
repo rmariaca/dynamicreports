@@ -43,21 +43,21 @@ import net.sf.jasperreports.engine.JasperReport;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DetailJasperSubreport {
-	
+
 	public DetailJasperSubreport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			SubreportBuilder subreport = cmp.subreport(getJasperSubreport())
 			                                .setDataSource(new SubreportDataSourceExpression());
-			
+
 			report()
 			  .title(Templates.createTitleComponent("DetailJasperSubreport"))
 			  .detail(
 			  	subreport,
-			  	cmp.filler().setFixedHeight(20))
+			  	cmp.verticalGap(20))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
@@ -67,16 +67,16 @@ public class DetailJasperSubreport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		return new JREmptyDataSource(3);
 	}
-	
+
 	private JasperReport getJasperSubreport() throws JRException {
 		InputStream is = DetailJasperSubreport.class.getResourceAsStream("subreport.jrxml");
 		return JasperCompileManager.compileReport(is);
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
@@ -88,7 +88,7 @@ public class DetailJasperSubreport {
 			return dataSource;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new DetailJasperSubreport();
 	}

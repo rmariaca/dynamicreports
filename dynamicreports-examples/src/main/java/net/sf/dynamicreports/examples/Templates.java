@@ -135,7 +135,7 @@ public class Templates {
 		        .newRow()
 		        .add(cmp.line())
 		        .newRow()
-		        .add(cmp.filler().setFixedHeight(10));
+		        .add(cmp.verticalGap(10));
 	}
 
 	public static CurrencyValueFormatter createCurrencyValueFormatter(String label) {

@@ -33,11 +33,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class ColumnGrid1Report {
 	private final int columns_count = 12;
-	
+
 	public ColumnGrid1Report() {
 		build();
 	}
-		
+
 	private void build() {
 		@SuppressWarnings("unchecked")
 		TextColumnBuilder<String>[] columns = new TextColumnBuilder[columns_count];
@@ -45,20 +45,20 @@ public class ColumnGrid1Report {
 			columns[i - 1] = col.column("Column" + i, "column" + i, type.stringType());
 		}
 		columns[columns_count / 2].setFixedWidth(300);
-		
+
 		try {
 			report()
 			  .setTextStyle(stl.style(stl.pen1Point()))
 			  .columns(columns)
 			  .columnGrid(grid.horizontalFlowColumnGridList(columns))
-			  .detail(cmp.filler().setFixedHeight(10))
+			  .detail(cmp.verticalGap(10))
 			  .setDataSource(createDataSource())
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		String[] columns = new String[columns_count];
 		for (int i = 1; i <= columns_count; i++) {
@@ -74,7 +74,7 @@ public class ColumnGrid1Report {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ColumnGrid1Report();
 	}

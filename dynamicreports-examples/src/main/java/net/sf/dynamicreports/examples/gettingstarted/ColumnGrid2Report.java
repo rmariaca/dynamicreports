@@ -33,18 +33,18 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class ColumnGrid2Report {
 	private final int columns_count = 12;
-	
+
 	public ColumnGrid2Report() {
 		build();
 	}
-		
+
 	private void build() {
 		@SuppressWarnings("unchecked")
 		TextColumnBuilder<String>[] columns = new TextColumnBuilder[columns_count];
 		for (int i = 1; i <= columns_count; i++) {
 			columns[i - 1] = col.column("Column" + i, "column" + i, type.stringType());
 		}
-		
+
 		try {
 			report()
 			  .setTextStyle(stl.style(stl.pen1Point()))
@@ -59,14 +59,14 @@ public class ColumnGrid2Report {
 			  		grid.verticalColumnGridList(columns[5], columns[6]))
 			  	.newRow()
 			  	.add(columns[7], columns[8], columns[9]))
-			  .detail(cmp.filler().setFixedHeight(10))
+			  .detail(cmp.verticalGap(10))
 			  .setDataSource(createDataSource())
-			  .show();		
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		String[] columns = new String[columns_count];
 		for (int i = 1; i <= columns_count; i++) {
@@ -82,7 +82,7 @@ public class ColumnGrid2Report {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ColumnGrid2Report();
 	}
