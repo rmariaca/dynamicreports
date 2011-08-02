@@ -59,6 +59,7 @@ public class Project {
 	private String xmlapisVersion;
 	private String springframeworkVersion;
 	private String hsqldbVersion;
+	private String xalanVersion;
 
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -96,6 +97,7 @@ public class Project {
 		xmlapisVersion = properties.getProperty("xmlapisVersion");
 		springframeworkVersion = properties.getProperty("springframeworkVersion");
 		hsqldbVersion = properties.getProperty("hsqldbVersion");
+		xalanVersion = properties.getProperty("xalanVersion");
 	}
 
 	public String getVersion() {
@@ -320,5 +322,13 @@ public class Project {
 
 	public void setHsqldbVersion(String hsqldbVersion) {
 		this.hsqldbVersion = hsqldbVersion;
+	}
+
+	public String getXalanVersion() {
+		return xalanVersion;
+	}
+
+	public void setXalanVersion(String xalanVersion) {
+		this.xalanVersion = xalanVersion;
 	}
 }

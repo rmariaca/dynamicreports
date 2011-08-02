@@ -24,57 +24,53 @@ package net.sf.dynamicreports.examples.datasource;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRXmlDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DatabaseDatasourceReport {
-	private Connection connection;
+public class XmlDatasourceReport {
 
-	public DatabaseDatasourceReport() {
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-			connection = DriverManager.getConnection("jdbc:hsqldb:mem:test");
-			createTable();
-			build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	public XmlDatasourceReport() {
+		build();
 	}
 
 	private void build() {
 		try {
+			FieldBuilder<Integer> idField = field("id", type.integerType())
+				.setDescription("@id");
+			FieldBuilder<String> itemField = field("item", type.stringType())
+				.setDescription("item");
+			FieldBuilder<Integer> quantityField = field("quantity", type.integerType())
+				.setDescription("quantity");
+			FieldBuilder<BigDecimal> unitPriceField = field("unitprice", type.bigDecimalType())
+				.setDescription("unitprice");
+
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  	col.column("Item",       "item",      type.stringType()),
-			  	col.column("Quantity",   "quantity",  type.integerType()),
-			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .title(Templates.createTitleComponent("DatabaseDatasource"))
+			  	col.column("Id",         idField),
+			  	col.column("Item",       itemField),
+			  	col.column("Quantity",   quantityField),
+			  	col.column("Unit price", unitPriceField))
+			  .title(Templates.createTitleComponent("XmlDatasource"))
 			  .pageFooter(Templates.footerComponent)
-			  .setDataSource("SELECT * FROM sales", connection)
+			  .setDataSource(new JRXmlDataSource(XmlDatasourceReport.class.getResourceAsStream("sales.xml"), "/sales/item"))
 			  .show();
 		} catch (DRException e) {
+			e.printStackTrace();
+		} catch (JRException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void createTable() throws SQLException {
-		Statement st = connection.createStatement();
-		st.execute("CREATE TABLE sales (item VARCHAR(50), quantity INTEGER, unitprice DECIMAL)");
-		st.execute("INSERT INTO sales VALUES ('Book', 5, 100)");
-	}
-
 	public static void main(String[] args) {
-		new DatabaseDatasourceReport();
+		new XmlDatasourceReport();
 	}
 }

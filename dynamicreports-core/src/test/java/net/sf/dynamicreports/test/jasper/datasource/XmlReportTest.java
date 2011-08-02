@@ -20,52 +20,45 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.report;
+package net.sf.dynamicreports.test.jasper.datasource;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Locale;
 
-import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
+import net.sf.jasperreports.engine.util.JRXmlUtils;
+
+import org.junit.Assert;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DatabaseReportTest extends AbstractJasperValueTest {
-	private Connection connection;
+public class XmlReportTest extends AbstractJasperValueTest {
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<Integer> column2;
 	private TextColumnBuilder<BigDecimal> column3;
 
 	@Override
-	public void init() {
+	protected void configureReport(JasperReportBuilder rb) {
 		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-			connection = DriverManager.getConnection("jdbc:hsqldb:mem:test");
-			createTable();
-		} catch (Exception e) {
+			rb.setLocale(Locale.ENGLISH)
+				.columns(
+					column1 =	col.column("Column1", field("field1", type.stringType()).setDescription("field1")),
+					column2 =	col.column("Column2", field("field2", type.integerType()).setDescription("field2")),
+					column3 =	col.column("Column3", field("field3", type.bigDecimalType()).setDescription("field3")))
+				.setQuery("/data/row", QueryLanguage.XPATH)
+				.setParameter(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, JRXmlUtils.parse(XmlReportTest.class.getResourceAsStream("data.xml")));
+		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
-		super.init();
-	}
-
-	@Override
-	protected void configureReport(JasperReportBuilder rb) {
-		rb.setLocale(Locale.ENGLISH)
-			.columns(
-				column1 =	col.column("Column1", "field1", type.stringType()),
-				column2 =	col.column("Column2", "field2", type.integerType()),
-				column3 =	col.column("Column3", "field3", type.bigDecimalType()))
-			.setDataSource("SELECT * FROM test_table", connection);
 	}
 
 	@Override
@@ -94,11 +87,5 @@ public class DatabaseReportTest extends AbstractJasperValueTest {
 		columnTitleValueTest(column3, "Column3");
 		columnDetailCountTest(column3, 1);
 		columnDetailValueTest(column3, 0, "100.00");
-	}
-
-	private void createTable() throws SQLException {
-		Statement st = connection.createStatement();
-		st.execute("CREATE TABLE test_table (field1 VARCHAR(50), field2 INTEGER, field3 DECIMAL)");
-		st.execute("INSERT INTO test_table VALUES ('text', 5, 100)");
 	}
 }

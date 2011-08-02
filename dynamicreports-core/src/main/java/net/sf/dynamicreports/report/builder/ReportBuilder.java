@@ -189,10 +189,10 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setQuery(String sql, String language) {
-		Validate.notNull(sql, "sql must not be null");
+	public T setQuery(String text, String language) {
+		Validate.notNull(text, "text must not be null");
 		Validate.notNull(language, "language must not be null");
-		return setQuery(DynamicReports.query(sql, language));
+		return setQuery(DynamicReports.query(text, language));
 	}
 
 	public T setQuery(String sql) {

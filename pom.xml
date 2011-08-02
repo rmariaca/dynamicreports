@@ -59,6 +59,7 @@
 		<jxlVersion>2.6.10</jxlVersion>
 		<junitVersion>4.0</junitVersion>
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
+		<xalanVersion>2.7.1</xalanVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -151,7 +152,14 @@
 				<version>${hsqldbVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
-			</dependency>		
+			</dependency>
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+				<version>${xalanVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

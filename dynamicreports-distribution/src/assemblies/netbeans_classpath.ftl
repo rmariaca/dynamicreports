@@ -64,6 +64,8 @@ file.reference.xml-apis-ext-${project.xmlapisVersion}.jar=lib\\xml-apis-ext-${pr
 file.reference.spring-core-${project.springframeworkVersion}.jar=lib\\spring-core-${project.springframeworkVersion}.jar
 file.reference.spring-beans-${project.springframeworkVersion}.jar=lib\\spring-beans-${project.springframeworkVersion}.jar
 file.reference.hsqldb-${project.hsqldbVersion}.jar=lib\\hsqldb-${project.hsqldbVersion}.jar
+file.reference.xalan-${project.xalanVersion}.jar=lib\\xalan-${project.xalanVersion}.jar
+file.reference.serializer-${project.xalanVersion}.jar=lib\\serializer-${project.xalanVersion}.jar
 includes=**
 jar.compress=false
 javac.classpath=\
@@ -105,7 +107,9 @@ javac.classpath=\
     ${r"${"}file.reference.xml-apis-ext-${project.xmlapisVersion}.jar${r"}"}:\
     ${r"${"}file.reference.spring-core-${project.springframeworkVersion}.jar${r"}"}:\
     ${r"${"}file.reference.spring-beans-${project.springframeworkVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.hsqldb-${project.hsqldbVersion}.jar${r"}"}
+    ${r"${"}file.reference.hsqldb-${project.hsqldbVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.xalan-${project.xalanVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.serializer-${project.xalanVersion}.jar${r"}"}
 # Space-separated list of extra javac options
 javac.compilerargs=
 javac.deprecation=false
