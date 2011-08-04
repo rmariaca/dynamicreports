@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.base.chart.dataset;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.report.base.DRDataset;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -36,28 +37,37 @@ import org.apache.commons.lang.Validate;
  */
 public class DRChartDataset implements DRIChartDataset {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
+	private DRDataset subDataset;
 	private DRIExpression<?> valueExpression;
 	private List<DRChartSerie> series;
-	
+
 	public DRChartDataset() {
 		series = new ArrayList<DRChartSerie>();
 	}
-	
+
+	public DRDataset getSubDataset() {
+		return subDataset;
+	}
+
+	public void setSubDataset(DRDataset subDataset) {
+		this.subDataset = subDataset;
+	}
+
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIExpression<?> valueExpression) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public void addSerie(DRChartSerie serie) {
 		Validate.notNull(serie, "serie must not be null");
 		series.add(serie);
 	}
-	
+
 	public List<DRChartSerie> getSeries() {
 		return series;
 	}

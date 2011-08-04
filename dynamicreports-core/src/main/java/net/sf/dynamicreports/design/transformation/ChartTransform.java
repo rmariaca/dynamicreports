@@ -51,6 +51,7 @@ import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
@@ -256,11 +257,12 @@ public class ChartTransform {
 			designDataset = new DRDesignChartDataset();
 		}
 
-		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
+		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
+		DRIDesignExpression valueExpression = accessor.getDatasetTransform().transformExpression(dataset.getSubDataset(), dataset.getValueExpression());
 		designDataset.setValueExpression(valueExpression);
 		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
-			designDataset.addSerie(serie(serie, valueExpression, resetType, resetGroup, index++));
+			designDataset.addSerie(serie(dataset.getSubDataset(), serie, valueExpression, resetType, resetGroup, index++));
 		}
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
@@ -281,29 +283,29 @@ public class ChartTransform {
 	}
 
 	//serie
-	private DRDesignChartSerie serie(DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+	private DRDesignChartSerie serie(DRIDataset dataset, DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
 		DRDesignChartSerie designSerie = new DRDesignChartSerie();
 
-		ExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
+		DatasetTransform expressionTransform = accessor.getDatasetTransform();
+		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(dataset, serie.getSeriesExpression());
 		designSerie.setSeriesExpression(seriesExpression);
-		DRIDesignExpression serieValueExpression = expressionTransform.transformExpression(serie.getValueExpression());
+		DRIDesignExpression serieValueExpression = expressionTransform.transformExpression(dataset, serie.getValueExpression());
 		if (serieValueExpression instanceof DRIDesignVariable) {
 			designSerie.setValueExpression(serieValueExpression);
 		}
 		else {
 			if (seriesExpression == null) {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, null)));
+				designSerie.setValueExpression(expressionTransform.transformExpression(dataset, new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, null)));
 			}
 			else {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
+				designSerie.setValueExpression(expressionTransform.transformExpression(dataset, new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
 			}
 		}
 		DRIExpression<?> labelExpression = serie.getLabelExpression();
 		if (labelExpression == null) {
 			labelExpression = Expressions.text("serie" + index);
 		}
-		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
+		designSerie.setLabelExpression(expressionTransform.transformExpression(dataset, labelExpression));
 		return designSerie;
 	}
 

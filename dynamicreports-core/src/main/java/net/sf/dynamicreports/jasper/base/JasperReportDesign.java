@@ -31,6 +31,7 @@ import net.sf.dynamicreports.jasper.transformation.BarcodeTransform;
 import net.sf.dynamicreports.jasper.transformation.ChartTransform;
 import net.sf.dynamicreports.jasper.transformation.ComponentTransform;
 import net.sf.dynamicreports.jasper.transformation.CrosstabTransform;
+import net.sf.dynamicreports.jasper.transformation.DatasetTransform;
 import net.sf.dynamicreports.jasper.transformation.ExpressionTransform;
 import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
@@ -55,6 +56,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private ChartTransform chartTransform;
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
+	private DatasetTransform datasetTransform;
 
 	private JasperDesign design;
 	private JasperCustomValues customValues;
@@ -85,6 +87,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
+		datasetTransform = new DatasetTransform(this);
 
 		this.parameters = new HashMap<String, Object>();
 		this.customValues = new JasperCustomValues();
@@ -92,12 +95,17 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	private void transform() {
 		reportTransform.transform();
+		datasetTransform.transform();
 		groupTransform.transform();
 		expressionTransform.transform();
 		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();
 		reportTransform.addDependencies();
+	}
+
+	public ReportTransform getReportTransform() {
+		return reportTransform;
 	}
 
 	public ChartTransform getChartTransform() {
@@ -126,6 +134,10 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public StyleTransform getStyleTransform() {
 		return styleTransform;
+	}
+
+	public DatasetTransform getDatasetTransform() {
+		return datasetTransform;
 	}
 
 	public DRIDesignReport getReport() {

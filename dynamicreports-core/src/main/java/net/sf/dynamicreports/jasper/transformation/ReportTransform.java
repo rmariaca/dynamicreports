@@ -187,7 +187,7 @@ public class ReportTransform {
 	}
 
 	//scriptlet
-	private JRDesignScriptlet scriptlet(String name, JRAbstractScriptlet scriptlet) {
+	protected JRDesignScriptlet scriptlet(String name, JRAbstractScriptlet scriptlet) {
 		JRDesignScriptlet jrScriptlet = new JRDesignScriptlet();
 		jrScriptlet.setName(name);
 		jrScriptlet.setValueClass(scriptlet.getClass());
@@ -195,7 +195,7 @@ public class ReportTransform {
 	}
 
 	//query
-	private JRDesignQuery query(DRIDesignQuery query) {
+	protected JRDesignQuery query(DRIDesignQuery query) {
 		JRDesignQuery jrQuery = new JRDesignQuery();
 		jrQuery.setText(query.getText());
 		jrQuery.setLanguage(query.getLanguage());

@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.chart.dataset;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.design.base.DRDesignDataset;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartDataset;
@@ -33,45 +34,54 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignChartDataset implements DRIDesignChartDataset {	
+public class DRDesignChartDataset implements DRIDesignChartDataset {
+	private DRDesignDataset subDataset;
 	private DRIDesignExpression valueExpression;
 	private List<DRDesignChartSerie> series;
 	private ResetType resetType;
-	private DRDesignGroup resetGroup;	
-	
+	private DRDesignGroup resetGroup;
+
 	public DRDesignChartDataset() {
 		series = new ArrayList<DRDesignChartSerie>();
 	}
-	
+
+	public DRDesignDataset getSubDataset() {
+		return subDataset;
+	}
+
+	public void setSubDataset(DRDesignDataset subDataset) {
+		this.subDataset = subDataset;
+	}
+
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public void addSerie(DRDesignChartSerie serie) {
 		series.add(serie);
 	}
-	
+
 	public List<DRDesignChartSerie> getSeries() {
 		return series;
 	}
-	
+
 	public ResetType getResetType() {
 		return resetType;
 	}
-	
+
 	public void setResetType(ResetType resetType) {
 		this.resetType = resetType;
 	}
-	
+
 	public DRDesignGroup getResetGroup() {
 		return resetGroup;
 	}
-	
+
 	public void setResetGroup(DRDesignGroup resetGroup) {
 		this.resetGroup = resetGroup;
-	}	
+	}
 }

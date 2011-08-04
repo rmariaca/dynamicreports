@@ -23,8 +23,11 @@
 package net.sf.dynamicreports.report.builder.chart;
 
 import java.awt.Color;
+import java.sql.Connection;
 
 import net.sf.dynamicreports.report.base.chart.DRChart;
+import net.sf.dynamicreports.report.builder.DatasetBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.HyperLinkComponentBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
@@ -34,6 +37,7 @@ import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.jasperreports.engine.JRDataSource;
 
 import org.apache.commons.lang.Validate;
 
@@ -146,6 +150,25 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 			getObject().getPlot().addSeriesColor(seriesColor);
 		}
 		return (T) this;
+	}
+
+	//subdataset
+	public T setSubDataset(DatasetBuilder subDataset) {
+		Validate.notNull(subDataset, "subDataset must not be null");
+		getObject().getDataset().setSubDataset(subDataset.build());
+		return (T) this;
+	}
+
+	public T setDataSource(JRDataSource dataSource) {
+		DatasetBuilder dataset = DynamicReports.dataset();
+		dataset.setDataSource(dataSource);
+		return setSubDataset(dataset);
+	}
+
+	public T setDataSource(String sql, Connection connection) {
+		DatasetBuilder dataset = DynamicReports.dataset();
+		dataset.setDataSource(sql, connection);
+		return setSubDataset(dataset);
 	}
 
 	public DRChart getChart() {

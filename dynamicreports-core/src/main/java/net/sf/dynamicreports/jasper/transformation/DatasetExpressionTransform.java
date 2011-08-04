@@ -24,8 +24,8 @@ package net.sf.dynamicreports.jasper.transformation;
 
 import java.util.Collection;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
-import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
@@ -33,67 +33,66 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRGroup;
+import net.sf.jasperreports.engine.design.JRDesignDataset;
 import net.sf.jasperreports.engine.design.JRDesignField;
 import net.sf.jasperreports.engine.design.JRDesignVariable;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ExpressionTransform extends AbstractExpressionTransform {
-	private JasperTransformAccessor accessor;
+public class DatasetExpressionTransform extends AbstractExpressionTransform {
+	private DRIDesignDataset dataset;
+	private JRDesignDataset jrDataset;
+	private JasperCustomValues customValues;
 
-	public ExpressionTransform(JasperTransformAccessor accessor) {
-		this.accessor = accessor;
+	public DatasetExpressionTransform(DRIDesignDataset dataset, JRDesignDataset jrDataset, JasperCustomValues customValues) {
+		this.dataset = dataset;
+		this.jrDataset = jrDataset;
+		this.customValues = customValues;
 	}
 
 	@Override
 	protected JasperCustomValues getCustomValues() {
-		return accessor.getCustomValues();
-	}
-
-	@Override
-	protected JRGroup getGroup(DRIDesignGroup group) {
-		return accessor.getGroupTransform().getGroup(group);
+		return customValues;
 	}
 
 	@Override
 	protected Collection<DRIDesignField> getFields() {
-		return accessor.getReport().getFields();
+		return dataset.getFields();
 	}
 
 	@Override
 	protected Collection<DRIDesignVariable> getVariables() {
-		return accessor.getReport().getVariables();
+		return dataset.getVariables();
 	}
 
 	@Override
 	protected Collection<DRIDesignSystemExpression> getSystemExpressions() {
-		return accessor.getReport().getSystemExpressions();
+		return dataset.getSystemExpressions();
 	}
 
 	@Override
 	protected Collection<DRIDesignJasperExpression> getJasperExpressions() {
-		return accessor.getReport().getJasperExpressions();
+		return dataset.getJasperExpressions();
 	}
 
 	@Override
 	protected Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
-		return accessor.getReport().getSimpleExpressions();
+		return dataset.getSimpleExpressions();
 	}
 
 	@Override
 	protected Collection<DRIDesignComplexExpression> getComplexExpressions() {
-		return accessor.getReport().getComplexExpressions();
+		return dataset.getComplexExpressions();
 	}
 
 	@Override
 	protected void addField(JRDesignField field) throws JRException {
-		accessor.getDesign().addField(field);
+		jrDataset.addField(field);
 	}
 
 	@Override
 	protected void addVariable(JRDesignVariable variable) throws JRException {
-		accessor.getDesign().addVariable(variable);
+		jrDataset.addVariable(variable);
 	}
 }

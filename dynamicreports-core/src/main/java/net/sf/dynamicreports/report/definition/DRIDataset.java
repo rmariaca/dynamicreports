@@ -20,27 +20,26 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.report.definition;
 
+import java.io.Serializable;
+import java.sql.Connection;
 import java.util.List;
 
-import net.sf.dynamicreports.design.constant.ResetType;
-import net.sf.dynamicreports.design.definition.DRIDesignDataset;
-import net.sf.dynamicreports.design.definition.DRIDesignGroup;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartDataset {
+public interface DRIDataset extends Serializable {
 
-	public DRIDesignDataset getSubDataset();
+	public List<? extends DRIField<?>> getFields();
 
-	public DRIDesignExpression getValueExpression();
+	public List<? extends DRIVariable<?>> getVariables();
 
-	public List<? extends DRIDesignChartSerie> getSeries();
+	public DRIQuery getQuery();
 
-	public ResetType getResetType();
+	public DRIExpression<Connection> getConnectionExpression();
 
-	public DRIDesignGroup getResetGroup();
+	public DRIExpression<?> getDataSourceExpression();
 }

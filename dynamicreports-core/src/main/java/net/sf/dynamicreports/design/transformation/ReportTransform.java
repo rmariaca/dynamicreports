@@ -58,7 +58,7 @@ public class ReportTransform {
 		}
 	}
 
-	private DRDesignQuery query(DRIQuery query) {
+	protected DRDesignQuery query(DRIQuery query) {
 		DRDesignQuery designQuery = new DRDesignQuery();
 		designQuery.setText(query.getText());
 		designQuery.setLanguage(query.getLanguage());

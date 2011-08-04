@@ -20,27 +20,38 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.design.definition;
 
-import java.util.List;
+import java.util.Collection;
 
-import net.sf.dynamicreports.design.constant.ResetType;
-import net.sf.dynamicreports.design.definition.DRIDesignDataset;
-import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartDataset {
+public interface DRIDesignDataset {
 
-	public DRIDesignDataset getSubDataset();
+	public String getName();
 
-	public DRIDesignExpression getValueExpression();
+	public Collection<DRIDesignField> getFields();
 
-	public List<? extends DRIDesignChartSerie> getSeries();
+	public Collection<DRIDesignVariable> getVariables();
 
-	public ResetType getResetType();
+	public Collection<DRIDesignSystemExpression> getSystemExpressions();
 
-	public DRIDesignGroup getResetGroup();
+	public Collection<DRIDesignJasperExpression> getJasperExpressions();
+
+	public Collection<DRIDesignSimpleExpression> getSimpleExpressions();
+
+	public Collection<DRIDesignComplexExpression> getComplexExpressions();
+
+	public DRIDesignQuery getQuery();
+
+	public DRIDesignExpression getConnectionExpression();
+
+	public DRIDesignExpression getDataSourceExpression();
 }

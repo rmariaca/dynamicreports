@@ -25,14 +25,17 @@ package net.sf.dynamicreports.report.definition.chart.dataset;
 import java.io.Serializable;
 import java.util.List;
 
+import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIChartDataset extends Serializable {
-	
+
+	public DRIDataset getSubDataset();
+
 	public DRIExpression<?> getValueExpression();
-	
+
 	public List<? extends DRIChartSerie> getSeries();
 }

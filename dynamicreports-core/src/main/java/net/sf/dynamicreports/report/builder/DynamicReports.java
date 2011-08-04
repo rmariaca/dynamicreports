@@ -187,4 +187,9 @@ public class DynamicReports {
 	public static TableOfContentsCustomizerBuilder tableOfContentsCustomizer() {
 		return new TableOfContentsCustomizerBuilder();
 	}
+
+	//dataset
+	public static DatasetBuilder dataset() {
+		return new DatasetBuilder();
+	}
 }

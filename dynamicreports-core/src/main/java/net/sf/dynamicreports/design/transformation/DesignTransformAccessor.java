@@ -34,6 +34,8 @@ public interface DesignTransformAccessor {
 
 	public Integer getPageWidth();
 
+	public ReportTransform getReportTransform();
+
 	public TemplateTransform getTemplateTransform();
 
 	public ExpressionTransform getExpressionTransform();
@@ -55,6 +57,8 @@ public interface DesignTransformAccessor {
 	public BarcodeTransform getBarcodeTransform();
 
 	public CrosstabTransform getCrosstabTransform();
+
+	public DatasetTransform getDatasetTransform();
 
 	public DRDesignPage getPage();
 }

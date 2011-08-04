@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
@@ -45,6 +46,7 @@ import net.sf.dynamicreports.design.transformation.ColumnGridTransform;
 import net.sf.dynamicreports.design.transformation.ColumnTransform;
 import net.sf.dynamicreports.design.transformation.ComponentTransform;
 import net.sf.dynamicreports.design.transformation.CrosstabTransform;
+import net.sf.dynamicreports.design.transformation.DatasetTransform;
 import net.sf.dynamicreports.design.transformation.DesignTransformAccessor;
 import net.sf.dynamicreports.design.transformation.ExpressionTransform;
 import net.sf.dynamicreports.design.transformation.GroupTransform;
@@ -79,6 +81,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private ChartTransform chartTransform;
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
+	private DatasetTransform datasetTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
 		this(report, null);
@@ -106,6 +109,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		chartTransform = new ChartTransform(this);
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
+		datasetTransform = new DatasetTransform(this);
 	}
 
 	private void transform() throws DRException {
@@ -128,6 +132,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public Integer getPageWidth() {
 		return pageWidth;
+	}
+
+	public ReportTransform getReportTransform() {
+		return reportTransform;
 	}
 
 	public TemplateTransform getTemplateTransform() {
@@ -172,6 +180,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public CrosstabTransform getCrosstabTransform() {
 		return crosstabTransform;
+	}
+
+	public DatasetTransform getDatasetTransform() {
+		return datasetTransform;
 	}
 
 	public DRIDesignTemplateDesign getTemplateDesign() {
@@ -272,6 +284,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return expressionTransform.getComplexExpressions();
+	}
+
+	public Collection<DRIDesignDataset> getDatasets() {
+		return datasetTransform.getDatasets();
 	}
 
 	public DRDesignBand getTitleBand() {

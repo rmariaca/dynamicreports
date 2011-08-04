@@ -46,6 +46,8 @@ public interface JasperTransformAccessor {
 
 	public ReportParameters getMasterReportParameters();
 
+	public ReportTransform getReportTransform();
+
 	public ExpressionTransform getExpressionTransform();
 
 	public GroupTransform getGroupTransform();
@@ -59,4 +61,6 @@ public interface JasperTransformAccessor {
 	public BarcodeTransform getBarcodeTransform();
 
 	public CrosstabTransform getCrosstabTransform();
+
+	public DatasetTransform getDatasetTransform();
 }
