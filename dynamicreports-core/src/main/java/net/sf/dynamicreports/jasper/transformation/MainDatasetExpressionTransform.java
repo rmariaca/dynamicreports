@@ -40,10 +40,10 @@ import net.sf.jasperreports.engine.design.JRDesignVariable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ExpressionTransform extends AbstractExpressionTransform {
+public class MainDatasetExpressionTransform extends AbstractExpressionTransform {
 	private JasperTransformAccessor accessor;
 
-	public ExpressionTransform(JasperTransformAccessor accessor) {
+	public MainDatasetExpressionTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
 

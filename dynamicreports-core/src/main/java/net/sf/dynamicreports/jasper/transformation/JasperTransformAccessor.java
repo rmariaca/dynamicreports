@@ -24,6 +24,7 @@ package net.sf.dynamicreports.jasper.transformation;
 
 import java.util.Map;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -48,7 +49,13 @@ public interface JasperTransformAccessor {
 
 	public ReportTransform getReportTransform();
 
-	public ExpressionTransform getExpressionTransform();
+	public void transformToMainDataset();
+
+	public void transformToDataset(DRIDesignDataset dataset);
+
+	public AbstractExpressionTransform getExpressionTransform();
+
+	public MainDatasetExpressionTransform getMainDatasetExpressionTransform();
 
 	public GroupTransform getGroupTransform();
 

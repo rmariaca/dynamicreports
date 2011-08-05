@@ -34,6 +34,8 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
  */
 public interface DRICrosstab extends DRIDimensionComponent {
 
+	public DRICrosstabDataset getDataset();
+
 	public Boolean isRepeatColumnHeaders();
 
 	public Boolean isRepeatRowHeaders();

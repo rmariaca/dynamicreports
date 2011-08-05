@@ -137,7 +137,7 @@ public class StyleTransform {
 	private DRDesignConditionalStyle conditionalStyle(DRIConditionalStyle conditionalStyle) throws DRException {
 		DRDesignConditionalStyle designConditionalStyle = new DRDesignConditionalStyle();
 		baseStyle(designConditionalStyle, conditionalStyle);
-		designConditionalStyle.setConditionExpression(accessor.getExpressionTransform().transformExpression(conditionalStyle.getConditionExpression()));
+		designConditionalStyle.setConditionExpression(accessor.getMainDatasetExpressionTransform().transformExpression(conditionalStyle.getConditionExpression()));
 		return designConditionalStyle;
 	}
 

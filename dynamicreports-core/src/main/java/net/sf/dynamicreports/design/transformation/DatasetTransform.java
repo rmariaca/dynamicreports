@@ -28,10 +28,8 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.definition.DRIDataset;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -70,13 +68,8 @@ public class DatasetTransform {
 		return designDataset;
 	}
 
-	protected DRIDesignExpression transformExpression(DRIDataset dataset, DRIExpression<?> expression) throws DRException {
-		if (dataset != null) {
-			return designDatasets.get(dataset).getDatasetExpressionTransform().transformExpression(expression);
-		}
-		else {
-			return accessor.getExpressionTransform().transformExpression(expression);
-		}
+	public DatasetExpressionTransform getDatasetExpressionTransform(DRIDataset dataset) {
+		return designDatasets.get(dataset).getDatasetExpressionTransform();
 	}
 
 	private void addDataset(DRIDataset dataset, DRDesignDataset designDataset) {

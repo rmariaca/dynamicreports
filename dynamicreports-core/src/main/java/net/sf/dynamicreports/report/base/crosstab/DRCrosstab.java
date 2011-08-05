@@ -44,6 +44,7 @@ import org.apache.commons.lang.Validate;
 public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private DRCrosstabDataset dataset;
 	private Boolean repeatColumnHeaders;
 	private Boolean repeatRowHeaders;
 	private Integer columnBreakOffset;
@@ -70,6 +71,7 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	@Override
 	protected void init() {
 		super.init();
+		dataset = new DRCrosstabDataset();
 		columnGroups = new ArrayList<DRICrosstabColumnGroup<?>>();
 		rowGroups = new ArrayList<DRICrosstabRowGroup<?>>();
 		variables = new ArrayList<DRICrosstabVariable<?>>();
@@ -77,6 +79,10 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 
 		whenNoDataCell = new DRCrosstabCellContent();
 		headerCell = new DRCrosstabCellContent();
+	}
+
+	public DRCrosstabDataset getDataset() {
+		return dataset;
 	}
 
 	public Boolean isRepeatColumnHeaders() {

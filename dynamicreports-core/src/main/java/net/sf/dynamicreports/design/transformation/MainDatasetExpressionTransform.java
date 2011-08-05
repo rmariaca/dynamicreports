@@ -35,10 +35,10 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ExpressionTransform extends AbstractExpressionTransform {
+public class MainDatasetExpressionTransform extends AbstractExpressionTransform {
 	private DesignTransformAccessor accessor;
 
-	public ExpressionTransform(DesignTransformAccessor accessor) {
+	public MainDatasetExpressionTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
 

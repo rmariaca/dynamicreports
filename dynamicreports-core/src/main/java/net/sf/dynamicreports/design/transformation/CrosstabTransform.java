@@ -37,6 +37,7 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCell;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
+import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabDataset;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabGroup;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
@@ -60,6 +61,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabDataset;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
@@ -89,6 +91,12 @@ public class CrosstabTransform {
 
 	protected DRDesignCrosstab transform(DRICrosstab crosstab, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignCrosstab designCrosstab = new DRDesignCrosstab();
+		designCrosstab.setDataset(dataset(crosstab.getDataset(), resetType, resetGroup));
+		accessor.transformToDataset(crosstab.getDataset().getSubDataset());
+		if (crosstab.getDataset() != null) {
+			resetType = null;
+			resetGroup = null;
+		}
 		DRDesignCrosstabCellContent whenNoDataCell = cellContent(crosstab.getWhenNoDataCell(), resetType, resetGroup);
 		designCrosstab.setWidth(accessor.getTemplateTransform().getCrosstabWidth(crosstab));
 		designCrosstab.setHeight(accessor.getTemplateTransform().getCrosstabHeight(crosstab, whenNoDataCell));
@@ -115,8 +123,18 @@ public class CrosstabTransform {
 			}
 		}
 		crosstabs.put(designCrosstab, crosstab);
+		accessor.transformToMainDataset();
 
 		return designCrosstab;
+	}
+
+	//dataset
+	private DRDesignCrosstabDataset dataset(DRICrosstabDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignCrosstabDataset designDataset = new DRDesignCrosstabDataset();
+		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
+		designDataset.setResetType(resetType);
+		designDataset.setResetGroup(resetGroup);
+		return designDataset;
 	}
 
 	private CrosstabRowCount addRowCountExpression(DRDesignCrosstab designCrosstab) throws DRException {

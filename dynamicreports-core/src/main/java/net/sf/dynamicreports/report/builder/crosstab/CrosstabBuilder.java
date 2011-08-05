@@ -22,13 +22,18 @@
 
 package net.sf.dynamicreports.report.builder.crosstab;
 
+import java.sql.Connection;
+
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstab;
+import net.sf.dynamicreports.report.builder.DatasetBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.jasperreports.engine.JRDataSource;
 
 import org.apache.commons.lang.Validate;
 
@@ -242,5 +247,24 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 			getObject().addMeasure(measure.build());
 		}
 		return this;
+	}
+
+	//subdataset
+	public CrosstabBuilder setSubDataset(DatasetBuilder subDataset) {
+		Validate.notNull(subDataset, "subDataset must not be null");
+		getObject().getDataset().setSubDataset(subDataset.build());
+		return this;
+	}
+
+	public CrosstabBuilder setDataSource(JRDataSource dataSource) {
+		DatasetBuilder dataset = DynamicReports.dataset();
+		dataset.setDataSource(dataSource);
+		return setSubDataset(dataset);
+	}
+
+	public CrosstabBuilder setDataSource(String sql, Connection connection) {
+		DatasetBuilder dataset = DynamicReports.dataset();
+		dataset.setDataSource(sql, connection);
+		return setSubDataset(dataset);
 	}
 }

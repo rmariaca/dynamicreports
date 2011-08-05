@@ -84,7 +84,7 @@ public class StyleTransform {
 		JRDesignConditionalStyle jrConditionalStyle = new JRDesignConditionalStyle();
 		abstractStyle(jrConditionalStyle, conditionalStyle);
 
-		jrConditionalStyle.setConditionExpression(accessor.getExpressionTransform().getExpression(conditionalStyle.getConditionExpression()));
+		jrConditionalStyle.setConditionExpression(accessor.getMainDatasetExpressionTransform().getExpression(conditionalStyle.getConditionExpression()));
 
 		return jrConditionalStyle;
 	}

@@ -39,6 +39,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.design.transformation.AbstractExpressionTransform;
 import net.sf.dynamicreports.design.transformation.BandTransform;
 import net.sf.dynamicreports.design.transformation.BarcodeTransform;
 import net.sf.dynamicreports.design.transformation.ChartTransform;
@@ -48,14 +49,15 @@ import net.sf.dynamicreports.design.transformation.ComponentTransform;
 import net.sf.dynamicreports.design.transformation.CrosstabTransform;
 import net.sf.dynamicreports.design.transformation.DatasetTransform;
 import net.sf.dynamicreports.design.transformation.DesignTransformAccessor;
-import net.sf.dynamicreports.design.transformation.ExpressionTransform;
 import net.sf.dynamicreports.design.transformation.GroupTransform;
+import net.sf.dynamicreports.design.transformation.MainDatasetExpressionTransform;
 import net.sf.dynamicreports.design.transformation.PageTransform;
 import net.sf.dynamicreports.design.transformation.ReportTransform;
 import net.sf.dynamicreports.design.transformation.StyleTransform;
 import net.sf.dynamicreports.design.transformation.SubtotalTransform;
 import net.sf.dynamicreports.design.transformation.TemplateTransform;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
@@ -70,7 +72,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private ReportTransform reportTransform;
 	private TemplateTransform templateTransform;
 	private PageTransform pageTransform;
-	private ExpressionTransform expressionTransform;
+	private MainDatasetExpressionTransform mainDatasetExpressionTransform;
 	private BandTransform bandTransform;
 	private ComponentTransform componentTransform;
 	private GroupTransform groupTransform;
@@ -82,6 +84,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
 	private DatasetTransform datasetTransform;
+	private AbstractExpressionTransform expressionTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
 		this(report, null);
@@ -98,7 +101,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		reportTransform = new ReportTransform(this);
 		templateTransform = new TemplateTransform(this);
 		pageTransform = new PageTransform(this);
-		expressionTransform = new ExpressionTransform(this);
+		mainDatasetExpressionTransform = new MainDatasetExpressionTransform(this);
 		groupTransform = new GroupTransform(this);
 		bandTransform = new BandTransform(this);
 		componentTransform = new ComponentTransform(this);
@@ -110,13 +113,14 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
 		datasetTransform = new DatasetTransform(this);
+		transformToMainDataset();
 	}
 
 	private void transform() throws DRException {
 		reportTransform.transform();
 		pageTransform.transform();
 		groupTransform.transform();
-		expressionTransform.transform();
+		mainDatasetExpressionTransform.transform();
 		bandTransform.transform();
 		columnGridTransform.transform();
 		columnTransform.transform();
@@ -142,8 +146,25 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return templateTransform;
 	}
 
-	public ExpressionTransform getExpressionTransform() {
+	public void transformToMainDataset() {
+		transformToDataset(null);
+	}
+
+	public void transformToDataset(DRIDataset dataset) {
+		if (dataset != null) {
+			expressionTransform = datasetTransform.getDatasetExpressionTransform(dataset);
+		}
+		else {
+			expressionTransform = mainDatasetExpressionTransform;
+		}
+	}
+
+	public AbstractExpressionTransform getExpressionTransform() {
 		return expressionTransform;
+	}
+
+	public MainDatasetExpressionTransform getMainDatasetExpressionTransform() {
+		return mainDatasetExpressionTransform;
 	}
 
 	public BandTransform getBandTransform() {
@@ -255,19 +276,19 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public Collection<DRIDesignField> getFields() {
-		return expressionTransform.getFields();
+		return mainDatasetExpressionTransform.getFields();
 	}
 
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
-		return expressionTransform.getSystemExpressions();
+		return mainDatasetExpressionTransform.getSystemExpressions();
 	}
 
 	public Collection<DRIDesignJasperExpression> getJasperExpressions() {
-		return expressionTransform.getJasperExpressions();
+		return mainDatasetExpressionTransform.getJasperExpressions();
 	}
 
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
-		return expressionTransform.getSimpleExpressions();
+		return mainDatasetExpressionTransform.getSimpleExpressions();
 	}
 
 	public Collection<DRIDesignStyle> getStyles() {
@@ -279,11 +300,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public Collection<DRIDesignVariable> getVariables() {
-		return expressionTransform.getVariables();
+		return mainDatasetExpressionTransform.getVariables();
 	}
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
-		return expressionTransform.getComplexExpressions();
+		return mainDatasetExpressionTransform.getComplexExpressions();
 	}
 
 	public Collection<DRIDesignDataset> getDatasets() {

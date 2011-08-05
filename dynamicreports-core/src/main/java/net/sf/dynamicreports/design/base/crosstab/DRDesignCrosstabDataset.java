@@ -20,39 +20,42 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.crosstab;
+package net.sf.dynamicreports.design.base.crosstab;
 
-import java.util.List;
-
-import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
-import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.design.base.DRDesignDataset;
+import net.sf.dynamicreports.design.base.DRDesignGroup;
+import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstab extends DRIDesignComponent {
+public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
+	private DRDesignDataset subDataset;
+	private ResetType resetType;
+	private DRDesignGroup resetGroup;
 
-	public DRIDesignCrosstabDataset getDataset();
+	public DRDesignDataset getSubDataset() {
+		return subDataset;
+	}
 
-	public Boolean isRepeatColumnHeaders();
+	public void setSubDataset(DRDesignDataset subDataset) {
+		this.subDataset = subDataset;
+	}
 
-	public Boolean isRepeatRowHeaders();
+	public ResetType getResetType() {
+		return resetType;
+	}
 
-	public Integer getColumnBreakOffset();
+	public void setResetType(ResetType resetType) {
+		this.resetType = resetType;
+	}
 
-	public Boolean getIgnoreWidth();
+	public DRDesignGroup getResetGroup() {
+		return resetGroup;
+	}
 
-	public RunDirection getRunDirection();
-
-	public DRIDesignCrosstabCellContent getWhenNoDataCell();
-
-	public DRIDesignCrosstabCellContent getHeaderCell();
-
-	public List<? extends DRIDesignCrosstabColumnGroup> getColumnGroups();
-
-	public List<? extends DRIDesignCrosstabRowGroup> getRowGroups();
-
-	public List<? extends DRIDesignCrosstabCell> getCells();
-
-	public List<DRIDesignCrosstabMeasure> getMeasures();
+	public void setResetGroup(DRDesignGroup resetGroup) {
+		this.resetGroup = resetGroup;
+	}
 }

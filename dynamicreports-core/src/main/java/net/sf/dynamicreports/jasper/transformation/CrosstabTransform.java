@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabColumnGroup;
+import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabDataset;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
@@ -37,6 +39,7 @@ import net.sf.jasperreports.crosstabs.design.JRDesignCrosstab;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabBucket;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabCell;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabColumnGroup;
+import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabDataset;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabGroup;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabMeasure;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabParameter;
@@ -61,6 +64,8 @@ public class CrosstabTransform {
 	protected JRDesignElement transform(DRIDesignCrosstab crosstab) {
 		JRDesignCrosstab jrCrosstab = new JRDesignCrosstab();
 
+		dataset(crosstab.getDataset(), jrCrosstab.getDesignDataset());
+		accessor.transformToDataset(crosstab.getDataset().getSubDataset());
 		if (crosstab.isRepeatColumnHeaders() != null) {
 			jrCrosstab.setRepeatColumnHeaders(crosstab.isRepeatColumnHeaders());
 		}
@@ -88,6 +93,7 @@ public class CrosstabTransform {
 		}
 
 		registerScriptletCrosstabParameter(jrCrosstab);
+		accessor.transformToMainDataset();
 
 		return jrCrosstab;
 	}
@@ -108,6 +114,16 @@ public class CrosstabTransform {
 			throw new JasperDesignException("Registration failed for scriptlet crosstab parameter", e);
 		}
 		return jrParameter;
+	}
+
+	//dataset
+	private void dataset(DRIDesignCrosstabDataset dataset, JRDesignCrosstabDataset jrDataset) {
+		jrDataset.setDatasetRun(accessor.getDatasetTransform().datasetRun(dataset.getSubDataset()));
+		ResetType resetType = dataset.getResetType();
+		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
+		if (resetType.equals(ResetType.GROUP) && dataset.getResetGroup() != null) {
+			jrDataset.setResetGroup(accessor.getGroupTransform().getGroup(dataset.getResetGroup()));
+		}
 	}
 
 	private JRDesignCellContents cellContent(DRIDesignCrosstabCellContent cellContent) {

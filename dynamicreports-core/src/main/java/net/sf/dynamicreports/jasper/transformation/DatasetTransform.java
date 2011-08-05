@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
@@ -39,7 +38,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.design.JRDesignDataset;
 import net.sf.jasperreports.engine.design.JRDesignDatasetRun;
-import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 
 /**
@@ -112,7 +110,7 @@ public class DatasetTransform {
 		}
 	}
 
-	public JRDesignDatasetRun datasetRun(DRIDesignDataset dataset) {
+	protected JRDesignDatasetRun datasetRun(DRIDesignDataset dataset) {
 		if (dataset == null) {
 			return null;
 		}
@@ -127,13 +125,8 @@ public class DatasetTransform {
 		return jrDatasetRun;
 	}
 
-	protected JRDesignExpression getExpression(DRIDesignDataset dataset, DRIDesignExpression expression) {
-		if (dataset != null) {
-			return datasetExpressions.get(dataset).getExpression(expression);
-		}
-		else {
-			return accessor.getExpressionTransform().getExpression(expression);
-		}
+	public DatasetExpressionTransform getDatasetExpressionTransform(DRIDesignDataset dataset) {
+		return datasetExpressions.get(dataset);
 	}
 
 	private class DatasetParametersExpression implements DRIDesignSimpleExpression {

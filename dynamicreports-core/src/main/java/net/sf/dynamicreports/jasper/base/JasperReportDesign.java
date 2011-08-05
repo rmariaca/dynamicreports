@@ -25,16 +25,18 @@ package net.sf.dynamicreports.jasper.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
+import net.sf.dynamicreports.jasper.transformation.AbstractExpressionTransform;
 import net.sf.dynamicreports.jasper.transformation.BandTransform;
 import net.sf.dynamicreports.jasper.transformation.BarcodeTransform;
 import net.sf.dynamicreports.jasper.transformation.ChartTransform;
 import net.sf.dynamicreports.jasper.transformation.ComponentTransform;
 import net.sf.dynamicreports.jasper.transformation.CrosstabTransform;
 import net.sf.dynamicreports.jasper.transformation.DatasetTransform;
-import net.sf.dynamicreports.jasper.transformation.ExpressionTransform;
 import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
+import net.sf.dynamicreports.jasper.transformation.MainDatasetExpressionTransform;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -48,7 +50,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 public class JasperReportDesign implements JasperTransformAccessor {
 	private DRIDesignReport report;
 	private ReportTransform reportTransform;
-	private ExpressionTransform expressionTransform;
+	private MainDatasetExpressionTransform mainDatasetExpressionTransform;
 	private BandTransform bandTransform;
 	private ComponentTransform componentTransform;
 	private GroupTransform groupTransform;
@@ -57,6 +59,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
 	private DatasetTransform datasetTransform;
+	private AbstractExpressionTransform expressionTransform;
 
 	private JasperDesign design;
 	private JasperCustomValues customValues;
@@ -79,7 +82,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private void init() throws DRException {
 		this.design = (JasperDesign) report.getTemplateDesign().getDesign();
 		reportTransform = new ReportTransform(this);
-		expressionTransform = new ExpressionTransform(this);
+		mainDatasetExpressionTransform = new MainDatasetExpressionTransform(this);
 		groupTransform = new GroupTransform(this);
 		bandTransform = new BandTransform(this);
 		componentTransform = new ComponentTransform(this);
@@ -88,6 +91,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
 		datasetTransform = new DatasetTransform(this);
+		transformToMainDataset();
 
 		this.parameters = new HashMap<String, Object>();
 		this.customValues = new JasperCustomValues();
@@ -97,7 +101,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		reportTransform.transform();
 		datasetTransform.transform();
 		groupTransform.transform();
-		expressionTransform.transform();
+		mainDatasetExpressionTransform.transform();
 		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();
@@ -124,8 +128,25 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return componentTransform;
 	}
 
-	public ExpressionTransform getExpressionTransform() {
+	public void transformToMainDataset() {
+		transformToDataset(null);
+	}
+
+	public void transformToDataset(DRIDesignDataset dataset) {
+		if (dataset != null) {
+			expressionTransform = datasetTransform.getDatasetExpressionTransform(dataset);
+		}
+		else {
+			expressionTransform = mainDatasetExpressionTransform;
+		}
+	}
+
+	public AbstractExpressionTransform getExpressionTransform() {
 		return expressionTransform;
+	}
+
+	public MainDatasetExpressionTransform getMainDatasetExpressionTransform() {
+		return mainDatasetExpressionTransform;
 	}
 
 	public GroupTransform getGroupTransform() {

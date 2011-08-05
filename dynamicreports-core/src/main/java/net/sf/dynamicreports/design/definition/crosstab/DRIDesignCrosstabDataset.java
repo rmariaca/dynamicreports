@@ -22,37 +22,18 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
-import java.util.List;
-
-import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
-import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstab extends DRIDesignComponent {
+public interface DRIDesignCrosstabDataset {
 
-	public DRIDesignCrosstabDataset getDataset();
+	public DRIDesignDataset getSubDataset();
 
-	public Boolean isRepeatColumnHeaders();
+	public ResetType getResetType();
 
-	public Boolean isRepeatRowHeaders();
-
-	public Integer getColumnBreakOffset();
-
-	public Boolean getIgnoreWidth();
-
-	public RunDirection getRunDirection();
-
-	public DRIDesignCrosstabCellContent getWhenNoDataCell();
-
-	public DRIDesignCrosstabCellContent getHeaderCell();
-
-	public List<? extends DRIDesignCrosstabColumnGroup> getColumnGroups();
-
-	public List<? extends DRIDesignCrosstabRowGroup> getRowGroups();
-
-	public List<? extends DRIDesignCrosstabCell> getCells();
-
-	public List<DRIDesignCrosstabMeasure> getMeasures();
+	public DRIDesignGroup getResetGroup();
 }

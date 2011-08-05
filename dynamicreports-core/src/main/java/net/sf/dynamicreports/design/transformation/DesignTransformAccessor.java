@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.transformation;
 
 import net.sf.dynamicreports.design.base.DRDesignPage;
+import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIReport;
 
 /**
@@ -38,7 +39,13 @@ public interface DesignTransformAccessor {
 
 	public TemplateTransform getTemplateTransform();
 
-	public ExpressionTransform getExpressionTransform();
+	public void transformToMainDataset();
+
+	public void transformToDataset(DRIDataset dataset);
+
+	public AbstractExpressionTransform getExpressionTransform();
+
+	public MainDatasetExpressionTransform getMainDatasetExpressionTransform();
 
 	public BandTransform getBandTransform();
 

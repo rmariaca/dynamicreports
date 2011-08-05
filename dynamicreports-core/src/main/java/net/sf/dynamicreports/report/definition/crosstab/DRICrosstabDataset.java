@@ -20,39 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.crosstab;
+package net.sf.dynamicreports.report.definition.crosstab;
 
-import java.util.List;
+import java.io.Serializable;
 
-import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
-import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.report.definition.DRIDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCrosstab extends DRIDesignComponent {
+public interface DRICrosstabDataset extends Serializable {
 
-	public DRIDesignCrosstabDataset getDataset();
-
-	public Boolean isRepeatColumnHeaders();
-
-	public Boolean isRepeatRowHeaders();
-
-	public Integer getColumnBreakOffset();
-
-	public Boolean getIgnoreWidth();
-
-	public RunDirection getRunDirection();
-
-	public DRIDesignCrosstabCellContent getWhenNoDataCell();
-
-	public DRIDesignCrosstabCellContent getHeaderCell();
-
-	public List<? extends DRIDesignCrosstabColumnGroup> getColumnGroups();
-
-	public List<? extends DRIDesignCrosstabRowGroup> getRowGroups();
-
-	public List<? extends DRIDesignCrosstabCell> getCells();
-
-	public List<DRIDesignCrosstabMeasure> getMeasures();
+	public DRIDataset getSubDataset();
 }

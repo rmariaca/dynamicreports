@@ -158,6 +158,7 @@ public class ChartTransform {
 			jrDataset.setResetGroup(accessor.getGroupTransform().getGroup(dataset.getResetGroup()));
 		}
 
+		accessor.transformToDataset(dataset.getSubDataset());
 		if (jrDataset instanceof JRDesignCategoryDataset) {
 			categoryDataset((DRIDesignCategoryDataset) dataset, (JRDesignCategoryDataset) jrDataset);
 		}
@@ -173,17 +174,18 @@ public class ChartTransform {
 		else {
 			throw new JasperDesignException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
+		accessor.transformToMainDataset();
 	}
 
 	private void categoryDataset(DRIDesignCategoryDataset dataset, JRDesignCategoryDataset jrDataset) {
-		DatasetTransform datasetTransform = accessor.getDatasetTransform();
-		JRDesignExpression exp1 = datasetTransform.getExpression(dataset.getSubDataset(), dataset.getValueExpression());
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			JRDesignCategorySeries jrSerie = new JRDesignCategorySeries();
-			jrSerie.setValueExpression(datasetTransform.getExpression(dataset.getSubDataset(), serie.getValueExpression()));
+			jrSerie.setValueExpression(expressionTransform.getExpression(serie.getValueExpression()));
 
-			JRDesignExpression exp2 = datasetTransform.getExpression(dataset.getSubDataset(), serie.getLabelExpression());
-			JRDesignExpression seriesExpression = datasetTransform.getExpression(dataset.getSubDataset(), serie.getSeriesExpression());
+			JRDesignExpression exp2 = expressionTransform.getExpression(serie.getLabelExpression());
+			JRDesignExpression seriesExpression = expressionTransform.getExpression(serie.getSeriesExpression());
 			if (dataset.isUseSeriesAsCategory()) {
 				jrSerie.setCategoryExpression(exp2);
 				if (seriesExpression != null) {
@@ -208,29 +210,29 @@ public class ChartTransform {
 	}
 
 	private void pieDataset(DRIDesignChartDataset dataset, JRDesignPieDataset jrDataset) {
-		DatasetTransform datasetTransform = accessor.getDatasetTransform();
-		JRDesignExpression exp1 = datasetTransform.getExpression(dataset.getSubDataset(), dataset.getValueExpression());
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			JRDesignPieSeries jrSerie = new JRDesignPieSeries();
 			jrSerie.setKeyExpression(exp1);
-			jrSerie.setValueExpression(datasetTransform.getExpression(dataset.getSubDataset(), serie.getValueExpression()));
+			jrSerie.setValueExpression(expressionTransform.getExpression(serie.getValueExpression()));
 			jrDataset.addPieSeries(jrSerie);
 		}
 	}
 
 	private void timeSeriesDataset(DRIDesignTimeSeriesDataset dataset, JRDesignTimeSeriesDataset jrDataset) {
-		DatasetTransform datasetTransform = accessor.getDatasetTransform();
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		if (dataset.getTimePeriodType() != null) {
 			jrDataset.setTimePeriod(ConstantTransform.timePeriodType(dataset.getTimePeriodType()));
 		}
 
-		JRDesignExpression exp1 = datasetTransform.getExpression(dataset.getSubDataset(), dataset.getValueExpression());
+		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			JRDesignTimeSeries jrSerie = new JRDesignTimeSeries();
 			jrSerie.setTimePeriodExpression(exp1);
-			jrSerie.setValueExpression(datasetTransform.getExpression(dataset.getSubDataset(), serie.getValueExpression()));
-			JRDesignExpression seriesExpression = datasetTransform.getExpression(dataset.getSubDataset(), serie.getSeriesExpression());
-			JRDesignExpression labelExpression = datasetTransform.getExpression(dataset.getSubDataset(), serie.getLabelExpression());
+			jrSerie.setValueExpression(expressionTransform.getExpression(serie.getValueExpression()));
+			JRDesignExpression seriesExpression = expressionTransform.getExpression(serie.getSeriesExpression());
+			JRDesignExpression labelExpression = expressionTransform.getExpression(serie.getLabelExpression());
 			if (seriesExpression != null) {
 				jrSerie.setSeriesExpression(seriesExpression);
 			}
@@ -243,14 +245,14 @@ public class ChartTransform {
 	}
 
 	private void xyDataset(DRIDesignChartDataset dataset, JRDesignXyDataset jrDataset) {
-		DatasetTransform datasetTransform = accessor.getDatasetTransform();
-		JRDesignExpression exp1 = datasetTransform.getExpression(dataset.getSubDataset(), dataset.getValueExpression());
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			JRDesignXySeries jrSerie = new JRDesignXySeries();
 			jrSerie.setXValueExpression(exp1);
-			jrSerie.setYValueExpression(datasetTransform.getExpression(dataset.getSubDataset(), serie.getValueExpression()));
-			JRDesignExpression seriesExpression = datasetTransform.getExpression(dataset.getSubDataset(), serie.getSeriesExpression());
-			JRDesignExpression labelExpression = datasetTransform.getExpression(dataset.getSubDataset(), serie.getLabelExpression());
+			jrSerie.setYValueExpression(expressionTransform.getExpression(serie.getValueExpression()));
+			JRDesignExpression seriesExpression = expressionTransform.getExpression(serie.getSeriesExpression());
+			JRDesignExpression labelExpression = expressionTransform.getExpression(serie.getLabelExpression());
 			if (seriesExpression != null) {
 				jrSerie.setSeriesExpression(seriesExpression);
 			}

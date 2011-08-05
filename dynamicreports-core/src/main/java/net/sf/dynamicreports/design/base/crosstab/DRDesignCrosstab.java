@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.constant.RunDirection;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignCrosstab extends DRDesignComponent implements DRIDesignCrosstab {
+	private DRDesignCrosstabDataset dataset;
 	private Boolean repeatColumnHeaders;
 	private Boolean repeatRowHeaders;
 	private Integer columnBreakOffset;
@@ -57,6 +58,14 @@ public class DRDesignCrosstab extends DRDesignComponent implements DRIDesignCros
 		rowGroups = new ArrayList<DRDesignCrosstabRowGroup>();
 		cells = new ArrayList<DRDesignCrosstabCell>();
 		measures = new ArrayList<DRIDesignCrosstabMeasure>();
+	}
+
+	public DRDesignCrosstabDataset getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(DRDesignCrosstabDataset dataset) {
+		this.dataset = dataset;
 	}
 
 	public Boolean isRepeatColumnHeaders() {
