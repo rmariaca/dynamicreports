@@ -39,6 +39,7 @@ import net.sf.dynamicreports.design.base.expression.DRDesignSimpleExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignSystemExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignValueFormatter;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
@@ -68,6 +69,7 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractExpressionTransform {
+	protected DesignTransformAccessor accessor;
 	private Map<String, DRIDesignField> fields;
 	private Map<String, DRIDesignVariable> variables;
 	private Map<String, DRIDesignSystemExpression> systemExpressions;
@@ -76,7 +78,8 @@ public abstract class AbstractExpressionTransform {
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<DRIExpression<?>, DRIDesignExpression> expressions;
 
-	public AbstractExpressionTransform() {
+	public AbstractExpressionTransform(DesignTransformAccessor accessor) {
+		this.accessor = accessor;
 		init();
 	}
 
@@ -311,4 +314,6 @@ public abstract class AbstractExpressionTransform {
 	protected abstract List<? extends DRIField<?>> transformFields();
 
 	protected abstract List<? extends DRIVariable<?>> transformVariables();
+
+	protected abstract DRIDesignDataset getDataset();
 }

@@ -24,6 +24,8 @@ package net.sf.dynamicreports.design.transformation;
 
 import java.util.List;
 
+import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIVariable;
@@ -34,8 +36,14 @@ import net.sf.dynamicreports.report.definition.DRIVariable;
 public class DatasetExpressionTransform extends AbstractExpressionTransform {
 	private DRIDataset dataset;
 
-	public DatasetExpressionTransform(DRIDataset dataset) {
+	public DatasetExpressionTransform(DesignTransformAccessor accessor, DRIDataset dataset) {
+		super(accessor);
 		this.dataset = dataset;
+	}
+
+	@Override
+	protected ResetType getVariableResetType(DRIVariable<?> variable) {
+		return ResetType.REPORT;
 	}
 
 	@Override
@@ -46,5 +54,10 @@ public class DatasetExpressionTransform extends AbstractExpressionTransform {
 	@Override
 	protected List<? extends DRIVariable<?>> transformVariables() {
 		return dataset.getVariables();
+	}
+
+	@Override
+	protected DRIDesignDataset getDataset() {
+		return accessor.getDatasetTransform().getDesignDataset(dataset);
 	}
 }

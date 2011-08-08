@@ -55,7 +55,7 @@ public interface JasperTransformAccessor {
 
 	public AbstractExpressionTransform getExpressionTransform();
 
-	public MainDatasetExpressionTransform getMainDatasetExpressionTransform();
+	public AbstractExpressionTransform getExpressionTransform(DRIDesignDataset dataset);
 
 	public GroupTransform getGroupTransform();
 

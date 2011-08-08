@@ -39,7 +39,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpre
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.SystemExpression;
@@ -58,11 +57,11 @@ import net.sf.jasperreports.engine.design.JRDesignVariable;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractExpressionTransform {
-	private static final String VALUE = "$P'{'" + JasperScriptlet.SCRIPTLET_NAME + "'}'.getValue(\"{0}\")";
+	private static final String VALUE = "$P'{'" + JasperCustomValues.CUSTOM_VALUES + "'}'.getValue(\"{0}\")";
 	private static final String FIELD_VALUE = "$F'{'{0}'}'";
 	private static final String VARIABLE_VALUE = "$V'{'{0}'}'";
 	private static final String PARAMETER_VALUE = "$P'{'{0}'}'";
-	private static final String COMPLEX_VALUE = "$P'{'" + JasperScriptlet.SCRIPTLET_NAME + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
+	private static final String COMPLEX_VALUE = "$P'{'" + JasperCustomValues.CUSTOM_VALUES + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
 
 	private Map<String, JRDesignExpression> expressions;
 

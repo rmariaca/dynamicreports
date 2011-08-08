@@ -51,7 +51,7 @@ public class SubDatasourceReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		FieldBuilder<String> itemField = field("item", type.stringType());
 		FieldBuilder<Integer> quantityField = field("quantity", type.integerType());
@@ -97,6 +97,7 @@ public class SubDatasourceReport {
 			  .title(
 			  	Templates.createTitleComponent("SubDatasource"),
 			  	cmp.horizontalList(chart1, chart2),
+			  	cmp.text("SubDatasource 3").setStyle(Templates.bold12CenteredStyle),
 					crosstab)
 			  .pageFooter(Templates.footerComponent)
 			  .show();

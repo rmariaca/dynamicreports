@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.base.style;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
 
@@ -30,6 +31,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
  */
 public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDesignConditionalStyle {
 	private DRIDesignExpression conditionExpression;
+	private DRIDesignDataset dataset;
 
 	public void setConditionExpression(DRIDesignExpression conditionExpression) {
 		this.conditionExpression = conditionExpression;
@@ -37,5 +39,13 @@ public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDe
 
 	public DRIDesignExpression getConditionExpression() {
 		return conditionExpression;
+	}
+
+	public DRIDesignDataset getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(DRIDesignDataset dataset) {
+		this.dataset = dataset;
 	}
 }

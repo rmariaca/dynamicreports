@@ -67,7 +67,7 @@ public class JasperScriptlet extends JRDefaultScriptlet implements DRIReportScri
 
 	private JasperCustomValues getCustomValues() {
 		try {
-			return (JasperCustomValues) getParameterValue(JasperCustomValues.CUSTOM_VALUES);
+			return (JasperCustomValues) getParameterValue(JasperCustomValues.CUSTOM_VALUES, false);
 		} catch (JRScriptletException e) {
 			throw new JasperDesignException("Custom values not found", e);
 		}
@@ -102,5 +102,14 @@ public class JasperScriptlet extends JRDefaultScriptlet implements DRIReportScri
 
 	public Object getSystemValue(String name) {
 		return systemValues.get(name);
+	}
+
+	@Override
+	public void afterReportInit() throws JRScriptletException {
+		super.afterReportInit();
+		JasperCustomValues customValues = getCustomValues();
+		if (customValues != null) {
+			customValues.setJasperScriptlet(this);
+		}
 	}
 }

@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
@@ -30,4 +31,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 public interface DRIDesignConditionalStyle extends DRIDesignBaseStyle {
 
 	public DRIDesignExpression getConditionExpression();
+
+	public DRIDesignDataset getDataset();
 }

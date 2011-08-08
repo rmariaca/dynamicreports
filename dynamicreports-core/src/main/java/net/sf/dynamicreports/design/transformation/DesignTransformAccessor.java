@@ -45,8 +45,6 @@ public interface DesignTransformAccessor {
 
 	public AbstractExpressionTransform getExpressionTransform();
 
-	public MainDatasetExpressionTransform getMainDatasetExpressionTransform();
-
 	public BandTransform getBandTransform();
 
 	public ComponentTransform getComponentTransform();

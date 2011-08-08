@@ -39,6 +39,7 @@ public class JasperCustomValues {
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<String, List<DRIChartCustomizer>> chartCustomizers;
+	private JasperScriptlet jasperScriptlet;
 
 	public JasperCustomValues() {
 		init();
@@ -99,5 +100,18 @@ public class JasperCustomValues {
 			return false;
 		}
 		return true;
+	}
+
+	public Object getValue(String valueName) {
+		return jasperScriptlet.getValue(valueName);
+	}
+
+	@SuppressWarnings("ucd")
+	public Object getValue(String name, Object[] values) {
+		return jasperScriptlet.getValue(name, values);
+	}
+
+	protected void setJasperScriptlet(JasperScriptlet jasperScriptlet) {
+		this.jasperScriptlet = jasperScriptlet;
 	}
 }

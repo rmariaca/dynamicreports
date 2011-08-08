@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
@@ -31,9 +34,13 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabDataset
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
-import net.sf.dynamicreports.jasper.base.JasperScriptlet;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
+import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.crosstabs.design.JRDesignCellContents;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstab;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabBucket;
@@ -48,7 +55,6 @@ import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignElement;
-import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 
 /**
@@ -95,18 +101,24 @@ public class CrosstabTransform {
 		registerScriptletCrosstabParameter(jrCrosstab);
 		accessor.transformToMainDataset();
 
+		Map<String, Object> crosstabParameters;
+		if (crosstab.getDataset().getSubDataset() == null) {
+			crosstabParameters = accessor.getParameters();
+		}
+		else {
+			crosstabParameters = accessor.getDatasetTransform().getDatasetParameters(crosstab.getDataset().getSubDataset());
+		}
+		CrosstabParametersExpression parametersExpression = new CrosstabParametersExpression(crosstabParameters);
+		accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+		jrCrosstab.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
+
 		return jrCrosstab;
 	}
 
 	private JRDesignParameter registerScriptletCrosstabParameter(JRDesignCrosstab jrCrosstab) {
 		JRDesignCrosstabParameter jrParameter = new JRDesignCrosstabParameter();
-		jrParameter.setName(JasperScriptlet.SCRIPTLET_NAME);
-		jrParameter.setValueClass(JasperScriptlet.class);
-
-		JRDesignExpression expression = new JRDesignExpression();
-		expression.setText(accessor.getExpressionTransform().toParameterValue(JasperScriptlet.SCRIPTLET_NAME));
-		expression.setValueClass(JasperScriptlet.class);
-		jrParameter.setExpression(expression);
+		jrParameter.setName(JasperCustomValues.CUSTOM_VALUES);
+		jrParameter.setValueClass(JasperCustomValues.class);
 
 		try {
 			jrCrosstab.addParameter(jrParameter);
@@ -212,6 +224,30 @@ public class CrosstabTransform {
 			jrCrosstab.addMeasure(jrMeasure);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for crosstab measure \"" + measure.getName() + "\"", e);
+		}
+	}
+
+	private class CrosstabParametersExpression implements DRIDesignSimpleExpression {
+		private Map<String, Object> parameters;
+		private String name;
+
+		public CrosstabParametersExpression(Map<String, Object> parameters) {
+			this.parameters = parameters;
+			this.name = ReportUtils.generateUniqueName("crosstabParametersExpression");
+		}
+
+		public Object evaluate(ReportParameters reportParameters) {
+			Map<String, Object> parameters = new HashMap<String, Object>(this.parameters);
+			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
+			return parameters;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Class<?> getValueClass() {
+			return Map.class;
 		}
 	}
 }

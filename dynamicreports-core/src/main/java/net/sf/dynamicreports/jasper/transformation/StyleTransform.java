@@ -35,6 +35,7 @@ import net.sf.jasperreports.engine.JRLineBox;
 import net.sf.jasperreports.engine.JRPen;
 import net.sf.jasperreports.engine.base.JRBaseStyle;
 import net.sf.jasperreports.engine.design.JRDesignConditionalStyle;
+import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignFont;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.type.ModeEnum;
@@ -84,7 +85,9 @@ public class StyleTransform {
 		JRDesignConditionalStyle jrConditionalStyle = new JRDesignConditionalStyle();
 		abstractStyle(jrConditionalStyle, conditionalStyle);
 
-		jrConditionalStyle.setConditionExpression(accessor.getMainDatasetExpressionTransform().getExpression(conditionalStyle.getConditionExpression()));
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform(conditionalStyle.getDataset());
+		JRDesignExpression expression = expressionTransform.getExpression(conditionalStyle.getConditionExpression());
+		jrConditionalStyle.setConditionExpression(expression);
 
 		return jrConditionalStyle;
 	}

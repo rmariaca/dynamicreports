@@ -145,8 +145,13 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return expressionTransform;
 	}
 
-	public MainDatasetExpressionTransform getMainDatasetExpressionTransform() {
-		return mainDatasetExpressionTransform;
+	public AbstractExpressionTransform getExpressionTransform(DRIDesignDataset dataset) {
+		if (dataset == null) {
+			return mainDatasetExpressionTransform;
+		}
+		else {
+			return getDatasetTransform().getDatasetExpressionTransform(dataset);
+		}
 	}
 
 	public GroupTransform getGroupTransform() {

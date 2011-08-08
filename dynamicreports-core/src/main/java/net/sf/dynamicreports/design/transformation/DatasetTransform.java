@@ -54,7 +54,7 @@ public class DatasetTransform {
 			return designDatasets.get(dataset);
 		}
 
-		DatasetExpressionTransform datasetExpressionTransform = new DatasetExpressionTransform(dataset);
+		DatasetExpressionTransform datasetExpressionTransform = new DatasetExpressionTransform(accessor, dataset);
 		datasetExpressionTransform.transform();
 		DRDesignDataset designDataset = new DRDesignDataset(datasetExpressionTransform);
 		if (dataset.getQuery() != null) {
@@ -70,6 +70,10 @@ public class DatasetTransform {
 
 	public DatasetExpressionTransform getDatasetExpressionTransform(DRIDataset dataset) {
 		return designDatasets.get(dataset).getDatasetExpressionTransform();
+	}
+
+	protected DRDesignDataset getDesignDataset(DRIDataset dataset) {
+		return designDatasets.get(dataset);
 	}
 
 	private void addDataset(DRIDataset dataset, DRDesignDataset designDataset) {

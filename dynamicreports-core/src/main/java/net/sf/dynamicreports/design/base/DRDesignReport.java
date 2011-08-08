@@ -163,10 +163,6 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return expressionTransform;
 	}
 
-	public MainDatasetExpressionTransform getMainDatasetExpressionTransform() {
-		return mainDatasetExpressionTransform;
-	}
-
 	public BandTransform getBandTransform() {
 		return bandTransform;
 	}

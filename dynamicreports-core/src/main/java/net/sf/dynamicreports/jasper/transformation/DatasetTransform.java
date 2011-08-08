@@ -125,6 +125,10 @@ public class DatasetTransform {
 		return jrDatasetRun;
 	}
 
+	protected Map<String, Object> getDatasetParameters(DRIDesignDataset dataset) {
+		return datasetParameters.get(dataset);
+	}
+
 	public DatasetExpressionTransform getDatasetExpressionTransform(DRIDesignDataset dataset) {
 		return datasetExpressions.get(dataset);
 	}
