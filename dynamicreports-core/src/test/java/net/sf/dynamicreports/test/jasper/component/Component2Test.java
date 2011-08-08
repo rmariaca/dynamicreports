@@ -40,13 +40,16 @@ public class Component2Test extends AbstractJasperPositionTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.title(
 			  cmp.horizontalList(
-			  		cmp.line(), cmp.filler().setFixedWidth(10), cmp.line()),
+			  	cmp.line(), cmp.filler().setFixedWidth(10), cmp.line()),
 			  cmp.horizontalList(
-			  		cmp.line().setFixedDimension(1, 50), cmp.line().setDirection(LineDirection.TOP_DOWN), cmp.line().setDirection(LineDirection.BOTTOM_UP)),
+			  	cmp.line().setFixedDimension(1, 50), cmp.line().setDirection(LineDirection.TOP_DOWN), cmp.line().setDirection(LineDirection.BOTTOM_UP)),
 			  cmp.ellipse(),
 			  cmp.rectangle(),
 			  cmp.roundRectangle(),
-			  cmp.roundRectangle(20));
+			  cmp.roundRectangle(20),
+			  cmp.verticalGap(30),
+			  cmp.horizontalList(
+			  	cmp.text(""), cmp.horizontalGap(10), cmp.text("")));
 	}
 
 	@Override
@@ -77,5 +80,9 @@ public class Component2Test extends AbstractJasperPositionTest {
 		Assert.assertEquals("Rectangle radius", 10, rectangle.getRadius());
 		rectangle = (JRPrintRectangle) getElementAt("title.rectangle3", 0);
 		Assert.assertEquals("Rectangle radius", 20, rectangle.getRadius());
+
+		elementPositionTest("title.list4", 0, 10, 491, 575, 16);
+		elementPositionTest("title.textField1", 0, 0, 0, 282, 16);
+		elementPositionTest("title.textField2", 0, 292, 0, 283, 16);
 	}
 }
