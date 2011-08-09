@@ -30,16 +30,17 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpres
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
-public class JasperCustomValues {
-	public static final String CUSTOM_VALUES = "CUSTOM_VALUES";
-
+public class JasperCustomValues implements DRICustomValues {
 	private Map<String, ValueType> valueTypes;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<String, List<DRIChartCustomizer>> chartCustomizers;
+	private Map<String, Object> systemValues;
 	private JasperScriptlet jasperScriptlet;
+	private Integer startPageNumber;
 
 	public JasperCustomValues() {
 		init();
@@ -50,6 +51,7 @@ public class JasperCustomValues {
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
 		chartCustomizers = new HashMap<String, List<DRIChartCustomizer>>();
+		systemValues = new HashMap<String, Object>();
 	}
 
 	public void addSimpleExpression(DRIDesignSimpleExpression simpleExpression) {
@@ -111,7 +113,27 @@ public class JasperCustomValues {
 		return jasperScriptlet.getValue(name, values);
 	}
 
+	public void setSystemValue(String name, Object value) {
+		systemValues.put(name, value);
+	}
+
+	protected Object getSystemValue(String name) {
+		return systemValues.get(name);
+	}
+
+	protected JasperScriptlet getJasperScriptlet() {
+		return jasperScriptlet;
+	}
+
 	protected void setJasperScriptlet(JasperScriptlet jasperScriptlet) {
 		this.jasperScriptlet = jasperScriptlet;
+	}
+
+	public Integer getStartPageNumber() {
+		return startPageNumber;
+	}
+
+	public void setStartPageNumber(Integer startPageNumber) {
+		this.startPageNumber = startPageNumber;
 	}
 }

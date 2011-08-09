@@ -117,7 +117,7 @@ public class CrosstabTransform {
 
 	private JRDesignParameter registerScriptletCrosstabParameter(JRDesignCrosstab jrCrosstab) {
 		JRDesignCrosstabParameter jrParameter = new JRDesignCrosstabParameter();
-		jrParameter.setName(JasperCustomValues.CUSTOM_VALUES);
+		jrParameter.setName(JasperCustomValues.NAME);
 		jrParameter.setValueClass(JasperCustomValues.class);
 
 		try {

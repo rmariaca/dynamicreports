@@ -55,7 +55,7 @@ import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.StretchType;
-import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
+import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
@@ -562,9 +562,9 @@ public class CrosstabTransform {
 
 		@Override
 		public T evaluate(List<?> values, ReportParameters reportParameters) {
-			DRIReportScriptlet scriptlet = (DRIReportScriptlet) reportParameters.getValue(DRIReportScriptlet.NAME);
+			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
 			for (int i = 0; i < getExpressions().size(); i++) {
-				scriptlet.setSystemValue(getExpressions().get(i).getName(), values.get(i));
+				customValues.setSystemValue(getExpressions().get(i).getName(), values.get(i));
 			}
 			return reportParameters.getValue(expression.getName());
 		}

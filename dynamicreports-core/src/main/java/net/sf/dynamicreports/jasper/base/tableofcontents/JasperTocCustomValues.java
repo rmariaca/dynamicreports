@@ -20,13 +20,33 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.jasper.base.tableofcontents;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIReportScriptlet {
-	public static final String NAME = "DYNAMICREPORTS";
+public class JasperTocCustomValues extends JasperCustomValues {
+	private List<JasperTocHeading> headings;
 
-	public void setSystemValue(String name, Object value);
+	public JasperTocCustomValues() {
+		headings = new ArrayList<JasperTocHeading>();
+	}
+
+	public void addTocHeading(int level, String id, String text) {
+		JasperTocHeading heading = new JasperTocHeading();
+		heading.setLevel(level);
+		heading.setText(text);
+		heading.setPageIndex(getJasperScriptlet().getReportParameters().getPageNumber());
+		heading.setReference(id);
+		headings.add(heading);
+	}
+
+	public List<JasperTocHeading> getHeadings() {
+		return headings;
+	}
 }

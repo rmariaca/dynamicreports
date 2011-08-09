@@ -38,7 +38,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocScriptlet;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.base.component.DRTextField;
@@ -49,9 +49,9 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
+import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
-import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -297,9 +297,9 @@ public class GroupTransform {
 
 		public String evaluate(ReportParameters reportParameters) {
 			String id = groupName + "_" + reportParameters.getReportRowNumber();
-			JasperTocScriptlet scriptlet = (JasperTocScriptlet) reportParameters.getValue(DRIReportScriptlet.NAME);
+			JasperTocCustomValues customValues = (JasperTocCustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
 			String text = String.valueOf(reportParameters.getValue(expressionName));
-			scriptlet.addTocHeading(level, id, text);
+			customValues.addTocHeading(level, id, text);
 			return null;
 		}
 	}

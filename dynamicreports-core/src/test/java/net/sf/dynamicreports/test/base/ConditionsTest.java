@@ -175,6 +175,18 @@ public class ConditionsTest {
 		public ReportParameters getMasterParameters() {
 			return null;
 		}
+
+		public <T> T getFieldValue(String name) {
+			return null;
+		}
+
+		public <T> T getVariableValue(String name) {
+			return null;
+		}
+
+		public <T> T getParameterValue(String name) {
+			return null;
+		}
 	}
 
 	private enum Type {

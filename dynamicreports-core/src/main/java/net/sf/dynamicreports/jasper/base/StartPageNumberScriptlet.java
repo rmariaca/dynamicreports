@@ -20,49 +20,32 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.jasper.base;
 
-import java.sql.Connection;
-import java.util.Locale;
+import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.jasperreports.engine.JRDefaultScriptlet;
+import net.sf.jasperreports.engine.JRScriptletException;
+import net.sf.jasperreports.engine.JRVariable;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface ReportParameters {
+public class StartPageNumberScriptlet extends JRDefaultScriptlet {
 
-	public <T> T getValue(String name);
+	private JasperCustomValues getCustomValues() {
+		try {
+			return (JasperCustomValues) getParameterValue(JasperCustomValues.NAME, false);
+		} catch (JRScriptletException e) {
+			throw new JasperDesignException("Custom values not found", e);
+		}
+	}
 
-	public <T> T getValue(DRIValue<T> value);
-
-	public <T> T getFieldValue(String name);
-
-	public <T> T getVariableValue(String name);
-
-	public <T> T getParameterValue(String name);
-
-	public Integer getPageNumber();
-
-	public Integer getColumnNumber();
-
-	public Integer getReportRowNumber();
-
-	public Integer getPageRowNumber();
-
-	public Integer getColumnRowNumber();
-
-	public Integer getGroupCount(String groupName);
-
-	@SuppressWarnings("ucd")
-	public Connection getConnection();
-
-	public Locale getLocale();
-
-	@SuppressWarnings("ucd")
-	public DRIScriptlet getScriptlet(String name);
-
-	public String getMessage(String key);
-
-	public String getMessage(String key, Object[] arguments);
-
-	public ReportParameters getMasterParameters();
+	@Override
+	public void afterReportInit() throws JRScriptletException {
+		super.afterReportInit();
+		JasperCustomValues customValues = getCustomValues();
+		if (customValues != null && customValues.getStartPageNumber() != null) {
+			setVariableValue(JRVariable.PAGE_NUMBER, customValues.getStartPageNumber());
+		}
+	}
 }

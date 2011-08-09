@@ -33,7 +33,6 @@ import java.util.ResourceBundle;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.constant.ValueType;
-import net.sf.dynamicreports.report.definition.DRIReportScriptlet;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -76,9 +75,6 @@ public class JasperReportParameters implements ReportParameters {
 			}
 		}
 
-		if (name.equals(DRIReportScriptlet.NAME)) {
-			return (T) getParameterValue(DRIReportScriptlet.NAME + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX);
-		}
 		return null;
 	}
 
@@ -88,18 +84,20 @@ public class JasperReportParameters implements ReportParameters {
 	}
 
 	//field
-	private Object getFieldValue(String name) {
+	@SuppressWarnings("unchecked")
+	public <T> T getFieldValue(String name) {
 		try {
-			return jasperScriptlet.getFieldValue(name);
+			return (T) jasperScriptlet.getFieldValue(name);
 		} catch (JRScriptletException e) {
 		}
 		return null;
 	}
 
 	//variable
-	private Object getVariableValue(String name) {
+	@SuppressWarnings("unchecked")
+	public <T> T getVariableValue(String name) {
 		try {
-			return jasperScriptlet.getVariableValue(name);
+			return (T) jasperScriptlet.getVariableValue(name);
 		} catch (JRScriptletException e) {
 		}
 		return null;
@@ -130,9 +128,10 @@ public class JasperReportParameters implements ReportParameters {
 	}
 
 	//parameter
-	private Object getParameterValue(String name) {
+	@SuppressWarnings("unchecked")
+	public <T> T getParameterValue(String name) {
 		try {
-			return ((Map<?, ?>) jasperScriptlet.getParameterValue(JRParameter.REPORT_PARAMETERS_MAP)).get(name);
+			return (T) ((Map<?, ?>) jasperScriptlet.getParameterValue(JRParameter.REPORT_PARAMETERS_MAP)).get(name);
 		} catch (JRScriptletException e) {
 		}
 		return null;

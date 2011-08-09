@@ -33,9 +33,7 @@ import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.design.JRDesignDataset;
 import net.sf.jasperreports.engine.design.JRDesignDatasetRun;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
@@ -82,9 +80,8 @@ public class DatasetTransform {
 		datasetExpressionTransform.transform();
 		datasetExpressions.put(dataset, datasetExpressionTransform);
 		if (!customValues.isEmpty()) {
-			addParameter(jrDataset, parameters, JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, customValues);
-			JasperScriptlet scriptlet = new JasperScriptlet();
-			addScriptlet(jrDataset, parameters, JasperScriptlet.NAME, scriptlet);
+			addParameter(jrDataset, parameters, JasperCustomValues.NAME, JasperCustomValues.class, customValues);
+			addScriptlet(jrDataset, parameters, JasperScriptlet.NAME);
 		}
 		return jrDataset;
 	}
@@ -101,10 +98,9 @@ public class DatasetTransform {
 		parameters.put(jrParameter.getName(), value);
 	}
 
-	private void addScriptlet(JRDesignDataset jrDataset, Map<String, Object> parameters, String name, JRAbstractScriptlet scriptlet) {
+	private void addScriptlet(JRDesignDataset jrDataset, Map<String, Object> parameters, String name) {
 		try {
-			jrDataset.addScriptlet(accessor.getReportTransform().scriptlet(name, scriptlet));
-			parameters.put(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, scriptlet);
+			jrDataset.addScriptlet(accessor.getReportTransform().scriptlet(name, JasperScriptlet.class));
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for scriptlet \"" + name + "\"", e);
 		}

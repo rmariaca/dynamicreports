@@ -41,7 +41,6 @@ import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -62,7 +61,6 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private AbstractExpressionTransform expressionTransform;
 
 	private JasperDesign design;
-	private JasperCustomValues customValues;
 	private Map<String, Object> parameters;
 	private ReportParameters masterReportParameters;
 	private Integer startPageNumber;
@@ -94,7 +92,6 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		transformToMainDataset();
 
 		this.parameters = new HashMap<String, Object>();
-		this.customValues = new JasperCustomValues();
 	}
 
 	private void transform() {
@@ -171,7 +168,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	}
 
 	public JasperCustomValues getCustomValues() {
-		return customValues;
+		return reportTransform.getCustomValues();
 	}
 
 	public JasperDesign getDesign() {
@@ -188,9 +185,5 @@ public class JasperReportDesign implements JasperTransformAccessor {
 
 	public ReportParameters getMasterReportParameters() {
 		return masterReportParameters;
-	}
-
-	public JRAbstractScriptlet getScriptlet() {
-		return reportTransform.getScriptlet();
 	}
 }

@@ -57,11 +57,11 @@ import net.sf.jasperreports.engine.design.JRDesignVariable;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractExpressionTransform {
-	private static final String VALUE = "$P'{'" + JasperCustomValues.CUSTOM_VALUES + "'}'.getValue(\"{0}\")";
+	private static final String VALUE = "$P'{'" + JasperCustomValues.NAME + "'}'.getValue(\"{0}\")";
 	private static final String FIELD_VALUE = "$F'{'{0}'}'";
 	private static final String VARIABLE_VALUE = "$V'{'{0}'}'";
 	private static final String PARAMETER_VALUE = "$P'{'{0}'}'";
-	private static final String COMPLEX_VALUE = "$P'{'" + JasperCustomValues.CUSTOM_VALUES + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
+	private static final String COMPLEX_VALUE = "$P'{'" + JasperCustomValues.NAME + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
 
 	private Map<String, JRDesignExpression> expressions;
 

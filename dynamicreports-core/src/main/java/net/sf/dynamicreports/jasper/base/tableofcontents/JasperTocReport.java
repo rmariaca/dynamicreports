@@ -44,8 +44,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class JasperTocReport {
 
 	public static void createTocReport(JasperReportDesign jasperReportDesign, JasperPrint jasperPrint) throws DRException, JRException {
-		JasperTocScriptlet scriptlet = (JasperTocScriptlet) jasperReportDesign.getScriptlet();
-		List<JasperTocHeading> headings = scriptlet.getHeadings();
+		JasperTocCustomValues customValues = (JasperTocCustomValues) jasperReportDesign.getCustomValues();
+		List<JasperTocHeading> headings = customValues.getHeadings();
 		if (headings != null && !headings.isEmpty()) {
 			JasperReportBuilder tocReport = report();
 

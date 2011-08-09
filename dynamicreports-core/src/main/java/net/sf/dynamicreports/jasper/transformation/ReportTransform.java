@@ -35,18 +35,16 @@ import net.sf.dynamicreports.jasper.base.CustomScriptlet;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocScriptlet;
+import net.sf.dynamicreports.jasper.base.StartPageNumberScriptlet;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRAbstractScriptlet;
-import net.sf.jasperreports.engine.JRDefaultScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptlet;
-import net.sf.jasperreports.engine.JRScriptletException;
-import net.sf.jasperreports.engine.JRVariable;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JRDesignScriptlet;
@@ -57,7 +55,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
  */
 public class ReportTransform {
 	private JasperTransformAccessor accessor;
-	private JRAbstractScriptlet scriptlet;
+	private JasperCustomValues customValues;
 
 	public ReportTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -67,6 +65,13 @@ public class ReportTransform {
 		DRIDesignReport report = accessor.getReport();
 		JasperDesign design = accessor.getDesign();
 		Map<String, Object> parameters = accessor.getParameters();
+
+		if (report.isTableOfContents()) {
+			customValues = new JasperTocCustomValues();
+		}
+		else {
+			customValues = new JasperCustomValues();
+		}
 
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
@@ -88,7 +93,8 @@ public class ReportTransform {
 		}
 
 		if (accessor.getStartPageNumber() != null) {
-			addScriptlet("startPageNumber", new StartPageNumberScriptlet());
+			addScriptlet("startPageNumber", StartPageNumberScriptlet.class);
+			customValues.setStartPageNumber(accessor.getStartPageNumber());
 		}
 
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
@@ -98,21 +104,15 @@ public class ReportTransform {
 
 	public void addDependencies() {
 		DRIDesignReport report = accessor.getReport();
-		if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty()) {
-			addParameter(JasperCustomValues.CUSTOM_VALUES, JasperCustomValues.class, accessor.getCustomValues());
+		if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty() ||
+				accessor.getCustomValues().getStartPageNumber() != null || report.isTableOfContents()) {
+			addParameter(JasperCustomValues.NAME, JasperCustomValues.class, accessor.getCustomValues());
 		}
 		if (accessor.getMasterReportParameters() != null) {
 			addParameter(JasperReportParameters.MASTER_REPORT_PARAMETERS, ReportParameters.class, accessor.getMasterReportParameters());
 		}
-		if (report.isTableOfContents()) {
-			scriptlet = new JasperTocScriptlet();
-			addScriptlet(JasperScriptlet.NAME, scriptlet);
-		}
-		else {
-			if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty()) {
-				scriptlet = new JasperScriptlet();
-				addScriptlet(JasperScriptlet.NAME, scriptlet);
-			}
+		if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty()) {
+			addScriptlet(JasperScriptlet.NAME, JasperScriptlet.class);
 		}
 	}
 
@@ -148,13 +148,14 @@ public class ReportTransform {
 	}
 
 	private void addScriptlet(DRIScriptlet scriptlet) {
-		addScriptlet(scriptlet.getName(), new CustomScriptlet(scriptlet));
+		CustomScriptlet customScriptlet = new CustomScriptlet(scriptlet);
+		addScriptlet(scriptlet.getName(), customScriptlet.getClass());
+		accessor.getParameters().put(scriptlet.getName() + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, customScriptlet);
 	}
 
-	private void addScriptlet(String name, JRAbstractScriptlet scriptlet) {
+	private void addScriptlet(String name, Class<? extends JRAbstractScriptlet> scriptletClass) {
 		try {
-			accessor.getDesign().addScriptlet(scriptlet(name, scriptlet));
-			accessor.getParameters().put(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX, scriptlet);
+			accessor.getDesign().addScriptlet(scriptlet(name, scriptletClass));
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for scriptlet \"" + name + "\"", e);
 		}
@@ -187,10 +188,10 @@ public class ReportTransform {
 	}
 
 	//scriptlet
-	protected JRDesignScriptlet scriptlet(String name, JRAbstractScriptlet scriptlet) {
+	protected JRDesignScriptlet scriptlet(String name, Class<? extends JRAbstractScriptlet> scriptletClass) {
 		JRDesignScriptlet jrScriptlet = new JRDesignScriptlet();
 		jrScriptlet.setName(name);
-		jrScriptlet.setValueClass(scriptlet.getClass());
+		jrScriptlet.setValueClass(scriptletClass);
 		return jrScriptlet;
 	}
 
@@ -202,16 +203,7 @@ public class ReportTransform {
 		return jrQuery;
 	}
 
-	public JRAbstractScriptlet getScriptlet() {
-		return scriptlet;
-	}
-
-	private class StartPageNumberScriptlet extends JRDefaultScriptlet {
-
-		@Override
-		public void afterReportInit() throws JRScriptletException {
-			super.afterReportInit();
-			setVariableValue(JRVariable.PAGE_NUMBER, accessor.getStartPageNumber());
-		}
+	public JasperCustomValues getCustomValues() {
+		return customValues;
 	}
 }
