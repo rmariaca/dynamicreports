@@ -41,6 +41,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private ComponentGroupType componentGroupType;
 	private int gap;
 	private boolean calculateComponents;
+	private Boolean removable;
 
 	public DRDesignList() {
 		this(ListType.HORIZONTAL);
@@ -121,5 +122,18 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 
 	public void setCalculateComponents(boolean calculateComponents) {
 		this.calculateComponents = calculateComponents;
+	}
+
+	public boolean isRemovable() {
+		if (removable != null) {
+			return removable;
+		}
+		else {
+			return ListType.VERTICAL.equals(type);
+		}
+	}
+
+	public void setRemovable(Boolean removable) {
+		this.removable = removable;
 	}
 }

@@ -42,6 +42,9 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
+	private Integer titleWidth;
+	private ComponentDimensionType titleWidthType;
+	private Integer titleColumns;
 	private Integer titleHeight;
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
@@ -72,6 +75,61 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 
 	public void setTitleStyle(DRStyle titleStyle) {
 		this.titleStyle = titleStyle;
+	}
+
+  /**
+   * Returns the column title width.
+   *
+   * @return the column title width >= 1
+   */
+	public Integer getTitleWidth() {
+		return titleWidth;
+	}
+
+  /**
+   * Sets the column title width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param titleWidth the column title width >= 1
+   * @exception IllegalArgumentException if <code>titleWidth</code> is < 1
+   */
+	public void setTitleWidth(Integer titleWidth) {
+		if (titleWidth != null) {
+			Validate.isTrue(titleWidth >= 1, "titleWidth must be >= 1");
+		}
+		this.titleWidth = titleWidth;
+	}
+
+	public ComponentDimensionType getTitleWidthType() {
+		return titleWidthType;
+	}
+
+	public void setTitleWidthType(ComponentDimensionType titleWidthType) {
+		this.titleWidthType = titleWidthType;
+	}
+
+  /**
+   * Returns the number of title columns.
+   *
+   * @return the number of title columns >= 1
+   */
+	public Integer getTitleColumns() {
+		return titleColumns;
+	}
+
+  /**
+   * This method is used to define the width of a column title.
+   * The width is set to the <code>columns</code> multiplied by width of the
+   * character <em>m</em> for the font used
+   *
+   * @param titleColumns the number of columns >= 1
+   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   */
+	public void setTitleColumns(Integer titleColumns) {
+		if (titleColumns != null) {
+			Validate.isTrue(titleColumns >= 1, "titleColumns must be >= 1");
+		}
+		this.titleColumns = titleColumns;
 	}
 
   /**
@@ -118,7 +176,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
    * This method is used to define the height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of rows >= 1
+   * @param titleRows the number of rows >= 1
    * @exception IllegalArgumentException if <code>rows</code> is < 1
    */
 	public void setTitleRows(Integer titleRows) {

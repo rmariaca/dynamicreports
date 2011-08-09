@@ -37,6 +37,12 @@ public interface DRIColumnTitleGroup extends DRIColumnGridComponent {
 
 	public DRIStyle getTitleStyle();
 
+	public Integer getTitleWidth();
+
+	public ComponentDimensionType getTitleWidthType();
+
+	public Integer getTitleColumns();
+
 	public Integer getTitleHeight();
 
 	public ComponentDimensionType getTitleHeightType();

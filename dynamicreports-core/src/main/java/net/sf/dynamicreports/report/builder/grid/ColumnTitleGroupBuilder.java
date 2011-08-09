@@ -73,6 +73,82 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
 	}
 
   /**
+   * This method is used to define the preferred width of a column title.
+   * The width is set to the <code>columns</code> multiplied by width of the font
+   *
+   * @param columns the number of preferred columns >= 1
+   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleColumns(Integer columns) {
+		getObject().setTitleColumns(columns);
+		return this;
+	}
+
+  /**
+   * This method is used to define the fixed width of a column title.
+   * The width is set to the <code>columns</code> multiplied by width of the font
+   *
+   * @param columns the number of fixed columns >= 1
+   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleFixedColumns(Integer columns) {
+		getObject().setTitleColumns(columns);
+		getObject().setTitleWidthType(ComponentDimensionType.FIXED);
+		return this;
+	}
+
+  /**
+   * This method is used to define the minimum width of a column title.
+   * The width is set to the <code>columns</code> multiplied by width of the font
+   *
+   * @param columns the number of minimum columns >= 1
+   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleMinColumns(Integer columns) {
+		getObject().setTitleColumns(columns);
+		getObject().setTitleWidthType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+
+  /**
+   * Sets the preferred width of a column title.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the column title preferred width >= 1
+   * @exception IllegalArgumentException if <code>width</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleWidth(Integer width) {
+		getObject().setTitleWidth(width);
+		return this;
+	}
+
+  /**
+   * Sets the fixed width of a column title.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the column title fixed width >= 1
+   * @exception IllegalArgumentException if <code>width</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleFixedWidth(Integer width) {
+		getObject().setTitleWidth(width);
+		getObject().setTitleWidthType(ComponentDimensionType.FIXED);
+		return this;
+	}
+
+  /**
+   * Sets the minimum width of a column title.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the column title minimum width >= 1
+   * @exception IllegalArgumentException if <code>width</code> is < 1
+   */
+	public ColumnTitleGroupBuilder setTitleMinWidth(Integer width) {
+		getObject().setTitleWidth(width);
+		getObject().setTitleWidthType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+
+  /**
    * This method is used to define the preferred height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *

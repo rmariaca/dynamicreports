@@ -22,18 +22,15 @@
 
 package net.sf.dynamicreports.design.transformation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.component.DRDesignListCell;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.grid.DRColumnGridList;
-import net.sf.dynamicreports.report.base.grid.DRColumnGridListCell;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
@@ -55,8 +52,7 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class ColumnGridTransform {
 	private DesignTransformAccessor accessor;
-	private DRIColumnGridList columnDefaultGridList;
-	private DRIColumnGridList columnTitleGridList;
+	private DRIColumnGridList columnGridList;
 
 	public ColumnGridTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -66,13 +62,7 @@ public class ColumnGridTransform {
 		DRIReport report = accessor.getReport();
 		DRIColumnGrid columnGrid = report.getColumnGrid();
 		if (columnGrid != null && !columnGrid.getList().getListCells().isEmpty()) {
-			if (isTitleGroup(columnGrid.getList())) {
-				this.columnDefaultGridList = createColumnDefaultGrid(columnGrid.getList());
-			}
-			else {
-				this.columnDefaultGridList = columnGrid.getList();
-			}
-			this.columnTitleGridList = columnGrid.getList();
+			this.columnGridList = columnGrid.getList();
 			return;
 		}
 
@@ -82,68 +72,7 @@ public class ColumnGridTransform {
 			columnGridList.setType(columnGrid.getList().getType());
 		}
 		addColumnsToGridList(columnGridList);
-		this.columnDefaultGridList = columnGridList;
-		this.columnTitleGridList = columnGridList;
-	}
-
-	private boolean isTitleGroup(DRIColumnGridComponent component) {
-		if (component instanceof DRIColumnGridList) {
-			DRIColumnGridList list = (DRIColumnGridList) component;
-			for (DRIColumnGridListCell cell : list.getListCells()) {
-				if (isTitleGroup(cell.getComponent())) {
-					return true;
-				}
-			}
-		}
-		else if (component instanceof DRIColumnTitleGroup) {
-			return true;
-		}
-		return false;
-	}
-
-	private DRIColumnGridList createColumnDefaultGrid(DRIColumnGridList list) {
-		DRColumnGridList columnGridList = new DRColumnGridList();
-		columnGridList.setGap(list.getGap());
-		columnGridList.setType(list.getType());
-		for (DRIColumnGridListCell cell : list.getListCells()) {
-			DRIColumnGridComponent component = cell.getComponent();
-			if (component instanceof DRIColumnGridList ||
-					component instanceof DRIColumnTitleGroup && !list.getType().equals(((DRIColumnTitleGroup) component).getList().getType())) {
-				DRIColumnGridList newList = createColumnDefaultGrid((DRIColumnGridList) component);
-				DRColumnGridListCell newCell = new DRColumnGridListCell(cell.getHorizontalAlignment(), cell.getVerticalAlignment(), newList);
-				columnGridList.addCell(newCell);
-			}
-			else if (component instanceof DRIColumnTitleGroup) {
-				for (DRIColumnGridComponent component2 : createColumnDefaultGrid((DRIColumnTitleGroup) component)) {
-					DRColumnGridListCell newCell = new DRColumnGridListCell(cell.getHorizontalAlignment(), cell.getVerticalAlignment(), component2);
-					columnGridList.addCell(newCell);
-				}
-			}
-			else {
-				columnGridList.addCell((DRColumnGridListCell) cell);
-			}
-		}
-		return columnGridList;
-	}
-
-	private List<DRIColumnGridComponent> createColumnDefaultGrid(DRIColumnTitleGroup titleGroup) {
-		List<DRIColumnGridComponent> components = new ArrayList<DRIColumnGridComponent>();
-		for (DRIColumnGridListCell cell : titleGroup.getList().getListCells()) {
-			DRIColumnGridComponent component = cell.getComponent();
-			if (component instanceof DRIColumnGridList ||
-					component instanceof DRIColumnTitleGroup && !titleGroup.getList().getType().equals(((DRIColumnTitleGroup) component).getList().getType())) {
-				components.add(createColumnDefaultGrid((DRIColumnGridList) component));
-			}
-			else if (component instanceof DRIColumnTitleGroup) {
-				for (DRIColumnGridComponent component2 : createColumnDefaultGrid((DRIColumnTitleGroup) component)) {
-					components.add(component2);
-				}
-			}
-			else {
-				components.add(component);
-			}
-		}
-		return components;
+		this.columnGridList = columnGridList;
 	}
 
 	private void addColumnsToGridList(DRColumnGridList columnGridList) {
@@ -156,16 +85,16 @@ public class ColumnGridTransform {
 	}
 
 	protected ColumnGrid createColumnGrid() throws DRException {
-		return createColumnGrid(columnDefaultGridList, null, false);
+		return createColumnGrid(columnGridList, null, false);
 	}
 
 	protected ColumnGrid createColumnTitleGrid(DRDesignStyle groupPaddingStyle) throws DRException {
-		return createColumnGrid(columnTitleGridList, groupPaddingStyle, true);
+		return createColumnGrid(columnGridList, groupPaddingStyle, true);
 	}
 
 	private ColumnGrid createColumnGrid(DRIColumnGridList columnGridList, DRDesignStyle groupPaddingStyle, boolean titleGroup) throws DRException {
 		ColumnGrid columnGrid = new ColumnGrid();
-		DRDesignList list = list(columnGridList, columnGrid, titleGroup);
+		DRDesignList list = list(columnGridList, columnGrid, titleGroup).getList();
 		int groupPadding = accessor.getGroupTransform().getGroupPadding();
 		if (groupPadding > 0) {
 			DRDesignFiller filler = new DRDesignFiller();
@@ -178,16 +107,16 @@ public class ColumnGridTransform {
 		return columnGrid;
 	}
 
-	private DRDesignList list(DRIColumnGridComponent columnGridComponent, ColumnGrid columnGrid, boolean titleGroup) throws DRException {
+	private GridList list(DRIColumnGridComponent columnGridComponent, ColumnGrid columnGrid, boolean titleGroup) throws DRException {
 		if (columnGridComponent instanceof DRIColumn<?>) {
 			DRDesignList list = new DRDesignList(ListType.VERTICAL);
 			DRIColumn<?> column = (DRIColumn<?>) columnGridComponent;
 			list.setWidth(accessor.getTemplateTransform().getColumnWidth(column, accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));
 			columnGrid.addList(column, list);
-			return list;
+			return new GridList(list, null);
 		}
 		else if (columnGridComponent instanceof DRIColumnGridList) {
-			return columnGridList((DRIColumnGridList) columnGridComponent, columnGrid, titleGroup);
+			return new GridList(columnGridList((DRIColumnGridList) columnGridComponent, columnGrid, titleGroup), null);
 		}
 		else if (columnGridComponent instanceof DRIColumnTitleGroup) {
 			return columnGridTitleGroup((DRIColumnTitleGroup) columnGridComponent, columnGrid, titleGroup);
@@ -227,17 +156,20 @@ public class ColumnGridTransform {
 					}
 				}
 			}
-			list.addComponent(horizontalAlignment, cell.getVerticalAlignment(), list(component, columnGrid, titleGroup));
+			GridList gridList = list(component, columnGrid, titleGroup);
+			if (gridList.getHorizontalCellAlignment() != null) {
+				list.addComponent(gridList.getHorizontalCellAlignment(), cell.getVerticalAlignment(), gridList.getList());
+			}
+			else {
+				list.addComponent(horizontalAlignment, cell.getVerticalAlignment(), gridList.getList());
+			}
 		}
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
-	private DRDesignList columnGridTitleGroup(DRIColumnTitleGroup columnGridTitleGroup, ColumnGrid columnGrid, boolean titleGroup) throws DRException {
-		DRDesignList columnList = list(columnGridTitleGroup.getList(), columnGrid, titleGroup);
-		if (!titleGroup || columnGridTitleGroup.getTitleExpression() == null) {
-			return columnList;
-		}
+	private GridList columnGridTitleGroup(DRIColumnTitleGroup columnGridTitleGroup, ColumnGrid columnGrid, boolean titleGroup) throws DRException {
+		DRDesignList columnList = list(columnGridTitleGroup.getList(), columnGrid, titleGroup).getList();
 
 		@SuppressWarnings("rawtypes")
 		DRTextField titleGroupField = new DRTextField();
@@ -246,14 +178,84 @@ public class ColumnGridTransform {
 		titleGroupField.setHeight(columnGridTitleGroup.getTitleHeight());
 		titleGroupField.setHeightType(columnGridTitleGroup.getTitleHeightType());
 		titleGroupField.setRows(columnGridTitleGroup.getTitleRows());
+
+		HorizontalCellComponentAlignment hCellAlignment = null;
+		if (columnGridTitleGroup.getTitleWidth() == null &&
+				columnGridTitleGroup.getTitleColumns() == null) {
+			int totalWidth = 0;
+			for (DRDesignListCell cell : columnList.getListCells()) {
+				Integer width = cell.getComponent().getWidth();
+				HorizontalCellComponentAlignment horizontalAlignment = cell.getHorizontalAlignment();
+				if (horizontalAlignment == null ||
+						horizontalAlignment.equals(HorizontalCellComponentAlignment.EXPAND) ||
+						horizontalAlignment.equals(HorizontalCellComponentAlignment.FLOAT)) {
+					totalWidth = 0;
+					break;
+				}
+				if (width != null) {
+					totalWidth += width;
+				}
+			}
+			if (totalWidth > 0) {
+				titleGroupField.setWidth(totalWidth);
+				hCellAlignment = HorizontalCellComponentAlignment.LEFT;
+			}
+		}
+		else {
+			if (columnGridTitleGroup.getTitleWidth() != null) {
+				titleGroupField.setWidth(columnGridTitleGroup.getTitleWidth());
+			}
+			if (columnGridTitleGroup.getTitleColumns() != null) {
+				titleGroupField.setColumns(columnGridTitleGroup.getTitleColumns());
+			}
+			hCellAlignment = ConstantTransform.toHorizontalCellComponentAlignment(columnGridTitleGroup.getTitleWidthType());
+		}
+
 		DRDesignTextField designTitleGroupField = accessor.getComponentTransform().textField(titleGroupField, DefaultStyleType.COLUMN_TITLE);
 		designTitleGroupField.setUniqueName("columngroup.title");
 
+		if (!titleGroup || columnGridTitleGroup.getTitleExpression() == null) {
+			columnList.setRemovable(true);
+			if (hCellAlignment != null) {
+				DRDesignList list = new DRDesignList();
+				list.setType(ListType.VERTICAL);
+				list.addComponent(columnList);
+				list.setWidth(designTitleGroupField.getWidth());
+				return new GridList(list, hCellAlignment);
+			}
+			return new GridList(columnList, null);
+		}
+
 		DRDesignList list = new DRDesignList();
 		list.setType(ListType.VERTICAL);
-		list.addComponent(designTitleGroupField);
-		list.addComponent(columnList);
+		if (hCellAlignment != null) {
+			list.addComponent(hCellAlignment, null, designTitleGroupField);
+			list.addComponent(columnList);
+			list.setWidth(designTitleGroupField.getWidth());
+			return new GridList(list, hCellAlignment);
+		}
+		else {
+			list.addComponent(designTitleGroupField);
+			list.addComponent(columnList);
+			return new GridList(list, null);
+		}
+	}
 
-		return list;
+	private class GridList {
+		private HorizontalCellComponentAlignment horizontalCellAlignment;
+		private DRDesignList list;
+
+		private GridList(DRDesignList list, HorizontalCellComponentAlignment horizontalCellAlignment) {
+			this.list = list;
+			this.horizontalCellAlignment = horizontalCellAlignment;
+		}
+
+		public HorizontalCellComponentAlignment getHorizontalCellAlignment() {
+			return horizontalCellAlignment;
+		}
+
+		public DRDesignList getList() {
+			return list;
+		}
 	}
 }

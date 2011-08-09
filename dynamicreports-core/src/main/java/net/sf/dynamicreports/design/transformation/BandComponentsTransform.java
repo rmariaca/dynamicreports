@@ -37,7 +37,6 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.constant.ComponentGroupType;
-import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
@@ -173,7 +172,7 @@ class BandComponentsTransform {
 	private void componentGroupType(DRDesignComponent component) {
 		if (component instanceof DRDesignList) {
 			DRDesignList list = (DRDesignList) component;
-			if (list.getType().equals(ListType.VERTICAL) && list.getStyle() == null && list.getPrintWhenExpression() == null) {
+			if (list.isRemovable() && list.getStyle() == null && list.getPrintWhenExpression() == null) {
 				list.setComponentGroupType(ComponentGroupType.NONE);
 				for (DRDesignComponent listComponent : list.getComponents()) {
 					listComponent.setX(list.getX() + listComponent.getX());

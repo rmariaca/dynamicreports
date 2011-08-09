@@ -33,24 +33,22 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ColumnTitleGroupPositionTest extends AbstractJasperPositionTest {
+public class ColumnTitleGroupPosition3Test extends AbstractJasperPositionTest {
 	private TextColumnBuilder<String> column1;
-	private TextColumnBuilder<String> column2;
-	private TextColumnBuilder<Integer> column3;
-	private TextColumnBuilder<String> column4;
+	private TextColumnBuilder<Integer> column2;
+	private TextColumnBuilder<String> column3;
 	private AggregationSubtotalBuilder<Integer> subtotal1;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		column1 = col.column("Column1", "field1", String.class);
-		column2 = col.column("Column2", "field2", String.class);
-		column3 = col.column("Column3", "field3", Integer.class);
-		column4 = col.column("Column4", "field4", String.class);
+		column1 = col.column("Col1", "field1", String.class);
+		column2 = col.column("Col2", "field2", Integer.class).setFixedWidth(40);
+		column3 = col.column("Col3", "field3", String.class).setFixedWidth(40);
 
-		rb.columnGrid(column1, grid.titleGroup("Group1", column2, grid.titleGroup("group2", column3, column4)))
-			.columns(column1, column2, column3, column4)
+		rb.columnGrid(column1, grid.titleGroup("Group1", column2, column3))
+			.columns(column1, column2, column3)
 			.subtotalsAtSummary(
-				subtotal1 = sbt.sum(column3));
+					subtotal1 = sbt.sum(column2));
 	}
 
 	@Override
@@ -59,31 +57,26 @@ public class ColumnTitleGroupPositionTest extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 48);
-		elementPositionTest("columnHeader.list3", 0, 143, 16, 432, 32);
-		elementPositionTest("columnHeader.list5", 0, 144, 16, 288, 16);
-		elementPositionTest("columnHeader.columngroup.title1", 0, 143, 0, 432, 16);
-		elementPositionTest("columnHeader.columngroup.title2", 0, 144, 0, 288, 16);
+		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 32);
+		elementPositionTest("columnHeader.list3", 0, 495, 16, 80, 16);
+		elementPositionTest("columnHeader.columngroup.title1", 0, 495, 0, 80, 16);
 		//column1
-		columnTitlePositionTest(column1, 0, 0, 0, 143, 48);
-		columnDetailPositionTest(column1, 0, 0, 0, 143, 26);
+		columnTitlePositionTest(column1, 0, 0, 0, 495, 32);
+		columnDetailPositionTest(column1, 0, 0, 0, 495, 16);
 		//column2
-		columnTitlePositionTest(column2, 0, 0, 0, 144, 32);
-		columnDetailPositionTest(column2, 0, 143, 0, 144, 26);
+		columnTitlePositionTest(column2, 0, 0, 0, 40, 16);
+		columnDetailPositionTest(column2, 0, 495, 0, 40, 16);
 		//column3
-		columnTitlePositionTest(column3, 0, 0, 0, 144, 16);
-		columnDetailPositionTest(column3, 0, 287, 0, 144, 26);
-		//column4
-		columnTitlePositionTest(column4, 0, 144, 0, 144, 16);
-		columnDetailPositionTest(column4, 0, 431, 0, 144, 26);
+		columnTitlePositionTest(column3, 0, 40, 0, 40, 16);
+		columnDetailPositionTest(column3, 0, 535, 0, 40, 16);
 		//subtotal
-		subtotalPositionTest(subtotal1, 0, 287, 0, 144, 16);
+		subtotalPositionTest(subtotal1, 0, 495, 0, 40, 16);
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
-		dataSource.add("text", "text text text text text text text text", 1, "text");
+		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		dataSource.add("text", 1, "text");
 		return dataSource;
 	}
 }
