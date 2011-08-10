@@ -2,6 +2,14 @@
 		
 	<h1 style="text-align:center">Version ${project.version}</h1>	
 	<a style="margin-left:auto;margin-right:auto" href="${page.path}download.html" class="download" title="Download"></a>
+
+	<!---
+	<form action="http://www.google.com/search" method="get" class="searchform">
+		<input name="sitesearch" value="http://dynamicreports.sourceforge.net" type="hidden">
+		<input name="q" class="textbox" type="text">
+		<input name="search" value="Search" type="submit" class="button">
+	</form>
+	-->
 			
 	<ul class="sidemenu">				
 		<li><a href="${page.path}index.html">Home</a></li>

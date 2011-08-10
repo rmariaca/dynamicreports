@@ -9,7 +9,9 @@
 </#if>
 
 <link rel="stylesheet" href="${page.path}styles/style.css" type="text/css" />
+<#if page.hasImage == true || page.hasImageGroup == true>
 <script type="text/javascript" src="scripts/jquery-1.4.2.min.js"></script>
+</#if>
 <script type="text/javascript">
 $(function(){
     $('a[href$="download.html"]').click(function(){

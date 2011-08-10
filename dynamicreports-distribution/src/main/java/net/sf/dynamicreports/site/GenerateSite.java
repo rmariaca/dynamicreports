@@ -24,6 +24,7 @@ package net.sf.dynamicreports.site;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import net.sf.dynamicreports.Project;
 import net.sf.dynamicreports.examples.Templates;
@@ -47,6 +49,9 @@ import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperImageExporterBuilder;
 import net.sf.dynamicreports.jasper.constant.ImageType;
+
+import org.apache.commons.lang.StringUtils;
+
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -70,6 +75,7 @@ public class GenerateSite {
 	private static String site_path;
 	private static String examples_path;
 	private static Project project;
+	private static Properties pageProp;
 
 	static {
 		runExamples = new Boolean(System.getenv("runExamples"));
@@ -86,6 +92,9 @@ public class GenerateSite {
 		cfg.setTemplateLoader(new MultiTemplateLoader(loaders));
 
 		try {
+			pageProp = new Properties();
+			pageProp.load(new FileInputStream(pages_path + "page.properties"));
+
 			project = new Project();
 			temp = cfg.getTemplate(templates_path + "site.ftl");
 		} catch (Exception e) {
@@ -103,27 +112,26 @@ public class GenerateSite {
 	}
 
 	private void generatePages() throws Exception {
-		BufferedReader reader = new BufferedReader(new FileReader(pages_path + "pages.txt"));
-    String line = reader.readLine();
-    while (line != null) {
-    	String[] p = line.split("\\|");
-    	line = reader.readLine();
-    	String file = p[0] + ".html";
-
-			Page page = new Page(file, pages_path + file, loadFile(new FileReader(pages_path + file)));
-			page.setTitle(p[1]);
-			if (p.length > 2) {
-				page.setDescription(p[2]);
+		File dir = new File(pages_path);
+		for (File file : dir.listFiles(new Filter())) {
+			String fileName = file.getName();
+			String name = StringUtils.substringBeforeLast(file.getName(), ".html");
+			Page page = new Page(fileName, pages_path + fileName, loadFile(new FileReader(file)));
+			page.setTitle((String) pageProp.get(name));
+			String description = (String) pageProp.get(name + "_description");
+			if (description != null) {
+				page.setDescription(description);
 			}
-			if (p.length > 3) {
-				page.setKeywords(p[3]);
+			String keywords = (String) pageProp.get(name + "_keywords");
+			if (keywords != null) {
+				page.setKeywords(keywords);
 			}
 
 			Map<String, Object> root = new HashMap<String, Object>();
 			root.put("project", project);
 			root.put("page", page);
 
-			Writer out = new FileWriter(site_path + file);
+			Writer out = new FileWriter(site_path + fileName);
 			temp.process(root, out);
 			out.flush();
 		}
@@ -181,12 +189,12 @@ public class GenerateSite {
 
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				groups.add(example.getPath());
-				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + example.getPath() + "</h2><br/>\r\n";
+				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + pageProp.getProperty(example.getPath()) + "</h2><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
 			text2 += "<@example_preview id=\"" + example.getName() + "\" file=\"" + getFileType(example.getName()) + "\" file_ext=\"" + getFileExt(example.getName()) + "\"/>\r\n";
-			if (count == 2 || next == null || !next.getPath().equals(example.getPath())) {
+			if (count == new Integer(pageProp.getProperty(example.getPath() + "_size")) - 1 || next == null || !next.getPath().equals(example.getPath())) {
 				content += "<tr>\r\n";
 				content += text1;
 				content += "</tr><tr>\r\n";
@@ -210,7 +218,7 @@ public class GenerateSite {
 
 		String groupContent = "<ul>\r\n";
 		for (String group : groups) {
-			groupContent += "<li><a href=\"#" + group + "\">" + group + "</a></li>\r\n";
+			groupContent += "<li><a href=\"#" + group + "\">" + pageProp.getProperty(group) + "</a></li>\r\n";
 		}
 		groupContent += "</ul>\r\n";
 		content = groupContent + content;
@@ -343,6 +351,16 @@ public class GenerateSite {
     	content = content.substring(2);
     }
     return content;
+	}
+
+	private class Filter implements FileFilter {
+
+		public boolean accept(File pathname) {
+			if (pathname.isDirectory()) {
+				return false;
+			}
+			return StringUtils.endsWith(pathname.getName(), ".html");
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
