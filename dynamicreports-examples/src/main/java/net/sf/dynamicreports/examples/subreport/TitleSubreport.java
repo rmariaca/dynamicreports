@@ -58,7 +58,6 @@ public class TitleSubreport {
 		JasperReportBuilder report = report();
 		report
 		  .setTemplate(Templates.reportTemplate)
-		  .setPageMargin(margin(0))
 		  .title(cmp.text("Subreport in title").setStyle(Templates.bold12CenteredStyle))
 		  .columns(
 		  	col.column("Item",       "item",      type.stringType()),

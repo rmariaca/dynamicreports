@@ -37,6 +37,7 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.base.DRMargin;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -472,6 +473,9 @@ public class TemplateTransform {
 		}
 		if (templateDesign.getPageMargin() != null) {
 			return templateDesign.getPageMargin();
+		}
+		if (accessor.getPageWidth() != null) {
+			return new DRMargin(0);
 		}
 		if (template.getPageMargin() != null) {
 			return template.getPageMargin();

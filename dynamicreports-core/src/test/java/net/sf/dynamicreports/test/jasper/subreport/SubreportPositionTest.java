@@ -49,7 +49,8 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 
 		rb.detail(
 			 	subreport,
-			 	cmp.filler().setFixedHeight(20));
+			 	cmp.filler().setFixedHeight(20))
+			.summary(cmp.subreport(subreport2()));
 	}
 
 	@Override
@@ -109,6 +110,9 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 		elementPositionTest("detail.column_column11", 5, 0, 0, 191, 16);
 		elementPositionTest("detail.column_column21", 4, 191, 0, 192, 16);
 		elementPositionTest("detail.column_column31", 2, 383, 0, 192, 16);
+
+		//summary
+		elementPositionTest("summary.textField1", 0, 20, 272, 555, 16);
 	}
 
 	@Override
@@ -123,7 +127,6 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			JasperReportBuilder report = report();
 			report
-			  .setPageMargin(margin(0))
 			  .title(cmp.text("Subreport" + masterRowNumber));
 
 			for (int i = 1; i <= masterRowNumber; i++) {
@@ -155,5 +158,12 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 
 			return dataSource;
 		}
+	}
+
+	private JasperReportBuilder subreport2() {
+		JasperReportBuilder report = report();
+		report.setPageMargin(margin(10));
+		report.summary(cmp.text("subreport2"));
+		return report;
 	}
 }

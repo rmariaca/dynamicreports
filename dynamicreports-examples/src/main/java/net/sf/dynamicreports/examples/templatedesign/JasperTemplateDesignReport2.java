@@ -92,7 +92,6 @@ public class JasperTemplateDesignReport2 {
 		JasperReportBuilder report = report();
 		report
 		  .setTemplate(Templates.reportTemplate)
-		  .setPageMargin(margin(0))
 		  .title(
 		  	cmp.horizontalList(
 		  		cmp.gap(30, 47),

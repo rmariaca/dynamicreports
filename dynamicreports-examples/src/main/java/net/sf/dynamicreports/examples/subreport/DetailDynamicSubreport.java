@@ -72,7 +72,6 @@ public class DetailDynamicSubreport {
 			JasperReportBuilder report = report();
 			report
 			  .setTemplate(Templates.reportTemplate)
-			  .setPageMargin(margin(0))
 			  .title(cmp.text("Subreport" + masterRowNumber).setStyle(Templates.bold12CenteredStyle));
 
 			for (int i = 1; i <= masterRowNumber; i++) {
