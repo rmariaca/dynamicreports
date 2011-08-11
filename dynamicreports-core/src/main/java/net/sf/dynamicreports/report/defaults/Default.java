@@ -64,6 +64,7 @@ public class Default {
 	private boolean summaryOnANewPage;
 	private boolean summaryWithPageHeaderAndFooter;
 	private boolean floatColumnFooter;
+	private boolean useFieldNameAsDescription;
 	//style
 	private boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -83,6 +84,7 @@ public class Default {
 	private int pageHeight;
 	private PageOrientation pageOrientation;
 	private DRMargin pageMargin;
+	private DRMargin subreportPageMargin;
 	private int pageColumnsPerPage;
 	private int pageColumnSpace;
 	//column
@@ -226,6 +228,7 @@ public class Default {
 		this.summaryOnANewPage = false;
 		this.summaryWithPageHeaderAndFooter = false;
 		this.floatColumnFooter = false;
+		this.useFieldNameAsDescription = true;
 
 		this.highlightDetailOddRows = false;
 		this.detailOddRowStyle = new DRSimpleStyle();
@@ -252,6 +255,7 @@ public class Default {
 		this.pageHeight = PageType.A4.getHeight();
 		this.pageOrientation = PageOrientation.PORTRAIT;
 		this.pageMargin = new DRMargin(10);
+		this.subreportPageMargin = new DRMargin(0);
 		this.pageColumnsPerPage = 1;
 		this.pageColumnSpace = 0;
 
@@ -421,6 +425,10 @@ public class Default {
 		return floatColumnFooter;
 	}
 
+	public boolean isUseFieldNameAsDescription() {
+		return useFieldNameAsDescription;
+	}
+
 	public boolean isHighlightDetailOddRows() {
 		return highlightDetailOddRows;
 	}
@@ -487,6 +495,10 @@ public class Default {
 
 	public DRMargin getPageMargin() {
 		return pageMargin;
+	}
+
+	public DRMargin getSubreportPageMargin() {
+		return subreportPageMargin;
 	}
 
 	public int getPageColumnsPerPage() {

@@ -111,6 +111,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
+		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
+		return this;
+	}
+
 	public ReportTemplateBuilder highlightDetailOddRows() {
 		return setHighlightDetailOddRows(true);
 	}

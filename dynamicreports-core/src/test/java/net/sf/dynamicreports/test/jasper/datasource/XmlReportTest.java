@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRXmlDataSource;
 import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.JRXmlUtils;
 
@@ -44,21 +45,37 @@ public class XmlReportTest extends AbstractJasperValueTest {
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<Integer> column2;
 	private TextColumnBuilder<BigDecimal> column3;
+	private TextColumnBuilder<String> column4;
+	private TextColumnBuilder<Integer> column5;
+	private TextColumnBuilder<BigDecimal> column6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		try {
 			rb.setLocale(Locale.ENGLISH)
 				.columns(
-					column1 =	col.column("Column1", field("field1", type.stringType()).setDescription("field1")),
-					column2 =	col.column("Column2", field("field2", type.integerType()).setDescription("field2")),
-					column3 =	col.column("Column3", field("field3", type.bigDecimalType()).setDescription("field3")))
-				.setQuery("/data/row", QueryLanguage.XPATH)
-				.setParameter(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, JRXmlUtils.parse(XmlReportTest.class.getResourceAsStream("data.xml")));
+					column1 =	col.column("Column1", field("field1", type.stringType()).setDescription("@field1")),
+					column2 =	col.column("Column2", field("field2", type.integerType())),
+					column3 =	col.column("Column3", field("field3", type.bigDecimalType())))
+				.setQuery("/data/row1", QueryLanguage.XPATH)
+				.setParameter(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, JRXmlUtils.parse(XmlReportTest.class.getResourceAsStream("data.xml")))
+				.summary(cmp.subreport(createSubreport()));
 		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	private JasperReportBuilder createSubreport() throws JRException {
+		JasperReportBuilder report = report();
+		report.setLocale(Locale.ENGLISH)
+			.columns(
+				column4 =	col.column("Column4", field("field4", type.stringType()).setDescription("@field4")),
+				column5 =	col.column("Column5", field("field5", type.integerType()).setDescription("field5")),
+				column6 =	col.column("Column6", field("field6", type.bigDecimalType())))
+			.setUseFieldNameAsDescription(false)
+			.setDataSource(new JRXmlDataSource(XmlReportTest.class.getResourceAsStream("data.xml"), "/data/row2"));
+		return report;
 	}
 
 	@Override
@@ -76,7 +93,7 @@ public class XmlReportTest extends AbstractJasperValueTest {
 		columnTitleCountTest(column1, 1);
 		columnTitleValueTest(column1, "Column1");
 		columnDetailCountTest(column1, 1);
-		columnDetailValueTest(column1, 0, "text");
+		columnDetailValueTest(column1, 0, "text1");
 		//column2
 		columnTitleCountTest(column2, 1);
 		columnTitleValueTest(column2, "Column2");
@@ -87,5 +104,21 @@ public class XmlReportTest extends AbstractJasperValueTest {
 		columnTitleValueTest(column3, "Column3");
 		columnDetailCountTest(column3, 1);
 		columnDetailValueTest(column3, 0, "100.00");
+
+		//column4
+		columnTitleCountTest(column4, 1);
+		columnTitleValueTest(column4, "Column4");
+		columnDetailCountTest(column4, 1);
+		columnDetailValueTest(column4, 0, "text2");
+		//column5
+		columnTitleCountTest(column5, 1);
+		columnTitleValueTest(column5, "Column5");
+		columnDetailCountTest(column5, 1);
+		columnDetailValueTest(column5, 0, "1");
+		//column6
+		columnTitleCountTest(column6, 1);
+		columnTitleValueTest(column6, "Column6");
+		columnDetailCountTest(column6, 1);
+		columnDetailValueTest(column6, 0, "");
 	}
 }

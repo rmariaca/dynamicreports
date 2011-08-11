@@ -84,6 +84,8 @@ public interface DRIReport extends Serializable {
 
 	public Boolean getFloatColumnFooter();
 
+	public Boolean getUseFieldNameAsDescription();
+
 	public DRIStyle getTextStyle();
 
 	public DRIStyle getColumnTitleStyle();

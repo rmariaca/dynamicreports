@@ -56,6 +56,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;
+	private Boolean useFieldNameAsDescription;
 	//style
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -206,6 +207,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setFloatColumnFooter(Boolean floatColumnFooter) {
 		this.floatColumnFooter = floatColumnFooter;
+	}
+
+	public Boolean getUseFieldNameAsDescription() {
+		return useFieldNameAsDescription;
+	}
+
+	public void setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
+		this.useFieldNameAsDescription = useFieldNameAsDescription;
 	}
 
 	public Boolean getHighlightDetailOddRows() {

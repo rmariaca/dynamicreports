@@ -71,6 +71,7 @@ public class DRReport implements DRIReport {
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;
+	private Boolean useFieldNameAsDescription;
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
 	private Boolean highlightDetailEvenRows;
@@ -374,6 +375,14 @@ public class DRReport implements DRIReport {
 
 	public void setFloatColumnFooter(Boolean floatColumnFooter) {
 		this.floatColumnFooter = floatColumnFooter;
+	}
+
+	public Boolean getUseFieldNameAsDescription() {
+		return useFieldNameAsDescription;
+	}
+
+	public void setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
+		this.useFieldNameAsDescription = useFieldNameAsDescription;
 	}
 
 	public DRStyle getTextStyle() {

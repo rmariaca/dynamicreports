@@ -160,7 +160,7 @@ public abstract class AbstractExpressionTransform {
 		DRDesignField designField = new DRDesignField();
 		designField.setName(field.getName());
 		designField.setValueClass(field.getValueClass());
-		designField.setDescription(field.getDescription());
+		designField.setDescription(accessor.getTemplateTransform().getFieldDescription(field));
 		return designField;
 	}
 

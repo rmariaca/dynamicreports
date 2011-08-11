@@ -37,7 +37,6 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.report.base.DRMargin;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -49,6 +48,7 @@ import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIBand;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
@@ -215,6 +215,26 @@ public class TemplateTransform {
 			return template.getFloatColumnFooter();
 		}
 		return Defaults.getDefaults().isFloatColumnFooter();
+	}
+
+	public String getFieldDescription(DRIField<?> field) {
+		if (field.getDescription() != null) {
+			return field.getDescription();
+		}
+		if (isUseFieldNameAsDescription()) {
+			return field.getName();
+		}
+		return null;
+	}
+
+	private boolean isUseFieldNameAsDescription() {
+		if (report.getUseFieldNameAsDescription() != null) {
+			return report.getUseFieldNameAsDescription();
+		}
+		if (template.getUseFieldNameAsDescription() != null) {
+			return template.getUseFieldNameAsDescription();
+		}
+		return Defaults.getDefaults().isUseFieldNameAsDescription();
 	}
 
 	//table of contents
@@ -475,7 +495,7 @@ public class TemplateTransform {
 			return templateDesign.getPageMargin();
 		}
 		if (accessor.getPageWidth() != null) {
-			return new DRMargin(0);
+			return Defaults.getDefaults().getSubreportPageMargin();
 		}
 		if (template.getPageMargin() != null) {
 			return template.getPageMargin();

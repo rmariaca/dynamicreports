@@ -45,19 +45,16 @@ public class XmlDatasourceReport {
 		try {
 			FieldBuilder<Integer> idField = field("id", type.integerType())
 				.setDescription("@id");
-			FieldBuilder<String> itemField = field("item", type.stringType())
-				.setDescription("item");
-			FieldBuilder<Integer> quantityField = field("quantity", type.integerType())
-				.setDescription("quantity");
-			FieldBuilder<BigDecimal> unitPriceField = field("unitprice", type.bigDecimalType())
-				.setDescription("unitprice");
+			FieldBuilder<String> itemField = field("item", type.stringType());
+			FieldBuilder<Integer> quantityField = field("quantity", type.integerType());
+			FieldBuilder<BigDecimal> unitPriceField = field("unitprice", type.bigDecimalType());
 
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  	col.column("Id",         idField),
-			  	col.column("Item",       itemField),
-			  	col.column("Quantity",   quantityField),
+			  	col.column("Id", idField),
+			  	col.column("Item", itemField),
+			  	col.column("Quantity", quantityField),
 			  	col.column("Unit price", unitPriceField))
 			  .title(Templates.createTitleComponent("XmlDatasource"))
 			  .pageFooter(Templates.footerComponent)

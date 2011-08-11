@@ -56,6 +56,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getFloatColumnFooter();
 
+	public Boolean getUseFieldNameAsDescription();
+
 	public Boolean getHighlightDetailOddRows();
 
 	public DRISimpleStyle getDetailOddRowStyle();

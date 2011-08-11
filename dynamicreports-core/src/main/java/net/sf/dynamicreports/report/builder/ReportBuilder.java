@@ -166,6 +166,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
+		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
+		return (T) this;
+	}
+
 	public T scriptlets(DRIScriptlet ...scriptlets) {
 		return addScriptlet(scriptlets);
 	}
