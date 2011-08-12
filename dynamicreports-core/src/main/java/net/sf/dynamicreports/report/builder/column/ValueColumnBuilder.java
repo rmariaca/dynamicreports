@@ -79,8 +79,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of preferred columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of preferred columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public T setColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -92,8 +92,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of fixed columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of fixed columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public T setFixedColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -106,8 +106,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of minimum columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of minimum columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public T setMinColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -119,8 +119,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * This method is used to define the preferred height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of preferred rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of preferred rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -131,8 +131,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * This method is used to define the fixed height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of fixed rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of fixed rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setFixedRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -144,8 +144,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * This method is used to define the minimum height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of minimum rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of minimum rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setMinRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -167,8 +167,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the preferred width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column preferred width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -179,8 +179,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the fixed width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column fixed width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setFixedWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -192,8 +192,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the minimum width of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column minimum width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setMinWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -205,8 +205,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the preferred height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column preferred height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column preferred height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setHeight(Integer height) {
 		getComponent().setHeight(height);
@@ -217,8 +217,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the fixed height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column fixed height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column fixed height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setFixedHeight(Integer height) {
 		getComponent().setHeight(height);
@@ -230,8 +230,8 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    * Sets the minimum height of a column.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column minimum height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column minimum height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setMinHeight(Integer height) {
 		getComponent().setHeight(height);

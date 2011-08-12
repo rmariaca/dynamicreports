@@ -32,7 +32,7 @@ import org.apache.commons.lang.Validate;
  */
 public class DRFont implements DRIFont {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String fontName;
 	private Integer fontSize;
 	private Boolean bold;
@@ -42,97 +42,97 @@ public class DRFont implements DRIFont {
 	private String pdfFontName;
 	private String pdfEncoding;
 	private Boolean pdfEmbedded;
-	
+
 	public DRFont() {
 	}
-	
+
 	public DRFont(String fontName, int fontSize) {
 		this.fontName = fontName;
-		this.setFontSize(fontSize);		
+		this.setFontSize(fontSize);
 	}
-	
+
 	public DRFont(String fontName, boolean bold, boolean italic, int fontSize) {
-		this.fontName = fontName;		
+		this.fontName = fontName;
 		this.bold = bold;
 		this.italic = italic;
-		this.setFontSize(fontSize);			
+		this.setFontSize(fontSize);
 	}
-	
+
 	public String getFontName() {
 		return fontName;
 	}
-	
+
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
 	}
-	
+
 	public Boolean getBold() {
 		return bold;
 	}
-	
+
 	public void setBold(Boolean bold) {
 		this.bold = bold;
 	}
-	
+
 	public Boolean getItalic() {
 		return italic;
 	}
-	
+
 	public void setItalic(Boolean italic) {
 		this.italic = italic;
 	}
-	
+
 	public Boolean getUnderline() {
 		return underline;
 	}
-	
+
 	public void setUnderline(Boolean underline) {
 		this.underline = underline;
 	}
-	
+
 	public Boolean getStrikeThrough() {
 		return strikeThrough;
 	}
-	
+
 	public void setStrikeThrough(Boolean strikeThrough) {
 		this.strikeThrough = strikeThrough;
 	}
-	
+
 	public Integer getFontSize() {
 		return fontSize;
 	}
-	
+
 	public void setFontSize(Integer fontSize) {
 		if (fontSize != null) {
-			Validate.isTrue(fontSize >= 1, "fontSize must be >= 1");
+			Validate.isTrue(fontSize >= 0, "fontSize must be >= 0");
 		}
 		this.fontSize = fontSize;
 	}
-	
+
 	public String getPdfFontName() {
 		return pdfFontName;
 	}
-	
+
 	@Deprecated
 	public void setPdfFontName(String pdfFontName) {
 		this.pdfFontName = pdfFontName;
 	}
-	
+
 	public String getPdfEncoding() {
 		return pdfEncoding;
 	}
-	
+
 	@Deprecated
 	public void setPdfEncoding(String pdfEncoding) {
 		this.pdfEncoding = pdfEncoding;
 	}
-	
+
 	public Boolean getPdfEmbedded() {
 		return pdfEmbedded;
 	}
-	
+
 	@Deprecated
 	public void setPdfEmbedded(Boolean pdfEmbedded) {
 		this.pdfEmbedded = pdfEmbedded;
-	}	
+	}
 }

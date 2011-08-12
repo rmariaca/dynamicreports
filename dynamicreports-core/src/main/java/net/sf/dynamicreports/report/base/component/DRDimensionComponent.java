@@ -44,7 +44,7 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
   /**
    * Returns the component width.
    *
-   * @return the component width >= 1
+   * @return the component width >= 0
    */
 	public Integer getWidth() {
 		return width;
@@ -54,12 +54,12 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
    * Sets the component width.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the component width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public void setWidth(Integer width) {
 		if (width != null) {
-			Validate.isTrue(width >= 1, "width must be >= 1");
+			Validate.isTrue(width >= 0, "width must be >= 0");
 		}
 		this.width = width;
 	}
@@ -67,7 +67,7 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
   /**
    * Returns the component height.
    *
-   * @return the component height >= 1
+   * @return the component height >= 0
    */
 	public Integer getHeight() {
 		return height;
@@ -77,12 +77,12 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
    * Sets the component height.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the component height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the component height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public void setHeight(Integer height) {
 		if (height != null) {
-			Validate.isTrue(height >= 1, "height must be >= 1");
+			Validate.isTrue(height >= 0, "height must be >= 0");
 		}
 		this.height = height;
 	}

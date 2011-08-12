@@ -112,8 +112,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of preferred columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of preferred columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public TextFieldBuilder<T> setColumns(Integer columns) {
 		getObject().setColumns(columns);
@@ -125,8 +125,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of fixed columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of fixed columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public TextFieldBuilder<T> setFixedColumns(Integer columns) {
 		getObject().setColumns(columns);
@@ -139,8 +139,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
    *
-   * @param columns the number of minimum columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of minimum columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public TextFieldBuilder<T> setMinColumns(Integer columns) {
 		getObject().setColumns(columns);
@@ -152,8 +152,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * This method is used to define the preferred height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of preferred rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of preferred rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public TextFieldBuilder<T> setRows(Integer rows) {
 		getObject().setRows(rows);
@@ -164,8 +164,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * This method is used to define the fixed height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of fixed rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of fixed rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public TextFieldBuilder<T> setFixedRows(Integer rows) {
 		getObject().setRows(rows);
@@ -177,8 +177,8 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
    * This method is used to define the minimum height of a textField.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of minimum rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of minimum rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public TextFieldBuilder<T> setMinRows(Integer rows) {
 		getObject().setRows(rows);

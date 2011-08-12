@@ -42,10 +42,10 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component preferred dimension.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component preferred width >= 1
-   * @param height the component preferred height >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param width the component preferred width >= 0
+   * @param height the component preferred height >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
@@ -57,10 +57,10 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component fixed dimension.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component fixed width >= 1
-   * @param height the component fixed height >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param width the component fixed width >= 0
+   * @param height the component fixed height >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setFixedDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
@@ -74,10 +74,10 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component minimum dimension.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component minimum width >= 1
-   * @param height the component minimum height >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param width the component minimum width >= 0
+   * @param height the component minimum height >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setMinDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
@@ -91,8 +91,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component preferred width.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component preferred width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the component preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setWidth(Integer width) {
 		getObject().setWidth(width);
@@ -103,8 +103,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component fixed width.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component fixed width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the component fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setFixedWidth(Integer width) {
 		getObject().setWidth(width);
@@ -116,8 +116,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component minimum width.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the component minimum width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the component minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public T setMinWidth(Integer width) {
 		getObject().setWidth(width);
@@ -129,8 +129,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component preferred height.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the component preferred height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the component preferred height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setHeight(Integer height) {
 		getObject().setHeight(height);
@@ -141,8 +141,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component fixed height.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the component fixed height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the component fixed height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setFixedHeight(Integer height) {
 		getObject().setHeight(height);
@@ -154,8 +154,8 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    * Sets the component minimum height.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the component minimum height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the component minimum height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setMinHeight(Integer height) {
 		getObject().setHeight(height);

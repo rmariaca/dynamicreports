@@ -76,8 +76,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the preferred width of a column title.
    * The width is set to the <code>columns</code> multiplied by width of the font
    *
-   * @param columns the number of preferred columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of preferred columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleColumns(Integer columns) {
 		getObject().setTitleColumns(columns);
@@ -88,8 +88,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the fixed width of a column title.
    * The width is set to the <code>columns</code> multiplied by width of the font
    *
-   * @param columns the number of fixed columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of fixed columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleFixedColumns(Integer columns) {
 		getObject().setTitleColumns(columns);
@@ -101,8 +101,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the minimum width of a column title.
    * The width is set to the <code>columns</code> multiplied by width of the font
    *
-   * @param columns the number of minimum columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   * @param columns the number of minimum columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleMinColumns(Integer columns) {
 		getObject().setTitleColumns(columns);
@@ -114,8 +114,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the preferred width of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column title preferred width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column title preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleWidth(Integer width) {
 		getObject().setTitleWidth(width);
@@ -126,8 +126,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the fixed width of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column title fixed width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column title fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleFixedWidth(Integer width) {
 		getObject().setTitleWidth(width);
@@ -139,8 +139,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the minimum width of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param width the column title minimum width >= 1
-   * @exception IllegalArgumentException if <code>width</code> is < 1
+   * @param width the column title minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleMinWidth(Integer width) {
 		getObject().setTitleWidth(width);
@@ -152,8 +152,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the preferred height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of preferred rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of preferred rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -164,8 +164,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the fixed height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of fixed rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of fixed rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleFixedRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -177,8 +177,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * This method is used to define the minimum height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of minimum rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of minimum rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleMinRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -190,8 +190,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the preferred height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title preferred height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title preferred height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -202,8 +202,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the fixed height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title fixed height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title fixed height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleFixedHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -215,8 +215,8 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
    * Sets the minimum height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title minimum height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title minimum height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public ColumnTitleGroupBuilder setTitleMinHeight(Integer height) {
 		getObject().setTitleHeight(height);

@@ -39,36 +39,36 @@ import org.apache.commons.lang.Validate;
  */
 public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRIExpression<T> valueExpression;
-	private String pattern;	
+	private String pattern;
 	private HorizontalAlignment horizontalAlignment;
-	private DRIValueFormatter<?, ? super T> valueFormatter;	
+	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private DRIDataType<? super T, T> dataType;
 	private Integer columns;
 	private Integer rows;
 	private Evaluation evaluationTime;
-	private DRGroup evaluationGroup;	
-	private Markup markup; 
+	private DRGroup evaluationGroup;
+	private Markup markup;
 	private Boolean stretchWithOverflow;
-	
+
 	public DRIExpression<T> getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIExpression<T> valueExpression) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.valueExpression = valueExpression;
 	}
-	
+
 	public String getPattern() {
 		return pattern;
 	}
-	
+
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
-	
+
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -96,7 +96,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
   /**
    * Returns the number of columns.
    *
-   * @return the number of columns >= 1
+   * @return the number of columns >= 0
    */
 	public Integer getColumns() {
 		return columns;
@@ -106,13 +106,13 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
    * This method is used to define the width of a column.
    * The width is set to the <code>columns</code> multiplied by width of the
    * character <em>m</em> for the font used
-   * 
-   * @param columns the number of columns >= 1
-   * @exception IllegalArgumentException if <code>columns</code> is < 1
+   *
+   * @param columns the number of columns >= 0
+   * @exception IllegalArgumentException if <code>columns</code> is < 0
    */
 	public void setColumns(Integer columns) {
 		if (columns != null) {
-			Validate.isTrue(columns >= 1, "columns must be >= 1");
+			Validate.isTrue(columns >= 0, "columns must be >= 0");
 		}
 		this.columns = columns;
 	}
@@ -120,7 +120,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
   /**
    * Returns the number of rows.
    *
-   * @return the number of rows >= 1
+   * @return the number of rows >= 0
    */
 	public Integer getRows() {
 		return rows;
@@ -129,37 +129,37 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
   /**
    * This method is used to define the height of a column.
    * The height is set to the <code>rows</code> multiplied by height of the font
-   * 
-   * @param rows the number of rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   *
+   * @param rows the number of rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public void setRows(Integer rows) {
 		if (rows != null) {
-			Validate.isTrue(rows >= 1, "rows must be >= 1");
+			Validate.isTrue(rows >= 0, "rows must be >= 0");
 		}
 		this.rows = rows;
-	}		
-	
+	}
+
 	public Evaluation getEvaluationTime() {
 		return evaluationTime;
 	}
-	
+
 	public void setEvaluationTime(Evaluation evaluationTime) {
 		this.evaluationTime = evaluationTime;
 	}
-	
+
 	public DRGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
-	
+
 	public void setEvaluationGroup(DRGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
 	}
-	
+
 	public Markup getMarkup() {
 		return markup;
 	}
-	
+
 	public void setMarkup(Markup markup) {
 		this.markup = markup;
 	}
@@ -170,6 +170,6 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 
 	public void setStretchWithOverflow(Boolean stretchWithOverflow) {
 		this.stretchWithOverflow = stretchWithOverflow;
-	}	
+	}
 }
 

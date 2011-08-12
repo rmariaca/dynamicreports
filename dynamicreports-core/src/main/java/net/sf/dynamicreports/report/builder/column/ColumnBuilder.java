@@ -82,8 +82,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * This method is used to define the preferred height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of preferred rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of preferred rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setTitleRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -94,8 +94,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * This method is used to define the fixed height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of fixed rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of fixed rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setTitleFixedRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -107,8 +107,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * This method is used to define the minimum height of a column title.
    * The height is set to the <code>rows</code> multiplied by height of the font
    *
-   * @param rows the number of minimum rows >= 1
-   * @exception IllegalArgumentException if <code>rows</code> is < 1
+   * @param rows the number of minimum rows >= 0
+   * @exception IllegalArgumentException if <code>rows</code> is < 0
    */
 	public T setTitleMinRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -120,8 +120,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * Sets the preferred height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title preferred height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title preferred height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setTitleHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -132,8 +132,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * Sets the fixed height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title fixed height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title fixed height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setTitleFixedHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -145,8 +145,8 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    * Sets the minimum height of a column title.
    * @see net.sf.dynamicreports.report.builder.Units
    *
-   * @param height the column title minimum height >= 1
-   * @exception IllegalArgumentException if <code>height</code> is < 1
+   * @param height the column title minimum height >= 0
+   * @exception IllegalArgumentException if <code>height</code> is < 0
    */
 	public T setTitleMinHeight(Integer height) {
 		getObject().setTitleHeight(height);

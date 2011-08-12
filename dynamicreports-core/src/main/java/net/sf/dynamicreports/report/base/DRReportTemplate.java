@@ -341,7 +341,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	private void setPageWidth(Integer pageWidth) {
 		if (pageWidth != null) {
-			Validate.isTrue(pageWidth >= 1, "pageWidth must be >= 1");
+			Validate.isTrue(pageWidth >= 0, "pageWidth must be >= 0");
 		}
 		this.pageWidth = pageWidth;
 	}
@@ -352,7 +352,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	private void setPageHeight(Integer pageHeight) {
 		if (pageHeight != null) {
-			Validate.isTrue(pageHeight >= 1, "pageHeight must be >= 1");
+			Validate.isTrue(pageHeight >= 0, "pageHeight must be >= 0");
 		}
 		this.pageHeight = pageHeight;
 	}
@@ -409,7 +409,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setColumnWidth(Integer columnWidth) {
 		if (columnWidth != null) {
-			Validate.isTrue(columnWidth >= 1, "columnWidth must be >= 1");
+			Validate.isTrue(columnWidth >= 0, "columnWidth must be >= 0");
 		}
 		this.columnWidth = columnWidth;
 	}
@@ -495,7 +495,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setTextFieldWidth(Integer textFieldWidth) {
 		if (textFieldWidth != null) {
-			Validate.isTrue(textFieldWidth >= 1, "textFieldWidth must be >= 1");
+			Validate.isTrue(textFieldWidth >= 0, "textFieldWidth must be >= 0");
 		}
 		this.textFieldWidth = textFieldWidth;
 	}
@@ -506,7 +506,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setImageHeight(Integer imageHeight) {
 		if (imageHeight != null) {
-			Validate.isTrue(imageHeight >= 1, "imageHeight must be >= 1");
+			Validate.isTrue(imageHeight >= 0, "imageHeight must be >= 0");
 		}
 		this.imageHeight = imageHeight;
 	}
@@ -517,7 +517,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setImageWidth(Integer imageWidth) {
 		if (imageWidth != null) {
-			Validate.isTrue(imageWidth >= 1, "imageWidth must be >= 1");
+			Validate.isTrue(imageWidth >= 0, "imageWidth must be >= 0");
 		}
 		this.imageWidth = imageWidth;
 	}
@@ -539,7 +539,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setChartHeight(Integer chartHeight) {
 		if (chartHeight != null) {
-			Validate.isTrue(chartHeight >= 1, "chartHeight must be >= 1");
+			Validate.isTrue(chartHeight >= 0, "chartHeight must be >= 0");
 		}
 		this.chartHeight = chartHeight;
 	}
@@ -550,7 +550,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setChartWidth(Integer chartWidth) {
 		if (chartWidth != null) {
-			Validate.isTrue(chartWidth >= 1, "chartWidth must be >= 1");
+			Validate.isTrue(chartWidth >= 0, "chartWidth must be >= 0");
 		}
 		this.chartWidth = chartWidth;
 	}
@@ -578,7 +578,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setBarcodeHeight(Integer barcodeHeight) {
 		if (barcodeHeight != null) {
-			Validate.isTrue(barcodeHeight >= 1, "barcodeHeight must be >= 1");
+			Validate.isTrue(barcodeHeight >= 0, "barcodeHeight must be >= 0");
 		}
 		this.barcodeHeight = barcodeHeight;
 	}
@@ -589,7 +589,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setBarcodeWidth(Integer barcodeWidth) {
 		if (barcodeWidth != null) {
-			Validate.isTrue(barcodeWidth >= 1, "barcodeWidth must be >= 1");
+			Validate.isTrue(barcodeWidth >= 0, "barcodeWidth must be >= 0");
 		}
 		this.barcodeWidth = barcodeWidth;
 	}
@@ -600,7 +600,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setSubreportHeight(Integer subreportHeight) {
 		if (subreportHeight != null) {
-			Validate.isTrue(subreportHeight >= 1, "subreportHeight must be >= 1");
+			Validate.isTrue(subreportHeight >= 0, "subreportHeight must be >= 0");
 		}
 		this.subreportHeight = subreportHeight;
 	}
@@ -611,7 +611,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setSubreportWidth(Integer subreportWidth) {
 		if (subreportWidth != null) {
-			Validate.isTrue(subreportWidth >= 1, "subreportWidth must be >= 1");
+			Validate.isTrue(subreportWidth >= 0, "subreportWidth must be >= 0");
 		}
 		this.subreportWidth = subreportWidth;
 	}
@@ -622,7 +622,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setCrosstabHeight(Integer crosstabHeight) {
 		if (crosstabHeight != null) {
-			Validate.isTrue(crosstabHeight >= 1, "crosstabHeight must be >= 1");
+			Validate.isTrue(crosstabHeight >= 0, "crosstabHeight must be >= 0");
 		}
 		this.crosstabHeight = crosstabHeight;
 	}
@@ -633,7 +633,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setCrosstabWidth(Integer crosstabWidth) {
 		if (crosstabWidth != null) {
-			Validate.isTrue(crosstabWidth >= 1, "crosstabWidth must be >= 1");
+			Validate.isTrue(crosstabWidth >= 0, "crosstabWidth must be >= 0");
 		}
 		this.crosstabWidth = crosstabWidth;
 	}
