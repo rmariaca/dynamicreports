@@ -20,37 +20,18 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition;
+package net.sf.dynamicreports.report.definition.component;
 
-import java.util.List;
-
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.GroupFooterPosition;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignGroup {
+public interface DRITotalPages extends DRIHyperLinkComponent {
 
-	public String getName();
+	public DRIExpression<String> getFormatExpression();
 
-	public DRIDesignExpression getGroupExpression();
-
-	public List<? extends DRIDesignBand> getHeaderBands();
-
-	public List<? extends DRIDesignBand> getFooterBands();
-
-	public boolean isStartInNewPage();
-
-	public boolean isStartInNewColumn();
-
-	public boolean isReprintHeaderOnEachPage();
-
-	public boolean isResetPageNumber();
-
-	public Integer getMinHeightToStartNewPage();
-
-	public GroupFooterPosition getFooterPosition();
-
-	public boolean isKeepTogether();
+	public HorizontalAlignment getHorizontalAlignment();
 }
+

@@ -58,6 +58,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.base.component.DRImage;
@@ -76,6 +77,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
+import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
@@ -97,6 +99,7 @@ import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.component.DRITotalPages;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
@@ -145,6 +148,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIPageXofY) {
 			return pageXofY((DRIPageXofY) component, defaultStyleType);
+		}
+		if (component instanceof DRITotalPages) {
+			return totalPages((DRITotalPages) component, defaultStyleType);
 		}
 		if (component instanceof DRILine) {
 			return line((DRILine) component);
@@ -353,7 +359,14 @@ public class ComponentTransform {
 		pageYField.setHeightType(pageXofY.getHeightType());
 		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);
 		pageYField.setValueExpression(new PageNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 1));
-		pageYField.setEvaluationTime(Evaluation.REPORT);
+		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
+		if (pageYEvaluationGroup == null) {
+			pageYField.setEvaluationTime(Evaluation.REPORT);
+		}
+		else {
+			pageYField.setEvaluationTime(Evaluation.GROUP);
+			pageYField.setEvaluationGroup((DRGroup) pageYEvaluationGroup);
+		}
 
 		int pageXofYWidth = templateTransform.getPageXofYWidth(pageXofY, style);
 		switch (horizontalAlignment) {
@@ -391,6 +404,30 @@ public class ComponentTransform {
 		listPageXofY.addComponent(pageXField);
 		listPageXofY.addComponent(pageYField);
 		return list(listPageXofY, DefaultStyleType.TEXT, null, null);
+	}
+
+	//total pages
+	private DRDesignTextField totalPages(DRITotalPages totalPages, DefaultStyleType defaultStyleType) throws DRException {
+		DRTextField<String> totalPagesField = new DRTextField<String>();
+		totalPagesField.setHyperLink((DRHyperLink) totalPages.getHyperLink());
+		totalPagesField.setPrintWhenExpression(totalPages.getPrintWhenExpression());
+		totalPagesField.setStyle((DRStyle) totalPages.getStyle());
+		totalPagesField.setWidth(totalPages.getWidth());
+		totalPagesField.setWidthType(totalPages.getWidthType());
+		totalPagesField.setHeight(totalPages.getHeight());
+		totalPagesField.setHeightType(totalPages.getHeightType());
+		totalPagesField.setHorizontalAlignment(totalPages.getHorizontalAlignment());
+		totalPagesField.setValueExpression(new TotalPagesExpression(totalPages.getFormatExpression()));
+		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
+		if (pageYEvaluationGroup == null) {
+			totalPagesField.setEvaluationTime(Evaluation.REPORT);
+		}
+		else {
+			totalPagesField.setEvaluationTime(Evaluation.GROUP);
+			totalPagesField.setEvaluationGroup((DRGroup) pageYEvaluationGroup);
+		}
+
+		return textField(totalPagesField, defaultStyleType);
 	}
 
 	//line
@@ -631,6 +668,22 @@ public class ComponentTransform {
 					pattern = pattern.substring(index1 + 3);
 				}
 			}
+			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
+			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});
+			return result;
+		}
+	}
+
+	private class TotalPagesExpression extends AbstractComplexExpression<String> {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		public TotalPagesExpression(DRIExpression<String> pageNumberFormatExpression) {
+			addExpression(pageNumberFormatExpression);
+		}
+
+		@Override
+		public String evaluate(List<?> values, ReportParameters reportParameters) {
+			String pattern = (String) values.get(0);
 			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
 			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});
 			return result;

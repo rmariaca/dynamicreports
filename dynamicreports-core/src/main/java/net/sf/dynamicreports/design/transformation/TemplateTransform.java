@@ -39,6 +39,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -673,6 +674,43 @@ public class TemplateTransform {
 			return template.getGroupReprintHeaderOnEachPage();
 		}
 		return Defaults.getDefaults().isGroupReprintHeaderOnEachPage();
+	}
+
+	protected boolean isGroupResetPageNumber(DRIGroup group) {
+		if (group.getResetPageNumber() != null) {
+			return group.getResetPageNumber();
+		}
+		if (template.getGroupResetPageNumber() != null) {
+			return template.getGroupResetPageNumber();
+		}
+		return Defaults.getDefaults().isGroupResetPageNumber();
+	}
+
+	protected Integer getGroupMinHeightToStartNewPage(DRIGroup group) {
+		if (group.getMinHeightToStartNewPage() != null) {
+			return group.getMinHeightToStartNewPage();
+		}
+		return Defaults.getDefaults().getGroupMinHeightToStartNewPage();
+	}
+
+	protected GroupFooterPosition getGroupFooterPosition(DRIGroup group) {
+		if (group.getFooterPosition() != null) {
+			return group.getFooterPosition();
+		}
+		if (template.getGroupFooterPosition() != null) {
+			return template.getGroupFooterPosition();
+		}
+		return Defaults.getDefaults().getGroupFooterPosition();
+	}
+
+	protected boolean isGroupKeepTogether(DRIGroup group) {
+		if (group.getKeepTogether() != null) {
+			return group.getKeepTogether();
+		}
+		if (template.getGroupKeepTogether() != null) {
+			return template.getGroupKeepTogether();
+		}
+		return Defaults.getDefaults().isGroupKeepTogether();
 	}
 
 	protected boolean isGroupByDataType(DRIGroup group) {

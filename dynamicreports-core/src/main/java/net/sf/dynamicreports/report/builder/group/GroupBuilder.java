@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -104,6 +105,34 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 
 	public T setReprintHeaderOnEachPage(Boolean reprintHeaderOnEachPage) {
 		getObject().setReprintHeaderOnEachPage(reprintHeaderOnEachPage);
+		return (T) this;
+	}
+
+	public T resetPageNumber() {
+		return setResetPageNumber(true);
+	}
+
+	public T setResetPageNumber(Boolean resetPageNumber) {
+		getObject().setResetPageNumber(resetPageNumber);
+		return (T) this;
+	}
+
+	public T setMinHeightToStartNewPage(Integer minHeightToStartNewPage) {
+		getObject().setMinHeightToStartNewPage(minHeightToStartNewPage);
+		return (T) this;
+	}
+
+	public T setFooterPosition(GroupFooterPosition footerPosition) {
+		getObject().setFooterPosition(footerPosition);
+		return (T) this;
+	}
+
+	public T keepTogether() {
+		return setKeepTogether(true);
+	}
+
+	public T setKeepTogether(Boolean keepTogether) {
+		getObject().setKeepTogether(keepTogether);
 		return (T) this;
 	}
 

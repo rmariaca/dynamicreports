@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.ImageScale;
@@ -69,6 +70,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
+import net.sf.jasperreports.engine.type.FooterPositionEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.LineDirectionEnum;
@@ -810,6 +812,21 @@ public class ConstantTransform {
 			return HyperlinkTypeEnum.REMOTE_PAGE;
 		default:
 			throw new JasperDesignException("HyperLinkType " + hyperLinkType.name() + " not supported");
+		}
+	}
+
+	public static FooterPositionEnum groupFooterPosition(GroupFooterPosition footerPosition) {
+		switch (footerPosition) {
+		case NORMAL:
+			return FooterPositionEnum.NORMAL;
+		case COLLATE_AT_BOTTOM:
+			return FooterPositionEnum.COLLATE_AT_BOTTOM;
+		case FORCE_AT_BOTTOM:
+			return FooterPositionEnum.FORCE_AT_BOTTOM;
+		case STACK_AT_BOTTOM:
+			return FooterPositionEnum.STACK_AT_BOTTOM;
+		default:
+			throw new JasperDesignException("GroupFooterPosition " + footerPosition.name() + " not supported");
 		}
 	}
 }

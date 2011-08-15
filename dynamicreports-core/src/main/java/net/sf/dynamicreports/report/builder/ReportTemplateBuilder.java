@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -315,6 +316,21 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setGroupReprintHeaderOnEachPage(Boolean groupReprintHeaderOnEachPage) {
 		getObject().setGroupReprintHeaderOnEachPage(groupReprintHeaderOnEachPage);
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupResetPageNumber(Boolean groupResetPageNumber) {
+		getObject().setGroupResetPageNumber(groupResetPageNumber);
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupFooterPosition(GroupFooterPosition groupFooterPosition) {
+		getObject().setGroupFooterPosition(groupFooterPosition);
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupKeepTogether(Boolean groupKeepTogether) {
+		getObject().setGroupKeepTogether(groupKeepTogether);
 		return this;
 	}
 

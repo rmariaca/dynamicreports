@@ -39,6 +39,7 @@ import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizer;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
@@ -100,6 +101,10 @@ public class Default {
 	private boolean groupStartInNewPage;
 	private boolean groupStartInNewColumn;
 	private boolean groupReprintHeaderOnEachPage;
+	private boolean groupResetPageNumber;
+	private Integer groupMinHeightToStartNewPage;
+	private GroupFooterPosition groupFooterPosition;
+	private boolean groupKeepTogether;
 	private boolean groupByDataType;
 	//table of contents
 	private boolean tableOfContents;
@@ -271,6 +276,10 @@ public class Default {
 		this.groupStartInNewPage = false;
 		this.groupStartInNewColumn = false;
 		this.groupReprintHeaderOnEachPage = false;
+		this.groupResetPageNumber = false;
+		this.groupMinHeightToStartNewPage = null;
+		this.groupFooterPosition = GroupFooterPosition.NORMAL;
+		this.groupKeepTogether = false;
 		this.groupByDataType = false;
 
 		this.tableOfContents = false;
@@ -547,6 +556,22 @@ public class Default {
 
 	public boolean isGroupReprintHeaderOnEachPage() {
 		return groupReprintHeaderOnEachPage;
+	}
+
+	public boolean isGroupResetPageNumber() {
+		return groupResetPageNumber;
+	}
+
+	public Integer getGroupMinHeightToStartNewPage() {
+		return groupMinHeightToStartNewPage;
+	}
+
+	public GroupFooterPosition getGroupFooterPosition() {
+		return groupFooterPosition;
+	}
+
+	public boolean isGroupKeepTogether() {
+		return groupKeepTogether;
 	}
 
 	public boolean isGroupByDataType() {

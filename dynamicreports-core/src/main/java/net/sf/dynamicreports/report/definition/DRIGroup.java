@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
 
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -61,6 +62,14 @@ public interface DRIGroup extends Serializable {
 	public Boolean getStartInNewColumn();
 
 	public Boolean getReprintHeaderOnEachPage();
+
+	public Boolean getResetPageNumber();
+
+	public Integer getMinHeightToStartNewPage();
+
+	public GroupFooterPosition getFooterPosition();
+
+	public Boolean getKeepTogether();
 
 	public DRIBand getHeaderBand();
 

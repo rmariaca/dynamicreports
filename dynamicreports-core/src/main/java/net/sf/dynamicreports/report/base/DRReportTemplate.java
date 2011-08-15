@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -89,6 +90,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean groupStartInNewPage;
 	private Boolean groupStartInNewColumn;
 	private Boolean groupReprintHeaderOnEachPage;
+	private Boolean groupResetPageNumber;
+	private GroupFooterPosition groupFooterPosition;
+	private Boolean groupKeepTogether;
 	//table of contents
 	public Boolean tableOfContents;
 	public DRITableOfContentsCustomizer tableOfContentsCustomizer;
@@ -471,6 +475,30 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setGroupReprintHeaderOnEachPage(Boolean groupReprintHeaderOnEachPage) {
 		this.groupReprintHeaderOnEachPage = groupReprintHeaderOnEachPage;
+	}
+
+	public Boolean getGroupResetPageNumber() {
+		return groupResetPageNumber;
+	}
+
+	public void setGroupResetPageNumber(Boolean groupResetPageNumber) {
+		this.groupResetPageNumber = groupResetPageNumber;
+	}
+
+	public GroupFooterPosition getGroupFooterPosition() {
+		return groupFooterPosition;
+	}
+
+	public void setGroupFooterPosition(GroupFooterPosition groupFooterPosition) {
+		this.groupFooterPosition = groupFooterPosition;
+	}
+
+	public Boolean getGroupKeepTogether() {
+		return groupKeepTogether;
+	}
+
+	public void setGroupKeepTogether(Boolean groupKeepTogether) {
+		this.groupKeepTogether = groupKeepTogether;
 	}
 
 	public Boolean getTableOfContents() {

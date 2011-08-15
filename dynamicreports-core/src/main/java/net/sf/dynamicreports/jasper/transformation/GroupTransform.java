@@ -32,45 +32,51 @@ import net.sf.jasperreports.engine.design.JRDesignGroup;
  */
 public class GroupTransform {
 	private JasperTransformAccessor accessor;
-	
+
 	public GroupTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
 	}
-	
+
 	public void transform() {
 		for (DRIDesignGroup group : accessor.getReport().getGroups()) {
 			addGroup(group);
-		}		
+		}
 	}
-	
+
 	private void addGroup(DRIDesignGroup group) {
 		try {
 			JRDesignGroup jrGroup = group(group);
-			accessor.getDesign().addGroup(jrGroup);	
+			accessor.getDesign().addGroup(jrGroup);
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for group \"" + group.getName() + "\"", e);
 		}
 	}
-	
+
 	private JRDesignGroup group(DRIDesignGroup group) {
 		JRDesignGroup jrGroup = new JRDesignGroup();
-		jrGroup.setName(group.getName());		
+		jrGroup.setName(group.getName());
 		jrGroup.setReprintHeaderOnEachPage(group.isReprintHeaderOnEachPage());
 		jrGroup.setStartNewColumn(group.isStartInNewColumn());
-		jrGroup.setStartNewPage(group.isStartInNewPage());	
+		jrGroup.setStartNewPage(group.isStartInNewPage());
+		jrGroup.setResetPageNumber(group.isResetPageNumber());
+		if (group.getMinHeightToStartNewPage() != null) {
+			jrGroup.setMinHeightToStartNewPage(group.getMinHeightToStartNewPage());
+		}
+		jrGroup.setFooterPosition(ConstantTransform.groupFooterPosition(group.getFooterPosition()));
+		jrGroup.setKeepTogether(group.isKeepTogether());
 		return jrGroup;
 	}
-	
+
 	public void transformExpressions() {
 		for (DRIDesignGroup group : accessor.getReport().getGroups()) {
 			getGroup(group).setExpression(accessor.getExpressionTransform().getExpression(group.getGroupExpression()));
-		}		
+		}
 	}
-	
+
 	protected JRDesignGroup getGroup(DRIDesignGroup group) {
 		JRDesignGroup jrGroup = (JRDesignGroup) accessor.getDesign().getGroupsMap().get(group.getName());
 		if (jrGroup == null)
 			throw new JasperDesignException("Group " + group.getName() + " is not registered");
 		return jrGroup;
-	}	
+	}
 }

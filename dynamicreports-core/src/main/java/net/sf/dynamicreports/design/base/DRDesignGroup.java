@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -39,12 +40,16 @@ public class DRDesignGroup implements DRIDesignGroup {
 	private boolean startInNewPage;
 	private boolean startInNewColumn;
 	private boolean reprintHeaderOnEachPage;
-	
+	private boolean resetPageNumber;
+	private Integer minHeightToStartNewPage;
+	private GroupFooterPosition footerPosition;
+	private boolean keepTogether;
+
 	public DRDesignGroup(String name) {
 		this.name = name;
 		init();
 	}
-	
+
 	private void init() {
 		headerBands = new ArrayList<DRDesignBand>();
 		footerBands = new ArrayList<DRDesignBand>();
@@ -53,7 +58,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 	public String getName() {
 		return name;
 	}
-	
+
 	public DRIDesignExpression getGroupExpression() {
 		return groupExpression;
 	}
@@ -73,7 +78,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 	public void addHeaderBand(DRDesignBand headerBand) {
 		this.headerBands.add(headerBand);
 	}
-	
+
 	public List<DRDesignBand> getFooterBands() {
 		return footerBands;
 	}
@@ -89,7 +94,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 	public void addFooterBand(int index, DRDesignBand footerBand) {
 		this.footerBands.add(index, footerBand);
 	}
-	
+
 	public boolean isStartInNewPage() {
 		return startInNewPage;
 	}
@@ -113,5 +118,36 @@ public class DRDesignGroup implements DRIDesignGroup {
 	public void setReprintHeaderOnEachPage(boolean reprintHeaderOnEachPage) {
 		this.reprintHeaderOnEachPage = reprintHeaderOnEachPage;
 	}
-	
+
+	public boolean isResetPageNumber() {
+		return resetPageNumber;
+	}
+
+	public void setResetPageNumber(boolean resetPageNumber) {
+		this.resetPageNumber = resetPageNumber;
+	}
+
+	public Integer getMinHeightToStartNewPage() {
+		return minHeightToStartNewPage;
+	}
+
+	public void setMinHeightToStartNewPage(Integer minHeightToStartNewPage) {
+		this.minHeightToStartNewPage = minHeightToStartNewPage;
+	}
+
+	public GroupFooterPosition getFooterPosition() {
+		return footerPosition;
+	}
+
+	public void setFooterPosition(GroupFooterPosition footerPosition) {
+		this.footerPosition = footerPosition;
+	}
+
+	public boolean isKeepTogether() {
+		return keepTogether;
+	}
+
+	public void setKeepTogether(boolean keepTogether) {
+		this.keepTogether = keepTogether;
+	}
 }

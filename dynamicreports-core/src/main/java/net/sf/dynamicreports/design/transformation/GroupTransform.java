@@ -66,6 +66,7 @@ public class GroupTransform {
 	private List<? extends DRIGroup> groups;
 	private Map<DRIGroup, DRDesignGroup> designGroups;
 	private List<DRIValueColumn<?>> hideGroupColumns;
+	private DRIGroup firstResetPageNumberGroup;
 	private int groupPadding;
 
 	public GroupTransform(DesignTransformAccessor accessor) {
@@ -93,6 +94,9 @@ public class GroupTransform {
 			hideGroupColumns.add((DRIValueColumn<?>) group.getValueField().getValueExpression());
 		}
 		designGroups.put(group, designGroup);
+		if (firstResetPageNumberGroup == null && designGroup.isResetPageNumber()) {
+			firstResetPageNumberGroup = group;
+		}
 		groupPadding += accessor.getTemplateTransform().getGroupPadding(group);
 	}
 
@@ -218,6 +222,10 @@ public class GroupTransform {
 		designGroup.setStartInNewPage(templateTransform.isGroupStartInNewPage(group));
 		designGroup.setStartInNewColumn(templateTransform.isGroupStartInNewColumn(group));
 		designGroup.setReprintHeaderOnEachPage(templateTransform.isGroupReprintHeaderOnEachPage(group));
+		designGroup.setResetPageNumber(templateTransform.isGroupResetPageNumber(group));
+		designGroup.setMinHeightToStartNewPage(templateTransform.getGroupMinHeightToStartNewPage(group));
+		designGroup.setFooterPosition(templateTransform.getGroupFooterPosition(group));
+		designGroup.setKeepTogether(templateTransform.isGroupKeepTogether(group));
 		DRIExpression<?> groupExpression = group.getValueField().getValueExpression();
 		if (templateTransform.isGroupByDataType(group) && group.getValueField().getDataType() != null) {
 			accessor.getExpressionTransform().transformExpression(groupExpression);
@@ -252,6 +260,10 @@ public class GroupTransform {
 			return groups.get(groups.size() - 1);
 		}
 		return null;
+	}
+
+	protected DRIGroup getFirstResetPageNumberGroup() {
+		return firstResetPageNumberGroup;
 	}
 
 	protected int getGroupPadding() {

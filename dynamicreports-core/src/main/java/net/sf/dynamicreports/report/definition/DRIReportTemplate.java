@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -113,6 +114,12 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getGroupStartInNewColumn();
 
 	public Boolean getGroupReprintHeaderOnEachPage();
+
+	public Boolean getGroupResetPageNumber();
+
+	public GroupFooterPosition getGroupFooterPosition();
+
+	public Boolean getGroupKeepTogether();
 
 	public Boolean getTableOfContents();
 

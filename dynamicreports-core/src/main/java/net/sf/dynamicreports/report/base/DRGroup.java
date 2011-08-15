@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -52,6 +53,10 @@ public class DRGroup implements DRIGroup {
 	private Boolean startInNewPage;
 	private Boolean startInNewColumn;
 	private Boolean reprintHeaderOnEachPage;
+	private Boolean resetPageNumber;
+	private Integer minHeightToStartNewPage;
+	private GroupFooterPosition footerPosition;
+	private Boolean keepTogether;
 	private DRBand headerBand;
 	private DRBand footerBand;
 
@@ -177,6 +182,38 @@ public class DRGroup implements DRIGroup {
 
 	public void setReprintHeaderOnEachPage(Boolean reprintHeaderOnEachPage) {
 		this.reprintHeaderOnEachPage = reprintHeaderOnEachPage;
+	}
+
+	public Boolean getResetPageNumber() {
+		return resetPageNumber;
+	}
+
+	public void setResetPageNumber(Boolean resetPageNumber) {
+		this.resetPageNumber = resetPageNumber;
+	}
+
+	public Integer getMinHeightToStartNewPage() {
+		return minHeightToStartNewPage;
+	}
+
+	public void setMinHeightToStartNewPage(Integer minHeightToStartNewPage) {
+		this.minHeightToStartNewPage = minHeightToStartNewPage;
+	}
+
+	public GroupFooterPosition getFooterPosition() {
+		return footerPosition;
+	}
+
+	public void setFooterPosition(GroupFooterPosition footerPosition) {
+		this.footerPosition = footerPosition;
+	}
+
+	public Boolean getKeepTogether() {
+		return keepTogether;
+	}
+
+	public void setKeepTogether(Boolean keepTogether) {
+		this.keepTogether = keepTogether;
 	}
 
 	public DRBand getHeaderBand() {
