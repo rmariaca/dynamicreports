@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.2.0 (2011-08-16)
+---------------------------------------------------
+ - support for barbecue barcodes
+ - ability to create datasets, see SubDatasourceReport for an example
+ - minor bug fixes and improvements
+ - new examples - BarcodeReport, DatabaseDatasourceReport, XmlDatasourceReport, SubDatasourceReport, UnitsReport, GroupLayoutReport
+ 
 Changes in version 2.1.2 (2011-07-26)
 ---------------------------------------------------
  - ability to group column titles, see ColumnTitleGroupReport for an example
