@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRXmlDataSource;
@@ -43,11 +44,20 @@ public class XmlDatasourceReport {
 
 	private void build() {
 		try {
+			JRXmlDataSource dataSource = new JRXmlDataSource(XmlDatasourceReport.class.getResourceAsStream("sales.xml"), "/sales/item");
+			JRXmlDataSource chartDataSource = dataSource.dataSource("/sales/chart/item");
+
 			FieldBuilder<Integer> idField = field("id", type.integerType())
 				.setDescription("@id");
 			FieldBuilder<String> itemField = field("item", type.stringType());
 			FieldBuilder<Integer> quantityField = field("quantity", type.integerType());
 			FieldBuilder<BigDecimal> unitPriceField = field("unitprice", type.bigDecimalType());
+
+			BarChartBuilder barChart = cht.barChart()
+				.setDataSource(chartDataSource)
+				.setCategory(itemField)
+				.series(
+					cht.serie(quantityField).setLabel("Quantity"));
 
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -57,8 +67,9 @@ public class XmlDatasourceReport {
 			  	col.column("Quantity", quantityField),
 			  	col.column("Unit price", unitPriceField))
 			  .title(Templates.createTitleComponent("XmlDatasource"))
+			  .summary(barChart)
 			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(new JRXmlDataSource(XmlDatasourceReport.class.getResourceAsStream("sales.xml"), "/sales/item"))
+			  .setDataSource(dataSource)
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
