@@ -139,11 +139,28 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private SplitType columnFooterSplitType;
 	private SplitType groupHeaderSplitType;
 	private SplitType groupFooterSplitType;
+	private SplitType detailHeaderSplitType;
 	private SplitType detailSplitType;
+	private SplitType detailFooterSplitType;
 	private SplitType lastPageFooterSplitType;
 	private SplitType summarySplitType;
 	private SplitType noDataSplitType;
 	private SplitType backgroundSplitType;
+	//band style
+	private DRStyle titleStyle;
+	private DRStyle pageHeaderStyle;
+	private DRStyle pageFooterStyle;
+	private DRStyle columnHeaderStyle;
+	private DRStyle columnFooterStyle;
+	private DRStyle groupHeaderStyle;
+	private DRStyle groupFooterStyle;
+	private DRStyle detailHeaderStyle;
+	private DRStyle detailStyle;
+	private DRStyle detailFooterStyle;
+	private DRStyle lastPageFooterStyle;
+	private DRStyle summaryStyle;
+	private DRStyle noDataStyle;
+	private DRStyle backgroundStyle;
 
 	public DRReportTemplate() {
 		this.chartSeriesColors = new ArrayList<Color>();
@@ -834,12 +851,28 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.groupFooterSplitType = groupFooterSplitType;
 	}
 
+	public SplitType getDetailHeaderSplitType() {
+		return detailHeaderSplitType;
+	}
+
+	public void setDetailHeaderSplitType(SplitType detailHeaderSplitType) {
+		this.detailHeaderSplitType = detailHeaderSplitType;
+	}
+
 	public SplitType getDetailSplitType() {
 		return detailSplitType;
 	}
 
 	public void setDetailSplitType(SplitType detailSplitType) {
 		this.detailSplitType = detailSplitType;
+	}
+
+	public SplitType getDetailFooterSplitType() {
+		return detailFooterSplitType;
+	}
+
+	public void setDetailFooterSplitType(SplitType detailFooterSplitType) {
+		this.detailFooterSplitType = detailFooterSplitType;
 	}
 
 	public SplitType getLastPageFooterSplitType() {
@@ -872,5 +905,117 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setBackgroundSplitType(SplitType backgroundSplitType) {
 		this.backgroundSplitType = backgroundSplitType;
+	}
+
+	public DRStyle getTitleStyle() {
+		return titleStyle;
+	}
+
+	public void setTitleStyle(DRStyle titleStyle) {
+		this.titleStyle = titleStyle;
+	}
+
+	public DRStyle getPageHeaderStyle() {
+		return pageHeaderStyle;
+	}
+
+	public void setPageHeaderStyle(DRStyle pageHeaderStyle) {
+		this.pageHeaderStyle = pageHeaderStyle;
+	}
+
+	public DRStyle getPageFooterStyle() {
+		return pageFooterStyle;
+	}
+
+	public void setPageFooterStyle(DRStyle pageFooterStyle) {
+		this.pageFooterStyle = pageFooterStyle;
+	}
+
+	public DRStyle getColumnHeaderStyle() {
+		return columnHeaderStyle;
+	}
+
+	public void setColumnHeaderStyle(DRStyle columnHeaderStyle) {
+		this.columnHeaderStyle = columnHeaderStyle;
+	}
+
+	public DRStyle getColumnFooterStyle() {
+		return columnFooterStyle;
+	}
+
+	public void setColumnFooterStyle(DRStyle columnFooterStyle) {
+		this.columnFooterStyle = columnFooterStyle;
+	}
+
+	public DRStyle getGroupHeaderStyle() {
+		return groupHeaderStyle;
+	}
+
+	public void setGroupHeaderStyle(DRStyle groupHeaderStyle) {
+		this.groupHeaderStyle = groupHeaderStyle;
+	}
+
+	public DRStyle getGroupFooterStyle() {
+		return groupFooterStyle;
+	}
+
+	public void setGroupFooterStyle(DRStyle groupFooterStyle) {
+		this.groupFooterStyle = groupFooterStyle;
+	}
+
+	public DRStyle getDetailHeaderStyle() {
+		return detailHeaderStyle;
+	}
+
+	public void setDetailHeaderStyle(DRStyle detailHeaderStyle) {
+		this.detailHeaderStyle = detailHeaderStyle;
+	}
+
+	public DRStyle getDetailStyle() {
+		return detailStyle;
+	}
+
+	public void setDetailStyle(DRStyle detailStyle) {
+		this.detailStyle = detailStyle;
+	}
+
+	public DRStyle getDetailFooterStyle() {
+		return detailFooterStyle;
+	}
+
+	public void setDetailFooterStyle(DRStyle detailFooterStyle) {
+		this.detailFooterStyle = detailFooterStyle;
+	}
+
+	public DRStyle getLastPageFooterStyle() {
+		return lastPageFooterStyle;
+	}
+
+	public void setLastPageFooterStyle(DRStyle lastPageFooterStyle) {
+		this.lastPageFooterStyle = lastPageFooterStyle;
+	}
+
+	public DRStyle getSummaryStyle() {
+		return summaryStyle;
+	}
+
+	public void setSummaryStyle(DRStyle summaryStyle) {
+		this.summaryStyle = summaryStyle;
+	}
+
+	public DRStyle getNoDataStyle() {
+		return noDataStyle;
+	}
+
+	public void setNoDataStyle(DRStyle noDataStyle) {
+		this.noDataStyle = noDataStyle;
+	}
+
+	public DRStyle getBackgroundStyle() {
+		return backgroundStyle;
+	}
+
+	public void setBackgroundStyle(DRStyle backgroundStyle) {
+		this.backgroundStyle = backgroundStyle;
 	}
 }

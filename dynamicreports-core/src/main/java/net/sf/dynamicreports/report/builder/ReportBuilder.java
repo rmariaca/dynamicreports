@@ -703,9 +703,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return setTableOfContents(true);
 	}
 
-	//band
+	//title band
 	public T setTitleSplitType(SplitType splitType) {
 		getObject().getTitleBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setTitleStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getTitleBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getTitleBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -722,8 +732,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//page header band
 	public T setPageHeaderSplitType(SplitType splitType) {
 		getObject().getPageHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setPageHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getPageHeaderBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getPageHeaderBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -740,8 +761,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//page footer band
 	public T setPageFooterSplitType(SplitType splitType) {
 		getObject().getPageFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setPageFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getPageFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getPageFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -758,8 +790,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//column header band
 	public T setColumnHeaderSplitType(SplitType splitType) {
 		getObject().getColumnHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setColumnHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getColumnHeaderBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getColumnHeaderBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -776,8 +819,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//column footer band
 	public T setColumnFooterSplitType(SplitType splitType) {
 		getObject().getColumnFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setColumnFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getColumnFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getColumnFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -794,12 +848,27 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//group header band
 	public T setGroupHeaderSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
 		DRGroup drGroup = getObject().getGroups().get(index);
 		drGroup.getHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setGroupHeaderStyle(GroupBuilder<?> group, StyleBuilder style) {
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		if (style != null) {
+			drGroup.getHeaderBand().getList().setStyle(style.build());
+		}
+		else {
+			drGroup.getHeaderBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -820,12 +889,27 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//group footer band
 	public T setGroupFooterSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
 		DRGroup drGroup = getObject().getGroups().get(index);
 		drGroup.getFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setGroupFooterStyle(GroupBuilder<?> group, StyleBuilder style) {
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		if (style != null) {
+			drGroup.getFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			drGroup.getFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -846,8 +930,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//detail band
 	public T setDetailSplitType(SplitType splitType) {
 		getObject().getDetailBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setDetailStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getDetailBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getDetailBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -864,8 +959,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//detail header band
 	public T setDetailHeaderSplitType(SplitType splitType) {
 		getObject().getDetailHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setDetailHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getDetailHeaderBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getDetailHeaderBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -882,8 +988,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//detail footer band
 	public T setDetailFooterSplitType(SplitType splitType) {
 		getObject().getDetailFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setDetailFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getDetailFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getDetailFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -900,8 +1017,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//last page footer band
 	public T setLastPageFooterSplitType(SplitType splitType) {
 		getObject().getLastPageFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setLastPageFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getLastPageFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getLastPageFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -918,8 +1046,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//summary band
 	public T setSummarySplitType(SplitType splitType) {
 		getObject().getSummaryBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setSummaryStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getSummaryBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getSummaryBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -936,8 +1075,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//no data band
 	public T setNoDataSplitType(SplitType splitType) {
 		getObject().getNoDataBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setNoDataStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getNoDataBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getNoDataBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 
@@ -954,8 +1104,19 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//background band
 	public T setBackgroundSplitType(SplitType splitType) {
 		getObject().getBackgroundBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setBackgroundStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getBackgroundBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getBackgroundBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 

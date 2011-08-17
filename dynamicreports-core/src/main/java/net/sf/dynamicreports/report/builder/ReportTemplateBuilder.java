@@ -538,6 +538,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	//band split type
 	public ReportTemplateBuilder setDefaultSplitType(SplitType defaultSplitType) {
 		getObject().setDefaultSplitType(defaultSplitType);
 		return this;
@@ -578,8 +579,18 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setDetailHeaderSplitType(SplitType detailHeaderSplitType) {
+		getObject().setDetailHeaderSplitType(detailHeaderSplitType);
+		return this;
+	}
+
 	public ReportTemplateBuilder setDetailSplitType(SplitType detailSplitType) {
 		getObject().setDetailSplitType(detailSplitType);
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailFooterSplitType(SplitType detailFooterSplitType) {
+		getObject().setDetailFooterSplitType(detailFooterSplitType);
 		return this;
 	}
 
@@ -600,6 +611,147 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setBackgroundSplitType(SplitType backgroundSplitType) {
 		getObject().setBackgroundSplitType(backgroundSplitType);
+		return this;
+	}
+
+	//band style
+	public ReportTemplateBuilder setTitleStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setTitleStyle(style.build());
+		}
+		else {
+			getObject().setTitleStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setPageHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setPageHeaderStyle(style.build());
+		}
+		else {
+			getObject().setPageHeaderStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setPageFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setPageFooterStyle(style.build());
+		}
+		else {
+			getObject().setPageFooterStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setColumnHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setColumnHeaderStyle(style.build());
+		}
+		else {
+			getObject().setColumnHeaderStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setColumnFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setColumnFooterStyle(style.build());
+		}
+		else {
+			getObject().setColumnFooterStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setGroupHeaderStyle(style.build());
+		}
+		else {
+			getObject().setGroupHeaderStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setGroupFooterStyle(style.build());
+		}
+		else {
+			getObject().setGroupFooterStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setDetailHeaderStyle(style.build());
+		}
+		else {
+			getObject().setDetailHeaderStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setDetailStyle(style.build());
+		}
+		else {
+			getObject().setDetailStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setDetailFooterStyle(style.build());
+		}
+		else {
+			getObject().setDetailFooterStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setLastPageFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setLastPageFooterStyle(style.build());
+		}
+		else {
+			getObject().setLastPageFooterStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setSummaryStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setSummaryStyle(style.build());
+		}
+		else {
+			getObject().setSummaryStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setNoDataStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setNoDataStyle(style.build());
+		}
+		else {
+			getObject().setNoDataStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setBackgroundStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().setBackgroundStyle(style.build());
+		}
+		else {
+			getObject().setBackgroundStyle(null);
+		}
 		return this;
 	}
 

@@ -193,7 +193,11 @@ public interface DRIReportTemplate extends Serializable {
 
 	public SplitType getGroupFooterSplitType();
 
+	public SplitType getDetailHeaderSplitType();
+
 	public SplitType getDetailSplitType();
+
+	public SplitType getDetailFooterSplitType();
 
 	public SplitType getLastPageFooterSplitType();
 
@@ -202,4 +206,32 @@ public interface DRIReportTemplate extends Serializable {
 	public SplitType getNoDataSplitType();
 
 	public SplitType getBackgroundSplitType();
+
+	public DRIStyle getTitleStyle();
+
+	public DRIStyle getPageHeaderStyle();
+
+	public DRIStyle getPageFooterStyle();
+
+	public DRIStyle getColumnHeaderStyle();
+
+	public DRIStyle getColumnFooterStyle();
+
+	public DRIStyle getGroupHeaderStyle();
+
+	public DRIStyle getGroupFooterStyle();
+
+	public DRIStyle getDetailHeaderStyle();
+
+	public DRIStyle getDetailStyle();
+
+	public DRIStyle getDetailFooterStyle();
+
+	public DRIStyle getLastPageFooterStyle();
+
+	public DRIStyle getSummaryStyle();
+
+	public DRIStyle getNoDataStyle();
+
+	public DRIStyle getBackgroundStyle();
 }

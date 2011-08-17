@@ -45,6 +45,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	}
 
 	protected void styleTest(JRStyle style, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+		Assert.assertNotNull("style is null", style);
 		Assert.assertEquals("foreColor", foreColor, style.getForecolor());
 		Assert.assertEquals("backColor", backColor, style.getBackcolor());
 		Assert.assertEquals("fontName", fontName, style.getFontName());

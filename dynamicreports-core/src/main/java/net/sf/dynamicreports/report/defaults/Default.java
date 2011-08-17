@@ -186,11 +186,15 @@ public class Default {
 	private SplitType columnFooterSplitType;
 	private SplitType groupHeaderSplitType;
 	private SplitType groupFooterSplitType;
+	private SplitType detailHeaderSplitType;
 	private SplitType detailSplitType;
+	private SplitType detailFooterSplitType;
 	private SplitType lastPageFooterSplitType;
 	private SplitType summarySplitType;
 	private SplitType noDataSplitType;
 	private SplitType backgroundSplitType;
+	//band style
+	private DRIStyle bandStyle;
 	//font
   private DRFont font;
   //datatype
@@ -368,11 +372,15 @@ public class Default {
 		this.columnFooterSplitType = null;
 		this.groupHeaderSplitType = null;
 		this.groupFooterSplitType = null;
+		this.detailHeaderSplitType = null;
 		this.detailSplitType = null;
+		this.detailFooterSplitType = null;
 		this.lastPageFooterSplitType = null;
 		this.summarySplitType = null;
 		this.noDataSplitType = null;
 		this.backgroundSplitType = null;
+
+		this.bandStyle = null;
 
 		this.font = new DRFont("SansSerif", 10);
 
@@ -834,8 +842,16 @@ public class Default {
 		return groupFooterSplitType;
 	}
 
+	public SplitType getDetailHeaderSplitType() {
+		return detailHeaderSplitType;
+	}
+
 	public SplitType getDetailSplitType() {
 		return detailSplitType;
+	}
+
+	public SplitType getDetailFooterSplitType() {
+		return detailFooterSplitType;
 	}
 
 	public SplitType getLastPageFooterSplitType() {
@@ -852,6 +868,10 @@ public class Default {
 
 	public SplitType getBackgroundSplitType() {
 		return backgroundSplitType;
+	}
+
+	public DRIStyle getBandStyle() {
+		return bandStyle;
 	}
 
 	public DRFont getFont() {

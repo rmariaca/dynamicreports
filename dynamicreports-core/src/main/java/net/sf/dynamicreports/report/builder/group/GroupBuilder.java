@@ -181,6 +181,16 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T setHeaderStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getHeaderBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getHeaderBand().getList().setStyle(null);
+		}
+		return (T) this;
+	}
+
 	public T addHeaderComponent(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -197,6 +207,16 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	//footer
 	public T setFooterSplitType(SplitType splitType) {
 		getObject().getFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setFooterStyle(StyleBuilder style) {
+		if (style != null) {
+			getObject().getFooterBand().getList().setStyle(style.build());
+		}
+		else {
+			getObject().getFooterBand().getList().setStyle(null);
+		}
 		return (T) this;
 	}
 

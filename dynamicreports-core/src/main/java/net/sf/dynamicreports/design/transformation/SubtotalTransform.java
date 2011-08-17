@@ -154,7 +154,7 @@ public class SubtotalTransform {
 			DRIGroup group = entry.getKey();
 			DRIBand bnd = group.getHeaderBand();
 			DRDesignGroup designGroup = accessor.getGroupTransform().getGroup(group);
-			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupHeader", bnd, accessor.getTemplateTransform().getGroupHeaderSplitType(bnd));
+			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupHeader", bnd, accessor.getTemplateTransform().getGroupHeaderSplitType(bnd), accessor.getTemplateTransform().getGroupHeaderStyle(bnd));
 			addAfterBandComponent(band, entry.getValue(), null);
 			setPrintGroupSubtotalsWhenExpression(group, entry.getValue());
 			designGroup.addHeaderBand(band);
@@ -163,7 +163,7 @@ public class SubtotalTransform {
 			DRIGroup group = entry.getKey();
 			DRIBand bnd = group.getFooterBand();
 			DRDesignGroup designGroup = accessor.getGroupTransform().getGroup(group);
-			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupFooter", bnd, accessor.getTemplateTransform().getGroupFooterSplitType(bnd));
+			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupFooter", bnd, accessor.getTemplateTransform().getGroupFooterSplitType(bnd), accessor.getTemplateTransform().getGroupFooterStyle(bnd));
 			addBeforeBandComponent(band, entry.getValue(), null);
 			setPrintGroupSubtotalsWhenExpression(group, entry.getValue());
 			designGroup.addFooterBand(0, band);

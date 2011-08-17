@@ -1491,8 +1491,16 @@ public class TemplateTransform {
 		return getSplitType(band, template.getGroupFooterSplitType(), Defaults.getDefaults().getGroupFooterSplitType());
 	}
 
+	protected SplitType getDetailHeaderSplitType(DRIBand band) {
+		return getSplitType(band, template.getDetailHeaderSplitType(), Defaults.getDefaults().getDetailHeaderSplitType());
+	}
+
 	protected SplitType getDetailSplitType(DRIBand band) {
 		return getSplitType(band, template.getDetailSplitType(), Defaults.getDefaults().getDetailSplitType());
+	}
+
+	protected SplitType getDetailFooterSplitType(DRIBand band) {
+		return getSplitType(band, template.getDetailFooterSplitType(), Defaults.getDefaults().getDetailFooterSplitType());
 	}
 
 	protected SplitType getLastPageFooterSplitType(DRIBand band) {
@@ -1525,6 +1533,73 @@ public class TemplateTransform {
 			return template.getDefaultSplitType();
 		}
 		return Defaults.getDefaults().getDefaultSplitType();
+	}
+
+	//band style
+	protected DRIStyle getTitleStyle(DRIBand band) {
+		return getBandStyle(band, template.getTitleStyle());
+	}
+
+	protected DRIStyle getPageHeaderStyle(DRIBand band) {
+		return getBandStyle(band, template.getPageHeaderStyle());
+	}
+
+	protected DRIStyle getPageFooterStyle(DRIBand band) {
+		return getBandStyle(band, template.getPageFooterStyle());
+	}
+
+	protected DRIStyle getColumnHeaderStyle(DRIBand band) {
+		return getBandStyle(band, template.getColumnHeaderStyle());
+	}
+
+	protected DRIStyle getColumnFooterStyle(DRIBand band) {
+		return getBandStyle(band, template.getColumnFooterStyle());
+	}
+
+	protected DRIStyle getGroupHeaderStyle(DRIBand band) {
+		return getBandStyle(band, template.getGroupHeaderStyle());
+	}
+
+	protected DRIStyle getGroupFooterStyle(DRIBand band) {
+		return getBandStyle(band, template.getGroupFooterStyle());
+	}
+
+	protected DRIStyle getDetailHeaderStyle(DRIBand band) {
+		return getBandStyle(band, template.getDetailHeaderStyle());
+	}
+
+	protected DRIStyle getDetailStyle(DRIBand band) {
+		return getBandStyle(band, template.getDetailStyle());
+	}
+
+	protected DRIStyle getDetailFooterStyle(DRIBand band) {
+		return getBandStyle(band, template.getDetailFooterStyle());
+	}
+
+	protected DRIStyle getLastPageFooterStyle(DRIBand band) {
+		return getBandStyle(band, template.getLastPageFooterStyle());
+	}
+
+	protected DRIStyle getSummaryStyle(DRIBand band) {
+		return getBandStyle(band, template.getSummaryStyle());
+	}
+
+	protected DRIStyle getNoDataStyle(DRIBand band) {
+		return getBandStyle(band, template.getNoDataStyle());
+	}
+
+	protected DRIStyle getBackgroundStyle(DRIBand band) {
+		return getBandStyle(band, template.getBackgroundStyle());
+	}
+
+	private DRIStyle getBandStyle(DRIBand band, DRIStyle templateStyle) {
+		if (band.getList().getStyle() != null) {
+			return band.getList().getStyle();
+		}
+		if (templateStyle != null) {
+			return templateStyle;
+		}
+		return Defaults.getDefaults().getBandStyle();
 	}
 
 	private int detectWidth(DRDesignList designList) {

@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -71,49 +72,49 @@ public class BandTransform {
 		DRIReport report = accessor.getReport();
 
 		DRIBand band = report.getTitleBand();
-		titleBand = band("title", band, templateTransform.getTitleSplitType(band), ResetType.REPORT, null);
+		titleBand = band("title", band, templateTransform.getTitleSplitType(band), templateTransform.getTitleStyle(band), ResetType.REPORT, null);
 
 		band = report.getPageHeaderBand();
-		pageHeaderBand = band("pageHeader", band, templateTransform.getPageHeaderSplitType(band), ResetType.PAGE, null);
+		pageHeaderBand = band("pageHeader", band, templateTransform.getPageHeaderSplitType(band), templateTransform.getPageHeaderStyle(band), ResetType.PAGE, null);
 
 		band = report.getPageFooterBand();
-		pageFooterBand = band("pageFooter", band, templateTransform.getPageFooterSplitType(band), ResetType.PAGE, null);
+		pageFooterBand = band("pageFooter", band, templateTransform.getPageFooterSplitType(band), templateTransform.getPageFooterStyle(band), ResetType.PAGE, null);
 
 		band = report.getColumnHeaderBand();
-		columnHeaderBand = band("columnHeader", band, templateTransform.getColumnHeaderSplitType(band), ResetType.COLUMN, null);
+		columnHeaderBand = band("columnHeader", band, templateTransform.getColumnHeaderSplitType(band), templateTransform.getColumnHeaderStyle(band), ResetType.COLUMN, null);
 
 		for (DRIGroup group : report.getGroups()) {
 			if (templateTransform.isGroupShowColumnHeaderAndFooter(group)) {
 				band = report.getColumnHeaderBand();
-				columnHeaderForGroupBand = band("columnHeaderForGroup", band, templateTransform.getColumnHeaderSplitType(band), ResetType.COLUMN, null);
+				columnHeaderForGroupBand = band("columnHeaderForGroup", band, templateTransform.getColumnHeaderSplitType(band), templateTransform.getColumnHeaderStyle(band), ResetType.COLUMN, null);
 				break;
 			}
 		}
 
 		band = report.getColumnFooterBand();
-		columnFooterBand = band("columnFooter", band, templateTransform.getColumnFooterSplitType(band), ResetType.COLUMN, null);
+		columnFooterBand = band("columnFooter", band, templateTransform.getColumnFooterSplitType(band), templateTransform.getColumnFooterStyle(band), ResetType.COLUMN, null);
 
 		band = report.getDetailHeaderBand();
-		detailBands.add(band("detailHeader", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
+		detailBands.add(band("detailHeader", band, templateTransform.getDetailHeaderSplitType(band), templateTransform.getDetailHeaderStyle(band), ResetType.REPORT, null));
 
 		band = report.getDetailBand();
-		detailBand = band("detail", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null);
+		detailBand = band("detail", band, templateTransform.getDetailSplitType(band), templateTransform.getDetailStyle(band), ResetType.REPORT, null);
 		detailBands.add(detailBand);
 
 		band = report.getDetailFooterBand();
-		detailBands.add(band("detailFooter", band, templateTransform.getDetailSplitType(band), ResetType.REPORT, null));
+		detailBands.add(band("detailFooter", band, templateTransform.getDetailFooterSplitType(band), templateTransform.getDetailFooterStyle(band), ResetType.REPORT, null));
 
 		band = report.getLastPageFooterBand();
-		lastPageFooterBand = band("lastPageFooter", band, templateTransform.getLastPageFooterSplitType(band), ResetType.PAGE, null);
+		lastPageFooterBand = band("lastPageFooter", band, templateTransform.getLastPageFooterSplitType(band), templateTransform.getLastPageFooterStyle(band), ResetType.PAGE, null);
 
 		band = report.getSummaryBand();
-		summaryBand = band("summary", band, templateTransform.getSummarySplitType(band), ResetType.REPORT, null);
+		summaryBand = band("summary", band, templateTransform.getSummarySplitType(band), templateTransform.getSummaryStyle(band), ResetType.REPORT, null);
 
 		band = report.getNoDataBand();
-		noDataBand = band("noData", band, templateTransform.getNoDataSplitType(band), ResetType.REPORT, null);
+		noDataBand = band("noData", band, templateTransform.getNoDataSplitType(band), templateTransform.getNoDataStyle(band), ResetType.REPORT, null);
 
 		band = report.getBackgroundBand();
-		backgroundBand = band("background", band, templateTransform.getBackgroundSplitType(band), ResetType.REPORT, null);
+		backgroundBand = band("background", band, templateTransform.getBackgroundSplitType(band), templateTransform.getBackgroundStyle(band), ResetType.REPORT, null);
 	}
 
 	public void prepareBands() throws DRException {
@@ -157,14 +158,19 @@ public class BandTransform {
 	}
 
 	//band
-	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIStyle defaultStyle, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignBand designBand = new DRDesignBand(bandName);
 		designBand.setSplitType(splitType);
 		designBand.setList(accessor.getComponentTransform().list(band.getList(), DefaultStyleType.TEXT, resetType, resetGroup));
+
+		if (designBand.getList().getStyle() == null && defaultStyle != null) {
+			designBand.getList().setStyle(accessor.getStyleTransform().transformStyle(defaultStyle, false, DefaultStyleType.NONE));
+		}
+
 		return designBand;
 	}
 
-	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType) throws DRException {
+	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIStyle defaultStyle) throws DRException {
 		DRDesignBand designBand = new DRDesignBand(bandName);
 		designBand.setSplitType(splitType);
 		DRDesignList list = new DRDesignList();
@@ -172,7 +178,13 @@ public class BandTransform {
 		list.setGap(accessor.getTemplateTransform().getListGap(band.getList()));
 		list.setStretchType(accessor.getTemplateTransform().getStretchType(band.getList()));
 		list.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(band.getList().getPrintWhenExpression()));
+		list.setStyle(accessor.getStyleTransform().transformStyle(band.getList().getStyle(), false, DefaultStyleType.NONE));
 		designBand.setList(list);
+
+		if (list.getStyle() == null && defaultStyle != null) {
+			list.setStyle(accessor.getStyleTransform().transformStyle(defaultStyle, false, DefaultStyleType.NONE));
+		}
+
 		return designBand;
 	}
 
