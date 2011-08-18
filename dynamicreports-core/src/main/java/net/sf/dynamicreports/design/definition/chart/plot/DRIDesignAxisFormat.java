@@ -44,6 +44,8 @@ public interface DRIDesignAxisFormat {
 
 	public String getTickLabelMask();
 
+	public Boolean getVerticalTickLabels();
+
 	public Double getTickLabelRotation();
 
 	public Color getLineColor();

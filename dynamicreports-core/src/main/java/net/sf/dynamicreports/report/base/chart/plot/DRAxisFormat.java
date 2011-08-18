@@ -41,6 +41,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 	private DRFont tickLabelFont;
 	private Color tickLabelColor;
 	private String tickLabelMask;
+	private Boolean verticalTickLabels;
 	private Double tickLabelRotation;
 	private Color lineColor;
 	private DRIExpression<? extends Number> rangeMinValueExpression;
@@ -92,6 +93,14 @@ public class DRAxisFormat implements DRIAxisFormat {
 
 	public void setTickLabelMask(String tickLabelMask) {
 		this.tickLabelMask = tickLabelMask;
+	}
+
+	public Boolean getVerticalTickLabels() {
+		return verticalTickLabels;
+	}
+
+	public void setVerticalTickLabels(Boolean verticalTickLabels) {
+		this.verticalTickLabels = verticalTickLabels;
 	}
 
 	public Double getTickLabelRotation() {

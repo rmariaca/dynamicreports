@@ -205,6 +205,7 @@ public class ChartTransform {
 		designAxisFormat.setTickLabelFont(accessor.getStyleTransform().transformFont(axisFormat.getTickLabelFont()));
 		designAxisFormat.setTickLabelColor(axisFormat.getTickLabelColor());
 		designAxisFormat.setTickLabelMask(axisFormat.getTickLabelMask());
+		designAxisFormat.setVerticalTickLabels(axisFormat.getVerticalTickLabels());
 		designAxisFormat.setTickLabelRotation(axisFormat.getTickLabelRotation());
 		designAxisFormat.setLineColor(axisFormat.getLineColor());
 		designAxisFormat.setRangeMinValueExpression(accessor.getExpressionTransform().transformExpression(axisFormat.getRangeMinValueExpression()));

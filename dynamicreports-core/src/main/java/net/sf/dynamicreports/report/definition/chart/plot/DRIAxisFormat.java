@@ -45,6 +45,8 @@ public interface DRIAxisFormat extends Serializable {
 
 	public String getTickLabelMask();
 
+	public Boolean getVerticalTickLabels();
+
 	public Double getTickLabelRotation();
 
 	public Color getLineColor();

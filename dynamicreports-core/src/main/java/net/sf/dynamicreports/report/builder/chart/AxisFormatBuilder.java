@@ -81,6 +81,11 @@ public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxis
 		return this;
 	}
 
+	public AxisFormatBuilder setVerticalTickLabels(Boolean verticalTickLabels) {
+		getObject().setVerticalTickLabels(verticalTickLabels);
+		return this;
+	}
+
 	public AxisFormatBuilder setTickLabelRotation(Double tickLabelRotation) {
 		getObject().setTickLabelRotation(tickLabelRotation);
 		return this;

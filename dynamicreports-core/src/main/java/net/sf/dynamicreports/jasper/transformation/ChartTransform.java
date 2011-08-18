@@ -312,6 +312,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setCategoryAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
 		jrPlot.setCategoryAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setCategoryAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
 		jrPlot.setCategoryAxisTickLabelRotation(categoryAxisFormat.getTickLabelRotation());
 		jrPlot.setCategoryAxisLabelColor(categoryAxisFormat.getLabelColor());
 		if (categoryAxisFormat.getLabelFont() != null) {
@@ -329,6 +330,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
 		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
 		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
 		if (valueAxisFormat.getLabelFont() != null) {
 			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
@@ -347,6 +349,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setCategoryAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
 		jrPlot.setCategoryAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setCategoryAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
 		jrPlot.setCategoryAxisTickLabelRotation(categoryAxisFormat.getTickLabelRotation());
 		jrPlot.setCategoryAxisLabelColor(categoryAxisFormat.getLabelColor());
 		if (categoryAxisFormat.getLabelFont() != null) {
@@ -364,6 +367,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
 		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
 		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
 		if (valueAxisFormat.getLabelFont() != null) {
 			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
@@ -386,6 +390,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setCategoryAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
 		jrPlot.setCategoryAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setCategoryAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
 		jrPlot.setCategoryAxisTickLabelRotation(categoryAxisFormat.getTickLabelRotation());
 		jrPlot.setCategoryAxisLabelColor(categoryAxisFormat.getLabelColor());
 		if (categoryAxisFormat.getLabelFont() != null) {
@@ -403,6 +408,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
 		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
 		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
 		if (valueAxisFormat.getLabelFont() != null) {
 			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
@@ -425,6 +431,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setCategoryAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
 		jrPlot.setCategoryAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setCategoryAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
 		jrPlot.setCategoryAxisTickLabelRotation(categoryAxisFormat.getTickLabelRotation());
 		jrPlot.setCategoryAxisLabelColor(categoryAxisFormat.getLabelColor());
 		if (categoryAxisFormat.getLabelFont() != null) {
@@ -442,6 +449,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
 		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
 		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
 		if (valueAxisFormat.getLabelFont() != null) {
 			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
@@ -476,6 +484,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat xAxisFormat = plot.getXAxisFormat();
 		jrPlot.setXAxisLabelExpression(accessor.getExpressionTransform().getExpression(xAxisFormat.getLabelExpression()));
 		jrPlot.setXAxisTickLabelMask(xAxisFormat.getTickLabelMask());
+		jrPlot.setXAxisVerticalTickLabels(xAxisFormat.getVerticalTickLabels());
 		jrPlot.setXAxisLabelColor(xAxisFormat.getLabelColor());
 		if (xAxisFormat.getLabelFont() != null) {
 			jrPlot.setXAxisLabelFont(accessor.getStyleTransform().font(xAxisFormat.getLabelFont()));
@@ -492,6 +501,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat yAxisFormat = plot.getYAxisFormat();
 		jrPlot.setYAxisLabelExpression(accessor.getExpressionTransform().getExpression(yAxisFormat.getLabelExpression()));
 		jrPlot.setYAxisTickLabelMask(yAxisFormat.getTickLabelMask());
+		jrPlot.setYAxisVerticalTickLabels(yAxisFormat.getVerticalTickLabels());
 		jrPlot.setYAxisLabelColor(yAxisFormat.getLabelColor());
 		if (yAxisFormat.getLabelFont() != null) {
 			jrPlot.setYAxisLabelFont(accessor.getStyleTransform().font(yAxisFormat.getLabelFont()));
@@ -513,6 +523,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
 		jrPlot.setTimeAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
 		jrPlot.setTimeAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setTimeAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
 		jrPlot.setTimeAxisLabelColor(categoryAxisFormat.getLabelColor());
 		if (categoryAxisFormat.getLabelFont() != null) {
 			jrPlot.setTimeAxisLabelFont(accessor.getStyleTransform().font(categoryAxisFormat.getLabelFont()));
@@ -529,6 +540,7 @@ public class ChartTransform {
 		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
 		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
 		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
 		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
 		if (valueAxisFormat.getLabelFont() != null) {
 			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));

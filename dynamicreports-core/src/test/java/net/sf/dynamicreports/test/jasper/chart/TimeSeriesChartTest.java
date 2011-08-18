@@ -79,7 +79,8 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 											.setLabelFont(stl.fontArialBold())
 											.setTickLabelFont(stl.fontArial().setItalic(true))
 											.setTickLabelColor(Color.CYAN)
-											.setLineColor(Color.LIGHT_GRAY)),
+											.setLineColor(Color.LIGHT_GRAY)
+											.setVerticalTickLabels(true)),
 					cht.timeSeriesChart()
 						.setTimePeriod(column2)
 						.series(cht.serie(column3))
@@ -93,7 +94,8 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 											.setTickLabelMask("#,##0.00")
 											.setLineColor(Color.LIGHT_GRAY)
 											.setRangeMinValueExpression(1)
-											.setRangeMaxValueExpression(15)));
+											.setRangeMaxValueExpression(15)
+											.setVerticalTickLabels(true)));
 	}
 
 	@Override
@@ -116,6 +118,7 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
+		Assert.assertTrue("vertical tick labels", ((ValueAxis) axis).isVerticalTickLabels());
 
 		chart = getChart("summary.chart3", 0);
 		axis = chart.getXYPlot().getRangeAxis();
@@ -128,6 +131,7 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 		//Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 		Assert.assertEquals("range min value", 1d, ((ValueAxis) axis).getLowerBound());
 		Assert.assertEquals("range max value", 15d, ((ValueAxis) axis).getUpperBound());
+		Assert.assertTrue("vertical tick labels", ((ValueAxis) axis).isVerticalTickLabels());
 	}
 
 	@Override

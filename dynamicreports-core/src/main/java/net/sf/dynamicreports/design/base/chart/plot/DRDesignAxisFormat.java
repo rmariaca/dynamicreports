@@ -38,6 +38,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 	private DRDesignFont tickLabelFont;
 	private Color tickLabelColor;
 	private String tickLabelMask;
+	private Boolean verticalTickLabels;
 	private Double tickLabelRotation;
 	private Color lineColor;
 	private DRIDesignExpression rangeMinValueExpression;
@@ -89,6 +90,14 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 
 	public void setTickLabelMask(String tickLabelMask) {
 		this.tickLabelMask = tickLabelMask;
+	}
+
+	public Boolean getVerticalTickLabels() {
+		return verticalTickLabels;
+	}
+
+	public void setVerticalTickLabels(Boolean verticalTickLabels) {
+		this.verticalTickLabels = verticalTickLabels;
 	}
 
 	public Double getTickLabelRotation() {
