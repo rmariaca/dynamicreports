@@ -61,7 +61,7 @@ import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
-import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
@@ -991,7 +991,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getChartHeight();
 	}
 
-	protected List<Color> getChartSeriesColors(DRIPlot plot) {
+	protected List<Color> getChartSeriesColors(DRIBasePlot plot) {
 		if (plot.getSeriesColors() != null && !plot.getSeriesColors().isEmpty()) {
 			return plot.getSeriesColors();
 		}

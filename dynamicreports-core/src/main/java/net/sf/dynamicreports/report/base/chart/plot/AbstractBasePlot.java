@@ -22,49 +22,54 @@
 
 package net.sf.dynamicreports.report.base.chart.plot;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
+import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
+public abstract class AbstractBasePlot implements DRIBasePlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private Boolean circular;
-	private Boolean showLabels;
-	private String labelFormat;
-	private String legendLabelFormat;
+	private Orientation orientation;
+	private List<Color> seriesColors;
 
-	public Boolean getCircular() {
-		return circular;
+	protected AbstractBasePlot() {
+		init();
 	}
 
-	public void setCircular(Boolean circular) {
-		this.circular = circular;
+	protected void init() {
+		this.seriesColors = new ArrayList<Color>();
 	}
 
-	public void setShowLabels(Boolean showLabels) {
-		this.showLabels = showLabels;
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
 	}
 
-	public Boolean getShowLabels() {
-		return showLabels;
+	public Orientation getOrientation() {
+		return orientation;
 	}
 
-	public String getLabelFormat() {
-		return labelFormat;
+	public void addSeriesColor(Color color) {
+		Validate.notNull(color, "color must not be null");
+		this.seriesColors.add(color);
 	}
 
-	public void setLabelFormat(String labelFormat) {
-		this.labelFormat = labelFormat;
+	@SuppressWarnings("ucd")
+	public void setSeriesColors(List<Color> seriesColors) {
+		Validate.notNull(seriesColors, "seriesColors must not be null");
+		Validate.noNullElements(seriesColors, "seriesColors must not contain null color");
+		this.seriesColors = seriesColors;
 	}
 
-	public String getLegendLabelFormat() {
-		return legendLabelFormat;
-	}
-
-	public void setLegendLabelFormat(String legendLabelFormat) {
-		this.legendLabelFormat = legendLabelFormat;
+	public List<Color> getSeriesColors() {
+		return seriesColors;
 	}
 }

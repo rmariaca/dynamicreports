@@ -20,16 +20,41 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.plot;
+package net.sf.dynamicreports.report.definition.chart.plot;
+
+import java.awt.Color;
+
+import net.sf.dynamicreports.report.constant.SpiderRotation;
+import net.sf.dynamicreports.report.constant.TableOrder;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIFont;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignPiePlot extends DRIDesignBasePlot {
+public interface DRISpiderPlot extends DRIPlot {
 
-	public Boolean getCircular();
+	public DRIExpression<? extends Number> getMaxValueExpression();
 
-	public String getLabelFormat();
+	public SpiderRotation getRotation();
 
-	public String getLegendLabelFormat();
+	public TableOrder getTableOrder();
+
+	public Boolean getWebFilled();
+
+	public Double getStartAngle();
+
+	public Double getHeadPercent();
+
+	public Double getInteriorGap();
+
+	public Color getAxisLineColor();
+
+	public Float getAxisLineWidth();
+
+	public DRIFont getLabelFont();
+
+	public Double getLabelGap();
+
+	public Color getLabelColor();
 }

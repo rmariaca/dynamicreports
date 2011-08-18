@@ -39,5 +39,6 @@ public enum ChartType {
 	XYAREA,
 	XYBAR,
 	XYLINE,
-	SCATTER;
+	SCATTER,
+	SPIDER;
 }

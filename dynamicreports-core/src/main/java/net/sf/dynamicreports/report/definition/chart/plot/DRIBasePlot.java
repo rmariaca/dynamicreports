@@ -20,16 +20,19 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.plot;
+package net.sf.dynamicreports.report.definition.chart.plot;
+
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.report.constant.Orientation;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignPiePlot extends DRIDesignBasePlot {
+public interface DRIBasePlot extends DRIPlot {
 
-	public Boolean getCircular();
+	public Orientation getOrientation();
 
-	public String getLabelFormat();
-
-	public String getLegendLabelFormat();
+	public List<Color> getSeriesColors();
 }

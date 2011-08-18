@@ -27,7 +27,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisPlot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignAxisPlot extends AbstractDesignPlot implements DRIDesignAxisPlot {
+public class DRDesignAxisPlot extends AbstractDesignBasePlot implements DRIDesignAxisPlot {
 	private DRDesignAxisFormat xAxisFormat;
 	private DRDesignAxisFormat yAxisFormat;
 

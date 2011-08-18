@@ -55,13 +55,17 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.report.constant.SpiderRotation;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.constant.TableOrder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
+import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
+import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.design.JRDesignChart;
@@ -827,6 +831,36 @@ public class ConstantTransform {
 			return FooterPositionEnum.STACK_AT_BOTTOM;
 		default:
 			throw new JasperDesignException("GroupFooterPosition " + footerPosition.name() + " not supported");
+		}
+	}
+
+	public static SpiderRotationEnum spiderRotation(SpiderRotation rotation) {
+		if (rotation == null) {
+			return null;
+		}
+
+		switch (rotation) {
+		case CLOCKWISE:
+			return SpiderRotationEnum.CLOCKWISE;
+		case ANTICLOCKWISE:
+			return SpiderRotationEnum.ANTICLOCKWISE;
+		default:
+			throw new JasperDesignException("SpiderRotation " + rotation.name() + " not supported");
+		}
+	}
+
+	public static TableOrderEnum tableOrder(TableOrder tableOrder) {
+		if (tableOrder == null) {
+			return null;
+		}
+
+		switch (tableOrder) {
+		case BY_ROW:
+			return TableOrderEnum.BY_ROW;
+		case BY_COLUMN:
+			return TableOrderEnum.BY_COLUMN;
+		default:
+			throw new JasperDesignException("TableOrder " + tableOrder.name() + " not supported");
 		}
 	}
 }

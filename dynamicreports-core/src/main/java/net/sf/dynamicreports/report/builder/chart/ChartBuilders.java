@@ -112,4 +112,8 @@ public class ChartBuilders {
 	public ScatterChartBuilder scatterChart() {
 		return Charts.scatterChart();
 	}
+
+	public SpiderChartBuilder spiderChart() {
+		return Charts.spiderChart();
+	}
 }

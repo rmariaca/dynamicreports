@@ -22,14 +22,39 @@
 
 package net.sf.dynamicreports.design.definition.chart.plot;
 
+import java.awt.Color;
+
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
+import net.sf.dynamicreports.report.constant.SpiderRotation;
+import net.sf.dynamicreports.report.constant.TableOrder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignPiePlot extends DRIDesignBasePlot {
+public interface DRIDesignSpiderPlot extends DRIDesignPlot {
 
-	public Boolean getCircular();
+	public DRIDesignExpression getMaxValueExpression();
 
-	public String getLabelFormat();
+	public SpiderRotation getRotation();
 
-	public String getLegendLabelFormat();
+	public TableOrder getTableOrder();
+
+	public Boolean getWebFilled();
+
+	public Double getStartAngle();
+
+	public Double getHeadPercent();
+
+	public Double getInteriorGap();
+
+	public Color getAxisLineColor();
+
+	public Float getAxisLineWidth();
+
+	public DRIDesignFont getLabelFont();
+
+	public Double getLabelGap();
+
+	public Color getLabelColor();
 }

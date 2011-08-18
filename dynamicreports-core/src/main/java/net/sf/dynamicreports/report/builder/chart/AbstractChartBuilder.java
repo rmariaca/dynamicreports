@@ -33,7 +33,6 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -130,25 +129,6 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 
 	public T setLegendPosition(Position legendPosition) {
 		getObject().getLegend().setPosition(legendPosition);
-		return (T) this;
-	}
-
-	//plot
-	public T setOrientation(Orientation orientation) {
-		getObject().getPlot().setOrientation(orientation);
-		return (T) this;
-	}
-
-	public T seriesColors(Color ...seriesColors) {
-		return addSeriesColor(seriesColors);
-	}
-
-	public T addSeriesColor(Color ...seriesColors) {
-		Validate.notNull(seriesColors, "seriesColors must not be null");
-		Validate.noNullElements(seriesColors, "seriesColors must not contains null seriesColor");
-		for (Color seriesColor : seriesColors) {
-			getObject().getPlot().addSeriesColor(seriesColor);
-		}
 		return (T) this;
 	}
 

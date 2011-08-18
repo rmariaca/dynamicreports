@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.definition.chart.plot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIPiePlot extends DRIPlot {
+public interface DRIPiePlot extends DRIBasePlot {
 
 	public Boolean getCircular();
 

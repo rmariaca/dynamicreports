@@ -20,56 +20,48 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.chart.plot;
+package net.sf.dynamicreports.report.builder.chart;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
+import net.sf.dynamicreports.report.base.chart.plot.AbstractBasePlot;
+import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
-import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 
 import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractPlot implements DRIPlot {	
+@SuppressWarnings({"unchecked", "ucd"})
+public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilder<T, U>, U extends AbstractBasePlot> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Orientation orientation;
-	private List<Color> seriesColors;
 
-	protected AbstractPlot() {
-		init();
-	}
-	
-	protected void init() {
-		this.seriesColors = new ArrayList<Color>();		
+	protected AbstractBaseChartBuilder(ChartType chartType) {
+		super(chartType);
 	}
 
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
+	//plot
+	public T setOrientation(Orientation orientation) {
+		getPlot().setOrientation(orientation);
+		return (T) this;
 	}
 
-	public Orientation getOrientation() {
-		return orientation;
+	public T seriesColors(Color ...seriesColors) {
+		return addSeriesColor(seriesColors);
 	}
 
-	public void addSeriesColor(Color color) {
-		Validate.notNull(color, "color must not be null");
-		this.seriesColors.add(color);
-	}
-
-	@SuppressWarnings("ucd")
-	public void setSeriesColors(List<Color> seriesColors) {
+	public T addSeriesColor(Color ...seriesColors) {
 		Validate.notNull(seriesColors, "seriesColors must not be null");
-		Validate.noNullElements(seriesColors, "seriesColors must not contain null color");
-		this.seriesColors = seriesColors;
+		Validate.noNullElements(seriesColors, "seriesColors must not contains null seriesColor");
+		for (Color seriesColor : seriesColors) {
+			getPlot().addSeriesColor(seriesColor);
+		}
+		return (T) this;
 	}
 
-	public List<Color> getSeriesColors() {
-		return seriesColors;
+	protected U getPlot() {
+		return (U) getObject().getPlot();
 	}
 }

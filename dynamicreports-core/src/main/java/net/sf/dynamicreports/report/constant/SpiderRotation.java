@@ -20,16 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.plot;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignPiePlot extends DRIDesignBasePlot {
-
-	public Boolean getCircular();
-
-	public String getLabelFormat();
-
-	public String getLegendLabelFormat();
+public enum SpiderRotation {
+	CLOCKWISE,
+	ANTICLOCKWISE;
 }

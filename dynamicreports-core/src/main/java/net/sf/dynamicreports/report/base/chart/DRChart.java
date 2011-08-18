@@ -25,18 +25,19 @@ package net.sf.dynamicreports.report.base.chart;
 import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
-import net.sf.dynamicreports.report.base.chart.plot.AbstractPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
 import org.apache.commons.lang.Validate;
@@ -44,17 +45,17 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRChart extends DRHyperLinkComponent implements DRIChart {	
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;	
-	
+public class DRChart extends DRHyperLinkComponent implements DRIChart {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private ChartType chartType;
 	private DRChartDataset dataset;
-	private AbstractPlot plot;
+	private DRIPlot plot;
 	private DRIChartCustomizer customizer;
 	private DRChartTitle title;
 	private DRChartSubtitle subtitle;
-	private DRChartLegend legend;	
-	
+	private DRChartLegend legend;
+
 	public DRChart(ChartType chartType) {
 		setChartType(chartType);
 	}
@@ -70,7 +71,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	private void setChartType(ChartType chartType)	{
 		Validate.notNull(chartType, "chartType must not be null");
 		this.chartType = chartType;
-		
+
 		switch(chartType) {
 			case AREA:
 			case STACKEDAREA:
@@ -119,11 +120,15 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				dataset = new DRChartDataset();
 				plot = new DRLinePlot();
 				break;
+			case SPIDER:
+				dataset = new DRCategoryDataset();
+				plot = new DRSpiderPlot();
+				break;
 			default:
 				throw new DRReportException("Chart type not supported.");
 		}
 	}
-	
+
 	public ChartType getChartType() {
 		return chartType;
 	}
@@ -132,14 +137,14 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		return dataset;
 	}
 
-	public AbstractPlot getPlot() {
+	public DRIPlot getPlot() {
 		return plot;
 	}
 
 	public DRIChartCustomizer getCustomizer() {
 		return customizer;
 	}
-	
+
 	public void setCustomizer(DRIChartCustomizer customizer) {
 		this.customizer = customizer;
 	}
@@ -172,5 +177,5 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	public void setLegend(DRChartLegend legend) {
 		Validate.notNull(legend, "legend must not be null");
 		this.legend = legend;
-	}	
+	}
 }

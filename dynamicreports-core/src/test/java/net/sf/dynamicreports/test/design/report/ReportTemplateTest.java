@@ -33,6 +33,7 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
+import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignBasePlot;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
@@ -204,7 +205,7 @@ public class ReportTemplateTest {
 			DRDesignComponent chart = titleList.getComponents().get(1);
 			Assert.assertEquals("chart width", new Integer(210), chart.getWidth());
 			Assert.assertEquals("chart height", new Integer(220), chart.getHeight());
-			Assert.assertEquals("chart colors", Color.BLUE, ((DRDesignChart) chart).getPlot().getSeriesColors().get(0));
+			Assert.assertEquals("chart colors", Color.BLUE, ((AbstractDesignBasePlot) ((DRDesignChart) chart).getPlot()).getSeriesColors().get(0));
 
 			DRDesignComponent barcode = titleList.getComponents().get(2);
 			Assert.assertEquals("barcode width", new Integer(110), barcode.getWidth());

@@ -22,14 +22,17 @@
 
 package net.sf.dynamicreports.design.definition.chart.plot;
 
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.report.constant.Orientation;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignPiePlot extends DRIDesignBasePlot {
+public interface DRIDesignBasePlot extends DRIDesignPlot {
 
-	public Boolean getCircular();
+	public Orientation getOrientation();
 
-	public String getLabelFormat();
-
-	public String getLegendLabelFormat();
+	public List<Color> getSeriesColors();
 }

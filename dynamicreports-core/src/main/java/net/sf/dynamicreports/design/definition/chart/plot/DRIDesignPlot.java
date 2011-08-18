@@ -22,17 +22,9 @@
 
 package net.sf.dynamicreports.design.definition.chart.plot;
 
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.constant.Orientation;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignPlot {
-
-	public Orientation getOrientation();
-
-	public List<Color> getSeriesColors();
 }

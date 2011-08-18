@@ -25,7 +25,7 @@ package net.sf.dynamicreports.design.definition.chart.plot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignAxisPlot extends DRIDesignPlot {
+public interface DRIDesignAxisPlot extends DRIDesignBasePlot {
 
 	public DRIDesignAxisFormat getXAxisFormat();
 

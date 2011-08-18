@@ -27,10 +27,10 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
-import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignPlot;
 import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
@@ -40,7 +40,7 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesignChart {
 	private ChartType chartType;
 	private DRDesignChartDataset dataset;
-	private AbstractDesignPlot plot;
+	private DRIDesignPlot plot;
 	private List<DRIChartCustomizer> customizers;
 	private DRDesignChartTitle title;
 	private DRDesignChartSubtitle subtitle;
@@ -69,11 +69,11 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.dataset = dataset;
 	}
 
-	public AbstractDesignPlot getPlot() {
+	public DRIDesignPlot getPlot() {
 		return plot;
 	}
 
-	public void setPlot(AbstractDesignPlot plot) {
+	public void setPlot(DRIDesignPlot plot) {
 		this.plot = plot;
 	}
 

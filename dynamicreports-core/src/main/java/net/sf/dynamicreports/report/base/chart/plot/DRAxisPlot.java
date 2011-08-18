@@ -30,7 +30,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRAxisPlot extends AbstractPlot implements DRIAxisPlot {	
+public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {	
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private DRAxisFormat xAxisFormat;

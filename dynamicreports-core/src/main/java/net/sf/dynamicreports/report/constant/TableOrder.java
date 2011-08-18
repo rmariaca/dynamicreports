@@ -20,34 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.base.chart.plot;
-
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
-import net.sf.dynamicreports.report.constant.Orientation;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractDesignPlot implements DRIDesignPlot {	
-	private Orientation orientation;
-	private List<Color> seriesColors;
-
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
-	}
-
-	public Orientation getOrientation() {
-		return orientation;
-	}
-
-	public void setSeriesColors(List<Color> seriesColors) {
-		this.seriesColors = seriesColors;
-	}
-
-	public List<Color> getSeriesColors() {
-		return seriesColors;
-	}
+public enum TableOrder {
+	BY_ROW,
+	BY_COLUMN;
 }

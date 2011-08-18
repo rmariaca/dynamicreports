@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings({"unchecked", "ucd"})
-public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<T, U>, U extends DRPiePlot> extends AbstractChartBuilder<T> {
+public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<T, U>, U extends DRPiePlot> extends AbstractBaseChartBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractPieChartBuilder(ChartType chartType) {
@@ -102,9 +102,5 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 
 	private DRChartDataset getDataset() {
 		return getObject().getDataset();
-	}
-
-	protected U getPlot() {
-		return (U) getObject().getPlot();
 	}
 }

@@ -1,0 +1,148 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 - 2011 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package net.sf.dynamicreports.report.base.chart.plot;
+
+import java.awt.Color;
+
+import net.sf.dynamicreports.report.base.style.DRFont;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.SpiderRotation;
+import net.sf.dynamicreports.report.constant.TableOrder;
+import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
+public class DRSpiderPlot implements DRISpiderPlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private DRIExpression<? extends Number> maxValueExpression;
+	private SpiderRotation rotation;
+	private TableOrder tableOrder;
+	private Boolean webFilled;
+	private Double startAngle;
+	private Double headPercent;
+	private Double interiorGap;
+	private Color axisLineColor;
+	private Float axisLineWidth;
+	private DRFont labelFont;
+	private Double labelGap;
+	private Color labelColor;
+
+	public DRIExpression<? extends Number> getMaxValueExpression() {
+		return maxValueExpression;
+	}
+
+	public void setMaxValueExpression(DRIExpression<? extends Number> maxValueExpression) {
+		this.maxValueExpression = maxValueExpression;
+	}
+
+	public SpiderRotation getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(SpiderRotation rotation) {
+		this.rotation = rotation;
+	}
+
+	public TableOrder getTableOrder() {
+		return tableOrder;
+	}
+
+	public void setTableOrder(TableOrder tableOrder) {
+		this.tableOrder = tableOrder;
+	}
+
+	public Boolean getWebFilled() {
+		return webFilled;
+	}
+
+	public void setWebFilled(Boolean webFilled) {
+		this.webFilled = webFilled;
+	}
+
+	public Double getStartAngle() {
+		return startAngle;
+	}
+
+	public void setStartAngle(Double startAngle) {
+		this.startAngle = startAngle;
+	}
+
+	public Double getHeadPercent() {
+		return headPercent;
+	}
+
+	public void setHeadPercent(Double headPercent) {
+		this.headPercent = headPercent;
+	}
+
+	public Double getInteriorGap() {
+		return interiorGap;
+	}
+
+	public void setInteriorGap(Double interiorGap) {
+		this.interiorGap = interiorGap;
+	}
+
+	public Color getAxisLineColor() {
+		return axisLineColor;
+	}
+
+	public void setAxisLineColor(Color axisLineColor) {
+		this.axisLineColor = axisLineColor;
+	}
+
+	public Float getAxisLineWidth() {
+		return axisLineWidth;
+	}
+
+	public void setAxisLineWidth(Float axisLineWidth) {
+		this.axisLineWidth = axisLineWidth;
+	}
+
+	public DRFont getLabelFont() {
+		return labelFont;
+	}
+
+	public void setLabelFont(DRFont labelFont) {
+		this.labelFont = labelFont;
+	}
+
+	public Double getLabelGap() {
+		return labelGap;
+	}
+
+	public void setLabelGap(Double labelGap) {
+		this.labelGap = labelGap;
+	}
+
+	public Color getLabelColor() {
+		return labelColor;
+	}
+
+	public void setLabelColor(Color labelColor) {
+		this.labelColor = labelColor;
+	}
+}

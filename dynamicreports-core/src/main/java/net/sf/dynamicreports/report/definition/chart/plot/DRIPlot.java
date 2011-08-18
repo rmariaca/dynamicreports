@@ -22,18 +22,10 @@
 
 package net.sf.dynamicreports.report.definition.chart.plot;
 
-import java.awt.Color;
 import java.io.Serializable;
-import java.util.List;
-
-import net.sf.dynamicreports.report.constant.Orientation;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIPlot extends Serializable {
-
-	public Orientation getOrientation();
-
-	public List<Color> getSeriesColors();
 }

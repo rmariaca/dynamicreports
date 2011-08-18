@@ -41,10 +41,11 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisFormat;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBar3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBarPlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBasePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignLinePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
-import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignSpiderPlot;
 import net.sf.dynamicreports.jasper.base.JasperChartCustomizer;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -65,12 +66,22 @@ import net.sf.jasperreports.charts.design.JRDesignTimeSeriesDataset;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeriesPlot;
 import net.sf.jasperreports.charts.design.JRDesignXyDataset;
 import net.sf.jasperreports.charts.design.JRDesignXySeries;
+import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
+import net.sf.jasperreports.components.charts.ChartSettings;
+import net.sf.jasperreports.components.spiderchart.SpiderChartComponent;
+import net.sf.jasperreports.components.spiderchart.StandardChartSettings;
+import net.sf.jasperreports.components.spiderchart.StandardSpiderDataset;
+import net.sf.jasperreports.components.spiderchart.StandardSpiderPlot;
 import net.sf.jasperreports.engine.JRChartPlot;
+import net.sf.jasperreports.engine.JRHyperlinkHelper;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot.JRBaseSeriesColor;
+import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.design.JRDesignChartDataset;
+import net.sf.jasperreports.engine.design.JRDesignComponentElement;
 import net.sf.jasperreports.engine.design.JRDesignElement;
+import net.sf.jasperreports.engine.design.JRDesignElementDataset;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
@@ -87,6 +98,15 @@ public class ChartTransform {
 
 	//chart
 	protected JRDesignElement transform(DRIDesignChart chart) {
+		if(chart.getChartType().equals(ChartType.SPIDER)) {
+			return spiderChart(chart);
+		}
+		else {
+			return chart(chart);
+		}
+	}
+
+	private JRDesignElement chart(DRIDesignChart chart) {
 		JRDesignChart jrChart = new JRDesignChart(new JRDesignStyle().getDefaultStyleProvider(), ConstantTransform.chartType(chart.getChartType()));
 		EvaluationTime evaluationTime = chart.getEvaluationTime();
 		jrChart.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
@@ -98,13 +118,6 @@ public class ChartTransform {
 			jrChart.setDataset(new JRDesignXyDataset(null));
 		}
 
-		chart(chart, jrChart);
-		dataset(chart.getDataset(), (JRDesignChartDataset) jrChart.getDataset());
-		plot(chart.getPlot(), jrChart.getPlot());
-		return jrChart;
-	}
-
-	private void chart(DRIDesignChart chart, JRDesignChart jrChart) {
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
 			jrChart.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
@@ -143,6 +156,35 @@ public class ChartTransform {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
 			addChartCustomizer(chart.getUniqueName(), chart.getCustomizers());
 		}
+
+		dataset(chart.getDataset(), (JRDesignChartDataset) jrChart.getDataset());
+		plot((DRIDesignBasePlot) chart.getPlot(), jrChart.getPlot());
+
+		return jrChart;
+	}
+
+	private JRDesignElement spiderChart(DRIDesignChart chart) {
+		SpiderChartComponent jrChart = new SpiderChartComponent();
+
+		EvaluationTime evaluationTime = chart.getEvaluationTime();
+		jrChart.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
+		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && chart.getEvaluationGroup() != null) {
+			jrChart.setEvaluationGroup(accessor.getGroupTransform().getGroup(chart.getEvaluationGroup()).getName());
+		}
+
+		jrChart.setChartSettings(spiderSettings(chart));
+		StandardSpiderDataset jrDataset = new StandardSpiderDataset();
+		dataset(chart.getDataset(), jrDataset);
+		jrChart.setDataset(jrDataset);
+		StandardSpiderPlot jrPlot = new StandardSpiderPlot();
+		jrChart.setPlot(jrPlot);
+		spiderPlot((DRIDesignSpiderPlot) chart.getPlot(), jrPlot);
+
+		JRDesignComponentElement jrComponent = new JRDesignComponentElement();
+		jrComponent.setComponent(jrChart);
+		jrComponent.setComponentKey(new ComponentKey(ComponentsExtensionsRegistryFactory.NAMESPACE, "jr", "spiderChart"));
+
+		return jrComponent;
 	}
 
 	private void addChartCustomizer(String name, List<DRIChartCustomizer> chartCustomizers) {
@@ -150,7 +192,7 @@ public class ChartTransform {
 	}
 
 	//dataset
-	private void dataset(DRIDesignChartDataset dataset, JRDesignChartDataset jrDataset) {
+	private void dataset(DRIDesignChartDataset dataset, JRDesignElementDataset jrDataset) {
 		jrDataset.setDatasetRun(accessor.getDatasetTransform().datasetRun(dataset.getSubDataset()));
 		ResetType resetType = dataset.getResetType();
 		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
@@ -265,7 +307,7 @@ public class ChartTransform {
 	}
 
 	//plot
-	private void plot(DRIDesignPlot plot, JRChartPlot jrPlot) {
+	private void plot(DRIDesignBasePlot plot, JRChartPlot jrPlot) {
 		if (plot.getOrientation() != null) {
 			jrPlot.setOrientation(ConstantTransform.chartPlotOrientation(plot.getOrientation()));
 		}
@@ -555,5 +597,68 @@ public class ChartTransform {
 
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
+	}
+
+	//spider
+	private ChartSettings spiderSettings(DRIDesignChart chart) {
+		StandardChartSettings settings = new StandardChartSettings();
+
+		DRIDesignHyperLink hyperLink = chart.getHyperLink();
+		if (hyperLink != null) {
+			settings.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
+			settings.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
+			settings.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
+			settings.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
+			settings.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
+			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+			if (hyperLinkType != null) {
+				settings.setLinkType(JRHyperlinkHelper.getLinkType(hyperLinkType));
+			}
+		}
+
+		DRIDesignChartTitle title = chart.getTitle();
+		settings.setTitleColor(title.getColor());
+		if (title.getFont() != null)
+			settings.setTitleFont(accessor.getStyleTransform().font(title.getFont()));
+		settings.setTitleExpression(accessor.getExpressionTransform().getExpression(title.getTitle()));
+		settings.setTitlePosition(ConstantTransform.chartPosition(title.getPosition()));
+
+		DRIDesignChartSubtitle subtitle = chart.getSubtitle();
+		settings.setSubtitleColor(subtitle.getColor());
+		if (subtitle.getFont() != null)
+			settings.setSubtitleFont(accessor.getStyleTransform().font(subtitle.getFont()));
+		settings.setSubtitleExpression(accessor.getExpressionTransform().getExpression(subtitle.getTitle()));
+
+		DRIDesignChartLegend legend = chart.getLegend();
+		settings.setLegendColor(legend.getColor());
+		settings.setLegendBackgroundColor(legend.getBackgroundColor());
+		settings.setShowLegend(legend.getShowLegend());
+		if (legend.getFont() != null)
+			settings.setLegendFont(accessor.getStyleTransform().font(legend.getFont()));
+		settings.setLegendPosition(ConstantTransform.chartPosition(legend.getPosition()));
+
+		if (!chart.getCustomizers().isEmpty()) {
+			settings.setCustomizerClass(JasperChartCustomizer.class.getName());
+			addChartCustomizer(chart.getUniqueName(), chart.getCustomizers());
+		}
+
+		return settings;
+	}
+
+	private void spiderPlot(DRIDesignSpiderPlot plot, StandardSpiderPlot jrPlot) {
+		jrPlot.setMaxValueExpression(accessor.getExpressionTransform().getExpression(plot.getMaxValueExpression()));
+		jrPlot.setRotation(ConstantTransform.spiderRotation(plot.getRotation()));
+		jrPlot.setTableOrder(ConstantTransform.tableOrder(plot.getTableOrder()));
+		jrPlot.setWebFilled(plot.getWebFilled());
+		jrPlot.setStartAngle(plot.getStartAngle());
+		jrPlot.setHeadPercent(plot.getHeadPercent());
+		jrPlot.setInteriorGap(plot.getInteriorGap());
+		jrPlot.setAxisLineColor(plot.getAxisLineColor());
+		jrPlot.setAxisLineWidth(plot.getAxisLineWidth());
+		if (plot.getLabelFont() != null) {
+			jrPlot.setLabelFont(accessor.getStyleTransform().font(plot.getLabelFont()));
+		}
+		jrPlot.setLabelGap(plot.getLabelGap());
+		jrPlot.setLabelColor(plot.getLabelColor());
 	}
 }

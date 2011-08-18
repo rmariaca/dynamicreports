@@ -27,7 +27,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignPiePlot extends AbstractDesignPlot implements DRIDesignPiePlot {
+public class DRDesignPiePlot extends AbstractDesignBasePlot implements DRIDesignPiePlot {
 	private Boolean circular;
 	private String labelFormat;
 	private String legendLabelFormat;

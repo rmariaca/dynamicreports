@@ -113,4 +113,8 @@ public class Charts {
 	public static ScatterChartBuilder scatterChart() {
 		return new ScatterChartBuilder();
 	}
+
+	public static SpiderChartBuilder spiderChart() {
+		return new SpiderChartBuilder();
+	}
 }

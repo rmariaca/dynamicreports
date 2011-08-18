@@ -36,7 +36,7 @@ import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignTimeSeriesDataset;
-import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignPlot;
+import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignBasePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisFormat;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBar3DPlot;
@@ -44,8 +44,10 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignBarPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignSpiderPlot;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -66,10 +68,12 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisFormat;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBar3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBarPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -106,8 +110,8 @@ public class ChartTransform {
 	}
 
 	//plot
-	private AbstractDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
-		AbstractDesignPlot designPlot;
+	private DRIDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		DRIDesignPlot designPlot;
 
 		if (plot instanceof DRIBar3DPlot) {
 			designPlot = bar3DPlot((DRIBar3DPlot) plot);
@@ -124,6 +128,9 @@ public class ChartTransform {
 		else if (plot instanceof DRIPiePlot) {
 			designPlot = piePlot((DRIPiePlot) plot, chartCustomizers);
 		}
+		else if (plot instanceof DRISpiderPlot) {
+			designPlot = spiderPlot((DRISpiderPlot) plot);
+		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
 		}
@@ -131,8 +138,12 @@ public class ChartTransform {
 			throw new DRDesignReportException("Chart plot " + plot.getClass().getName() + " not supported");
 		}
 
-		designPlot.setOrientation(plot.getOrientation());
-		designPlot.setSeriesColors(accessor.getTemplateTransform().getChartSeriesColors(plot));
+		if (plot instanceof DRIBasePlot) {
+			AbstractDesignBasePlot designBasePlot = ((AbstractDesignBasePlot) designPlot);
+			DRIBasePlot basePlot = (DRIBasePlot) plot;
+			designBasePlot.setOrientation(basePlot.getOrientation());
+			designBasePlot.setSeriesColors(accessor.getTemplateTransform().getChartSeriesColors(basePlot));
+		}
 
 		return designPlot;
 	}
@@ -183,6 +194,23 @@ public class ChartTransform {
 		if (piePlot.getShowLabels() != null && !piePlot.getShowLabels()) {
 			chartCustomizers.add(new PieChartShowLabelsCustomizer());
 		}
+	}
+
+	private DRDesignSpiderPlot spiderPlot(DRISpiderPlot spiderPlot) throws DRException {
+		DRDesignSpiderPlot designSpiderPlot = new DRDesignSpiderPlot();
+		designSpiderPlot.setMaxValueExpression(accessor.getExpressionTransform().transformExpression(spiderPlot.getMaxValueExpression()));
+		designSpiderPlot.setRotation(spiderPlot.getRotation());
+		designSpiderPlot.setTableOrder(spiderPlot.getTableOrder());
+		designSpiderPlot.setWebFilled(spiderPlot.getWebFilled());
+		designSpiderPlot.setStartAngle(spiderPlot.getStartAngle());
+		designSpiderPlot.setHeadPercent(spiderPlot.getHeadPercent());
+		designSpiderPlot.setInteriorGap(spiderPlot.getInteriorGap());
+		designSpiderPlot.setAxisLineColor(spiderPlot.getAxisLineColor());
+		designSpiderPlot.setAxisLineWidth(spiderPlot.getAxisLineWidth());
+		designSpiderPlot.setLabelFont(accessor.getStyleTransform().transformFont(spiderPlot.getLabelFont()));
+		designSpiderPlot.setLabelGap(spiderPlot.getLabelGap());
+		designSpiderPlot.setLabelColor(spiderPlot.getLabelColor());
+		return designSpiderPlot;
 	}
 
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {

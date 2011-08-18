@@ -25,9 +25,9 @@ package net.sf.dynamicreports.report.definition.chart.plot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIAxisPlot extends DRIPlot {
+public interface DRIAxisPlot extends DRIBasePlot {
 
 	public DRIAxisFormat getXAxisFormat();
 
-	public DRIAxisFormat getYAxisFormat();	
+	public DRIAxisFormat getYAxisFormat();
 }
