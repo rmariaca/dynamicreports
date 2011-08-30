@@ -37,7 +37,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 public class DRSpiderPlot implements DRISpiderPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRIExpression<? extends Number> maxValueExpression;
+	private DRIExpression<Double> maxValueExpression;
 	private SpiderRotation rotation;
 	private TableOrder tableOrder;
 	private Boolean webFilled;
@@ -50,11 +50,11 @@ public class DRSpiderPlot implements DRISpiderPlot {
 	private Double labelGap;
 	private Color labelColor;
 
-	public DRIExpression<? extends Number> getMaxValueExpression() {
+	public DRIExpression<Double> getMaxValueExpression() {
 		return maxValueExpression;
 	}
 
-	public void setMaxValueExpression(DRIExpression<? extends Number> maxValueExpression) {
+	public void setMaxValueExpression(DRIExpression<Double> maxValueExpression) {
 		this.maxValueExpression = maxValueExpression;
 	}
 

@@ -36,11 +36,11 @@ import org.jfree.data.category.CategoryDataset;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractJasperChartTest extends AbstractJasperTest {
-	
+
 	protected void chartCountTest(String name, int expectedNumberOfCharts) {
 		Assert.assertEquals("chart count " + name, expectedNumberOfCharts, findElement(name).size());
 	}
-	
+
 	protected void chartCategoryCountTest(String name, int index, int expectedNumberOfCategories) {
 		Assert.assertEquals("chart category count " + name, expectedNumberOfCategories, getChart(name, index).getCategoryPlot().getDataset().getColumnCount());
 	}
@@ -48,28 +48,32 @@ public abstract class AbstractJasperChartTest extends AbstractJasperTest {
 	protected void chartSeriesCountTest(String name, int index, int expectedNumberOfSeries) {
 		Assert.assertEquals("chart series count " + name, expectedNumberOfSeries, getChart(name, index).getCategoryPlot().getDataset().getRowCount());
 	}
-	
+
 	protected void chartTitleTest(String name, int index, String title) {
 		TextTitle chartTitle = getChart(name, index).getTitle();
-		if (title != null) {			
+		if (title != null) {
 			Assert.assertEquals("chart title", title, chartTitle.getText());
 		}
 		else {
 			Assert.assertNull("chart title", chartTitle);
 		}
 	}
-		
+
 	protected void chartDataTest(String name, int index, String[] categories, String[] series, Number[][] values) {
 		CategoryDataset dataset = getChart(name, index).getCategoryPlot().getDataset();
 		for (int i = 0; i < categories.length; i++) {
 			for (int j = 0; j < series.length; j++) {
 				Assert.assertEquals("chart data", values[i][j], dataset.getValue(series[j], categories[i]));
 			}
-		}	
+		}
 	}
-	
+
 	protected JFreeChart getChart(String key, int index) {
-		JRPrintImage image = (JRPrintImage) getElementAt(key, index);	
+		JRPrintImage image = (JRPrintImage) getElementAt(key, index);
+		return getChart(image);
+	}
+
+	protected JFreeChart getChart(JRPrintImage image) {
 		DrawChartRenderer renderer = (DrawChartRenderer) image.getRenderer();
 		try {
 			Field field = renderer.getClass().getDeclaredField("chart");

@@ -85,18 +85,13 @@ public class SpiderChartBuilder extends AbstractChartBuilder<SpiderChartBuilder>
 		return this;
 	}
 
-	public SpiderChartBuilder setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
-		getDataset().setUseSeriesAsCategory(useSeriesAsCategory);
-		return this;
-	}
-
 	//plot
-	public SpiderChartBuilder setMaxValue(Number maxValue) {
-		getPlot().setMaxValueExpression(Expressions.number(maxValue));
+	public SpiderChartBuilder setMaxValue(Double maxValue) {
+		getPlot().setMaxValueExpression(Expressions.value(maxValue));
 		return this;
 	}
 
-	public SpiderChartBuilder setMaxValue(DRIExpression<? extends Number> maxValueExpression) {
+	public SpiderChartBuilder setMaxValue(DRIExpression<Double> maxValueExpression) {
 		getPlot().setMaxValueExpression(maxValueExpression);
 		return this;
 	}

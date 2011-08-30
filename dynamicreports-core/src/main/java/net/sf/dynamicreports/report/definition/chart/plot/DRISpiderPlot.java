@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.definition.style.DRIFont;
  */
 public interface DRISpiderPlot extends DRIPlot {
 
-	public DRIExpression<? extends Number> getMaxValueExpression();
+	public DRIExpression<Double> getMaxValueExpression();
 
 	public SpiderRotation getRotation();
 

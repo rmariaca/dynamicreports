@@ -213,6 +213,9 @@ public class ChartTransform {
 		else if (jrDataset instanceof JRDesignXyDataset) {
 			xyDataset(dataset, (JRDesignXyDataset) jrDataset);
 		}
+		else if (jrDataset instanceof StandardSpiderDataset) {
+			spiderDataset((DRIDesignCategoryDataset) dataset, (StandardSpiderDataset) jrDataset);
+		}
 		else {
 			throw new JasperDesignException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
@@ -220,6 +223,15 @@ public class ChartTransform {
 	}
 
 	private void categoryDataset(DRIDesignCategoryDataset dataset, JRDesignCategoryDataset jrDataset) {
+		List<JRDesignCategorySeries> jrSeries = categorySeries(dataset);
+		for (JRDesignCategorySeries jrSerie : jrSeries) {
+			jrDataset.addCategorySeries(jrSerie);
+		}
+	}
+
+	private List<JRDesignCategorySeries> categorySeries(DRIDesignCategoryDataset dataset) {
+		List<JRDesignCategorySeries> series = new ArrayList<JRDesignCategorySeries>();
+
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
@@ -247,8 +259,10 @@ public class ChartTransform {
 				}
 				jrSerie.setLabelExpression(exp2);
 			}
-			jrDataset.addCategorySeries(jrSerie);
+			series.add(jrSerie);
 		}
+
+		return series;
 	}
 
 	private void pieDataset(DRIDesignChartDataset dataset, JRDesignPieDataset jrDataset) {
@@ -303,6 +317,13 @@ public class ChartTransform {
 			}
 			jrSerie.setLabelExpression(labelExpression);
 			jrDataset.addXySeries(jrSerie);
+		}
+	}
+
+	private void spiderDataset(DRIDesignCategoryDataset dataset, StandardSpiderDataset jrDataset) {
+		List<JRDesignCategorySeries> jrSeries = categorySeries(dataset);
+		for (JRDesignCategorySeries jrSerie : jrSeries) {
+			jrDataset.addCategorySeries(jrSerie);
 		}
 	}
 
