@@ -23,11 +23,13 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
+import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.StretchType;
-import net.sf.dynamicreports.report.definition.DRIGroup;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -185,8 +187,9 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
 		return (T) this;
 	}
 
-	public T setPrintWhenGroupChanges(DRIGroup printWhenGroupChanges) {
-		getObject().setPrintWhenGroupChanges(printWhenGroupChanges);
+	public T setPrintWhenGroupChanges(GroupBuilder<?> group) {
+		Validate.notNull(group, "group must not be null");
+		getObject().setPrintWhenGroupChanges(group.getGroup());
 		return (T) this;
 	}
 }
