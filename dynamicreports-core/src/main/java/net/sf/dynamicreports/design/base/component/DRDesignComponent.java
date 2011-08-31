@@ -26,9 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
@@ -45,7 +47,11 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	private DRIDesignExpression printWhenExpression;
 	private boolean isRemoveLineWhenBlank;
 	private List<DRIDesignPropertyExpression> propertyExpressions;
+	private ComponentPositionType positionType;
 	private StretchType stretchType;
+	private boolean printInFirstWholeBand;
+	private boolean printWhenDetailOverflows;
+	private DRIDesignGroup printWhenGroupChanges;
 
 	protected DRDesignComponent(String name) {
 		this.name = name;
@@ -133,11 +139,43 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.propertyExpressions = propertyExpressions;
 	}
 
+	public ComponentPositionType getPositionType() {
+		return positionType;
+	}
+
+	public void setPositionType(ComponentPositionType positionType) {
+		this.positionType = positionType;
+	}
+
 	public StretchType getStretchType() {
 		return stretchType;
 	}
 
 	public void setStretchType(StretchType stretchType) {
 		this.stretchType = stretchType;
+	}
+
+	public boolean isPrintInFirstWholeBand() {
+		return printInFirstWholeBand;
+	}
+
+	public void setPrintInFirstWholeBand(boolean printInFirstWholeBand) {
+		this.printInFirstWholeBand = printInFirstWholeBand;
+	}
+
+	public boolean isPrintWhenDetailOverflows() {
+		return printWhenDetailOverflows;
+	}
+
+	public void setPrintWhenDetailOverflows(boolean printWhenDetailOverflows) {
+		this.printWhenDetailOverflows = printWhenDetailOverflows;
+	}
+
+	public DRIDesignGroup getPrintWhenGroupChanges() {
+		return printWhenGroupChanges;
+	}
+
+	public void setPrintWhenGroupChanges(DRIDesignGroup printWhenGroupChanges) {
+		this.printWhenGroupChanges = printWhenGroupChanges;
 	}
 }

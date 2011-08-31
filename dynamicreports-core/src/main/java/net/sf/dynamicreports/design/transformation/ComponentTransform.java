@@ -180,7 +180,11 @@ public class ComponentTransform {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
 		designComponent.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
 		designComponent.setRemoveLineWhenBlank(accessor.getTemplateTransform().getRemoveLineWhenBlank(component));
+		designComponent.setPositionType(accessor.getTemplateTransform().getPositionType(component));
 		designComponent.setStretchType(accessor.getTemplateTransform().getStretchType(component));
+		designComponent.setPrintInFirstWholeBand(accessor.getTemplateTransform().getPrintInFirstWholeBand(component));
+		designComponent.setPrintWhenDetailOverflows(accessor.getTemplateTransform().getPrintWhenDetailOverflows(component));
+		designComponent.setPrintWhenGroupChanges(accessor.getTemplateTransform().getPrintWhenGroupChanges(component));
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}

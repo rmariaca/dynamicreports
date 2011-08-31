@@ -22,9 +22,11 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.style.DRDesignBaseStyle;
@@ -35,8 +37,10 @@ import net.sf.dynamicreports.design.base.style.DRDesignPadding;
 import net.sf.dynamicreports.design.base.style.DRDesignParagraph;
 import net.sf.dynamicreports.design.base.style.DRDesignPen;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.design.base.style.DRDesignTabStop;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.style.DRBaseStyle;
 import net.sf.dynamicreports.report.base.style.DRBorder;
@@ -53,6 +57,7 @@ import net.sf.dynamicreports.report.definition.style.DRIPadding;
 import net.sf.dynamicreports.report.definition.style.DRIParagraph;
 import net.sf.dynamicreports.report.definition.style.DRIPen;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRITabStop;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -165,9 +170,21 @@ public class StyleTransform {
 	private DRDesignParagraph paragraph(DRIParagraph paragraph) {
 		DRDesignParagraph designParagraph = new DRDesignParagraph();
 		designParagraph.setLineSpacing(paragraph.getLineSpacing());
+		designParagraph.setLineSpacingSize(paragraph.getLineSpacingSize());
 		designParagraph.setFirstLineIndent(paragraph.getFirstLineIndent());
 		designParagraph.setLeftIndent(paragraph.getLeftIndent());
 		designParagraph.setRightIndent(paragraph.getRightIndent());
+		designParagraph.setSpacingBefore(paragraph.getSpacingBefore());
+		designParagraph.setSpacingAfter(paragraph.getSpacingAfter());
+		designParagraph.setTabStopWidth(paragraph.getTabStopWidth());
+		List<DRIDesignTabStop> designTabStops = new ArrayList<DRIDesignTabStop>();
+		for (DRITabStop tabStop : paragraph.getTabStops()) {
+			DRDesignTabStop designTabStop = new DRDesignTabStop();
+			designTabStop.setPosition(tabStop.getPosition());
+			designTabStop.setAlignment(tabStop.getAlignment());
+			designTabStops.add(designTabStop);
+		}
+		designParagraph.setTabStops(designTabStops);
 		return designParagraph;
 	}
 

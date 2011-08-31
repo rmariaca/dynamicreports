@@ -30,11 +30,13 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignPadding;
 import net.sf.dynamicreports.design.definition.style.DRIDesignParagraph;
 import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRLineBox;
 import net.sf.jasperreports.engine.JRParagraph;
 import net.sf.jasperreports.engine.JRPen;
+import net.sf.jasperreports.engine.TabStop;
 import net.sf.jasperreports.engine.base.JRBaseFont;
 import net.sf.jasperreports.engine.base.JRBaseStyle;
 import net.sf.jasperreports.engine.design.JRDesignConditionalStyle;
@@ -117,9 +119,19 @@ public class StyleTransform {
 
 	private void paragraph(JRParagraph jrParagraph, DRIDesignParagraph paragraph) {
 		jrParagraph.setLineSpacing(ConstantTransform.lineSpacing(paragraph.getLineSpacing()));
+		jrParagraph.setLineSpacingSize(paragraph.getLineSpacingSize());
 		jrParagraph.setFirstLineIndent(paragraph.getFirstLineIndent());
 		jrParagraph.setLeftIndent(paragraph.getLeftIndent());
 		jrParagraph.setRightIndent(paragraph.getRightIndent());
+		jrParagraph.setSpacingBefore(paragraph.getSpacingBefore());
+		jrParagraph.setSpacingAfter(paragraph.getSpacingAfter());
+		jrParagraph.setTabStopWidth(paragraph.getTabStopWidth());
+		for (DRIDesignTabStop tabStop : paragraph.getTabStops()) {
+			TabStop jrTabStop = new TabStop();
+			jrTabStop.setPosition(tabStop.getPosition());
+			jrTabStop.setAlignment(ConstantTransform.tabStopAlignment(tabStop.getAlignment()));
+			jrParagraph.addTabStop(jrTabStop);
+		}
 	}
 
 	protected void pen(JRPen jrPen, DRIDesignPen pen) {

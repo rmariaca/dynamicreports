@@ -35,9 +35,11 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -598,9 +600,37 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isRemoveLineWhenBlank();
 	}
 
+	protected ComponentPositionType getPositionType(DRIComponent component) {
+		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getPositionType() != null) {
+			return ((DRIDimensionComponent)component).getPositionType();
+		}
+		return null;
+	}
+
 	protected StretchType getStretchType(DRIComponent component) {
 		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getStretchType() != null) {
 			return ((DRIDimensionComponent)component).getStretchType();
+		}
+		return null;
+	}
+
+	protected boolean getPrintInFirstWholeBand(DRIComponent component) {
+		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getPrintInFirstWholeBand() != null) {
+			return ((DRIDimensionComponent)component).getPrintInFirstWholeBand();
+		}
+		return Defaults.getDefaults().isPrintInFirstWholeBand();
+	}
+
+	protected boolean getPrintWhenDetailOverflows(DRIComponent component) {
+		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getPrintWhenDetailOverflows() != null) {
+			return ((DRIDimensionComponent)component).getPrintWhenDetailOverflows();
+		}
+		return Defaults.getDefaults().isPrintWhenDetailOverflows();
+	}
+
+	protected DRIDesignGroup getPrintWhenGroupChanges(DRIComponent component) {
+		if (component instanceof DRIDimensionComponent && ((DRIDimensionComponent)component).getPrintWhenGroupChanges() != null) {
+			return accessor.getGroupTransform().getGroup(((DRIDimensionComponent)component).getPrintWhenGroupChanges());
 		}
 		return null;
 	}

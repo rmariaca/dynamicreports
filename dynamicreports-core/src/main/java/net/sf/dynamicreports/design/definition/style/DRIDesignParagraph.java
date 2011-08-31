@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.LineSpacing;
 
 /**
@@ -31,9 +33,19 @@ public interface DRIDesignParagraph {
 
 	public LineSpacing getLineSpacing();
 
+	public Float getLineSpacingSize();
+
 	public Integer getFirstLineIndent();
 
 	public Integer getLeftIndent();
 
 	public Integer getRightIndent();
+
+	public Integer getSpacingBefore();
+
+	public Integer getSpacingAfter();
+
+	public Integer getTabStopWidth();
+
+	public List<DRIDesignTabStop> getTabStops();
 }

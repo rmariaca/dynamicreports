@@ -54,6 +54,7 @@ import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -76,7 +77,6 @@ import net.sf.jasperreports.engine.design.JRDesignSubreport;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
-import net.sf.jasperreports.engine.type.PositionTypeEnum;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -186,8 +186,18 @@ public class ComponentTransform {
 			}
 		}
 
-		jrElement.setPositionType(PositionTypeEnum.FLOAT);
+		ComponentPositionType positionType = component.getPositionType();
+		if (positionType == null) {
+			positionType = ComponentPositionType.FLOAT;
+		}
+
+		jrElement.setPositionType(ConstantTransform.componentPositionType(positionType));
 		jrElement.setStretchType(ConstantTransform.stretchType(stretchType));
+		jrElement.setPrintInFirstWholeBand(component.isPrintInFirstWholeBand());
+		jrElement.setPrintWhenDetailOverflows(component.isPrintWhenDetailOverflows());
+		if (component.getPrintWhenGroupChanges() != null) {
+			jrElement.setPrintWhenGroupChanges(accessor.getGroupTransform().getGroup(component.getPrintWhenGroupChanges()));
+		}
 		jrElement.setKey(component.getUniqueName());
 		jrElement.setX(component.getX());
 		jrElement.setY(component.getY());

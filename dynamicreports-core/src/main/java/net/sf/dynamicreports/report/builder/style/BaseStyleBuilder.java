@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.report.base.style.DRBaseStyle;
+import net.sf.dynamicreports.report.base.style.DRTabStop;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -32,7 +33,10 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
+import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -277,6 +281,11 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		return (T) this;
 	}
 
+	public T setLineSpacingSize(Float lineSpacingSize) {
+		getObject().getParagraph().setLineSpacingSize(lineSpacingSize);
+		return (T) this;
+	}
+
 	public T setFirstLineIndent(Integer firstLineIndent) {
 		getObject().getParagraph().setFirstLineIndent(firstLineIndent);
 		return (T) this;
@@ -289,6 +298,30 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 
 	public T setRightIndent(Integer rightIndent) {
 		getObject().getParagraph().setRightIndent(rightIndent);
+		return (T) this;
+	}
+
+	public T setSpacingBefore(Integer spacingBefore) {
+		getObject().getParagraph().setSpacingBefore(spacingBefore);
+		return (T) this;
+	}
+
+	public T setSpacingAfter(Integer spacingAfter) {
+		getObject().getParagraph().setSpacingAfter(spacingAfter);
+		return (T) this;
+	}
+
+	public T setTabStopWidth(Integer tabStopWidth) {
+		getObject().getParagraph().setTabStopWidth(tabStopWidth);
+		return (T) this;
+	}
+
+	public T addTabStop(int position, TabStopAlignment alignment) {
+		Validate.notNull(alignment, "alignment must not be null");
+		DRTabStop tabStop = new DRTabStop();
+		tabStop.setPosition(position);
+		tabStop.setAlignment(alignment);
+		getObject().getParagraph().getTabStops().add(tabStop);
 		return (T) this;
 	}
 

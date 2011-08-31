@@ -23,8 +23,10 @@
 package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 
 import org.apache.commons.lang.Validate;
@@ -39,7 +41,11 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
 	private Integer height;
 	private ComponentDimensionType widthType;
 	private ComponentDimensionType heightType;
+	private ComponentPositionType positionType;
 	private StretchType stretchType;
+	private Boolean printInFirstWholeBand;
+	private Boolean printWhenDetailOverflows;
+	private DRIGroup printWhenGroupChanges;
 
   /**
    * Returns the component width.
@@ -103,11 +109,43 @@ public abstract class DRDimensionComponent extends DRComponent implements DRIDim
 		this.heightType = heightType;
 	}
 
+	public ComponentPositionType getPositionType() {
+		return positionType;
+	}
+
+	public void setPositionType(ComponentPositionType positionType) {
+		this.positionType = positionType;
+	}
+
 	public StretchType getStretchType() {
 		return stretchType;
 	}
 
 	public void setStretchType(StretchType stretchType) {
 		this.stretchType = stretchType;
+	}
+
+	public Boolean getPrintInFirstWholeBand() {
+		return printInFirstWholeBand;
+	}
+
+	public void setPrintInFirstWholeBand(Boolean printInFirstWholeBand) {
+		this.printInFirstWholeBand = printInFirstWholeBand;
+	}
+
+	public Boolean getPrintWhenDetailOverflows() {
+		return printWhenDetailOverflows;
+	}
+
+	public void setPrintWhenDetailOverflows(Boolean printWhenDetailOverflows) {
+		this.printWhenDetailOverflows = printWhenDetailOverflows;
+	}
+
+	public DRIGroup getPrintWhenGroupChanges() {
+		return printWhenGroupChanges;
+	}
+
+	public void setPrintWhenGroupChanges(DRIGroup printWhenGroupChanges) {
+		this.printWhenGroupChanges = printWhenGroupChanges;
 	}
 }

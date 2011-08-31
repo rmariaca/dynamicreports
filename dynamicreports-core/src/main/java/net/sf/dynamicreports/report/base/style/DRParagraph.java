@@ -22,9 +22,13 @@
 
 package net.sf.dynamicreports.report.base.style;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.definition.style.DRIParagraph;
+import net.sf.dynamicreports.report.definition.style.DRITabStop;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -33,9 +37,18 @@ public class DRParagraph implements DRIParagraph {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private LineSpacing lineSpacing;
+	private Float lineSpacingSize;
 	private Integer firstLineIndent;
 	private Integer leftIndent;
 	private Integer rightIndent;
+	private Integer spacingBefore;
+	private Integer spacingAfter;
+	private Integer tabStopWidth;
+	private List<DRITabStop> tabStops;
+
+	public DRParagraph() {
+		tabStops = new ArrayList<DRITabStop>();
+	}
 
 	public LineSpacing getLineSpacing() {
 		return lineSpacing;
@@ -43,6 +56,14 @@ public class DRParagraph implements DRIParagraph {
 
 	public void setLineSpacing(LineSpacing lineSpacing) {
 		this.lineSpacing = lineSpacing;
+	}
+
+	public Float getLineSpacingSize() {
+		return lineSpacingSize;
+	}
+
+	public void setLineSpacingSize(Float lineSpacingSize) {
+		this.lineSpacingSize = lineSpacingSize;
 	}
 
 	public Integer getFirstLineIndent() {
@@ -69,4 +90,35 @@ public class DRParagraph implements DRIParagraph {
 		this.rightIndent = rightIndent;
 	}
 
+	public Integer getSpacingBefore() {
+		return spacingBefore;
+	}
+
+	public void setSpacingBefore(Integer spacingBefore) {
+		this.spacingBefore = spacingBefore;
+	}
+
+	public Integer getSpacingAfter() {
+		return spacingAfter;
+	}
+
+	public void setSpacingAfter(Integer spacingAfter) {
+		this.spacingAfter = spacingAfter;
+	}
+
+	public Integer getTabStopWidth() {
+		return tabStopWidth;
+	}
+
+	public void setTabStopWidth(Integer tabStopWidth) {
+		this.tabStopWidth = tabStopWidth;
+	}
+
+	public List<DRITabStop> getTabStops() {
+		return tabStops;
+	}
+
+	public void setTabStops(List<DRITabStop> tabStops) {
+		this.tabStops = tabStops;
+	}
 }

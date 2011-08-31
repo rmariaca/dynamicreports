@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.style;
 
 import java.io.Serializable;
+import java.util.List;
 
 import net.sf.dynamicreports.report.constant.LineSpacing;
 
@@ -33,9 +34,19 @@ public interface DRIParagraph extends Serializable {
 
 	public LineSpacing getLineSpacing();
 
+	public Float getLineSpacingSize();
+
 	public Integer getFirstLineIndent();
 
 	public Integer getLeftIndent();
 
 	public Integer getRightIndent();
+
+	public Integer getSpacingBefore();
+
+	public Integer getSpacingAfter();
+
+	public Integer getTabStopWidth();
+
+	public List<DRITabStop> getTabStops();
 }

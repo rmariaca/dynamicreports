@@ -25,11 +25,8 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum LineSpacing {
-	SINGLE,
-	ONE_AND_HALF,
-	DOUBLE,
-	AT_LEAST,
-	FIXED,
-	PROPORTIONAL
+public enum ComponentPositionType {
+	FLOAT,
+	FIX_RELATIVE_TO_TOP,
+	FIX_RELATIVE_TO_BOTTOM;
 }

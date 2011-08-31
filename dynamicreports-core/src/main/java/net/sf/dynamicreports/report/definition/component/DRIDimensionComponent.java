@@ -23,7 +23,9 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.definition.DRIGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,5 +40,13 @@ public interface DRIDimensionComponent extends DRIComponent {
 
 	public ComponentDimensionType getHeightType();
 
+	public ComponentPositionType getPositionType();
+
 	public StretchType getStretchType();
+
+	public Boolean getPrintInFirstWholeBand();
+
+	public Boolean getPrintWhenDetailOverflows();
+
+	public DRIGroup getPrintWhenGroupChanges();
 }

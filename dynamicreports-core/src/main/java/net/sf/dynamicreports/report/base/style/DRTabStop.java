@@ -20,16 +20,34 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.base.style;
+
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.TabStopAlignment;
+import net.sf.dynamicreports.report.definition.style.DRITabStop;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum LineSpacing {
-	SINGLE,
-	ONE_AND_HALF,
-	DOUBLE,
-	AT_LEAST,
-	FIXED,
-	PROPORTIONAL
+public class DRTabStop implements DRITabStop {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private int position;
+	private TabStopAlignment alignment;
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public TabStopAlignment getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(TabStopAlignment alignment) {
+		this.alignment = alignment;
+	}
 }

@@ -24,8 +24,10 @@ package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.definition.DRIGroup;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -163,8 +165,28 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
 		return (T) this;
 	}
 
+	public T setPositionType(ComponentPositionType positionType) {
+		getObject().setPositionType(positionType);
+		return (T) this;
+	}
+
 	public T setStretchType(StretchType stretchType) {
 		getObject().setStretchType(stretchType);
+		return (T) this;
+	}
+
+	public T setPrintInFirstWholeBand(Boolean printInFirstWholeBand) {
+		getObject().setPrintInFirstWholeBand(printInFirstWholeBand);
+		return (T) this;
+	}
+
+	public T setPrintWhenDetailOverflows(Boolean printWhenDetailOverflows) {
+		getObject().setPrintWhenDetailOverflows(printWhenDetailOverflows);
+		return (T) this;
+	}
+
+	public T setPrintWhenGroupChanges(DRIGroup printWhenGroupChanges) {
+		getObject().setPrintWhenGroupChanges(printWhenGroupChanges);
 		return (T) this;
 	}
 }

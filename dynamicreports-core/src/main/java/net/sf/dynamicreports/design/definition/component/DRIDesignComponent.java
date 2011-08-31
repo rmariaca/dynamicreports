@@ -24,9 +24,11 @@ package net.sf.dynamicreports.design.definition.component;
 
 import java.util.List;
 
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
@@ -53,5 +55,13 @@ public interface DRIDesignComponent {
 
 	public List<DRIDesignPropertyExpression> getPropertyExpressions();
 
+	public ComponentPositionType getPositionType();
+
 	public StretchType getStretchType();
+
+	public boolean isPrintInFirstWholeBand();
+
+	public boolean isPrintWhenDetailOverflows();
+
+	public DRIDesignGroup getPrintWhenGroupChanges();
 }

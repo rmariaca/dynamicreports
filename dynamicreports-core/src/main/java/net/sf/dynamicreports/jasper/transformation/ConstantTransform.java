@@ -39,6 +39,7 @@ import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
+import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
@@ -58,6 +59,7 @@ import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SpiderRotation;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.TableOrder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
@@ -81,6 +83,7 @@ import net.sf.jasperreports.engine.type.LineDirectionEnum;
 import net.sf.jasperreports.engine.type.LineSpacingEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
+import net.sf.jasperreports.engine.type.PositionTypeEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
 import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.type.RunDirectionEnum;
@@ -88,6 +91,7 @@ import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.type.SortOrderEnum;
 import net.sf.jasperreports.engine.type.SplitTypeEnum;
 import net.sf.jasperreports.engine.type.StretchTypeEnum;
+import net.sf.jasperreports.engine.type.TabStopAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
@@ -699,6 +703,12 @@ public class ConstantTransform {
 			return LineSpacingEnum.ONE_AND_HALF;
 		case DOUBLE:
 			return LineSpacingEnum.DOUBLE;
+		case AT_LEAST:
+			return LineSpacingEnum.AT_LEAST;
+		case FIXED:
+			return LineSpacingEnum.FIXED;
+		case PROPORTIONAL:
+			return LineSpacingEnum.PROPORTIONAL;
 		default:
 			throw new JasperDesignException("LineSpacing " + lineSpacing.name() + " not supported");
 		}
@@ -776,6 +786,19 @@ public class ConstantTransform {
 			return SortOrderEnum.DESCENDING;
 		default:
 			throw new JasperDesignException("OrderType " + orderType.name() + " not supported");
+		}
+	}
+
+	public static PositionTypeEnum componentPositionType(ComponentPositionType componentPositionType) {
+		switch (componentPositionType) {
+		case FLOAT:
+			return PositionTypeEnum.FLOAT;
+		case FIX_RELATIVE_TO_TOP:
+			return PositionTypeEnum.FIX_RELATIVE_TO_TOP;
+		case FIX_RELATIVE_TO_BOTTOM:
+			return PositionTypeEnum.FIX_RELATIVE_TO_BOTTOM;
+		default:
+			throw new JasperDesignException("ComponentPositionType " + componentPositionType.name() + " not supported");
 		}
 	}
 
@@ -861,6 +884,19 @@ public class ConstantTransform {
 			return TableOrderEnum.BY_COLUMN;
 		default:
 			throw new JasperDesignException("TableOrder " + tableOrder.name() + " not supported");
+		}
+	}
+
+	public static TabStopAlignEnum tabStopAlignment(TabStopAlignment alignment) {
+		switch (alignment) {
+		case LEFT:
+			return TabStopAlignEnum.LEFT;
+		case CENTER:
+			return TabStopAlignEnum.CENTER;
+		case RIGHT:
+			return TabStopAlignEnum.RIGHT;
+		default:
+			throw new JasperDesignException("TabStopAlignment " + alignment.name() + " not supported");
 		}
 	}
 }

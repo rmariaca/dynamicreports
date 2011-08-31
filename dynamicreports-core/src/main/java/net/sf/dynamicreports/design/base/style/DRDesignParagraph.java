@@ -22,7 +22,10 @@
 
 package net.sf.dynamicreports.design.base.style;
 
+import java.util.List;
+
 import net.sf.dynamicreports.design.definition.style.DRIDesignParagraph;
+import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 
 /**
@@ -30,9 +33,14 @@ import net.sf.dynamicreports.report.constant.LineSpacing;
  */
 public class DRDesignParagraph implements DRIDesignParagraph {
 	private LineSpacing lineSpacing;
+	private Float lineSpacingSize;
 	private Integer firstLineIndent;
 	private Integer leftIndent;
 	private Integer rightIndent;
+	private Integer spacingBefore;
+	private Integer spacingAfter;
+	private Integer tabStopWidth;
+	private List<DRIDesignTabStop> tabStops;
 
 	public LineSpacing getLineSpacing() {
 		return lineSpacing;
@@ -40,6 +48,14 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 
 	public void setLineSpacing(LineSpacing lineSpacing) {
 		this.lineSpacing = lineSpacing;
+	}
+
+	public Float getLineSpacingSize() {
+		return lineSpacingSize;
+	}
+
+	public void setLineSpacingSize(Float lineSpacingSize) {
+		this.lineSpacingSize = lineSpacingSize;
 	}
 
 	public Integer getFirstLineIndent() {
@@ -66,4 +82,35 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.rightIndent = rightIndent;
 	}
 
+	public Integer getSpacingBefore() {
+		return spacingBefore;
+	}
+
+	public void setSpacingBefore(Integer spacingBefore) {
+		this.spacingBefore = spacingBefore;
+	}
+
+	public Integer getSpacingAfter() {
+		return spacingAfter;
+	}
+
+	public void setSpacingAfter(Integer spacingAfter) {
+		this.spacingAfter = spacingAfter;
+	}
+
+	public Integer getTabStopWidth() {
+		return tabStopWidth;
+	}
+
+	public void setTabStopWidth(Integer tabStopWidth) {
+		this.tabStopWidth = tabStopWidth;
+	}
+
+	public List<DRIDesignTabStop> getTabStops() {
+		return tabStops;
+	}
+
+	public void setTabStops(List<DRIDesignTabStop> tabStops) {
+		this.tabStops = tabStops;
+	}
 }

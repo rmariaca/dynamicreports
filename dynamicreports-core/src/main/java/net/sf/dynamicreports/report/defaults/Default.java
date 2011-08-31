@@ -93,6 +93,8 @@ public class Default {
 	private int columnWidth;
 	//component
 	private boolean removeLineWhenBlank;
+	private boolean printInFirstWholeBand;
+	private boolean printWhenDetailOverflows;
 	//group
 	private GroupHeaderLayout groupHeaderLayout;
 	private boolean groupHideColumn;
@@ -272,6 +274,8 @@ public class Default {
 		this.columnWidth = 100;
 
 		this.removeLineWhenBlank = false;
+		this.printInFirstWholeBand = false;
+		this.printWhenDetailOverflows = false;
 
 		this.groupHeaderLayout = GroupHeaderLayout.VALUE;
 		this.groupHideColumn = true;
@@ -536,6 +540,14 @@ public class Default {
 
 	public boolean isRemoveLineWhenBlank() {
 		return removeLineWhenBlank;
+	}
+
+	public boolean isPrintInFirstWholeBand() {
+		return printInFirstWholeBand;
+	}
+
+	public boolean isPrintWhenDetailOverflows() {
+		return printWhenDetailOverflows;
 	}
 
 	public GroupHeaderLayout getGroupHeaderLayout() {

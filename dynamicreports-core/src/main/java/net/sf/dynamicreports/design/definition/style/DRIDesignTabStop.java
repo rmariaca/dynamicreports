@@ -20,16 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.design.definition.style;
+
+import net.sf.dynamicreports.report.constant.TabStopAlignment;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum LineSpacing {
-	SINGLE,
-	ONE_AND_HALF,
-	DOUBLE,
-	AT_LEAST,
-	FIXED,
-	PROPORTIONAL
+public interface DRIDesignTabStop {
+
+	public int getPosition();
+
+	public TabStopAlignment getAlignment();
 }
