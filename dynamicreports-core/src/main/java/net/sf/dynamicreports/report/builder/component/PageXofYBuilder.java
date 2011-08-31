@@ -23,36 +23,18 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRPageXofY;
-import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class PageXofYBuilder extends HyperLinkComponentBuilder<PageXofYBuilder, DRPageXofY> {
+public class PageXofYBuilder extends AbstractFormatFieldBuilder<PageXofYBuilder, DRPageXofY> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected PageXofYBuilder() {
 		super(new DRPageXofY());
-	}
-
-	public PageXofYBuilder setFormatExpression(String format) {
-		getObject().setFormatExpression(Expressions.text(format));
-		return this;
-	}
-
-	public PageXofYBuilder setFormatExpression(DRIExpression<String> formatExpression) {
-		getObject().setFormatExpression(formatExpression);
-		return this;
-	}
-
-	public PageXofYBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
-		return this;
 	}
 
 	@Override

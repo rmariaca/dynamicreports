@@ -20,28 +20,25 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.component;
+package net.sf.dynamicreports.report.base.component;
 
-import net.sf.dynamicreports.report.base.component.DRTotalPages;
-import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.component.DRICurrentDate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class TotalPagesBuilder extends AbstractFormatFieldBuilder<TotalPagesBuilder, DRTotalPages> {
+public class DRCurrentDate extends DRFormatField implements DRICurrentDate {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected TotalPagesBuilder() {
-		super(new DRTotalPages());
+	private String pattern;
+
+	public String getPattern() {
+		return pattern;
 	}
 
-	@Override
-	protected void configure() {
-		if (getObject().getFormatExpression() == null) {
-			setFormatExpression(new SystemMessageExpression("total_pages"));
-		}
-		super.configure();
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
 	}
 }
+

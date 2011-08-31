@@ -22,30 +22,26 @@
 
 package net.sf.dynamicreports.report.builder.component;
 
-import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.base.component.DRPageNumber;
+import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class PageNumberBuilder extends HyperLinkComponentBuilder<PageNumberBuilder, DRTextField<Integer>> {
+public class PageNumberBuilder extends AbstractFormatFieldBuilder<PageNumberBuilder, DRPageNumber> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected PageNumberBuilder() {
-		super(new DRTextField<Integer>());
+		super(new DRPageNumber());
 	}
 
-	public PageNumberBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
-		return this;
-	}
-	
 	@Override
 	protected void configure() {
-		getObject().setValueExpression(Expressions.pageNumber());		
-		super.configure();		
+		if (getObject().getFormatExpression() == null) {
+			setFormatExpression(new SystemMessageExpression("page_number"));
+		}
+		super.configure();
 	}
 }

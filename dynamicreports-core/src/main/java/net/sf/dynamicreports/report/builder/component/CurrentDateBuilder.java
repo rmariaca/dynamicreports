@@ -22,37 +22,31 @@
 
 package net.sf.dynamicreports.report.builder.component;
 
-import java.util.Date;
-
-import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.base.component.DRCurrentDate;
+import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class CurrentDateBuilder extends HyperLinkComponentBuilder<CurrentDateBuilder, DRTextField<Date>> {
+public class CurrentDateBuilder extends AbstractFormatFieldBuilder<CurrentDateBuilder, DRCurrentDate> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected CurrentDateBuilder() {
-		super(new DRTextField<Date>());
+		super(new DRCurrentDate());
 	}
 
 	public CurrentDateBuilder setPattern(String pattern) {
 		getObject().setPattern(pattern);
 		return this;
 	}
-	
-	public CurrentDateBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
-		return this;
-	}
-	
+
 	@Override
 	protected void configure() {
-		getObject().setValueExpression(Expressions.date(new Date()));		
-		super.configure();		
+		if (getObject().getFormatExpression() == null) {
+			setFormatExpression(new SystemMessageExpression("current_date"));
+		}
+		super.configure();
 	}
 }

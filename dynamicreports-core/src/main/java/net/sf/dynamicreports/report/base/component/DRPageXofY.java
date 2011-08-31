@@ -23,36 +23,13 @@
 package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-
-import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRPageXofY extends DRHyperLinkComponent implements DRIPageXofY {
+public class DRPageXofY extends DRFormatField implements DRIPageXofY {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRIExpression<String> formatExpression;
-	private HorizontalAlignment horizontalAlignment;
-
-	public DRIExpression<String> getFormatExpression() {
-		return formatExpression;
-	}
-
-	public void setFormatExpression(DRIExpression<String> formatExpression) {
-		Validate.notNull(formatExpression, "formatExpression must not be null");
-		this.formatExpression = formatExpression;
-	}
-
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
-	}
-
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
-	}
 }
 

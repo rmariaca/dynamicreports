@@ -23,7 +23,10 @@
 package net.sf.dynamicreports.design.transformation;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.base.DRDesignGroup;
@@ -86,15 +89,18 @@ import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.component.DRIBreak;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRICurrentDate;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.component.DRIEllipse;
 import net.sf.dynamicreports.report.definition.component.DRIFiller;
+import net.sf.dynamicreports.report.definition.component.DRIFormatField;
 import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
+import net.sf.dynamicreports.report.definition.component.DRIPageNumber;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
@@ -151,6 +157,12 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRITotalPages) {
 			return totalPages((DRITotalPages) component, defaultStyleType);
+		}
+		if (component instanceof DRIPageNumber) {
+			return pageNumber((DRIPageNumber) component, defaultStyleType);
+		}
+		if (component instanceof DRICurrentDate) {
+			return currentDate((DRICurrentDate) component, defaultStyleType);
 		}
 		if (component instanceof DRILine) {
 			return line((DRILine) component);
@@ -353,7 +365,7 @@ public class ComponentTransform {
 		pageXField.setHeight(height);
 		pageXField.setHeightType(pageXofY.getHeightType());
 		pageXField.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-		pageXField.setValueExpression(new PageNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 0));
+		pageXField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 0));
 
 		DRTextField<String> pageYField = new DRTextField<String>();
 		pageYField.setHyperLink((DRHyperLink) pageXofY.getHyperLink());
@@ -362,7 +374,7 @@ public class ComponentTransform {
 		pageYField.setHeight(height);
 		pageYField.setHeightType(pageXofY.getHeightType());
 		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);
-		pageYField.setValueExpression(new PageNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 1));
+		pageYField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 1));
 		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
 		if (pageYEvaluationGroup == null) {
 			pageYField.setEvaluationTime(Evaluation.REPORT);
@@ -412,26 +424,45 @@ public class ComponentTransform {
 
 	//total pages
 	private DRDesignTextField totalPages(DRITotalPages totalPages, DefaultStyleType defaultStyleType) throws DRException {
-		DRTextField<String> totalPagesField = new DRTextField<String>();
-		totalPagesField.setHyperLink((DRHyperLink) totalPages.getHyperLink());
-		totalPagesField.setPrintWhenExpression(totalPages.getPrintWhenExpression());
-		totalPagesField.setStyle((DRStyle) totalPages.getStyle());
-		totalPagesField.setWidth(totalPages.getWidth());
-		totalPagesField.setWidthType(totalPages.getWidthType());
-		totalPagesField.setHeight(totalPages.getHeight());
-		totalPagesField.setHeightType(totalPages.getHeightType());
-		totalPagesField.setHorizontalAlignment(totalPages.getHorizontalAlignment());
-		totalPagesField.setValueExpression(new TotalPagesExpression(totalPages.getFormatExpression()));
-		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
-		if (pageYEvaluationGroup == null) {
+		PageNumberExpression expression = new PageNumberExpression(totalPages.getFormatExpression());
+		DRTextField<String> totalPagesField = formatField(totalPages, expression);
+		DRIGroup pageEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
+		if (pageEvaluationGroup == null) {
 			totalPagesField.setEvaluationTime(Evaluation.REPORT);
 		}
 		else {
 			totalPagesField.setEvaluationTime(Evaluation.GROUP);
-			totalPagesField.setEvaluationGroup((DRGroup) pageYEvaluationGroup);
+			totalPagesField.setEvaluationGroup((DRGroup) pageEvaluationGroup);
 		}
 
 		return textField(totalPagesField, defaultStyleType);
+	}
+
+	//page number
+	private DRDesignTextField pageNumber(DRIPageNumber pageNumber, DefaultStyleType defaultStyleType) throws DRException {
+		PageNumberExpression expression = new PageNumberExpression(pageNumber.getFormatExpression());
+		return textField(formatField(pageNumber, expression), defaultStyleType);
+	}
+
+	//current date
+	private DRDesignTextField currentDate(DRICurrentDate currentDate, DefaultStyleType defaultStyleType) throws DRException {
+		CurrentDateExpression expression = new CurrentDateExpression(currentDate.getFormatExpression(), currentDate.getPattern());
+		return textField(formatField(currentDate, expression), defaultStyleType);
+	}
+
+	//format field
+	private DRTextField<String> formatField(DRIFormatField formatField, DRIExpression<String> expression) throws DRException {
+		DRTextField<String> formatFieldTextField = new DRTextField<String>();
+		formatFieldTextField.setHyperLink((DRHyperLink) formatField.getHyperLink());
+		formatFieldTextField.setPrintWhenExpression(formatField.getPrintWhenExpression());
+		formatFieldTextField.setStyle((DRStyle) formatField.getStyle());
+		formatFieldTextField.setWidth(formatField.getWidth());
+		formatFieldTextField.setWidthType(formatField.getWidthType());
+		formatFieldTextField.setHeight(formatField.getHeight());
+		formatFieldTextField.setHeightType(formatField.getHeightType());
+		formatFieldTextField.setHorizontalAlignment(formatField.getHorizontalAlignment());
+		formatFieldTextField.setValueExpression(expression);
+		return formatFieldTextField;
 	}
 
 	//line
@@ -639,13 +670,13 @@ public class ComponentTransform {
 		return evaluationGroup;
 	}
 
-	private class PageNumberExpression extends AbstractComplexExpression<String> {
+	private class PageXofYNumberExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		private HorizontalAlignment horizontalAlignment;
 		private int index;
 
-		public PageNumberExpression(DRIExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
+		public PageXofYNumberExpression(DRIExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
 			addExpression(pageNumberFormatExpression);
 			this.horizontalAlignment = horizontalAlignment;
 			this.index = index;
@@ -678,10 +709,10 @@ public class ComponentTransform {
 		}
 	}
 
-	private class TotalPagesExpression extends AbstractComplexExpression<String> {
+	private class PageNumberExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-		public TotalPagesExpression(DRIExpression<String> pageNumberFormatExpression) {
+		public PageNumberExpression(DRIExpression<String> pageNumberFormatExpression) {
 			addExpression(pageNumberFormatExpression);
 		}
 
@@ -689,7 +720,33 @@ public class ComponentTransform {
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
 			String pattern = (String) values.get(0);
 			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
-			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});
+			String result = format.format(new Object[]{reportParameters.getPageNumber()});
+			return result;
+		}
+	}
+
+	private class CurrentDateExpression extends AbstractComplexExpression<String> {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+		private String datePattern;
+
+		public CurrentDateExpression(DRIExpression<String> currentDateExpression, String datePattern) {
+			this.datePattern = datePattern;
+			addExpression(currentDateExpression);
+		}
+
+		@Override
+		public String evaluate(List<?> values, ReportParameters reportParameters) {
+			String pattern = (String) values.get(0);
+			Locale locale = reportParameters.getLocale();
+			MessageFormat format = new MessageFormat(pattern, locale);
+			String date;
+			if (datePattern == null) {
+				date = DataTypes.dateType().valueToString(new Date(), locale);
+			}
+			else {
+				date = new SimpleDateFormat(datePattern, locale).format(new Date());
+			}
+			String result = format.format(new Object[]{date});
 			return result;
 		}
 	}

@@ -20,28 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.component;
-
-import net.sf.dynamicreports.report.base.component.DRTotalPages;
-import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
-import net.sf.dynamicreports.report.constant.Constants;
+package net.sf.dynamicreports.report.definition.component;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class TotalPagesBuilder extends AbstractFormatFieldBuilder<TotalPagesBuilder, DRTotalPages> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public interface DRIPageNumber extends DRIFormatField {
 
-	protected TotalPagesBuilder() {
-		super(new DRTotalPages());
-	}
-
-	@Override
-	protected void configure() {
-		if (getObject().getFormatExpression() == null) {
-			setFormatExpression(new SystemMessageExpression("total_pages"));
-		}
-		super.configure();
-	}
 }
+

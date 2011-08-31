@@ -22,26 +22,35 @@
 
 package net.sf.dynamicreports.report.builder.component;
 
-import net.sf.dynamicreports.report.base.component.DRTotalPages;
-import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
+import net.sf.dynamicreports.report.base.component.DRFormatField;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class TotalPagesBuilder extends AbstractFormatFieldBuilder<TotalPagesBuilder, DRTotalPages> {
+@SuppressWarnings({"unchecked", "ucd"})
+public abstract class AbstractFormatFieldBuilder<T extends AbstractFormatFieldBuilder<T, U>, U extends DRFormatField> extends HyperLinkComponentBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected TotalPagesBuilder() {
-		super(new DRTotalPages());
+	protected AbstractFormatFieldBuilder(U formatField) {
+		super(formatField);
 	}
 
-	@Override
-	protected void configure() {
-		if (getObject().getFormatExpression() == null) {
-			setFormatExpression(new SystemMessageExpression("total_pages"));
-		}
-		super.configure();
+	public T setFormatExpression(String format) {
+		getObject().setFormatExpression(Expressions.text(format));
+		return (T) this;
+	}
+
+	public T setFormatExpression(DRIExpression<String> formatExpression) {
+		getObject().setFormatExpression(formatExpression);
+		return (T) this;
+	}
+
+	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		getObject().setHorizontalAlignment(horizontalAlignment);
+		return (T) this;
 	}
 }

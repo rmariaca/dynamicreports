@@ -20,28 +20,39 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.component;
+package net.sf.dynamicreports.report.base.component;
 
-import net.sf.dynamicreports.report.base.component.DRTotalPages;
-import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.component.DRIFormatField;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class TotalPagesBuilder extends AbstractFormatFieldBuilder<TotalPagesBuilder, DRTotalPages> {
+public abstract class DRFormatField extends DRHyperLinkComponent implements DRIFormatField {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected TotalPagesBuilder() {
-		super(new DRTotalPages());
+	private DRIExpression<String> formatExpression;
+	private HorizontalAlignment horizontalAlignment;
+
+	public DRIExpression<String> getFormatExpression() {
+		return formatExpression;
 	}
 
-	@Override
-	protected void configure() {
-		if (getObject().getFormatExpression() == null) {
-			setFormatExpression(new SystemMessageExpression("total_pages"));
-		}
-		super.configure();
+	public void setFormatExpression(DRIExpression<String> formatExpression) {
+		Validate.notNull(formatExpression, "formatExpression must not be null");
+		this.formatExpression = formatExpression;
+	}
+
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
 	}
 }
+

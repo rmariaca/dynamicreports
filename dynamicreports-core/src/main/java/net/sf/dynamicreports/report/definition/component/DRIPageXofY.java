@@ -22,16 +22,10 @@
 
 package net.sf.dynamicreports.report.definition.component;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIPageXofY extends DRIHyperLinkComponent {
+public interface DRIPageXofY extends DRIFormatField {
 
-	public DRIExpression<String> getFormatExpression();
-
-	public HorizontalAlignment getHorizontalAlignment();
 }
 
