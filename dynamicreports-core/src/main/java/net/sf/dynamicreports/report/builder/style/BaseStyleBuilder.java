@@ -273,7 +273,22 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 	}
 
 	public T setLineSpacing(LineSpacing lineSpacing) {
-		getObject().setLineSpacing(lineSpacing);
+		getObject().getParagraph().setLineSpacing(lineSpacing);
+		return (T) this;
+	}
+
+	public T setFirstLineIndent(Integer firstLineIndent) {
+		getObject().getParagraph().setFirstLineIndent(firstLineIndent);
+		return (T) this;
+	}
+
+	public T setLeftIndent(Integer leftIndent) {
+		getObject().getParagraph().setLeftIndent(leftIndent);
+		return (T) this;
+	}
+
+	public T setRightIndent(Integer rightIndent) {
+		getObject().getParagraph().setRightIndent(rightIndent);
 		return (T) this;
 	}
 

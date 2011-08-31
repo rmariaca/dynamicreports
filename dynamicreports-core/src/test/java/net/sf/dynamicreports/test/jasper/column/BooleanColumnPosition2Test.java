@@ -59,7 +59,7 @@ public class BooleanColumnPosition2Test extends AbstractJasperPositionTest {
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");
-		dataSource.add(true, "1111111");
+		dataSource.add(true, "1111111111");
 		dataSource.add(false, "");
 		return dataSource;
 	}

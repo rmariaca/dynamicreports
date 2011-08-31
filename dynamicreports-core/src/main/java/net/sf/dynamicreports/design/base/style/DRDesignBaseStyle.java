@@ -27,7 +27,6 @@ import java.awt.Color;
 import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
-import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
@@ -48,7 +47,7 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	private Rotation rotation;
 	private String pattern;
 	private Markup markup;
-	private LineSpacing lineSpacing;
+	private DRDesignParagraph paragraph;
 	private DRDesignPen linePen;
 
 	public Color getForegroundColor() {
@@ -147,12 +146,12 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 		this.markup = markup;
 	}
 
-	public LineSpacing getLineSpacing() {
-		return lineSpacing;
+	public DRDesignParagraph getParagraph() {
+		return paragraph;
 	}
 
-	public void setLineSpacing(LineSpacing lineSpacing) {
-		this.lineSpacing = lineSpacing;
+	public void setParagraph(DRDesignParagraph paragraph) {
+		this.paragraph = paragraph;
 	}
 
 	public DRDesignPen getLinePen() {

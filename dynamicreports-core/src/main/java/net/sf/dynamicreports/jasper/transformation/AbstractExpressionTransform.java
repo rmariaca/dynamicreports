@@ -180,7 +180,6 @@ public abstract class AbstractExpressionTransform {
 	private JRDesignExpression expression(DRIDesignExpression simpleExpression) {
 		JRDesignExpression expression = new JRDesignExpression();
 		expression.setText(getExpressionText(simpleExpression));
-		expression.setValueClass(simpleExpression.getValueClass());
 		return expression;
 	}
 

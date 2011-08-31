@@ -20,46 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.style;
+package net.sf.dynamicreports.report.definition.style;
 
-import java.awt.Color;
+import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.ImageScale;
-import net.sf.dynamicreports.report.constant.Markup;
-import net.sf.dynamicreports.report.constant.Rotation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.LineSpacing;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignBaseStyle {
+public interface DRIParagraph extends Serializable {
 
-	public Color getForegroundColor();
+	public LineSpacing getLineSpacing();
 
-	public Color getBackgroundColor();
+	public Integer getFirstLineIndent();
 
-	public Integer getRadius();
+	public Integer getLeftIndent();
 
-	public ImageScale getImageScale();
-
-	public HorizontalAlignment getHorizontalAlignment();
-
-	public VerticalAlignment getVerticalAlignment();
-
-	public DRIDesignBorder getBorder();
-
-	public DRIDesignPadding getPadding();
-
-	public DRIDesignFont getFont();
-
-	public Rotation getRotation();
-
-	public String getPattern();
-
-	public Markup getMarkup();
-
-	public DRIDesignParagraph getParagraph();
-
-	public DRIDesignPen getLinePen();
+	public Integer getRightIndent();
 }

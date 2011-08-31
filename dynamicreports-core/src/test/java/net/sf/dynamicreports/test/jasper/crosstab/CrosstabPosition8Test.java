@@ -51,7 +51,7 @@ public class CrosstabPosition8Test extends AbstractJasperCrosstabPositionTest {
 		TextColumnBuilder<String> column2 = col.column("Column2", "field2", String.class);
 		TextColumnBuilder<Integer> column3 = col.column("Column3", "field3", Integer.class);
 
-		rowGroup1 = ctab.rowGroup(column1).setHeaderWidth(25);
+		rowGroup1 = ctab.rowGroup(column1).setHeaderWidth(22);
 		measure1 = ctab.measure("measure1", column3, Calculation.SUM);
 		measure2 = ctab.measure("measure2", column3, Calculation.SUM);
 
@@ -79,8 +79,8 @@ public class CrosstabPosition8Test extends AbstractJasperCrosstabPositionTest {
 		crosstabGroupTotalHeaderPositionTest(columnGroup1, 0, 0, 0, 100, 16);
 
 		//row group 1
-		crosstabGroupHeaderPositionTest(rowGroup1, 0, 0, 0, 25, 26);
-		crosstabGroupTotalHeaderPositionTest(rowGroup1, 0, 0, 0, 25, 26);
+		crosstabGroupHeaderPositionTest(rowGroup1, 0, 0, 0, 22, 26);
+		crosstabGroupTotalHeaderPositionTest(rowGroup1, 0, 0, 0, 22, 26);
 
 		//measures
 		crosstabCellPositionTest(measure1, null, null, 0, 0, 0, 50, 26);

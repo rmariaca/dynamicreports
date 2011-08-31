@@ -20,39 +20,50 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper.style;
+package net.sf.dynamicreports.design.base.style;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-
-import java.io.Serializable;
-
-import junit.framework.Assert;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.design.definition.style.DRIDesignParagraph;
 import net.sf.dynamicreports.report.constant.LineSpacing;
-import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
-import net.sf.jasperreports.engine.JRStyle;
-import net.sf.jasperreports.engine.type.LineSpacingEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Style7Test extends AbstractJasperStyleTest implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class DRDesignParagraph implements DRIDesignParagraph {
+	private LineSpacing lineSpacing;
+	private Integer firstLineIndent;
+	private Integer leftIndent;
+	private Integer rightIndent;
 
-	@Override
-	protected void configureReport(JasperReportBuilder rb) {
-		rb.setTextStyle(stl.style().setLineSpacing(LineSpacing.DOUBLE))
-		  .title(
-					cmp.text(""));
+	public LineSpacing getLineSpacing() {
+		return lineSpacing;
 	}
 
-	@Override
-	public void test() {
-		super.test();
-
-		numberOfPagesTest(1);
-
-		JRStyle style = getElementAt("title.textField1", 0).getStyle();
-		Assert.assertEquals("line spacing", LineSpacingEnum.DOUBLE, style.getParagraph().getLineSpacing());
+	public void setLineSpacing(LineSpacing lineSpacing) {
+		this.lineSpacing = lineSpacing;
 	}
+
+	public Integer getFirstLineIndent() {
+		return firstLineIndent;
+	}
+
+	public void setFirstLineIndent(Integer firstLineIndent) {
+		this.firstLineIndent = firstLineIndent;
+	}
+
+	public Integer getLeftIndent() {
+		return leftIndent;
+	}
+
+	public void setLeftIndent(Integer leftIndent) {
+		this.leftIndent = leftIndent;
+	}
+
+	public Integer getRightIndent() {
+		return rightIndent;
+	}
+
+	public void setRightIndent(Integer rightIndent) {
+		this.rightIndent = rightIndent;
+	}
+
 }

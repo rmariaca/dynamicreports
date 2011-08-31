@@ -73,9 +73,9 @@ import net.sf.jasperreports.components.spiderchart.StandardChartSettings;
 import net.sf.jasperreports.components.spiderchart.StandardSpiderDataset;
 import net.sf.jasperreports.components.spiderchart.StandardSpiderPlot;
 import net.sf.jasperreports.engine.JRChartPlot;
+import net.sf.jasperreports.engine.JRChartPlot.JRSeriesColor;
 import net.sf.jasperreports.engine.JRHyperlinkHelper;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot;
-import net.sf.jasperreports.engine.base.JRBaseChartPlot.JRBaseSeriesColor;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.design.JRDesignChartDataset;
@@ -333,7 +333,7 @@ public class ChartTransform {
 			jrPlot.setOrientation(ConstantTransform.chartPlotOrientation(plot.getOrientation()));
 		}
 		if (plot.getSeriesColors() != null) {
-			List<JRBaseSeriesColor> colors = new ArrayList<JRBaseSeriesColor>();
+			List<JRSeriesColor> colors = new ArrayList<JRSeriesColor>();
 			int i = 1;
 			for (Color color : plot.getSeriesColors()) {
 				colors.add(new JRBaseChartPlot.JRBaseSeriesColor(i++, color));

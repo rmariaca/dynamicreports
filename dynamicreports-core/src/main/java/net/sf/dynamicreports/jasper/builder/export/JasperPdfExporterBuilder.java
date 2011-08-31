@@ -35,41 +35,41 @@ import org.apache.commons.lang.Validate;
 @SuppressWarnings("ucd")
 public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<JasperPdfExporterBuilder, JasperPdfExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperPdfExporterBuilder() {
 		super(new JasperPdfExporter());
 	}
-	
+
 	public JasperPdfExporterBuilder setCreatingBatchModeBookmarks(Boolean creatingBatchModeBookmarks) {
 		this.getObject().setCreatingBatchModeBookmarks(creatingBatchModeBookmarks);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setCompressed(Boolean compressed) {
 		this.getObject().setCompressed(compressed);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setEncrypted(Boolean encrypted) {
 		this.getObject().setEncrypted(encrypted);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setBitKey128(Boolean bitKey128) {
 		this.getObject().setBitKey128(bitKey128);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setUserPassword(String userPassword) {
 		this.getObject().setUserPassword(userPassword);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setOwnerPassword(String ownerPassword) {
 		this.getObject().setOwnerPassword(ownerPassword);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder permissions(PdfPermission ...permissions) {
 		return addPermission(permissions);
 	}
@@ -79,62 +79,57 @@ public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 		Validate.noNullElements(permissions, "permissions must not contains null permission");
 		for (PdfPermission permission : permissions) {
 			this.getObject().addPermission(permission);
-		}		
+		}
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setPdfVersion(PdfVersion pdfVersion) {
 		this.getObject().setPdfVersion(pdfVersion);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setMetadataTitle(String metadataTitle) {
 		this.getObject().setMetadataTitle(metadataTitle);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setMetadataAuthor(String metadataAuthor) {
 		this.getObject().setMetadataAuthor(metadataAuthor);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setMetadataSubject(String metadataSubject) {
 		this.getObject().setMetadataSubject(metadataSubject);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setMetadataKeyWords(String metadataKeyWords) {
 		this.getObject().setMetadataKeyWords(metadataKeyWords);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setMetadataCreator(String metadataCreator) {
 		this.getObject().setMetadataCreator(metadataCreator);
 		return this;
 	}
-	
-	public JasperPdfExporterBuilder setForcelineBreakPolicy(Boolean forcelineBreakPolicy) {
-		this.getObject().setForcelineBreakPolicy(forcelineBreakPolicy);
-		return this;
-	}
-	
+
 	public JasperPdfExporterBuilder setForceSvgShapes(Boolean forceSvgShapes) {
 		this.getObject().setForceSvgShapes(forceSvgShapes);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setPdfJavaScript(String pdfJavaScript) {
 		this.getObject().setPdfJavaScript(pdfJavaScript);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setTagged(Boolean tagged) {
 		this.getObject().setTagged(tagged);
 		return this;
 	}
-	
+
 	public JasperPdfExporterBuilder setTagLanguage(String tagLanguage) {
 		this.getObject().setTagLanguage(tagLanguage);
 		return this;
-	}	
+	}
 }

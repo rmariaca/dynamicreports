@@ -27,7 +27,6 @@ import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
-import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
@@ -61,7 +60,7 @@ public interface DRIBaseStyle extends Serializable {
 
 	public Markup getMarkup();
 
-	public LineSpacing getLineSpacing();
+	public DRIParagraph getParagraph();
 
 	public DRIPen getLinePen();
 }

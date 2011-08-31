@@ -182,11 +182,11 @@ public class StyleResolver {
 	}
 
 	protected static int getHorizontalPadding(DRDesignStyle style) {
-		return getLeftPadding(style) + getRightPadding(style);
+		return getLeftPadding(style) + getRightPadding(style) + getLeftIndent(style) + getRightIndent(style);
 	}
 
 	protected static int getVerticalPadding(DRDesignStyle style) {
-		return getTopPadding(style) + getBottomPadding(style);
+		return getTopPadding(style) + getBottomPadding(style) + getFirstLineIndent(style);
 	}
 
 	private static Integer getTopPadding(DRDesignStyle style) {
@@ -237,6 +237,45 @@ public class StyleResolver {
 		}
 		if (style.getParentStyle() != null) {
 			return getRightPadding(style.getParentStyle());
+		}
+		return 0;
+	}
+
+	private static Integer getFirstLineIndent(DRDesignStyle style) {
+		if (style == null) {
+			return 0;
+		}
+		if (style.getParagraph() != null && style.getParagraph().getFirstLineIndent() != null) {
+			return style.getParagraph().getFirstLineIndent();
+		}
+		if (style.getParentStyle() != null) {
+			return getFirstLineIndent(style.getParentStyle());
+		}
+		return 0;
+	}
+
+	private static Integer getLeftIndent(DRDesignStyle style) {
+		if (style == null) {
+			return 0;
+		}
+		if (style.getParagraph() != null && style.getParagraph().getLeftIndent() != null) {
+			return style.getParagraph().getLeftIndent();
+		}
+		if (style.getParentStyle() != null) {
+			return getLeftIndent(style.getParentStyle());
+		}
+		return 0;
+	}
+
+	private static Integer getRightIndent(DRDesignStyle style) {
+		if (style == null) {
+			return 0;
+		}
+		if (style.getParagraph() != null && style.getParagraph().getRightIndent() != null) {
+			return style.getParagraph().getRightIndent();
+		}
+		if (style.getParentStyle() != null) {
+			return getRightIndent(style.getParentStyle());
 		}
 		return 0;
 	}

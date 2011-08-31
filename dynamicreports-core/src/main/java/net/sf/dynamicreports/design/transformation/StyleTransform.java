@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.base.style.DRDesignBorder;
 import net.sf.dynamicreports.design.base.style.DRDesignConditionalStyle;
 import net.sf.dynamicreports.design.base.style.DRDesignFont;
 import net.sf.dynamicreports.design.base.style.DRDesignPadding;
+import net.sf.dynamicreports.design.base.style.DRDesignParagraph;
 import net.sf.dynamicreports.design.base.style.DRDesignPen;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
@@ -41,6 +42,7 @@ import net.sf.dynamicreports.report.base.style.DRBaseStyle;
 import net.sf.dynamicreports.report.base.style.DRBorder;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
+import net.sf.dynamicreports.report.base.style.DRParagraph;
 import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.style.DRIBaseStyle;
@@ -48,6 +50,7 @@ import net.sf.dynamicreports.report.definition.style.DRIBorder;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIPadding;
+import net.sf.dynamicreports.report.definition.style.DRIParagraph;
 import net.sf.dynamicreports.report.definition.style.DRIPen;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -155,8 +158,17 @@ public class StyleTransform {
 		designBaseStyle.setRotation(baseStyle.getRotation());
 		designBaseStyle.setPattern(baseStyle.getPattern());
 		designBaseStyle.setMarkup(baseStyle.getMarkup());
-		designBaseStyle.setLineSpacing(baseStyle.getLineSpacing());
+		designBaseStyle.setParagraph(paragraph(baseStyle.getParagraph()));
 		designBaseStyle.setLinePen(pen(baseStyle.getLinePen()));
+	}
+
+	private DRDesignParagraph paragraph(DRIParagraph paragraph) {
+		DRDesignParagraph designParagraph = new DRDesignParagraph();
+		designParagraph.setLineSpacing(paragraph.getLineSpacing());
+		designParagraph.setFirstLineIndent(paragraph.getFirstLineIndent());
+		designParagraph.setLeftIndent(paragraph.getLeftIndent());
+		designParagraph.setRightIndent(paragraph.getRightIndent());
+		return designParagraph;
 	}
 
 	private DRDesignBorder border(DRIBorder border) {
@@ -243,7 +255,7 @@ public class StyleTransform {
 		toStyle.setRotation(fromStyle.getRotation());
 		toStyle.setPattern(fromStyle.getPattern());
 		toStyle.setMarkup(fromStyle.getMarkup());
-		toStyle.setLineSpacing(fromStyle.getLineSpacing());
+		toStyle.setParagraph((DRParagraph) fromStyle.getParagraph());
 		toStyle.setLinePen((DRPen) fromStyle.getLinePen());
 	}
 

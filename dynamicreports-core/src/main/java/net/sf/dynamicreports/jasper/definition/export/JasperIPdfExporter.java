@@ -31,40 +31,38 @@ import net.sf.dynamicreports.jasper.constant.PdfVersion;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface JasperIPdfExporter extends JasperIExporter {
-	
+
 	public Boolean getCreatingBatchModeBookmarks();
-	
+
 	public Boolean getCompressed();
-	
+
 	public Boolean getEncrypted();
-	
+
 	public Boolean getBitKey128();
-	
+
 	public String getUserPassword();
-	
+
 	public String getOwnerPassword();
-	
+
 	public List<PdfPermission> getPermissions();
-	
+
 	public PdfVersion getPdfVersion();
-	
+
 	public String getMetadataTitle();
-	
+
 	public String getMetadataAuthor();
-	
+
 	public String getMetadataSubject();
-	
+
 	public String getMetadataKeyWords();
-	
+
 	public String getMetadataCreator();
-	
-	public Boolean getForcelineBreakPolicy();
-	
+
 	public Boolean getForceSvgShapes();
-	
+
 	public String getPdfJavaScript();
-	
+
 	public Boolean getTagged();
-	
+
 	public String getTagLanguage();
 }

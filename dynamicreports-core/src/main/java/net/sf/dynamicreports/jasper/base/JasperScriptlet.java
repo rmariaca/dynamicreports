@@ -34,7 +34,10 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.jasperreports.engine.JRDefaultScriptlet;
 import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.JRScriptletException;
+import net.sf.jasperreports.engine.fill.JRFillField;
 import net.sf.jasperreports.engine.fill.JRFillGroup;
+import net.sf.jasperreports.engine.fill.JRFillParameter;
+import net.sf.jasperreports.engine.fill.JRFillVariable;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -85,9 +88,8 @@ public class JasperScriptlet extends JRDefaultScriptlet {
 		return getCustomValues().getSystemValue(name);
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public void setData(Map parsm, Map fldsm, Map varsm, JRFillGroup[] grps) {
+	public void setData(Map<String, JRFillParameter> parsm, Map<String,JRFillField> fldsm, Map<String,JRFillVariable> varsm, JRFillGroup[] grps) {
 		super.setData(parsm, fldsm, varsm, grps);
 		reportParameters = new JasperReportParameters(this);
 	}

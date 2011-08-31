@@ -27,16 +27,18 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignBorder;
 import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 import net.sf.dynamicreports.design.definition.style.DRIDesignPadding;
+import net.sf.dynamicreports.design.definition.style.DRIDesignParagraph;
 import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRLineBox;
+import net.sf.jasperreports.engine.JRParagraph;
 import net.sf.jasperreports.engine.JRPen;
+import net.sf.jasperreports.engine.base.JRBaseFont;
 import net.sf.jasperreports.engine.base.JRBaseStyle;
 import net.sf.jasperreports.engine.design.JRDesignConditionalStyle;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
-import net.sf.jasperreports.engine.design.JRDesignFont;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.type.ModeEnum;
 
@@ -109,8 +111,15 @@ public class StyleTransform {
 		baseStyle.setPattern(style.getPattern());
 		baseStyle.setMarkup(ConstantTransform.markup(style.getMarkup()));
 		baseStyle.setBlankWhenNull(true);
-		baseStyle.setLineSpacing(ConstantTransform.lineSpacing(style.getLineSpacing()));
+		paragraph(baseStyle.getParagraph(), style.getParagraph());
 		pen(baseStyle.getLinePen(), style.getLinePen());
+	}
+
+	private void paragraph(JRParagraph jrParagraph, DRIDesignParagraph paragraph) {
+		jrParagraph.setLineSpacing(ConstantTransform.lineSpacing(paragraph.getLineSpacing()));
+		jrParagraph.setFirstLineIndent(paragraph.getFirstLineIndent());
+		jrParagraph.setLeftIndent(paragraph.getLeftIndent());
+		jrParagraph.setRightIndent(paragraph.getRightIndent());
 	}
 
 	protected void pen(JRPen jrPen, DRIDesignPen pen) {
@@ -157,11 +166,11 @@ public class StyleTransform {
 		baseStyle.setPdfEmbedded(font.getPdfEmbedded());
 	}
 
-	protected JRDesignFont font(DRIDesignFont font) {
+	protected JRBaseFont font(DRIDesignFont font) {
 		if (font == null)
 			return null;
 
-		JRDesignFont jrFont = new JRDesignFont();
+		JRBaseFont jrFont = new JRBaseFont();
 		jrFont.setFontName(font.getFontName());
 		jrFont.setBold(font.getBold());
 		jrFont.setItalic(font.getItalic());

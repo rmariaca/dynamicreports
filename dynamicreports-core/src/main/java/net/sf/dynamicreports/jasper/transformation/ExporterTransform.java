@@ -275,9 +275,6 @@ public class ExporterTransform {
 		if (jasperExporter.getMetadataCreator() != null) {
 			jrExporter.setParameter(JRPdfExporterParameter.METADATA_CREATOR, jasperExporter.getMetadataCreator());
 		}
-		if (jasperExporter.getForcelineBreakPolicy() != null) {
-			jrExporter.setParameter(JRPdfExporterParameter.FORCE_LINEBREAK_POLICY, jasperExporter.getForcelineBreakPolicy());
-		}
 		if (jasperExporter.getForceSvgShapes() != null) {
 			jrExporter.setParameter(JRPdfExporterParameter.FORCE_SVG_SHAPES, jasperExporter.getForceSvgShapes());
 		}

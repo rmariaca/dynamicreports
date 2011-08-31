@@ -168,6 +168,7 @@ public class CrosstabTransform {
 		jrBucket.setExpression(accessor.getExpressionTransform().getExpression(group.getExpression()));
 		jrBucket.setOrderByExpression(accessor.getExpressionTransform().getExpression(group.getOrderByExpression()));
 		jrBucket.setComparatorExpression(accessor.getExpressionTransform().getExpression(group.getComparatorExpression()));
+		jrBucket.setValueClassName(group.getExpression().getValueClass().getName());
 		return jrBucket;
 	}
 
