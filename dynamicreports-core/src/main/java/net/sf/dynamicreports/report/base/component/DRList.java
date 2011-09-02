@@ -74,7 +74,6 @@ public class DRList extends DRDimensionComponent implements DRIList {
 		listCells.add(new DRListCell(horizontalAlignment, verticalAlignment, component));
 	}
 
-	@SuppressWarnings("ucd")
 	public void setType(ListType type) {
 		Validate.notNull(type, "type must not be null");
 		this.type = type;

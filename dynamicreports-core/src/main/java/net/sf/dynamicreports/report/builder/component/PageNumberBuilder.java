@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PageNumberBuilder extends AbstractFormatFieldBuilder<PageNumberBuilder, DRPageNumber> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

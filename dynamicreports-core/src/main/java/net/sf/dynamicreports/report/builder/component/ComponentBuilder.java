@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
+@SuppressWarnings("unchecked")
 public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U extends DRComponent> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

@@ -153,7 +153,6 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		return title;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setTitle(DRChartTitle title) {
 		Validate.notNull(title, "title must not be null");
 		this.title = title;
@@ -163,7 +162,6 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		return subtitle;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setSubtitle(DRChartSubtitle subtitle) {
 		Validate.notNull(subtitle, "subtitle must not be null");
 		this.subtitle = subtitle;
@@ -173,7 +171,6 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		return legend;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setLegend(DRChartLegend legend) {
 		Validate.notNull(legend, "legend must not be null");
 		this.legend = legend;

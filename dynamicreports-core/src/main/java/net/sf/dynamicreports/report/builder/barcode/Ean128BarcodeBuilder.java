@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Ean128BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Ean128BarcodeBuilder, DREan128Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

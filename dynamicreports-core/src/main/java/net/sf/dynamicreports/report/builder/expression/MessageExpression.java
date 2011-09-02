@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class MessageExpression extends AbstractSimpleExpression<String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

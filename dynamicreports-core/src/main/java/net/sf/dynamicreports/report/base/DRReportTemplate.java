@@ -609,7 +609,6 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.chartSeriesColors.add(color);
 	}
 
-	@SuppressWarnings("ucd")
 	public void setChartSeriesColors(List<Color> chartSeriesColors) {
 		if (chartSeriesColors != null) {
 			Validate.noNullElements(chartSeriesColors, "chartSeriesColors must not contains null chartSeriesColor");

@@ -38,7 +38,6 @@ import net.sf.dynamicreports.report.exception.DRReportException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSubtotalBuilder<T>, T> implements DRIValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

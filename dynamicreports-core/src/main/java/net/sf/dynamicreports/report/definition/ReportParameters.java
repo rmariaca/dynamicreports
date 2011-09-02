@@ -52,12 +52,10 @@ public interface ReportParameters {
 
 	public Integer getGroupCount(String groupName);
 
-	@SuppressWarnings("ucd")
 	public Connection getConnection();
 
 	public Locale getLocale();
 
-	@SuppressWarnings("ucd")
 	public DRIScriptlet getScriptlet(String name);
 
 	public String getMessage(String key);

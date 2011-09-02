@@ -28,19 +28,18 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class JasperCsvExporterBuilder extends AbstractJasperExporterBuilder<JasperCsvExporterBuilder, JasperCsvExporter> {	
+public class JasperCsvExporterBuilder extends AbstractJasperExporterBuilder<JasperCsvExporterBuilder, JasperCsvExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperCsvExporterBuilder() {
 		super(new JasperCsvExporter());
 	}
-	
+
 	public JasperCsvExporterBuilder setFieldDelimiter(String fieldDelimiter) {
 		this.getObject().setFieldDelimiter(fieldDelimiter);
 		return this;
 	}
-	
+
 	public JasperCsvExporterBuilder setRecordDelimiter(String recordDelimiter) {
 		this.getObject().setRecordDelimiter(recordDelimiter);
 		return this;

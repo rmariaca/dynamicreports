@@ -22,19 +22,18 @@
 
 package net.sf.dynamicreports.report.builder.expression;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private T value;
 	private Class<? super T> valueClass;
 
@@ -45,16 +44,16 @@ public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 		this.valueClass = (Class<? super T>) value.getClass();
 	}
 
-	public ValueExpression(T value, Class<? super T> valueClass) {	
+	public ValueExpression(T value, Class<? super T> valueClass) {
 		Validate.notNull(valueClass, "valueClass must not be null");
-		this.value = value;			
+		this.value = value;
 		this.valueClass = valueClass;
 	}
-	
+
 	public T evaluate(ReportParameters reportParameters) {
 		return value;
 	}
-	
+
 	@Override
 	public Class<? super T> getValueClass() {
 		return valueClass;

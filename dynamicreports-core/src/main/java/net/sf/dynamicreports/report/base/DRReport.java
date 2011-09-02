@@ -189,7 +189,6 @@ public class DRReport implements DRIReport {
 		return columns;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setColumns(List<DRColumn<?>> columns) {
 		Validate.notNull(columns, "columns must not be null");
 		Validate.noNullElements(columns, "columns must not contains null column");
@@ -205,7 +204,6 @@ public class DRReport implements DRIReport {
 		return groups;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setGroups(List<DRGroup> groups) {
 		Validate.notNull(groups, "groups must not be null");
 		Validate.noNullElements(groups, "groups must not contains null group");
@@ -221,7 +219,6 @@ public class DRReport implements DRIReport {
 		return fields;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setFields(List<DRField<?>> fields) {
 		Validate.notNull(fields, "fields must not be null");
 		Validate.noNullElements(fields, "fields must not contains null field");
@@ -237,7 +234,6 @@ public class DRReport implements DRIReport {
 		return variables;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setVariables(List<DRVariable<?>> variables) {
 		Validate.notNull(variables, "variables must not be null");
 		Validate.noNullElements(variables, "variables must not contains null variable");
@@ -253,7 +249,6 @@ public class DRReport implements DRIReport {
 		return subtotals;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setSubtotals(List<DRSubtotal<?>> subtotals) {
 		Validate.notNull(subtotals, "subtotals must not be null");
 		Validate.noNullElements(subtotals, "subtotals must not contains null subtotal");
@@ -269,7 +264,6 @@ public class DRReport implements DRIReport {
 		return parameters;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setParameters(List<DRParameter<?>> parameters) {
 		Validate.notNull(parameters, "parameters must not be null");
 		Validate.noNullElements(parameters, "parameters must not contains null parameter");
@@ -285,7 +279,6 @@ public class DRReport implements DRIReport {
 		return scriptlets;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setScriptlets(List<DRIScriptlet> scriptlets) {
 		Validate.notNull(scriptlets, "scriptlets must not be null");
 		Validate.noNullElements(scriptlets, "scriptlets must not contains null scriptlet");
@@ -323,7 +316,6 @@ public class DRReport implements DRIReport {
 		return page;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setPage(DRPage page) {
 		Validate.notNull(page, "page must not be null");
 		this.page = page;
@@ -493,7 +485,6 @@ public class DRReport implements DRIReport {
 		return detailRowHighlighters;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setDetailRowHighlighters(List<DRConditionalStyle> detailRowHighlighters) {
 		Validate.notNull(detailRowHighlighters, "detailRowHighlighters must not be null");
 		Validate.noNullElements(detailRowHighlighters, "detailRowHighlighters must not contains null detailRowHighlighter");

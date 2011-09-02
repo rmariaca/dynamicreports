@@ -57,7 +57,6 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 		return conditionalStyles;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setConditionalStyles(List<DRDesignConditionalStyle> conditionalStyles) {
 		this.conditionalStyles = conditionalStyles;
 	}

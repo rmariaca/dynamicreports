@@ -31,14 +31,13 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class VerticalListCellBuilder extends AbstractBuilder<VerticalListCellBuilder, DRListCell> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected VerticalListCellBuilder(ComponentBuilder<?, ?> component) {
 		super(new DRListCell(component.build()));
 	}
-	
+
 	//width
 	public VerticalListCellBuilder widthFixedOnLeft() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.LEFT);
@@ -49,17 +48,17 @@ public class VerticalListCellBuilder extends AbstractBuilder<VerticalListCellBui
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.CENTER);
 		return this;
 	}
-	
+
 	public VerticalListCellBuilder widthFixedOnRight() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.RIGHT);
 		return this;
 	}
-	
+
 	public VerticalListCellBuilder widthFloat() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.FLOAT);
 		return this;
 	}
-	
+
 	public VerticalListCellBuilder widthExpand() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.EXPAND);
 		return this;
@@ -70,12 +69,12 @@ public class VerticalListCellBuilder extends AbstractBuilder<VerticalListCellBui
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.TOP);
 		return this;
 	}
-	
+
 	public VerticalListCellBuilder heightExpand() {
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.EXPAND);
 		return this;
 	}
-	
+
 	public DRListCell getListCell() {
 		return build();
 	}

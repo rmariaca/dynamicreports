@@ -29,14 +29,13 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected FontBuilder() {
 		super(new DRFont());
 	}
-	
+
 	protected FontBuilder(String fontName, Boolean bold, Boolean italic, Integer fontSize) {
 		super(new DRFont(fontName, bold, italic, fontSize));
 	}
@@ -54,7 +53,7 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 	public FontBuilder bold() {
 		return setBold(true);
 	}
-	
+
 	public FontBuilder setBold(Boolean bold) {
 		getObject().setBold(bold);
 		return this;
@@ -63,7 +62,7 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 	public FontBuilder italic() {
 		return setItalic(true);
 	}
-	
+
 	public FontBuilder setItalic(Boolean italic) {
 		getObject().setItalic(italic);
 		return this;
@@ -73,10 +72,10 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 		setBold(true);
 		return setItalic(true);
 	}
-	
+
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public FontBuilder setPdfEmbedded(Boolean pdfEmbedded) {
 		getObject().setPdfEmbedded(pdfEmbedded);
@@ -85,7 +84,7 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public FontBuilder setPdfEncoding(String pdfEncoding) {
 		getObject().setPdfEncoding(pdfEncoding);
@@ -94,7 +93,7 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 
 	@Deprecated
 	/**
-	 * You should configure the fonts.xml file 
+	 * You should configure the fonts.xml file
 	 */
 	public FontBuilder setPdfFontName(String pdfFontName) {
 		getObject().setPdfFontName(pdfFontName);
@@ -104,7 +103,7 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 	public FontBuilder strikeThrough() {
 		return setStrikeThrough(true);
 	}
-	
+
 	public FontBuilder setStrikeThrough(Boolean strikeThrough) {
 		getObject().setStrikeThrough(strikeThrough);
 		return this;
@@ -113,12 +112,12 @@ public class FontBuilder extends AbstractBuilder<FontBuilder, DRFont> {
 	public FontBuilder underline() {
 		return setUnderline(true);
 	}
-	
+
 	public FontBuilder setUnderline(Boolean underline) {
 		getObject().setUnderline(underline);
 		return this;
 	}
-	
+
 	public DRFont getFont() {
 		return build();
 	}

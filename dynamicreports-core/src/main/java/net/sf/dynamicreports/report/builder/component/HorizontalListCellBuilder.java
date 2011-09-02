@@ -31,14 +31,13 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class HorizontalListCellBuilder extends AbstractBuilder<HorizontalListCellBuilder, DRListCell> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected HorizontalListCellBuilder(ComponentBuilder<?, ?> component) {
 		super(new DRListCell(component.build()));
 	}
-	
+
 	//width
 	public HorizontalListCellBuilder widthFixed() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.LEFT);
@@ -49,7 +48,7 @@ public class HorizontalListCellBuilder extends AbstractBuilder<HorizontalListCel
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.FLOAT);
 		return this;
 	}
-	
+
 	public HorizontalListCellBuilder widthExpand() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.EXPAND);
 		return this;
@@ -65,17 +64,17 @@ public class HorizontalListCellBuilder extends AbstractBuilder<HorizontalListCel
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.MIDDLE);
 		return this;
 	}
-	
+
 	public HorizontalListCellBuilder heightFixedOnBottom() {
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.BOTTOM);
 		return this;
 	}
-	
+
 	public HorizontalListCellBuilder heightExpand() {
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.EXPAND);
 		return this;
 	}
-	
+
 	public DRListCell getListCell() {
 		return build();
 	}

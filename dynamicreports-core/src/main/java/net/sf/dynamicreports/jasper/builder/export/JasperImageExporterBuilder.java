@@ -29,24 +29,23 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class JasperImageExporterBuilder extends AbstractJasperExporterBuilder<JasperImageExporterBuilder, JasperImageExporter> {	
+public class JasperImageExporterBuilder extends AbstractJasperExporterBuilder<JasperImageExporterBuilder, JasperImageExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperImageExporterBuilder() {
 		super(new JasperImageExporter());
 	}
-	
+
 	public JasperImageExporterBuilder setPageGap(Integer pageGap) {
 		this.getObject().setPageGap(pageGap);
 		return this;
 	}
-	
+
 	public JasperImageExporterBuilder setImageType(ImageType imageType) {
 		this.getObject().setImageType(imageType);
 		return this;
 	}
-	
+
 	public JasperImageExporterBuilder setZoom(Float zoom) {
 		this.getObject().setZoom(zoom);
 		return this;

@@ -28,10 +28,9 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class JasperExcelApiXlsExporterBuilder extends AbstractJasperExcelExporterBuilder<JasperExcelApiXlsExporterBuilder, JasperExcelApiXlsExporter> {	
+public class JasperExcelApiXlsExporterBuilder extends AbstractJasperExcelExporterBuilder<JasperExcelApiXlsExporterBuilder, JasperExcelApiXlsExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperExcelApiXlsExporterBuilder() {
 		super(new JasperExcelApiXlsExporter());
 	}

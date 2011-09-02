@@ -31,25 +31,24 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractValueFormatter<T, U> implements DRIValueFormatter<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
-	
+
 	protected AbstractValueFormatter() {
 		this.name = ReportUtils.generateUniqueName("valueFormatter");
 	}
-	
+
 	protected AbstractValueFormatter(String name) {
 		Validate.notEmpty(name, "name must not be empty");
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Class<T> getValueClass() {
 		return (Class<T>) ReportUtils.getGenericClass(this, 0);

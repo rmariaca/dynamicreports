@@ -31,14 +31,13 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class VerticalColumnGridListCellBuilder extends AbstractBuilder<VerticalColumnGridListCellBuilder, DRColumnGridListCell> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected VerticalColumnGridListCellBuilder(ColumnGridComponentBuilder component) {
 		super(new DRColumnGridListCell(component.build()));
 	}
-	
+
 	//width
 	public VerticalColumnGridListCellBuilder widthFixedOnLeft() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.LEFT);
@@ -49,17 +48,17 @@ public class VerticalColumnGridListCellBuilder extends AbstractBuilder<VerticalC
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.CENTER);
 		return this;
 	}
-	
+
 	public VerticalColumnGridListCellBuilder widthFixedOnRight() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.RIGHT);
 		return this;
 	}
-	
+
 	public VerticalColumnGridListCellBuilder widthFloat() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.FLOAT);
 		return this;
 	}
-	
+
 	public VerticalColumnGridListCellBuilder widthExpand() {
 		getObject().setHorizontalAlignment(HorizontalCellComponentAlignment.EXPAND);
 		return this;
@@ -70,12 +69,12 @@ public class VerticalColumnGridListCellBuilder extends AbstractBuilder<VerticalC
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.TOP);
 		return this;
 	}
-	
+
 	public VerticalColumnGridListCellBuilder heightExpand() {
 		getObject().setVerticalAlignment(VerticalCellComponentAlignment.EXPAND);
 		return this;
 	}
-	
+
 	public DRColumnGridListCell getColumnGridListCell() {
 		return build();
 	}

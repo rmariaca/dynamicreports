@@ -36,7 +36,6 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

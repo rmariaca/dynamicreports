@@ -39,7 +39,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesChartBuilder, DRLinePlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

@@ -35,7 +35,7 @@ import org.apache.commons.lang.Validate;
  */
 public class DRColumnGridListCell implements DRIColumnGridListCell {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private HorizontalCellComponentAlignment horizontalAlignment;
 	private VerticalCellComponentAlignment verticalAlignment;
 	private DRIColumnGridComponent component;
@@ -44,31 +44,30 @@ public class DRColumnGridListCell implements DRIColumnGridListCell {
 		Validate.notNull(component, "component must not be null");
 		this.component = component;
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public DRColumnGridListCell(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRIColumnGridComponent component) {
 		this(component);
 		this.horizontalAlignment = horizontalAlignment;
 		this.verticalAlignment = verticalAlignment;
 	}
-	
+
 	public void setHorizontalAlignment(HorizontalCellComponentAlignment horizontalAlignment) {
 		this.horizontalAlignment = horizontalAlignment;
 	}
-	
+
 	public HorizontalCellComponentAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
-	
+
 	public void setVerticalAlignment(VerticalCellComponentAlignment verticalAlignment) {
 		this.verticalAlignment = verticalAlignment;
 	}
-	
+
 	public VerticalCellComponentAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
-	
+
 	public DRIColumnGridComponent getComponent() {
 		return component;
-	}		
+	}
 }

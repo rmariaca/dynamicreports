@@ -57,7 +57,6 @@ public class DRDataset implements DRIDataset {
 		return fields;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setFields(List<DRField<?>> fields) {
 		Validate.notNull(fields, "fields must not be null");
 		Validate.noNullElements(fields, "fields must not contains null field");
@@ -73,7 +72,6 @@ public class DRDataset implements DRIDataset {
 		return variables;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setVariables(List<DRVariable<?>> variables) {
 		Validate.notNull(variables, "variables must not be null");
 		Validate.noNullElements(variables, "variables must not contains null variable");

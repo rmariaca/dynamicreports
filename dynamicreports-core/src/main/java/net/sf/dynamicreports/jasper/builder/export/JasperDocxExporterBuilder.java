@@ -28,21 +28,20 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class JasperDocxExporterBuilder extends AbstractJasperExporterBuilder<JasperDocxExporterBuilder, JasperDocxExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperDocxExporterBuilder() {
 		super(new JasperDocxExporter());
-	}	
-	
+	}
+
 	public JasperDocxExporterBuilder setFramesAsNestedTables(Boolean framesAsNestedTables) {
 		this.getObject().setFramesAsNestedTables(framesAsNestedTables);
 		return this;
 	}
-	
+
 	public JasperDocxExporterBuilder setFlexibleRowHeight(Boolean flexibleRowHeight) {
 		this.getObject().setFlexibleRowHeight(flexibleRowHeight);
 		return this;
-	}	
+	}
 }

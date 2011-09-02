@@ -31,21 +31,20 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractSystemExpression<T> implements DRISystemExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
-		
+
 	protected AbstractSystemExpression(String name) {
 		Validate.notEmpty(name, "name must not be empty");
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
 		return (Class<T>) ReportUtils.getGenericClass(this, 0);

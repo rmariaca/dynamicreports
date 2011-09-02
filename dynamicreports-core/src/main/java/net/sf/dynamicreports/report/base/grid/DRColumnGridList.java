@@ -39,9 +39,9 @@ import org.apache.commons.lang.Validate;
  */
 public class DRColumnGridList implements DRIColumnGridList {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private List<DRColumnGridListCell> listCells;
-	private ListType type;	
+	private ListType type;
 	private int gap;
 
 	public DRColumnGridList() {
@@ -52,30 +52,29 @@ public class DRColumnGridList implements DRIColumnGridList {
 		setType(type);
 		this.listCells = new ArrayList<DRColumnGridListCell>();
 	}
-	
+
 	public List<DRColumnGridListCell> getListCells() {
 		return listCells;
 	}
-	
+
 	public void addComponent(DRIColumnGridComponent component) {
 		listCells.add(new DRColumnGridListCell(component));
 	}
-		
+
 	public void addCell(DRColumnGridListCell cell) {
 		Validate.notNull(cell, "cell must not be null");
 		listCells.add(cell);
 	}
 
-	@SuppressWarnings("ucd")
 	public void addComponent(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRIColumnGridComponent component) {
 		listCells.add(new DRColumnGridListCell(horizontalAlignment, verticalAlignment, component));
 	}
-	
+
 	public void setType(ListType type) {
 		Validate.notNull(type, "type must not be null");
 		this.type = type;
 	}
-	
+
 	public ListType getType() {
 		return type;
 	}
@@ -87,5 +86,5 @@ public class DRColumnGridList implements DRIColumnGridList {
 	public void setGap(int gap) {
 		Validate.notNull(gap < 0, "gap must be >= 0");
 		this.gap = gap;
-	}	
+	}
 }

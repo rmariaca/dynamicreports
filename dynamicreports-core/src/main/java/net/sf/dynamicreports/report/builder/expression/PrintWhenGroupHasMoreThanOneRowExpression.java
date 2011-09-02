@@ -29,16 +29,15 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PrintWhenGroupHasMoreThanOneRowExpression extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String groupName;
-	
+
 	public PrintWhenGroupHasMoreThanOneRowExpression(String groupName) {
-		this.groupName = groupName;			
+		this.groupName = groupName;
 	}
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		return reportParameters.getGroupCount(groupName) > 1;
 	}

@@ -36,7 +36,6 @@ import net.sf.jasperreports.engine.JasperReport;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class ComponentBuilders {
 
 	//horizontal

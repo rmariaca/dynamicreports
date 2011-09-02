@@ -37,7 +37,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
+@SuppressWarnings("unchecked")
 public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> extends ColumnBuilder<T, DRValueColumn<U>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

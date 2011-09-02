@@ -27,18 +27,17 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class DRException extends Exception {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	public DRException(String message) {
 		super(message);
 	}
-	
+
 	public DRException(Throwable cause)	{
 		super(cause);
 	}
-	
+
 	public DRException(String message, Throwable cause) {
 		super(message, cause);
 	}

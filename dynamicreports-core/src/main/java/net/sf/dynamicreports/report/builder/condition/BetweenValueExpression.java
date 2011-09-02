@@ -28,14 +28,13 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class BetweenValueExpression<T extends Number> extends AbstractBetweenValueExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-			
+
 	public BetweenValueExpression(DRIValue<T> value, Number min, Number max) {
-		super(value, min, max);		
+		super(value, min, max);
 	}
-	
+
 	@Override
 	protected Boolean compare(Number actualValue, Number min, Number max) {
 		return actualValue.doubleValue() >= min.doubleValue() && actualValue.doubleValue() <= max.doubleValue();

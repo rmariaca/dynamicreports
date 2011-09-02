@@ -25,21 +25,20 @@ package net.sf.dynamicreports.report.builder;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Units {
-	
+
 	public static int cm(Number value) {
 		return unit(value, 28.3464);
 	}
-	
+
 	public static int inch(Number value) {
 		return unit(value, 72);
 	}
-	
+
 	public static int mm(Number value) {
 		return unit(value, 2.83464);
 	}
-	
+
 	private static int unit(Number value, double unitValue) {
 		if (value != null) {
 			return (int) ((value.doubleValue()) * unitValue);

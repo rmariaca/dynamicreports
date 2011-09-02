@@ -25,7 +25,6 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PdfEncoding {
 	public static final String CP1250_Central_European = "CP1250";
 	public static final String CP1251_Cyrillic = "CP1251";

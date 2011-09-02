@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilder, DRBarPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -40,7 +39,7 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 	protected BarChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
-	
+
 	public BarChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;
@@ -50,7 +49,7 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 		getPlot().setShowTickLabels(showTickLabels);
 		return this;
 	}
-	
+
 	public BarChartBuilder setShowTickMarks(Boolean showTickMarks) {
 		getPlot().setShowTickMarks(showTickMarks);
 		return this;

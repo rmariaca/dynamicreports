@@ -29,19 +29,18 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<JasperHtmlExporterBuilder, JasperHtmlExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperHtmlExporterBuilder() {
 		super(new JasperHtmlExporter());
-	}	
-	
+	}
+
 	public JasperHtmlExporterBuilder setOutputImagesToDir(Boolean outputImagesToDir) {
 		this.getObject().setOutputImagesToDir(outputImagesToDir);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setImagesDirName(String imagesDirName) {
 		this.getObject().setImagesDirName(imagesDirName);
 		return this;
@@ -51,49 +50,49 @@ public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		this.getObject().setImagesURI(imagesURI);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setHtmlHeader(String htmlHeader) {
 		this.getObject().setHtmlHeader(htmlHeader);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setBetweenPagesHtml(String betweenPagesHtml) {
 		this.getObject().setBetweenPagesHtml(betweenPagesHtml);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setHtmlFooter(String htmlFooter) {
 		this.getObject().setHtmlFooter(htmlFooter);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setRemoveEmptySpaceBetweenRows(Boolean removeEmptySpaceBetweenRows) {
 		this.getObject().setRemoveEmptySpaceBetweenRows(removeEmptySpaceBetweenRows);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setWhitePageBackground(Boolean whitePageBackground) {
 		this.getObject().setWhitePageBackground(whitePageBackground);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setUsingImagesToAlign(Boolean usingImagesToAlign) {
 		this.getObject().setUsingImagesToAlign(usingImagesToAlign);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setWrapBreakWord(Boolean wrapBreakWord) {
 		this.getObject().setWrapBreakWord(wrapBreakWord);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setSizeUnit(SizeUnit sizeUnit) {
 		this.getObject().setSizeUnit(sizeUnit);
 		return this;
 	}
-	
+
 	public JasperHtmlExporterBuilder setFramesAsNestedTables(Boolean framesAsNestedTables) {
 		this.getObject().setFramesAsNestedTables(framesAsNestedTables);
 		return this;
-	}	
+	}
 }

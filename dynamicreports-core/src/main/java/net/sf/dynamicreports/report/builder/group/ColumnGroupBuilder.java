@@ -33,25 +33,24 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {	
+public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRValueColumn<?> column;
-	
+
 	protected ColumnGroupBuilder(ValueColumnBuilder<?, ?> column) {
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
 		init();
 	}
-	
+
 	protected ColumnGroupBuilder(String name, ValueColumnBuilder<?, ?> column) {
 		super(name);
 		Validate.notNull(column, "column must not be null");
 		this.column = column.build();
 		init();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void init() {
 		@SuppressWarnings("rawtypes")
@@ -63,12 +62,12 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 		getObject().setTitleStyle(column.getTitleStyle());
 		getObject().setTitleWidth(column.getComponent().getWidth());
 	}
-	
+
 	public ColumnGroupBuilder setHideColumn(Boolean hideColumn) {
 		getObject().setHideColumn(hideColumn);
 		return this;
 	}
-		
+
 	@Override
 	protected void configure() {
 		setValueExpression(column);

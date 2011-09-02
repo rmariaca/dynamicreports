@@ -31,23 +31,22 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public abstract class AbstractScriptlet implements DRIScriptlet {	
+public abstract class AbstractScriptlet implements DRIScriptlet {
 	private String name;
 
 	public AbstractScriptlet() {
 		this.name = ReportUtils.generateUniqueName("scriptlet");
 	}
-	
+
 	public AbstractScriptlet(String name) {
 		Validate.notEmpty(name, "name must not be empty");
 		this.name = name;
 	}
-		
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void afterColumnInit(ReportParameters reportParameters) {
 	}
 

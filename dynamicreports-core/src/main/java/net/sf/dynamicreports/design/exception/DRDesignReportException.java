@@ -25,14 +25,13 @@ package net.sf.dynamicreports.design.exception;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class DRDesignReportException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public DRDesignReportException(String message) {
 		super(message);
 	}
-		
+
 	public DRDesignReportException(String message, Throwable cause) {
 		super(message, cause);
 	}

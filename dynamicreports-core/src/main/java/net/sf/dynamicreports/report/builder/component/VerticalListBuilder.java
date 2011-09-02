@@ -31,7 +31,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class VerticalListBuilder extends DimensionComponentBuilder<VerticalListBuilder, DRList> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

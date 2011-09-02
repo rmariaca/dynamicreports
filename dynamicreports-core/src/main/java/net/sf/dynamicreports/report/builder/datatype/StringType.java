@@ -33,7 +33,6 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class StringType extends AbstractDataType<String, String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

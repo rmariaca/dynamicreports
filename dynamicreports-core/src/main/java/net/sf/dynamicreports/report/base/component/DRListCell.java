@@ -34,7 +34,7 @@ import org.apache.commons.lang.Validate;
  */
 public class DRListCell implements DRIListCell {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private HorizontalCellComponentAlignment horizontalAlignment;
 	private VerticalCellComponentAlignment verticalAlignment;
 	private DRComponent component;
@@ -43,31 +43,30 @@ public class DRListCell implements DRIListCell {
 		Validate.notNull(component, "component must not be null");
 		this.component = component;
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public DRListCell(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRComponent component) {
 		this(component);
 		this.horizontalAlignment = horizontalAlignment;
 		this.verticalAlignment = verticalAlignment;
 	}
-	
+
 	public void setHorizontalAlignment(HorizontalCellComponentAlignment horizontalAlignment) {
 		this.horizontalAlignment = horizontalAlignment;
 	}
-	
+
 	public HorizontalCellComponentAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
-	
+
 	public void setVerticalAlignment(VerticalCellComponentAlignment verticalAlignment) {
 		this.verticalAlignment = verticalAlignment;
 	}
-	
+
 	public VerticalCellComponentAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
-	
+
 	public DRComponent getComponent() {
 		return component;
-	}		
+	}
 }

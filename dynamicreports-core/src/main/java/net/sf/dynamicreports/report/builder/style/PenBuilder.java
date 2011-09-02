@@ -32,10 +32,9 @@ import net.sf.dynamicreports.report.constant.LineStyle;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PenBuilder extends AbstractBuilder<PenBuilder, DRPen> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected PenBuilder() {
 		super(new DRPen());
 	}
@@ -43,22 +42,22 @@ public class PenBuilder extends AbstractBuilder<PenBuilder, DRPen> {
 	protected PenBuilder(Float lineWidth, LineStyle lineStyle) {
 		super(new DRPen(lineWidth, lineStyle));
 	}
-	
+
 	public PenBuilder setLineWidth(Float lineWidth) {
 		getObject().setLineWidth(lineWidth);
 		return this;
 	}
-	
+
 	public PenBuilder setLineStyle(LineStyle lineStyle) {
 		getObject().setLineStyle(lineStyle);
 		return this;
 	}
-	
+
 	public PenBuilder setLineColor(Color lineColor) {
 		getObject().setLineColor(lineColor);
 		return this;
 	}
-	
+
 	public DRPen getPen() {
 		return build();
 	}

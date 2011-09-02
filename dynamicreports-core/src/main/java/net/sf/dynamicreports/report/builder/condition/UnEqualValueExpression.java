@@ -28,12 +28,11 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class UnEqualValueExpression<T extends Number> extends AbstractValuesExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-			
+
 	public UnEqualValueExpression(DRIValue<T> value, Number ...numbers) {
-		super(value, numbers);		
+		super(value, numbers);
 	}
 
 	@Override

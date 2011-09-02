@@ -29,14 +29,13 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class BreakBuilder extends ComponentBuilder<BreakBuilder, DRBreak> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected BreakBuilder() {
 		super(new DRBreak());
 	}
-	
+
 	public BreakBuilder setType(BreakType breakType) {
 		getObject().setType(breakType);
 		return this;

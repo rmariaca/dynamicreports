@@ -29,14 +29,13 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class BorderBuilder extends AbstractBuilder<BorderBuilder, DRBorder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected BorderBuilder() {
 		super(new DRBorder());
 	}
-	
+
 	protected BorderBuilder(PenBuilder pen) {
 		super(new DRBorder(pen.build()));
 	}
@@ -57,7 +56,7 @@ public class BorderBuilder extends AbstractBuilder<BorderBuilder, DRBorder> {
 		}
 		else {
 			getObject().setLeftPen(null);
-		}		
+		}
 		return this;
 	}
 
@@ -67,7 +66,7 @@ public class BorderBuilder extends AbstractBuilder<BorderBuilder, DRBorder> {
 		}
 		else {
 			getObject().setBottomPen(null);
-		}		
+		}
 		return this;
 	}
 
@@ -77,10 +76,10 @@ public class BorderBuilder extends AbstractBuilder<BorderBuilder, DRBorder> {
 		}
 		else {
 			getObject().setRightPen(null);
-		}		
+		}
 		return this;
 	}
-	
+
 	public DRBorder getBorder() {
 		return build();
 	}

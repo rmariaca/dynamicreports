@@ -40,34 +40,33 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumnBuilder, Double> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRIExpression<? extends Number> actualExpression;
 	private PercentageTotalType totalType;
 	private DRGroup totalGroup;
-	
+
 	protected PercentageColumnBuilder(ValueColumnBuilder<?, ? extends Number> column) {
 		Validate.notNull(column, "column must not be null");
 		this.actualExpression = column.build();
-	}	
-	
+	}
+
 	protected PercentageColumnBuilder(FieldBuilder<? extends Number> field) {
 		Validate.notNull(field, "field must not be null");
 		this.actualExpression = field.getField();
-	}	
-	
+	}
+
 	/*protected PercentageColumnBuilder(DRISimpleExpression<? extends Number> valueExpression) {
 		Validate.notNull(valueExpression, "valueExpression must not be null");
 		this.actualExpression = valueExpression;
 	}*/
-	
+
 	public PercentageColumnBuilder setTotalType(PercentageTotalType totalType) {
 		this.totalType = totalType;
 		return this;
 	}
-	
+
 	public PercentageColumnBuilder setTotalGroup(GroupBuilder<?> totalGroup) {
 		if (totalGroup != null) {
 			this.totalGroup = totalGroup.getGroup();
@@ -78,16 +77,16 @@ public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumn
 		}
 
 		return this;
-	}	
-	
+	}
+
 	@Override
-	protected void configure() {		
+	protected void configure() {
 		if (getComponent().getDataType() == null) {
 			getComponent().setDataType(DataTypes.percentageType());
 		}
-		
+
 		DRVariable<Number> totalExpression = new DRVariable<Number>(actualExpression, Calculation.SUM);
-		if (totalType != null) {			
+		if (totalType != null) {
 			switch (totalType) {
 			case REPORT:
 				totalExpression.setResetType(Evaluation.REPORT);
@@ -103,14 +102,14 @@ public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumn
 				break;
 			default:
 				throw new DRReportException("Percentage total type " + totalType.name() + " not supported.");
-			}		
+			}
 		}
 		else {
 			totalExpression.setResetType(Evaluation.LAST_GROUP);
 		}
 		totalExpression.setResetGroup(totalGroup);
-		
+
 		setValueExpression(new PercentageExpression(actualExpression, totalExpression));
-		super.configure();		
+		super.configure();
 	}
 }

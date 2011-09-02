@@ -32,21 +32,20 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class HorizontalColumnGridListBuilder extends AbstractBuilder<HorizontalColumnGridListBuilder, DRColumnGridList> implements ColumnGridComponentBuilder {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private DRColumnGridList row; 
-	
+
+	private DRColumnGridList row;
+
 	protected HorizontalColumnGridListBuilder() {
 		super(new DRColumnGridList(ListType.VERTICAL));
 		init();
 	}
-	
+
 	protected void init() {
 		newRow();
 	}
-	
+
 	public HorizontalColumnGridListBuilder add(ColumnGridComponentBuilder ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -55,7 +54,7 @@ public class HorizontalColumnGridListBuilder extends AbstractBuilder<HorizontalC
 		}
 		return this;
 	}
-	
+
 	public HorizontalColumnGridListBuilder add(HorizontalColumnGridListCellBuilder ...cells) {
 		Validate.notNull(cells, "cells must not be null");
 		Validate.noNullElements(cells, "cells must not contains null cell");
@@ -72,23 +71,23 @@ public class HorizontalColumnGridListBuilder extends AbstractBuilder<HorizontalC
 	public HorizontalColumnGridListBuilder newFlowRow() {
 		return newRow(ListType.HORIZONTAL_FLOW);
 	}
-	
+
 	private HorizontalColumnGridListBuilder newRow(ListType listType) {
 		row = new DRColumnGridList(listType);
 		getObject().addComponent(row);
 		return this;
 	}
-	
+
 	public HorizontalColumnGridListBuilder setGap(int gap) {
 		row.setGap(gap);
 		return this;
 	}
-	
-	public HorizontalColumnGridListBuilder setVerticalGap(int gap) {		
+
+	public HorizontalColumnGridListBuilder setVerticalGap(int gap) {
 		getObject().setGap(gap);
 		return this;
 	}
-	
+
 	public DRColumnGridList getColumnGridList() {
 		return build();
 	}

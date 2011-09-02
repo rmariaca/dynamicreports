@@ -50,7 +50,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class DynamicReports {
 	public static final ColumnBuilders col = new ColumnBuilders();
 	public static final GridBuilders grid = new GridBuilders();

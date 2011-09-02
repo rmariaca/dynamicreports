@@ -29,14 +29,13 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class XyBarChartBuilder extends AbstractXyChartBuilder<XyBarChartBuilder, DRBarPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected XyBarChartBuilder() {
 		super(ChartType.XYBAR);
 	}
-	
+
 	public XyBarChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;
@@ -46,7 +45,7 @@ public class XyBarChartBuilder extends AbstractXyChartBuilder<XyBarChartBuilder,
 		getPlot().setShowTickLabels(showTickLabels);
 		return this;
 	}
-	
+
 	public XyBarChartBuilder setShowTickMarks(boolean showTickMarks) {
 		getPlot().setShowTickMarks(showTickMarks);
 		return this;

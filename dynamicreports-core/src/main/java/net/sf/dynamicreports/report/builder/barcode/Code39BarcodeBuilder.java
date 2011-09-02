@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Code39BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Code39BarcodeBuilder, DRCode39Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

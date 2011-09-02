@@ -31,7 +31,6 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class BigIntegerType extends NumberType<BigInteger> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

@@ -30,39 +30,39 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
+@SuppressWarnings("unchecked")
 public abstract class AbstractJasperExcelExporterBuilder<T extends AbstractJasperExcelExporterBuilder<T, U>, U extends AbstractJasperExcelExporter> extends AbstractJasperExporterBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected AbstractJasperExcelExporterBuilder(U exporter) {
 		super(exporter);
-	}	
-	
+	}
+
 	public T setOnePagePerSheet(Boolean onePagePerSheet) {
 		this.getObject().setOnePagePerSheet(onePagePerSheet);
 		return (T) this;
 	}
-	
+
 	public T setRemoveEmptySpaceBetweenRows(Boolean removeEmptySpaceBetweenRows) {
 		this.getObject().setRemoveEmptySpaceBetweenRows(removeEmptySpaceBetweenRows);
 		return (T) this;
 	}
-	
+
 	public T setRemoveEmptySpaceBetweenColumns(Boolean removeEmptySpaceBetweenColumns) {
 		this.getObject().setRemoveEmptySpaceBetweenColumns(removeEmptySpaceBetweenColumns);
 		return (T) this;
 	}
-	
+
 	public T setWhitePageBackground(Boolean whitePageBackground) {
 		this.getObject().setWhitePageBackground(whitePageBackground);
 		return (T) this;
 	}
-	
+
 	public T setDetectCellType(Boolean detectCellType) {
 		this.getObject().setDetectCellType(detectCellType);
 		return (T) this;
 	}
-	
+
 	public T sheetNames(String ...sheetNames) {
 		return addSheetName(sheetNames);
 	}
@@ -72,47 +72,47 @@ public abstract class AbstractJasperExcelExporterBuilder<T extends AbstractJaspe
 		Validate.noNullElements(sheetNames, "sheetNames must not contains null sheetName");
 		for (String sheetName : sheetNames) {
 			this.getObject().addSheetName(sheetName);
-		}		
+		}
 		return (T) this;
 	}
-	
+
 	public T setFontSizeFixEnabled(Boolean fontSizeFixEnabled) {
 		this.getObject().setFontSizeFixEnabled(fontSizeFixEnabled);
 		return (T) this;
 	}
-	
+
 	public T setImageBorderFixEnabled(Boolean imageBorderFixEnabled) {
 		this.getObject().setImageBorderFixEnabled(imageBorderFixEnabled);
 		return (T) this;
 	}
-	
+
 	public T setMaxRowsPerSheet(Integer maxRowsPerSheet) {
 		this.getObject().setMaxRowsPerSheet(maxRowsPerSheet);
 		return (T) this;
 	}
-	
+
 	public T setIgnoreGraphics(Boolean ignoreGraphics) {
 		this.getObject().setIgnoreGraphics(ignoreGraphics);
 		return (T) this;
 	}
-	
+
 	public T setCollapseRowSpan(Boolean collapseRowSpan) {
 		this.getObject().setCollapseRowSpan(collapseRowSpan);
 		return (T) this;
 	}
-	
+
 	public T setIgnoreCellBorder(Boolean ignoreCellBorder) {
 		this.getObject().setIgnoreCellBorder(ignoreCellBorder);
 		return (T) this;
 	}
-	
+
 	public T setIgnoreCellBackground(Boolean ignoreCellBackground) {
 		this.getObject().setIgnoreCellBackground(ignoreCellBackground);
 		return (T) this;
 	}
-	
+
 	public T setPassword(String password) {
 		this.getObject().setPassword(password);
 		return (T) this;
-	}	
+	}
 }

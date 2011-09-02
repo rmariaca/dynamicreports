@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PaddingBuilder extends AbstractBuilder<PaddingBuilder, DRPadding> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -40,7 +39,7 @@ public class PaddingBuilder extends AbstractBuilder<PaddingBuilder, DRPadding> {
 	protected PaddingBuilder(int padding) {
 		super(new DRPadding(padding));
 	}
-	
+
 	public PaddingBuilder setTop(Integer top) {
 		getObject().setTop(top);
 		return this;
@@ -60,7 +59,7 @@ public class PaddingBuilder extends AbstractBuilder<PaddingBuilder, DRPadding> {
 		getObject().setRight(right);
 		return this;
 	}
-	
+
 	public DRPadding getPadding() {
 		return build();
 	}

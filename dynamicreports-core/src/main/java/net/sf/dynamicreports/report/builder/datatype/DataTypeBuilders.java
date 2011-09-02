@@ -28,7 +28,6 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class DataTypeBuilders {
 
 	public <U, T extends DRIDataType<? super U, U>> T detectType(Class<U> dataType) throws DRException {

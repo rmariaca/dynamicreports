@@ -34,7 +34,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
+@SuppressWarnings("unchecked")
 public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilder<T, U>, U extends AbstractBasePlot> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

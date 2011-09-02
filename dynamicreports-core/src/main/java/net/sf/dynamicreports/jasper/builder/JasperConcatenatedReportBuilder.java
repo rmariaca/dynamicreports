@@ -68,7 +68,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class JasperConcatenatedReportBuilder implements Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

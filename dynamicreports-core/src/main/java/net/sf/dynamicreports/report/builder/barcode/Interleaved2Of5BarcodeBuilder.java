@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Interleaved2Of5BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Interleaved2Of5BarcodeBuilder, DRInterleaved2Of5Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

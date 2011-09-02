@@ -22,30 +22,29 @@
 
 package net.sf.dynamicreports.report.builder.condition;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class UnEqualExpression extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	private DRIValue<?> value;
-	private Object[] values;	
-	
+	private Object[] values;
+
 	public <T> UnEqualExpression(DRIValue<T> value, T ...values) {
 		Validate.notNull(value, "value must not be null");
 		Validate.noNullElements(values, "values must not contains null value");
 		this.value = value;
-		this.values = values;		
+		this.values = values;
 	}
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Object actualValue = reportParameters.getValue(value);
 		for (Object value : values) {
@@ -55,7 +54,7 @@ public class UnEqualExpression extends AbstractSimpleExpression<Boolean> {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public Class<Boolean> getValueClass() {
 		return Boolean.class;

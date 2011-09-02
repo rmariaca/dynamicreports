@@ -27,46 +27,45 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Conditions {
 
-	public static <T> EqualExpression equal(DRIValue<T> value, T ...values) {		
+	public static <T> EqualExpression equal(DRIValue<T> value, T ...values) {
 		return new EqualExpression(value, values);
 	}
-	
-	public static <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {		
+
+	public static <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {
 		return new EqualValueExpression<T>(value, number);
 	}
-	
-	public static <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {		
+
+	public static <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {
 		return new UnEqualExpression(value, values);
 	}
-	
-	public static <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {		
+
+	public static <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {
 		return new UnEqualValueExpression<T>(value, number);
 	}
-	
-	public static <T extends Number> SmallerValueExpression<T> smaller(DRIValue<T> value, Number number) {		
+
+	public static <T extends Number> SmallerValueExpression<T> smaller(DRIValue<T> value, Number number) {
 		return new SmallerValueExpression<T>(value, number);
 	}
-	
-	public static <T extends Number> SmallerOrEqualsValueExpression<T> smallerOrEquals(DRIValue<T> value, Number number) {		
+
+	public static <T extends Number> SmallerOrEqualsValueExpression<T> smallerOrEquals(DRIValue<T> value, Number number) {
 		return new SmallerOrEqualsValueExpression<T>(value, number);
 	}
-	
-	public static <T extends Number> GreaterValueExpression<T> greater(DRIValue<T> value, Number number) {		
+
+	public static <T extends Number> GreaterValueExpression<T> greater(DRIValue<T> value, Number number) {
 		return new GreaterValueExpression<T>(value, number);
 	}
-	
-	public static <T extends Number> GreaterOrEqualsValueExpression<T> greaterOrEquals(DRIValue<T> value, Number number) {		
+
+	public static <T extends Number> GreaterOrEqualsValueExpression<T> greaterOrEquals(DRIValue<T> value, Number number) {
 		return new GreaterOrEqualsValueExpression<T>(value, number);
 	}
-	
-	public static <T extends Number> BetweenValueExpression<T> between(DRIValue<T> value, Number min, Number max) {		
+
+	public static <T extends Number> BetweenValueExpression<T> between(DRIValue<T> value, Number min, Number max) {
 		return new BetweenValueExpression<T>(value, min, max);
 	}
-	
-	public static <T extends Number> NotBetweenValueExpression<T> notBetween(DRIValue<T> value, Number min, Number max) {		
+
+	public static <T extends Number> NotBetweenValueExpression<T> notBetween(DRIValue<T> value, Number min, Number max) {
 		return new NotBetweenValueExpression<T>(value, min, max);
 	}
 }

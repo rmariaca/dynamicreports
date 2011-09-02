@@ -36,7 +36,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class AxisFormatBuilder extends AbstractBuilder<AxisFormatBuilder, DRAxisFormat> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

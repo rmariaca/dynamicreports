@@ -32,7 +32,6 @@ import net.sf.dynamicreports.jasper.constant.ImageType;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class ExporterBuilders {
 
 	//csv

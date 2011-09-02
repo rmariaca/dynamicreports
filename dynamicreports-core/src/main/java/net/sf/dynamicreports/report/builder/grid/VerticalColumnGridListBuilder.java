@@ -32,14 +32,13 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class VerticalColumnGridListBuilder extends AbstractBuilder<VerticalColumnGridListBuilder, DRColumnGridList> implements ColumnGridComponentBuilder {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	protected VerticalColumnGridListBuilder() {
 		super(new DRColumnGridList(ListType.VERTICAL));
 	}
-	
+
 	public VerticalColumnGridListBuilder add(ColumnGridComponentBuilder ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -48,7 +47,7 @@ public class VerticalColumnGridListBuilder extends AbstractBuilder<VerticalColum
 		}
 		return this;
 	}
-	
+
 	public VerticalColumnGridListBuilder add(VerticalColumnGridListCellBuilder ...cells) {
 		Validate.notNull(cells, "cells must not be null");
 		Validate.noNullElements(cells, "cells must not contains null cell");
@@ -57,12 +56,12 @@ public class VerticalColumnGridListBuilder extends AbstractBuilder<VerticalColum
 		}
 		return this;
 	}
-	
+
 	public VerticalColumnGridListBuilder setGap(int gap) {
 		getObject().setGap(gap);
 		return this;
 	}
-	
+
 	public DRColumnGridList getColumnGridList() {
 		return build();
 	}

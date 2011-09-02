@@ -33,14 +33,14 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRStyle extends DRBaseStyle implements DRIStyle {	
+public class DRStyle extends DRBaseStyle implements DRIStyle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRStyle parentStyle;
 	private List<DRConditionalStyle> conditionalStyles;
-	
+
 	@Override
-	protected void init() {		
+	protected void init() {
 		super.init();
 		conditionalStyles = new ArrayList<DRConditionalStyle>();
 	}
@@ -57,7 +57,6 @@ public class DRStyle extends DRBaseStyle implements DRIStyle {
 		return conditionalStyles;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setConditionalStyles(List<DRConditionalStyle> conditionalStyles) {
 		Validate.notNull(conditionalStyles, "conditionalStyles must not be null");
 		Validate.noNullElements(conditionalStyles, "conditionalStyles must not contains null conditionalStyle");

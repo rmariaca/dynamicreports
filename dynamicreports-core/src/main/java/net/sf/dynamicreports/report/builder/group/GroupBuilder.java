@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "rawtypes", "ucd"})
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBuilder<T, DRGroup> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

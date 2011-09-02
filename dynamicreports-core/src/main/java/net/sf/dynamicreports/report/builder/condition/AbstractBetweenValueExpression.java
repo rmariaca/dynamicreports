@@ -22,24 +22,23 @@
 
 package net.sf.dynamicreports.report.builder.condition;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractBetweenValueExpression<T extends Number> extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	private DRIValue<T> value;
 	private Number min;
 	private Number max;
-	
+
 	public AbstractBetweenValueExpression(DRIValue<T> value, Number min, Number max) {
 		Validate.notNull(value, "value must not be null");
 		Validate.notNull(min, "min must not be null");
@@ -47,9 +46,9 @@ public abstract class AbstractBetweenValueExpression<T extends Number> extends A
 		Validate.isTrue(min.doubleValue() < max.doubleValue(), "min < max");
 		this.value = value;
 		this.min = min;
-		this.max = max;		
+		this.max = max;
 	}
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Number actualValue = reportParameters.getValue(value);
 		if (actualValue != null) {
@@ -57,11 +56,11 @@ public abstract class AbstractBetweenValueExpression<T extends Number> extends A
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Class<Boolean> getValueClass() {
 		return Boolean.class;
 	}
-	
+
 	protected abstract Boolean compare(Number actualValue, Number min, Number max);
 }

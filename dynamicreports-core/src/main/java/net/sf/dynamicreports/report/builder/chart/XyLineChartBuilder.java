@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class XyLineChartBuilder extends AbstractXyChartBuilder<XyLineChartBuilder, DRLinePlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -40,7 +39,7 @@ public class XyLineChartBuilder extends AbstractXyChartBuilder<XyLineChartBuilde
 	protected XyLineChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
-	
+
 	public XyLineChartBuilder setShowShapes(Boolean showShapes) {
 		getPlot().setShowShapes(showShapes);
 		return this;

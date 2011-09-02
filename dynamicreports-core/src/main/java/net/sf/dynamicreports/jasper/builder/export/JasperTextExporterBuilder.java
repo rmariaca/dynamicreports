@@ -28,41 +28,40 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class JasperTextExporterBuilder extends AbstractJasperExporterBuilder<JasperTextExporterBuilder, JasperTextExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	protected JasperTextExporterBuilder() {
 		super(new JasperTextExporter());
 	}
-	
+
 	public JasperTextExporterBuilder setCharacterWidth(Integer characterWidth) {
 		this.getObject().setCharacterWidth(characterWidth);
 		return this;
 	}
-	
+
 	public JasperTextExporterBuilder setCharacterHeight(Integer characterHeight) {
 		this.getObject().setCharacterHeight(characterHeight);
 		return this;
 	}
-	
+
 	public JasperTextExporterBuilder setPageWidth(Integer pageWidth) {
 		this.getObject().setPageWidth(pageWidth);
 		return this;
 	}
-	
+
 	public JasperTextExporterBuilder setPageHeight(Integer pageHeight) {
 		this.getObject().setPageHeight(pageHeight);
 		return this;
 	}
-	
+
 	public JasperTextExporterBuilder setBetweenPagesText(String betweenPagesText) {
 		this.getObject().setBetweenPagesText(betweenPagesText);
 		return this;
 	}
-	
+
 	public JasperTextExporterBuilder setLineSeparator(String lineSeparator) {
 		this.getObject().setLineSeparator(lineSeparator);
 		return this;
-	}	
+	}
 }

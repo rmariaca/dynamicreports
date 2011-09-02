@@ -25,7 +25,6 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public enum PageType {
 	LETTER(612, 792),
 	NOTE(540, 720),
@@ -65,11 +64,11 @@ public enum PageType {
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}

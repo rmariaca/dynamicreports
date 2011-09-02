@@ -28,12 +28,11 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class GreaterValueExpression<T extends Number> extends AbstractValueExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-			
+
 	public GreaterValueExpression(DRIValue<T> value, Number number) {
-		super(value, number);		
+		super(value, number);
 	}
 
 	@Override

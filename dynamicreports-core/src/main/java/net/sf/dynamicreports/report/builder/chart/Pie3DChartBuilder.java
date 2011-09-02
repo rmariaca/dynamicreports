@@ -29,14 +29,13 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Pie3DChartBuilder extends AbstractPieChartBuilder<Pie3DChartBuilder, DRPie3DPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected Pie3DChartBuilder() {
 		super(ChartType.PIE3D);
 	}
-	
+
 	public Pie3DChartBuilder setDepthFactor(Double depthFactor) {
 		getPlot().setDepthFactor(depthFactor);
 		return this;

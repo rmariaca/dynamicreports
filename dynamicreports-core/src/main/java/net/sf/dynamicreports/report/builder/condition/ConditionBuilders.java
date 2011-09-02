@@ -27,46 +27,45 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class ConditionBuilders {
-	
-	public <T> EqualExpression equal(DRIValue<T> value, T ...values) {		
+
+	public <T> EqualExpression equal(DRIValue<T> value, T ...values) {
 		return Conditions.equal(value, values);
 	}
-	
-	public <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {		
+
+	public <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {
 		return Conditions.equal(value, number);
 	}
-	
-	public <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {		
+
+	public <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {
 		return Conditions.unEqual(value, values);
 	}
-	
-	public <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {		
+
+	public <T extends Number> UnEqualValueExpression<T> unEqual(DRIValue<T> value, Number ...number) {
 		return Conditions.unEqual(value, number);
 	}
-	
+
 	public <T extends Number> SmallerValueExpression<T> smaller(DRIValue<T> value, Number number) {
 		return Conditions.smaller(value, number);
 	}
-	
-	public <T extends Number> SmallerOrEqualsValueExpression<T> smallerOrEquals(DRIValue<T> value, Number number) {		
+
+	public <T extends Number> SmallerOrEqualsValueExpression<T> smallerOrEquals(DRIValue<T> value, Number number) {
 		return Conditions.smallerOrEquals(value, number);
 	}
-	
+
 	public <T extends Number> GreaterValueExpression<T> greater(DRIValue<T> value, Number number) {
 		return Conditions.greater(value, number);
 	}
-	
-	public <T extends Number> GreaterOrEqualsValueExpression<T> greaterOrEquals(DRIValue<T> value, Number number) {		
+
+	public <T extends Number> GreaterOrEqualsValueExpression<T> greaterOrEquals(DRIValue<T> value, Number number) {
 		return Conditions.greaterOrEquals(value, number);
 	}
-	
-	public <T extends Number> BetweenValueExpression<T> between(DRIValue<T> value, Number min, Number max) {		
+
+	public <T extends Number> BetweenValueExpression<T> between(DRIValue<T> value, Number min, Number max) {
 		return Conditions.between(value, min, max);
 	}
-	
-	public <T extends Number> NotBetweenValueExpression<T> notBetween(DRIValue<T> value, Number min, Number max) {		
+
+	public <T extends Number> NotBetweenValueExpression<T> notBetween(DRIValue<T> value, Number min, Number max) {
 		return Conditions.notBetween(value, min, max);
 	}
 }

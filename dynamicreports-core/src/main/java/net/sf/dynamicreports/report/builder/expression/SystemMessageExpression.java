@@ -31,16 +31,15 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class SystemMessageExpression extends AbstractSimpleExpression<String> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String key;
 
 	public SystemMessageExpression(String key) {
-		this.key = key;		
+		this.key = key;
 	}
-	
+
 	public String evaluate(ReportParameters reportParameters) {
 		return ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_NAME, reportParameters.getLocale()).getString(key);
 	}

@@ -29,7 +29,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBuilder, DRBar3DPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -40,7 +39,7 @@ public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBu
 	protected Bar3DChartBuilder(ChartType chartType) {
 		super(chartType);
 	}
-	
+
 	public Bar3DChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;
@@ -50,7 +49,7 @@ public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBu
 		getPlot().setXOffset(xOffset);
 		return this;
 	}
-	
+
 	public Bar3DChartBuilder setYOffset(Double yOffset) {
 		getPlot().setYOffset(yOffset);
 		return this;

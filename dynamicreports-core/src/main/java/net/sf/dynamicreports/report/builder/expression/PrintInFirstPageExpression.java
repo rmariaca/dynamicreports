@@ -29,10 +29,9 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PrintInFirstPageExpression extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		return reportParameters.getPageNumber() == 1;
 	}

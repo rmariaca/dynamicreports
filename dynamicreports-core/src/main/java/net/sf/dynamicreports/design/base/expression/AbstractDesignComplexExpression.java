@@ -32,20 +32,19 @@ import net.sf.dynamicreports.report.ReportUtils;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-abstract class AbstractDesignComplexExpression implements DRIDesignComplexExpression {	
+abstract class AbstractDesignComplexExpression implements DRIDesignComplexExpression {
 	private String name;
 	private List<DRIDesignExpression> expressions;
-	
+
 	protected AbstractDesignComplexExpression() {
 		this.name = ReportUtils.generateUniqueName("complexExpression");
 		this.expressions = new ArrayList<DRIDesignExpression>();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 
-	@SuppressWarnings("ucd")
 	public void setExpressions(List<DRIDesignExpression> expressions) {
 		this.expressions = expressions;
 	}
@@ -53,7 +52,7 @@ abstract class AbstractDesignComplexExpression implements DRIDesignComplexExpres
 	public void addExpression(DRIDesignExpression expression) {
 		this.expressions.add(expression);
 	}
-	
+
 	public List<DRIDesignExpression> getExpressions() {
 		return expressions;
 	}

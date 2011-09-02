@@ -44,7 +44,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder, DRReportTemplate> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

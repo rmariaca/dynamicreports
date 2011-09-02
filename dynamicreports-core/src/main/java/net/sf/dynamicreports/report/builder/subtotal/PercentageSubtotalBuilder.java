@@ -40,7 +40,6 @@ import net.sf.dynamicreports.report.exception.DRReportException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class PercentageSubtotalBuilder extends BaseSubtotalBuilder<PercentageSubtotalBuilder, Double> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

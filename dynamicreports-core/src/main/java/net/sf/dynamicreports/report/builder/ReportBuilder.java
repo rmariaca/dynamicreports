@@ -58,7 +58,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
+@SuppressWarnings("unchecked")
 public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T, DRReport> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

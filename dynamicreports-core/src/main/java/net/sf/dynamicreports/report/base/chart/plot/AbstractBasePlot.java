@@ -62,7 +62,6 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 		this.seriesColors.add(color);
 	}
 
-	@SuppressWarnings("ucd")
 	public void setSeriesColors(List<Color> seriesColors) {
 		Validate.notNull(seriesColors, "seriesColors must not be null");
 		Validate.noNullElements(seriesColors, "seriesColors must not contain null color");

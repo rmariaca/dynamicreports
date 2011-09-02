@@ -31,7 +31,6 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class JasperExpression<T> implements DRIJasperExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

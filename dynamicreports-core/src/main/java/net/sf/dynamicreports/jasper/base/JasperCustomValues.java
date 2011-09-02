@@ -108,7 +108,6 @@ public class JasperCustomValues implements DRICustomValues {
 		return jasperScriptlet.getValue(valueName);
 	}
 
-	@SuppressWarnings("ucd")
 	public Object getValue(String name, Object[] values) {
 		return jasperScriptlet.getValue(name, values);
 	}

@@ -22,30 +22,29 @@
 
 package net.sf.dynamicreports.report.builder.condition;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractValuesExpression<T extends Number> extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	private DRIValue<T> value;
-	private Number[] numbers;	
-	
+	private Number[] numbers;
+
 	public AbstractValuesExpression(DRIValue<T> value, Number ...numbers) {
 		Validate.notNull(value, "value must not be null");
 		Validate.noNullElements(numbers, "numbers must not contains null number");
 		this.value = value;
-		this.numbers = numbers;		
+		this.numbers = numbers;
 	}
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Number actualValue = reportParameters.getValue(value);
 		if (actualValue != null) {
@@ -53,11 +52,11 @@ public abstract class AbstractValuesExpression<T extends Number> extends Abstrac
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Class<Boolean> getValueClass() {
 		return Boolean.class;
 	}
-	
+
 	protected abstract Boolean compare(Number actualValue, Number[] numbers);
 }

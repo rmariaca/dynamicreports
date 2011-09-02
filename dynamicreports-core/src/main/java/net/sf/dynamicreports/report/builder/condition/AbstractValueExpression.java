@@ -32,20 +32,19 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public abstract class AbstractValueExpression<T extends Number> extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
+
 	private DRIValue<T> value;
-	private Number number;	
-	
+	private Number number;
+
 	public AbstractValueExpression(DRIValue<T> value, Number number) {
 		Validate.notNull(value, "value must not be null");
 		Validate.notNull(number, "number must not be null");
 		this.value = value;
-		this.number = number;		
+		this.number = number;
 	}
-	
+
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Number actualValue = reportParameters.getValue(value);
 		if (actualValue != null) {
@@ -53,11 +52,11 @@ public abstract class AbstractValueExpression<T extends Number> extends Abstract
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Class<Boolean> getValueClass() {
 		return Boolean.class;
 	}
-	
+
 	protected abstract Boolean compare(Number actualValue, Number number);
 }

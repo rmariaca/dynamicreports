@@ -26,7 +26,6 @@ package net.sf.dynamicreports.report.builder.grid;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class GridBuilders {
 
 	//horizontal

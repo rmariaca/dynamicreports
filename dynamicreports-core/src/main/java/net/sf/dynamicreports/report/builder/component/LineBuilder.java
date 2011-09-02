@@ -30,7 +30,6 @@ import net.sf.dynamicreports.report.constant.LineDirection;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
 public class LineBuilder extends DimensionComponentBuilder<LineBuilder, DRLine> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
