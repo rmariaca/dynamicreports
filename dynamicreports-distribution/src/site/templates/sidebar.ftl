@@ -41,6 +41,7 @@
 		<li><a href="${page.path}requirements.html">Requirements</a></li>
 		<li><a href="${page.path}source_repository.html">Source repository</a></li>
 		<li><a href="${page.path}team.html">Project team</a></li>
+		<li><a href="${page.path}statistics.html">Statistics</a></li>
 	</ul>
 
 	<h4>Links</h4>
