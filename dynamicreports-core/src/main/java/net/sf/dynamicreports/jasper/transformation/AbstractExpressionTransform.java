@@ -132,7 +132,7 @@ public abstract class AbstractExpressionTransform {
 		}
 	}
 
-	private void addComplexExpression(DRIDesignComplexExpression complexExpression) {
+	protected void addComplexExpression(DRIDesignComplexExpression complexExpression) {
 		if (complexExpression == null)
 			return;
 		getCustomValues().addComplexExpression(complexExpression);

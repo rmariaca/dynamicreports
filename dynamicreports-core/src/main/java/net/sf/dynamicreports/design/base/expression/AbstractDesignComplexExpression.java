@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.ReportUtils;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-abstract class AbstractDesignComplexExpression implements DRIDesignComplexExpression {
+public abstract class AbstractDesignComplexExpression implements DRIDesignComplexExpression {
 	private String name;
 	private List<DRIDesignExpression> expressions;
 

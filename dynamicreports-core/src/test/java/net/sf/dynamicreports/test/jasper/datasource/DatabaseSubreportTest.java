@@ -29,17 +29,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Locale;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DatabaseReportTest extends AbstractJasperValueTest {
+public class DatabaseSubreportTest extends AbstractJasperValueTest {
 	private Connection connection;
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<Integer> column2;
@@ -60,12 +65,14 @@ public class DatabaseReportTest extends AbstractJasperValueTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.setLocale(Locale.ENGLISH)
-			.columns(
-				column1 =	col.column("Column1", "field1", type.stringType()),
-				column2 =	col.column("Column2", "field2", type.integerType()),
-				column3 =	col.column("Column3", "field3", type.bigDecimalType()))
-			.setDataSource("SELECT * FROM test_table1", connection);
+		SubreportBuilder subreport = cmp.subreport(new SubreportExpression());
+		subreport.setConnection(connection);
+
+		CustomGroupBuilder group = grp.group(field("field4", Integer.class));
+		group.footer(subreport);
+
+		rb.groupBy(group)
+			.setDataSource("SELECT * FROM test_table2", connection);
 	}
 
 	@Override
@@ -80,25 +87,48 @@ public class DatabaseReportTest extends AbstractJasperValueTest {
 		numberOfPagesTest(1);
 
 		//column1
-		columnTitleCountTest(column1, 1);
-		columnTitleValueTest(column1, "Column1");
-		columnDetailCountTest(column1, 1);
-		columnDetailValueTest(column1, 0, "text");
+		columnTitleCountTest(column1, 2);
+		columnTitleValueTest(column1, "Column1", "Column1");
+		columnDetailCountTest(column1, 3);
+		columnDetailValueTest(column1, "text", "text", "text");
 		//column2
-		columnTitleCountTest(column2, 1);
-		columnTitleValueTest(column2, "Column2");
-		columnDetailCountTest(column2, 1);
-		columnDetailValueTest(column2, 0, "5");
+		columnTitleCountTest(column2, 2);
+		columnTitleValueTest(column2, "Column2", "Column2");
+		columnDetailCountTest(column2, 3);
+		columnDetailValueTest(column2, "5", "6", "7");
 		//column3
-		columnTitleCountTest(column3, 1);
-		columnTitleValueTest(column3, "Column3");
-		columnDetailCountTest(column3, 1);
-		columnDetailValueTest(column3, 0, "100.00");
+		columnTitleCountTest(column3, 2);
+		columnTitleValueTest(column3, "Column3", "Column3");
+		columnDetailCountTest(column3, 3);
+		columnDetailValueTest(column3, "100.00", "200.00", "300.00");
+	}
+
+	private class SubreportExpression extends AbstractComplexExpression<JasperReportBuilder> {
+		private static final long serialVersionUID = 1L;
+
+		public SubreportExpression() {
+			addExpression(field("field4", Integer.class));
+		}
+
+		@Override
+		public JasperReportBuilder evaluate(List<?> values, ReportParameters reportParameters) {
+	    JasperReportBuilder report = report();
+	    report
+	    	.setLocale(Locale.ENGLISH)
+				.columns(
+					column1 =	col.column("Column1", "field1", type.stringType()),
+					column2 =	col.column("Column2", "field2", type.integerType()),
+					column3 =	col.column("Column3", "field3", type.bigDecimalType()))
+				.setQuery("SELECT * FROM test_table2 WHERE field4 = " + values.get(0));
+	    return report;
+		}
 	}
 
 	private void createTable() throws SQLException {
 		Statement st = connection.createStatement();
-		st.execute("CREATE TABLE test_table1 (field1 VARCHAR(50), field2 INTEGER, field3 DECIMAL)");
-		st.execute("INSERT INTO test_table1 VALUES ('text', 5, 100)");
+		st.execute("CREATE TABLE test_table2 (field1 VARCHAR(50), field2 INTEGER, field3 DECIMAL, field4 INTEGER)");
+		st.execute("INSERT INTO test_table2 VALUES ('text', 5, 100, 1)");
+		st.execute("INSERT INTO test_table2 VALUES ('text', 6, 200, 1)");
+		st.execute("INSERT INTO test_table2 VALUES ('text', 7, 300, 2)");
 	}
 }

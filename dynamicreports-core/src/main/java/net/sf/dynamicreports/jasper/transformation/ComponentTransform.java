@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
+import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
@@ -332,7 +333,7 @@ public class ComponentTransform {
 
 		if (ReportBuilder.class.isAssignableFrom(subreport.getReportExpression().getValueClass())) {
 			SubreportExpression subreportExpression = new SubreportExpression(subreport.getReportExpression(), width);
-			accessor.getExpressionTransform().addSimpleExpression(subreportExpression);
+			accessor.getExpressionTransform().addComplexExpression(subreportExpression);
 			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreportExpression));
 
 			SubreportParametersExpression parametersExpression = new SubreportParametersExpression(subreportExpression);
@@ -396,24 +397,23 @@ public class ComponentTransform {
 		return jrDesignGenericElement;
 	}
 
-	private class SubreportExpression implements DRIDesignSimpleExpression {
+	private class SubreportExpression extends AbstractDesignComplexExpression {
 		private String name;
-		private DRIDesignExpression reportExpression;
 		private Integer pageWidth;
 		private ReportBuilder<?> reportBuilder;
 		private Map<ReportBuilder<?>, JasperReportDesign> reportDesigns;
 		private Map<ReportBuilder<?>, JasperReport> jasperReports;
 
 		public SubreportExpression(DRIDesignExpression reportExpression, Integer pageWidth) {
-			this.reportExpression = reportExpression;
+			addExpression(reportExpression);
 			this.pageWidth = pageWidth;
 			this.name = ReportUtils.generateUniqueName("subreportExpression");
 			reportDesigns = new HashMap<ReportBuilder<?>, JasperReportDesign>();
 			jasperReports = new HashMap<ReportBuilder<?>, JasperReport>();
 		}
 
-		public Object evaluate(ReportParameters reportParameters) {
-			reportBuilder = (ReportBuilder<?>) reportParameters.getValue(reportExpression.getName());
+		public Object evaluate(List<?> values, ReportParameters reportParameters) {
+			reportBuilder = (ReportBuilder<?>) values.get(0);
 			if (jasperReports.containsKey(reportBuilder)) {
 				return jasperReports.get(reportBuilder);
 			}
@@ -439,6 +439,7 @@ public class ComponentTransform {
 			return reportDesigns.get(reportBuilder);
 		}
 
+		@Override
 		public String getName() {
 			return name;
 		}
