@@ -83,6 +83,7 @@ public class DatasetTransform {
 			addParameter(jrDataset, parameters, JasperCustomValues.NAME, JasperCustomValues.class, customValues);
 			addScriptlet(jrDataset, parameters, JasperScriptlet.NAME);
 		}
+		jrDataset.setFilterExpression(datasetExpressionTransform.getExpression(dataset.getFilterExpression()));
 		return jrDataset;
 	}
 

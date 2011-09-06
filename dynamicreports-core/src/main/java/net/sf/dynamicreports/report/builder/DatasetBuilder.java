@@ -120,6 +120,12 @@ public class DatasetBuilder extends AbstractBuilder<DatasetBuilder, DRDataset> {
 		return this;
 	}
 
+	//filter
+	public DatasetBuilder setFilterExpression(DRIExpression<Boolean> filterExpression) {
+		getObject().setFilterExpression(filterExpression);
+		return this;
+	}
+
 	public DatasetBuilder setDataSource(String sql, Connection connection) {
 		Validate.notNull(sql, "sql must not be null");
 		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);

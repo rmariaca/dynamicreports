@@ -54,4 +54,6 @@ public interface DRIDesignDataset {
 	public DRIDesignExpression getConnectionExpression();
 
 	public DRIDesignExpression getDataSourceExpression();
+
+	public DRIDesignExpression getFilterExpression();
 }

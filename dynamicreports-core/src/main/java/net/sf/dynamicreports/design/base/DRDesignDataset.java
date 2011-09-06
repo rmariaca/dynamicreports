@@ -44,6 +44,7 @@ public class DRDesignDataset implements DRIDesignDataset {
 	private DRDesignQuery query;
 	private DRIDesignExpression connectionExpression;
 	private DRIDesignExpression dataSourceExpression;
+	private DRIDesignExpression filterExpression;
 
 	public DRDesignDataset(DatasetExpressionTransform datasetExpressionTransform) {
 		this.datasetExpressionTransform = datasetExpressionTransform;
@@ -104,5 +105,13 @@ public class DRDesignDataset implements DRIDesignDataset {
 
 	public void setDataSourceExpression(DRIDesignExpression dataSourceExpression) {
 		this.dataSourceExpression = dataSourceExpression;
+	}
+
+	public DRIDesignExpression getFilterExpression() {
+		return filterExpression;
+	}
+
+	public void setFilterExpression(DRIDesignExpression filterExpression) {
+		this.filterExpression = filterExpression;
 	}
 }

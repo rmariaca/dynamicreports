@@ -42,4 +42,6 @@ public interface DRIDataset extends Serializable {
 	public DRIExpression<Connection> getConnectionExpression();
 
 	public DRIExpression<?> getDataSourceExpression();
+
+	public DRIExpression<Boolean> getFilterExpression();
 }

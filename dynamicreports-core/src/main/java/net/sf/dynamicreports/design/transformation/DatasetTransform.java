@@ -62,6 +62,7 @@ public class DatasetTransform {
 		}
 		designDataset.setConnectionExpression(accessor.getExpressionTransform().transformExpression(dataset.getConnectionExpression()));
 		designDataset.setDataSourceExpression(accessor.getExpressionTransform().transformExpression(dataset.getDataSourceExpression()));
+		designDataset.setFilterExpression(datasetExpressionTransform.transformExpression(dataset.getFilterExpression()));
 
 		addDataset(dataset, designDataset);
 

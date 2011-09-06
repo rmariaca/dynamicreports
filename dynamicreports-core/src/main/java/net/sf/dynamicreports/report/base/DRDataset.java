@@ -43,6 +43,7 @@ public class DRDataset implements DRIDataset {
 	private DRQuery query;
 	private DRIExpression<Connection> connectionExpression;
 	private DRIExpression<?> dataSourceExpression;
+	private DRIExpression<Boolean> filterExpression;
 
 	public DRDataset() {
 		init();
@@ -105,5 +106,13 @@ public class DRDataset implements DRIDataset {
 
 	public void setDataSourceExpression(DRIExpression<?> dataSourceExpression) {
 		this.dataSourceExpression = dataSourceExpression;
+	}
+
+	public DRIExpression<Boolean> getFilterExpression() {
+		return filterExpression;
+	}
+
+	public void setFilterExpression(DRIExpression<Boolean> filterExpression) {
+		this.filterExpression = filterExpression;
 	}
 }
