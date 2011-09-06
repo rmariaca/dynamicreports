@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -234,4 +235,9 @@ public class Subtotals {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		return new PercentageSubtotalBuilder(expression, showInColumn);
 	}*/
+
+	//text
+	public static AggregationSubtotalBuilder<String> text(String text, ColumnBuilder<?, ?> showInColumn) {
+		return aggregate(Expressions.text(text), showInColumn, Calculation.NOTHING);
+	}
 }

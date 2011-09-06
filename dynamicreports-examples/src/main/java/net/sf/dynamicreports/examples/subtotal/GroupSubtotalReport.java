@@ -37,19 +37,19 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class GroupSubtotalReport {
-	
+
 	public GroupSubtotalReport() {
 		build();
 	}
-	
-	private void build() {		
+
+	private void build() {
 		TextColumnBuilder<String>     countryColumn  = col.column("Country",  "country",  type.stringType());
 		TextColumnBuilder<String>     itemColumn     = col.column("Item",     "item",     type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity", "quantity", type.integerType());
 		TextColumnBuilder<BigDecimal> priceColumn    = col.column("Price",    "price",    type.bigDecimalType());
-		
+
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -62,7 +62,7 @@ public class GroupSubtotalReport {
 			  .subtotalsAtGroupFooter(
 			  	countryGroup, sbt.sum(priceColumn))
 			  .subtotalsAtSummary(
-			  	sbt.sum(quantityColumn), sbt.sum(priceColumn))
+			  	sbt.text("Total", itemColumn), sbt.sum(quantityColumn), sbt.sum(priceColumn))
 			  .title(Templates.createTitleComponent("GroupSubtotal"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
@@ -71,7 +71,7 @@ public class GroupSubtotalReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("country", "item", "quantity", "price");
 		dataSource.add("USA", "Book", 4, new BigDecimal(10));
@@ -84,7 +84,7 @@ public class GroupSubtotalReport {
 		dataSource.add("Canada", "Notebook", 2, new BigDecimal(30));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new GroupSubtotalReport();
 	}

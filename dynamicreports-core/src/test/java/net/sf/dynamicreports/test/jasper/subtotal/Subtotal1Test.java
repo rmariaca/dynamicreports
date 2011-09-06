@@ -44,7 +44,7 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class Subtotal1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private AggregationSubtotalBuilder<BigDecimal> subtotal1;
 	private AggregationSubtotalBuilder<BigDecimal> subtotal2;
 	private AggregationSubtotalBuilder<BigDecimal> subtotal3;
@@ -56,12 +56,13 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 	private AggregationSubtotalBuilder<Integer> subtotal9;
 	private AggregationSubtotalBuilder<Integer> subtotal10;
 	private AggregationSubtotalBuilder<Integer> subtotal11;
-	
+	private AggregationSubtotalBuilder<String> subtotal12;
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<BigDecimal> column1;
 		TextColumnBuilder<String> column2;
-		
+
 		rb.setLocale(Locale.ENGLISH)
 			.setPageColumnsPerPage(2)
 			.columns(
@@ -85,42 +86,43 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 					(subtotal8 = sbt.aggregate(column1, Calculation.LOWEST)).setLabel("summary lowest"),
 					subtotal9 = sbt.sum(new ColumnCalculationExpression(), column2).setLabel("summary sum").setValueFormatter(new ColumnValueFormatter2()),
 					subtotal10 = sbt.aggregate(column1, Calculation.COUNT),
-					subtotal11 = sbt.aggregate(column2, Calculation.COUNT));
+					subtotal11 = sbt.aggregate(column2, Calculation.COUNT),
+					subtotal12 = sbt.text("total", column1));
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(2);
 		//title
 		subtotalLabelCountTest(subtotal1, 1);
-		subtotalLabelValueTest(subtotal1, "title sum");		
+		subtotalLabelValueTest(subtotal1, "title sum");
 		subtotalCountTest(subtotal1, 1);
 		subtotalValueTest(subtotal1, "101.00");
 		//pageHeader
 		subtotalLabelCountTest(subtotal2, 2);
-		subtotalLabelValueTest(subtotal2, "page header sum", "page header sum");		
+		subtotalLabelValueTest(subtotal2, "page header sum", "page header sum");
 		subtotalCountTest(subtotal2, 2);
 		subtotalValueTest(subtotal2, "80.80", "20.20");
 		//pageFooter
 		subtotalLabelCountTest(subtotal3, 1);
-		subtotalLabelValueTest(subtotal3, "page footer sum");		
+		subtotalLabelValueTest(subtotal3, "page footer sum");
 		subtotalCountTest(subtotal3, 1);
 		subtotalValueTest(subtotal3, "80.80");
 		//columnHeader
 		subtotalLabelCountTest(subtotal4, 3);
-		subtotalLabelValueTest(subtotal4, "column header sum", "column header sum", "column header sum");		
+		subtotalLabelValueTest(subtotal4, "column header sum", "column header sum", "column header sum");
 		subtotalCountTest(subtotal4, 3);
 		subtotalValueTest(subtotal4, "40.40", "40.40", "20.20");
 		//columnFooter
 		subtotalLabelCountTest(subtotal5, 3);
-		subtotalLabelValueTest(subtotal5, "column footer sum", "column footer sum", "column footer sum");		
+		subtotalLabelValueTest(subtotal5, "column footer sum", "column footer sum", "column footer sum");
 		subtotalCountTest(subtotal5, 3);
 		subtotalValueTest(subtotal5, "40.40", "40.40", "20.20");
 		//lastPageFooter
 		subtotalLabelCountTest(subtotal6, 1);
-		subtotalLabelValueTest(subtotal6, "last page footer sum");		
+		subtotalLabelValueTest(subtotal6, "last page footer sum");
 		subtotalCountTest(subtotal6, 1);
 		subtotalValueTest(subtotal6, "101.00");
 		//summary
@@ -136,46 +138,49 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 
 		subtotalIndexCountTest(subtotal10, 3, 1);
 		subtotalIndexValueTest(subtotal10, 3, "100");
-		
+
 		subtotalLabelCountTest(subtotal9, 1);
 		subtotalLabelValueTest(subtotal9, "summary sum");
 		subtotalCountTest(subtotal9, 1);
 		subtotalValueTest(subtotal9, "value = 200");
-		
+
 		subtotalIndexCountTest(subtotal11, 2, 1);
-		subtotalIndexValueTest(subtotal11, 2, "100");	
+		subtotalIndexValueTest(subtotal11, 2, "100");
+
+		subtotalIndexCountTest(subtotal12, 4, 1);
+		subtotalIndexValueTest(subtotal12, 4, "total");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");
 		for (int i = 0; i < 100; i++) {
 			dataSource.add(new BigDecimal(1.01), "v2");
-		}		
+		}
 		return dataSource;
 	}
-	
+
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, String> {
 		private static final long serialVersionUID = 1L;
 
 		public String format(String value, ReportParameters reportParameters) {
 			return "value = " + value;
-		}	
+		}
 	}
-	
+
 	private class ColumnValueFormatter2 extends AbstractValueFormatter<String, Integer> {
 		private static final long serialVersionUID = 1L;
 
 		public String format(Integer value, ReportParameters reportParameters) {
 			return "value = " + value;
-		}	
+		}
 	}
-	
+
 	private class ColumnCalculationExpression extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
-		
+
 		public Integer evaluate(ReportParameters reportParameters) {
 			return new Integer(((String) reportParameters.getValue("field2")).substring(1));
-		}		
+		}
 	}
 }
