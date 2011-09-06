@@ -102,6 +102,10 @@ public class ReportTransform {
 		}
 	}
 
+	public void transformExpressions() {
+		accessor.getDesign().setFilterExpression(accessor.getExpressionTransform().getExpression(accessor.getReport().getFilterExpression()));
+	}
+
 	public void addDependencies() {
 		DRIDesignReport report = accessor.getReport();
 		if (!accessor.getCustomValues().isEmpty() || !report.getScriptlets().isEmpty() ||

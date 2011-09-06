@@ -103,10 +103,14 @@ public abstract class AbstractExpressionTransform {
 	}
 
 	protected DRIDesignExpression transformExpression(DRIExpression<?> expression) throws DRException {
-		return transformExpression(expression, null);
+		return transformExpression(expression, null, null);
 	}
 
-	protected DRIDesignExpression transformExpression(DRIExpression<?> expression, DRIValueFormatter<?, ?> valueFormatter) throws DRException {
+	protected DRIDesignExpression transformExpression(DRIExpression<?> expression, String parameterName) throws DRException {
+		return transformExpression(expression, null, parameterName);
+	}
+
+	protected DRIDesignExpression transformExpression(DRIExpression<?> expression, DRIValueFormatter<?, ?> valueFormatter, String parameterName) throws DRException {
 		if (expression == null) {
 			return null;
 		}
@@ -126,10 +130,10 @@ public abstract class AbstractExpressionTransform {
 			express = new DRDesignJasperExpression((DRIJasperExpression<?>) expression);
 		}
 		else if (expression instanceof DRISimpleExpression<?>) {
-			express = new DRDesignSimpleExpression((DRISimpleExpression<?>) expression);
+			express = new DRDesignSimpleExpression((DRISimpleExpression<?>) expression, parameterName);
 		}
 		else if (expression instanceof DRIComplexExpression<?>) {
-			express = transformComplexExpression((DRIComplexExpression<?>) expression);
+			express = transformComplexExpression((DRIComplexExpression<?>) expression, parameterName);
 		}
 		else if (expression instanceof DRIField<?>) {
 			express = transformField((DRIField<?>) expression);
@@ -164,8 +168,8 @@ public abstract class AbstractExpressionTransform {
 		return designField;
 	}
 
-	private DRIDesignExpression transformComplexExpression(DRIComplexExpression<?> complexExpression) throws DRException {
-		DRDesignComplexExpression designComplexExpression = new DRDesignComplexExpression(complexExpression);
+	private DRIDesignExpression transformComplexExpression(DRIComplexExpression<?> complexExpression, String parameterName) throws DRException {
+		DRDesignComplexExpression designComplexExpression = new DRDesignComplexExpression(complexExpression, parameterName);
 		for (DRIExpression<?> expression : complexExpression.getExpressions()) {
 			designComplexExpression.addExpression(transformExpression(expression));
 		}

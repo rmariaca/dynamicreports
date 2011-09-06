@@ -29,6 +29,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
@@ -71,6 +72,8 @@ public interface DRIDesignReport {
 	public boolean isTableOfContents();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
+
+	public DRIDesignExpression getFilterExpression();
 
 	public Collection<DRIDesignParameter> getParameters();
 

@@ -29,6 +29,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
+import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
@@ -49,7 +50,6 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
@@ -449,13 +449,12 @@ public class ComponentTransform {
 		}
 	}
 
-	private class SubreportParametersExpression implements DRIDesignSimpleExpression {
-		private String name;
+	private class SubreportParametersExpression extends AbstractDesignSimpleExpression {
 		private SubreportExpression subreportExpression;
 
 		public SubreportParametersExpression(SubreportExpression subreportExpression) {
+			super(ReportUtils.generateUniqueName("subreportParametersExpression"));
 			this.subreportExpression = subreportExpression;
-			this.name = ReportUtils.generateUniqueName("subreportParametersExpression");
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
@@ -464,30 +463,21 @@ public class ComponentTransform {
 			return parameters;
 		}
 
-		public String getName() {
-			return name;
-		}
-
 		public Class<?> getValueClass() {
 			return Map.class;
 		}
 	}
 
-	private class JasperSubreportParametersExpression implements DRIDesignSimpleExpression {
-		private String name;
+	private class JasperSubreportParametersExpression extends AbstractDesignSimpleExpression {
 
 		public JasperSubreportParametersExpression() {
-			this.name = ReportUtils.generateUniqueName("jasperSubreportParametersExpression");
+			super(ReportUtils.generateUniqueName("jasperSubreportParametersExpression"));
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
 			Map<Object, Object> map = new HashMap<Object, Object>();
 			map.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return map;
-		}
-
-		public String getName() {
-			return name;
 		}
 
 		public Class<?> getValueClass() {

@@ -25,6 +25,7 @@ package net.sf.dynamicreports.jasper.transformation;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
@@ -34,7 +35,6 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabDataset
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
@@ -55,7 +55,6 @@ import net.sf.jasperreports.crosstabs.type.CrosstabColumnPositionEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabRowPositionEnum;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignElement;
-import net.sf.jasperreports.engine.design.JRDesignParameter;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -115,7 +114,7 @@ public class CrosstabTransform {
 		return jrCrosstab;
 	}
 
-	private JRDesignParameter registerScriptletCrosstabParameter(JRDesignCrosstab jrCrosstab) {
+	private void registerScriptletCrosstabParameter(JRDesignCrosstab jrCrosstab) {
 		JRDesignCrosstabParameter jrParameter = new JRDesignCrosstabParameter();
 		jrParameter.setName(JasperCustomValues.NAME);
 		jrParameter.setValueClass(JasperCustomValues.class);
@@ -125,7 +124,6 @@ public class CrosstabTransform {
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for scriptlet crosstab parameter", e);
 		}
-		return jrParameter;
 	}
 
 	//dataset
@@ -228,23 +226,18 @@ public class CrosstabTransform {
 		}
 	}
 
-	private class CrosstabParametersExpression implements DRIDesignSimpleExpression {
+	private class CrosstabParametersExpression extends AbstractDesignSimpleExpression {
 		private Map<String, Object> parameters;
-		private String name;
 
 		public CrosstabParametersExpression(Map<String, Object> parameters) {
+			super(ReportUtils.generateUniqueName("crosstabParametersExpression"));
 			this.parameters = parameters;
-			this.name = ReportUtils.generateUniqueName("crosstabParametersExpression");
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
 			Map<String, Object> parameters = new HashMap<String, Object>(this.parameters);
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
-		}
-
-		public String getName() {
-			return name;
 		}
 
 		public Class<?> getValueClass() {

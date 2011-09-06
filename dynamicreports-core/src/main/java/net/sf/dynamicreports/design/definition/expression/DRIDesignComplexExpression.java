@@ -31,7 +31,9 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
  */
 public interface DRIDesignComplexExpression extends DRIDesignExpression {
 
-	public List<DRIDesignExpression> getExpressions();	
-	
+	public List<DRIDesignExpression> getExpressions();
+
 	public Object evaluate(List<?> values, ReportParameters reportParameters);
+
+	public String getParameterName();
 }

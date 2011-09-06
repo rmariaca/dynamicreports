@@ -30,25 +30,30 @@ import net.sf.dynamicreports.design.base.DRDesignQuery;
 import net.sf.dynamicreports.design.base.DRDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.report.definition.DRIParameter;
 import net.sf.dynamicreports.report.definition.DRIQuery;
 import net.sf.dynamicreports.report.definition.DRIReport;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ReportTransform {
-	private DRIReport report;
+	private DesignTransformAccessor accessor;
 	private DRIDesignTemplateDesign templateDesign;
 	private DRDesignQuery query;
 	private List<DRIDesignParameter> parameters;
+	private DRIDesignExpression filterExpression;
 
 	public ReportTransform(DesignTransformAccessor accessor) {
-		this.report = accessor.getReport();
+		this.accessor = accessor;
 		parameters = new ArrayList<DRIDesignParameter>();
 	}
 
-	public void transform() {
+	public void transform() throws DRException {
+		DRIReport report = accessor.getReport();
 		templateDesign = new DRDesignTemplateDesign(report.getTemplateDesign());
 		if (report.getQuery() != null) {
 			query = query(report.getQuery());
@@ -56,6 +61,7 @@ public class ReportTransform {
 		for (DRIParameter<?> parameter : report.getParameters()) {
 			parameters.add(parameter(parameter));
 		}
+		filterExpression = accessor.getExpressionTransform().transformExpression(report.getFilterExpression(), JasperScriptlet.SCRIPTLET_NAME);
 	}
 
 	protected DRDesignQuery query(DRIQuery query) {
@@ -70,7 +76,7 @@ public class ReportTransform {
 		designParameter.setName(parameter.getName());
 		designParameter.setValueClass(parameter.getValueClass());
 		designParameter.setValue(parameter.getValue());
-		designParameter.setExternal(report.getTemplateDesign().isDefinedParameter(parameter.getName()));
+		designParameter.setExternal(accessor.getReport().getTemplateDesign().isDefinedParameter(parameter.getName()));
 		return designParameter;
 	}
 
@@ -84,5 +90,9 @@ public class ReportTransform {
 
 	public List<DRIDesignParameter> getParameters() {
 		return parameters;
+	}
+
+	public DRIDesignExpression getFilterExpression() {
+		return filterExpression;
 	}
 }

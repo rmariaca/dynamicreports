@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -119,6 +120,8 @@ public interface DRIReport extends Serializable {
 	public Boolean getTableOfContents();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
+
+	public DRIExpression<Boolean> getFilterExpression();
 
 	public DRIBand getTitleBand();
 

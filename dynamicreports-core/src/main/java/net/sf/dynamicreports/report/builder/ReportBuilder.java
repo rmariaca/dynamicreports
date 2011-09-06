@@ -52,6 +52,7 @@ import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
 
@@ -701,6 +702,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	public T setTableOfContents(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
 		getObject().setTableOfContentsCustomizer(tableOfContentsCustomizer);
 		return setTableOfContents(true);
+	}
+
+	//filter
+	public T setFilterExpression(DRIExpression<Boolean> filterExpression) {
+		getObject().setFilterExpression(filterExpression);
+		return (T) this;
 	}
 
 	//title band

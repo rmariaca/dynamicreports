@@ -28,6 +28,8 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignSimpleExpression extends DRIDesignExpression {
-	
+
 	public Object evaluate(ReportParameters reportParameters);
+
+	public String getParameterName();
 }

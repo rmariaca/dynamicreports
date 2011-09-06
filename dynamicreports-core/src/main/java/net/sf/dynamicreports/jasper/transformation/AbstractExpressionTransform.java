@@ -57,11 +57,11 @@ import net.sf.jasperreports.engine.design.JRDesignVariable;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class AbstractExpressionTransform {
-	private static final String VALUE = "$P'{'" + JasperCustomValues.NAME + "'}'.getValue(\"{0}\")";
+	private static final String VALUE = "$P'{'{0}'}'.getValue(\"{1}\")";
 	private static final String FIELD_VALUE = "$F'{'{0}'}'";
 	private static final String VARIABLE_VALUE = "$V'{'{0}'}'";
 	private static final String PARAMETER_VALUE = "$P'{'{0}'}'";
-	private static final String COMPLEX_VALUE = "$P'{'" + JasperCustomValues.NAME + "'}'.getValue(\"{0}\", new Object[]'{'{1}'}')";
+	private static final String COMPLEX_VALUE = "$P'{'{0}'}'.getValue(\"{1}\", new Object[]'{'{2}'}')";
 
 	private Map<String, JRDesignExpression> expressions;
 
@@ -199,10 +199,12 @@ public abstract class AbstractExpressionTransform {
 			if (values.length() > 0) {
 				values = values.substring(2);
 			}
-			return MessageFormat.format(COMPLEX_VALUE, expression.getName(), values);
+			String parameterName = getExpressionParameterName(complexExpression.getParameterName());
+			return MessageFormat.format(COMPLEX_VALUE, parameterName, expression.getName(), values);
 		}
 		else if (expression instanceof DRIDesignSimpleExpression) {
-			return MessageFormat.format(VALUE, expression.getName());
+			String parameterName = getExpressionParameterName(((DRIDesignSimpleExpression) expression).getParameterName());
+			return MessageFormat.format(VALUE, parameterName, expression.getName());
 		}
 		else if (expression instanceof DRIDesignSystemExpression) {
 			String name = ((DRIDesignSystemExpression) expression).getName();
@@ -219,6 +221,15 @@ public abstract class AbstractExpressionTransform {
 		}
 		else {
 			throw new JasperDesignException("Expression " + expression.getClass().getName() + " not supported");
+		}
+	}
+
+	private String getExpressionParameterName(String parameterName) {
+		if (parameterName == null) {
+			return JasperCustomValues.NAME;
+		}
+		else {
+			return parameterName;
 		}
 	}
 

@@ -48,11 +48,11 @@ public class JasperScriptlet extends JRDefaultScriptlet {
 
 	private JasperReportParameters reportParameters;
 
-	protected Object getValue(String valueName) {
+	public Object getValue(String valueName) {
 		return reportParameters.getValue(valueName);
 	}
 
-	protected Object getValue(String name, Object[] values) {
+	public Object getValue(String name, Object[] values) {
 		return getComplexExpression(name).evaluate(Arrays.asList(values), reportParameters);
 	}
 

@@ -37,7 +37,11 @@ public abstract class AbstractDesignComplexExpression implements DRIDesignComple
 	private List<DRIDesignExpression> expressions;
 
 	protected AbstractDesignComplexExpression() {
-		this.name = ReportUtils.generateUniqueName("complexExpression");
+		this(ReportUtils.generateUniqueName("complexExpression"));
+	}
+
+	protected AbstractDesignComplexExpression(String name) {
+		this.name = name;
 		this.expressions = new ArrayList<DRIDesignExpression>();
 	}
 
@@ -55,5 +59,9 @@ public abstract class AbstractDesignComplexExpression implements DRIDesignComple
 
 	public List<DRIDesignExpression> getExpressions() {
 		return expressions;
+	}
+
+	public String getParameterName() {
+		return null;
 	}
 }

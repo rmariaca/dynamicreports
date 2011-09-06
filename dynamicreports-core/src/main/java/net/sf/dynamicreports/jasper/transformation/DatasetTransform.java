@@ -25,8 +25,8 @@ package net.sf.dynamicreports.jasper.transformation;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
@@ -129,23 +129,18 @@ public class DatasetTransform {
 		return datasetExpressions.get(dataset);
 	}
 
-	private class DatasetParametersExpression implements DRIDesignSimpleExpression {
+	private class DatasetParametersExpression extends AbstractDesignSimpleExpression {
 		private Map<String, Object> parameters;
-		private String name;
 
 		public DatasetParametersExpression(Map<String, Object> parameters) {
+			super(ReportUtils.generateUniqueName("datasetParametersExpression"));
 			this.parameters = parameters;
-			this.name = ReportUtils.generateUniqueName("datasetParametersExpression");
 		}
 
 		public Object evaluate(ReportParameters reportParameters) {
 			Map<String, Object> parameters = new HashMap<String, Object>(this.parameters);
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
-		}
-
-		public String getName() {
-			return name;
 		}
 
 		public Class<?> getValueClass() {

@@ -99,6 +99,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		datasetTransform.transform();
 		groupTransform.transform();
 		mainDatasetExpressionTransform.transform();
+		reportTransform.transformExpressions();
 		groupTransform.transformExpressions();
 		styleTransform.transform();
 		bandTransform.transform();

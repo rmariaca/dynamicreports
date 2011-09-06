@@ -257,7 +257,7 @@ public class ComponentTransform {
 		designTextField.setHeight(templateTransform.getTextFieldHeight(textField, style));
 		designTextField.setPattern(templateTransform.getTextFieldPattern(textField, style));
 		designTextField.setHorizontalAlignment(templateTransform.getTextFieldHorizontalAlignment(textField, style));
-		designTextField.setValueExpression(accessor.getExpressionTransform().transformExpression(textField.getValueExpression(), templateTransform.getTextFieldValueFormatter(textField)));
+		designTextField.setValueExpression(accessor.getExpressionTransform().transformExpression(textField.getValueExpression(), templateTransform.getTextFieldValueFormatter(textField), null));
 		designTextField.setMarkup(textField.getMarkup());
 		if (textField.getEvaluationTime() != null) {
 			designTextField.setEvaluationTime(ConstantTransform.textFieldEvaluationTime(textField.getEvaluationTime(), textField.getEvaluationGroup(), accessor));

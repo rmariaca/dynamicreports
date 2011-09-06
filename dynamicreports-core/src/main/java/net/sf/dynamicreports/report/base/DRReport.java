@@ -39,6 +39,7 @@ import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
@@ -80,6 +81,7 @@ public class DRReport implements DRIReport {
 	private DRColumnGrid columnGrid;
 	private Boolean tableOfContents;
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
+	private DRIExpression<Boolean> filterExpression;
 
 	private DRStyle textStyle;
 	private DRStyle columnTitleStyle;
@@ -518,6 +520,14 @@ public class DRReport implements DRIReport {
 
 	public void setTableOfContentsCustomizer(DRITableOfContentsCustomizer tableOfContentsCustomizer) {
 		this.tableOfContentsCustomizer = tableOfContentsCustomizer;
+	}
+
+	public DRIExpression<Boolean> getFilterExpression() {
+		return filterExpression;
+	}
+
+	public void setFilterExpression(DRIExpression<Boolean> filterExpression) {
+		this.filterExpression = filterExpression;
 	}
 
 	public DRBand getTitleBand() {

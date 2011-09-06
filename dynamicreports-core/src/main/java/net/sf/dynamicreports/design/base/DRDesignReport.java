@@ -35,6 +35,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
@@ -261,6 +262,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
 		return templateTransform.getTableOfContentsCustomizer();
+	}
+
+	public DRIDesignExpression getFilterExpression() {
+		return reportTransform.getFilterExpression();
 	}
 
 	public Collection<DRIDesignParameter> getParameters() {

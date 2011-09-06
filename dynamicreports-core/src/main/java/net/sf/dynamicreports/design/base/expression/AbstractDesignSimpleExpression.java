@@ -22,36 +22,28 @@
 
 package net.sf.dynamicreports.design.base.expression;
 
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.report.ReportUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignSimpleExpression extends AbstractDesignSimpleExpression {
-	private DRISimpleExpression<?> simpleExpression;
-	private String parameterName;
+public abstract class AbstractDesignSimpleExpression implements DRIDesignSimpleExpression {
+	private String name;
 
-	public DRDesignSimpleExpression(DRISimpleExpression<?> simpleExpression, String parameterName) {
-		this.simpleExpression = simpleExpression;
-		this.parameterName = parameterName;
+	protected AbstractDesignSimpleExpression() {
+		this(ReportUtils.generateUniqueName("simpleExpression"));
 	}
 
-	public Object evaluate(ReportParameters reportParameters) {
-		return simpleExpression.evaluate(reportParameters);
+	protected AbstractDesignSimpleExpression(String name) {
+		this.name = name;
 	}
 
-	public Class<?> getValueClass() {
-		return simpleExpression.getValueClass();
-	}
-
-	@Override
 	public String getName() {
-		return simpleExpression.getName();
+		return name;
 	}
 
-	@Override
 	public String getParameterName() {
-		return parameterName;
+		return null;
 	}
 }

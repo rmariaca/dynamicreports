@@ -30,11 +30,13 @@ import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignComplexExpression extends AbstractDesignComplexExpression {	
+public class DRDesignComplexExpression extends AbstractDesignComplexExpression {
 	private DRIComplexExpression<?> complexExpression;
-	
-	public DRDesignComplexExpression(DRIComplexExpression<?> complexExpression) {
+	private String parameterName;
+
+	public DRDesignComplexExpression(DRIComplexExpression<?> complexExpression, String parameterName) {
 		this.complexExpression = complexExpression;
+		this.parameterName = parameterName;
 	}
 
 	public Object evaluate(List<?> values, ReportParameters reportParameters) {
@@ -44,9 +46,14 @@ public class DRDesignComplexExpression extends AbstractDesignComplexExpression {
 	public Class<?> getValueClass() {
 		return complexExpression.getValueClass();
 	}
-	
+
 	@Override
 	public String getName() {
 		return complexExpression.getName();
+	}
+
+	@Override
+	public String getParameterName() {
+		return parameterName;
 	}
 }
