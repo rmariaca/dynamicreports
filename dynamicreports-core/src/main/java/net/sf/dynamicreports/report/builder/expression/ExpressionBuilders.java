@@ -25,9 +25,12 @@ package net.sf.dynamicreports.report.builder.expression;
 import java.awt.Image;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
@@ -152,5 +155,38 @@ public class ExpressionBuilders {
 
 	public PrintInEvenRowExpression printInEvenRow() {
 		return Expressions.printInEvenRow();
+	}
+
+	//subdatasource
+	public BeanCollectionSubDatasourceExpression subDatasourceBeanCollection(String fieldName) {
+		return Expressions.subDatasourceBeanCollection(fieldName);
+	}
+
+	public BeanCollectionSubDatasourceExpression subDatasourceBeanCollection(DRIExpression<? extends Collection<?>> expression) {
+		return Expressions.subDatasourceBeanCollection(expression);
+	}
+
+	public BeanArraySubDatasourceExpression subDatasourceBeanArray(String fieldName) {
+		return Expressions.subDatasourceBeanArray(fieldName);
+	}
+
+	public BeanArraySubDatasourceExpression subDatasourceBeanArray(DRIExpression<? extends Object[]> expression) {
+		return Expressions.subDatasourceBeanArray(expression);
+	}
+
+	public MapCollectionSubDatasourceExpression subDatasourceMapCollection(String fieldName) {
+		return Expressions.subDatasourceMapCollection(fieldName);
+	}
+
+	public MapCollectionSubDatasourceExpression subDatasourceMapCollection(DRIExpression<? extends Collection<Map<String, ?>>> expression) {
+		return Expressions.subDatasourceMapCollection(expression);
+	}
+
+	public MapArraySubDatasourceExpression subDatasourceMapArray(String fieldName) {
+		return Expressions.subDatasourceMapArray(fieldName);
+	}
+
+	public MapArraySubDatasourceExpression subDatasourceMapArray(DRIExpression<? extends Object[]> expression) {
+		return Expressions.subDatasourceMapArray(expression);
 	}
 }

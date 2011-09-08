@@ -79,11 +79,6 @@ public class FilterTest extends AbstractJasperCrosstabValueTest implements Seria
 	}
 
 	@Override
-	protected boolean serializableTest() {
-		return false;
-	}
-
-	@Override
 	public void test() {
 		super.test();
 
