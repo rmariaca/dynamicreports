@@ -56,6 +56,14 @@
 					<groupId>logkit</groupId>
 					<artifactId>logkit</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-ooxml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.castor</groupId>
+					<artifactId>castor</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
