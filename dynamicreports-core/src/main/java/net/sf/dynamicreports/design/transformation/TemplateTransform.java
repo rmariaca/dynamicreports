@@ -77,6 +77,7 @@ import net.sf.dynamicreports.report.definition.component.DRIGenericElement;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
+import net.sf.dynamicreports.report.definition.component.DRIMap;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
@@ -949,6 +950,21 @@ public class TemplateTransform {
 			return rectangle.getHeight();
 		}
 		return Defaults.getDefaults().getRectangleHeight();
+	}
+
+	//map
+	protected int getMapWidth(DRIMap map) {
+		if (map.getWidth() != null) {
+			return map.getWidth();
+		}
+		return Defaults.getDefaults().getMapWidth();
+	}
+
+	protected int getMapHeight(DRIMap map) {
+		if (map.getHeight() != null) {
+			return map.getHeight();
+		}
+		return Defaults.getDefaults().getMapHeight();
 	}
 
 	//break

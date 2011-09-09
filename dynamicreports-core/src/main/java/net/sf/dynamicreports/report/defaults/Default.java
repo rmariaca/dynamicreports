@@ -131,6 +131,9 @@ public class Default {
 	private int rectangleRadius;
 	private int rectangleWidth;
 	private int rectangleHeight;
+	//map
+	private int mapWidth;
+	private int mapHeight;
 	//break
 	private int breakWidth;
 	private int breakHeight;
@@ -312,6 +315,9 @@ public class Default {
 		this.rectangleRadius = 0;
 		this.rectangleWidth = 100;
 		this.rectangleHeight = 100;
+
+		this.mapWidth = 200;
+		this.mapHeight = 200;
 
 		this.breakWidth = 1;
 		this.breakHeight = 1;
@@ -660,6 +666,14 @@ public class Default {
 
 	public int getRectangleHeight() {
 		return rectangleHeight;
+	}
+
+	public int getMapWidth() {
+		return mapWidth;
+	}
+
+	public int getMapHeight() {
+		return mapHeight;
 	}
 
 	public int getBreakWidth() {

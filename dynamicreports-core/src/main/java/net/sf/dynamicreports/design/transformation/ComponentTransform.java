@@ -44,6 +44,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignHyperlinkComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignImage;
 import net.sf.dynamicreports.design.base.component.DRDesignLine;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
+import net.sf.dynamicreports.design.base.component.DRDesignMap;
 import net.sf.dynamicreports.design.base.component.DRDesignRectangle;
 import net.sf.dynamicreports.design.base.component.DRDesignSubreport;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
@@ -100,6 +101,7 @@ import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
+import net.sf.dynamicreports.report.definition.component.DRIMap;
 import net.sf.dynamicreports.report.definition.component.DRIPageNumber;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
@@ -184,6 +186,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRICrosstab) {
 			return crosstab((DRICrosstab) component, resetType, resetGroup);
+		}
+		if (component instanceof DRIMap) {
+			return map((DRIMap) component, resetType, resetGroup);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -314,7 +319,7 @@ public class ComponentTransform {
 		return designBarcode;
 	}
 
-	//barcode
+	//barbecue
 	private DRDesignBarbecue barbecue(DRIBarbecue barbecue, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignBarbecue designBarbecue = accessor.getBarcodeTransform().transform(barbecue);
 		component(designBarbecue, barbecue, barbecue.getStyle(), false, DefaultStyleType.BARCODE);
@@ -579,6 +584,20 @@ public class ComponentTransform {
 		DRDesignCrosstab designCrosstab = accessor.getCrosstabTransform().transform(crosstab, resetType, resetGroup);
 		component(designCrosstab, crosstab, crosstab.getStyle(), false, DefaultStyleType.NONE);
 		return designCrosstab;
+	}
+
+	//map
+	private DRDesignMap map(DRIMap map, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignMap designMap = new DRDesignMap();
+		component(designMap, map, map.getStyle(), false, DefaultStyleType.NONE);
+		designMap.setLatitudeExpression(accessor.getExpressionTransform().transformExpression(map.getLatitudeExpression()));
+		designMap.setLongitudeExpression(accessor.getExpressionTransform().transformExpression(map.getLongitudeExpression()));
+		designMap.setZoomExpression(accessor.getExpressionTransform().transformExpression(map.getZoomExpression()));
+		designMap.setWidth(accessor.getTemplateTransform().getMapWidth(map));
+		designMap.setHeight(accessor.getTemplateTransform().getMapHeight(map));
+		designMap.setEvaluationTime(evaluationTimeFromResetType(resetType));
+		designMap.setEvaluationGroup(resetGroup);
+		return designMap;
 	}
 
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {

@@ -43,6 +43,7 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignGenericElement
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
+import net.sf.dynamicreports.design.definition.component.DRIDesignMap;
 import net.sf.dynamicreports.design.definition.component.DRIDesignRectangle;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
@@ -60,11 +61,15 @@ import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
+import net.sf.jasperreports.components.map.StandardMapComponent;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRGenericElementType;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignBreak;
+import net.sf.jasperreports.engine.design.JRDesignComponentElement;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignEllipse;
 import net.sf.jasperreports.engine.design.JRDesignFrame;
@@ -162,6 +167,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignCrosstab) {
 			JRDesignElement jrElement = accessor.getCrosstabTransform().transform((DRIDesignCrosstab) component);
+			component(jrElement, component, listType);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignMap) {
+			JRDesignElement jrElement = map((DRIDesignMap) component);
 			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
@@ -395,6 +405,25 @@ public class ComponentTransform {
 			jrDesignGenericElement.addParameter(accessor.getExpressionTransform().getGenericElementParameterExpression(parameterExpression));
 		}
 		return jrDesignGenericElement;
+	}
+
+	//map
+	private JRDesignElement map(DRIDesignMap map) {
+		StandardMapComponent jrMap = new StandardMapComponent();
+		EvaluationTime evaluationTime = map.getEvaluationTime();
+		jrMap.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
+		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && map.getEvaluationGroup() != null) {
+			jrMap.setEvaluationGroup(accessor.getGroupTransform().getGroup(map.getEvaluationGroup()).getName());
+		}
+		jrMap.setLatitudeExpression(accessor.getExpressionTransform().getExpression(map.getLatitudeExpression()));
+		jrMap.setLongitudeExpression(accessor.getExpressionTransform().getExpression(map.getLongitudeExpression()));
+		jrMap.setZoomExpression(accessor.getExpressionTransform().getExpression(map.getZoomExpression()));
+
+		JRDesignComponentElement jrComponent = new JRDesignComponentElement();
+		jrComponent.setComponent(jrMap);
+		jrComponent.setComponentKey(new ComponentKey(ComponentsExtensionsRegistryFactory.NAMESPACE, "jr", "map"));
+
+		return jrComponent;
 	}
 
 	private class SubreportExpression extends AbstractDesignComplexExpression {
