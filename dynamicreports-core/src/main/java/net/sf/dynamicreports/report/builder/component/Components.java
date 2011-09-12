@@ -244,4 +244,17 @@ public class Components {
 	public static RectangleBuilder roundRectangle(int radius) {
 		return new RectangleBuilder().setRadius(radius);
 	}
+
+	//map
+	public static MapBuilder map() {
+		return new MapBuilder();
+	}
+
+	public static MapBuilder map(Float latitude, Float longitude, Integer zoom) {
+		MapBuilder mapBuilder = new MapBuilder();
+		mapBuilder.setLatitude(latitude);
+		mapBuilder.setLongitude(longitude);
+		mapBuilder.setZoom(zoom);
+		return mapBuilder;
+	}
 }

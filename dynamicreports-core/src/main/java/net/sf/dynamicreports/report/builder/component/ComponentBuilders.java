@@ -230,4 +230,13 @@ public class ComponentBuilders {
 	public RectangleBuilder roundRectangle(int radius) {
 		return Components.roundRectangle(radius);
 	}
+
+	//map
+	public MapBuilder map() {
+		return Components.map();
+	}
+
+	public MapBuilder map(Float latitude, Float longitude, Integer zoom) {
+		return Components.map(latitude, longitude, zoom);
+	}
 }

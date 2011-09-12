@@ -60,6 +60,7 @@
 		<junitVersion>4.0</junitVersion>
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
 		<xalanVersion>2.7.1</xalanVersion>
+		<velocityVersion>1.7</velocityVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -157,6 +158,13 @@
 				<groupId>xalan</groupId>
 				<artifactId>xalan</artifactId>
 				<version>${xalanVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${velocityVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>
