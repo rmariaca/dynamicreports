@@ -91,6 +91,11 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		return this;
 	}
 
+	public TextFieldBuilder<T> setPattern(DRIExpression<String> patternExpression) {
+		getObject().setPatternExpression(patternExpression);
+		return this;
+	}
+
 	public TextFieldBuilder<T> setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;

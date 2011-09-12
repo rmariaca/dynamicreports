@@ -86,6 +86,11 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		return (T) this;
 	}
 
+	public T setPattern(DRIExpression<String> patternExpression) {
+		getObject().getValueField().setPatternExpression(patternExpression);
+		return (T) this;
+	}
+
 	public T setValueFormatter(DRIValueFormatter<?, ? super U> valueFormatter) {
 		getObject().getValueField().setValueFormatter(valueFormatter);
 		return (T) this;

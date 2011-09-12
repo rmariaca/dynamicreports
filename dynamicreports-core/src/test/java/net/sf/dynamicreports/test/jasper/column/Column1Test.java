@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -48,6 +49,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 	private TextColumnBuilder<Date> column3;
 	private TextColumnBuilder<Double> column4;
 	private TextColumnBuilder<BigDecimal> column5;
+	private TextColumnBuilder<Double> column6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -57,7 +59,8 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 					column2 = col.column("Column2\nColumn2", "field2", String.class),
 					column3 = col.column("Column3", "field3", Date.class).setPattern("dd.MM.yyyy"),
 					column4 = col.column("Column4", "field4", Double.class).setPattern("#,###.00"),
-					column5 = col.column("Column5", "field5", BigDecimal.class).setValueFormatter(new ColumnValueFormatter()));
+					column5 = col.column("Column5", "field5", BigDecimal.class).setValueFormatter(new ColumnValueFormatter()),
+					column6 = col.column("Column6", "field6", Double.class).setPattern(new PatternExpression()));
 	}
 
 	@Override
@@ -85,13 +88,22 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 		columnDetailValueTest(column5, 50, "value = 10");
 		columnTitleCountTest(column5, 3);
 		columnTitleValueTest(column5, "Column5", "Column5", "Column5");
+		//column6
+		columnDetailCountTest(column6, 110);
+		columnDetailValueTest(column6, 0, "1.00");
+		columnDetailValueTest(column6, 1, "1.000");
+		columnDetailValueTest(column6, 2, "1.0000");
+		columnDetailValueTest(column6, 3, "1.0");
+		columnDetailValueTest(column6, 50, "1.0");
+		columnTitleCountTest(column6, 3);
+		columnTitleValueTest(column6, "Column6", "Column6", "Column6");
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5");
+		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5", "field6");
 		for (int i = 0; i < 110; i++) {
-			dataSource.add(1, "test", new Date(), 1d, new BigDecimal(10));
+			dataSource.add(1, "test", new Date(), 1d, new BigDecimal(10), 1d);
 		}
 		return dataSource;
 	}
@@ -101,6 +113,21 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 
 		public String format(BigDecimal value, ReportParameters reportParameters) {
 			return "value = " + value;
+		}
+	}
+
+	private class PatternExpression extends AbstractSimpleExpression<String> {
+		private static final long serialVersionUID = 1L;
+
+		public String evaluate(ReportParameters reportParameters) {
+			String pattern = "#,###.0";
+			Integer reportRowNumber = reportParameters.getReportRowNumber();
+			if (reportRowNumber < 4) {
+				for (int i = 0; i < reportRowNumber; i++) {
+					pattern += "0";
+				}
+			}
+			return pattern;
 		}
 	}
 }

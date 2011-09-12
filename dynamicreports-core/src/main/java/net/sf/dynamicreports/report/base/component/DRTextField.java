@@ -42,6 +42,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 
 	private DRIExpression<T> valueExpression;
 	private String pattern;
+	private DRIExpression<String> patternExpression;
 	private HorizontalAlignment horizontalAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private DRIDataType<? super T, T> dataType;
@@ -67,6 +68,14 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+
+	public DRIExpression<String> getPatternExpression() {
+		return patternExpression;
+	}
+
+	public void setPatternExpression(DRIExpression<String> patternExpression) {
+		this.patternExpression = patternExpression;
 	}
 
 	public HorizontalAlignment getHorizontalAlignment() {

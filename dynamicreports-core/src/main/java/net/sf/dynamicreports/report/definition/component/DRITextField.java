@@ -34,11 +34,13 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRITextField<T> extends DRIHyperLinkComponent {
-	
+
 	public DRIExpression<T> getValueExpression();
-	
+
 	public String getPattern();
-	
+
+	public DRIExpression<String> getPatternExpression();
+
 	public HorizontalAlignment getHorizontalAlignment();
 
 	public DRIValueFormatter<?, ? super T> getValueFormatter();
@@ -47,12 +49,12 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 
 	public Integer getColumns();
 
-	public Integer getRows();	
-	
+	public Integer getRows();
+
 	public Evaluation getEvaluationTime();
-	
+
 	public DRIGroup getEvaluationGroup();
-	
+
 	public Markup getMarkup();
 
 	public Boolean getStretchWithOverflow();

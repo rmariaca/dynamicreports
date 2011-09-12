@@ -289,6 +289,7 @@ public class ComponentTransform {
 		if (!StringUtils.isBlank(pattern)) {
 			jrTextField.setPattern(pattern);
 		}
+		jrTextField.setPatternExpression(accessor.getExpressionTransform().getExpression(textField.getPatternExpression()));
 		jrTextField.setHorizontalAlignment(ConstantTransform.horizontalAlignment(textField.getHorizontalAlignment()));
 		jrTextField.setExpression(accessor.getExpressionTransform().getExpression(textField.getValueExpression()));
 		jrTextField.setPrintRepeatedValues(textField.isPrintRepeatedValues());

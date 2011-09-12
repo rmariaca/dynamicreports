@@ -33,27 +33,36 @@ import net.sf.dynamicreports.report.constant.Markup;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRIDesignTextField {
-	private String pattern;	
+	private String pattern;
+	private DRIDesignExpression patternExpression;
 	private HorizontalAlignment horizontalAlignment;
 	private DRIDesignExpression valueExpression;
 	private boolean printRepeatedValues;
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
-	private Markup markup; 
+	private Markup markup;
 	private boolean stretchWithOverflow;
-	
+
 	public DRDesignTextField() {
 		super("textField");
 	}
-	
+
 	public String getPattern() {
 		return pattern;
 	}
-	
+
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
-	
+
+	public DRIDesignExpression getPatternExpression() {
+		return patternExpression;
+	}
+
+	public void setPatternExpression(DRIDesignExpression patternExpression) {
+		this.patternExpression = patternExpression;
+	}
+
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -61,11 +70,11 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		this.horizontalAlignment = horizontalAlignment;
 	}
-	
+
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
@@ -93,11 +102,11 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	public void setEvaluationGroup(DRDesignGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
 	}
-	
+
 	public Markup getMarkup() {
 		return markup;
 	}
-	
+
 	public void setMarkup(Markup markup) {
 		this.markup = markup;
 	}
@@ -108,5 +117,5 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 
 	public void setStretchWithOverflow(boolean stretchWithOverflow) {
 		this.stretchWithOverflow = stretchWithOverflow;
-	}	
+	}
 }

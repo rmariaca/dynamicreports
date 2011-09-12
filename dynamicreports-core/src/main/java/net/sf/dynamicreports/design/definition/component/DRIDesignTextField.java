@@ -34,9 +34,11 @@ import net.sf.dynamicreports.report.constant.Markup;
 public interface DRIDesignTextField extends DRIDesignHyperLinkComponent {
 
 	public String getPattern();
-	
+
+	public DRIDesignExpression getPatternExpression();
+
 	public HorizontalAlignment getHorizontalAlignment();
-	
+
 	public DRIDesignExpression getValueExpression();
 
 	public boolean isPrintRepeatedValues();
@@ -46,6 +48,6 @@ public interface DRIDesignTextField extends DRIDesignHyperLinkComponent {
 	public DRIDesignGroup getEvaluationGroup();
 
 	public Markup getMarkup();
-	
-	public boolean isStretchWithOverflow();	
+
+	public boolean isStretchWithOverflow();
 }

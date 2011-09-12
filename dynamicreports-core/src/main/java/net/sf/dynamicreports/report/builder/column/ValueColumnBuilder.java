@@ -64,6 +64,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	public T setPattern(DRIExpression<String> patternExpression) {
+		getComponent().setPatternExpression(patternExpression);
+		return (T) this;
+	}
+
 	public T setValueFormatter(DRIValueFormatter<?, ? super U> valueFormatter) {
 		getComponent().setValueFormatter(valueFormatter);
 		return (T) this;
