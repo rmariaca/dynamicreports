@@ -967,6 +967,21 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getMapHeight();
 	}
 
+	//custom component
+	protected int getCustomComponentWidth(DRIDimensionComponent component) {
+		if (component.getWidth() != null) {
+			return component.getWidth();
+		}
+		return Defaults.getDefaults().getCustomComponentWidth();
+	}
+
+	protected int getCustomComponentHeight(DRIDimensionComponent component) {
+		if (component.getHeight() != null) {
+			return component.getHeight();
+		}
+		return Defaults.getDefaults().getCustomComponentHeight();
+	}
+
 	//break
 	protected int getBreakWidth(DRIBreak breakComponent) {
 		return Defaults.getDefaults().getBreakWidth();

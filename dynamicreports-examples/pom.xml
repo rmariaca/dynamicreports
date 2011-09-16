@@ -22,6 +22,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.dynamicreports</groupId>
+			<artifactId>dynamicreports-googlecharts</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<!-- only for JDK 1.5, not required for JDK 1.6 -->
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>

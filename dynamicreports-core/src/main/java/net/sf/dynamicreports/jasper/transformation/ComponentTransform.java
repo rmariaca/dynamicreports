@@ -51,11 +51,15 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
+import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.report.components.CustomComponentTransform;
+import net.sf.dynamicreports.report.components.CustomComponents;
+import net.sf.dynamicreports.report.components.DRIDesignCustomComponent;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
@@ -172,6 +176,11 @@ public class ComponentTransform {
 		}
 		else if (component instanceof DRIDesignMap) {
 			JRDesignElement jrElement = map((DRIDesignMap) component);
+			component(jrElement, component, listType);
+			jrElements = new JRDesignElement[] {jrElement};
+		}
+		else if (component instanceof DRIDesignCustomComponent) {
+			JRDesignElement jrElement = customComponent(component);
 			component(jrElement, component, listType);
 			jrElements = new JRDesignElement[] {jrElement};
 		}
@@ -424,6 +433,18 @@ public class ComponentTransform {
 		jrComponent.setComponent(jrMap);
 		jrComponent.setComponentKey(new ComponentKey(ComponentsExtensionsRegistryFactory.NAMESPACE, "jr", "map"));
 
+		return jrComponent;
+	}
+
+	//custom component
+	private JRDesignElement customComponent(DRIDesignComponent component) {
+		@SuppressWarnings("rawtypes")
+		CustomComponentTransform componentTransfom = CustomComponents.getComponentTransform(component);
+		if (componentTransfom == null) {
+			throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
+		}
+		@SuppressWarnings("unchecked")
+		JRDesignComponentElement jrComponent = (JRDesignComponentElement) componentTransfom.jasperComponent(accessor, component);
 		return jrComponent;
 	}
 

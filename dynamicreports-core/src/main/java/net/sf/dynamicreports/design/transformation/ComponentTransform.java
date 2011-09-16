@@ -73,6 +73,9 @@ import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.components.CustomComponentTransform;
+import net.sf.dynamicreports.report.components.CustomComponents;
+import net.sf.dynamicreports.report.components.DRICustomComponent;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -189,6 +192,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIMap) {
 			return map((DRIMap) component, resetType, resetGroup);
+		}
+		if (component instanceof DRICustomComponent) {
+			return customComponent((DRICustomComponent) component, resetType, resetGroup);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -601,6 +607,26 @@ public class ComponentTransform {
 		return designMap;
 	}
 
+	//custom component
+	private DRDesignComponent customComponent(DRICustomComponent component, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		@SuppressWarnings("rawtypes")
+		CustomComponentTransform componentTransfom = CustomComponents.getComponentTransform(component);
+		if (componentTransfom == null) {
+			throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
+		}
+		@SuppressWarnings("unchecked")
+		DRDesignComponent designComponent = (DRDesignComponent) componentTransfom.designComponent(accessor, component, resetType, resetGroup);
+		component(designComponent, component, component.getStyle(), false, DefaultStyleType.NONE);
+		DRIDimensionComponent dimensionComponent = component;
+		if (designComponent.getWidth() == null) {
+			designComponent.setWidth(accessor.getTemplateTransform().getCustomComponentWidth(dimensionComponent));
+		}
+		if (designComponent.getHeight() == null) {
+			designComponent.setHeight(accessor.getTemplateTransform().getCustomComponentHeight(dimensionComponent));
+		}
+		return designComponent;
+	}
+
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
 		if (expression == null) {
 			return null;
@@ -619,7 +645,7 @@ public class ComponentTransform {
 		throw new DRDesignReportException("Expression " + expression.getClass().getName() + " not supported");
 	}
 
-	private EvaluationTime evaluationTimeFromResetType(ResetType resetType) {
+	public EvaluationTime evaluationTimeFromResetType(ResetType resetType) {
 		if (resetType == null) {
 			return null;
 		}

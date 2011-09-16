@@ -312,7 +312,7 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static EvaluationTimeEnum evaluationTime(EvaluationTime evaluationTime) {
+	public static EvaluationTimeEnum evaluationTime(EvaluationTime evaluationTime) {
 		if (evaluationTime == null) {
 			return EvaluationTimeEnum.NOW;
 		}

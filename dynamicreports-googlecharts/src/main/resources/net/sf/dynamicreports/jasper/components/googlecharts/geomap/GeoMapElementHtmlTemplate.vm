@@ -1,0 +1,51 @@
+#if (${divId} && ${divClass})
+	<div id='${divId}' class='${divClass}'
+#else 
+	<div
+#end
+#if(${xhtml})
+		style='position: absolute; left: ${elementX}; top: ${elementY}; width: ${elementWidth}px; height: ${elementHeight}px;
+#else
+		style='width: ${elementWidth}px; height: ${elementHeight}px;
+#end
+		#if(${backgroundColor}) 
+			background-color: \#${backgroundColor};
+		#end
+	'>
+		<div id='map_canvas' style='width: 100%; height: 100%; overflow: auto'></div>
+	</div>
+
+  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+  <script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});
+   google.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = new google.visualization.DataTable();
+      data.addRows(6);
+      data.addColumn('string', 'City');
+      data.addColumn('number', 'Popularity');
+      data.setValue(0, 0, 'New York');
+      data.setValue(0, 1, 200);
+      data.setValue(1, 0, 'Boston');
+      data.setValue(1, 1, 300);
+      data.setValue(2, 0, 'Miami');
+      data.setValue(2, 1, 400);
+      data.setValue(3, 0, 'Chicago');
+      data.setValue(3, 1, 500);
+      data.setValue(4, 0, 'Los Angeles');
+      data.setValue(4, 1, 600);
+      data.setValue(5, 0, 'Houston');
+      data.setValue(5, 1, 700);
+
+      var options = {};
+      options['region'] = 'US';
+      options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
+      options['dataMode'] = 'markers';
+
+      var container = document.getElementById('map_canvas');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(data, options);
+    };
+  
+  </script>

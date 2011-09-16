@@ -73,7 +73,7 @@ public class GroupTransform {
 		}
 	}
 
-	protected JRDesignGroup getGroup(DRIDesignGroup group) {
+	public JRDesignGroup getGroup(DRIDesignGroup group) {
 		JRDesignGroup jrGroup = (JRDesignGroup) accessor.getDesign().getGroupsMap().get(group.getName());
 		if (jrGroup == null)
 			throw new JasperDesignException("Group " + group.getName() + " is not registered");

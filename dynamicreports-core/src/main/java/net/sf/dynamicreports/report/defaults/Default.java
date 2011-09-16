@@ -134,6 +134,9 @@ public class Default {
 	//map
 	private int mapWidth;
 	private int mapHeight;
+	//custom component
+	private int customComponentWidth;
+	private int customComponentHeight;
 	//break
 	private int breakWidth;
 	private int breakHeight;
@@ -318,6 +321,9 @@ public class Default {
 
 		this.mapWidth = 200;
 		this.mapHeight = 200;
+
+		this.customComponentWidth = 200;
+		this.customComponentHeight = 200;
 
 		this.breakWidth = 1;
 		this.breakHeight = 1;
@@ -674,6 +680,14 @@ public class Default {
 
 	public int getMapHeight() {
 		return mapHeight;
+	}
+
+	public int getCustomComponentWidth() {
+		return customComponentWidth;
+	}
+
+	public int getCustomComponentHeight() {
+		return customComponentHeight;
 	}
 
 	public int getBreakWidth() {

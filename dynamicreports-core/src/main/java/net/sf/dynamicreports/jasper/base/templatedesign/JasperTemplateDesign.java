@@ -127,7 +127,7 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	}
 
 	public boolean isDefinedParameter(String name) {
-		JRParameter parameter = (JRParameter) jasperDesign.getParametersMap().get(name);
+		JRParameter parameter = jasperDesign.getParametersMap().get(name);
 		return parameter != null;
 	}
 
@@ -224,7 +224,7 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	}
 
 	private int getBandComponentsCount(JRBand band) {
-		if (band != null) {
+		if (band != null && band.getElements() != null) {
 			return band.getElements().length;
 		}
 		return 0;

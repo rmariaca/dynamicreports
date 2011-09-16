@@ -91,10 +91,10 @@
 				<version>0.7.4</version>
 				<configuration>
 					<schemaIncludes>
-						<schemaInclude>**/*.xsd</schemaInclude>
+						<schemaInclude>**/dynamicreports.xsd</schemaInclude>
 					</schemaIncludes>
 					<bindingIncludes>
-						<bindingInclude>**/*.xjb</bindingInclude>
+						<bindingInclude>**/dynamicreports.xjb</bindingInclude>
 					</bindingIncludes>
 					<removeOldOutput>true</removeOldOutput>
 				</configuration>
