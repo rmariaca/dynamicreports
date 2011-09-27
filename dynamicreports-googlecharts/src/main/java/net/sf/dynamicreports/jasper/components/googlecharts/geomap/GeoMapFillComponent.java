@@ -22,15 +22,21 @@
 
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapDataMode;
 import net.sf.jasperreports.engine.JRComponentElement;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRGenericPrintElement;
 import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.component.BaseFillComponent;
 import net.sf.jasperreports.engine.component.FillPrepareResult;
+import net.sf.jasperreports.engine.fill.JRFillObjectFactory;
 import net.sf.jasperreports.engine.fill.JRTemplateGenericElement;
 import net.sf.jasperreports.engine.fill.JRTemplateGenericPrintElement;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
+import net.sf.jasperreports.engine.util.JRStringUtil;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,10 +44,16 @@ import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 public class GeoMapFillComponent extends BaseFillComponent {
 
 	private GeoMapComponent geoMapComponent;
-	// private Float latitude;
+	private Boolean showLegend;
+	private GeoMapDataMode dataMode;
+	private String region;
+	private List<Color> colors;
+	private GeoMapFillDataset dataset;
 
-	public GeoMapFillComponent(GeoMapComponent geoMapComponent) {
+	public GeoMapFillComponent(GeoMapComponent geoMapComponent, JRFillObjectFactory factory) {
 		this.geoMapComponent = geoMapComponent;
+		this.dataset = new GeoMapFillDataset(geoMapComponent.getDataset(), factory);
+		factory.registerElementDataset(this.dataset);
 	}
 
 	protected GeoMapComponent getGeoMap() {
@@ -55,7 +67,13 @@ public class GeoMapFillComponent extends BaseFillComponent {
 	}
 
 	private void evaluateGeoMap(byte evaluation) throws JRException {
-		// latitude =	(Float)fillContext.evaluate(mapComponent.getLatitudeExpression(),	evaluation);
+		showLegend = geoMapComponent.getShowLegend();
+		dataMode = geoMapComponent.getDataMode();
+		region = JRStringUtil.getString(fillContext.evaluate(geoMapComponent.getRegionExpression(),	evaluation));
+		colors = geoMapComponent.getColors();
+
+		dataset.evaluateDatasetRun(evaluation);
+		dataset.finishDataset();
 	}
 
 	private boolean isEvaluateNow() {
@@ -64,9 +82,6 @@ public class GeoMapFillComponent extends BaseFillComponent {
 
 	public FillPrepareResult prepare(int availableHeight) {
 		return FillPrepareResult.PRINT_NO_STRETCH;
-		// return isEvaluateNow() && (latitude == null || longitude == null)
-		// ? FillPrepareResult.NO_PRINT_NO_OVERFLOW
-		// : FillPrepareResult.PRINT_NO_STRETCH;
 	}
 
 	public JRPrintElement fill() {
@@ -83,8 +98,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		if (isEvaluateNow()) {
 			copy(printElement);
 		} else {
-			fillContext.registerDelayedEvaluation(printElement, geoMapComponent.getEvaluationTime(),
-					geoMapComponent.getEvaluationGroup());
+			fillContext.registerDelayedEvaluation(printElement, geoMapComponent.getEvaluationTime(), geoMapComponent.getEvaluationGroup());
 		}
 
 		return printElement;
@@ -97,6 +111,10 @@ public class GeoMapFillComponent extends BaseFillComponent {
 	}
 
 	private void copy(JRGenericPrintElement printElement) {
-		//printElement.setParameterValue(MapPrintElement.PARAMETER_LATITUDE, latitude);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_SHOW_LEGEND, showLegend);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_DATA_MODE, dataMode);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_REGION, region);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_COLORS, colors);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_DATASET, dataset.getCustomDataset());
 	}
 }

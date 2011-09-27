@@ -22,7 +22,12 @@
 
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapDataMode;
 import net.sf.jasperreports.engine.JRCloneable;
+import net.sf.jasperreports.engine.JRExpression;
 import net.sf.jasperreports.engine.component.Component;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 
@@ -34,4 +39,14 @@ public interface GeoMapComponent extends Component, JRCloneable {
 	public EvaluationTimeEnum getEvaluationTime();
 
 	public String getEvaluationGroup();
+
+	public Boolean getShowLegend();
+
+	public GeoMapDataMode getDataMode();
+
+	public JRExpression getRegionExpression();
+
+	public List<Color> getColors();
+
+	public GeoMapDataset getDataset();
 }

@@ -22,24 +22,25 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.components.DRICustomComponent;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
+public interface DRIDesignGeoMapDataset {
 
-	public Boolean getShowLegend();
+	public DRIDesignDataset getSubDataset();
 
-	public GeoMapDataMode getDataMode();
+	public DRIDesignExpression getLocationExpression();
 
-	public DRIExpression<String> getRegionExpression();
+	public DRIDesignExpression getValueExpression();
 
-	public List<Color> getColors();
+	public DRIDesignExpression getTooltipExpression();
 
-	public DRIGeoMapDataset getDataset();
+	public ResetType getResetType();
+
+	public DRIDesignGroup getResetGroup();
 }

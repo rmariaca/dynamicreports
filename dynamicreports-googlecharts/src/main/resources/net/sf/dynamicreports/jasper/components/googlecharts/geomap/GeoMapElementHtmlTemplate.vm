@@ -1,8 +1,4 @@
-#if (${divId} && ${divClass})
-	<div id='${divId}' class='${divClass}'
-#else 
-	<div
-#end
+  <div
 #if(${xhtml})
 		style='position: absolute; left: ${elementX}; top: ${elementY}; width: ${elementWidth}px; height: ${elementHeight}px;
 #else
@@ -22,26 +18,35 @@
 
     function drawMap() {
       var data = new google.visualization.DataTable();
-      data.addRows(6);
-      data.addColumn('string', 'City');
-      data.addColumn('number', 'Popularity');
-      data.setValue(0, 0, 'New York');
-      data.setValue(0, 1, 200);
-      data.setValue(1, 0, 'Boston');
-      data.setValue(1, 1, 300);
-      data.setValue(2, 0, 'Miami');
-      data.setValue(2, 1, 400);
-      data.setValue(3, 0, 'Chicago');
-      data.setValue(3, 1, 500);
-      data.setValue(4, 0, 'Los Angeles');
-      data.setValue(4, 1, 600);
-      data.setValue(5, 0, 'Houston');
-      data.setValue(5, 1, 700);
+      data.addRows(${dataset}.size());
+      data.addColumn('string', 'Location');
+      data.addColumn('number', 'Value');
+      data.addColumn('string', 'Tooltip');
+      #set($count = 0)
+      #foreach ($data in ${dataset})
+        data.setValue($count, 0, '$data.location');
+        data.setValue($count, 1, '$data.value');
+        data.setValue($count, 2, '$data.tooltip');
+        #set($count = $count + 1 )
+      #end
 
       var options = {};
-      options['region'] = 'US';
-      options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
-      options['dataMode'] = 'markers';
+      #if (${showLegend})
+        options['showLegend'] = ${showLegend};
+      #end
+      #if (${dataMode})
+        options['dataMode'] = '${dataMode}';
+      #end      
+      #if (${region})
+        options['region'] = '${region}';
+      #end
+      #if (${colors})
+        options['colors'] = [
+        #foreach ($color in ${colors})
+          $color#if ($velocityCount != ${colors}.size()), #end
+        #end
+        ];
+      #end
 
       var container = document.getElementById('map_canvas');
       var geomap = new google.visualization.GeoMap(container);

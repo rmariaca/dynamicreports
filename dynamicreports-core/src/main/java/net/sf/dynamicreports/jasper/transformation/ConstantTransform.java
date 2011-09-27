@@ -297,7 +297,7 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static ResetTypeEnum variableResetType(ResetType resetType) {
+	public static ResetTypeEnum variableResetType(ResetType resetType) {
 		switch (resetType) {
 		case REPORT:
 			return ResetTypeEnum.REPORT;

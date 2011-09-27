@@ -107,7 +107,7 @@ public class DatasetTransform {
 		}
 	}
 
-	protected JRDesignDatasetRun datasetRun(DRIDesignDataset dataset) {
+	public JRDesignDatasetRun datasetRun(DRIDesignDataset dataset) {
 		if (dataset == null) {
 			return null;
 		}

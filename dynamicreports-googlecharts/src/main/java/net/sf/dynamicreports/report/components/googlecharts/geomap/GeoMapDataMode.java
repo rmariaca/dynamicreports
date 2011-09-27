@@ -22,24 +22,10 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.components.DRICustomComponent;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
-
-	public Boolean getShowLegend();
-
-	public GeoMapDataMode getDataMode();
-
-	public DRIExpression<String> getRegionExpression();
-
-	public List<Color> getColors();
-
-	public DRIGeoMapDataset getDataset();
+public enum GeoMapDataMode {
+	REGIONS,
+	MARKERS
 }

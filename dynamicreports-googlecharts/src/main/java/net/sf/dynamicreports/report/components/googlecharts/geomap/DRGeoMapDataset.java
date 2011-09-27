@@ -22,24 +22,47 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.components.DRICustomComponent;
+import net.sf.dynamicreports.report.base.DRDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
+public class DRGeoMapDataset implements DRIGeoMapDataset {
+	private DRDataset subDataset;
+	private DRIExpression<?> locationExpression;
+	private DRIExpression<?> valueExpression;
+	private DRIExpression<?> tooltipExpression;
 
-	public Boolean getShowLegend();
+	public DRDataset getSubDataset() {
+		return subDataset;
+	}
 
-	public GeoMapDataMode getDataMode();
+	public void setSubDataset(DRDataset subDataset) {
+		this.subDataset = subDataset;
+	}
 
-	public DRIExpression<String> getRegionExpression();
+	public DRIExpression<?> getLocationExpression() {
+		return locationExpression;
+	}
 
-	public List<Color> getColors();
+	public void setLocationExpression(DRIExpression<?> locationExpression) {
+		this.locationExpression = locationExpression;
+	}
 
-	public DRIGeoMapDataset getDataset();
+	public DRIExpression<?> getValueExpression() {
+		return valueExpression;
+	}
+
+	public void setValueExpression(DRIExpression<?> valueExpression) {
+		this.valueExpression = valueExpression;
+	}
+
+	public DRIExpression<?> getTooltipExpression() {
+		return tooltipExpression;
+	}
+
+	public void setTooltipExpression(DRIExpression<?> tooltipExpression) {
+		this.tooltipExpression = tooltipExpression;
+	}
 }

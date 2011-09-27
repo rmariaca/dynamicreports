@@ -22,14 +22,19 @@
 
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
+import java.awt.Color;
 import java.io.Serializable;
+import java.util.List;
 
+import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapDataMode;
 import net.sf.jasperreports.engine.JRConstants;
+import net.sf.jasperreports.engine.JRExpression;
 import net.sf.jasperreports.engine.JRRuntimeException;
 import net.sf.jasperreports.engine.base.JRBaseObjectFactory;
 import net.sf.jasperreports.engine.design.events.JRChangeEventsSupport;
 import net.sf.jasperreports.engine.design.events.JRPropertyChangeSupport;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
+import net.sf.jasperreports.engine.util.JRCloneUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -37,13 +42,21 @@ import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 public class StandardGeoMapComponent implements GeoMapComponent, Serializable, JRChangeEventsSupport {
 	private static final long serialVersionUID = JRConstants.SERIAL_VERSION_UID;
 
-	public static final String PROPERTY_LATITUDE_EXPRESSION = "latitudeExpression";
 	public static final String PROPERTY_EVALUATION_TIME = "evaluationTime";
 	public static final String PROPERTY_EVALUATION_GROUP = "evaluationGroup";
+	public static final String PROPERTY_SHOW_LEGEND = "showLegend";
+	public static final String PROPERTY_DATA_MODE = "dataMode";
+	public static final String PROPERTY_REGION_EXPRESSION = "regionExpression";
+	public static final String PROPERTY_COLORS = "colors";
+	public static final String PROPERTY_DATASET = "dataset";
 
-	//private JRExpression latitudeExpression;
 	private EvaluationTimeEnum evaluationTime = EvaluationTimeEnum.NOW;
 	private String evaluationGroup;
+	private Boolean showLegend;
+	private GeoMapDataMode dataMode;
+	private JRExpression regionExpression;
+	private List<Color> colors;
+	private GeoMapDataset dataset;
 
 	private transient JRPropertyChangeSupport eventSupport;
 
@@ -51,20 +64,13 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 	}
 
 	public StandardGeoMapComponent(GeoMapComponent map, JRBaseObjectFactory objectFactory) {
-		//this.latitudeExpression = objectFactory.getExpression(map.getLatitudeExpression());
 		this.evaluationTime = map.getEvaluationTime();
 		this.evaluationGroup = map.getEvaluationGroup();
+		this.showLegend = map.getShowLegend();
+		this.regionExpression = objectFactory.getExpression(map.getRegionExpression());;
+		this.colors = map.getColors();
+		this.dataset = new StandardGeoMapDataset(map.getDataset(), objectFactory);
 	}
-
-	/*public JRExpression getLatitudeExpression() {
-		return latitudeExpression;
-	}
-
-	public void setLatitudeExpression(JRExpression latitudeExpression) {
-		Object old = this.latitudeExpression;
-		this.latitudeExpression = latitudeExpression;
-		getEventSupport().firePropertyChange(PROPERTY_LATITUDE_EXPRESSION, old, this.latitudeExpression);
-	}*/
 
 	public EvaluationTimeEnum getEvaluationTime() {
 		return evaluationTime;
@@ -86,6 +92,56 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_EVALUATION_GROUP, old, this.evaluationGroup);
 	}
 
+	public Boolean getShowLegend() {
+		return showLegend;
+	}
+
+	public void setShowLegend(Boolean showLegend) {
+		Object old = this.showLegend;
+		this.showLegend = showLegend;
+		getEventSupport().firePropertyChange(PROPERTY_SHOW_LEGEND, old, this.showLegend);
+	}
+
+	public GeoMapDataMode getDataMode() {
+		return dataMode;
+	}
+
+	public void setDataMode(GeoMapDataMode dataMode) {
+		Object old = this.dataMode;
+		this.dataMode = dataMode;
+		getEventSupport().firePropertyChange(PROPERTY_DATA_MODE, old, this.dataMode);
+	}
+
+	public JRExpression getRegionExpression() {
+		return regionExpression;
+	}
+
+	public void setRegionExpression(JRExpression regionExpression) {
+		Object old = this.regionExpression;
+		this.regionExpression = regionExpression;
+		getEventSupport().firePropertyChange(PROPERTY_REGION_EXPRESSION, old, this.regionExpression);
+	}
+
+	public List<Color> getColors() {
+		return colors;
+	}
+
+	public void setColors(List<Color> colors) {
+		Object old = this.colors;
+		this.colors = colors;
+		getEventSupport().firePropertyChange(PROPERTY_COLORS, old, this.colors);
+	}
+
+	public GeoMapDataset getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(GeoMapDataset dataset) {
+		Object old = this.dataset;
+		this.dataset = dataset;
+		getEventSupport().firePropertyChange(PROPERTY_DATASET, old, this.dataset);
+	}
+
 	public JRPropertyChangeSupport getEventSupport() {
 		synchronized (this) {
 			if (eventSupport == null) {
@@ -105,7 +161,8 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 			// never
 			throw new JRRuntimeException(e);
 		}
-		//clone.latitudeExpression = JRCloneUtils.nullSafeClone(latitudeExpression);
+		clone.regionExpression = JRCloneUtils.nullSafeClone(regionExpression);
+		clone.dataset = JRCloneUtils.nullSafeClone(dataset);
 		clone.eventSupport = null;
 		return clone;
 	}

@@ -20,26 +20,45 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.components.googlecharts.geomap;
-
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.components.DRICustomComponent;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
+public class GeoMapData {
+	private String location;
+	private Number value;
+	private String tooltip;
 
-	public Boolean getShowLegend();
+	public String getLocation() {
+		return location;
+	}
 
-	public GeoMapDataMode getDataMode();
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-	public DRIExpression<String> getRegionExpression();
+	public Number getValue() {
+		return value;
+	}
 
-	public List<Color> getColors();
+	public void setValue(Number value) {
+		this.value = value;
+	}
 
-	public DRIGeoMapDataset getDataset();
+	public String getTooltip() {
+		return tooltip;
+	}
+
+	public void setTooltip(String tooltip) {
+		this.tooltip = tooltip;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof GeoMapData)) {
+			return false;
+		}
+		return location.equals(((GeoMapData) obj).location);
+	}
 }

@@ -22,6 +22,11 @@
 
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
+import java.awt.Color;
+import java.util.List;
+import java.util.Set;
+
+import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapDataMode;
 import net.sf.jasperreports.engine.JRGenericPrintElement;
 import net.sf.jasperreports.engine.export.GenericElementHtmlHandler;
 import net.sf.jasperreports.engine.export.JRHtmlExporter;
@@ -41,11 +46,29 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 	private static final String GEOMAP_ELEMENT_HTML_TEMPLATE = "net/sf/dynamicreports/jasper/components/googlecharts/geomap/GeoMapElementHtmlTemplate.vm";
 
 	public String getHtmlFragment(JRHtmlExporterContext context, JRGenericPrintElement element)	{
-		//Float latitude = (Float)element.getParameterValue(MapPrintElement.PARAMETER_LATITUDE);
-		//latitude = latitude == null ? MapPrintElement.DEFAULT_LATITUDE : latitude;
+		Boolean showLegend = (Boolean) element.getParameterValue(GeoMapPrintElement.PARAMETER_SHOW_LEGEND);
+		GeoMapDataMode dataMode = (GeoMapDataMode) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATA_MODE);
+		String region = (String) element.getParameterValue(GeoMapPrintElement.PARAMETER_REGION);
+		@SuppressWarnings("unchecked")
+		List<Color> colors = (List<Color>) element.getParameterValue(GeoMapPrintElement.PARAMETER_COLORS);
+		@SuppressWarnings("unchecked")
+		Set<GeoMapData> dataset = (Set<GeoMapData>) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATASET);
 
 		VelocityContext velocityContext = new VelocityContext();
-		//velocityContext.put("latitude", latitude);
+		velocityContext.put("showLegend", showLegend);
+		switch (dataMode) {
+		case REGIONS:
+			velocityContext.put("dataMode", "regions");
+			break;
+		case MARKERS:
+			velocityContext.put("dataMode", "markers");
+			break;
+		default:
+			break;
+		}
+		velocityContext.put("region", region);
+		velocityContext.put("colors", colors);
+		velocityContext.put("dataset", dataset);
 		if(context.getExporter() instanceof JRXhtmlExporter) {
 			velocityContext.put("xhtml", "xhtml");
 			velocityContext.put("elementX", ((JRXhtmlExporter)context.getExporter()).toSizeUnit(element.getX()));

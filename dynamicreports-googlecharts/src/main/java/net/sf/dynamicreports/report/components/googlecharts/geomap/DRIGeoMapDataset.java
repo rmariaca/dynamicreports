@@ -22,24 +22,19 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
-import java.awt.Color;
-import java.util.List;
-
-import net.sf.dynamicreports.report.components.DRICustomComponent;
+import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
+public interface DRIGeoMapDataset {
 
-	public Boolean getShowLegend();
+	public DRIDataset getSubDataset();
 
-	public GeoMapDataMode getDataMode();
+	public DRIExpression<?> getLocationExpression();
 
-	public DRIExpression<String> getRegionExpression();
+	public DRIExpression<?> getValueExpression();
 
-	public List<Color> getColors();
-
-	public DRIGeoMapDataset getDataset();
+	public DRIExpression<?> getTooltipExpression();
 }

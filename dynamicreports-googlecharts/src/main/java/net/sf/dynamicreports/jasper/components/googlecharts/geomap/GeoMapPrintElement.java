@@ -32,4 +32,9 @@ public class GeoMapPrintElement {
 	public static final String GEOMAP_ELEMENT_NAME = "geoMap";
 	public static final JRGenericElementType GEOMAP_ELEMENT_TYPE = new JRGenericElementType(GoogleChartsExtensionsRegistryFactory.NAMESPACE, GEOMAP_ELEMENT_NAME);
 
+	public static final String PARAMETER_SHOW_LEGEND = "showLegend";
+	public static final String PARAMETER_DATA_MODE = "dataMode";
+	public static final String PARAMETER_REGION = "region";
+	public static final String PARAMETER_COLORS = "colors";
+	public static final String PARAMETER_DATASET = "dataset";
 }

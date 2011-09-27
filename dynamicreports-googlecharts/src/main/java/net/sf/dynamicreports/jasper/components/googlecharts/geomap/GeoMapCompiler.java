@@ -35,8 +35,14 @@ import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 public class GeoMapCompiler implements ComponentCompiler {
 
 	public void collectExpressions(Component component, JRExpressionCollector collector) {
-		//GeoMapComponent geoMap = (GeoMapComponent) component;
-		//collector.addExpression(geoMap.getLatitudeExpression());
+		GeoMapComponent geoMap = (GeoMapComponent) component;
+		collector.addExpression(geoMap.getRegionExpression());
+	}
+
+	public static void collectExpressions(GeoMapDataset standardGeoMapDataset, JRExpressionCollector collector) {
+		collector.addExpression(standardGeoMapDataset.getLocationExpression());
+		collector.addExpression(standardGeoMapDataset.getValueExpression());
+		collector.addExpression(standardGeoMapDataset.getTooltipExpression());
 	}
 
 	public Component toCompiledComponent(Component component, JRBaseObjectFactory baseFactory) {
@@ -57,6 +63,13 @@ public class GeoMapCompiler implements ComponentCompiler {
 			} else if (!verifier.getReportDesign().getGroupsMap().containsKey(evaluationGroup)) {
 				verifier.addBrokenRule("Map evalution group \"" + evaluationGroup + " not found", geoMap);
 			}
+		}
+
+		GeoMapDataset dataset = geoMap.getDataset();
+		if (dataset == null) {
+			verifier.addBrokenRule("No dataset for geo map", geoMap);
+		} else {
+			verifier.verifyElementDataset(dataset);
 		}
 	}
 }

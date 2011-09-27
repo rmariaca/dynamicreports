@@ -29,9 +29,11 @@ import net.sf.dynamicreports.design.transformation.DesignTransformAccessor;
 import net.sf.dynamicreports.jasper.components.googlecharts.GoogleChartsExtensionsRegistryFactory;
 import net.sf.dynamicreports.jasper.components.googlecharts.geomap.GeoMapPrintElement;
 import net.sf.dynamicreports.jasper.components.googlecharts.geomap.StandardGeoMapComponent;
+import net.sf.dynamicreports.jasper.components.googlecharts.geomap.StandardGeoMapDataset;
 import net.sf.dynamicreports.jasper.transformation.ConstantTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.report.components.CustomComponentTransform;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRComponentElement;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignComponentElement;
@@ -45,11 +47,33 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		return component instanceof DRIGeoMap || component instanceof DRIDesignGeoMap;
 	}
 
-	public DRIDesignGeoMap designComponent(DesignTransformAccessor accessor, DRIGeoMap geoMap, ResetType resetType, DRDesignGroup resetGroup) {
+	public DRIDesignGeoMap designComponent(DesignTransformAccessor accessor, DRIGeoMap geoMap, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignGeoMap designGeoMap = new DRDesignGeoMap();
 		designGeoMap.setEvaluationTime(accessor.getComponentTransform().evaluationTimeFromResetType(resetType));
 		designGeoMap.setEvaluationGroup(resetGroup);
+
+		designGeoMap.setShowLegend(geoMap.getShowLegend());
+		designGeoMap.setDataMode(geoMap.getDataMode());
+		designGeoMap.setRegionExpression(accessor.getExpressionTransform().transformExpression(geoMap.getRegionExpression()));
+		designGeoMap.setColors(geoMap.getColors());
+		designGeoMap.setDataset(dataset(accessor, geoMap.getDataset(), resetType, resetGroup));
+
 		return designGeoMap;
+	}
+
+	private DRDesignGeoMapDataset dataset(DesignTransformAccessor accessor, DRIGeoMapDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignGeoMapDataset designDataset = new DRDesignGeoMapDataset();
+
+		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
+		accessor.transformToDataset(dataset.getSubDataset());
+		designDataset.setLocationExpression(accessor.getExpressionTransform().transformExpression(dataset.getLocationExpression()));
+		designDataset.setValueExpression(accessor.getExpressionTransform().transformExpression(dataset.getValueExpression()));
+		designDataset.setTooltipExpression(accessor.getExpressionTransform().transformExpression(dataset.getTooltipExpression()));
+		designDataset.setResetType(resetType);
+		designDataset.setResetGroup(resetGroup);
+		accessor.transformToMainDataset();
+
+		return designDataset;
 	}
 
 	public JRComponentElement jasperComponent(JasperTransformAccessor accessor, DRIDesignGeoMap geoMap) {
@@ -59,6 +83,13 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && geoMap.getEvaluationGroup() != null) {
 			jrGeoMap.setEvaluationGroup(accessor.getGroupTransform().getGroup(geoMap.getEvaluationGroup()).getName());
 		}
+		jrGeoMap.setShowLegend(geoMap.getShowLegend());
+		jrGeoMap.setDataMode(geoMap.getDataMode());
+		jrGeoMap.setRegionExpression(accessor.getExpressionTransform().getExpression(geoMap.getRegionExpression()));
+		jrGeoMap.setColors(geoMap.getColors());
+		StandardGeoMapDataset jrDataset = new StandardGeoMapDataset();
+		dataset(accessor, geoMap.getDataset(), jrDataset);
+		jrGeoMap.setDataset(jrDataset);
 
 		JRDesignComponentElement jrComponent = new JRDesignComponentElement();
 		jrComponent.setComponent(jrGeoMap);
@@ -67,4 +98,18 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		return jrComponent;
 	}
 
+	private void dataset(JasperTransformAccessor accessor, DRIDesignGeoMapDataset dataset, StandardGeoMapDataset jrDataset) {
+		jrDataset.setDatasetRun(accessor.getDatasetTransform().datasetRun(dataset.getSubDataset()));
+		ResetType resetType = dataset.getResetType();
+		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
+		if (resetType.equals(ResetType.GROUP) && dataset.getResetGroup() != null) {
+			jrDataset.setResetGroup(accessor.getGroupTransform().getGroup(dataset.getResetGroup()));
+		}
+
+		accessor.transformToDataset(dataset.getSubDataset());
+		jrDataset.setLocationExpression(accessor.getExpressionTransform().getExpression(dataset.getLocationExpression()));
+		jrDataset.setValueExpression(accessor.getExpressionTransform().getExpression(dataset.getValueExpression()));
+		jrDataset.setTooltipExpression(accessor.getExpressionTransform().getExpression(dataset.getTooltipExpression()));
+		accessor.transformToMainDataset();
+	}
 }

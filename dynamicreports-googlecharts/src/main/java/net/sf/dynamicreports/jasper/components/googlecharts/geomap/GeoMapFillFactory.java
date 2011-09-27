@@ -35,12 +35,11 @@ public class GeoMapFillFactory implements ComponentFillFactory {
 
 	public FillComponent toFillComponent(Component component, JRFillObjectFactory factory) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
-		return new GeoMapFillComponent(geoMap);
+		return new GeoMapFillComponent(geoMap, factory);
 	}
 
 	public FillComponent cloneFillComponent(FillComponent component, JRFillCloneFactory factory) {
-		GeoMapFillComponent fillGeoMap = (GeoMapFillComponent) component;
-		return new GeoMapFillComponent(fillGeoMap.getGeoMap());
+		throw new UnsupportedOperationException();
 	}
 
 }

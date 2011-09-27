@@ -245,7 +245,7 @@ public abstract class AbstractExpressionTransform {
 		return MessageFormat.format(PARAMETER_VALUE, expression);
 	}
 
-	protected JRDesignExpression getExpression(DRIDesignExpression expression) {
+	public JRDesignExpression getExpression(DRIDesignExpression expression) {
 		if (expression == null)
 			return null;
 		if (!expressions.containsKey(expression.getName())) {

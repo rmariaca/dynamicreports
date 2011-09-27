@@ -20,26 +20,22 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.components.googlecharts.geomap;
+package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
-import java.awt.Color;
-import java.util.List;
+import java.io.Serializable;
 
-import net.sf.dynamicreports.report.components.DRICustomComponent;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.jasperreports.engine.JRElementDataset;
+import net.sf.jasperreports.engine.JRExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMap extends DRICustomComponent {
+public interface GeoMapDataset extends JRElementDataset, Serializable {
 
-	public Boolean getShowLegend();
+	public JRExpression getLocationExpression();
 
-	public GeoMapDataMode getDataMode();
+	public JRExpression getValueExpression();
 
-	public DRIExpression<String> getRegionExpression();
+	public JRExpression getTooltipExpression();
 
-	public List<Color> getColors();
-
-	public DRIGeoMapDataset getDataset();
 }

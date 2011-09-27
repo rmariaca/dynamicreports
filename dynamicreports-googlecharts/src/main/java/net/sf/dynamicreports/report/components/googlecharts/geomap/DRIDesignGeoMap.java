@@ -22,8 +22,12 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
+import java.awt.Color;
+import java.util.List;
+
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.components.DRIDesignCustomComponent;
 
 /**
@@ -34,4 +38,14 @@ public interface DRIDesignGeoMap extends DRIDesignCustomComponent {
 	public EvaluationTime getEvaluationTime();
 
 	public DRIDesignGroup getEvaluationGroup();
+
+	public Boolean getShowLegend();
+
+	public GeoMapDataMode getDataMode();
+
+	public DRIDesignExpression getRegionExpression();
+
+	public List<Color> getColors();
+
+	public DRIDesignGeoMapDataset getDataset();
 }

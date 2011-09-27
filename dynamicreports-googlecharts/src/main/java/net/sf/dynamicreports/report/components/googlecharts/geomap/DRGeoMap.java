@@ -22,8 +22,12 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
+import java.awt.Color;
+import java.util.List;
+
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -31,4 +35,53 @@ import net.sf.dynamicreports.report.constant.Constants;
 public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private Boolean showLegend;
+	private GeoMapDataMode dataMode;
+	private DRIExpression<String> regionExpression;
+	private List<Color> colors;
+	private DRGeoMapDataset dataset;
+
+	public DRGeoMap() {
+		dataset = new DRGeoMapDataset();
+	}
+
+	public Boolean getShowLegend() {
+		return showLegend;
+	}
+
+	public void setShowLegend(Boolean showLegend) {
+		this.showLegend = showLegend;
+	}
+
+	public GeoMapDataMode getDataMode() {
+		return dataMode;
+	}
+
+	public void setDataMode(GeoMapDataMode dataMode) {
+		this.dataMode = dataMode;
+	}
+
+	public DRIExpression<String> getRegionExpression() {
+		return regionExpression;
+	}
+
+	public void setRegionExpression(DRIExpression<String> regionExpression) {
+		this.regionExpression = regionExpression;
+	}
+
+	public List<Color> getColors() {
+		return colors;
+	}
+
+	public void setColors(List<Color> colors) {
+		this.colors = colors;
+	}
+
+	public DRGeoMapDataset getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(DRGeoMapDataset dataset) {
+		this.dataset = dataset;
+	}
 }

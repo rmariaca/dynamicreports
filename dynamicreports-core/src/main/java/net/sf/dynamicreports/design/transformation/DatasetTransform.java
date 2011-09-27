@@ -46,7 +46,7 @@ public class DatasetTransform {
 		designDatasets = new HashMap<DRIDataset, DRDesignDataset>();
 	}
 
-	protected DRDesignDataset transform(DRIDataset dataset) throws DRException {
+	public DRDesignDataset transform(DRIDataset dataset) throws DRException {
 		if (dataset == null) {
 			return null;
 		}

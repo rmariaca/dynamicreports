@@ -102,7 +102,7 @@ public abstract class AbstractExpressionTransform {
 		}
 	}
 
-	protected DRIDesignExpression transformExpression(DRIExpression<?> expression) throws DRException {
+	public DRIDesignExpression transformExpression(DRIExpression<?> expression) throws DRException {
 		return transformExpression(expression, null, null);
 	}
 
