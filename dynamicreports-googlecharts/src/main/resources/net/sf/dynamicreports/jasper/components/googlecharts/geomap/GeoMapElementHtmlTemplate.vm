@@ -8,7 +8,7 @@
 			background-color: \#${backgroundColor};
 		#end
 	'>
-		<div id='map_canvas' style='width: 100%; height: 100%; overflow: auto'></div>
+		<div id='${id}' style='width: 100%; height: 100%; overflow: auto'></div>
 	</div>
 
   <script type='text/javascript' src='https://www.google.com/jsapi'></script>
@@ -18,15 +18,19 @@
 
     function drawMap() {
       var data = new google.visualization.DataTable();
-      data.addRows(${dataset}.size());
+      data.addRows($dataset.size());
       data.addColumn('string', 'Location');
       data.addColumn('number', 'Value');
       data.addColumn('string', 'Tooltip');
       #set($count = 0)
       #foreach ($data in ${dataset})
         data.setValue($count, 0, '$data.location');
-        data.setValue($count, 1, '$data.value');
-        data.setValue($count, 2, '$data.tooltip');
+        data.setValue($count, 1, $data.value);
+        #if (${data.tooltip})
+          data.setValue($count, 2, '$data.tooltip');
+        #else
+          data.setValue($count, 2, '$data.location');
+        #end
         #set($count = $count + 1 )
       #end
 
@@ -43,12 +47,12 @@
       #if (${colors})
         options['colors'] = [
         #foreach ($color in ${colors})
-          $color#if ($velocityCount != ${colors}.size()), #end
+          $color#if ($velocityCount != $colors.size()), #end
         #end
         ];
-      #end
+      #end      
 
-      var container = document.getElementById('map_canvas');
+      var container = document.getElementById('${id}');
       var geomap = new google.visualization.GeoMap(container);
       geomap.draw(data, options);
     };

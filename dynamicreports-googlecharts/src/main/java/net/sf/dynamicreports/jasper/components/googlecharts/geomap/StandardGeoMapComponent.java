@@ -63,13 +63,14 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 	public StandardGeoMapComponent() {
 	}
 
-	public StandardGeoMapComponent(GeoMapComponent map, JRBaseObjectFactory objectFactory) {
-		this.evaluationTime = map.getEvaluationTime();
-		this.evaluationGroup = map.getEvaluationGroup();
-		this.showLegend = map.getShowLegend();
-		this.regionExpression = objectFactory.getExpression(map.getRegionExpression());;
-		this.colors = map.getColors();
-		this.dataset = new StandardGeoMapDataset(map.getDataset(), objectFactory);
+	public StandardGeoMapComponent(GeoMapComponent component, JRBaseObjectFactory factory) {
+		this.evaluationTime = component.getEvaluationTime();
+		this.evaluationGroup = component.getEvaluationGroup();
+		this.showLegend = component.getShowLegend();
+		this.dataMode = component.getDataMode();
+		this.regionExpression = factory.getExpression(component.getRegionExpression());;
+		this.colors = component.getColors();
+		this.dataset = new StandardGeoMapDataset(component.getDataset(), factory);
 	}
 
 	public EvaluationTimeEnum getEvaluationTime() {

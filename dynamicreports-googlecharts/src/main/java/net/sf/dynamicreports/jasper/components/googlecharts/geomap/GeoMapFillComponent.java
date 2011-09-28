@@ -50,9 +50,9 @@ public class GeoMapFillComponent extends BaseFillComponent {
 	private List<Color> colors;
 	private GeoMapFillDataset dataset;
 
-	public GeoMapFillComponent(GeoMapComponent geoMapComponent, JRFillObjectFactory factory) {
-		this.geoMapComponent = geoMapComponent;
-		this.dataset = new GeoMapFillDataset(geoMapComponent.getDataset(), factory);
+	public GeoMapFillComponent(GeoMapComponent component, JRFillObjectFactory factory) {
+		this.geoMapComponent = component;
+		this.dataset = new GeoMapFillDataset(component.getDataset(), factory);
 		factory.registerElementDataset(this.dataset);
 	}
 

@@ -48,9 +48,9 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 
 	public StandardGeoMapDataset(GeoMapDataset dataset, JRBaseObjectFactory factory) {
 		super(dataset, factory);
-		this.locationExpression = dataset.getLocationExpression();
-		this.valueExpression = dataset.getValueExpression();
-		this.tooltipExpression = dataset.getTooltipExpression();
+		this.locationExpression = factory.getExpression(dataset.getLocationExpression());
+		this.valueExpression = factory.getExpression(dataset.getValueExpression());
+		this.tooltipExpression = factory.getExpression(dataset.getTooltipExpression());
 	}
 
 	public void collectExpressions(JRExpressionCollector collector) {

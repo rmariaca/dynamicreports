@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -51,23 +52,33 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		String region = (String) element.getParameterValue(GeoMapPrintElement.PARAMETER_REGION);
 		@SuppressWarnings("unchecked")
 		List<Color> colors = (List<Color>) element.getParameterValue(GeoMapPrintElement.PARAMETER_COLORS);
+		List<String> stringColors = null;
+		if (colors != null && !colors.isEmpty()) {
+			stringColors = new ArrayList<String>();
+			for (Color color : colors) {
+				stringColors.add(getColorString(color));
+			}
+		}
 		@SuppressWarnings("unchecked")
 		Set<GeoMapData> dataset = (Set<GeoMapData>) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATASET);
 
 		VelocityContext velocityContext = new VelocityContext();
 		velocityContext.put("showLegend", showLegend);
-		switch (dataMode) {
-		case REGIONS:
-			velocityContext.put("dataMode", "regions");
-			break;
-		case MARKERS:
-			velocityContext.put("dataMode", "markers");
-			break;
-		default:
-			break;
+		if (dataMode != null) {
+			switch (dataMode) {
+			case REGIONS:
+				velocityContext.put("dataMode", "regions");
+				break;
+			case MARKERS:
+				velocityContext.put("dataMode", "markers");
+				break;
+			default:
+				break;
+			}
 		}
+		velocityContext.put("id", "map_" + element.hashCode());
 		velocityContext.put("region", region);
-		velocityContext.put("colors", colors);
+		velocityContext.put("colors", stringColors);
 		velocityContext.put("dataset", dataset);
 		if(context.getExporter() instanceof JRXhtmlExporter) {
 			velocityContext.put("xhtml", "xhtml");
@@ -86,6 +97,12 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		}
 		return VelocityUtil.processTemplate(GEOMAP_ELEMENT_HTML_TEMPLATE, velocityContext);
 	}
+
+  private String getColorString(Color color) {
+    int colorMask = Integer.parseInt("FFFFFF", 16);
+    String hex = Integer.toHexString(color.getRGB() & colorMask).toUpperCase();
+    return "0x" + ("000000" + hex).substring(hex.length());
+  }
 
 	public boolean toExport(JRGenericPrintElement element) {
 		return true;
