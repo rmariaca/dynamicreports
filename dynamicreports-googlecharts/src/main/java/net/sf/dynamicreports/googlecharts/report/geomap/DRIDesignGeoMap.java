@@ -20,40 +20,34 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
+package net.sf.dynamicreports.googlecharts.report.geomap;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.design.constant.EvaluationTime;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.component.DRIDesignCustomComponent;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public interface DRIDesignGeoMap extends DRIDesignCustomComponent {
 
-	public GeoMapReport() {
-		build();
-	}
+	public EvaluationTime getEvaluationTime();
 
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
+	public DRIDesignGroup getEvaluationGroup();
 
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public Boolean getShowLegend();
 
-	public static void main(String[] args) {
-		new GeoMapReport();
-	}
+	public GeoMapDataMode getDataMode();
+
+	public DRIDesignExpression getRegionExpression();
+
+	public DRIDesignExpression getValueLabelExpression();
+
+	public List<Color> getColors();
+
+	public DRIDesignGeoMapDataset getDataset();
 }

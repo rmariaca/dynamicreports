@@ -28,10 +28,10 @@ import java.awt.Color;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
+import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapBuilder;
+import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapDataMode;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
-import net.sf.dynamicreports.report.components.googlecharts.GoogleCharts;
-import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapBuilder;
-import net.sf.dynamicreports.report.components.googlecharts.geomap.GeoMapDataMode;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -71,7 +71,7 @@ public class GeoMapReport {
 			  .setTemplate(Templates.reportTemplate)
 			  .title(Templates.createTitleComponent("GeoMap"))
 			  .summary(
-			  	geoMap1, geoMap2)
+			  	geoMap1, cmp.verticalGap(10), geoMap2)
 			  .pageFooter(Templates.footerComponent)
 			  .toHtml(htmlExporter);
 		} catch (DRException e) {
@@ -84,6 +84,8 @@ public class GeoMapReport {
 		dataSource.add("US", 170, "United States");
 		dataSource.add("CA", 90, "Canada");
 		dataSource.add("FR", 120, "France");
+		dataSource.add("AU", 100, "Australia");
+		dataSource.add("CN", 150, "China");
 		return dataSource;
 	}
 

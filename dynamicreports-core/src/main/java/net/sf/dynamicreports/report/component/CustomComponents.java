@@ -20,40 +20,25 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
+package net.sf.dynamicreports.report.component;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import java.util.List;
+
+import net.sf.jasperreports.extensions.ExtensionsEnvironment;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public class CustomComponents {
 
-	public GeoMapReport() {
-		build();
-	}
-
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
-
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static CustomComponentTransform<?, ?> getComponentTransform(Object component) {
+		List<CustomComponentTransform> transforms = (List<CustomComponentTransform>) ExtensionsEnvironment.getExtensionsRegistry().getExtensions(CustomComponentTransform.class);
+		for (CustomComponentTransform transform : transforms) {
+			if (transform.isTransform(component)) {
+				return transform;
+			}
 		}
-	}
-
-	public static void main(String[] args) {
-		new GeoMapReport();
+		return null;
 	}
 }

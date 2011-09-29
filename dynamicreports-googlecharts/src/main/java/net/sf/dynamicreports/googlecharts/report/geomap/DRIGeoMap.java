@@ -20,40 +20,28 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
+package net.sf.dynamicreports.googlecharts.report.geomap;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import java.awt.Color;
+import java.util.List;
+
+import net.sf.dynamicreports.report.component.DRICustomComponent;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public interface DRIGeoMap extends DRICustomComponent {
 
-	public GeoMapReport() {
-		build();
-	}
+	public Boolean getShowLegend();
 
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
+	public GeoMapDataMode getDataMode();
 
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public DRIExpression<String> getRegionExpression();
 
-	public static void main(String[] args) {
-		new GeoMapReport();
-	}
+	public DRIExpression<String> getValueLabelExpression();
+
+	public List<Color> getColors();
+
+	public DRIGeoMapDataset getDataset();
 }

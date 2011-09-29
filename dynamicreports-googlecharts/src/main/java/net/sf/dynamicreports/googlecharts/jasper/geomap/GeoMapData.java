@@ -20,40 +20,45 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
-
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+package net.sf.dynamicreports.googlecharts.jasper.geomap;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public class GeoMapData {
+	private String location;
+	private Number value;
+	private String label;
 
-	public GeoMapReport() {
-		build();
+	public String getLocation() {
+		return location;
 	}
 
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public Number getValue() {
+		return value;
+	}
+
+	public void setValue(Number value) {
+		this.value = value;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof GeoMapData)) {
+			return false;
 		}
-	}
-
-	public static void main(String[] args) {
-		new GeoMapReport();
+		return location.equals(((GeoMapData) obj).location);
 	}
 }

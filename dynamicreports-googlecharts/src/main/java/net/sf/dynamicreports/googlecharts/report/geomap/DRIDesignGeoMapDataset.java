@@ -20,40 +20,27 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
+package net.sf.dynamicreports.googlecharts.report.geomap;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignDataset;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public interface DRIDesignGeoMapDataset {
 
-	public GeoMapReport() {
-		build();
-	}
+	public DRIDesignDataset getSubDataset();
 
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
+	public DRIDesignExpression getLocationExpression();
 
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public DRIDesignExpression getValueExpression();
 
-	public static void main(String[] args) {
-		new GeoMapReport();
-	}
+	public DRIDesignExpression getLabelExpression();
+
+	public ResetType getResetType();
+
+	public DRIDesignGroup getResetGroup();
 }

@@ -20,40 +20,23 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.component;
+package net.sf.dynamicreports.googlecharts.report.geomap;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.definition.DRIDataset;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GeoMapReport {
+public interface DRIGeoMapDataset extends Serializable {
 
-	public GeoMapReport() {
-		build();
-	}
+	public DRIDataset getSubDataset();
 
-	private void build() {
-		try {
-			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/temp/report.html")
-				.setImagesDirName("c:/temp/images")
-				.setOutputImagesToDir(true);
+	public DRIExpression<?> getLocationExpression();
 
-			report()
-			  .setTemplate(template())
-			  .title(
-			  	Templates.createTitleComponent("GeoMap"),
-			  	GoogleCharts.geoMap())
-			  .toHtml(htmlExporter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public DRIExpression<?> getValueExpression();
 
-	public static void main(String[] args) {
-		new GeoMapReport();
-	}
+	public DRIExpression<?> getLabelExpression();
 }
