@@ -50,7 +50,7 @@ import net.sf.jasperreports.extensions.ExtensionsRegistryFactory;
 public class GoogleChartsExtensionsRegistryFactory implements ExtensionsRegistryFactory {
 	public static final String NAMESPACE = "http://dynamicreports.sourceforge.net/googlecharts";
 	public static final String XSD_LOCATION = "http://dynamicreports.sourceforge.net/xsd/googlecharts.xsd";
-	public static final String XSD_RESOURCE = "net/sf/dynamicreports/jasper/components/googlecharts/googlecharts.xsd";
+	public static final String XSD_RESOURCE = "net/sf/dynamicreports/googlecharts/jasper/googlecharts.xsd";
 
 	private static final ExtensionsRegistry REGISTRY;
 
