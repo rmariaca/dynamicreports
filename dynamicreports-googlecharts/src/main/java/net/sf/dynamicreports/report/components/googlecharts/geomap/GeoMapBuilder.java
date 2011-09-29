@@ -24,7 +24,6 @@ package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
 import java.awt.Color;
 import java.sql.Connection;
-import java.util.List;
 
 import net.sf.dynamicreports.report.builder.DatasetBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
@@ -59,8 +58,16 @@ public class GeoMapBuilder extends DimensionComponentBuilder<GeoMapBuilder, DRGe
 		return this;
 	}
 
-	public GeoMapBuilder setColors(List<Color> colors) {
-		getObject().setColors(colors);
+	public GeoMapBuilder colors(Color ...colors) {
+		return addColor(colors);
+	}
+
+	public GeoMapBuilder addColor(Color ...colors) {
+		Validate.notNull(colors, "colors must not be null");
+		Validate.noNullElements(colors, "colors must not contains null color");
+		for (Color color : colors) {
+			getObject().addColor(color);
+		}
 		return this;
 	}
 
@@ -75,7 +82,18 @@ public class GeoMapBuilder extends DimensionComponentBuilder<GeoMapBuilder, DRGe
 		return this;
 	}
 
-	//dataset
+	//value label
+	public GeoMapBuilder setValueLabel(String valueLabel) {
+		getObject().setValueLabelExpression(Expressions.text(valueLabel));
+		return this;
+	}
+
+	public GeoMapBuilder setValueLabel(DRIExpression<String> valueLabelExpression) {
+		getObject().setValueLabelExpression(valueLabelExpression);
+		return this;
+	}
+
+	//location
 	public GeoMapBuilder setLocation(ValueColumnBuilder<?, String> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setLocationExpression(column.getColumn());
@@ -97,10 +115,15 @@ public class GeoMapBuilder extends DimensionComponentBuilder<GeoMapBuilder, DRGe
 		return this;
 	}
 
+	//value
 	public GeoMapBuilder setValue(ValueColumnBuilder<?, ? extends Number> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
 		return this;
+	}
+
+	public GeoMapBuilder setValue(String fieldName, Class<? extends Number> valueClass) {
+		return setValue(DynamicReports.field(fieldName, valueClass));
 	}
 
 	public GeoMapBuilder setValue(FieldBuilder<? extends Number> field) {
@@ -120,24 +143,25 @@ public class GeoMapBuilder extends DimensionComponentBuilder<GeoMapBuilder, DRGe
 		return this;
 	}
 
-	public GeoMapBuilder setTooltip(ValueColumnBuilder<?, String> column) {
+	//label
+	public GeoMapBuilder setLabel(ValueColumnBuilder<?, String> column) {
 		Validate.notNull(column, "column must not be null");
-		getDataset().setTooltipExpression(column.getColumn());
+		getDataset().setLabelExpression(column.getColumn());
 		return this;
 	}
 
-	public GeoMapBuilder setTooltip(String fieldName, Class<String> valueClass) {
-		return setTooltip(DynamicReports.field(fieldName, valueClass));
+	public GeoMapBuilder setLabel(String fieldName, Class<String> valueClass) {
+		return setLabel(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public GeoMapBuilder setTooltip(FieldBuilder<String> field) {
+	public GeoMapBuilder setLabel(FieldBuilder<String> field) {
 		Validate.notNull(field, "field must not be null");
-		getDataset().setTooltipExpression(field.build());
+		getDataset().setLabelExpression(field.build());
 		return this;
 	}
 
-	public GeoMapBuilder setTooltip(DRIExpression<String> expression) {
-		getDataset().setTooltipExpression(expression);
+	public GeoMapBuilder setLabel(DRIExpression<String> expression) {
+		getDataset().setLabelExpression(expression);
 		return this;
 	}
 

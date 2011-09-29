@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
@@ -38,6 +39,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 	private Boolean showLegend;
 	private GeoMapDataMode dataMode;
 	private DRIExpression<String> regionExpression;
+	private DRIExpression<String> valueLabelExpression;
 	private List<Color> colors;
 	private DRGeoMapDataset dataset;
 
@@ -69,12 +71,27 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		this.regionExpression = regionExpression;
 	}
 
+	public DRIExpression<String> getValueLabelExpression() {
+		return valueLabelExpression;
+	}
+
+	public void setValueLabelExpression(DRIExpression<String> valueLabelExpression) {
+		this.valueLabelExpression = valueLabelExpression;
+	}
+
 	public List<Color> getColors() {
 		return colors;
 	}
 
 	public void setColors(List<Color> colors) {
 		this.colors = colors;
+	}
+
+	public void addColor(Color color) {
+		if (colors == null) {
+			colors = new ArrayList<Color>();
+		}
+		colors.add(color);
 	}
 
 	public DRGeoMapDataset getDataset() {

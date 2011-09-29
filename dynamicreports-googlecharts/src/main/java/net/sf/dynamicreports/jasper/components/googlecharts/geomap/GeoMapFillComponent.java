@@ -47,6 +47,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 	private Boolean showLegend;
 	private GeoMapDataMode dataMode;
 	private String region;
+	private String valueLabel;
 	private List<Color> colors;
 	private GeoMapFillDataset dataset;
 
@@ -70,6 +71,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		showLegend = geoMapComponent.getShowLegend();
 		dataMode = geoMapComponent.getDataMode();
 		region = JRStringUtil.getString(fillContext.evaluate(geoMapComponent.getRegionExpression(),	evaluation));
+		valueLabel = JRStringUtil.getString(fillContext.evaluate(geoMapComponent.getValueLabelExpression(),	evaluation));
 		colors = geoMapComponent.getColors();
 
 		dataset.evaluateDatasetRun(evaluation);
@@ -114,6 +116,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_SHOW_LEGEND, showLegend);
 		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_DATA_MODE, dataMode);
 		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_REGION, region);
+		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_VALUE_LABEL, valueLabel);
 		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_COLORS, colors);
 		printElement.setParameterValue(GeoMapPrintElement.PARAMETER_DATASET, dataset.getCustomDataset());
 	}

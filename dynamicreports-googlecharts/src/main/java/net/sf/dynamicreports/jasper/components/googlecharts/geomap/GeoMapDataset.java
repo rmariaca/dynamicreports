@@ -36,6 +36,6 @@ public interface GeoMapDataset extends JRElementDataset, Serializable {
 
 	public JRExpression getValueExpression();
 
-	public JRExpression getTooltipExpression();
+	public JRExpression getLabelExpression();
 
 }

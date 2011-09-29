@@ -34,7 +34,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 	private DRDesignDataset subDataset;
 	private DRIDesignExpression locationExpression;
 	private DRIDesignExpression valueExpression;
-	private DRIDesignExpression tooltipExpression;
+	private DRIDesignExpression labelExpression;
 	private ResetType resetType;
 	private DRDesignGroup resetGroup;
 
@@ -62,12 +62,12 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.valueExpression = valueExpression;
 	}
 
-	public DRIDesignExpression getTooltipExpression() {
-		return tooltipExpression;
+	public DRIDesignExpression getLabelExpression() {
+		return labelExpression;
 	}
 
-	public void setTooltipExpression(DRIDesignExpression tooltipExpression) {
-		this.tooltipExpression = tooltipExpression;
+	public void setLabelExpression(DRIDesignExpression labelExpression) {
+		this.labelExpression = labelExpression;
 	}
 
 	public ResetType getResetType() {

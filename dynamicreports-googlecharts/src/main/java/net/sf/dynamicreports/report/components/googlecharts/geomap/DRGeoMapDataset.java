@@ -23,16 +23,19 @@
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
 import net.sf.dynamicreports.report.base.DRDataset;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRGeoMapDataset implements DRIGeoMapDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRDataset subDataset;
 	private DRIExpression<?> locationExpression;
 	private DRIExpression<?> valueExpression;
-	private DRIExpression<?> tooltipExpression;
+	private DRIExpression<?> labelExpression;
 
 	public DRDataset getSubDataset() {
 		return subDataset;
@@ -58,11 +61,11 @@ public class DRGeoMapDataset implements DRIGeoMapDataset {
 		this.valueExpression = valueExpression;
 	}
 
-	public DRIExpression<?> getTooltipExpression() {
-		return tooltipExpression;
+	public DRIExpression<?> getLabelExpression() {
+		return labelExpression;
 	}
 
-	public void setTooltipExpression(DRIExpression<?> tooltipExpression) {
-		this.tooltipExpression = tooltipExpression;
+	public void setLabelExpression(DRIExpression<?> labelExpression) {
+		this.labelExpression = labelExpression;
 	}
 }

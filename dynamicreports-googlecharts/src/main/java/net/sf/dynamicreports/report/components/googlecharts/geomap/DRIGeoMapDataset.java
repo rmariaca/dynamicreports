@@ -22,13 +22,15 @@
 
 package net.sf.dynamicreports.report.components.googlecharts.geomap;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIGeoMapDataset {
+public interface DRIGeoMapDataset extends Serializable {
 
 	public DRIDataset getSubDataset();
 
@@ -36,5 +38,5 @@ public interface DRIGeoMapDataset {
 
 	public DRIExpression<?> getValueExpression();
 
-	public DRIExpression<?> getTooltipExpression();
+	public DRIExpression<?> getLabelExpression();
 }

@@ -45,6 +45,8 @@ public interface DRIDesignGeoMap extends DRIDesignCustomComponent {
 
 	public DRIDesignExpression getRegionExpression();
 
+	public DRIDesignExpression getValueLabelExpression();
+
 	public List<Color> getColors();
 
 	public DRIDesignGeoMapDataset getDataset();

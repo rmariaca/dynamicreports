@@ -35,6 +35,7 @@ public class GeoMapPrintElement {
 	public static final String PARAMETER_SHOW_LEGEND = "showLegend";
 	public static final String PARAMETER_DATA_MODE = "dataMode";
 	public static final String PARAMETER_REGION = "region";
+	public static final String PARAMETER_VALUE_LABEL = "valueLabel";
 	public static final String PARAMETER_COLORS = "colors";
 	public static final String PARAMETER_DATASET = "dataset";
 }

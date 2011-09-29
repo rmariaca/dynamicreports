@@ -37,11 +37,11 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 
 	public static final String PROPERTY_LOCATION_EXPRESSION = "locationExpression";
 	public static final String PROPERTY_VALUE_EXPRESSION = "valueExpression";
-	public static final String PROPERTY_TOOLTIP_EXPRESSION = "tooltipExpression";
+	public static final String PROPERTY_LABEL_EXPRESSION = "labelExpression";
 
 	private JRExpression locationExpression;
 	private JRExpression valueExpression;
-	private JRExpression tooltipExpression;
+	private JRExpression labelExpression;
 
 	public StandardGeoMapDataset() {
 	}
@@ -50,7 +50,7 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		super(dataset, factory);
 		this.locationExpression = factory.getExpression(dataset.getLocationExpression());
 		this.valueExpression = factory.getExpression(dataset.getValueExpression());
-		this.tooltipExpression = factory.getExpression(dataset.getTooltipExpression());
+		this.labelExpression = factory.getExpression(dataset.getLabelExpression());
 	}
 
 	public void collectExpressions(JRExpressionCollector collector) {
@@ -77,16 +77,16 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		getEventSupport().firePropertyChange(PROPERTY_VALUE_EXPRESSION, old, this.valueExpression);
 	}
 
-	public JRExpression getTooltipExpression() {
-		return tooltipExpression;
+	public JRExpression getLabelExpression() {
+		return labelExpression;
 	}
 
-	public void setTooltipExpression(JRExpression tooltipExpression) {
-		this.tooltipExpression = tooltipExpression;
+	public void setLabelExpression(JRExpression labelExpression) {
+		this.labelExpression = labelExpression;
 
-		Object old = this.tooltipExpression;
-		this.tooltipExpression = tooltipExpression;
-		getEventSupport().firePropertyChange(PROPERTY_TOOLTIP_EXPRESSION, old, this.tooltipExpression);
+		Object old = this.labelExpression;
+		this.labelExpression = labelExpression;
+		getEventSupport().firePropertyChange(PROPERTY_LABEL_EXPRESSION, old, this.labelExpression);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		StandardGeoMapDataset clone = (StandardGeoMapDataset) super.clone();
 		clone.locationExpression = JRCloneUtils.nullSafeClone(locationExpression);
 		clone.valueExpression = JRCloneUtils.nullSafeClone(valueExpression);
-		clone.tooltipExpression = JRCloneUtils.nullSafeClone(tooltipExpression);
+		clone.labelExpression = JRCloneUtils.nullSafeClone(labelExpression);
 		return clone;
 	}
 }

@@ -43,7 +43,7 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 	private Set<GeoMapData> dataset;
 	private String location;
 	private Number value;
-	private String tooltip;
+	private String label;
 
 	public GeoMapFillDataset(JRElementDataset dataset, JRFillObjectFactory factory) {
 		super(dataset, factory);
@@ -62,7 +62,7 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 	protected void customEvaluate(JRCalculator calculator) throws JRExpressionEvalException {
 		location = (String) calculator.evaluate(getLocationExpression());
 		value = (Number) calculator.evaluate(getValueExpression());
-		tooltip = (String) calculator.evaluate(getTooltipExpression());
+		label = (String) calculator.evaluate(getLabelExpression());
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 		GeoMapData data = new GeoMapData();
 		data.setLocation(location);
 		data.setValue(value);
-		data.setTooltip(tooltip);
+		data.setLabel(label);
 		dataset.add(data);
 	}
 
@@ -86,8 +86,8 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 		return ((GeoMapDataset) parent).getValueExpression();
 	}
 
-	public JRExpression getTooltipExpression() {
-		return ((GeoMapDataset) parent).getTooltipExpression();
+	public JRExpression getLabelExpression() {
+		return ((GeoMapDataset) parent).getLabelExpression();
 	}
 
 	public void finishDataset() {

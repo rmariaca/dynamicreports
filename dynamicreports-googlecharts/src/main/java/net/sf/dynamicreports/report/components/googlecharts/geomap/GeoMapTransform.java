@@ -55,6 +55,7 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		designGeoMap.setShowLegend(geoMap.getShowLegend());
 		designGeoMap.setDataMode(geoMap.getDataMode());
 		designGeoMap.setRegionExpression(accessor.getExpressionTransform().transformExpression(geoMap.getRegionExpression()));
+		designGeoMap.setValueLabelExpression(accessor.getExpressionTransform().transformExpression(geoMap.getValueLabelExpression()));
 		designGeoMap.setColors(geoMap.getColors());
 		designGeoMap.setDataset(dataset(accessor, geoMap.getDataset(), resetType, resetGroup));
 
@@ -68,7 +69,7 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		accessor.transformToDataset(dataset.getSubDataset());
 		designDataset.setLocationExpression(accessor.getExpressionTransform().transformExpression(dataset.getLocationExpression()));
 		designDataset.setValueExpression(accessor.getExpressionTransform().transformExpression(dataset.getValueExpression()));
-		designDataset.setTooltipExpression(accessor.getExpressionTransform().transformExpression(dataset.getTooltipExpression()));
+		designDataset.setLabelExpression(accessor.getExpressionTransform().transformExpression(dataset.getLabelExpression()));
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
 		accessor.transformToMainDataset();
@@ -86,6 +87,7 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		jrGeoMap.setShowLegend(geoMap.getShowLegend());
 		jrGeoMap.setDataMode(geoMap.getDataMode());
 		jrGeoMap.setRegionExpression(accessor.getExpressionTransform().getExpression(geoMap.getRegionExpression()));
+		jrGeoMap.setValueLabelExpression(accessor.getExpressionTransform().getExpression(geoMap.getValueLabelExpression()));
 		jrGeoMap.setColors(geoMap.getColors());
 		StandardGeoMapDataset jrDataset = new StandardGeoMapDataset();
 		dataset(accessor, geoMap.getDataset(), jrDataset);
@@ -109,7 +111,7 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		accessor.transformToDataset(dataset.getSubDataset());
 		jrDataset.setLocationExpression(accessor.getExpressionTransform().getExpression(dataset.getLocationExpression()));
 		jrDataset.setValueExpression(accessor.getExpressionTransform().getExpression(dataset.getValueExpression()));
-		jrDataset.setTooltipExpression(accessor.getExpressionTransform().getExpression(dataset.getTooltipExpression()));
+		jrDataset.setLabelExpression(accessor.getExpressionTransform().getExpression(dataset.getLabelExpression()));
 		accessor.transformToMainDataset();
 	}
 }

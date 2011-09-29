@@ -37,6 +37,7 @@ public class GeoMapCompiler implements ComponentCompiler {
 	public void collectExpressions(Component component, JRExpressionCollector collector) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
 		collector.addExpression(geoMap.getRegionExpression());
+		collector.addExpression(geoMap.getValueLabelExpression());
 		collectExpressions(geoMap.getDataset(), collector);
 	}
 
@@ -46,7 +47,7 @@ public class GeoMapCompiler implements ComponentCompiler {
 			JRExpressionCollector datasetCollector = collector.getCollector(dataset);
 			datasetCollector.addExpression(dataset.getLocationExpression());
 			datasetCollector.addExpression(dataset.getValueExpression());
-			datasetCollector.addExpression(dataset.getTooltipExpression());
+			datasetCollector.addExpression(dataset.getLabelExpression());
 		}
 	}
 

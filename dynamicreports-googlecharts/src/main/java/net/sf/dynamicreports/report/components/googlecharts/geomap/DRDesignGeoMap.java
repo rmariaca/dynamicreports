@@ -40,6 +40,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 	private Boolean showLegend;
 	private GeoMapDataMode dataMode;
 	private DRIDesignExpression regionExpression;
+	private DRIDesignExpression valueLabelExpression;
 	private List<Color> colors;
 	private DRDesignGeoMapDataset dataset;
 
@@ -85,6 +86,14 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 
 	public void setRegionExpression(DRIDesignExpression regionExpression) {
 		this.regionExpression = regionExpression;
+	}
+
+	public DRIDesignExpression getValueLabelExpression() {
+		return valueLabelExpression;
+	}
+
+	public void setValueLabelExpression(DRIDesignExpression valueLabelExpression) {
+		this.valueLabelExpression = valueLabelExpression;
 	}
 
 	public List<Color> getColors() {

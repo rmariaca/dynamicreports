@@ -39,6 +39,8 @@ public interface DRIGeoMap extends DRICustomComponent {
 
 	public DRIExpression<String> getRegionExpression();
 
+	public DRIExpression<String> getValueLabelExpression();
+
 	public List<Color> getColors();
 
 	public DRIGeoMapDataset getDataset();

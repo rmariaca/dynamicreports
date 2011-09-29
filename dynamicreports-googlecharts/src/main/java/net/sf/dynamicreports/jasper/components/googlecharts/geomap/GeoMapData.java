@@ -28,7 +28,7 @@ package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 public class GeoMapData {
 	private String location;
 	private Number value;
-	private String tooltip;
+	private String label;
 
 	public String getLocation() {
 		return location;
@@ -46,12 +46,12 @@ public class GeoMapData {
 		this.value = value;
 	}
 
-	public String getTooltip() {
-		return tooltip;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	@Override

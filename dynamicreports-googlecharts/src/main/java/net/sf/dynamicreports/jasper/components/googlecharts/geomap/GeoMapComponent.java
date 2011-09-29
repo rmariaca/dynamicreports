@@ -46,6 +46,8 @@ public interface GeoMapComponent extends Component, JRCloneable {
 
 	public JRExpression getRegionExpression();
 
+	public JRExpression getValueLabelExpression();
+
 	public List<Color> getColors();
 
 	public GeoMapDataset getDataset();

@@ -38,7 +38,7 @@ public interface DRIDesignGeoMapDataset {
 
 	public DRIDesignExpression getValueExpression();
 
-	public DRIDesignExpression getTooltipExpression();
+	public DRIDesignExpression getLabelExpression();
 
 	public ResetType getResetType();
 

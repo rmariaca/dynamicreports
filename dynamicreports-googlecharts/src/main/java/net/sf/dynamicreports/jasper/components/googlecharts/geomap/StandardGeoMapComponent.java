@@ -47,6 +47,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 	public static final String PROPERTY_SHOW_LEGEND = "showLegend";
 	public static final String PROPERTY_DATA_MODE = "dataMode";
 	public static final String PROPERTY_REGION_EXPRESSION = "regionExpression";
+	public static final String PROPERTY_VALUE_LABEL_EXPRESSION = "valueLabelExpression";
 	public static final String PROPERTY_COLORS = "colors";
 	public static final String PROPERTY_DATASET = "dataset";
 
@@ -55,6 +56,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 	private Boolean showLegend;
 	private GeoMapDataMode dataMode;
 	private JRExpression regionExpression;
+	private JRExpression valueLabelExpression;
 	private List<Color> colors;
 	private GeoMapDataset dataset;
 
@@ -68,7 +70,8 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		this.evaluationGroup = component.getEvaluationGroup();
 		this.showLegend = component.getShowLegend();
 		this.dataMode = component.getDataMode();
-		this.regionExpression = factory.getExpression(component.getRegionExpression());;
+		this.regionExpression = factory.getExpression(component.getRegionExpression());
+		this.valueLabelExpression = factory.getExpression(component.getValueLabelExpression());
 		this.colors = component.getColors();
 		this.dataset = new StandardGeoMapDataset(component.getDataset(), factory);
 	}
@@ -123,6 +126,16 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_REGION_EXPRESSION, old, this.regionExpression);
 	}
 
+	public JRExpression getValueLabelExpression() {
+		return valueLabelExpression;
+	}
+
+	public void setValueLabelExpression(JRExpression valueLabelExpression) {
+		Object old = this.valueLabelExpression;
+		this.valueLabelExpression = valueLabelExpression;
+		getEventSupport().firePropertyChange(PROPERTY_VALUE_LABEL_EXPRESSION, old, this.valueLabelExpression);
+	}
+
 	public List<Color> getColors() {
 		return colors;
 	}
@@ -163,6 +176,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 			throw new JRRuntimeException(e);
 		}
 		clone.regionExpression = JRCloneUtils.nullSafeClone(regionExpression);
+		clone.valueLabelExpression = JRCloneUtils.nullSafeClone(valueLabelExpression);
 		clone.dataset = JRCloneUtils.nullSafeClone(dataset);
 		clone.eventSupport = null;
 		return clone;

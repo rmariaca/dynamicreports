@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.jasper.components.googlecharts.geomap;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +36,7 @@ import net.sf.jasperreports.engine.type.ModeEnum;
 import net.sf.jasperreports.engine.util.JRColorUtil;
 import net.sf.jasperreports.web.util.VelocityUtil;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
 /**
@@ -50,14 +50,19 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		Boolean showLegend = (Boolean) element.getParameterValue(GeoMapPrintElement.PARAMETER_SHOW_LEGEND);
 		GeoMapDataMode dataMode = (GeoMapDataMode) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATA_MODE);
 		String region = (String) element.getParameterValue(GeoMapPrintElement.PARAMETER_REGION);
+		String valueLabel = (String) element.getParameterValue(GeoMapPrintElement.PARAMETER_VALUE_LABEL);
+		if (valueLabel == null) {
+			valueLabel = "";
+		}
 		@SuppressWarnings("unchecked")
 		List<Color> colors = (List<Color>) element.getParameterValue(GeoMapPrintElement.PARAMETER_COLORS);
-		List<String> stringColors = null;
+		String stringColors = null;
 		if (colors != null && !colors.isEmpty()) {
-			stringColors = new ArrayList<String>();
+			stringColors = "";
 			for (Color color : colors) {
-				stringColors.add(getColorString(color));
+				stringColors += "," + getColorString(color);
 			}
+			stringColors = StringUtils.removeStart(stringColors, ",");
 		}
 		@SuppressWarnings("unchecked")
 		Set<GeoMapData> dataset = (Set<GeoMapData>) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATASET);
@@ -78,6 +83,7 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		}
 		velocityContext.put("id", "map_" + element.hashCode());
 		velocityContext.put("region", region);
+		velocityContext.put("valueLabel", valueLabel);
 		velocityContext.put("colors", stringColors);
 		velocityContext.put("dataset", dataset);
 		if(context.getExporter() instanceof JRXhtmlExporter) {
