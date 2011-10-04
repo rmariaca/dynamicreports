@@ -28,6 +28,7 @@
 			<outputDirectory>lib</outputDirectory>
 			<excludes>
 				<exclude>net.sourceforge.dynamicreports:dynamicreports-core</exclude>
+				<exclude>net.sourceforge.dynamicreports:dynamicreports-googlecharts</exclude>
 				<exclude>net.sourceforge.dynamicreports:dynamicreports-examples</exclude>
 				<exclude>net.sourceforge.dynamicreports:dynamicreports-distribution</exclude>
 				<exclude>org.aspectj:aspectjrt</exclude>

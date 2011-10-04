@@ -60,6 +60,7 @@ public class Project {
 	private String springframeworkVersion;
 	private String hsqldbVersion;
 	private String xalanVersion;
+	private String velocityVersion;
 
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -98,6 +99,7 @@ public class Project {
 		springframeworkVersion = properties.getProperty("springframeworkVersion");
 		hsqldbVersion = properties.getProperty("hsqldbVersion");
 		xalanVersion = properties.getProperty("xalanVersion");
+		velocityVersion = properties.getProperty("velocityVersion");
 	}
 
 	public String getVersion() {
@@ -331,4 +333,13 @@ public class Project {
 	public void setXalanVersion(String xalanVersion) {
 		this.xalanVersion = xalanVersion;
 	}
+
+	public String getVelocityVersion() {
+		return velocityVersion;
+	}
+
+	public void setVelocityVersion(String velocityVersion) {
+		this.velocityVersion = velocityVersion;
+	}
+
 }

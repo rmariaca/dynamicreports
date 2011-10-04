@@ -72,7 +72,6 @@ public class GeoMapReport {
 			  .title(Templates.createTitleComponent("GeoMap"))
 			  .summary(
 			  	geoMap1, cmp.verticalGap(10), geoMap2)
-			  .pageFooter(Templates.footerComponent)
 			  .toHtml(htmlExporter);
 		} catch (DRException e) {
 			e.printStackTrace();

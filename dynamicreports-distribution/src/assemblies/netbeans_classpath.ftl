@@ -48,6 +48,7 @@ file.reference.commons-digester-${project.commonsdigesterVersion}.jar=lib\\commo
 file.reference.commons-lang-${project.commonslangVersion}.jar=lib\\commons-lang-${project.commonslangVersion}.jar
 file.reference.commons-logging-${project.commonsloggingVersion}.jar=lib\\commons-logging-${project.commonsloggingVersion}.jar
 file.reference.dynamicreports-core-${project.version}.jar=lib\\dynamicreports-core-${project.version}.jar
+file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
 file.reference.itext-${project.itextVersion}.jar=lib\\itext-${project.itextVersion}.jar
 file.reference.jasperreports-${project.jasperreportsVersion}.jar=lib\\jasperreports-${project.jasperreportsVersion}.jar
 file.reference.jaxb-api-${project.jaxbimplVersion}.jar=lib\\jaxb-api-${project.jaxbimplVersion}.jar
@@ -66,6 +67,7 @@ file.reference.spring-beans-${project.springframeworkVersion}.jar=lib\\spring-be
 file.reference.hsqldb-${project.hsqldbVersion}.jar=lib\\hsqldb-${project.hsqldbVersion}.jar
 file.reference.xalan-${project.xalanVersion}.jar=lib\\xalan-${project.xalanVersion}.jar
 file.reference.serializer-${project.xalanVersion}.jar=lib\\serializer-${project.xalanVersion}.jar
+file.reference.velocity-${project.velocityVersion}.jar=lib\\velocity-${project.velocityVersion}.jar
 includes=**
 jar.compress=false
 javac.classpath=\
@@ -92,6 +94,7 @@ javac.classpath=\
     ${r"${"}file.reference.commons-lang-${project.commonslangVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-logging-${project.commonsloggingVersion}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-core-${project.version}.jar${r"}"}:\
+    ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.itext-${project.itextVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jasperreports-${project.jasperreportsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jaxb-api-${project.jaxbimplVersion}.jar${r"}"}:\
@@ -109,7 +112,8 @@ javac.classpath=\
     ${r"${"}file.reference.spring-beans-${project.springframeworkVersion}.jar${r"}"}:\
     ${r"${"}file.reference.hsqldb-${project.hsqldbVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xalan-${project.xalanVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.serializer-${project.xalanVersion}.jar${r"}"}
+    ${r"${"}file.reference.serializer-${project.xalanVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.velocity-${project.velocityVersion}.jar${r"}"}
 # Space-separated list of extra javac options
 javac.compilerargs=
 javac.deprecation=false

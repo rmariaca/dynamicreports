@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.site;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -67,12 +68,17 @@ public class GenerateSite {
 	private static final String examples_source = "../dynamicreports-examples/src/main/java/";
 	private static final String templates_path = "src/site/templates/";
 	private static final String pages_path = "src/site/pages/";
+	private static final String htmlToImageFile = "target/htmltoimage.bat";
+	private static final float image_large_zoom = 1.1f;
+	private static final float image_medium_zoom = 0.15f;
+	private static final float image_small_zoom = 0.08f;
 
 	private static Template temp;
 	private static StringTemplateLoader loader;
 	private static List<Example> examples;
 	private static boolean runExamples;
 	private static String site_path;
+	private static String htmlToImage_path;
 	private static String examples_path;
 	private static Project project;
 	private static Properties pageProp;
@@ -80,6 +86,7 @@ public class GenerateSite {
 	static {
 		runExamples = new Boolean(System.getenv("runExamples"));
 		site_path = System.getenv("outputDirectory") + "/";
+		htmlToImage_path = System.getenv("htmlToImageDirectory") + "/";
 		examples_path = site_path + "examples/";
 
 		Configuration cfg = new Configuration();
@@ -243,33 +250,6 @@ public class GenerateSite {
 	}
 
 	public static void generateExampleImage(String name, JasperReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Exception {
-		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), ImageType.PNG);
-		imageExporter.setOffsetX(1);
-		imageExporter.setOffsetY(1);
-		imageExporter.setPageGap(1);
-		imageExporter.setZoom(0.08f);
-		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
-			imageExporter.setEndPageIndex(2);
-		}
-		reportBuilder.toImage(imageExporter);
-		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), ImageType.PNG);
-		imageExporter.setOffsetX(1);
-		imageExporter.setOffsetY(1);
-		imageExporter.setPageGap(1);
-		imageExporter.setZoom(0.15f);
-		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
-			imageExporter.setEndPageIndex(2);
-		}
-		reportBuilder.toImage(imageExporter);
-		imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), ImageType.PNG);
-		imageExporter.setOffsetX(1);
-		imageExporter.setOffsetY(1);
-		imageExporter.setPageGap(1);
-		imageExporter.setZoom(1.1f);
-		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
-			imageExporter.setEndPageIndex(2);
-		}
-		reportBuilder.toImage(imageExporter);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);
 		if (jasperExporterBuilder instanceof JasperHtmlExporterBuilder) {
@@ -277,12 +257,63 @@ public class GenerateSite {
 		}
 		jasperExporterBuilder.getExporter().setOutputFileName(examples_path + name.toLowerCase() + getFileExt(name) + "." + getFileType(name));
 		method.invoke(reportBuilder, jasperExporterBuilder);
+
+		if (!Boolean.valueOf(pageProp.getProperty(name + "_htmltoimage"))) {
+			jasperToImage(name, reportBuilder);
+		}
+		else {
+			htmlToImage(name, reportBuilder);
+		}
+	}
+
+	private static void jasperToImage(String name, JasperReportBuilder reportBuilder) throws Exception {
+		jasperToImage(name, "", image_large_zoom, reportBuilder);
+		jasperToImage(name, "_m", image_medium_zoom, reportBuilder);
+		jasperToImage(name, "_s", image_small_zoom, reportBuilder);
+	}
+
+	private static void jasperToImage(String name, String imageName, float zoom, JasperReportBuilder reportBuilder) throws Exception {
+		JasperImageExporterBuilder imageExporter = Exporters.imageExporter(new FileOutputStream(examples_path + name.toLowerCase() + imageName + ".png"), ImageType.PNG);
+		imageExporter.setOffsetX(1);
+		imageExporter.setOffsetY(1);
+		imageExporter.setPageGap(1);
+		imageExporter.setZoom(zoom);
+		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
+			imageExporter.setEndPageIndex(2);
+		}
+		reportBuilder.toImage(imageExporter);
+	}
+
+	private static void htmlToImage(String name, JasperReportBuilder reportBuilder) throws Exception {
+		htmlToImage(name, "", image_large_zoom, reportBuilder);
+		htmlToImage(name, "_m", image_medium_zoom, reportBuilder);
+		htmlToImage(name, "_s", image_small_zoom, reportBuilder);
+	}
+
+	private static void htmlToImage(String name, String imageName, float zoom, JasperReportBuilder reportBuilder) throws Exception {
+		int width = (int) (reportBuilder.toJasperPrint().getPageWidth() * zoom);
+		int height = (int) (reportBuilder.toJasperPrint().getPageHeight() * zoom);
+
+		String command = htmlToImage_path + "html2image" +
+				" -url=" + examples_path + name.toLowerCase() + getFileExt(name) + "." + getFileType(name) +
+				" -out=" + examples_path + name.toLowerCase() + imageName + ".png" +
+				" -highquality" +
+				" -width=" + width +
+				" -height=" + height +
+				" -bwidth=" + width +
+				" -bheight=" + height +
+				" -delay=60000";
+
+		FileWriter fw = new FileWriter(htmlToImageFile, true);
+	  BufferedWriter out = new BufferedWriter(fw);
+	  out.write(command + "\n");
+	  out.close();
 	}
 
 	public static void generateExampleImage(String name, JasperConcatenatedReportBuilder reportBuilder, AbstractJasperExporterBuilder<?, ?> jasperExporterBuilder) throws Throwable {
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), 0.08f);
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), 0.15f);
-		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), 1.1f);
+		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_s.png"), image_small_zoom);
+		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + "_m.png"), image_medium_zoom);
+		reportBuilder.toPng(new FileOutputStream(examples_path + name.toLowerCase() + ".png"), image_large_zoom);
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);
 		jasperExporterBuilder.getExporter().setOutputFileName(examples_path + name.toLowerCase() + ".pdf");
@@ -294,17 +325,15 @@ public class GenerateSite {
 	}
 
 	private static String getFileType(String name) {
-		if (name.toLowerCase().indexOf("html") > -1) {
-			return "html";
-		}
-		if (name.toLowerCase().indexOf("excel") > -1) {
-			return "xls";
+		String type = pageProp.getProperty(name + "_type");
+		if (type != null) {
+			return type;
 		}
 		return "pdf";
 	}
 
 	private static String getFileExt(String name) {
-		if (name.toLowerCase().indexOf("html") > -1) {
+		if (getFileType(name).equals("html")) {
 			return "html";
 		}
 		return "";

@@ -8,6 +8,11 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-core-${project.version}-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/dynamicreports-googlecharts-${project.version}.jar" sourcepath="lib/dynamicreports-googlecharts-${project.version}-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/dynamicreports-examples/lib/dynamicreports-googlecharts-${project.version}-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/activation-${project.activationVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/avalon-framework-impl-${project.avalonframeworkimplVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/barcode4j-${project.barcode4jVersion}.jar"/>
@@ -48,4 +53,5 @@
 	<classpathentry kind="lib" path="lib/hsqldb-${project.hsqldbVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xalan-${project.xalanVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/serializer-${project.xalanVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/velocity-${project.velocityVersion}.jar"/>
 </classpath>

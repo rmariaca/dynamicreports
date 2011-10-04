@@ -105,6 +105,12 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-lang</groupId>
+					<artifactId>commons-lang</artifactId>
+        		</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -145,6 +151,18 @@
 				<dependency>
 					<groupId>net.sourceforge.dynamicreports</groupId>
 					<artifactId>dynamicreports-core</artifactId>
+					<version>${project.version}</version>
+					<classifier>javadoc</classifier>
+				</dependency>
+				<dependency>
+					<groupId>net.sourceforge.dynamicreports</groupId>
+					<artifactId>dynamicreports-googlecharts</artifactId>
+					<version>${project.version}</version>
+					<classifier>sources</classifier>
+				</dependency>
+				<dependency>
+					<groupId>net.sourceforge.dynamicreports</groupId>
+					<artifactId>dynamicreports-googlecharts</artifactId>
 					<version>${project.version}</version>
 					<classifier>javadoc</classifier>
 				</dependency>
@@ -289,6 +307,7 @@
 								<version>${project.version}</version>
 								<developmentVersion>${developmentVersion}</developmentVersion>
 								<outputDirectory>${siteOutputDirectory}</outputDirectory>
+								<htmlToImageDirectory>${htmlToImageDirectory}</htmlToImageDirectory>
 								<runExamples>${runExamples}</runExamples>
 								<properties>${project.properties}</properties>						
 							</environmentVariables>						

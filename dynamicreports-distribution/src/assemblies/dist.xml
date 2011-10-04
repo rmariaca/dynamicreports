@@ -6,20 +6,33 @@
 	<id>dist</id>
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<formats>
-		<format>dir</format>
+		<format>zip</format>
 	</formats>
 
+	<fileSets>
+		<fileSet>
+			<directory>..</directory>
+			<includes>
+				<include>*.txt</include>
+			</includes>
+		</fileSet>		
+	</fileSets>
+	
 	<files>
 		<file>
-			<source>../changelog.txt</source>
-			<destName>readme.txt</destName>
+			<source>src/assemblies/readme.txt</source>
 		</file>
-	</files>
-
+ 	</files>
+	
 	<dependencySets>
 		<dependencySet>
 			<includes>
 				<include>net.sourceforge.dynamicreports:dynamicreports-core:jar</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-core:*:javadoc</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-core:*:sources</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:jar</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:*:javadoc</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:*:sources</include>
 			</includes>      
 		</dependencySet>   
 	</dependencySets>
