@@ -79,6 +79,7 @@ public class GenerateSite {
 	private static boolean runExamples;
 	private static String site_path;
 	private static String htmlToImage_path;
+	private static String htmlToImage_key;
 	private static String examples_path;
 	private static Project project;
 	private static Properties pageProp;
@@ -87,6 +88,7 @@ public class GenerateSite {
 		runExamples = new Boolean(System.getenv("runExamples"));
 		site_path = System.getenv("outputDirectory") + "/";
 		htmlToImage_path = System.getenv("htmlToImageDirectory") + "/";
+		htmlToImage_key = System.getenv("htmlToImageKey");
 		examples_path = site_path + "examples/";
 
 		Configuration cfg = new Configuration();
@@ -285,28 +287,50 @@ public class GenerateSite {
 	}
 
 	private static void htmlToImage(String name, JasperReportBuilder reportBuilder) throws Exception {
-		htmlToImage(name, "", image_large_zoom, reportBuilder);
-		htmlToImage(name, "_m", image_medium_zoom, reportBuilder);
-		htmlToImage(name, "_s", image_small_zoom, reportBuilder);
-	}
+		FileWriter fw = new FileWriter(htmlToImageFile, true);
+	  BufferedWriter out = new BufferedWriter(fw);
 
-	private static void htmlToImage(String name, String imageName, float zoom, JasperReportBuilder reportBuilder) throws Exception {
-		int width = (int) (reportBuilder.toJasperPrint().getPageWidth() * zoom);
-		int height = (int) (reportBuilder.toJasperPrint().getPageHeight() * zoom);
-
+		int width = (int) (reportBuilder.toJasperPrint().getPageWidth() * image_large_zoom);
+		int height = (int) (reportBuilder.toJasperPrint().getPageHeight() * image_large_zoom);
 		String command = htmlToImage_path + "html2image" +
+				" -$=" + htmlToImage_key +
 				" -url=" + examples_path + name.toLowerCase() + getFileExt(name) + "." + getFileType(name) +
-				" -out=" + examples_path + name.toLowerCase() + imageName + ".png" +
+				" -out=" + examples_path + name.toLowerCase() + ".png" +
 				" -highquality" +
 				" -width=" + width +
 				" -height=" + height +
 				" -bwidth=" + width +
 				" -bheight=" + height +
 				" -delay=60000";
-
-		FileWriter fw = new FileWriter(htmlToImageFile, true);
-	  BufferedWriter out = new BufferedWriter(fw);
 	  out.write(command + "\n");
+
+		width = (int) (reportBuilder.toJasperPrint().getPageWidth() * image_medium_zoom);
+		height = (int) (reportBuilder.toJasperPrint().getPageHeight() * image_medium_zoom);
+		command = htmlToImage_path + "convert" +
+				" " + examples_path + name.toLowerCase() + ".png" +
+				" -resize " + width + "x" + height +
+				" -bordercolor black" +
+				" -border 1" +
+				" " + examples_path + name.toLowerCase() + "_m.png";
+		out.write(command + "\n");
+
+		width = (int) (reportBuilder.toJasperPrint().getPageWidth() * image_small_zoom);
+		height = (int) (reportBuilder.toJasperPrint().getPageHeight() * image_small_zoom);
+		command = htmlToImage_path + "convert" +
+				" " + examples_path + name.toLowerCase() + ".png" +
+				" -resize " + width + "x" + height +
+				" -bordercolor black" +
+				" -border 1" +
+				" " + examples_path + name.toLowerCase() + "_s.png";
+		out.write(command + "\n");
+
+		command = htmlToImage_path + "convert" +
+				" " + examples_path + name.toLowerCase() + ".png" +
+				" -bordercolor black" +
+				" -border 1" +
+				" " + examples_path + name.toLowerCase() + ".png";
+		out.write(command + "\n");
+
 	  out.close();
 	}
 

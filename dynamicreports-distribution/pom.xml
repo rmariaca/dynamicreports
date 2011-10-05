@@ -21,7 +21,7 @@
 		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>
 		<bcprovjdk14Version>138</bcprovjdk14Version>
 		<commonsbeanutilsVersion>1.8.0</commonsbeanutilsVersion>
-		<commonscollectionsVersion>2.1</commonscollectionsVersion>
+		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
 		<commonsdigesterVersion>1.7</commonsdigesterVersion>
 		<commonsloggingVersion>1.1</commonsloggingVersion>
 		<itextVersion>2.1.7</itextVersion>
@@ -105,12 +105,6 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-lang</groupId>
-					<artifactId>commons-lang</artifactId>
-        		</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -308,6 +302,7 @@
 								<developmentVersion>${developmentVersion}</developmentVersion>
 								<outputDirectory>${siteOutputDirectory}</outputDirectory>
 								<htmlToImageDirectory>${htmlToImageDirectory}</htmlToImageDirectory>
+								<htmlToImageKey>${htmlToImageKey}</htmlToImageKey>
 								<runExamples>${runExamples}</runExamples>
 								<properties>${project.properties}</properties>						
 							</environmentVariables>						

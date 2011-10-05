@@ -48,6 +48,8 @@
 	<ul class="sidemenu">
 		<li><a href="http://sourceforge.net/projects/dynamicreports">DynamicReports at SourceForge</a></li>
 		<li><a href="http://www.jaspersoft.com/jasperreports">JasperReports</a></li>
+		<li><a href="http://www.jaspersoft.com/ireport-designer">iReport</a></li>
+		<li><a href="http://code.google.com/apis/chart/">Google charts</a></li>
 		<li><a href="http://eclipse.org/">Eclipse</a></li>
 		<li><a href="http://maven.apache.org/">Apache Maven Project</a></li>
 	</ul>							

@@ -37,6 +37,10 @@ import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ *
+ * GeoMap component works only for html export.
+ * Visit the following link for more information about geo map parameters
+ * http://code.google.com/apis/chart/interactive/docs/gallery/geomap.html
  */
 public class GeoMapReport {
 
