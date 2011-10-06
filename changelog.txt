@@ -1,6 +1,11 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.0 (2011-10-06)
+---------------------------------------------------
+ - map component, see MapReport for an example
+ - google geo map component, see GeoMapReport for an example
+  
 Changes in version 2.2.1 (2011-09-08)
 ---------------------------------------------------
  - updated JasperReports to 4.1.1
