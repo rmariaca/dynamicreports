@@ -116,4 +116,12 @@ public class Charts {
 	public static SpiderChartBuilder spiderChart() {
 		return new SpiderChartBuilder();
 	}
+
+	public static MultiAxisChartBuilder multiAxisChart() {
+		return new MultiAxisChartBuilder();
+	}
+
+	public static MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?> ...charts) {
+		return new MultiAxisChartBuilder().charts(charts);
+	}
 }

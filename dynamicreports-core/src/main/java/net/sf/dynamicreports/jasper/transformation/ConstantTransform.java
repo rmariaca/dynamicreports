@@ -30,6 +30,7 @@ import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.constant.AxisPosition;
 import net.sf.dynamicreports.report.constant.BarbecueType;
 import net.sf.dynamicreports.report.constant.BarcodeBaselinePosition;
 import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
@@ -64,6 +65,7 @@ import net.sf.dynamicreports.report.constant.TableOrder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.jasperreports.charts.type.AxisPositionEnum;
 import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
@@ -240,6 +242,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_XYLINE;
 		case SCATTER:
 			return JRDesignChart.CHART_TYPE_SCATTER;
+		case MULTI_AXIS:
+			return JRDesignChart.CHART_TYPE_MULTI_AXIS;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}
@@ -405,6 +409,21 @@ public class ConstantTransform {
 			return EdgeEnum.RIGHT;
 		default:
 			throw new JasperDesignException("Position " + position.name() + " not supported");
+		}
+	}
+
+	protected static AxisPositionEnum chartAxisPosition(AxisPosition axisPosition) {
+		if (axisPosition == null) {
+			return null;
+		}
+
+		switch (axisPosition) {
+		case LEFT_OR_TOP:
+			return AxisPositionEnum.LEFT_OR_TOP;
+		case RIGHT_OR_BOTTOM:
+			return AxisPositionEnum.RIGHT_OR_BOTTOM;
+		default:
+			throw new JasperDesignException("AxisPosition " + axisPosition.name() + " not supported");
 		}
 	}
 

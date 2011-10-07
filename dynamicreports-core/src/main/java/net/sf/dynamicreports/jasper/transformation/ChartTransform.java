@@ -42,7 +42,9 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBar3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBarPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBasePlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignLinePlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignSpiderPlot;
@@ -55,7 +57,9 @@ import net.sf.jasperreports.charts.design.JRDesignBar3DPlot;
 import net.sf.jasperreports.charts.design.JRDesignBarPlot;
 import net.sf.jasperreports.charts.design.JRDesignCategoryDataset;
 import net.sf.jasperreports.charts.design.JRDesignCategorySeries;
+import net.sf.jasperreports.charts.design.JRDesignChartAxis;
 import net.sf.jasperreports.charts.design.JRDesignLinePlot;
+import net.sf.jasperreports.charts.design.JRDesignMultiAxisPlot;
 import net.sf.jasperreports.charts.design.JRDesignPie3DPlot;
 import net.sf.jasperreports.charts.design.JRDesignPieDataset;
 import net.sf.jasperreports.charts.design.JRDesignPiePlot;
@@ -106,7 +110,7 @@ public class ChartTransform {
 		}
 	}
 
-	private JRDesignElement chart(DRIDesignChart chart) {
+	private JRDesignChart chart(DRIDesignChart chart) {
 		JRDesignChart jrChart = new JRDesignChart(new JRDesignStyle().getDefaultStyleProvider(), ConstantTransform.chartType(chart.getChartType()));
 		EvaluationTime evaluationTime = chart.getEvaluationTime();
 		jrChart.setEvaluationTime(ConstantTransform.evaluationTime(evaluationTime));
@@ -158,7 +162,7 @@ public class ChartTransform {
 		}
 
 		dataset(chart.getDataset(), (JRDesignChartDataset) jrChart.getDataset());
-		plot((DRIDesignBasePlot) chart.getPlot(), jrChart.getPlot());
+		plot((DRIDesignBasePlot) chart.getPlot(), jrChart.getPlot(), jrChart);
 
 		return jrChart;
 	}
@@ -193,6 +197,10 @@ public class ChartTransform {
 
 	//dataset
 	private void dataset(DRIDesignChartDataset dataset, JRDesignElementDataset jrDataset) {
+		if (dataset == null) {
+			return;
+		}
+
 		jrDataset.setDatasetRun(accessor.getDatasetTransform().datasetRun(dataset.getSubDataset()));
 		ResetType resetType = dataset.getResetType();
 		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
@@ -328,7 +336,7 @@ public class ChartTransform {
 	}
 
 	//plot
-	private void plot(DRIDesignBasePlot plot, JRChartPlot jrPlot) {
+	private void plot(DRIDesignBasePlot plot, JRChartPlot jrPlot, JRDesignChart jrChart) {
 		if (plot.getOrientation() != null) {
 			jrPlot.setOrientation(ConstantTransform.chartPlotOrientation(plot.getOrientation()));
 		}
@@ -364,6 +372,9 @@ public class ChartTransform {
 		}
 		else if (jrPlot instanceof JRDesignTimeSeriesPlot) {
 			timeSeriesPlot((DRIDesignLinePlot) plot, (JRDesignTimeSeriesPlot) jrPlot);
+		}
+		else if (jrPlot instanceof JRDesignMultiAxisPlot) {
+			multiAxisPlot((DRIDesignMultiAxisPlot) plot, (JRDesignMultiAxisPlot) jrPlot, jrChart);
 		}
 		else {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
@@ -618,6 +629,17 @@ public class ChartTransform {
 
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
+	}
+
+	private void multiAxisPlot(DRIDesignMultiAxisPlot plot, JRDesignMultiAxisPlot jrPlot, JRDesignChart jrChart) {
+		jrPlot.setChart(jrChart);
+		for (DRIDesignChartAxis axis : plot.getAxes()) {
+			JRDesignChartAxis jrAxis = new JRDesignChartAxis(jrChart);
+			jrAxis.setPosition(ConstantTransform.chartAxisPosition(axis.getPosition()));
+			JRDesignChart chart = chart(axis.getChart());
+			jrAxis.setChart(chart);
+			jrPlot.addAxis(jrAxis);
+		}
 	}
 
 	//spider

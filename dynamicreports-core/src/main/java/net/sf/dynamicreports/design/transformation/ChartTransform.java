@@ -41,7 +41,9 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisFormat;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBar3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBarPlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignChartAxis;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignSpiderPlot;
@@ -69,7 +71,9 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBar3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIMultiAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
@@ -97,7 +101,7 @@ public class ChartTransform {
 		designChart.setHeight(accessor.getTemplateTransform().getChartHeight(chart));
 		designChart.setChartType(chart.getChartType());
 		designChart.setDataset(dataset(chart.getDataset(), resetType, resetGroup));
-		designChart.setPlot(plot(chart.getPlot(), designChart.getCustomizers()));
+		designChart.setPlot(plot(chart.getPlot(), designChart.getCustomizers(), resetType, resetGroup));
 		designChart.setTitle(title(chart.getTitle()));
 		designChart.setSubtitle(subtitle(chart.getSubtitle()));
 		designChart.setLegend(legend(chart.getLegend()));
@@ -110,7 +114,7 @@ public class ChartTransform {
 	}
 
 	//plot
-	private DRIDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+	private DRIDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRIDesignPlot designPlot;
 
 		if (plot instanceof DRIBar3DPlot) {
@@ -121,6 +125,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRILinePlot) {
 			designPlot = linePlot((DRILinePlot) plot);
+		}
+		else if (plot instanceof DRIMultiAxisPlot) {
+			designPlot = multiAxisPlot((DRIMultiAxisPlot) plot, resetType, resetGroup);
 		}
 		else if (plot instanceof DRIPie3DPlot) {
 			designPlot = pie3DPlot((DRIPie3DPlot) plot, chartCustomizers);
@@ -172,6 +179,18 @@ public class ChartTransform {
 		designLinePlot.setShowShapes(linePlot.getShowShapes());
 		designLinePlot.setShowLines(linePlot.getShowLines());
 		return designLinePlot;
+	}
+
+	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignMultiAxisPlot designMultiAxisPlot = new DRDesignMultiAxisPlot();
+		axisPlot(designMultiAxisPlot, multiAxisPlot);
+		for (DRIChartAxis axis : multiAxisPlot.getAxes()) {
+			DRDesignChartAxis designAxis = new DRDesignChartAxis();
+			designAxis.setPosition(axis.getPosition());
+			designAxis.setChart(transform(axis.getChart(), resetType, resetGroup));
+			designMultiAxisPlot.getAxes().add(designAxis);
+		}
+		return designMultiAxisPlot;
 	}
 
 	private DRDesignPie3DPlot pie3DPlot(DRIPie3DPlot pie3DPlot, List<DRIChartCustomizer> chartCustomizers) {
@@ -275,6 +294,10 @@ public class ChartTransform {
 
 	//dataset
 	private DRDesignChartDataset dataset(DRIChartDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		if (dataset == null) {
+			return null;
+		}
+
 		DRDesignChartDataset designDataset;
 		if (dataset instanceof DRICategoryDataset) {
 			designDataset = categoryDataset((DRICategoryDataset) dataset);

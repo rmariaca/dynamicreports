@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
@@ -123,6 +124,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case SPIDER:
 				dataset = new DRCategoryDataset();
 				plot = new DRSpiderPlot();
+				break;
+			case MULTI_AXIS:
+				dataset = null;
+				plot = new DRMultiAxisPlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");

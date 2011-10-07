@@ -20,26 +20,36 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.base.chart.plot;
+
+import net.sf.dynamicreports.report.constant.AxisPosition;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.DRIChart;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER
+public class DRChartAxis implements DRIChartAxis {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private AxisPosition position;
+	private DRIChart chart;
+
+	public AxisPosition getPosition() {
+		return position;
+	}
+
+	public void setPosition(AxisPosition position) {
+		this.position = position;
+	}
+
+	public DRIChart getChart() {
+		return chart;
+	}
+
+	public void setChart(DRIChart chart) {
+		this.chart = chart;
+	}
+
 }
