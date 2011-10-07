@@ -50,36 +50,38 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class GroupCustomSubtotalTest extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<Integer> column2;
 	private VariableBuilder<Integer> variable1;
 	private AggregationSubtotalBuilder<Integer> subtotal1;
 	private CustomSubtotalBuilder<Integer> subtotal2;
 	private AggregationSubtotalBuilder<Integer> subtotal3;
 	private CustomSubtotalBuilder<String> subtotal4;
-	
+	private CustomSubtotalBuilder<String> subtotal5;
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<String> column1;
-				
+
 		rb.setLocale(Locale.ENGLISH)
 			.columns(
 					column1 = col.column("Column1", "field1", String.class),
 					column2 = col.column("Column2", "field2", Integer.class))
-			.groupBy(column1)		
+			.groupBy(column1)
 			.subtotalsAtFirstGroupFooter(
 					subtotal1 = sbt.sum(column2),
 					subtotal2 = sbt.customValue(new ValueExpression(), column2))
 			.subtotalsAtLastGroupFooter(
 					subtotal3 = sbt.sum(column2),
-					subtotal4 = sbt.customValue(new ValueExpression2(), column2));
+					subtotal4 = sbt.customValue(new ValueExpression2(), column2),
+					subtotal5 = sbt.customValue(new ValueExpression3(), column2));
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
-		numberOfPagesTest(1);		
+
+		numberOfPagesTest(1);
 		//groupFooter
 		subtotalIndexCountTest(subtotal1, 1, 2);
 		subtotalIndexValueTest(subtotal1, 1, "6", "15");
@@ -89,8 +91,10 @@ public class GroupCustomSubtotalTest extends AbstractJasperValueTest implements 
 		subtotalIndexValueTest(subtotal3, 3, "6", "15");
 		subtotalIndexCountTest(subtotal4, 4, 2);
 		subtotalIndexValueTest(subtotal4, 4, "6 (28.57%)", "15 (71.43%)");
+		subtotalIndexCountTest(subtotal5, 5, 2);
+		subtotalIndexValueTest(subtotal5, 5, "value1", "value2");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");
@@ -99,33 +103,43 @@ public class GroupCustomSubtotalTest extends AbstractJasperValueTest implements 
 		}
 		for (int i = 4; i <= 6; i++) {
 			dataSource.add("group2", i);
-		}	
+		}
 		return dataSource;
 	}
-	
+
 	private class ValueExpression extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
 		public Integer evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue(variable1);
-		}		
+		}
 	}
-	
+
 	private class ValueExpression2 extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = 1L;
 
-		public ValueExpression2() {			
+		public ValueExpression2() {
 			variable1 = variable(column2, Calculation.SUM);
 			variable1.setResetType(Evaluation.LAST_GROUP);
 			VariableBuilder<Integer> variable2 = variable(column2, Calculation.SUM);
 			variable2.setResetType(Evaluation.REPORT);
 			addExpression(new PercentageExpression(variable1.getVariable(), variable2.getVariable()));
 		}
-		
+
 		@Override
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
 			String percentage = new DecimalFormat("#,##0.00%", new DecimalFormatSymbols(Locale.ENGLISH)).format(values.get(0));
 			return reportParameters.getValue(variable1) + " (" + percentage + ")";
-		}	
+		}
+	}
+
+	private class ValueExpression3 extends AbstractComplexExpression<String> {
+		private static final long serialVersionUID = 1L;
+		private int count = 1;
+
+		@Override
+		public String evaluate(List<?> values, ReportParameters reportParameters) {
+			return "value" + count++;
+		}
 	}
 }

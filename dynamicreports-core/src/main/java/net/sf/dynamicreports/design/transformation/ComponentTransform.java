@@ -679,7 +679,7 @@ public class ComponentTransform {
 	}
 
 	private DRDesignGroup detectEvaluationGroup(EvaluationTime evaluationTime, DRIDesignExpression expression) {
-		if (expression != null && evaluationTime.equals(EvaluationTime.GROUP)) {
+		if (expression != null && evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP)) {
 			DRDesignGroup evaluationGroup = detectEvaluationGroup(expression);
 			if (evaluationGroup == null) {
 				throw new DRDesignReportException("Can not detect evaluation group");
