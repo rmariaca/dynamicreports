@@ -29,11 +29,13 @@ import java.util.Date;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.ChartSerieBuilder;
-import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
 import net.sf.dynamicreports.report.constant.AxisPosition;
-import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -54,16 +56,14 @@ public class MultiAxisChartReport {
 		ChartSerieBuilder stock1Serie = cht.serie(stock1Field).setLabel("Stock1");
 		ChartSerieBuilder stock2Serie = cht.serie(stock2Field).setLabel("Stock2");
 
-		TimeSeriesChartBuilder chart1 = cht.timeSeriesChart()
-  		.setTimePeriod(dateField)
-  		.setTimePeriodType(TimePeriod.MONTH)
+		LineChartBuilder chart1 = cht.lineChart()
+  		.setCategory(new CategoryExpression())
   		.series(stock1Serie)
   		.setValueAxisFormat(
   			cht.axisFormat().setLabel("Stock1"));
 
-		TimeSeriesChartBuilder chart2 = cht.timeSeriesChart()
-	  	.setTimePeriod(dateField)
-	  	.setTimePeriodType(TimePeriod.MONTH)
+		BarChartBuilder chart2 = cht.barChart()
+	  	.setCategory(new CategoryExpression())
 	  	.series(stock2Serie)
 	  	.setValueAxisFormat(
   			cht.axisFormat().setLabel("Stock2"));
@@ -71,6 +71,7 @@ public class MultiAxisChartReport {
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
+			  .fields(dateField)
 			  .title(
 			  	Templates.createTitleComponent("MultiAxisChart"),
 			  	cht.multiAxisChart(chart1, chart2),
@@ -87,13 +88,13 @@ public class MultiAxisChartReport {
 
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("date", "stock1", "stock2");
-		dataSource.add(toDate(2010, 1), 25, 200);
+		dataSource.add(toDate(2010, 1), 25, 300);
 		dataSource.add(toDate(2010, 2), 11, 450);
-		dataSource.add(toDate(2010, 3), 7, 280);
+		dataSource.add(toDate(2010, 3), 17, 280);
 		dataSource.add(toDate(2010, 4), 15, 620);
 		dataSource.add(toDate(2010, 5), 30, 400);
 		dataSource.add(toDate(2010, 6), 8, 320);
-		dataSource.add(toDate(2010, 7), 5, 490);
+		dataSource.add(toDate(2010, 7), 25, 490);
 		return dataSource;
 	}
 
@@ -107,5 +108,13 @@ public class MultiAxisChartReport {
 
 	public static void main(String[] args) {
 		new MultiAxisChartReport();
+	}
+
+	private class CategoryExpression extends AbstractSimpleExpression<String> {
+		private static final long serialVersionUID = 1L;
+
+		public String evaluate(ReportParameters reportParameters) {
+			return type.dateYearToMonthType().valueToString("date", reportParameters);
+		}
 	}
 }

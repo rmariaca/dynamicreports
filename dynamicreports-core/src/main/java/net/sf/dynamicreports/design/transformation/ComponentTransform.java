@@ -377,7 +377,7 @@ public class ComponentTransform {
 		pageXField.setHeight(height);
 		pageXField.setHeightType(pageXofY.getHeightType());
 		pageXField.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-		pageXField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 0));
+		pageXField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), 0));
 
 		DRTextField<String> pageYField = new DRTextField<String>();
 		pageYField.setHyperLink((DRHyperLink) pageXofY.getHyperLink());
@@ -386,7 +386,7 @@ public class ComponentTransform {
 		pageYField.setHeight(height);
 		pageYField.setHeightType(pageXofY.getHeightType());
 		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);
-		pageYField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), horizontalAlignment, 1));
+		pageYField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), 1));
 		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
 		if (pageYEvaluationGroup == null) {
 			pageYField.setEvaluationTime(Evaluation.REPORT);
@@ -410,7 +410,7 @@ public class ComponentTransform {
 			pageYField.setWidthType(pageXofY.getWidthType());
 			break;
 		case RIGHT:
-			pageYWidth = StyleResolver.getFontWidth(style, 4);
+			pageYWidth = StyleResolver.getFontWidth(style, 6);
 			pageXWidth = pageXofYWidth - pageYWidth;
 			if (pageXWidth <= 0) {
 				pageXWidth = 10;
@@ -719,12 +719,10 @@ public class ComponentTransform {
 	private class PageXofYNumberExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-		private HorizontalAlignment horizontalAlignment;
 		private int index;
 
-		public PageXofYNumberExpression(DRIExpression<String> pageNumberFormatExpression, HorizontalAlignment horizontalAlignment, int index) {
+		public PageXofYNumberExpression(DRIExpression<String> pageNumberFormatExpression, int index) {
 			addExpression(pageNumberFormatExpression);
-			this.horizontalAlignment = horizontalAlignment;
 			this.index = index;
 		}
 
@@ -732,22 +730,11 @@ public class ComponentTransform {
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
 			String pattern = (String) values.get(0);
 			int index1 = pattern.indexOf("{0}");
-			int index2 = pattern.indexOf("{1}");
 			if (index == 0) {
-				if (horizontalAlignment.equals(HorizontalAlignment.RIGHT)) {
-					pattern = pattern.substring(0, index2);
-				}
-				else {
-					pattern = pattern.substring(0, index1 + 3);
-				}
+				pattern = pattern.substring(0, index1 + 3);
 			}
 			else {
-				if (horizontalAlignment.equals(HorizontalAlignment.RIGHT)) {
-					pattern = pattern.substring(index2);
-				}
-				else {
-					pattern = pattern.substring(index1 + 3);
-				}
+				pattern = pattern.substring(index1 + 3);
 			}
 			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
 			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});

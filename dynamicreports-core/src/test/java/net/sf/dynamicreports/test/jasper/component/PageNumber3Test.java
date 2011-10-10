@@ -41,16 +41,16 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
  */
 public class PageNumber3Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder subreport = cmp.subreport(titleSubreport())
     .setDataSource(new SubreportDataSourceExpression());
-		
+
 		rb.detail(subreport)
 	    .pageFooter(
 	  		cmp.pageNumber(),
-	  		cmp.totalPages(),					
+	  		cmp.totalPages(),
 				cmp.pageXslashY(),
 				cmp.pageXofY(),
 				cmp.pageXofY().setFormatExpression("Page {0} of {1}"),
@@ -63,57 +63,57 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(3);
 		elementCountTest("pageFooter.textField1", 3);
 		elementValueTest("pageFooter.textField1", "1", "2", "3");
-		
+
 		elementCountTest("pageFooter.textField2", 3);
 		elementValueTest("pageFooter.textField2", "3", "3", "3");
-		
+
 		elementCountTest("pageFooter.textField3", 3);
 		elementValueTest("pageFooter.textField3", "1", "2", "3");
 
 		elementCountTest("pageFooter.textField4", 3);
 		elementValueTest("pageFooter.textField4", "/3", "/3", "/3");
-		
+
 		elementCountTest("pageFooter.textField5", 3);
 		elementValueTest("pageFooter.textField5", "1", "2", "3");
-		
+
 		elementCountTest("pageFooter.textField6", 3);
 		elementValueTest("pageFooter.textField6", " of 3", " of 3", " of 3");
-		
+
 		elementCountTest("pageFooter.textField7", 3);
 		elementValueTest("pageFooter.textField7", "Page 1", "Page 2", "Page 3");
-		
+
 		elementCountTest("pageFooter.textField8", 3);
 		elementValueTest("pageFooter.textField8", " of 3", " of 3", " of 3");
-		
+
 		elementCountTest("pageFooter.textField9", 3);
 		elementValueTest("pageFooter.textField9", "1", "2", "3");
-		
+
 		elementCountTest("pageFooter.textField10", 3);
 		elementValueTest("pageFooter.textField10", " of 3", " of 3", " of 3");
-		
+
 		elementCountTest("pageFooter.textField11", 3);
-		elementValueTest("pageFooter.textField11", "1 of ", "2 of ", "3 of ");
-		
+		elementValueTest("pageFooter.textField11", "1", "2", "3");
+
 		elementCountTest("pageFooter.textField12", 3);
-		elementValueTest("pageFooter.textField12", "3", "3", "3");
-		
+		elementValueTest("pageFooter.textField12", " of 3", " of 3", " of 3");
+
 		elementCountTest("pageFooter.textField13", 3);
 		elementValueTest("pageFooter.textField13", "1", "2", "3");
-		
+
 		elementCountTest("pageFooter.textField14", 3);
 		elementValueTest("pageFooter.textField14", " of 3", " of 3", " of 3");
-		
+
 		elementCountTest("pageFooter.textField15", 3);
 		elementValueTest("pageFooter.textField15", "1", "2", "3");
-		
+
 		elementCountTest("pageFooter.textField16", 3);
 		elementValueTest("pageFooter.textField16", " of 3", " of 3", " of 3");
 	}
-	
+
 	private JasperReportBuilder titleSubreport() {
 		JasperReportBuilder report = report();
 		report
@@ -121,20 +121,20 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 		  .setDataSource(titleSubreportDataSource());
 		return report;
 	}
-	
+
 	private JRDataSource titleSubreportDataSource() {
 		DataSource dataSource = new DataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
-		}		
+		}
 		return dataSource;
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		return new JREmptyDataSource(2);
 	}
-	
+
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
@@ -142,7 +142,7 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 			DataSource dataSource = new DataSource("field1");
 			for (int i = 0; i < 50; i++) {
 				dataSource.add(i);
-			}		
+			}
 			return dataSource;
 		}
 	}

@@ -34,13 +34,13 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PageNumberPositionTest extends AbstractJasperPositionTest {
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		StyleBuilder style = stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT);
 		PageXofYBuilder pageXofYLeft = cmp.pageXofY().setStyle(stl.style(style));
 		PageXofYBuilder pageXofYRight = cmp.pageXofY().setStyle(stl.style(style).setHorizontalAlignment(HorizontalAlignment.RIGHT));
-		
+
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 		  .pageFooter(
 					cmp.pageXofY(),
@@ -54,33 +54,33 @@ public class PageNumberPositionTest extends AbstractJasperPositionTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
 		elementPositionTest("pageFooter.textField1", 0, 0, 0, 287, 16);
 		elementPositionTest("pageFooter.textField2", 0, 287, 0, 288, 16);
-		
+
 		elementPositionTest("pageFooter.textField3", 0, 0, 0, 40, 16);
 		elementPositionTest("pageFooter.textField4", 0, 40, 0, 535, 16);
-		
-		elementPositionTest("pageFooter.textField5", 0, 0, 0, 535, 16);
-		elementPositionTest("pageFooter.textField6", 0, 535, 0, 40, 16);
-		
+
+		elementPositionTest("pageFooter.textField5", 0, 0, 0, 517, 16);
+		elementPositionTest("pageFooter.textField6", 0, 517, 0, 58, 16);
+
 		elementPositionTest("pageFooter.textField7", 0, 0, 0, 287, 16);
 		elementPositionTest("pageFooter.textField8", 0, 287, 0, 288, 16);
-		
+
 		elementPositionTest("pageFooter.textField9", 0, 0, 0, 287, 16);
 		elementPositionTest("pageFooter.textField10", 0, 287, 0, 288, 16);
-		
+
 		elementPositionTest("pageFooter.textField11", 0, 0, 0, 36, 12);
 		elementPositionTest("pageFooter.textField12", 0, 36, 0, 107, 12);
-		
-		elementPositionTest("pageFooter.textField13", 0, 0, 0, 108, 12);
-		elementPositionTest("pageFooter.textField14", 0, 108, 0, 36, 12);
-		
+
+		elementPositionTest("pageFooter.textField13", 0, 0, 0, 90, 12);
+		elementPositionTest("pageFooter.textField14", 0, 90, 0, 54, 12);
+
 		elementPositionTest("pageFooter.textField15", 0, 0, 0, 36, 12);
 		elementPositionTest("pageFooter.textField16", 0, 36, 0, 108, 12);
-		
-		elementPositionTest("pageFooter.textField17", 0, 0, 0, 108, 12);
-		elementPositionTest("pageFooter.textField18", 0, 108, 0, 36, 12);
+
+		elementPositionTest("pageFooter.textField17", 0, 0, 0, 90, 12);
+		elementPositionTest("pageFooter.textField18", 0, 90, 0, 54, 12);
 	}
 }
