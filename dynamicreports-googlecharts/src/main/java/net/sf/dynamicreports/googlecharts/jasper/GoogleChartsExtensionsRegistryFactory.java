@@ -72,7 +72,8 @@ public class GoogleChartsExtensionsRegistryFactory implements ExtensionsRegistry
 		bundle.setComponentManagers(componentManagers);
 
 		REGISTRY = new ExtensionsRegistry() {
-			public List<?> getExtensions(Class<?> extensionType) {
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			public List getExtensions(Class extensionType) {
 				if (ComponentsBundle.class.equals(extensionType)) {
 					return Collections.singletonList(bundle);
 				}

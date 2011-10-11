@@ -49,7 +49,7 @@
 	</developers>
 	
 	<properties>
-		<jasperreportsVersion>4.1.1</jasperreportsVersion>
+		<jasperreportsVersion>4.1.2</jasperreportsVersion>
 		<commonslangVersion>2.5</commonslangVersion>
 		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
