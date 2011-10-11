@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.jasper.builder.export;
 
 import net.sf.dynamicreports.jasper.base.export.JasperXhtmlExporter;
+import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
@@ -33,5 +34,50 @@ public class JasperXhtmlExporterBuilder extends AbstractJasperExporterBuilder<Ja
 
 	protected JasperXhtmlExporterBuilder() {
 		super(new JasperXhtmlExporter());
+	}
+
+	public JasperXhtmlExporterBuilder setOutputImagesToDir(Boolean outputImagesToDir) {
+		this.getObject().setOutputImagesToDir(outputImagesToDir);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setImagesDirName(String imagesDirName) {
+		this.getObject().setImagesDirName(imagesDirName);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setImagesURI(String imagesURI) {
+		this.getObject().setImagesURI(imagesURI);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setHtmlHeader(String htmlHeader) {
+		this.getObject().setHtmlHeader(htmlHeader);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setBetweenPagesHtml(String betweenPagesHtml) {
+		this.getObject().setBetweenPagesHtml(betweenPagesHtml);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setHtmlFooter(String htmlFooter) {
+		this.getObject().setHtmlFooter(htmlFooter);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setWhitePageBackground(Boolean whitePageBackground) {
+		this.getObject().setWhitePageBackground(whitePageBackground);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setWrapBreakWord(Boolean wrapBreakWord) {
+		this.getObject().setWrapBreakWord(wrapBreakWord);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setSizeUnit(SizeUnit sizeUnit) {
+		this.getObject().setSizeUnit(sizeUnit);
+		return this;
 	}
 }

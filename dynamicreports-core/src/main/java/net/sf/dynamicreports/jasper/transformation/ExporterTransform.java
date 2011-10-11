@@ -192,6 +192,33 @@ public class ExporterTransform {
 	private JRExporter xhtml(JasperIXhtmlExporter jasperExporter) {
 		JRExporter jrExporter = new JRXhtmlExporter();
 		exporter(jrExporter, jasperExporter);
+		if (jasperExporter.getOutputImagesToDir() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IS_OUTPUT_IMAGES_TO_DIR, jasperExporter.getOutputImagesToDir());
+		}
+		if (jasperExporter.getImagesDirName() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_DIR_NAME, jasperExporter.getImagesDirName());
+		}
+		if (jasperExporter.getImagesURI() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, jasperExporter.getImagesURI());
+		}
+		if (jasperExporter.getHtmlHeader() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, jasperExporter.getHtmlHeader());
+		}
+		if (jasperExporter.getBetweenPagesHtml() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.BETWEEN_PAGES_HTML, jasperExporter.getBetweenPagesHtml());
+		}
+		if (jasperExporter.getHtmlFooter() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.HTML_FOOTER, jasperExporter.getHtmlFooter());
+		}
+		if (jasperExporter.getWhitePageBackground() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IS_WHITE_PAGE_BACKGROUND, jasperExporter.getWhitePageBackground());
+		}
+		if (jasperExporter.getWrapBreakWord() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.IS_WRAP_BREAK_WORD, jasperExporter.getWrapBreakWord());
+		}
+		if (jasperExporter.getSizeUnit() != null) {
+			jrExporter.setParameter(JRHtmlExporterParameter.SIZE_UNIT, ConstantTransform.sizeUnit(jasperExporter.getSizeUnit()));
+		}
 		return jrExporter;
 	}
 

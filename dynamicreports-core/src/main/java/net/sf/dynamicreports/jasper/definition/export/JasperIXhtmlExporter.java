@@ -22,8 +22,28 @@
 
 package net.sf.dynamicreports.jasper.definition.export;
 
+import net.sf.dynamicreports.jasper.constant.SizeUnit;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperIXhtmlExporter extends JasperIExporter {	
+public interface JasperIXhtmlExporter extends JasperIExporter {
+
+	public Boolean getOutputImagesToDir();
+
+	public String getImagesDirName();
+
+	public String getImagesURI();
+
+	public String getHtmlHeader();
+
+	public String getBetweenPagesHtml();
+
+	public String getHtmlFooter();
+
+	public Boolean getWhitePageBackground();
+
+	public Boolean getWrapBreakWord();
+
+	public SizeUnit getSizeUnit();
 }
