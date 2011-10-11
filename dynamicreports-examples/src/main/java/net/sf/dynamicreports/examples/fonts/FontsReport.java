@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  *
  * This report is working properly only when the font "FreeUniversal" is registered.
- * The font is registered in file fonts.xml and it is located in the root of the classpath.
+ * The font is registered in these files: customfonts.xml and jasperreports_extension.properties. The files are located in the root of the classpath.
  */
 public class FontsReport {
 

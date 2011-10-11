@@ -2,17 +2,6 @@
 
 <fontFamilies>
 
-	<!--
-	<fontFamily name="CustomFontName">
-		<normal>customfont.ttf</normal>
-		<bold>customfont-bold.ttf</bold>
-		<italic>customfont-italic.ttf</italic>
-		<boldItalic>customfont-bolditalic.ttf</boldItalic>
-		<pdfEncoding>Cp1252</pdfEncoding>
-		<pdfEmbedded>true</pdfEmbedded>
-	</fontFamily>
-	-->
-
 	<fontFamily name="SansSerif">
 		<exportFonts>
 			<export key="net.sf.jasperreports.html">Arial, Helvetica, sans-serif</export>
