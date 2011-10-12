@@ -419,6 +419,50 @@ public class TemplateTransform {
 
 	//page
 	protected int getPageWidth() throws DRException {
+		if (isIgnorePageWidth()) {
+			return getDynamicPageWidth();
+		} else {
+			return getStaticPageWidth();
+		}
+	}
+
+	private boolean isIgnorePageWidth() {
+		if (report.getPage().getIgnorePageWidth() != null) {
+			return report.getPage().getIgnorePageWidth();
+		}
+		if (template.getIgnorePageWidth() != null) {
+			return template.getIgnorePageWidth();
+		}
+		return Defaults.getDefaults().isIgnorePageWidth();
+	}
+
+	private int getDynamicPageWidth() throws DRException {
+		int maxPageWidth = 0;
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getTitleBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getPageHeaderBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getPageFooterBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getColumnHeaderBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getColumnFooterBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getDetailBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getLastPageFooterBand(), maxPageWidth);
+		maxPageWidth = getMaxBandWidth(accessor.getBandTransform().getSummaryBand(), maxPageWidth);
+
+		return maxPageWidth + getPageMargin().getLeft() + getPageMargin().getRight();
+	}
+
+	private int getMaxBandWidth(DRIDesignBand band, int maxWidth) throws DRException {
+		if (band == null || band.getList() == null) {
+			return maxWidth;
+		}
+
+		int bandWidth = detectWidth(band.getList());
+		if (bandWidth > maxWidth) {
+			return bandWidth;
+		}
+		return maxWidth;
+	}
+
+	private int getStaticPageWidth() throws DRException {
 		if (accessor.getPageWidth() != null) {
 			return pageWidth(accessor.getPageWidth());
 		}

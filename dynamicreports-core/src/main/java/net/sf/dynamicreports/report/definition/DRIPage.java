@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIPage extends Serializable {
-	
+
 	public Integer getWidth();
 
 	public Integer getHeight();
@@ -42,4 +42,6 @@ public interface DRIPage extends Serializable {
 	public Integer getColumnsPerPage();
 
 	public Integer getColumnSpace();
+
+	public Boolean getIgnorePageWidth();
 }

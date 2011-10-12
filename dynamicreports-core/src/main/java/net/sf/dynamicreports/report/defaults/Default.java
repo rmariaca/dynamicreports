@@ -88,6 +88,7 @@ public class Default {
 	private DRMargin subreportPageMargin;
 	private int pageColumnsPerPage;
 	private int pageColumnSpace;
+	private boolean ignorePageWidth;
 	//column
 	private boolean columnPrintRepeatedDetailValues;
 	private int columnWidth;
@@ -275,6 +276,7 @@ public class Default {
 		this.subreportPageMargin = new DRMargin(0);
 		this.pageColumnsPerPage = 1;
 		this.pageColumnSpace = 0;
+		this.ignorePageWidth = false;
 
 		this.columnPrintRepeatedDetailValues = true;
 		this.columnWidth = 100;
@@ -540,6 +542,10 @@ public class Default {
 
 	public int getPageColumnSpace() {
 		return pageColumnSpace;
+	}
+
+	public boolean isIgnorePageWidth() {
+		return ignorePageWidth;
 	}
 
 	public boolean isColumnPrintRepeatedDetailValues() {

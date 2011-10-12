@@ -126,8 +126,8 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		columnGridTransform.transform();
 		columnTransform.transform();
 		groupTransform.transformHeaderAndFooter();
+		pageTransform.transformPageWidth();
 		subtotalTransform.transform();
-
 		bandTransform.prepareBands();
 	}
 
@@ -145,6 +145,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public TemplateTransform getTemplateTransform() {
 		return templateTransform;
+	}
+
+	public PageTransform getPageTransform() {
+		return pageTransform;
 	}
 
 	public void transformToMainDataset() {

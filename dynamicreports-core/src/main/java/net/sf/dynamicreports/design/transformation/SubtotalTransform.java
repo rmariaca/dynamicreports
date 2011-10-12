@@ -140,7 +140,7 @@ public class SubtotalTransform {
 
 		DRFiller filler = null;
 		if (accessor.getTemplateTransform().getPageColumnsPerPage() > 1) {
-			int fillerWidth = accessor.getBandTransform().getMaxWidth() - accessor.getBandTransform().getMaxColumnWidth();
+			int fillerWidth = accessor.getPageTransform().getMaxBandWidth() - accessor.getPageTransform().getPage().getColumnWidth();
 			filler= new DRFiller();
 			filler.setWidth(fillerWidth);
 		}

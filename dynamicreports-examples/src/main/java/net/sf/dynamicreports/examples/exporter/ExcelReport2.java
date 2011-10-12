@@ -38,11 +38,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ExcelReport2 {
-	
+
 	public ExcelReport2() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			JasperXlsExporterBuilder xlsExporter = export.xlsExporter("c:/report.xls")
@@ -50,14 +50,16 @@ public class ExcelReport2 {
 			                                             .setIgnorePageMargins(true)
 			                                             .setWhitePageBackground(false)
 			                                             .setRemoveEmptySpaceBetweenColumns(true);
-			
+
 			TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType())
 			                                          .setFixedWidth(30)
-			                                          .setStretchWithOverflow(false)			                                          
+			                                          .setStretchWithOverflow(false)
 			                                          .addProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true");
-			
+
 			report()
 			  .setColumnTitleStyle(Templates.columnTitleStyle)
+			  .addProperty(JasperProperty.EXPORT_XLS_FREEZE_ROW, "2")
+			  .ignorePageWidth()
 			  .ignorePagination()
 			  .columns(
 			  	itemColumn,
@@ -66,10 +68,10 @@ public class ExcelReport2 {
 			  .setDataSource(createDataSource())
 			  .toXls(xlsExporter);
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 5; i++) {
@@ -77,7 +79,7 @@ public class ExcelReport2 {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ExcelReport2();
 	}

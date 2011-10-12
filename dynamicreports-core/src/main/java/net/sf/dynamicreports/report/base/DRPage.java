@@ -41,6 +41,7 @@ public class DRPage implements DRIPage {
 	private DRMargin margin;
 	private Integer columnsPerPage;
 	private Integer columnSpace;
+	private Boolean ignorePageWidth;
 
 	public void setPageFormat(PageType pageType, PageOrientation orientation) {
 		Validate.notNull(pageType, "pageType must not be null");
@@ -144,5 +145,13 @@ public class DRPage implements DRIPage {
 			Validate.isTrue(columnSpace >= 0, "columnSpace must be >= 0");
 		}
 		this.columnSpace = columnSpace;
+	}
+
+	public Boolean getIgnorePageWidth() {
+		return ignorePageWidth;
+	}
+
+	public void setIgnorePageWidth(Boolean ignorePageWidth) {
+		this.ignorePageWidth = ignorePageWidth;
 	}
 }

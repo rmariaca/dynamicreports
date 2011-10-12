@@ -79,6 +79,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRMargin pageMargin;
 	private Integer pageColumnsPerPage;
 	private Integer pageColumnSpace;
+	private Boolean ignorePageWidth;
 	//column
 	private Boolean columnPrintRepeatedDetailValues;
 	private Integer columnWidth;
@@ -414,6 +415,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.isTrue(pageColumnSpace >= 0, "pageColumnSpace must be >= 0");
 		}
 		this.pageColumnSpace = pageColumnSpace;
+	}
+
+	public Boolean getIgnorePageWidth() {
+		return ignorePageWidth;
+	}
+
+	public void setIgnorePageWidth(Boolean ignorePageWidth) {
+		this.ignorePageWidth = ignorePageWidth;
 	}
 
 	public Boolean getColumnPrintRepeatedDetailValues() {

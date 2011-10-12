@@ -273,6 +273,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setIgnorePageWidth(Boolean ignorePageWidth) {
+		getObject().setIgnorePageWidth(ignorePageWidth);
+		return this;
+	}
+
 	public ReportTemplateBuilder setColumnPrintRepeatedDetailValues(Boolean columnPrintRepeatedDetailValues) {
 		getObject().setColumnPrintRepeatedDetailValues(columnPrintRepeatedDetailValues);
 		return this;

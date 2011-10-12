@@ -97,6 +97,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Integer getPageColumnSpace();
 
+	public Boolean getIgnorePageWidth();
+
 	public Boolean getColumnPrintRepeatedDetailValues();
 
 	public Integer getColumnWidth();

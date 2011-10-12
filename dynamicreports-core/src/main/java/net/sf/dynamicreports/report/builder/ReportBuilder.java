@@ -117,6 +117,15 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T ignorePageWidth() {
+		return setIgnorePageWidth(true);
+	}
+
+	public T setIgnorePageWidth(Boolean ignorePageWidth) {
+		getObject().getPage().setIgnorePageWidth(ignorePageWidth);
+		return (T) this;
+	}
+
 	public T ignorePagination() {
 		return setIgnorePagination(true);
 	}

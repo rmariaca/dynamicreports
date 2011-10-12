@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.jasper.constant;
 
+import net.sf.jasperreports.engine.export.JRXlsAbstractExporter;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -31,10 +33,10 @@ public class JasperProperty {
 	public static final String TEXT_TRUNCATE_AT_CHAR = "net.sf.jasperreports.text.truncate.at.char";
 	public static final String TEXT_TRUNCATE_SUFFIX = "net.sf.jasperreports.text.truncate.suffix";
 	public static final String TEXT_MEASURER_FACTORY = "net.sf.jasperreports.text.measurer.factory";
-	
+
 	//chart
 	public static final String CHART_THEME = "net.sf.jasperreports.chart.theme";
-	
+
 	//pdf
 	public static final String EXPORT_PDF_TAG_H1 = "net.sf.jasperreports.export.pdf.tag.h1";
 	public static final String EXPORT_PDF_TAG_H2 = "net.sf.jasperreports.export.pdf.tag.h2";
@@ -53,7 +55,7 @@ public class JasperProperty {
 	public static final String EXPORT_PDF_128_BIT_KEY = "net.sf.jasperreports.export.pdf.128.bit.key";
 	public static final String EXPORT_PDF_TAGGED = "net.sf.jasperreports.export.pdf.tagged";
 	public static final String EXPORT_PDF_TAG_LANGUAGE = "net.sf.jasperreports.export.pdf.tag.language";
-	
+
 	//html
 	public static final String EXPORT_HTML_ID = "net.sf.jasperreports.export.html.id";
 	public static final String EXPORT_HTML_FRAMES_AS_NESTED_TABLES = "net.sf.jasperreports.export.html.frames.as.nested.tables";
@@ -62,11 +64,11 @@ public class JasperProperty {
 	public static final String EXPORT_HTML_WRAP_BREAK_WORD = "net.sf.jasperreports.export.html.wrap.break.word";
 	public static final String EXPORT_HTML_SIZE_UNIT = "net.sf.jasperreports.export.html.size.unit";
 	public static final String EXPORT_HTML_USING_IMAGES_TO_ALIGN = "net.sf.jasperreports.export.html.using.images.to.align";
-	
+
 	//export
 	public static final String EXPORT_CHARACTER_ENCODING = "net.sf.jasperreports.export.character.encoding";
 	public static final String EXPORT_GRAPHICD2D_MIN_JOB_SIZE = "net.sf.jasperreports.export.graphics2d.min.job.size";
-	
+
 	//xls
 	public static final String EXPORT_XLS_CREATE_CUSTOM_PALETTE = "net.sf.jasperreports.export.xls.create.custom.palette";
 	public static final String EXPORT_XLS_ONE_PAGE_PER_SHEET = "net.sf.jasperreports.export.xls.one.page.per.sheet";
@@ -79,10 +81,26 @@ public class JasperProperty {
 	public static final String EXPORT_XLS_COLLAPSE_ROW_SPAN = "net.sf.jasperreports.export.xls.collapse.row.span";
 	public static final String EXPORT_XLS_IGNORE_CELL_BORDER = "net.sf.jasperreports.export.xls.ignore.cell.border";
 	public static final String EXPORT_XLS_MAX_ROWS_PER_SHEET = "net.sf.jasperreports.export.xls.max.rows.per.sheet";
-	
+	/**
+	 * @see JRXlsAbstractExporter#PROPERTY_FREEZE_ROW
+	 */
+	public static final String EXPORT_XLS_FREEZE_ROW = "net.sf.jasperreports.export.xls.freeze.row";
+	/**
+	 * @see JRXlsAbstractExporter#PROPERTY_FREEZE_COLUMN
+	 */
+	public static final String EXPORT_XLS_FREEZE_COLUMN = "net.sf.jasperreports.export.xls.freeze.column";
+	/**
+	 * @see JRXlsAbstractExporter#PROPERTY_FREEZE_ROW_EDGE
+	 */
+	public static final String EXPORT_XLS_FREEZE_ROW_EDGE = "net.sf.jasperreports.export.xls.freeze.row.edge";
+	/**
+	 * @see JRXlsAbstractExporter#PROPERTY_FREEZE_COLUMN_EDGE
+	 */
+	public static final String EXPORT_XLS_FREEZE_COLUMN_EDGE = "net.sf.jasperreports.export.xls.freeze.column.edge";
+
 	//xml
 	public static final String EXPORT_XML_VALIDATION = "net.sf.jasperreports.export.xml.validation";
-	
+
 	//csv
 	public static final String EXPORT_CSV_FIELD_DELIMITER = "net.sf.jasperreports.export.csv.field.delimiter";
 	public static final String EXPORT_CSV_RECORD_DELIMITER = "net.sf.jasperreports.export.csv.record.delimiter";

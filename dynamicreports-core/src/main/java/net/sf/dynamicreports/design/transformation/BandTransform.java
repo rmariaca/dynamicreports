@@ -43,8 +43,6 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class BandTransform {
 	private DesignTransformAccessor accessor;
-	private int maxWidth;
-	private int maxColumnWidth;
 
 	private DRDesignBand titleBand;
 	private DRDesignBand pageHeaderBand;
@@ -66,8 +64,6 @@ public class BandTransform {
 
 	public void transform() throws DRException {
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
-		maxWidth = templateTransform.getPageWidth() - templateTransform.getPageMargin().getLeft() - templateTransform.getPageMargin().getRight();
-		maxColumnWidth = accessor.getPage().getColumnWidth();
 
 		DRIReport report = accessor.getReport();
 
@@ -120,6 +116,8 @@ public class BandTransform {
 	public void prepareBands() throws DRException {
 		BandComponentsTransform bandComponents = new BandComponentsTransform(accessor);
 		DRITemplateDesign<?> templateDesign = accessor.getReport().getTemplateDesign();
+		int maxWidth = accessor.getPageTransform().getMaxBandWidth();
+		int maxColumnWidth = accessor.getPageTransform().getPage().getColumnWidth();
 
 		titleBand = bandComponents.prepareBand(titleBand, maxWidth, templateDesign.getTitleComponentsCount());
 		pageHeaderBand = bandComponents.prepareBand(pageHeaderBand, maxWidth, templateDesign.getPageHeaderComponentsCount());
@@ -186,14 +184,6 @@ public class BandTransform {
 		}
 
 		return designBand;
-	}
-
-	protected int getMaxWidth() {
-		return maxWidth;
-	}
-
-	protected int getMaxColumnWidth() {
-		return maxColumnWidth;
 	}
 
 	public DRDesignBand getTitleBand() {

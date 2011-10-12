@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
+import net.sf.dynamicreports.jasper.constant.JasperProperty;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -36,11 +37,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ExcelReport {
-	
+
 	public ExcelReport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			JasperXlsExporterBuilder xlsExporter = export.xlsExporter("c:/report.xls")
@@ -48,9 +49,11 @@ public class ExcelReport {
 			                                             .setIgnorePageMargins(true)
 			                                             .setWhitePageBackground(false)
 			                                             .setRemoveEmptySpaceBetweenColumns(true);
-			
+
 			report()
 			  .setColumnTitleStyle(Templates.columnTitleStyle)
+			  .addProperty(JasperProperty.EXPORT_XLS_FREEZE_ROW, "2")
+			  .ignorePageWidth()
 			  .ignorePagination()
 			  .columns(
 			  	col.column("Item",       "item",      type.stringType()),
@@ -59,10 +62,10 @@ public class ExcelReport {
 			  .setDataSource(createDataSource())
 			  .toXls(xlsExporter);
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 50; i++) {
@@ -70,7 +73,7 @@ public class ExcelReport {
 		}
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ExcelReport();
 	}

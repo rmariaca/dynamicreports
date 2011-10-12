@@ -33,22 +33,21 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class PageTransform {
 	private TemplateTransform templateTransform;
 	private DRDesignPage page;
-	
-	public PageTransform(DesignTransformAccessor accessor) {		
+	private int maxBandWidth;
+
+	public PageTransform(DesignTransformAccessor accessor) {
 		this.templateTransform = accessor.getTemplateTransform();
 		this.page = new DRDesignPage();
 	}
-	
+
 	public void transform() throws DRException {
-		this.page.setWidth(templateTransform.getPageWidth());
 		this.page.setHeight(templateTransform.getPageHeight());
 		this.page.setOrientation(templateTransform.getPageOrientation());
 		this.page.setMargin(margin(templateTransform.getPageMargin()));
 		this.page.setColumnsPerPage(templateTransform.getPageColumnsPerPage());
-		this.page.setColumnSpace(templateTransform.getPageColumnSpace());		
-		this.page.setColumnWidth(templateTransform.getPageColumnWidth(this.page));
+		this.page.setColumnSpace(templateTransform.getPageColumnSpace());
 	}
-	
+
 	private DRDesignMargin margin(DRIMargin margin) {
 		DRDesignMargin designMargin = new DRDesignMargin();
 		designMargin.setTop(margin.getTop());
@@ -57,8 +56,19 @@ public class PageTransform {
 		designMargin.setRight(margin.getRight());
 		return designMargin;
 	}
-	
+
 	public DRDesignPage getPage() {
 		return page;
-	}	
+	}
+
+	public void transformPageWidth() throws DRException {
+		int pageWidth = templateTransform.getPageWidth();
+		maxBandWidth = pageWidth - getPage().getMargin().getLeft() - getPage().getMargin().getRight();
+		this.page.setWidth(pageWidth);
+		this.page.setColumnWidth(templateTransform.getPageColumnWidth(this.page));
+	}
+
+	public int getMaxBandWidth() {
+		return maxBandWidth;
+	}
 }

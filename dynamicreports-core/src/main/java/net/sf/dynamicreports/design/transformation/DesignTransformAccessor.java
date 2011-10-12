@@ -45,6 +45,8 @@ public interface DesignTransformAccessor {
 
 	public AbstractExpressionTransform getExpressionTransform();
 
+	public PageTransform getPageTransform();
+
 	public BandTransform getBandTransform();
 
 	public ComponentTransform getComponentTransform();
