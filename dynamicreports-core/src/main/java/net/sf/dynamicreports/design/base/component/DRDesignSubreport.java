@@ -30,6 +30,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
  */
 public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSubreport {
 	private DRIDesignExpression reportExpression;
+	private DRIDesignExpression parametersExpression;
 	private DRIDesignExpression connectionExpression;
 	private DRIDesignExpression dataSourceExpression;
 	private Boolean runToBottom;
@@ -44,6 +45,14 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 
 	public void setReportExpression(DRIDesignExpression reportExpression) {
 		this.reportExpression = reportExpression;
+	}
+
+	public DRIDesignExpression getParametersExpression() {
+		return parametersExpression;
+	}
+
+	public void setParametersExpression(DRIDesignExpression parametersExpression) {
+		this.parametersExpression = parametersExpression;
 	}
 
 	public DRIDesignExpression getConnectionExpression() {

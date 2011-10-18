@@ -342,6 +342,7 @@ public class ComponentTransform {
 		designSubreport.setWidth(accessor.getTemplateTransform().getSubreportWidth(subreport));
 		designSubreport.setHeight(accessor.getTemplateTransform().getSubreportHeight(subreport));
 		designSubreport.setReportExpression(accessor.getExpressionTransform().transformExpression(subreport.getReportExpression()));
+		designSubreport.setParametersExpression(accessor.getExpressionTransform().transformExpression(subreport.getParametersExpression()));
 		designSubreport.setConnectionExpression(accessor.getExpressionTransform().transformExpression(subreport.getConnectionExpression()));
 		designSubreport.setDataSourceExpression(accessor.getExpressionTransform().transformExpression(subreport.getDataSourceExpression()));
 		designSubreport.setRunToBottom(subreport.getRunToBottom());

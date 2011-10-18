@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.base.component.DRSubreport;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
@@ -55,6 +56,17 @@ public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder
 
 	public SubreportBuilder setReport(DRIExpression<?> reportExpression) {
 		getObject().setReportExpression(reportExpression);
+		return this;
+	}
+
+	//parameters
+	public SubreportBuilder setParameters(Map<String, Object> parameters) {
+		getObject().setParametersExpression(Expressions.value(parameters));
+		return this;
+	}
+
+	public SubreportBuilder setParameters(DRIExpression<Map<String, Object>> parametersExpression) {
+		getObject().setParametersExpression(parametersExpression);
 		return this;
 	}
 

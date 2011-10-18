@@ -29,7 +29,6 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
-import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
@@ -54,6 +53,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpre
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
@@ -356,15 +356,15 @@ public class ComponentTransform {
 			accessor.getExpressionTransform().addComplexExpression(subreportExpression);
 			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreportExpression));
 
-			SubreportParametersExpression parametersExpression = new SubreportParametersExpression(subreportExpression);
-			accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+			SubreportParametersExpression parametersExpression = new SubreportParametersExpression(subreportExpression, subreport.getParametersExpression());
+			accessor.getExpressionTransform().addComplexExpression(parametersExpression);
 			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
 		}
 		else {
 			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreport.getReportExpression()));
 
-			JasperSubreportParametersExpression parametersExpression = new JasperSubreportParametersExpression();
-			accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+			JasperSubreportParametersExpression parametersExpression = new JasperSubreportParametersExpression(subreport.getParametersExpression());
+			accessor.getExpressionTransform().addComplexExpression(parametersExpression);
 			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
 		}
 
@@ -490,6 +490,10 @@ public class ComponentTransform {
 			return reportDesigns.get(reportBuilder);
 		}
 
+		public ReportBuilder<?> getReportBuilder() {
+			return reportBuilder;
+		}
+
 		@Override
 		public String getName() {
 			return name;
@@ -500,16 +504,36 @@ public class ComponentTransform {
 		}
 	}
 
-	private class SubreportParametersExpression extends AbstractDesignSimpleExpression {
+	private class SubreportParametersExpression extends AbstractDesignComplexExpression {
 		private SubreportExpression subreportExpression;
 
-		public SubreportParametersExpression(SubreportExpression subreportExpression) {
+		public SubreportParametersExpression(SubreportExpression subreportExpression, DRIDesignExpression parametersExpression) {
 			super(ReportUtils.generateUniqueName("subreportParametersExpression"));
 			this.subreportExpression = subreportExpression;
+			if (parametersExpression != null) {
+				addExpression(parametersExpression);
+			}
 		}
 
-		public Object evaluate(ReportParameters reportParameters) {
-			Map<String, Object> parameters = new HashMap<String, Object>(subreportExpression.getReportDesign().getParameters());
+		@SuppressWarnings("unchecked")
+		public Object evaluate(List<?> values, ReportParameters reportParameters) {
+			Map<String, Object> parameters = null;
+			if (!values.isEmpty()) {
+				parameters = (Map<String, Object>) values.get(0);
+			}
+			else {
+				parameters = new HashMap<String, Object>();
+			}
+			if (subreportExpression.getReportBuilder() instanceof JasperReportBuilder) {
+				try {
+					parameters.putAll(((JasperReportBuilder) subreportExpression.getReportBuilder()).getJasperParameters());
+				} catch (DRException e) {
+					if (log.isErrorEnabled()) {
+						log.error("Error encountered while creating subreport design", e);
+					}
+				}
+			}
+			parameters.putAll(subreportExpression.getReportDesign().getParameters());
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
 		}
@@ -519,16 +543,26 @@ public class ComponentTransform {
 		}
 	}
 
-	private class JasperSubreportParametersExpression extends AbstractDesignSimpleExpression {
+	private class JasperSubreportParametersExpression extends AbstractDesignComplexExpression {
 
-		public JasperSubreportParametersExpression() {
+		public JasperSubreportParametersExpression(DRIDesignExpression parametersExpression) {
 			super(ReportUtils.generateUniqueName("jasperSubreportParametersExpression"));
+			if (parametersExpression != null) {
+				addExpression(parametersExpression);
+			}
 		}
 
-		public Object evaluate(ReportParameters reportParameters) {
-			Map<Object, Object> map = new HashMap<Object, Object>();
-			map.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
-			return map;
+		@SuppressWarnings("unchecked")
+		public Object evaluate(List<?> values, ReportParameters reportParameters) {
+			Map<String, Object> parameters = null;
+			if (!values.isEmpty()) {
+				parameters = (Map<String, Object>) values.get(0);
+			}
+			else {
+				parameters = new HashMap<String, Object>();
+			}
+			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
+			return parameters;
 		}
 
 		public Class<?> getValueClass() {

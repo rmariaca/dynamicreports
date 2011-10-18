@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -32,6 +33,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 public interface DRISubreport extends DRIDimensionComponent {
 
 	public DRIExpression<?> getReportExpression();
+
+	public DRIExpression<Map<String, Object>> getParametersExpression();
 
 	public DRIExpression<Connection> getConnectionExpression();
 

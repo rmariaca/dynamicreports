@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.base.component;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
@@ -37,6 +38,7 @@ public class DRSubreport extends DRDimensionComponent implements DRISubreport {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<?> reportExpression;
+	private DRIExpression<Map<String, Object>> parametersExpression;
 	private DRIExpression<Connection> connectionExpression;
 	private DRIExpression<?> dataSourceExpression;
 	private Boolean runToBottom;
@@ -48,6 +50,14 @@ public class DRSubreport extends DRDimensionComponent implements DRISubreport {
 	public void setReportExpression(DRIExpression<?> reportExpression) {
 		Validate.notNull(reportExpression, "reportExpression must not be null");
 		this.reportExpression = reportExpression;
+	}
+
+	public DRIExpression<Map<String, Object>> getParametersExpression() {
+		return parametersExpression;
+	}
+
+	public void setParametersExpression(DRIExpression<Map<String, Object>> parametersExpression) {
+		this.parametersExpression = parametersExpression;
 	}
 
 	public DRIExpression<Connection> getConnectionExpression() {

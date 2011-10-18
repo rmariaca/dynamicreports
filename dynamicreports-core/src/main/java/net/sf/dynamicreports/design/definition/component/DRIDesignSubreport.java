@@ -31,6 +31,8 @@ public interface DRIDesignSubreport extends DRIDesignComponent {
 
 	public DRIDesignExpression getReportExpression();
 
+	public DRIDesignExpression getParametersExpression();
+
 	public DRIDesignExpression getConnectionExpression();
 
 	public DRIDesignExpression getDataSourceExpression();

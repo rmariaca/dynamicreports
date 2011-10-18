@@ -121,15 +121,25 @@ public class ReportTransform {
 	}
 
 	private <T> void addParameter(String name, Class<T> parameterClass, T value) {
-		JRDesignParameter jrParameter = new JRDesignParameter();
-		jrParameter.setName(name);
-		jrParameter.setValueClass(parameterClass);
-		try {
-			accessor.getDesign().addParameter(jrParameter);
-		} catch (JRException e) {
-			throw new JasperDesignException("Registration failed for parameter \"" + name + "\"", e);
+		if (!accessor.getDesign().getParametersMap().containsKey(name)) {
+			try {
+				JRDesignParameter jrParameter = new JRDesignParameter();
+				jrParameter.setName(name);
+				jrParameter.setValueClass(parameterClass);
+				accessor.getDesign().addParameter(jrParameter);
+			} catch (JRException e) {
+				throw new JasperDesignException("Registration failed for parameter \"" + name + "\"", e);
+			}
 		}
-		accessor.getParameters().put(jrParameter.getName(), value);
+		else {
+			JRParameter jrParameter = accessor.getDesign().getParametersMap().get(name);
+			if (!parameterClass.isAssignableFrom(jrParameter.getValueClass())) {
+				throw new JasperDesignException("Registration failed for parameter \"" + name + "\", parameter is not instance of " + parameterClass.getName());
+			}
+		}
+		if (value != null) {
+			accessor.getParameters().put(name, value);
+		}
 	}
 
 	private void addParameter(DRIDesignParameter parameter) {
@@ -138,7 +148,9 @@ public class ReportTransform {
 				accessor.getDesign().addParameter(parameter(parameter));
 			}
 			accessor.getCustomValues().addValueType(parameter.getName(), ValueType.PARAMETER);
-			accessor.getParameters().put(parameter.getName(), parameter.getValue());
+			if (parameter.getValue() != null) {
+				accessor.getParameters().put(parameter.getName(), parameter.getValue());
+			}
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for parameter \"" + parameter.getName() + "\"", e);
 		}
