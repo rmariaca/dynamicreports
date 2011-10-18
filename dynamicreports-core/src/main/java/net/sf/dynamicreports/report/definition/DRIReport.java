@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.definition;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -64,6 +65,8 @@ public interface DRIReport extends Serializable {
 	public List<? extends DRISubtotal<?>> getSubtotals();
 
 	public List<? extends DRIParameter<?>> getParameters();
+
+	public Map<String, Object> getParameterValues();
 
 	public List<DRIScriptlet> getScriptlets();
 

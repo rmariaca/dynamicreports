@@ -109,11 +109,9 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private JRVirtualizer virtualizer;
 	private Integer startPageNumber;
 	private Map<String, Object> parameters;
-	private Map<String, Object> additionalParameters;
 
 	public JasperReportBuilder() {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
-		this.additionalParameters = new HashMap<String, Object>();
 	}
 
 	protected void setStartPageNumber(Integer startPageNumber) throws JRException {
@@ -183,15 +181,17 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
+	@Override
 	public JasperReportBuilder setParameter(String name, Object value) {
-		additionalParameters.put(name, value);
+		super.setParameter(name, value);
 		parameters = null;
 		jasperPrint = null;
 		return this;
 	}
 
+	@Override
 	public JasperReportBuilder setParameters(Map<String, Object> parameters) {
-		additionalParameters = parameters;
+		super.setParameters(parameters);
 		this.parameters = null;
 		jasperPrint = null;
 		return this;
@@ -239,9 +239,10 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public Map<String, Object> getJasperParameters() throws DRException {
 		if (parameters == null) {
 			parameters = new HashMap<String, Object>();
-			parameters.putAll(toJasperReportDesign().getParameters());
-			if (additionalParameters != null) {
-				parameters.putAll(additionalParameters);
+			JasperReportDesign jasperReportDesign = toJasperReportDesign();
+			parameters.putAll(jasperReportDesign.getParameters());
+			if (jasperReportDesign.getParameterValues() != null) {
+				parameters.putAll(jasperReportDesign.getParameterValues());
 			}
 		}
 		return parameters;

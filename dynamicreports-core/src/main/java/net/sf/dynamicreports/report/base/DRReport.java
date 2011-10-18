@@ -23,8 +23,10 @@
 package net.sf.dynamicreports.report.base;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -63,6 +65,7 @@ public class DRReport implements DRIReport {
 	private List<DRField<?>> fields;
 	private List<DRVariable<?>> variables;
 	private List<DRParameter<?>> parameters;
+	private Map<String, Object> parameterValues;
 	private List<DRIScriptlet> scriptlets;
 	private Properties properties;
 	private DRQuery query;
@@ -275,6 +278,22 @@ public class DRReport implements DRIReport {
 	public void addParameter(DRParameter<?> parameter) {
 		Validate.notNull(parameter, "parameter must not be null");
 		this.parameters.add(parameter);
+	}
+
+	public Map<String, Object> getParameterValues() {
+		return parameterValues;
+	}
+
+	public void addParameterValue(String name, Object value) {
+		Validate.notNull(name, "parameter name must not be null");
+		if (parameterValues == null) {
+			parameterValues = new HashMap<String, Object>();
+		}
+		this.parameterValues.put(name, value);
+	}
+
+	public void setParameterValues(Map<String, Object> parameterValues) {
+		this.parameterValues = parameterValues;
 	}
 
 	public List<DRIScriptlet> getScriptlets() {

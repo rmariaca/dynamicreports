@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.definition;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -76,6 +77,8 @@ public interface DRIDesignReport {
 	public DRIDesignExpression getFilterExpression();
 
 	public Collection<DRIDesignParameter> getParameters();
+
+	public Map<String, Object> getParameterValues();
 
 	public Collection<DRIScriptlet> getScriptlets();
 

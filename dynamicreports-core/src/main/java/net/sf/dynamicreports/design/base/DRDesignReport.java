@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -274,6 +275,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public Collection<DRIDesignParameter> getParameters() {
 		return reportTransform.getParameters();
+	}
+
+	public Map<String, Object> getParameterValues() {
+		return report.getParameterValues();
 	}
 
 	public Collection<DRIScriptlet> getScriptlets() {

@@ -180,6 +180,10 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return parameters;
 	}
 
+	public Map<String, Object> getParameterValues() {
+		return report.getParameterValues();
+	}
+
 	public Integer getStartPageNumber() {
 		return startPageNumber;
 	}

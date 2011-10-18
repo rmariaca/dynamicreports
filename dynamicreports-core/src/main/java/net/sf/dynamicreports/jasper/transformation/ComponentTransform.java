@@ -53,7 +53,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpre
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
@@ -490,10 +489,6 @@ public class ComponentTransform {
 			return reportDesigns.get(reportBuilder);
 		}
 
-		public ReportBuilder<?> getReportBuilder() {
-			return reportBuilder;
-		}
-
 		@Override
 		public String getName() {
 			return name;
@@ -524,16 +519,10 @@ public class ComponentTransform {
 			else {
 				parameters = new HashMap<String, Object>();
 			}
-			if (subreportExpression.getReportBuilder() instanceof JasperReportBuilder) {
-				try {
-					parameters.putAll(((JasperReportBuilder) subreportExpression.getReportBuilder()).getJasperParameters());
-				} catch (DRException e) {
-					if (log.isErrorEnabled()) {
-						log.error("Error encountered while creating subreport design", e);
-					}
-				}
-			}
 			parameters.putAll(subreportExpression.getReportDesign().getParameters());
+			if (subreportExpression.getReportDesign().getParameterValues() != null) {
+				parameters.putAll(subreportExpression.getReportDesign().getParameterValues());
+			}
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
 		}

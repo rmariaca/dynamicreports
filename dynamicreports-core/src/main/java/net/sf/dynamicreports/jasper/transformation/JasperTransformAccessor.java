@@ -43,6 +43,8 @@ public interface JasperTransformAccessor {
 
 	public Map<String, Object> getParameters();
 
+	public Map<String, Object> getParameterValues();
+
 	public Integer getStartPageNumber();
 
 	public ReportParameters getMasterReportParameters();

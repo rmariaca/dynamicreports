@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -266,6 +267,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		for (ParameterBuilder<?> parameter : parameters) {
 			getObject().addParameter(parameter.build());
 		}
+		return (T) this;
+	}
+
+	public T setParameter(String name, Object value) {
+		getObject().addParameterValue(name, value);
+		return (T) this;
+	}
+
+	public T setParameters(Map<String, Object> parameters) {
+		getObject().setParameterValues(parameters);
 		return (T) this;
 	}
 
