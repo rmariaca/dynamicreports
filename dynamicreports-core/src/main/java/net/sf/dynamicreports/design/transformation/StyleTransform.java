@@ -66,7 +66,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class StyleTransform {
 	private DesignTransformAccessor accessor;
 	private Map<String, DRIDesignStyle> styles;
-	private Map<DRIStyle, DRDesignStyle> designStyles;
+	private Map<String, DRDesignStyle> designStyles;
 
 	public StyleTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -75,7 +75,7 @@ public class StyleTransform {
 
 	private void init() {
 		styles = new LinkedHashMap<String, DRIDesignStyle>();
-		designStyles = new HashMap<DRIStyle, DRDesignStyle>();
+		designStyles = new HashMap<String, DRDesignStyle>();
 	}
 
 	private DRDesignStyle transformStyle(DRIStyle style, boolean textStyle) throws DRException {
@@ -86,8 +86,9 @@ public class StyleTransform {
 		if (style == null) {
 			return getDefaultStyle(defaultStyleType);
 		}
-		if (designStyles.containsKey(style)) {
-			return designStyles.get(style);
+		String styleName = style.hashCode() + "_" + textStyle;
+		if (designStyles.containsKey(styleName)) {
+			return designStyles.get(styleName);
 		}
 
 		DRDesignStyle designStyle = style(style, textStyle, defaultStyleType);
@@ -108,7 +109,7 @@ public class StyleTransform {
 				designStyle.getFont().setPdfEmbedded(Defaults.getDefaults().getFont().getPdfEmbedded());
 			}
 		}
-		addStyle(style, designStyle);
+		addStyle(styleName, style, designStyle);
 		return designStyle;
 	}
 
@@ -245,7 +246,7 @@ public class StyleTransform {
 		}
 	}
 
-	private void addStyle(DRIStyle style, DRDesignStyle designStyle) {
+	private void addStyle(String styleName, DRIStyle style, DRDesignStyle designStyle) {
 		if (designStyle == null) {
 			return;
 		}
@@ -256,7 +257,7 @@ public class StyleTransform {
 			return;
 		}
 		styles.put(designStyle.getName(), designStyle);
-		designStyles.put(style, designStyle);
+		designStyles.put(styleName, designStyle);
 	}
 
 	public void copyStyle(DRBaseStyle toStyle, DRIBaseStyle fromStyle) {
