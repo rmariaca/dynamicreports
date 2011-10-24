@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -108,6 +109,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setFloatColumnFooter(Boolean floatColumnFooter) {
 		getObject().setFloatColumnFooter(floatColumnFooter);
+		return this;
+	}
+
+	public ReportTemplateBuilder setPrintOrder(Orientation printOrder) {
+		getObject().setPrintOrder(printOrder);
 		return this;
 	}
 

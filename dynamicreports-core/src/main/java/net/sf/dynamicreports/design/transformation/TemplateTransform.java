@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
@@ -219,6 +220,16 @@ public class TemplateTransform {
 			return template.getFloatColumnFooter();
 		}
 		return Defaults.getDefaults().isFloatColumnFooter();
+	}
+
+	public Orientation getPrintOrder() {
+		if (report.getPrintOrder() != null) {
+			return report.getPrintOrder();
+		}
+		if (template.getPrintOrder() != null) {
+			return template.getPrintOrder();
+		}
+		return Defaults.getDefaults().getPrintOrder();
 	}
 
 	public String getFieldDescription(DRIField<?> field) {

@@ -30,6 +30,7 @@ import java.util.Locale;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -56,6 +57,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getSummaryWithPageHeaderAndFooter();
 
 	public Boolean getFloatColumnFooter();
+
+	public Orientation getPrintOrder();
 
 	public Boolean getUseFieldNameAsDescription();
 

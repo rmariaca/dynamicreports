@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
@@ -174,6 +175,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T setFloatColumnFooter(Boolean floatColumnFooter) {
 		getObject().setFloatColumnFooter(floatColumnFooter);
+		return (T) this;
+	}
+
+	public T setPrintOrder(Orientation printOrder) {
+		getObject().setPrintOrder(printOrder);
 		return (T) this;
 	}
 

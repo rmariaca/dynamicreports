@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -87,6 +88,8 @@ public interface DRIReport extends Serializable {
 	public Boolean getSummaryWithPageHeaderAndFooter();
 
 	public Boolean getFloatColumnFooter();
+
+	public Orientation getPrintOrder();
 
 	public Boolean getUseFieldNameAsDescription();
 

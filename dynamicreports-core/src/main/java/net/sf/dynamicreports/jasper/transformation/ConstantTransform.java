@@ -86,6 +86,7 @@ import net.sf.jasperreports.engine.type.LineSpacingEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.engine.type.PositionTypeEnum;
+import net.sf.jasperreports.engine.type.PrintOrderEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
 import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.type.RunDirectionEnum;
@@ -916,6 +917,17 @@ public class ConstantTransform {
 			return TabStopAlignEnum.RIGHT;
 		default:
 			throw new JasperDesignException("TabStopAlignment " + alignment.name() + " not supported");
+		}
+	}
+
+	protected static PrintOrderEnum printOrder(Orientation printOrder) {
+		switch (printOrder) {
+		case HORIZONTAL:
+			return PrintOrderEnum.HORIZONTAL;
+		case VERTICAL:
+			return PrintOrderEnum.VERTICAL;
+		default:
+			throw new JasperDesignException("PrintOrder " + printOrder.name() + " not supported");
 		}
 	}
 }

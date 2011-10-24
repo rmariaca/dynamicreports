@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
+import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.SplitType;
@@ -57,6 +58,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;
+	private Orientation printOrder;
 	private Boolean useFieldNameAsDescription;
 	//style
 	private Boolean highlightDetailOddRows;
@@ -229,6 +231,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setFloatColumnFooter(Boolean floatColumnFooter) {
 		this.floatColumnFooter = floatColumnFooter;
+	}
+
+	public Orientation getPrintOrder() {
+		return printOrder;
+	}
+
+	public void setPrintOrder(Orientation printOrder) {
+		this.printOrder = printOrder;
 	}
 
 	public Boolean getUseFieldNameAsDescription() {
