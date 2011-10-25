@@ -189,6 +189,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setLanguage(String language) {
+		getObject().setLanguage(language);
+		return (T) this;
+	}
+
 	public T setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
 		return (T) this;

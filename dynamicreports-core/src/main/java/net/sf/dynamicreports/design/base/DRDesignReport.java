@@ -271,6 +271,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return templateTransform.getColumnDirection();
 	}
 
+	public String getLanguage() {
+		return templateTransform.getLanguage();
+	}
+
 	public boolean isTableOfContents() {
 		return templateTransform.isTableOfContents();
 	}

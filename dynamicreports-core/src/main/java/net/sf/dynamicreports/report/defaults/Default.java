@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.constant.Language;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -69,6 +70,7 @@ public class Default {
 	private boolean floatColumnFooter;
 	private Orientation printOrder;
 	private RunDirection columnDirection;
+	private String language;
 	private boolean useFieldNameAsDescription;
 	//style
 	private boolean highlightDetailOddRows;
@@ -252,6 +254,7 @@ public class Default {
 		this.floatColumnFooter = false;
 		this.printOrder = Orientation.VERTICAL;
 		this.columnDirection = RunDirection.LEFT_TO_RIGHT;
+		this.language = Language.JAVA;
 		this.useFieldNameAsDescription = true;
 
 		this.highlightDetailOddRows = false;
@@ -472,6 +475,10 @@ public class Default {
 
 	public RunDirection getColumnDirection() {
 		return columnDirection;
+	}
+
+	public String getLanguage() {
+		return language;
 	}
 
 	public boolean isUseFieldNameAsDescription() {

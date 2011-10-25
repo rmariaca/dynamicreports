@@ -79,6 +79,7 @@ public class DRReport implements DRIReport {
 	private Boolean floatColumnFooter;
 	private Orientation printOrder;
 	private RunDirection columnDirection;
+	private String language;
 	private Boolean useFieldNameAsDescription;
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -408,6 +409,14 @@ public class DRReport implements DRIReport {
 
 	public void setColumnDirection(RunDirection columnDirection) {
 		this.columnDirection = columnDirection;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public Boolean getUseFieldNameAsDescription() {

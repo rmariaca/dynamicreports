@@ -243,6 +243,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getColumnDirection();
 	}
 
+	public String getLanguage() {
+		if (report.getLanguage() != null) {
+			return report.getLanguage();
+		}
+		if (template.getLanguage() != null) {
+			return template.getLanguage();
+		}
+		return Defaults.getDefaults().getLanguage();
+	}
+
 	public String getFieldDescription(DRIField<?> field) {
 		if (field.getDescription() != null) {
 			return field.getDescription();

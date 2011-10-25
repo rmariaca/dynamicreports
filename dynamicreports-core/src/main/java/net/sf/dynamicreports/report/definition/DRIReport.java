@@ -94,6 +94,8 @@ public interface DRIReport extends Serializable {
 
 	public RunDirection getColumnDirection();
 
+	public String getLanguage();
+
 	public Boolean getUseFieldNameAsDescription();
 
 	public DRIStyle getTextStyle();

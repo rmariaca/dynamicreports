@@ -63,6 +63,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public RunDirection getColumnDirection();
 
+	public String getLanguage();
+
 	public Boolean getUseFieldNameAsDescription();
 
 	public Boolean getHighlightDetailOddRows();

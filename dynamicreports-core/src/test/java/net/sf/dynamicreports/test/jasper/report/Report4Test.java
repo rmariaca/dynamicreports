@@ -25,6 +25,7 @@ package net.sf.dynamicreports.test.jasper.report;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.Language;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
@@ -42,6 +43,7 @@ public class Report4Test extends AbstractJasperPositionTest {
 		rb.setPageColumnsPerPage(2)
 			.setPrintOrder(Orientation.HORIZONTAL)
 			.setColumnDirection(RunDirection.RIGHT_TO_LEFT)
+			.setLanguage(Language.GROOVY)
 			.columns(
 				column1 = col.column("Column1", "field1", Integer.class));
 	}

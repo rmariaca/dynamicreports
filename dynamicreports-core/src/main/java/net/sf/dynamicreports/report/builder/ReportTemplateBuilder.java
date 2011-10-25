@@ -123,6 +123,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setLanguage(String language) {
+		getObject().setLanguage(language);
+		return this;
+	}
+
 	public ReportTemplateBuilder setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
 		return this;

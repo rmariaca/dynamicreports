@@ -76,6 +76,8 @@ public interface DRIDesignReport {
 
 	public RunDirection getColumnDirection();
 
+	public String getLanguage();
+
 	public boolean isTableOfContents();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();

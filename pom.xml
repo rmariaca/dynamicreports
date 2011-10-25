@@ -61,7 +61,8 @@
 		<junitVersion>4.0</junitVersion>
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
 		<xalanVersion>2.7.1</xalanVersion>
-		<velocityVersion>1.7</velocityVersion>
+		<groovyVersion>1.7.5</groovyVersion>
+		<velocityVersion>1.7</velocityVersion>		
 	</properties>
 
 	<dependencyManagement>
@@ -159,6 +160,13 @@
 				<groupId>xalan</groupId>
 				<artifactId>xalan</artifactId>
 				<version>${xalanVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-all</artifactId>
+				<version>${groovyVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>
