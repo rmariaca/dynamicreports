@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -59,6 +60,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getFloatColumnFooter();
 
 	public Orientation getPrintOrder();
+
+	public RunDirection getColumnDirection();
 
 	public Boolean getUseFieldNameAsDescription();
 

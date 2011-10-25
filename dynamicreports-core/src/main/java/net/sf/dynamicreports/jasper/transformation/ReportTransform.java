@@ -88,6 +88,7 @@ public class ReportTransform {
 		design.setSummaryWithPageHeaderAndFooter(report.isSummaryWithPageHeaderAndFooter());
 		design.setFloatColumnFooter(report.isFloatColumnFooter());
 		design.setPrintOrder(ConstantTransform.printOrder(report.getPrintOrder()));
+		design.setColumnDirection(ConstantTransform.runDirection(report.getColumnDirection()));
 
 		for (DRIDesignParameter parameter : report.getParameters()) {
 			addParameter(parameter);

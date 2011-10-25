@@ -37,6 +37,7 @@ import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -77,6 +78,7 @@ public class DRReport implements DRIReport {
 	private Boolean summaryWithPageHeaderAndFooter;
 	private Boolean floatColumnFooter;
 	private Orientation printOrder;
+	private RunDirection columnDirection;
 	private Boolean useFieldNameAsDescription;
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -398,6 +400,14 @@ public class DRReport implements DRIReport {
 
 	public void setPrintOrder(Orientation printOrder) {
 		this.printOrder = printOrder;
+	}
+
+	public RunDirection getColumnDirection() {
+		return columnDirection;
+	}
+
+	public void setColumnDirection(RunDirection columnDirection) {
+		this.columnDirection = columnDirection;
 	}
 
 	public Boolean getUseFieldNameAsDescription() {

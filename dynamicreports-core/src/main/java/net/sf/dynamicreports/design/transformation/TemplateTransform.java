@@ -46,6 +46,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
@@ -230,6 +231,16 @@ public class TemplateTransform {
 			return template.getPrintOrder();
 		}
 		return Defaults.getDefaults().getPrintOrder();
+	}
+
+	public RunDirection getColumnDirection() {
+		if (report.getColumnDirection() != null) {
+			return report.getColumnDirection();
+		}
+		if (template.getColumnDirection() != null) {
+			return template.getColumnDirection();
+		}
+		return Defaults.getDefaults().getColumnDirection();
 	}
 
 	public String getFieldDescription(DRIField<?> field) {

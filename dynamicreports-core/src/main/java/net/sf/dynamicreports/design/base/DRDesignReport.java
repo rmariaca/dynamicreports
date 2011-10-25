@@ -59,6 +59,7 @@ import net.sf.dynamicreports.design.transformation.StyleTransform;
 import net.sf.dynamicreports.design.transformation.SubtotalTransform;
 import net.sf.dynamicreports.design.transformation.TemplateTransform;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIReport;
@@ -264,6 +265,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public Orientation getPrintOrder() {
 		return templateTransform.getPrintOrder();
+	}
+
+	public RunDirection getColumnDirection() {
+		return templateTransform.getColumnDirection();
 	}
 
 	public boolean isTableOfContents() {

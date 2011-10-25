@@ -26,6 +26,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,6 +41,7 @@ public class Report4Test extends AbstractJasperPositionTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setPageColumnsPerPage(2)
 			.setPrintOrder(Orientation.HORIZONTAL)
+			.setColumnDirection(RunDirection.RIGHT_TO_LEFT)
 			.columns(
 				column1 = col.column("Column1", "field1", Integer.class));
 	}
@@ -50,10 +52,10 @@ public class Report4Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		columnDetailPositionTest(column1, 0, 10, 26, 287, 16);
-		columnDetailPositionTest(column1, 1, 297, 26, 287, 16);
-		columnDetailPositionTest(column1, 2, 10, 42, 287, 16);
-		columnDetailPositionTest(column1, 3, 297, 42, 287, 16);
+		columnDetailPositionTest(column1, 0, 298, 26, 287, 16);
+		columnDetailPositionTest(column1, 1, 11, 26, 287, 16);
+		columnDetailPositionTest(column1, 2, 298, 42, 287, 16);
+		columnDetailPositionTest(column1, 3, 11, 42, 287, 16);
 	}
 
 	@Override

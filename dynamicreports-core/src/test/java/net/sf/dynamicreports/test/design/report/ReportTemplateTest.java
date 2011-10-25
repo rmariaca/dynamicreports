@@ -48,6 +48,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -93,6 +94,7 @@ public class ReportTemplateTest {
 						.setSummaryWithPageHeaderAndFooter(true)
 						.setFloatColumnFooter(true)
 						.setPrintOrder(Orientation.HORIZONTAL)
+						.setColumnDirection(RunDirection.RIGHT_TO_LEFT)
 
 						.setHighlightDetailOddRows(true)
 						.setDetailOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.BLUE))
@@ -163,6 +165,7 @@ public class ReportTemplateTest {
 			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());
 			Assert.assertTrue("float column footer", report.isFloatColumnFooter());
 			Assert.assertEquals("print order", Orientation.HORIZONTAL, report.getPrintOrder());
+			Assert.assertEquals("column direction", RunDirection.RIGHT_TO_LEFT, report.getColumnDirection());
 
 			DRDesignTextField columnTextField1 = (DRDesignTextField) ((DRDesignList) report.getDetailBands().get(0).getBandComponent()).getComponents().get(0);
 			DRIDesignStyle style = columnTextField1.getStyle();

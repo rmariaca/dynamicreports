@@ -36,6 +36,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
@@ -72,6 +73,8 @@ public interface DRIDesignReport {
 	public boolean isFloatColumnFooter();
 
 	public Orientation getPrintOrder();
+
+	public RunDirection getColumnDirection();
 
 	public boolean isTableOfContents();
 

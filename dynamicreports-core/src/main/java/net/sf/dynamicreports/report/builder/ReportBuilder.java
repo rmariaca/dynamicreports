@@ -48,6 +48,7 @@ import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -180,6 +181,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T setPrintOrder(Orientation printOrder) {
 		getObject().setPrintOrder(printOrder);
+		return (T) this;
+	}
+
+	public T setColumnDirection(RunDirection columnDirection) {
+		getObject().setColumnDirection(columnDirection);
 		return (T) this;
 	}
 

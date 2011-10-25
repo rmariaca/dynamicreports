@@ -47,6 +47,7 @@ import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
@@ -67,6 +68,7 @@ public class Default {
 	private boolean summaryWithPageHeaderAndFooter;
 	private boolean floatColumnFooter;
 	private Orientation printOrder;
+	private RunDirection columnDirection;
 	private boolean useFieldNameAsDescription;
 	//style
 	private boolean highlightDetailOddRows;
@@ -249,6 +251,7 @@ public class Default {
 		this.summaryWithPageHeaderAndFooter = false;
 		this.floatColumnFooter = false;
 		this.printOrder = Orientation.VERTICAL;
+		this.columnDirection = RunDirection.LEFT_TO_RIGHT;
 		this.useFieldNameAsDescription = true;
 
 		this.highlightDetailOddRows = false;
@@ -465,6 +468,10 @@ public class Default {
 
 	public Orientation getPrintOrder() {
 		return printOrder;
+	}
+
+	public RunDirection getColumnDirection() {
+		return columnDirection;
 	}
 
 	public boolean isUseFieldNameAsDescription() {
