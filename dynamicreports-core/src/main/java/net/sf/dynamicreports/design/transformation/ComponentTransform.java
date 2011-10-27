@@ -652,6 +652,8 @@ public class ComponentTransform {
 		}
 
 		switch (resetType) {
+		case NONE:
+			return EvaluationTime.NOW;
 		case REPORT:
 			return EvaluationTime.REPORT;
 		case PAGE:

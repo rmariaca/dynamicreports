@@ -387,6 +387,7 @@ public class ChartTransform {
 		public Number evaluate(ReportParameters reportParameters) {
 			Object resetValue = null;
 			switch (resetType) {
+			case NONE:
 			case REPORT:
 				break;
 			case PAGE:

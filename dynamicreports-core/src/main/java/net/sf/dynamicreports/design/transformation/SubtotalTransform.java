@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
+import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRFiller;
 import net.sf.dynamicreports.report.base.component.DRTextField;
@@ -74,7 +75,8 @@ public class SubtotalTransform {
 		for (DRISubtotal<?> subtotal : accessor.getReport().getSubtotals()) {
 			SubtotalPosition position = subtotal.getPosition();
 			DRIColumn<?> showInColumn = subtotal.getShowInColumn();
-			DRDesignComponent subtotalComponent = valueComponent(subtotal);
+			DRDesignTextField subtotalValueComponent = valueComponent(subtotal);
+			DRDesignComponent subtotalComponent = subtotalValueComponent;
 			if (subtotal.getLabelExpression() != null) {
 				DRDesignList list = new DRDesignList(ListType.VERTICAL);
 				list.addComponent(horizontalAlignment, verticalAlignment, labelComponent(subtotal));
@@ -131,6 +133,7 @@ public class SubtotalTransform {
 				lastPageFooter.addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			case SUMMARY:
+				subtotalValueComponent.setEvaluationTime(EvaluationTime.NOW);
 				summary.addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			default:
@@ -228,7 +231,7 @@ public class SubtotalTransform {
 	}
 
 	//value
-	private DRDesignComponent valueComponent(DRISubtotal<?> subtotal) throws DRException {
+	private DRDesignTextField valueComponent(DRISubtotal<?> subtotal) throws DRException {
 		DRDesignTextField designValueField = accessor.getComponentTransform().textField(subtotal.getValueField(), DefaultStyleType.SUBTOTAL);
 		designValueField.setUniqueName("column_" + subtotal.getShowInColumn().getName() + ".subtotal");
 		designValueField.setWidth(accessor.getTemplateTransform().getColumnWidth(subtotal.getShowInColumn(), accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));

@@ -36,14 +36,16 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 class ConstantTransform {
-	
+
 	public static ResetType variableResetType(Evaluation resetType, DRIGroup resetGroup, DesignTransformAccessor accessor) {
 		if (resetType == null) {
 			return ResetType.REPORT;
 		}
-		
+
 		switch (resetType) {
-		case REPORT:			
+		case NONE:
+			return ResetType.NONE;
+		case REPORT:
 			return ResetType.REPORT;
 		case PAGE:
 			return ResetType.PAGE;
@@ -51,17 +53,17 @@ class ConstantTransform {
 			return ResetType.COLUMN;
 		case FIRST_GROUP:
 			if (accessor.getGroupTransform().getFirstGroup() == null) {
-				return ResetType.REPORT; 
+				return ResetType.REPORT;
 			}
 			return ResetType.GROUP;
 		case BEFORE_GROUP:
 			if (accessor.getGroupTransform().getBeforeGroup(resetGroup) == null) {
-				return ResetType.REPORT; 
+				return ResetType.REPORT;
 			}
 			return ResetType.GROUP;
 		case LAST_GROUP:
 			if (accessor.getGroupTransform().getLastGroup() == null) {
-				return ResetType.REPORT; 
+				return ResetType.REPORT;
 			}
 			return ResetType.GROUP;
 		case GROUP:
@@ -75,9 +77,10 @@ class ConstantTransform {
 		if (resetType == null) {
 			return null;
 		}
-		
+
 		switch (resetType) {
-		case REPORT:			
+		case NONE:
+		case REPORT:
 		case PAGE:
 		case COLUMN:
 			if (resetGroup != null) {
@@ -108,14 +111,16 @@ class ConstantTransform {
 			throw new DRDesignReportException("Reset group " + resetType.name() + " not supported");
 		}
 	}
-	
+
 	public static EvaluationTime textFieldEvaluationTime(Evaluation evaluationTime, DRIGroup evaluationGroup, DesignTransformAccessor accessor) {
 		if (evaluationTime == null) {
-			return EvaluationTime.REPORT;
+			return EvaluationTime.NOW;
 		}
-		
+
 		switch (evaluationTime) {
-		case REPORT:			
+		case NONE:
+			return EvaluationTime.NOW;
+		case REPORT:
 			return EvaluationTime.REPORT;
 		case PAGE:
 			return EvaluationTime.PAGE;
@@ -123,17 +128,17 @@ class ConstantTransform {
 			return EvaluationTime.COLUMN;
 		case FIRST_GROUP:
 			if (accessor.getGroupTransform().getFirstGroup() == null) {
-				return EvaluationTime.REPORT; 
+				return EvaluationTime.REPORT;
 			}
 			return EvaluationTime.GROUP;
 		case BEFORE_GROUP:
 			if (accessor.getGroupTransform().getBeforeGroup(evaluationGroup) == null) {
-				return EvaluationTime.REPORT; 
+				return EvaluationTime.REPORT;
 			}
 			return EvaluationTime.GROUP;
 		case LAST_GROUP:
 			if (accessor.getGroupTransform().getLastGroup() == null) {
-				return EvaluationTime.REPORT; 
+				return EvaluationTime.REPORT;
 			}
 			return EvaluationTime.GROUP;
 		case GROUP:
@@ -142,14 +147,15 @@ class ConstantTransform {
 			throw new DRDesignReportException("Evaluation time " + evaluationTime.name() + " not supported");
 		}
 	}
-	
+
 	public static DRIGroup textFieldEvaluationGroup(Evaluation evaluationTime, DRIGroup evaluationGroup, DesignTransformAccessor accessor) throws DRException {
 		if (evaluationTime == null) {
 			return null;
 		}
-		
+
 		switch (evaluationTime) {
-		case REPORT:			
+		case NONE:
+		case REPORT:
 		case PAGE:
 		case COLUMN:
 			if (evaluationGroup != null) {
@@ -180,12 +186,12 @@ class ConstantTransform {
 			throw new DRDesignReportException("Evaluation group " + evaluationTime.name() + " not supported");
 		}
 	}
-	
+
 	public static HorizontalCellComponentAlignment toHorizontalCellComponentAlignment(ComponentDimensionType widthType) {
 		if (widthType == null) {
 			return null;
 		}
-		
+
 		switch (widthType) {
 		case FIXED:
 			return HorizontalCellComponentAlignment.LEFT;
@@ -195,14 +201,14 @@ class ConstantTransform {
 			return HorizontalCellComponentAlignment.EXPAND;
 		default:
 			throw new DRDesignReportException("Component dimension type " + widthType.name() + " not supported");
-		}		
+		}
 	}
-	
+
 	public static VerticalCellComponentAlignment toVerticalCellComponentAlignment(ComponentDimensionType heightType) {
 		if (heightType == null) {
 			return null;
 		}
-		
+
 		switch (heightType) {
 		case FIXED:
 			return VerticalCellComponentAlignment.TOP;
@@ -211,6 +217,6 @@ class ConstantTransform {
 			return VerticalCellComponentAlignment.EXPAND;
 		default:
 			throw new DRDesignReportException("Component dimension type " + heightType.name() + " not supported");
-		}	
+		}
 	}
 }

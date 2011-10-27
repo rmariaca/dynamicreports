@@ -303,7 +303,13 @@ public class ConstantTransform {
 	}
 
 	public static ResetTypeEnum variableResetType(ResetType resetType) {
+		if (resetType == null) {
+			return ResetTypeEnum.NONE;
+		}
+
 		switch (resetType) {
+		case NONE:
+			return ResetTypeEnum.NONE;
 		case REPORT:
 			return ResetTypeEnum.REPORT;
 		case PAGE:

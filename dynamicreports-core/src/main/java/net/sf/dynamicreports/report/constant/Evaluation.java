@@ -25,7 +25,9 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum Evaluation {	
+public enum Evaluation {
+	NONE,
+
 	/**
 	 * A constant specifying that an expression should be evaluated at the end of the filling process.
 	 */
@@ -45,10 +47,10 @@ public enum Evaluation {
 	 * A constant specifying that an expression should be evaluated after each group break.
 	 */
 	GROUP,
-	
+
 	FIRST_GROUP,
-	
+
 	BEFORE_GROUP,
-	
-	LAST_GROUP	
+
+	LAST_GROUP
 }

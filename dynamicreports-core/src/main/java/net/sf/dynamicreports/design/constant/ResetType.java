@@ -26,6 +26,7 @@ package net.sf.dynamicreports.design.constant;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public enum ResetType {
+	NONE,
 	REPORT,
 	PAGE,
 	COLUMN,

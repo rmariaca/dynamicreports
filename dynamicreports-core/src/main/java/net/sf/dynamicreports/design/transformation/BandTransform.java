@@ -107,10 +107,10 @@ public class BandTransform {
 		summaryBand = band("summary", band, templateTransform.getSummarySplitType(band), templateTransform.getSummaryStyle(band), ResetType.REPORT, null);
 
 		band = report.getNoDataBand();
-		noDataBand = band("noData", band, templateTransform.getNoDataSplitType(band), templateTransform.getNoDataStyle(band), ResetType.REPORT, null);
+		noDataBand = band("noData", band, templateTransform.getNoDataSplitType(band), templateTransform.getNoDataStyle(band), ResetType.NONE, null);
 
 		band = report.getBackgroundBand();
-		backgroundBand = band("background", band, templateTransform.getBackgroundSplitType(band), templateTransform.getBackgroundStyle(band), ResetType.REPORT, null);
+		backgroundBand = band("background", band, templateTransform.getBackgroundSplitType(band), templateTransform.getBackgroundStyle(band), ResetType.NONE, null);
 	}
 
 	public void prepareBands() throws DRException {
