@@ -57,8 +57,8 @@ public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldB
 		return this;
 	}
 
-	public BooleanFieldBuilder setImageScale(BooleanComponentType componentType) {
-		getObject().setComponentType(componentType);
+	public BooleanFieldBuilder setComponentType(BooleanComponentType booleanComponentType) {
+		getObject().setComponentType(booleanComponentType);
 		return this;
 	}
 }
