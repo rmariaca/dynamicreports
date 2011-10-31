@@ -49,7 +49,11 @@ public class Component2Test extends AbstractJasperPositionTest {
 			  cmp.roundRectangle(20),
 			  cmp.verticalGap(30),
 			  cmp.horizontalList(
-			  	cmp.text(""), cmp.horizontalGap(10), cmp.text("")));
+			  	cmp.text(""), cmp.horizontalGap(10), cmp.text("")),
+			  cmp.centerHorizontal(cmp.text("").setFixedWidth(50)),
+			  cmp.centerHorizontal(cmp.text("").setFixedWidth(50)).setFixedWidth(250),
+			  cmp.horizontalList(cmp.centerVertical(cmp.text("").setFixedRows(1)), cmp.text("").setFixedRows(3)),
+			  cmp.centerVertical(cmp.text("").setFixedRows(1)).setFixedHeight(50));
 	}
 
 	@Override
@@ -84,5 +88,12 @@ public class Component2Test extends AbstractJasperPositionTest {
 		elementPositionTest("title.list4", 0, 10, 491, 575, 16);
 		elementPositionTest("title.textField1", 0, 0, 0, 282, 16);
 		elementPositionTest("title.textField2", 0, 292, 0, 283, 16);
+
+		elementPositionTest("title.textField3", 0, 262, 0, 50, 16);
+		elementPositionTest("title.textField4", 0, 100, 0, 50, 16);
+
+		elementPositionTest("title.textField5", 0, 0, 11, 287, 16);
+		elementPositionTest("title.textField6", 0, 287, 0, 288, 39);
+		elementPositionTest("title.textField7", 0, 10, 595, 575, 16);
 	}
 }

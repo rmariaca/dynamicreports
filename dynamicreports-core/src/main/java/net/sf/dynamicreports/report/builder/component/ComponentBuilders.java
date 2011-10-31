@@ -239,4 +239,13 @@ public class ComponentBuilders {
 	public MapBuilder map(Float latitude, Float longitude, Integer zoom) {
 		return Components.map(latitude, longitude, zoom);
 	}
+
+	//alignment
+	public HorizontalListBuilder centerHorizontal(ComponentBuilder<?, ?> component) {
+		return Components.centerHorizontal(component);
+	}
+
+	public VerticalListBuilder centerVertical(ComponentBuilder<?, ?> component) {
+		return Components.centerVertical(component);
+	}
 }

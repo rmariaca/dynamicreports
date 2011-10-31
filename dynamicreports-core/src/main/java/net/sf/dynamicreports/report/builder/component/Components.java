@@ -257,4 +257,21 @@ public class Components {
 		mapBuilder.setZoom(zoom);
 		return mapBuilder;
 	}
+
+	//alignment
+	public static HorizontalListBuilder centerHorizontal(ComponentBuilder<?, ?> component) {
+		HorizontalListBuilder list = horizontalList();
+		list.add(filler().setWidth(1));
+		list.add(component);
+		list.add(filler().setWidth(1));
+		return list;
+	}
+
+	public static VerticalListBuilder centerVertical(ComponentBuilder<?, ?> component) {
+		VerticalListBuilder list = verticalList();
+		list.add(filler().setHeight(1));
+		list.add(component);
+		list.add(filler().setHeight(1));
+		return list;
+	}
 }
