@@ -118,15 +118,11 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		int offset = 1;
 		int pageNumber = 1;
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-			try {
-				if (continuousPageNumbering) {
-					jasperReportBuilder.setStartPageNumber(pageNumber);
-				}
-				else {
-					jasperReportBuilder.setStartPageNumber(null);
-				}
-			} catch (JRException e) {
-				throw new DRException(e);
+			if (continuousPageNumbering) {
+				jasperReportBuilder.setStartPageNumber(pageNumber);
+			}
+			else {
+				jasperReportBuilder.setStartPageNumber(null);
 			}
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);

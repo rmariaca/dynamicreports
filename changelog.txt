@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.1 (2011-11-03)
+---------------------------------------------------
+ - multi axis chart, see MultiAxisChartReport for an example
+ - new ignorePageWidth attribute was added, if it's enabled the page width is automatically calculated by the report content, see DynamicPageWidthReport and ExcelReport for an example
+ - upgrade to JasperReports 4.1.2
+ - minor bug fixes and improvements
+ - new examples - MultiAxisChartReport, DynamicPageWidthReport, ComponentsReport
+  
 Changes in version 2.3.0 (2011-10-06)
 ---------------------------------------------------
  - map component, see MapReport for an example

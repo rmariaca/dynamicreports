@@ -114,7 +114,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
 	}
 
-	protected void setStartPageNumber(Integer startPageNumber) throws JRException {
+	protected void setStartPageNumber(Integer startPageNumber) throws DRException {
 		if (this.startPageNumber == startPageNumber) {
 			return;
 		}
@@ -197,7 +197,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
-	public JasperReportBuilder rebuild() throws JRException {
+	public JasperReportBuilder rebuild() throws DRException {
 		builded = false;
 		reportDesign = null;
 		jasperDesign = null;
@@ -205,7 +205,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		parameters = null;
 		jasperPrint = null;
 		if (dataSource != null && dataSource instanceof JRRewindableDataSource) {
-			((JRRewindableDataSource) dataSource).moveFirst();
+			try {
+				((JRRewindableDataSource) dataSource).moveFirst();
+			} catch (JRException e) {
+				throw new DRException(e);
+			}
 		}
 		return this;
 	}
