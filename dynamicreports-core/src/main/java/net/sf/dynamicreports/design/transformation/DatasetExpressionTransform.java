@@ -28,6 +28,7 @@ import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIField;
+import net.sf.dynamicreports.report.definition.DRISort;
 import net.sf.dynamicreports.report.definition.DRIVariable;
 
 /**
@@ -54,6 +55,11 @@ public class DatasetExpressionTransform extends AbstractExpressionTransform {
 	@Override
 	protected List<? extends DRIVariable<?>> transformVariables() {
 		return dataset.getVariables();
+	}
+
+	@Override
+	protected List<? extends DRISort> transformSorts() {
+		return dataset.getSorts();
 	}
 
 	@Override

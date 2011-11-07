@@ -23,27 +23,16 @@
 package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.util.List;
 
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDataset extends Serializable {
+public interface DRISort extends Serializable {
 
-	public List<? extends DRIField<?>> getFields();
+	public DRIExpression<?> getExpression();
 
-	public List<? extends DRIVariable<?>> getVariables();
-
-	public List<? extends DRISort> getSorts();
-
-	public DRIQuery getQuery();
-
-	public DRIExpression<Connection> getConnectionExpression();
-
-	public DRIExpression<?> getDataSourceExpression();
-
-	public DRIExpression<Boolean> getFilterExpression();
+	public OrderType getOrderType();
 }

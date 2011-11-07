@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder;
 import java.sql.Connection;
 
 import net.sf.dynamicreports.report.base.DRDataset;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
@@ -76,6 +77,29 @@ public class DatasetBuilder extends AbstractBuilder<DatasetBuilder, DRDataset> {
 		Validate.noNullElements(variables, "variables must not contains null variable");
 		for (VariableBuilder<?> variable : variables) {
 			getObject().addVariable(variable.getVariable());
+		}
+		return this;
+	}
+
+	//sort
+	public DatasetBuilder sortBy(TextColumnBuilder<?> ...sortColumns) {
+		Validate.notNull(sortColumns, "sortColumns must not be null");
+		Validate.noNullElements(sortColumns, "sortColumns must not contains null sortColumn");
+		for (TextColumnBuilder<?> sortColumn : sortColumns) {
+			sortBy(DynamicReports.asc(sortColumn));
+		}
+		return this;
+	}
+
+	public DatasetBuilder sortBy(SortBuilder ...sorts) {
+		return addSort(sorts);
+	}
+
+	public DatasetBuilder addSort(SortBuilder ...sorts) {
+		Validate.notNull(sorts, "sorts must not be null");
+		Validate.noNullElements(sorts, "sorts must not contains null sort");
+		for (SortBuilder sort : sorts) {
+			getObject().addSort(sort.build());
 		}
 		return this;
 	}

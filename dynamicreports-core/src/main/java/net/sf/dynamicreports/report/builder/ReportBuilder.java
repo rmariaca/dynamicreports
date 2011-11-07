@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRReport;
 import net.sf.dynamicreports.report.base.grid.DRColumnGrid;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
@@ -329,6 +330,29 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.noNullElements(variables, "variables must not contains null variable");
 		for (VariableBuilder<?> variable : variables) {
 			getObject().addVariable(variable.getVariable());
+		}
+		return (T) this;
+	}
+
+	//sort
+	public T sortBy(TextColumnBuilder<?> ...sortColumns) {
+		Validate.notNull(sortColumns, "sortColumns must not be null");
+		Validate.noNullElements(sortColumns, "sortColumns must not contains null sortColumn");
+		for (TextColumnBuilder<?> sortColumn : sortColumns) {
+			sortBy(DynamicReports.asc(sortColumn));
+		}
+		return (T) this;
+	}
+
+	public T sortBy(SortBuilder ...sorts) {
+		return addSort(sorts);
+	}
+
+	public T addSort(SortBuilder ...sorts) {
+		Validate.notNull(sorts, "sorts must not be null");
+		Validate.noNullElements(sorts, "sorts must not contains null sort");
+		for (SortBuilder sort : sorts) {
+			getObject().addSort(sort.build());
 		}
 		return (T) this;
 	}

@@ -64,6 +64,8 @@ public interface DRIReport extends Serializable {
 
 	public List<? extends DRIVariable<?>> getVariables();
 
+	public List<? extends DRISort> getSorts();
+
 	public List<? extends DRISubtotal<?>> getSubtotals();
 
 	public List<? extends DRIParameter<?>> getParameters();

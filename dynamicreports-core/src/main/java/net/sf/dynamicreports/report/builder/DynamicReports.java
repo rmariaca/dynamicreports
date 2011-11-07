@@ -28,6 +28,7 @@ import net.sf.dynamicreports.jasper.builder.export.ExporterBuilders;
 import net.sf.dynamicreports.report.builder.barcode.BarcodeBuilders;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilders;
 import net.sf.dynamicreports.report.builder.condition.ConditionBuilders;
@@ -41,6 +42,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -126,6 +128,47 @@ public class DynamicReports {
 
 	public static <T> VariableBuilder<T> variable(String name, DRIExpression<?> expression, Calculation calculation) {
 		return new VariableBuilder<T>(name, expression, calculation);
+	}
+
+	//sort
+	public static SortBuilder asc(TextColumnBuilder<?> column) {
+		return new SortBuilder(column).setOrderType(OrderType.ASCENDING);
+	}
+
+	public static SortBuilder asc(FieldBuilder<?> field) {
+		return new SortBuilder(field).setOrderType(OrderType.ASCENDING);
+	}
+
+	public static SortBuilder asc(String fieldName, Class<?> valueClass) {
+		return new SortBuilder(field(fieldName, valueClass)).setOrderType(OrderType.ASCENDING);
+	}
+
+	public static SortBuilder asc(VariableBuilder<?> variable) {
+		return new SortBuilder(variable).setOrderType(OrderType.ASCENDING);
+	}
+
+	public static SortBuilder asc(DRIExpression<?> expression) {
+		return new SortBuilder(expression).setOrderType(OrderType.ASCENDING);
+	}
+
+	public static SortBuilder desc(TextColumnBuilder<?> column) {
+		return new SortBuilder(column).setOrderType(OrderType.DESCENDING);
+	}
+
+	public static SortBuilder desc(FieldBuilder<?> field) {
+		return new SortBuilder(field).setOrderType(OrderType.DESCENDING);
+	}
+
+	public static SortBuilder desc(String fieldName, Class<?> valueClass) {
+		return new SortBuilder(field(fieldName, valueClass)).setOrderType(OrderType.DESCENDING);
+	}
+
+	public static SortBuilder desc(VariableBuilder<?> variable) {
+		return new SortBuilder(variable).setOrderType(OrderType.DESCENDING);
+	}
+
+	public static SortBuilder desc(DRIExpression<?> expression) {
+		return new SortBuilder(expression).setOrderType(OrderType.DESCENDING);
 	}
 
 	//hyperLink

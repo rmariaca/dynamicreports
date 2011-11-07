@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignField;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
+import net.sf.dynamicreports.design.base.DRDesignSort;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
 import net.sf.dynamicreports.design.base.expression.DRDesignComplexExpression;
 import net.sf.dynamicreports.design.base.expression.DRDesignJasperExpression;
@@ -41,6 +43,7 @@ import net.sf.dynamicreports.design.base.expression.DRDesignValueFormatter;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -50,7 +53,11 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpre
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.base.DRVariable;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.definition.DRIField;
+import net.sf.dynamicreports.report.definition.DRISort;
 import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.DRIVariable;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
@@ -77,6 +84,7 @@ public abstract class AbstractExpressionTransform {
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<DRIExpression<?>, DRIDesignExpression> expressions;
+	private List<DRIDesignSort> sorts;
 
 	public AbstractExpressionTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -91,6 +99,7 @@ public abstract class AbstractExpressionTransform {
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
 		expressions = new HashMap<DRIExpression<?>, DRIDesignExpression>();
+		sorts = new ArrayList<DRIDesignSort>();
 	}
 
 	public void transform() throws DRException {
@@ -99,6 +108,9 @@ public abstract class AbstractExpressionTransform {
 		}
 		for (DRIVariable<?> variable : transformVariables()) {
 			transformExpression(variable);
+		}
+		for (DRISort sort : transformSorts()) {
+			transformSort(sort);
 		}
 	}
 
@@ -191,6 +203,26 @@ public abstract class AbstractExpressionTransform {
 
 	protected DRDesignGroup getVariableResetGroup(DRIVariable<?> variable) throws DRException {
 		return null;
+	}
+
+	private void transformSort(DRISort sort) throws DRException {
+		DRIDesignExpression expression = transformExpression(sort.getExpression());
+		DRIDesignExpression sortExpression;
+		if (expression instanceof DRIDesignField || expression instanceof DRIDesignVariable) {
+			sortExpression = expression;
+		}
+		else {
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			DRVariable variable = new DRVariable(sort.getExpression(), Calculation.NOTHING);
+			variable.setResetType(Evaluation.NONE);
+			sortExpression = transformExpression(variable);
+		}
+
+		DRDesignSort designSort = new DRDesignSort();
+		designSort.setExpression(sortExpression);
+		designSort.setOrderType(sort.getOrderType());
+
+		sorts.add(designSort);
 	}
 
 	protected DRIDesignPropertyExpression transformPropertyExpression(DRIPropertyExpression propertyExpression) throws DRException {
@@ -315,9 +347,15 @@ public abstract class AbstractExpressionTransform {
 		return complexExpressions.values();
 	}
 
+	public Collection<DRIDesignSort> getSorts() {
+		return sorts;
+	}
+
 	protected abstract List<? extends DRIField<?>> transformFields();
 
 	protected abstract List<? extends DRIVariable<?>> transformVariables();
+
+	protected abstract List<? extends DRISort> transformSorts();
 
 	protected abstract DRIDesignDataset getDataset();
 }

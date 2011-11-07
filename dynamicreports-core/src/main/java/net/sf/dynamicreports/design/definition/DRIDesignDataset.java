@@ -49,6 +49,8 @@ public interface DRIDesignDataset {
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions();
 
+	public Collection<DRIDesignSort> getSorts();
+
 	public DRIDesignQuery getQuery();
 
 	public DRIDesignExpression getConnectionExpression();

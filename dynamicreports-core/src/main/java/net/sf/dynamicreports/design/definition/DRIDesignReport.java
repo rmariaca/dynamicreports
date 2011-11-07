@@ -106,6 +106,8 @@ public interface DRIDesignReport {
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions();
 
+	public Collection<DRIDesignSort> getSorts();
+
 	public Collection<DRIDesignDataset> getDatasets();
 
 	public DRIDesignBand getTitleBand();

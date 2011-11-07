@@ -40,6 +40,7 @@ public class DRDataset implements DRIDataset {
 
 	private List<DRField<?>> fields;
 	private List<DRVariable<?>> variables;
+	private List<DRSort> sorts;
 	private DRQuery query;
 	private DRIExpression<Connection> connectionExpression;
 	private DRIExpression<?> dataSourceExpression;
@@ -52,6 +53,7 @@ public class DRDataset implements DRIDataset {
 	private void init() {
 		this.fields = new ArrayList<DRField<?>>();
 		this.variables = new ArrayList<DRVariable<?>>();
+		this.sorts = new ArrayList<DRSort>();
 	}
 
 	public List<DRField<?>> getFields() {
@@ -82,6 +84,21 @@ public class DRDataset implements DRIDataset {
 	public void addVariable(DRVariable<?> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		this.variables.add(variable);
+	}
+
+	public List<DRSort> getSorts() {
+		return sorts;
+	}
+
+	public void setSorts(List<DRSort> sorts) {
+		Validate.notNull(sorts, "sorts must not be null");
+		Validate.noNullElements(sorts, "sorts must not contains null sort");
+		this.sorts = sorts;
+	}
+
+	public void addSort(DRSort sort) {
+		Validate.notNull(sort, "sort must not be null");
+		this.sorts.add(sort);
 	}
 
 	public DRQuery getQuery() {

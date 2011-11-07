@@ -30,6 +30,7 @@ import java.util.Map;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -51,7 +52,9 @@ import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignField;
 import net.sf.jasperreports.engine.design.JRDesignGenericElementParameter;
 import net.sf.jasperreports.engine.design.JRDesignPropertyExpression;
+import net.sf.jasperreports.engine.design.JRDesignSortField;
 import net.sf.jasperreports.engine.design.JRDesignVariable;
+import net.sf.jasperreports.engine.type.SortFieldTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -87,6 +90,9 @@ public abstract class AbstractExpressionTransform {
 		}
 		for (DRIDesignVariable variable : getVariables()) {
 			addVariable(variable);
+		}
+		for (DRIDesignSort sort : getSorts()) {
+			addSort(sort);
 		}
 	}
 
@@ -144,6 +150,14 @@ public abstract class AbstractExpressionTransform {
 			throw new JasperDesignException("Duplicate declaration of expression \"" + expression.getName() + "\"");
 		}
 		expressions.put(expression.getName(), expression(expression));
+	}
+
+	private void addSort(DRIDesignSort sort) {
+		try {
+			addSort(sort(sort));
+		} catch (JRException e) {
+			throw new JasperDesignException("Registration failed for sort \"" + sort.getExpression().getName() + "\"", e);
+		}
 	}
 
 	//field
@@ -254,6 +268,30 @@ public abstract class AbstractExpressionTransform {
 		return expressions.get(expression.getName());
 	}
 
+	//sort
+	private JRDesignSortField sort(DRIDesignSort sort) {
+		DRIDesignExpression expression = sort.getExpression();
+		String name;
+		SortFieldTypeEnum type;
+		if (expression instanceof DRIDesignField) {
+			name = expression.getName();
+			type = SortFieldTypeEnum.FIELD;
+		}
+		else if (expression instanceof DRIDesignVariable) {
+			name = expression.getName();
+			type = SortFieldTypeEnum.VARIABLE;
+		}
+		else {
+			throw new JasperDesignException("Sort expression \"" + expression.getName() + "\" not supported");
+		}
+
+		JRDesignSortField jrSort = new JRDesignSortField();
+		jrSort.setName(name);
+		jrSort.setOrder(ConstantTransform.orderType(sort.getOrderType()));
+		jrSort.setType(type);
+		return jrSort;
+	}
+
 	protected JRPropertyExpression getPropertyExpression(DRIDesignPropertyExpression propertyExpression) {
 		JRDesignPropertyExpression jrPropertyExpression = new JRDesignPropertyExpression();
 		jrPropertyExpression.setName(propertyExpression.getName());
@@ -282,7 +320,11 @@ public abstract class AbstractExpressionTransform {
 
 	protected abstract Collection<DRIDesignComplexExpression> getComplexExpressions();
 
+	protected abstract Collection<DRIDesignSort> getSorts();
+
 	protected abstract void addField(JRDesignField field) throws JRException;
 
 	protected abstract void addVariable(JRDesignVariable variable) throws JRException;
+
+	protected abstract void addSort(JRDesignSortField sort) throws JRException;
 }

@@ -26,6 +26,7 @@ import java.util.Collection;
 
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
@@ -35,6 +36,7 @@ import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignDataset;
 import net.sf.jasperreports.engine.design.JRDesignField;
+import net.sf.jasperreports.engine.design.JRDesignSortField;
 import net.sf.jasperreports.engine.design.JRDesignVariable;
 
 /**
@@ -87,6 +89,11 @@ public class DatasetExpressionTransform extends AbstractExpressionTransform {
 	}
 
 	@Override
+	protected Collection<DRIDesignSort> getSorts() {
+		return dataset.getSorts();
+	}
+
+	@Override
 	protected void addField(JRDesignField field) throws JRException {
 		jrDataset.addField(field);
 	}
@@ -94,5 +101,10 @@ public class DatasetExpressionTransform extends AbstractExpressionTransform {
 	@Override
 	protected void addVariable(JRDesignVariable variable) throws JRException {
 		jrDataset.addVariable(variable);
+	}
+
+	@Override
+	protected void addSort(JRDesignSortField sort) throws JRException {
+		jrDataset.addSortField(sort);
 	}
 }

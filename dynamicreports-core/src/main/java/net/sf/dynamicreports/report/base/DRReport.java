@@ -66,6 +66,7 @@ public class DRReport implements DRIReport {
 	private List<DRSubtotal<?>> subtotals;
 	private List<DRField<?>> fields;
 	private List<DRVariable<?>> variables;
+	private List<DRSort> sorts;
 	private List<DRParameter<?>> parameters;
 	private Map<String, Object> parameterValues;
 	private List<DRIScriptlet> scriptlets;
@@ -125,6 +126,7 @@ public class DRReport implements DRIReport {
 		this.subtotals = new ArrayList<DRSubtotal<?>>();
 		this.fields = new ArrayList<DRField<?>>();
 		this.variables = new ArrayList<DRVariable<?>>();
+		this.sorts = new ArrayList<DRSort>();
 		this.parameters = new ArrayList<DRParameter<?>>();
 		this.scriptlets = new ArrayList<DRIScriptlet>();
 		this.detailRowHighlighters = new ArrayList<DRConditionalStyle>();
@@ -253,6 +255,21 @@ public class DRReport implements DRIReport {
 	public void addVariable(DRVariable<?> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		this.variables.add(variable);
+	}
+
+	public List<DRSort> getSorts() {
+		return sorts;
+	}
+
+	public void setSorts(List<DRSort> sorts) {
+		Validate.notNull(sorts, "sorts must not be null");
+		Validate.noNullElements(sorts, "sorts must not contains null sort");
+		this.sorts = sorts;
+	}
+
+	public void addSort(DRSort sort) {
+		Validate.notNull(sort, "sort must not be null");
+		this.sorts.add(sort);
 	}
 
 	public List<DRSubtotal<?>> getSubtotals() {

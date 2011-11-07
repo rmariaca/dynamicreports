@@ -26,6 +26,7 @@ import java.util.Collection;
 
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -81,6 +82,10 @@ public class DRDesignDataset implements DRIDesignDataset {
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return datasetExpressionTransform.getComplexExpressions();
+	}
+
+	public Collection<DRIDesignSort> getSorts() {
+		return datasetExpressionTransform.getSorts();
 	}
 
 	public DRDesignQuery getQuery() {

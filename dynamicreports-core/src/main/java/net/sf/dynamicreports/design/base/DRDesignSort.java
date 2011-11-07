@@ -20,30 +20,33 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
+package net.sf.dynamicreports.design.base;
 
-import java.io.Serializable;
-import java.sql.Connection;
-import java.util.List;
-
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.OrderType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDataset extends Serializable {
+public class DRDesignSort implements DRIDesignSort {
+	private DRIDesignExpression expression;
+	private OrderType orderType;
 
-	public List<? extends DRIField<?>> getFields();
+	public DRIDesignExpression getExpression() {
+		return expression;
+	}
 
-	public List<? extends DRIVariable<?>> getVariables();
+	public void setExpression(DRIDesignExpression expression) {
+		this.expression = expression;
+	}
 
-	public List<? extends DRISort> getSorts();
+	public OrderType getOrderType() {
+		return orderType;
+	}
 
-	public DRIQuery getQuery();
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
+	}
 
-	public DRIExpression<Connection> getConnectionExpression();
-
-	public DRIExpression<?> getDataSourceExpression();
-
-	public DRIExpression<Boolean> getFilterExpression();
 }

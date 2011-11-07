@@ -33,6 +33,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignField;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
+import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
@@ -329,6 +330,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return mainDatasetExpressionTransform.getComplexExpressions();
+	}
+
+	public Collection<DRIDesignSort> getSorts() {
+		return mainDatasetExpressionTransform.getSorts();
 	}
 
 	public Collection<DRIDesignDataset> getDatasets() {
