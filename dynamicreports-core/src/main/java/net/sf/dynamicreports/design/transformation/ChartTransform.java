@@ -381,10 +381,14 @@ public class ChartTransform {
 			this.resetType = resetType;
 			this.resetGroup = resetGroup;
 			this.key = key;
-			this.values = new HashMap<Object, Double>();
 		}
 
 		public Number evaluate(ReportParameters reportParameters) {
+			if (reportParameters.getReportRowNumber() <= 1) {
+				resetValue = null;
+				values = new HashMap<Object, Double>();
+			}
+
 			Object resetValue = null;
 			switch (resetType) {
 			case NONE:

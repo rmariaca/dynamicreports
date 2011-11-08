@@ -35,7 +35,7 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractJasperChartTest extends AbstractJasperTest {
+public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 
 	protected void chartCountTest(String name, int expectedNumberOfCharts) {
 		Assert.assertEquals("chart count " + name, expectedNumberOfCharts, findElement(name).size());
