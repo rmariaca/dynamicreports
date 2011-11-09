@@ -34,18 +34,18 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class XYBarChartReport {
-		
+
 	public XYBarChartReport() {
 		build();
 	}
-	
+
 	private void build() {
 		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-		
+
 		TextColumnBuilder<Integer> xColumn  = col.column("X",  "x",  type.integerType());
 		TextColumnBuilder<Integer> y1Column = col.column("Y1", "y1", type.integerType());
 		TextColumnBuilder<Integer> y2Column = col.column("Y2", "y2", type.integerType());
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -57,7 +57,7 @@ public class XYBarChartReport {
 			  	   .setTitleFont(boldFont)
 			  	   .setXValue(xColumn)
 			  	   .series(
-			  	  		 cht.serie(y1Column), cht.serie(y2Column))
+			  	  		 cht.xySerie(y1Column), cht.xySerie(y2Column))
 			  	   .setXAxisFormat(
 			  	   	cht.axisFormat().setLabel("X"))
 			  	   .setYAxisFormat(
@@ -69,15 +69,15 @@ public class XYBarChartReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("x", "y1", "y2");		
+		DataSource dataSource = new DataSource("x", "y1", "y2");
 		for (int i = 0; i < 20; i++) {
 			dataSource.add(i, (int) (Math.random() * 10), (int) (Math.random() * 10));
 		}
 		return dataSource;
-	}	
-	
+	}
+
 	public static void main(String[] args) {
 		new XYBarChartReport();
 	}

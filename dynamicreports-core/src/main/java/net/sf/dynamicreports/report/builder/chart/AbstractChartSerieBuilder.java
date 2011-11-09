@@ -20,15 +20,14 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.chart.dataset;
+package net.sf.dynamicreports.report.builder.chart;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.sf.dynamicreports.report.base.DRDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.AbstractChartSerie;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -36,40 +35,32 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRChartDataset implements DRIChartDataset {
+@SuppressWarnings("unchecked")
+public abstract class AbstractChartSerieBuilder<T extends AbstractChartSerieBuilder<T, U>, U extends AbstractChartSerie> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRDataset subDataset;
-	private DRIExpression<?> valueExpression;
-	private List<DRIChartSerie> series;
-
-	public DRChartDataset() {
-		series = new ArrayList<DRIChartSerie>();
+	protected AbstractChartSerieBuilder(U object) {
+		super(object);
 	}
 
-	public DRDataset getSubDataset() {
-		return subDataset;
+	public T setSeries(ValueColumnBuilder<?, ?> column) {
+		Validate.notNull(column, "column must not be null");
+		getObject().setSeriesExpression(column.getColumn());
+		return (T) this;
 	}
 
-	public void setSubDataset(DRDataset subDataset) {
-		this.subDataset = subDataset;
+	public T setSeries(String fieldName, Class<?> valueClass) {
+		return setSeries(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public DRIExpression<?> getValueExpression() {
-		return valueExpression;
+	public T setSeries(FieldBuilder<?> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setSeriesExpression(field.build());
+		return (T) this;
 	}
 
-	public void setValueExpression(DRIExpression<?> valueExpression) {
-		Validate.notNull(valueExpression, "valueExpression must not be null");
-		this.valueExpression = valueExpression;
-	}
-
-	public void addSerie(DRIChartSerie serie) {
-		Validate.notNull(serie, "serie must not be null");
-		series.add(serie);
-	}
-
-	public List<DRIChartSerie> getSeries() {
-		return series;
+	public T setSeries(DRIExpression<?> expression) {
+		getObject().setSeriesExpression(expression);
+		return (T) this;
 	}
 }

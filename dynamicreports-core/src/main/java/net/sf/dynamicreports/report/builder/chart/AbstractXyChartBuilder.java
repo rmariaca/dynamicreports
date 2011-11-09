@@ -66,14 +66,14 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		return (T) this;
 	}
 
-	public T series(ChartSerieBuilder ...chartSeries) {
+	public T series(XyChartSerieBuilder ...chartSeries) {
 		return addSerie(chartSeries);
 	}
 
-	public T addSerie(ChartSerieBuilder ...chartSeries) {
+	public T addSerie(XyChartSerieBuilder ...chartSeries) {
 		Validate.notNull(chartSeries, "chartSeries must not be null");
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
-		for (ChartSerieBuilder chartSerie : chartSeries) {
+		for (XyChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
 		return (T) this;

@@ -22,16 +22,14 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import java.util.Date;
-
-import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
-import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
+import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
+import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.constant.ScaleType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -39,77 +37,67 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesChartBuilder, DRLinePlot> {
+public class BubbleChartBuilder extends AbstractBaseChartBuilder<BubbleChartBuilder, DRBubblePlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected TimeSeriesChartBuilder() {
-		super(ChartType.TIMESERIES);
+	protected BubbleChartBuilder() {
+		super(ChartType.BUBBLE);
 	}
 
 	//dataset
-	public TimeSeriesChartBuilder setTimePeriod(ValueColumnBuilder<?, ? extends Date> column) {
+	public BubbleChartBuilder setXValue(ValueColumnBuilder<?, ? extends Number> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(String fieldName, Class<? extends Date> valueClass) {
-		return setTimePeriod(DynamicReports.field(fieldName, valueClass));
+	public BubbleChartBuilder setXValue(String fieldName, Class<? extends Number> valueClass) {
+		return setXValue(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(FieldBuilder<? extends Date> field) {
+	public BubbleChartBuilder setXValue(FieldBuilder<? extends Number> field) {
 		Validate.notNull(field, "field must not be null");
 		getDataset().setValueExpression(field.build());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setTimePeriod(DRIExpression<? extends Date> expression) {
+	public BubbleChartBuilder setXValue(DRIExpression<? extends Number> expression) {
 		getDataset().setValueExpression(expression);
 		return this;
 	}
 
-	public TimeSeriesChartBuilder series(CategoryChartSerieBuilder ...chartSeries) {
+	public BubbleChartBuilder series(XyzChartSerieBuilder ...chartSeries) {
 		return addSerie(chartSeries);
 	}
 
-	public TimeSeriesChartBuilder addSerie(CategoryChartSerieBuilder ...chartSeries) {
+	public BubbleChartBuilder addSerie(XyzChartSerieBuilder ...chartSeries) {
 		Validate.notNull(chartSeries, "chartSeries must not be null");
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
-		for (CategoryChartSerieBuilder chartSerie : chartSeries) {
+		for (XyzChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setTimePeriodType(TimePeriod timePeriodType) {
-		getDataset().setTimePeriodType(timePeriodType);
-		return this;
-	}
-
 	//plot
-	public TimeSeriesChartBuilder setTimeAxisFormat(AxisFormatBuilder timeAxisFormat) {
-		Validate.notNull(timeAxisFormat, "timeAxisFormat must not be null");
-		getPlot().setXAxisFormat(timeAxisFormat.build());
+	public BubbleChartBuilder setXAxisFormat(AxisFormatBuilder xAxisFormat) {
+		Validate.notNull(xAxisFormat, "xAxisFormat must not be null");
+		getPlot().setXAxisFormat(xAxisFormat.build());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setValueAxisFormat(AxisFormatBuilder valueAxisFormat) {
-		Validate.notNull(valueAxisFormat, "valueAxisFormat must not be null");
-		getPlot().setYAxisFormat(valueAxisFormat.build());
+	public BubbleChartBuilder setYAxisFormat(AxisFormatBuilder yAxisFormat) {
+		Validate.notNull(yAxisFormat, "yAxisFormat must not be null");
+		getPlot().setYAxisFormat(yAxisFormat.build());
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setShowShapes(Boolean showShapes) {
-		getPlot().setShowShapes(showShapes);
+	public BubbleChartBuilder setScaleType(ScaleType scaleType) {
+		getPlot().setScaleType(scaleType);
 		return this;
 	}
 
-	public TimeSeriesChartBuilder setShowLines(Boolean showLines) {
-		getPlot().setShowLines(showLines);
-		return this;
-	}
-
-	private DRTimeSeriesDataset getDataset() {
-		return (DRTimeSeriesDataset) getObject().getDataset();
+	private DRChartDataset getDataset() {
+		return getObject().getDataset();
 	}
 }

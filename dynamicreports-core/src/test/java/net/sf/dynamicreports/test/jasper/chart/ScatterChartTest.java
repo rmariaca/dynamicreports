@@ -46,24 +46,24 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
  */
 public class ScatterChartTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-		
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<Integer> column1;
-		TextColumnBuilder<Integer> column2; 
-		
+		TextColumnBuilder<Integer> column2;
+
 		rb.columns(
 				column1 = col.column("Column1", "field1", Integer.class),
 				column2 = col.column("Column2", "field2", Integer.class))
 			.summary(
 					cht.scatterChart()
 						.setXValue(column1)
-						.series(cht.serie(column2))
+						.series(cht.xySerie(column2))
 						.setShowShapes(false)
 						.setShowLines(false),
 					cht.scatterChart()
 						.setXValue(column1)
-						.series(cht.serie(column2))						
+						.series(cht.xySerie(column2))
 						.setXAxisFormat(
 								cht.axisFormat()
 											.setLabel("category")
@@ -74,7 +74,7 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 											.setLineColor(Color.LIGHT_GRAY)),
 					cht.scatterChart()
 						.setXValue(column1)
-						.series(cht.serie(column2))													
+						.series(cht.xySerie(column2))
 						.setYAxisFormat(
 								cht.axisFormat()
 											.setLabel("value")
@@ -85,19 +85,19 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 											.setTickLabelMask("#,##0.00")
 											.setLineColor(Color.LIGHT_GRAY)));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		JFreeChart chart = getChart("summary.chart1", 0);		
+
+		JFreeChart chart = getChart("summary.chart1", 0);
 		XYItemRenderer renderer = chart.getXYPlot().getRenderer();
 		Assert.assertEquals("renderer", XYLineAndShapeRenderer.class, renderer.getClass());
 		Assert.assertFalse("show shapes", ((XYLineAndShapeRenderer) renderer).getBaseShapesVisible());
 		Assert.assertFalse("show lines", ((XYLineAndShapeRenderer) renderer).getBaseLinesVisible());
-		
+
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getXYPlot().getDomainAxis();
 		Assert.assertEquals("category label", "category", axis.getLabel());
@@ -106,18 +106,18 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
-		
+
 		chart = getChart("summary.chart3", 0);
 		axis = chart.getXYPlot().getRangeAxis();
 		Assert.assertEquals("value label", "value", axis.getLabel());
 		Assert.assertEquals("value label color", Color.BLUE, axis.getLabelPaint());
 		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
-		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());		
-		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));		
+		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
+		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2");

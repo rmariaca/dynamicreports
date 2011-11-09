@@ -22,31 +22,31 @@
 
 package net.sf.dynamicreports.design.base.chart.dataset;
 
-import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyChartSerie;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignChartSerie implements DRIDesignChartSerie {
-	private DRIDesignExpression seriesExpression;
-	private DRIDesignExpression valueExpression;
+public class DRDesignXyChartSerie extends AbstractDesignChartSerie implements DRIDesignXyChartSerie {
+	private DRIDesignExpression xValueExpression;
+	private DRIDesignExpression yValueExpression;
 	private DRIDesignExpression labelExpression;
 
-	public DRIDesignExpression getSeriesExpression() {
-		return seriesExpression;
+	public DRIDesignExpression getXValueExpression() {
+		return xValueExpression;
 	}
 
-	public void setSeriesExpression(DRIDesignExpression seriesExpression) {
-		this.seriesExpression = seriesExpression;
+	public void setXValueExpression(DRIDesignExpression xValueExpression) {
+		this.xValueExpression = xValueExpression;
 	}
 
-	public DRIDesignExpression getValueExpression() {
-		return valueExpression;
+	public DRIDesignExpression getYValueExpression() {
+		return yValueExpression;
 	}
 
-	public void setValueExpression(DRIDesignExpression valueExpression) {
-		this.valueExpression = valueExpression;
+	public void setYValueExpression(DRIDesignExpression yValueExpression) {
+		this.yValueExpression = yValueExpression;
 	}
 
 	public DRIDesignExpression getLabelExpression() {
@@ -56,4 +56,5 @@ public class DRDesignChartSerie implements DRIDesignChartSerie {
 	public void setLabelExpression(DRIDesignExpression labelExpression) {
 		this.labelExpression = labelExpression;
 	}
+
 }

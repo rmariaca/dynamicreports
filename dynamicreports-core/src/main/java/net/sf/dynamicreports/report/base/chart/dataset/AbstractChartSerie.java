@@ -20,14 +20,28 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.report.base.chart.dataset;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
+public abstract class AbstractChartSerie implements DRIChartSerie {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public DRIDesignExpression getSeriesExpression();
+	private DRIExpression<?> seriesExpression;
+
+	public DRIExpression<?> getSeriesExpression() {
+		return seriesExpression;
+	}
+
+	public void setSeriesExpression(DRIExpression<?> seriesExpression) {
+		Validate.notNull(seriesExpression, "seriesExpression must not be null");
+		this.seriesExpression = seriesExpression;
+	}
 }

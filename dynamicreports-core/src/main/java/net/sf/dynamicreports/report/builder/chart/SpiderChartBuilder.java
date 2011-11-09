@@ -71,14 +71,14 @@ public class SpiderChartBuilder extends AbstractChartBuilder<SpiderChartBuilder>
 		return this;
 	}
 
-	public SpiderChartBuilder series(ChartSerieBuilder ...chartSeries) {
+	public SpiderChartBuilder series(CategoryChartSerieBuilder ...chartSeries) {
 		return addSerie(chartSeries);
 	}
 
-	public SpiderChartBuilder addSerie(ChartSerieBuilder ...chartSeries) {
+	public SpiderChartBuilder addSerie(CategoryChartSerieBuilder ...chartSeries) {
 		Validate.notNull(chartSeries, "chartSeries must not be null");
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
-		for (ChartSerieBuilder chartSerie : chartSeries) {
+		for (CategoryChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
 		return this;

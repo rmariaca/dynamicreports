@@ -30,7 +30,7 @@ import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
-import net.sf.dynamicreports.report.builder.chart.ChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
@@ -57,8 +57,8 @@ public class SubDatasourceReport {
 		FieldBuilder<Integer> quantityField = field("quantity", type.integerType());
 		FieldBuilder<BigDecimal> unitPriceField = field("unitprice", type.bigDecimalType());
 
-		ChartSerieBuilder quantitySerie = cht.serie(quantityField).setLabel("Quantity");
-		ChartSerieBuilder unitPriceSerie = cht.serie(unitPriceField).setLabel("Unit price");
+		CategoryChartSerieBuilder quantitySerie = cht.serie(quantityField).setLabel("Quantity");
+		CategoryChartSerieBuilder unitPriceSerie = cht.serie(unitPriceField).setLabel("Unit price");
 
 		BarChartBuilder chart1 = cht.barChart()
   		.setDataSource(createDataSource1())

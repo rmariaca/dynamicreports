@@ -22,13 +22,8 @@
 
 package net.sf.dynamicreports.report.base.chart.dataset;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.sf.dynamicreports.report.base.DRDataset;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyChartSerie;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -36,40 +31,36 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRChartDataset implements DRIChartDataset {
+public class DRXyChartSerie extends AbstractChartSerie implements DRIXyChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRDataset subDataset;
-	private DRIExpression<?> valueExpression;
-	private List<DRIChartSerie> series;
+	private DRIExpression<?> xValueExpression;
+	private DRIExpression<?> yValueExpression;
+	private DRIExpression<?> labelExpression;
 
-	public DRChartDataset() {
-		series = new ArrayList<DRIChartSerie>();
+	public DRIExpression<?> getXValueExpression() {
+		return xValueExpression;
 	}
 
-	public DRDataset getSubDataset() {
-		return subDataset;
+	public void setXValueExpression(DRIExpression<?> xValueExpression) {
+		Validate.notNull(xValueExpression, "xValueExpression must not be null");
+		this.xValueExpression = xValueExpression;
 	}
 
-	public void setSubDataset(DRDataset subDataset) {
-		this.subDataset = subDataset;
+	public DRIExpression<?> getYValueExpression() {
+		return yValueExpression;
 	}
 
-	public DRIExpression<?> getValueExpression() {
-		return valueExpression;
+	public void setYValueExpression(DRIExpression<?> yValueExpression) {
+		Validate.notNull(yValueExpression, "yValueExpression must not be null");
+		this.yValueExpression = yValueExpression;
 	}
 
-	public void setValueExpression(DRIExpression<?> valueExpression) {
-		Validate.notNull(valueExpression, "valueExpression must not be null");
-		this.valueExpression = valueExpression;
+	public DRIExpression<?> getLabelExpression() {
+		return labelExpression;
 	}
 
-	public void addSerie(DRIChartSerie serie) {
-		Validate.notNull(serie, "serie must not be null");
-		series.add(serie);
-	}
-
-	public List<DRIChartSerie> getSeries() {
-		return series;
+	public void setLabelExpression(DRIExpression<?> labelExpression) {
+		this.labelExpression = labelExpression;
 	}
 }

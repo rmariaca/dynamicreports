@@ -20,14 +20,26 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.report.base.chart.plot;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.ScaleType;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
+public class DRBubblePlot extends DRAxisPlot implements DRIBubblePlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public DRIDesignExpression getSeriesExpression();
+	private ScaleType scaleType;
+
+	public ScaleType getScaleType() {
+		return scaleType;
+	}
+
+	public void setScaleType(ScaleType scaleType) {
+		this.scaleType = scaleType;
+	}
+
 }

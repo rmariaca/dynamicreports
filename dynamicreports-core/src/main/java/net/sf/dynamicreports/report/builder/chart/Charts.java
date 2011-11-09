@@ -37,24 +37,51 @@ public class Charts {
 		return new AxisFormatBuilder();
 	}
 
-	public static ChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
-		return new ChartSerieBuilder(column);
+	//category serie
+	public static CategoryChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
+		return new CategoryChartSerieBuilder(column);
 	}
 
-	public static ChartSerieBuilder serie(String fieldName, Class<? extends Number> valueClass) {
+	public static CategoryChartSerieBuilder serie(String fieldName, Class<? extends Number> valueClass) {
 		return serie(DynamicReports.field(fieldName, valueClass));
 	}
 
-	public static ChartSerieBuilder serie(FieldBuilder<? extends Number> field) {
-		return new ChartSerieBuilder(field);
+	public static CategoryChartSerieBuilder serie(FieldBuilder<? extends Number> field) {
+		return new CategoryChartSerieBuilder(field);
 	}
 
-	public static ChartSerieBuilder serie(DRIExpression<? extends Number> valueExpression) {
-		return new ChartSerieBuilder(valueExpression);
+	public static CategoryChartSerieBuilder serie(DRIExpression<? extends Number> valueExpression) {
+		return new CategoryChartSerieBuilder(valueExpression);
 	}
 
-	public static ChartSerieBuilder serie(VariableBuilder<? extends Number> variable) {
-		return new ChartSerieBuilder(variable);
+	public static CategoryChartSerieBuilder serie(VariableBuilder<? extends Number> variable) {
+		return new CategoryChartSerieBuilder(variable);
+	}
+
+	//xy serie
+	public static XyChartSerieBuilder xySerie(ValueColumnBuilder<?, ? extends Number> column) {
+		return new XyChartSerieBuilder(column);
+	}
+
+	public static XyChartSerieBuilder xySerie(String fieldName, Class<? extends Number> valueClass) {
+		return xySerie(DynamicReports.field(fieldName, valueClass));
+	}
+
+	public static XyChartSerieBuilder xySerie(FieldBuilder<? extends Number> field) {
+		return new XyChartSerieBuilder(field);
+	}
+
+	public static XyChartSerieBuilder xySerie(DRIExpression<? extends Number> valueExpression) {
+		return new XyChartSerieBuilder(valueExpression);
+	}
+
+	public static XyChartSerieBuilder xySerie(VariableBuilder<? extends Number> variable) {
+		return new XyChartSerieBuilder(variable);
+	}
+
+	//xyz serie
+	public static XyzChartSerieBuilder xyzSerie() {
+		return new XyzChartSerieBuilder();
 	}
 
 	public static AreaChartBuilder areaChart() {
@@ -123,5 +150,9 @@ public class Charts {
 
 	public static MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?> ...charts) {
 		return new MultiAxisChartBuilder().charts(charts);
+	}
+
+	public static BubbleChartBuilder bubbleChart() {
+		return new BubbleChartBuilder();
 	}
 }

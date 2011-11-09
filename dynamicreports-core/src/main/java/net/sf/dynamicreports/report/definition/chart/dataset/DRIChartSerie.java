@@ -33,7 +33,4 @@ public interface DRIChartSerie extends Serializable {
 
 	public DRIExpression<?> getSeriesExpression();
 
-	public DRIExpression<?> getValueExpression();
-
-	public DRIExpression<?> getLabelExpression();
 }

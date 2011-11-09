@@ -20,14 +20,41 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.design.base.chart.dataset;
 
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyzChartSerie;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
+public class DRDesignXyzChartSerie extends AbstractDesignChartSerie implements DRIDesignXyzChartSerie {
+	private DRIDesignExpression xValueExpression;
+	private DRIDesignExpression yValueExpression;
+	private DRIDesignExpression zValueExpression;
 
-	public DRIDesignExpression getSeriesExpression();
+	public DRIDesignExpression getXValueExpression() {
+		return xValueExpression;
+	}
+
+	public void setXValueExpression(DRIDesignExpression xValueExpression) {
+		this.xValueExpression = xValueExpression;
+	}
+
+	public DRIDesignExpression getYValueExpression() {
+		return yValueExpression;
+	}
+
+	public void setYValueExpression(DRIDesignExpression yValueExpression) {
+		this.yValueExpression = yValueExpression;
+	}
+
+	public DRIDesignExpression getZValueExpression() {
+		return zValueExpression;
+	}
+
+	public void setZValueExpression(DRIDesignExpression zValueExpression) {
+		this.zValueExpression = zValueExpression;
+	}
+
 }

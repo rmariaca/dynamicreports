@@ -20,14 +20,18 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
+package net.sf.dynamicreports.report.definition.chart.dataset;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
+public interface DRIXyChartSerie extends DRIChartSerie {
 
-	public DRIDesignExpression getSeriesExpression();
+	public DRIExpression<?> getXValueExpression();
+
+	public DRIExpression<?> getYValueExpression();
+
+	public DRIExpression<?> getLabelExpression();
 }

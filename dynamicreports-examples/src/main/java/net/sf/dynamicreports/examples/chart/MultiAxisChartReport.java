@@ -32,7 +32,7 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
-import net.sf.dynamicreports.report.builder.chart.ChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
 import net.sf.dynamicreports.report.constant.AxisPosition;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -53,8 +53,8 @@ public class MultiAxisChartReport {
 		FieldBuilder<Integer> stock1Field = field("stock1", type.integerType());
 		FieldBuilder<Integer> stock2Field = field("stock2", type.integerType());
 
-		ChartSerieBuilder stock1Serie = cht.serie(stock1Field).setLabel("Stock1");
-		ChartSerieBuilder stock2Serie = cht.serie(stock2Field).setLabel("Stock2");
+		CategoryChartSerieBuilder stock1Serie = cht.serie(stock1Field).setLabel("Stock1");
+		CategoryChartSerieBuilder stock2Serie = cht.serie(stock2Field).setLabel("Stock2");
 
 		LineChartBuilder chart1 = cht.lineChart()
   		.setCategory(new CategoryExpression())

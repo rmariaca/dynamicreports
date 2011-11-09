@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
@@ -128,6 +129,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case MULTI_AXIS:
 				dataset = null;
 				plot = new DRMultiAxisPlot();
+				break;
+			case BUBBLE:
+				dataset = new DRChartDataset();
+				plot = new DRBubblePlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");

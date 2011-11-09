@@ -27,7 +27,11 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
+public interface DRIDesignXyChartSerie extends DRIDesignChartSerie {
 
-	public DRIDesignExpression getSeriesExpression();
+	public DRIDesignExpression getXValueExpression();
+
+	public DRIDesignExpression getYValueExpression();
+
+	public DRIDesignExpression getLabelExpression();
 }

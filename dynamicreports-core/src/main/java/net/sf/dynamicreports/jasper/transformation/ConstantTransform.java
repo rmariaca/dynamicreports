@@ -57,6 +57,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
+import net.sf.dynamicreports.report.constant.ScaleType;
 import net.sf.dynamicreports.report.constant.SpiderRotation;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
@@ -67,6 +68,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
 import net.sf.jasperreports.charts.type.EdgeEnum;
+import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
@@ -245,6 +247,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_SCATTER;
 		case MULTI_AXIS:
 			return JRDesignChart.CHART_TYPE_MULTI_AXIS;
+		case BUBBLE:
+			return JRDesignChart.CHART_TYPE_BUBBLE;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}
@@ -934,6 +938,19 @@ public class ConstantTransform {
 			return PrintOrderEnum.VERTICAL;
 		default:
 			throw new JasperDesignException("PrintOrder " + printOrder.name() + " not supported");
+		}
+	}
+
+	public static ScaleTypeEnum scaleType(ScaleType scaleType) {
+		switch (scaleType) {
+		case ON_BOTH_AXES:
+			return ScaleTypeEnum.ON_BOTH_AXES;
+		case ON_DOMAIN_AXIS:
+			return ScaleTypeEnum.ON_DOMAIN_AXIS;
+		case ON_RANGE_AXIS:
+			return ScaleTypeEnum.ON_RANGE_AXIS;
+		default:
+			throw new JasperDesignException("ScaleType " + scaleType.name() + " not supported");
 		}
 	}
 }

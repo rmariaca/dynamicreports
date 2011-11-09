@@ -41,5 +41,6 @@ public enum ChartType {
 	XYLINE,
 	SCATTER,
 	MULTI_AXIS,
-	SPIDER
+	SPIDER,
+	BUBBLE
 }

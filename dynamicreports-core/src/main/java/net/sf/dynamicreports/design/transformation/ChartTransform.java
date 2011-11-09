@@ -32,15 +32,18 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartLegend;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartSubtitle;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartTitle;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
-import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignTimeSeriesDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyChartSerie;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyzChartSerie;
 import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignBasePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisFormat;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBar3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBarPlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignBubblePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignChartAxis;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
@@ -49,6 +52,7 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignSpiderPlot;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
@@ -62,15 +66,19 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.chart.DRIChartLegend;
 import net.sf.dynamicreports.report.definition.chart.DRIChartSubtitle;
 import net.sf.dynamicreports.report.definition.chart.DRIChartTitle;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyzChartSerie;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisFormat;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBar3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMultiAxisPlot;
@@ -137,6 +145,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRISpiderPlot) {
 			designPlot = spiderPlot((DRISpiderPlot) plot);
+		}
+		else if (plot instanceof DRIBubblePlot) {
+			designPlot = bubblePlot((DRIBubblePlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -232,6 +243,13 @@ public class ChartTransform {
 		return designSpiderPlot;
 	}
 
+	private DRDesignBubblePlot bubblePlot(DRIBubblePlot bubblePlot) throws DRException {
+		DRDesignBubblePlot designBubblePlot = new DRDesignBubblePlot();
+		axisPlot(designBubblePlot, bubblePlot);
+		designBubblePlot.setScaleType(bubblePlot.getScaleType());
+		return designBubblePlot;
+	}
+
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
 		DRDesignAxisPlot designAxisPlot = new DRDesignAxisPlot();
 		axisPlot(designAxisPlot, axisPlot);
@@ -315,7 +333,20 @@ public class ChartTransform {
 		designDataset.setValueExpression(valueExpression);
 		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
-			designDataset.addSerie(serie(dataset.getSubDataset(), serie, valueExpression, resetType, resetGroup, index++));
+			DRIDesignChartSerie designSerie;
+			if (serie instanceof DRICategoryChartSerie) {
+				designSerie = categorySerie(dataset.getSubDataset(), (DRICategoryChartSerie) serie, valueExpression, resetType, resetGroup, index++);
+			}
+			else if (serie instanceof DRIXyChartSerie) {
+				designSerie = xySerie(dataset.getSubDataset(), (DRIXyChartSerie) serie, valueExpression, resetType, resetGroup, index++);
+			}
+			else if (serie instanceof DRIXyzChartSerie) {
+				designSerie = xyzSerie(dataset.getSubDataset(), (DRIXyzChartSerie) serie, valueExpression, resetType, resetGroup, index++);
+			}
+			else {
+				throw new DRDesignReportException("Chart serie " + serie.getClass().getName() + " not supported");
+			}
+			designDataset.addSerie(designSerie);
 		}
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
@@ -336,9 +367,9 @@ public class ChartTransform {
 		return designDataset;
 	}
 
-	//serie
-	private DRDesignChartSerie serie(DRIDataset dataset, DRIChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
-		DRDesignChartSerie designSerie = new DRDesignChartSerie();
+	//design serie
+	private DRDesignCategoryChartSerie categorySerie(DRIDataset dataset, DRICategoryChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+		DRDesignCategoryChartSerie designSerie = new DRDesignCategoryChartSerie();
 
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
@@ -361,6 +392,46 @@ public class ChartTransform {
 		}
 		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
 
+		return designSerie;
+	}
+
+	//xy serie
+	private DRDesignXyChartSerie xySerie(DRIDataset dataset, DRIXyChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+		DRDesignXyChartSerie designSerie = new DRDesignXyChartSerie();
+
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
+		designSerie.setSeriesExpression(seriesExpression);
+		designSerie.setXValueExpression(expressionTransform.transformExpression(serie.getXValueExpression()));
+		DRIDesignExpression serieYExpression = expressionTransform.transformExpression(serie.getYValueExpression());
+		if (serieYExpression instanceof DRIDesignVariable) {
+			designSerie.setYValueExpression(serieYExpression);
+		}
+		else {
+			if (seriesExpression == null) {
+				designSerie.setYValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieYExpression, resetType, resetGroup, null)));
+			}
+			else {
+				designSerie.setYValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieYExpression, resetType, resetGroup, seriesExpression.getName())));
+			}
+		}
+		DRIExpression<?> labelExpression = serie.getLabelExpression();
+		if (labelExpression == null) {
+			labelExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
+
+		return designSerie;
+	}
+
+	//xyz serie
+	private DRDesignXyzChartSerie xyzSerie(DRIDataset dataset, DRIXyzChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+		DRDesignXyzChartSerie designSerie = new DRDesignXyzChartSerie();
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		designSerie.setSeriesExpression(expressionTransform.transformExpression(serie.getSeriesExpression()));
+		designSerie.setXValueExpression(expressionTransform.transformExpression(serie.getXValueExpression()));
+		designSerie.setYValueExpression(expressionTransform.transformExpression(serie.getYValueExpression()));
+		designSerie.setZValueExpression(expressionTransform.transformExpression(serie.getZValueExpression()));
 		return designSerie;
 	}
 

@@ -36,24 +36,51 @@ public class ChartBuilders {
 		return Charts.axisFormat();
 	}
 
-	public ChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
+	//category serie
+	public CategoryChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
 		return Charts.serie(column);
 	}
 
-	public ChartSerieBuilder serie(String fieldName, Class<? extends Number> valueClass) {
+	public CategoryChartSerieBuilder serie(String fieldName, Class<? extends Number> valueClass) {
 		return Charts.serie(fieldName, valueClass);
 	}
 
-	public ChartSerieBuilder serie(FieldBuilder<? extends Number> field) {
+	public CategoryChartSerieBuilder serie(FieldBuilder<? extends Number> field) {
 		return Charts.serie(field);
 	}
 
-	public ChartSerieBuilder serie(DRIExpression<? extends Number> valueExpression) {
+	public CategoryChartSerieBuilder serie(DRIExpression<? extends Number> valueExpression) {
 		return Charts.serie(valueExpression);
 	}
 
-	public ChartSerieBuilder serie(VariableBuilder<? extends Number> variable) {
+	public CategoryChartSerieBuilder serie(VariableBuilder<? extends Number> variable) {
 		return Charts.serie(variable);
+	}
+
+	//xy serie
+	public XyChartSerieBuilder xySerie(ValueColumnBuilder<?, ? extends Number> column) {
+		return Charts.xySerie(column);
+	}
+
+	public XyChartSerieBuilder xySerie(String fieldName, Class<? extends Number> valueClass) {
+		return Charts.xySerie(fieldName, valueClass);
+	}
+
+	public XyChartSerieBuilder xySerie(FieldBuilder<? extends Number> field) {
+		return Charts.xySerie(field);
+	}
+
+	public XyChartSerieBuilder xySerie(DRIExpression<? extends Number> valueExpression) {
+		return Charts.xySerie(valueExpression);
+	}
+
+	public XyChartSerieBuilder xySerie(VariableBuilder<? extends Number> variable) {
+		return Charts.xySerie(variable);
+	}
+
+	//xyz serie
+	public XyzChartSerieBuilder xyzSerie() {
+		return Charts.xyzSerie();
 	}
 
 	public AreaChartBuilder areaChart() {
@@ -122,5 +149,9 @@ public class ChartBuilders {
 
 	public MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?> ...charts) {
 		return Charts.multiAxisChart(charts);
+	}
+
+	public BubbleChartBuilder bubbleChart() {
+		return Charts.bubbleChart();
 	}
 }

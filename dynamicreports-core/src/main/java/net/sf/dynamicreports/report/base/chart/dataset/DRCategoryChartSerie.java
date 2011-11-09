@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.base.chart.dataset;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSerie;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang.Validate;
@@ -31,21 +31,11 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRChartSerie implements DRIChartSerie {
+public class DRCategoryChartSerie extends AbstractChartSerie implements DRICategoryChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRIExpression<?> seriesExpression;
 	private DRIExpression<?> valueExpression;
 	private DRIExpression<?> labelExpression;
-
-	public DRIExpression<?> getSeriesExpression() {
-		return seriesExpression;
-	}
-
-	public void setSeriesExpression(DRIExpression<?> seriesExpression) {
-		Validate.notNull(seriesExpression, "seriesExpression must not be null");
-		this.seriesExpression = seriesExpression;
-	}
 
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;

@@ -20,14 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.definition.chart.dataset;
-
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignChartSerie {
-
-	public DRIDesignExpression getSeriesExpression();
+public enum ScaleType {
+	ON_BOTH_AXES,
+	ON_DOMAIN_AXIS,
+	ON_RANGE_AXIS
 }
