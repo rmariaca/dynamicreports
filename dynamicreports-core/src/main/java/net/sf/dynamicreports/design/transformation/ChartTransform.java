@@ -400,21 +400,9 @@ public class ChartTransform {
 		DRDesignXyChartSerie designSerie = new DRDesignXyChartSerie();
 
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
-		designSerie.setSeriesExpression(seriesExpression);
+		designSerie.setSeriesExpression(expressionTransform.transformExpression(serie.getSeriesExpression()));
 		designSerie.setXValueExpression(expressionTransform.transformExpression(serie.getXValueExpression()));
-		DRIDesignExpression serieYExpression = expressionTransform.transformExpression(serie.getYValueExpression());
-		if (serieYExpression instanceof DRIDesignVariable) {
-			designSerie.setYValueExpression(serieYExpression);
-		}
-		else {
-			if (seriesExpression == null) {
-				designSerie.setYValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieYExpression, resetType, resetGroup, null)));
-			}
-			else {
-				designSerie.setYValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieYExpression, resetType, resetGroup, seriesExpression.getName())));
-			}
-		}
+		designSerie.setYValueExpression(expressionTransform.transformExpression(serie.getYValueExpression()));
 		DRIExpression<?> labelExpression = serie.getLabelExpression();
 		if (labelExpression == null) {
 			labelExpression = Expressions.text("serie" + index);
@@ -428,7 +416,11 @@ public class ChartTransform {
 	private DRDesignXyzChartSerie xyzSerie(DRIDataset dataset, DRIXyzChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
 		DRDesignXyzChartSerie designSerie = new DRDesignXyzChartSerie();
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		designSerie.setSeriesExpression(expressionTransform.transformExpression(serie.getSeriesExpression()));
+		DRIExpression<?> seriesExpression = serie.getSeriesExpression();
+		if (seriesExpression == null) {
+			seriesExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setSeriesExpression(expressionTransform.transformExpression(seriesExpression));
 		designSerie.setXValueExpression(expressionTransform.transformExpression(serie.getXValueExpression()));
 		designSerie.setYValueExpression(expressionTransform.transformExpression(serie.getYValueExpression()));
 		designSerie.setZValueExpression(expressionTransform.transformExpression(serie.getZValueExpression()));

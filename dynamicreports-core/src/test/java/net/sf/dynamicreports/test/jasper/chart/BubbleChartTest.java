@@ -26,11 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.Serializable;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.ScaleType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -38,33 +38,34 @@ import net.sf.jasperreports.engine.JRDataSource;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ScatterChartTest extends AbstractJasperChartTest implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class BubbleChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<Integer> column1;
 		TextColumnBuilder<Integer> column2;
+		TextColumnBuilder<Double> column3;
 
 		rb.columns(
 				column1 = col.column("Column1", "field1", Integer.class),
-				column2 = col.column("Column2", "field2", Integer.class))
+				column2 = col.column("Column2", "field2", Integer.class),
+				column3 = col.column("Column3", "field3", Double.class))
 			.summary(
-					cht.scatterChart()
+					cht.bubbleChart()
 						.setXValue(column1)
 						.series(
-							cht.xySerie(column2), cht.xySerie(column1).setXValue(column2))
-						.setShowShapes(false)
-						.setShowLines(false),
-					cht.scatterChart()
+							cht.xyzSerie().setYValue(column2).setZValue(column3).setSeries(exp.text("a")),
+							cht.xyzSerie().setXValue(column2).setYValue(column1).setZValue(column3))
+						.setScaleType(ScaleType.ON_BOTH_AXES),
+					cht.bubbleChart()
 						.setXValue(column1)
-						.series(cht.xySerie(column2))
+						.series(cht.xyzSerie().setYValue(column2).setZValue(column3))
 						.setXAxisFormat(
 								cht.axisFormat()
 											.setLabel("category")
@@ -73,9 +74,9 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 											.setTickLabelFont(stl.fontArial().setItalic(true))
 											.setTickLabelColor(Color.CYAN)
 											.setLineColor(Color.LIGHT_GRAY)),
-					cht.scatterChart()
+					cht.bubbleChart()
 						.setXValue(column1)
-						.series(cht.xySerie(column2))
+						.series(cht.xyzSerie().setYValue(column2).setZValue(column3))
 						.setYAxisFormat(
 								cht.axisFormat()
 											.setLabel("value")
@@ -95,11 +96,10 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 
 		JFreeChart chart = getChart("summary.chart1", 0);
 		XYItemRenderer renderer = chart.getXYPlot().getRenderer();
-		Assert.assertEquals("renderer", XYLineAndShapeRenderer.class, renderer.getClass());
-		Assert.assertFalse("show shapes", ((XYLineAndShapeRenderer) renderer).getBaseShapesVisible());
-		Assert.assertFalse("show lines", ((XYLineAndShapeRenderer) renderer).getBaseLinesVisible());
-		xyChartDataTest(chart, 0, "Column2", new Number[][] {{1d, 2d}, {2d, 3d}, {3d, 4d}, {4d, 5d}});
-		xyChartDataTest(chart, 1, "Column1", new Number[][] {{2d, 1d}, {3d, 2d}, {4d, 3d}, {5d, 4d}});
+		Assert.assertEquals("renderer", XYBubbleRenderer.class, renderer.getClass());
+		Assert.assertEquals("scale type", XYBubbleRenderer.SCALE_ON_BOTH_AXES, ((XYBubbleRenderer) renderer).getScaleType());
+		xyzChartDataTest(chart, 0, "a", new Number[][] {{1d, 2d, 0.25}, {2d, 3d, 0.5}, {3d, 4d, 0.75}, {4d, 5d, 1d}});
+		xyzChartDataTest(chart, 1, "serie1", new Number[][] {{2d, 1d, 0.25}, {3d, 2d, 0.5}, {4d, 3d, 0.75}, {5d, 4d, 1d}});
 
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getXYPlot().getDomainAxis();
@@ -123,9 +123,9 @@ public class ScatterChartTest extends AbstractJasperChartTest implements Seriali
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DataSource dataSource = new DataSource("field1", "field2", "field3");
 		for (int i = 0; i < 4; i++) {
-			dataSource.add(i + 1, i + 2);
+			dataSource.add(i + 1, i + 2, (i * 0.25 + 0.25));
 		}
 		return dataSource;
 	}

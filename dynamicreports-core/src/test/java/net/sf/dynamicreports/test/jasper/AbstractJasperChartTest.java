@@ -31,6 +31,8 @@ import net.sf.jasperreports.engine.JRPrintImage;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYZDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -65,6 +67,29 @@ public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 			for (int j = 0; j < series.length; j++) {
 				Assert.assertEquals("chart data", values[i][j], dataset.getValue(series[j], categories[i]));
 			}
+		}
+	}
+
+	protected void xyChartDataTest(JFreeChart chart, int series, String seriesName, Number[][] values) {
+		XYDataset dataset = chart.getXYPlot().getDataset();
+		int index = 0;
+		for (Number[] numbers : values) {
+			Assert.assertEquals("chart data series name", seriesName, dataset.getSeriesKey(series));
+			Assert.assertEquals("chart data x", numbers[0], dataset.getXValue(series, index));
+			Assert.assertEquals("chart data y", numbers[1], dataset.getYValue(series, index));
+			index++;
+		}
+	}
+
+	protected void xyzChartDataTest(JFreeChart chart, int series, String seriesName, Number[][] values) {
+		XYZDataset dataset = (XYZDataset) chart.getXYPlot().getDataset();
+		int index = 0;
+		for (Number[] numbers : values) {
+			Assert.assertEquals("chart data series name", seriesName, dataset.getSeriesKey(series));
+			Assert.assertEquals("chart data x", numbers[0], dataset.getXValue(series, index));
+			Assert.assertEquals("chart data y", numbers[1], dataset.getYValue(series, index));
+			Assert.assertEquals("chart data z", numbers[2], dataset.getZValue(series, index));
+			index++;
 		}
 	}
 
