@@ -38,11 +38,11 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ConcatenatedReport1 {
-	
+
 	public ConcatenatedReport1() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			concatenatedReport()
@@ -50,27 +50,27 @@ public class ConcatenatedReport1 {
 			  	invoiceReport(), salesReport())
 			  .toPdf(Exporters.pdfExporter("c:/report.pdf"));
 		} catch (DRException e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
-	
-	private JasperReportBuilder invoiceReport() {	
+
+	private JasperReportBuilder invoiceReport() throws DRException {
 		return createReport(new InvoiceDesign(), new InvoiceData());
 	}
 
-	private JasperReportBuilder salesReport() {	
+	private JasperReportBuilder salesReport() throws DRException {
 		return createReport(new SalesDesign(), new SalesData());
 	}
-	
-	private <T extends ReportData> JasperReportBuilder createReport(ReportDesign<T> design, T data) {
+
+	private <T extends ReportData> JasperReportBuilder createReport(ReportDesign<T> design, T data) throws DRException {
 		JasperReportBuilder reportBuilder = DynamicReports.report();
 		if (data != null) {
 			reportBuilder.setDataSource(data.createDataSource());
 		}
-		design.configureReport(reportBuilder, data);	
+		design.configureReport(reportBuilder, data);
 		return reportBuilder;
 	}
-	
+
 	public static void main(String[] args) {
 		new ConcatenatedReport1();
 	}

@@ -24,45 +24,70 @@ package net.sf.dynamicreports.examples.complex.dynamicreport;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.examples.complex.dynamicreport.DynamicReportData.DynamicReport;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DynamicReportDesign implements ReportDesign<DynamicReportData> {
 
-	public void configureReport(ReportBuilder<?> rb, DynamicReportData data) {
-		DynamicReport report = data.getUserReport();
-		Map<String, TextColumnBuilder> columns = report.getColumns();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void configureReport(ReportBuilder<?> rb, DynamicReportData data) throws DRException {
+		rb.setTemplate(Templates.reportTemplate)
+			.title(Templates.createTitleComponent("DynamicReport"));
 
-		for (TextColumnBuilder<?> column : columns.values()) {
-			rb.columns(column);
+		DynamicReport report = data.getDynamicReport();
+		List<DynamicColumn> columns = report.getColumns();
+		Map<String, TextColumnBuilder> drColumns = new HashMap<String, TextColumnBuilder>();
+
+		for (DynamicColumn column : columns) {
+			TextColumnBuilder drColumn = col.column(column.getTitle(), column.getName(), type.detectType(column.getType()));
+			if (column.getPattern() != null) {
+				drColumn.setPattern(column.getPattern());
+			}
+			if (column.getHorizontalAlignment() != null) {
+				drColumn.setHorizontalAlignment(column.getHorizontalAlignment());
+			}
+			drColumns.put(column.getName(), drColumn);
+			rb.columns(drColumn);
 		}
 
 		for (String group : report.getGroups()) {
-			ColumnGroupBuilder group2 = grp.group(columns.get(group));
+			ColumnGroupBuilder group2 = grp.group(drColumns.get(group));
 			rb.groupBy(group2);
 
 			for (String subtotal : report.getSubtotals()) {
-				rb.subtotalsAtGroupFooter(group2, sbt.sum(columns.get(subtotal)));
+				rb.subtotalsAtGroupFooter(group2, sbt.sum(drColumns.get(subtotal)));
 			}
 		}
 
-		if (!report.getSubtotals().isEmpty()) {
-			rb.subtotalsAtSummary(sbt.text("Total", (columns.get("item"))));
-		}
 		for (String subtotal : report.getSubtotals()) {
-			rb.subtotalsAtSummary(sbt.sum(columns.get(subtotal)));
+			rb.subtotalsAtSummary(sbt.sum(drColumns.get(subtotal)));
 		}
 
-		rb.setTemplate(Templates.reportTemplate)
-		  .pageFooter(Templates.footerComponent);
+		if (report.getTitle() != null) {
+			TextFieldBuilder<String> title = cmp.text(report.getTitle())
+				.setStyle(Templates.bold12CenteredStyle)
+				.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			rb.addTitle(title);
+		}
+		if (report.isShowPageNumber()) {
+			PageXofYBuilder pageXofY = cmp.pageXofY()
+				.setStyle(Templates.boldCenteredStyle);
+			rb.addPageFooter(pageXofY);
+		}
+
 	}
 }

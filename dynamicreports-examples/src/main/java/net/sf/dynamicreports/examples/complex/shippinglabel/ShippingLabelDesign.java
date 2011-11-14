@@ -28,8 +28,6 @@ import java.util.Date;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.examples.complex.shippinglabel.ShippingLabelData.Customer;
-import net.sf.dynamicreports.examples.complex.shippinglabel.ShippingLabelData.ShippingLabel;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.barcode.Code128BarcodeBuilder;
 import net.sf.dynamicreports.report.builder.barcode.Ean128BarcodeBuilder;
@@ -39,6 +37,7 @@ import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -46,7 +45,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 	private StyleBuilder bold14Style;
 
-	public void configureReport(ReportBuilder<?> rb, ShippingLabelData invoiceData) {
+	public void configureReport(ReportBuilder<?> rb, ShippingLabelData invoiceData) throws DRException {
 		ShippingLabel shippingLabel = invoiceData.getShippingLabel();
 
 		StyleBuilder textStyle            = stl.style().setFontSize(12);

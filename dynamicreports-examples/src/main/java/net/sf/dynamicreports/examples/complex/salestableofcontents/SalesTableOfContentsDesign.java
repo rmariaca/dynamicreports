@@ -50,13 +50,14 @@ import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfContentsData> {
 
-	public void configureReport(ReportBuilder<?> rb, SalesTableOfContentsData invoiceData) {
+	public void configureReport(ReportBuilder<?> rb, SalesTableOfContentsData invoiceData) throws DRException {
 		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
 		TextColumnBuilder<String> itemColumn    = col.column("Item",    "item",    type.stringType());
 

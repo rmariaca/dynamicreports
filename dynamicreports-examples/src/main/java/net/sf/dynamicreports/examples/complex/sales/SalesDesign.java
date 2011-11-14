@@ -39,13 +39,14 @@ import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class SalesDesign implements ReportDesign<SalesData> {
 
-	public void configureReport(ReportBuilder<?> rb, SalesData invoiceData) {
+	public void configureReport(ReportBuilder<?> rb, SalesData invoiceData) throws DRException {
 		//init styles
 		FontBuilder  boldFont = stl.fontArialBold();
 		//init columns

@@ -20,15 +20,39 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.complex;
+package net.sf.dynamicreports.examples.complex.invoice;
 
-import net.sf.dynamicreports.report.builder.ReportBuilder;
-import net.sf.dynamicreports.report.exception.DRException;
+import java.math.BigDecimal;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface ReportDesign<T extends ReportData> {
+public class Item {
+	private String description;
+	private Integer quantity;
+	private BigDecimal unitprice;
 
-	public void configureReport(ReportBuilder<?> rb, T reportData) throws DRException;
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public BigDecimal getUnitprice() {
+		return unitprice;
+	}
+
+	public void setUnitprice(BigDecimal unitprice) {
+		this.unitprice = unitprice;
+	}
 }

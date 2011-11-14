@@ -28,8 +28,6 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.examples.complex.invoice.InvoiceData.Customer;
-import net.sf.dynamicreports.examples.complex.invoice.InvoiceData.Invoice;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -39,6 +37,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -47,7 +46,7 @@ public class InvoiceDesign implements ReportDesign<InvoiceData> {
 	private Invoice invoice;
 	private AggregationSubtotalBuilder<BigDecimal> totalSum;
 
-	public void configureReport(ReportBuilder<?> rb, InvoiceData invoiceData) {
+	public void configureReport(ReportBuilder<?> rb, InvoiceData invoiceData) throws DRException {
 		invoice = invoiceData.getInvoice();
 		//init styles
 		StyleBuilder columnStyle   = stl.style(Templates.columnStyle).setBorder(stl.pen1Point());

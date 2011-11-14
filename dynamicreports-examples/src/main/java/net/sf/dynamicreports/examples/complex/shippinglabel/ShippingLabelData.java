@@ -32,14 +32,14 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class ShippingLabelData implements ReportData {
 	private ShippingLabel shippingLabel;
-	
+
 	public ShippingLabelData() {
 		shippingLabel = createShippingLabel();
 	}
-	
+
 	private ShippingLabel createShippingLabel() {
 		ShippingLabel shippingLabel = new ShippingLabel();
-		
+
 		shippingLabel.setFrom(createCustomer("Mary Patterson", "151 Pompton St.", "Washington"));
 		shippingLabel.setTo(createCustomer("Peter Marsh", "23 Baden Av.", "New York"));
 		shippingLabel.setPriority(1);
@@ -51,7 +51,7 @@ public class ShippingLabelData implements ReportData {
 		shippingLabel.setShipToPostalCode("09820");
 		shippingLabel.setPo("8492640276542");
 		shippingLabel.setSerialShippingContainer("100264835710351");
-		
+
 		return shippingLabel;
 	}
 
@@ -62,144 +62,12 @@ public class ShippingLabelData implements ReportData {
 		customer.setCity(city);
 		return customer;
 	}
-	
+
 	public ShippingLabel getShippingLabel() {
 		return shippingLabel;
 	}
-	
+
 	public JRDataSource createDataSource() {
 		return null;
-	}
-	
-	public class ShippingLabel {
-		private Customer from;
-		private Customer to;
-		private Integer priority;
-		private String pod;
-		private String carrier;
-		private Date dateShipped;
-		private Integer weight;
-		private Integer quantity;
-		private String shipToPostalCode;
-		private String po;
-		private String serialShippingContainer;
-		
-		public Customer getFrom() {
-			return from;
-		}
-		
-		public void setFrom(Customer from) {
-			this.from = from;
-		}
-		
-		public Customer getTo() {
-			return to;
-		}
-		
-		public void setTo(Customer to) {
-			this.to = to;
-		}
-
-		public Integer getPriority() {
-			return priority;
-		}
-
-		public void setPriority(Integer priority) {
-			this.priority = priority;
-		}
-
-		public String getPod() {
-			return pod;
-		}
-
-		public void setPod(String pod) {
-			this.pod = pod;
-		}
-
-		public String getCarrier() {
-			return carrier;
-		}
-
-		public void setCarrier(String carrier) {
-			this.carrier = carrier;
-		}
-
-		public Date getDateShipped() {
-			return dateShipped;
-		}
-
-		public void setDateShipped(Date dateShipped) {
-			this.dateShipped = dateShipped;
-		}
-
-		public Integer getWeight() {
-			return weight;
-		}
-
-		public void setWeight(Integer weight) {
-			this.weight = weight;
-		}
-
-		public Integer getQuantity() {
-			return quantity;
-		}
-
-		public void setQuantity(Integer quantity) {
-			this.quantity = quantity;
-		}
-
-		public String getShipToPostalCode() {
-			return shipToPostalCode;
-		}
-
-		public void setShipToPostalCode(String shipToPostalCode) {
-			this.shipToPostalCode = shipToPostalCode;
-		}
-
-		public String getPo() {
-			return po;
-		}
-
-		public void setPo(String po) {
-			this.po = po;
-		}
-
-		public String getSerialShippingContainer() {
-			return serialShippingContainer;
-		}
-
-		public void setSerialShippingContainer(String serialShippingContainer) {
-			this.serialShippingContainer = serialShippingContainer;
-		}		
-	}
-	
-	public class Customer {
-		private String name;
-		private String address;
-		private String city;
-		
-		public String getName() {
-			return name;
-		}
-		
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		public String getAddress() {
-			return address;
-		}
-		
-		public void setAddress(String address) {
-			this.address = address;
-		}
-		
-		public String getCity() {
-			return city;
-		}
-		
-		public void setCity(String city) {
-			this.city = city;
-		}
 	}
 }

@@ -35,27 +35,27 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  */
 public class InvoiceData implements ReportData {
 	private Invoice invoice;
-	
+
 	public InvoiceData() {
 		invoice = createInvoice();
 	}
-	
+
 	private Invoice createInvoice() {
 		Invoice invoice = new Invoice();
 		invoice.setId(5);
 		invoice.setShipping(new BigDecimal(10));
 		invoice.setTax(0.2);
-		
+
 		invoice.setBillTo(createCustomer("Mary Patterson", "151 Pompton St.", "Washington", "mpatterson@noemail.com"));
 		invoice.setShipTo(createCustomer("Peter Marsh", "23 Baden Av.", "New York", null));
-		
+
 		List<Item> items = new ArrayList<Item>();
 		items.add(createItem("Notebook", 1, new BigDecimal(1000)));
 		items.add(createItem("DVD", 5, new BigDecimal(40)));
 		items.add(createItem("Book", 2, new BigDecimal(10)));
 		items.add(createItem("Phone", 1, new BigDecimal(200)));
 		invoice.setItems(items);
-		
+
 		return invoice;
 	}
 
@@ -67,7 +67,7 @@ public class InvoiceData implements ReportData {
 		customer.setEmail(email);
 		return customer;
 	}
-	
+
 	private Item createItem(String description, Integer quantity, BigDecimal unitprice) {
 		Item item = new Item();
 		item.setDescription(description);
@@ -75,138 +75,12 @@ public class InvoiceData implements ReportData {
 		item.setUnitprice(unitprice);
 		return item;
 	}
-	
+
 	public Invoice getInvoice() {
 		return invoice;
 	}
-	
+
 	public JRDataSource createDataSource() {
 		return new JRBeanCollectionDataSource(invoice.getItems());
-	}
-	
-	public class Invoice {
-		private Integer id;
-		private BigDecimal shipping;
-		private Double tax;
-		private Customer billTo;
-		private Customer shipTo;
-		private List<Item> items;
-		
-		public Integer getId() {
-			return id;
-		}
-		
-		public void setId(Integer id) {
-			this.id = id;
-		}
-		
-		public BigDecimal getShipping() {
-			return shipping;
-		}
-		
-		public void setShipping(BigDecimal shipping) {
-			this.shipping = shipping;
-		}
-		
-		public Double getTax() {
-			return tax;
-		}
-		
-		public void setTax(Double tax) {
-			this.tax = tax;
-		}
-		
-		public Customer getBillTo() {
-			return billTo;
-		}
-		
-		public void setBillTo(Customer billTo) {
-			this.billTo = billTo;
-		}
-		
-		public Customer getShipTo() {
-			return shipTo;
-		}
-		
-		public void setShipTo(Customer shipTo) {
-			this.shipTo = shipTo;
-		}	
-		
-		public List<Item> getItems() {
-			return items;
-		}
-		
-		public void setItems(List<Item> items) {
-			this.items = items;
-		}
-	}
-	
-	public class Customer {
-		private String name;
-		private String address;
-		private String city;
-		private String email;
-		
-		public String getName() {
-			return name;
-		}
-		
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		public String getAddress() {
-			return address;
-		}
-		
-		public void setAddress(String address) {
-			this.address = address;
-		}
-		
-		public String getCity() {
-			return city;
-		}
-		
-		public void setCity(String city) {
-			this.city = city;
-		}
-		
-		public String getEmail() {
-			return email;
-		}
-		
-		public void setEmail(String email) {
-			this.email = email;
-		}	
-	}
-	
-	public class Item {
-		private String description;
-		private Integer quantity;
-		private BigDecimal unitprice;
-		
-		public String getDescription() {
-			return description;
-		}
-		
-		public void setDescription(String description) {
-			this.description = description;
-		}
-		
-		public Integer getQuantity() {
-			return quantity;
-		}
-		
-		public void setQuantity(Integer quantity) {
-			this.quantity = quantity;
-		}
-		
-		public BigDecimal getUnitprice() {
-			return unitprice;
-		}
-		
-		public void setUnitprice(BigDecimal unitprice) {
-			this.unitprice = unitprice;
-		}	
 	}
 }

@@ -43,13 +43,14 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class SalesCrosstabDesign implements ReportDesign<SalesCrosstabData> {
 
-	public void configureReport(ReportBuilder<?> rb, SalesCrosstabData invoiceData) {
+	public void configureReport(ReportBuilder<?> rb, SalesCrosstabData invoiceData) throws DRException {
 		CrosstabRowGroupBuilder<String> rowStateGroup = ctab.rowGroup("state", String.class)
 		                                                    .setHeaderWidth(80);
 		CrosstabRowGroupBuilder<String> rowItemGroup = ctab.rowGroup("item", String.class)

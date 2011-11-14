@@ -20,15 +20,37 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.complex;
-
-import net.sf.dynamicreports.report.builder.ReportBuilder;
-import net.sf.dynamicreports.report.exception.DRException;
+package net.sf.dynamicreports.examples.complex.shippinglabel;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface ReportDesign<T extends ReportData> {
+public class Customer {
+	private String name;
+	private String address;
+	private String city;
 
-	public void configureReport(ReportBuilder<?> rb, T reportData) throws DRException;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 }
