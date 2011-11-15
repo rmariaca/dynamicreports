@@ -26,6 +26,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -35,16 +36,21 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class SubtotalPosition3Test extends AbstractJasperPositionTest {
 	private AggregationSubtotalBuilder<Integer> subtotal1;
+	private AggregationSubtotalBuilder<Integer> subtotal2;
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<Integer> column2;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
-				column1 = col.column("", "field1", type.stringType()).setFixedWidth(540),
-				column2 = col.column("", "field2", type.integerType()))
+				column1 = col.column("Column1", "field1", type.stringType()).setFixedWidth(540),
+				column2 = col.column("Column2", "field2", type.integerType()))
+			.groupBy(
+				grp.group(column1).setHideColumn(false).setPadding(0).setHeaderLayout(GroupHeaderLayout.EMPTY))
+			.subtotalsAtFirstGroupFooter(
+				subtotal1 = sbt.sum(column2))
 			.subtotalsAtSummary(
-					subtotal1 = sbt.sum(column2));
+				subtotal2 = sbt.sum(column2));
 	}
 
 	@Override
@@ -58,7 +64,10 @@ public class SubtotalPosition3Test extends AbstractJasperPositionTest {
 		columnDetailPositionTest(column2, 0, 540, 0, 35, 26);
 
 		//summary
+		elementPositionTest("subtotalGroupFooter.list1", 0, 10, 88, 575, 26);
 		subtotalPositionTest(subtotal1, 0, 540, 0, 35, 26);
+		elementPositionTest("summary.list1", 0, 10, 114, 575, 26);
+		subtotalPositionTest(subtotal2, 0, 540, 0, 35, 26);
 	}
 
 	@Override

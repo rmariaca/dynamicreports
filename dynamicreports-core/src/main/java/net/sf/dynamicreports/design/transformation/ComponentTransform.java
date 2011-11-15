@@ -628,7 +628,7 @@ public class ComponentTransform {
 		return designComponent;
 	}
 
-	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
+	protected EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {
 		if (expression == null) {
 			return null;
 		}

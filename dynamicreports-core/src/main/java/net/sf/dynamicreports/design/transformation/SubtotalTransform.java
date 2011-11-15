@@ -103,6 +103,10 @@ public class SubtotalTransform {
 				getGroupGrid(subtotal.getGroup(), groupHeader).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			case GROUP_FOOTER:
+				EvaluationTime evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+				if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+					subtotalValueComponent.setEvaluationTime(EvaluationTime.NOW);
+				}
 				getGroupGrid(subtotal.getGroup(), groupFooter).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			case FIRST_GROUP_HEADER:
@@ -114,6 +118,10 @@ public class SubtotalTransform {
 			case FIRST_GROUP_FOOTER:
 				firstGroup = accessor.getGroupTransform().getFirstGroup();
 				if (firstGroup != null) {
+					evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+					if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+						subtotalValueComponent.setEvaluationTime(EvaluationTime.NOW);
+					}
 					getGroupGrid(firstGroup, groupFooter).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				}
 				break;
@@ -126,6 +134,10 @@ public class SubtotalTransform {
 			case LAST_GROUP_FOOTER:
 				lastGroup = accessor.getGroupTransform().getLastGroup();
 				if (lastGroup != null) {
+					evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+					if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+						subtotalValueComponent.setEvaluationTime(EvaluationTime.NOW);
+					}
 					getGroupGrid(lastGroup, groupFooter).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				}
 				break;
