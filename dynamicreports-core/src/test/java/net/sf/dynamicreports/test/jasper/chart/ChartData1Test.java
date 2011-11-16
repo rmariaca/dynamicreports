@@ -41,7 +41,7 @@ import org.jfree.chart.JFreeChart;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ChartDataTest extends AbstractJasperChartTest implements Serializable {
+public class ChartData1Test extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	@Override

@@ -484,8 +484,12 @@ public class ChartTransform {
 			if (!values.containsKey(keyValue)) {
 				values.put(keyValue, 0d);
 			}
-			double value = values.get(keyValue).doubleValue() + ((Number) reportParameters.getValue(serieExpression.getName())).doubleValue();
-			values.put(keyValue, value);
+			Number serieValue = reportParameters.getValue(serieExpression.getName());
+			double value = values.get(keyValue).doubleValue();
+			if (serieValue != null) {
+				value += serieValue.doubleValue();
+				values.put(keyValue, value);
+			}
 
 			return value;
 		}
