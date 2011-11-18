@@ -36,6 +36,7 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRReportException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptlet;
 import net.sf.jasperreports.engine.JRScriptletException;
@@ -75,7 +76,7 @@ public class JasperReportParameters implements ReportParameters {
 			}
 		}
 
-		return null;
+		throw new DRReportException("Value " + name + " not found");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -89,8 +90,8 @@ public class JasperReportParameters implements ReportParameters {
 		try {
 			return (T) jasperScriptlet.getFieldValue(name);
 		} catch (JRScriptletException e) {
+			throw new DRReportException(e);
 		}
-		return null;
 	}
 
 	//variable
@@ -99,8 +100,8 @@ public class JasperReportParameters implements ReportParameters {
 		try {
 			return (T) jasperScriptlet.getVariableValue(name);
 		} catch (JRScriptletException e) {
+			throw new DRReportException(e);
 		}
-		return null;
 	}
 
 	public Integer getPageNumber() {
@@ -133,8 +134,8 @@ public class JasperReportParameters implements ReportParameters {
 		try {
 			return (T) ((Map<?, ?>) jasperScriptlet.getParameterValue(JRParameter.REPORT_PARAMETERS_MAP)).get(name);
 		} catch (JRScriptletException e) {
+			throw new DRReportException(e);
 		}
-		return null;
 	}
 
 	public Connection getConnection() {

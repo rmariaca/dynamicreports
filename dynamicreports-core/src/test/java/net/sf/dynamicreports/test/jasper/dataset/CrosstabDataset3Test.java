@@ -146,7 +146,11 @@ public class CrosstabDataset3Test extends AbstractJasperCrosstabValueTest implem
 
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			Integer value1 = reportParameters.getValue("field3");
 			Integer value2 = reportParameters.getValue("field4");
@@ -159,7 +163,11 @@ public class CrosstabDataset3Test extends AbstractJasperCrosstabValueTest implem
 
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			Integer value1 = reportParameters.getValue(measure1);
 			Integer value2 = reportParameters.getValue(variable1);

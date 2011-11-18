@@ -140,7 +140,11 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 
 			double f1 = ((Number) reportParameters.getValue("field2")).doubleValue();
@@ -154,7 +158,11 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 
 		public String evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			return (String) reportParameters.getValue("field1") + "_exp";
 		}

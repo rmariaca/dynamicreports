@@ -27,11 +27,15 @@ package net.sf.dynamicreports.report.exception;
  */
 public class DRReportException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	
+
 	public DRReportException(String message) {
 		super(message);
 	}
-	
+
+	public DRReportException(Throwable cause) {
+		super(cause);
+	}
+
 	public DRReportException(String message, Throwable cause) {
 		super(message, cause);
 	}

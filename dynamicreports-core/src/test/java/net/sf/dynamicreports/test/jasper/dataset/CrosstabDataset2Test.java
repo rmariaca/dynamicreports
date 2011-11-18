@@ -118,7 +118,11 @@ public class CrosstabDataset2Test extends AbstractJasperCrosstabValueTest implem
 
 		public String format(Integer value, ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			return "value = " + value;
 		}
@@ -129,7 +133,11 @@ public class CrosstabDataset2Test extends AbstractJasperCrosstabValueTest implem
 
 		public String format(String value, ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			return "value = " + value;
 		}

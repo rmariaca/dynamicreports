@@ -132,7 +132,11 @@ public class CrosstabDatasetStyleTest extends AbstractJasperCrosstabStyleTest im
 
 		public Boolean evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
-			Assert.assertNull(reportParameters.getValue("parameter"));
+			try {
+				reportParameters.getValue("parameter");
+				Assert.fail("parameter is not null");
+			} catch (Exception e) {
+			}
 			Assert.assertEquals("parameter_value", reportParameters.getMasterParameters().getValue("parameter"));
 			Integer value = reportParameters.getValue(measure1);
 			return values.contains(value);
