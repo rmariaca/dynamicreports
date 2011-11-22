@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.definition.component;
 
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -37,5 +38,7 @@ public interface DRIImage extends DRIHyperLinkComponent {
 	public Boolean getUsingCache();
 
 	public Boolean getLazy();
+
+	public HorizontalAlignment getHorizontalAlignment();
 }
 

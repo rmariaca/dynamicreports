@@ -332,6 +332,7 @@ public class ComponentTransform {
 
 		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);
 		jrImage.setScaleImage(ConstantTransform.imageScale(image.getImageScale()));
+		jrImage.setHorizontalAlignment(ConstantTransform.horizontalAlignment(image.getHorizontalAlignment()));
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
 		if (image.getUsingCache() != null) {
 			jrImage.setUsingCache(image.getUsingCache());

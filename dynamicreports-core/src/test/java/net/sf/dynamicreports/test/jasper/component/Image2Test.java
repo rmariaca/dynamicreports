@@ -25,11 +25,14 @@ package net.sf.dynamicreports.test.jasper.component;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.component.ImageBuilder;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintImage;
+import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 
 import org.bouncycastle.util.Arrays;
 
@@ -40,7 +43,9 @@ public class Image2Test extends AbstractJasperTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.pageHeader(cmp.image(Image2Test.class.getResourceAsStream("dynamicreports.png")))
+		ImageBuilder image = cmp.image(Image2Test.class.getResourceAsStream("dynamicreports.png"))
+			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		rb.pageHeader(image)
 			.detail(cmp.filler().setFixedHeight(20));
 	}
 
@@ -56,6 +61,7 @@ public class Image2Test extends AbstractJasperTest {
 			jrImage = (JRPrintImage) getElementAt("pageHeader.image1", 1);
 			byte[] imageData2 = jrImage.getRenderer().getImageData();
 			Assert.assertTrue("image data", Arrays.areEqual(imageData1, imageData2));
+			Assert.assertEquals("image horizontal alignment", HorizontalAlignEnum.CENTER, jrImage.getHorizontalAlignmentValue());
 		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

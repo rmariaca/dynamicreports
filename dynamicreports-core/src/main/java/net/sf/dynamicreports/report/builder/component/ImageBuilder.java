@@ -29,6 +29,7 @@ import java.net.URL;
 import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -83,6 +84,11 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 
 	public ImageBuilder setLazy(Boolean lazy) {
 		getObject().setLazy(lazy);
+		return this;
+	}
+
+	public ImageBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
 }

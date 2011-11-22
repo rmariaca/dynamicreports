@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -39,6 +40,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 	private DRIExpression<?> imageExpression;
 	private Boolean usingCache;
 	private Boolean lazy;
+	private HorizontalAlignment horizontalAlignment;
 
 	public DRIExpression<?> getImageExpression() {
 		return imageExpression;
@@ -71,6 +73,14 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 
 	public void setLazy(Boolean lazy) {
 		this.lazy = lazy;
+	}
+
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
 	}
 }
 

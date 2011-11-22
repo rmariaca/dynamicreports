@@ -303,6 +303,7 @@ public class ComponentTransform {
 		designImage.setImageExpression(accessor.getExpressionTransform().transformExpression(image.getImageExpression()));
 		designImage.setUsingCache(image.getUsingCache());
 		designImage.setLazy(image.getLazy());
+		designImage.setHorizontalAlignment(image.getHorizontalAlignment());
 		designImage.setWidth(accessor.getTemplateTransform().getImageWidth(image));
 		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image));
 		return designImage;

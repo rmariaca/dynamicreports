@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 
 /**
@@ -34,6 +35,7 @@ public class DRDesignImage extends DRDesignHyperlinkComponent implements DRIDesi
 	private DRIDesignExpression imageExpression;
 	private Boolean usingCache;
 	private Boolean lazy;
+	private HorizontalAlignment horizontalAlignment;
 
 	public DRDesignImage() {
 		super("image");
@@ -70,4 +72,13 @@ public class DRDesignImage extends DRDesignHyperlinkComponent implements DRIDesi
 	public void setLazy(Boolean lazy) {
 		this.lazy = lazy;
 	}
+
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
+	}
+
 }
