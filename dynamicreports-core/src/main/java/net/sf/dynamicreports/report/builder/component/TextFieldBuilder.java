@@ -24,12 +24,14 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.util.Date;
 
+import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -187,6 +189,16 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 	public TextFieldBuilder<T> setMinRows(Integer rows) {
 		getObject().setRows(rows);
 		getObject().setHeightType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+
+	public TextFieldBuilder<T> setEvaluationTime(Evaluation evaluationTime) {
+		getObject().setEvaluationTime(evaluationTime);
+		return this;
+	}
+
+	public TextFieldBuilder<T> setEvaluationGroup(DRGroup evaluationGroup) {
+		getObject().setEvaluationGroup(evaluationGroup);
 		return this;
 	}
 

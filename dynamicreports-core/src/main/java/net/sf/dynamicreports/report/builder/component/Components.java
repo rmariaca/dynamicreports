@@ -29,6 +29,7 @@ import java.util.Date;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -126,6 +127,10 @@ public class Components {
 
 	public static <T> TextFieldBuilder<T> text(FieldBuilder<T> field) {
 		return new TextFieldBuilder<T>().setText(field);
+	}
+
+	public static <T> TextFieldBuilder<T> text(VariableBuilder<T> variable) {
+		return new TextFieldBuilder<T>().setText(variable);
 	}
 
 	public static <T> TextFieldBuilder<T> text(DRIExpression<T> textExpression) {
