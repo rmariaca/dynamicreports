@@ -121,6 +121,9 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.renderers.BatikRenderer;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -733,6 +736,9 @@ public class ComponentTransform {
 		@Override
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
 			String pattern = (String) values.get(0);
+			Validate.isTrue(StringUtils.contains(pattern, "{0}"), "Wrong format pattern \"" + pattern + "\", missing argument {0}");
+			Validate.isTrue(StringUtils.contains(pattern, "{1}"), "Wrong format pattern \"" + pattern + "\", missing argument {1}");
+			Validate.isTrue(pattern.indexOf("{0}") < pattern.indexOf("{1}"), "Wrong format pattern \"" + pattern + "\", argument {0} must be before {1}");
 			int index1 = pattern.indexOf("{0}");
 			if (index == 0) {
 				pattern = pattern.substring(0, index1 + 3);
