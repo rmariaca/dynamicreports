@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.2 (2011-11-29)
+---------------------------------------------------
+ - support for sorting the data source, see SortReport for an example
+ - bubble chart, see BubbleChartReport for an example 
+ - minor bug fixes and improvements
+ - new examples - SortReport, BubbleChartReport, PercentageColumnWidthReport, DynamicReport, GroupChartReport2, VariableReport
+ 
 Changes in version 2.3.1 (2011-11-03)
 ---------------------------------------------------
  - multi axis chart, see MultiAxisChartReport for an example
