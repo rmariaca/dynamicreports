@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -53,7 +54,7 @@ public class DynamicReportDesign implements ReportDesign<DynamicReportData> {
 		Map<String, TextColumnBuilder> drColumns = new HashMap<String, TextColumnBuilder>();
 
 		for (DynamicColumn column : columns) {
-			TextColumnBuilder drColumn = col.column(column.getTitle(), column.getName(), type.detectType(column.getType()));
+			TextColumnBuilder drColumn = col.column(column.getTitle(), column.getName(), (DRIDataType) type.detectType(column.getType()));
 			if (column.getPattern() != null) {
 				drColumn.setPattern(column.getPattern());
 			}
