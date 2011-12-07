@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractBaseChartBuilder<T, U> {
+public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractBaseChartBuilder<T, U, DRSeriesDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractXyChartBuilder(ChartType chartType) {
@@ -90,9 +90,5 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		Validate.notNull(yAxisFormat, "yAxisFormat must not be null");
 		getPlot().setYAxisFormat(yAxisFormat.build());
 		return (T) this;
-	}
-
-	private DRChartDataset getDataset() {
-		return getObject().getDataset();
 	}
 }

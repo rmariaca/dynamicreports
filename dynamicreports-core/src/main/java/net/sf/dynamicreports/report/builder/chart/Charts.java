@@ -148,11 +148,15 @@ public class Charts {
 		return new MultiAxisChartBuilder();
 	}
 
-	public static MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?> ...charts) {
+	public static MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?, ?> ...charts) {
 		return new MultiAxisChartBuilder().charts(charts);
 	}
 
 	public static BubbleChartBuilder bubbleChart() {
 		return new BubbleChartBuilder();
+	}
+
+	public static CandlestickChartBuilder candlestickChart() {
+		return new CandlestickChartBuilder();
 	}
 }

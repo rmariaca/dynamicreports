@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.builder.chart;
 
 import java.awt.Color;
 
+import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.plot.AbstractBasePlot;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -35,7 +36,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilder<T, U>, U extends AbstractBasePlot> extends AbstractChartBuilder<T> {
+public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilder<T, U, V>, U extends AbstractBasePlot, V extends DRChartDataset> extends AbstractChartBuilder<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractBaseChartBuilder(ChartType chartType) {
@@ -63,5 +64,9 @@ public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilde
 
 	protected U getPlot() {
 		return (U) getObject().getPlot();
+	}
+
+	protected V getDataset() {
+		return (V) getObject().getDataset();
 	}
 }

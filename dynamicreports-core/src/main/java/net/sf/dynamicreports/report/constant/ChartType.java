@@ -42,5 +42,6 @@ public enum ChartType {
 	SCATTER,
 	MULTI_AXIS,
 	SPIDER,
-	BUBBLE
+	BUBBLE,
+	CANDLESTICK
 }

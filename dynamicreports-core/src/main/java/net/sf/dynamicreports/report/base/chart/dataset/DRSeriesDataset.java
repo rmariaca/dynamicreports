@@ -22,22 +22,44 @@
 
 package net.sf.dynamicreports.report.base.chart.dataset;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCategoryDataset extends DRSeriesDataset implements DRICategoryDataset {
+public class DRSeriesDataset extends DRChartDataset implements DRISeriesDataset {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Boolean useSeriesAsCategory;
-		
-	public void setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
-		this.useSeriesAsCategory = useSeriesAsCategory;
+
+	private DRIExpression<?> valueExpression;
+	private List<DRIChartSerie> series;
+
+	public DRSeriesDataset() {
+		series = new ArrayList<DRIChartSerie>();
 	}
 
-	public Boolean getUseSeriesAsCategory() {
-		return useSeriesAsCategory;
+	public DRIExpression<?> getValueExpression() {
+		return valueExpression;
+	}
+
+	public void setValueExpression(DRIExpression<?> valueExpression) {
+		Validate.notNull(valueExpression, "valueExpression must not be null");
+		this.valueExpression = valueExpression;
+	}
+
+	public void addSerie(DRIChartSerie serie) {
+		Validate.notNull(serie, "serie must not be null");
+		series.add(serie);
+	}
+
+	public List<DRIChartSerie> getSeries() {
+		return series;
 	}
 }

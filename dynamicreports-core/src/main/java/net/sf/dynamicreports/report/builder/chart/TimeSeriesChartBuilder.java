@@ -39,7 +39,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesChartBuilder, DRLinePlot> {
+public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesChartBuilder, DRLinePlot, DRTimeSeriesDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected TimeSeriesChartBuilder() {
@@ -107,9 +107,5 @@ public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesC
 	public TimeSeriesChartBuilder setShowLines(Boolean showLines) {
 		getPlot().setShowLines(showLines);
 		return this;
-	}
-
-	private DRTimeSeriesDataset getDataset() {
-		return (DRTimeSeriesDataset) getObject().getDataset();
 	}
 }

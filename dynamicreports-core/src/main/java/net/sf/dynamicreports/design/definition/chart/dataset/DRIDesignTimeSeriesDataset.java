@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.TimePeriod;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignTimeSeriesDataset extends DRIDesignChartDataset {
+public interface DRIDesignTimeSeriesDataset extends DRIDesignSeriesDataset {
 
 	public TimePeriod getTimePeriodType();
 }

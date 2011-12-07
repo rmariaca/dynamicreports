@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.dynamicreports.design.base.DRDesignDataset;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartLegend;
@@ -35,6 +36,8 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChartTitle;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignHighLowDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignSeriesDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignTimeSeriesDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyzChartSerie;
@@ -44,6 +47,7 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBar3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBarPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBubblePlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignCandlestickPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignChartAxis;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
@@ -70,6 +74,8 @@ import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSer
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIHighLowDataset;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyzChartSerie;
@@ -79,6 +85,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIBar3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMultiAxisPlot;
@@ -148,6 +155,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRIBubblePlot) {
 			designPlot = bubblePlot((DRIBubblePlot) plot);
+		}
+		else if (plot instanceof DRICandlestickPlot) {
+			designPlot = candlestickPlot((DRICandlestickPlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -250,6 +260,13 @@ public class ChartTransform {
 		return designBubblePlot;
 	}
 
+	private DRDesignCandlestickPlot candlestickPlot(DRICandlestickPlot candlestickPlot) throws DRException {
+		DRDesignCandlestickPlot designCandlestickPlot = new DRDesignCandlestickPlot();
+		axisPlot(designCandlestickPlot, candlestickPlot);
+		designCandlestickPlot.setShowVolume(candlestickPlot.getShowVolume());
+		return designCandlestickPlot;
+	}
+
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
 		DRDesignAxisPlot designAxisPlot = new DRDesignAxisPlot();
 		axisPlot(designAxisPlot, axisPlot);
@@ -316,19 +333,35 @@ public class ChartTransform {
 			return null;
 		}
 
+		DRDesignDataset subDataset = accessor.getDatasetTransform().transform(dataset.getSubDataset());
+		accessor.transformToDataset(dataset.getSubDataset());
+
 		DRDesignChartDataset designDataset;
 		if (dataset instanceof DRICategoryDataset) {
-			designDataset = categoryDataset((DRICategoryDataset) dataset);
+			designDataset = categoryDataset((DRICategoryDataset) dataset, resetType, resetGroup);
 		}
 		else if (dataset instanceof DRITimeSeriesDataset) {
-			designDataset = timeSeriesDataset((DRITimeSeriesDataset) dataset);
+			designDataset = timeSeriesDataset((DRITimeSeriesDataset) dataset, resetType, resetGroup);
+		}
+		else if (dataset instanceof DRISeriesDataset) {
+			designDataset = seriesDataset((DRISeriesDataset) dataset, resetType, resetGroup);
+		}
+		else if (dataset instanceof DRIHighLowDataset) {
+			designDataset = highLowDataset((DRIHighLowDataset) dataset, resetType, resetGroup);
 		}
 		else {
-			designDataset = new DRDesignChartDataset();
+			throw new DRDesignReportException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
 
-		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
-		accessor.transformToDataset(dataset.getSubDataset());
+		designDataset.setSubDataset(subDataset);
+		designDataset.setResetType(resetType);
+		designDataset.setResetGroup(resetGroup);
+		accessor.transformToMainDataset();
+
+		return designDataset;
+	}
+
+	private void seriesDataset(DRISeriesDataset dataset, DRDesignSeriesDataset designDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
 		designDataset.setValueExpression(valueExpression);
 		int index = 0;
@@ -348,22 +381,38 @@ public class ChartTransform {
 			}
 			designDataset.addSerie(designSerie);
 		}
-		designDataset.setResetType(resetType);
-		designDataset.setResetGroup(resetGroup);
-		accessor.transformToMainDataset();
+	}
 
+	private DRDesignSeriesDataset seriesDataset(DRISeriesDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignSeriesDataset designDataset = new DRDesignSeriesDataset();
+		seriesDataset(dataset, designDataset, resetType, resetGroup);
 		return designDataset;
 	}
 
-	private DRDesignCategoryDataset categoryDataset(DRICategoryDataset dataset) {
+	private DRDesignCategoryDataset categoryDataset(DRICategoryDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignCategoryDataset designDataset = new DRDesignCategoryDataset();
+		seriesDataset(dataset, designDataset, resetType, resetGroup);
 		designDataset.setUseSeriesAsCategory(accessor.getTemplateTransform().isChartCategoryDatasetUseSeriesAsCategory(dataset));
 		return designDataset;
 	}
 
-	private DRDesignTimeSeriesDataset timeSeriesDataset(DRITimeSeriesDataset dataset) {
+	private DRDesignTimeSeriesDataset timeSeriesDataset(DRITimeSeriesDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignTimeSeriesDataset designDataset = new DRDesignTimeSeriesDataset();
+		seriesDataset(dataset, designDataset, resetType, resetGroup);
 		designDataset.setTimePeriodType(accessor.getTemplateTransform().getChartTimeSeriesDatasetTimePeriodType(dataset));
+		return designDataset;
+	}
+
+	private DRDesignHighLowDataset highLowDataset(DRIHighLowDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignHighLowDataset designDataset = new DRDesignHighLowDataset();
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		designDataset.setSeriesExpression(expressionTransform.transformExpression(dataset.getSeriesExpression()));
+		designDataset.setDateExpression(expressionTransform.transformExpression(dataset.getDateExpression()));
+		designDataset.setHighExpression(expressionTransform.transformExpression(dataset.getHighExpression()));
+		designDataset.setLowExpression(expressionTransform.transformExpression(dataset.getLowExpression()));
+		designDataset.setOpenExpression(expressionTransform.transformExpression(dataset.getOpenExpression()));
+		designDataset.setCloseExpression(expressionTransform.transformExpression(dataset.getCloseExpression()));
+		designDataset.setVolumeExpression(expressionTransform.transformExpression(dataset.getVolumeExpression()));
 		return designDataset;
 	}
 

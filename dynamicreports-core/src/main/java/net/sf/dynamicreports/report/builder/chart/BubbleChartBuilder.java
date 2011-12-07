@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class BubbleChartBuilder extends AbstractBaseChartBuilder<BubbleChartBuilder, DRBubblePlot> {
+public class BubbleChartBuilder extends AbstractBaseChartBuilder<BubbleChartBuilder, DRBubblePlot, DRSeriesDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected BubbleChartBuilder() {
@@ -95,9 +95,5 @@ public class BubbleChartBuilder extends AbstractBaseChartBuilder<BubbleChartBuil
 	public BubbleChartBuilder setScaleType(ScaleType scaleType) {
 		getPlot().setScaleType(scaleType);
 		return this;
-	}
-
-	private DRChartDataset getDataset() {
-		return getObject().getDataset();
 	}
 }

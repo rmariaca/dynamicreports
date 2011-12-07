@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<T, U>, U extends DRPiePlot> extends AbstractBaseChartBuilder<T, U> {
+public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<T, U>, U extends DRPiePlot> extends AbstractBaseChartBuilder<T, U, DRSeriesDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractPieChartBuilder(ChartType chartType) {
@@ -98,9 +98,5 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 	public T setLegendLabelFormat(String legendLabelFormat) {
 		getPlot().setLegendLabelFormat(legendLabelFormat);
 		return (T) this;
-	}
-
-	private DRChartDataset getDataset() {
-		return getObject().getDataset();
 	}
 }

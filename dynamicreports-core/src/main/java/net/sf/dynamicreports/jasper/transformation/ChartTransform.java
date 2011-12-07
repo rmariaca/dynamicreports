@@ -37,6 +37,8 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignCategoryCh
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignCategoryDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignHighLowDataset;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignSeriesDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignTimeSeriesDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyChartSerie;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyzChartSerie;
@@ -46,6 +48,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBar3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBarPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBasePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBubblePlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignCandlestickPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignLinePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot;
@@ -60,9 +63,11 @@ import net.sf.jasperreports.charts.design.JRDesignAreaPlot;
 import net.sf.jasperreports.charts.design.JRDesignBar3DPlot;
 import net.sf.jasperreports.charts.design.JRDesignBarPlot;
 import net.sf.jasperreports.charts.design.JRDesignBubblePlot;
+import net.sf.jasperreports.charts.design.JRDesignCandlestickPlot;
 import net.sf.jasperreports.charts.design.JRDesignCategoryDataset;
 import net.sf.jasperreports.charts.design.JRDesignCategorySeries;
 import net.sf.jasperreports.charts.design.JRDesignChartAxis;
+import net.sf.jasperreports.charts.design.JRDesignHighLowDataset;
 import net.sf.jasperreports.charts.design.JRDesignLinePlot;
 import net.sf.jasperreports.charts.design.JRDesignMultiAxisPlot;
 import net.sf.jasperreports.charts.design.JRDesignPie3DPlot;
@@ -220,19 +225,22 @@ public class ChartTransform {
 			categoryDataset((DRIDesignCategoryDataset) dataset, (JRDesignCategoryDataset) jrDataset);
 		}
 		else if (jrDataset instanceof JRDesignPieDataset) {
-			pieDataset(dataset, (JRDesignPieDataset) jrDataset);
+			pieDataset((DRIDesignSeriesDataset) dataset, (JRDesignPieDataset) jrDataset);
 		}
 		else if (jrDataset instanceof JRDesignTimeSeriesDataset) {
 			timeSeriesDataset((DRIDesignTimeSeriesDataset) dataset, (JRDesignTimeSeriesDataset) jrDataset);
 		}
 		else if (jrDataset instanceof JRDesignXyDataset) {
-			xyDataset(dataset, (JRDesignXyDataset) jrDataset);
+			xyDataset((DRIDesignSeriesDataset) dataset, (JRDesignXyDataset) jrDataset);
 		}
 		else if (jrDataset instanceof StandardSpiderDataset) {
 			spiderDataset((DRIDesignCategoryDataset) dataset, (StandardSpiderDataset) jrDataset);
 		}
 		else if (jrDataset instanceof JRDesignXyzDataset) {
-			xyzDataset(dataset, (JRDesignXyzDataset) jrDataset);
+			xyzDataset((DRIDesignSeriesDataset) dataset, (JRDesignXyzDataset) jrDataset);
+		}
+		else if (jrDataset instanceof JRDesignHighLowDataset) {
+			highLowDataset((DRIDesignHighLowDataset) dataset, (JRDesignHighLowDataset) jrDataset);
 		}
 		else {
 			throw new JasperDesignException("Dataset " + dataset.getClass().getName() + " not supported");
@@ -284,7 +292,7 @@ public class ChartTransform {
 		return series;
 	}
 
-	private void pieDataset(DRIDesignChartDataset dataset, JRDesignPieDataset jrDataset) {
+	private void pieDataset(DRIDesignSeriesDataset dataset, JRDesignPieDataset jrDataset) {
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
@@ -321,7 +329,7 @@ public class ChartTransform {
 		}
 	}
 
-	private void xyDataset(DRIDesignChartDataset dataset, JRDesignXyDataset jrDataset) {
+	private void xyDataset(DRIDesignSeriesDataset dataset, JRDesignXyDataset jrDataset) {
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignXyChartSerie xySerie = (DRIDesignXyChartSerie) serie;
@@ -346,7 +354,7 @@ public class ChartTransform {
 		}
 	}
 
-	private void xyzDataset(DRIDesignChartDataset dataset, JRDesignXyzDataset jrDataset) {
+	private void xyzDataset(DRIDesignSeriesDataset dataset, JRDesignXyzDataset jrDataset) {
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignXyzChartSerie xyzSerie = (DRIDesignXyzChartSerie) serie;
@@ -362,6 +370,17 @@ public class ChartTransform {
 			jrSerie.setSeriesExpression(expressionTransform.getExpression(serie.getSeriesExpression()));
 			jrDataset.addXyzSeries(jrSerie);
 		}
+	}
+
+	private void highLowDataset(DRIDesignHighLowDataset dataset, JRDesignHighLowDataset jrDataset) {
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		jrDataset.setSeriesExpression(expressionTransform.getExpression(dataset.getSeriesExpression()));
+		jrDataset.setDateExpression(expressionTransform.getExpression(dataset.getDateExpression()));
+		jrDataset.setHighExpression(expressionTransform.getExpression(dataset.getHighExpression()));
+		jrDataset.setLowExpression(expressionTransform.getExpression(dataset.getLowExpression()));
+		jrDataset.setOpenExpression(expressionTransform.getExpression(dataset.getOpenExpression()));
+		jrDataset.setCloseExpression(expressionTransform.getExpression(dataset.getCloseExpression()));
+		jrDataset.setVolumeExpression(expressionTransform.getExpression(dataset.getVolumeExpression()));
 	}
 
 	private void spiderDataset(DRIDesignCategoryDataset dataset, StandardSpiderDataset jrDataset) {
@@ -414,6 +433,9 @@ public class ChartTransform {
 		}
 		else if (jrPlot instanceof JRDesignBubblePlot) {
 			bubblePlot((DRIDesignBubblePlot) plot, (JRDesignBubblePlot) jrPlot);
+		}
+		else if (jrPlot instanceof JRDesignCandlestickPlot) {
+			candlestickPlot((DRIDesignCandlestickPlot) plot, (JRDesignCandlestickPlot) jrPlot);
 		}
 		else {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
@@ -668,6 +690,44 @@ public class ChartTransform {
 
 		jrPlot.setShowShapes(plot.getShowShapes());
 		jrPlot.setShowLines(plot.getShowLines());
+	}
+
+	private void candlestickPlot(DRIDesignCandlestickPlot plot, JRDesignCandlestickPlot jrPlot) {
+		//time
+		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
+		jrPlot.setTimeAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
+		jrPlot.setTimeAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setTimeAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
+		jrPlot.setTimeAxisLabelColor(categoryAxisFormat.getLabelColor());
+		if (categoryAxisFormat.getLabelFont() != null) {
+			jrPlot.setTimeAxisLabelFont(accessor.getStyleTransform().font(categoryAxisFormat.getLabelFont()));
+		}
+		jrPlot.setTimeAxisLineColor(categoryAxisFormat.getLineColor());
+		jrPlot.setTimeAxisTickLabelColor(categoryAxisFormat.getTickLabelColor());
+		if (categoryAxisFormat.getTickLabelFont() != null) {
+			jrPlot.setTimeAxisTickLabelFont(accessor.getStyleTransform().font(categoryAxisFormat.getTickLabelFont()));
+		}
+		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
+		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
+
+		//value
+		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
+		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
+		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
+		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
+		if (valueAxisFormat.getLabelFont() != null) {
+			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
+		}
+		jrPlot.setValueAxisLineColor(valueAxisFormat.getLineColor());
+		jrPlot.setValueAxisTickLabelColor(valueAxisFormat.getTickLabelColor());
+		if (valueAxisFormat.getTickLabelFont() != null) {
+			jrPlot.setValueAxisTickLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getTickLabelFont()));
+		}
+		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
+		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
+
+		jrPlot.setShowVolume(plot.getShowVolume());
 	}
 
 	private void multiAxisPlot(DRIDesignMultiAxisPlot plot, JRDesignMultiAxisPlot jrPlot, JRDesignChart jrChart) {

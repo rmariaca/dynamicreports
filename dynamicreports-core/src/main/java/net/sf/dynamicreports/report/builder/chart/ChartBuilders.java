@@ -147,11 +147,15 @@ public class ChartBuilders {
 		return Charts.multiAxisChart();
 	}
 
-	public MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?> ...charts) {
+	public MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?, ?> ...charts) {
 		return Charts.multiAxisChart(charts);
 	}
 
 	public BubbleChartBuilder bubbleChart() {
 		return Charts.bubbleChart();
+	}
+
+	public CandlestickChartBuilder candlestickChart() {
+		return Charts.candlestickChart();
 	}
 }

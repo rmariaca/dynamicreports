@@ -20,24 +20,18 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.chart.dataset;
+package net.sf.dynamicreports.design.definition.chart.dataset;
 
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
+import java.util.List;
+
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCategoryDataset extends DRSeriesDataset implements DRICategoryDataset {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Boolean useSeriesAsCategory;
-		
-	public void setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
-		this.useSeriesAsCategory = useSeriesAsCategory;
-	}
+public interface DRIDesignSeriesDataset extends DRIDesignChartDataset {
 
-	public Boolean getUseSeriesAsCategory() {
-		return useSeriesAsCategory;
-	}
+	public DRIDesignExpression getValueExpression();
+
+	public List<? extends DRIDesignChartSerie> getSeries();
 }

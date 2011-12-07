@@ -20,24 +20,24 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.chart.dataset;
+package net.sf.dynamicreports.report.base.chart.plot;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
+import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRCategoryDataset extends DRSeriesDataset implements DRICategoryDataset {
+public class DRCandlestickPlot extends DRAxisPlot implements DRICandlestickPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Boolean useSeriesAsCategory;
-		
-	public void setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
-		this.useSeriesAsCategory = useSeriesAsCategory;
+
+	private Boolean showVolume;
+
+	public void setShowVolume(Boolean showVolume) {
+		this.showVolume = showVolume;
 	}
 
-	public Boolean getUseSeriesAsCategory() {
-		return useSeriesAsCategory;
+	public Boolean getShowVolume() {
+		return showVolume;
 	}
 }

@@ -24,11 +24,14 @@ package net.sf.dynamicreports.report.base.chart;
 
 import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRHighLowDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
@@ -95,11 +98,11 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				plot = new DRLinePlot();
 				break;
 			case PIE:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRPiePlot();
 				break;
 			case PIE3D:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRPie3DPlot();
 				break;
 			case TIMESERIES:
@@ -107,19 +110,19 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				plot = new DRLinePlot();
 				break;
 			case XYAREA:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRAxisPlot();
 				break;
 			case XYBAR:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRBarPlot();
 				break;
 			case XYLINE:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRLinePlot();
 				break;
 			case SCATTER:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRLinePlot();
 				break;
 			case SPIDER:
@@ -131,8 +134,12 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				plot = new DRMultiAxisPlot();
 				break;
 			case BUBBLE:
-				dataset = new DRChartDataset();
+				dataset = new DRSeriesDataset();
 				plot = new DRBubblePlot();
+				break;
+			case CANDLESTICK:
+				dataset = new DRHighLowDataset();
+				plot = new DRCandlestickPlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");

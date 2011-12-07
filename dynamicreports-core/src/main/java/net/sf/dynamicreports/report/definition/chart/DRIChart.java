@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIChart extends DRIHyperLinkComponent {
-	
+
 	public ChartType getChartType();
 
 	public DRIChartDataset getDataset();

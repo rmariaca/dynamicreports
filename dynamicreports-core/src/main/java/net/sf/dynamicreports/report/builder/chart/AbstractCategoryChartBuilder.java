@@ -37,7 +37,7 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractBaseChartBuilder<T, U> {
+public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryChartBuilder<T, U>, U extends DRAxisPlot> extends AbstractBaseChartBuilder<T, U, DRCategoryDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractCategoryChartBuilder(ChartType chartType) {
@@ -95,9 +95,5 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		Validate.notNull(valueAxisFormat, "valueAxisFormat must not be null");
 		getPlot().setYAxisFormat(valueAxisFormat.build());
 		return (T) this;
-	}
-
-	private DRCategoryDataset getDataset() {
-		return (DRCategoryDataset) getObject().getDataset();
 	}
 }

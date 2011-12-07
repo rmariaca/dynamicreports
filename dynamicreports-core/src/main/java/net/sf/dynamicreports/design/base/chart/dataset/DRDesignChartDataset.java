@@ -22,29 +22,18 @@
 
 package net.sf.dynamicreports.design.base.chart.dataset;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.dynamicreports.design.base.DRDesignDataset;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartDataset;
-import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignChartDataset implements DRIDesignChartDataset {
 	private DRDesignDataset subDataset;
-	private DRIDesignExpression valueExpression;
-	private List<DRIDesignChartSerie> series;
 	private ResetType resetType;
 	private DRDesignGroup resetGroup;
-
-	public DRDesignChartDataset() {
-		series = new ArrayList<DRIDesignChartSerie>();
-	}
 
 	public DRDesignDataset getSubDataset() {
 		return subDataset;
@@ -52,22 +41,6 @@ public class DRDesignChartDataset implements DRIDesignChartDataset {
 
 	public void setSubDataset(DRDesignDataset subDataset) {
 		this.subDataset = subDataset;
-	}
-
-	public DRIDesignExpression getValueExpression() {
-		return valueExpression;
-	}
-
-	public void setValueExpression(DRIDesignExpression valueExpression) {
-		this.valueExpression = valueExpression;
-	}
-
-	public void addSerie(DRIDesignChartSerie serie) {
-		series.add(serie);
-	}
-
-	public List<DRIDesignChartSerie> getSeries() {
-		return series;
 	}
 
 	public ResetType getResetType() {

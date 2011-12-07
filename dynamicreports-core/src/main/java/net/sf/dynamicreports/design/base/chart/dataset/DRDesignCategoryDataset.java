@@ -27,7 +27,7 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignCategoryDa
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignCategoryDataset extends DRDesignChartDataset implements DRIDesignCategoryDataset {	
+public class DRDesignCategoryDataset extends DRDesignSeriesDataset implements DRIDesignCategoryDataset {	
 	private boolean useSeriesAsCategory;
 	
 	public void setUseSeriesAsCategory(boolean useSeriesAsCategory) {

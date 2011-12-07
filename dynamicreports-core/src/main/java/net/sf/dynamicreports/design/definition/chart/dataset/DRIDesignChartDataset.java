@@ -22,12 +22,9 @@
 
 package net.sf.dynamicreports.design.definition.chart.dataset;
 
-import java.util.List;
-
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -35,10 +32,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 public interface DRIDesignChartDataset {
 
 	public DRIDesignDataset getSubDataset();
-
-	public DRIDesignExpression getValueExpression();
-
-	public List<? extends DRIDesignChartSerie> getSeries();
 
 	public ResetType getResetType();
 

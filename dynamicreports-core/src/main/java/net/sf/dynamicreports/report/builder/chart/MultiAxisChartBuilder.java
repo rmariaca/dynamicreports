@@ -39,20 +39,20 @@ public class MultiAxisChartBuilder extends AbstractCategoryChartBuilder<MultiAxi
 		super(ChartType.MULTI_AXIS);
 	}
 
-	public MultiAxisChartBuilder charts(AbstractBaseChartBuilder<?, ?> ...charts) {
+	public MultiAxisChartBuilder charts(AbstractBaseChartBuilder<?, ?, ?> ...charts) {
 		return addChart(charts);
 	}
 
-	public MultiAxisChartBuilder addChart(AbstractBaseChartBuilder<?, ?> ...charts) {
+	public MultiAxisChartBuilder addChart(AbstractBaseChartBuilder<?, ?, ?> ...charts) {
 		Validate.notNull(charts, "charts must not be null");
 		Validate.noNullElements(charts, "charts must not contains null chart");
-		for (AbstractBaseChartBuilder<?, ?> chart : charts) {
+		for (AbstractBaseChartBuilder<?, ?, ?> chart : charts) {
 			getPlot().addChart(chart.build());
 		}
 		return this;
 	}
 
-	public MultiAxisChartBuilder addChart(AbstractBaseChartBuilder<?, ?> chart, AxisPosition position) {
+	public MultiAxisChartBuilder addChart(AbstractBaseChartBuilder<?, ?, ?> chart, AxisPosition position) {
 		Validate.notNull(chart, "chart must not be null");
 		getPlot().addChart(chart.build(), position);
 		return this;

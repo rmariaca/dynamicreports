@@ -25,7 +25,7 @@ package net.sf.dynamicreports.design.definition.chart.dataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignCategoryDataset extends DRIDesignChartDataset {
+public interface DRIDesignCategoryDataset extends DRIDesignSeriesDataset {
 
 	public boolean isUseSeriesAsCategory();
 }

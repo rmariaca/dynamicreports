@@ -20,25 +20,39 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.chart.dataset;
+package net.sf.dynamicreports.design.base.chart.dataset;
 
-import net.sf.dynamicreports.report.base.DRDataset;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignSeriesDataset;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRChartDataset implements DRIChartDataset {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public class DRDesignSeriesDataset extends DRDesignChartDataset implements DRIDesignSeriesDataset {
+	private DRIDesignExpression valueExpression;
+	private List<DRIDesignChartSerie> series;
 
-	private DRDataset subDataset;
-
-	public DRDataset getSubDataset() {
-		return subDataset;
+	public DRDesignSeriesDataset() {
+		series = new ArrayList<DRIDesignChartSerie>();
 	}
 
-	public void setSubDataset(DRDataset subDataset) {
-		this.subDataset = subDataset;
+	public DRIDesignExpression getValueExpression() {
+		return valueExpression;
+	}
+
+	public void setValueExpression(DRIDesignExpression valueExpression) {
+		this.valueExpression = valueExpression;
+	}
+
+	public void addSerie(DRIDesignChartSerie serie) {
+		series.add(serie);
+	}
+
+	public List<DRIDesignChartSerie> getSeries() {
+		return series;
 	}
 }
