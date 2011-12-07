@@ -49,6 +49,7 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignBarPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignBubblePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignCandlestickPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignChartAxis;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignHighLowPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
@@ -87,6 +88,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMultiAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
@@ -158,6 +160,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRICandlestickPlot) {
 			designPlot = candlestickPlot((DRICandlestickPlot) plot);
+		}
+		else if (plot instanceof DRIHighLowPlot) {
+			designPlot = highLowPlot((DRIHighLowPlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -265,6 +270,14 @@ public class ChartTransform {
 		axisPlot(designCandlestickPlot, candlestickPlot);
 		designCandlestickPlot.setShowVolume(candlestickPlot.getShowVolume());
 		return designCandlestickPlot;
+	}
+
+	private DRDesignHighLowPlot highLowPlot(DRIHighLowPlot highLowPlot) throws DRException {
+		DRDesignHighLowPlot designHighLowPlot = new DRDesignHighLowPlot();
+		axisPlot(designHighLowPlot, highLowPlot);
+		designHighLowPlot.setShowOpenTicks(highLowPlot.getShowOpenTicks());
+		designHighLowPlot.setShowCloseTicks(highLowPlot.getShowCloseTicks());
+		return designHighLowPlot;
 	}
 
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {

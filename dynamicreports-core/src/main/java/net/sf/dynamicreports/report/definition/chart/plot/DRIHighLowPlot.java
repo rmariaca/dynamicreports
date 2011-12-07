@@ -20,24 +20,14 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.chart;
-
-import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
-import net.sf.dynamicreports.report.constant.ChartType;
-import net.sf.dynamicreports.report.constant.Constants;
+package net.sf.dynamicreports.report.definition.chart.plot;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CandlestickChartBuilder extends AbstractHighLowChartBuilder<CandlestickChartBuilder, DRCandlestickPlot> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public interface DRIHighLowPlot extends DRIAxisPlot {
 
-	protected CandlestickChartBuilder() {
-		super(ChartType.CANDLESTICK);
-	}
+	public Boolean getShowOpenTicks();
 
-	public CandlestickChartBuilder setShowVolume(Boolean showVolume) {
-		getPlot().setShowVolume(showVolume);
-		return this;
-	}
+	public Boolean getShowCloseTicks();
 }

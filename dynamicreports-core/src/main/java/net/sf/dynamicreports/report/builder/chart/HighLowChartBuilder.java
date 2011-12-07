@@ -22,22 +22,27 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRHighLowPlot;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CandlestickChartBuilder extends AbstractHighLowChartBuilder<CandlestickChartBuilder, DRCandlestickPlot> {
+public class HighLowChartBuilder extends AbstractHighLowChartBuilder<HighLowChartBuilder, DRHighLowPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CandlestickChartBuilder() {
-		super(ChartType.CANDLESTICK);
+	protected HighLowChartBuilder() {
+		super(ChartType.HIGHLOW);
 	}
 
-	public CandlestickChartBuilder setShowVolume(Boolean showVolume) {
-		getPlot().setShowVolume(showVolume);
+	public HighLowChartBuilder setShowOpenTicks(Boolean showOpenTicks) {
+		getPlot().setShowOpenTicks(showOpenTicks);
+		return this;
+	}
+
+	public HighLowChartBuilder setShowCloseTicks(Boolean showCloseTicks) {
+		getPlot().setShowCloseTicks(showCloseTicks);
 		return this;
 	}
 }

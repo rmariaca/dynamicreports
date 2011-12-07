@@ -20,24 +20,33 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.chart;
+package net.sf.dynamicreports.report.base.chart.plot;
 
-import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
-import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CandlestickChartBuilder extends AbstractHighLowChartBuilder<CandlestickChartBuilder, DRCandlestickPlot> {
+public class DRHighLowPlot extends DRAxisPlot implements DRIHighLowPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CandlestickChartBuilder() {
-		super(ChartType.CANDLESTICK);
+	private Boolean showOpenTicks;
+	private Boolean showCloseTicks;
+
+	public Boolean getShowOpenTicks() {
+		return showOpenTicks;
 	}
 
-	public CandlestickChartBuilder setShowVolume(Boolean showVolume) {
-		getPlot().setShowVolume(showVolume);
-		return this;
+	public void setShowOpenTicks(Boolean showOpenTicks) {
+		this.showOpenTicks = showOpenTicks;
+	}
+
+	public Boolean getShowCloseTicks() {
+		return showCloseTicks;
+	}
+
+	public void setShowCloseTicks(Boolean showCloseTicks) {
+		this.showCloseTicks = showCloseTicks;
 	}
 }

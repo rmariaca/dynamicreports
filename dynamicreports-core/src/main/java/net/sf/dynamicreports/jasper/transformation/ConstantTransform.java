@@ -251,6 +251,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_BUBBLE;
 		case CANDLESTICK:
 			return JRDesignChart.CHART_TYPE_CANDLESTICK;
+		case HIGHLOW:
+			return JRDesignChart.CHART_TYPE_HIGHLOW;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}

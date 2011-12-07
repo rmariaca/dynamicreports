@@ -50,6 +50,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBasePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBubblePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignCandlestickPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignHighLowPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignLinePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
@@ -68,6 +69,7 @@ import net.sf.jasperreports.charts.design.JRDesignCategoryDataset;
 import net.sf.jasperreports.charts.design.JRDesignCategorySeries;
 import net.sf.jasperreports.charts.design.JRDesignChartAxis;
 import net.sf.jasperreports.charts.design.JRDesignHighLowDataset;
+import net.sf.jasperreports.charts.design.JRDesignHighLowPlot;
 import net.sf.jasperreports.charts.design.JRDesignLinePlot;
 import net.sf.jasperreports.charts.design.JRDesignMultiAxisPlot;
 import net.sf.jasperreports.charts.design.JRDesignPie3DPlot;
@@ -437,6 +439,9 @@ public class ChartTransform {
 		else if (jrPlot instanceof JRDesignCandlestickPlot) {
 			candlestickPlot((DRIDesignCandlestickPlot) plot, (JRDesignCandlestickPlot) jrPlot);
 		}
+		else if (jrPlot instanceof JRDesignHighLowPlot) {
+			highLowPlot((DRIDesignHighLowPlot) plot, (JRDesignHighLowPlot) jrPlot);
+		}
 		else {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
 		}
@@ -728,6 +733,45 @@ public class ChartTransform {
 		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
 
 		jrPlot.setShowVolume(plot.getShowVolume());
+	}
+
+	private void highLowPlot(DRIDesignHighLowPlot plot, JRDesignHighLowPlot jrPlot) {
+		//time
+		DRIDesignAxisFormat categoryAxisFormat = plot.getXAxisFormat();
+		jrPlot.setTimeAxisLabelExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getLabelExpression()));
+		jrPlot.setTimeAxisTickLabelMask(categoryAxisFormat.getTickLabelMask());
+		jrPlot.setTimeAxisVerticalTickLabels(categoryAxisFormat.getVerticalTickLabels());
+		jrPlot.setTimeAxisLabelColor(categoryAxisFormat.getLabelColor());
+		if (categoryAxisFormat.getLabelFont() != null) {
+			jrPlot.setTimeAxisLabelFont(accessor.getStyleTransform().font(categoryAxisFormat.getLabelFont()));
+		}
+		jrPlot.setTimeAxisLineColor(categoryAxisFormat.getLineColor());
+		jrPlot.setTimeAxisTickLabelColor(categoryAxisFormat.getTickLabelColor());
+		if (categoryAxisFormat.getTickLabelFont() != null) {
+			jrPlot.setTimeAxisTickLabelFont(accessor.getStyleTransform().font(categoryAxisFormat.getTickLabelFont()));
+		}
+		jrPlot.setDomainAxisMinValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMinValueExpression()));
+		jrPlot.setDomainAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(categoryAxisFormat.getRangeMaxValueExpression()));
+
+		//value
+		DRIDesignAxisFormat valueAxisFormat = plot.getYAxisFormat();
+		jrPlot.setValueAxisLabelExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getLabelExpression()));
+		jrPlot.setValueAxisTickLabelMask(valueAxisFormat.getTickLabelMask());
+		jrPlot.setValueAxisVerticalTickLabels(valueAxisFormat.getVerticalTickLabels());
+		jrPlot.setValueAxisLabelColor(valueAxisFormat.getLabelColor());
+		if (valueAxisFormat.getLabelFont() != null) {
+			jrPlot.setValueAxisLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getLabelFont()));
+		}
+		jrPlot.setValueAxisLineColor(valueAxisFormat.getLineColor());
+		jrPlot.setValueAxisTickLabelColor(valueAxisFormat.getTickLabelColor());
+		if (valueAxisFormat.getTickLabelFont() != null) {
+			jrPlot.setValueAxisTickLabelFont(accessor.getStyleTransform().font(valueAxisFormat.getTickLabelFont()));
+		}
+		jrPlot.setRangeAxisMinValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMinValueExpression()));
+		jrPlot.setRangeAxisMaxValueExpression(accessor.getExpressionTransform().getExpression(valueAxisFormat.getRangeMaxValueExpression()));
+
+		jrPlot.setShowOpenTicks(plot.getShowOpenTicks());
+		jrPlot.setShowCloseTicks(plot.getShowCloseTicks());
 	}
 
 	private void multiAxisPlot(DRIDesignMultiAxisPlot plot, JRDesignMultiAxisPlot jrPlot, JRDesignChart jrChart) {

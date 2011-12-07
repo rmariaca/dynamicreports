@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRHighLowPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
@@ -140,6 +141,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case CANDLESTICK:
 				dataset = new DRHighLowDataset();
 				plot = new DRCandlestickPlot();
+				break;
+			case HIGHLOW:
+				dataset = new DRHighLowDataset();
+				plot = new DRHighLowPlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");
