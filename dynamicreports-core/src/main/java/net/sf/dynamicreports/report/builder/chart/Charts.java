@@ -159,4 +159,8 @@ public class Charts {
 	public static CandlestickChartBuilder candlestickChart() {
 		return new CandlestickChartBuilder();
 	}
+
+	public static HighLowChartBuilder highLowChart() {
+		return new HighLowChartBuilder();
+	}
 }

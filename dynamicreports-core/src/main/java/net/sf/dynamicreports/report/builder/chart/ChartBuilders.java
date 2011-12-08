@@ -158,4 +158,8 @@ public class ChartBuilders {
 	public CandlestickChartBuilder candlestickChart() {
 		return Charts.candlestickChart();
 	}
+
+	public HighLowChartBuilder highLowChart() {
+		return Charts.highLowChart();
+	}
 }

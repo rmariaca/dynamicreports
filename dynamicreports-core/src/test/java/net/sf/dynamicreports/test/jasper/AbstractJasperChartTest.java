@@ -31,6 +31,7 @@ import net.sf.jasperreports.engine.JRPrintImage;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.xy.DefaultHighLowDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
@@ -89,6 +90,21 @@ public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 			Assert.assertEquals("chart data x", numbers[0], dataset.getXValue(series, index));
 			Assert.assertEquals("chart data y", numbers[1], dataset.getYValue(series, index));
 			Assert.assertEquals("chart data z", numbers[2], dataset.getZValue(series, index));
+			index++;
+		}
+	}
+
+	protected void highLowChartDataTest(JFreeChart chart, int series, Object[][] values) {
+		DefaultHighLowDataset dataset = (DefaultHighLowDataset) chart.getXYPlot().getDataset();
+		int index = 0;
+		for (Object[] value : values) {
+			Assert.assertEquals("chart data series", value[0], dataset.getSeriesKey(series));
+			Assert.assertEquals("chart data date", value[1], dataset.getXDate(series, index));
+			Assert.assertEquals("chart data high value", value[2], dataset.getHigh(series, index));
+			Assert.assertEquals("chart data low value", value[3], dataset.getLow(series, index));
+			Assert.assertEquals("chart data open value", value[4], dataset.getOpenValue(series, index));
+			Assert.assertEquals("chart data close value", value[5], dataset.getClose(series, index));
+			Assert.assertEquals("chart data volume value", value[6], dataset.getVolume(series, index));
 			index++;
 		}
 	}
