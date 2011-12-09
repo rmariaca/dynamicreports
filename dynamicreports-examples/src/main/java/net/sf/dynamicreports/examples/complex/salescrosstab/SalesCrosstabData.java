@@ -42,20 +42,20 @@ public class SalesCrosstabData implements ReportData {
 		for (int i = 0; i < 400; i++) {
 			Date date = c.getTime();
 
-			dataSource.add("New York", "Notebook", date, 1, new BigDecimal(500));
-			dataSource.add("New York", "DVD", date, 5, new BigDecimal(30));
-			dataSource.add("New York", "Book", date, 2, new BigDecimal(11));
-			dataSource.add("New York", "Phone", date, 1, new BigDecimal(200));
+			dataSource.add("Florida", "Notebook", date, 1, new BigDecimal(500));
+			dataSource.add("Florida", "DVD", date, 5, new BigDecimal(30));
+			dataSource.add("Florida", "Book", date, 2, new BigDecimal(11));
+			dataSource.add("Florida", "Phone", date, 1, new BigDecimal(200));
 
 			dataSource.add("Washington", "Notebook", date, 1, new BigDecimal(610));
 			dataSource.add("Washington", "DVD", date, 2, new BigDecimal(42));
 			dataSource.add("Washington", "Book", date, 3, new BigDecimal(12));
 			dataSource.add("Washington", "Phone", date, 1, new BigDecimal(380));
 
-			dataSource.add("Florida", "Notebook", date, 1, new BigDecimal(460));
-			dataSource.add("Florida", "DVD", date, 3, new BigDecimal(49));
-			dataSource.add("Florida", "Book", date, 4, new BigDecimal(11));
-			dataSource.add("Florida", "Phone", date, 2, new BigDecimal(190));
+			dataSource.add("New York", "Notebook", date, 1, new BigDecimal(460));
+			dataSource.add("New York", "DVD", date, 3, new BigDecimal(49));
+			dataSource.add("New York", "Book", date, 4, new BigDecimal(11));
+			dataSource.add("New York", "Phone", date, 2, new BigDecimal(190));
 
 			dataSource.add("Arizona", "Notebook", date, 1, new BigDecimal(400));
 			dataSource.add("Arizona", "DVD", date, 2, new BigDecimal(30));

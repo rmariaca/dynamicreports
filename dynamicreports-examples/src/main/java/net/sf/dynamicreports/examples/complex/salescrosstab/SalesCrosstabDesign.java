@@ -63,6 +63,8 @@ public class SalesCrosstabDesign implements ReportDesign<SalesCrosstabData> {
 		CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", "unitprice", BigDecimal.class, Calculation.SUM);
 		unitPriceMeasure.setPattern("#,###");
 
+		rowStateGroup.orderBy(quantityMeasure);
+
 		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(unitPriceMeasure, 50000))
 		                                        .setForegroudColor(Color.GREEN);
 		ConditionalStyleBuilder condition2 = stl.conditionalStyle(cnd.smaller(unitPriceMeasure, 300))

@@ -28,14 +28,12 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.OrderType;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -58,7 +56,7 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 			.rowGroups(
 				rowGroup = ctab.rowGroup("field1", String.class).setOrderType(OrderType.DESCENDING).setShowTotal(false))
 			.columnGroups(
-				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).setOrderByExpression(new OrderByExpression()))
+				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).orderBy(measure1))
 			.measures(
 				measure1);
 
@@ -104,13 +102,5 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 		dataSource.add("b", "d", 2);
 		dataSource.add("b", "d", 1);
 		return dataSource;
-	}
-
-	private class OrderByExpression extends AbstractSimpleExpression<Integer> {
-		private static final long serialVersionUID = 1L;
-
-		public Integer evaluate(ReportParameters reportParameters) {
-			return reportParameters.getValue(measure1);
-		}
 	}
 }

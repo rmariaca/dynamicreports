@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -207,5 +208,10 @@ public class Expressions {
 
 	public static MapArraySubDatasourceExpression subDatasourceMapArray(DRIExpression<? extends Object[]> expression) {
 		return new MapArraySubDatasourceExpression(expression);
+	}
+
+	//crosstab
+	public static OrderByExpression orderBy(CrosstabMeasureBuilder<? extends Comparable<?>> measure) {
+		return new OrderByExpression(measure);
 	}
 }

@@ -141,6 +141,14 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 	}
 
 	public T setOrderByExpression(DRIExpression<? extends Comparable<?>> orderByExpression) {
+		return orderBy(orderByExpression);
+	}
+
+	public T orderBy(CrosstabMeasureBuilder<? extends Comparable<?>> measure) {
+		return orderBy(Expressions.orderBy(measure));
+	}
+
+	public T orderBy(DRIExpression<? extends Comparable<?>> orderByExpression) {
 		getObject().setOrderByExpression(orderByExpression);
 		return (T) this;
 	}
