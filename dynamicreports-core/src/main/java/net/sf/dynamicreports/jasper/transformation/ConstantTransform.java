@@ -68,6 +68,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
 import net.sf.jasperreports.charts.type.EdgeEnum;
+import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
@@ -100,7 +101,6 @@ import net.sf.jasperreports.engine.type.TabStopAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Millisecond;
@@ -397,12 +397,12 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static PlotOrientation chartPlotOrientation(Orientation orientation) {
+	protected static PlotOrientationEnum chartPlotOrientation(Orientation orientation) {
 		switch (orientation) {
 		case HORIZONTAL:
-			return PlotOrientation.HORIZONTAL;
+			return PlotOrientationEnum.HORIZONTAL;
 		case VERTICAL:
-			return PlotOrientation.VERTICAL;
+			return PlotOrientationEnum.VERTICAL;
 		default:
 			throw new JasperDesignException("Chart plot orientation " + orientation.name() + " not supported");
 		}

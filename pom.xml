@@ -49,14 +49,14 @@
 	</developers>
 	
 	<properties>
-		<jasperreportsVersion>4.1.2</jasperreportsVersion>
+		<jasperreportsVersion>4.5.0</jasperreportsVersion>
 		<commonslangVersion>2.5</commonslangVersion>
 		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
 		<springframeworkVersion>2.5</springframeworkVersion>
-		<poiVersion>3.6</poiVersion>
+		<poiVersion>3.7</poiVersion>
 		<jxlVersion>2.6.10</jxlVersion>
 		<junitVersion>4.0</junitVersion>
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
