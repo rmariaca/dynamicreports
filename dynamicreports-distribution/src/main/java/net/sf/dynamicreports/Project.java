@@ -53,6 +53,7 @@ public class Project {
 	private String jdtcoreVersion;
 	private String jfreechartVersion;
 	private String jxlVersion;
+	private String jacksonVersion;
 	private String log4jVersion;
 	private String poiVersion;
 	private String staxapiVersion;
@@ -92,6 +93,7 @@ public class Project {
 		jdtcoreVersion = properties.getProperty("jdtcoreVersion");
 		jfreechartVersion = properties.getProperty("jfreechartVersion");
 		jxlVersion = properties.getProperty("jxlVersion");
+		jacksonVersion = properties.getProperty("jacksonVersion");
 		log4jVersion = properties.getProperty("log4jVersion");
 		poiVersion = properties.getProperty("poiVersion");
 		staxapiVersion = properties.getProperty("staxapiVersion");
@@ -276,6 +278,14 @@ public class Project {
 
 	public void setJxlVersion(String jxlVersion) {
 		this.jxlVersion = jxlVersion;
+	}
+
+	public String getJacksonVersion() {
+		return jacksonVersion;
+	}
+
+	public void setJacksonVersion(String jacksonVersion) {
+		this.jacksonVersion = jacksonVersion;
 	}
 
 	public String getLog4jVersion() {

@@ -57,6 +57,8 @@ file.reference.jcommon-${project.jcommonVersion}.jar=lib\\jcommon-${project.jcom
 file.reference.jdtcore-${project.jdtcoreVersion}.jar=lib\\jdtcore-${project.jdtcoreVersion}.jar
 file.reference.jfreechart-${project.jfreechartVersion}.jar=lib\\jfreechart-${project.jfreechartVersion}.jar
 file.reference.jxl-${project.jxlVersion}.jar=lib\\jxl-${project.jxlVersion}.jar
+file.reference.jackson-core-lgpl-${project.jacksonVersion}.jar=lib\\jackson-core-lgpl-${project.jacksonVersion}.jar
+file.reference.jackson-mapper-lgpl-${project.jacksonVersion}.jar=lib\\jackson-mapper-lgpl-${project.jacksonVersion}.jar
 file.reference.log4j-${project.log4jVersion}.jar=lib\\log4j-${project.log4jVersion}.jar
 file.reference.poi-${project.poiVersion}.jar=lib\\poi-${project.poiVersion}.jar
 file.reference.stax-api-${project.staxapiVersion}.jar=lib\\stax-api-${project.staxapiVersion}.jar
@@ -103,6 +105,8 @@ javac.classpath=\
     ${r"${"}file.reference.jdtcore-${project.jdtcoreVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jfreechart-${project.jfreechartVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jxl-${project.jxlVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.jackson-core-lgpl-${project.jacksonVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.jackson-mapper-lgpl-${project.jacksonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.log4j-${project.log4jVersion}.jar${r"}"}:\
     ${r"${"}file.reference.poi-${project.poiVersion}.jar${r"}"}:\
     ${r"${"}file.reference.stax-api-${project.staxapiVersion}.jar${r"}"}:\

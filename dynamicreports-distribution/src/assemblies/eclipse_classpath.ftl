@@ -43,6 +43,8 @@
 	<classpathentry kind="lib" path="lib/jdtcore-${project.jdtcoreVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-${project.jfreechartVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jxl-${project.jxlVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-lgpl-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper-lgpl-${project.jacksonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-${project.log4jVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/poi-${project.poiVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/stax-api-${project.staxapiVersion}.jar"/>
