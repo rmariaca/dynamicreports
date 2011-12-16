@@ -18,7 +18,6 @@
 		<li><a href="${page.path}features.html">Features</a></li>
 		<li><a href="${page.path}roadmap.html">Road map</a></li>
 		<li><a href="${page.path}faq.html">FAQ</a></li>
-		<li><a href="${page.path}links.html">External links</a></li>
 	</ul>							
 	
 	<h4>Documentation &amp; examples</h4>
@@ -27,6 +26,7 @@
 		<li><a href="${page.examples}examples.html">Examples</a></li>
 		<li><a href="${page.path}tipsandtricks.html">Tips &amp; tricks</a></li>
 		<li><a href="${page.path}apidocs/index.html">Javadoc</a></li>
+		<li><div style="color: #FF0000"><a href="external_resources.html">External resources</a><b> new</b></div></li>
 	</ul>
 			
 	<h4>Support</h4>
