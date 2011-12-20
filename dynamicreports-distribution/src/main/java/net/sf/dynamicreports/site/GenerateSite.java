@@ -198,7 +198,7 @@ public class GenerateSite {
 
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				groups.add(example.getPath());
-				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + pageProp.getProperty(example.getPath()) + "</h2><br/>\r\n";
+				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + pageProp.getProperty(example.getPath()) + "</h3><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";

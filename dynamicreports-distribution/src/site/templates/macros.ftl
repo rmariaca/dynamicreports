@@ -98,17 +98,9 @@
 </#if>
 </#macro>
 <#macro example_preview id file="pdf" file_ext="">
-<td>
-<table class="example" style="margin-left:auto;margin-right:auto">
-	<tr>
-		<td style="text-align:center">
-			<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img class="preview" src="${page.examples}${id?lower_case}_s.png" alt="${id}"/></a>
-		</td>
-		<td>
-			<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" alt="${file}" width="16" height="16"/></a>
-			<a rel="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png" alt="${id}"/></a>
-		</td>
-	</tr>
-</table>
+<td style="text-align:center">
+	<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img class="preview" src="${page.examples}${id?lower_case}_s.png" alt="${id}"/></a>
+	<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" alt="${file}" width="16" height="16"/></a>
+	<a rel="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png" alt="${id}"/></a>
 </td>
 </#macro>
