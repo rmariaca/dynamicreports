@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.3 (2011-12-20)
+---------------------------------------------------
+ - upgrade to JasperReports 4.5.0
+ - candlestick chart, see CandlestickChartReport for an example
+ - highlow chart, see HighLowChartReport for an example 
+ 
 Changes in version 2.3.2 (2011-11-29)
 ---------------------------------------------------
  - support for sorting the data source, see SortReport for an example
