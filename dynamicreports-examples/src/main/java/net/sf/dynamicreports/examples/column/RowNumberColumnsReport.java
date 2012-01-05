@@ -23,20 +23,19 @@
 package net.sf.dynamicreports.examples.column;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class RowNumberColumnsReport {
-	
+
 	public RowNumberColumnsReport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			report()
@@ -49,21 +48,13 @@ public class RowNumberColumnsReport {
 			  	col.columnRowNumberColumn("Page column row"))
 			  .title(Templates.createTitleComponent("RowNumberColumns"))
 			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
+			  .setDataSource(new JREmptyDataSource(150))
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource();
-		for (int i = 0; i < 150; i++) {
-			dataSource.add();	
-		}		
-		return dataSource;
-	}
-	
+
 	public static void main(String[] args) {
 		new RowNumberColumnsReport();
 	}
