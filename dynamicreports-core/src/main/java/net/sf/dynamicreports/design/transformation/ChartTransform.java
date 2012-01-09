@@ -39,6 +39,7 @@ import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignHighLowDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignSeriesDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignTimeSeriesDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignValueDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignXyzChartSerie;
 import net.sf.dynamicreports.design.base.chart.plot.AbstractDesignBasePlot;
@@ -51,6 +52,8 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignCandlestickPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignChartAxis;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignHighLowPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignLinePlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignMeterInterval;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignMeterPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
@@ -78,6 +81,7 @@ import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIHighLowDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIValueDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyzChartSerie;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisFormat;
@@ -90,6 +94,8 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIMeterInterval;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIMeterPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMultiAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
@@ -163,6 +169,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRIHighLowPlot) {
 			designPlot = highLowPlot((DRIHighLowPlot) plot);
+		}
+		else if (plot instanceof DRIMeterPlot) {
+			designPlot = meterPlot((DRIMeterPlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -280,6 +289,37 @@ public class ChartTransform {
 		return designHighLowPlot;
 	}
 
+	private DRDesignMeterPlot meterPlot(DRIMeterPlot meterPlot) throws DRException {
+		DRDesignMeterPlot designMeterPlot = new DRDesignMeterPlot();
+		designMeterPlot.setDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(meterPlot.getDataRangeLowExpression()));
+		designMeterPlot.setDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(meterPlot.getDataRangeHighExpression()));
+		designMeterPlot.setValueColor(meterPlot.getValueColor());
+		designMeterPlot.setValueMask(meterPlot.getValueMask());
+		designMeterPlot.setValueFont(accessor.getStyleTransform().transformFont(meterPlot.getValueFont()));
+		designMeterPlot.setShape(meterPlot.getShape());
+		for (DRIMeterInterval interval : meterPlot.getIntervals()) {
+			designMeterPlot.getIntervals().add(meterInterval(interval));
+		}
+		designMeterPlot.setMeterAngle(meterPlot.getMeterAngle());
+		designMeterPlot.setUnits(meterPlot.getUnits());
+		designMeterPlot.setTickInterval(meterPlot.getTickInterval());
+		designMeterPlot.setMeterBackgroundColor(meterPlot.getMeterBackgroundColor());
+		designMeterPlot.setNeedleColor(meterPlot.getNeedleColor());
+		designMeterPlot.setTickColor(meterPlot.getTickColor());
+		designMeterPlot.setTickLabelFont(accessor.getStyleTransform().transformFont(meterPlot.getTickLabelFont()));
+		return designMeterPlot;
+	}
+
+	private DRDesignMeterInterval meterInterval(DRIMeterInterval interval) throws DRException {
+		DRDesignMeterInterval designInterval = new DRDesignMeterInterval();
+		designInterval.setLabel(interval.getLabel());
+		designInterval.setBackgroundColor(interval.getBackgroundColor());
+		designInterval.setAlpha(interval.getAlpha());
+		designInterval.setDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(interval.getDataRangeLowExpression()));
+		designInterval.setDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(interval.getDataRangeHighExpression()));
+		return designInterval;
+	}
+
 	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
 		DRDesignAxisPlot designAxisPlot = new DRDesignAxisPlot();
 		axisPlot(designAxisPlot, axisPlot);
@@ -360,7 +400,10 @@ public class ChartTransform {
 			designDataset = seriesDataset((DRISeriesDataset) dataset, resetType, resetGroup);
 		}
 		else if (dataset instanceof DRIHighLowDataset) {
-			designDataset = highLowDataset((DRIHighLowDataset) dataset, resetType, resetGroup);
+			designDataset = highLowDataset((DRIHighLowDataset) dataset);
+		}
+		else if (dataset instanceof DRIValueDataset) {
+			designDataset = valueDataset((DRIValueDataset) dataset);
 		}
 		else {
 			throw new DRDesignReportException("Dataset " + dataset.getClass().getName() + " not supported");
@@ -416,7 +459,7 @@ public class ChartTransform {
 		return designDataset;
 	}
 
-	private DRDesignHighLowDataset highLowDataset(DRIHighLowDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignHighLowDataset highLowDataset(DRIHighLowDataset dataset) throws DRException {
 		DRDesignHighLowDataset designDataset = new DRDesignHighLowDataset();
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
 		designDataset.setSeriesExpression(expressionTransform.transformExpression(dataset.getSeriesExpression()));
@@ -426,6 +469,13 @@ public class ChartTransform {
 		designDataset.setOpenExpression(expressionTransform.transformExpression(dataset.getOpenExpression()));
 		designDataset.setCloseExpression(expressionTransform.transformExpression(dataset.getCloseExpression()));
 		designDataset.setVolumeExpression(expressionTransform.transformExpression(dataset.getVolumeExpression()));
+		return designDataset;
+	}
+
+	private DRDesignValueDataset valueDataset(DRIValueDataset dataset) throws DRException {
+		DRDesignValueDataset designDataset = new DRDesignValueDataset();
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		designDataset.setValueExpression(expressionTransform.transformExpression(dataset.getValueExpression()));
 		return designDataset;
 	}
 

@@ -20,30 +20,25 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.definition.chart.plot;
+
+import java.awt.Color;
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER
+public interface DRIMeterInterval extends Serializable {
+
+	public String getLabel();
+
+	public Color getBackgroundColor();
+
+	public Double getAlpha();
+
+	public DRIExpression<? extends Number> getDataRangeLowExpression();
+
+	public DRIExpression<? extends Number> getDataRangeHighExpression();
 }

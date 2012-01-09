@@ -20,30 +20,29 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.base.chart.dataset;
+
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIValueDataset;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER
+public class DRValueDataset extends DRChartDataset implements DRIValueDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private DRIExpression<?> valueExpression;
+
+	public DRIExpression<?> getValueExpression() {
+		return valueExpression;
+	}
+
+	public void setValueExpression(DRIExpression<?> valueExpression) {
+		Validate.notNull(valueExpression, "valueExpression must not be null");
+		this.valueExpression = valueExpression;
+	}
+
 }

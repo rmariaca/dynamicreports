@@ -84,6 +84,7 @@ public class Charts {
 		return new XyzChartSerieBuilder();
 	}
 
+	//charts
 	public static AreaChartBuilder areaChart() {
 		return new AreaChartBuilder();
 	}
@@ -162,5 +163,13 @@ public class Charts {
 
 	public static HighLowChartBuilder highLowChart() {
 		return new HighLowChartBuilder();
+	}
+
+	public static MeterChartBuilder meterChart() {
+		return new MeterChartBuilder();
+	}
+
+	public static MeterIntervalBuilder meterInterval() {
+		return new MeterIntervalBuilder();
 	}
 }

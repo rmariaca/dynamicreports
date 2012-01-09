@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRHighLowDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
+import net.sf.dynamicreports.report.base.chart.dataset.DRValueDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBar3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
@@ -34,6 +35,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRHighLowPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRMeterPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
@@ -145,6 +147,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case HIGHLOW:
 				dataset = new DRHighLowDataset();
 				plot = new DRHighLowPlot();
+				break;
+			case METER:
+				dataset = new DRValueDataset();
+				plot = new DRMeterPlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");

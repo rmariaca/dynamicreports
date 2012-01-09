@@ -25,25 +25,9 @@ package net.sf.dynamicreports.report.constant;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
+public enum MeterShape {
+	CHORD,
+	CIRCLE,
 	PIE,
-	PIE3D,
-	TIMESERIES,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER
+	DIAL
 }

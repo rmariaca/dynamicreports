@@ -20,30 +20,23 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.design.base.chart.dataset;
+
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignValueDataset;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER
+public class DRDesignValueDataset extends DRDesignChartDataset implements DRIDesignValueDataset {
+	private DRIDesignExpression valueExpression;
+
+	public DRIDesignExpression getValueExpression() {
+		return valueExpression;
+	}
+
+	public void setValueExpression(DRIDesignExpression valueExpression) {
+		this.valueExpression = valueExpression;
+	}
+
 }

@@ -40,6 +40,7 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignHighLowDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignSeriesDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignTimeSeriesDataset;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignValueDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyChartSerie;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyzChartSerie;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignAxisFormat;
@@ -52,6 +53,8 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignCandlestickPl
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignHighLowPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignLinePlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMeterInterval;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMeterPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
@@ -68,9 +71,11 @@ import net.sf.jasperreports.charts.design.JRDesignCandlestickPlot;
 import net.sf.jasperreports.charts.design.JRDesignCategoryDataset;
 import net.sf.jasperreports.charts.design.JRDesignCategorySeries;
 import net.sf.jasperreports.charts.design.JRDesignChartAxis;
+import net.sf.jasperreports.charts.design.JRDesignDataRange;
 import net.sf.jasperreports.charts.design.JRDesignHighLowDataset;
 import net.sf.jasperreports.charts.design.JRDesignHighLowPlot;
 import net.sf.jasperreports.charts.design.JRDesignLinePlot;
+import net.sf.jasperreports.charts.design.JRDesignMeterPlot;
 import net.sf.jasperreports.charts.design.JRDesignMultiAxisPlot;
 import net.sf.jasperreports.charts.design.JRDesignPie3DPlot;
 import net.sf.jasperreports.charts.design.JRDesignPieDataset;
@@ -80,10 +85,13 @@ import net.sf.jasperreports.charts.design.JRDesignScatterPlot;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeries;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeriesDataset;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeriesPlot;
+import net.sf.jasperreports.charts.design.JRDesignValueDataset;
+import net.sf.jasperreports.charts.design.JRDesignValueDisplay;
 import net.sf.jasperreports.charts.design.JRDesignXyDataset;
 import net.sf.jasperreports.charts.design.JRDesignXySeries;
 import net.sf.jasperreports.charts.design.JRDesignXyzDataset;
 import net.sf.jasperreports.charts.design.JRDesignXyzSeries;
+import net.sf.jasperreports.charts.util.JRMeterInterval;
 import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
 import net.sf.jasperreports.components.charts.ChartSettings;
 import net.sf.jasperreports.components.spiderchart.SpiderChartComponent;
@@ -92,6 +100,7 @@ import net.sf.jasperreports.components.spiderchart.StandardSpiderDataset;
 import net.sf.jasperreports.components.spiderchart.StandardSpiderPlot;
 import net.sf.jasperreports.engine.JRChartPlot;
 import net.sf.jasperreports.engine.JRChartPlot.JRSeriesColor;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRHyperlinkHelper;
 import net.sf.jasperreports.engine.base.JRBaseChartPlot;
 import net.sf.jasperreports.engine.component.ComponentKey;
@@ -244,6 +253,9 @@ public class ChartTransform {
 		else if (jrDataset instanceof JRDesignHighLowDataset) {
 			highLowDataset((DRIDesignHighLowDataset) dataset, (JRDesignHighLowDataset) jrDataset);
 		}
+		else if (jrDataset instanceof JRDesignValueDataset) {
+			valueDataset((DRIDesignValueDataset) dataset, (JRDesignValueDataset) jrDataset);
+		}
 		else {
 			throw new JasperDesignException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
@@ -385,6 +397,11 @@ public class ChartTransform {
 		jrDataset.setVolumeExpression(expressionTransform.getExpression(dataset.getVolumeExpression()));
 	}
 
+	private void valueDataset(DRIDesignValueDataset dataset, JRDesignValueDataset jrDataset) {
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		jrDataset.setValueExpression(expressionTransform.getExpression(dataset.getValueExpression()));
+	}
+
 	private void spiderDataset(DRIDesignCategoryDataset dataset, StandardSpiderDataset jrDataset) {
 		List<JRDesignCategorySeries> jrSeries = categorySeries(dataset);
 		for (JRDesignCategorySeries jrSerie : jrSeries) {
@@ -441,6 +458,9 @@ public class ChartTransform {
 		}
 		else if (jrPlot instanceof JRDesignHighLowPlot) {
 			highLowPlot((DRIDesignHighLowPlot) plot, (JRDesignHighLowPlot) jrPlot);
+		}
+		else if (jrPlot instanceof JRDesignMeterPlot) {
+			meterPlot((DRIDesignMeterPlot) plot, (JRDesignMeterPlot) jrPlot, jrChart);
 		}
 		else {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
@@ -772,6 +792,56 @@ public class ChartTransform {
 
 		jrPlot.setShowOpenTicks(plot.getShowOpenTicks());
 		jrPlot.setShowCloseTicks(plot.getShowCloseTicks());
+	}
+
+	private void meterPlot(DRIDesignMeterPlot plot, JRDesignMeterPlot jrPlot, JRDesignChart jrChart) {
+		JRDesignDataRange jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(plot.getDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(plot.getDataRangeHighExpression()));
+		try {
+			jrPlot.setDataRange(jrDataRange);
+		} catch (JRException e) {
+			throw new JasperDesignException("Registration failed for meter data range", e);
+		}
+
+		JRDesignValueDisplay jrValueDisplay = new JRDesignValueDisplay(null, jrChart);
+		jrValueDisplay.setColor(plot.getValueColor());
+		jrValueDisplay.setMask(plot.getValueMask());
+		jrValueDisplay.setFont(accessor.getStyleTransform().font(plot.getValueFont()));
+		jrPlot.setValueDisplay(jrValueDisplay);
+
+		List<JRMeterInterval> intervals = new ArrayList<JRMeterInterval>();
+		for (DRIDesignMeterInterval meterInterval : plot.getIntervals()) {
+			intervals.add(meterInterval(meterInterval));
+		}
+		jrPlot.setIntervals(intervals);
+
+		try {
+			jrPlot.setShape(ConstantTransform.meterShape(plot.getShape()));
+		} catch (JRException e) {
+			throw new JasperDesignException("Registration failed for meter shape", e);
+		}
+		jrPlot.setMeterAngle(plot.getMeterAngle());
+		jrPlot.setUnits(plot.getUnits());
+		jrPlot.setTickInterval(plot.getTickInterval());
+		jrPlot.setMeterBackgroundColor(plot.getMeterBackgroundColor());
+		jrPlot.setNeedleColor(plot.getNeedleColor());
+		jrPlot.setTickColor(plot.getTickColor());
+		jrPlot.setTickLabelFont(accessor.getStyleTransform().font(plot.getTickLabelFont()));
+	}
+
+	private JRMeterInterval meterInterval(DRIDesignMeterInterval meterInterval) {
+		JRMeterInterval jrMeterInterval = new JRMeterInterval();
+		jrMeterInterval.setLabel(meterInterval.getLabel());
+		jrMeterInterval.setBackgroundColor(meterInterval.getBackgroundColor());
+		jrMeterInterval.setAlpha(meterInterval.getAlpha());
+
+		JRDesignDataRange jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(meterInterval.getDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(meterInterval.getDataRangeHighExpression()));
+		jrMeterInterval.setDataRange(jrDataRange);
+
+		return jrMeterInterval;
 	}
 
 	private void multiAxisPlot(DRIDesignMultiAxisPlot plot, JRDesignMultiAxisPlot jrPlot, JRDesignChart jrChart) {

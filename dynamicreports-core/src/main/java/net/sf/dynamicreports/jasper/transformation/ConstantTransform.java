@@ -51,6 +51,7 @@ import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.Markup;
+import net.sf.dynamicreports.report.constant.MeterShape;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
@@ -68,6 +69,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
 import net.sf.jasperreports.charts.type.EdgeEnum;
+import net.sf.jasperreports.charts.type.MeterShapeEnum;
 import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
@@ -253,6 +255,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_CANDLESTICK;
 		case HIGHLOW:
 			return JRDesignChart.CHART_TYPE_HIGHLOW;
+		case METER:
+			return JRDesignChart.CHART_TYPE_METER;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}
@@ -439,6 +443,25 @@ public class ConstantTransform {
 			return AxisPositionEnum.RIGHT_OR_BOTTOM;
 		default:
 			throw new JasperDesignException("AxisPosition " + axisPosition.name() + " not supported");
+		}
+	}
+
+	protected static MeterShapeEnum meterShape(MeterShape meterShape) {
+		if (meterShape == null) {
+			return null;
+		}
+
+		switch (meterShape) {
+		case CHORD:
+			return MeterShapeEnum.CHORD;
+		case CIRCLE:
+			return MeterShapeEnum.CIRCLE;
+		case PIE:
+			return MeterShapeEnum.PIE;
+		case DIAL:
+			return MeterShapeEnum.DIAL;
+		default:
+			throw new JasperDesignException("MeterShape " + meterShape.name() + " not supported");
 		}
 	}
 
