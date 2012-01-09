@@ -49,6 +49,11 @@ public class MeterChartBuilder extends AbstractChartBuilder<MeterChartBuilder> {
 	}
 
 	//dataset
+	public MeterChartBuilder setValue(Number value) {
+		getDataset().setValueExpression(Expressions.number(value));
+		return this;
+	}
+
 	public MeterChartBuilder setValue(ValueColumnBuilder<?, ? extends Number> column) {
 		Validate.notNull(column, "column must not be null");
 		getDataset().setValueExpression(column.getColumn());
@@ -71,8 +76,9 @@ public class MeterChartBuilder extends AbstractChartBuilder<MeterChartBuilder> {
 	}
 
 	//plot
-	public void setDataRangeLowExpression(Number dataRangeLowValue) {
+	public MeterChartBuilder setDataRangeLowExpression(Number dataRangeLowValue) {
 		getPlot().setDataRangeLowExpression(Expressions.number(dataRangeLowValue));
+		return this;
 	}
 
 	public MeterChartBuilder setDataRangeLowExpression(DRIExpression<? extends Number> dataRangeLowExpression) {
@@ -80,8 +86,9 @@ public class MeterChartBuilder extends AbstractChartBuilder<MeterChartBuilder> {
 		return this;
 	}
 
-	public void setDataRangeHighExpression(Number dataRangeHighValue) {
+	public MeterChartBuilder setDataRangeHighExpression(Number dataRangeHighValue) {
 		getPlot().setDataRangeHighExpression(Expressions.number(dataRangeHighValue));
+		return this;
 	}
 
 	public MeterChartBuilder setDataRangeHighExpression(DRIExpression<? extends Number> dataRangeHighExpression) {

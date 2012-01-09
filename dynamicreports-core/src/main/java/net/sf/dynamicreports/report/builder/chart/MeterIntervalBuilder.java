@@ -40,32 +40,39 @@ public class MeterIntervalBuilder extends AbstractBuilder<MeterIntervalBuilder, 
 		super(new DRMeterInterval());
 	}
 
-	public void setLabel(String label) {
+	public MeterIntervalBuilder setLabel(String label) {
 		getObject().setLabel(label);
+		return this;
 	}
 
-	public void setBackgroundColor(Color backgroundColor) {
+	public MeterIntervalBuilder setBackgroundColor(Color backgroundColor) {
 		getObject().setBackgroundColor(backgroundColor);
+		return this;
 	}
 
-	public void setAlpha(Double alpha) {
+	public MeterIntervalBuilder setAlpha(Double alpha) {
 		getObject().setAlpha(alpha);
+		return this;
 	}
 
-	public void setDataRangeLowExpression(Number dataRangeLowValue) {
+	public MeterIntervalBuilder setDataRangeLowExpression(Number dataRangeLowValue) {
 		getObject().setDataRangeLowExpression(Expressions.number(dataRangeLowValue));
+		return this;
 	}
 
-	public void setDataRangeLowExpression(DRIExpression<? extends Number> dataRangeLowExpression) {
+	public MeterIntervalBuilder setDataRangeLowExpression(DRIExpression<? extends Number> dataRangeLowExpression) {
 		getObject().setDataRangeLowExpression(dataRangeLowExpression);
+		return this;
 	}
 
-	public void setDataRangeHighExpression(Number dataRangeHighValue) {
+	public MeterIntervalBuilder setDataRangeHighExpression(Number dataRangeHighValue) {
 		getObject().setDataRangeHighExpression(Expressions.number(dataRangeHighValue));
+		return this;
 	}
 
-	public void setDataRangeHighExpression(DRIExpression<? extends Number> dataRangeHighExpression) {
+	public MeterIntervalBuilder setDataRangeHighExpression(DRIExpression<? extends Number> dataRangeHighExpression) {
 		getObject().setDataRangeHighExpression(dataRangeHighExpression);
+		return this;
 	}
 
 }
