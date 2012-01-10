@@ -62,6 +62,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignSpiderPlot;
 import net.sf.dynamicreports.jasper.base.JasperChartCustomizer;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.ChartType;
+import net.sf.dynamicreports.report.constant.MeterShape;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.jasperreports.charts.design.JRDesignAreaPlot;
 import net.sf.jasperreports.charts.design.JRDesignBar3DPlot;
@@ -826,7 +827,12 @@ public class ChartTransform {
 		jrPlot.setTickInterval(plot.getTickInterval());
 		jrPlot.setMeterBackgroundColor(plot.getMeterBackgroundColor());
 		jrPlot.setNeedleColor(plot.getNeedleColor());
-		jrPlot.setTickColor(plot.getTickColor());
+		if (plot.getTickColor() == null && plot.getShape() != null && plot.getShape().equals(MeterShape.DIAL)) {
+			jrPlot.setTickColor(Color.BLACK);
+		}
+		else {
+			jrPlot.setTickColor(plot.getTickColor());
+		}
 		jrPlot.setTickLabelFont(accessor.getStyleTransform().font(plot.getTickLabelFont()));
 	}
 

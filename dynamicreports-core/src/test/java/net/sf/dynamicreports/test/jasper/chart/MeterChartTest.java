@@ -77,8 +77,10 @@ public class MeterChartTest extends AbstractJasperChartTest {
 							.setAlpha(0.5)
 							.setBackgroundColor(Color.YELLOW)
 							.setDataRangeLowExpression(20)
-							.setDataRangeHighExpression(25))
-					);
+							.setDataRangeHighExpression(25)),
+				cht.meterChart()
+					.setValue(5)
+					.setShape(MeterShape.DIAL));
 	}
 
 	@Override
