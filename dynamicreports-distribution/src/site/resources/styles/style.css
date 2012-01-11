@@ -106,6 +106,10 @@ table {
 	border-collapse: collapse;
 	margin: 10px;	
 }
+table.documentation {
+	border-collapse: collapse;
+	margin: 0 0 0 10px;
+}
 table.example {
 	border-collapse: collapse;
 	margin: 0px;	
@@ -129,8 +133,7 @@ tr {
 td {
 	padding-left: 11px;
 	padding-right: 11px;
-	border-left: 1px solid #FFF;
-	border-bottom: solid 1px #ffffff;
+	border: 1px solid #93BC0C;
 	text-align: left;
 }
 td.first,th.first {

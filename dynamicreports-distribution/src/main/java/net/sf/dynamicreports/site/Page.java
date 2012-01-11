@@ -28,9 +28,10 @@ import java.util.Set;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Page {	
+public class Page {
 	private String page;
 	private String path;
+	private String documentation;
 	private String examples;
 	private boolean sideBar;
 	private String content;
@@ -41,15 +42,16 @@ public class Page {
 	private String description;
 	private String keywords;
 	private String title;
-	
-	public Page(String page, String name, String pageContent) throws Exception {	
+
+	public Page(String page, String name, String pageContent) throws Exception {
 		this.page = page;
 		init();
 		setPage(name, pageContent);
 	}
-	
+
 	private void init() throws Exception {
 		path = "";
+		documentation = "documentation/";
 		examples = "examples/";
 		sideBar = true;
 		hasCode = false;
@@ -60,7 +62,7 @@ public class Page {
 		keywords = "";
 		title = "";
 	}
-	
+
 	private void setPage(String name, String pageContent) throws Exception {
     if (pageContent.indexOf("<@java_code>") != -1) {
     	codeClasses.add("Java");
@@ -70,18 +72,18 @@ public class Page {
     }
     hasCode = !codeClasses.isEmpty();
     hasImage = pageContent.indexOf("<@example") != -1;
-    hasImageGroup = pageContent.indexOf("<@image_group") != -1;	
+    hasImageGroup = pageContent.indexOf("<@image_group") != -1;
     content = "/" + name;
 	}
 
 	public String getPage() {
 		return page;
 	}
-	
+
 	public void setPage(String page) {
 		this.page = page;
 	}
-	
+
 	public String getPath() {
 		return path;
 	}
@@ -90,14 +92,22 @@ public class Page {
 		this.path = path;
 	}
 
+	public String getDocumentation() {
+		return documentation;
+	}
+
+	public void setDocumentation(String documentation) {
+		this.documentation = documentation;
+	}
+
 	public String getExamples() {
 		return examples;
 	}
-	
+
 	public void setExamples(String examples) {
 		this.examples = examples;
 	}
-	
+
 	public boolean isSideBar() {
 		return sideBar;
 	}
@@ -168,5 +178,5 @@ public class Page {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}	
+	}
 }

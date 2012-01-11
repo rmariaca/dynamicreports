@@ -68,6 +68,7 @@ public class GenerateSite {
 	private static final String examples_source = "../dynamicreports-examples/src/main/java/";
 	private static final String templates_path = "src/site/templates/";
 	private static final String pages_path = "src/site/pages/";
+	private static final String documentation_pages_path = pages_path + "documentation/";
 	private static final String htmlToImageFile = "target/htmltoimage.bat";
 	private static final float image_large_zoom = 1.1f;
 	private static final float image_medium_zoom = 0.15f;
@@ -80,6 +81,7 @@ public class GenerateSite {
 	private static String site_path;
 	private static String htmlToImage_path;
 	private static String htmlToImage_key;
+	private static String documentation_path;
 	private static String examples_path;
 	private static Project project;
 	private static Properties pageProp;
@@ -89,6 +91,7 @@ public class GenerateSite {
 		site_path = System.getenv("outputDirectory") + "/";
 		htmlToImage_path = System.getenv("htmlToImageDirectory") + "/";
 		htmlToImage_key = System.getenv("htmlToImageKey");
+		documentation_path = site_path + "documentation/";
 		examples_path = site_path + "examples/";
 
 		Configuration cfg = new Configuration();
@@ -103,6 +106,7 @@ public class GenerateSite {
 		try {
 			pageProp = new Properties();
 			pageProp.load(new FileInputStream(pages_path + "page.properties"));
+			pageProp.load(new FileInputStream(documentation_pages_path + "page.properties"));
 
 			project = new Project();
 			temp = cfg.getTemplate(templates_path + "site.ftl");
@@ -115,6 +119,7 @@ public class GenerateSite {
 
 	public GenerateSite() throws Exception {
 		generatePages();
+		generateDocumentationPages();
 		if (runExamples) {
 			generateExamples();
 		}
@@ -141,6 +146,28 @@ public class GenerateSite {
 			root.put("page", page);
 
 			Writer out = new FileWriter(site_path + fileName);
+			temp.process(root, out);
+			out.flush();
+		}
+	}
+
+	private void generateDocumentationPages() throws Exception {
+		File dir = new File(documentation_pages_path);
+		for (File file : dir.listFiles(new Filter())) {
+			String fileName = file.getName();
+			String name = StringUtils.substringBeforeLast(file.getName(), ".html");
+			Page page = new Page(fileName, documentation_pages_path + fileName, loadFile(new FileReader(file)));
+			page.setPath("../");
+			page.setDocumentation("");
+			page.setExamples("../examples/");
+			page.setSideBar(false);
+			page.setTitle((String) pageProp.get(name));
+
+			Map<String, Object> root = new HashMap<String, Object>();
+			root.put("project", project);
+			root.put("page", page);
+
+			Writer out = new FileWriter(documentation_path + fileName);
 			temp.process(root, out);
 			out.flush();
 		}
@@ -237,6 +264,7 @@ public class GenerateSite {
 		Map<String, Object> root = new HashMap<String, Object>();
 		Page page = new Page("examples/" + name.toLowerCase() + ".html", name, content);
 		page.setPath("../");
+		page.setDocumentation("../documentation/");
 		page.setExamples("");
 		page.setTitle("Examples");
 		root.put("project", project);
@@ -377,6 +405,7 @@ public class GenerateSite {
 		Map<String, Object> root = new HashMap<String, Object>();
 		Page page = new Page("examples/" + name.toLowerCase() + ".html", name, content);
 		page.setPath("../");
+		page.setDocumentation("../documentation/");
 		page.setExamples("");
 		page.setSideBar(false);
 		page.setTitle(name);
