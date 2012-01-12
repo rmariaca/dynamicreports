@@ -90,7 +90,7 @@
 <a href="${page.path}apidocs/net/sf/dynamicreports/report/builder/condition/ConditionBuilders.html${method}">${title}</a></#macro>
 <#macro example_link id table=true>
 <#if table == true>
-<td style="text-align:center">
+<td style="text-align:center;border:none">
 </#if>
 	<a href="${page.examples}${id?lower_case}.html">${id}</a>
 <#if table == true>
@@ -98,7 +98,7 @@
 </#if>
 </#macro>
 <#macro example_preview id file="pdf" file_ext="">
-<td style="text-align:center">
+<td style="text-align:center;border:none">
 	<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img class="preview" src="${page.examples}${id?lower_case}_s.png" alt="${id}"/></a>
 	<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" alt="${file}" width="16" height="16"/></a>
 	<a rel="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png" alt="${id}"/></a>

@@ -457,20 +457,19 @@ a.download:hover, a.download:active {
 #documentation td {
 	border: 1px solid #93BC0C;
 }
-#documentation ol.nested
+#documentation ol
 {
 	color: #1773BC;
-	background: #F0F0F0; 
-	counter-reset: item
 }
-#documentation li.nested
+#documentation ul li
 {
-	display: block
+	list-style-type: none;
+	list-style-image: none;
 }
-#documentation li.nested:before
+#toc
 {
-	content: counters(item, ".") ". - ";
-	counter-increment: item
+	padding: 5px;
+	background: #F0F0F0;
 }
 
 /* Footer */	
