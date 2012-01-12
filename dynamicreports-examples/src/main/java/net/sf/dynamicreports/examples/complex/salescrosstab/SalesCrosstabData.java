@@ -39,7 +39,7 @@ public class SalesCrosstabData implements ReportData {
 		DataSource dataSource = new DataSource("state", "item", "orderdate", "quantity", "unitprice");
 		Calendar c = Calendar.getInstance();
 
-		for (int i = 0; i < 400; i++) {
+		for (int i = 0; i < 370; i++) {
 			Date date = c.getTime();
 
 			dataSource.add("Florida", "Notebook", date, 1, new BigDecimal(500));
