@@ -106,10 +106,6 @@ table {
 	border-collapse: collapse;
 	margin: 10px;	
 }
-table.documentation {
-	border-collapse: collapse;
-	margin: 0 0 0 10px;
-}
 table.example {
 	border-collapse: collapse;
 	margin: 0px;	
@@ -133,7 +129,8 @@ tr {
 td {
 	padding-left: 11px;
 	padding-right: 11px;
-	border: 1px solid #93BC0C;
+	border-left: 1px solid #FFF;
+	border-bottom: solid 1px #ffffff;
 	text-align: left;
 }
 td.first,th.first {
@@ -435,6 +432,46 @@ a.download:hover, a.download:active {
 	background: none; 
 }
 
+/* Documentation */
+#documentation h3 {
+	padding: 5px;
+	font: bold 2em 'Trebuchet MS', Tahoma, Sans-serif;
+	color: #555;	
+	background: #CCC;	
+}
+#documentation h4 {
+	padding: 5px 5px 5px 20px;
+	font: bold 1.8em 'Trebuchet MS', Tahoma, Sans-serif;
+	color: #555;
+	background: #F0F0F0;
+}
+#documentation table {
+	border-collapse: collapse;
+	margin: 0 10px 0 10px;
+}
+#documentation th {
+	color: #555;	
+	background: #DFEBBB;
+	border: 1px solid #93BC0C;
+}
+#documentation td {
+	border: 1px solid #93BC0C;
+}
+#documentation ol.nested
+{
+	color: #1773BC;
+	background: #F0F0F0; 
+	counter-reset: item
+}
+#documentation li.nested
+{
+	display: block
+}
+#documentation li.nested:before
+{
+	content: counters(item, ".") ". - ";
+	counter-increment: item
+}
 
 /* Footer */	
 #footer {

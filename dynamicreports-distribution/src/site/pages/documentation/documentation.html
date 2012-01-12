@@ -1,3 +1,67 @@
+<div id="documentation">
+
+<!-- TOC -->
+<ol class="nested">
+	<li class="nested"><a href="#syntax">Syntax</a></li>
+	<li class="nested"><a href="#reportBuilder">Report builder</a>
+    	<ol class="nested">
+        	<li class="nested"><a href="#reportBuilder_jasperReportBuilder">JasperReportBuilder</a></li>
+        	<li class="nested"><a href="#reportBuilder_jasperConcatenatedBuilder">JasperConcatenatedBuilder</a></li>
+    	</ol>
+    </li>
+	<li class="nested"><a href="#dataSource">Data Source</a>
+	    <ol class="nested">
+        	<li class="nested"><a href="#dataSource_database">Database</a></li>
+        	<li class="nested"><a href="#dataSource_dataSources">Data sources</a></li>
+    	</ol>
+	</li>
+	<li class="nested"><a href="#reportBands">Report bands</a>
+	    <ol class="nested">
+        	<li class="nested"><a href="#reportBands_title">Title</a></li>
+        	<li class="nested"><a href="#reportBands_pageHeader">Page header</a></li>
+        	<li class="nested"><a href="#reportBands_pageFooter">Page footer</a></li>
+        	<li class="nested"><a href="#reportBands_columnHeader">Column header</a></li>
+        	<li class="nested"><a href="#reportBands_columnFooter">Column footer</a></li>
+        	<li class="nested"><a href="#reportBands_groupHeader">Group header</a></li>
+        	<li class="nested"><a href="#reportBands_groupFooter">Group footer</a></li>
+        	<li class="nested"><a href="#reportBands_detail">Detail</a></li>
+        	<li class="nested"><a href="#reportBands_detailHeader">Detail header</a></li>
+        	<li class="nested"><a href="#reportBands_detailFooter">Detail footer</a></li>
+        	<li class="nested"><a href="#reportBands_lastPageFooter">Last page footer</a></li>
+        	<li class="nested"><a href="#reportBands_summary">Summary</li>
+        	<li class="nested"><a href="#reportBands_noData">No data</a></li>
+        	<li class="nested"><a href="#reportBands_background">Background</a></li>
+    	</ol>
+    </li>
+	<li class="nested"><a href="#column">Column</a>
+	    <ol class="nested">
+        	<li class="nested"><a href="#column_textColumn">Text column</a></li>
+        	<li class="nested"><a href="#column_expressionColumn">Expression column</a></li>
+        	<li class="nested"><a href="#column_percentageColumn">Percentage column</a></li>
+        	<li class="nested"><a href="#column_rowNumberColumn">Row number column</a></li>
+        	<li class="nested"><a href="#column_booleanColumn">Boolean column</a></li>
+        	<li class="nested"><a href="#column_componentColumn">Component column</a></li>
+    	</ol>
+    </li>
+	<li class="nested"><a href="#expression">Expression</a>
+	    <ol class="nested">
+        	<li class="nested"><a href="#expression_simpleExpression">Simple expression</a></li>
+        	<li class="nested"><a href="#expression_complexExpression">Complex expression</a></li>
+        	<li class="nested"><a href="#expression_jasperExpression">Jasper expression</a></li>
+        	<li class="nested"><a href="#expression_valueFormatter">Value formatter</a></li>
+    	</ol>
+	</li>
+	<li class="nested"><a href="#fonts">Fonts</a></li>
+	<li class="nested"><a href="#servlets">Servlets</a></li>
+	<li class="nested"><a href="#configuration">Configuration</a>
+	    <ol class="nested">
+        	<li class="nested"><a href="#configuration_defaultSettings">Default settings</a></li>
+        	<li class="nested"><a href="#configuration_maven">Maven configuration</a></li>
+        	<li class="nested"><a href="#configuration_mavenSnapshot">Maven snapshot repository configuration</a></li>
+    	</ol>
+	</li>
+</ol>
+
 <!-- Syntax -->
 <a name="syntax"></a><h3>Syntax</h3>
 <p>
@@ -5,7 +69,7 @@ Before you start creating reports with DynamicReports, you should consider which
 Java 5 added static imports that allow static methods or constants to be referenced without qualifying them with a class name. DynamicReports provides a lot of static methods of creating every part of a report and therefore you can consider using a static import for these methods.<br/>
 Let's see in detail the difference between using and not using a static import:
 </p>
-<h4>Classic java syntax (without using a static import)</h4>
+<p><b>Classic java syntax (without using a static import)</b></p>
 <@java_code>
 JasperReportBuilder report = DynamicReports.report();
 report.addColumn(Columns.column("Item", "item", DataTypes.stringType()));
@@ -14,7 +78,7 @@ report.addTitle(Componens.text("Report title"));
 report.setDataSource(dataSource)
 report.show();
 </@java_code>
-<h4>Using a static import for DynamicReports methods</h4> 
+<p><b>Using a static import for DynamicReports methods</b></p> 
 <@java_code>
 import static net.sf.dynamicreports. DynamicReports.*;
 report()
@@ -33,13 +97,13 @@ All examples and tutorials in the documentation use static imports to provide mo
 </p>
 
 <!-- Report builder -->
-<a name="report_builder"></a><h3>Report builder</h3>
-<a name="jasper_report_builder"></a><h4>JasperReportBuilder</h4>
+<a name="reportBuilder"></a><h3>Report builder</h3>
+<a name="reportBuilder_jasperReportBuilder"></a><h4>JasperReportBuilder</h4>
 <p>
 The most used report builder for creating reports. It allows constructing and customizing the whole report content. A report consists of bands, columns, subtotals, groups, and other parts. Each part is created and configured using a particular builder method and it's passed to the report builder instance.<br/>
 In the table below, you will find a list of all available builders:
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>Builder name</th>
 		<th>Using a static import for DynamicReports methods<br/><i>import static net.sf.dynamicreports. DynamicReports.*</i></th>
@@ -155,7 +219,7 @@ Another example:
 <a href="../examples/simplereport_step01.html">SimpleReport_Step1</a>
 </p>
 
-<a name="jasper_concatenated_builder"></a><h4>JasperConcatenatedBuilder</h4>
+<a name="reportBuilder_jasperConcatenatedBuilder"></a><h4>JasperConcatenatedBuilder</h4>
 <p>
 This report builder allows concatenating several separated reports into one single document. Each report starts on a new page with its own page dimension.<br/>
 <b>Examples</b><br/>
@@ -173,13 +237,13 @@ Another examples:
 </p>
 
 <!-- Data Source -->
-<a name="data_source"></a><h3>Data Source</h3>
+<a name="dataSource"></a><h3>Data Source</h3>
 <p>
 The important part of reporting is the data source which fills the report design with given data. Data can be retrieved from various sources such as a database, a xml file or using an interface JRDataSource. JasperReports itself has a lot of implementations of JRDataSource interface and basically implementation of this interface by you is quite often unneeded.
 Data in reports can be additionally sorted or filtered and some components such as chart, subreport, and crosstab can have their own data source if it's needed. Please refer to the link below for examples.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -198,12 +262,12 @@ Data in reports can be additionally sorted or filtered and some components such 
 <a href="../examples/examples.html#datasource">DataSource examples</a>
 </p>
 
-<a name="data_source_database"></a><h4>Database</h4>
+<a name="dataSource_database"></a><h4>Database</h4>
 <p>
 In this type of data source, data are retrieved from a database; you only need a properly configured database connector and a SQL query.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -226,13 +290,13 @@ Another example:
 <a href="../examples/databasedatasourcereport">DatabaseDataSourceReport</a>
 </p>
 
-<a name="data_source_datasources"></a><h4>Data sources</h4>
+<a name="dataSource_dataSources"></a><h4>Data sources</h4>
 <p>
 In this type, a JRDataSource object is expected as a data source. A good explanation of various implementations of data sources, as well as a few examples can be found using the following link:
 <a href="http://jasperreports.sourceforge.net/sample.reference/datasource/index.html">JasperReports data sources</a><br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -255,19 +319,19 @@ Another example:
 </p>
 
 <!-- Report bands -->
-<a name="report_bands"></a><h3>Report bands</h3>
+<a name="reportBands"></a><h3>Report bands</h3>
 <p>
 Each report consists of several sections (bands). Each band has its particular location, signification, dimension, and can contain components. The height of the band is based on the component's dimension that it contains and can grow when the components are stretched.<br/>
 <img class="preview" src="bands.png" alt="Report bands"/><br/> 
 A report contains these bands:
 </p>
 
-<a name="report_bands_title"></a><h4>Title</h4> 
+<a name="reportBands_title"></a><h4>Title</h4> 
 <p>
 The band is printed on the first page and only once.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -297,27 +361,27 @@ The band is printed on the first page and only once.<br/>
 	</tr>
 </table>
 
-<a name="report_bands_page_header"></a><h4>Page Header</h4>
+<a name="reportBands_pageHeader"></a><h4>Page header</h4>
 <p>
 The band is printed on each page at the top of the page.
 </p>
 
-<a name="report_bands_page_footer"></a><h4>Page footer</h4>
+<a name="reportBands_pageFooter"></a><h4>Page footer</h4>
 <p>
 The band is printed on each page at the bottom of the page.
 </p>
 
-<a name="report_bands_column_header"></a><h4>Column header</h4>
+<a name="reportBands_columnHeader"></a><h4>Column header</h4>
 <p>
 The band is printed on each page at the top of the page and it's placed below the page header band.
 </p>
 
-<a name="report_bands_column_footer"></a><h4>Column footer</h4>
+<a name="reportBands_columnFooter"></a><h4>Column footer</h4>
 <p>
 The band is printed on each page at the bottom of the page and it's placed above the page footer band.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -332,42 +396,42 @@ The band is printed on each page at the bottom of the page and it's placed above
 	</tr>
 </table>
 
-<a name="report_bands_group_header"></a><h4>Group header</h4>
+<a name="reportBands_groupHeader"></a><h4>Group header</h4>
 <p>
 The band is printed for each data group. It's placed above the grouped data and between the column header and footer.
 </p>
 
-<a name="report_bands_group_footer"></a><h4>Group footer</h4>
+<a name="reportBands_groupFooter"></a><h4>Group footer</h4>
 <p>
 The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
 </p>
 
-<a name="report_bands_detail"></a><h4>Detail</h4>
+<a name="reportBands_detail"></a><h4>Detail</h4>
 <p>
 The band is printed for each record row in the data source and it's placed between the column header and footer band.
 </p>
 
-<a name="report_bands_detail_header"></a><h4>Detail header</h4>
+<a name="reportBands_detailHeader"></a><h4>Detail header</h4>
 <p>
 The band is printed for each record row in the data source and it's placed above the detail band.
 </p>
 
-<a name="report_bands_detail_footer"></a><h4>Detail footer</h4>
+<a name="reportBands_detailFooter"></a><h4>Detail footer</h4>
 <p>
 The band is printed for each record row in the data source and it's placed below the detail band.
 </p>
 
-<a name="report_bands_last_page_footer"></a><h4>Last page footer</h4>
+<a name="reportBands_lastPageFooter"></a><h4>Last page footer</h4>
 <p>
 The band is printed only on the last page at the bottom of the page.
 </p>
 
-<a name="report_bands_summary"></a><h4>Summary</h4>
+<a name="reportBands_summary"></a><h4>Summary</h4>
 <p>
 The band is printed on the last page and only once.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -390,12 +454,12 @@ The band is printed on the last page and only once.<br/>
 	</tr>
 </table>
 
-<a name="report_bands_no_data"></a><h4>No data</h4>
+<a name="reportBands_noData"></a><h4>No data</h4>
 <p>
 The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.
 </p>
 
-<a name="report_bands_background"></a><h4>Background</h4>
+<a name="reportBands_background"></a><h4>Background</h4>
 <p>
 The band is printed on each page. It's mostly used for adding watermarks to the report.
 </p>
@@ -422,7 +486,7 @@ All columns automatically fit the available page width.<br/>
 The picture above shows what is a column and how it is divided.<br/>
 <b>Configuration options of a column title</b>
 </p>               
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -447,7 +511,7 @@ The picture above shows what is a column and how it is divided.<br/>
 <p>
 <b>Configuration options of column values</b>
 </p>               
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -501,7 +565,7 @@ The picture above shows what is a column and how it is divided.<br/>
 <p>
 <b>Configuration options of a column</b>
 </p>               
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -520,12 +584,12 @@ The picture above shows what is a column and how it is divided.<br/>
 <a href="../examples/examples.html#column">Column examples</a>
 </p>
 
-<a name="column_text_column"></a><h4>Text column</h4>
+<a name="column_textColumn"></a><h4>Text column</h4>
 <p>
 It is represented by a TextColumnBuilder instance and it is used to show values from the data source.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -581,12 +645,12 @@ Another example:
 <a href="../examples/columndatatypesreport.html">ColumnDataTypesReport</a>
 </p>
 
-<a name="column_expression_column"></a><h4>Expression column</h4>
+<a name="column_expressionColumn"></a><h4>Expression column</h4>
 <p>
 It is represented by a TextColumnBuilder instance and the displayed values are defined in an expression.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -617,12 +681,12 @@ Another example:
 <a href="../examples/expressioncolumnreport.html">ExpressionColumnReport</a>
 </p>
 
-<a name="column_percentage_column"></a><h4>Percentage column</h4>
+<a name="column_percentageColumn"></a><h4>Percentage column</h4>
 <p>
 It is represented by a PercentageColumnBuilder instance. It calculates percentage values from the field or column values.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -650,7 +714,7 @@ It is represented by a PercentageColumnBuilder instance. It calculates percentag
 <p>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -679,12 +743,12 @@ Another example:
 <a href="../examples/percentagecolumnsreport.html">PercentageColumnsReport</a>
 </p>
 
-<a name="column_row_number_columns"></a><h4>Row number columns</h4>
+<a name="column_rowNumberColumn"></a><h4>Row number column</h4>
 <p>
 It is represented by a TextColumnBuilder instance and displays row numbers.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -718,12 +782,12 @@ Another example:
 <a href="../examples/rownumbercolumnsreport.html">RowNumberColumnsReport</a>
 </p>
 
-<a name="column_boolean_column"></a><h4>Boolean column</h4>
+<a name="column_booleanColumn"></a><h4>Boolean column</h4>
 <p>
 It is represented by a BooleanColumnBuilder instance and shows a boolean value either as a text or as an image.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -750,7 +814,7 @@ It is represented by a BooleanColumnBuilder instance and shows a boolean value e
 <p>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -780,12 +844,12 @@ Another example:
 <a href="../examples/booleancolumnreport.html">BooleanColumnReport</a>
 </p>
 
-<a name="column_component_column"></a><h4>Component column</h4>
+<a name="column_componentColumn"></a><h4>Component column</h4>
 <p>
 It is represented by a ComponentColumnBuilder instance and is used to display custom components (e.g. images or complex content) in columns.<br/>
 <b>Builders</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -820,7 +884,7 @@ Expressions are used to define various calculations, conditions, text field cont
 Every expression can access the declared report fields, variables and other expressions and get their values to calculate the expression value. It must be an instance of DRIExpression.
 </p>
 
-<a name="expression_simple_expression"></a><h4>Simple expression</h4>
+<a name="expression_simpleExpression"></a><h4>Simple expression</h4>
 <p>
 The basic and the simplest implementation of an expression.<br/>
 A simple expression must be an instance of DRISimpleExpression and implement the inherited abstract method evaluate.<br/>
@@ -842,7 +906,7 @@ Another example:
 <a href="../examples/simpleexpressionreport.html">SimpleExpressionReport</a>
 </p>
 
-<a name="expression_complex_expression"></a><h4>Complex expression</h4>
+<a name="expression_complexExpression"></a><h4>Complex expression</h4>
 <p>
 The difference between a simple and complex expression is that a complex expression allows registering additional fields or variables that are not defined in the report and are needed for calculating the value.<br/>
 A complex expression must be an instance of DRIComplexExpression and must implement the inherited abstract method evaluate.<br/>
@@ -871,12 +935,12 @@ Another example:
 <a href="../examples/complexexpressionreport.html">ComplexExpressionReport</a>
 </p>
 
-<a name="expression_jasper_expression"></a><h4>Jasper expression</h4>
+<a name="expression_jasperExpression"></a><h4>Jasper expression</h4>
 <p>
 This expression allows declaring an expression in a Jasper native syntax. Knowledge of the jasper syntax is also required for proper use.<br/>
 <b>Configuration options</b>
 </p>
-<table class="documentation">
+<table>
 	<tr>
 		<th>method</th>
 		<th>description</th>
@@ -905,7 +969,7 @@ Another example:
 <a href="../examples/jasperexpressionreport.html">JasperExpressionReport</a>
 </p>
 
-<a name="expression_value_formatter"></a><h4>Value formatter</h4>
+<a name="expression_valueFormatter"></a><h4>Value formatter</h4>
 <p>
 The purpose of this expression is to format a value only. For instance, when it is necessary to display a currency next to the value or just show a value in another format. It can be applied in any report column, group, subtotal, or text field component.<br/>
 A value formatter expression must be an instance of DRIValueFormatter and must implement the inherited abstract method format.<br/>
@@ -917,7 +981,7 @@ A value formatter expression must be an instance of DRIValueFormatter and must i
 Quick usage:
 <@java_code>
 The code below converts a big decimal value to a string and adds a currency symbol next to the value.
-TextColumnBuilder&lt;BigDecimal&gt;  column = �;
+TextColumnBuilder&lt;BigDecimal&gt;  column = ...;
 column. setValueFormatter(new ValueFormatter()))  
 private class ValueFormatter extends AbstractValueFormatter&lt;String, BigDecimal&gt; {      
   public String format(BigDecimal value, ReportParameters reportParameters) {  
@@ -984,34 +1048,12 @@ report().
 </@java_code>
 </p>
 <p>
-You can check if the configuration is working properly by exporting the report into pdf. Open the pdf document and look at the document properties and select fonts, there should be a list of all embedded <i>FreeUniversal</i> fonts.
+You can check if the configuration is working properly by exporting the report into pdf. Open the pdf document and look at the document properties and select fonts, there should be a list of all embedded <i>FreeUniversal</i> fonts.<br/>
 <img class="preview" src="fonts.png" alt="Fonts"/><br/> 
 For more information about font configuration visit the following site:<br/>
-<a href="http://jasperforge.org/uploads/publish/jasperreportswebsite/trunk/sample.reference/fonts/index.html#fontextensions">Font extensions</a>
+<a href="http://jasperforge.org/uploads/publish/jasperreportswebsite/trunk/sample.reference/fonts/index.html#fontextensions">Font extensions</a><br/>
 <b>Examples</b><br/>
 <a href="../examples/fontsreport.html">FontsReport</a>
-</p>
-
-<!-- Default settings -->
-<a name="settings"></a><h3>Default settings</h3>
-<p>
-DynamicReports automatically looks for a file named 
-<a id="dynamicreports-defaults_source" title="dynamicreports-defaults" href="examples/dynamicreports-defaults.html">dynamicreports-defaults.xml</a> 
-on startup.<br/>
-In this file you can change the default settings (default font, pattern and horizontal alignment for all data types).
-<@xml_code>
-	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-	&lt;DynamicReports&gt;
-		&lt;!-- DEFAULT FONT --&gt;
-		&lt;font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/&gt;
-		  	
-		&lt;!-- DEFAULT DATA TYPES --&gt;
-		&lt;bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/&gt;
-		&lt;dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/&gt;
-		...	
-	&lt;/DynamicReports&gt;
-</@xml_code>
-Copy this file in the root of the classpath.
 </p>
 
 <!-- Servlets -->
@@ -1052,8 +1094,31 @@ public class PdfReportServlet extends HttpServlet {
 </@java_code>
 </p>
 
+<!-- Configuration -->
+<a name="configuration"></a><h3>Configuration</h3>
+<a name="configuration_defaultSettings"></a><h4>Default settings</h4>
+<p>
+DynamicReports automatically looks for a file named 
+<a id="dynamicreports-defaults_source" title="dynamicreports-defaults" href="examples/dynamicreports-defaults.html">dynamicreports-defaults.xml</a> 
+on startup.<br/>
+In this file you can change the default settings (default font, pattern and horizontal alignment for all data types).
+<@xml_code>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;DynamicReports&gt;
+		&lt;!-- DEFAULT FONT --&gt;
+		&lt;font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/&gt;
+		  	
+		&lt;!-- DEFAULT DATA TYPES --&gt;
+		&lt;bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/&gt;
+		&lt;dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/&gt;
+		...	
+	&lt;/DynamicReports&gt;
+</@xml_code>
+Copy this file in the root of the classpath.
+</p>
+
 <!-- Maven configuration -->
-<a name="maven"></a><h3>Maven configuration</h3>
+<a name="configuration_maven"></a><h4>Maven configuration</h4>
 <p>
 DynamicReports is synchronized with Maven Central Repository.<br/>
 Add the dependencies listed below to your pom.xml configuration file.
@@ -1080,7 +1145,7 @@ JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are u
 </p>
 
 <!-- Maven snapshot repository configuration -->
-<a name="maven_snapshot"></a><h3>Maven snapshot repository configuration</h3>
+<a name="configuration_mavenSnapshot"></a><h4>Maven snapshot repository configuration</h4>
 <p>
 To use the development snapshots of DynamicReports, change your pom.xml configuration:<br/>
 update dynamicreports-core version to ${project.developmentVersion}
@@ -1120,3 +1185,5 @@ and add the Sonatype Nexus snapshot repository
 &lt;/repositories&gt;
 </@xml_code>
 </p>
+
+</div>

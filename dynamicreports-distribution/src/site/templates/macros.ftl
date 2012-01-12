@@ -28,15 +28,15 @@
 </#if>
 <table style="margin-left:auto;margin-right:auto">
 	<tr>
-		<td>
+		<td style="border:none">
 			<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img src="${page.examples}${id?lower_case}_m.png" alt="${id}"/></a>
 		</td>
-		<td>
+		<td style="border:none">
 			<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img class="preview" src="${page.path}images/${file}.png" alt="${file}" width="16" height="16"/></a>
 			<a rel="image" href="${page.examples}${id?lower_case}.png"><img class="preview" src="${page.path}images/preview.png" alt="preview"/></a>
 		</td>
 		<#if source_code == true>
-		<td>
+		<td style="border:none">
 			<a href="${page.examples}${id?lower_case}.html" title="example source code">${id}.java</a>
 		</td>
 		</#if>
