@@ -257,7 +257,7 @@ public class GenerateSite {
 			groupContent += "<li><a href=\"#" + group + "\">" + pageProp.getProperty(group) + "</a></li>\r\n";
 		}
 		groupContent += "</ul>\r\n";
-		content = "<div id=\"documentation\">\r\n<div id=\"toc\">\r\n" + groupContent + "</div>\r\n" + content;
+		content = "<div id=\"documentation\">\r\n<div id=\"toc\">\r\n<p><b>Table of contents</b></p>\r\n" + groupContent + "</div>\r\n" + content;
 		content += "</div>";
 
     loader.putTemplate(name, content);

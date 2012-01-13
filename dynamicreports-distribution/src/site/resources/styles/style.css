@@ -440,6 +440,7 @@ a.download:hover, a.download:active {
 	background: #CCC;	
 }
 #documentation h4 {
+	margin:5px;
 	padding: 5px 5px 5px 20px;
 	font: bold 1.8em 'Trebuchet MS', Tahoma, Sans-serif;
 	color: #555;
