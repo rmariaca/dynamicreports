@@ -29,7 +29,7 @@
         	<li><a href="#reportBands_detailHeader">Detail header</a></li>
         	<li><a href="#reportBands_detailFooter">Detail footer</a></li>
         	<li><a href="#reportBands_lastPageFooter">Last page footer</a></li>
-        	<li><a href="#reportBands_summary">Summary</li>
+        	<li><a href="#reportBands_summary">Summary</a></li>
         	<li><a href="#reportBands_noData">No data</a></li>
         	<li><a href="#reportBands_background">Background</a></li>
     	</ul>
@@ -348,7 +348,7 @@ The band is printed on the first page and only once.<br/>
 	</tr>
 	<tr>
 		<td><b>setTitleSplitType(SplitType splitType)</b></td>
-		<td>	Sets the title band split type<br/>
+		<td>Sets the title band split type<br/>
 <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
 <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
 <i>SplitType.IMMEDIATE</i> - the band can be split</td>
@@ -365,18 +365,63 @@ The band is printed on the first page and only once.<br/>
 
 <a name="reportBands_pageHeader"></a><h4>Page header</h4>
 <p>
-The band is printed on each page at the top of the page.
+The band is printed on each page at the top of the page.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setPageHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a page header band style</td>
+	</tr>
+	<tr>
+		<td><b>pageHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addPageHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the page header band</td>
+	</tr>
+</table>
 
 <a name="reportBands_pageFooter"></a><h4>Page footer</h4>
 <p>
-The band is printed on each page at the bottom of the page.
+The band is printed on each page at the bottom of the page.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setPageFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a page footer band style</td>
+	</tr>
+	<tr>
+		<td><b>pageFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addPageFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the page footer band</td>
+	</tr>
+</table>
 
 <a name="reportBands_columnHeader"></a><h4>Column header</h4>
 <p>
-The band is printed on each page at the top of the page and it's placed below the page header band.
+The band is printed on each page at the top of the page and it's placed below the page header band.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setColumnHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a column header band style</td>
+	</tr>
+	<tr>
+		<td><b>columnHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addColumnHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the column header band</td>
+	</tr>
+</table>
 
 <a name="reportBands_columnFooter"></a><h4>Column footer</h4>
 <p>
@@ -396,6 +441,14 @@ The band is printed on each page at the bottom of the page and it's placed above
 		<td><b>setFloatColumnFooter(Boolean floatColumnFooter)</b></td>
 		<td>Sets whether or not the column footer band is printed at the bottom of the column</td>
 	</tr>
+	<tr>
+		<td><b>setColumnFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a column footer band style</td>
+	</tr>
+	<tr>
+		<td><b>columnFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addColumnFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the column footer band</td>
+	</tr>
 </table>
 
 <a name="reportBands_groupHeader"></a><h4>Group header</h4>
@@ -410,23 +463,104 @@ The band is printed for each data group. It's placed below the grouped data and 
 
 <a name="reportBands_detail"></a><h4>Detail</h4>
 <p>
-The band is printed for each record row in the data source and it's placed between the column header and footer band.
+The band is printed for each record row in the data source and it's placed between the column header and footer band.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail band style</td>
+	</tr>
+	<tr>
+		<td><b>detail(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetail(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail band</td>
+	</tr>
+</table>
 
 <a name="reportBands_detailHeader"></a><h4>Detail header</h4>
 <p>
-The band is printed for each record row in the data source and it's placed above the detail band.
+The band is printed for each record row in the data source and it's placed above the detail band.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail header band style</td>
+	</tr>
+	<tr>
+		<td><b>detailHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetailHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail header band</td>
+	</tr>
+</table>
 
 <a name="reportBands_detailFooter"></a><h4>Detail footer</h4>
 <p>
-The band is printed for each record row in the data source and it's placed below the detail band.
+The band is printed for each record row in the data source and it's placed below the detail band.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail footer band style</td>
+	</tr>
+	<tr>
+		<td><b>detailFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetailFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail footer band</td>
+	</tr>
+</table>
 
 <a name="reportBands_lastPageFooter"></a><h4>Last page footer</h4>
 <p>
-The band is printed only on the last page at the bottom of the page.
+The band is printed only on the last page at the bottom of the page.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setLastPageFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a last page footer band style</td>
+	</tr>
+	<tr>
+		<td><b>lastPageFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addLastPageFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the last page footer band</td>
+	</tr>
+</table>
 
 <a name="reportBands_summary"></a><h4>Summary</h4>
 <p>
@@ -454,17 +588,62 @@ The band is printed on the last page and only once.<br/>
 		<td><b>setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter)</b></td>
 		<td>Sets whether or not the summary band is printed with the page header and footer</td>
 	</tr>
+	<tr>
+		<td><b>setSummarySplitType(SplitType splitType)</b></td>
+		<td>Sets the summary band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setSummaryStyle(StyleBuilder style)</b></td>
+		<td>Sets a summary band style</td>
+	</tr>
+	<tr>
+		<td><b>summary(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addSummary(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the summary band</td>
+	</tr>
 </table>
 
 <a name="reportBands_noData"></a><h4>No data</h4>
 <p>
-The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.
+The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setNoDataStyle(StyleBuilder style)</b></td>
+		<td>Sets a no data band style</td>
+	</tr>
+	<tr>
+		<td><b>noData(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addNoData(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the no data band</td>
+	</tr>
+</table>
 
 <a name="reportBands_background"></a><h4>Background</h4>
 <p>
-The band is printed on each page. It's mostly used for adding watermarks to the report.
+The band is printed on each page. It's mostly used for adding watermarks to the report.<br/>
+<b>Configuration options</b>
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setBackgroundStyle(StyleBuilder style)</b></td>
+		<td>Sets a background band style</td>
+	</tr>
+	<tr>
+		<td><b>background(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addBackground(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the background band</td>
+	</tr>
+</table>
 
 <p>
 <b>Examples</b><br/>
