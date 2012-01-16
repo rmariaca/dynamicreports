@@ -133,7 +133,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				plot = new DRSpiderPlot();
 				break;
 			case MULTI_AXIS:
-				dataset = null;
+				dataset = new DRChartDataset();
 				plot = new DRMultiAxisPlot();
 				break;
 			case BUBBLE:

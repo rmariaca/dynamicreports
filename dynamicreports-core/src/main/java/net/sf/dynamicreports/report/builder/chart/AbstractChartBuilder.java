@@ -145,6 +145,12 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 		return setSubDataset(dataset);
 	}
 
+	public T setDataSource(DRIExpression<JRDataSource> dataSourceExpression) {
+		DatasetBuilder dataset = DynamicReports.dataset();
+		dataset.setDataSource(dataSourceExpression);
+		return setSubDataset(dataset);
+	}
+
 	public T setDataSource(String sql, Connection connection) {
 		DatasetBuilder dataset = DynamicReports.dataset();
 		dataset.setDataSource(sql, connection);

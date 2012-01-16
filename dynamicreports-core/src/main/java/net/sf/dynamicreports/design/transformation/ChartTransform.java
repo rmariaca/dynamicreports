@@ -119,12 +119,18 @@ public class ChartTransform {
 
 	//chart
 	protected DRDesignChart transform(DRIChart chart, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		return transform(chart, null, resetType, resetGroup);
+	}
+
+	private DRDesignChart transform(DRIChart chart, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignChart designChart = new DRDesignChart();
 		designChart.setWidth(accessor.getTemplateTransform().getChartWidth(chart));
 		designChart.setHeight(accessor.getTemplateTransform().getChartHeight(chart));
 		designChart.setChartType(chart.getChartType());
-		designChart.setDataset(dataset(chart.getDataset(), resetType, resetGroup));
-		designChart.setPlot(plot(chart.getPlot(), designChart.getCustomizers(), resetType, resetGroup));
+		if (!(chart.getPlot() instanceof DRIMultiAxisPlot)) {
+			designChart.setDataset(dataset(chart.getDataset(), subDataset, resetType, resetGroup));
+		}
+		designChart.setPlot(plot(chart.getPlot(), designChart.getCustomizers(), chart.getDataset().getSubDataset(), resetType, resetGroup));
 		designChart.setTitle(title(chart.getTitle()));
 		designChart.setSubtitle(subtitle(chart.getSubtitle()));
 		designChart.setLegend(legend(chart.getLegend()));
@@ -137,7 +143,7 @@ public class ChartTransform {
 	}
 
 	//plot
-	private DRIDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRIDesignPlot plot(DRIPlot plot, List<DRIChartCustomizer> chartCustomizers, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRIDesignPlot designPlot;
 
 		if (plot instanceof DRIBar3DPlot) {
@@ -150,7 +156,7 @@ public class ChartTransform {
 			designPlot = linePlot((DRILinePlot) plot);
 		}
 		else if (plot instanceof DRIMultiAxisPlot) {
-			designPlot = multiAxisPlot((DRIMultiAxisPlot) plot, resetType, resetGroup);
+			designPlot = multiAxisPlot((DRIMultiAxisPlot) plot, subDataset, resetType, resetGroup);
 		}
 		else if (plot instanceof DRIPie3DPlot) {
 			designPlot = pie3DPlot((DRIPie3DPlot) plot, chartCustomizers);
@@ -216,13 +222,13 @@ public class ChartTransform {
 		return designLinePlot;
 	}
 
-	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignMultiAxisPlot designMultiAxisPlot = new DRDesignMultiAxisPlot();
 		axisPlot(designMultiAxisPlot, multiAxisPlot);
 		for (DRIChartAxis axis : multiAxisPlot.getAxes()) {
 			DRDesignChartAxis designAxis = new DRDesignChartAxis();
 			designAxis.setPosition(axis.getPosition());
-			designAxis.setChart(transform(axis.getChart(), resetType, resetGroup));
+			designAxis.setChart(transform(axis.getChart(), subDataset, resetType, resetGroup));
 			designMultiAxisPlot.getAxes().add(designAxis);
 		}
 		return designMultiAxisPlot;
@@ -381,13 +387,16 @@ public class ChartTransform {
 	}
 
 	//dataset
-	private DRDesignChartDataset dataset(DRIChartDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
-		if (dataset == null) {
-			return null;
+	private DRDesignChartDataset dataset(DRIChartDataset dataset, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignDataset designSubDataset = null;
+		if (dataset.getSubDataset() != null) {
+			designSubDataset = accessor.getDatasetTransform().transform(dataset.getSubDataset());
+			accessor.transformToDataset(dataset.getSubDataset());
 		}
-
-		DRDesignDataset subDataset = accessor.getDatasetTransform().transform(dataset.getSubDataset());
-		accessor.transformToDataset(dataset.getSubDataset());
+		else {
+			designSubDataset = accessor.getDatasetTransform().transform(subDataset);
+			accessor.transformToDataset(subDataset);
+		}
 
 		DRDesignChartDataset designDataset;
 		if (dataset instanceof DRICategoryDataset) {
@@ -409,7 +418,7 @@ public class ChartTransform {
 			throw new DRDesignReportException("Dataset " + dataset.getClass().getName() + " not supported");
 		}
 
-		designDataset.setSubDataset(subDataset);
+		designDataset.setSubDataset(designSubDataset);
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
 		accessor.transformToMainDataset();
