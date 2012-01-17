@@ -54,55 +54,57 @@ import org.apache.commons.lang.Validate;
  */
 public class DynamicReports {
 	/**
-	 * A set of methods of creating report columns
+	 * A set of methods of creating report columns.<br/>
+	 * It is used to display data in a multi-column layout.
 	 */
 	public static final ColumnBuilders col = new ColumnBuilders();
 	/**
-	 * A set of methods of customizing columns layout
+	 * A set of methods of customizing columns layout.
 	 */
 	public static final GridBuilders grid = new GridBuilders();
 	/**
-	 * A set of methods of creating report groups
+	 * A set of methods of creating report groups.
 	 */
 	public static final GroupBuilders grp = new GroupBuilders();
 	/**
-	 * A set of methods of creating column subtotals
+	 * A set of methods of creating column subtotals.
 	 */
 	public static final SubtotalBuilders sbt = new SubtotalBuilders();
 	/**
-	 * A set of methods of creating and customizing styles
+	 * A set of methods of creating and customizing styles.
 	 */
 	public static final StyleBuilders stl = new StyleBuilders();
 	/**
-	 * A set of methods of creating components
+	 * A set of methods of creating components.
 	 */
 	public static final ComponentBuilders cmp = new ComponentBuilders();
 	/**
-	 * A set of build in expressions
+	 * A set of build in expressions.<br/>
+	 * Expressions are used to define various calculations, conditions, text field content, specific report groups, etc.
 	 */
 	public static final ExpressionBuilders exp = new ExpressionBuilders();
 	/**
-	 * A set of build in condition expressions
+	 * A set of build in condition expressions.
 	 */
 	public static final ConditionBuilders cnd = new ConditionBuilders();
 	/**
-	 * A set of build in data types
+	 * A set of build in data types.
 	 */
 	public static final DataTypeBuilders type = new DataTypeBuilders();
 	/**
-	 * A set of methods of creating and customizing charts
+	 * A set of methods of creating and customizing charts.
 	 */
 	public static final ChartBuilders cht = new ChartBuilders();
 	/**
-	 * A set of methods of creating exporters
+	 * A set of methods of creating exporters.
 	 */
 	public static final ExporterBuilders export = new ExporterBuilders();
 	/**
-	 * A set of methods of creating barcodes
+	 * A set of methods of creating barcodes.
 	 */
 	public static final BarcodeBuilders bcode = new BarcodeBuilders();
 	/**
-	 * A set of methods of creating and customizing crosstabs
+	 * A set of methods of creating and customizing crosstabs.
 	 */
 	public static final CrosstabBuilders ctab = new CrosstabBuilders();
 

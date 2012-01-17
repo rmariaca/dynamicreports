@@ -27,11 +27,22 @@ import java.io.Serializable;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
+ * The purpose of this expression is to format a value only.<br/>
+ * For instance, when it is necessary to display a currency next to the value or just show a value in another format.<br/>
+ * It can be applied in any report column, group, subtotal, or text field component.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIValueFormatter<T, U> extends Serializable {
-	
+
+	/**
+	 * Evaluates the format expression.
+	 *
+	 * @param value the value to be formatted
+	 * @param reportParameters access to report fields, variables, parameters, expressions, and other report values
+	 * @return the formatted value
+	 */
 	public T format(U value, ReportParameters reportParameters);
-	
+
 	public Class<T> getValueClass();
 }

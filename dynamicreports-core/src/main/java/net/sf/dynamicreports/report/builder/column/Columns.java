@@ -32,7 +32,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import org.apache.commons.lang.Validate;
 
 /**
- * A set of methods of creating report columns
+ * A set of methods of creating report columns.<br/>
+ * It is used to display data in a multi-column layout.
  *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */

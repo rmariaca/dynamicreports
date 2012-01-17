@@ -22,11 +22,18 @@
 
 package net.sf.dynamicreports.report.definition.expression;
 
-
 /**
+ * This expression allows declaring an expression in a Jasper native syntax.
+ * Knowledge of the jasper syntax is also required for proper use.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIJasperExpression<T> extends DRIExpression<T> {
 
+	/**
+	 * Gets the jasper expression.
+	 *
+	 * @return the jasper expression
+	 */
 	public String getExpression();
 }

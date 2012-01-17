@@ -35,7 +35,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
- * A set of build in expressions
+ * A set of build in expressions.<br/>
+ * Expressions are used to define various calculations, conditions, text field content, specific report groups, etc.
  *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -126,10 +127,24 @@ public class ExpressionBuilders {
 	}
 
 	//jasper
+	/**
+	 * Creates a new jasper string expression, useful only for showing a static text.
+	 *
+	 * @param text text to be shown
+	 * @return the expression
+	 */
 	public JasperExpression<String> jasper(String text) {
 		return Expressions.jasper(text);
 	}
 
+	/**
+	 * Creates a new jasper expression.<br/>
+	 * This expression allows declaring an expression in a Jasper native syntax. Knowledge of the jasper syntax is also required for proper use.
+	 *
+	 * @param expression the jasper expression
+	 * @param valueClass the expression class
+	 * @return the expression
+	 */
 	public <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
 		return Expressions.jasper(expression, valueClass);
 	}
