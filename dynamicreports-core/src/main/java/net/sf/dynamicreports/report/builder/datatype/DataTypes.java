@@ -33,6 +33,8 @@ import net.sf.dynamicreports.report.exception.DRException;
 import org.apache.commons.lang.Validate;
 
 /**
+ * A set of build in data types
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DataTypes {

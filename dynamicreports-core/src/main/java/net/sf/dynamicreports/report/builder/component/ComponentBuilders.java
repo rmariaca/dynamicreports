@@ -35,6 +35,8 @@ import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
 
 /**
+ * A set of methods of creating components
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ComponentBuilders {

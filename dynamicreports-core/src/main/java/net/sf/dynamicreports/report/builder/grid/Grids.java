@@ -25,6 +25,8 @@ package net.sf.dynamicreports.report.builder.grid;
 import org.apache.commons.lang.Validate;
 
 /**
+ * A set of methods of customizing columns layout
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Grids {

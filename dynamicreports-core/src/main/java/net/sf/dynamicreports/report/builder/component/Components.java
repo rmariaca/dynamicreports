@@ -39,6 +39,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import org.apache.commons.lang.Validate;
 
 /**
+ * A set of methods of creating components
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Components {

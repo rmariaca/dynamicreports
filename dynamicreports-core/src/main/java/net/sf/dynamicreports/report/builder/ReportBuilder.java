@@ -334,7 +334,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	//sort
+	/**
+	 * Adds a sort field to the dataset
+	 *
+	 * @param sortColumns - columns to be sorted
+	 * @return a report builder
+	 */
 	public T sortBy(TextColumnBuilder<?> ...sortColumns) {
 		Validate.notNull(sortColumns, "sortColumns must not be null");
 		Validate.noNullElements(sortColumns, "sortColumns must not contains null sortColumn");
@@ -344,10 +349,22 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds a sort field to the dataset
+	 *
+	 * @param sorts - the sorts definition
+	 * @return a report builder
+	 */
 	public T sortBy(SortBuilder ...sorts) {
 		return addSort(sorts);
 	}
 
+	/**
+	 * Adds a sort field to the dataset
+	 *
+	 * @param sorts - the sorts definition
+	 * @return a report builder
+	 */
 	public T addSort(SortBuilder ...sorts) {
 		Validate.notNull(sorts, "sorts must not be null");
 		Validate.noNullElements(sorts, "sorts must not contains null sort");
@@ -765,7 +782,13 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return setTableOfContents(true);
 	}
 
-	//filter
+	/**
+	 * Sets a dataset filter expression.
+	 * The expression must be a type of Boolean
+	 *
+	 * @param filterExpression - the filter expression
+	 * @return a report builder
+	 */
 	public T setFilterExpression(DRIExpression<Boolean> filterExpression) {
 		getObject().setFilterExpression(filterExpression);
 		return (T) this;

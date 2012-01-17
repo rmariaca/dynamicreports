@@ -37,6 +37,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.Validate;
 
 /**
+ * A set of build in expressions
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Expressions {

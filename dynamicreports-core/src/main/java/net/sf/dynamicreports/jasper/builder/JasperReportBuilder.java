@@ -95,6 +95,10 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.apache.commons.lang.Validate;
 
 /**
+ * The most used report builder for creating reports. It allows constructing and customizing the whole report content.
+ * A report consists of bands, columns, subtotals, groups, and other parts.
+ * Each part is created and configured using a particular builder method and it's passed to the report builder instance.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
@@ -128,19 +132,49 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
+	/**
+	 * Sets a data source object.
+	 * Creates a new JRBeanCollectionDataSource data source object.
+	 *
+	 * @param collection - the collection values
+	 * @return a report builder
+	 */
 	public JasperReportBuilder setDataSource(Collection<?> collection) {
 		return setDataSource(new JRBeanCollectionDataSource(collection));
 	}
 
+	/**
+	 * Sets a database data source.
+	 * In this type of data source, data are retrieved from a database.
+	 *
+	 * @param resultSet - the resultSet object
+	 * @return a report builder
+	 */
 	public JasperReportBuilder setDataSource(ResultSet resultSet) {
 		return setDataSource(new JRResultSetDataSource(resultSet));
 	}
 
+	/**
+	 * Sets a database data source.
+	 * In this type of data source, data are retrieved from a database.
+	 *
+	 * @param sql - the sql query
+	 * @param connection - the database connection
+	 * @return a report builder
+	 */
 	public JasperReportBuilder setDataSource(String sql, Connection connection) {
 		Validate.notNull(sql, "sql must not be null");
 		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);
 	}
 
+	/**
+	 * Sets a database data source.
+	 * In this type of data source, data are retrieved from a database.
+	 *
+	 * @param query - the query definition
+	 * @param connection - the database connection
+	 * @return a report builder
+	 */
 	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {
 		Validate.notNull(query, "query must not be null");
 		Validate.notNull(connection, "connection must not be null");
@@ -150,6 +184,12 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
+	/**
+	 * Sets a data source object.
+	 *
+	 * @param dataSource - the JRDataSource object
+	 * @return a report builder
+	 */
 	public JasperReportBuilder setDataSource(JRDataSource dataSource) {
 		this.dataSource = dataSource;
 		connection = null;

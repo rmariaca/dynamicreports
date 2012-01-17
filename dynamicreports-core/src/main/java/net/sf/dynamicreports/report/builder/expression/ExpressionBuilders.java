@@ -35,6 +35,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
+ * A set of build in expressions
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ExpressionBuilders {

@@ -31,6 +31,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import org.apache.commons.lang.Validate;
 
 /**
+ * A set of methods of creating and customizing crosstabs
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Crosstabs {

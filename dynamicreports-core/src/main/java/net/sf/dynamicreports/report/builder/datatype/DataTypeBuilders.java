@@ -26,6 +26,8 @@ import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
+ * A set of build in data types
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DataTypeBuilders {

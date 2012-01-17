@@ -26,6 +26,8 @@ import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
+ * A set of methods of creating and customizing styles
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class StyleBuilders {

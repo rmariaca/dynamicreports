@@ -53,25 +53,75 @@ import org.apache.commons.lang.Validate;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DynamicReports {
+	/**
+	 * A set of methods of creating report columns
+	 */
 	public static final ColumnBuilders col = new ColumnBuilders();
+	/**
+	 * A set of methods of customizing columns layout
+	 */
 	public static final GridBuilders grid = new GridBuilders();
+	/**
+	 * A set of methods of creating report groups
+	 */
 	public static final GroupBuilders grp = new GroupBuilders();
+	/**
+	 * A set of methods of creating column subtotals
+	 */
 	public static final SubtotalBuilders sbt = new SubtotalBuilders();
+	/**
+	 * A set of methods of creating and customizing styles
+	 */
 	public static final StyleBuilders stl = new StyleBuilders();
+	/**
+	 * A set of methods of creating components
+	 */
 	public static final ComponentBuilders cmp = new ComponentBuilders();
+	/**
+	 * A set of build in expressions
+	 */
 	public static final ExpressionBuilders exp = new ExpressionBuilders();
+	/**
+	 * A set of build in condition expressions
+	 */
 	public static final ConditionBuilders cnd = new ConditionBuilders();
+	/**
+	 * A set of build in data types
+	 */
 	public static final DataTypeBuilders type = new DataTypeBuilders();
+	/**
+	 * A set of methods of creating and customizing charts
+	 */
 	public static final ChartBuilders cht = new ChartBuilders();
+	/**
+	 * A set of methods of creating exporters
+	 */
 	public static final ExporterBuilders export = new ExporterBuilders();
+	/**
+	 * A set of methods of creating barcodes
+	 */
 	public static final BarcodeBuilders bcode = new BarcodeBuilders();
+	/**
+	 * A set of methods of creating and customizing crosstabs
+	 */
 	public static final CrosstabBuilders ctab = new CrosstabBuilders();
 
-	//report
+	/**
+	 * Creates a new report builder.
+	 * The most used report builder for creating reports. It allows constructing and customizing the whole report content.
+	 *
+	 * @return a report builder
+	 */
 	public static JasperReportBuilder report() {
 		return new JasperReportBuilder();
 	}
 
+	/**
+	 * Creates a new concatenated report builder.
+	 * This report builder allows concatenating several separated reports into one single document.
+	 *
+	 * @return a report builder
+	 */
 	public static JasperConcatenatedReportBuilder concatenatedReport() {
 		return new JasperConcatenatedReportBuilder();
 	}

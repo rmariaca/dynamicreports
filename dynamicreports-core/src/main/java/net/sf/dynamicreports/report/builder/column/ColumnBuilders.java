@@ -28,6 +28,8 @@ import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
+ * A set of methods of creating report columns
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ColumnBuilders {

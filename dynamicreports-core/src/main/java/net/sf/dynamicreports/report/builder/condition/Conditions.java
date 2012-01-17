@@ -25,6 +25,8 @@ package net.sf.dynamicreports.report.builder.condition;
 import net.sf.dynamicreports.report.definition.DRIValue;
 
 /**
+ * A set of build in condition expressions
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Conditions {

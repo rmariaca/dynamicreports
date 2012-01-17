@@ -30,6 +30,8 @@ import net.sf.dynamicreports.jasper.constant.ImageType;
 
 
 /**
+ * A set of methods of creating exporters
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ExporterBuilders {

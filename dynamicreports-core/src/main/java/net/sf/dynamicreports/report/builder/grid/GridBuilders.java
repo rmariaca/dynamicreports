@@ -24,6 +24,8 @@ package net.sf.dynamicreports.report.builder.grid;
 
 
 /**
+ * A set of methods of customizing columns layout
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class GridBuilders {

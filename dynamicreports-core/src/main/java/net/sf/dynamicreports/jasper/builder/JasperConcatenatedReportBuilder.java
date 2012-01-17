@@ -66,6 +66,9 @@ import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
 import org.apache.commons.lang.Validate;
 
 /**
+ * This report builder allows concatenating several separated reports into one single document.
+ * Each report starts on a new page with its own page dimension.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperConcatenatedReportBuilder implements Serializable {

@@ -27,6 +27,8 @@ import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
+ * A set of methods of creating report groups
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class GroupBuilders {
