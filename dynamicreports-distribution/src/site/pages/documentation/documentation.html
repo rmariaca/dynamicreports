@@ -394,6 +394,13 @@ The band is printed on each page at the top of the page.<br/>
 		<th>description</th>
 	</tr>
 	<tr>
+		<td><b>setPageHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the page header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
 		<td><b>setPageHeaderStyle(StyleBuilder style)</b></td>
 		<td>Sets a page header band style</td>
 	</tr>
@@ -413,6 +420,13 @@ The band is printed on each page at the bottom of the page.<br/>
 	<tr>
 		<th>method</th>
 		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setPageFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the page footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
 	</tr>
 	<tr>
 		<td><b>setPageFooterStyle(StyleBuilder style)</b></td>
@@ -436,6 +450,13 @@ The band is printed on each page at the top of the page and it's placed below th
 		<th>description</th>
 	</tr>
 	<tr>
+		<td><b>setColumnHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the column header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
 		<td><b>setColumnHeaderStyle(StyleBuilder style)</b></td>
 		<td>Sets a column header band style</td>
 	</tr>
@@ -455,6 +476,13 @@ The band is printed on each page at the bottom of the page and it's placed above
 	<tr>
 		<th>method</th>
 		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setColumnFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the column footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
 	</tr>
 	<tr>
 		<td><b>floatColumnFooter()</b></td>
@@ -479,12 +507,54 @@ The band is printed on each page at the bottom of the page and it's placed above
 <p>
 The band is printed for each data group. It's placed above the grouped data and between the column header and footer.
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setGroupHeaderSplitType(GroupBuilder&lt;?&gt; group, SplitType splitType)</b></td>
+		<td>Sets the group header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setGroupHeaderStyle(GroupBuilder&lt;?&gt; group, StyleBuilder style)</b></td>
+		<td>Sets a group header band style</td>
+	</tr>
+	<tr>
+		<td><b>groupHeader(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components),<br/>addGroupHeader(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the group header band</td>
+	</tr>
+</table>
 
 <!-- Report bands - Group footer -->
 <a name="reportBands_groupFooter"></a><h4>Group footer</h4>
 <p>
 The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
 </p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setGroupFooterSplitType(GroupBuilder&lt;?&gt; group, SplitType splitType)</b></td>
+		<td>Sets the group footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setGroupFooterStyle(GroupBuilder&lt;?&gt; group, StyleBuilder style)</b></td>
+		<td>Sets a group footer band style</td>
+	</tr>
+	<tr>
+		<td><b>groupFooter(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components),<br/>addGroupFooter(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the group footer band</td>
+	</tr>
+</table>
 
 <!-- Report bands - Detail -->
 <a name="reportBands_detail"></a><h4>Detail</h4>
@@ -580,6 +650,13 @@ The band is printed only on the last page at the bottom of the page.<br/>
 	<tr>
 		<th>method</th>
 		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setLastPageFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the last page footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
 	</tr>
 	<tr>
 		<td><b>setLastPageFooterStyle(StyleBuilder style)</b></td>
@@ -1098,7 +1175,7 @@ The basic and the simplest implementation of an expression.<br/>
 A simple expression must be an instance of DRISimpleExpression and implement the inherited abstract method evaluate.<br/>
 <i>public Object evaluate(ReportParameters reportParameters);</i><br/>
 - reportParameters - access to report fields, variables, parameters, expressions, and other report values<br/>
-- the method returns the desired value<br/>
+- the method returns the result of the expression evaluation<br/>
 <b>Examples</b><br/>
 Quick usage:
 <@java_code>
@@ -1122,7 +1199,7 @@ A complex expression must be an instance of DRIComplexExpression and must implem
 <i>public Object evaluate(List&lt;?&gt; values, ReportParameters reportParameters);</i><br/>
 - values - the values of the registered expressions<br/>
 - reportParameters - access to report fields, variables, parameters, expressions, and other report values<br/>
-- the method returns the desired value<br/>
+- the method returns the result of the expression evaluation<br/>
 <b>Examples</b><br/>
 Quick usage:
 <@java_code>
