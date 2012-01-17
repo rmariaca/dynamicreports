@@ -23,18 +23,38 @@
 package net.sf.dynamicreports.report.builder;
 
 /**
+ * A set of methods of converting unit values to pixels.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Units {
 
+	/**
+	 * Converts a value in centimeters to pixels.
+	 *
+	 * @param value - the value in centimeters
+	 * @return pixels
+	 */
 	public static int cm(Number value) {
 		return unit(value, 28.3464);
 	}
 
+	/**
+	 * Converts a value in inches to pixels.
+	 *
+	 * @param value - the value in inches
+	 * @return pixels
+	 */
 	public static int inch(Number value) {
 		return unit(value, 72);
 	}
 
+	/**
+	 * Converts a value in milimeters to pixels.
+	 *
+	 * @param value - the value in milimeters
+	 * @return pixels
+	 */
 	public static int mm(Number value) {
 		return unit(value, 2.83464);
 	}

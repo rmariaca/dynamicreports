@@ -43,16 +43,34 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		super(column);
 	}
 
+	/**
+	 * Sets the column title.
+	 *
+	 * @param titleExpression the title expression
+	 * @return a column builder
+	 */
 	public T setTitle(DRIExpression<?> titleExpression) {
 		getObject().setTitleExpression(titleExpression);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column title.
+	 *
+	 * @param title the title
+	 * @return a column builder
+	 */
 	public T setTitle(String title) {
 		getObject().setTitleExpression(Expressions.text(title));
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column title style.
+	 *
+	 * @param titleStyle the title style
+	 * @return a column builder
+	 */
 	public T setTitleStyle(StyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
@@ -63,6 +81,12 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value style.
+	 *
+	 * @param style the value style
+	 * @return a column builder
+	 */
 	public T setStyle(StyleBuilder style) {
 		if (style != null) {
 			getComponent().setStyle(style.getStyle());
@@ -73,6 +97,12 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 		return (T) this;
 	}
 
+	/**
+	 * Sets the print when expression. The expression must be a type of Boolean and it decides whether or not a column value will be printed.
+	 *
+	 * @param printWhenExpression the print expression
+	 * @return a column builder
+	 */
 	public T setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
 		getComponent().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
@@ -84,6 +114,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param rows the number of preferred rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setTitleRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -96,6 +127,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param rows the number of fixed rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setTitleFixedRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -109,6 +141,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param rows the number of minimum rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setTitleMinRows(Integer rows) {
 		getObject().setTitleRows(rows);
@@ -122,6 +155,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param height the column title preferred height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setTitleHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -134,6 +168,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param height the column title fixed height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setTitleFixedHeight(Integer height) {
 		getObject().setTitleHeight(height);
@@ -147,6 +182,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
    *
    * @param height the column title minimum height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setTitleMinHeight(Integer height) {
 		getObject().setTitleHeight(height);

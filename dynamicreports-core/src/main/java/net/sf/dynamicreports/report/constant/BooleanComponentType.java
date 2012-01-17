@@ -26,13 +26,40 @@ package net.sf.dynamicreports.report.constant;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public enum BooleanComponentType {
+	/**
+	 * Shows a text value (true/false)
+	 */
 	TEXT_TRUE_FALSE,
+	/**
+	 * Shows a text value (yes/no)
+	 */
 	TEXT_YES_NO,
+	/**
+	 * Shows an image
+	 */
 	IMAGE_STYLE_1,
+	/**
+	 * Shows an image
+	 */
 	IMAGE_STYLE_2,
+	/**
+	 * Shows an image
+	 */
 	IMAGE_STYLE_3,
+	/**
+	 * Shows an image
+	 */
 	IMAGE_STYLE_4,
+	/**
+	 * Shows a ball image
+	 */
 	IMAGE_BALL,
+	/**
+	 * Shows a check box image
+	 */
 	IMAGE_CHECKBOX_1,
+	/**
+	 * Shows a check box image
+	 */
 	IMAGE_CHECKBOX_2
 }

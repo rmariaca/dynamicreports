@@ -49,31 +49,68 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		getComponent().setValueExpression(valueExpression);
 	}
 
+	/**
+	 * Specifies whether or not print a value if the value is the same as the previous value.
+	 *
+	 * @param printRepeatedDetailValues print repeated detail values
+	 * @return a column builder
+	 */
 	public T setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues) {
 		getObject().setPrintRepeatedDetailValues(printRepeatedDetailValues);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value horizontal alignment.
+	 *
+	 * @param horizontalAlignment
+	 * @return a column builder
+	 */
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
 		getComponent().setHorizontalAlignment(horizontalAlignment);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value format pattern.
+	 *
+	 * @param pattern the format pattern
+	 * @return a column builder
+	 */
 	public T setPattern(String pattern) {
 		getComponent().setPattern(pattern);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value format pattern.
+	 * The expression must be a type of String.
+	 *
+	 * @param patternExpression the format pattern expression
+	 * @return a column builder
+	 */
 	public T setPattern(DRIExpression<String> patternExpression) {
 		getComponent().setPatternExpression(patternExpression);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value formatter expression.
+	 *
+	 * @param valueFormatter the value formatter expression
+	 * @return a column builder
+	 */
 	public T setValueFormatter(DRIValueFormatter<?, ? super U> valueFormatter) {
 		getComponent().setValueFormatter(valueFormatter);
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column data type.
+	 *
+	 * @param dataType the data type
+	 * @return a column builder
+	 */
 	public T setDataType(DRIDataType<? super U, U> dataType) {
 		getComponent().setDataType(dataType);
 		return (T) this;
@@ -86,6 +123,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param columns the number of preferred columns >= 0
    * @exception IllegalArgumentException if <code>columns</code> is < 0
+   * @return a column builder
    */
 	public T setColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -99,6 +137,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param columns the number of fixed columns >= 0
    * @exception IllegalArgumentException if <code>columns</code> is < 0
+   * @return a column builder
    */
 	public T setFixedColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -113,6 +152,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param columns the number of minimum columns >= 0
    * @exception IllegalArgumentException if <code>columns</code> is < 0
+   * @return a column builder
    */
 	public T setMinColumns(Integer columns) {
 		getComponent().setColumns(columns);
@@ -126,6 +166,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param rows the number of preferred rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -138,6 +179,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param rows the number of fixed rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setFixedRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -151,6 +193,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param rows the number of minimum rows >= 0
    * @exception IllegalArgumentException if <code>rows</code> is < 0
+   * @return a column builder
    */
 	public T setMinRows(Integer rows) {
 		getComponent().setRows(rows);
@@ -158,6 +201,12 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	/**
+	 * Sets the column value hyperlink.
+	 *
+	 * @param hyperLink the value hyperlink
+	 * @return a column builder
+	 */
 	public T setHyperLink(HyperLinkBuilder hyperLink) {
 		if (hyperLink != null) {
 			getComponent().setHyperLink(hyperLink.getHyperLink());
@@ -174,6 +223,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param width the column preferred width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public T setWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -186,6 +236,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param width the column fixed width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public T setFixedWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -199,6 +250,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param width the column minimum width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public T setMinWidth(Integer width) {
 		getComponent().setWidth(width);
@@ -212,6 +264,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param height the column preferred height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setHeight(Integer height) {
 		getComponent().setHeight(height);
@@ -224,6 +277,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param height the column fixed height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setFixedHeight(Integer height) {
 		getComponent().setHeight(height);
@@ -237,6 +291,7 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
    *
    * @param height the column minimum height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public T setMinHeight(Integer height) {
 		getComponent().setHeight(height);
@@ -249,16 +304,36 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	/**
+	 * Adds a jasper property to the column value.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a column builder
+	 */
 	public T addProperty(DRIPropertyExpression propertyExpression) {
 		getComponent().addPropertyExpression(propertyExpression);
 		return (T) this;
 	}
 
+	/**
+	 * Adds a jasper property to the column value.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a column builder
+	 */
 	public T addProperty(String name, DRIExpression<String> valueExpression) {
 		getComponent().addPropertyExpression(Expressions.property(name, valueExpression));
 		return (T) this;
 	}
 
+	/**
+	 * Adds a jasper property to the column value.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a column builder
+	 */
 	public T addProperty(String name, String value) {
 		getComponent().addPropertyExpression(Expressions.property(name, value));
 		return (T) this;

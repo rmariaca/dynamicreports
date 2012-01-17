@@ -77,22 +77,10 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 		this.titleStyle = titleStyle;
 	}
 
-  /**
-   * Returns the column title height.
-   *
-   * @return the column title height >= 0
-   */
 	public Integer getTitleHeight() {
 		return titleHeight;
 	}
 
-  /**
-   * Sets the column title height.
-   * @see net.sf.dynamicreports.report.builder.Units
-   *
-   * @param titleHeight the column title height >= 0
-   * @exception IllegalArgumentException if <code>titleHeight</code> is < 0
-   */
 	public void setTitleHeight(Integer titleHeight) {
 		if (titleHeight != null) {
 			Validate.isTrue(titleHeight >= 0, "titleHeight must be >= 0");
@@ -108,22 +96,10 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 		this.titleHeightType = titleHeightType;
 	}
 
-  /**
-   * Returns the number of title rows.
-   *
-   * @return the number of title rows >= 0
-   */
 	public Integer getTitleRows() {
 		return titleRows;
 	}
 
-  /**
-   * This method is used to define the height of a column title.
-   * The height is set to the <code>rows</code> multiplied by height of the font
-   *
-   * @param rows the number of rows >= 0
-   * @exception IllegalArgumentException if <code>rows</code> is < 0
-   */
 	public void setTitleRows(Integer titleRows) {
 		if (titleRows != null) {
 			Validate.isTrue(titleRows >= 0, "titleRows must be >= 0");

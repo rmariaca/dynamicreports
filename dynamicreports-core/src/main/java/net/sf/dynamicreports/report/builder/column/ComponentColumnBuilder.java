@@ -28,6 +28,8 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
+ * It is used to display custom components (e.g. images or complex content) in columns.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ComponentColumnBuilder extends ColumnBuilder<ComponentColumnBuilder, DRColumn<DRComponent>> {

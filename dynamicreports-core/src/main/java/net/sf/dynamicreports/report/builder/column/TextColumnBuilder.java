@@ -40,6 +40,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import org.apache.commons.lang.Validate;
 
 /**
+ * It is used to show values from the data source.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T>, T> implements DRIValue<T> {
@@ -55,6 +57,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 	}
 
 	//add
+	/**
+	 * Creates a new column by adding a column value to this column instance.
+	 *
+	 * @param column the column builder
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> add(TextColumnBuilder<? extends Number> column) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
@@ -64,6 +72,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
 
+	/**
+	 * Creates a new column by adding a value to this column instance.
+	 *
+	 * @param number the value
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> add(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
@@ -74,6 +88,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 	}
 
 	//subtract
+	/**
+	 * Creates a new column by subtracting a column value from this column instance.
+	 *
+	 * @param column the column builder
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> subtract(TextColumnBuilder<? extends Number> column) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can subtract");
@@ -83,6 +103,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
 
+	/**
+	 * Creates a new column by subtracting a value from this column instance.
+	 *
+	 * @param number the value
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> subtract(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can subtract");
@@ -93,6 +119,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 	}
 
 	//multiply
+	/**
+	 * Creates a new column by multiplying this column instance with a column value.
+	 *
+	 * @param column the column builder
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> multiply(TextColumnBuilder<? extends Number> column) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
@@ -102,6 +134,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
 
+	/**
+	 * Creates a new column by multiplying this column instance with a value.
+	 *
+	 * @param number the value
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> multiply(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
@@ -112,6 +150,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 	}
 
 	//divide
+	/**
+	 * Creates a new column by dividing this column instance with a column value.
+	 *
+	 * @param column the column builder
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> divide(int scale, TextColumnBuilder<? extends Number> column) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can divide");
@@ -121,6 +165,12 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
 
+	/**
+	 * Creates a new column by dividing this column instance with a value.
+	 *
+	 * @param number the value
+	 * @return a column builder
+	 */
 	@SuppressWarnings("unchecked")
 	public TextColumnBuilder<BigDecimal> divide(int scale, Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can divide");

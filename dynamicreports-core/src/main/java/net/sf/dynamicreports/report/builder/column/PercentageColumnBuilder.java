@@ -38,6 +38,8 @@ import net.sf.dynamicreports.report.exception.DRReportException;
 import org.apache.commons.lang.Validate;
 
 /**
+ * It calculates percentage values from the field or column values.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumnBuilder, Double> {
@@ -62,11 +64,23 @@ public class PercentageColumnBuilder extends ValueColumnBuilder<PercentageColumn
 		this.actualExpression = valueExpression;
 	}*/
 
+	/**
+	 * Sets the total type. Has effect only when the report contains at least one group.
+	 *
+	 * @param totalType the total type
+	 * @return a column builder
+	 */
 	public PercentageColumnBuilder setTotalType(PercentageTotalType totalType) {
 		this.totalType = totalType;
 		return this;
 	}
 
+	/**
+	 * Sets the total group. Has effect only when the report contains at least one group.
+	 *
+	 * @param totalGroup the total group
+	 * @return a column builder
+	 */
 	public PercentageColumnBuilder setTotalGroup(GroupBuilder<?> totalGroup) {
 		if (totalGroup != null) {
 			this.totalGroup = totalGroup.getGroup();

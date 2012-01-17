@@ -26,7 +26,16 @@ package net.sf.dynamicreports.report.constant;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public enum SplitType {
+	/**
+	 * A band can be split
+	 */
 	IMMEDIATE,
+	/**
+	 * Prevents a band from splitting.
+	 */
 	PREVENT,
+	/**
+	 * A band can be split, but never within its declared height.
+	 */
 	STRETCH
 }

@@ -144,37 +144,81 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Prints the title band on a separate page.
+	 *
+	 * @return a report builder
+	 */
 	public T titleOnANewPage() {
 		return setTitleOnANewPage(true);
 	}
 
+	/**
+	 * Sets whether or not the title band is printed on a separate page.
+	 *
+	 * @param titleOnANewPage print the title band on a separate page
+	 * @return a report builder
+	 */
 	public T setTitleOnANewPage(Boolean titleOnANewPage) {
 		getObject().setTitleOnANewPage(titleOnANewPage);
 		return (T) this;
 	}
 
+	/**
+	 * Prints the summary band on a separate page.
+	 *
+	 * @return a report builder
+	 */
 	public T summaryOnANewPage() {
 		return setSummaryOnANewPage(true);
 	}
 
+	/**
+	 * Sets whether or not the summary band is printed on a separate page.
+	 *
+	 * @param summaryOnANewPage print the summary band on a separate page
+	 * @return a report builder
+	 */
 	public T setSummaryOnANewPage(Boolean summaryOnANewPage) {
 		getObject().setSummaryOnANewPage(summaryOnANewPage);
 		return (T) this;
 	}
 
+	/**
+	 * Prints the summary band with the page header and footer.
+	 *
+	 * @return a report builder
+	 */
 	public T summaryWithPageHeaderAndFooter() {
 		return setSummaryWithPageHeaderAndFooter(true);
 	}
 
+	/**
+	 * Sets whether or not the summary band is printed with the page header and footer.
+	 *
+	 * @param summaryWithPageHeaderAndFooter print the summary band with the page header and footer
+	 * @return a report builder
+	 */
 	public T setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter) {
 		getObject().setSummaryWithPageHeaderAndFooter(summaryWithPageHeaderAndFooter);
 		return (T) this;
 	}
 
+	/**
+	 * Prints the column footer band at the bottom of the column.
+	 * 
+	 * @return a report builder
+	 */
 	public T floatColumnFooter() {
 		return setFloatColumnFooter(true);
 	}
 
+	/**
+	 * Sets whether or not the column footer band is printed at the bottom of the column
+	 * 
+	 * @param floatColumnFooter print the column footer at the bottom of the column
+	 * @return a report builder
+	 */
 	public T setFloatColumnFooter(Boolean floatColumnFooter) {
 		getObject().setFloatColumnFooter(floatColumnFooter);
 		return (T) this;
@@ -337,7 +381,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	/**
 	 * Adds a sort field to the dataset
 	 *
-	 * @param sortColumns - columns to be sorted
+	 * @param sortColumns columns to be sorted
 	 * @return a report builder
 	 */
 	public T sortBy(TextColumnBuilder<?> ...sortColumns) {
@@ -352,7 +396,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	/**
 	 * Adds a sort field to the dataset
 	 *
-	 * @param sorts - the sorts definition
+	 * @param sorts the sort definitions
 	 * @return a report builder
 	 */
 	public T sortBy(SortBuilder ...sorts) {
@@ -362,7 +406,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	/**
 	 * Adds a sort field to the dataset
 	 *
-	 * @param sorts - the sorts definition
+	 * @param sorts the sort definitions
 	 * @return a report builder
 	 */
 	public T addSort(SortBuilder ...sorts) {
@@ -786,7 +830,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * Sets a dataset filter expression.
 	 * The expression must be a type of Boolean
 	 *
-	 * @param filterExpression - the filter expression
+	 * @param filterExpression the filter expression
 	 * @return a report builder
 	 */
 	public T setFilterExpression(DRIExpression<Boolean> filterExpression) {
@@ -794,12 +838,27 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	//title band
+	//title
+	/**
+	 * Sets the title band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the title split type
+	 * @return a report builder
+	 */
 	public T setTitleSplitType(SplitType splitType) {
 		getObject().getTitleBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a title band style
+	 *
+	 * @param style the title band style
+	 * @return a report builder
+	 */
 	public T setTitleStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getTitleBand().getList().setStyle(style.build());
@@ -810,10 +869,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the title band.
+	 * The band is printed on the first page and only once.
+	 *
+	 * @param components the title components
+	 * @return a report builder
+	 */
 	public T title(ComponentBuilder<?, ?> ...components) {
 		return addTitle(components);
 	}
 
+	/**
+	 * Adds components to the title band.
+	 * The band is printed on the first page and only once.
+	 *
+	 * @param components the title components
+	 * @return a report builder
+	 */
 	public T addTitle(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -824,11 +897,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//page header band
+	/**
+	 * Sets the page header band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the page header split type
+	 * @return a report builder
+	 */
 	public T setPageHeaderSplitType(SplitType splitType) {
 		getObject().getPageHeaderBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a page header band style
+	 *
+	 * @param style the page header band style
+	 * @return a report builder
+	 */
 	public T setPageHeaderStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getPageHeaderBand().getList().setStyle(style.build());
@@ -839,10 +927,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the page header band.
+	 * The band is printed on each page at the top of the page.
+	 *
+	 * @param components the page header components
+	 * @return a report builder
+	 */
 	public T pageHeader(ComponentBuilder<?, ?> ...components) {
 		return addPageHeader(components);
 	}
 
+	/**
+	 * Adds components to the page header band.
+	 * The band is printed on each page at the top of the page.
+	 *
+	 * @param components the page header components
+	 * @return a report builder
+	 */
 	public T addPageHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -853,11 +955,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//page footer band
+	/**
+	 * Sets the page footer band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the page footer split type
+	 * @return a report builder
+	 */
 	public T setPageFooterSplitType(SplitType splitType) {
 		getObject().getPageFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a page footer band style
+	 *
+	 * @param style the page footer band style
+	 * @return a report builder
+	 */
 	public T setPageFooterStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getPageFooterBand().getList().setStyle(style.build());
@@ -868,10 +985,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the page footer band.
+	 * The band is printed on each page at the bottom of the page.
+	 *
+	 * @param components the page footer components
+	 * @return a report builder
+	 */
 	public T pageFooter(ComponentBuilder<?, ?> ...components) {
 		return addPageFooter(components);
 	}
 
+	/**
+	 * Adds components to the page footer band.
+	 * The band is printed on each page at the bottom of the page.
+	 *
+	 * @param components the page footer components
+	 * @return a report builder
+	 */
 	public T addPageFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -882,11 +1013,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//column header band
+	/**
+	 * Sets the column header band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the column header split type
+	 * @return a report builder
+	 */
 	public T setColumnHeaderSplitType(SplitType splitType) {
 		getObject().getColumnHeaderBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a column header band style
+	 *
+	 * @param style the column header band style
+	 * @return a report builder
+	 */
 	public T setColumnHeaderStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getColumnHeaderBand().getList().setStyle(style.build());
@@ -897,10 +1043,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the column header band.
+	 * The band is printed on each page at the top of the page and it's placed below the page header band.
+	 *
+	 * @param components the column header components
+	 * @return a report builder
+	 */
 	public T columnHeader(ComponentBuilder<?, ?> ...components) {
 		return addColumnHeader(components);
 	}
 
+	/**
+	 * Adds components to the column header band.
+	 * The band is printed on each page at the top of the page and it's placed below the page header band.
+	 *
+	 * @param components the column header components
+	 * @return a report builder
+	 */
 	public T addColumnHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -911,11 +1071,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//column footer band
+	/**
+	 * Sets the column footer band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the column footer split type
+	 * @return a report builder
+	 */
 	public T setColumnFooterSplitType(SplitType splitType) {
 		getObject().getColumnFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a column footer band style
+	 *
+	 * @param style the column footer band style
+	 * @return a report builder
+	 */
 	public T setColumnFooterStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getColumnFooterBand().getList().setStyle(style.build());
@@ -926,10 +1101,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the column footer band.
+	 * The band is printed on each page at the bottom of the page and it's placed above the page footer band.
+	 *
+	 * @param components the column footer components
+	 * @return a report builder
+	 */
 	public T columnFooter(ComponentBuilder<?, ?> ...components) {
 		return addColumnFooter(components);
 	}
 
+	/**
+	 * Adds components to the column footer band.
+	 * The band is printed on each page at the bottom of the page and it's placed above the page footer band.
+	 *
+	 * @param components the column footer components
+	 * @return a report builder
+	 */
 	public T addColumnFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -940,6 +1129,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//group header band
+	/**
+	 * Sets the group header band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param group the group to which to apply the split type
+	 * @param splitType the group header split type
+	 * @return a report builder
+	 */
 	public T setGroupHeaderSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -949,6 +1148,13 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Sets a group header band style
+	 *
+	 * @param group the group to which to apply the style
+	 * @param style the group header band style
+	 * @return a report builder
+	 */
 	public T setGroupHeaderStyle(GroupBuilder<?> group, StyleBuilder style) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -963,10 +1169,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the group header band.
+	 * The band is printed for each data group. It's placed above the grouped data and between the column header and footer.
+	 *
+	 * @param group the group to which to add the components
+	 * @param components the group header components
+	 * @return a report builder
+	 */
 	public T groupHeader(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		return addGroupHeader(group, components);
 	}
 
+	/**
+	 * Adds components to the group header band.
+	 * The band is printed for each data group. It's placed above the grouped data and between the column header and footer.
+	 *
+	 * @param group the group to which to add the components
+	 * @param components the group header components
+	 * @return a report builder
+	 */
 	public T addGroupHeader(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -981,6 +1203,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//group footer band
+	/**
+	 * Sets the group footer band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param group the group to which to apply the split type
+	 * @param splitType the group footer split type
+	 * @return a report builder
+	 */
 	public T setGroupFooterSplitType(GroupBuilder<?> group, SplitType splitType) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -990,6 +1222,13 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Sets a group footer band style
+	 *
+	 * @param group the group to which to apply the style
+	 * @param style the group footer band style
+	 * @return a report builder
+	 */
 	public T setGroupFooterStyle(GroupBuilder<?> group, StyleBuilder style) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -1004,10 +1243,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the group footer band.
+	 * The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
+	 *
+	 * @param group the group to which to add the components
+	 * @param components the group footer components
+	 * @return a report builder
+	 */
 	public T groupFooter(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		return addGroupFooter(group, components);
 	}
 
+	/**
+	 * Adds components to the group footer band.
+	 * The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
+	 *
+	 * @param group the group to which to add the components
+	 * @param components the group footer components
+	 * @return a report builder
+	 */
 	public T addGroupFooter(GroupBuilder<?> group, ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
@@ -1022,11 +1277,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//detail band
+	/**
+	 * Sets the detail band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the detail split type
+	 * @return a report builder
+	 */
 	public T setDetailSplitType(SplitType splitType) {
 		getObject().getDetailBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a detail band style
+	 *
+	 * @param style the detail band style
+	 * @return a report builder
+	 */
 	public T setDetailStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailBand().getList().setStyle(style.build());
@@ -1037,10 +1307,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the detail band.
+	 * The band is printed for each record row in the data source and it's placed between the column header and footer band.
+	 *
+	 * @param components the detail components
+	 * @return a report builder
+	 */
 	public T detail(ComponentBuilder<?, ?> ...components) {
 		return addDetail(components);
 	}
 
+	/**
+	 * Adds components to the detail band.
+	 * The band is printed for each record row in the data source and it's placed between the column header and footer band.
+	 *
+	 * @param components the detail components
+	 * @return a report builder
+	 */
 	public T addDetail(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1051,11 +1335,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//detail header band
+	/**
+	 * Sets the detail header band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the detail header split type
+	 * @return a report builder
+	 */
 	public T setDetailHeaderSplitType(SplitType splitType) {
 		getObject().getDetailHeaderBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a detail header band style
+	 *
+	 * @param style the detail header band style
+	 * @return a report builder
+	 */
 	public T setDetailHeaderStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailHeaderBand().getList().setStyle(style.build());
@@ -1066,10 +1365,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the detail header band.
+	 * The band is printed for each record row in the data source and it's placed above the detail band.
+	 *
+	 * @param components the detail header components
+	 * @return a report builder
+	 */
 	public T detailHeader(ComponentBuilder<?, ?> ...components) {
 		return addDetailHeader(components);
 	}
 
+	/**
+	 * Adds components to the detail header band.
+	 * The band is printed for each record row in the data source and it's placed above the detail band.
+	 *
+	 * @param components the detail header components
+	 * @return a report builder
+	 */
 	public T addDetailHeader(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1080,11 +1393,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//detail footer band
+	/**
+	 * Sets the detail footer band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the detail footer split type
+	 * @return a report builder
+	 */
 	public T setDetailFooterSplitType(SplitType splitType) {
 		getObject().getDetailFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a detail footer band style
+	 *
+	 * @param style the detail footer band style
+	 * @return a report builder
+	 */
 	public T setDetailFooterStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailFooterBand().getList().setStyle(style.build());
@@ -1095,10 +1423,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the detail footer band.
+	 * The band is printed for each record row in the data source and it's placed below the detail band.
+	 *
+	 * @param components the detail footer components
+	 * @return a report builder
+	 */
 	public T detailFooter(ComponentBuilder<?, ?> ...components) {
 		return addDetailFooter(components);
 	}
 
+	/**
+	 * Adds components to the detail footer band.
+	 * The band is printed for each record row in the data source and it's placed below the detail band.
+	 *
+	 * @param components the detail footer components
+	 * @return a report builder
+	 */
 	public T addDetailFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1109,11 +1451,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//last page footer band
+	/**
+	 * Sets the last page footer band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the last page footer split type
+	 * @return a report builder
+	 */
 	public T setLastPageFooterSplitType(SplitType splitType) {
 		getObject().getLastPageFooterBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a last page footer band style
+	 *
+	 * @param style the last page footer band style
+	 * @return a report builder
+	 */
 	public T setLastPageFooterStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getLastPageFooterBand().getList().setStyle(style.build());
@@ -1124,10 +1481,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the last page footer band.
+	 * The band is printed only on the last page at the bottom of the page.
+	 *
+	 * @param components the last page footer components
+	 * @return a report builder
+	 */
 	public T lastPageFooter(ComponentBuilder<?, ?> ...components) {
 		return addLastPageFooter(components);
 	}
 
+	/**
+	 * Adds components to the last page footer band.
+	 * The band is printed only on the last page at the bottom of the page.
+	 *
+	 * @param components the last page footer components
+	 * @return a report builder
+	 */
 	public T addLastPageFooter(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1138,11 +1509,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//summary band
+	/**
+	 * Sets the summary band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the summary split type
+	 * @return a report builder
+	 */
 	public T setSummarySplitType(SplitType splitType) {
 		getObject().getSummaryBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a summary band style
+	 *
+	 * @param style the summary band style
+	 * @return a report builder
+	 */
 	public T setSummaryStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getSummaryBand().getList().setStyle(style.build());
@@ -1153,10 +1539,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the summary band.
+	 * The band is printed on the last page and only once.
+	 *
+	 * @param components the summary components
+	 * @return a report builder
+	 */
 	public T summary(ComponentBuilder<?, ?> ...components) {
 		return addSummary(components);
 	}
 
+	/**
+	 * Adds components to the summary band.
+	 * The band is printed on the last page and only once.
+	 *
+	 * @param components the summary components
+	 * @return a report builder
+	 */
 	public T addSummary(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1167,11 +1567,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//no data band
+	/**
+	 * Sets the no data band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the no data split type
+	 * @return a report builder
+	 */
 	public T setNoDataSplitType(SplitType splitType) {
 		getObject().getNoDataBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a no data band style
+	 *
+	 * @param style the no data band style
+	 * @return a report builder
+	 */
 	public T setNoDataStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getNoDataBand().getList().setStyle(style.build());
@@ -1182,10 +1597,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the no data band.
+	 * The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.
+	 *
+	 * @param components the no data components
+	 * @return a report builder
+	 */
 	public T noData(ComponentBuilder<?, ?> ...components) {
 		return addNoData(components);
 	}
 
+	/**
+	 * Adds components to the no data band.
+	 * The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.
+	 *
+	 * @param components the no data components
+	 * @return a report builder
+	 */
 	public T addNoData(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -1196,11 +1625,26 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//background band
+	/**
+	 * Sets the background band split type.<br/>
+	 * <i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+	 * <i>SplitType.STRETCH</i> - the band can be split, but never within its declared height<br/>
+	 * <i>SplitType.IMMEDIATE</i> - the band can be split
+	 *
+	 * @param splitType the background split type
+	 * @return a report builder
+	 */
 	public T setBackgroundSplitType(SplitType splitType) {
 		getObject().getBackgroundBand().setSplitType(splitType);
 		return (T) this;
 	}
 
+	/**
+	 * Sets a background band style
+	 *
+	 * @param style the background band style
+	 * @return a report builder
+	 */
 	public T setBackgroundStyle(StyleBuilder style) {
 		if (style != null) {
 			getObject().getBackgroundBand().getList().setStyle(style.build());
@@ -1211,10 +1655,24 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	/**
+	 * Adds components to the background band.
+	 * The band is printed on each page. It's mostly used for adding watermarks to the report.
+	 *
+	 * @param components the background components
+	 * @return a report builder
+	 */
 	public T background(ComponentBuilder<?, ?> ...components) {
 		return addBackground(components);
 	}
 
+	/**
+	 * Adds components to the background band.
+	 * The band is printed on each page. It's mostly used for adding watermarks to the report.
+	 *
+	 * @param components the background components
+	 * @return a report builder
+	 */
 	public T addBackground(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");

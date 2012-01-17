@@ -33,6 +33,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import org.apache.commons.lang.Validate;
 
 /**
+ * It shows a boolean value either as a text or as an image.
+ *
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DRBooleanColumn> {
@@ -55,6 +57,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param width the column preferred width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setWidth(Integer width) {
 		getObject().setWidth(width);
@@ -67,6 +70,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param width the column fixed width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setFixedWidth(Integer width) {
 		getObject().setWidth(width);
@@ -80,6 +84,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param width the column minimum width >= 0
    * @exception IllegalArgumentException if <code>width</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setMinWidth(Integer width) {
 		getObject().setWidth(width);
@@ -93,6 +98,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param height the column preferred height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setHeight(Integer height) {
 		getObject().setHeight(height);
@@ -105,6 +111,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param height the column fixed height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setFixedHeight(Integer height) {
 		getObject().setHeight(height);
@@ -118,6 +125,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    *
    * @param height the column minimum height >= 0
    * @exception IllegalArgumentException if <code>height</code> is < 0
+   * @return a column builder
    */
 	public BooleanColumnBuilder setMinHeight(Integer height) {
 		getObject().setHeight(height);
@@ -125,22 +133,49 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 		return this;
 	}
 
+	/**
+	 * Sets the boolean presentation type.<br/>
+	 * <i>BooleanComponentType.TEXT_*</i> - shows a text value<br/>
+	 * <i>BooleanComponentType.IMAGE_*</i> - shows an image
+	 *
+	 * @param booleanComponentType the component type
+	 * @return a column builder
+	 */
 	public BooleanColumnBuilder setComponentType(BooleanComponentType booleanComponentType) {
 		getObject().setComponentType(booleanComponentType);
 		return this;
 	}
 
+	/**
+	 * Sets the boolean image dimension. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param width the image width
+	 * @param height the image height
+	 * @return a column builder
+	 */
 	public BooleanColumnBuilder setImageDimension(Integer width, Integer height) {
 		getObject().setImageWidth(width);
 		getObject().setImageHeight(height);
 		return this;
 	}
 
+	/**
+	 * Sets the boolean image width. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param width the image width
+	 * @return a column builder
+	 */
 	public BooleanColumnBuilder setImageWidth(Integer width) {
 		getObject().setImageWidth(width);
 		return this;
 	}
 
+	/**
+	 * Sets the boolean image height. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param height the image height
+	 * @return a column builder
+	 */
 	public BooleanColumnBuilder setImageHeight(Integer height) {
 		getObject().setImageHeight(height);
 		return this;

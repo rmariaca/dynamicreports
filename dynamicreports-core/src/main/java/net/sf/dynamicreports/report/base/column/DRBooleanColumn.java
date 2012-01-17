@@ -49,22 +49,10 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private DRStyle style;
 	private DRIExpression<Boolean> printWhenExpression;
 
-  /**
-   * Returns the component width.
-   *
-   * @return the component width >= 0
-   */
 	public Integer getWidth() {
 		return width;
 	}
 
-  /**
-   * Sets the component width.
-   * @see net.sf.dynamicreports.report.builder.Units
-   *
-   * @param width the component width >= 0
-   * @exception IllegalArgumentException if <code>width</code> is < 0
-   */
 	public void setWidth(Integer width) {
 		if (width != null) {
 			Validate.isTrue(width >= 0, "width must be >= 0");
@@ -72,22 +60,10 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.width = width;
 	}
 
-  /**
-   * Returns the component height.
-   *
-   * @return the component height >= 0
-   */
 	public Integer getHeight() {
 		return height;
 	}
 
-  /**
-   * Sets the component height.
-   * @see net.sf.dynamicreports.report.builder.Units
-   *
-   * @param height the component height >= 0
-   * @exception IllegalArgumentException if <code>height</code> is < 0
-   */
 	public void setHeight(Integer height) {
 		if (height != null) {
 			Validate.isTrue(height >= 0, "height must be >= 0");
