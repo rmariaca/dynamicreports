@@ -156,7 +156,7 @@ public class GenerateSite {
 		for (File file : dir.listFiles(new Filter())) {
 			String fileName = file.getName();
 			String name = StringUtils.substringBeforeLast(file.getName(), ".html");
-			Page page = new Page(fileName, documentation_pages_path + fileName, loadFile(new FileReader(file)));
+			Page page = new Page("documentation/" + fileName, documentation_pages_path + fileName, loadFile(new FileReader(file)));
 			page.setPath("../");
 			page.setDocumentation("");
 			page.setExamples("../examples/");
