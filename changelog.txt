@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.4 (2012-01-18)
+---------------------------------------------------
+ - meter chart, see MeterChartReport for an example
+ - fixed NPE when trying to set a datasource to a MultiAxisChart
+ - minor javadoc updates
+ 
 Changes in version 2.3.3 (2011-12-20)
 ---------------------------------------------------
  - upgrade to JasperReports 4.5.0
