@@ -45,8 +45,8 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 	private StyleBuilder bold14Style;
 
-	public void configureReport(ReportBuilder<?> rb, ShippingLabelData invoiceData) throws DRException {
-		ShippingLabel shippingLabel = invoiceData.getShippingLabel();
+	public void configureReport(ReportBuilder<?> rb, ShippingLabelData shippingLabelData) throws DRException {
+		ShippingLabel shippingLabel = shippingLabelData.getShippingLabel();
 
 		StyleBuilder textStyle            = stl.style().setFontSize(12);
 		bold14Style                       = stl.style(Templates.boldStyle).setFontSize(14);
