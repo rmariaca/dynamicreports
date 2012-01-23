@@ -59,6 +59,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPie3DPlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignSpiderPlot;
+import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignThermometerPlot;
 import net.sf.dynamicreports.jasper.base.JasperChartCustomizer;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -83,6 +84,7 @@ import net.sf.jasperreports.charts.design.JRDesignPieDataset;
 import net.sf.jasperreports.charts.design.JRDesignPiePlot;
 import net.sf.jasperreports.charts.design.JRDesignPieSeries;
 import net.sf.jasperreports.charts.design.JRDesignScatterPlot;
+import net.sf.jasperreports.charts.design.JRDesignThermometerPlot;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeries;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeriesDataset;
 import net.sf.jasperreports.charts.design.JRDesignTimeSeriesPlot;
@@ -463,6 +465,9 @@ public class ChartTransform {
 		else if (jrPlot instanceof JRDesignMeterPlot) {
 			meterPlot((DRIDesignMeterPlot) plot, (JRDesignMeterPlot) jrPlot, jrChart);
 		}
+		else if (jrPlot instanceof JRDesignThermometerPlot) {
+			thermometerPlot((DRIDesignThermometerPlot) plot, (JRDesignThermometerPlot) jrPlot, jrChart);
+		}
 		else {
 			throw new JasperDesignException("Plot " + plot.getClass().getName() + " not supported");
 		}
@@ -834,6 +839,37 @@ public class ChartTransform {
 			jrPlot.setTickColor(plot.getTickColor());
 		}
 		jrPlot.setTickLabelFont(accessor.getStyleTransform().font(plot.getTickLabelFont()));
+	}
+
+	private void thermometerPlot(DRIDesignThermometerPlot plot, JRDesignThermometerPlot jrPlot, JRDesignChart jrChart) {
+		JRDesignDataRange jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(plot.getDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(plot.getDataRangeHighExpression()));
+		jrPlot.setDataRange(jrDataRange);
+
+		JRDesignValueDisplay jrValueDisplay = new JRDesignValueDisplay(null, jrChart);
+		jrValueDisplay.setColor(plot.getValueColor());
+		jrValueDisplay.setMask(plot.getValueMask());
+		jrValueDisplay.setFont(accessor.getStyleTransform().font(plot.getValueFont()));
+		jrPlot.setValueDisplay(jrValueDisplay);
+
+		jrPlot.setValueLocation(ConstantTransform.valueLocation(plot.getValueLocation()));
+		jrPlot.setMercuryColor(plot.getMercuryColor());
+
+		jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(plot.getLowDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(plot.getLowDataRangeHighExpression()));
+		jrPlot.setLowRange(jrDataRange);
+
+		jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(plot.getMediumDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(plot.getMediumDataRangeHighExpression()));
+		jrPlot.setMediumRange(jrDataRange);
+
+		jrDataRange = new JRDesignDataRange(null);
+		jrDataRange.setLowExpression(accessor.getExpressionTransform().getExpression(plot.getHighDataRangeLowExpression()));
+		jrDataRange.setHighExpression(accessor.getExpressionTransform().getExpression(plot.getHighDataRangeHighExpression()));
+		jrPlot.setHighRange(jrDataRange);
 	}
 
 	private JRMeterInterval meterInterval(DRIDesignMeterInterval meterInterval) {

@@ -173,4 +173,8 @@ public class ChartBuilders {
 	public MeterIntervalBuilder meterInterval() {
 		return Charts.meterInterval();
 	}
+
+	public ThermometerChartBuilder thermometerChart() {
+		return Charts.thermometerChart();
+	}
 }

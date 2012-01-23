@@ -58,6 +58,7 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignMultiAxisPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPie3DPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignSpiderPlot;
+import net.sf.dynamicreports.design.base.chart.plot.DRDesignThermometerPlot;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
@@ -101,6 +102,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPie3DPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -178,6 +180,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRIMeterPlot) {
 			designPlot = meterPlot((DRIMeterPlot) plot);
+		}
+		else if (plot instanceof DRIThermometerPlot) {
+			designPlot = thermometerPlot((DRIThermometerPlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
 			designPlot = axisPlot((DRIAxisPlot) plot);
@@ -314,6 +319,24 @@ public class ChartTransform {
 		designMeterPlot.setTickColor(meterPlot.getTickColor());
 		designMeterPlot.setTickLabelFont(accessor.getStyleTransform().transformFont(meterPlot.getTickLabelFont()));
 		return designMeterPlot;
+	}
+
+	private DRDesignThermometerPlot thermometerPlot(DRIThermometerPlot thermometerPlot) throws DRException {
+		DRDesignThermometerPlot designThermometerPlot = new DRDesignThermometerPlot();
+		designThermometerPlot.setDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getDataRangeLowExpression()));
+		designThermometerPlot.setDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getDataRangeHighExpression()));
+		designThermometerPlot.setValueColor(thermometerPlot.getValueColor());
+		designThermometerPlot.setValueMask(thermometerPlot.getValueMask());
+		designThermometerPlot.setValueFont(accessor.getStyleTransform().transformFont(thermometerPlot.getValueFont()));
+		designThermometerPlot.setValueLocation(thermometerPlot.getValueLocation());
+		designThermometerPlot.setMercuryColor(thermometerPlot.getMercuryColor());
+		designThermometerPlot.setLowDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getLowDataRangeLowExpression()));
+		designThermometerPlot.setLowDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getLowDataRangeHighExpression()));
+		designThermometerPlot.setMediumDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getMediumDataRangeLowExpression()));
+		designThermometerPlot.setMediumDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getMediumDataRangeHighExpression()));
+		designThermometerPlot.setHighDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getHighDataRangeLowExpression()));
+		designThermometerPlot.setHighDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getHighDataRangeHighExpression()));
+		return designThermometerPlot;
 	}
 
 	private DRDesignMeterInterval meterInterval(DRIMeterInterval interval) throws DRException {

@@ -174,4 +174,8 @@ public class Charts {
 	public static MeterIntervalBuilder meterInterval() {
 		return new MeterIntervalBuilder();
 	}
+
+	public static ThermometerChartBuilder thermometerChart() {
+		return new ThermometerChartBuilder();
+	}
 }

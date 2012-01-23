@@ -65,6 +65,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.TableOrder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
@@ -72,6 +73,7 @@ import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.charts.type.MeterShapeEnum;
 import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
+import net.sf.jasperreports.charts.type.ValueLocationEnum;
 import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
@@ -257,6 +259,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_HIGHLOW;
 		case METER:
 			return JRDesignChart.CHART_TYPE_METER;
+		case THERMOMETER:
+			return JRDesignChart.CHART_TYPE_THERMOMETER;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}
@@ -462,6 +466,25 @@ public class ConstantTransform {
 			return MeterShapeEnum.DIAL;
 		default:
 			throw new JasperDesignException("MeterShape " + meterShape.name() + " not supported");
+		}
+	}
+
+	protected static ValueLocationEnum valueLocation(ValueLocation valueLocation) {
+		if (valueLocation == null) {
+			return null;
+		}
+
+		switch (valueLocation) {
+		case NONE:
+			return ValueLocationEnum.NONE;
+		case LEFT:
+			return ValueLocationEnum.LEFT;
+		case RIGHT:
+			return ValueLocationEnum.RIGHT;
+		case BULB:
+			return ValueLocationEnum.BULB;
+		default:
+			throw new JasperDesignException("ValueLocation " + valueLocation.name() + " not supported");
 		}
 	}
 

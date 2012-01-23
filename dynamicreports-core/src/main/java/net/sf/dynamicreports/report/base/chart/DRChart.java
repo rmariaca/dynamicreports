@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRThermometerPlot;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -151,6 +152,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case METER:
 				dataset = new DRValueDataset();
 				plot = new DRMeterPlot();
+				break;
+			case THERMOMETER:
+				dataset = new DRValueDataset();
+				plot = new DRThermometerPlot();
 				break;
 			default:
 				throw new DRReportException("Chart type not supported.");
