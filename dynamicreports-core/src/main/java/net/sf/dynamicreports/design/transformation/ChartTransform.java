@@ -36,6 +36,7 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChartTitle;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignGanttChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignHighLowDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignSeriesDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignTimeSeriesDataset;
@@ -79,6 +80,7 @@ import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSer
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIGanttChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIHighLowDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
@@ -464,6 +466,9 @@ public class ChartTransform {
 			else if (serie instanceof DRIXyzChartSerie) {
 				designSerie = xyzSerie(dataset.getSubDataset(), (DRIXyzChartSerie) serie, valueExpression, resetType, resetGroup, index++);
 			}
+			else if (serie instanceof DRIGanttChartSerie) {
+				designSerie = ganttSerie(dataset.getSubDataset(), (DRIGanttChartSerie) serie, valueExpression, resetType, resetGroup, index++);
+			}
 			else {
 				throw new DRDesignReportException("Chart serie " + serie.getClass().getName() + " not supported");
 			}
@@ -568,6 +573,24 @@ public class ChartTransform {
 		designSerie.setXValueExpression(expressionTransform.transformExpression(serie.getXValueExpression()));
 		designSerie.setYValueExpression(expressionTransform.transformExpression(serie.getYValueExpression()));
 		designSerie.setZValueExpression(expressionTransform.transformExpression(serie.getZValueExpression()));
+		return designSerie;
+	}
+
+	//gantt serie
+	private DRDesignGanttChartSerie ganttSerie(DRIDataset dataset, DRIGanttChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+		DRDesignGanttChartSerie designSerie = new DRDesignGanttChartSerie();
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		DRIExpression<?> seriesExpression = serie.getSeriesExpression();
+		if (seriesExpression == null) {
+			seriesExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setSeriesExpression(expressionTransform.transformExpression(seriesExpression));
+		designSerie.setTaskExpression(expressionTransform.transformExpression(serie.getTaskExpression()));
+		designSerie.setSubtaskExpression(expressionTransform.transformExpression(serie.getSubtaskExpression()));
+		designSerie.setStartDateExpression(expressionTransform.transformExpression(serie.getStartDateExpression()));
+		designSerie.setEndDateExpression(expressionTransform.transformExpression(serie.getEndDateExpression()));
+		designSerie.setPercentExpression(expressionTransform.transformExpression(serie.getPercentExpression()));
+		designSerie.setLabelExpression(expressionTransform.transformExpression(serie.getLabelExpression()));
 		return designSerie;
 	}
 

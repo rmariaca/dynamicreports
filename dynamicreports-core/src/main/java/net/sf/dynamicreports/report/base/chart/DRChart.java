@@ -157,6 +157,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				dataset = new DRValueDataset();
 				plot = new DRThermometerPlot();
 				break;
+			case GANTT:
+				dataset = new DRSeriesDataset();
+				plot = new DRBarPlot();
+				break;
 			default:
 				throw new DRReportException("Chart type not supported.");
 		}

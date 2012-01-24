@@ -37,6 +37,7 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignCategoryCh
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignCategoryDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
+import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignGanttChartSerie;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignHighLowDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignSeriesDataset;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignTimeSeriesDataset;
@@ -74,6 +75,8 @@ import net.sf.jasperreports.charts.design.JRDesignCategoryDataset;
 import net.sf.jasperreports.charts.design.JRDesignCategorySeries;
 import net.sf.jasperreports.charts.design.JRDesignChartAxis;
 import net.sf.jasperreports.charts.design.JRDesignDataRange;
+import net.sf.jasperreports.charts.design.JRDesignGanttDataset;
+import net.sf.jasperreports.charts.design.JRDesignGanttSeries;
 import net.sf.jasperreports.charts.design.JRDesignHighLowDataset;
 import net.sf.jasperreports.charts.design.JRDesignHighLowPlot;
 import net.sf.jasperreports.charts.design.JRDesignLinePlot;
@@ -253,6 +256,9 @@ public class ChartTransform {
 		else if (jrDataset instanceof JRDesignXyzDataset) {
 			xyzDataset((DRIDesignSeriesDataset) dataset, (JRDesignXyzDataset) jrDataset);
 		}
+		else if (jrDataset instanceof JRDesignGanttDataset) {
+			ganttDataset((DRIDesignSeriesDataset) dataset, (JRDesignGanttDataset) jrDataset);
+		}
 		else if (jrDataset instanceof JRDesignHighLowDataset) {
 			highLowDataset((DRIDesignHighLowDataset) dataset, (JRDesignHighLowDataset) jrDataset);
 		}
@@ -386,6 +392,30 @@ public class ChartTransform {
 			jrSerie.setZValueExpression(expressionTransform.getExpression(xyzSerie.getZValueExpression()));
 			jrSerie.setSeriesExpression(expressionTransform.getExpression(serie.getSeriesExpression()));
 			jrDataset.addXyzSeries(jrSerie);
+		}
+	}
+
+	private void ganttDataset(DRIDesignSeriesDataset dataset, JRDesignGanttDataset jrDataset) {
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());//TODO
+		for (DRIDesignChartSerie serie : dataset.getSeries()) {
+			DRIDesignGanttChartSerie ganttSerie = (DRIDesignGanttChartSerie) serie;
+			JRDesignGanttSeries jrSerie = new JRDesignGanttSeries();
+			jrSerie.setTaskExpression(expressionTransform.getExpression(ganttSerie.getTaskExpression()));
+			jrSerie.setSubtaskExpression(expressionTransform.getExpression(ganttSerie.getSubtaskExpression()));
+			jrSerie.setStartDateExpression(expressionTransform.getExpression(ganttSerie.getStartDateExpression()));
+			jrSerie.setEndDateExpression(expressionTransform.getExpression(ganttSerie.getEndDateExpression()));
+			jrSerie.setPercentExpression(expressionTransform.getExpression(ganttSerie.getPercentExpression()));
+			JRDesignExpression seriesExpression = expressionTransform.getExpression(ganttSerie.getSeriesExpression());
+			JRDesignExpression labelExpression = expressionTransform.getExpression(ganttSerie.getLabelExpression());
+			if (seriesExpression != null) {
+				jrSerie.setSeriesExpression(seriesExpression);
+			}
+			else {
+				jrSerie.setSeriesExpression(labelExpression);
+			}
+			jrSerie.setLabelExpression(labelExpression);
+			jrDataset.addGanttSeries(jrSerie);
 		}
 	}
 

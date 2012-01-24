@@ -85,6 +85,11 @@ public class ChartBuilders {
 		return Charts.xyzSerie();
 	}
 
+	//gantt serie
+	public GanttChartSerieBuilder ganttSerie() {
+		return Charts.ganttSerie();
+	}
+
 	//charts
 	public AreaChartBuilder areaChart() {
 		return Charts.areaChart();
@@ -176,5 +181,9 @@ public class ChartBuilders {
 
 	public ThermometerChartBuilder thermometerChart() {
 		return Charts.thermometerChart();
+	}
+
+	public GanttChartBuilder ganttChart() {
+		return Charts.ganttChart();
 	}
 }
