@@ -50,6 +50,7 @@ import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIBand;
@@ -66,6 +67,7 @@ import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
@@ -1150,6 +1152,13 @@ public class TemplateTransform {
 			return dataset.getTimePeriodType();
 		}
 		return Defaults.getDefaults().getChartTimeSeriesDatasetTimePeriodType();
+	}
+
+	protected ValueLocation getChartThermometerPlotValueLocation(DRIThermometerPlot plot) {
+		if (plot.getValueLocation() != null) {
+			return plot.getValueLocation();
+		}
+		return Defaults.getDefaults().getChartThermometerPlotValueLocation();
 	}
 
 	//barcode

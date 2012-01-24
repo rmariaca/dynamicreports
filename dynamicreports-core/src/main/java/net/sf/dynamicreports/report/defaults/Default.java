@@ -51,6 +51,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
@@ -162,6 +163,7 @@ public class Default {
 	private List<Color> chartSeriesColors;
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
+	private ValueLocation chartThermometerPlotValueLocation;
 	//barcode
 	private int barcodeWidth;
 	private int barcodeHeight;
@@ -356,6 +358,7 @@ public class Default {
 		this.chartSeriesColors = new ArrayList<Color>();
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
+		this.chartThermometerPlotValueLocation = ValueLocation.NONE;
 
 		this.barcodeWidth = 100;
 		this.barcodeHeight = 100;
@@ -771,6 +774,10 @@ public class Default {
 
 	public TimePeriod getChartTimeSeriesDatasetTimePeriodType() {
 		return chartTimeSeriesDatasetTimePeriodType;
+	}
+
+	public ValueLocation getChartThermometerPlotValueLocation() {
+		return chartThermometerPlotValueLocation;
 	}
 
 	public int getBarcodeWidth() {

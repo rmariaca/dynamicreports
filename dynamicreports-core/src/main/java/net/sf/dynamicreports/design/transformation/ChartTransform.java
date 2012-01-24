@@ -328,7 +328,7 @@ public class ChartTransform {
 		designThermometerPlot.setValueColor(thermometerPlot.getValueColor());
 		designThermometerPlot.setValueMask(thermometerPlot.getValueMask());
 		designThermometerPlot.setValueFont(accessor.getStyleTransform().transformFont(thermometerPlot.getValueFont()));
-		designThermometerPlot.setValueLocation(thermometerPlot.getValueLocation());
+		designThermometerPlot.setValueLocation(accessor.getTemplateTransform().getChartThermometerPlotValueLocation(thermometerPlot));
 		designThermometerPlot.setMercuryColor(thermometerPlot.getMercuryColor());
 		designThermometerPlot.setLowDataRangeLowExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getLowDataRangeLowExpression()));
 		designThermometerPlot.setLowDataRangeHighExpression(accessor.getExpressionTransform().transformExpression(thermometerPlot.getLowDataRangeHighExpression()));
