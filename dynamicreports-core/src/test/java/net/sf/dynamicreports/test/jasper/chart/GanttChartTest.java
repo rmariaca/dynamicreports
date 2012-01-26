@@ -74,9 +74,9 @@ public class GanttChartTest extends AbstractJasperChartTest {
 							cht.ganttSerie()
 								.setStartDate(field2)
 								.setEndDate(field3))
-						.setTimeAxisFormat(
+						.setTaskAxisFormat(
 								cht.axisFormat()
-											.setLabel("category")
+											.setLabel("task")
 											.setLabelColor(Color.BLUE)
 											.setLabelFont(stl.fontArialBold())
 											.setTickLabelFont(stl.fontArial().setItalic(true))
@@ -89,9 +89,9 @@ public class GanttChartTest extends AbstractJasperChartTest {
 							cht.ganttSerie()
 								.setStartDate(field2)
 								.setEndDate(field3))
-						.setTaskAxisFormat(
+						.setTimeAxisFormat(
 								cht.axisFormat()
-											.setLabel("value")
+											.setLabel("time")
 											.setLabelColor(Color.BLUE)
 											.setLabelFont(stl.fontArialBold())
 											.setTickLabelFont(stl.fontArial().setItalic(true))
@@ -116,9 +116,9 @@ public class GanttChartTest extends AbstractJasperChartTest {
 
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getCategoryPlot().getDomainAxis();
-		Assert.assertEquals("category label", "category", axis.getLabel());
-		Assert.assertEquals("category label color", Color.BLUE, axis.getLabelPaint());
-		Assert.assertEquals("category label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
+		Assert.assertEquals("task label", "task", axis.getLabel());
+		Assert.assertEquals("task label color", Color.BLUE, axis.getLabelPaint());
+		Assert.assertEquals("task label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
 		CategoryLabelPosition labelPosition = chart.getCategoryPlot().getDomainAxis().getCategoryLabelPositions().getLabelPosition(RectangleEdge.LEFT);
@@ -127,9 +127,9 @@ public class GanttChartTest extends AbstractJasperChartTest {
 
 		chart = getChart("summary.chart3", 0);
 		axis = chart.getCategoryPlot().getRangeAxis();
-		Assert.assertEquals("value label", "value", axis.getLabel());
-		Assert.assertEquals("value label color", Color.BLUE, axis.getLabelPaint());
-		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
+		Assert.assertEquals("time label", "time", axis.getLabel());
+		Assert.assertEquals("time label color", Color.BLUE, axis.getLabelPaint());
+		Assert.assertEquals("time label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());

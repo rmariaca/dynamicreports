@@ -81,13 +81,13 @@ public class GanttChartBuilder extends AbstractBaseChartBuilder<GanttChartBuilde
 	//plot
 	public GanttChartBuilder setTimeAxisFormat(AxisFormatBuilder timeAxisFormat) {
 		Validate.notNull(timeAxisFormat, "timeAxisFormat must not be null");
-		getPlot().setXAxisFormat(timeAxisFormat.build());
+		getPlot().setYAxisFormat(timeAxisFormat.build());
 		return this;
 	}
 
 	public GanttChartBuilder setTaskAxisFormat(AxisFormatBuilder taskAxisFormat) {
 		Validate.notNull(taskAxisFormat, "taskAxisFormat must not be null");
-		getPlot().setYAxisFormat(taskAxisFormat.build());
+		getPlot().setXAxisFormat(taskAxisFormat.build());
 		return this;
 	}
 
