@@ -29,10 +29,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
  */
 public interface DRIDesignGanttChartSerie extends DRIDesignChartSerie {
 
-	public DRIDesignExpression getTaskExpression();
-
-	public DRIDesignExpression getSubtaskExpression();
-
 	public DRIDesignExpression getStartDateExpression();
 
 	public DRIDesignExpression getEndDateExpression();

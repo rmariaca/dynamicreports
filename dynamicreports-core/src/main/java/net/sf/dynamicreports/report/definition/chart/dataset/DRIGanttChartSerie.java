@@ -29,10 +29,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  */
 public interface DRIGanttChartSerie extends DRIChartSerie {
 
-	public DRIExpression<?> getTaskExpression();
-
-	public DRIExpression<?> getSubtaskExpression();
-
 	public DRIExpression<?> getStartDateExpression();
 
 	public DRIExpression<?> getEndDateExpression();

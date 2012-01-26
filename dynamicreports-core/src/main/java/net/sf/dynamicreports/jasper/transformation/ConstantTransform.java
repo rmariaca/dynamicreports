@@ -261,6 +261,8 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_METER;
 		case THERMOMETER:
 			return JRDesignChart.CHART_TYPE_THERMOMETER;
+		case GANTT:
+			return JRDesignChart.CHART_TYPE_GANTT;
 		default:
 			throw new JasperDesignException("Chart " + chartType.name() + " not supported");
 		}

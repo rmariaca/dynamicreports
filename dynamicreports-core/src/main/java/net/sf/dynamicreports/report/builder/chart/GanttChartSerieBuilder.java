@@ -22,9 +22,17 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import java.util.Date;
+
 import net.sf.dynamicreports.report.base.chart.dataset.DRGanttChartSerie;
+import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.VariableBuilder;
+import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,32 +44,73 @@ public class GanttChartSerieBuilder extends AbstractChartSerieBuilder<GanttChart
 		super(new DRGanttChartSerie());
 	}
 
-	public GanttChartSerieBuilder setTaskExpression(DRIExpression<?> taskExpression) {
-		getObject().setTaskExpression(taskExpression);
+	//start date
+	public GanttChartSerieBuilder setStartDate(ValueColumnBuilder<?, Date> column) {
+		Validate.notNull(column, "column must not be null");
+		getObject().setStartDateExpression(column.getColumn());
 		return this;
 	}
 
-	public GanttChartSerieBuilder setSubtaskExpression(DRIExpression<?> subtaskExpression) {
-		getObject().setSubtaskExpression(subtaskExpression);
+	public GanttChartSerieBuilder setStartDate(FieldBuilder<Date> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setStartDateExpression(field.build());
 		return this;
 	}
 
-	public GanttChartSerieBuilder setStartDateExpression(DRIExpression<?> startDateExpression) {
-		getObject().setStartDateExpression(startDateExpression);
+	public GanttChartSerieBuilder setStartDate(DRIExpression<Date> expression) {
+		getObject().setStartDateExpression(expression);
 		return this;
 	}
 
-	public GanttChartSerieBuilder setEndDateExpression(DRIExpression<?> endDateExpression) {
-		getObject().setEndDateExpression(endDateExpression);
+	//end date
+	public GanttChartSerieBuilder setEndDate(ValueColumnBuilder<?, Date> column) {
+		Validate.notNull(column, "column must not be null");
+		getObject().setEndDateExpression(column.getColumn());
 		return this;
 	}
 
-	public GanttChartSerieBuilder setPercentExpression(DRIExpression<?> percentExpression) {
-		getObject().setPercentExpression(percentExpression);
+	public GanttChartSerieBuilder setEndDate(FieldBuilder<Date> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setEndDateExpression(field.build());
 		return this;
 	}
 
-	public GanttChartSerieBuilder setLabelExpression(DRIExpression<?> labelExpression) {
+	public GanttChartSerieBuilder setEndDate(DRIExpression<Date> expression) {
+		getObject().setEndDateExpression(expression);
+		return this;
+	}
+
+	//percent
+	public GanttChartSerieBuilder setPercent(ValueColumnBuilder<?, ? extends Number> column) {
+		Validate.notNull(column, "column must not be null");
+		getObject().setPercentExpression(column.getColumn());
+		return this;
+	}
+
+	public GanttChartSerieBuilder setPercent(FieldBuilder<? extends Number> field) {
+		Validate.notNull(field, "field must not be null");
+		getObject().setPercentExpression(field.build());
+		return this;
+	}
+
+	public GanttChartSerieBuilder setPercent(DRIExpression<? extends Number> expression) {
+		getObject().setPercentExpression(expression);
+		return this;
+	}
+
+	public GanttChartSerieBuilder setPercent(VariableBuilder<? extends Number> variable) {
+		Validate.notNull(variable, "variable must not be null");
+		getObject().setPercentExpression(variable.build());
+		return this;
+	}
+
+	//label
+	public GanttChartSerieBuilder setLabel(String label) {
+		getObject().setLabelExpression(Expressions.text(label));
+		return this;
+	}
+
+	public GanttChartSerieBuilder setLabel(DRIExpression<String> labelExpression) {
 		getObject().setLabelExpression(labelExpression);
 		return this;
 	}

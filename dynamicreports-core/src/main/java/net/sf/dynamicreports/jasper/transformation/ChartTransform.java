@@ -397,12 +397,12 @@ public class ChartTransform {
 
 	private void ganttDataset(DRIDesignSeriesDataset dataset, JRDesignGanttDataset jrDataset) {
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		JRDesignExpression exp1 = expressionTransform.getExpression(dataset.getValueExpression());//TODO
+		JRDesignExpression taskExpression = expressionTransform.getExpression(dataset.getValueExpression());
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignGanttChartSerie ganttSerie = (DRIDesignGanttChartSerie) serie;
 			JRDesignGanttSeries jrSerie = new JRDesignGanttSeries();
-			jrSerie.setTaskExpression(expressionTransform.getExpression(ganttSerie.getTaskExpression()));
-			jrSerie.setSubtaskExpression(expressionTransform.getExpression(ganttSerie.getSubtaskExpression()));
+			jrSerie.setTaskExpression(taskExpression);
+			jrSerie.setSubtaskExpression(taskExpression);
 			jrSerie.setStartDateExpression(expressionTransform.getExpression(ganttSerie.getStartDateExpression()));
 			jrSerie.setEndDateExpression(expressionTransform.getExpression(ganttSerie.getEndDateExpression()));
 			jrSerie.setPercentExpression(expressionTransform.getExpression(ganttSerie.getPercentExpression()));
@@ -415,6 +415,7 @@ public class ChartTransform {
 				jrSerie.setSeriesExpression(labelExpression);
 			}
 			jrSerie.setLabelExpression(labelExpression);
+
 			jrDataset.addGanttSeries(jrSerie);
 		}
 	}

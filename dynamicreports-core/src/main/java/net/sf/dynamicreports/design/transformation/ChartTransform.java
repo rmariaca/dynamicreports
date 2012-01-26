@@ -580,17 +580,15 @@ public class ChartTransform {
 	private DRDesignGanttChartSerie ganttSerie(DRIDataset dataset, DRIGanttChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
 		DRDesignGanttChartSerie designSerie = new DRDesignGanttChartSerie();
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		DRIExpression<?> seriesExpression = serie.getSeriesExpression();
-		if (seriesExpression == null) {
-			seriesExpression = Expressions.text("serie" + index);
-		}
-		designSerie.setSeriesExpression(expressionTransform.transformExpression(seriesExpression));
-		designSerie.setTaskExpression(expressionTransform.transformExpression(serie.getTaskExpression()));
-		designSerie.setSubtaskExpression(expressionTransform.transformExpression(serie.getSubtaskExpression()));
+		designSerie.setSeriesExpression(expressionTransform.transformExpression(serie.getSeriesExpression()));
 		designSerie.setStartDateExpression(expressionTransform.transformExpression(serie.getStartDateExpression()));
 		designSerie.setEndDateExpression(expressionTransform.transformExpression(serie.getEndDateExpression()));
 		designSerie.setPercentExpression(expressionTransform.transformExpression(serie.getPercentExpression()));
-		designSerie.setLabelExpression(expressionTransform.transformExpression(serie.getLabelExpression()));
+		DRIExpression<?> labelExpression = serie.getLabelExpression();
+		if (labelExpression == null) {
+			labelExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
 		return designSerie;
 	}
 

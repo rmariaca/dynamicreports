@@ -155,6 +155,7 @@ public abstract class AbstractJasperTest {
 
 	protected Date toDate(int year, int month, int day) {
 		Calendar c = Calendar.getInstance();
+		c.clear();
 		c.set(Calendar.YEAR, year);
 		c.set(Calendar.MONTH, month - 1);
 		c.set(Calendar.DAY_OF_MONTH, day);

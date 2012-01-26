@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.test.jasper;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 
 import junit.framework.Assert;
 import net.sf.jasperreports.charts.util.DrawChartRenderer;
@@ -31,6 +32,7 @@ import net.sf.jasperreports.engine.JRPrintImage;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.gantt.GanttCategoryDataset;
 import org.jfree.data.xy.DefaultHighLowDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
@@ -106,6 +108,15 @@ public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 			Assert.assertEquals("chart data close value", value[5], dataset.getClose(series, index));
 			Assert.assertEquals("chart data volume value", value[6], dataset.getVolume(series, index));
 			index++;
+		}
+	}
+
+	protected void ganttChartDataTest(JFreeChart chart, String serie, String[] tasks, Object[][] values) {
+		GanttCategoryDataset dataset = (GanttCategoryDataset) chart.getCategoryPlot().getDataset();
+		for (int i = 0; i < tasks.length; i++) {
+			Assert.assertEquals("chart data start value", ((Date) values[i][0]).getTime(), dataset.getStartValue(serie, tasks[i]));
+			Assert.assertEquals("chart data end value", ((Date) values[i][1]).getTime(), dataset.getEndValue(serie, tasks[i]));
+			Assert.assertEquals("chart data percent value", values[i][2], dataset.getPercentComplete(serie, tasks[i], 0));
 		}
 	}
 

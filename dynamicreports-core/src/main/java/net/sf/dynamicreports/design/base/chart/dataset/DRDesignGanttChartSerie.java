@@ -29,28 +29,10 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignGanttChartSerie extends AbstractDesignChartSerie implements DRIDesignGanttChartSerie {
-	private DRIDesignExpression taskExpression;
-	private DRIDesignExpression subtaskExpression;
 	private DRIDesignExpression startDateExpression;
 	private DRIDesignExpression endDateExpression;
 	private DRIDesignExpression percentExpression;
 	private DRIDesignExpression labelExpression;
-
-	public DRIDesignExpression getTaskExpression() {
-		return taskExpression;
-	}
-
-	public void setTaskExpression(DRIDesignExpression taskExpression) {
-		this.taskExpression = taskExpression;
-	}
-
-	public DRIDesignExpression getSubtaskExpression() {
-		return subtaskExpression;
-	}
-
-	public void setSubtaskExpression(DRIDesignExpression subtaskExpression) {
-		this.subtaskExpression = subtaskExpression;
-	}
 
 	public DRIDesignExpression getStartDateExpression() {
 		return startDateExpression;
