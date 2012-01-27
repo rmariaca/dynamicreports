@@ -39,7 +39,7 @@ public class Subreport3Test extends AbstractJasperValueTest {
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder subreport1 = cmp.subreport(subreport1());
-		subreport1.setDataSource(new Subreport1DataSource());
+		subreport1.setDataSource(createSubreport1DataSource());
 
 		rb.fields(field("f1", Integer.class))
 		  .detail(subreport1);
@@ -79,16 +79,12 @@ public class Subreport3Test extends AbstractJasperValueTest {
 		return report;
 	}
 
-	private class Subreport1DataSource extends AbstractSimpleExpression<JRDataSource> {
-		private static final long serialVersionUID = 1L;
-
-		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("f2");
-			dataSource.add(3);
-			dataSource.add(4);
-			dataSource.add(5);
-			return dataSource;
-		}
+	public JRDataSource createSubreport1DataSource() {
+		DataSource dataSource = new DataSource("f2");
+		dataSource.add(3);
+		dataSource.add(4);
+		dataSource.add(5);
+		return dataSource;
 	}
 
 	private JasperReportBuilder subreport2() {

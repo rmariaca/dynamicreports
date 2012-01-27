@@ -135,7 +135,7 @@ public class DatasetBuilder extends AbstractBuilder<DatasetBuilder, DRDataset> {
 
 	//datasource
 	public DatasetBuilder setDataSource(JRDataSource dataSource) {
-		getObject().setDataSourceExpression(Expressions.value(dataSource));
+		getObject().setDataSourceExpression(Expressions.dataSource(dataSource));
 		return this;
 	}
 

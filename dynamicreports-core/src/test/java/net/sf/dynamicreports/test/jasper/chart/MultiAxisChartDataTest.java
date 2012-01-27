@@ -30,11 +30,9 @@ import java.util.Date;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -68,14 +66,14 @@ public class MultiAxisChartDataTest extends AbstractJasperChartTest implements S
 	  	.series(cht.serie(field3).setLabel("serie2"));
 
 		TimeSeriesChartBuilder chart3 = cht.timeSeriesChart()
-			.setDataSource(new DataSource2Expression())
+			.setDataSource(createDataSource2())
 	  	.setTimePeriod(field1)
 	  	.setTimePeriodType(TimePeriod.DAY)
 	  	.series(cht.serie(field2).setLabel("serie1"));
 
 		rb.summary(
-	  	cht.multiAxisChart(chart1, chart2).setDataSource(new DataSource1Expression()),
-	  	cht.multiAxisChart(chart3, chart2).setDataSource(new DataSource1Expression()));
+	  	cht.multiAxisChart(chart1, chart2).setDataSource(createDataSource1()),
+	  	cht.multiAxisChart(chart3, chart2).setDataSource(createDataSource1()));
 	}
 
 	@Override
@@ -117,33 +115,25 @@ public class MultiAxisChartDataTest extends AbstractJasperChartTest implements S
 		Assert.assertEquals("value", 9d, serie.getDataItem(3).getValue());
 	}
 
-	private class DataSource1Expression extends AbstractSimpleExpression<JRDataSource> {
-		private static final long serialVersionUID = 1L;
-
-		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("field1", "field2", "field3");
-			Calendar c = Calendar.getInstance();
-			c.setTime(new Date());
-			for (int i = 0; i < 4; i++) {
-				dataSource.add(c.getTime(), i + 1, i * i);
-				c.add(Calendar.DAY_OF_MONTH, 1);
-			}
-			return dataSource;
+	public JRDataSource createDataSource1() {
+		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		for (int i = 0; i < 4; i++) {
+			dataSource.add(c.getTime(), i + 1, i * i);
+			c.add(Calendar.DAY_OF_MONTH, 1);
 		}
+		return dataSource;
 	}
 
-	private class DataSource2Expression extends AbstractSimpleExpression<JRDataSource> {
-		private static final long serialVersionUID = 1L;
-
-		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("field1", "field2");
-			Calendar c = Calendar.getInstance();
-			c.setTime(new Date());
-			for (int i = 0; i < 4; i++) {
-				dataSource.add(c.getTime(), i + 2);
-				c.add(Calendar.DAY_OF_MONTH, 1);
-			}
-			return dataSource;
+	public JRDataSource createDataSource2() {
+		DataSource dataSource = new DataSource("field1", "field2");
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		for (int i = 0; i < 4; i++) {
+			dataSource.add(c.getTime(), i + 2);
+			c.add(Calendar.DAY_OF_MONTH, 1);
 		}
+		return dataSource;
 	}
 }

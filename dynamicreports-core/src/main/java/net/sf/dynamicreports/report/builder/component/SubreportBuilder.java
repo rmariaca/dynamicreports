@@ -83,7 +83,7 @@ public class SubreportBuilder extends DimensionComponentBuilder<SubreportBuilder
 
 	//datasource
 	public SubreportBuilder setDataSource(JRDataSource dataSource) {
-		getObject().setDataSourceExpression(Expressions.value(dataSource));
+		getObject().setDataSourceExpression(Expressions.dataSource(dataSource));
 		return this;
 	}
 

@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * A set of build in expressions.<br/>
@@ -116,6 +117,10 @@ public class ExpressionBuilders {
 
 	public ValueExpression<String> text(String text) {
 		return Expressions.text(text);
+	}
+
+	public DataSourceExpression dataSource(JRDataSource dataSource) {
+		return Expressions.dataSource(dataSource);
 	}
 
 	public MessageExpression message(String key) {

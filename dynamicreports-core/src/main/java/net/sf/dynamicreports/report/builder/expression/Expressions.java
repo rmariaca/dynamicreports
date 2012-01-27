@@ -32,6 +32,7 @@ import java.util.Map;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.jasperreports.engine.JRDataSource;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.Validate;
@@ -129,6 +130,10 @@ public class Expressions {
 
 	public static ValueExpression<String> text(String text) {
 		return value(text, String.class);
+	}
+
+	public static DataSourceExpression dataSource(JRDataSource dataSource) {
+		return new DataSourceExpression(dataSource);
 	}
 
 	public static MessageExpression message(String key) {
