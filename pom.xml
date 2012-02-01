@@ -62,7 +62,8 @@
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
 		<xalanVersion>2.7.1</xalanVersion>
 		<groovyVersion>1.7.5</groovyVersion>
-		<velocityVersion>1.7</velocityVersion>		
+		<velocityVersion>1.7</velocityVersion>
+		<jsonVersion>20080701</jsonVersion>		
 	</properties>
 
 	<dependencyManagement>
@@ -175,6 +176,12 @@
 				<artifactId>velocity</artifactId>
 				<version>${velocityVersion}</version>
 				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${jsonVersion}</version>
 				<optional>true</optional>
 			</dependency>
 			<dependency>

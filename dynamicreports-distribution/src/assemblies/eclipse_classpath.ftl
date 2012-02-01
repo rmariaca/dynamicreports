@@ -56,4 +56,5 @@
 	<classpathentry kind="lib" path="lib/xalan-${project.xalanVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/serializer-${project.xalanVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-${project.velocityVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/json-${project.jsonVersion}.jar"/>
 </classpath>

@@ -70,6 +70,7 @@ file.reference.hsqldb-${project.hsqldbVersion}.jar=lib\\hsqldb-${project.hsqldbV
 file.reference.xalan-${project.xalanVersion}.jar=lib\\xalan-${project.xalanVersion}.jar
 file.reference.serializer-${project.xalanVersion}.jar=lib\\serializer-${project.xalanVersion}.jar
 file.reference.velocity-${project.velocityVersion}.jar=lib\\velocity-${project.velocityVersion}.jar
+file.reference.json-${project.jsonVersion}.jar=lib\\json-${project.jsonVersion}.jar
 includes=**
 jar.compress=false
 javac.classpath=\
@@ -117,7 +118,8 @@ javac.classpath=\
     ${r"${"}file.reference.hsqldb-${project.hsqldbVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xalan-${project.xalanVersion}.jar${r"}"}:\
     ${r"${"}file.reference.serializer-${project.xalanVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.velocity-${project.velocityVersion}.jar${r"}"}
+    ${r"${"}file.reference.velocity-${project.velocityVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.json-${project.jsonVersion}.jar${r"}"}
 # Space-separated list of extra javac options
 javac.compilerargs=
 javac.deprecation=false

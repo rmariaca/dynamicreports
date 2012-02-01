@@ -284,7 +284,7 @@ public class GenerateSite {
 		Method method = reportBuilder.getClass().getDeclaredMethod("export", AbstractJasperExporterBuilder.class);
 		method.setAccessible(true);
 		if (jasperExporterBuilder instanceof JasperHtmlExporterBuilder) {
-			((JasperHtmlExporterBuilder) jasperExporterBuilder).getExporter().setImagesDirName(examples_path + "/images");
+			((JasperHtmlExporterBuilder) jasperExporterBuilder).getExporter().setImagesDirName(examples_path + "/" + name.toLowerCase() + "_images");
 		}
 		jasperExporterBuilder.getExporter().setOutputFileName(examples_path + name.toLowerCase() + getFileExt(name) + "." + getFileType(name));
 		method.invoke(reportBuilder, jasperExporterBuilder);

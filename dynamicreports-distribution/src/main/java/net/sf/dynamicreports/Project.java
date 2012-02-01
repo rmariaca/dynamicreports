@@ -62,6 +62,7 @@ public class Project {
 	private String hsqldbVersion;
 	private String xalanVersion;
 	private String velocityVersion;
+	private String jsonVersion;
 
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -102,6 +103,7 @@ public class Project {
 		hsqldbVersion = properties.getProperty("hsqldbVersion");
 		xalanVersion = properties.getProperty("xalanVersion");
 		velocityVersion = properties.getProperty("velocityVersion");
+		jsonVersion = properties.getProperty("jsonVersion");
 	}
 
 	public String getVersion() {
@@ -350,6 +352,14 @@ public class Project {
 
 	public void setVelocityVersion(String velocityVersion) {
 		this.velocityVersion = velocityVersion;
+	}
+
+	public String getJsonVersion() {
+		return jsonVersion;
+	}
+
+	public void setJsonVersion(String jsonVersion) {
+		this.jsonVersion = jsonVersion;
 	}
 
 }

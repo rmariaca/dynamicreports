@@ -38,20 +38,20 @@ import org.aspectj.lang.annotation.Pointcut;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @Aspect
-public class ExamplesAspect {	
+public class ExamplesAspect {
 	private static String name = "";
-		
+
 	@Around("show()")
 	public JasperReportBuilder show(ProceedingJoinPoint pjp) throws Throwable {
 		JasperReportBuilder reportBuilder = (JasperReportBuilder) pjp.getTarget();
 		GenerateSite.generateExampleImage(name, reportBuilder);
 		return reportBuilder;
 	}
-	
+
 	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.show())")
 	public void show() {
 	}
-	
+
 	@Around("build()")
 	public void build(ProceedingJoinPoint pjp) throws Throwable {
 		Class<? extends Object> design = pjp.getTarget().getClass();
@@ -63,33 +63,42 @@ public class ExamplesAspect {
 		GenerateSite.addExample(name, path, design);
 		pjp.proceed();
 	}
-	
+
 	@Pointcut("execution(void net.sf.dynamicreports.examples..build())")
 	public void build() {
 	}
-	
+
 	@Around("export()")
 	public JasperReportBuilder to(ProceedingJoinPoint pjp) throws Throwable {
 		JasperReportBuilder reportBuilder = (JasperReportBuilder) pjp.getTarget();
 		GenerateSite.generateExampleImage(name, reportBuilder, (AbstractJasperExporterBuilder<?, ?>) pjp.getArgs()[0]);
 		return reportBuilder;
 	}
-	
+
 	@Pointcut(
 			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toPdf(*)) || " +
 			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toHtml(*)) || " +
 			"execution(public net.sf.dynamicreports.jasper.builder.JasperReportBuilder net.sf.dynamicreports.jasper.builder.JasperReportBuilder.toXls(*))")
 	public void export() {
 	}
-	
+
 	@Around("toConcatenatedPdf()")
 	public JasperConcatenatedReportBuilder toConcatenatedPdf(ProceedingJoinPoint pjp) throws Throwable {
 		JasperConcatenatedReportBuilder reportBuilder = (JasperConcatenatedReportBuilder) pjp.getTarget();
 		GenerateSite.generateExampleImage(name, reportBuilder, (JasperPdfExporterBuilder) pjp.getArgs()[0]);
 		return reportBuilder;
 	}
-	
+
 	@Pointcut("execution(public net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder.toPdf(*))")
 	public void toConcatenatedPdf() {
+	}
+
+	@Around("getOpenFlashChartLocation()")
+	public String getOpenFlashChartLocation(ProceedingJoinPoint pjp) throws Throwable {
+		return "openflashchart/" + pjp.proceed();
+	}
+
+	@Pointcut("execution(public String net.sf.dynamicreports.examples.genericelement.openflashchart.OpenFlashChartHtmlHandler.getSwfLocation())")
+	public void getOpenFlashChartLocation() {
 	}
 }
