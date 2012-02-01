@@ -97,6 +97,7 @@ public class ReportTemplateTest {
 						.setPrintOrder(Orientation.HORIZONTAL)
 						.setColumnDirection(RunDirection.RIGHT_TO_LEFT)
 						.setLanguage(Language.GROOVY)
+						.setBackgroundColor(Color.LIGHT_GRAY)
 
 						.setHighlightDetailOddRows(true)
 						.setDetailOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.BLUE))
@@ -169,6 +170,7 @@ public class ReportTemplateTest {
 			Assert.assertEquals("print order", Orientation.HORIZONTAL, report.getPrintOrder());
 			Assert.assertEquals("column direction", RunDirection.RIGHT_TO_LEFT, report.getColumnDirection());
 			Assert.assertEquals("language", Language.GROOVY, report.getLanguage());
+			Assert.assertEquals("background color", Color.LIGHT_GRAY, report.getBackgroundColor());
 
 			DRDesignTextField columnTextField1 = (DRDesignTextField) ((DRDesignList) report.getDetailBands().get(0).getBandComponent()).getComponents().get(0);
 			DRIDesignStyle style = columnTextField1.getStyle();

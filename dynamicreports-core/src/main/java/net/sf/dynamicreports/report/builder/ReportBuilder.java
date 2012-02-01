@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.builder;
 
+import java.awt.Color;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -206,7 +207,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	/**
 	 * Prints the column footer band at the bottom of the column.
-	 * 
+	 *
 	 * @return a report builder
 	 */
 	public T floatColumnFooter() {
@@ -215,7 +216,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	/**
 	 * Sets whether or not the column footer band is printed at the bottom of the column
-	 * 
+	 *
 	 * @param floatColumnFooter print the column footer at the bottom of the column
 	 * @return a report builder
 	 */
@@ -241,6 +242,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
+		return (T) this;
+	}
+
+	public T setBackgroundColor(Color backgroundColor) {
+		getObject().setBackgroundColor(backgroundColor);
 		return (T) this;
 	}
 

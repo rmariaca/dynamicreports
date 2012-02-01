@@ -73,6 +73,7 @@ public class Default {
 	private RunDirection columnDirection;
 	private String language;
 	private boolean useFieldNameAsDescription;
+	private Color backgroundColor;
 	//style
 	private boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -258,6 +259,7 @@ public class Default {
 		this.columnDirection = RunDirection.LEFT_TO_RIGHT;
 		this.language = Language.JAVA;
 		this.useFieldNameAsDescription = true;
+		this.backgroundColor = null;
 
 		this.highlightDetailOddRows = false;
 		this.detailOddRowStyle = new DRSimpleStyle();
@@ -486,6 +488,10 @@ public class Default {
 
 	public boolean isUseFieldNameAsDescription() {
 		return useFieldNameAsDescription;
+	}
+
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 
 	public boolean isHighlightDetailOddRows() {

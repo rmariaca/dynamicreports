@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -77,6 +78,8 @@ public interface DRIDesignReport {
 	public RunDirection getColumnDirection();
 
 	public String getLanguage();
+
+	public Color getBackgroundColor();
 
 	public boolean isTableOfContents();
 

@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.base;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -274,6 +275,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public String getLanguage() {
 		return templateTransform.getLanguage();
+	}
+
+	public Color getBackgroundColor() {
+		return templateTransform.getBackgroundColor();
 	}
 
 	public boolean isTableOfContents() {
