@@ -587,7 +587,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return export(pptxExporterBuilder);
 	}
 
-	private JasperReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
+	public JasperReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
 		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());

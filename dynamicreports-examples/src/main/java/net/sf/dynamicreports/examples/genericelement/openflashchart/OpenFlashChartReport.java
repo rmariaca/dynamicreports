@@ -24,14 +24,15 @@ package net.sf.dynamicreports.examples.genericelement.openflashchart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.report.base.AbstractScriptlet;
 import net.sf.dynamicreports.report.builder.component.GenericElementBuilder;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -46,32 +47,36 @@ public class OpenFlashChartReport {
 	}
 
 	private void build() {
-		try {
-			pieChart1 = new PieChart();
-			pieChart1.setTitle("Quantity");
-			GenericElementBuilder chart1 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
-			  .setHeight(200)
-			  .addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart1);
+		pieChart1 = new PieChart();
+		pieChart1.setTitle("Quantity");
+		GenericElementBuilder chart1 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
+			.setHeight(200)
+			.addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart1);
 
-			pieChart2 = new PieChart();
-			pieChart2.setTitle("Unit price");
-			GenericElementBuilder chart2 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
-			  .setHeight(200)
-			  .addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart2);
+		pieChart2 = new PieChart();
+		pieChart2.setTitle("Unit price");
+		GenericElementBuilder chart2 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
+			.setHeight(200)
+			.addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart2);
+
+		try {
+			JasperHtmlExporterBuilder htmlExporter = export.htmlExporter("c:/report.html")
+				.setImagesDirName("c:/images")
+				.setOutputImagesToDir(true);
 
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .scriptlets(new ReportScriptlet())
-			  .columns(
+				.setTemplate(Templates.reportTemplate)
+				.scriptlets(new ReportScriptlet())
+				.columns(
 					col.column("Item", "item", type.stringType()),
 					col.column("Quantity", "quantity", type.integerType()),
 					col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .title(Templates.createTitleComponent("OpenFlashChart"))
-			  .summary(
-			  	cmp.horizontalList(chart1, chart2))
-			  .setDataSource(createDataSource())
-			  .toPdf(new FileOutputStream("c:/report.pdf"));
-		} catch (Exception e) {
+				.title(Templates.createTitleComponent("OpenFlashChart"))
+				.summary(
+					cmp.horizontalList(chart1, chart2))
+				.setDataSource(createDataSource())
+				.toHtml(htmlExporter);
+		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}

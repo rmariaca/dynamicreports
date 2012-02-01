@@ -44,7 +44,6 @@ public class OpenFlashChartHtmlHandler implements GenericElementHtmlHandler {
 		int width = element.getWidth();
 		int height = element.getHeight();
 		Color backcolor = element.getBackcolor();
-		String swfLocation = "open-flash-chart.swf";
 		String chartData = ((ChartGenerator) element.getParameterValue(ChartGenerator.PARAMETER_CHART_GENERATOR)).generateChart();
 		String chartEncodedData = JRStringUtil.htmlEncode(chartData);
 
@@ -56,7 +55,7 @@ public class OpenFlashChartHtmlHandler implements GenericElementHtmlHandler {
 		result.append("align=\"middle\">");
 		result.append("<param name=\"allowScriptAccess\" value=\"sameDomain\" /> ");
 		result.append("<param name=\"movie\" value=\"");
-		result.append(swfLocation);
+		result.append(getSwfLocation());
 		result.append("?width=" + width);
 		result.append("&height=" + height);
 		result.append("&inline_data=" + chartEncodedData);
@@ -64,7 +63,7 @@ public class OpenFlashChartHtmlHandler implements GenericElementHtmlHandler {
 		result.append("<param name=\"quality\" value=\"high\" />");
 		result.append("<param name=\"bgcolor\" value=\"#" + JRColorUtil.getColorHexa(backcolor) + "\" /> ");
 		result.append("<embed src=\"");
-		result.append(swfLocation);
+		result.append(getSwfLocation());
 		result.append("?width=" + width);
 		result.append("&height=" + height);
 		result.append("&inline_data=" + chartEncodedData);
@@ -75,5 +74,9 @@ public class OpenFlashChartHtmlHandler implements GenericElementHtmlHandler {
 		result.append("name=\"open-flash-chart\" align=\"middle\" allowScriptAccess=\"sameDomain\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" /> </object> ");
 
 		return result.toString();
+	}
+
+	public String getSwfLocation() {
+		return "open-flash-chart.swf";
 	}
 }
