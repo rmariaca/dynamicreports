@@ -22,7 +22,6 @@
 
 package net.sf.dynamicreports.report.builder;
 
-import java.awt.Color;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -242,11 +241,6 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		getObject().setUseFieldNameAsDescription(useFieldNameAsDescription);
-		return (T) this;
-	}
-
-	public T setBackgroundColor(Color backgroundColor) {
-		getObject().setBackgroundColor(backgroundColor);
 		return (T) this;
 	}
 

@@ -133,11 +133,6 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setBackgroundColor(Color backgroundColor) {
-		getObject().setBackgroundColor(backgroundColor);
-		return this;
-	}
-
 	public ReportTemplateBuilder highlightDetailOddRows() {
 		return setHighlightDetailOddRows(true);
 	}

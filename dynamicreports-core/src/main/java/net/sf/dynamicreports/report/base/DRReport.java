@@ -22,7 +22,6 @@
 
 package net.sf.dynamicreports.report.base;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +82,6 @@ public class DRReport implements DRIReport {
 	private RunDirection columnDirection;
 	private String language;
 	private Boolean useFieldNameAsDescription;
-	private Color backgroundColor;
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
 	private Boolean highlightDetailEvenRows;
@@ -444,14 +442,6 @@ public class DRReport implements DRIReport {
 
 	public void setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		this.useFieldNameAsDescription = useFieldNameAsDescription;
-	}
-
-	public Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
 	}
 
 	public DRStyle getTextStyle() {

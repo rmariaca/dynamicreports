@@ -27,9 +27,11 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.base.DRDesignBand;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
+import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -134,7 +136,22 @@ public class BandTransform {
 		lastPageFooterBand = bandComponents.prepareBand(lastPageFooterBand, maxWidth, templateDesign.getLastPageFooterComponentsCount());
 		summaryBand = bandComponents.prepareBand(summaryBand, maxWidth, templateDesign.getSummaryComponentsCount());
 		noDataBand = bandComponents.prepareBand(noDataBand, maxWidth, templateDesign.getNoDataComponentsCount());
+
+		if (backgroundBand.getList() != null && backgroundBand.getList().getStyle() != null && backgroundBand.getList().isEmpty()) {
+			DRDesignFiller component = new DRDesignFiller();
+			component.setWidth(1);
+			component.setHeight(1);
+			backgroundBand.getList().addComponent(component);
+		}
 		backgroundBand = bandComponents.prepareBand(backgroundBand, maxWidth, templateDesign.getBackgroundComponentsCount());
+		if (backgroundBand != null && backgroundBand.getBandComponent() != null &&
+				backgroundBand.getList() != null && backgroundBand.getList().getStyle() != null) {
+			DRIDesignPage page = accessor.getPage();
+			int height = page.getHeight() - page.getMargin().getTop() - page.getMargin().getBottom();
+			backgroundBand.getList().setHeight(height);
+			backgroundBand.setHeight(height);
+		}
+
 		for (DRDesignGroup group : accessor.getGroupTransform().getGroups()) {
 			List<DRDesignBand> bands = new ArrayList<DRDesignBand>();
 			for (DRDesignBand band : group.getHeaderBands()) {

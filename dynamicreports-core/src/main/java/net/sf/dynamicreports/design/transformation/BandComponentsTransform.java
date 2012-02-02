@@ -131,6 +131,10 @@ class BandComponentsTransform {
 				DRDesignComponent lComponent = list.getComponents().get(0);
 				DRDesignComponent elm = removeEmptyComponents(lComponent);
 				if (elm == null) {
+					if (list.getStyle() != null && list.getWidth() > 0 && list.getHeight() > 0) {
+						list.getComponents().clear();
+						return list;
+					}
 					return null;
 				}
 				elm.setX(lComponent.getX() + elm.getX());
@@ -156,6 +160,10 @@ class BandComponentsTransform {
 					}
 				}
 				if (components.isEmpty()) {
+					if (list.getStyle() != null && list.getWidth() > 0 && list.getHeight() > 0) {
+						list.getComponents().clear();
+						return list;
+					}
 					return null;
 				}
 				list.getComponents().clear();

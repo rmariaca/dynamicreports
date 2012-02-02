@@ -22,7 +22,6 @@
 
 package net.sf.dynamicreports.report.definition;
 
-import java.awt.Color;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -100,8 +99,6 @@ public interface DRIReport extends Serializable {
 	public String getLanguage();
 
 	public Boolean getUseFieldNameAsDescription();
-
-	public Color getBackgroundColor();
 
 	public DRIStyle getTextStyle();
 

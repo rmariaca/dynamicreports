@@ -22,20 +22,15 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
-import java.awt.Color;
-
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
-import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignElement;
-import net.sf.jasperreports.engine.design.JRDesignFrame;
 import net.sf.jasperreports.engine.design.JRDesignSection;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.type.ModeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -103,9 +98,6 @@ public class BandTransform {
 		if (templateDesign.getBackgroundComponentsCount() == 0 && report.getBackgroundBand() != null) {
 			design.setBackground(band(report.getBackgroundBand()));
 		}
-		if (accessor.getReport().getBackgroundColor() != null) {
-			backgroundColor(design, accessor.getReport().getBackgroundColor());
-		}
 	}
 
 	//band
@@ -124,26 +116,5 @@ public class BandTransform {
 		}
 		jrBand.setHeight(band.getHeight());
 		return jrBand;
-	}
-
-	private void backgroundColor(JasperDesign design, Color backgroundColor) {
-		if (design.getBackground() == null) {
-			design.setBackground(new JRDesignBand());
-		}
-		JRDesignBand jrBand = (JRDesignBand) design.getBackground();
-		DRIDesignPage page = accessor.getReport().getPage();
-		int width = page.getWidth() - page.getMargin().getLeft() - page.getMargin().getRight();
-		int height = page.getHeight() - page.getMargin().getTop() - page.getMargin().getBottom();
-		jrBand.setHeight(height);
-
-		JRDesignFrame jrFrame = new JRDesignFrame();
-		jrFrame.setKey("background.backgroundColor");
-		jrFrame.setX(0);
-		jrFrame.setY(0);
-		jrFrame.setWidth(width);
-		jrFrame.setHeight(height);
-		jrFrame.setBackcolor(backgroundColor);
-		jrFrame.setMode(ModeEnum.OPAQUE);
-		jrBand.addElement(0, jrFrame);
 	}
 }

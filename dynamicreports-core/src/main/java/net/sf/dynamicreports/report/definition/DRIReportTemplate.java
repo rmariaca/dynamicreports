@@ -67,8 +67,6 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getUseFieldNameAsDescription();
 
-	public Color getBackgroundColor();
-
 	public Boolean getHighlightDetailOddRows();
 
 	public DRISimpleStyle getDetailOddRowStyle();

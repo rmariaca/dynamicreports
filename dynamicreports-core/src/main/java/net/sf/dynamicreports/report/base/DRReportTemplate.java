@@ -63,7 +63,6 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private RunDirection columnDirection;
 	private String language;
 	private Boolean useFieldNameAsDescription;
-	private Color backgroundColor;
 	//style
 	private Boolean highlightDetailOddRows;
 	private DRSimpleStyle detailOddRowStyle;
@@ -267,14 +266,6 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		this.useFieldNameAsDescription = useFieldNameAsDescription;
-	}
-
-	public Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
 	}
 
 	public Boolean getHighlightDetailOddRows() {

@@ -23,28 +23,21 @@
 package net.sf.dynamicreports.test.jasper.report;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-
-import java.awt.Color;
-import java.util.List;
-
-import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.jasperreports.engine.JRPrintElement;
-import net.sf.jasperreports.engine.type.ModeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ReportBackgroundTest extends AbstractJasperPositionTest {
+public class ReportBackground1Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 			.background(cmp.text("text"))
-			.setBackgroundColor(Color.LIGHT_GRAY);
+			.setBackgroundStyle(stl.style());
 	}
 
 	@Override
@@ -53,14 +46,7 @@ public class ReportBackgroundTest extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		elementPositionTest("background.textField1", 0, 10, 10, 822, 16);
-		elementPositionTest("background.backgroundColor", 0, 10, 10, 822, 575);
-
-		List<JRPrintElement> elements = getJasperPrint().getPages().get(0).getElements();
-		Assert.assertEquals("background order", "background.backgroundColor", elements.get(0).getKey());
-		Assert.assertEquals("background order", "background.textField1", elements.get(1).getKey());
-
-		Assert.assertEquals("background color", Color.LIGHT_GRAY, elements.get(0).getBackcolor());
-		Assert.assertEquals("background color", ModeEnum.OPAQUE, elements.get(0).getModeValue());
+		elementPositionTest("background.list1", 0, 10, 10, 822, 575);
+		elementPositionTest("background.textField1", 0, 0, 0, 822, 16);
 	}
 }

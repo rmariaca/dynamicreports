@@ -275,16 +275,6 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isUseFieldNameAsDescription();
 	}
 
-	public Color getBackgroundColor() {
-		if (report.getBackgroundColor() != null) {
-			return report.getBackgroundColor();
-		}
-		if (template.getBackgroundColor() != null) {
-			return template.getBackgroundColor();
-		}
-		return Defaults.getDefaults().getBackgroundColor();
-	}
-
 	//table of contents
 	public boolean isTableOfContents() {
 		if (report.getTableOfContents() != null) {
