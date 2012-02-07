@@ -145,6 +145,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 				}
 			}
 			pageNumber += jasperPrint.getPages().size();
+			jasperReportBuilder.rebuild();
 		}
 		try {
 			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
@@ -289,25 +290,12 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		return export(pptxExporterBuilder);
 	}
 
-	private JasperConcatenatedReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
+	public JasperConcatenatedReportBuilder export(AbstractJasperExporterBuilder<?, ? extends AbstractJasperExporter> exporterBuilder) throws DRException {
 		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
 			JRExporter exporter = exporterTransform.transform();
-			List<JasperPrint> jasperPrints = new ArrayList<JasperPrint>();
-			int pageNumber = 1;
-			for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-				if (continuousPageNumbering) {
-					jasperReportBuilder.setStartPageNumber(pageNumber);
-				}
-				else {
-					jasperReportBuilder.setStartPageNumber(null);
-				}
-				JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
-				jasperPrints.add(jasperPrint);
-				pageNumber += jasperPrint.getPages().size();
-			}
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrints);
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, new JasperPrintList(jasperReportBuilders, continuousPageNumbering));
 			exporter.exportReport();
 		} catch (JRException e) {
 			throw new DRException(e);
