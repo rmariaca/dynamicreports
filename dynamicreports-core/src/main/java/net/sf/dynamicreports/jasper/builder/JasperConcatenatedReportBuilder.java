@@ -36,6 +36,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import net.sf.dynamicreports.jasper.base.JasperSimplePrintList;
+import net.sf.dynamicreports.jasper.base.JasperSwapPrintList;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
@@ -53,6 +55,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
+import net.sf.dynamicreports.jasper.definition.JasperPrintList;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -62,6 +65,7 @@ import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
+import net.sf.jasperreports.engine.util.JRSwapFile;
 
 import org.apache.commons.lang.Validate;
 
@@ -76,10 +80,16 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 
 	private List<JasperReportBuilder> jasperReportBuilders;
 	private boolean continuousPageNumbering;
+	private JRSwapFile swapFile;
 
 	public JasperConcatenatedReportBuilder() {
 		this.jasperReportBuilders = new ArrayList<JasperReportBuilder>();
 		this.continuousPageNumbering = false;
+	}
+
+	public JasperConcatenatedReportBuilder setSwapFile(JRSwapFile swapFile) {
+		this.swapFile = swapFile;
+		return this;
 	}
 
 	public JasperConcatenatedReportBuilder concatenate(JasperReportBuilder ...jasperReportBuilders) {
@@ -295,7 +305,29 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		try {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
 			JRExporter exporter = exporterTransform.transform();
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, new JasperPrintList(jasperReportBuilders, continuousPageNumbering));
+
+			JasperPrintList jasperPrintList = null;
+			if (swapFile != null) {
+				jasperPrintList = new JasperSwapPrintList(swapFile);
+			}
+			else {
+				jasperPrintList = new JasperSimplePrintList();
+			}
+			int pageNumber = 1;
+			for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
+				if (continuousPageNumbering) {
+					jasperReportBuilder.setStartPageNumber(pageNumber);
+				}
+				else {
+					jasperReportBuilder.setStartPageNumber(null);
+				}
+				JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
+				jasperPrintList.add(jasperPrint);
+				pageNumber += jasperPrint.getPages().size();
+				jasperReportBuilder.rebuild();
+			}
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrintList.getPrintList());
+
 			exporter.exportReport();
 		} catch (JRException e) {
 			throw new DRException(e);
