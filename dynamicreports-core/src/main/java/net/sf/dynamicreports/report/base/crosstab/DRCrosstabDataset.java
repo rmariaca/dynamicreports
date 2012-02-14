@@ -33,6 +33,7 @@ public class DRCrosstabDataset implements DRICrosstabDataset {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRDataset subDataset;
+	private Boolean dataPreSorted;
 
 	public DRDataset getSubDataset() {
 		return subDataset;
@@ -40,5 +41,13 @@ public class DRCrosstabDataset implements DRICrosstabDataset {
 
 	public void setSubDataset(DRDataset subDataset) {
 		this.subDataset = subDataset;
+	}
+
+	public Boolean getDataPreSorted() {
+		return dataPreSorted;
+	}
+
+	public void setDataPreSorted(Boolean dataPreSorted) {
+		this.dataPreSorted = dataPreSorted;
 	}
 }

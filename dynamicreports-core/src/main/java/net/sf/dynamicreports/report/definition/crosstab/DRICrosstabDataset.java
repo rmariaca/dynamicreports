@@ -32,4 +32,6 @@ import net.sf.dynamicreports.report.definition.DRIDataset;
 public interface DRICrosstabDataset extends Serializable {
 
 	public DRIDataset getSubDataset();
+
+	public Boolean getDataPreSorted();
 }

@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabDataset
  */
 public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 	private DRDesignDataset subDataset;
+	private Boolean dataPreSorted;
 	private ResetType resetType;
 	private DRDesignGroup resetGroup;
 
@@ -41,6 +42,14 @@ public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 
 	public void setSubDataset(DRDesignDataset subDataset) {
 		this.subDataset = subDataset;
+	}
+
+	public Boolean getDataPreSorted() {
+		return dataPreSorted;
+	}
+
+	public void setDataPreSorted(Boolean dataPreSorted) {
+		this.dataPreSorted = dataPreSorted;
 	}
 
 	public ResetType getResetType() {

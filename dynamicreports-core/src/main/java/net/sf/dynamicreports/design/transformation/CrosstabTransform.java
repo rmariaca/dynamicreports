@@ -132,6 +132,7 @@ public class CrosstabTransform {
 	private DRDesignCrosstabDataset dataset(DRICrosstabDataset dataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignCrosstabDataset designDataset = new DRDesignCrosstabDataset();
 		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
+		designDataset.setDataPreSorted(dataset.getDataPreSorted());
 		designDataset.setResetType(resetType);
 		designDataset.setResetGroup(resetGroup);
 		return designDataset;

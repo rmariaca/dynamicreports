@@ -129,6 +129,9 @@ public class CrosstabTransform {
 	//dataset
 	private void dataset(DRIDesignCrosstabDataset dataset, JRDesignCrosstabDataset jrDataset) {
 		jrDataset.setDatasetRun(accessor.getDatasetTransform().datasetRun(dataset.getSubDataset()));
+		if (dataset.getDataPreSorted() != null) {
+			jrDataset.setDataPreSorted(dataset.getDataPreSorted());
+		}
 		ResetType resetType = dataset.getResetType();
 		jrDataset.setResetType(ConstantTransform.variableResetType(resetType));
 		if (resetType.equals(ResetType.GROUP) && dataset.getResetGroup() != null) {

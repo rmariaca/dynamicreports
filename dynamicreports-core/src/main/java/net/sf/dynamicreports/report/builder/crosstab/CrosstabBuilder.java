@@ -266,4 +266,9 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		dataset.setDataSource(sql, connection);
 		return setSubDataset(dataset);
 	}
+
+	public CrosstabBuilder setDataPreSorted(Boolean dataPreSorted) {
+		getObject().getDataset().setDataPreSorted(dataPreSorted);
+		return this;
+	}
 }

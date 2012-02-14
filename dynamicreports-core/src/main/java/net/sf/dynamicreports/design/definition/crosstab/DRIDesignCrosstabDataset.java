@@ -33,6 +33,8 @@ public interface DRIDesignCrosstabDataset {
 
 	public DRIDesignDataset getSubDataset();
 
+	public Boolean getDataPreSorted();
+
 	public ResetType getResetType();
 
 	public DRIDesignGroup getResetGroup();
