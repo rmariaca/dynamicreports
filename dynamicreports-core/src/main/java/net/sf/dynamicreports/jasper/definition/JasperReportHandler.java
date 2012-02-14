@@ -24,15 +24,18 @@ package net.sf.dynamicreports.jasper.definition;
 
 import java.util.List;
 
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperPrintList {
+public interface JasperReportHandler {
 
-	public List<JasperPrint> getPrintList();
+	public void concatenate(JasperReportBuilder ...jasperReportBuilders);
 
-	public void add(JasperPrint jasperPrint);
+	public void setContinuousPageNumbering(boolean continuousPageNumbering);
 
+	public List<JasperPrint> getPrintList() throws DRException;
 }

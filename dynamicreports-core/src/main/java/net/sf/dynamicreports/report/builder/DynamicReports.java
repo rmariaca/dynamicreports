@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.ExporterBuilders;
+import net.sf.dynamicreports.jasper.definition.JasperReportHandler;
 import net.sf.dynamicreports.report.builder.barcode.BarcodeBuilders;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
@@ -126,6 +127,16 @@ public class DynamicReports {
 	 */
 	public static JasperConcatenatedReportBuilder concatenatedReport() {
 		return new JasperConcatenatedReportBuilder();
+	}
+
+	/**
+	 * Creates a new concatenated report builder.
+	 * This report builder allows concatenating several separated reports into one single document.
+	 *
+	 * @return a report builder
+	 */
+	public static JasperConcatenatedReportBuilder concatenatedReport(JasperReportHandler jasperReportHandler) {
+		return new JasperConcatenatedReportBuilder(jasperReportHandler);
 	}
 
 	//field

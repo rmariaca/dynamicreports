@@ -31,14 +31,11 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import net.sf.dynamicreports.jasper.base.JasperSimplePrintList;
-import net.sf.dynamicreports.jasper.base.JasperSwapPrintList;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import net.sf.dynamicreports.jasper.base.reporthandler.JasperReportBuilderHandler;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperCsvExporterBuilder;
@@ -55,7 +52,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
-import net.sf.dynamicreports.jasper.definition.JasperPrintList;
+import net.sf.dynamicreports.jasper.definition.JasperReportHandler;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -65,7 +62,6 @@ import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
-import net.sf.jasperreports.engine.util.JRSwapFile;
 
 import org.apache.commons.lang.Validate;
 
@@ -78,26 +74,20 @@ import org.apache.commons.lang.Validate;
 public class JasperConcatenatedReportBuilder implements Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private List<JasperReportBuilder> jasperReportBuilders;
-	private boolean continuousPageNumbering;
-	private JRSwapFile swapFile;
+	private JasperReportHandler jasperReportHandler;
 
 	public JasperConcatenatedReportBuilder() {
-		this.jasperReportBuilders = new ArrayList<JasperReportBuilder>();
-		this.continuousPageNumbering = false;
+		this(new JasperReportBuilderHandler());
 	}
 
-	public JasperConcatenatedReportBuilder setSwapFile(JRSwapFile swapFile) {
-		this.swapFile = swapFile;
-		return this;
+	public JasperConcatenatedReportBuilder(JasperReportHandler jasperReportHandler) {
+		this.jasperReportHandler = jasperReportHandler;
 	}
 
 	public JasperConcatenatedReportBuilder concatenate(JasperReportBuilder ...jasperReportBuilders) {
 		Validate.notNull(jasperReportBuilders, "jasperReportBuilders must not be null");
 		Validate.noNullElements(jasperReportBuilders, "jasperReportBuilders must not contains null jasperReportBuilder");
-		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-			this.jasperReportBuilders.add(jasperReportBuilder);
-		}
+		jasperReportHandler.concatenate(jasperReportBuilders);
 		return this;
 	}
 
@@ -112,8 +102,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		int maxWidth = 0;
 		int maxHeight = 0;
 
-		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
+		for (JasperPrint jasperPrint : jasperReportHandler.getPrintList()) {
 			int pages = jasperPrint.getPages().size();
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			maxWidth += pageWidth * pages + (pages - 1) + 2;
@@ -129,15 +118,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		g2d.fill(new Rectangle2D.Float(1, 1, maxWidth - 1, maxHeight - 1));
 
 		int offset = 1;
-		int pageNumber = 1;
-		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-			if (continuousPageNumbering) {
-				jasperReportBuilder.setStartPageNumber(pageNumber);
-			}
-			else {
-				jasperReportBuilder.setStartPageNumber(null);
-			}
-			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
+		for (JasperPrint jasperPrint : jasperReportHandler.getPrintList()) {
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			for (int i = 0; i < jasperPrint.getPages().size(); i++) {
 				try {
@@ -154,8 +135,6 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 					throw new DRException(e);
 				}
 			}
-			pageNumber += jasperPrint.getPages().size();
-			jasperReportBuilder.rebuild();
 		}
 		try {
 			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
@@ -170,7 +149,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	}
 
 	public JasperConcatenatedReportBuilder setContinuousPageNumbering(boolean continuousPageNumbering) {
-		this.continuousPageNumbering = continuousPageNumbering;
+		jasperReportHandler.setContinuousPageNumbering(continuousPageNumbering);
 		return this;
 	}
 
@@ -305,29 +284,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		try {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
 			JRExporter exporter = exporterTransform.transform();
-
-			JasperPrintList jasperPrintList = null;
-			if (swapFile != null) {
-				jasperPrintList = new JasperSwapPrintList(swapFile);
-			}
-			else {
-				jasperPrintList = new JasperSimplePrintList();
-			}
-			int pageNumber = 1;
-			for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
-				if (continuousPageNumbering) {
-					jasperReportBuilder.setStartPageNumber(pageNumber);
-				}
-				else {
-					jasperReportBuilder.setStartPageNumber(null);
-				}
-				JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
-				jasperPrintList.add(jasperPrint);
-				pageNumber += jasperPrint.getPages().size();
-				jasperReportBuilder.rebuild();
-			}
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrintList.getPrintList());
-
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperReportHandler.getPrintList());
 			exporter.exportReport();
 		} catch (JRException e) {
 			throw new DRException(e);

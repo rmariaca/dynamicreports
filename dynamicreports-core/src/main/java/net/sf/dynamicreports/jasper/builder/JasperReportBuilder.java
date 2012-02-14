@@ -118,7 +118,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		setTemplateDesign(new JasperEmptyTemplateDesign());
 	}
 
-	protected void setStartPageNumber(Integer startPageNumber) throws DRException {
+	public void setStartPageNumber(Integer startPageNumber) throws DRException {
 		if (this.startPageNumber == startPageNumber) {
 			return;
 		}
