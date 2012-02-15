@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.3.5 (2012-02-15)
+---------------------------------------------------
+ - gantt chart, see GanttChartReport for an example
+ - thermometer chart, see ThermometerChartReport for an example
+ - dataPreSorted attribute was added to crosstabs
+ - minor bug fixes and improvements
+ - new examples - ApplicationForm, OpenFlashChartReport, GanttChartReport, ThermometerChartReport 
+  
 Changes in version 2.3.4 (2012-01-18)
 ---------------------------------------------------
  - meter chart, see MeterChartReport for an example
