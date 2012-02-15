@@ -27,10 +27,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.ByteArrayOutputStream;
 
 import junit.framework.Assert;
-import net.sf.dynamicreports.jasper.base.reporthandler.JasperSwapFileHandler;
+import net.sf.dynamicreports.jasper.base.reporthandler.JasperPrintListFileHandler;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
 import net.sf.jasperreports.engine.util.JRSwapFile;
 
 import org.junit.Before;
@@ -55,7 +56,7 @@ public class ConcatenatedReport3Test {
 			.pageFooter(cmp.pageNumber());
 
 		JRSwapFile swapFile = new JRSwapFile(System.getProperty("java.io.tmpdir"), 2000, 5000);
-		concatenatedReport = concatenatedReport(new JasperSwapFileHandler(swapFile));
+		concatenatedReport = concatenatedReport(new JasperPrintListFileHandler(System.getProperty("java.io.tmpdir"), new JRSwapFileVirtualizer(3, swapFile)));
 		concatenatedReport.continuousPageNumbering();
 		concatenatedReport.concatenate(report1, report2, report3);
 	}

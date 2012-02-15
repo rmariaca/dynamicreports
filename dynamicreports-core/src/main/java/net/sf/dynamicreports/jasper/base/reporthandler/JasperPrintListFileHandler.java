@@ -22,48 +22,43 @@
 
 package net.sf.dynamicreports.jasper.base.reporthandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 import net.sf.dynamicreports.report.exception.DRReportException;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRVirtualizationHelper;
+import net.sf.jasperreports.engine.JRVirtualizer;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.util.JRSwapFile;
-import net.sf.jasperreports.engine.util.JRSwapFile.SwapHandle;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class JasperSwapFileHandler extends AbstractPrintListHandler {
+public class JasperPrintListFileHandler extends AbstractPrintListHandler {
 	private List<JasperPrint> printList;
-	private JRSwapFile swapFile;
-	private List<SwapHandle> handles;
+	private final String directory;
+	private JRVirtualizer virtualizer;
+	private int index = 0;
 
-	public JasperSwapFileHandler(JRSwapFile swapFile) {
-		this.swapFile = swapFile;
-		this.handles = new ArrayList<SwapHandle>();
+	public JasperPrintListFileHandler(String directory) {
+		this(directory, null);
+	}
+
+	public JasperPrintListFileHandler(String directory, JRVirtualizer virtualizer) {
+		this.directory = directory;
+		this.virtualizer = virtualizer;
 		printList = new PrintList();
 	}
 
 	@Override
 	protected void add(JasperPrint jasperPrint) {
 		try {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(bos);
-			oos.writeObject(jasperPrint);
-			oos.close();
-			bos.close();
-			byte[] data = bos.toByteArray();
-			SwapHandle handle = swapFile.write(data);
-			handles.add(handle);
-		} catch (IOException e) {
+			JRSaver.saveObject(jasperPrint, directory + "/jrprint" + index++);
+		} catch (JRException e) {
 			throw new DRReportException(e);
 		}
 	}
@@ -75,11 +70,11 @@ public class JasperSwapFileHandler extends AbstractPrintListHandler {
 	private class PrintList implements List<JasperPrint> {
 
 		public int size() {
-			return handles.size();
+			return index;
 		}
 
 		public boolean isEmpty() {
-			return handles.isEmpty();
+			return index == 0;
 		}
 
 		public boolean contains(Object o) {
@@ -127,23 +122,20 @@ public class JasperSwapFileHandler extends AbstractPrintListHandler {
 		}
 
 		public void clear() {
-			for (SwapHandle handle : handles) {
-				swapFile.free(handle);
-			}
-			handles.clear();
+			throw new UnsupportedOperationException();
 		}
 
 		public JasperPrint get(int index) {
-			SwapHandle handle = handles.get(index);
 			try {
-				byte[] data = swapFile.read(handle, false);
-				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
-				JasperPrint jasperPrint = (JasperPrint) ois.readObject();
-				ois.close();
+				if (virtualizer != null) {
+					JRVirtualizationHelper.setThreadVirtualizer(virtualizer);
+				}
+				JasperPrint jasperPrint = (JasperPrint) JRLoader.loadObjectFromFile(directory + "/jrprint" + index);
+				if (virtualizer != null) {
+					JRVirtualizationHelper.clearThreadVirtualizer();
+				}
 				return jasperPrint;
-			} catch (IOException e) {
-				throw new DRReportException(e);
-			} catch (ClassNotFoundException e) {
+			} catch (JRException e) {
 				throw new DRReportException(e);
 			}
 		}
