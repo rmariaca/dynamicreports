@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.base.style;
 
 import java.awt.Color;
 
+import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
@@ -52,6 +53,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 	private Markup markup;
 	private DRParagraph paragraph;
 	private DRPen linePen;
+	private DRComponent listBackgroundComponent;
 
 	public DRBaseStyle() {
 		init();
@@ -174,5 +176,13 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 
 	public void setLinePen(DRPen linePen) {
 		this.linePen = linePen;
+	}
+
+	public DRComponent getListBackgroundComponent() {
+		return listBackgroundComponent;
+	}
+
+	public void setListBackgroundComponent(DRComponent listBackgroundComponent) {
+		this.listBackgroundComponent = listBackgroundComponent;
 	}
 }

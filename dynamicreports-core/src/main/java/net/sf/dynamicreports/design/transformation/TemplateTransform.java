@@ -1009,7 +1009,7 @@ public class TemplateTransform {
 	}
 
 	//rectangle
-	protected int getRectangleRadius(DRIRectangle rectangle) {
+	protected Integer getRectangleRadius(DRIRectangle rectangle) {
 		if (rectangle.getRadius() != null) {
 			return rectangle.getRadius();
 		}

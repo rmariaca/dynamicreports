@@ -28,6 +28,8 @@ import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
+import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -181,15 +183,15 @@ public class StyleResolver {
 		return null;
 	}
 
-	protected static int getHorizontalPadding(DRDesignStyle style) {
+	public static int getHorizontalPadding(DRIDesignStyle style) {
 		return getLeftPadding(style) + getRightPadding(style) + getLeftIndent(style) + getRightIndent(style);
 	}
 
-	protected static int getVerticalPadding(DRDesignStyle style) {
+	public static int getVerticalPadding(DRIDesignStyle style) {
 		return getTopPadding(style) + getBottomPadding(style) + getFirstLineIndent(style);
 	}
 
-	private static Integer getTopPadding(DRDesignStyle style) {
+	private static Integer getTopPadding(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -202,7 +204,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getBottomPadding(DRDesignStyle style) {
+	private static Integer getBottomPadding(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -215,7 +217,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getLeftPadding(DRDesignStyle style) {
+	private static Integer getLeftPadding(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -228,7 +230,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getRightPadding(DRDesignStyle style) {
+	private static Integer getRightPadding(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -241,7 +243,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getFirstLineIndent(DRDesignStyle style) {
+	private static Integer getFirstLineIndent(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -254,7 +256,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getLeftIndent(DRDesignStyle style) {
+	private static Integer getLeftIndent(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -267,7 +269,7 @@ public class StyleResolver {
 		return 0;
 	}
 
-	private static Integer getRightIndent(DRDesignStyle style) {
+	private static Integer getRightIndent(DRIDesignStyle style) {
 		if (style == null) {
 			return 0;
 		}
@@ -326,5 +328,18 @@ public class StyleResolver {
 		int b = (int) (color1.getBlue() * amount + color2.getBlue() * percent);
 		int a = (int) (color1.getAlpha() * amount + color2.getAlpha() * percent);
 	  return new Color(r, g, b, a);
+	}
+
+	public static DRIDesignComponent getListBackgroundComponent(DRIDesignStyle style) {
+		if (style == null) {
+			return null;
+		}
+		if (style.getListBackgroundComponent() != null) {
+			return style.getListBackgroundComponent();
+		}
+		if (style.getParentStyle() != null) {
+			return getListBackgroundComponent(style.getParentStyle());
+		}
+		return null;
 	}
 }

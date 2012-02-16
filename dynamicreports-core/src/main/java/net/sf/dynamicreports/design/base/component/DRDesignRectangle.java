@@ -29,18 +29,18 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignRectangle;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignRectangle extends DRDesignComponent implements DRIDesignRectangle {
-	private int radius;
+	private Integer radius;
 	private DRDesignPen pen;
 
 	public DRDesignRectangle() {
 		super("rectangle");
 	}
 
-	public int getRadius() {
+	public Integer getRadius() {
 		return radius;
 	}
 
-	public void setRadius(int radius) {
+	public void setRadius(Integer radius) {
 		this.radius = radius;
 	}
 

@@ -136,7 +136,7 @@ public class Default {
 	private int ellipseWidth;
 	private int ellipseHeight;
 	//rectangle
-	private int rectangleRadius;
+	private Integer rectangleRadius;
 	private int rectangleWidth;
 	private int rectangleHeight;
 	//map
@@ -328,7 +328,7 @@ public class Default {
 		this.ellipseWidth = 100;
 		this.ellipseHeight = 100;
 
-		this.rectangleRadius = 0;
+		this.rectangleRadius = null;
 		this.rectangleWidth = 100;
 		this.rectangleHeight = 100;
 
@@ -692,7 +692,7 @@ public class Default {
 		return ellipseHeight;
 	}
 
-	public int getRectangleRadius() {
+	public Integer getRectangleRadius() {
 		return rectangleRadius;
 	}
 

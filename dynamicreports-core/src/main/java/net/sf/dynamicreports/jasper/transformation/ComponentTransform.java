@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
+import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
@@ -51,6 +52,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.design.transformation.StyleResolver;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
@@ -223,8 +225,9 @@ public class ComponentTransform {
 		jrElement.setWidth(component.getWidth());
 		jrElement.setHeight(component.getHeight());
 
-		if (component.getStyle() != null)
+		if (component.getStyle() != null) {
 			jrElement.setStyle(accessor.getStyleTransform().getStyle(component.getStyle()));
+		}
 		jrElement.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(component.getPrintWhenExpression()));
 		jrElement.setRemoveLineWhenBlank(component.isRemoveLineWhenBlank());
 
@@ -247,6 +250,17 @@ public class ComponentTransform {
 		case FRAME:
 			JRDesignFrame frame = new JRDesignFrame();
 			component(frame, list, list.getType());
+
+			DRDesignComponent background = (DRDesignComponent) StyleResolver.getListBackgroundComponent(list.getStyle());
+			if (background != null) {
+				background.setX(0);
+				background.setY(0);
+				background.setWidth(frame.getWidth() - StyleResolver.getHorizontalPadding(list.getStyle()));
+				background.setHeight(frame.getHeight() - StyleResolver.getVerticalPadding(list.getStyle()));
+				JRDesignElement jrBackground = component(background, list.getType())[0];
+				frame.addElement(jrBackground);
+			}
+
 			for (DRIDesignComponent element : list.getComponents()) {
 				JRDesignElement[] jrElements = component(element, list.getType());
 				for (JRDesignElement jrElement : jrElements) {

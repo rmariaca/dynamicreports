@@ -27,6 +27,8 @@ import java.awt.Color;
 import net.sf.dynamicreports.report.base.style.DRBaseStyle;
 import net.sf.dynamicreports.report.base.style.DRTabStop;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.builder.component.ImageBuilder;
+import net.sf.dynamicreports.report.builder.component.RectangleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
@@ -332,6 +334,18 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		else {
 			getObject().setLinePen(null);
 		}
+		return (T) this;
+	}
+
+	public T setListBackgroundComponent(RectangleBuilder listBackgroundComponent) {
+		Validate.notNull(listBackgroundComponent, "listBackgroundComponent must not be null");
+		getObject().setListBackgroundComponent(listBackgroundComponent.build());
+		return (T) this;
+	}
+
+	public T setListBackgroundComponent(ImageBuilder listBackgroundComponent) {
+		Validate.notNull(listBackgroundComponent, "listBackgroundComponent must not be null");
+		getObject().setListBackgroundComponent(listBackgroundComponent.build());
 		return (T) this;
 	}
 

@@ -29,7 +29,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
  */
 public interface DRIDesignRectangle extends DRIDesignComponent {
 
-	public int getRadius();
+	public Integer getRadius();
 
 	public DRIDesignPen getPen();
 
