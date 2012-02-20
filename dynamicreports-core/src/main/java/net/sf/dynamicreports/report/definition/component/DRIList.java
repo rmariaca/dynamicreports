@@ -36,4 +36,6 @@ public interface DRIList extends DRIDimensionComponent {
 	public ListType getType();
 
 	public Integer getGap();
+
+	public DRIComponent getBackgroundComponent();
 }

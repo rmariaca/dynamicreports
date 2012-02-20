@@ -42,6 +42,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	private int gap;
 	private boolean calculateComponents;
 	private Boolean removable;
+	private DRDesignComponent backgroundComponent;
 
 	public DRDesignList() {
 		this(ListType.HORIZONTAL);
@@ -136,4 +137,13 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 	public void setRemovable(Boolean removable) {
 		this.removable = removable;
 	}
+
+	public DRDesignComponent getBackgroundComponent() {
+		return backgroundComponent;
+	}
+
+	public void setBackgroundComponent(DRDesignComponent backgroundComponent) {
+		this.backgroundComponent = backgroundComponent;
+	}
+
 }

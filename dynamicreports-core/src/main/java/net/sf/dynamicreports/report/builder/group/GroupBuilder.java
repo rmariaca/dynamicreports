@@ -191,6 +191,12 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T setHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getHeaderBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	public T addHeaderComponent(ComponentBuilder<?, ?> ...components) {
 		Validate.notNull(components, "components must not be null");
 		Validate.noNullElements(components, "components must not contains null component");
@@ -217,6 +223,12 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		else {
 			getObject().getFooterBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 

@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -244,4 +245,32 @@ public interface DRIReportTemplate extends Serializable {
 	public DRIStyle getNoDataStyle();
 
 	public DRIStyle getBackgroundStyle();
+
+	public DRIComponent getTitleBackgroundComponent();
+
+	public DRIComponent getPageHeaderBackgroundComponent();
+
+	public DRIComponent getPageFooterBackgroundComponent();
+
+	public DRIComponent getColumnHeaderBackgroundComponent();
+
+	public DRIComponent getColumnFooterBackgroundComponent();
+
+	public DRIComponent getGroupHeaderBackgroundComponent();
+
+	public DRIComponent getGroupFooterBackgroundComponent();
+
+	public DRIComponent getDetailHeaderBackgroundComponent();
+
+	public DRIComponent getDetailBackgroundComponent();
+
+	public DRIComponent getDetailFooterBackgroundComponent();
+
+	public DRIComponent getLastPageFooterBackgroundComponent();
+
+	public DRIComponent getSummaryBackgroundComponent();
+
+	public DRIComponent getNoDataBackgroundComponent();
+
+	public DRIComponent getBackgroundBackgroundComponent();
 }

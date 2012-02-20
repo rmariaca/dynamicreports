@@ -869,6 +869,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setTitleBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getTitleBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the title band.
 	 * The band is printed on the first page and only once.
@@ -924,6 +930,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			getObject().getPageHeaderBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setPageHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getPageHeaderBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 
@@ -985,6 +997,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setPageFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getPageFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the page footer band.
 	 * The band is printed on each page at the bottom of the page.
@@ -1043,6 +1061,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setColumnHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getColumnHeaderBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the column header band.
 	 * The band is printed on each page at the top of the page and it's placed below the page header band.
@@ -1098,6 +1122,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			getObject().getColumnFooterBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setColumnFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getColumnFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 
@@ -1166,6 +1196,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			drGroup.getHeaderBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setGroupHeaderBackgroundComponent(GroupBuilder<?> group, ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		drGroup.getHeaderBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 
@@ -1243,6 +1283,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setGroupFooterBackgroundComponent(GroupBuilder<?> group, ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		drGroup.getFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the group footer band.
 	 * The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
@@ -1307,6 +1357,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setDetailBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getDetailBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the detail band.
 	 * The band is printed for each record row in the data source and it's placed between the column header and footer band.
@@ -1362,6 +1418,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			getObject().getDetailHeaderBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setDetailHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getDetailHeaderBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 
@@ -1423,6 +1485,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setDetailFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getDetailFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the detail footer band.
 	 * The band is printed for each record row in the data source and it's placed below the detail band.
@@ -1478,6 +1546,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			getObject().getLastPageFooterBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setLastPageFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getLastPageFooterBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 
@@ -1539,6 +1613,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setSummaryBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getSummaryBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the summary band.
 	 * The band is printed on the last page and only once.
@@ -1597,6 +1677,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setNoDataBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getNoDataBand().getList().setBackgroundComponent(backgroundComponent.build());
+		return (T) this;
+	}
+
 	/**
 	 * Adds components to the no data band.
 	 * The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.
@@ -1652,6 +1738,12 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		else {
 			getObject().getBackgroundBand().getList().setStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setBackgroundBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().getBackgroundBand().getList().setBackgroundComponent(backgroundComponent.build());
 		return (T) this;
 	}
 

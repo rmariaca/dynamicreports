@@ -28,7 +28,6 @@ import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
-import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -330,16 +329,4 @@ public class StyleResolver {
 	  return new Color(r, g, b, a);
 	}
 
-	public static DRIDesignComponent getListBackgroundComponent(DRIDesignStyle style) {
-		if (style == null) {
-			return null;
-		}
-		if (style.getListBackgroundComponent() != null) {
-			return style.getListBackgroundComponent();
-		}
-		if (style.getParentStyle() != null) {
-			return getListBackgroundComponent(style.getParentStyle());
-		}
-		return null;
-	}
 }

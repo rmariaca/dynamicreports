@@ -26,6 +26,7 @@ import java.awt.Color;
 import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.DRReportTemplate;
+import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
@@ -773,6 +774,90 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		else {
 			getObject().setBackgroundStyle(null);
 		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setTitleBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setTitleBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setPageHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setPageHeaderBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setPageFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setPageFooterBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setColumnHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setColumnHeaderBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setColumnFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setColumnFooterBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setGroupHeaderBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setGroupFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setGroupFooterBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailHeaderBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setDetailHeaderBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setDetailBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setDetailFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setDetailFooterBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setLastPageFooterBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setLastPageFooterBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setSummaryBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setSummaryBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setNoDataBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setNoDataBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public ReportTemplateBuilder setBackgroundBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setBackgroundBackgroundComponent(backgroundComponent.build());
 		return this;
 	}
 

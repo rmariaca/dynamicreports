@@ -37,6 +37,7 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabColumnGroup;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.constant.ComponentGroupType;
+import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
@@ -75,6 +76,7 @@ class BandComponentsTransform {
 			throw new DRException("Band " + band.getName() + " must not be defined at once in jrxml template design and in dynamic design");
 		}
 
+		prepareListBackgroundComponents(component);
 		prepareCrosstabs(component);
 
 		return band;
@@ -131,7 +133,8 @@ class BandComponentsTransform {
 				DRDesignComponent lComponent = list.getComponents().get(0);
 				DRDesignComponent elm = removeEmptyComponents(lComponent);
 				if (elm == null) {
-					if (list.getStyle() != null && list.getWidth() > 0 && list.getHeight() > 0) {
+					if (list.getWidth() > 0 && list.getHeight() > 0 &&
+							(list.getStyle() != null || list.getBackgroundComponent() != null)) {
 						list.getComponents().clear();
 						return list;
 					}
@@ -140,7 +143,7 @@ class BandComponentsTransform {
 				elm.setX(lComponent.getX() + elm.getX());
 				elm.setY(lComponent.getY() + elm.getY());
 
-				if (list.getStyle() == null && list.getPrintWhenExpression() == null) {
+				if (list.getStyle() == null && list.getPrintWhenExpression() == null && list.getBackgroundComponent() == null) {
 					elm.setX(list.getX() + elm.getX());
 					elm.setY(list.getY() + elm.getY());
 					return elm;
@@ -160,7 +163,8 @@ class BandComponentsTransform {
 					}
 				}
 				if (components.isEmpty()) {
-					if (list.getStyle() != null && list.getWidth() > 0 && list.getHeight() > 0) {
+					if (list.getWidth() > 0 && list.getHeight() > 0 &&
+							(list.getStyle() != null || list.getBackgroundComponent() != null)) {
 						list.getComponents().clear();
 						return list;
 					}
@@ -180,7 +184,7 @@ class BandComponentsTransform {
 	private void componentGroupType(DRDesignComponent component) {
 		if (component instanceof DRDesignList) {
 			DRDesignList list = (DRDesignList) component;
-			if (list.isRemovable() && list.getStyle() == null && list.getPrintWhenExpression() == null) {
+			if (list.isRemovable() && list.getStyle() == null && list.getPrintWhenExpression() == null && list.getBackgroundComponent() == null) {
 				list.setComponentGroupType(ComponentGroupType.NONE);
 				for (DRDesignComponent listComponent : list.getComponents()) {
 					listComponent.setX(list.getX() + listComponent.getX());
@@ -193,6 +197,24 @@ class BandComponentsTransform {
 
 			for (DRDesignComponent listComponent : list.getComponents()) {
 				componentGroupType(listComponent);
+			}
+		}
+	}
+
+	private void prepareListBackgroundComponents(DRDesignComponent component) throws DRException {
+		if (component instanceof DRDesignList) {
+			DRDesignList list = (DRDesignList) component;
+			if (list.getBackgroundComponent() != null) {
+				DRDesignComponent backgroundComponent = list.getBackgroundComponent();
+				backgroundComponent.setX(0);
+				backgroundComponent.setY(0);
+				backgroundComponent.setWidth(list.getWidth() - StyleResolver.getHorizontalPadding(list.getStyle()));
+				backgroundComponent.setHeight(list.getHeight() - StyleResolver.getVerticalPadding(list.getStyle()));
+				backgroundComponent.setStretchType(StretchType.RELATIVE_TO_TALLEST_OBJECT);
+				list.setBackgroundComponent(backgroundComponent);
+			}
+			for (DRDesignComponent listComponent : list.getComponents()) {
+				prepareListBackgroundComponents(listComponent);
 			}
 		}
 	}

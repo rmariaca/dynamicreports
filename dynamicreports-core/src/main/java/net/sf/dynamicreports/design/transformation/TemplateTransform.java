@@ -1748,6 +1748,73 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getBandStyle();
 	}
 
+	//band background component
+	protected DRIComponent getTitleBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getTitleBackgroundComponent());
+	}
+
+	protected DRIComponent getPageHeaderBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getPageHeaderBackgroundComponent());
+	}
+
+	protected DRIComponent getPageFooterBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getPageFooterBackgroundComponent());
+	}
+
+	protected DRIComponent getColumnHeaderBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getColumnHeaderBackgroundComponent());
+	}
+
+	protected DRIComponent getColumnFooterBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getColumnFooterBackgroundComponent());
+	}
+
+	protected DRIComponent getGroupHeaderBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getGroupHeaderBackgroundComponent());
+	}
+
+	protected DRIComponent getGroupFooterBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getGroupFooterBackgroundComponent());
+	}
+
+	protected DRIComponent getDetailHeaderBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getDetailHeaderBackgroundComponent());
+	}
+
+	protected DRIComponent getDetailBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getDetailBackgroundComponent());
+	}
+
+	protected DRIComponent getDetailFooterBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getDetailFooterBackgroundComponent());
+	}
+
+	protected DRIComponent getLastPageFooterBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getLastPageFooterBackgroundComponent());
+	}
+
+	protected DRIComponent getSummaryBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getSummaryBackgroundComponent());
+	}
+
+	protected DRIComponent getNoDataBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getNoDataBackgroundComponent());
+	}
+
+	protected DRIComponent getBackgroundBackgroundComponent(DRIBand band) {
+		return getBandBackgroundComponent(band, template.getBackgroundBackgroundComponent());
+	}
+
+	private DRIComponent getBandBackgroundComponent(DRIBand band, DRIComponent templateBackgroundComponent) {
+		if (band.getList().getBackgroundComponent() != null) {
+			return band.getList().getBackgroundComponent();
+		}
+		if (templateBackgroundComponent != null) {
+			return templateBackgroundComponent;
+		}
+		return Defaults.getDefaults().getBandBackgroundComponent();
+	}
+
 	private int detectWidth(DRDesignList designList) {
 		ComponentPosition.width(designList);
 		return designList.getWidth();

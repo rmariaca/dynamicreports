@@ -54,6 +54,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -166,23 +167,23 @@ public class GroupTransform {
 		}
 		if (!header.isEmpty()) {
 			DRIBand bnd = group.getHeaderBand();
-			DRDesignBand band = accessor.getBandTransform().band("groupHeaderTitleAndValue", bnd, templateTransform.getGroupHeaderSplitType(bnd), templateTransform.getGroupHeaderStyle(bnd));
+			DRDesignBand band = accessor.getBandTransform().band("groupHeaderTitleAndValue", bnd, templateTransform.getGroupHeaderSplitType(bnd), templateTransform.getGroupHeaderStyle(bnd), templateTransform.getGroupHeaderBackgroundComponent(bnd));
 			band.addComponent(header);
 			designGroup.addHeaderBand(band);
 		}
 
 		DRIBand band = group.getHeaderBand();
-		designGroup.addHeaderBand(groupBand("groupHeader", band, templateTransform.getGroupHeaderSplitType(band), templateTransform.getGroupHeaderStyle(band), groupPadding, designGroup));
+		designGroup.addHeaderBand(groupBand("groupHeader", band, templateTransform.getGroupHeaderSplitType(band), templateTransform.getGroupHeaderStyle(band), templateTransform.getGroupHeaderBackgroundComponent(band), groupPadding, designGroup));
 		band = group.getFooterBand();
-		designGroup.addFooterBand(groupBand("groupFooter", band, templateTransform.getGroupFooterSplitType(band), templateTransform.getGroupFooterStyle(band), groupPadding, designGroup));
+		designGroup.addFooterBand(groupBand("groupFooter", band, templateTransform.getGroupFooterSplitType(band), templateTransform.getGroupFooterStyle(band), templateTransform.getGroupFooterBackgroundComponent(band), groupPadding, designGroup));
 		if (templateTransform.isGroupShowColumnHeaderAndFooter(group)) {
 			designGroup.addHeaderBand(accessor.getBandTransform().getColumnHeaderForGroupBand());
 			designGroup.addFooterBand(accessor.getBandTransform().getColumnFooterBand());
 		}
 	}
 
-	private DRDesignBand groupBand(String name, DRIBand band, SplitType splitType, DRIStyle defaultStyle, int groupPadding, DRDesignGroup resetGroup) throws DRException {
-		DRDesignBand designBand = accessor.getBandTransform().band(name, band, splitType, defaultStyle, ResetType.GROUP, resetGroup);
+	private DRDesignBand groupBand(String name, DRIBand band, SplitType splitType, DRIStyle defaultStyle, DRIComponent defaultBackgroundComponent, int groupPadding, DRDesignGroup resetGroup) throws DRException {
+		DRDesignBand designBand = accessor.getBandTransform().band(name, band, splitType, defaultStyle, defaultBackgroundComponent, ResetType.GROUP, resetGroup);
 		if (groupPadding > 0) {
 			DRDesignFiller filler = new DRDesignFiller();
 			filler.setWidth(groupPadding);

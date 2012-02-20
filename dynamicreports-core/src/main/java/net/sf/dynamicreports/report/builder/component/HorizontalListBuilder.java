@@ -148,6 +148,18 @@ public class HorizontalListBuilder extends DimensionComponentBuilder<HorizontalL
 		return this;
 	}
 
+	public HorizontalListBuilder setBaseBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
+	public HorizontalListBuilder setBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		row.setBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
 	public DRList getList() {
 		return build();
 	}

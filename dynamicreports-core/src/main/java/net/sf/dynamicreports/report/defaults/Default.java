@@ -55,6 +55,7 @@ import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -212,6 +213,8 @@ public class Default {
 	private SplitType backgroundSplitType;
 	//band style
 	private DRIStyle bandStyle;
+	//band background component
+	private DRIComponent bandBackgroundComponent;
 	//font
   private DRFont font;
   //datatype
@@ -411,6 +414,8 @@ public class Default {
 		this.backgroundSplitType = null;
 
 		this.bandStyle = null;
+
+		this.bandBackgroundComponent = null;
 
 		this.font = new DRFont("SansSerif", 10);
 
@@ -946,6 +951,10 @@ public class Default {
 
 	public DRIStyle getBandStyle() {
 		return bandStyle;
+	}
+
+	public DRIComponent getBandBackgroundComponent() {
+		return bandBackgroundComponent;
 	}
 
 	public DRFont getFont() {

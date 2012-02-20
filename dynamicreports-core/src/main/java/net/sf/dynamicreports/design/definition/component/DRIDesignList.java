@@ -37,4 +37,6 @@ public interface DRIDesignList extends DRIDesignComponent {
 	public ListType getType();
 
 	public ComponentGroupType getComponentGroupType();
+
+	public DRIDesignComponent getBackgroundComponent();
 }

@@ -29,7 +29,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.style.DRDesignBaseStyle;
 import net.sf.dynamicreports.design.base.style.DRDesignBorder;
 import net.sf.dynamicreports.design.base.style.DRDesignConditionalStyle;
@@ -43,7 +42,6 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.style.DRBaseStyle;
 import net.sf.dynamicreports.report.base.style.DRBorder;
 import net.sf.dynamicreports.report.base.style.DRFont;
@@ -168,10 +166,6 @@ public class StyleTransform {
 		designBaseStyle.setMarkup(baseStyle.getMarkup());
 		designBaseStyle.setParagraph(paragraph(baseStyle.getParagraph()));
 		designBaseStyle.setLinePen(pen(baseStyle.getLinePen()));
-		if (baseStyle.getListBackgroundComponent() != null) {
-			DRDesignComponent component = accessor.getComponentTransform().component(baseStyle.getListBackgroundComponent(), DefaultStyleType.NONE, null, null);
-			designBaseStyle.setListBackgroundComponent(component);
-		}
 	}
 
 	private DRDesignParagraph paragraph(DRIParagraph paragraph) {
@@ -281,7 +275,6 @@ public class StyleTransform {
 		toStyle.setMarkup(fromStyle.getMarkup());
 		toStyle.setParagraph((DRParagraph) fromStyle.getParagraph());
 		toStyle.setLinePen((DRPen) fromStyle.getLinePen());
-		toStyle.setListBackgroundComponent((DRComponent) fromStyle.getListBackgroundComponent());
 	}
 
 	public Collection<DRIDesignStyle> getStyles() {

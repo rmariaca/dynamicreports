@@ -154,7 +154,8 @@ public class SubtotalTransform {
 		}
 
 		DRFiller filler = null;
-		if (accessor.getTemplateTransform().getPageColumnsPerPage() > 1) {
+		TemplateTransform templateTransform = accessor.getTemplateTransform();
+		if (templateTransform.getPageColumnsPerPage() > 1) {
 			int fillerWidth = accessor.getPageTransform().getMaxBandWidth() - accessor.getPageTransform().getPage().getColumnWidth();
 			filler= new DRFiller();
 			filler.setWidth(fillerWidth);
@@ -169,7 +170,7 @@ public class SubtotalTransform {
 			DRIGroup group = entry.getKey();
 			DRIBand bnd = group.getHeaderBand();
 			DRDesignGroup designGroup = accessor.getGroupTransform().getGroup(group);
-			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupHeader", bnd, accessor.getTemplateTransform().getGroupHeaderSplitType(bnd), accessor.getTemplateTransform().getGroupHeaderStyle(bnd));
+			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupHeader", bnd, templateTransform.getGroupHeaderSplitType(bnd), templateTransform.getGroupHeaderStyle(bnd), templateTransform.getGroupHeaderBackgroundComponent(bnd));
 			addAfterBandComponent(band, entry.getValue(), null);
 			setPrintGroupSubtotalsWhenExpression(group, entry.getValue());
 			designGroup.addHeaderBand(band);
@@ -178,7 +179,7 @@ public class SubtotalTransform {
 			DRIGroup group = entry.getKey();
 			DRIBand bnd = group.getFooterBand();
 			DRDesignGroup designGroup = accessor.getGroupTransform().getGroup(group);
-			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupFooter", bnd, accessor.getTemplateTransform().getGroupFooterSplitType(bnd), accessor.getTemplateTransform().getGroupFooterStyle(bnd));
+			DRDesignBand band = accessor.getBandTransform().band("subtotalGroupFooter", bnd, templateTransform.getGroupFooterSplitType(bnd), templateTransform.getGroupFooterStyle(bnd), templateTransform.getGroupFooterBackgroundComponent(bnd));
 			addBeforeBandComponent(band, entry.getValue(), null);
 			setPrintGroupSubtotalsWhenExpression(group, entry.getValue());
 			designGroup.addFooterBand(0, band);

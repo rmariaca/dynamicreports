@@ -255,8 +255,23 @@ public class ComponentTransform {
 			}
 			designList.addComponent(horizontalAlignment, verticalAlignment, component(component, defaultStyleType, resetType, resetGroup));
 		}
+		designList.setBackgroundComponent(listBackgroundComponent(list.getBackgroundComponent(), defaultStyleType, resetType, resetGroup));
 
 		return designList;
+	}
+
+	protected DRDesignComponent listBackgroundComponent(DRIComponent backgroundComponent, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		if (backgroundComponent != null) {
+			if (backgroundComponent instanceof DRIRectangle ||
+					backgroundComponent instanceof DRIImage ||
+					backgroundComponent instanceof DRITextField) {
+				return component(backgroundComponent, defaultStyleType, resetType, resetGroup);
+			}
+			else {
+				throw new DRDesignReportException("List background component not supported. Only rectangle, image and textfield are supported");
+			}
+		}
+		return null;
 	}
 
 	//text field

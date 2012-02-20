@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
@@ -167,6 +168,21 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRStyle summaryStyle;
 	private DRStyle noDataStyle;
 	private DRStyle backgroundStyle;
+	//band background component
+	private DRComponent titleBackgroundComponent;
+	private DRComponent pageHeaderBackgroundComponent;
+	private DRComponent pageFooterBackgroundComponent;
+	private DRComponent columnHeaderBackgroundComponent;
+	private DRComponent columnFooterBackgroundComponent;
+	private DRComponent groupHeaderBackgroundComponent;
+	private DRComponent groupFooterBackgroundComponent;
+	private DRComponent detailHeaderBackgroundComponent;
+	private DRComponent detailBackgroundComponent;
+	private DRComponent detailFooterBackgroundComponent;
+	private DRComponent lastPageFooterBackgroundComponent;
+	private DRComponent summaryBackgroundComponent;
+	private DRComponent noDataBackgroundComponent;
+	private DRComponent backgroundBackgroundComponent;
 
 	public DRReportTemplate() {
 		this.chartSeriesColors = new ArrayList<Color>();
@@ -1055,4 +1071,117 @@ public class DRReportTemplate implements DRIReportTemplate {
 	public void setBackgroundStyle(DRStyle backgroundStyle) {
 		this.backgroundStyle = backgroundStyle;
 	}
+
+	public DRComponent getTitleBackgroundComponent() {
+		return titleBackgroundComponent;
+	}
+
+	public void setTitleBackgroundComponent(DRComponent titleBackgroundComponent) {
+		this.titleBackgroundComponent = titleBackgroundComponent;
+	}
+
+	public DRComponent getPageHeaderBackgroundComponent() {
+		return pageHeaderBackgroundComponent;
+	}
+
+	public void setPageHeaderBackgroundComponent(DRComponent pageHeaderBackgroundComponent) {
+		this.pageHeaderBackgroundComponent = pageHeaderBackgroundComponent;
+	}
+
+	public DRComponent getPageFooterBackgroundComponent() {
+		return pageFooterBackgroundComponent;
+	}
+
+	public void setPageFooterBackgroundComponent(DRComponent pageFooterBackgroundComponent) {
+		this.pageFooterBackgroundComponent = pageFooterBackgroundComponent;
+	}
+
+	public DRComponent getColumnHeaderBackgroundComponent() {
+		return columnHeaderBackgroundComponent;
+	}
+
+	public void setColumnHeaderBackgroundComponent(DRComponent columnHeaderBackgroundComponent) {
+		this.columnHeaderBackgroundComponent = columnHeaderBackgroundComponent;
+	}
+
+	public DRComponent getColumnFooterBackgroundComponent() {
+		return columnFooterBackgroundComponent;
+	}
+
+	public void setColumnFooterBackgroundComponent(DRComponent columnFooterBackgroundComponent) {
+		this.columnFooterBackgroundComponent = columnFooterBackgroundComponent;
+	}
+
+	public DRComponent getGroupHeaderBackgroundComponent() {
+		return groupHeaderBackgroundComponent;
+	}
+
+	public void setGroupHeaderBackgroundComponent(DRComponent groupHeaderBackgroundComponent) {
+		this.groupHeaderBackgroundComponent = groupHeaderBackgroundComponent;
+	}
+
+	public DRComponent getGroupFooterBackgroundComponent() {
+		return groupFooterBackgroundComponent;
+	}
+
+	public void setGroupFooterBackgroundComponent(DRComponent groupFooterBackgroundComponent) {
+		this.groupFooterBackgroundComponent = groupFooterBackgroundComponent;
+	}
+
+	public DRComponent getDetailHeaderBackgroundComponent() {
+		return detailHeaderBackgroundComponent;
+	}
+
+	public void setDetailHeaderBackgroundComponent(DRComponent detailHeaderBackgroundComponent) {
+		this.detailHeaderBackgroundComponent = detailHeaderBackgroundComponent;
+	}
+
+	public DRComponent getDetailBackgroundComponent() {
+		return detailBackgroundComponent;
+	}
+
+	public void setDetailBackgroundComponent(DRComponent detailBackgroundComponent) {
+		this.detailBackgroundComponent = detailBackgroundComponent;
+	}
+
+	public DRComponent getDetailFooterBackgroundComponent() {
+		return detailFooterBackgroundComponent;
+	}
+
+	public void setDetailFooterBackgroundComponent(DRComponent detailFooterBackgroundComponent) {
+		this.detailFooterBackgroundComponent = detailFooterBackgroundComponent;
+	}
+
+	public DRComponent getLastPageFooterBackgroundComponent() {
+		return lastPageFooterBackgroundComponent;
+	}
+
+	public void setLastPageFooterBackgroundComponent(DRComponent lastPageFooterBackgroundComponent) {
+		this.lastPageFooterBackgroundComponent = lastPageFooterBackgroundComponent;
+	}
+
+	public DRComponent getSummaryBackgroundComponent() {
+		return summaryBackgroundComponent;
+	}
+
+	public void setSummaryBackgroundComponent(DRComponent summaryBackgroundComponent) {
+		this.summaryBackgroundComponent = summaryBackgroundComponent;
+	}
+
+	public DRComponent getNoDataBackgroundComponent() {
+		return noDataBackgroundComponent;
+	}
+
+	public void setNoDataBackgroundComponent(DRComponent noDataBackgroundComponent) {
+		this.noDataBackgroundComponent = noDataBackgroundComponent;
+	}
+
+	public DRComponent getBackgroundBackgroundComponent() {
+		return backgroundBackgroundComponent;
+	}
+
+	public void setBackgroundBackgroundComponent(DRComponent backgroundBackgroundComponent) {
+		this.backgroundBackgroundComponent = backgroundBackgroundComponent;
+	}
+
 }

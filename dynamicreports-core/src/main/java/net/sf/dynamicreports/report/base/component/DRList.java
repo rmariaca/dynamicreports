@@ -42,6 +42,7 @@ public class DRList extends DRDimensionComponent implements DRIList {
 	private List<DRListCell> listCells;
 	private ListType type;
 	private Integer gap;
+	private DRComponent backgroundComponent;
 
 	public DRList() {
 		this(ListType.HORIZONTAL);
@@ -93,4 +94,14 @@ public class DRList extends DRDimensionComponent implements DRIList {
 		}
 		this.gap = gap;
 	}
+
+	public DRComponent getBackgroundComponent() {
+		return backgroundComponent;
+	}
+
+	public void setBackgroundComponent(DRComponent backgroundComponent) {
+		this.backgroundComponent = backgroundComponent;
+	}
+
+
 }

@@ -24,7 +24,6 @@ package net.sf.dynamicreports.design.definition.style;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Markup;
@@ -64,5 +63,4 @@ public interface DRIDesignBaseStyle {
 
 	public DRIDesignPen getLinePen();
 
-	public DRIDesignComponent getListBackgroundComponent();
 }

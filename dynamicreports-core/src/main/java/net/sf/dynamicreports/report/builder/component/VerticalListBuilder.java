@@ -78,6 +78,12 @@ public class VerticalListBuilder extends DimensionComponentBuilder<VerticalListB
 		return this;
 	}
 
+	public VerticalListBuilder setBackgroundComponent(ComponentBuilder<?, ?> backgroundComponent) {
+		Validate.notNull(backgroundComponent, "backgroundComponent must not be null");
+		getObject().setBackgroundComponent(backgroundComponent.build());
+		return this;
+	}
+
 	public DRList getList() {
 		return build();
 	}
