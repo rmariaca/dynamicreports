@@ -117,8 +117,12 @@ class BandComponentsTransform {
 		}
 		component.setUniqueName(componentName + componentNames.get(componentName));
 		if (component instanceof DRDesignList) {
-			for (DRDesignComponent lComponent : ((DRDesignList) component).getComponents()) {
+			DRDesignList list = (DRDesignList) component;
+			for (DRDesignComponent lComponent : list.getComponents()) {
 				generateComponentNames(lComponent, bandName);
+			}
+			if (list.getBackgroundComponent() != null) {
+				list.getBackgroundComponent().setUniqueName(component.getUniqueName() + ".background");
 			}
 		}
 	}
