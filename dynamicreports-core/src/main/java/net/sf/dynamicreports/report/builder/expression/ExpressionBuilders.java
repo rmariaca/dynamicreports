@@ -29,8 +29,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
+import net.sf.dynamicreports.report.builder.crosstab.AbstractCrosstabGroupBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
+import net.sf.dynamicreports.report.definition.DRICrosstabValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -216,5 +220,17 @@ public class ExpressionBuilders {
 	//crosstab
 	public OrderByExpression orderBy(CrosstabMeasureBuilder<? extends Comparable<?>> measure) {
 		return Expressions.orderBy(measure);
+	}
+
+	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure) {
+		return Expressions.crosstabValue(measure);
+	}
+
+	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, AbstractCrosstabGroupBuilder<?, ?, ?> group) {
+		return Expressions.crosstabValue(measure, group);
+	}
+
+	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, CrosstabColumnGroupBuilder<?> columnGroup, CrosstabRowGroupBuilder<?> rowGroup) {
+		return Expressions.crosstabValue(measure, columnGroup, rowGroup);
 	}
 }

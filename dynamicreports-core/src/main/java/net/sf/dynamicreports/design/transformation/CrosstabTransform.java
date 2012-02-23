@@ -66,8 +66,11 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
+import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -162,11 +165,11 @@ public class CrosstabTransform {
 
 		designGroup.setExpression(accessor.getExpressionTransform().transformExpression(group.getExpression()));
 		if (group.getOrderByExpression() != null) {
-			CrosstabExpression orderByExpression = new CrosstabExpression(crosstab, group.getOrderByExpression());
+			DRIExpression orderByExpression = getCrosstabExpression(crosstab, group.getOrderByExpression());
 			designGroup.setOrderByExpression(accessor.getExpressionTransform().transformExpression(orderByExpression));
 		}
 		if (group.getComparatorExpression() != null) {
-			CrosstabExpression comparatorExpression = new CrosstabExpression(crosstab, group.getComparatorExpression());
+			DRIExpression comparatorExpression = getCrosstabExpression(crosstab, group.getComparatorExpression());
 			designGroup.setComparatorExpression(accessor.getExpressionTransform().transformExpression(comparatorExpression));
 		}
 
@@ -396,7 +399,7 @@ public class CrosstabTransform {
 			if (style != null) {
 				newStyle.setParentStyle((DRStyle) style);
 				for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
-					CrosstabExpression<Boolean> conditionalStyleExpression = new CrosstabExpression<Boolean>(crosstab, conditionalStyle.getConditionExpression());
+					DRIExpression<Boolean> conditionalStyleExpression = getCrosstabExpression(crosstab, conditionalStyle.getConditionExpression());
 					DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyleExpression);
 					accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
 					newStyle.addConditionalStyle(newConditionalStyle);
@@ -446,7 +449,7 @@ public class CrosstabTransform {
 				textField.setValueExpression(measure.getExpression());
 			}
 			else {
-				CrosstabExpression valueExpression = new CrosstabExpression(crosstab, measure.getExpression());
+				DRIExpression valueExpression = getCrosstabExpression(crosstab, measure.getExpression());
 				textField.setValueExpression(valueExpression);
 			}
 
@@ -537,6 +540,13 @@ public class CrosstabTransform {
 		}
 	}
 
+	private <T> DRIExpression<T> getCrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) throws DRException {
+		if (expression instanceof DRIJasperExpression) {
+			return expression;
+		}
+		return new CrosstabExpression<T>(crosstab, expression);
+	}
+
 	private class CrosstabExpression<T> extends AbstractComplexExpression<T> {
 		private static final long serialVersionUID = 1L;
 
@@ -545,12 +555,13 @@ public class CrosstabTransform {
 		public CrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) throws DRException {
 			this.expression = expression;
 			accessor.getExpressionTransform().transformExpression(expression);
-			/*for (DRICrosstabColumnGroup<?> columnGroup : crosstab.getColumnGroups()) {
-				addExpression(columnGroup);
+			if (expression instanceof DRIComplexExpression) {
+				for (DRIExpression<?> express : ((DRIComplexExpression<?>) expression).getExpressions()) {
+					if (express instanceof DRISystemExpression<?>) {
+						addExpression(express);
+					}
+				}
 			}
-			for (DRICrosstabRowGroup<?> rowGroup : crosstab.getRowGroups()) {
-				addExpression(rowGroup);
-			}*/
 			for (DRICrosstabVariable<?> variable : crosstab.getVariables()) {
 				addExpression(variable);
 			}

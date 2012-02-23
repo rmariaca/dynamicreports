@@ -29,13 +29,13 @@ import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
-import net.sf.dynamicreports.report.definition.DRIValue;
+import net.sf.dynamicreports.report.definition.DRICrosstabValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariableBuilder<T>, DRCrosstabVariable<T>> implements DRIValue<T> {
+public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariableBuilder<T>, DRCrosstabVariable<T>> implements DRICrosstabValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected CrosstabVariableBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
@@ -56,6 +56,6 @@ public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariable
 	}
 
 	public String getName() {
-		return build().getName();
+		return getObject().getName();
 	}
 }
