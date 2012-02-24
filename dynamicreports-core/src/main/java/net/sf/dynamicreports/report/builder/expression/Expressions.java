@@ -249,7 +249,7 @@ public class Expressions {
 		return new CrosstabValueExpression<T>(measure, group);
 	}
 
-	public static <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, CrosstabColumnGroupBuilder<?> columnGroup, CrosstabRowGroupBuilder<?> rowGroup) {
-		return new CrosstabValueExpression<T>(measure, columnGroup, rowGroup);
+	public static <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+		return new CrosstabValueExpression<T>(measure, rowGroup, columnGroup);
 	}
 }

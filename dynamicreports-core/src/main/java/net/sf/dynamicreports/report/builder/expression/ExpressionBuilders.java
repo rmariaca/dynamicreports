@@ -230,7 +230,7 @@ public class ExpressionBuilders {
 		return Expressions.crosstabValue(measure, group);
 	}
 
-	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, CrosstabColumnGroupBuilder<?> columnGroup, CrosstabRowGroupBuilder<?> rowGroup) {
-		return Expressions.crosstabValue(measure, columnGroup, rowGroup);
+	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+		return Expressions.crosstabValue(measure, rowGroup, columnGroup);
 	}
 }

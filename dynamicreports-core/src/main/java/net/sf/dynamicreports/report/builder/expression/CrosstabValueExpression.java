@@ -43,7 +43,7 @@ public final class CrosstabValueExpression<T> extends AbstractSystemExpression<T
 		super(measure.getName() + "_" + group.getName() + "_ALL");
 	}
 
-	protected CrosstabValueExpression(DRICrosstabValue<T> measure, CrosstabColumnGroupBuilder<?> columnGroup, CrosstabRowGroupBuilder<?> rowGroup) {
+	protected CrosstabValueExpression(DRICrosstabValue<T> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
 		super(measure.getName() + "_" + rowGroup.getName() + "_" + columnGroup.getName() + "_ALL");
 	}
 }

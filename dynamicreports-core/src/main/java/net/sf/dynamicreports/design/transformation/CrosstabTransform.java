@@ -70,7 +70,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
-import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -557,9 +556,7 @@ public class CrosstabTransform {
 			accessor.getExpressionTransform().transformExpression(expression);
 			if (expression instanceof DRIComplexExpression) {
 				for (DRIExpression<?> express : ((DRIComplexExpression<?>) expression).getExpressions()) {
-					if (express instanceof DRISystemExpression<?>) {
-						addExpression(express);
-					}
+					addExpression(express);
 				}
 			}
 			for (DRICrosstabVariable<?> variable : crosstab.getVariables()) {
@@ -572,13 +569,20 @@ public class CrosstabTransform {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T evaluate(List<?> values, ReportParameters reportParameters) {
 			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
 			for (int i = 0; i < getExpressions().size(); i++) {
 				customValues.setSystemValue(getExpressions().get(i).getName(), values.get(i));
 			}
-			return reportParameters.getValue(expression.getName());
+			if (expression instanceof DRIComplexExpression) {
+				DRIComplexExpression<?> express = (DRIComplexExpression<?>) expression;
+				return (T) express.evaluate(values, reportParameters);
+			}
+			else {
+				return reportParameters.getValue(expression.getName());
+			}
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
