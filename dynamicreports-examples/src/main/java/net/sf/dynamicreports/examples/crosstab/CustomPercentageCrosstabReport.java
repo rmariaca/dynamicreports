@@ -25,50 +25,54 @@ package net.sf.dynamicreports.examples.crosstab;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
+import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageCrosstabReport {
+public class CustomPercentageCrosstabReport {
 
-	public PercentageCrosstabReport() {
+	public CustomPercentageCrosstabReport() {
 		build();
 	}
 
 	private void build() {
 		CrosstabRowGroupBuilder<String> rowGroup = ctab.rowGroup("state", String.class)
-			 .setTotalHeader("Total for state");
+			.setTotalHeader("Total for state");
 
 		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class);
 
-		FieldBuilder<BigDecimal> unitPriceField = field("unitprice", BigDecimal.class);
+		FieldBuilder<BigDecimal> quantityField = field("unitprice", BigDecimal.class);
 
+		CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure = ctab.measure("Unit price", quantityField, Calculation.SUM);
+		CrosstabMeasureBuilder<BigDecimal> percentageMeasure = ctab.measure("%", new PercentageExpression(unitPriceMeasure, columnGroup));
+		percentageMeasure.setDataType(type.doubleType());
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
 			.rowGroups(rowGroup)
 			.columnGroups(columnGroup)
-			.measures(
-				ctab.measure("Unit price", unitPriceField, Calculation.SUM),
-				ctab.measure("%", unitPriceField, Calculation.SUM).setPercentageType(CrosstabPercentageType.GRAND_TOTAL));
+			.measures(unitPriceMeasure, percentageMeasure);
 
 		try {
 			report()
 				.setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 				.setTemplate(Templates.reportTemplate)
-				.title(Templates.createTitleComponent("PercentageCrosstab"))
+				.title(Templates.createTitleComponent("CustomPercentageCrosstab"))
 				.summary(crosstab)
 				.pageFooter(Templates.footerComponent)
 				.setDataSource(createDataSource())
@@ -111,6 +115,22 @@ public class PercentageCrosstabReport {
 	}
 
 	public static void main(String[] args) {
-		new PercentageCrosstabReport();
+		new CustomPercentageCrosstabReport();
+	}
+
+	private class PercentageExpression extends AbstractComplexExpression<BigDecimal> {
+		private static final long serialVersionUID = 1L;
+
+		private PercentageExpression(CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure, CrosstabColumnGroupBuilder<String> columnGroup) {
+			addExpression(exp.crosstabValue(unitPriceMeasure));
+			addExpression(exp.crosstabValue(unitPriceMeasure, columnGroup));
+		}
+
+		@Override
+		public BigDecimal evaluate(List<?> values, ReportParameters reportParameters) {
+			BigDecimal unitPrice = (BigDecimal) values.get(0);
+			BigDecimal unitPriceTotal = (BigDecimal) values.get(1);
+			return unitPrice.divide(unitPriceTotal, 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100));
+		}
 	}
 }
