@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.base.component;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.report.base.DRTableOfContentsHeading;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
@@ -43,6 +44,7 @@ public abstract class DRComponent implements DRIComponent {
 	private DRIExpression<Boolean> printWhenExpression;
 	private Boolean removeLineWhenBlank;
 	private List<DRIPropertyExpression> propertyExpressions;
+	private DRTableOfContentsHeading tableOfContentsHeading;
 
 	public DRComponent() {
 		init();
@@ -88,4 +90,13 @@ public abstract class DRComponent implements DRIComponent {
 	public void setPropertyExpressions(List<DRIPropertyExpression> propertyExpressions) {
 		this.propertyExpressions = propertyExpressions;
 	}
+
+	public DRTableOfContentsHeading getTableOfContentsHeading() {
+		return tableOfContentsHeading;
+	}
+
+	public void setTableOfContentsHeading(DRTableOfContentsHeading tableOfContentsHeading) {
+		this.tableOfContentsHeading = tableOfContentsHeading;
+	}
+
 }

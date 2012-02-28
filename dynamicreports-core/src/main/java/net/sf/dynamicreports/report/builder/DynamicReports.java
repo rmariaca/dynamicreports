@@ -42,6 +42,7 @@ import net.sf.dynamicreports.report.builder.group.GroupBuilders;
 import net.sf.dynamicreports.report.builder.style.StyleBuilders;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilders;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsHeadingBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -291,6 +292,14 @@ public class DynamicReports {
 	//table of contents
 	public static TableOfContentsCustomizerBuilder tableOfContentsCustomizer() {
 		return new TableOfContentsCustomizerBuilder();
+	}
+
+	public static TableOfContentsHeadingBuilder tableOfContentsHeading() {
+		return new TableOfContentsHeadingBuilder();
+	}
+
+	public static TableOfContentsHeadingBuilder tableOfContentsHeading(String label) {
+		return new TableOfContentsHeadingBuilder().setLabel(label);
 	}
 
 	//dataset

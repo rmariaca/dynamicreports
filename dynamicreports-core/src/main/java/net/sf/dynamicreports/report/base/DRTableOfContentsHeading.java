@@ -20,28 +20,35 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.component;
+package net.sf.dynamicreports.report.base;
 
-import java.io.Serializable;
-import java.util.List;
-
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIComponent extends Serializable {
+public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public DRIStyle getStyle();
+	private DRIExpression<String> labelExpression;
+	private Integer level;
 
-	public DRIExpression<Boolean> getPrintWhenExpression();
+	public DRIExpression<String> getLabelExpression() {
+		return labelExpression;
+	}
 
-	public Boolean getRemoveLineWhenBlank();
+	public void setLabelExpression(DRIExpression<String> labelExpression) {
+		this.labelExpression = labelExpression;
+	}
 
-	public List<DRIPropertyExpression> getPropertyExpressions();
+	public Integer getLevel() {
+		return level;
+	}
 
-	public DRITableOfContentsHeading getTableOfContentsHeading();
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
 }

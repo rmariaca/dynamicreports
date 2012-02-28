@@ -20,28 +20,15 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.component;
+package net.sf.dynamicreports.design.definition;
 
-import java.io.Serializable;
-import java.util.List;
-
-import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIComponent extends Serializable {
+public interface DRIDesignTableOfContentsHeading {
 
-	public DRIStyle getStyle();
+	public DRIDesignTextField getReferenceField();
 
-	public DRIExpression<Boolean> getPrintWhenExpression();
-
-	public Boolean getRemoveLineWhenBlank();
-
-	public List<DRIPropertyExpression> getPropertyExpressions();
-
-	public DRITableOfContentsHeading getTableOfContentsHeading();
 }

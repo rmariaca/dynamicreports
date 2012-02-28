@@ -29,9 +29,11 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
+import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
+import net.sf.dynamicreports.design.definition.DRIDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
@@ -108,81 +110,66 @@ public class ComponentTransform {
 		JRDesignElement[] jrElements;
 		if (component instanceof DRIDesignChart) {
 			JRDesignElement jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignBarcode) {
 			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignBarbecue) {
 			JRDesignElement jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarbecue) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignList) {
 			jrElements = list((DRIDesignList) component);
 		}
 		else if (component instanceof DRIDesignTextField) {
 			JRDesignElement jrElement = textField((DRIDesignTextField) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignFiller) {
 			JRDesignElement jrElement = filler((DRIDesignFiller) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignImage) {
 			JRDesignElement jrElement = image((DRIDesignImage) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignSubreport) {
 			JRDesignElement jrElement = subreport((DRIDesignSubreport) component, component.getWidth());
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignLine) {
 			JRDesignElement jrElement = line((DRIDesignLine) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignEllipse) {
 			JRDesignElement jrElement = ellipse((DRIDesignEllipse) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignRectangle) {
 			JRDesignElement jrElement = rectangle((DRIDesignRectangle) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignBreak) {
 			JRDesignElement jrElement = breakComponent((DRIDesignBreak) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignGenericElement) {
 			JRDesignElement jrElement = genericElement((DRIDesignGenericElement) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignCrosstab) {
 			JRDesignElement jrElement = accessor.getCrosstabTransform().transform((DRIDesignCrosstab) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignMap) {
 			JRDesignElement jrElement = map((DRIDesignMap) component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else if (component instanceof DRIDesignCustomComponent) {
 			JRDesignElement jrElement = customComponent(component);
-			component(jrElement, component, listType);
-			jrElements = new JRDesignElement[] {jrElement};
+			jrElements = component(jrElement, component, listType);
 		}
 		else {
 			throw new JasperDesignException("Component " + component.getClass().getName() + " not supported");
@@ -191,7 +178,7 @@ public class ComponentTransform {
 		return jrElements;
 	}
 
-	private void component(JRDesignElement jrElement, DRIDesignComponent component, ListType listType) {
+	private JRDesignElement[] component(JRDesignElement jrElement, DRIDesignComponent component, ListType listType) {
 		StretchType stretchType = component.getStretchType();
 		if (stretchType == null) {
 			if (component instanceof DRIDesignSubreport ||
@@ -233,6 +220,19 @@ public class ComponentTransform {
 		for (DRIDesignPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			jrElement.addPropertyExpression(accessor.getExpressionTransform().getPropertyExpression(propertyExpression));
 		}
+
+		DRIDesignTableOfContentsHeading tocHeading = component.getTableOfContentsHeading();
+		if (tocHeading != null) {
+			DRDesignTextField referenceField = (DRDesignTextField) tocHeading.getReferenceField();
+			referenceField.setX(component.getX());
+			referenceField.setY(component.getY());
+			JRDesignElement jrReferenceElement = textField(referenceField);
+			component(jrReferenceElement, referenceField, listType);
+			return new JRDesignElement[] {jrReferenceElement, jrElement};
+		}
+		else {
+			return new JRDesignElement[] {jrElement};
+		}
 	}
 
 	private StretchType detectStretchType(ListType listType) {
@@ -248,7 +248,7 @@ public class ComponentTransform {
 		switch (list.getComponentGroupType()) {
 		case FRAME:
 			JRDesignFrame frame = new JRDesignFrame();
-			component(frame, list, list.getType());
+			JRDesignElement[] jrElems = component(frame, list, list.getType());
 
 			DRDesignComponent background = (DRDesignComponent) list.getBackgroundComponent();
 			if (background != null) {
@@ -262,7 +262,7 @@ public class ComponentTransform {
 					frame.addElement(jrElement);
 				}
 			}
-			return new JRDesignElement[] {frame};
+			return jrElems;
 		case NONE:
 			List<JRDesignElement> jrElementList = new ArrayList<JRDesignElement>();
 			for (DRIDesignComponent element : list.getComponents()) {

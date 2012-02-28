@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.component;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
@@ -52,6 +53,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	private boolean printInFirstWholeBand;
 	private boolean printWhenDetailOverflows;
 	private DRIDesignGroup printWhenGroupChanges;
+	private DRDesignTableOfContentsHeading tableOfContentsHeading;
 
 	protected DRDesignComponent(String name) {
 		this.name = name;
@@ -178,4 +180,13 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 	public void setPrintWhenGroupChanges(DRIDesignGroup printWhenGroupChanges) {
 		this.printWhenGroupChanges = printWhenGroupChanges;
 	}
+
+	public DRDesignTableOfContentsHeading getTableOfContentsHeading() {
+		return tableOfContentsHeading;
+	}
+
+	public void setTableOfContentsHeading(DRDesignTableOfContentsHeading tableOfContentsHeading) {
+		this.tableOfContentsHeading = tableOfContentsHeading;
+	}
+
 }

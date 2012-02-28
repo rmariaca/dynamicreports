@@ -24,11 +24,15 @@ package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsHeadingBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -77,6 +81,17 @@ public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U exten
 
 	public T addProperty(String name, String value) {
 		getComponent().addPropertyExpression(Expressions.property(name, value));
+		return (T) this;
+	}
+
+	public T setTableOfContentsHeading(String label) {
+		TableOfContentsHeadingBuilder tocHeading = DynamicReports.tableOfContentsHeading(label);
+		return setTableOfContentsHeading(tocHeading);
+	}
+
+	public T setTableOfContentsHeading(TableOfContentsHeadingBuilder tocHeading) {
+		Validate.notNull(tocHeading, "tocHeading must not be null");
+		getComponent().setTableOfContentsHeading(tocHeading.build());
 		return (T) this;
 	}
 

@@ -120,6 +120,7 @@ public class Default {
 	//table of contents
 	private boolean tableOfContents;
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
+	private int tableOfContentsLevel;
 	//text field
 	private int textFieldWidth;
 	private boolean textFieldPrintRepeatedValues;
@@ -314,6 +315,7 @@ public class Default {
 
 		this.tableOfContents = false;
 		this.tableOfContentsCustomizer = new TableOfContentsCustomizer();
+		this.tableOfContentsLevel = 0;
 
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
@@ -651,6 +653,10 @@ public class Default {
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
 		return tableOfContentsCustomizer;
+	}
+
+	public int getTableOfContentsLevel() {
+		return tableOfContentsLevel;
 	}
 
 	public int getTextFieldWidth() {
