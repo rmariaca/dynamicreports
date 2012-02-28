@@ -30,7 +30,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignBand;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
-import net.sf.dynamicreports.design.base.DRDesignHyperLink;
+import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
@@ -38,8 +38,6 @@ import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
-import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -49,7 +47,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
-import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -115,21 +112,9 @@ public class GroupTransform {
 		DRDesignList header = new DRDesignList();
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
 
-		DRDesignHyperLink designHyperLink = null;
-		boolean tableOfContents = accessor.getTemplateTransform().isTableOfContents();
-		if (tableOfContents) {
-			DRTextField<String> referenceField = new DRTextField<String>();
-			String expressionName = group.getValueField().getValueExpression().getName();
-			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), expressionName));
-			DRHyperLink hyperLink = new DRHyperLink();
-			hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName()));
-			referenceField.setHyperLink(hyperLink);
-			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
-			designReferenceField.setWidth(0);
-			designReferenceField.setHeight(0);
-			designReferenceField.setUniqueName("group_" + group.getName() + ".tocReference");
-			header.addComponent(designReferenceField);
-			designHyperLink = designReferenceField.getHyperLink();
+		DRDesignTableOfContentsHeading designTocHeading = accessor.getTableOfContentsTransform().groupHeading(group, level);
+		if (designTocHeading != null) {
+			header.addComponent(designTocHeading.getReferenceField());
 		}
 
 		switch (templateTransform.getGroupHeaderLayout(group)) {
@@ -145,8 +130,8 @@ public class GroupTransform {
 			header.addComponent(HorizontalCellComponentAlignment.LEFT, null, titleComponent(group));
 			DRDesignTextField valueComponent = valueComponent(group);
 			header.addComponent(valueComponent);
-			if (tableOfContents) {
-				valueComponent.setHyperLink(designHyperLink);
+			if (designTocHeading != null) {
+				valueComponent.setHyperLink(designTocHeading.getReferenceField().getHyperLink());
 			}
 			break;
 		case VALUE:
@@ -158,8 +143,8 @@ public class GroupTransform {
 			}
 			valueComponent = valueComponent(group);
 			header.addComponent(valueComponent);
-			if (tableOfContents) {
-				valueComponent.setHyperLink(designHyperLink);
+			if (designTocHeading != null) {
+				valueComponent.setHyperLink(designTocHeading.getReferenceField().getHyperLink());
 			}
 			break;
 		default:
@@ -293,43 +278,6 @@ public class GroupTransform {
 
 		public String evaluate(ReportParameters reportParameters) {
 			return dataType.valueToString(valueExpression.getName(), reportParameters);
-		}
-	}
-
-	private class TocReferenceExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private int level;
-		private String groupName;
-		private String expressionName;
-
-		private TocReferenceExpression(int level, String groupName, String expressionName) {
-			this.level = level;
-			this.groupName = groupName;
-			this.expressionName = expressionName;
-		}
-
-		public String evaluate(ReportParameters reportParameters) {
-			String id = groupName + "_" + reportParameters.getReportRowNumber();
-			JasperTocCustomValues customValues = (JasperTocCustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			String text = String.valueOf(reportParameters.getValue(expressionName));
-			customValues.addTocHeading(level, id, text);
-			return null;
-		}
-	}
-
-	private class TocReferenceLinkExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private String groupName;
-
-		private TocReferenceLinkExpression(String groupName) {
-			this.groupName = groupName;
-		}
-
-		public String evaluate(ReportParameters reportParameters) {
-			String id = groupName + "_" + reportParameters.getReportRowNumber();
-			return id;
 		}
 	}
 }

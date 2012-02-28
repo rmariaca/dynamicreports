@@ -62,7 +62,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRHyperLink;
@@ -70,7 +69,6 @@ import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.base.style.DRStyle;
@@ -87,10 +85,8 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
-import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
-import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
@@ -219,30 +215,12 @@ public class ComponentTransform {
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}
-
-		boolean tableOfContents = accessor.getTemplateTransform().isTableOfContents();
-		DRITableOfContentsHeading tocHeading = component.getTableOfContentsHeading();
-		if (tableOfContents && tocHeading != null) {
-			if (tableOfContents) {
-				DRTextField<String> referenceField = new DRTextField<String>();
-				String expressionName = tocHeading.getLabelExpression().getName();
-				referenceField.setValueExpression(new TocReferenceExpression(accessor.getTemplateTransform().getTableOfContentsLevel(tocHeading), tocHeading.getLabelExpression()));
-				DRHyperLink hyperLink = new DRHyperLink();
-				hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
-				referenceField.setHyperLink(hyperLink);
-				DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
-				designReferenceField.setWidth(0);
-				designReferenceField.setHeight(0);
-				designReferenceField.setUniqueName(expressionName + ".tocReference");
-
-				DRDesignTableOfContentsHeading designTocHeading = new DRDesignTableOfContentsHeading();
-				designTocHeading.setReferenceField(designReferenceField);
-				designComponent.setTableOfContentsHeading(designTocHeading);
-
-				DRDesignHyperLink designHyperLink = designReferenceField.getHyperLink();
-				if (designComponent instanceof DRDesignHyperlinkComponent) {
-					((DRDesignHyperlinkComponent) designComponent).setHyperLink(designHyperLink);
-				}
+		DRDesignTableOfContentsHeading designTocHeading = accessor.getTableOfContentsTransform().componentHeading(component.getTableOfContentsHeading());
+		if (designTocHeading != null) {
+			designComponent.setTableOfContentsHeading(designTocHeading);
+			DRDesignHyperLink designHyperLink = designTocHeading.getReferenceField().getHyperLink();
+			if (designComponent instanceof DRDesignHyperlinkComponent) {
+				((DRDesignHyperlinkComponent) designComponent).setHyperLink(designHyperLink);
 			}
 		}
 	}
@@ -921,40 +899,4 @@ public class ComponentTransform {
 		}
 	}
 
-	private class TocReferenceExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private int level;
-		private String expressionName;
-
-		private TocReferenceExpression(int level, DRIExpression<String> labelExpression) {
-			this.level = level;
-			this.expressionName = labelExpression.getName();
-			addExpression(labelExpression);
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String id = expressionName + "_" + reportParameters.getReportRowNumber();
-			JasperTocCustomValues customValues = (JasperTocCustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			String text = (String) values.get(0);
-			customValues.addTocHeading(level, id, text);
-			return null;
-		}
-	}
-
-	private class TocReferenceLinkExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private String expressionName;
-
-		private TocReferenceLinkExpression(String expressionName) {
-			this.expressionName = expressionName;
-		}
-
-		public String evaluate(ReportParameters reportParameters) {
-			String id = expressionName + "_" + reportParameters.getReportRowNumber();
-			return id;
-		}
-	}
 }

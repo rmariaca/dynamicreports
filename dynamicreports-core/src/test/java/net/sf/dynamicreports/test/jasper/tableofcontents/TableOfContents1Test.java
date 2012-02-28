@@ -23,10 +23,16 @@
 package net.sf.dynamicreports.test.jasper.tableofcontents;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.Serializable;
+
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsHeadingBuilder;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -37,22 +43,29 @@ import org.apache.commons.lang.StringUtils;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class TableOfContentsTest extends AbstractJasperValueTest {
+public class TableOfContents1Test extends AbstractJasperValueTest implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
 	private TextColumnBuilder<String> column3;
 	private ColumnGroupBuilder group1;
 	private ColumnGroupBuilder group2;
+	private LabelExpression labelExpression;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
+		labelExpression = new LabelExpression();
+		TableOfContentsHeadingBuilder tocHeading = tableOfContentsHeading()
+			.setLabel(labelExpression);
+
 		rb.tableOfContents()
 	  	.columns(
 	  		column1 = col.column("Column1", "field1", type.stringType()),
 	  		column2 = col.column("Column2", "field2", type.stringType()),
 	  		column3 = col.column("Column3", "field3", type.stringType()))
 		  .groupBy(
-		  	group1 = grp.group(column1),
+		  	group1 = grp.group(column1).footer(cmp.text("group footer").setTableOfContentsHeading(tocHeading)),
 		  	group2 = grp.group(column2));
 	}
 
@@ -64,22 +77,38 @@ public class TableOfContentsTest extends AbstractJasperValueTest {
 
 		elementValueTest("title.textField1", "Table of contents");
 
-		elementCountTest("detail.textField1", 3);
+		elementCountTest("detail.textField1", 6);
+		int index = 0;
 		for (int i = 0; i < 3; i++) {
 			String anchorName = group1.getGroup().getName() + "_" + i * 24;
 
-			elementValueTest("detail.textField1", i, "value" + (i + 1));
-			JRPrintText text = (JRPrintText) getElementAt("detail.textField1", i);
+			elementValueTest("detail.textField1", index, "value" + (i + 1));
+			JRPrintText text = (JRPrintText) getElementAt("detail.textField1", index);
 			Assert.assertEquals("text anchor", anchorName, text.getHyperlinkAnchor());
 
-			JRPrintText dots = (JRPrintText) getElementAt("detail.textField2", i);
+			JRPrintText dots = (JRPrintText) getElementAt("detail.textField2", index);
 			Assert.assertTrue("dots", StringUtils.containsOnly(dots.getText(), "."));
 			Assert.assertEquals("dots anchor", anchorName, dots.getHyperlinkAnchor());
 
-			JRPrintText pageIndex = (JRPrintText) getElementAt("detail.textField3", i);
+			JRPrintText pageIndex = (JRPrintText) getElementAt("detail.textField3", index);
 			Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
+			index++;
+
+			anchorName = labelExpression.getName() + "_" + (i + 1) * 24;
+
+			elementValueTest("detail.textField1", index, "group footer" + (i + 1));
+			text = (JRPrintText) getElementAt("detail.textField1", index);
+			Assert.assertEquals("text anchor", anchorName, text.getHyperlinkAnchor());
+
+			dots = (JRPrintText) getElementAt("detail.textField2", index);
+			Assert.assertTrue("dots", StringUtils.containsOnly(dots.getText(), "."));
+			Assert.assertEquals("dots anchor", anchorName, dots.getHyperlinkAnchor());
+
+			pageIndex = (JRPrintText) getElementAt("detail.textField3", index);
+			Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
+			index++;
 		}
-		elementValueTest("detail.textField3", "1", "1", "2");
+		elementValueTest("detail.textField3", "1", "1", "1", "2", "2", "2");
 
 		elementCountTest("detail.textField4", 9);
 		for (int i = 0; i < 9; i++) {
@@ -103,6 +132,21 @@ public class TableOfContentsTest extends AbstractJasperValueTest {
 		elementCountTest(name1, 3);
 		for (int i = 0; i < 3; i++) {
 			String anchorName = group1.getGroup().getName() + "_" + i * 24;
+
+			elementValueTest(name1, i, "");
+			JRPrintText reference = (JRPrintText) getElementAt(name1, i);
+			Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
+
+			groupHeaderValueTest(group1, i, "value" + (i + 1));
+			reference = (JRPrintText) getElementAt(name2, i);
+			Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
+		}
+
+		name1 = labelExpression.getName() + ".tocReference";
+		name2 = "groupFooter.textField1";
+		elementCountTest(name1, 3);
+		for (int i = 0; i < 3; i++) {
+			String anchorName = labelExpression.getName() + "_" + (i + 1) * 24;
 
 			elementValueTest(name1, i, "");
 			JRPrintText reference = (JRPrintText) getElementAt(name1, i);
@@ -146,5 +190,16 @@ public class TableOfContentsTest extends AbstractJasperValueTest {
 			}
 		}
 		return dataSource;
+	}
+
+	private class LabelExpression extends AbstractSimpleExpression<String> {
+		private static final long serialVersionUID = 1L;
+
+		private int index = 1;
+
+		public String evaluate(ReportParameters reportParameters) {
+			return "group footer" + index++;
+		}
+
 	}
 }

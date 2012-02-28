@@ -67,5 +67,7 @@ public interface DesignTransformAccessor {
 
 	public DatasetTransform getDatasetTransform();
 
+	public TableOfContentsTransform getTableOfContentsTransform();
+
 	public DRDesignPage getPage();
 }

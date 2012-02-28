@@ -58,6 +58,7 @@ import net.sf.dynamicreports.design.transformation.PageTransform;
 import net.sf.dynamicreports.design.transformation.ReportTransform;
 import net.sf.dynamicreports.design.transformation.StyleTransform;
 import net.sf.dynamicreports.design.transformation.SubtotalTransform;
+import net.sf.dynamicreports.design.transformation.TableOfContentsTransform;
 import net.sf.dynamicreports.design.transformation.TemplateTransform;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
@@ -89,6 +90,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private BarcodeTransform barcodeTransform;
 	private CrosstabTransform crosstabTransform;
 	private DatasetTransform datasetTransform;
+	private TableOfContentsTransform tableOfContentsTransform;
 	private AbstractExpressionTransform expressionTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
@@ -118,6 +120,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		barcodeTransform = new BarcodeTransform(this);
 		crosstabTransform = new CrosstabTransform(this);
 		datasetTransform = new DatasetTransform(this);
+		tableOfContentsTransform = new TableOfContentsTransform(this);
 		transformToMainDataset();
 	}
 
@@ -210,6 +213,10 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 
 	public DatasetTransform getDatasetTransform() {
 		return datasetTransform;
+	}
+
+	public TableOfContentsTransform getTableOfContentsTransform() {
+		return tableOfContentsTransform;
 	}
 
 	public DRIDesignTemplateDesign getTemplateDesign() {
