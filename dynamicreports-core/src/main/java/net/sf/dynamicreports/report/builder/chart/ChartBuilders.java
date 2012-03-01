@@ -103,6 +103,10 @@ public class ChartBuilders {
 		return Charts.barChart();
 	}
 
+	public LayeredBarChartBuilder layeredBarChart() {
+		return Charts.layeredBarChart();
+	}
+	
 	public StackedBarChartBuilder stackedBarChart() {
 		return Charts.stackedBarChart();
 	}

@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Paint;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +97,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRILayeredBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMeterInterval;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIMeterPlot;
@@ -110,6 +112,10 @@ import net.sf.dynamicreports.report.exception.DRException;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.LayeredBarRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.GradientPaintTransformer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -152,6 +158,9 @@ public class ChartTransform {
 
 		if (plot instanceof DRIBar3DPlot) {
 			designPlot = bar3DPlot((DRIBar3DPlot) plot);
+		}
+		else if (plot instanceof DRILayeredBarPlot) {
+			designPlot = layeredBarPlot((DRILayeredBarPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIBarPlot) {
 			designPlot = barPlot((DRIBarPlot) plot);
@@ -218,6 +227,12 @@ public class ChartTransform {
 		designBarPlot.setShowTickMarks(barPlot.getShowTickMarks());
 		designBarPlot.setShowTickLabels(barPlot.getShowTickLabels());
 		designBarPlot.setShowLabels(barPlot.getShowLabels());
+		return designBarPlot;
+	}
+
+	private DRDesignBarPlot layeredBarPlot(DRILayeredBarPlot layeredBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		DRDesignBarPlot designBarPlot = barPlot(layeredBarPlot);
+		chartCustomizers.add(new LayeredBarRendererCustomizer(layeredBarPlot.getSeriesBarWidths()));
 		return designBarPlot;
 	}
 
@@ -666,6 +681,53 @@ public class ChartTransform {
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 	    PiePlot plot = (PiePlot) chart.getPlot();
 	    plot.setLabelGenerator(null);
+	  }
+	}
+
+	private class LayeredBarRendererCustomizer implements DRIChartCustomizer, Serializable {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		private List<Double> seriesBarWidths;
+
+		private LayeredBarRendererCustomizer(List<Double> seriesBarWidths) {
+			this.seriesBarWidths = seriesBarWidths;
+		}
+
+		public void customize(JFreeChart chart, ReportParameters reportParameters) {
+			BarRenderer categoryRenderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
+	    LayeredBarRenderer renderer = new LayeredBarRenderer();
+
+	    renderer.setBaseItemLabelsVisible(categoryRenderer.getBaseItemLabelsVisible());
+	    renderer.setBaseItemLabelFont(categoryRenderer.getBaseItemLabelFont());
+	    renderer.setBaseItemLabelPaint(categoryRenderer.getBaseItemLabelPaint());
+	    renderer.setBaseItemLabelGenerator(categoryRenderer.getBaseItemLabelGenerator());
+			renderer.setShadowVisible(categoryRenderer.getShadowsVisible());
+			CategoryDataset categoryDataset = chart.getCategoryPlot().getDataset();
+			if(categoryDataset != null)	{
+				for(int i = 0; i < categoryDataset.getRowCount(); i++) {
+					Paint seriesOutlinePaint = categoryRenderer.getSeriesOutlinePaint(i);
+					if (seriesOutlinePaint != null) {
+						renderer.setSeriesOutlinePaint(i, seriesOutlinePaint);
+					}
+					Paint seriesPaint = categoryRenderer.getSeriesPaint(i);
+					if (seriesPaint != null) {
+						renderer.setSeriesPaint(i, seriesPaint);
+					}
+				}
+			}
+			renderer.setItemMargin(categoryRenderer.getItemMargin());
+			GradientPaintTransformer gradientPaintTransformer = categoryRenderer.getGradientPaintTransformer();
+			if (gradientPaintTransformer != null) {
+				renderer.setGradientPaintTransformer(gradientPaintTransformer);
+			}
+
+	    if (seriesBarWidths != null) {
+	    	for (int i = 0; i < seriesBarWidths.size(); i++) {
+	    		renderer.setSeriesBarWidth(i, seriesBarWidths.get(i));
+				}
+	    }
+
+	    chart.getCategoryPlot().setRenderer(renderer);
 	  }
 	}
 }

@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRBubblePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRCandlestickPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRHighLowPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRLayeredBarPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMeterPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
@@ -91,6 +92,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case STACKEDBAR:
 				dataset = new DRCategoryDataset();
 				plot = new DRBarPlot();
+				break;
+			case LAYEREDBAR:
+				dataset = new DRCategoryDataset();
+				plot = new DRLayeredBarPlot();
 				break;
 			case BAR3D:
 			case STACKEDBAR3D:

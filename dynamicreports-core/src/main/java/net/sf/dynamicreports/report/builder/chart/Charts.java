@@ -104,6 +104,10 @@ public class Charts {
 		return new BarChartBuilder();
 	}
 
+	public static LayeredBarChartBuilder layeredBarChart() {
+		return new LayeredBarChartBuilder();
+	}
+
 	public static StackedBarChartBuilder stackedBarChart() {
 		return new StackedBarChartBuilder();
 	}
