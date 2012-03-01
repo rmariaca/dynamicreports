@@ -33,7 +33,7 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<String> labelExpression;
-	private Integer level;
+	//private Integer level;
 
 	public DRIExpression<String> getLabelExpression() {
 		return labelExpression;
@@ -43,12 +43,12 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 		this.labelExpression = labelExpression;
 	}
 
-	public Integer getLevel() {
+	/*public Integer getLevel() {
 		return level;
 	}
 
 	public void setLevel(Integer level) {
 		this.level = level;
-	}
+	}*/
 
 }

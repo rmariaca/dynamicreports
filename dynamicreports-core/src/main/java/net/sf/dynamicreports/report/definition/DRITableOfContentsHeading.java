@@ -33,5 +33,5 @@ public interface DRITableOfContentsHeading extends Serializable {
 
 	public DRIExpression<String> getLabelExpression();
 
-	public Integer getLevel();
+	//public Integer getLevel();
 }

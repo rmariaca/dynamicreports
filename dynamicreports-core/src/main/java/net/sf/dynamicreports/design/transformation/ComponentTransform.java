@@ -215,7 +215,7 @@ public class ComponentTransform {
 		for (DRIPropertyExpression propertyExpression : component.getPropertyExpressions()) {
 			designComponent.getPropertyExpressions().add(accessor.getExpressionTransform().transformPropertyExpression(propertyExpression));
 		}
-		DRDesignTableOfContentsHeading designTocHeading = accessor.getTableOfContentsTransform().componentHeading(component.getTableOfContentsHeading());
+		DRDesignTableOfContentsHeading designTocHeading = accessor.getTableOfContentsTransform().componentHeading(component);
 		if (designTocHeading != null) {
 			designComponent.setTableOfContentsHeading(designTocHeading);
 			DRDesignHyperLink designHyperLink = designTocHeading.getReferenceField().getHyperLink();

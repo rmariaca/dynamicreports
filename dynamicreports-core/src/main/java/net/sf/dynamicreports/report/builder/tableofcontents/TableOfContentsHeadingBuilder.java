@@ -48,10 +48,10 @@ public class TableOfContentsHeadingBuilder extends AbstractBuilder<TableOfConten
 		return this;
 	}
 
-	public TableOfContentsHeadingBuilder setLevel(Integer level) {
+	/*public TableOfContentsHeadingBuilder setLevel(Integer level) {
 		this.getObject().setLevel(level);
 		return this;
-	}
+	}*/
 
 	public DRTableOfContentsHeading getTableOfContentsHeading() {
 		return build();

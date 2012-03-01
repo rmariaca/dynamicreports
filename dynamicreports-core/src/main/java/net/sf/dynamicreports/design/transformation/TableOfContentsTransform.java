@@ -32,11 +32,14 @@ import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
 import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -50,14 +53,21 @@ public class TableOfContentsTransform {
 		this.accessor = accessor;
 	}
 
-	protected DRDesignTableOfContentsHeading componentHeading(DRITableOfContentsHeading tocHeading) throws DRException {
+	protected DRDesignTableOfContentsHeading componentHeading(DRIComponent component) throws DRException {
+		DRITableOfContentsHeading tocHeading = component.getTableOfContentsHeading();
 		boolean tableOfContents = accessor.getTemplateTransform().isTableOfContents();
 		if (tableOfContents && tocHeading != null) {
 			DRTextField<String> referenceField = new DRTextField<String>();
-			String expressionName = tocHeading.getLabelExpression().getName();
 			int level = accessor.getTemplateTransform().getTableOfContentsLevel(tocHeading);
-			DRIExpression<String> labelExpression = tocHeading.getLabelExpression();
-			referenceField.setValueExpression(new TocReferenceExpression(level, labelExpression.getName(), labelExpression));
+			DRIExpression<?> labelExpression = tocHeading.getLabelExpression();
+			if (labelExpression == null && component instanceof DRITextField) {
+				labelExpression = ((DRITextField<?>) component).getValueExpression();
+			}
+			if (labelExpression == null) {
+				labelExpression = Expressions.text("");
+			}
+			String expressionName = labelExpression.getName();
+			referenceField.setValueExpression(new TocReferenceExpression(level, expressionName, labelExpression));
 			DRHyperLink hyperLink = new DRHyperLink();
 			hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
 			referenceField.setHyperLink(hyperLink);

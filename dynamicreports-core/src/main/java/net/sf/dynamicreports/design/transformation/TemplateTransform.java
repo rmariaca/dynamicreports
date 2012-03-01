@@ -298,9 +298,9 @@ public class TemplateTransform {
 	}
 
 	public int getTableOfContentsLevel(DRITableOfContentsHeading tocHeading) {
-		if (tocHeading.getLevel() != null) {
+		/*if (tocHeading.getLevel() != null) {
 			return tocHeading.getLevel();
-		}
+		}*/
 		return Defaults.getDefaults().getTableOfContentsLevel();
 	}
 
