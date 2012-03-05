@@ -60,6 +60,7 @@ import net.sf.dynamicreports.design.transformation.StyleTransform;
 import net.sf.dynamicreports.design.transformation.SubtotalTransform;
 import net.sf.dynamicreports.design.transformation.TableOfContentsTransform;
 import net.sf.dynamicreports.design.transformation.TemplateTransform;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -75,6 +76,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport {
 	private DRIReport report;
 	private Integer pageWidth;
+	private List<JasperTocHeading> tocHeadings;
 	private ReportTransform reportTransform;
 	private TemplateTransform templateTransform;
 	private PageTransform pageTransform;
@@ -94,12 +96,13 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	private AbstractExpressionTransform expressionTransform;
 
 	public DRDesignReport(DRIReport report) throws DRException {
-		this(report, null);
+		this(report, null, null);
 	}
 
-	public DRDesignReport(DRIReport report, Integer pageWidth) throws DRException {
+	public DRDesignReport(DRIReport report, Integer pageWidth, List<JasperTocHeading> tocHeadings) throws DRException {
 		this.report = report;
 		this.pageWidth = pageWidth;
+		this.tocHeadings = tocHeadings;
 		init();
 		transform();
 	}
@@ -284,7 +287,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	public boolean isTableOfContents() {
-		return templateTransform.isTableOfContents();
+		return templateTransform.isTableOfContents(tocHeadings);
+	}
+
+	public List<JasperTocHeading> getTableOfContentsHeadings() {
+		return tocHeadings;
 	}
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {

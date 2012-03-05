@@ -22,6 +22,10 @@
 
 package net.sf.dynamicreports.report.definition;
 
+import java.util.List;
+
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -29,4 +33,10 @@ public interface DRICustomValues {
 	public static final String NAME = "CUSTOM_VALUES";
 
 	public void setSystemValue(String name, Object value);
+
+	public void addTocHeading(int level, String id, String text);
+
+	public List<JasperTocHeading> getTocHeadings();
+
+	public void setTocHeadings(List<JasperTocHeading> tocHeadings);
 }

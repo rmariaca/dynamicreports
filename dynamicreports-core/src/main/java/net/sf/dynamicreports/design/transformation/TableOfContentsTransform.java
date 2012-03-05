@@ -27,7 +27,6 @@ import java.util.List;
 import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -55,7 +54,7 @@ public class TableOfContentsTransform {
 
 	protected DRDesignTableOfContentsHeading componentHeading(DRIComponent component) throws DRException {
 		DRITableOfContentsHeading tocHeading = component.getTableOfContentsHeading();
-		boolean tableOfContents = accessor.getTemplateTransform().isTableOfContents();
+		boolean tableOfContents = accessor.isTableOfContents();
 		if (tableOfContents && tocHeading != null) {
 			DRTextField<String> referenceField = new DRTextField<String>();
 			int level = accessor.getTemplateTransform().getTableOfContentsLevel(tocHeading);
@@ -85,7 +84,7 @@ public class TableOfContentsTransform {
 	}
 
 	protected DRDesignTableOfContentsHeading groupHeading(DRIGroup group, int level) throws DRException {
-		boolean tableOfContents = accessor.getTemplateTransform().isTableOfContents();
+		boolean tableOfContents = accessor.isTableOfContents();
 		if (tableOfContents) {
 			DRTextField<String> referenceField = new DRTextField<String>();
 			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), group.getValueField().getValueExpression()));
@@ -120,7 +119,7 @@ public class TableOfContentsTransform {
 		@Override
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
 			String id = expressionName + "_" + reportParameters.getReportRowNumber();
-			JasperTocCustomValues customValues = (JasperTocCustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
+			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
 			String text = String.valueOf(values.get(0));
 			customValues.addTocHeading(level, id, text);
 			return null;

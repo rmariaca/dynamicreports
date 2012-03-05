@@ -65,6 +65,7 @@ import net.sf.dynamicreports.report.component.DRIDesignCustomComponent;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
+import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
@@ -478,7 +479,9 @@ public class ComponentTransform {
 				return jasperReports.get(reportBuilder);
 			}
 			try {
-				JasperReportDesign reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters, null);
+				DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
+				DRDesignReport report = new DRDesignReport(reportBuilder.build(), pageWidth, customValues.getTocHeadings());
+				JasperReportDesign reportDesign = new JasperReportDesign(report, reportParameters, null);
 				JasperReport jasperReport = JasperCompileManager.compileReport(reportDesign.getDesign());
 				reportDesigns.put(reportBuilder, reportDesign);
 				jasperReports.put(reportBuilder, jasperReport);

@@ -28,6 +28,7 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
@@ -41,6 +42,7 @@ public class JasperCustomValues implements DRICustomValues {
 	private Map<String, Object> systemValues;
 	private JasperScriptlet jasperScriptlet;
 	private Integer startPageNumber;
+	private List<JasperTocHeading> tocHeadings;
 
 	public JasperCustomValues() {
 		init();
@@ -134,5 +136,22 @@ public class JasperCustomValues implements DRICustomValues {
 
 	public void setStartPageNumber(Integer startPageNumber) {
 		this.startPageNumber = startPageNumber;
+	}
+
+	public void addTocHeading(int level, String id, String text) {
+		JasperTocHeading heading = new JasperTocHeading();
+		heading.setLevel(level);
+		heading.setText(text);
+		heading.setPageIndex(getJasperScriptlet().getReportParameters().getPageNumber());
+		heading.setReference(id);
+		tocHeadings.add(heading);
+	}
+
+	public List<JasperTocHeading> getTocHeadings() {
+		return tocHeadings;
+	}
+
+	public void setTocHeadings(List<JasperTocHeading> tocHeadings) {
+		this.tocHeadings = tocHeadings;
 	}
 }

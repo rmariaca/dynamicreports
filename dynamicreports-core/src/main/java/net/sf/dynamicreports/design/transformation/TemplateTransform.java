@@ -38,6 +38,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
@@ -277,7 +278,10 @@ public class TemplateTransform {
 	}
 
 	//table of contents
-	public boolean isTableOfContents() {
+	public boolean isTableOfContents(List<JasperTocHeading> tocHeadings) {
+		if (tocHeadings != null) {
+			return true;
+		}
 		if (report.getTableOfContents() != null) {
 			return report.getTableOfContents();
 		}

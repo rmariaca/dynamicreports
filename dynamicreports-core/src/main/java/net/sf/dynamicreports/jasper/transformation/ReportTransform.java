@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -36,7 +38,7 @@ import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.jasper.base.StartPageNumberScriptlet;
-import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocCustomValues;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -66,11 +68,13 @@ public class ReportTransform {
 		JasperDesign design = accessor.getDesign();
 		Map<String, Object> parameters = accessor.getParameters();
 
+		customValues = new JasperCustomValues();
 		if (report.isTableOfContents()) {
-			customValues = new JasperTocCustomValues();
-		}
-		else {
-			customValues = new JasperCustomValues();
+			List<JasperTocHeading> tocHeadings = report.getTableOfContentsHeadings();
+			if (tocHeadings == null) {
+				tocHeadings = new ArrayList<JasperTocHeading>();
+			}
+			customValues.setTocHeadings(tocHeadings);
 		}
 
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());

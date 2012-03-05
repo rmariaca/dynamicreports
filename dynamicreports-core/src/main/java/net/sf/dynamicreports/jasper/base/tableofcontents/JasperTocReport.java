@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.List;
 
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.DRPage;
@@ -44,8 +45,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class JasperTocReport {
 
 	public static void createTocReport(JasperReportDesign jasperReportDesign, JasperPrint jasperPrint) throws DRException, JRException {
-		JasperTocCustomValues customValues = (JasperTocCustomValues) jasperReportDesign.getCustomValues();
-		List<JasperTocHeading> headings = customValues.getHeadings();
+		JasperCustomValues customValues = jasperReportDesign.getCustomValues();
+		List<JasperTocHeading> headings = customValues.getTocHeadings();
 		if (headings != null && !headings.isEmpty()) {
 			JasperReportBuilder tocReport = report();
 
@@ -72,7 +73,7 @@ public class JasperTocReport {
 
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();
 			for (int i = 0; i < tocJasperPrint.getPages().size(); i++) {
-				JRPrintPage page = (JRPrintPage) tocJasperPrint.getPages().get(i);
+				JRPrintPage page = tocJasperPrint.getPages().get(i);
 				jasperPrint.addPage(i, page);
 			}
 			for (JRStyle style : tocJasperPrint.getStyles()) {

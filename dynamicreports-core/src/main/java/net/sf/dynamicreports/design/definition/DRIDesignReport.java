@@ -35,6 +35,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -79,6 +80,8 @@ public interface DRIDesignReport {
 	public String getLanguage();
 
 	public boolean isTableOfContents();
+
+	public List<JasperTocHeading> getTableOfContentsHeadings();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
 

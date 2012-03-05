@@ -69,5 +69,7 @@ public interface DesignTransformAccessor {
 
 	public TableOfContentsTransform getTableOfContentsTransform();
 
+	public boolean isTableOfContents();
+
 	public DRDesignPage getPage();
 }
