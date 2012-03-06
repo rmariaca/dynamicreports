@@ -22,8 +22,8 @@
 		<bcprovjdk14Version>138</bcprovjdk14Version>
 		<commonsbeanutilsVersion>1.8.0</commonsbeanutilsVersion>
 		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
-		<commonsdigesterVersion>1.7</commonsdigesterVersion>
-		<commonsloggingVersion>1.1</commonsloggingVersion>
+		<commonsdigesterVersion>2.1</commonsdigesterVersion>
+		<commonsloggingVersion>1.1.1</commonsloggingVersion>
 		<itextVersion>2.1.7</itextVersion>
 		<jcommonVersion>1.0.15</jcommonVersion>
 		<jdtcoreVersion>3.1.0</jdtcoreVersion>
