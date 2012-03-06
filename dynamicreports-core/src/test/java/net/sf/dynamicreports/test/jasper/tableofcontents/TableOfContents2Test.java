@@ -43,6 +43,8 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 	private DRIExpression<String> labelExpression1;
 	private DRIExpression<String> labelExpression2;
 	private DRIExpression<String> labelExpression3;
+	private DRIExpression<String> labelExpression4;
+	private DRIExpression<String> labelExpression5;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -59,7 +61,27 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 	  	.summary(
 	  		cmp.text("text").setTableOfContentsHeading(tableOfContentsHeading().setLabel(labelExpression2)),
 	  		textField.setTableOfContentsHeading(tableOfContentsHeading()),
-	  		cmp.line().setTableOfContentsHeading(tableOfContentsHeading()));
+	  		cmp.line().setTableOfContentsHeading(tableOfContentsHeading()),
+	  		cmp.subreport(createSubreport1()));
+	}
+
+	private JasperReportBuilder createSubreport1() {
+		TextFieldBuilder<String> textField = cmp.text("text3");
+		labelExpression4 = textField.getComponent().getValueExpression();
+
+		JasperReportBuilder report = report();
+		report.title(textField.setTableOfContentsHeading(tableOfContentsHeading()));
+		report.title(cmp.subreport(createSubreport2()));
+		return report;
+	}
+
+	private JasperReportBuilder createSubreport2() {
+		TextFieldBuilder<String> textField = cmp.text("text4");
+		labelExpression5 = textField.getComponent().getValueExpression();
+
+		JasperReportBuilder report = report();
+		report.title(textField.setTableOfContentsHeading(tableOfContentsHeading()));
+		return report;
 	}
 
 	@Override
@@ -70,7 +92,7 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 
 		elementValueTest("title.textField1", "Table of contents");
 
-		elementCountTest("detail.textField1", 4);
+		elementCountTest("detail.textField1", 6);
 
 		String anchorName = labelExpression1.getName() + "_0";
 		elementValueTest("detail.textField1", 0, "title");
@@ -102,7 +124,27 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 		pageIndex = (JRPrintText) getElementAt("detail.textField3", 2);
 		Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
 
-		elementValueTest("detail.textField3", "1", "1", "1", "1");
+		anchorName = labelExpression4.getName() + "_0";
+		elementValueTest("detail.textField1", 4, "text3");
+		text = (JRPrintText) getElementAt("detail.textField1", 4);
+		Assert.assertEquals("text anchor", anchorName, text.getHyperlinkAnchor());
+		dots = (JRPrintText) getElementAt("detail.textField2", 4);
+		Assert.assertTrue("dots", StringUtils.containsOnly(dots.getText(), "."));
+		Assert.assertEquals("dots anchor", anchorName, dots.getHyperlinkAnchor());
+		pageIndex = (JRPrintText) getElementAt("detail.textField3", 4);
+		Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
+
+		anchorName = labelExpression5.getName() + "_0";
+		elementValueTest("detail.textField1", 5, "text4");
+		text = (JRPrintText) getElementAt("detail.textField1", 5);
+		Assert.assertEquals("text anchor", anchorName, text.getHyperlinkAnchor());
+		dots = (JRPrintText) getElementAt("detail.textField2", 5);
+		Assert.assertTrue("dots", StringUtils.containsOnly(dots.getText(), "."));
+		Assert.assertEquals("dots anchor", anchorName, dots.getHyperlinkAnchor());
+		pageIndex = (JRPrintText) getElementAt("detail.textField3", 5);
+		Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
+
+		elementValueTest("detail.textField3", "1", "1", "1", "1", "1", "1");
 
 		String name1 = labelExpression1.getName() + ".tocReference";
 		String name2 = "title.textField1";
@@ -135,6 +177,28 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 		Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
 		elementValueTest(name2, 0, "text2");
 		reference = (JRPrintText) getElementAt(name2, 0);
+		Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
+
+		name1 = labelExpression4.getName() + ".tocReference";
+		name2 = "title.textField1";
+		elementCountTest(name1, 1);
+		anchorName = labelExpression4.getName() + "_0";
+		elementValueTest(name1, 0, "");
+		reference = (JRPrintText) getElementAt(name1, 0);
+		Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
+		elementValueTest(name2, 2, "text3");
+		reference = (JRPrintText) getElementAt(name2, 2);
+		Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
+
+		name1 = labelExpression5.getName() + ".tocReference";
+		name2 = "title.textField1";
+		elementCountTest(name1, 1);
+		anchorName = labelExpression5.getName() + "_0";
+		elementValueTest(name1, 0, "");
+		reference = (JRPrintText) getElementAt(name1, 0);
+		Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
+		elementValueTest(name2, 3, "text4");
+		reference = (JRPrintText) getElementAt(name2, 3);
 		Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
 
 		columnTitleCountTest(column1, 1);
