@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
@@ -47,9 +49,11 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class TableOfContentsTransform {
 	private DesignTransformAccessor accessor;
+	private Map<DRITableOfContentsHeading, Integer> levels;
 
 	public TableOfContentsTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
+		this.levels = new HashMap<DRITableOfContentsHeading, Integer>();
 	}
 
 	protected DRDesignTableOfContentsHeading componentHeading(DRIComponent component) throws DRException {
@@ -57,7 +61,7 @@ public class TableOfContentsTransform {
 		boolean tableOfContents = accessor.isTableOfContents();
 		if (tableOfContents && tocHeading != null) {
 			DRTextField<String> referenceField = new DRTextField<String>();
-			int level = accessor.getTemplateTransform().getTableOfContentsLevel(tocHeading);
+			int level = getLevel(tocHeading);
 			DRIExpression<?> labelExpression = tocHeading.getLabelExpression();
 			if (labelExpression == null && component instanceof DRITextField) {
 				labelExpression = ((DRITextField<?>) component).getValueExpression();
@@ -81,6 +85,18 @@ public class TableOfContentsTransform {
 		}
 
 		return null;
+	}
+
+	private int getLevel(DRITableOfContentsHeading tocHeading) {
+		if (levels.containsKey(tocHeading)) {
+			return levels.get(tocHeading);
+		}
+		int level = 0;
+		if (tocHeading.getParentHeading() != null) {
+			level = getLevel(tocHeading.getParentHeading()) + 1;
+		}
+		levels.put(tocHeading, level);
+		return level;
 	}
 
 	protected DRDesignTableOfContentsHeading groupHeading(DRIGroup group, int level) throws DRException {

@@ -61,7 +61,6 @@ import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
-import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
@@ -299,13 +298,6 @@ public class TemplateTransform {
 			return template.getTableOfContentsCustomizer();
 		}
 		return Defaults.getDefaults().getTableOfContentsCustomizer();
-	}
-
-	public int getTableOfContentsLevel(DRITableOfContentsHeading tocHeading) {
-		/*if (tocHeading.getLevel() != null) {
-			return tocHeading.getLevel();
-		}*/
-		return Defaults.getDefaults().getTableOfContentsLevel();
 	}
 
 	//style

@@ -38,6 +38,16 @@ public class TableOfContentsHeadingBuilder extends AbstractBuilder<TableOfConten
 		super(new DRTableOfContentsHeading());
 	}
 
+	public TableOfContentsHeadingBuilder setParentHeading(TableOfContentsHeadingBuilder parentHeading) {
+		if (parentHeading != null) {
+			getObject().setParentHeading(parentHeading.build());
+		}
+		else {
+			getObject().setParentHeading(null);
+		}
+		return this;
+	}
+
 	public TableOfContentsHeadingBuilder setLabel(String label) {
 		this.getObject().setLabelExpression(Expressions.text(label));
 		return this;
@@ -47,11 +57,6 @@ public class TableOfContentsHeadingBuilder extends AbstractBuilder<TableOfConten
 		this.getObject().setLabelExpression(labelExpression);
 		return this;
 	}
-
-	/*public TableOfContentsHeadingBuilder setLevel(Integer level) {
-		this.getObject().setLevel(level);
-		return this;
-	}*/
 
 	public DRTableOfContentsHeading getTableOfContentsHeading() {
 		return build();

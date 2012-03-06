@@ -32,8 +32,16 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private DRTableOfContentsHeading parentHeading;
 	private DRIExpression<String> labelExpression;
-	//private Integer level;
+
+	public DRTableOfContentsHeading getParentHeading() {
+		return parentHeading;
+	}
+
+	public void setParentHeading(DRTableOfContentsHeading parentHeading) {
+		this.parentHeading = parentHeading;
+	}
 
 	public DRIExpression<String> getLabelExpression() {
 		return labelExpression;
@@ -42,13 +50,5 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 	public void setLabelExpression(DRIExpression<String> labelExpression) {
 		this.labelExpression = labelExpression;
 	}
-
-	/*public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}*/
 
 }

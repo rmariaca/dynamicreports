@@ -31,7 +31,8 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  */
 public interface DRITableOfContentsHeading extends Serializable {
 
+	public DRITableOfContentsHeading getParentHeading();
+
 	public DRIExpression<String> getLabelExpression();
 
-	//public Integer getLevel();
 }
