@@ -42,7 +42,7 @@ public class JasperCustomValues implements DRICustomValues {
 	private Map<String, Object> systemValues;
 	private JasperScriptlet jasperScriptlet;
 	private Integer startPageNumber;
-	private List<JasperTocHeading> tocHeadings;
+	private Map<String, JasperTocHeading> tocHeadings;
 
 	public JasperCustomValues() {
 		init();
@@ -142,16 +142,15 @@ public class JasperCustomValues implements DRICustomValues {
 		JasperTocHeading heading = new JasperTocHeading();
 		heading.setLevel(level);
 		heading.setText(text);
-		heading.setPageIndex(getJasperScriptlet().getReportParameters().getPageNumber());
 		heading.setReference(id);
-		tocHeadings.add(heading);
+		tocHeadings.put(id, heading);
 	}
 
-	public List<JasperTocHeading> getTocHeadings() {
+	public Map<String, JasperTocHeading> getTocHeadings() {
 		return tocHeadings;
 	}
 
-	public void setTocHeadings(List<JasperTocHeading> tocHeadings) {
+	public void setTocHeadings(Map<String, JasperTocHeading> tocHeadings) {
 		this.tocHeadings = tocHeadings;
 	}
 }

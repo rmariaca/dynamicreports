@@ -81,7 +81,7 @@ public interface DRIDesignReport {
 
 	public boolean isTableOfContents();
 
-	public List<JasperTocHeading> getTableOfContentsHeadings();
+	public Map<String, JasperTocHeading> getTableOfContentsHeadings();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();
 

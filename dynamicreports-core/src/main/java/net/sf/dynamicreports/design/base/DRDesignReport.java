@@ -76,7 +76,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport {
 	private DRIReport report;
 	private Integer pageWidth;
-	private List<JasperTocHeading> tocHeadings;
+	private Map<String, JasperTocHeading> tocHeadings;
 	private ReportTransform reportTransform;
 	private TemplateTransform templateTransform;
 	private PageTransform pageTransform;
@@ -99,7 +99,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		this(report, null, null);
 	}
 
-	public DRDesignReport(DRIReport report, Integer pageWidth, List<JasperTocHeading> tocHeadings) throws DRException {
+	public DRDesignReport(DRIReport report, Integer pageWidth, Map<String, JasperTocHeading> tocHeadings) throws DRException {
 		this.report = report;
 		this.pageWidth = pageWidth;
 		this.tocHeadings = tocHeadings;
@@ -290,7 +290,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return templateTransform.isTableOfContents(tocHeadings);
 	}
 
-	public List<JasperTocHeading> getTableOfContentsHeadings() {
+	public Map<String, JasperTocHeading> getTableOfContentsHeadings() {
 		return tocHeadings;
 	}
 

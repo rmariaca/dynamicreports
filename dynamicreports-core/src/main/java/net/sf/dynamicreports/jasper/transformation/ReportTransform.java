@@ -22,9 +22,8 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -70,9 +69,9 @@ public class ReportTransform {
 
 		customValues = new JasperCustomValues();
 		if (report.isTableOfContents()) {
-			List<JasperTocHeading> tocHeadings = report.getTableOfContentsHeadings();
+			Map<String, JasperTocHeading> tocHeadings = report.getTableOfContentsHeadings();
 			if (tocHeadings == null) {
-				tocHeadings = new ArrayList<JasperTocHeading>();
+				tocHeadings = new HashMap<String, JasperTocHeading>();
 			}
 			customValues.setTocHeadings(tocHeadings);
 		}

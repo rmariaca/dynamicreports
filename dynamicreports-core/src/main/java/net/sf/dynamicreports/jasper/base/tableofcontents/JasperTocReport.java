@@ -24,7 +24,9 @@ package net.sf.dynamicreports.jasper.base.tableofcontents;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
@@ -34,10 +36,15 @@ import net.sf.dynamicreports.report.base.DRPage;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRPrintElement;
+import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintPage;
+import net.sf.jasperreports.engine.JRPrintText;
 import net.sf.jasperreports.engine.JRStyle;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -46,12 +53,21 @@ public class JasperTocReport {
 
 	public static void createTocReport(JasperReportDesign jasperReportDesign, JasperPrint jasperPrint) throws DRException, JRException {
 		JasperCustomValues customValues = jasperReportDesign.getCustomValues();
-		List<JasperTocHeading> headings = customValues.getTocHeadings();
+		Map<String, JasperTocHeading> headings = customValues.getTocHeadings();
 		if (headings != null && !headings.isEmpty()) {
 			JasperReportBuilder tocReport = report();
 
+			List<JasperTocHeading> headingList = new ArrayList<JasperTocHeading>();
+			int pageNumber = 1;
+			for (JRPrintPage page : jasperPrint.getPages()) {
+				for (JRPrintElement element : page.getElements()) {
+					addTocHeading(headings, headingList, element, pageNumber);
+				}
+				pageNumber++;
+			}
+
 			int levels = 0;
-			for (JasperTocHeading heading : headings) {
+			for (JasperTocHeading heading : headingList) {
 				if (heading.getLevel() > levels) {
 					levels = heading.getLevel();
 				}
@@ -69,7 +85,7 @@ public class JasperTocReport {
 			tocPage.setWidth(designPage.getWidth());
 			tocPage.setHeight(designPage.getHeight());
 			tocPage.setOrientation(designPage.getOrientation());
-			tocReport.setDataSource(new JRBeanCollectionDataSource(headings));
+			tocReport.setDataSource(new JRBeanCollectionDataSource(headingList));
 
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();
 			for (int i = 0; i < tocJasperPrint.getPages().size(); i++) {
@@ -81,4 +97,19 @@ public class JasperTocReport {
 			}
 		}
 	}
+
+	private static void addTocHeading(Map<String, JasperTocHeading> headings, List<JasperTocHeading> headingList, JRPrintElement element, int pageNumber) {
+		if (element instanceof JRPrintText && StringUtils.contains(element.getKey(), ".tocReference")) {
+			String id = ((JRPrintText) element).getAnchorName();
+			JasperTocHeading heading = headings.get(id);
+			heading.setPageIndex(pageNumber);
+			headingList.add(heading);
+		}
+		if (element instanceof JRPrintFrame) {
+			for (JRPrintElement element2 : ((JRPrintFrame) element).getElements()) {
+				addTocHeading(headings, headingList, element2, pageNumber);
+			}
+		}
+	}
+
 }

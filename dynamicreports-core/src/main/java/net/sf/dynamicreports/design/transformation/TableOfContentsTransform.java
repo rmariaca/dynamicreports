@@ -75,8 +75,8 @@ public class TableOfContentsTransform {
 			hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
 			referenceField.setHyperLink(hyperLink);
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
-			designReferenceField.setWidth(0);
-			designReferenceField.setHeight(0);
+			designReferenceField.setWidth(1);
+			designReferenceField.setHeight(1);
 			designReferenceField.setUniqueName(expressionName + ".tocReference");
 
 			DRDesignTableOfContentsHeading designTocHeading = new DRDesignTableOfContentsHeading();

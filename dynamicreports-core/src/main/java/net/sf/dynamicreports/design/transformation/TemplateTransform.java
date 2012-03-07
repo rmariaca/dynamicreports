@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.transformation;
 import java.awt.Color;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
@@ -277,7 +278,7 @@ public class TemplateTransform {
 	}
 
 	//table of contents
-	public boolean isTableOfContents(List<JasperTocHeading> tocHeadings) {
+	public boolean isTableOfContents(Map<String, JasperTocHeading> tocHeadings) {
 		if (tocHeadings != null) {
 			return true;
 		}
