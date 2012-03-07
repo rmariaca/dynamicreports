@@ -104,7 +104,7 @@ public class TableOfContentsReport2 {
 
 	private JRDataSource createSubreportDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 30; i++) {
 			dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 		}
 		return dataSource;
