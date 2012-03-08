@@ -20,30 +20,15 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
-
-import java.io.Serializable;
-
-import net.sf.dynamicreports.report.constant.HyperLinkTarget;
-import net.sf.dynamicreports.report.constant.HyperLinkType;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIHyperLink extends Serializable {
-
-	public DRIExpression<String> getAnchorNameExpression();
-
-	public DRIExpression<String> getAnchorExpression();
-
-	public DRIExpression<Integer> getPageExpression();
-
-	public DRIExpression<String> getReferenceExpression();
-
-	public DRIExpression<String> getTooltipExpression();
-
-	public HyperLinkType getType();
-
-	public HyperLinkTarget getTarget();
+public enum HyperLinkTarget {
+	NONE,
+	SELF,
+	BLANK,
+	PARENT,
+	TOP
 }

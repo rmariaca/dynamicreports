@@ -236,6 +236,7 @@ public class ComponentTransform {
 			designHyperLink.setReferenceExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
 			designHyperLink.setTooltipExpression( accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
 			designHyperLink.setType(hyperLink.getType());
+			designHyperLink.setTarget(hyperLink.getTarget());
 			designHyperlinkComponent.setHyperLink(designHyperLink);
 		}
 	}

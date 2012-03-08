@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 
 /**
@@ -41,4 +42,6 @@ public interface DRIDesignHyperLink {
 	public DRIDesignExpression getTooltipExpression();
 
 	public HyperLinkType getType();
+
+	public HyperLinkTarget getTarget();
 }

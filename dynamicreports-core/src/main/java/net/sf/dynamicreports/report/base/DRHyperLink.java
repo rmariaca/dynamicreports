@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -39,6 +40,7 @@ public class DRHyperLink implements DRIHyperLink {
 	private DRIExpression<String> referenceExpression;
 	private DRIExpression<String> tooltipExpression;
 	private HyperLinkType hyperLinkType;
+	private HyperLinkTarget hyperLinkTarget;
 
 	public DRIExpression<String> getAnchorNameExpression() {
 		return anchorNameExpression;
@@ -86,5 +88,13 @@ public class DRHyperLink implements DRIHyperLink {
 
 	public void setType(HyperLinkType hyperLinkType) {
 		this.hyperLinkType = hyperLinkType;
+	}
+
+	public HyperLinkTarget getTarget() {
+		return hyperLinkTarget;
+	}
+
+	public void setTarget(HyperLinkTarget hyperLinkTarget) {
+		this.hyperLinkTarget = hyperLinkTarget;
 	}
 }

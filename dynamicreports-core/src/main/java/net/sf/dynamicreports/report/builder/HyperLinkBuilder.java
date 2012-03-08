@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -114,6 +115,11 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 
 	public HyperLinkBuilder setType(HyperLinkType hyperLinkType) {
 		getObject().setType(hyperLinkType);
+		return this;
+	}
+
+	public HyperLinkBuilder setTarget(HyperLinkTarget hyperLinkTarget) {
+		getObject().setTarget(hyperLinkTarget);
 		return this;
 	}
 

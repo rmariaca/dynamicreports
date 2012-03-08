@@ -117,6 +117,7 @@ import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignElementDataset;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 
 /**
@@ -161,6 +162,10 @@ public class ChartTransform {
 			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
 			if (hyperLinkType != null) {
 				jrChart.setHyperlinkType(hyperLinkType);
+			}
+			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+			if (hyperLinkTarget != null) {
+				jrChart.setHyperlinkTarget(hyperLinkTarget);
 			}
 		}
 
@@ -983,6 +988,10 @@ public class ChartTransform {
 			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
 			if (hyperLinkType != null) {
 				settings.setLinkType(JRHyperlinkHelper.getLinkType(hyperLinkType));
+			}
+			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+			if (hyperLinkTarget != null) {
+				settings.setLinkTarget(JRHyperlinkHelper.getLinkTarget(hyperLinkTarget));
 			}
 		}
 

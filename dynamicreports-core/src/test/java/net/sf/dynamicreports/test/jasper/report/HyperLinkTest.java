@@ -26,9 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
+import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.jasperreports.engine.JRPrintText;
+import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 
 /**
@@ -44,7 +46,8 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 			.setAnchor("anchor")
 			.setAnchorName("anchorName")
 			.setPage(1)
-			.setType(HyperLinkType.NONE);
+			.setType(HyperLinkType.LOCAL_ANCHOR)
+			.setTarget(HyperLinkTarget.TOP);
 
 		rb.title(
 			cmp.text("title 1").setHyperLink(hyperLink));
@@ -62,6 +65,7 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 		Assert.assertEquals("hyperlink anchor", "anchor", textField.getHyperlinkAnchor());
 		Assert.assertEquals("hyperlink anchorName", "anchorName", textField.getAnchorName());
 		Assert.assertEquals("hyperlink page", new Integer(1), textField.getHyperlinkPage());
-		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.NONE, textField.getHyperlinkTypeValue());
+		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.LOCAL_ANCHOR, textField.getHyperlinkTypeValue());
+		Assert.assertEquals("hyperlink target", HyperlinkTargetEnum.TOP, textField.getHyperlinkTargetValue());
 	}
 }

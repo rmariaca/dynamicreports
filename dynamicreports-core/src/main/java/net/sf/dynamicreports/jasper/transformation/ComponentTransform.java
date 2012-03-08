@@ -88,6 +88,7 @@ import net.sf.jasperreports.engine.design.JRDesignStaticText;
 import net.sf.jasperreports.engine.design.JRDesignStyle;
 import net.sf.jasperreports.engine.design.JRDesignSubreport;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
+import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
 
@@ -293,6 +294,10 @@ public class ComponentTransform {
 			if (hyperLinkType != null) {
 				jrTextField.setHyperlinkType(hyperLinkType);
 			}
+			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+			if (hyperLinkTarget != null) {
+				jrTextField.setHyperlinkTarget(hyperLinkTarget);
+			}
 		}
 
 		EvaluationTime evaluationTime = textField.getEvaluationTime();
@@ -337,6 +342,10 @@ public class ComponentTransform {
 			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
 			if (hyperLinkType != null) {
 				jrImage.setHyperlinkType(hyperLinkType);
+			}
+			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+			if (hyperLinkTarget != null) {
+				jrImage.setHyperlinkTarget(hyperLinkTarget);
 			}
 		}
 

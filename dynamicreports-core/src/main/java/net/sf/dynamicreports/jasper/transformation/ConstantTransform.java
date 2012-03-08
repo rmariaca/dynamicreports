@@ -45,6 +45,7 @@ import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
@@ -87,6 +88,7 @@ import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.FooterPositionEnum;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.LineDirectionEnum;
 import net.sf.jasperreports.engine.type.LineSpacingEnum;
@@ -922,6 +924,27 @@ public class ConstantTransform {
 			return HyperlinkTypeEnum.REMOTE_PAGE;
 		default:
 			throw new JasperDesignException("HyperLinkType " + hyperLinkType.name() + " not supported");
+		}
+	}
+
+	public static HyperlinkTargetEnum hyperLinkTarget(HyperLinkTarget hyperLinkTarget) {
+		if (hyperLinkTarget == null) {
+			return null;
+		}
+
+		switch (hyperLinkTarget) {
+		case NONE:
+			return HyperlinkTargetEnum.NONE;
+		case SELF:
+			return HyperlinkTargetEnum.SELF;
+		case BLANK:
+			return HyperlinkTargetEnum.BLANK;
+		case PARENT:
+			return HyperlinkTargetEnum.PARENT;
+		case TOP:
+			return HyperlinkTargetEnum.TOP;
+		default:
+			throw new JasperDesignException("HyperLinkTarget " + hyperLinkTarget.name() + " not supported");
 		}
 	}
 
