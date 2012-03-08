@@ -67,6 +67,7 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -250,7 +251,9 @@ public class ChartTransform {
 		for (DRIChartAxis axis : multiAxisPlot.getAxes()) {
 			DRDesignChartAxis designAxis = new DRDesignChartAxis();
 			designAxis.setPosition(axis.getPosition());
-			designAxis.setChart(transform(axis.getChart(), subDataset, resetType, resetGroup));
+			DRDesignChart chart = transform(axis.getChart(), subDataset, resetType, resetGroup);
+			chart.setUniqueName(ReportUtils.generateUniqueName("chart"));
+			designAxis.setChart(chart);
 			designMultiAxisPlot.getAxes().add(designAxis);
 		}
 		return designMultiAxisPlot;

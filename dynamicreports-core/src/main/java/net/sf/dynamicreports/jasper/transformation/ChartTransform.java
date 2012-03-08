@@ -187,6 +187,7 @@ public class ChartTransform {
 
 		if (!chart.getCustomizers().isEmpty()) {
 			jrChart.setCustomizerClass(JasperChartCustomizer.class.getName());
+			jrChart.setKey(chart.getUniqueName());
 			addChartCustomizer(chart.getUniqueName(), chart.getCustomizers());
 		}
 
