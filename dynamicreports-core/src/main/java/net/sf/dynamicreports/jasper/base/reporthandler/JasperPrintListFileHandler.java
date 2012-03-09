@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.jasper.base.reporthandler;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +32,6 @@ import java.util.ListIterator;
 
 import net.sf.dynamicreports.report.exception.DRReportException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRVirtualizationHelper;
 import net.sf.jasperreports.engine.JRVirtualizer;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -39,26 +41,35 @@ import net.sf.jasperreports.engine.util.JRSaver;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class JasperPrintListFileHandler extends AbstractPrintListHandler {
+	private static final String TEMP_FILE_PREFIX = "JasperPrint";
+
 	private List<JasperPrint> printList;
-	private final String directory;
+	private List<File> tempFiles;
+	private File directory;
 	private JRVirtualizer virtualizer;
-	private int index = 0;
 
 	public JasperPrintListFileHandler(String directory) {
 		this(directory, null);
 	}
 
 	public JasperPrintListFileHandler(String directory, JRVirtualizer virtualizer) {
-		this.directory = directory;
 		this.virtualizer = virtualizer;
+		if (directory != null) {
+			this.directory = new File(directory);
+		}
 		printList = new PrintList();
+		tempFiles = new ArrayList<File>();
 	}
 
 	@Override
 	protected void add(JasperPrint jasperPrint) {
 		try {
-			JRSaver.saveObject(jasperPrint, directory + "/jrprint" + index++);
+			File tempFile = File.createTempFile(TEMP_FILE_PREFIX, null, directory);
+			JRSaver.saveObject(jasperPrint, tempFile);
+			tempFiles.add(tempFile);
 		} catch (JRException e) {
+			throw new DRReportException(e);
+		} catch (IOException e) {
 			throw new DRReportException(e);
 		}
 	}
@@ -67,14 +78,22 @@ public class JasperPrintListFileHandler extends AbstractPrintListHandler {
 		return printList;
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		for (File tempFile : tempFiles) {
+			tempFile.delete();
+		}
+		super.finalize();
+	}
+
 	private class PrintList implements List<JasperPrint> {
 
 		public int size() {
-			return index;
+			return tempFiles.size();
 		}
 
 		public boolean isEmpty() {
-			return index == 0;
+			return tempFiles.isEmpty();
 		}
 
 		public boolean contains(Object o) {
@@ -127,13 +146,8 @@ public class JasperPrintListFileHandler extends AbstractPrintListHandler {
 
 		public JasperPrint get(int index) {
 			try {
-				if (virtualizer != null) {
-					JRVirtualizationHelper.setThreadVirtualizer(virtualizer);
-				}
-				JasperPrint jasperPrint = (JasperPrint) JRLoader.loadObjectFromFile(directory + "/jrprint" + index);
-				if (virtualizer != null) {
-					JRVirtualizationHelper.clearThreadVirtualizer();
-				}
+				File tempFile = tempFiles.get(index);
+				JasperPrint jasperPrint = JRLoader.loadJasperPrint(tempFile, virtualizer);
 				return jasperPrint;
 			} catch (JRException e) {
 				throw new DRReportException(e);
