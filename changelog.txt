@@ -1,6 +1,15 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.4.0 (2012-03-14)
+---------------------------------------------------
+ - upgrade to JasperReports 4.5.1
+ - list and band background component, see ListBackgroundReport for an example
+ - layered bar chart, see LayeredBarChartReport for an example
+ - ability to add to the table of contents links to components, see TableOfContentsReport2 for an example
+ - minor bug fixes and improvements
+ - new examples - CustomPercentageCrosstabReport, FlowColumnPairsReport, ListBackgroundReport, LayeredBarChartReport, TableOfContentsReport2 
+ 
 Changes in version 2.3.5 (2012-02-15)
 ---------------------------------------------------
  - gantt chart, see GanttChartReport for an example
