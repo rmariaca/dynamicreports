@@ -55,6 +55,7 @@ public class DRReport implements DRIReport {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRReportTemplate template;
+	private List<DRIExpression<?>> templates;
 	private DRITemplateDesign<?> templateDesign;
 	private Locale locale;
 	private ResourceBundle resourceBundle;
@@ -121,6 +122,7 @@ public class DRReport implements DRIReport {
 
 	private void init() {
 		this.template = new DRReportTemplate();
+		this.templates = new ArrayList<DRIExpression<?>>();
 		this.columns = new ArrayList<DRColumn<?>>();
 		this.groups = new ArrayList<DRGroup>();
 		this.subtotals = new ArrayList<DRSubtotal<?>>();
@@ -154,6 +156,19 @@ public class DRReport implements DRIReport {
 	public void setTemplate(DRReportTemplate template) {
 		Validate.notNull(template, "template must not be null");
 		this.template = template;
+	}
+
+	public List<DRIExpression<?>> getTemplates() {
+		return templates;
+	}
+
+	public void addTemplate(DRIExpression<?> template) {
+		Validate.notNull(template, "template must not be null");
+		this.templates.add(template);
+	}
+
+	public void setTemplates(List<DRIExpression<?>> templates) {
+		this.templates = templates;
 	}
 
 	public DRITemplateDesign<?> getTemplateDesign() {

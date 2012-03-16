@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.report.builder;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -34,6 +37,7 @@ import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.group.Groups;
@@ -304,9 +308,55 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	//template
 	public T setTemplate(ReportTemplateBuilder template) {
 		Validate.notNull(template, "template must not be null");
 		getObject().setTemplate(template.build());
+		return (T) this;
+	}
+
+	public T addTemplate(InputStream ...inputStreams) {
+		Validate.notNull(inputStreams, "inputStreams must not be null");
+		Validate.noNullElements(inputStreams, "inputStreams must not contains null inputStream");
+		for (InputStream inputStream : inputStreams) {
+			addTemplate(Expressions.inputStream(inputStream));
+		}
+		return (T) this;
+	}
+
+	public T addTemplate(File ...files) {
+		Validate.notNull(files, "files must not be null");
+		Validate.noNullElements(files, "files must not contains null file");
+		for (File file : files) {
+			addTemplate(Expressions.value(file, File.class));
+		}
+		return (T) this;
+	}
+
+	public T addTemplate(String ...fileNames) {
+		Validate.notNull(fileNames, "fileNames must not be null");
+		Validate.noNullElements(fileNames, "fileNames must not contains null fileName");
+		for (String fileName : fileNames) {
+			addTemplate(Expressions.text(fileName));
+		}
+		return (T) this;
+	}
+
+	public T addTemplate(URL ...urls) {
+		Validate.notNull(urls, "urls must not be null");
+		Validate.noNullElements(urls, "urls must not contains null url");
+		for (URL url : urls) {
+			addTemplate(Expressions.url(url));
+		}
+		return (T) this;
+	}
+
+	public T addTemplate(DRIExpression<?> ...templates) {
+		Validate.notNull(templates, "templates must not be null");
+		Validate.noNullElements(templates, "templates must not contains null template");
+		for (DRIExpression<?> template : templates) {
+			getObject().addTemplate(template);
+		}
 		return (T) this;
 	}
 

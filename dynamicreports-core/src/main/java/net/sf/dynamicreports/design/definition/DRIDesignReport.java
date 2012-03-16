@@ -47,6 +47,8 @@ import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
  */
 public interface DRIDesignReport {
 
+	public List<DRIDesignExpression> getTemplates();
+
 	public DRIDesignTemplateDesign getTemplateDesign();
 
 	public Locale getLocale();
