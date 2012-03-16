@@ -54,4 +54,6 @@ public interface DRIDesignChart extends DRIDesignHyperLinkComponent {
 	public EvaluationTime getEvaluationTime();
 
 	public DRIDesignGroup getEvaluationGroup();
+
+	public String getTheme();
 }

@@ -138,6 +138,7 @@ public class ChartTransform {
 		designChart.setWidth(accessor.getTemplateTransform().getChartWidth(chart));
 		designChart.setHeight(accessor.getTemplateTransform().getChartHeight(chart));
 		designChart.setChartType(chart.getChartType());
+		designChart.setTheme(chart.getTheme());
 		if (!(chart.getPlot() instanceof DRIMultiAxisPlot)) {
 			designChart.setDataset(dataset(chart.getDataset(), subDataset, resetType, resetGroup));
 		}

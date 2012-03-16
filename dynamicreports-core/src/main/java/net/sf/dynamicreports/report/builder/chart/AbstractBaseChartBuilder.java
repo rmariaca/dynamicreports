@@ -43,6 +43,11 @@ public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilde
 		super(chartType);
 	}
 
+	public T setTheme(String theme) {
+		getObject().setTheme(theme);
+		return (T) this;
+	}
+
 	//plot
 	public T setOrientation(Orientation orientation) {
 		getPlot().setOrientation(orientation);

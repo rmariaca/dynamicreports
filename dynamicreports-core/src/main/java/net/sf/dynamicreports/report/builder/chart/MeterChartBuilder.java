@@ -48,6 +48,11 @@ public class MeterChartBuilder extends AbstractChartBuilder<MeterChartBuilder> {
 		super(ChartType.METER);
 	}
 
+	public MeterChartBuilder setTheme(String theme) {
+		getObject().setTheme(theme);
+		return this;
+	}
+
 	//dataset
 	public MeterChartBuilder setValue(Number value) {
 		getDataset().setValueExpression(Expressions.number(value));

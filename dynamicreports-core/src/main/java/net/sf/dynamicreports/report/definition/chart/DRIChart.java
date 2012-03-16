@@ -45,4 +45,6 @@ public interface DRIChart extends DRIHyperLinkComponent {
 	public DRIChartSubtitle getSubtitle();
 
 	public DRIChartLegend getLegend();
+
+	public String getTheme();
 }

@@ -151,6 +151,7 @@ public class ChartTransform {
 		if (chart.getChartType().equals(ChartType.XYBAR)) {
 			jrChart.setDataset(new JRDesignXyDataset(null));
 		}
+		jrChart.setTheme(chart.getTheme());
 
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {

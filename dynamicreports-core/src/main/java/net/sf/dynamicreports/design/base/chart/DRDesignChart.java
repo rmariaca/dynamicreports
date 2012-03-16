@@ -47,6 +47,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 	private DRDesignChartLegend legend;
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
+	private String theme;
 
 	public DRDesignChart() {
 		super("chart");
@@ -123,5 +124,13 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 
 	public void setEvaluationGroup(DRDesignGroup evaluationGroup) {
 		this.evaluationGroup = evaluationGroup;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 }

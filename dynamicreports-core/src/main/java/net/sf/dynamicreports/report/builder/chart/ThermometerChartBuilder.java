@@ -48,6 +48,11 @@ public class ThermometerChartBuilder extends AbstractChartBuilder<ThermometerCha
 		super(ChartType.THERMOMETER);
 	}
 
+	public ThermometerChartBuilder setTheme(String theme) {
+		getObject().setTheme(theme);
+		return this;
+	}
+
 	//dataset
 	public ThermometerChartBuilder setValue(Number value) {
 		getDataset().setValueExpression(Expressions.number(value));

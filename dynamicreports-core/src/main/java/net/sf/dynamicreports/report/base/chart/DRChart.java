@@ -65,6 +65,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	private DRChartTitle title;
 	private DRChartSubtitle subtitle;
 	private DRChartLegend legend;
+	private String theme;
 
 	public DRChart(ChartType chartType) {
 		setChartType(chartType);
@@ -217,4 +218,13 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		Validate.notNull(legend, "legend must not be null");
 		this.legend = legend;
 	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
 }
