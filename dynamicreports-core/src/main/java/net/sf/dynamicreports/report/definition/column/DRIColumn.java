@@ -26,24 +26,24 @@ import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIColumn<T extends DRIComponent> extends DRIColumnGridComponent {
-		
+
 	public T getComponent();
 
 	public DRIExpression<?> getTitleExpression();
 
-	public DRIStyle getTitleStyle();
-	
+	public DRIReportStyle getTitleStyle();
+
 	public Integer getTitleHeight();
 
 	public ComponentDimensionType getTitleHeightType();
 
 	public Integer getTitleRows();
-	
+
 	public String getName();
 }

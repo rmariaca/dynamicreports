@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,13 +36,13 @@ public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 
 	private DRICrosstabRowGroup<?> rowGroup;
 	private DRICrosstabColumnGroup<?> columnGroup;
-	private DRIStyle style;
+	private DRIReportStyle style;
 
-	public DRCrosstabCellStyle(DRIStyle style) {
+	public DRCrosstabCellStyle(DRIReportStyle style) {
 		this(style, null, null);
 	}
 
-	public DRCrosstabCellStyle(DRIStyle style, DRICrosstabRowGroup<?> rowGroup, DRICrosstabColumnGroup<?> columnGroup) {
+	public DRCrosstabCellStyle(DRIReportStyle style, DRICrosstabRowGroup<?> rowGroup, DRICrosstabColumnGroup<?> columnGroup) {
 		this.style = style;
 		this.rowGroup = rowGroup;
 		this.columnGroup = columnGroup;
@@ -64,11 +64,11 @@ public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 		this.columnGroup = columnGroup;
 	}
 
-	public DRIStyle getStyle() {
+	public DRIReportStyle getStyle() {
 		return style;
 	}
 
-	public void setStyle(DRIStyle style) {
+	public void setStyle(DRIReportStyle style) {
 		this.style = style;
 	}
 }

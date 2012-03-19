@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
@@ -36,7 +37,8 @@ import org.apache.commons.lang.Validate;
 public class DRStyle extends DRBaseStyle implements DRIStyle {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRStyle parentStyle;
+	private String name;
+	private DRIReportStyle parentStyle;
 	private List<DRConditionalStyle> conditionalStyles;
 
 	@Override
@@ -45,11 +47,19 @@ public class DRStyle extends DRBaseStyle implements DRIStyle {
 		conditionalStyles = new ArrayList<DRConditionalStyle>();
 	}
 
-	public DRStyle getParentStyle() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public DRIReportStyle getParentStyle() {
 		return parentStyle;
 	}
 
-	public void setParentStyle(DRStyle parentStyle) {
+	public void setParentStyle(DRIReportStyle parentStyle) {
 		this.parentStyle = parentStyle;
 	}
 

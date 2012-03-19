@@ -35,7 +35,6 @@ import net.sf.dynamicreports.jasper.base.JasperScriptlet;
 import net.sf.dynamicreports.report.definition.DRIParameter;
 import net.sf.dynamicreports.report.definition.DRIQuery;
 import net.sf.dynamicreports.report.definition.DRIReport;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -43,7 +42,6 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public class ReportTransform {
 	private DesignTransformAccessor accessor;
-	private List<DRIDesignExpression> templates;
 	private DRIDesignTemplateDesign templateDesign;
 	private DRDesignQuery query;
 	private List<DRIDesignParameter> parameters;
@@ -56,10 +54,6 @@ public class ReportTransform {
 
 	public void transform() throws DRException {
 		DRIReport report = accessor.getReport();
-		templates = new ArrayList<DRIDesignExpression>();
-		for (DRIExpression<?> template : report.getTemplates()) {
-			templates.add(accessor.getExpressionTransform().transformExpression(template));
-		}
 		templateDesign = new DRDesignTemplateDesign(report.getTemplateDesign());
 		if (report.getQuery() != null) {
 			query = query(report.getQuery());
@@ -84,10 +78,6 @@ public class ReportTransform {
 		designParameter.setValue(parameter.getValue());
 		designParameter.setExternal(accessor.getReport().getTemplateDesign().isDefinedParameter(parameter.getName()));
 		return designParameter;
-	}
-
-	public List<DRIDesignExpression> getTemplates() {
-		return templates;
 	}
 
 	public DRIDesignTemplateDesign getTemplateDesign() {

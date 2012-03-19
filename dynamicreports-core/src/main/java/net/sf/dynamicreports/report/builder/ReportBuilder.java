@@ -22,9 +22,6 @@
 
 package net.sf.dynamicreports.report.builder;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -37,11 +34,11 @@ import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
-import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.group.Groups;
 import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
@@ -315,7 +312,9 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T addTemplate(InputStream ...inputStreams) {
+	//TODO
+	//template style
+	/*public T addTemplate(InputStream ...inputStreams) {
 		Validate.notNull(inputStreams, "inputStreams must not be null");
 		Validate.noNullElements(inputStreams, "inputStreams must not contains null inputStream");
 		for (InputStream inputStream : inputStreams) {
@@ -324,7 +323,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T addTemplate(File ...files) {
+	public T addTemplateStyle(File ...files) {
 		Validate.notNull(files, "files must not be null");
 		Validate.noNullElements(files, "files must not contains null file");
 		for (File file : files) {
@@ -349,13 +348,17 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 			addTemplate(Expressions.url(url));
 		}
 		return (T) this;
+	}*/
+
+	public T templateStyles(StyleBuilder ...templateStyles) {
+		return addTemplateStyle(templateStyles);
 	}
 
-	public T addTemplate(DRIExpression<?> ...templates) {
-		Validate.notNull(templates, "templates must not be null");
-		Validate.noNullElements(templates, "templates must not contains null template");
-		for (DRIExpression<?> template : templates) {
-			getObject().addTemplate(template);
+	public T addTemplateStyle(StyleBuilder ...templateStyles) {
+		Validate.notNull(templateStyles, "templateStyles must not be null");
+		Validate.noNullElements(templateStyles, "templateStyles must not contains null templateStyle");
+		for (StyleBuilder templateStyle : templateStyles) {
+			getObject().addTemplateStyle(templateStyle.build());
 		}
 		return (T) this;
 	}
@@ -483,7 +486,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//style
-	public T setTextStyle(StyleBuilder textStyle) {
+	public T setTextStyle(ReportStyleBuilder textStyle) {
 		if (textStyle != null) {
 			getObject().setTextStyle(textStyle.build());
 		}
@@ -493,7 +496,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setColumnTitleStyle(StyleBuilder columnTitleStyle) {
+	public T setColumnTitleStyle(ReportStyleBuilder columnTitleStyle) {
 		if (columnTitleStyle != null) {
 			getObject().setColumnTitleStyle(columnTitleStyle.build());
 		}
@@ -503,7 +506,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setColumnStyle(StyleBuilder columnStyle) {
+	public T setColumnStyle(ReportStyleBuilder columnStyle) {
 		if (columnStyle != null) {
 			getObject().setColumnStyle(columnStyle.build());
 		}
@@ -513,7 +516,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setGroupTitleStyle(StyleBuilder groupTitleStyle) {
+	public T setGroupTitleStyle(ReportStyleBuilder groupTitleStyle) {
 		if (groupTitleStyle != null) {
 			getObject().setGroupTitleStyle(groupTitleStyle.build());
 		}
@@ -523,7 +526,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setGroupStyle(StyleBuilder groupStyle) {
+	public T setGroupStyle(ReportStyleBuilder groupStyle) {
 		if (groupStyle != null) {
 			getObject().setGroupStyle(groupStyle.build());
 		}
@@ -533,7 +536,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setSubtotalStyle(StyleBuilder subtotalStyle) {
+	public T setSubtotalStyle(ReportStyleBuilder subtotalStyle) {
 		if (subtotalStyle != null) {
 			getObject().setSubtotalStyle(subtotalStyle.build());
 		}
@@ -543,7 +546,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setImageStyle(StyleBuilder imageStyle) {
+	public T setImageStyle(ReportStyleBuilder imageStyle) {
 		if (imageStyle != null) {
 			getObject().setImageStyle(imageStyle.build());
 		}
@@ -553,7 +556,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setChartStyle(StyleBuilder chartStyle) {
+	public T setChartStyle(ReportStyleBuilder chartStyle) {
 		if (chartStyle != null) {
 			getObject().setChartStyle(chartStyle.build());
 		}
@@ -563,7 +566,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	public T setBarcodeStyle(StyleBuilder barcodeStyle) {
+	public T setBarcodeStyle(ReportStyleBuilder barcodeStyle) {
 		if (barcodeStyle != null) {
 			getObject().setBarcodeStyle(barcodeStyle.build());
 		}
@@ -909,7 +912,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the title band style
 	 * @return a report builder
 	 */
-	public T setTitleStyle(StyleBuilder style) {
+	public T setTitleStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getTitleBand().getList().setStyle(style.build());
 		}
@@ -973,7 +976,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the page header band style
 	 * @return a report builder
 	 */
-	public T setPageHeaderStyle(StyleBuilder style) {
+	public T setPageHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getPageHeaderBand().getList().setStyle(style.build());
 		}
@@ -1037,7 +1040,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the page footer band style
 	 * @return a report builder
 	 */
-	public T setPageFooterStyle(StyleBuilder style) {
+	public T setPageFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getPageFooterBand().getList().setStyle(style.build());
 		}
@@ -1101,7 +1104,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the column header band style
 	 * @return a report builder
 	 */
-	public T setColumnHeaderStyle(StyleBuilder style) {
+	public T setColumnHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getColumnHeaderBand().getList().setStyle(style.build());
 		}
@@ -1165,7 +1168,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the column footer band style
 	 * @return a report builder
 	 */
-	public T setColumnFooterStyle(StyleBuilder style) {
+	public T setColumnFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getColumnFooterBand().getList().setStyle(style.build());
 		}
@@ -1235,7 +1238,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the group header band style
 	 * @return a report builder
 	 */
-	public T setGroupHeaderStyle(GroupBuilder<?> group, StyleBuilder style) {
+	public T setGroupHeaderStyle(GroupBuilder<?> group, ReportStyleBuilder style) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
@@ -1319,7 +1322,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the group footer band style
 	 * @return a report builder
 	 */
-	public T setGroupFooterStyle(GroupBuilder<?> group, StyleBuilder style) {
+	public T setGroupFooterStyle(GroupBuilder<?> group, ReportStyleBuilder style) {
 		Validate.notNull(group, "group must not be null");
 		int index = getObject().getGroups().indexOf(group.getGroup());
 		Validate.isTrue(index >= 0, "group must be registered");
@@ -1397,7 +1400,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the detail band style
 	 * @return a report builder
 	 */
-	public T setDetailStyle(StyleBuilder style) {
+	public T setDetailStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailBand().getList().setStyle(style.build());
 		}
@@ -1461,7 +1464,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the detail header band style
 	 * @return a report builder
 	 */
-	public T setDetailHeaderStyle(StyleBuilder style) {
+	public T setDetailHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailHeaderBand().getList().setStyle(style.build());
 		}
@@ -1525,7 +1528,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the detail footer band style
 	 * @return a report builder
 	 */
-	public T setDetailFooterStyle(StyleBuilder style) {
+	public T setDetailFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getDetailFooterBand().getList().setStyle(style.build());
 		}
@@ -1589,7 +1592,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the last page footer band style
 	 * @return a report builder
 	 */
-	public T setLastPageFooterStyle(StyleBuilder style) {
+	public T setLastPageFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getLastPageFooterBand().getList().setStyle(style.build());
 		}
@@ -1653,7 +1656,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the summary band style
 	 * @return a report builder
 	 */
-	public T setSummaryStyle(StyleBuilder style) {
+	public T setSummaryStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getSummaryBand().getList().setStyle(style.build());
 		}
@@ -1717,7 +1720,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the no data band style
 	 * @return a report builder
 	 */
-	public T setNoDataStyle(StyleBuilder style) {
+	public T setNoDataStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getNoDataBand().getList().setStyle(style.build());
 		}
@@ -1781,7 +1784,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 * @param style the background band style
 	 * @return a report builder
 	 */
-	public T setBackgroundStyle(StyleBuilder style) {
+	public T setBackgroundStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getBackgroundBand().getList().setStyle(style.build());
 		}

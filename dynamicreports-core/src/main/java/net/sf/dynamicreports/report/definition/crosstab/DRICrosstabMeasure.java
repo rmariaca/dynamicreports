@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -54,5 +54,5 @@ public interface DRICrosstabMeasure<T> extends Serializable {
 
 	public DRIExpression<?> getTitleExpression();
 
-	public DRIStyle getTitleStyle();
+	public DRIReportStyle getTitleStyle();
 }

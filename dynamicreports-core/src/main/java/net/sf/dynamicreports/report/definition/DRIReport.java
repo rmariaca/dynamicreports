@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -46,7 +47,7 @@ public interface DRIReport extends Serializable {
 
 	public DRIReportTemplate getTemplate();
 
-	public List<DRIExpression<?>> getTemplates();
+	public List<DRIStyle> getTemplateStyles();
 
 	public DRITemplateDesign<?> getTemplateDesign();
 
@@ -102,23 +103,23 @@ public interface DRIReport extends Serializable {
 
 	public Boolean getUseFieldNameAsDescription();
 
-	public DRIStyle getTextStyle();
+	public DRIReportStyle getTextStyle();
 
-	public DRIStyle getColumnTitleStyle();
+	public DRIReportStyle getColumnTitleStyle();
 
-	public DRIStyle getColumnStyle();
+	public DRIReportStyle getColumnStyle();
 
-	public DRIStyle getGroupTitleStyle();
+	public DRIReportStyle getGroupTitleStyle();
 
-	public DRIStyle getGroupStyle();
+	public DRIReportStyle getGroupStyle();
 
-	public DRIStyle getSubtotalStyle();
+	public DRIReportStyle getSubtotalStyle();
 
-	public DRIStyle getImageStyle();
+	public DRIReportStyle getImageStyle();
 
-	public DRIStyle getChartStyle();
+	public DRIReportStyle getChartStyle();
 
-	public DRIStyle getBarcodeStyle();
+	public DRIReportStyle getBarcodeStyle();
 
 	public Boolean getHighlightDetailOddRows();
 

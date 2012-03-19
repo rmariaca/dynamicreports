@@ -27,8 +27,8 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.DRReportTemplate;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -172,7 +172,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setTextStyle(StyleBuilder textStyle) {
+	public ReportTemplateBuilder setTextStyle(ReportStyleBuilder textStyle) {
 		if (textStyle != null) {
 			getObject().setTextStyle(textStyle.build());
 		}
@@ -182,7 +182,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setColumnTitleStyle(StyleBuilder columnTitleStyle) {
+	public ReportTemplateBuilder setColumnTitleStyle(ReportStyleBuilder columnTitleStyle) {
 		if (columnTitleStyle != null) {
 			getObject().setColumnTitleStyle(columnTitleStyle.build());
 		}
@@ -192,7 +192,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setColumnStyle(StyleBuilder columnStyle) {
+	public ReportTemplateBuilder setColumnStyle(ReportStyleBuilder columnStyle) {
 		if (columnStyle != null) {
 			getObject().setColumnStyle(columnStyle.build());
 		}
@@ -202,7 +202,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setGroupTitleStyle(StyleBuilder groupTitleStyle) {
+	public ReportTemplateBuilder setGroupTitleStyle(ReportStyleBuilder groupTitleStyle) {
 		if (groupTitleStyle != null) {
 			getObject().setGroupTitleStyle(groupTitleStyle.build());
 		}
@@ -212,7 +212,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setGroupStyle(StyleBuilder groupStyle) {
+	public ReportTemplateBuilder setGroupStyle(ReportStyleBuilder groupStyle) {
 		if (groupStyle != null) {
 			getObject().setGroupStyle(groupStyle.build());
 		}
@@ -222,7 +222,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setSubtotalStyle(StyleBuilder subtotalStyle) {
+	public ReportTemplateBuilder setSubtotalStyle(ReportStyleBuilder subtotalStyle) {
 		if (subtotalStyle != null) {
 			getObject().setSubtotalStyle(subtotalStyle.build());
 		}
@@ -232,7 +232,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setImageStyle(StyleBuilder imageStyle) {
+	public ReportTemplateBuilder setImageStyle(ReportStyleBuilder imageStyle) {
 		if (imageStyle != null) {
 			getObject().setImageStyle(imageStyle.build());
 		}
@@ -242,7 +242,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setChartStyle(StyleBuilder chartStyle) {
+	public ReportTemplateBuilder setChartStyle(ReportStyleBuilder chartStyle) {
 		if (chartStyle != null) {
 			getObject().setChartStyle(chartStyle.build());
 		}
@@ -252,7 +252,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setBarcodeStyle(StyleBuilder barcodeStyle) {
+	public ReportTemplateBuilder setBarcodeStyle(ReportStyleBuilder barcodeStyle) {
 		if (barcodeStyle != null) {
 			getObject().setBarcodeStyle(barcodeStyle.build());
 		}
@@ -485,7 +485,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setCrosstabGroupStyle(StyleBuilder crosstabGroupStyle) {
+	public ReportTemplateBuilder setCrosstabGroupStyle(ReportStyleBuilder crosstabGroupStyle) {
 		if (crosstabGroupStyle != null) {
 			getObject().setCrosstabGroupStyle(crosstabGroupStyle.build());
 		}
@@ -495,7 +495,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setCrosstabGroupTotalStyle(StyleBuilder crosstabGroupTotalStyle) {
+	public ReportTemplateBuilder setCrosstabGroupTotalStyle(ReportStyleBuilder crosstabGroupTotalStyle) {
 		if (crosstabGroupTotalStyle != null) {
 			getObject().setCrosstabGroupTotalStyle(crosstabGroupTotalStyle.build());
 		}
@@ -505,7 +505,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setCrosstabGrandTotalStyle(StyleBuilder crosstabGrandTotalStyle) {
+	public ReportTemplateBuilder setCrosstabGrandTotalStyle(ReportStyleBuilder crosstabGrandTotalStyle) {
 		if (crosstabGrandTotalStyle != null) {
 			getObject().setCrosstabGrandTotalStyle(crosstabGrandTotalStyle.build());
 		}
@@ -515,7 +515,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setCrosstabCellStyle(StyleBuilder crosstabCellStyle) {
+	public ReportTemplateBuilder setCrosstabCellStyle(ReportStyleBuilder crosstabCellStyle) {
 		if (crosstabCellStyle != null) {
 			getObject().setCrosstabCellStyle(crosstabCellStyle.build());
 		}
@@ -525,7 +525,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setCrosstabMeasureTitleStyle(StyleBuilder crosstabMeasureTitleStyle) {
+	public ReportTemplateBuilder setCrosstabMeasureTitleStyle(ReportStyleBuilder crosstabMeasureTitleStyle) {
 		if (crosstabMeasureTitleStyle != null) {
 			getObject().setCrosstabMeasureTitleStyle(crosstabMeasureTitleStyle.build());
 		}
@@ -550,7 +550,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setBooleanColumnStyle(StyleBuilder cooleanColumnStyle) {
+	public ReportTemplateBuilder setBooleanColumnStyle(ReportStyleBuilder cooleanColumnStyle) {
 		if (cooleanColumnStyle != null) {
 			getObject().setBooleanColumnStyle(cooleanColumnStyle.build());
 		}
@@ -637,7 +637,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 	}
 
 	//band style
-	public ReportTemplateBuilder setTitleStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setTitleStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setTitleStyle(style.build());
 		}
@@ -647,7 +647,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setPageHeaderStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setPageHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setPageHeaderStyle(style.build());
 		}
@@ -657,7 +657,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setPageFooterStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setPageFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setPageFooterStyle(style.build());
 		}
@@ -667,7 +667,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setColumnHeaderStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setColumnHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setColumnHeaderStyle(style.build());
 		}
@@ -677,7 +677,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setColumnFooterStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setColumnFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setColumnFooterStyle(style.build());
 		}
@@ -687,7 +687,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setGroupHeaderStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setGroupHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setGroupHeaderStyle(style.build());
 		}
@@ -697,7 +697,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setGroupFooterStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setGroupFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setGroupFooterStyle(style.build());
 		}
@@ -707,7 +707,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setDetailHeaderStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setDetailHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setDetailHeaderStyle(style.build());
 		}
@@ -717,7 +717,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setDetailStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setDetailStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setDetailStyle(style.build());
 		}
@@ -727,7 +727,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setDetailFooterStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setDetailFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setDetailFooterStyle(style.build());
 		}
@@ -737,7 +737,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setLastPageFooterStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setLastPageFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setLastPageFooterStyle(style.build());
 		}
@@ -747,7 +747,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setSummaryStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setSummaryStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setSummaryStyle(style.build());
 		}
@@ -757,7 +757,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setNoDataStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setNoDataStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setNoDataStyle(style.build());
 		}
@@ -767,7 +767,7 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
-	public ReportTemplateBuilder setBackgroundStyle(StyleBuilder style) {
+	public ReportTemplateBuilder setBackgroundStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setBackgroundStyle(style.build());
 		}

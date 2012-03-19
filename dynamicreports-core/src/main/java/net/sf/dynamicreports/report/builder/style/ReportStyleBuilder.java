@@ -20,18 +20,18 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.style;
+package net.sf.dynamicreports.report.builder.style;
 
-import java.util.List;
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIStyle extends DRIBaseStyle, DRIReportStyle {
+public interface ReportStyleBuilder extends Serializable {
 
-	public String getName();
+	public DRIReportStyle getStyle();
 
-	public DRIReportStyle getParentStyle();
-
-	public List<? extends DRIConditionalStyle> getConditionalStyles();
+	public DRIReportStyle build();
 }

@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.transformation;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -93,6 +94,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -348,7 +350,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isHighlightDetailEvenRows();
 	}
 
-	protected DRIStyle getTextStyle() {
+	protected DRIReportStyle getTextStyle() {
 		if (report.getTextStyle() != null) {
 			return report.getTextStyle();
 		}
@@ -358,7 +360,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getTextStyle();
 	}
 
-	protected DRIStyle getColumnTitleStyle() {
+	protected DRIReportStyle getColumnTitleStyle() {
 		if (report.getColumnTitleStyle() != null) {
 			return report.getColumnTitleStyle();
 		}
@@ -371,7 +373,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getColumnStyle(boolean textStyle) {
+	protected DRIReportStyle getColumnStyle(boolean textStyle) {
 		if (report.getColumnStyle() != null) {
 			return report.getColumnStyle();
 		}
@@ -387,7 +389,7 @@ public class TemplateTransform {
 		return null;
 	}
 
-	protected DRIStyle getGroupTitleStyle() {
+	protected DRIReportStyle getGroupTitleStyle() {
 		if (report.getGroupTitleStyle() != null) {
 			return report.getGroupTitleStyle();
 		}
@@ -400,7 +402,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getGroupStyle() {
+	protected DRIReportStyle getGroupStyle() {
 		if (report.getGroupStyle() != null) {
 			return report.getGroupStyle();
 		}
@@ -413,7 +415,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getSubtotalStyle() {
+	protected DRIReportStyle getSubtotalStyle() {
 		if (report.getSubtotalStyle() != null) {
 			return report.getSubtotalStyle();
 		}
@@ -426,7 +428,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getImageStyle() {
+	protected DRIReportStyle getImageStyle() {
 		if (report.getImageStyle() != null) {
 			return report.getImageStyle();
 		}
@@ -436,7 +438,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getImageStyle();
 	}
 
-	protected DRIStyle getChartStyle() {
+	protected DRIReportStyle getChartStyle() {
 		if (report.getChartStyle() != null) {
 			return report.getChartStyle();
 		}
@@ -446,7 +448,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getChartStyle();
 	}
 
-	protected DRIStyle getBarcodeStyle() {
+	protected DRIReportStyle getBarcodeStyle() {
 		if (report.getBarcodeStyle() != null) {
 			return report.getBarcodeStyle();
 		}
@@ -1501,7 +1503,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isCrosstabHighlightEvenRows();
 	}
 
-	protected DRIStyle getCrosstabGroupStyle(DRICrosstab crosstab) {
+	protected DRIReportStyle getCrosstabGroupStyle(DRICrosstab crosstab) {
 		if (crosstab.getGroupStyle() != null) {
 			return crosstab.getGroupStyle();
 		}
@@ -1514,7 +1516,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getCrosstabGroupTotalStyle(DRICrosstab crosstab) {
+	protected DRIReportStyle getCrosstabGroupTotalStyle(DRICrosstab crosstab) {
 		if (crosstab.getGroupTotalStyle() != null) {
 			return crosstab.getGroupTotalStyle();
 		}
@@ -1527,7 +1529,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getCrosstabGrandTotalStyle(DRICrosstab crosstab) {
+	protected DRIReportStyle getCrosstabGrandTotalStyle(DRICrosstab crosstab) {
 		if (crosstab.getGrandTotalStyle() != null) {
 			return crosstab.getGrandTotalStyle();
 		}
@@ -1540,7 +1542,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	protected DRIStyle getCrosstabCellStyle(DRICrosstab crosstab) {
+	protected DRIReportStyle getCrosstabCellStyle(DRICrosstab crosstab) {
 		if (crosstab.getCellStyle() != null) {
 			return crosstab.getCellStyle();
 		}
@@ -1553,7 +1555,7 @@ public class TemplateTransform {
 		return getTextStyle();
 	}
 
-	public DRIStyle getCrosstabMeasureTitleStyle(DRICrosstab crosstab, DRICrosstabMeasure<?> measure) {
+	public DRIReportStyle getCrosstabMeasureTitleStyle(DRICrosstab crosstab, DRICrosstabMeasure<?> measure) {
 		if (measure.getTitleStyle() != null) {
 			return measure.getTitleStyle();
 		}
@@ -1596,7 +1598,7 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getBooleanColumnImageHeight();
 	}
 
-	public DRIStyle getBooleanColumnStyle(DRIBooleanColumn column) {
+	public DRIReportStyle getBooleanColumnStyle(DRIBooleanColumn column) {
 		if (column.getStyle() != null) {
 			return column.getStyle();
 		}
@@ -1611,6 +1613,17 @@ public class TemplateTransform {
 			return column.getWidth();
 		}
 		return Defaults.getDefaults().getColumnWidth();
+	}
+
+	public Map<String, DRIStyle> getTemplateStyles() {
+		Map<String, DRIStyle> templateStyles = new HashMap<String, DRIStyle>();
+		/*for (DRIStyle style : template.getTemplateStyles()) {
+			templateStyles.put(style.getName(), style);
+		}*/
+		for (DRIStyle style : report.getTemplateStyles()) {
+			templateStyles.put(style.getName(), style);
+		}
+		return templateStyles;
 	}
 
 	//split
@@ -1687,63 +1700,63 @@ public class TemplateTransform {
 	}
 
 	//band style
-	protected DRIStyle getTitleStyle(DRIBand band) {
+	protected DRIReportStyle getTitleStyle(DRIBand band) {
 		return getBandStyle(band, template.getTitleStyle());
 	}
 
-	protected DRIStyle getPageHeaderStyle(DRIBand band) {
+	protected DRIReportStyle getPageHeaderStyle(DRIBand band) {
 		return getBandStyle(band, template.getPageHeaderStyle());
 	}
 
-	protected DRIStyle getPageFooterStyle(DRIBand band) {
+	protected DRIReportStyle getPageFooterStyle(DRIBand band) {
 		return getBandStyle(band, template.getPageFooterStyle());
 	}
 
-	protected DRIStyle getColumnHeaderStyle(DRIBand band) {
+	protected DRIReportStyle getColumnHeaderStyle(DRIBand band) {
 		return getBandStyle(band, template.getColumnHeaderStyle());
 	}
 
-	protected DRIStyle getColumnFooterStyle(DRIBand band) {
+	protected DRIReportStyle getColumnFooterStyle(DRIBand band) {
 		return getBandStyle(band, template.getColumnFooterStyle());
 	}
 
-	protected DRIStyle getGroupHeaderStyle(DRIBand band) {
+	protected DRIReportStyle getGroupHeaderStyle(DRIBand band) {
 		return getBandStyle(band, template.getGroupHeaderStyle());
 	}
 
-	protected DRIStyle getGroupFooterStyle(DRIBand band) {
+	protected DRIReportStyle getGroupFooterStyle(DRIBand band) {
 		return getBandStyle(band, template.getGroupFooterStyle());
 	}
 
-	protected DRIStyle getDetailHeaderStyle(DRIBand band) {
+	protected DRIReportStyle getDetailHeaderStyle(DRIBand band) {
 		return getBandStyle(band, template.getDetailHeaderStyle());
 	}
 
-	protected DRIStyle getDetailStyle(DRIBand band) {
+	protected DRIReportStyle getDetailStyle(DRIBand band) {
 		return getBandStyle(band, template.getDetailStyle());
 	}
 
-	protected DRIStyle getDetailFooterStyle(DRIBand band) {
+	protected DRIReportStyle getDetailFooterStyle(DRIBand band) {
 		return getBandStyle(band, template.getDetailFooterStyle());
 	}
 
-	protected DRIStyle getLastPageFooterStyle(DRIBand band) {
+	protected DRIReportStyle getLastPageFooterStyle(DRIBand band) {
 		return getBandStyle(band, template.getLastPageFooterStyle());
 	}
 
-	protected DRIStyle getSummaryStyle(DRIBand band) {
+	protected DRIReportStyle getSummaryStyle(DRIBand band) {
 		return getBandStyle(band, template.getSummaryStyle());
 	}
 
-	protected DRIStyle getNoDataStyle(DRIBand band) {
+	protected DRIReportStyle getNoDataStyle(DRIBand band) {
 		return getBandStyle(band, template.getNoDataStyle());
 	}
 
-	protected DRIStyle getBackgroundStyle(DRIBand band) {
+	protected DRIReportStyle getBackgroundStyle(DRIBand band) {
 		return getBandStyle(band, template.getBackgroundStyle());
 	}
 
-	private DRIStyle getBandStyle(DRIBand band, DRIStyle templateStyle) {
+	private DRIReportStyle getBandStyle(DRIBand band, DRIReportStyle templateStyle) {
 		if (band.getList().getStyle() != null) {
 			return band.getList().getStyle();
 		}
@@ -1829,4 +1842,5 @@ public class TemplateTransform {
 		ComponentPosition.height(designList);
 		return designList.getHeight();
 	}
+
 }

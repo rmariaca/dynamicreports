@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
@@ -71,7 +71,7 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		return (T) this;
 	}
 
-	public T setLabelStyle(StyleBuilder labelStyle) {
+	public T setLabelStyle(ReportStyleBuilder labelStyle) {
 		if (labelStyle != null) {
 			getObject().setLabelStyle(labelStyle.getStyle());
 		}
@@ -146,7 +146,7 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		return (T) this;
 	}
 
-	public T setStyle(StyleBuilder style) {
+	public T setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getValueField().setStyle(style.getStyle());
 		}

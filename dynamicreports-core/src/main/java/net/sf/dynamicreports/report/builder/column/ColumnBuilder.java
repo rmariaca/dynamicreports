@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -71,7 +71,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 	 * @param titleStyle the title style
 	 * @return a column builder
 	 */
-	public T setTitleStyle(StyleBuilder titleStyle) {
+	public T setTitleStyle(ReportStyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
 		}
@@ -87,7 +87,7 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 	 * @param style the value style
 	 * @return a column builder
 	 */
-	public T setStyle(StyleBuilder style) {
+	public T setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getComponent().setStyle(style.getStyle());
 		}

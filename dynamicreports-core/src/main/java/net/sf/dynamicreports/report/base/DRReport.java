@@ -34,7 +34,6 @@ import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.grid.DRColumnGrid;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
@@ -44,6 +43,7 @@ import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
@@ -55,7 +55,7 @@ public class DRReport implements DRIReport {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRReportTemplate template;
-	private List<DRIExpression<?>> templates;
+	private List<DRIStyle> templateStyles;
 	private DRITemplateDesign<?> templateDesign;
 	private Locale locale;
 	private ResourceBundle resourceBundle;
@@ -93,15 +93,15 @@ public class DRReport implements DRIReport {
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
 	private DRIExpression<Boolean> filterExpression;
 
-	private DRStyle textStyle;
-	private DRStyle columnTitleStyle;
-	private DRStyle columnStyle;
-	private DRStyle groupTitleStyle;
-	private DRStyle groupStyle;
-	private DRStyle subtotalStyle;
-	private DRStyle imageStyle;
-	private DRStyle chartStyle;
-	private DRStyle barcodeStyle;
+	private DRIReportStyle textStyle;
+	private DRIReportStyle columnTitleStyle;
+	private DRIReportStyle columnStyle;
+	private DRIReportStyle groupTitleStyle;
+	private DRIReportStyle groupStyle;
+	private DRIReportStyle subtotalStyle;
+	private DRIReportStyle imageStyle;
+	private DRIReportStyle chartStyle;
+	private DRIReportStyle barcodeStyle;
 
 	private DRBand titleBand;
 	private DRBand pageHeaderBand;
@@ -122,7 +122,7 @@ public class DRReport implements DRIReport {
 
 	private void init() {
 		this.template = new DRReportTemplate();
-		this.templates = new ArrayList<DRIExpression<?>>();
+		this.templateStyles = new ArrayList<DRIStyle>();
 		this.columns = new ArrayList<DRColumn<?>>();
 		this.groups = new ArrayList<DRGroup>();
 		this.subtotals = new ArrayList<DRSubtotal<?>>();
@@ -158,17 +158,18 @@ public class DRReport implements DRIReport {
 		this.template = template;
 	}
 
-	public List<DRIExpression<?>> getTemplates() {
-		return templates;
+	public List<DRIStyle> getTemplateStyles() {
+		return templateStyles;
 	}
 
-	public void addTemplate(DRIExpression<?> template) {
-		Validate.notNull(template, "template must not be null");
-		this.templates.add(template);
+	public void addTemplateStyle(DRIStyle templateStyle) {
+		Validate.notNull(templateStyle, "templateStyle must not be null");
+		Validate.notNull(templateStyle.getName(), "templateStyle name must not be null");
+		this.templateStyles.add(templateStyle);
 	}
 
-	public void setTemplates(List<DRIExpression<?>> templates) {
-		this.templates = templates;
+	public void setTemplateStyles(List<DRIStyle> templateStyles) {
+		this.templateStyles = templateStyles;
 	}
 
 	public DRITemplateDesign<?> getTemplateDesign() {
@@ -459,75 +460,75 @@ public class DRReport implements DRIReport {
 		this.useFieldNameAsDescription = useFieldNameAsDescription;
 	}
 
-	public DRStyle getTextStyle() {
+	public DRIReportStyle getTextStyle() {
 		return textStyle;
 	}
 
-	public void setTextStyle(DRStyle textStyle) {
+	public void setTextStyle(DRIReportStyle textStyle) {
 		this.textStyle = textStyle;
 	}
 
-	public DRStyle getColumnTitleStyle() {
+	public DRIReportStyle getColumnTitleStyle() {
 		return columnTitleStyle;
 	}
 
-	public void setColumnTitleStyle(DRStyle columnTitleStyle) {
+	public void setColumnTitleStyle(DRIReportStyle columnTitleStyle) {
 		this.columnTitleStyle = columnTitleStyle;
 	}
 
-	public DRStyle getColumnStyle() {
+	public DRIReportStyle getColumnStyle() {
 		return columnStyle;
 	}
 
-	public void setColumnStyle(DRStyle columnStyle) {
+	public void setColumnStyle(DRIReportStyle columnStyle) {
 		this.columnStyle = columnStyle;
 	}
 
-	public DRStyle getGroupTitleStyle() {
+	public DRIReportStyle getGroupTitleStyle() {
 		return groupTitleStyle;
 	}
 
-	public void setGroupTitleStyle(DRStyle groupTitleStyle) {
+	public void setGroupTitleStyle(DRIReportStyle groupTitleStyle) {
 		this.groupTitleStyle = groupTitleStyle;
 	}
 
-	public DRStyle getGroupStyle() {
+	public DRIReportStyle getGroupStyle() {
 		return groupStyle;
 	}
 
-	public void setGroupStyle(DRStyle groupStyle) {
+	public void setGroupStyle(DRIReportStyle groupStyle) {
 		this.groupStyle = groupStyle;
 	}
 
-	public DRStyle getSubtotalStyle() {
+	public DRIReportStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
 
-	public void setSubtotalStyle(DRStyle subtotalStyle) {
+	public void setSubtotalStyle(DRIReportStyle subtotalStyle) {
 		this.subtotalStyle = subtotalStyle;
 	}
 
-	public DRStyle getImageStyle() {
+	public DRIReportStyle getImageStyle() {
 		return imageStyle;
 	}
 
-	public void setImageStyle(DRStyle imageStyle) {
+	public void setImageStyle(DRIReportStyle imageStyle) {
 		this.imageStyle = imageStyle;
 	}
 
-	public DRStyle getChartStyle() {
+	public DRIReportStyle getChartStyle() {
 		return chartStyle;
 	}
 
-	public void setChartStyle(DRStyle chartStyle) {
+	public void setChartStyle(DRIReportStyle chartStyle) {
 		this.chartStyle = chartStyle;
 	}
 
-	public DRIStyle getBarcodeStyle() {
+	public DRIReportStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
 
-	public void setBarcodeStyle(DRStyle barcodeStyle) {
+	public void setBarcodeStyle(DRIReportStyle barcodeStyle) {
 		this.barcodeStyle = barcodeStyle;
 	}
 

@@ -222,10 +222,6 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		return tableOfContentsTransform;
 	}
 
-	public List<DRIDesignExpression> getTemplates() {
-		return reportTransform.getTemplates();
-	}
-
 	public DRIDesignTemplateDesign getTemplateDesign() {
 		return reportTransform.getTemplateDesign();
 	}

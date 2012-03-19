@@ -22,16 +22,11 @@
 
 package net.sf.dynamicreports.report.definition.style;
 
-import java.util.List;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIStyle extends DRIBaseStyle, DRIReportStyle {
+public interface DRIReferencedStyle extends DRIReportStyle {
 
 	public String getName();
 
-	public DRIReportStyle getParentStyle();
-
-	public List<? extends DRIConditionalStyle> getConditionalStyles();
 }

@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -90,7 +90,7 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setHeaderStyle(StyleBuilder style) {
+	public T setHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setHeaderStyle(style.getStyle());
 		}
@@ -120,7 +120,7 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
-	public T setTotalHeaderStyle(StyleBuilder style) {
+	public T setTotalHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setTotalHeaderStyle(style.getStyle());
 		}

@@ -38,7 +38,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -178,7 +178,7 @@ public class BandTransform {
 	}
 
 	//band
-	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIStyle defaultStyle, DRIComponent defaultBackgroundComponent, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIReportStyle defaultStyle, DRIComponent defaultBackgroundComponent, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignBand designBand = new DRDesignBand(bandName);
 		designBand.setSplitType(splitType);
 		designBand.setList(accessor.getComponentTransform().list(band.getList(), DefaultStyleType.TEXT, resetType, resetGroup));
@@ -193,7 +193,7 @@ public class BandTransform {
 		return designBand;
 	}
 
-	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIStyle defaultStyle, DRIComponent defaultBackgroundComponent) throws DRException {
+	protected DRDesignBand band(String bandName, DRIBand band, SplitType splitType, DRIReportStyle defaultStyle, DRIComponent defaultBackgroundComponent) throws DRException {
 		DRDesignBand designBand = new DRDesignBand(bandName);
 		designBand.setSplitType(splitType);
 		DRDesignList list = new DRDesignList();

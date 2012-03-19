@@ -54,6 +54,7 @@ import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -197,7 +198,7 @@ public class ColumnTransform {
 			throw new DRDesignReportException("Boolean component type " + componentType.name() + " not supported");
 		}
 
-		component.setStyle((DRStyle) accessor.getTemplateTransform().getBooleanColumnStyle(column));
+		component.setStyle(accessor.getTemplateTransform().getBooleanColumnStyle(column));
 		component.setPrintWhenExpression(column.getPrintWhenExpression());
 
 		return component;
@@ -209,7 +210,7 @@ public class ColumnTransform {
 		@SuppressWarnings("rawtypes")
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(column.getTitleExpression());
-		titleField.setStyle((DRStyle) column.getTitleStyle());
+		titleField.setStyle(column.getTitleStyle());
 		titleField.setWidth(accessor.getTemplateTransform().getColumnWidth(column, accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));
 		titleField.setHeight(column.getTitleHeight());
 		titleField.setHeightType(column.getTitleHeightType());
@@ -247,25 +248,26 @@ public class ColumnTransform {
 			rowHighlighters.add(detailRowConditionalStyle(detailEvenRowStyle, Expressions.printInEvenRow()));
 		}
 		if (!rowHighlighters.isEmpty()) {
-			DRIStyle style = getColumnComponent(column).getStyle();
+			DRIReportStyle style = getColumnComponent(column).getStyle();
 			if (style == null) {
 				style = accessor.getTemplateTransform().getColumnStyle(column instanceof DRIValueColumn<?>);
 			}
 			DRStyle newStyle = new DRStyle();
-			newStyle.setParentStyle((DRStyle) style);
+			newStyle.setParentStyle(style);
 			if (!(column instanceof DRIValueColumn<?>)) {
 				newStyle.setPadding(new DRPadding(0));
 			}
 			List<DRIConditionalStyle> conditionalStyles = new ArrayList<DRIConditionalStyle>();
 			if (style != null) {
-				for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
+				DRIStyle stl = accessor.getStyleTransform().getStyle(style);
+				for (DRIConditionalStyle conditionalStyle : stl.getConditionalStyles()) {
 					conditionalStyles.add(conditionalStyle);
 				}
 			}
 			for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
 				conditionalStyles.add(conditionalStyle);
 			}
-			Color backgroundColor = StyleResolver.getBackgroundColor(style);
+			Color backgroundColor = StyleResolver.getBackgroundColor(style, accessor.getStyleTransform());
 			for (DRIConditionalStyle conditionalStyle : conditionalStyles) {
 				if (backgroundColor != null) {
 					DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
@@ -282,11 +284,11 @@ public class ColumnTransform {
 		}
 		else {
 			if (designComponent.getStyle() == null && !(column instanceof DRIValueColumn<?>)) {
-				DRIStyle columnStyle = accessor.getTemplateTransform().getColumnStyle(false);
+				DRIReportStyle columnStyle = accessor.getTemplateTransform().getColumnStyle(false);
 				DRStyle newStyle = null;
 				if (columnStyle != null) {
 					newStyle = new DRStyle();
-					newStyle.setParentStyle((DRStyle) columnStyle);
+					newStyle.setParentStyle(columnStyle);
 					newStyle.setPadding(new DRPadding(0));
 				}
 				DRDesignStyle designColumnStyle = accessor.getStyleTransform().transformStyle(newStyle, false, DefaultStyleType.NONE);

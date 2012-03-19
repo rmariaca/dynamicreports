@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -50,7 +50,7 @@ public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIC
 
 	public Integer getImageHeight();
 
-	public DRIStyle getStyle();
+	public DRIReportStyle getStyle();
 
 	public DRIExpression<Boolean> getPrintWhenExpression();
 }

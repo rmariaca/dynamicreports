@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
@@ -129,27 +129,27 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setStyle(StyleBuilder style) {
+	public CrosstabMeasureBuilder<T> setStyle(ReportStyleBuilder style) {
 		Validate.notNull(style, "style must not be null");
 		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle()));
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setStyle(StyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup) {
+	public CrosstabMeasureBuilder<T> setStyle(ReportStyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup) {
 		Validate.notNull(style, "style must not be null");
 		Validate.notNull(rowGroup, "rowGroup must not be null");
 		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), rowGroup.build(), null));
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setStyle(StyleBuilder style, CrosstabColumnGroupBuilder<?> columnGroup) {
+	public CrosstabMeasureBuilder<T> setStyle(ReportStyleBuilder style, CrosstabColumnGroupBuilder<?> columnGroup) {
 		Validate.notNull(style, "style must not be null");
 		Validate.notNull(columnGroup, "columnGroup must not be null");
 		getObject().getStyles().add(new DRCrosstabCellStyle(style.getStyle(), null, columnGroup.build()));
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setStyle(StyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
+	public CrosstabMeasureBuilder<T> setStyle(ReportStyleBuilder style, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup) {
 		Validate.notNull(style, "style must not be null");
 		Validate.notNull(rowGroup, "rowGroup must not be null");
 		Validate.notNull(columnGroup, "columnGroup must not be null");
@@ -167,7 +167,7 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		return this;
 	}
 
-	public CrosstabMeasureBuilder<T> setTitleStyle(StyleBuilder titleStyle) {
+	public CrosstabMeasureBuilder<T> setTitleStyle(ReportStyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
 		}

@@ -116,7 +116,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRRenderable;
@@ -203,7 +203,7 @@ public class ComponentTransform {
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
 
-	private void component(DRDesignComponent designComponent, DRIComponent component, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
+	private void component(DRDesignComponent designComponent, DRIComponent component, DRIReportStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		designComponent.setStyle(accessor.getStyleTransform().transformStyle(style, textStyle, defaultStyleType));
 		designComponent.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(component.getPrintWhenExpression()));
 		designComponent.setRemoveLineWhenBlank(accessor.getTemplateTransform().getRemoveLineWhenBlank(component));
@@ -225,7 +225,7 @@ public class ComponentTransform {
 		}
 	}
 
-	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
+	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIReportStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		component(designHyperlinkComponent, hyperlinkComponent, style, textStyle, defaultStyleType);
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
 		if (hyperLink != null) {
@@ -381,7 +381,7 @@ public class ComponentTransform {
 	//page x of y
 	private DRDesignList pageXofY(DRIPageXofY pageXofY, DefaultStyleType defaultStyleType) throws DRException {
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
-		DRIStyle pageXofYStyle = pageXofY.getStyle();
+		DRIReportStyle pageXofYStyle = pageXofY.getStyle();
 		if (pageXofYStyle == null) {
 			pageXofYStyle = accessor.getTemplateTransform().getTextStyle();
 		}
@@ -390,13 +390,13 @@ public class ComponentTransform {
 		HorizontalAlignment horizontalAlignment = templateTransform.getPageXofYHorizontalAlignment(pageXofY, style);
 
 		DRStyle newStylePageX = new DRStyle();
-		newStylePageX.setParentStyle((DRStyle) pageXofYStyle);
+		newStylePageX.setParentStyle(pageXofYStyle);
 		newStylePageX.getPadding().setRight(0);
 		DRPen pen = new DRPen();
 		pen.setLineWidth(0f);
 		newStylePageX.getBorder().setRightPen(pen);
 		DRStyle newStylePageY = new DRStyle();
-		newStylePageY.setParentStyle((DRStyle) pageXofYStyle);
+		newStylePageY.setParentStyle(pageXofYStyle);
 		newStylePageY.getPadding().setLeft(0);
 		newStylePageY.getBorder().setLeftPen(pen);
 
@@ -497,7 +497,7 @@ public class ComponentTransform {
 		DRTextField<String> formatFieldTextField = new DRTextField<String>();
 		formatFieldTextField.setHyperLink((DRHyperLink) formatField.getHyperLink());
 		formatFieldTextField.setPrintWhenExpression(formatField.getPrintWhenExpression());
-		formatFieldTextField.setStyle((DRStyle) formatField.getStyle());
+		formatFieldTextField.setStyle(formatField.getStyle());
 		formatFieldTextField.setWidth(formatField.getWidth());
 		formatFieldTextField.setWidthType(formatField.getWidthType());
 		formatFieldTextField.setHeight(formatField.getHeight());
@@ -583,7 +583,7 @@ public class ComponentTransform {
 		component.setHeight(booleanField.getHeight());
 		component.setHeightType(booleanField.getHeightType());
 		component.setHyperLink((DRHyperLink) booleanField.getHyperLink());
-		component.setStyle((DRStyle) booleanField.getStyle());
+		component.setStyle(booleanField.getStyle());
 		component.setPrintWhenExpression(booleanField.getPrintWhenExpression());
 		component.setPropertyExpressions(booleanField.getPropertyExpressions());
 

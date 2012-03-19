@@ -24,12 +24,12 @@ package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -42,7 +42,7 @@ public class DRGroup implements DRIGroup {
 	private String name;
 	private DRTextField<?> valueField;
 	private DRIExpression<?> titleExpression;
-	private DRStyle titleStyle;
+	private DRIReportStyle titleStyle;
 	private Integer titleWidth;
 	private GroupHeaderLayout headerLayout;
 	private Boolean hideColumn;
@@ -93,11 +93,11 @@ public class DRGroup implements DRIGroup {
 		this.titleExpression = titleExpression;
 	}
 
-	public DRStyle getTitleStyle() {
+	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}
 
-	public void setTitleStyle(DRStyle titleStyle) {
+	public void setTitleStyle(DRIReportStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
 

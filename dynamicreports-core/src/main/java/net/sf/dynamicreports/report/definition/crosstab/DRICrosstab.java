@@ -26,8 +26,8 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -58,15 +58,15 @@ public interface DRICrosstab extends DRIDimensionComponent {
 
 	public DRISimpleStyle getEvenRowStyle();
 
-	public DRIStyle getGroupStyle();
+	public DRIReportStyle getGroupStyle();
 
-	public DRIStyle getGroupTotalStyle();
+	public DRIReportStyle getGroupTotalStyle();
 
-	public DRIStyle getGrandTotalStyle();
+	public DRIReportStyle getGrandTotalStyle();
 
-	public DRIStyle getCellStyle();
+	public DRIReportStyle getCellStyle();
 
-	public DRIStyle getMeasureTitleStyle();
+	public DRIReportStyle getMeasureTitleStyle();
 
 	public DRICrosstabCellContent getWhenNoDataCell();
 

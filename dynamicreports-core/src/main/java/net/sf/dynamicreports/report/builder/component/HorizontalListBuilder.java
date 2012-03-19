@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRList;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
@@ -118,7 +118,7 @@ public class HorizontalListBuilder extends DimensionComponentBuilder<HorizontalL
 	}
 
 	@Override
-	public HorizontalListBuilder setStyle(StyleBuilder style) {
+	public HorizontalListBuilder setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			row.setStyle(style.build());
 		}
@@ -138,7 +138,7 @@ public class HorizontalListBuilder extends DimensionComponentBuilder<HorizontalL
 		return this;
 	}
 
-	public HorizontalListBuilder setBaseStyle(StyleBuilder style) {
+	public HorizontalListBuilder setBaseStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setStyle(style.build());
 		}

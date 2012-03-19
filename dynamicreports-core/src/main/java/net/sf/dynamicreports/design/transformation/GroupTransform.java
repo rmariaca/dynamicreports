@@ -41,7 +41,6 @@ import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
@@ -54,7 +53,7 @@ import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -167,7 +166,7 @@ public class GroupTransform {
 		}
 	}
 
-	private DRDesignBand groupBand(String name, DRIBand band, SplitType splitType, DRIStyle defaultStyle, DRIComponent defaultBackgroundComponent, int groupPadding, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignBand groupBand(String name, DRIBand band, SplitType splitType, DRIReportStyle defaultStyle, DRIComponent defaultBackgroundComponent, int groupPadding, DRDesignGroup resetGroup) throws DRException {
 		DRDesignBand designBand = accessor.getBandTransform().band(name, band, splitType, defaultStyle, defaultBackgroundComponent, ResetType.GROUP, resetGroup);
 		if (groupPadding > 0) {
 			DRDesignFiller filler = new DRDesignFiller();
@@ -187,7 +186,7 @@ public class GroupTransform {
 		@SuppressWarnings("rawtypes")
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(group.getTitleExpression());
-		titleField.setStyle((DRStyle) group.getTitleStyle());
+		titleField.setStyle(group.getTitleStyle());
 		titleField.setWidth(group.getTitleWidth());
 		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.GROUP_TITLE);
 		designTitleField.setUniqueName("group_" + group.getName() + ".title");

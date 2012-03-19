@@ -24,11 +24,11 @@ package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -37,29 +37,29 @@ import org.apache.commons.lang.Validate;
  */
 public class DRSubtotal<T> implements DRISubtotal<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRColumn<?> showInColumn;
 	private DRTextField<T> valueField;
 	private SubtotalPosition position;
 	private DRGroup group;
-	
+
 	private DRIExpression<?> labelExpression;
-	private DRStyle labelStyle;
-	
-	public DRSubtotal(DRColumn<?> showInColumn) {		
+	private DRIReportStyle labelStyle;
+
+	public DRSubtotal(DRColumn<?> showInColumn) {
 		setShowInColumn(showInColumn);
 		init();
 	}
-	
+
 	private void init() {
 		valueField = new DRTextField<T>();
 	}
-	
+
 	public void setShowInColumn(DRColumn<?> showInColumn) {
 		Validate.notNull(showInColumn, "showInColumn must not be null");
 		this.showInColumn = showInColumn;
 	}
-	
+
 	public DRColumn<?> getShowInColumn() {
 		return showInColumn;
 	}
@@ -67,7 +67,7 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 	public DRTextField<T> getValueField() {
 		return valueField;
 	}
-	
+
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}
@@ -76,14 +76,14 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.labelExpression = labelExpression;
 	}
 
-	public DRStyle getLabelStyle() {
+	public DRIReportStyle getLabelStyle() {
 		return labelStyle;
 	}
 
-	public void setLabelStyle(DRStyle labelStyle) {
+	public void setLabelStyle(DRIReportStyle labelStyle) {
 		this.labelStyle = labelStyle;
 	}
-	
+
 	public SubtotalPosition getPosition() {
 		return position;
 	}
@@ -104,7 +104,7 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 	public String getName() {
 		return valueField.getValueExpression().getName();
 	}
-	
+
 	public Class<? super T> getValueClass() {
 		return valueField.getValueExpression().getValueClass();
 	}

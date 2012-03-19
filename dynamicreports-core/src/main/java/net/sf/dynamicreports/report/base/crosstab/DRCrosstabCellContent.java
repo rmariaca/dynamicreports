@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,7 +36,7 @@ public class DRCrosstabCellContent implements DRICrosstabCellContent {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRList list;
-	private DRIStyle style;
+	private DRIReportStyle style;
 
 	public DRCrosstabCellContent() {
 		this.list = new DRList(ListType.VERTICAL);
@@ -50,11 +50,11 @@ public class DRCrosstabCellContent implements DRICrosstabCellContent {
 		list.addComponent(component);
 	}
 
-	public DRIStyle getStyle() {
+	public DRIReportStyle getStyle() {
 		return style;
 	}
 
-	public void setStyle(DRIStyle style) {
+	public void setStyle(DRIReportStyle style) {
 		this.style = style;
 	}
 }

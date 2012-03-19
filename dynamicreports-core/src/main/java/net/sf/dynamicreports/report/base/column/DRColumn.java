@@ -23,12 +23,12 @@
 package net.sf.dynamicreports.report.base.column;
 
 import net.sf.dynamicreports.report.ReportUtils;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -42,7 +42,7 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	private T component;
 
 	private DRIExpression<?> titleExpression;
-	private DRStyle titleStyle;
+	private DRIReportStyle titleStyle;
 	private Integer titleHeight;
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
@@ -69,11 +69,11 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 		this.titleExpression = titleExpression;
 	}
 
-	public DRStyle getTitleStyle() {
+	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}
 
-	public void setTitleStyle(DRStyle titleStyle) {
+	public void setTitleStyle(DRIReportStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
 

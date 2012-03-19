@@ -27,7 +27,6 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
@@ -35,6 +34,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -56,11 +56,11 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 	private DRSimpleStyle oddRowStyle;
 	private Boolean highlightEvenRows;
 	private DRSimpleStyle evenRowStyle;
-	private DRStyle groupStyle;
-	private DRStyle groupTotalStyle;
-	private DRStyle grandTotalStyle;
-	private DRStyle cellStyle;
-	private DRStyle measureTitleStyle;
+	private DRIReportStyle groupStyle;
+	private DRIReportStyle groupTotalStyle;
+	private DRIReportStyle grandTotalStyle;
+	private DRIReportStyle cellStyle;
+	private DRIReportStyle measureTitleStyle;
 	private DRCrosstabCellContent whenNoDataCell;
 	private DRCrosstabCellContent headerCell;
 	private List<DRICrosstabColumnGroup<?>> columnGroups;
@@ -185,43 +185,43 @@ public class DRCrosstab extends DRDimensionComponent implements DRICrosstab {
 		this.evenRowStyle = evenRowStyle;
 	}
 
-	public DRStyle getGroupStyle() {
+	public DRIReportStyle getGroupStyle() {
 		return groupStyle;
 	}
 
-	public void setGroupStyle(DRStyle groupStyle) {
+	public void setGroupStyle(DRIReportStyle groupStyle) {
 		this.groupStyle = groupStyle;
 	}
 
-	public DRStyle getGroupTotalStyle() {
+	public DRIReportStyle getGroupTotalStyle() {
 		return groupTotalStyle;
 	}
 
-	public void setGroupTotalStyle(DRStyle groupTotalStyle) {
+	public void setGroupTotalStyle(DRIReportStyle groupTotalStyle) {
 		this.groupTotalStyle = groupTotalStyle;
 	}
 
-	public DRStyle getGrandTotalStyle() {
+	public DRIReportStyle getGrandTotalStyle() {
 		return grandTotalStyle;
 	}
 
-	public void setGrandTotalStyle(DRStyle grandTotalStyle) {
+	public void setGrandTotalStyle(DRIReportStyle grandTotalStyle) {
 		this.grandTotalStyle = grandTotalStyle;
 	}
 
-	public DRStyle getCellStyle() {
+	public DRIReportStyle getCellStyle() {
 		return cellStyle;
 	}
 
-	public void setCellStyle(DRStyle cellStyle) {
+	public void setCellStyle(DRIReportStyle cellStyle) {
 		this.cellStyle = cellStyle;
 	}
 
-	public DRStyle getMeasureTitleStyle() {
+	public DRIReportStyle getMeasureTitleStyle() {
 		return measureTitleStyle;
 	}
 
-	public void setMeasureTitleStyle(DRStyle measureTitleStyle) {
+	public void setMeasureTitleStyle(DRIReportStyle measureTitleStyle) {
 		this.measureTitleStyle = measureTitleStyle;
 	}
 

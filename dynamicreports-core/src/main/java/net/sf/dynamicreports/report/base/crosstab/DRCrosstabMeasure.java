@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.ReportUtils;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
@@ -34,6 +33,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -52,7 +52,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 	private Boolean stretchWithOverflow;
 	private List<DRICrosstabCellStyle> styles;
 	private DRIExpression<?> titleExpression;
-	private DRStyle titleStyle;
+	private DRIReportStyle titleStyle;
 
 	public DRCrosstabMeasure(DRIExpression<?> expression) {
 		Validate.notNull(expression, "expression must not be null");
@@ -125,11 +125,11 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.titleExpression = titleExpression;
 	}
 
-	public DRStyle getTitleStyle() {
+	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}
 
-	public void setTitleStyle(DRStyle titleStyle) {
+	public void setTitleStyle(DRIReportStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
 }

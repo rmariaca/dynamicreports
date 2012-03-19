@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -48,7 +48,7 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
 	public Boolean getHeaderStretchWithOverflow();
 
-	public DRIStyle getHeaderStyle();
+	public DRIReportStyle getHeaderStyle();
 
 	public Boolean getShowTotal();
 
@@ -56,7 +56,7 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
 	public DRIExpression<?> getTotalHeaderExpression();
 
-	public DRIStyle getTotalHeaderStyle();
+	public DRIReportStyle getTotalHeaderStyle();
 
 	public DRIExpression<T> getExpression();
 

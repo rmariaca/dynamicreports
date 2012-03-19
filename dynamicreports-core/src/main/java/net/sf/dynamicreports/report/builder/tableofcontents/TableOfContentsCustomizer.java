@@ -36,7 +36,7 @@ import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
@@ -63,9 +63,9 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	protected HyperLinkBuilder referenceHyperLink;
 	protected int pageIndexDigits;
 
-	protected StyleBuilder titleStyle;
-	protected StyleBuilder headingStyle;
-	protected Map<Integer, StyleBuilder> headingStyles;
+	protected ReportStyleBuilder titleStyle;
+	protected ReportStyleBuilder headingStyle;
+	protected Map<Integer, ReportStyleBuilder> headingStyles;
 	protected Integer textFixedWidth;
 	protected Integer dotsFixedWidth;
 	protected Integer pageIndexFixedWidth;
@@ -79,7 +79,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	}
 
 	public TableOfContentsCustomizer() {
-		headingStyles = new HashMap<Integer, StyleBuilder>();
+		headingStyles = new HashMap<Integer, ReportStyleBuilder>();
 	}
 
 	protected void init() {
@@ -174,7 +174,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 		}
 		headingComponent.add(pageIndexComponent);
 
-		StyleBuilder headingStyle = headingStyles.get(level);
+		ReportStyleBuilder headingStyle = headingStyles.get(level);
 		if (headingStyle == null) {
 			headingStyle = this.headingStyle;
 		}
@@ -187,15 +187,15 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 		return headingComponent;
 	}
 
-	public void setTitleStyle(StyleBuilder titleStyle) {
+	public void setTitleStyle(ReportStyleBuilder titleStyle) {
 		this.titleStyle = titleStyle;
 	}
 
-	public void setHeadingStyle(StyleBuilder headingStyle) {
+	public void setHeadingStyle(ReportStyleBuilder headingStyle) {
 		this.headingStyle = headingStyle;
 	}
 
-	public void setHeadingStyle(int level, StyleBuilder headingStyle) {
+	public void setHeadingStyle(int level, ReportStyleBuilder headingStyle) {
 		this.headingStyles.put(level, headingStyle);
 	}
 

@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.grid;
 import net.sf.dynamicreports.report.base.grid.DRColumnTitleGroup;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -61,7 +61,7 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
 		return this;
 	}
 
-	public ColumnTitleGroupBuilder setTitleStyle(StyleBuilder titleStyle) {
+	public ColumnTitleGroupBuilder setTitleStyle(ReportStyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
 		}

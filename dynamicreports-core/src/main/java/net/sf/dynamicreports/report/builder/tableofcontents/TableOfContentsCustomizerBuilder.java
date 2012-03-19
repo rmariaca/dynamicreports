@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.tableofcontents;
 
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
@@ -40,17 +40,17 @@ public class TableOfContentsCustomizerBuilder extends AbstractBuilder<TableOfCon
 		return build();
 	}
 
-	public TableOfContentsCustomizerBuilder setTitleStyle(StyleBuilder titleStyle) {
+	public TableOfContentsCustomizerBuilder setTitleStyle(ReportStyleBuilder titleStyle) {
 		this.getObject().setTitleStyle(titleStyle);
 		return this;
 	}
 
-	public TableOfContentsCustomizerBuilder setHeadingStyle(StyleBuilder headingStyle) {
+	public TableOfContentsCustomizerBuilder setHeadingStyle(ReportStyleBuilder headingStyle) {
 		this.getObject().setHeadingStyle(headingStyle);
 		return this;
 	}
 
-	public TableOfContentsCustomizerBuilder setHeadingStyle(int level, StyleBuilder headingStyle) {
+	public TableOfContentsCustomizerBuilder setHeadingStyle(int level, ReportStyleBuilder headingStyle) {
 		this.getObject().setHeadingStyle(level, headingStyle);
 		return this;
 	}

@@ -29,8 +29,8 @@ import net.sf.dynamicreports.report.builder.DatasetBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -101,7 +101,7 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setGroupStyle(StyleBuilder groupStyle) {
+	public CrosstabBuilder setGroupStyle(ReportStyleBuilder groupStyle) {
 		if (groupStyle != null) {
 			getObject().setGroupStyle(groupStyle.build());
 		}
@@ -111,7 +111,7 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setGroupTotalStyle(StyleBuilder groupTotalStyle) {
+	public CrosstabBuilder setGroupTotalStyle(ReportStyleBuilder groupTotalStyle) {
 		if (groupTotalStyle != null) {
 			getObject().setGroupTotalStyle(groupTotalStyle.build());
 		}
@@ -121,7 +121,7 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setGrandTotalStyle(StyleBuilder grandTotalStyle) {
+	public CrosstabBuilder setGrandTotalStyle(ReportStyleBuilder grandTotalStyle) {
 		if (grandTotalStyle != null) {
 			getObject().setGrandTotalStyle(grandTotalStyle.build());
 		}
@@ -131,7 +131,7 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setCellStyle(StyleBuilder cellStyle) {
+	public CrosstabBuilder setCellStyle(ReportStyleBuilder cellStyle) {
 		if (cellStyle != null) {
 			getObject().setCellStyle(cellStyle.build());
 		}
@@ -141,7 +141,7 @@ public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, 
 		return this;
 	}
 
-	public CrosstabBuilder setMeasureTitleStyle(StyleBuilder measureTitleStyle) {
+	public CrosstabBuilder setMeasureTitleStyle(ReportStyleBuilder measureTitleStyle) {
 		if (measureTitleStyle != null) {
 			getObject().setMeasureTitleStyle(measureTitleStyle.build());
 		}

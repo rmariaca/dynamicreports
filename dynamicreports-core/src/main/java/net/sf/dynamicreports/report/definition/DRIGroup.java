@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -41,7 +41,7 @@ public interface DRIGroup extends Serializable {
 
 	public DRIExpression<?> getTitleExpression();
 
-	public DRIStyle getTitleStyle();
+	public DRIReportStyle getTitleStyle();
 
 	public Integer getTitleWidth();
 

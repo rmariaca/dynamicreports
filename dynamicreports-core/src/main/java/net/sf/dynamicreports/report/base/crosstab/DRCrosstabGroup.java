@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -48,11 +48,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private HorizontalAlignment headerHorizontalAlignment;
 	private DRIValueFormatter<?, ? super T> headerValueFormatter;
 	private Boolean headerStretchWithOverflow;
-	private DRIStyle headerStyle;
+	private DRIReportStyle headerStyle;
 	private Boolean showTotal;
 	private CrosstabTotalPosition totalPosition;
 	private DRIExpression<?> totalHeaderExpression;
-	private DRIStyle totalHeaderStyle;
+	private DRIReportStyle totalHeaderStyle;
 	private DRIExpression<T> expression;
 	private DRIDataType<? super T, T> dataType;
 	private DRIExpression<? extends Comparable<?>> orderByExpression;
@@ -99,11 +99,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerStretchWithOverflow = headerStretchWithOverflow;
 	}
 
-	public DRIStyle getHeaderStyle() {
+	public DRIReportStyle getHeaderStyle() {
 		return headerStyle;
 	}
 
-	public void setHeaderStyle(DRIStyle headerStyle) {
+	public void setHeaderStyle(DRIReportStyle headerStyle) {
 		this.headerStyle = headerStyle;
 	}
 
@@ -131,11 +131,11 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.totalHeaderExpression = totalHeaderExpression;
 	}
 
-	public DRIStyle getTotalHeaderStyle() {
+	public DRIReportStyle getTotalHeaderStyle() {
 		return totalHeaderStyle;
 	}
 
-	public void setTotalHeaderStyle(DRIStyle totalHeaderStyle) {
+	public void setTotalHeaderStyle(DRIReportStyle totalHeaderStyle) {
 		this.totalHeaderStyle = totalHeaderStyle;
 	}
 

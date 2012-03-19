@@ -121,7 +121,7 @@ public class StyleBuilders {
 		return Styles.style();
 	}
 
-	public StyleBuilder style(StyleBuilder parentStyle) {
+	public StyleBuilder style(ReportStyleBuilder parentStyle) {
 		return Styles.style(parentStyle);
 	}
 
@@ -139,6 +139,10 @@ public class StyleBuilders {
 
 	public SimpleStyleBuilder simpleStyle() {
 		return Styles.simpleStyle();
+	}
+
+	public ReferencedStyleBuilder referencedStyle(String name) {
+		return Styles.referencedStyle(name);
 	}
 
 	public ConditionalStyleBuilder conditionalStyle(DRIExpression<Boolean> conditionExpression) {

@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
@@ -307,15 +308,16 @@ public class StyleResolver {
 		return null;
 	}
 
-	public static Color getBackgroundColor(DRIStyle style) {
-		if (style == null) {
+	public static Color getBackgroundColor(DRIReportStyle reportStyle, StyleTransform transform) {
+		if (reportStyle == null) {
 			return null;
 		}
+		DRIStyle style = transform.getStyle(reportStyle);
 		if (style.getBackgroundColor() != null) {
 			return style.getBackgroundColor();
 		}
 		if (style.getParentStyle() != null) {
-			return getBackgroundColor(style.getParentStyle());
+			return getBackgroundColor(style.getParentStyle(), transform);
 		}
 		return null;
 	}

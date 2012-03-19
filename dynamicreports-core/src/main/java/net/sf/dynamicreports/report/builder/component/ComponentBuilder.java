@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsHeadingBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -45,7 +45,7 @@ public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U exten
 		super(object);
 	}
 
-	public T setStyle(StyleBuilder style) {
+	public T setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setStyle(style.getStyle());
 		}

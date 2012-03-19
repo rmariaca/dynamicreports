@@ -36,8 +36,8 @@ import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -76,23 +76,23 @@ public interface DRIReportTemplate extends Serializable {
 
 	public DRISimpleStyle getDetailEvenRowStyle();
 
-	public DRIStyle getTextStyle();
+	public DRIReportStyle getTextStyle();
 
-	public DRIStyle getColumnTitleStyle();
+	public DRIReportStyle getColumnTitleStyle();
 
-	public DRIStyle getColumnStyle();
+	public DRIReportStyle getColumnStyle();
 
-	public DRIStyle getGroupTitleStyle();
+	public DRIReportStyle getGroupTitleStyle();
 
-	public DRIStyle getGroupStyle();
+	public DRIReportStyle getGroupStyle();
 
-	public DRIStyle getSubtotalStyle();
+	public DRIReportStyle getSubtotalStyle();
 
-	public DRIStyle getImageStyle();
+	public DRIReportStyle getImageStyle();
 
-	public DRIStyle getChartStyle();
+	public DRIReportStyle getChartStyle();
 
-	public DRIStyle getBarcodeStyle();
+	public DRIReportStyle getBarcodeStyle();
 
 	public Integer getPageWidth();
 
@@ -168,15 +168,15 @@ public interface DRIReportTemplate extends Serializable {
 
 	public DRISimpleStyle getCrosstabEvenRowStyle();
 
-	public DRIStyle getCrosstabGroupStyle();
+	public DRIReportStyle getCrosstabGroupStyle();
 
-	public DRIStyle getCrosstabGroupTotalStyle();
+	public DRIReportStyle getCrosstabGroupTotalStyle();
 
-	public DRIStyle getCrosstabGrandTotalStyle();
+	public DRIReportStyle getCrosstabGrandTotalStyle();
 
-	public DRIStyle getCrosstabCellStyle();
+	public DRIReportStyle getCrosstabCellStyle();
 
-	public DRIStyle getCrosstabMeasureTitleStyle();
+	public DRIReportStyle getCrosstabMeasureTitleStyle();
 
 	public List<Color> getChartSeriesColors();
 
@@ -186,7 +186,7 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Integer getBooleanColumnImageHeight();
 
-	public DRIStyle getBooleanColumnStyle();
+	public DRIReportStyle getBooleanColumnStyle();
 
 	public SplitType getDefaultSplitType();
 
@@ -218,33 +218,33 @@ public interface DRIReportTemplate extends Serializable {
 
 	public SplitType getBackgroundSplitType();
 
-	public DRIStyle getTitleStyle();
+	public DRIReportStyle getTitleStyle();
 
-	public DRIStyle getPageHeaderStyle();
+	public DRIReportStyle getPageHeaderStyle();
 
-	public DRIStyle getPageFooterStyle();
+	public DRIReportStyle getPageFooterStyle();
 
-	public DRIStyle getColumnHeaderStyle();
+	public DRIReportStyle getColumnHeaderStyle();
 
-	public DRIStyle getColumnFooterStyle();
+	public DRIReportStyle getColumnFooterStyle();
 
-	public DRIStyle getGroupHeaderStyle();
+	public DRIReportStyle getGroupHeaderStyle();
 
-	public DRIStyle getGroupFooterStyle();
+	public DRIReportStyle getGroupFooterStyle();
 
-	public DRIStyle getDetailHeaderStyle();
+	public DRIReportStyle getDetailHeaderStyle();
 
-	public DRIStyle getDetailStyle();
+	public DRIReportStyle getDetailStyle();
 
-	public DRIStyle getDetailFooterStyle();
+	public DRIReportStyle getDetailFooterStyle();
 
-	public DRIStyle getLastPageFooterStyle();
+	public DRIReportStyle getLastPageFooterStyle();
 
-	public DRIStyle getSummaryStyle();
+	public DRIReportStyle getSummaryStyle();
 
-	public DRIStyle getNoDataStyle();
+	public DRIReportStyle getNoDataStyle();
 
-	public DRIStyle getBackgroundStyle();
+	public DRIReportStyle getBackgroundStyle();
 
 	public DRIComponent getTitleBackgroundComponent();
 
@@ -273,4 +273,5 @@ public interface DRIReportTemplate extends Serializable {
 	public DRIComponent getNoDataBackgroundComponent();
 
 	public DRIComponent getBackgroundBackgroundComponent();
+
 }

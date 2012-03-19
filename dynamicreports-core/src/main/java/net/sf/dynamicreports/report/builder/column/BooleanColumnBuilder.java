@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.builder.column;
 
 import net.sf.dynamicreports.report.base.column.DRBooleanColumn;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -182,7 +182,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	}
 
 	@Override
-	public BooleanColumnBuilder setStyle(StyleBuilder style) {
+	public BooleanColumnBuilder setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setStyle(style.getStyle());
 		}

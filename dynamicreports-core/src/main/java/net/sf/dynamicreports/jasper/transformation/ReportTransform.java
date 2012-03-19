@@ -32,7 +32,6 @@ import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignQuery;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.base.CustomScriptlet;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
@@ -47,10 +46,8 @@ import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptlet;
-import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JRDesignReportTemplate;
 import net.sf.jasperreports.engine.design.JRDesignScriptlet;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
@@ -112,12 +109,6 @@ public class ReportTransform {
 	}
 
 	public void transformExpressions() {
-		for (DRIDesignExpression template : accessor.getReport().getTemplates()) {
-			JRDesignExpression expression = accessor.getExpressionTransform().getExpression(template);
-			JRDesignReportTemplate jrTemplate = new JRDesignReportTemplate();
-			jrTemplate.setSourceExpression(expression);
-			accessor.getDesign().addTemplate(jrTemplate);
-		}
 		accessor.getDesign().setFilterExpression(accessor.getExpressionTransform().getExpression(accessor.getReport().getFilterExpression()));
 	}
 

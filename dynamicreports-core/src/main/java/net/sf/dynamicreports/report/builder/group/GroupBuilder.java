@@ -26,7 +26,7 @@ import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -145,7 +145,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
-	public T setStyle(StyleBuilder style) {
+	public T setStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getValueField().setStyle(style.getStyle());
 		}
@@ -160,7 +160,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
-	public T setTitleStyle(StyleBuilder titleStyle) {
+	public T setTitleStyle(ReportStyleBuilder titleStyle) {
 		if (titleStyle != null) {
 			getObject().setTitleStyle(titleStyle.getStyle());
 		}
@@ -181,7 +181,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
-	public T setHeaderStyle(StyleBuilder style) {
+	public T setHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getHeaderBand().getList().setStyle(style.build());
 		}
@@ -216,7 +216,7 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
-	public T setFooterStyle(StyleBuilder style) {
+	public T setFooterStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getFooterBand().getList().setStyle(style.build());
 		}

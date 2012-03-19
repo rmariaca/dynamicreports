@@ -22,13 +22,13 @@
 
 package net.sf.dynamicreports.report.base.column;
 
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -46,7 +46,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private BooleanComponentType componentType;
 	private Integer imageWidth;
 	private Integer imageHeight;
-	private DRStyle style;
+	private DRIReportStyle style;
 	private DRIExpression<Boolean> printWhenExpression;
 
 	public Integer getWidth() {
@@ -126,11 +126,11 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.imageHeight = imageHeight;
 	}
 
-	public DRStyle getStyle() {
+	public DRIReportStyle getStyle() {
 		return style;
 	}
 
-	public void setStyle(DRStyle style) {
+	public void setStyle(DRIReportStyle style) {
 		this.style = style;
 	}
 

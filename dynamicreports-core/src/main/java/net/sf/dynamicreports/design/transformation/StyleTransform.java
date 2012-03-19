@@ -56,6 +56,8 @@ import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIPadding;
 import net.sf.dynamicreports.report.definition.style.DRIParagraph;
 import net.sf.dynamicreports.report.definition.style.DRIPen;
+import net.sf.dynamicreports.report.definition.style.DRIReferencedStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.definition.style.DRITabStop;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -67,6 +69,7 @@ public class StyleTransform {
 	private DesignTransformAccessor accessor;
 	private Map<String, DRIDesignStyle> styles;
 	private Map<String, DRDesignStyle> designStyles;
+	private Map<String, DRIStyle> templateStyles;
 
 	public StyleTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -78,11 +81,11 @@ public class StyleTransform {
 		designStyles = new HashMap<String, DRDesignStyle>();
 	}
 
-	private DRDesignStyle transformStyle(DRIStyle style, boolean textStyle) throws DRException {
+	private DRDesignStyle transformStyle(DRIReportStyle style, boolean textStyle) throws DRException {
 		return transformStyle(style, textStyle, DefaultStyleType.NONE);
 	}
 
-	protected DRDesignStyle transformStyle(DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
+	protected DRDesignStyle transformStyle(DRIReportStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		if (style == null) {
 			return getDefaultStyle(defaultStyleType);
 		}
@@ -91,7 +94,7 @@ public class StyleTransform {
 			return designStyles.get(styleName);
 		}
 
-		DRDesignStyle designStyle = style(style, textStyle, defaultStyleType);
+		DRDesignStyle designStyle = style(getStyle(style), textStyle, defaultStyleType);
 		if (textStyle) {
 			if (StyleResolver.getFontName(designStyle) == null) {
 				designStyle.getFont().setFontName(Defaults.getDefaults().getFont().getFontName());
@@ -109,7 +112,7 @@ public class StyleTransform {
 				designStyle.getFont().setPdfEmbedded(Defaults.getDefaults().getFont().getPdfEmbedded());
 			}
 		}
-		addStyle(styleName, style, designStyle);
+		addStyle(styleName, designStyle);
 		return designStyle;
 	}
 
@@ -141,6 +144,27 @@ public class StyleTransform {
 			designStyle.addConditionalStyle(conditionalStyle(conditionalStyle));
 		}
 		return designStyle;
+	}
+
+	protected DRIStyle getStyle(DRIReportStyle reportStyle) {
+		if (reportStyle == null) {
+			return null;
+		}
+		if (reportStyle instanceof DRIStyle) {
+			return (DRIStyle) reportStyle;
+		}
+		if (reportStyle instanceof DRIReferencedStyle) {
+			if (templateStyles == null) {
+				templateStyles = accessor.getTemplateTransform().getTemplateStyles();
+			}
+			String name = ((DRIReferencedStyle) reportStyle).getName();
+			DRIStyle style = templateStyles.get(name);
+			if (style == null) {
+				throw new DRDesignReportException("Template style " + name + " not found");
+			}
+			return style;
+		}
+		throw new DRDesignReportException("Style " + reportStyle.getClass().getName() + " not supported");
 	}
 
 	private DRDesignConditionalStyle conditionalStyle(DRIConditionalStyle conditionalStyle) throws DRException {
@@ -246,7 +270,7 @@ public class StyleTransform {
 		}
 	}
 
-	private void addStyle(String styleName, DRIStyle style, DRDesignStyle designStyle) {
+	private void addStyle(String styleName, DRDesignStyle designStyle) {
 		if (designStyle == null) {
 			return;
 		}

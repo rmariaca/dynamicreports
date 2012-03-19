@@ -30,7 +30,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class StyleBuilder extends BaseStyleBuilder<StyleBuilder, DRStyle> {
+public class StyleBuilder extends BaseStyleBuilder<StyleBuilder, DRStyle> implements ReportStyleBuilder {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected StyleBuilder() {
@@ -50,7 +50,12 @@ public class StyleBuilder extends BaseStyleBuilder<StyleBuilder, DRStyle> {
 		return this;
 	}
 
-	public StyleBuilder setParentStyle(StyleBuilder parentStyle) {
+	public StyleBuilder setName(String name) {
+		getObject().setName(name);
+		return this;
+	}
+
+	public StyleBuilder setParentStyle(ReportStyleBuilder parentStyle) {
 		if (parentStyle != null) {
 			getObject().setParentStyle(parentStyle.build());
 		}

@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.definition.grid;
 
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -35,7 +35,7 @@ public interface DRIColumnTitleGroup extends DRIColumnGridComponent {
 
 	public DRIExpression<?> getTitleExpression();
 
-	public DRIStyle getTitleStyle();
+	public DRIReportStyle getTitleStyle();
 
 	public Integer getTitleWidth();
 

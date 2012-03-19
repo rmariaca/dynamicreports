@@ -29,7 +29,6 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
@@ -42,7 +41,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -69,15 +68,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRSimpleStyle detailOddRowStyle;
 	private Boolean highlightDetailEvenRows;
 	private DRSimpleStyle detailEvenRowStyle;
-	private DRStyle textStyle;
-	private DRStyle columnTitleStyle;
-	private DRStyle columnStyle;
-	private DRStyle groupTitleStyle;
-	private DRStyle groupStyle;
-	private DRStyle subtotalStyle;
-	private DRStyle imageStyle;
-	private DRStyle chartStyle;
-	private DRStyle barcodeStyle;
+	private DRIReportStyle textStyle;
+	private DRIReportStyle columnTitleStyle;
+	private DRIReportStyle columnStyle;
+	private DRIReportStyle groupTitleStyle;
+	private DRIReportStyle groupStyle;
+	private DRIReportStyle subtotalStyle;
+	private DRIReportStyle imageStyle;
+	private DRIReportStyle chartStyle;
+	private DRIReportStyle barcodeStyle;
 	//page
 	private Integer pageWidth;
 	private Integer pageHeight;
@@ -127,16 +126,16 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRSimpleStyle crosstabOddRowStyle;
 	private Boolean crosstabHighlightEvenRows;
 	private DRSimpleStyle crosstabEvenRowStyle;
-	private DRStyle crosstabGroupStyle;
-	private DRStyle crosstabGroupTotalStyle;
-	private DRStyle crosstabGrandTotalStyle;
-	private DRStyle crosstabCellStyle;
-	private DRStyle crosstabMeasureTitleStyle;
+	private DRIReportStyle crosstabGroupStyle;
+	private DRIReportStyle crosstabGroupTotalStyle;
+	private DRIReportStyle crosstabGrandTotalStyle;
+	private DRIReportStyle crosstabCellStyle;
+	private DRIReportStyle crosstabMeasureTitleStyle;
 	//boolean
 	private BooleanComponentType booleanComponentType;
 	private Integer booleanColumnImageWidth;
 	private Integer booleanColumnImageHeight;
-	private DRIStyle booleanColumnStyle;
+	private DRIReportStyle booleanColumnStyle;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -154,20 +153,20 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private SplitType noDataSplitType;
 	private SplitType backgroundSplitType;
 	//band style
-	private DRStyle titleStyle;
-	private DRStyle pageHeaderStyle;
-	private DRStyle pageFooterStyle;
-	private DRStyle columnHeaderStyle;
-	private DRStyle columnFooterStyle;
-	private DRStyle groupHeaderStyle;
-	private DRStyle groupFooterStyle;
-	private DRStyle detailHeaderStyle;
-	private DRStyle detailStyle;
-	private DRStyle detailFooterStyle;
-	private DRStyle lastPageFooterStyle;
-	private DRStyle summaryStyle;
-	private DRStyle noDataStyle;
-	private DRStyle backgroundStyle;
+	private DRIReportStyle titleStyle;
+	private DRIReportStyle pageHeaderStyle;
+	private DRIReportStyle pageFooterStyle;
+	private DRIReportStyle columnHeaderStyle;
+	private DRIReportStyle columnFooterStyle;
+	private DRIReportStyle groupHeaderStyle;
+	private DRIReportStyle groupFooterStyle;
+	private DRIReportStyle detailHeaderStyle;
+	private DRIReportStyle detailStyle;
+	private DRIReportStyle detailFooterStyle;
+	private DRIReportStyle lastPageFooterStyle;
+	private DRIReportStyle summaryStyle;
+	private DRIReportStyle noDataStyle;
+	private DRIReportStyle backgroundStyle;
 	//band background component
 	private DRComponent titleBackgroundComponent;
 	private DRComponent pageHeaderBackgroundComponent;
@@ -316,75 +315,75 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.detailEvenRowStyle = detailEvenRowStyle;
 	}
 
-	public DRStyle getTextStyle() {
+	public DRIReportStyle getTextStyle() {
 		return textStyle;
 	}
 
-	public void setTextStyle(DRStyle textStyle) {
+	public void setTextStyle(DRIReportStyle textStyle) {
 		this.textStyle = textStyle;
 	}
 
-	public DRStyle getColumnTitleStyle() {
+	public DRIReportStyle getColumnTitleStyle() {
 		return columnTitleStyle;
 	}
 
-	public void setColumnTitleStyle(DRStyle columnTitleStyle) {
+	public void setColumnTitleStyle(DRIReportStyle columnTitleStyle) {
 		this.columnTitleStyle = columnTitleStyle;
 	}
 
-	public DRStyle getColumnStyle() {
+	public DRIReportStyle getColumnStyle() {
 		return columnStyle;
 	}
 
-	public void setColumnStyle(DRStyle columnStyle) {
+	public void setColumnStyle(DRIReportStyle columnStyle) {
 		this.columnStyle = columnStyle;
 	}
 
-	public DRStyle getGroupTitleStyle() {
+	public DRIReportStyle getGroupTitleStyle() {
 		return groupTitleStyle;
 	}
 
-	public void setGroupTitleStyle(DRStyle groupTitleStyle) {
+	public void setGroupTitleStyle(DRIReportStyle groupTitleStyle) {
 		this.groupTitleStyle = groupTitleStyle;
 	}
 
-	public DRStyle getGroupStyle() {
+	public DRIReportStyle getGroupStyle() {
 		return groupStyle;
 	}
 
-	public void setGroupStyle(DRStyle groupStyle) {
+	public void setGroupStyle(DRIReportStyle groupStyle) {
 		this.groupStyle = groupStyle;
 	}
 
-	public DRStyle getSubtotalStyle() {
+	public DRIReportStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
 
-	public void setSubtotalStyle(DRStyle subtotalStyle) {
+	public void setSubtotalStyle(DRIReportStyle subtotalStyle) {
 		this.subtotalStyle = subtotalStyle;
 	}
 
-	public DRStyle getImageStyle() {
+	public DRIReportStyle getImageStyle() {
 		return imageStyle;
 	}
 
-	public void setImageStyle(DRStyle imageStyle) {
+	public void setImageStyle(DRIReportStyle imageStyle) {
 		this.imageStyle = imageStyle;
 	}
 
-	public DRStyle getChartStyle() {
+	public DRIReportStyle getChartStyle() {
 		return chartStyle;
 	}
 
-	public void setChartStyle(DRStyle chartStyle) {
+	public void setChartStyle(DRIReportStyle chartStyle) {
 		this.chartStyle = chartStyle;
 	}
 
-	public DRIStyle getBarcodeStyle() {
+	public DRIReportStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
 
-	public void setBarcodeStyle(DRStyle barcodeStyle) {
+	public void setBarcodeStyle(DRIReportStyle barcodeStyle) {
 		this.barcodeStyle = barcodeStyle;
 	}
 
@@ -768,43 +767,43 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.crosstabEvenRowStyle = crosstabEvenRowStyle;
 	}
 
-	public DRStyle getCrosstabGroupStyle() {
+	public DRIReportStyle getCrosstabGroupStyle() {
 		return crosstabGroupStyle;
 	}
 
-	public void setCrosstabGroupStyle(DRStyle crosstabGroupStyle) {
+	public void setCrosstabGroupStyle(DRIReportStyle crosstabGroupStyle) {
 		this.crosstabGroupStyle = crosstabGroupStyle;
 	}
 
-	public DRStyle getCrosstabGroupTotalStyle() {
+	public DRIReportStyle getCrosstabGroupTotalStyle() {
 		return crosstabGroupTotalStyle;
 	}
 
-	public void setCrosstabGroupTotalStyle(DRStyle crosstabGroupTotalStyle) {
+	public void setCrosstabGroupTotalStyle(DRIReportStyle crosstabGroupTotalStyle) {
 		this.crosstabGroupTotalStyle = crosstabGroupTotalStyle;
 	}
 
-	public DRStyle getCrosstabGrandTotalStyle() {
+	public DRIReportStyle getCrosstabGrandTotalStyle() {
 		return crosstabGrandTotalStyle;
 	}
 
-	public void setCrosstabGrandTotalStyle(DRStyle crosstabGrandTotalStyle) {
+	public void setCrosstabGrandTotalStyle(DRIReportStyle crosstabGrandTotalStyle) {
 		this.crosstabGrandTotalStyle = crosstabGrandTotalStyle;
 	}
 
-	public DRStyle getCrosstabCellStyle() {
+	public DRIReportStyle getCrosstabCellStyle() {
 		return crosstabCellStyle;
 	}
 
-	public void setCrosstabCellStyle(DRStyle crosstabCellStyle) {
+	public void setCrosstabCellStyle(DRIReportStyle crosstabCellStyle) {
 		this.crosstabCellStyle = crosstabCellStyle;
 	}
 
-	public DRStyle getCrosstabMeasureTitleStyle() {
+	public DRIReportStyle getCrosstabMeasureTitleStyle() {
 		return crosstabMeasureTitleStyle;
 	}
 
-	public void setCrosstabMeasureTitleStyle(DRStyle crosstabMeasureTitleStyle) {
+	public void setCrosstabMeasureTitleStyle(DRIReportStyle crosstabMeasureTitleStyle) {
 		this.crosstabMeasureTitleStyle = crosstabMeasureTitleStyle;
 	}
 
@@ -832,11 +831,11 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.booleanColumnImageHeight = booleanColumnImageHeight;
 	}
 
-	public DRIStyle getBooleanColumnStyle() {
+	public DRIReportStyle getBooleanColumnStyle() {
 		return booleanColumnStyle;
 	}
 
-	public void setBooleanColumnStyle(DRIStyle booleanColumnStyle) {
+	public void setBooleanColumnStyle(DRIReportStyle booleanColumnStyle) {
 		this.booleanColumnStyle = booleanColumnStyle;
 	}
 
@@ -960,115 +959,115 @@ public class DRReportTemplate implements DRIReportTemplate {
 		this.backgroundSplitType = backgroundSplitType;
 	}
 
-	public DRStyle getTitleStyle() {
+	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}
 
-	public void setTitleStyle(DRStyle titleStyle) {
+	public void setTitleStyle(DRIReportStyle titleStyle) {
 		this.titleStyle = titleStyle;
 	}
 
-	public DRStyle getPageHeaderStyle() {
+	public DRIReportStyle getPageHeaderStyle() {
 		return pageHeaderStyle;
 	}
 
-	public void setPageHeaderStyle(DRStyle pageHeaderStyle) {
+	public void setPageHeaderStyle(DRIReportStyle pageHeaderStyle) {
 		this.pageHeaderStyle = pageHeaderStyle;
 	}
 
-	public DRStyle getPageFooterStyle() {
+	public DRIReportStyle getPageFooterStyle() {
 		return pageFooterStyle;
 	}
 
-	public void setPageFooterStyle(DRStyle pageFooterStyle) {
+	public void setPageFooterStyle(DRIReportStyle pageFooterStyle) {
 		this.pageFooterStyle = pageFooterStyle;
 	}
 
-	public DRStyle getColumnHeaderStyle() {
+	public DRIReportStyle getColumnHeaderStyle() {
 		return columnHeaderStyle;
 	}
 
-	public void setColumnHeaderStyle(DRStyle columnHeaderStyle) {
+	public void setColumnHeaderStyle(DRIReportStyle columnHeaderStyle) {
 		this.columnHeaderStyle = columnHeaderStyle;
 	}
 
-	public DRStyle getColumnFooterStyle() {
+	public DRIReportStyle getColumnFooterStyle() {
 		return columnFooterStyle;
 	}
 
-	public void setColumnFooterStyle(DRStyle columnFooterStyle) {
+	public void setColumnFooterStyle(DRIReportStyle columnFooterStyle) {
 		this.columnFooterStyle = columnFooterStyle;
 	}
 
-	public DRStyle getGroupHeaderStyle() {
+	public DRIReportStyle getGroupHeaderStyle() {
 		return groupHeaderStyle;
 	}
 
-	public void setGroupHeaderStyle(DRStyle groupHeaderStyle) {
+	public void setGroupHeaderStyle(DRIReportStyle groupHeaderStyle) {
 		this.groupHeaderStyle = groupHeaderStyle;
 	}
 
-	public DRStyle getGroupFooterStyle() {
+	public DRIReportStyle getGroupFooterStyle() {
 		return groupFooterStyle;
 	}
 
-	public void setGroupFooterStyle(DRStyle groupFooterStyle) {
+	public void setGroupFooterStyle(DRIReportStyle groupFooterStyle) {
 		this.groupFooterStyle = groupFooterStyle;
 	}
 
-	public DRStyle getDetailHeaderStyle() {
+	public DRIReportStyle getDetailHeaderStyle() {
 		return detailHeaderStyle;
 	}
 
-	public void setDetailHeaderStyle(DRStyle detailHeaderStyle) {
+	public void setDetailHeaderStyle(DRIReportStyle detailHeaderStyle) {
 		this.detailHeaderStyle = detailHeaderStyle;
 	}
 
-	public DRStyle getDetailStyle() {
+	public DRIReportStyle getDetailStyle() {
 		return detailStyle;
 	}
 
-	public void setDetailStyle(DRStyle detailStyle) {
+	public void setDetailStyle(DRIReportStyle detailStyle) {
 		this.detailStyle = detailStyle;
 	}
 
-	public DRStyle getDetailFooterStyle() {
+	public DRIReportStyle getDetailFooterStyle() {
 		return detailFooterStyle;
 	}
 
-	public void setDetailFooterStyle(DRStyle detailFooterStyle) {
+	public void setDetailFooterStyle(DRIReportStyle detailFooterStyle) {
 		this.detailFooterStyle = detailFooterStyle;
 	}
 
-	public DRStyle getLastPageFooterStyle() {
+	public DRIReportStyle getLastPageFooterStyle() {
 		return lastPageFooterStyle;
 	}
 
-	public void setLastPageFooterStyle(DRStyle lastPageFooterStyle) {
+	public void setLastPageFooterStyle(DRIReportStyle lastPageFooterStyle) {
 		this.lastPageFooterStyle = lastPageFooterStyle;
 	}
 
-	public DRStyle getSummaryStyle() {
+	public DRIReportStyle getSummaryStyle() {
 		return summaryStyle;
 	}
 
-	public void setSummaryStyle(DRStyle summaryStyle) {
+	public void setSummaryStyle(DRIReportStyle summaryStyle) {
 		this.summaryStyle = summaryStyle;
 	}
 
-	public DRStyle getNoDataStyle() {
+	public DRIReportStyle getNoDataStyle() {
 		return noDataStyle;
 	}
 
-	public void setNoDataStyle(DRStyle noDataStyle) {
+	public void setNoDataStyle(DRIReportStyle noDataStyle) {
 		this.noDataStyle = noDataStyle;
 	}
 
-	public DRStyle getBackgroundStyle() {
+	public DRIReportStyle getBackgroundStyle() {
 		return backgroundStyle;
 	}
 
-	public void setBackgroundStyle(DRStyle backgroundStyle) {
+	public void setBackgroundStyle(DRIReportStyle backgroundStyle) {
 		this.backgroundStyle = backgroundStyle;
 	}
 

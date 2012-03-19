@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.report.builder.group;
 
 import net.sf.dynamicreports.report.base.column.DRValueColumn;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -56,7 +55,7 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 		@SuppressWarnings("rawtypes")
 		DRIDataType dataType = column.getComponent().getDataType();
 		getObject().getValueField().setDataType(dataType);
-		getObject().getValueField().setStyle((DRStyle) column.getComponent().getStyle());
+		getObject().getValueField().setStyle(column.getComponent().getStyle());
 		getObject().getValueField().setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
 		getObject().setTitleExpression(column.getTitleExpression());
 		getObject().setTitleStyle(column.getTitleStyle());

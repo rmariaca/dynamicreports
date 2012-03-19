@@ -26,21 +26,21 @@ import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
+import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRISubtotal<T> extends DRIExpression<T>, DRIValue<T> {
-	
+
 	public DRIColumn<?> getShowInColumn();
 
 	public DRITextField<T> getValueField();
-	
+
 	public DRIExpression<?> getLabelExpression();
 
-	public DRIStyle getLabelStyle();
-	
+	public DRIReportStyle getLabelStyle();
+
 	public SubtotalPosition getPosition();
 
 	public DRIGroup getGroup();

@@ -20,18 +20,25 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.style;
+package net.sf.dynamicreports.report.base.style;
 
-import java.util.List;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.style.DRIReferencedStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIStyle extends DRIBaseStyle, DRIReportStyle {
+public class DRReferencedStyle implements DRIReferencedStyle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public String getName();
+	private String name;
 
-	public DRIReportStyle getParentStyle();
+	public DRReferencedStyle(String name) {
+		this.name = name;
+	}
 
-	public List<? extends DRIConditionalStyle> getConditionalStyles();
+	public String getName() {
+		return name;
+	}
+
 }
