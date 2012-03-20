@@ -145,8 +145,8 @@ public class Styles {
 		return new SimpleStyleBuilder();
 	}
 
-	public static ReferencedStyleBuilder referencedStyle(String name) {
-		return new ReferencedStyleBuilder(name);
+	public static TemplateStyleBuilder templateStyle(String name) {
+		return new TemplateStyleBuilder(name);
 	}
 
 	public static ConditionalStyleBuilder conditionalStyle(DRIExpression<Boolean> conditionExpression) {

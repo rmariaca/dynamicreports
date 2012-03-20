@@ -20,13 +20,24 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.style;
+package net.sf.dynamicreports.report.builder.style;
+
+import net.sf.dynamicreports.report.base.style.DRTemplateStyle;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIReferencedStyle extends DRIReportStyle {
+public class TemplateStyleBuilder extends AbstractBuilder<TemplateStyleBuilder, DRTemplateStyle> implements ReportStyleBuilder {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public String getName();
+	protected TemplateStyleBuilder(String name) {
+		super(new DRTemplateStyle(name));
+	}
+
+	public DRTemplateStyle getStyle() {
+		return build();
+	}
 
 }

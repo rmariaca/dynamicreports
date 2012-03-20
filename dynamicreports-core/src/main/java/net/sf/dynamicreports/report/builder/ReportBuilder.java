@@ -312,44 +312,7 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
-	//TODO
 	//template style
-	/*public T addTemplate(InputStream ...inputStreams) {
-		Validate.notNull(inputStreams, "inputStreams must not be null");
-		Validate.noNullElements(inputStreams, "inputStreams must not contains null inputStream");
-		for (InputStream inputStream : inputStreams) {
-			addTemplate(Expressions.inputStream(inputStream));
-		}
-		return (T) this;
-	}
-
-	public T addTemplateStyle(File ...files) {
-		Validate.notNull(files, "files must not be null");
-		Validate.noNullElements(files, "files must not contains null file");
-		for (File file : files) {
-			addTemplate(Expressions.value(file, File.class));
-		}
-		return (T) this;
-	}
-
-	public T addTemplate(String ...fileNames) {
-		Validate.notNull(fileNames, "fileNames must not be null");
-		Validate.noNullElements(fileNames, "fileNames must not contains null fileName");
-		for (String fileName : fileNames) {
-			addTemplate(Expressions.text(fileName));
-		}
-		return (T) this;
-	}
-
-	public T addTemplate(URL ...urls) {
-		Validate.notNull(urls, "urls must not be null");
-		Validate.noNullElements(urls, "urls must not contains null url");
-		for (URL url : urls) {
-			addTemplate(Expressions.url(url));
-		}
-		return (T) this;
-	}*/
-
 	public T templateStyles(StyleBuilder ...templateStyles) {
 		return addTemplateStyle(templateStyles);
 	}

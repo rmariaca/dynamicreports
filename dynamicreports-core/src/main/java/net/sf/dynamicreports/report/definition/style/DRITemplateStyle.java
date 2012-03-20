@@ -20,25 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.base.style;
-
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.style.DRIReferencedStyle;
+package net.sf.dynamicreports.report.definition.style;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRReferencedStyle implements DRIReferencedStyle {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+public interface DRITemplateStyle extends DRIReportStyle {
 
-	private String name;
-
-	public DRReferencedStyle(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
+	public String getName();
 
 }

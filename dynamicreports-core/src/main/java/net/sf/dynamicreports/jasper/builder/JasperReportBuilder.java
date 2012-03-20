@@ -196,6 +196,29 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		return this;
 	}
 
+	//TODO
+	//template style
+	/*public JasperReportBuilder addTemplateStyle(InputStream inputStream) {
+		Validate.notNull(inputStream, "inputStream must not be null");
+		return this;
+	}
+
+	public JasperReportBuilder addTemplateStyle(File file) {
+		Validate.notNull(file, "file must not be null");
+		return this;
+	}
+
+	public JasperReportBuilder addTemplateStyle(String fileName) {
+		Validate.notNull(fileName, "fileName must not be null");
+		return this;
+	}
+
+	public JasperReportBuilder addTemplateStyle(URL url) {
+		Validate.notNull(url, "url must not be null");
+		return this;
+	}*/
+
+	//template design
 	public JasperReportBuilder setTemplateDesign(InputStream inputStream) throws DRException {
 		return setTemplateDesign(new JasperTemplateDesign(inputStream));
 	}

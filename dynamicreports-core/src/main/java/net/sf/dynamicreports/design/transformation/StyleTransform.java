@@ -56,7 +56,7 @@ import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIPadding;
 import net.sf.dynamicreports.report.definition.style.DRIParagraph;
 import net.sf.dynamicreports.report.definition.style.DRIPen;
-import net.sf.dynamicreports.report.definition.style.DRIReferencedStyle;
+import net.sf.dynamicreports.report.definition.style.DRITemplateStyle;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.definition.style.DRITabStop;
@@ -153,11 +153,11 @@ public class StyleTransform {
 		if (reportStyle instanceof DRIStyle) {
 			return (DRIStyle) reportStyle;
 		}
-		if (reportStyle instanceof DRIReferencedStyle) {
+		if (reportStyle instanceof DRITemplateStyle) {
 			if (templateStyles == null) {
 				templateStyles = accessor.getTemplateTransform().getTemplateStyles();
 			}
-			String name = ((DRIReferencedStyle) reportStyle).getName();
+			String name = ((DRITemplateStyle) reportStyle).getName();
 			DRIStyle style = templateStyles.get(name);
 			if (style == null) {
 				throw new DRDesignReportException("Template style " + name + " not found");
