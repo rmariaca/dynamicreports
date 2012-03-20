@@ -41,42 +41,42 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PercentageSubtotalReport {
-	
+
 	public PercentageSubtotalReport() {
 		build();
 	}
-	
+
 	private void build() {
 		TextColumnBuilder<String>     countryColumn = col.column("Country", "country", type.stringType());
 		TextColumnBuilder<String>     itemColumn    = col.column("Item",    "item",    type.stringType());
 		TextColumnBuilder<BigDecimal> priceColumn   = col.column("Price",   "price",   type.bigDecimalType());
-		
+
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
 		ColumnGroupBuilder itemGroup    = grp.group(itemColumn);
-		
-		StyleBuilder countryLabelStyle       = stl.style().setForegroudColor(Color.RED);
+
+		StyleBuilder countryLabelStyle       = stl.style().setForegroundColor(Color.RED);
 		StyleBuilder countryStyle            = stl.style(countryLabelStyle)
 		                                          .setTopBorder(stl.pen1Point());
-		StyleBuilder itemInCountryLabelStyle = stl.style().setForegroudColor(Color.GREEN);
+		StyleBuilder itemInCountryLabelStyle = stl.style().setForegroundColor(Color.GREEN);
 		StyleBuilder itemInCountryStyle      = stl.style(itemInCountryLabelStyle)
 		                                          .setTopBorder(stl.pen1Point());
-		StyleBuilder itemLabelStyle          = stl.style().setForegroudColor(Color.BLUE);
+		StyleBuilder itemLabelStyle          = stl.style().setForegroundColor(Color.BLUE);
 		StyleBuilder itemStyle               = stl.style(itemLabelStyle)
 		                                          .setTopBorder(stl.pen1Point());
-		
+
 		PercentageSubtotalBuilder countryPercentage       = sbt.percentage(priceColumn).setLabel("country price [%]")
 		                                                       .setLabelStyle(countryLabelStyle)
 		                                                       .setStyle(countryStyle);
-		
+
 		PercentageSubtotalBuilder itemInCountryPercentage = sbt.percentage(priceColumn).setLabel("item in country price[%]")
 		                                                       .setLabelStyle(itemInCountryLabelStyle)
 		                                                       .setStyle(itemInCountryStyle);
-		
+
 		PercentageSubtotalBuilder itemPercentage          = sbt.percentage(priceColumn).setLabel("item price[%]")
 		                                                       .setLabelStyle(itemLabelStyle)
 		                                                       .setStyle(itemStyle)
 		                                                       .setTotalType(PercentageTotalType.REPORT);
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -96,7 +96,7 @@ public class PercentageSubtotalReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("country", "item", "price");
 		dataSource.add("USA", "Book", new BigDecimal(10));
@@ -109,7 +109,7 @@ public class PercentageSubtotalReport {
 		dataSource.add("Canada", "Notebook", new BigDecimal(30));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new PercentageSubtotalReport();
 	}

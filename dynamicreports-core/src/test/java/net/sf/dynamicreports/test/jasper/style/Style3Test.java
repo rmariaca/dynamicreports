@@ -41,18 +41,18 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class Style3Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
 	private TextColumnBuilder<String> column3;
 	private TextColumnBuilder<String> column4;
 	private ColumnGroupBuilder group1;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		StyleBuilder titleStyle = stl.style().setForegroudColor(Color.RED);
-		StyleBuilder columnStyle = stl.style().setForegroudColor(Color.BLUE);
-		
+		StyleBuilder titleStyle = stl.style().setForegroundColor(Color.RED);
+		StyleBuilder columnStyle = stl.style().setForegroundColor(Color.BLUE);
+
 		rb.setColumnTitleStyle(titleStyle)
 			.setColumnStyle(columnStyle)
 			.columns(
@@ -66,26 +66,26 @@ public class Style3Test extends AbstractJasperStyleTest implements Serializable 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		//column2		
+
+		//column2
 		columnTitleStyleTest(column2, 0, Color.RED, null, "Arial", 10, null, null);
 		columnDetailStyleTest(column2, 0, Color.BLUE, null, "Arial", 10, null, null);
 
-		//column3		
+		//column3
 		columnTitleStyleTest(column3, 0, Color.RED, null, "Arial", 10, null, null);
 		columnDetailStyleTest(column3, 0, null, null, "Arial", 10, true, null);
 
-		//column4		
+		//column4
 		columnTitleStyleTest(column4, 0, null, null, "Arial", 10, null, true);
 		columnDetailStyleTest(column4, 0, Color.BLUE, null, "Arial", 10, true, null);
-		
+
 		//group1
 		groupHeaderTitleStyleTest(group1, 0, null, null, "Arial", 10, true, null);
 		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, null, true);
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1", "field2", "field3");

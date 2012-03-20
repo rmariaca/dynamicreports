@@ -196,7 +196,7 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		return (T) this;
 	}
 
-	public T setForegroudColor(Color foregroudColor) {
+	public T setForegroundColor(Color foregroudColor) {
 		getObject().setForegroundColor(foregroudColor);
 		return (T) this;
 	}

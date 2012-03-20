@@ -46,7 +46,7 @@ public class TableOfContentsStyleTest extends AbstractJasperStyleTest {
 		TextColumnBuilder<String> column2 = col.column("Column2", "field2", type.stringType());
 
 		StyleBuilder titleTocStyle = stl.style()
-			.setForegroudColor(Color.BLUE)
+			.setForegroundColor(Color.BLUE)
 			.setFontSize(18)
 			.bold()
 			.setHorizontalAlignment(HorizontalAlignment.CENTER);

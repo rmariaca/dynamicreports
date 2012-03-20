@@ -66,9 +66,9 @@ public class SalesCrosstabDesign implements ReportDesign<SalesCrosstabData> {
 		rowStateGroup.orderBy(quantityMeasure);
 
 		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(unitPriceMeasure, 50000))
-		                                        .setForegroudColor(Color.GREEN);
+		                                        .setForegroundColor(Color.GREEN);
 		ConditionalStyleBuilder condition2 = stl.conditionalStyle(cnd.smaller(unitPriceMeasure, 300))
-		                                         .setForegroudColor(Color.RED);
+		                                         .setForegroundColor(Color.RED);
 
 		StyleBuilder unitPriceStyle = stl.style()
 		                                 .setBorder(stl.pen1Point().setLineColor(Color.BLACK))

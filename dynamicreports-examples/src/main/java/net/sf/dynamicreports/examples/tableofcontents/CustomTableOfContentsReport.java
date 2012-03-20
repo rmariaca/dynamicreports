@@ -54,7 +54,7 @@ public class CustomTableOfContentsReport {
 		TextColumnBuilder<String> itemColumn    = col.column("Item",    "item",    type.stringType());
 
 		StyleBuilder titleTocStyle = stl.style()
-			.setForegroudColor(Color.BLUE)
+			.setForegroundColor(Color.BLUE)
 			.setFontSize(18)
 			.bold()
 			.setHorizontalAlignment(HorizontalAlignment.CENTER);

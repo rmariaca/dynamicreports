@@ -39,7 +39,7 @@ public class Style9Test extends AbstractJasperStyleTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		StyleBuilder style = stl.style().bold().setForegroudColor(Color.BLUE);
+		StyleBuilder style = stl.style().bold().setForegroundColor(Color.BLUE);
 
 		rb.title(
 			cmp.rectangle().setStyle(style),
