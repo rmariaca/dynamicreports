@@ -6,7 +6,6 @@
 		<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
 	</style>
 	<style name="columnStyle" style="textStyle" isItalic="true"/>
-	<style name="columnStyle1" style="columnStyle"/>
 	<style name="titleStyle0" style="textStyle" isBold="true"/>
 	<style name="titleStyle" style="titleStyle0" isBold="true">
 		<box>
