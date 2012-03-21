@@ -62,6 +62,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		border = new DRBorder();
 		padding = new DRPadding();
 		paragraph = new DRParagraph();
+		linePen = new DRPen();
 	}
 
 	public Color getForegroundColor() {

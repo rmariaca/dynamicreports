@@ -30,21 +30,20 @@ import net.sf.dynamicreports.report.definition.style.DRIBorder;
  */
 public class DRBorder implements DRIBorder {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRPen topPen;
 	private DRPen leftPen;
 	private DRPen bottomPen;
 	private DRPen rightPen;
-	
+
 	public DRBorder() {
-		init(new DRPen());
+		topPen = new DRPen();
+		leftPen = new DRPen();
+		bottomPen = new DRPen();
+		rightPen = new DRPen();
 	}
 
 	public DRBorder(DRPen pen) {
-		init(pen);
-	}
-	
-	private void init(DRPen pen) {
 		topPen = pen;
 		leftPen = pen;
 		bottomPen = pen;

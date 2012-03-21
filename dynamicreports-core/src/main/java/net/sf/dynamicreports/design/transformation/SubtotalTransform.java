@@ -36,7 +36,6 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRFiller;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
@@ -236,7 +235,7 @@ public class SubtotalTransform {
 		@SuppressWarnings("rawtypes")
 		DRTextField labelField = new DRTextField();
 		labelField.setValueExpression(subtotal.getLabelExpression());
-		labelField.setStyle((DRStyle) subtotal.getLabelStyle());
+		labelField.setStyle(subtotal.getLabelStyle());
 		labelField.setWidth(accessor.getTemplateTransform().getColumnWidth(subtotal.getShowInColumn(), accessor.getStyleTransform().getDefaultStyle(DefaultStyleType.COLUMN)));
 		DRDesignTextField designLabelField = accessor.getComponentTransform().textField(labelField, DefaultStyleType.TEXT);
 		designLabelField.setUniqueName("column_" + subtotal.getShowInColumn().getName() + ".subtotal.label");

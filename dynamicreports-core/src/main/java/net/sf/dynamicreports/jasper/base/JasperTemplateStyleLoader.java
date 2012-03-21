@@ -130,70 +130,72 @@ public class JasperTemplateStyleLoader {
 	}
 
 	private static void abstractStyle(JRStyle jrStyle, DRBaseStyle style) {
-		style.setForegroundColor(jrStyle.getForecolor());
-		style.setBackgroundColor(jrStyle.getBackcolor());
-		style.setRadius(jrStyle.getRadius());
-		style.setImageScale(imageScale(jrStyle.getScaleImageValue()));
-		style.setHorizontalAlignment(horizontalAlignment(jrStyle.getHorizontalAlignmentValue()));
-		style.setVerticalAlignment(verticalAlignment(jrStyle.getVerticalAlignmentValue()));
+		style.setForegroundColor(jrStyle.getOwnForecolor());
+		style.setBackgroundColor(jrStyle.getOwnBackcolor());
+		style.setRadius(jrStyle.getOwnRadius());
+		style.setImageScale(imageScale(jrStyle.getOwnScaleImageValue()));
+		style.setHorizontalAlignment(horizontalAlignment(jrStyle.getOwnHorizontalAlignmentValue()));
+		style.setVerticalAlignment(verticalAlignment(jrStyle.getOwnVerticalAlignmentValue()));
 		border(jrStyle.getLineBox(), style.getBorder());
 		padding(jrStyle.getLineBox(), style.getPadding());
 		font(jrStyle, style.getFont());
-		style.setRotation(rotation(jrStyle.getRotationValue()));
-		style.setPattern(jrStyle.getPattern());
-		style.setMarkup(markup(jrStyle.getMarkup()));
+		style.setRotation(rotation(jrStyle.getOwnRotationValue()));
+		style.setPattern(jrStyle.getOwnPattern());
+		style.setMarkup(markup(jrStyle.getOwnMarkup()));
 		paragraph(jrStyle.getParagraph(), style.getParagraph());
 		pen(jrStyle.getLinePen(), style.getLinePen());
 	}
 
 	private static void paragraph(JRParagraph jrParagraph, DRParagraph paragraph) {
-		paragraph.setLineSpacing(lineSpacing(jrParagraph.getLineSpacing()));
-		paragraph.setLineSpacingSize(jrParagraph.getLineSpacingSize());
-		paragraph.setFirstLineIndent(jrParagraph.getFirstLineIndent());
-		paragraph.setLeftIndent(jrParagraph.getLeftIndent());
-		paragraph.setRightIndent(jrParagraph.getRightIndent());
-		paragraph.setSpacingBefore(jrParagraph.getSpacingBefore());
-		paragraph.setSpacingAfter(jrParagraph.getSpacingAfter());
-		paragraph.setTabStopWidth(jrParagraph.getTabStopWidth());
-		for (TabStop jrTabStop : jrParagraph.getTabStops()) {
-			DRTabStop tabStop = new DRTabStop();
-			tabStop.setPosition(jrTabStop.getPosition());
-			tabStop.setAlignment(tabStopAlignment(jrTabStop.getAlignment()));
-			paragraph.getTabStops().add(tabStop);
+		paragraph.setLineSpacing(lineSpacing(jrParagraph.getOwnLineSpacing()));
+		paragraph.setLineSpacingSize(jrParagraph.getOwnLineSpacingSize());
+		paragraph.setFirstLineIndent(jrParagraph.getOwnFirstLineIndent());
+		paragraph.setLeftIndent(jrParagraph.getOwnLeftIndent());
+		paragraph.setRightIndent(jrParagraph.getOwnRightIndent());
+		paragraph.setSpacingBefore(jrParagraph.getOwnSpacingBefore());
+		paragraph.setSpacingAfter(jrParagraph.getOwnSpacingAfter());
+		paragraph.setTabStopWidth(jrParagraph.getOwnTabStopWidth());
+		if (jrParagraph.getOwnTabStops() != null) {
+			for (TabStop jrTabStop : jrParagraph.getOwnTabStops()) {
+				DRTabStop tabStop = new DRTabStop();
+				tabStop.setPosition(jrTabStop.getPosition());
+				tabStop.setAlignment(tabStopAlignment(jrTabStop.getAlignment()));
+				paragraph.getTabStops().add(tabStop);
+			}
 		}
 	}
 
 	protected static void pen(JRPen jrPen, DRPen pen) {
-		pen.setLineColor(jrPen.getLineColor());
-		pen.setLineStyle(lineStyle(jrPen.getLineStyleValue()));
-		pen.setLineWidth(jrPen.getLineWidth());
+		pen.setLineColor(jrPen.getOwnLineColor());
+		pen.setLineStyle(lineStyle(jrPen.getOwnLineStyleValue()));
+		pen.setLineWidth(jrPen.getOwnLineWidth());
 	}
 
-	private static void border(JRLineBox lineBox, DRBorder border) {
-		pen(lineBox.getLeftPen(), border.getLeftPen());
-		pen(lineBox.getRightPen(), border.getRightPen());
-		pen(lineBox.getTopPen(), border.getTopPen());
-		pen(lineBox.getBottomPen(), border.getBottomPen());
+	private static void border(JRLineBox jrLineBox, DRBorder border) {
+		pen(jrLineBox.getLeftPen(), border.getLeftPen());
+		pen(jrLineBox.getRightPen(), border.getRightPen());
+		pen(jrLineBox.getTopPen(), border.getTopPen());
+		pen(jrLineBox.getBottomPen(), border.getBottomPen());
 	}
 
 	private static void padding(JRLineBox jrLineBox, DRPadding padding) {
-		padding.setLeft(jrLineBox.getLeftPadding());
-		padding.setRight(jrLineBox.getRightPadding());
-		padding.setTop(jrLineBox.getTopPadding());
-		padding.setBottom(jrLineBox.getBottomPadding());
+		padding.setLeft(jrLineBox.getOwnLeftPadding());
+		padding.setRight(jrLineBox.getOwnRightPadding());
+		padding.setTop(jrLineBox.getOwnTopPadding());
+		padding.setBottom(jrLineBox.getOwnBottomPadding());
 	}
 
 	@SuppressWarnings("deprecation")
 	private static void font(JRStyle jrStyle, DRFont font) {
-		font.setFontName(jrStyle.getFontName());
-		font.setBold(jrStyle.isBold());
-		font.setItalic(jrStyle.isItalic());
-		font.setFontSize(jrStyle.getFontSize());
-		font.setStrikeThrough(jrStyle.isStrikeThrough());
-		font.setUnderline(jrStyle.isUnderline());
-		font.setPdfFontName(jrStyle.getPdfFontName());
-		font.setPdfEncoding(jrStyle.getPdfEncoding());
-		font.setPdfEmbedded(jrStyle.isPdfEmbedded());
+		font.setFontName(jrStyle.getOwnFontName());
+		font.setBold(jrStyle.isOwnBold());
+		font.setItalic(jrStyle.isOwnItalic());
+		font.setFontSize(jrStyle.getOwnFontSize());
+		font.setStrikeThrough(jrStyle.isOwnStrikeThrough());
+		font.setUnderline(jrStyle.isOwnUnderline());
+		font.setPdfFontName(jrStyle.getOwnPdfFontName());
+		font.setPdfEncoding(jrStyle.getOwnPdfEncoding());
+		font.setPdfEmbedded(jrStyle.isOwnPdfEmbedded());
 	}
 
 	private static LineStyle lineStyle(LineStyleEnum lineStyle) {

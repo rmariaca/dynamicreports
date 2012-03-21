@@ -31,7 +31,6 @@ import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.grid.DRColumnGridList;
-import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
@@ -174,7 +173,7 @@ public class ColumnGridTransform {
 		@SuppressWarnings("rawtypes")
 		DRTextField titleGroupField = new DRTextField();
 		titleGroupField.setValueExpression(columnGridTitleGroup.getTitleExpression());
-		titleGroupField.setStyle((DRStyle) columnGridTitleGroup.getTitleStyle());
+		titleGroupField.setStyle(columnGridTitleGroup.getTitleStyle());
 		titleGroupField.setHeight(columnGridTitleGroup.getTitleHeight());
 		titleGroupField.setHeightType(columnGridTitleGroup.getTitleHeightType());
 		titleGroupField.setRows(columnGridTitleGroup.getTitleRows());
