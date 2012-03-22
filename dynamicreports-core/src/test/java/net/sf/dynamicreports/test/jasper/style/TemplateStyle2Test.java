@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -54,7 +55,10 @@ public class TemplateStyle2Test extends AbstractJasperStyleTest implements Seria
 		StyleBuilder subtotalStyle = stl.style(2).setName("subtotalStyle").setTopBorder(stl.pen1Point()).bold();
 		StyleBuilder boldStyle = stl.style().setName("boldStyle").bold();
 
-		rb.templateStyles(textStyle, titleStyle, subtotalStyle, boldStyle)
+		ReportTemplateBuilder template = template()
+				.templateStyles(textStyle, titleStyle, subtotalStyle, boldStyle);
+
+		rb.setTemplate(template)
 			.setTextStyle(stl.templateStyle("textStyle"))
 			.setColumnTitleStyle(stl.templateStyle("titleStyle"))
 			.setSubtotalStyle(stl.templateStyle("subtotalStyle"))

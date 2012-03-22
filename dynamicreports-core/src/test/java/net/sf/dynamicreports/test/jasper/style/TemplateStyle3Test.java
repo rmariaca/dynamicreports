@@ -60,7 +60,7 @@ public class TemplateStyle3Test extends AbstractJasperStyleTest implements Seria
 					stl.conditionalStyle(new ConditionExpression(16)).setBackgroundColor(Color.ORANGE));
 		StyleBuilder columnStyle2 = stl.style(stl.templateStyle("columnStyle")).bold();
 
-		rb.addTemplateStyle(TemplateStyle4Test.class.getResource("StyleTemplate1.jrtx"))
+		rb.addTemplateStyle(stl.loadStyles(TemplateStyle4Test.class.getResource("StyleTemplate1.jrtx")))
 			.columns(
 					column1 = col.column("Column1", "field1", Integer.class).setStyle(columnStyle1),
 					column2 = col.column("Column2", "field2", Integer.class).setStyle(columnStyle2),

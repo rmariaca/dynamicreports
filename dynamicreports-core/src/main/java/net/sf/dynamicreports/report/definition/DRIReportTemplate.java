@@ -38,11 +38,14 @@ import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIReportTemplate extends Serializable {
+
+	public List<DRIStyle> getTemplateStyles();
 
 	public Locale getLocale();
 
@@ -179,6 +182,8 @@ public interface DRIReportTemplate extends Serializable {
 	public DRIReportStyle getCrosstabMeasureTitleStyle();
 
 	public List<Color> getChartSeriesColors();
+
+	public String getChartTheme();
 
 	public BooleanComponentType getBooleanComponentType();
 

@@ -130,6 +130,7 @@ public class ReportTemplateTest {
 						.setChartWidth(210)
 						.setChartHeight(220)
 						.chartSeriesColors(Color.BLUE)
+						.setChartTheme("customTheme")
 
 						.setBarcodeWidth(110)
 						.setBarcodeHeight(120)
@@ -215,6 +216,7 @@ public class ReportTemplateTest {
 			Assert.assertEquals("chart width", new Integer(210), chart.getWidth());
 			Assert.assertEquals("chart height", new Integer(220), chart.getHeight());
 			Assert.assertEquals("chart colors", Color.BLUE, ((AbstractDesignBasePlot) ((DRDesignChart) chart).getPlot()).getSeriesColors().get(0));
+			Assert.assertEquals("chart theme", "customTheme", ((DRDesignChart) chart).getTheme());
 
 			DRDesignComponent barcode = titleList.getComponents().get(2);
 			Assert.assertEquals("barcode width", new Integer(110), barcode.getWidth());

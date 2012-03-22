@@ -165,6 +165,7 @@ public class Default {
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
 	private ValueLocation chartThermometerPlotValueLocation;
+	private String chartTheme;
 	//barcode
 	private int barcodeWidth;
 	private int barcodeHeight;
@@ -362,6 +363,7 @@ public class Default {
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
 		this.chartThermometerPlotValueLocation = ValueLocation.NONE;
+		this.chartTheme = null;
 
 		this.barcodeWidth = 100;
 		this.barcodeHeight = 100;
@@ -785,6 +787,10 @@ public class Default {
 		return chartThermometerPlotValueLocation;
 	}
 
+	public String getChartTheme() {
+		return chartTheme;
+	}
+
 	public int getBarcodeWidth() {
 		return barcodeWidth;
 	}
@@ -1060,4 +1066,5 @@ public class Default {
 	public HorizontalAlignment getPageXofYHorizontalAlignment() {
 		return pageXofYHorizontalAlignment;
 	}
+
 }

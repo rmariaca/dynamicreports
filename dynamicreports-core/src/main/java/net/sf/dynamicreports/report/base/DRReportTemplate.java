@@ -42,6 +42,7 @@ import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang.Validate;
 
@@ -51,6 +52,7 @@ import org.apache.commons.lang.Validate;
 public class DRReportTemplate implements DRIReportTemplate {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private List<DRIStyle> templateStyles;
 	private Locale locale;
 	private Boolean showColumnTitle;
 	private Boolean ignorePagination;
@@ -113,6 +115,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Integer chartWidth;
 	private Integer chartHeight;
 	private List<Color> chartSeriesColors;
+	private String chartTheme;
 	//barcode
 	private Integer barcodeWidth;
 	private Integer barcodeHeight;
@@ -184,7 +187,22 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRComponent backgroundBackgroundComponent;
 
 	public DRReportTemplate() {
+		this.templateStyles = new ArrayList<DRIStyle>();
 		this.chartSeriesColors = new ArrayList<Color>();
+	}
+
+	public List<DRIStyle> getTemplateStyles() {
+		return templateStyles;
+	}
+
+	public void addTemplateStyle(DRIStyle templateStyle) {
+		Validate.notNull(templateStyle, "templateStyle must not be null");
+		Validate.notNull(templateStyle.getName(), "templateStyle name must not be null");
+		this.templateStyles.add(templateStyle);
+	}
+
+	public void setTemplateStyles(List<DRIStyle> templateStyles) {
+		this.templateStyles = templateStyles;
 	}
 
 	public Locale getLocale() {
@@ -667,6 +685,14 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.noNullElements(chartSeriesColors, "chartSeriesColors must not contains null chartSeriesColor");
 		}
 		this.chartSeriesColors = chartSeriesColors;
+	}
+
+	public String getChartTheme() {
+		return chartTheme;
+	}
+
+	public void setChartTheme(String chartTheme) {
+		this.chartTheme = chartTheme;
 	}
 
 	public Integer getBarcodeHeight() {

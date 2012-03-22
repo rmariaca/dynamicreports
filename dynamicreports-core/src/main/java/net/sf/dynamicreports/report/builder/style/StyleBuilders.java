@@ -22,8 +22,13 @@
 
 package net.sf.dynamicreports.report.builder.style;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * A set of methods of creating and customizing styles
@@ -147,5 +152,21 @@ public class StyleBuilders {
 
 	public ConditionalStyleBuilder conditionalStyle(DRIExpression<Boolean> conditionExpression) {
 		return Styles.conditionalStyle(conditionExpression);
+	}
+
+	public TemplateStyleFileBuilder loadStyles(InputStream inputStream) {
+		return Styles.loadStyles(inputStream);
+	}
+
+	public TemplateStyleFileBuilder loadStyles(File file) {
+		return Styles.loadStyles(file);
+	}
+
+	public TemplateStyleFileBuilder loadStyles(String fileName) throws DRException {
+		return Styles.loadStyles(fileName);
+	}
+
+	public TemplateStyleFileBuilder loadStyles(URL url) {
+		return Styles.loadStyles(url);
 	}
 }

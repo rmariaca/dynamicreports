@@ -1168,6 +1168,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getChartThermometerPlotValueLocation();
 	}
 
+	protected String getChartTheme(DRIChart chart) {
+		if (chart.getTheme() != null) {
+			return chart.getTheme();
+		}
+		if (template.getChartTheme() != null) {
+			return template.getChartTheme();
+		}
+		return Defaults.getDefaults().getChartTheme();
+	}
+
 	//barcode
 	protected int getBarcodeWidth(DRIBarcode barcode) {
 		if (barcode.getWidth() != null) {
@@ -1617,9 +1627,9 @@ public class TemplateTransform {
 
 	public Map<String, DRIStyle> getTemplateStyles() {
 		Map<String, DRIStyle> templateStyles = new HashMap<String, DRIStyle>();
-		/*for (DRIStyle style : template.getTemplateStyles()) {
+		for (DRIStyle style : template.getTemplateStyles()) {
 			templateStyles.put(style.getName(), style);
-		}*/
+		}
 		for (DRIStyle style : report.getTemplateStyles()) {
 			templateStyles.put(style.getName(), style);
 		}

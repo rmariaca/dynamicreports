@@ -22,9 +22,14 @@
 
 package net.sf.dynamicreports.report.builder.style;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+
 import net.sf.dynamicreports.report.constant.FontName;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang.Validate;
 
@@ -151,5 +156,21 @@ public class Styles {
 
 	public static ConditionalStyleBuilder conditionalStyle(DRIExpression<Boolean> conditionExpression) {
 		return new ConditionalStyleBuilder(conditionExpression);
+	}
+
+	public static TemplateStyleFileBuilder loadStyles(InputStream inputStream) {
+		return new TemplateStyleFileBuilder(inputStream);
+	}
+
+	public static TemplateStyleFileBuilder loadStyles(File file) {
+		return new TemplateStyleFileBuilder(file);
+	}
+
+	public static TemplateStyleFileBuilder loadStyles(String fileName) throws DRException {
+		return new TemplateStyleFileBuilder(fileName);
+	}
+
+	public static TemplateStyleFileBuilder loadStyles(URL url) {
+		return new TemplateStyleFileBuilder(url);
 	}
 }

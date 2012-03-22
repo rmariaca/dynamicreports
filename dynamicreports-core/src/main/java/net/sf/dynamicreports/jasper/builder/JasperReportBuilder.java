@@ -40,7 +40,6 @@ import javax.imageio.ImageIO;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
-import net.sf.dynamicreports.jasper.base.JasperTemplateStyleLoader;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
 import net.sf.dynamicreports.jasper.base.export.JasperImageExporter;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocReport;
@@ -72,7 +71,6 @@ import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -195,30 +193,6 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	public JasperReportBuilder setDataSource(JRDataSource dataSource) {
 		this.dataSource = dataSource;
 		connection = null;
-		return this;
-	}
-
-	//template style
-	public JasperReportBuilder addTemplateStyle(InputStream inputStream) {
-		return addTemplateStyles(JasperTemplateStyleLoader.loadStyles(inputStream));
-	}
-
-	public JasperReportBuilder addTemplateStyle(File file) {
-		return addTemplateStyles(JasperTemplateStyleLoader.loadStyles(file));
-	}
-
-	public JasperReportBuilder addTemplateStyle(String fileName) throws DRException {
-		return addTemplateStyles(JasperTemplateStyleLoader.loadStyles(fileName));
-	}
-
-	public JasperReportBuilder addTemplateStyle(URL url) {
-		return addTemplateStyles(JasperTemplateStyleLoader.loadStyles(url));
-	}
-
-	private JasperReportBuilder addTemplateStyles(DRIStyle[] styles) {
-		for (DRIStyle style : styles) {
-			getObject().addTemplateStyle(style);
-		}
 		return this;
 	}
 
