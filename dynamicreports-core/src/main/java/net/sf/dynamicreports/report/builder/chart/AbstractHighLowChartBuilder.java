@@ -27,6 +27,7 @@ import java.util.Date;
 import net.sf.dynamicreports.report.base.chart.dataset.DRHighLowDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -199,6 +200,12 @@ public abstract class AbstractHighLowChartBuilder<T extends AbstractHighLowChart
 	public T setVolume(VariableBuilder<? extends Number> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		getDataset().setVolumeExpression(variable.build());
+		return (T) this;
+	}
+
+	public T setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return (T) this;
 	}
 

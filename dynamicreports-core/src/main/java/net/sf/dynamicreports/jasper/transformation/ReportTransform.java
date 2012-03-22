@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
+import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.DRIDesignMargin;
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.design.definition.DRIDesignParameter;
@@ -46,10 +47,13 @@ import net.sf.jasperreports.engine.JRAbstractScriptlet;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRScriptlet;
+import net.sf.jasperreports.engine.design.JRDesignHyperlink;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JRDesignScriptlet;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
+import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -181,6 +185,28 @@ public class ReportTransform {
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for scriptlet \"" + name + "\"", e);
 		}
+	}
+
+	public JRDesignHyperlink hyperLink(DRIDesignHyperLink hyperLink) {
+		if (hyperLink == null) {
+			return null;
+		}
+
+		JRDesignHyperlink jrHyperLink = new JRDesignHyperlink();
+		jrHyperLink.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
+		jrHyperLink.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
+		jrHyperLink.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
+		jrHyperLink.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
+		HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+		if (hyperLinkType != null) {
+			jrHyperLink.setHyperlinkType(hyperLinkType);
+		}
+		HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+		if (hyperLinkTarget != null) {
+			jrHyperLink.setHyperlinkTarget(hyperLinkTarget);
+		}
+
+		return jrHyperLink;
 	}
 
 	//page

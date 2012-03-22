@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -81,6 +82,12 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 
 	public T setUseSeriesAsCategory(Boolean useSeriesAsCategory) {
 		getDataset().setUseSeriesAsCategory(useSeriesAsCategory);
+		return (T) this;
+	}
+
+	public T setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return (T) this;
 	}
 

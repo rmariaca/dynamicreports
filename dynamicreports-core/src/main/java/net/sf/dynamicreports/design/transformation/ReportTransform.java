@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.transformation;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.dynamicreports.design.base.DRDesignHyperLink;
 import net.sf.dynamicreports.design.base.DRDesignParameter;
 import net.sf.dynamicreports.design.base.DRDesignQuery;
 import net.sf.dynamicreports.design.base.DRDesignTemplateDesign;
@@ -32,6 +33,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.base.JasperScriptlet;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.DRIParameter;
 import net.sf.dynamicreports.report.definition.DRIQuery;
 import net.sf.dynamicreports.report.definition.DRIReport;
@@ -78,6 +80,23 @@ public class ReportTransform {
 		designParameter.setValue(parameter.getValue());
 		designParameter.setExternal(accessor.getReport().getTemplateDesign().isDefinedParameter(parameter.getName()));
 		return designParameter;
+	}
+
+	public DRDesignHyperLink hyperlink(DRIHyperLink hyperLink) throws DRException {
+		if (hyperLink == null) {
+			return null;
+		}
+
+		DRDesignHyperLink designHyperLink = new DRDesignHyperLink();
+		designHyperLink.setAnchorNameExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
+		designHyperLink.setAnchorExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
+		designHyperLink.setPageExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
+		designHyperLink.setReferenceExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
+		designHyperLink.setTooltipExpression( accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
+		designHyperLink.setType(hyperLink.getType());
+		designHyperLink.setTarget(hyperLink.getTarget());
+
+		return designHyperLink;
 	}
 
 	public DRIDesignTemplateDesign getTemplateDesign() {

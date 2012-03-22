@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.base.chart.dataset;
 
+import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignHighLowDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
@@ -36,6 +37,7 @@ public class DRDesignHighLowDataset extends DRDesignChartDataset implements DRID
 	private DRIDesignExpression openExpression;
 	private DRIDesignExpression closeExpression;
 	private DRIDesignExpression volumeExpression;
+	private DRIDesignHyperLink itemHyperLink;
 
 	public DRIDesignExpression getSeriesExpression() {
 		return seriesExpression;
@@ -91,6 +93,14 @@ public class DRDesignHighLowDataset extends DRDesignChartDataset implements DRID
 
 	public void setVolumeExpression(DRIDesignExpression volumeExpression) {
 		this.volumeExpression = volumeExpression;
+	}
+
+	public DRIDesignHyperLink getItemHyperLink() {
+		return itemHyperLink;
+	}
+
+	public void setItemHyperLink(DRIDesignHyperLink itemHyperLink) {
+		this.itemHyperLink = itemHyperLink;
 	}
 
 }

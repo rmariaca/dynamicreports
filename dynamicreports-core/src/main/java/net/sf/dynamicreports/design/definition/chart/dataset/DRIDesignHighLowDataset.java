@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition.chart.dataset;
 
+import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
@@ -42,4 +43,6 @@ public interface DRIDesignHighLowDataset extends DRIDesignChartDataset {
 	public DRIDesignExpression getCloseExpression();
 
 	public DRIDesignExpression getVolumeExpression();
+
+	public DRIDesignHyperLink getItemHyperLink();
 }

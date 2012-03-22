@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.base.chart.dataset;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIHighLowDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -39,6 +40,7 @@ public class DRHighLowDataset extends DRChartDataset implements DRIHighLowDatase
 	private DRIExpression<?> openExpression;
 	private DRIExpression<?> closeExpression;
 	private DRIExpression<?> volumeExpression;
+	private DRIHyperLink itemHyperLink;
 
 	public DRIExpression<?> getSeriesExpression() {
 		return seriesExpression;
@@ -94,6 +96,14 @@ public class DRHighLowDataset extends DRChartDataset implements DRIHighLowDatase
 
 	public void setVolumeExpression(DRIExpression<?> volumeExpression) {
 		this.volumeExpression = volumeExpression;
+	}
+
+	public DRIHyperLink getItemHyperLink() {
+		return itemHyperLink;
+	}
+
+	public void setItemHyperLink(DRIHyperLink itemHyperLink) {
+		this.itemHyperLink = itemHyperLink;
 	}
 
 }

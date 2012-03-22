@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -76,6 +77,12 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 		for (CategoryChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
+		return (T) this;
+	}
+
+	public T setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return (T) this;
 	}
 

@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -75,6 +76,12 @@ public class GanttChartBuilder extends AbstractBaseChartBuilder<GanttChartBuilde
 		for (GanttChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
+		return this;
+	}
+
+	public GanttChartBuilder setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return this;
 	}
 

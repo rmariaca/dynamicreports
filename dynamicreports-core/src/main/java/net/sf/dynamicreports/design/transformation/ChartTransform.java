@@ -472,6 +472,7 @@ public class ChartTransform {
 
 	private void seriesDataset(DRISeriesDataset dataset, DRDesignSeriesDataset designDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
+		designDataset.setItemHyperLink(accessor.getReportTransform().hyperlink(dataset.getItemHyperLink()));
 		designDataset.setValueExpression(valueExpression);
 		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
@@ -518,6 +519,7 @@ public class ChartTransform {
 	private DRDesignHighLowDataset highLowDataset(DRIHighLowDataset dataset) throws DRException {
 		DRDesignHighLowDataset designDataset = new DRDesignHighLowDataset();
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		designDataset.setItemHyperLink(accessor.getReportTransform().hyperlink(dataset.getItemHyperLink()));
 		designDataset.setSeriesExpression(expressionTransform.transformExpression(dataset.getSeriesExpression()));
 		designDataset.setDateExpression(expressionTransform.transformExpression(dataset.getDateExpression()));
 		designDataset.setHighExpression(expressionTransform.transformExpression(dataset.getHighExpression()));

@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
@@ -81,6 +82,12 @@ public class SpiderChartBuilder extends AbstractChartBuilder<SpiderChartBuilder>
 		for (CategoryChartSerieBuilder chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
+		return this;
+	}
+
+	public SpiderChartBuilder setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return this;
 	}
 

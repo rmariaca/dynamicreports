@@ -228,15 +228,8 @@ public class ComponentTransform {
 	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIReportStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		component(designHyperlinkComponent, hyperlinkComponent, style, textStyle, defaultStyleType);
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
-		if (hyperLink != null) {
-			DRDesignHyperLink designHyperLink = new DRDesignHyperLink();
-			designHyperLink.setAnchorNameExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
-			designHyperLink.setAnchorExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
-			designHyperLink.setPageExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
-			designHyperLink.setReferenceExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));
-			designHyperLink.setTooltipExpression( accessor.getExpressionTransform().transformExpression(hyperLink.getTooltipExpression()));
-			designHyperLink.setType(hyperLink.getType());
-			designHyperLink.setTarget(hyperLink.getTarget());
+		DRDesignHyperLink designHyperLink = accessor.getReportTransform().hyperlink(hyperLink);
+		if (designHyperLink != null) {
 			designHyperlinkComponent.setHyperLink(designHyperLink);
 		}
 	}

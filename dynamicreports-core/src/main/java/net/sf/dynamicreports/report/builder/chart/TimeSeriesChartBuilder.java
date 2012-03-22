@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.base.chart.dataset.DRTimeSeriesDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -83,6 +84,12 @@ public class TimeSeriesChartBuilder extends AbstractBaseChartBuilder<TimeSeriesC
 
 	public TimeSeriesChartBuilder setTimePeriodType(TimePeriod timePeriodType) {
 		getDataset().setTimePeriodType(timePeriodType);
+		return this;
+	}
+
+	public TimeSeriesChartBuilder setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getDataset().setItemHyperLink(itemHyperLink.build());
 		return this;
 	}
 

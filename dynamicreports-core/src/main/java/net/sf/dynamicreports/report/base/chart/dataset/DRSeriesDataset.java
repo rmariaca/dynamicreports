@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -40,6 +41,7 @@ public class DRSeriesDataset extends DRChartDataset implements DRISeriesDataset 
 
 	private DRIExpression<?> valueExpression;
 	private List<DRIChartSerie> series;
+	private DRIHyperLink itemHyperLink;
 
 	public DRSeriesDataset() {
 		series = new ArrayList<DRIChartSerie>();
@@ -62,4 +64,13 @@ public class DRSeriesDataset extends DRChartDataset implements DRISeriesDataset 
 	public List<DRIChartSerie> getSeries() {
 		return series;
 	}
+
+	public DRIHyperLink getItemHyperLink() {
+		return itemHyperLink;
+	}
+
+	public void setItemHyperLink(DRIHyperLink itemHyperLink) {
+		this.itemHyperLink = itemHyperLink;
+	}
+
 }

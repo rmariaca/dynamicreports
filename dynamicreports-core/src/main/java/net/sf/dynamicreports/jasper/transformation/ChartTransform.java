@@ -293,6 +293,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignCategoryChartSerie categorySerie = (DRIDesignCategoryChartSerie) serie;
 			JRDesignCategorySeries jrSerie = new JRDesignCategorySeries();
+			jrSerie.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			jrSerie.setValueExpression(expressionTransform.getExpression(categorySerie.getValueExpression()));
 
 			JRDesignExpression exp2 = expressionTransform.getExpression(categorySerie.getLabelExpression());
@@ -328,6 +329,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignCategoryChartSerie categorySerie = (DRIDesignCategoryChartSerie) serie;
 			JRDesignPieSeries jrSerie = new JRDesignPieSeries();
+			jrSerie.setSectionHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			jrSerie.setKeyExpression(exp1);
 			jrSerie.setValueExpression(expressionTransform.getExpression(categorySerie.getValueExpression()));
 			jrDataset.addPieSeries(jrSerie);
@@ -344,6 +346,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignCategoryChartSerie categorySerie = (DRIDesignCategoryChartSerie) serie;
 			JRDesignTimeSeries jrSerie = new JRDesignTimeSeries();
+			jrSerie.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			jrSerie.setTimePeriodExpression(exp1);
 			jrSerie.setValueExpression(expressionTransform.getExpression(categorySerie.getValueExpression()));
 			JRDesignExpression seriesExpression = expressionTransform.getExpression(serie.getSeriesExpression());
@@ -364,6 +367,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignXyChartSerie xySerie = (DRIDesignXyChartSerie) serie;
 			JRDesignXySeries jrSerie = new JRDesignXySeries();
+			jrSerie.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			if (xySerie.getXValueExpression() != null) {
 				jrSerie.setXValueExpression(expressionTransform.getExpression(xySerie.getXValueExpression()));
 			}
@@ -389,6 +393,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignXyzChartSerie xyzSerie = (DRIDesignXyzChartSerie) serie;
 			JRDesignXyzSeries jrSerie = new JRDesignXyzSeries();
+			jrSerie.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			if (xyzSerie.getXValueExpression() != null) {
 				jrSerie.setXValueExpression(expressionTransform.getExpression(xyzSerie.getXValueExpression()));
 			}
@@ -408,6 +413,7 @@ public class ChartTransform {
 		for (DRIDesignChartSerie serie : dataset.getSeries()) {
 			DRIDesignGanttChartSerie ganttSerie = (DRIDesignGanttChartSerie) serie;
 			JRDesignGanttSeries jrSerie = new JRDesignGanttSeries();
+			jrSerie.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 			jrSerie.setTaskExpression(taskExpression);
 			jrSerie.setSubtaskExpression(taskExpression);
 			jrSerie.setStartDateExpression(expressionTransform.getExpression(ganttSerie.getStartDateExpression()));
@@ -429,6 +435,7 @@ public class ChartTransform {
 
 	private void highLowDataset(DRIDesignHighLowDataset dataset, JRDesignHighLowDataset jrDataset) {
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		jrDataset.setItemHyperlink(accessor.getReportTransform().hyperLink(dataset.getItemHyperLink()));
 		jrDataset.setSeriesExpression(expressionTransform.getExpression(dataset.getSeriesExpression()));
 		jrDataset.setDateExpression(expressionTransform.getExpression(dataset.getDateExpression()));
 		jrDataset.setHighExpression(expressionTransform.getExpression(dataset.getHighExpression()));
