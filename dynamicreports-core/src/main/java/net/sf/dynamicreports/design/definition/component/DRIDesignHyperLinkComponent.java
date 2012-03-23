@@ -23,11 +23,16 @@
 package net.sf.dynamicreports.design.definition.component;
 
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignHyperLinkComponent extends DRIDesignComponent {
+
+	public DRIDesignExpression getAnchorNameExpression();
+
+	public Integer getBookmarkLevel();
 
 	public DRIDesignHyperLink getHyperLink();
 }

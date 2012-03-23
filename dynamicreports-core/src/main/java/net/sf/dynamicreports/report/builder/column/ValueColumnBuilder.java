@@ -201,6 +201,21 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	public T setAnchorName(String anchorName) {
+		getComponent().setAnchorNameExpression(Expressions.text(anchorName));
+		return (T) this;
+	}
+
+	public T setAnchorName(DRIExpression<String> anchorNameExpression) {
+		getComponent().setAnchorNameExpression(anchorNameExpression);
+		return (T) this;
+	}
+
+	public T setBookmarkLevel(Integer bookmarkLevel) {
+		getComponent().setBookmarkLevel(bookmarkLevel);
+		return (T) this;
+	}
+
 	/**
 	 * Sets the column value hyperlink.
 	 *

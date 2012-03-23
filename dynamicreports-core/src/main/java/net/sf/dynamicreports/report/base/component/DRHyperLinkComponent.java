@@ -25,20 +25,39 @@ package net.sf.dynamicreports.report.base.component;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class DRHyperLinkComponent extends DRDimensionComponent implements DRIHyperLinkComponent {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
+	private DRIExpression<String> anchorNameExpression;
+	private Integer bookmarkLevel;
 	private DRHyperLink hyperLink;
-	
+
+	public DRIExpression<String> getAnchorNameExpression() {
+		return anchorNameExpression;
+	}
+
+	public void setAnchorNameExpression(DRIExpression<String> anchorNameExpression) {
+		this.anchorNameExpression = anchorNameExpression;
+	}
+
+	public Integer getBookmarkLevel() {
+		return bookmarkLevel;
+	}
+
+	public void setBookmarkLevel(Integer bookmarkLevel) {
+		this.bookmarkLevel = bookmarkLevel;
+	}
+
 	public DRHyperLink getHyperLink() {
 		return hyperLink;
 	}
 
 	public void setHyperLink(DRHyperLink hyperLink) {
 		this.hyperLink = hyperLink;
-	}	
+	}
 }

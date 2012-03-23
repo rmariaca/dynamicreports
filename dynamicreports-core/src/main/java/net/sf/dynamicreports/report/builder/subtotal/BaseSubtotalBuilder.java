@@ -102,6 +102,21 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		return (T) this;
 	}
 
+	public T setAnchorName(String anchorName) {
+		getObject().getValueField().setAnchorNameExpression(Expressions.text(anchorName));
+		return (T) this;
+	}
+
+	public T setAnchorName(DRIExpression<String> anchorNameExpression) {
+		getObject().getValueField().setAnchorNameExpression(anchorNameExpression);
+		return (T) this;
+	}
+
+	public T setBookmarkLevel(Integer bookmarkLevel) {
+		getObject().getValueField().setBookmarkLevel(bookmarkLevel);
+		return (T) this;
+	}
+
 	public T setHyperLink(HyperLinkBuilder hyperLink) {
 		if (hyperLink != null) {
 			getObject().getValueField().setHyperLink(hyperLink.getHyperLink());

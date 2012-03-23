@@ -29,7 +29,6 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
-import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
@@ -71,9 +70,7 @@ public class TableOfContentsTransform {
 			}
 			String expressionName = labelExpression.getName();
 			referenceField.setValueExpression(new TocReferenceExpression(level, expressionName, labelExpression));
-			DRHyperLink hyperLink = new DRHyperLink();
-			hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
-			referenceField.setHyperLink(hyperLink);
+			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(1);
 			designReferenceField.setHeight(1);
@@ -104,9 +101,7 @@ public class TableOfContentsTransform {
 		if (tableOfContents) {
 			DRTextField<String> referenceField = new DRTextField<String>();
 			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), group.getValueField().getValueExpression()));
-			DRHyperLink hyperLink = new DRHyperLink();
-			hyperLink.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName()));
-			referenceField.setHyperLink(hyperLink);
+			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName()));
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(0);
 			designReferenceField.setHeight(0);

@@ -130,6 +130,8 @@ public class GroupTransform {
 			DRDesignTextField valueComponent = valueComponent(group);
 			header.addComponent(valueComponent);
 			if (designTocHeading != null) {
+				valueComponent.setAnchorNameExpression(designTocHeading.getReferenceField().getAnchorNameExpression());
+				valueComponent.setBookmarkLevel(designTocHeading.getReferenceField().getBookmarkLevel());
 				valueComponent.setHyperLink(designTocHeading.getReferenceField().getHyperLink());
 			}
 			break;
@@ -143,6 +145,8 @@ public class GroupTransform {
 			valueComponent = valueComponent(group);
 			header.addComponent(valueComponent);
 			if (designTocHeading != null) {
+				valueComponent.setAnchorNameExpression(designTocHeading.getReferenceField().getAnchorNameExpression());
+				valueComponent.setBookmarkLevel(designTocHeading.getReferenceField().getBookmarkLevel());
 				valueComponent.setHyperLink(designTocHeading.getReferenceField().getHyperLink());
 			}
 			break;

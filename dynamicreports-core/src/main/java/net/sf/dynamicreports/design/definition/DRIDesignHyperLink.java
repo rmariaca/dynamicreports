@@ -31,8 +31,6 @@ import net.sf.dynamicreports.report.constant.HyperLinkType;
  */
 public interface DRIDesignHyperLink {
 
-	public DRIDesignExpression getAnchorNameExpression();
-
 	public DRIDesignExpression getAnchorExpression();
 
 	public DRIDesignExpression getPageExpression();

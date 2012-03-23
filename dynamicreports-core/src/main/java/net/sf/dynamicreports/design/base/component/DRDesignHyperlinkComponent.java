@@ -24,17 +24,36 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.base.DRDesignHyperLink;
 import net.sf.dynamicreports.design.definition.component.DRIDesignHyperLinkComponent;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public abstract class DRDesignHyperlinkComponent extends DRDesignComponent implements DRIDesignHyperLinkComponent {
+	private DRIDesignExpression anchorNameExpression;
+	private Integer bookmarkLevel;
 	private DRDesignHyperLink hyperLink;
 
 	public DRDesignHyperlinkComponent(String name) {
 		super(name);
 	}
-	
+
+	public DRIDesignExpression getAnchorNameExpression() {
+		return anchorNameExpression;
+	}
+
+	public void setAnchorNameExpression(DRIDesignExpression anchorNameExpression) {
+		this.anchorNameExpression = anchorNameExpression;
+	}
+
+	public Integer getBookmarkLevel() {
+		return bookmarkLevel;
+	}
+
+	public void setBookmarkLevel(Integer bookmarkLevel) {
+		this.bookmarkLevel = bookmarkLevel;
+	}
+
 	public DRDesignHyperLink getHyperLink() {
 		return hyperLink;
 	}

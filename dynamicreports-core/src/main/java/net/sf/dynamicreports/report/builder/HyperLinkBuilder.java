@@ -63,16 +63,6 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 		return this;
 	}
 
-	public HyperLinkBuilder setAnchorName(String anchorName) {
-		getObject().setAnchorNameExpression(Expressions.text(anchorName));
-		return this;
-	}
-
-	public HyperLinkBuilder setAnchorName(DRIExpression<String> anchorNameExpression) {
-		getObject().setAnchorNameExpression(anchorNameExpression);
-		return this;
-	}
-
 	public HyperLinkBuilder setAnchor(String anchor) {
 		getObject().setAnchorExpression(Expressions.text(anchor));
 		return this;

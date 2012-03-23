@@ -33,8 +33,6 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  */
 public interface DRIHyperLink extends Serializable {
 
-	public DRIExpression<String> getAnchorNameExpression();
-
 	public DRIExpression<String> getAnchorExpression();
 
 	public DRIExpression<Integer> getPageExpression();

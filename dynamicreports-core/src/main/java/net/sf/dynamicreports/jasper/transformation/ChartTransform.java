@@ -153,9 +153,13 @@ public class ChartTransform {
 		}
 		jrChart.setTheme(chart.getTheme());
 
+		jrChart.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(chart.getAnchorNameExpression()));
+		if (chart.getBookmarkLevel() != null) {
+			jrChart.setBookmarkLevel(chart.getBookmarkLevel());
+		}
+
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
-			jrChart.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
 			jrChart.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
 			jrChart.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
@@ -986,9 +990,13 @@ public class ChartTransform {
 	private ChartSettings spiderSettings(DRIDesignChart chart) {
 		StandardChartSettings settings = new StandardChartSettings();
 
+		settings.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(chart.getAnchorNameExpression()));
+		if (chart.getBookmarkLevel() != null) {
+			settings.setBookmarkLevel(chart.getBookmarkLevel());
+		}
+
 		DRIDesignHyperLink hyperLink = chart.getHyperLink();
 		if (hyperLink != null) {
-			settings.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
 			settings.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
 			settings.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			settings.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));

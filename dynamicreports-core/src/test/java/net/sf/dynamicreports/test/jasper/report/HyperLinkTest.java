@@ -44,13 +44,12 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 			.setReference("reference")
 			.setTooltip("tooltip")
 			.setAnchor("anchor")
-			.setAnchorName("anchorName")
 			.setPage(1)
 			.setType(HyperLinkType.LOCAL_ANCHOR)
 			.setTarget(HyperLinkTarget.TOP);
 
 		rb.title(
-			cmp.text("title 1").setHyperLink(hyperLink));
+			cmp.text("title 1").setHyperLink(hyperLink).setAnchorName("anchorName").setBookmarkLevel(1));
 	}
 
 	@Override
@@ -64,6 +63,7 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 		Assert.assertEquals("hyperlink tooltip", "tooltip", textField.getHyperlinkTooltip());
 		Assert.assertEquals("hyperlink anchor", "anchor", textField.getHyperlinkAnchor());
 		Assert.assertEquals("hyperlink anchorName", "anchorName", textField.getAnchorName());
+		Assert.assertEquals("hyperlink bookmark level", 1, textField.getBookmarkLevel());
 		Assert.assertEquals("hyperlink page", new Integer(1), textField.getHyperlinkPage());
 		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.LOCAL_ANCHOR, textField.getHyperlinkTypeValue());
 		Assert.assertEquals("hyperlink target", HyperlinkTargetEnum.TOP, textField.getHyperlinkTargetValue());

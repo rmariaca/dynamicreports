@@ -283,9 +283,13 @@ public class ComponentTransform {
 	private JRDesignElement textField(DRIDesignTextField textField) {
 		JRDesignTextField jrTextField = new JRDesignTextField();
 
+		jrTextField.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(textField.getAnchorNameExpression()));
+		if (textField.getBookmarkLevel() != null) {
+			jrTextField.setBookmarkLevel(textField.getBookmarkLevel());
+		}
+
 		DRIDesignHyperLink hyperLink = textField.getHyperLink();
 		if (hyperLink != null) {
-			jrTextField.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
 			jrTextField.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
 			jrTextField.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrTextField.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
@@ -332,9 +336,13 @@ public class ComponentTransform {
 	private JRDesignElement image(DRIDesignImage image) {
 		JRDesignImage jrImage = new JRDesignImage(new JRDesignStyle().getDefaultStyleProvider());
 
+		jrImage.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(image.getAnchorNameExpression()));
+		if (image.getBookmarkLevel() != null) {
+			jrImage.setBookmarkLevel(image.getBookmarkLevel());
+		}
+
 		DRIDesignHyperLink hyperLink = image.getHyperLink();
 		if (hyperLink != null) {
-			jrImage.setAnchorNameExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorNameExpression()));
 			jrImage.setHyperlinkAnchorExpression(accessor.getExpressionTransform().getExpression(hyperLink.getAnchorExpression()));
 			jrImage.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrImage.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));

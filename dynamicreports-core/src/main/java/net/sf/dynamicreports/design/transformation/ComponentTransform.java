@@ -218,8 +218,12 @@ public class ComponentTransform {
 		DRDesignTableOfContentsHeading designTocHeading = accessor.getTableOfContentsTransform().componentHeading(component);
 		if (designTocHeading != null) {
 			designComponent.setTableOfContentsHeading(designTocHeading);
+			DRIDesignExpression anchorNameExpression = designTocHeading.getReferenceField().getAnchorNameExpression();
+			Integer bookmarkLevel = designTocHeading.getReferenceField().getBookmarkLevel();
 			DRDesignHyperLink designHyperLink = designTocHeading.getReferenceField().getHyperLink();
 			if (designComponent instanceof DRDesignHyperlinkComponent) {
+				((DRDesignHyperlinkComponent) designComponent).setAnchorNameExpression(anchorNameExpression);
+				((DRDesignHyperlinkComponent) designComponent).setBookmarkLevel(bookmarkLevel);
 				((DRDesignHyperlinkComponent) designComponent).setHyperLink(designHyperLink);
 			}
 		}
@@ -227,6 +231,14 @@ public class ComponentTransform {
 
 	private void hyperlink(DRDesignHyperlinkComponent designHyperlinkComponent, DRIHyperLinkComponent hyperlinkComponent, DRIReportStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		component(designHyperlinkComponent, hyperlinkComponent, style, textStyle, defaultStyleType);
+
+		if (hyperlinkComponent.getAnchorNameExpression() != null) {
+			designHyperlinkComponent.setAnchorNameExpression(accessor.getExpressionTransform().transformExpression(hyperlinkComponent.getAnchorNameExpression()));
+		}
+		if (hyperlinkComponent.getBookmarkLevel() != null) {
+			designHyperlinkComponent.setBookmarkLevel(hyperlinkComponent.getBookmarkLevel());
+		}
+
 		DRIHyperLink hyperLink = hyperlinkComponent.getHyperLink();
 		DRDesignHyperLink designHyperLink = accessor.getReportTransform().hyperlink(hyperLink);
 		if (designHyperLink != null) {
@@ -394,6 +406,8 @@ public class ComponentTransform {
 		newStylePageY.getBorder().setLeftPen(pen);
 
 		DRTextField<String> pageXField = new DRTextField<String>();
+		pageXField.setAnchorNameExpression(pageXofY.getAnchorNameExpression());
+		pageXField.setBookmarkLevel(pageXofY.getBookmarkLevel());
 		pageXField.setHyperLink((DRHyperLink) pageXofY.getHyperLink());
 		pageXField.setPrintWhenExpression(pageXofY.getPrintWhenExpression());
 		pageXField.setStyle(newStylePageX);
@@ -403,6 +417,8 @@ public class ComponentTransform {
 		pageXField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), 0));
 
 		DRTextField<String> pageYField = new DRTextField<String>();
+		pageYField.setAnchorNameExpression(pageXofY.getAnchorNameExpression());
+		pageYField.setBookmarkLevel(pageXofY.getBookmarkLevel());
 		pageYField.setHyperLink((DRHyperLink) pageXofY.getHyperLink());
 		pageYField.setPrintWhenExpression(pageXofY.getPrintWhenExpression());
 		pageYField.setStyle(newStylePageY);
@@ -488,6 +504,8 @@ public class ComponentTransform {
 	//format field
 	private DRTextField<String> formatField(DRIFormatField formatField, DRIExpression<String> expression) throws DRException {
 		DRTextField<String> formatFieldTextField = new DRTextField<String>();
+		formatFieldTextField.setAnchorNameExpression(formatField.getAnchorNameExpression());
+		formatFieldTextField.setBookmarkLevel(formatField.getBookmarkLevel());
 		formatFieldTextField.setHyperLink((DRHyperLink) formatField.getHyperLink());
 		formatFieldTextField.setPrintWhenExpression(formatField.getPrintWhenExpression());
 		formatFieldTextField.setStyle(formatField.getStyle());
@@ -575,6 +593,8 @@ public class ComponentTransform {
 		component.setWidthType(booleanField.getWidthType());
 		component.setHeight(booleanField.getHeight());
 		component.setHeightType(booleanField.getHeightType());
+		component.setAnchorNameExpression(booleanField.getAnchorNameExpression());
+		component.setBookmarkLevel(booleanField.getBookmarkLevel());
 		component.setHyperLink((DRHyperLink) booleanField.getHyperLink());
 		component.setStyle(booleanField.getStyle());
 		component.setPrintWhenExpression(booleanField.getPrintWhenExpression());

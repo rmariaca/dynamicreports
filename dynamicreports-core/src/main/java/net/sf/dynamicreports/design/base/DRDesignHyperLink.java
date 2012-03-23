@@ -31,21 +31,12 @@ import net.sf.dynamicreports.report.constant.HyperLinkType;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DRDesignHyperLink implements DRIDesignHyperLink {
-	private DRIDesignExpression anchorNameExpression;
 	private DRIDesignExpression anchorExpression;
 	private DRIDesignExpression pageExpression;
 	private DRIDesignExpression referenceExpression;
 	private DRIDesignExpression tooltipExpression;
 	private HyperLinkType hyperLinkType;
 	private HyperLinkTarget hyperLinkTarget;
-
-	public DRIDesignExpression getAnchorNameExpression() {
-		return anchorNameExpression;
-	}
-
-	public void setAnchorNameExpression(DRIDesignExpression anchorNameExpression) {
-		this.anchorNameExpression = anchorNameExpression;
-	}
 
 	public DRIDesignExpression getAnchorExpression() {
 		return anchorExpression;

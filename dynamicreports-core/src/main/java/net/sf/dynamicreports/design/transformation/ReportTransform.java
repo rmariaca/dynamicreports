@@ -88,7 +88,6 @@ public class ReportTransform {
 		}
 
 		DRDesignHyperLink designHyperLink = new DRDesignHyperLink();
-		designHyperLink.setAnchorNameExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorNameExpression()));
 		designHyperLink.setAnchorExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getAnchorExpression()));
 		designHyperLink.setPageExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getPageExpression()));
 		designHyperLink.setReferenceExpression(accessor.getExpressionTransform().transformExpression(hyperLink.getReferenceExpression()));

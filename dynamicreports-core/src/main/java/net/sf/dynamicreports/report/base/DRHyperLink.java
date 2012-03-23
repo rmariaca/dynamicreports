@@ -34,21 +34,12 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 public class DRHyperLink implements DRIHyperLink {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRIExpression<String> anchorNameExpression;
 	private DRIExpression<String> anchorExpression;
 	private DRIExpression<Integer> pageExpression;
 	private DRIExpression<String> referenceExpression;
 	private DRIExpression<String> tooltipExpression;
 	private HyperLinkType hyperLinkType;
 	private HyperLinkTarget hyperLinkTarget;
-
-	public DRIExpression<String> getAnchorNameExpression() {
-		return anchorNameExpression;
-	}
-
-	public void setAnchorNameExpression(DRIExpression<String> anchorNameExpression) {
-		this.anchorNameExpression = anchorNameExpression;
-	}
 
 	public DRIExpression<String> getAnchorExpression() {
 		return anchorExpression;

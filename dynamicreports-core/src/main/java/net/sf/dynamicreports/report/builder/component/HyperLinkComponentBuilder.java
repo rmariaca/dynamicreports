@@ -24,7 +24,9 @@ package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -35,6 +37,21 @@ public abstract class HyperLinkComponentBuilder<T extends HyperLinkComponentBuil
 
 	public HyperLinkComponentBuilder(U component) {
 		super(component);
+	}
+
+	public T setAnchorName(String anchorName) {
+		getObject().setAnchorNameExpression(Expressions.text(anchorName));
+		return (T) this;
+	}
+
+	public T setAnchorName(DRIExpression<String> anchorNameExpression) {
+		getObject().setAnchorNameExpression(anchorNameExpression);
+		return (T) this;
+	}
+
+	public T setBookmarkLevel(Integer bookmarkLevel) {
+		getObject().setBookmarkLevel(bookmarkLevel);
+		return (T) this;
 	}
 
 	public T setHyperLink(HyperLinkBuilder hyperLink) {
