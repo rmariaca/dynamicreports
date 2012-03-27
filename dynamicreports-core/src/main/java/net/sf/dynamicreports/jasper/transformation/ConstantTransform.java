@@ -243,6 +243,7 @@ public class ConstantTransform {
 		case PIE3D:
 			return JRDesignChart.CHART_TYPE_PIE3D;
 		case TIMESERIES:
+		case DIFFERENCE:
 			return JRDesignChart.CHART_TYPE_TIMESERIES;
 		case XYAREA:
 			return JRDesignChart.CHART_TYPE_XYAREA;

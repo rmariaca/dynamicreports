@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Color;
 import java.awt.Paint;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -97,6 +98,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIDifferencePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILayeredBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
@@ -115,6 +117,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LayeredBarRenderer;
+import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.GradientPaintTransformer;
 
@@ -166,6 +169,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRIBarPlot) {
 			designPlot = barPlot((DRIBarPlot) plot);
+		}
+		else if (plot instanceof DRIDifferencePlot) {
+			designPlot = differencePlot((DRIDifferencePlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRILinePlot) {
 			designPlot = linePlot((DRILinePlot) plot);
@@ -243,6 +249,13 @@ public class ChartTransform {
 		axisPlot(designLinePlot, linePlot);
 		designLinePlot.setShowShapes(linePlot.getShowShapes());
 		designLinePlot.setShowLines(linePlot.getShowLines());
+		return designLinePlot;
+	}
+
+	private DRDesignLinePlot differencePlot(DRIDifferencePlot differencePlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		DRDesignLinePlot designLinePlot = new DRDesignLinePlot();
+		axisPlot(designLinePlot, differencePlot);
+		chartCustomizers.add(new DifferenceRendererCustomizer(differencePlot));
 		return designLinePlot;
 	}
 
@@ -736,4 +749,34 @@ public class ChartTransform {
 	    chart.getCategoryPlot().setRenderer(renderer);
 	  }
 	}
+
+	private class DifferenceRendererCustomizer implements DRIChartCustomizer, Serializable {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		private Color positiveColor;
+		private Color negativeColor;
+		private Boolean showShapes;
+
+		private DifferenceRendererCustomizer(DRIDifferencePlot differencePlot) {
+			this.positiveColor = differencePlot.getPositiveColor();
+			this.negativeColor = differencePlot.getNegativeColor();
+			this.showShapes = differencePlot.getShowShapes();
+		}
+
+		public void customize(JFreeChart chart, ReportParameters reportParameters) {
+			//XYLineAndShapeRenderer xyRenderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
+      XYDifferenceRenderer renderer = new XYDifferenceRenderer();
+      if (positiveColor != null) {
+      	renderer.setPositivePaint(positiveColor);
+      }
+      if (negativeColor != null) {
+      	renderer.setNegativePaint(negativeColor);
+      }
+      if (showShapes != null) {
+      	renderer.setShapesVisible(showShapes);
+      }
+      chart.getXYPlot().setRenderer(renderer);
+		}
+	}
+
 }

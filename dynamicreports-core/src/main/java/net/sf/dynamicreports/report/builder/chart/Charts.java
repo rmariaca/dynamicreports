@@ -136,6 +136,10 @@ public class Charts {
 		return new TimeSeriesChartBuilder();
 	}
 
+	public static DifferenceChartBuilder differenceChart() {
+		return new DifferenceChartBuilder();
+	}
+
 	public static XyAreaChartBuilder xyAreaChart() {
 		return new XyAreaChartBuilder();
 	}

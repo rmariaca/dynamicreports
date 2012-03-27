@@ -20,34 +20,45 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.base.chart.plot;
+
+import java.awt.Color;
+
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIDifferencePlot;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	LAYEREDBAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	DIFFERENCE,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER,
-	THERMOMETER,
-	GANTT
+public class DRDifferencePlot extends DRAxisPlot implements DRIDifferencePlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private Color positiveColor;
+	private Color negativeColor;
+	private Boolean showShapes;
+
+	public Color getPositiveColor() {
+		return positiveColor;
+	}
+
+	public void setPositiveColor(Color positiveColor) {
+		this.positiveColor = positiveColor;
+	}
+
+	public Color getNegativeColor() {
+		return negativeColor;
+	}
+
+	public void setNegativeColor(Color negativeColor) {
+		this.negativeColor = negativeColor;
+	}
+
+	public Boolean getShowShapes() {
+		return showShapes;
+	}
+
+	public void setShowShapes(Boolean showShapes) {
+		this.showShapes = showShapes;
+	}
+
 }

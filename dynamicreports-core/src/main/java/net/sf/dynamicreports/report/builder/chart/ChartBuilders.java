@@ -106,7 +106,7 @@ public class ChartBuilders {
 	public LayeredBarChartBuilder layeredBarChart() {
 		return Charts.layeredBarChart();
 	}
-	
+
 	public StackedBarChartBuilder stackedBarChart() {
 		return Charts.stackedBarChart();
 	}
@@ -133,6 +133,10 @@ public class ChartBuilders {
 
 	public TimeSeriesChartBuilder timeSeriesChart() {
 		return Charts.timeSeriesChart();
+	}
+
+	public DifferenceChartBuilder differenceChart() {
+		return Charts.differenceChart();
 	}
 
 	public XyAreaChartBuilder xyAreaChart() {
