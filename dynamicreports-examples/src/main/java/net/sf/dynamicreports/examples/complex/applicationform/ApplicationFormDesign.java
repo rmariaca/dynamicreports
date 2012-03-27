@@ -133,6 +133,7 @@ public class ApplicationFormDesign implements ReportDesign<ApplicationFormData> 
 	private HorizontalListBuilder textCell(String text, int size) {
 		HorizontalListBuilder list = cmp.horizontalList();
 		String cellText = StringUtils.rightPad(text, size);
+		cellText = StringUtils.left(cellText, size);
 		for (char character : cellText.toCharArray()) {
 			TextFieldBuilder<String> cell = cmp.text(String.valueOf(character))
 				.setStyle(cellStyle)
