@@ -118,6 +118,7 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LayeredBarRenderer;
 import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.GradientPaintTransformer;
 
@@ -764,8 +765,14 @@ public class ChartTransform {
 		}
 
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
-			//XYLineAndShapeRenderer xyRenderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
+			XYLineAndShapeRenderer lineRenderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
       XYDifferenceRenderer renderer = new XYDifferenceRenderer();
+
+	    renderer.setBaseItemLabelsVisible(lineRenderer.getBaseItemLabelsVisible());
+	    renderer.setBaseItemLabelFont(lineRenderer.getBaseItemLabelFont());
+	    renderer.setBaseItemLabelPaint(lineRenderer.getBaseItemLabelPaint());
+	    renderer.setBaseItemLabelGenerator(lineRenderer.getBaseItemLabelGenerator());
+
       if (positiveColor != null) {
       	renderer.setPositivePaint(positiveColor);
       }

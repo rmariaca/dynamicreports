@@ -74,7 +74,9 @@ public class DifferenceChartTest extends AbstractJasperChartTest implements Seri
 						.setTimePeriod(column1)
 						.series(cht.serie(column3), cht.serie(column4))
 						.setTimePeriodType(TimePeriod.DAY)
-						.setShowShapes(false),
+						.setShowShapes(false)
+						.setPositiveColor(Color.BLUE)
+						.setNegativeColor(Color.MAGENTA),
 					cht.differenceChart()
 						.setTimePeriod(column1)
 						.series(cht.serie(column3))
@@ -114,6 +116,8 @@ public class DifferenceChartTest extends AbstractJasperChartTest implements Seri
 		XYItemRenderer renderer = chart.getXYPlot().getRenderer();
 		Assert.assertEquals("renderer", XYDifferenceRenderer.class, renderer.getClass());
 		Assert.assertFalse("show shapes", ((XYDifferenceRenderer) renderer).getShapesVisible());
+		Assert.assertEquals("positive paint", Color.BLUE, ((XYDifferenceRenderer) renderer).getPositivePaint());
+		Assert.assertEquals("negative paint", Color.MAGENTA, ((XYDifferenceRenderer) renderer).getNegativePaint());
 
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getXYPlot().getDomainAxis();
