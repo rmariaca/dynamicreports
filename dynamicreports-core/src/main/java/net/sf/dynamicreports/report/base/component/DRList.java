@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

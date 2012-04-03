@@ -50,7 +50,7 @@
 	
 	<properties>
 		<jasperreportsVersion>4.5.1</jasperreportsVersion>
-		<commonslangVersion>2.5</commonslangVersion>
+		<commonslangVersion>3.1</commonslangVersion>
 		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
@@ -84,8 +84,8 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
 				<version>${commonslangVersion}</version>
 			</dependency>
 			<dependency>

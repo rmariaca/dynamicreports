@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.exception.DRException;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

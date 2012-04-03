@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIFormatField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

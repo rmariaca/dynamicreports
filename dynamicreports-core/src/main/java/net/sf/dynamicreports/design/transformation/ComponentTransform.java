@@ -122,8 +122,8 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.renderers.BatikRenderer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

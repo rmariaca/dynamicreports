@@ -25,7 +25,7 @@ package net.sf.dynamicreports.jasper.builder.export;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExcelExporter;
 import net.sf.dynamicreports.report.constant.Constants;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

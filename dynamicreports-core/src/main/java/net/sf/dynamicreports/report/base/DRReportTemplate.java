@@ -44,7 +44,7 @@ import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

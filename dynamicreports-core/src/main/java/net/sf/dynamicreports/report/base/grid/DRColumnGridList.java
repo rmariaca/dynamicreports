@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridList;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

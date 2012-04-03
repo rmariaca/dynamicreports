@@ -37,7 +37,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * It is used to show values from the data source.

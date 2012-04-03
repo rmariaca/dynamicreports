@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.grid;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * A set of methods of customizing columns layout

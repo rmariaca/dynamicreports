@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

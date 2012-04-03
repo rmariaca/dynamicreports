@@ -36,7 +36,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.MeterShape;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

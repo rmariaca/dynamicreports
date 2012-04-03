@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * A set of methods of creating and customizing styles

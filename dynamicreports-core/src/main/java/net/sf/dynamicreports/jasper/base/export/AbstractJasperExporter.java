@@ -29,19 +29,19 @@ import java.io.Writer;
 import net.sf.dynamicreports.jasper.definition.export.JasperIExporter;
 import net.sf.dynamicreports.report.constant.Constants;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractJasperExporter implements JasperIExporter {	
+public abstract class AbstractJasperExporter implements JasperIExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Writer outputWriter;
 	private OutputStream outputStream;
 	private File outputFile;
 	private String outputFileName;
-	
+
 	private Integer pageIndex;
 	private Integer startPageIndex;
 	private Integer endPageIndex;
@@ -49,7 +49,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 	private Integer offsetX;
 	private Integer offsetY;
 	private Boolean ignorePageMargins;
-		
+
 	public Writer getOutputWriter() {
 		return outputWriter;
 	}
@@ -89,56 +89,56 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 	public Integer getPageIndex() {
 		return pageIndex;
 	}
-	
+
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
-	
+
 	public Integer getStartPageIndex() {
 		return startPageIndex;
 	}
-	
+
 	public void setStartPageIndex(Integer startPageIndex) {
 		this.startPageIndex = startPageIndex;
 	}
-	
+
 	public Integer getEndPageIndex() {
 		return endPageIndex;
 	}
-	
+
 	public void setEndPageIndex(Integer endPageIndex) {
 		this.endPageIndex = endPageIndex;
 	}
-	
+
 	public String getCharacterEncoding() {
 		return characterEncoding;
 	}
-	
+
 	public void setCharacterEncoding(String characterEncoding) {
 		this.characterEncoding = characterEncoding;
 	}
-	
+
 	public Integer getOffsetX() {
 		return offsetX;
 	}
-	
+
 	public void setOffsetX(Integer offsetX) {
 		this.offsetX = offsetX;
 	}
-	
+
 	public Integer getOffsetY() {
 		return offsetY;
 	}
-	
+
 	public void setOffsetY(Integer offsetY) {
 		this.offsetY = offsetY;
 	}
-	
+
 	public Boolean getIgnorePageMargins() {
 		return ignorePageMargins;
 	}
-	
+
 	public void setIgnorePageMargins(Boolean ignorePageMargins) {
 		this.ignorePageMargins = ignorePageMargins;
-	}	
+	}
 }

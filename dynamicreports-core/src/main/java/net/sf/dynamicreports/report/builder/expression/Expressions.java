@@ -38,8 +38,8 @@ import net.sf.dynamicreports.report.definition.DRICrosstabValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JRDataSource;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * A set of build in expressions.<br/>

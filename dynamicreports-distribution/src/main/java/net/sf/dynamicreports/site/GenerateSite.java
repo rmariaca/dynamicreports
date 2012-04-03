@@ -51,7 +51,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperImageExporterBuilder;
 import net.sf.dynamicreports.jasper.constant.ImageType;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;

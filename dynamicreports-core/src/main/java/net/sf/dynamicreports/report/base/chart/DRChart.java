@@ -51,7 +51,7 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

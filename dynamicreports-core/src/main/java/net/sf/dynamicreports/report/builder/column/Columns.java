@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * A set of methods of creating report columns.<br/>

@@ -92,7 +92,7 @@ import net.sf.jasperreports.engine.xml.JRXmlWriter;
 import net.sf.jasperreports.view.JasperDesignViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * The most used report builder for creating reports. It allows constructing and customizing the whole report content.

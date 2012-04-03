@@ -35,7 +35,7 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)

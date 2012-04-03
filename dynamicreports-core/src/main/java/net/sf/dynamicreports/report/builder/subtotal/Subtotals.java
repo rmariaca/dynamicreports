@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * A set of methods of creating column subtotals

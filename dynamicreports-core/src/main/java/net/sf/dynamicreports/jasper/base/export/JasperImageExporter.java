@@ -22,22 +22,22 @@
 
 package net.sf.dynamicreports.jasper.base.export;
 
-import org.apache.commons.lang.Validate;
-
 import net.sf.dynamicreports.jasper.constant.ImageType;
 import net.sf.dynamicreports.jasper.definition.export.JasperIImageExporter;
 import net.sf.dynamicreports.report.constant.Constants;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class JasperImageExporter extends AbstractJasperExporter implements JasperIImageExporter {	
+public class JasperImageExporter extends AbstractJasperExporter implements JasperIImageExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Integer pageGap;
-	private ImageType imageType;	
+	private ImageType imageType;
 	private Float zoom;
-		
+
 	public Integer getPageGap() {
 		return pageGap;
 	}
@@ -49,17 +49,17 @@ public class JasperImageExporter extends AbstractJasperExporter implements Jaspe
 	public ImageType getImageType() {
 		return imageType;
 	}
-	
+
 	public void setImageType(ImageType imageType) {
 		Validate.notNull(imageType, "imageType must not be null");
 		this.imageType = imageType;
 	}
-	
+
 	public Float getZoom() {
 		return zoom;
 	}
-	
+
 	public void setZoom(Float zoom) {
 		this.zoom = zoom;
-	}	
+	}
 }

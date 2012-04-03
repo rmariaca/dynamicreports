@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.constant.PercentageTotalType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * It calculates percentage values from the field or column values.
