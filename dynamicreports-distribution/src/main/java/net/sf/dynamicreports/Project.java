@@ -45,6 +45,7 @@ public class Project {
 	private String commonscollectionsVersion;
 	private String commonsdigesterVersion;
 	private String commonslangVersion;
+	private String commonslang3Version;
 	private String commonsloggingVersion;
 	private String itextVersion;
 	private String jasperreportsVersion;
@@ -86,6 +87,7 @@ public class Project {
 		commonscollectionsVersion = properties.getProperty("commonscollectionsVersion");
 		commonsdigesterVersion = properties.getProperty("commonsdigesterVersion");
 		commonslangVersion = properties.getProperty("commonslangVersion");
+		commonslang3Version = properties.getProperty("commonslang3Version");
 		commonsloggingVersion = properties.getProperty("commonsloggingVersion");
 		itextVersion = properties.getProperty("itextVersion");
 		jasperreportsVersion = properties.getProperty("jasperreportsVersion");
@@ -216,6 +218,14 @@ public class Project {
 
 	public void setCommonslangVersion(String commonslangVersion) {
 		this.commonslangVersion = commonslangVersion;
+	}
+
+	public String getCommonslang3Version() {
+		return commonslang3Version;
+	}
+
+	public void setCommonslang3Version(String commonslang3Version) {
+		this.commonslang3Version = commonslang3Version;
 	}
 
 	public String getCommonsloggingVersion() {

@@ -24,6 +24,7 @@
 		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
 		<commonsdigesterVersion>2.1</commonsdigesterVersion>
 		<commonsloggingVersion>1.1.1</commonsloggingVersion>
+		<commonslangVersion>2.5</commonslangVersion>
 		<itextVersion>2.1.7</itextVersion>
 		<jcommonVersion>1.0.15</jcommonVersion>
 		<jdtcoreVersion>3.1.0</jdtcoreVersion>
@@ -95,6 +96,11 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commonsloggingVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commonslangVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>

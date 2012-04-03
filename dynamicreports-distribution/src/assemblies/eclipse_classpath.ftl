@@ -34,6 +34,7 @@
 	<classpathentry kind="lib" path="lib/commons-collections-${project.commonscollectionsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-${project.commonsdigesterVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-${project.commonslangVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-${project.commonslang3Version}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-${project.commonsloggingVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/itext-${project.itextVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-${project.jasperreportsVersion}.jar"/>

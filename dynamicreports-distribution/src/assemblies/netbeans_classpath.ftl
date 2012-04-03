@@ -46,6 +46,7 @@ file.reference.commons-beanutils-${project.commonsbeanutilsVersion}.jar=lib\\com
 file.reference.commons-collections-${project.commonscollectionsVersion}.jar=lib\\commons-collections-${project.commonscollectionsVersion}.jar
 file.reference.commons-digester-${project.commonsdigesterVersion}.jar=lib\\commons-digester-${project.commonsdigesterVersion}.jar
 file.reference.commons-lang-${project.commonslangVersion}.jar=lib\\commons-lang-${project.commonslangVersion}.jar
+file.reference.commons-lang3-${project.commonslang3Version}.jar=lib\\commons-lang3-${project.commonslang3Version}.jar
 file.reference.commons-logging-${project.commonsloggingVersion}.jar=lib\\commons-logging-${project.commonsloggingVersion}.jar
 file.reference.dynamicreports-core-${project.version}.jar=lib\\dynamicreports-core-${project.version}.jar
 file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
@@ -95,6 +96,7 @@ javac.classpath=\
     ${r"${"}file.reference.commons-collections-${project.commonscollectionsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-digester-${project.commonsdigesterVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-lang-${project.commonslangVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.commons-lang3-${project.commonslang3Version}.jar${r"}"}:\
     ${r"${"}file.reference.commons-logging-${project.commonsloggingVersion}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-core-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
