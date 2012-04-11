@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -187,6 +188,46 @@ public abstract class ColumnBuilder<T extends ColumnBuilder<T, U>, U extends DRC
 	public T setTitleMinHeight(Integer height) {
 		getObject().setTitleHeight(height);
 		getObject().setTitleHeightType(ComponentDimensionType.EXPAND);
+		return (T) this;
+	}
+
+	public T setTitleStretchWithOverflow(Boolean stretchWithOverflow) {
+		getObject().setTitleStretchWithOverflow(stretchWithOverflow);
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a column builder
+	 */
+	public T addTitleProperty(DRIPropertyExpression propertyExpression) {
+		getObject().addTitlePropertyExpression(propertyExpression);
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a column builder
+	 */
+	public T addTitleProperty(String name, DRIExpression<String> valueExpression) {
+		getObject().addTitlePropertyExpression(Expressions.property(name, valueExpression));
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a column builder
+	 */
+	public T addTitleProperty(String name, String value) {
+		getObject().addTitlePropertyExpression(Expressions.property(name, value));
 		return (T) this;
 	}
 

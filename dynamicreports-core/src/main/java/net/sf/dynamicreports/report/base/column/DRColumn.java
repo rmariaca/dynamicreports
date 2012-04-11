@@ -22,12 +22,16 @@
 
 package net.sf.dynamicreports.report.base.column;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 import org.apache.commons.lang3.Validate;
@@ -46,15 +50,19 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 	private Integer titleHeight;
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
+	private Boolean titleStretchWithOverflow;
+	private List<DRIPropertyExpression> titlePropertyExpressions;
 
 	protected DRColumn() {
 		this.name = ReportUtils.generateUniqueName("column");
+		titlePropertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
 	public DRColumn(T component) {
 		Validate.notNull(component, "component must not be null");
 		this.name = ReportUtils.generateUniqueName("column");
 		this.component = component;
+		titlePropertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
 	public T getComponent() {
@@ -105,6 +113,27 @@ public class DRColumn<T extends DRIComponent> implements DRIColumn<T> {
 			Validate.isTrue(titleRows >= 0, "titleRows must be >= 0");
 		}
 		this.titleRows = titleRows;
+	}
+
+	public Boolean getTitleStretchWithOverflow() {
+		return titleStretchWithOverflow;
+	}
+
+	public void setTitleStretchWithOverflow(Boolean titleStretchWithOverflow) {
+		this.titleStretchWithOverflow = titleStretchWithOverflow;
+	}
+
+	public List<DRIPropertyExpression> getTitlePropertyExpressions() {
+		return titlePropertyExpressions;
+	}
+
+	public void addTitlePropertyExpression(DRIPropertyExpression propertyExpression) {
+		Validate.notNull(propertyExpression, "propertyExpression must not be null");
+		this.titlePropertyExpressions.add(propertyExpression);
+	}
+
+	public void setTitlePropertyExpressions(List<DRIPropertyExpression> titlePropertyExpressions) {
+		this.titlePropertyExpressions = titlePropertyExpressions;
 	}
 
 	public String getName() {

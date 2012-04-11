@@ -35,12 +35,16 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class TextField3Test extends AbstractJasperValueTest {
 	private TextColumnBuilder<String> column1;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.columns(				
-				column1 = col.column("", "field1", String.class).setFixedWidth(25).setStretchWithOverflow(false).addProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true"))
-			.title(					
+		rb.columns(
+				column1 = col.column("test test", "field1", String.class).setFixedWidth(25)
+					.setStretchWithOverflow(false)
+					.addProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true")
+					.setTitleStretchWithOverflow(false)
+					.addTitleProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true"))
+			.title(
 				cmp.text("test test").setFixedWidth(25).setStretchWithOverflow(false).addProperty(JasperProperty.PRINT_KEEP_FULL_TEXT, "true"),
 				cmp.text("test test").setFixedWidth(25),
 				cmp.text("test test").setFixedWidth(25).setStretchWithOverflow(false));
@@ -49,19 +53,22 @@ public class TextField3Test extends AbstractJasperValueTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		elementValueTest("title.textField1", 0, "test ");
 		elementFullValueTest("title.textField1", 0, "test test");
 		elementValueTest("title.textField2", 0, "test test");
 		elementValueTest("title.textField3", 0, "test ");
 		elementFullValueTest("title.textField3", 0, "test ");
-		
+
+		columnTitleValueTest(column1, 0, "test ");
+		columnTitleFullValueTest(column1, 0, "test test");
+
 		columnDetailValueTest(column1, 0, "test ");
 		columnDetailFullValueTest(column1, 0, "test test");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");

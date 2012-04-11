@@ -34,12 +34,14 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class TextField2Test extends AbstractJasperPositionTest {
 	private TextColumnBuilder<String> column1;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		rb.columns(				
-				column1 = col.column("", "field1", String.class).setFixedWidth(25).setStretchWithOverflow(false))
-			.title(					
+		rb.columns(
+				column1 = col.column("test test", "field1", String.class).setFixedWidth(25)
+					.setStretchWithOverflow(false)
+					.setTitleStretchWithOverflow(false))
+			.title(
 				cmp.text("test test").setFixedWidth(25).setStretchWithOverflow(false),
 				cmp.text("test test").setFixedWidth(25));
 	}
@@ -47,15 +49,16 @@ public class TextField2Test extends AbstractJasperPositionTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		elementPositionTest("title.textField1", 0, 10, 10, 25, 16);
 		elementPositionTest("title.textField2", 0, 10, 26, 25, 26);
-		
+
+		columnTitlePositionTest(column1, 0, 10, 52, 25, 16);
 		columnDetailPositionTest(column1, 0, 10, 68, 25, 16);
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("field1");
