@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.4.1 (2012-04-12)
+---------------------------------------------------
+ - difference chart, see DifferenceChartReport for an example
+ - template styles, this allows to use external styles, see TemplateStyleReport, TemplateStyleFileReport for an example 
+ - new column attributes were added - setTitleStretchWithOverflow, addTitleProperty
+ - upgrade to commons-lang3 3.1
+ - minor improvements
+ 
 Changes in version 2.4.0 (2012-03-14)
 ---------------------------------------------------
  - upgrade to JasperReports 4.5.1
