@@ -30,7 +30,9 @@ import net.sf.dynamicreports.report.builder.group.CustomGroupBuilder;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRElement;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.type.PositionTypeEnum;
 import net.sf.jasperreports.engine.type.StretchTypeEnum;
 
@@ -50,6 +52,7 @@ public class Component3Test extends AbstractJasperTest {
 			.setPrintWhenDetailOverflows(true)
 			.setPrintWhenGroupChanges(group);
 		rb.title(textField)
+			.columns(col.column("column1", type.stringType()).setPrintWhenDetailOverflows(true))
 			.groupBy(group);
 	}
 
@@ -65,5 +68,14 @@ public class Component3Test extends AbstractJasperTest {
 		Assert.assertTrue("print in first whole band", textField.isPrintInFirstWholeBand());
 		Assert.assertTrue("print when detail overflows", textField.isPrintWhenDetailOverflows());
 		Assert.assertEquals("print when group changes", "group1", textField.getPrintWhenGroupChanges().getName());
+
+		textField = getJasperReport().getDetailSection().getBands()[0].getElementByKey("detail.column_column11");
+		Assert.assertTrue("print when detail overflows", textField.isPrintWhenDetailOverflows());
 	}
+
+	 @Override
+	protected JRDataSource createDataSource() {
+		return new JREmptyDataSource(1);
+	}
+
 }

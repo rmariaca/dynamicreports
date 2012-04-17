@@ -319,6 +319,11 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	public T setPrintWhenDetailOverflows(Boolean printWhenDetailOverflows) {
+		getComponent().setPrintWhenDetailOverflows(printWhenDetailOverflows);
+		return (T) this;
+	}
+
 	/**
 	 * Adds a jasper property to the column value.
 	 *
