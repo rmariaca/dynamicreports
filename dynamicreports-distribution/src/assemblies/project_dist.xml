@@ -52,6 +52,8 @@
 			<includes>
 				<include>net.sourceforge.dynamicreports:dynamicreports-core</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-examples:jar</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-examples:*:sources</include>
 			</includes>
 			<outputDirectory>dist</outputDirectory>      
 		</dependencySet>
