@@ -27,7 +27,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.awt.Color;
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
@@ -38,6 +37,7 @@ import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -136,7 +136,7 @@ public class SimpleReport_Step11 {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
 		dataSource.add("DVD", 5, new BigDecimal(30));
 		dataSource.add("DVD", 1, new BigDecimal(28));

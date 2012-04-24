@@ -27,8 +27,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -72,7 +72,7 @@ public class TableOfContentsPosition4Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		for (int i = 0; i < 10; i++) {
 			dataSource.add("value" + i, "text");
 		}

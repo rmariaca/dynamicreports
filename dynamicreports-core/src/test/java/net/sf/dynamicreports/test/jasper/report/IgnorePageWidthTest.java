@@ -25,8 +25,8 @@ package net.sf.dynamicreports.test.jasper.report;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -94,7 +94,7 @@ public class IgnorePageWidthTest extends AbstractJasperPositionTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7", "field8");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7", "field8");
 		dataSource.add("text", "text", "text", "text", "text", "text", "text", "text");
 		return dataSource;
 	}

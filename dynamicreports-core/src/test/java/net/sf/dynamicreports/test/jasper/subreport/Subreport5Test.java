@@ -32,9 +32,9 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -86,7 +86,7 @@ public class Subreport5Test extends AbstractJasperValueTest implements Serializa
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		dataSource.add("text1");
 		dataSource.add("text2");
 		dataSource.add("text3");
@@ -102,7 +102,7 @@ public class Subreport5Test extends AbstractJasperValueTest implements Serializa
 
 		@Override
 		public JRDataSource evaluate(List<?> values, ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("field1");
+			DRDataSource dataSource = new DRDataSource("field1");
 			dataSource.add(values.get(0) + "a");
 			dataSource.add(values.get(0) + "b");
 			return dataSource;

@@ -26,11 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -81,7 +81,7 @@ public class UnitsReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		for (int i = 0; i < 20; i++) {
 			dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 		}

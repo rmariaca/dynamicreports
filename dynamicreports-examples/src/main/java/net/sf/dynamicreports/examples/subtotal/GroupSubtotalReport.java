@@ -26,10 +26,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -73,7 +73,7 @@ public class GroupSubtotalReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("country", "item", "quantity", "price");
+		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "price");
 		dataSource.add("USA", "Book", 4, new BigDecimal(10));
 		dataSource.add("USA", "Book", 3, new BigDecimal(10));
 		dataSource.add("USA", "Notebook", 2, new BigDecimal(20));

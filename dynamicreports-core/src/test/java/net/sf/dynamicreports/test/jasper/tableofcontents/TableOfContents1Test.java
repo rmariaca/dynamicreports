@@ -32,9 +32,9 @@ import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsHeadingBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRPrintText;
 
@@ -181,7 +181,7 @@ public class TableOfContents1Test extends AbstractJasperValueTest implements Ser
 	@Override
 	protected JRDataSource createDataSource() {
 		String[] values = new String[]{"value1", "value2", "value3"};
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		for (String field1 : values) {
 			for (String field2 : values) {
 				for (int i = 0; i < 8; i++) {

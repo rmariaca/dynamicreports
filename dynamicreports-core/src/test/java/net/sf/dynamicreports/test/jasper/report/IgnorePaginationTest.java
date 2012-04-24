@@ -28,8 +28,8 @@ import java.io.Serializable;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.type.OrientationEnum;
@@ -62,7 +62,7 @@ public class IgnorePaginationTest extends AbstractJasperValueTest implements Ser
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 100; i++) {
 			dataSource.add(i);
 		}		

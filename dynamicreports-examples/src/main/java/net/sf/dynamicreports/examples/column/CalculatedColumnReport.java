@@ -26,9 +26,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -36,12 +36,12 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CalculatedColumnReport {
-	
+
 	public CalculatedColumnReport() {
 		build();
 	}
-	
-	private void build() {			
+
+	private void build() {
 		TextColumnBuilder<Integer>    column1 = col.column("A", "field1", type.integerType());
 		TextColumnBuilder<Integer>    column2 = col.column("B", "field2", type.integerType());
 		TextColumnBuilder<BigDecimal> column3 = column1.multiply(column2).setTitle("A * B");
@@ -50,7 +50,7 @@ public class CalculatedColumnReport {
 		TextColumnBuilder<BigDecimal> column6 = column1.subtract(column2).setTitle("A - B");
 		TextColumnBuilder<BigDecimal> column7 = column3.add(6).setTitle("A * B + 6");
 		TextColumnBuilder<BigDecimal> column8 = column7.divide(2, 5).add(1).setTitle("(A*B+6) / 5 + 1");
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -59,18 +59,18 @@ public class CalculatedColumnReport {
 			  .title(Templates.createTitleComponent("CalculatedColumn"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		dataSource.add(10, 5);
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new CalculatedColumnReport();
 	}

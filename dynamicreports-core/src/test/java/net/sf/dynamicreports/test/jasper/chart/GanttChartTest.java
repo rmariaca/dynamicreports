@@ -31,8 +31,8 @@ import java.util.Date;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -137,7 +137,7 @@ public class GanttChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5", "field6");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6");
 		dataSource.add("task1", toDate(2011, 1, 1), toDate(2011, 1, 5), 1d, toDate(2011, 1, 2), toDate(2011, 1, 6));
 		dataSource.add("task1", toDate(2011, 1, 6), toDate(2011, 1, 8), 1d, toDate(2011, 1, 8), toDate(2011, 1, 9));
 		dataSource.add("task2", toDate(2011, 1, 10), toDate(2011, 1, 15), 0.5d, toDate(2011, 1, 8), toDate(2011, 1, 14));

@@ -31,10 +31,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -79,7 +79,7 @@ public class ConversionColumnReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity");
 		dataSource.add("Notebook", "1/1/2010", "100.9");
 		dataSource.add("Notebook", "2/2/2010", "100.2");
 		return dataSource;

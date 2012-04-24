@@ -26,9 +26,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -62,7 +62,7 @@ public class Subreport3Test extends AbstractJasperValueTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("f1");
+		DRDataSource dataSource = new DRDataSource("f1");
 		dataSource.add(1);
 		dataSource.add(2);
 		return dataSource;
@@ -80,7 +80,7 @@ public class Subreport3Test extends AbstractJasperValueTest {
 	}
 
 	public JRDataSource createSubreport1DataSource() {
-		DataSource dataSource = new DataSource("f2");
+		DRDataSource dataSource = new DRDataSource("f2");
 		dataSource.add(3);
 		dataSource.add(4);
 		dataSource.add(5);

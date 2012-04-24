@@ -27,8 +27,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -61,7 +61,7 @@ public class SubtotalPosition1Test extends AbstractJasperPositionTest {
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		dataSource.add(1);
 		return dataSource;
 	}

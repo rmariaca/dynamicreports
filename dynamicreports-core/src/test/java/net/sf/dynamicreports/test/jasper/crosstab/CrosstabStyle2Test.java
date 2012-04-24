@@ -38,9 +38,9 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -104,7 +104,7 @@ public class CrosstabStyle2Test extends AbstractJasperCrosstabStyleTest implemen
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		dataSource.add("a", "c", 1);
 		dataSource.add("a", "c", 2);
 		dataSource.add("a", "d", 3);

@@ -31,8 +31,8 @@ import java.io.Serializable;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -116,7 +116,7 @@ public class XyAreaChartTest extends AbstractJasperChartTest implements Serializ
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add((i + 1), i + 1);
 		}

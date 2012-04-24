@@ -34,9 +34,9 @@ import net.sf.dynamicreports.report.base.AbstractScriptlet;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.type.OrientationEnum;
@@ -88,7 +88,7 @@ public class Report1Test extends AbstractJasperValueTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
 		}

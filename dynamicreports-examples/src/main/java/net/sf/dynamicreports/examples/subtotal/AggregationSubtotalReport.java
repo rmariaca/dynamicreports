@@ -28,10 +28,10 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -95,7 +95,7 @@ public class AggregationSubtotalReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("Book", toDate(2010, 1, 1), 3, new BigDecimal(11));
 		dataSource.add("Book", toDate(2010, 2, 1), 1, new BigDecimal(15));
 		dataSource.add("Book", toDate(2010, 2, 1), 3, new BigDecimal(10));

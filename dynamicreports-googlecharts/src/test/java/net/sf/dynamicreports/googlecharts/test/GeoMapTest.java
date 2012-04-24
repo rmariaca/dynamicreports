@@ -27,6 +27,7 @@ import java.awt.Color;
 import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
 import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapDataMode;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class GeoMapTest extends AbstractJasperTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("location", "quantity", "label");
+		DRDataSource dataSource = new DRDataSource("location", "quantity", "label");
 		dataSource.add("GB", 170, "United Kingdom");
 		dataSource.add("DE", 90, "Germany");
 		dataSource.add("FR", 120, null);

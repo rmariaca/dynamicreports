@@ -26,7 +26,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
@@ -37,6 +36,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -121,7 +121,7 @@ public class CustomTextSubtotalReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("country", "item", "quantity", "price");
+		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "price");
 		dataSource.add("USA", "Book", 4, new BigDecimal(10));
 		dataSource.add("USA", "Book", 3, new BigDecimal(10));
 		dataSource.add("USA", "Notebook", 2, new BigDecimal(20));

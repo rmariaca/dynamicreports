@@ -26,9 +26,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -61,7 +61,7 @@ public class DataFilterReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("DVD", 5, new BigDecimal(30));
 		dataSource.add("DVD", 1, new BigDecimal(28));
 		dataSource.add("DVD", 5, new BigDecimal(32));

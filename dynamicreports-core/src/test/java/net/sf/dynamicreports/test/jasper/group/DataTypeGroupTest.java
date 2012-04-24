@@ -30,8 +30,8 @@ import java.util.Locale;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -73,7 +73,7 @@ public class DataTypeGroupTest extends AbstractJasperValueTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 1; i++) {
 			dataSource.add(toDate(2010, 1, 1));
 			dataSource.add(toDate(2010, 2, 1));

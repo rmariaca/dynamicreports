@@ -28,9 +28,9 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -70,7 +70,7 @@ public class TableOfContentsReport1 {
 	private JRDataSource createDataSource() {
 		String[] countries = new String[]{"USA", "Canada", "Mexico"};
 		String[] items = new String[]{"Book", "Notebook", "PDA"};
-		DataSource dataSource = new DataSource("country", "item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("country", "item", "orderdate", "quantity", "unitprice");
 		for (String country : countries) {
 			for (String item : items) {
 				for (int i = 0; i < 8; i++) {

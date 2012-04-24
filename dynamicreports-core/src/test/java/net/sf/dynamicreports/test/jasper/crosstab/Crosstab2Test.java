@@ -35,8 +35,8 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -148,7 +148,7 @@ public class Crosstab2Test extends AbstractJasperCrosstabValueTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5");
 		dataSource.add("a", "c", "g", "i", 1);
 		dataSource.add("a", "c", "g", "j", 2);
 		dataSource.add("a", "d", "g", "i", 3);

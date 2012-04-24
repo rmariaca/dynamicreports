@@ -28,10 +28,10 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -75,7 +75,7 @@ public class DateGroupReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("orderdate", "item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("orderdate", "item", "quantity", "unitprice");
 		dataSource.add(toDate(2009, 11, 1), "DVD", 5, new BigDecimal(30));
 		dataSource.add(toDate(2009, 11, 1), "Book", 3, new BigDecimal(11));
 		dataSource.add(toDate(2009, 12, 1), "DVD", 1, new BigDecimal(28));		

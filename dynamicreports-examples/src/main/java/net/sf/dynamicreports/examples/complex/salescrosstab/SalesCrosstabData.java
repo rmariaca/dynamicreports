@@ -26,8 +26,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.complex.ReportData;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 public class SalesCrosstabData implements ReportData {
 
 	public JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("state", "item", "orderdate", "quantity", "unitprice");
 		Calendar c = Calendar.getInstance();
 
 		for (int i = 0; i < 370; i++) {

@@ -27,8 +27,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.BooleanColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 
@@ -67,7 +67,7 @@ public class Style8Test extends AbstractJasperStyleTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4");
 		dataSource.add(true, true, true, "text");
 		return dataSource;
 	}

@@ -34,8 +34,8 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
 import net.sf.dynamicreports.report.constant.AxisPosition;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.charts.JRChartAxis;
 import net.sf.jasperreports.charts.JRMultiAxisPlot;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
@@ -115,7 +115,7 @@ public class MultiAxisChartTest extends AbstractJasperChartTest implements Seria
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		for (int i = 0; i < 4; i++) {

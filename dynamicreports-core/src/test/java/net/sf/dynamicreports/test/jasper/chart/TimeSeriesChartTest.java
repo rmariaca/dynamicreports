@@ -35,8 +35,8 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -136,7 +136,7 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		for (int i = 0; i < 4; i++) {

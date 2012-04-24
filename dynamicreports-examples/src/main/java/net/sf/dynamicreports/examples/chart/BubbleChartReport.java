@@ -23,10 +23,10 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -74,7 +74,7 @@ public class BubbleChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("x", "y1", "z1", "y2", "z2");
+		DRDataSource dataSource = new DRDataSource("x", "y1", "z1", "y2", "z2");
 		for (int i = 0; i < 20; i++) {
 			dataSource.add((double) i, Math.random() * 10, Math.random() * 2, Math.random() * 8, Math.random() * 3);
 		}

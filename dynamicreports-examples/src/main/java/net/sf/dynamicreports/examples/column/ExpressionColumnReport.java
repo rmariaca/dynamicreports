@@ -27,10 +27,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,11 +40,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class ExpressionColumnReport {
 	private FieldBuilder<Integer> quantityField;
-	
+
 	public ExpressionColumnReport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			report()
@@ -64,26 +64,26 @@ public class ExpressionColumnReport {
 			e.printStackTrace();
 		}
 	}
-		
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("Notebook", new Date(), 1, new BigDecimal(500));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ExpressionColumnReport();
 	}
-	
+
 	private class ExpressionColumn extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
 		public String evaluate(ReportParameters reportParameters) {
-			return 
+			return
 				"Item = " + reportParameters.getValue("item") + ", " +
 				"Order date = " + type.dateType().valueToString("orderdate", reportParameters) + ", " +
 				"Quantity = " + type.integerType().valueToString(quantityField, reportParameters) + ", " +
 				"Unit price = " + type.bigDecimalType().valueToString("unitprice", reportParameters);
-		}		
+		}
 	}
 }

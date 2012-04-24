@@ -30,9 +30,9 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 
@@ -123,7 +123,7 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 	}
 
 	private JRDataSource titleSubreportDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
 		}
@@ -139,7 +139,7 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 		private static final long serialVersionUID = 1L;
 
 		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("field1");
+			DRDataSource dataSource = new DRDataSource("field1");
 			for (int i = 0; i < 50; i++) {
 				dataSource.add(i);
 			}

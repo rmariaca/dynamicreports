@@ -27,10 +27,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.GanttChartBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -95,7 +95,7 @@ public class GanttChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("task", "actualstartdate", "actualenddate", "scheduledstartdate", "scheduledenddate", "actual");
+		DRDataSource dataSource = new DRDataSource("task", "actualstartdate", "actualenddate", "scheduledstartdate", "scheduledenddate", "actual");
 		dataSource.add("Proposal", toDate(2011, 1, 5), toDate(2011, 1, 7), toDate(2011, 1, 4), toDate(2011, 1, 7), 1d);
 		dataSource.add("Analysis", toDate(2011, 1, 7), toDate(2011, 1, 14), toDate(2011, 1, 7), toDate(2011, 1, 12), 0.8d);
 		dataSource.add("Implementation", toDate(2011, 1, 15), toDate(2011, 1, 27), toDate(2011, 1, 12), toDate(2011, 1, 25), 0.3d);

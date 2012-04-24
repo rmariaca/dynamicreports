@@ -27,7 +27,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -35,6 +34,7 @@ import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
 import net.sf.dynamicreports.report.constant.AxisPosition;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -87,7 +87,7 @@ public class MultiAxisChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("date", "stock1", "stock2");
+		DRDataSource dataSource = new DRDataSource("date", "stock1", "stock2");
 		dataSource.add(toDate(2010, 1), 25, 300);
 		dataSource.add(toDate(2010, 2), 11, 450);
 		dataSource.add(toDate(2010, 3), 17, 280);

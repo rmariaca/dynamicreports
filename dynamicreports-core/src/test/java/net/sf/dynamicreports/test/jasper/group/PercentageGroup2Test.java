@@ -32,8 +32,8 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.PercentageTotalType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -163,7 +163,7 @@ public class PercentageGroup2Test extends AbstractJasperValueTest {
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4");
 		int count = 1;
 		for (int i = 1; i <= 3; i++) {
 			dataSource.add("group1", "group1_1", "group1_1_1", count++);

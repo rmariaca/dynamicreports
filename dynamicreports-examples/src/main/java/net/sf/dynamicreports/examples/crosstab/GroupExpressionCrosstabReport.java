@@ -27,7 +27,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
@@ -36,6 +35,7 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -80,7 +80,7 @@ public class GroupExpressionCrosstabReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "orderdate", "quantity");
+		DRDataSource dataSource = new DRDataSource("state", "orderdate", "quantity");
 		Calendar c = Calendar.getInstance();
 		for (int i = 0; i < 700; i++) {
 			Date date = c.getTime();

@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.examples.gettingstarted;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
@@ -31,6 +30,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -88,7 +88,7 @@ public class BandReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("column1", "column2");
+		DRDataSource dataSource = new DRDataSource("column1", "column2");
 		int row = 1;
 		for (int i = 1; i <= 2; i++) {
 			for (int j = 0; j < 50; j++) {

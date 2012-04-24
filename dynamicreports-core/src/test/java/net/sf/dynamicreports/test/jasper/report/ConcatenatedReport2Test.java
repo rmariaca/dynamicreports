@@ -29,8 +29,8 @@ import java.io.ByteArrayOutputStream;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.junit.Before;
@@ -84,7 +84,7 @@ public class ConcatenatedReport2Test {
 	}
 
 	private JRDataSource createDataSource(String text) {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		dataSource.add(text);
 		return dataSource;
 	}

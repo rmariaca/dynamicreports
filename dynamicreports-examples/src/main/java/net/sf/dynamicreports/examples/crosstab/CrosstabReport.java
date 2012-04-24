@@ -26,7 +26,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
@@ -34,6 +33,7 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -75,7 +75,7 @@ public class CrosstabReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("state", "item", "quantity", "unitprice");
 		dataSource.add("New York", "Notebook", 1, new BigDecimal(500));
 		dataSource.add("New York", "DVD", 5, new BigDecimal(30));
 		dataSource.add("New York", "DVD", 2, new BigDecimal(45));

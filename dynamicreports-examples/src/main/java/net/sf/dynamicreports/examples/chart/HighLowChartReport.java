@@ -27,10 +27,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -85,7 +85,7 @@ public class HighLowChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("series", "date", "high", "low", "open", "close", "volume");
+		DRDataSource dataSource = new DRDataSource("series", "date", "high", "low", "open", "close", "volume");
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, -20);
 		for (int i = 0; i < 20; i++) {

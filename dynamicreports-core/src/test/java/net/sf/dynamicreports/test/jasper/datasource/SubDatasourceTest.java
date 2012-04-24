@@ -29,8 +29,8 @@ import java.util.Arrays;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -92,7 +92,7 @@ public class SubDatasourceTest extends AbstractJasperValueTest implements Serial
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		dataSource.add("1", "text1", Arrays.asList(new SubData("texta1", "texta2"), new SubData("texta3", "texta4")));
 		dataSource.add("2", "text2", Arrays.asList(new SubData("textb1", "textb2")));
 		return dataSource;

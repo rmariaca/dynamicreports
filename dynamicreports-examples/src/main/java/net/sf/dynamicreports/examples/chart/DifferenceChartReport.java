@@ -26,10 +26,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.util.Calendar;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -70,7 +70,7 @@ public class DifferenceChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("date", "value1", "value2");
+		DRDataSource dataSource = new DRDataSource("date", "value1", "value2");
 		double value1 = 0;
     double value2 = 0;
     Calendar c = Calendar.getInstance();

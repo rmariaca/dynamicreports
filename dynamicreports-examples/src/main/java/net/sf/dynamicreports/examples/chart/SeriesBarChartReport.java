@@ -23,10 +23,10 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -70,7 +70,7 @@ public class SeriesBarChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "item", "quantity");
+		DRDataSource dataSource = new DRDataSource("state", "item", "quantity");
 		dataSource.add("New York", "Book", 170);
 		dataSource.add("New York", "Notebook", 100);
 		dataSource.add("Washington", "PDA", 120);

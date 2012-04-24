@@ -26,11 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.report.base.AbstractScriptlet;
 import net.sf.dynamicreports.report.builder.component.GenericElementBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -82,7 +82,7 @@ public class OpenFlashChartReport {
 	}
 
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 60, new BigDecimal(150));
 		dataSource.add("Camera", 40, new BigDecimal(400));
 		dataSource.add("PDA", 50, new BigDecimal(250));

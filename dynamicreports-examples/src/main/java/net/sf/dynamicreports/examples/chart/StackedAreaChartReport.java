@@ -23,10 +23,10 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -71,7 +71,7 @@ public class StackedAreaChartReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "stock1", "stock2", "stock3");		
+		DRDataSource dataSource = new DRDataSource("item", "stock1", "stock2", "stock3");		
 		dataSource.add("Notebook", 90, 85, 40);
 		dataSource.add("Book", 170, 100, 150);
 		dataSource.add("PDA", 120, 80, 60);

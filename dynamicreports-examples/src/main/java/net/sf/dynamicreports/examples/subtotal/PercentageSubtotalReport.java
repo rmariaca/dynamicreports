@@ -27,13 +27,13 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.awt.Color;
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.PercentageTotalType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -98,7 +98,7 @@ public class PercentageSubtotalReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("country", "item", "price");
+		DRDataSource dataSource = new DRDataSource("country", "item", "price");
 		dataSource.add("USA", "Book", new BigDecimal(10));
 		dataSource.add("USA", "Book", new BigDecimal(10));
 		dataSource.add("USA", "Notebook", new BigDecimal(20));

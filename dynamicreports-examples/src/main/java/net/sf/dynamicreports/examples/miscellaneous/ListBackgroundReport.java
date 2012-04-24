@@ -28,13 +28,13 @@ import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
 import net.sf.dynamicreports.report.builder.component.RectangleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.ImageScale;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -99,7 +99,7 @@ public class ListBackgroundReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		for (int i = 0; i < 30; i++) {
 			dataSource.add("Book", new Date(), (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 		}

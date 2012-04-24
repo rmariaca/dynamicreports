@@ -25,8 +25,8 @@ package net.sf.dynamicreports.test.jasper.report;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRPrintText;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
@@ -73,7 +73,7 @@ public class TitleTest extends AbstractJasperValueTest {
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1");
+		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
 		}		

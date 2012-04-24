@@ -29,12 +29,12 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -82,7 +82,7 @@ public class ConditionalStyleReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("DVD", toDate(2010, 1, 1), 5, new BigDecimal(30));
 		dataSource.add("DVD", toDate(2010, 1, 3), 1, new BigDecimal(28));
 		dataSource.add("DVD", toDate(2010, 1, 19), 5, new BigDecimal(32));

@@ -23,11 +23,11 @@
 package net.sf.dynamicreports.examples.column;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -66,7 +66,7 @@ public class BooleanColumnReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("boolean");
+		DRDataSource dataSource = new DRDataSource("boolean");
 		dataSource.add(true);
 		dataSource.add(false);
 		dataSource.add(true);

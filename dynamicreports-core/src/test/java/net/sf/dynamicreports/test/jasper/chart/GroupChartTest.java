@@ -31,8 +31,8 @@ import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -83,7 +83,7 @@ public class GroupChartTest extends AbstractJasperChartTest implements Serializa
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		dataSource.add("value1", "value1_1", 5);
 		dataSource.add("value1", "value1_1", 6);
 		dataSource.add("value1", "value1_2", 7);

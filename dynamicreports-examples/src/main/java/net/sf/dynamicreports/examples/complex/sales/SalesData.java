@@ -26,17 +26,17 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.complex.ReportData;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class SalesData implements ReportData {
-	
+
 	public JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("state", "item", "orderdate", "quantity", "unitprice");
 		dataSource.add("New York", "Notebook", toDate(2010, 1, 1), 1, new BigDecimal(500));
 		dataSource.add("New York", "DVD", toDate(2010, 1, 1), 5, new BigDecimal(30));
 		dataSource.add("New York", "DVD", toDate(2010, 1, 3), 2, new BigDecimal(45));
@@ -47,7 +47,7 @@ public class SalesData implements ReportData {
 		dataSource.add("New York", "Book", toDate(2010, 1, 21), 6, new BigDecimal(14));
 		dataSource.add("New York", "Phone", toDate(2010, 1, 16), 1, new BigDecimal(200));
 		dataSource.add("New York", "Phone", toDate(2010, 1, 22), 2, new BigDecimal(520));
-		
+
 		dataSource.add("Washington", "Notebook", toDate(2010, 1, 15), 1, new BigDecimal(610));
 		dataSource.add("Washington", "DVD", toDate(2010, 1, 8), 4, new BigDecimal(40));
 		dataSource.add("Washington", "DVD", toDate(2010, 1, 16), 6, new BigDecimal(35));
@@ -59,7 +59,7 @@ public class SalesData implements ReportData {
 		dataSource.add("Washington", "Book", toDate(2010, 1, 29), 5, new BigDecimal(10));
 		dataSource.add("Washington", "Phone", toDate(2010, 1, 12), 2, new BigDecimal(210));
 		dataSource.add("Washington", "Phone", toDate(2010, 1, 29), 1, new BigDecimal(380));
-		
+
 		dataSource.add("Florida", "Notebook", toDate(2010, 1, 3), 1, new BigDecimal(460));
 		dataSource.add("Florida", "DVD", toDate(2010, 1, 1), 3, new BigDecimal(49));
 		dataSource.add("Florida", "DVD", toDate(2010, 1, 8), 4, new BigDecimal(32));
@@ -73,7 +73,7 @@ public class SalesData implements ReportData {
 		dataSource.add("Florida", "Phone", toDate(2010, 1, 26), 1, new BigDecimal(201));
 		return dataSource;
 	}
-	
+
 	private Date toDate(int year, int month, int day) {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, year);

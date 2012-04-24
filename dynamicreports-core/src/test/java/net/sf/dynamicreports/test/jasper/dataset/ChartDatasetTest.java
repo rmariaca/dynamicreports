@@ -33,10 +33,10 @@ import net.sf.dynamicreports.report.builder.DatasetBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -127,7 +127,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add("value" + (i + 1), i + 1, i + 2);
 			dataSource.add("value" + (i + 1), i + 1, i + 2);

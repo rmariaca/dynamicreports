@@ -26,10 +26,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.ThermometerChartBuilder;
 import net.sf.dynamicreports.report.constant.ValueLocation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -73,7 +73,7 @@ public class ThermometerChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("value");
+		DRDataSource dataSource = new DRDataSource("value");
 		dataSource.add(40);
 		return dataSource;
 	}

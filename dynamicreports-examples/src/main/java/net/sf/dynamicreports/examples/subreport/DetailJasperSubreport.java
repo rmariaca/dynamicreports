@@ -27,10 +27,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -81,7 +81,7 @@ public class DetailJasperSubreport {
 		private static final long serialVersionUID = 1L;
 
 		public JRDataSource evaluate(ReportParameters reportParameters) {
-			DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+			DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 			for (int i = 0; i < 5; i++) {
 				dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 			}

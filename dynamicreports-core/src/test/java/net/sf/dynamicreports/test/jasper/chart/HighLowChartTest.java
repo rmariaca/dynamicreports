@@ -32,8 +32,8 @@ import java.util.Date;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -159,7 +159,7 @@ public class HighLowChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7");
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, -3);
 		dataSource.add("serie", date1 = c.getTime(), 50d, 35d, 40d, 47d, 70d);

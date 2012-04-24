@@ -30,9 +30,9 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 
@@ -146,7 +146,7 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 			for (int i = 1; i <= masterRowNumber; i++) {
 				columns[i - 1] = "column" + i;
 			}
-			DataSource dataSource = new DataSource(columns);
+			DRDataSource dataSource = new DRDataSource(columns);
 
 			for (int i = 1; i <= masterRowNumber; i++) {
 				Object[] values = new Object[masterRowNumber];

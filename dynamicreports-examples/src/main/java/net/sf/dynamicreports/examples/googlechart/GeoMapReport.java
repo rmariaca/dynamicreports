@@ -26,12 +26,12 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.googlecharts.report.GoogleCharts;
 import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapBuilder;
 import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapDataMode;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -83,7 +83,7 @@ public class GeoMapReport {
 	}
 
 	private JRDataSource createDataSource1() {
-		DataSource dataSource = new DataSource("location", "quantity", "label");
+		DRDataSource dataSource = new DRDataSource("location", "quantity", "label");
 		dataSource.add("US", 170, "United States");
 		dataSource.add("CA", 90, "Canada");
 		dataSource.add("FR", 120, "France");
@@ -93,7 +93,7 @@ public class GeoMapReport {
 	}
 
 	private JRDataSource createDataSource2() {
-		DataSource dataSource = new DataSource("location", "quantity");
+		DRDataSource dataSource = new DRDataSource("location", "quantity");
 		dataSource.add("New York", 110);
 		dataSource.add("Boston", 140);
 		dataSource.add("Miami", 80);

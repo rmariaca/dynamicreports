@@ -34,8 +34,8 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.SpiderRotation;
 import net.sf.dynamicreports.report.constant.TableOrder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintImage;
@@ -113,7 +113,7 @@ public class SpiderChartTest extends AbstractJasperChartTest implements Serializ
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add("value" + (i + 1), i + 1);
 			dataSource.add("value" + (i + 1), i + 1);

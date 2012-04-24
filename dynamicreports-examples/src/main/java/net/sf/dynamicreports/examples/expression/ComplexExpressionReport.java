@@ -27,9 +27,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -60,7 +60,7 @@ public class ComplexExpressionReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 20, new BigDecimal(10));
 		return dataSource;
 	}

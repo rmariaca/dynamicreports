@@ -26,8 +26,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.complex.ReportData;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -39,7 +39,7 @@ public class SalesTableOfContentsData implements ReportData {
 		String[] countries = new String[]{"USA", "Canada", "Mexico", "Australia", "France", "Spain", "Germany", "China"};
 		String[] items = new String[]{"Book", "Notebook", "PDA"};
 
-		DataSource dataSource = new DataSource("country", "item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("country", "item", "orderdate", "quantity", "unitprice");
 
 		for (String country : countries) {
 			for (String item : items) {

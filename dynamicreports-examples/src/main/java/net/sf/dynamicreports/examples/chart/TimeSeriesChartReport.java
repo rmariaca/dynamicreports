@@ -28,11 +28,11 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -77,7 +77,7 @@ public class TimeSeriesChartReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("orderdate", "quantity", "price");		
+		DRDataSource dataSource = new DRDataSource("orderdate", "quantity", "price");		
 		dataSource.add(toDate(2010, 1), 50, new BigDecimal(200));
 		dataSource.add(toDate(2010, 2), 110, new BigDecimal(450));
 		dataSource.add(toDate(2010, 3), 70, new BigDecimal(280));

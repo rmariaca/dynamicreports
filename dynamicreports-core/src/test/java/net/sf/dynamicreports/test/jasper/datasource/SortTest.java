@@ -28,8 +28,8 @@ import net.sf.dynamicreports.report.builder.DatasetBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -83,7 +83,7 @@ public class SortTest extends AbstractJasperChartTest {
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		dataSource.add("3", "text4");
 		dataSource.add("1", "text1");
 		dataSource.add("3", "text3");
@@ -92,7 +92,7 @@ public class SortTest extends AbstractJasperChartTest {
 	}
 
 	protected JRDataSource createDataSource2() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		dataSource.add("text4", 6);
 		dataSource.add("text1", 3);
 		dataSource.add("text3", 8);

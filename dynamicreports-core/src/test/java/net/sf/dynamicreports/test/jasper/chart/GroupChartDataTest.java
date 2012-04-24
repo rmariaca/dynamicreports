@@ -31,10 +31,10 @@ import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -133,7 +133,7 @@ public class GroupChartDataTest extends AbstractJasperChartTest implements Seria
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4");
 		dataSource.add("group1", "value1", 1, 1);
 		dataSource.add("group1", "value1", 2, 2);
 		dataSource.add("group1", "value2", 3, 3);

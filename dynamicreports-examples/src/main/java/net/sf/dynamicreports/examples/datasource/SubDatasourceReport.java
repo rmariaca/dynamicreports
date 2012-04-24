@@ -26,7 +26,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
@@ -38,6 +37,7 @@ import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -107,7 +107,7 @@ public class SubDatasourceReport {
 	}
 
 	private JRDataSource createDataSource1() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 170, new BigDecimal(100));
 		dataSource.add("Notebook", 90, new BigDecimal(450));
 		dataSource.add("PDA", 120, new BigDecimal(250));
@@ -115,7 +115,7 @@ public class SubDatasourceReport {
 	}
 
 	private JRDataSource createDataSource2() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 100, new BigDecimal(120));
 		dataSource.add("Notebook", 190, new BigDecimal(350));
 		dataSource.add("PDA", 800, new BigDecimal(290));
@@ -123,7 +123,7 @@ public class SubDatasourceReport {
 	}
 
 	private JRDataSource createDataSource3() {
-		DataSource dataSource = new DataSource("state", "item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("state", "item", "quantity", "unitprice");
 		dataSource.add("New York", "Notebook", 1, new BigDecimal(500));
 		dataSource.add("New York", "DVD", 5, new BigDecimal(30));
 		dataSource.add("New York", "DVD", 2, new BigDecimal(45));

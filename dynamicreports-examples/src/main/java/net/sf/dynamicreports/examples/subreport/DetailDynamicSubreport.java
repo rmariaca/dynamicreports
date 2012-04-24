@@ -23,11 +23,11 @@
 package net.sf.dynamicreports.examples.subreport;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -91,7 +91,7 @@ public class DetailDynamicSubreport {
 			for (int i = 1; i <= masterRowNumber; i++) {
 				columns[i - 1] = "column" + i;
 			}
-			DataSource dataSource = new DataSource(columns);
+			DRDataSource dataSource = new DRDataSource(columns);
 
 			for (int i = 1; i <= masterRowNumber; i++) {
 				Object[] values = new Object[masterRowNumber];

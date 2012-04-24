@@ -26,11 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -78,7 +78,7 @@ public class GroupChartReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("country", "item", "quantity", "sales");		
+		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "sales");		
 		dataSource.add("USA", "Book", 170, new BigDecimal(100));
 		dataSource.add("USA", "Notebook", 90, new BigDecimal(280));
 		dataSource.add("USA", "PDA", 120, new BigDecimal(250));

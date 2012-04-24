@@ -23,13 +23,13 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -82,7 +82,7 @@ public class GroupCountChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("country", "item", "quantity");
+		DRDataSource dataSource = new DRDataSource("country", "item", "quantity");
 		dataSource.add("USA", "Book", 170);
 		dataSource.add("USA", "Book", 80);
 		dataSource.add("USA", "Notebook", 90);

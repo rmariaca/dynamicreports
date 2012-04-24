@@ -26,11 +26,11 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -39,20 +39,20 @@ import net.sf.jasperreports.engine.JRDataSource;
  */
 public class PercentageColumnsReport {
 	private FieldBuilder<BigDecimal> unitPriceField;
-	
+
 	public PercentageColumnsReport() {
 		build();
 	}
-	
+
 	private void build() {
 		try {
 			unitPriceField = field("unitprice", BigDecimal.class);
-			
+
 			TextColumnBuilder<String>  itemColumn          = col.column("Item", "item", type.stringType());
 			TextColumnBuilder<Integer> quantityColumn      = col.column("Quantity", "quantity", type.integerType());
 			PercentageColumnBuilder    quantityPercColumn  = col.percentageColumn("Quantity [%]", quantityColumn);
 			PercentageColumnBuilder    unitPricePercColumn = col.percentageColumn("Unit price [%]", unitPriceField);
-			
+
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .fields(
@@ -67,16 +67,16 @@ public class PercentageColumnsReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 3, new BigDecimal(11));
 		dataSource.add("Book", 1, new BigDecimal(15));
 		dataSource.add("Book", 5, new BigDecimal(10));
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new PercentageColumnsReport();
 	}

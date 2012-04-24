@@ -29,9 +29,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,11 +40,11 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ColumnDetectDataTypeReport {
-	
+
 	public ColumnDetectDataTypeReport() {
 		build();
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void build() {
 		try {
@@ -53,7 +53,7 @@ public class ColumnDetectDataTypeReport {
 				report.addColumn(col.column(column.title, column.field, (DRIDataType) type.detectType(column.dataType)));
 			}
 			report
-			  .setTemplate(Templates.reportTemplate)			  
+			  .setTemplate(Templates.reportTemplate)
 			  .title(Templates.createTitleComponent("ColumnDetectDataTypes"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
@@ -62,16 +62,16 @@ public class ColumnDetectDataTypeReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("Notebook", new Date(), 1, new BigDecimal(500));
 		return dataSource;
 	}
-	
+
 	private List<Column> createColumns() {
 		List<Column> columns = new ArrayList<Column>();
-		columns.add(new Column("Item",        "item",      "string"));//dataType = "String", "STRING", "java.lang.String", "text" 
+		columns.add(new Column("Item",        "item",      "string"));//dataType = "String", "STRING", "java.lang.String", "text"
 		columns.add(new Column("Quantity",    "quantity",  "integer"));//dataType = "Integer", "INTEGER", "java.lang.Integer"
 		columns.add(new Column("Unit price",  "unitprice", "bigDecimal"));//dataType = "bigdecimal", "BIGDECIMAL", "java.math.BigDecimal"
 		columns.add(new Column("Order date",  "orderdate", "date"));//dataType = "Date", "DATE", "java.util.Date"
@@ -81,19 +81,19 @@ public class ColumnDetectDataTypeReport {
 		columns.add(new Column("Order day",   "orderdate", "dateDay"));//dataType = "DateDay", "dateday", "DATEDAY"
 		return columns;
 	}
-	
+
 	private class Column {
 		private String title;
 		private String field;
 		private String dataType;
-		
+
 		private Column(String title, String field, String dataType) {
 			this.title = title;
 			this.field = field;
-			this.dataType = dataType;			
+			this.dataType = dataType;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ColumnDetectDataTypeReport();
 	}

@@ -30,9 +30,9 @@ import java.io.Serializable;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -73,7 +73,7 @@ public class TemplateDesign2Test extends AbstractJasperValueTest implements Seri
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		for (int i = 0; i < 2; i++) {
 			dataSource.add("row" + i, i);
 		}		
@@ -91,7 +91,7 @@ public class TemplateDesign2Test extends AbstractJasperValueTest implements Seri
 	}
 	
 	private JRDataSource titleSubreportDataSource() {
-		DataSource dataSource = new DataSource("field2");
+		DRDataSource dataSource = new DRDataSource("field2");
 		dataSource.add("value1");
 		dataSource.add("value2");
 		dataSource.add("value3");

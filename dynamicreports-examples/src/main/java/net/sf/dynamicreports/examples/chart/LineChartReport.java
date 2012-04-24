@@ -26,10 +26,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -73,7 +73,7 @@ public class LineChartReport {
 	}
 	
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "quantity", "unitprice");		
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");		
 		dataSource.add("Book", 170, new BigDecimal(100));
 		dataSource.add("Notebook", 90, new BigDecimal(450));
 		dataSource.add("PDA", 120, new BigDecimal(250));

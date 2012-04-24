@@ -34,9 +34,9 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -101,7 +101,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4", "field5", "field6");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6");
 		for (int i = 0; i < 110; i++) {
 			dataSource.add(1, "test", new Date(), 1d, new BigDecimal(10), 1d);
 		}

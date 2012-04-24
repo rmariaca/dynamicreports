@@ -27,7 +27,6 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
@@ -38,6 +37,7 @@ import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -83,7 +83,7 @@ public class CustomPercentageCrosstabReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("state", "item", "unitprice");
+		DRDataSource dataSource = new DRDataSource("state", "item", "unitprice");
 		dataSource.add("New York", "Notebook", new BigDecimal(500));
 		dataSource.add("New York", "DVD", new BigDecimal(30));
 		dataSource.add("New York", "DVD", new BigDecimal(45.6));

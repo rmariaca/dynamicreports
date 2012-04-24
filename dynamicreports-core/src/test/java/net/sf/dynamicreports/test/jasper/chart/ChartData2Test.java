@@ -28,8 +28,8 @@ import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -74,7 +74,7 @@ public class ChartData2Test extends AbstractJasperChartTest implements Serializa
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add("value" + (i + 1), i + 1, i + 2);
 			dataSource.add("value" + (i + 1), i + 1, i + 2);

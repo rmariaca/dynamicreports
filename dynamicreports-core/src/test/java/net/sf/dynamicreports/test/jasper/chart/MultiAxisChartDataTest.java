@@ -33,8 +33,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
@@ -116,7 +116,7 @@ public class MultiAxisChartDataTest extends AbstractJasperChartTest implements S
 	}
 
 	public JRDataSource createDataSource1() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		for (int i = 0; i < 4; i++) {
@@ -127,7 +127,7 @@ public class MultiAxisChartDataTest extends AbstractJasperChartTest implements S
 	}
 
 	public JRDataSource createDataSource2() {
-		DataSource dataSource = new DataSource("field1", "field2");
+		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		for (int i = 0; i < 4; i++) {

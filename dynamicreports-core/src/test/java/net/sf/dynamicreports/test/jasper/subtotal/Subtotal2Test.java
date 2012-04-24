@@ -32,8 +32,8 @@ import java.util.Locale;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
-import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -191,7 +191,7 @@ public class Subtotal2Test extends AbstractJasperValueTest implements Serializab
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2", "field3", "field4");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4");
 		dataSource.add(new BigDecimal(1.01), 5, "value8", toDate(2010, 1, 1));
 		dataSource.add(new BigDecimal(2.01), 5, "value2", toDate(2010, 2, 1));
 		dataSource.add(new BigDecimal(9.01), 8, "value3", toDate(2010, 2, 1));

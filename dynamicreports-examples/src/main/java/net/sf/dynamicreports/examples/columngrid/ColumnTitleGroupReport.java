@@ -27,10 +27,10 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.grid.ColumnTitleGroupBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -69,7 +69,7 @@ public class ColumnTitleGroupReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
 		dataSource.add("Notebook", new Date(), 1, new BigDecimal(500));
 		return dataSource;
 	}

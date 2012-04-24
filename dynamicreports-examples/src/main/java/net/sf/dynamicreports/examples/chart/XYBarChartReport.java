@@ -23,10 +23,10 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -71,7 +71,7 @@ public class XYBarChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("x", "y1", "y2");
+		DRDataSource dataSource = new DRDataSource("x", "y1", "y2");
 		for (int i = 0; i < 20; i++) {
 			dataSource.add(i, (int) (Math.random() * 10), (int) (Math.random() * 10));
 		}

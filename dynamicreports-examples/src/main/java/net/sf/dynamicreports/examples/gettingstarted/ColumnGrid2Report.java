@@ -23,8 +23,8 @@
 package net.sf.dynamicreports.examples.gettingstarted;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -72,7 +72,7 @@ public class ColumnGrid2Report {
 		for (int i = 1; i <= columns_count; i++) {
 			columns[i - 1] = "column" + i;
 		}
-		DataSource dataSource = new DataSource(columns);
+		DRDataSource dataSource = new DRDataSource(columns);
 		for (int i = 1; i <= 5; i++) {
 			Object[] row = new Object[columns_count];
 			for (int j = 0; j < columns_count; j++) {

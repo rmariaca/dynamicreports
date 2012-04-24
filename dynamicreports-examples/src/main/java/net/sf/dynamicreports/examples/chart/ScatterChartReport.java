@@ -23,10 +23,10 @@
 package net.sf.dynamicreports.examples.chart;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -72,7 +72,7 @@ public class ScatterChartReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("x", "y1", "y2");
+		DRDataSource dataSource = new DRDataSource("x", "y1", "y2");
 		for (int i = -10; i < 10; i++) {
 			dataSource.add(i, i + (int) (Math.random() * 5), i + (int) (Math.random() * 5));
 		}

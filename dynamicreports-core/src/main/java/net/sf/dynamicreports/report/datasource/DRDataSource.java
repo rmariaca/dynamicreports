@@ -20,7 +20,7 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.test.jasper;
+package net.sf.dynamicreports.report.datasource;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.JRRewindableDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DataSource implements JRRewindableDataSource, Serializable {
+public class DRDataSource implements JRRewindableDataSource, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String[] columns;
@@ -44,7 +44,7 @@ public class DataSource implements JRRewindableDataSource, Serializable {
 	private Iterator<Map<String, Object>> iterator;
 	private Map<String, Object> currentRecord;
 
-	public DataSource(String ...columns) {
+	public DRDataSource(String ...columns) {
 		this.columns = columns;
 		this.values = new ArrayList<Map<String, Object>>();
 	}

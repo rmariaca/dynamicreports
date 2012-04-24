@@ -27,8 +27,8 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -67,7 +67,7 @@ public class DynamicPageWidthReport {
 	}
 
 	private JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("id", "item", "orderdate", "quantity", "unitprice");
+		DRDataSource dataSource = new DRDataSource("id", "item", "orderdate", "quantity", "unitprice");
 		dataSource.add(5, "Notebook", new Date(), 1, new BigDecimal(500));
 		dataSource.add(8, "Book", new Date(), 7, new BigDecimal(300));
 		dataSource.add(15, "PDA", new Date(), 2, new BigDecimal(250));
