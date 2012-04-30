@@ -1,3 +1,25 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 - 2012 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.sf.dynamicreports.adhoc.transformation;
 
 import java.awt.Color;
@@ -63,6 +85,9 @@ import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueOperator;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueRestriction;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocVerticalAlignment;
 
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
 public class XmlToAdhocTransform {
 
 	public AdhocConfiguration transform(XmlAdhocConfiguration xmlAdhocConfiguration) {
@@ -100,27 +125,27 @@ public class XmlToAdhocTransform {
 		if (xmlAdhocReport.getColumn() != null && !xmlAdhocReport.getColumn().isEmpty()) {
 			for (XmlAdhocColumn xmlAdhocColumn : xmlAdhocReport.getColumn()) {
 				adhocReport.addColumn(column(xmlAdhocColumn));
-			}			
+			}
 		}
 		if (xmlAdhocReport.getGroup() != null && !xmlAdhocReport.getGroup().isEmpty()) {
 			for (XmlAdhocGroup xmlAdhocGroup : xmlAdhocReport.getGroup()) {
 				adhocReport.addGroup(group(xmlAdhocGroup));
-			}			
+			}
 		}
 		if (xmlAdhocReport.getSort() != null && !xmlAdhocReport.getSort().isEmpty()) {
 			for (XmlAdhocSort xmlAdhocSort : xmlAdhocReport.getSort()) {
 				adhocReport.addSort(sort(xmlAdhocSort));
-			}			
+			}
 		}
 		if (xmlAdhocReport.getSubtotal() != null && !xmlAdhocReport.getSubtotal().isEmpty()) {
 			for (XmlAdhocSubtotal xmlAdhocSubtotal : xmlAdhocReport.getSubtotal()) {
 				adhocReport.addSubtotal(subtotal(xmlAdhocSubtotal));
-			}			
+			}
 		}
 		if (xmlAdhocReport.getComponent() != null && !xmlAdhocReport.getComponent().isEmpty()) {
 			for (XmlAdhocComponent xmlAdhocComponent : xmlAdhocReport.getComponent()) {
 				adhocReport.addComponent(component(xmlAdhocComponent));
-			}			
+			}
 		}
 		return adhocReport;
 	}
@@ -144,7 +169,7 @@ public class XmlToAdhocTransform {
 		adhocGroup.setTitleStyle(style(xmlAdhocGroup.getTitleStyle()));
 		if (xmlAdhocGroup.getProperty() != null && !xmlAdhocGroup.getProperty().isEmpty()) {
 			properties(xmlAdhocGroup.getProperty(), adhocGroup.getProperties());
-		}		
+		}
 		return adhocGroup;
 	}
 
@@ -245,7 +270,7 @@ public class XmlToAdhocTransform {
 		}
 		return Color.decode(color);
 	}
-	
+
 	protected AdhocFont font(XmlAdhocFont xmlAdhocFont) {
 		if (xmlAdhocFont == null) {
 			return null;
@@ -364,7 +389,7 @@ public class XmlToAdhocTransform {
 			return adhocComponent;
 		}
 	}
-	
+
 	protected void component(XmlAdhocComponent xmlAdhocComponent, AdhocComponent adhocComponent) {
 		adhocComponent.setKey(xmlAdhocComponent.getKey());
 		adhocComponent.setStyle(style(xmlAdhocComponent.getStyle()));
@@ -419,12 +444,12 @@ public class XmlToAdhocTransform {
 		if (xmlAdhocCategoryChart.getSerie() != null && !xmlAdhocCategoryChart.getSerie().isEmpty()) {
 			for (XmlAdhocCategoryChartSerie xmlAdhocCategoryChartSerie : xmlAdhocCategoryChart.getSerie()) {
 				adhocCategoryChart.addSerie(categoryChartSerie(xmlAdhocCategoryChartSerie));
-			}			
+			}
 		}
 		if (xmlAdhocCategoryChart.getSeriesColors() != null && !xmlAdhocCategoryChart.getSeriesColors().isEmpty()) {
 			for (String xmlAdhocSeriesColor : xmlAdhocCategoryChart.getSeriesColors()) {
 				adhocCategoryChart.addSeriesColor(color(xmlAdhocSeriesColor));
-			}			
+			}
 		}
 		adhocCategoryChart.setCategoryAxis(axisFormat(xmlAdhocCategoryChart.getCategoryAxis()));
 		adhocCategoryChart.setValueAxis(axisFormat(xmlAdhocCategoryChart.getValueAxis()));
@@ -476,7 +501,7 @@ public class XmlToAdhocTransform {
 		if (xmlAdhocFilter.getRestriction() != null && !xmlAdhocFilter.getRestriction().isEmpty()) {
 			for (XmlAdhocRestriction xmlAdhocRestriction : xmlAdhocFilter.getRestriction()) {
 				adhocFilter.addRestriction(restriction(xmlAdhocRestriction));
-			}			
+			}
 		}
 		return adhocFilter;
 	}
@@ -493,11 +518,11 @@ public class XmlToAdhocTransform {
 			return adhocRestriction;
 		}
 	}
-	
+
 	protected void restriction(XmlAdhocRestriction xmlAdhocRestriction, AdhocRestriction adhocRestriction) {
 		if (xmlAdhocRestriction.getProperty() != null && !xmlAdhocRestriction.getProperty().isEmpty()) {
 			properties(xmlAdhocRestriction.getProperty(), adhocRestriction.getProperties());
-		}		
+		}
 	}
 
 	protected void valueRestriction(XmlAdhocValueRestriction xmlAdhocValueRestriction, AdhocValueRestriction adhocValueRestriction) {
@@ -507,7 +532,7 @@ public class XmlToAdhocTransform {
 		if (xmlAdhocValueRestriction.getValue() != null && !xmlAdhocValueRestriction.getValue().isEmpty()) {
 			for (String value : xmlAdhocValueRestriction.getValue()) {
 				adhocValueRestriction.addValue(value);
-			}			
+			}
 		}
 	}
 

@@ -1,3 +1,25 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 - 2012 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.sf.dynamicreports.adhoc.transformation;
 
 import java.awt.Color;
@@ -63,6 +85,9 @@ import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueOperator;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueRestriction;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocVerticalAlignment;
 
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
 public class AdhocToXmlTransform {
 
 	public XmlAdhocConfiguration transform(AdhocConfiguration adhocConfiguration) {
@@ -103,29 +128,29 @@ public class AdhocToXmlTransform {
 		if (adhocReport.getColumns() != null && !adhocReport.getColumns().isEmpty()) {
 			for (AdhocColumn adhocColumn : adhocReport.getColumns()) {
 				xmlAdhocReport.getColumn().add(column(adhocColumn));
-			}			
+			}
 		}
 		if (adhocReport.getGroups() != null && !adhocReport.getGroups().isEmpty()) {
 			for (AdhocGroup adhocGroup : adhocReport.getGroups()) {
 				xmlAdhocReport.getGroup().add(group(adhocGroup));
-			}			
+			}
 		}
 		if (adhocReport.getSorts() != null && !adhocReport.getSorts().isEmpty()) {
 			for (AdhocSort adhocSort : adhocReport.getSorts()) {
 				xmlAdhocReport.getSort().add(sort(adhocSort));
-			}			
+			}
 		}
 		if (adhocReport.getSubtotals() != null && !adhocReport.getSubtotals().isEmpty()) {
 			for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
 				xmlAdhocReport.getSubtotal().add(subtotal(adhocSubtotal));
-			}			
+			}
 		}
 		if (adhocReport.getComponents() != null && !adhocReport.getComponents().isEmpty()) {
 			for (AdhocComponent adhocComponent : adhocReport.getComponents()) {
 				xmlAdhocReport.getComponent().add(component(adhocComponent));
-			}			
+			}
 		}
-		
+
 		return xmlAdhocReport;
 	}
 
@@ -148,7 +173,7 @@ public class AdhocToXmlTransform {
 		xmlAdhocGroup.setTitleStyle(style(adhocGroup.getTitleStyle()));
 		if (adhocGroup.getProperties() != null && !adhocGroup.getProperties().isEmpty()) {
 			properties(adhocGroup.getProperties(), xmlAdhocGroup.getProperty());
-		}		
+		}
 		return xmlAdhocGroup;
 	}
 
@@ -368,7 +393,7 @@ public class AdhocToXmlTransform {
 			return xmlAdhocComponent;
 		}
 	}
-	
+
 	protected void component(AdhocComponent adhocComponent, XmlAdhocComponent xmlAdhocComponent) {
 		xmlAdhocComponent.setKey(adhocComponent.getKey());
 		xmlAdhocComponent.setStyle(style(adhocComponent.getStyle()));
@@ -423,12 +448,12 @@ public class AdhocToXmlTransform {
 		if (adhocCategoryChart.getSeries() != null && !adhocCategoryChart.getSeries().isEmpty()) {
 			for (AdhocCategoryChartSerie adhocCategoryChartSerie : adhocCategoryChart.getSeries()) {
 				xmlAdhocCategoryChart.getSerie().add(categoryChartSerie(adhocCategoryChartSerie));
-			}			
+			}
 		}
 		if (adhocCategoryChart.getSeriesColors() != null && !adhocCategoryChart.getSeriesColors().isEmpty()) {
 			for (Color adhocSeriesColor : adhocCategoryChart.getSeriesColors()) {
 				xmlAdhocCategoryChart.getSeriesColors().add(color(adhocSeriesColor));
-			}			
+			}
 		}
 		xmlAdhocCategoryChart.setCategoryAxis(axisFormat(adhocCategoryChart.getCategoryAxis()));
 		xmlAdhocCategoryChart.setValueAxis(axisFormat(adhocCategoryChart.getValueAxis()));
@@ -480,7 +505,7 @@ public class AdhocToXmlTransform {
 		if (adhocFilter.getRestrictions() != null && !adhocFilter.getRestrictions().isEmpty()) {
 			for (AdhocRestriction adhocRestriction : adhocFilter.getRestrictions()) {
 				xmlAdhocFilter.getRestriction().add(restriction(adhocRestriction));
-			}			
+			}
 		}
 		return xmlAdhocFilter;
 	}
@@ -501,9 +526,9 @@ public class AdhocToXmlTransform {
 	protected void restriction(AdhocRestriction adhocRestriction, XmlAdhocRestriction xmlAdhocRestriction) {
 		if (adhocRestriction.getProperties() != null && !adhocRestriction.getProperties().isEmpty()) {
 			properties(adhocRestriction.getProperties(), xmlAdhocRestriction.getProperty());
-		}		
+		}
 	}
-	
+
 	protected void valueRestriction(AdhocValueRestriction adhocValueRestriction, XmlAdhocValueRestriction xmlAdhocValueRestriction) {
 		restriction(adhocValueRestriction, xmlAdhocValueRestriction);
 		xmlAdhocValueRestriction.setName(adhocValueRestriction.getName());
@@ -511,7 +536,7 @@ public class AdhocToXmlTransform {
 		if (adhocValueRestriction.getValues() != null && !adhocValueRestriction.getValues().isEmpty()) {
 			for (String value : adhocValueRestriction.getValues()) {
 				xmlAdhocValueRestriction.getValue().add(value);
-			}			
+			}
 		}
 	}
 
