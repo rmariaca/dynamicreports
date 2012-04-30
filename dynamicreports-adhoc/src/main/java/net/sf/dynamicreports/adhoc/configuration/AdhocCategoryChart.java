@@ -118,4 +118,30 @@ public class AdhocCategoryChart extends AdhocChart {
 		this.useSeriesAsCategory = useSeriesAsCategory;
 	}
 
+	@Override
+	public AdhocCategoryChart clone() {
+		AdhocCategoryChart clone = (AdhocCategoryChart) super.clone();
+
+		if (series != null) {
+			clone.series = new ArrayList<AdhocCategoryChartSerie>();
+			for (AdhocCategoryChartSerie adhocCategoryChartSerie : series) {
+				clone.addSerie(adhocCategoryChartSerie.clone());
+			}
+		}
+		if (seriesColors != null) {
+			clone.seriesColors = new ArrayList<Color>();
+			for (Color adhocSeriesColor : seriesColors) {
+				clone.addSeriesColor(adhocSeriesColor);
+			}
+		}
+		if (categoryAxis != null) {
+			clone.categoryAxis = categoryAxis.clone();
+		}
+		if (valueAxis != null) {
+			clone.valueAxis = valueAxis.clone();
+		}
+
+		return clone;
+	}
+
 }

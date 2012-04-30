@@ -28,7 +28,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocPen implements Serializable {
+public class AdhocPen implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Float lineWidth;
@@ -48,6 +48,18 @@ public class AdhocPen implements Serializable {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	@Override
+	public AdhocPen clone() {
+		AdhocPen clone;
+		try {
+			clone = (AdhocPen) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		return clone;
 	}
 
 }

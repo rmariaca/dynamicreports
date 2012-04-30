@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocSort implements Serializable {
+public class AdhocSort implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -47,6 +47,18 @@ public class AdhocSort implements Serializable {
 
 	public void setOrderType(AdhocOrderType orderType) {
 		this.orderType = orderType;
+	}
+
+	@Override
+	public AdhocSort clone() {
+		AdhocSort clone;
+		try {
+			clone = (AdhocSort) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		return clone;
 	}
 
 }

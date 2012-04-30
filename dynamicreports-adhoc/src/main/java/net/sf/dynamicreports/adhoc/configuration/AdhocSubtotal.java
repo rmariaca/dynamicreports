@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocSubtotal implements Serializable {
+public class AdhocSubtotal implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -74,6 +74,25 @@ public class AdhocSubtotal implements Serializable {
 
 	public void setLabelStyle(AdhocStyle labelStyle) {
 		this.labelStyle = labelStyle;
+	}
+
+	@Override
+	public AdhocSubtotal clone() {
+		AdhocSubtotal clone;
+		try {
+			clone = (AdhocSubtotal) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (style != null) {
+			clone.style = style.clone();
+		}
+		if (labelStyle != null) {
+			clone.labelStyle = labelStyle.clone();
+		}
+
+		return clone;
 	}
 
 }

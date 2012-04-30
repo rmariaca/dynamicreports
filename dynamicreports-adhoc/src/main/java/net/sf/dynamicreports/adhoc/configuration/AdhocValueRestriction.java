@@ -67,4 +67,18 @@ public class AdhocValueRestriction extends AdhocRestriction {
 		this.values = values;
 	}
 
+	@Override
+	public AdhocValueRestriction clone() {
+		AdhocValueRestriction clone = (AdhocValueRestriction) super.clone();
+
+		if (values != null) {
+			clone.values = new ArrayList<String>();
+			for (String value : values) {
+				clone.addValue(value);
+			}
+		}
+
+		return clone;
+	}
+
 }

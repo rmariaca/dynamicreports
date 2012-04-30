@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocPage implements Serializable {
+public class AdhocPage implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer width;
@@ -101,6 +101,18 @@ public class AdhocPage implements Serializable {
 
 	public void setIgnorePageWidth(Boolean ignorePageWidth) {
 		this.ignorePageWidth = ignorePageWidth;
+	}
+
+	@Override
+	public AdhocPage clone() {
+		AdhocPage clone;
+		try {
+			clone = (AdhocPage) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		return clone;
 	}
 
 }

@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocCategoryChartSerie implements Serializable {
+public class AdhocCategoryChartSerie implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String series;
@@ -56,6 +56,18 @@ public class AdhocCategoryChartSerie implements Serializable {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	@Override
+	public AdhocCategoryChartSerie clone() {
+		AdhocCategoryChartSerie clone;
+		try {
+			clone = (AdhocCategoryChartSerie) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		return clone;
 	}
 
 }

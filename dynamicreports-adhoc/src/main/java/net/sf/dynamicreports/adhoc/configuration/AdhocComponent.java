@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocComponent implements Serializable {
+public class AdhocComponent implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String key;
@@ -65,6 +65,22 @@ public class AdhocComponent implements Serializable {
 
 	public void setHeight(Integer height) {
 		this.height = height;
+	}
+
+	@Override
+	public AdhocComponent clone() {
+		AdhocComponent clone;
+		try {
+			clone = (AdhocComponent) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (style != null) {
+			clone.style = style.clone();
+		}
+
+		return clone;
 	}
 
 }

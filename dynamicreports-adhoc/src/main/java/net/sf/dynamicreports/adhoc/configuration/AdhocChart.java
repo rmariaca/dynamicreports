@@ -67,4 +67,15 @@ public class AdhocChart extends AdhocComponent {
 		this.showLegend = showLegend;
 	}
 
+	@Override
+	public AdhocChart clone() {
+		AdhocChart clone = (AdhocChart) super.clone();
+
+		if (titleFont != null) {
+			clone.titleFont = titleFont.clone();
+		}
+
+		return clone;
+	}
+
 }

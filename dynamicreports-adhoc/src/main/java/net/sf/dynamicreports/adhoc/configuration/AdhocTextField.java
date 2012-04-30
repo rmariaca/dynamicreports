@@ -38,4 +38,10 @@ public class AdhocTextField extends AdhocComponent {
 		this.text = text;
 	}
 
+	@Override
+	public AdhocTextField clone() {
+		AdhocTextField clone = (AdhocTextField) super.clone();
+		return clone;
+	}
+
 }

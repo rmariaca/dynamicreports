@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocColumn implements Serializable {
+public class AdhocColumn implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -74,6 +74,25 @@ public class AdhocColumn implements Serializable {
 
 	public void setTitleStyle(AdhocStyle titleStyle) {
 		this.titleStyle = titleStyle;
+	}
+
+	@Override
+	public AdhocColumn clone() {
+		AdhocColumn clone;
+		try {
+			clone = (AdhocColumn) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (style != null) {
+			clone.style = style.clone();
+		}
+		if (titleStyle != null) {
+			clone.titleStyle = titleStyle.clone();
+		}
+
+		return clone;
 	}
 
 }

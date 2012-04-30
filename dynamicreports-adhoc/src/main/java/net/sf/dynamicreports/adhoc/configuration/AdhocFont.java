@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocFont implements Serializable {
+public class AdhocFont implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -83,6 +83,18 @@ public class AdhocFont implements Serializable {
 
 	public void setSize(Integer size) {
 		this.size = size;
+	}
+
+	@Override
+	public AdhocFont clone() {
+		AdhocFont clone;
+		try {
+			clone = (AdhocFont) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		return clone;
 	}
 
 }

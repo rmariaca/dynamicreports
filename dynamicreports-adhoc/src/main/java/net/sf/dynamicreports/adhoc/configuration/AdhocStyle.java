@@ -28,7 +28,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocStyle implements Serializable {
+public class AdhocStyle implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private AdhocFont font;
@@ -120,6 +120,34 @@ public class AdhocStyle implements Serializable {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+
+	@Override
+	public AdhocStyle clone() {
+		AdhocStyle clone;
+		try {
+			clone = (AdhocStyle) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (font != null) {
+			clone.font = font.clone();
+		}
+		if (topBorder != null) {
+			clone.topBorder = topBorder.clone();
+		}
+		if (leftBorder != null) {
+			clone.leftBorder = leftBorder.clone();
+		}
+		if (bottomBorder != null) {
+			clone.bottomBorder = bottomBorder.clone();
+		}
+		if (rightBorder != null) {
+			clone.rightBorder = rightBorder.clone();
+		}
+
+		return clone;
 	}
 
 }

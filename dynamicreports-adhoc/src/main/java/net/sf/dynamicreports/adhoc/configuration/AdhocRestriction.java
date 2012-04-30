@@ -28,7 +28,7 @@ import java.util.Properties;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocRestriction implements Serializable {
+public class AdhocRestriction implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Properties properties;
@@ -51,6 +51,26 @@ public class AdhocRestriction implements Serializable {
 
 	public void setProperties(Properties properties) {
 		this.properties = properties;
+	}
+
+	@Override
+	public AdhocRestriction clone() {
+		AdhocRestriction clone;
+		try {
+			clone = (AdhocRestriction) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (properties != null) {
+			clone.properties = new Properties();
+			for (Object keyObject : properties.keySet()) {
+				String key = (String) keyObject;
+				clone.addProperty(key, properties.getProperty(key));
+			}
+		}
+
+		return clone;
 	}
 
 }

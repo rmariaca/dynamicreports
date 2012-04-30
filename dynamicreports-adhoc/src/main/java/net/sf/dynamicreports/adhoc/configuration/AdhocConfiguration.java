@@ -27,7 +27,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocConfiguration implements Serializable {
+public class AdhocConfiguration implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private AdhocReport report;
@@ -47,6 +47,25 @@ public class AdhocConfiguration implements Serializable {
 
 	public void setFilter(AdhocFilter filter) {
 		this.filter = filter;
+	}
+
+	@Override
+	public AdhocConfiguration clone() {
+		AdhocConfiguration clone;
+		try {
+			clone = (AdhocConfiguration) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (report != null) {
+			clone.report = report.clone();
+		}
+		if (filter != null) {
+			clone.filter = filter.clone();
+		}
+
+		return clone;
 	}
 
 }

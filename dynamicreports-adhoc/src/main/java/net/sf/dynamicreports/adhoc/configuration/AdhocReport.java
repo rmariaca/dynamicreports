@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocReport implements Serializable {
+public class AdhocReport implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private AdhocStyle textStyle;
@@ -221,6 +221,76 @@ public class AdhocReport implements Serializable {
 
 	public void setComponents(List<AdhocComponent> components) {
 		this.components = components;
+	}
+
+	@Override
+	public AdhocReport clone() {
+		AdhocReport clone;
+		try {
+			clone = (AdhocReport) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (textStyle != null) {
+			clone.textStyle = textStyle.clone();
+		}
+		if (columnStyle != null) {
+			clone.columnStyle = columnStyle.clone();
+		}
+		if (columnTitleStyle != null) {
+			clone.columnTitleStyle = columnTitleStyle.clone();
+		}
+		if (groupStyle != null) {
+			clone.groupStyle = groupStyle.clone();
+		}
+		if (groupTitleStyle != null) {
+			clone.groupTitleStyle = groupTitleStyle.clone();
+		}
+		if (subtotalStyle != null) {
+			clone.subtotalStyle = subtotalStyle.clone();
+		}
+		if (detailOddRowStyle != null) {
+			clone.detailOddRowStyle = detailOddRowStyle.clone();
+		}
+		if (detailEvenRowStyle != null) {
+			clone.detailEvenRowStyle = detailEvenRowStyle.clone();
+		}
+		if (page != null) {
+			clone.page = page.clone();
+		}
+		if (columns != null) {
+			clone.columns = new ArrayList<AdhocColumn>();
+			for (AdhocColumn adhocColumn : columns) {
+				clone.addColumn(adhocColumn.clone());
+			}
+		}
+		if (groups != null) {
+			clone.groups = new ArrayList<AdhocGroup>();
+			for (AdhocGroup adhocGroup : groups) {
+				clone.addGroup(adhocGroup);
+			}
+		}
+		if (sorts != null) {
+			clone.sorts = new ArrayList<AdhocSort>();
+			for (AdhocSort adhocSort : sorts) {
+				clone.addSort(adhocSort);
+			}
+		}
+		if (subtotals != null) {
+			clone.subtotals = new ArrayList<AdhocSubtotal>();
+			for (AdhocSubtotal adhocSubtotal : subtotals) {
+				clone.addSubtotal(adhocSubtotal);
+			}
+		}
+		if (components != null) {
+			clone.components = new ArrayList<AdhocComponent>();
+			for (AdhocComponent adhocComponent : components) {
+				clone.addComponent(adhocComponent);
+			}
+		}
+
+		return clone;
 	}
 
 }

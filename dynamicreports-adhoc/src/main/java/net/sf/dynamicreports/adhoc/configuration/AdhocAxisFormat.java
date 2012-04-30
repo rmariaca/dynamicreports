@@ -28,7 +28,7 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocAxisFormat implements Serializable {
+public class AdhocAxisFormat implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String label;
@@ -57,6 +57,22 @@ public class AdhocAxisFormat implements Serializable {
 
 	public void setLabelColor(Color labelColor) {
 		this.labelColor = labelColor;
+	}
+
+	@Override
+	public AdhocAxisFormat clone() {
+		AdhocAxisFormat clone;
+		try {
+			clone = (AdhocAxisFormat) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (labelFont != null) {
+			clone.labelFont = labelFont.clone();
+		}
+
+		return clone;
 	}
 
 }

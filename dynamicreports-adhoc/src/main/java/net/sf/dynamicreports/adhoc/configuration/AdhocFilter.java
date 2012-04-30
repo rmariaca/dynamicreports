@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocFilter implements Serializable {
+public class AdhocFilter implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<AdhocRestriction> restrictions;
@@ -48,6 +48,25 @@ public class AdhocFilter implements Serializable {
 
 	public void setRestrictions(List<AdhocRestriction> restrictions) {
 		this.restrictions = restrictions;
+	}
+
+	@Override
+	public AdhocFilter clone() {
+		AdhocFilter clone;
+		try {
+			clone = (AdhocFilter) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (restrictions != null) {
+			clone.restrictions = new ArrayList<AdhocRestriction>();
+			for (AdhocRestriction adhocRestriction : restrictions) {
+				clone.addRestriction(adhocRestriction.clone());
+			}
+		}
+
+		return clone;
 	}
 
 }

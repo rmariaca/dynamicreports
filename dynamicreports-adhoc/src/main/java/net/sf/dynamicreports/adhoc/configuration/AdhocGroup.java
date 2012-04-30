@@ -28,7 +28,7 @@ import java.util.Properties;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocGroup implements Serializable {
+public class AdhocGroup implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -96,6 +96,32 @@ public class AdhocGroup implements Serializable {
 
 	public void setProperties(Properties properties) {
 		this.properties = properties;
+	}
+
+	@Override
+	public AdhocGroup clone() {
+		AdhocGroup clone;
+		try {
+			clone = (AdhocGroup) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+
+		if (style != null) {
+			clone.style = style.clone();
+		}
+		if (titleStyle != null) {
+			clone.titleStyle = titleStyle.clone();
+		}
+		if (properties != null) {
+			clone.properties = new Properties();
+			for (Object keyObject : properties.keySet()) {
+				String key = (String) keyObject;
+				clone.addProperty(key, properties.getProperty(key));
+			}
+		}
+
+		return clone;
 	}
 
 }
