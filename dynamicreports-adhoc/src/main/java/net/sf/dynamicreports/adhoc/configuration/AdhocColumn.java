@@ -22,10 +22,14 @@
 
 package net.sf.dynamicreports.adhoc.configuration;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocColumn {
+public class AdhocColumn implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private String label;
 	private Integer width;

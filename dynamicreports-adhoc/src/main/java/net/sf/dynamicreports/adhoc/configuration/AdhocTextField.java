@@ -26,6 +26,8 @@ package net.sf.dynamicreports.adhoc.configuration;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class AdhocTextField extends AdhocComponent {
+	private static final long serialVersionUID = 1L;
+
 	private String text;
 
 	public String getText() {

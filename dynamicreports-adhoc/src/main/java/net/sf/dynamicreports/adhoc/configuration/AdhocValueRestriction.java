@@ -29,6 +29,8 @@ import java.util.List;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class AdhocValueRestriction extends AdhocRestriction {
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private AdhocValueOperator operator;
 	private List<String> values;

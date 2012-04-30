@@ -22,13 +22,16 @@
 
 package net.sf.dynamicreports.adhoc.configuration;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocFilter {
+public class AdhocFilter implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private List<AdhocRestriction> restrictions;
 
 	public AdhocFilter() {

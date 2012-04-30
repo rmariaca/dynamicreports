@@ -23,11 +23,14 @@
 package net.sf.dynamicreports.adhoc.configuration;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocAxisFormat {
+public class AdhocAxisFormat implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String label;
 	private AdhocFont labelFont;
 	private Color labelColor;

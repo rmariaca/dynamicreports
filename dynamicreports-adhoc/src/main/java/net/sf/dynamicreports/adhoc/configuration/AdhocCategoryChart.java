@@ -30,6 +30,8 @@ import java.util.List;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class AdhocCategoryChart extends AdhocChart {
+	private static final long serialVersionUID = 1L;
+
 	private AdhocCategoryChartType type;
 	private String category;
 	private List<AdhocCategoryChartSerie> series;

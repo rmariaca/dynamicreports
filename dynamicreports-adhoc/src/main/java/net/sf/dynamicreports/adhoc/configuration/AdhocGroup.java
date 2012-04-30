@@ -22,12 +22,15 @@
 
 package net.sf.dynamicreports.adhoc.configuration;
 
+import java.io.Serializable;
 import java.util.Properties;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocGroup {
+public class AdhocGroup implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private Boolean startInNewPage;
 	private AdhocGroupHeaderLayout layout;

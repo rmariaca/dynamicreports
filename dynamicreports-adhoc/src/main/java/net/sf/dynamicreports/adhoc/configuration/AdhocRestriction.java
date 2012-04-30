@@ -22,12 +22,15 @@
 
 package net.sf.dynamicreports.adhoc.configuration;
 
+import java.io.Serializable;
 import java.util.Properties;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocRestriction {
+public class AdhocRestriction implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Properties properties;
 
 	public AdhocRestriction() {

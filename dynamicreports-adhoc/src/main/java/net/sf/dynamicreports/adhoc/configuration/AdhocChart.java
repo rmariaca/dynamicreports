@@ -28,6 +28,8 @@ import java.awt.Color;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class AdhocChart extends AdhocComponent {
+	private static final long serialVersionUID = 1L;
+
 	private String title;
 	private AdhocFont titleFont;
 	private Color titleColor;
