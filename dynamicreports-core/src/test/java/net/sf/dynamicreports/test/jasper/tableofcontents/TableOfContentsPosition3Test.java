@@ -40,6 +40,7 @@ public class TableOfContentsPosition3Test extends AbstractJasperPositionTest {
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setPageFormat(PageType.A6, PageOrientation.LANDSCAPE)
+			.setPageMargin(margin(10).setLeft(30))
 			.tableOfContents()
 	  	.columns(
 	  		column1 = col.column("Column1", "field1", type.stringType()),
@@ -53,19 +54,19 @@ public class TableOfContentsPosition3Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(5);
 
-		elementPositionTest("title.textField1", 0, 10, 10, 401, 19);
+		elementPositionTest("title.textField1", 0, 30, 10, 381, 19);
 
 		for (int i = 0; i < 14; i++) {
-			elementPositionTest("detail.list2", i, 10, 49 + 16 * i, 401, 16);
-			elementPositionTest("detail.textField1", i, 0, 0, 189, 16);
-			elementPositionTest("detail.textField2", i, 189, 0, 190, 16);
-			elementPositionTest("detail.textField3", i, 379, 0, 22, 16);
+			elementPositionTest("detail.list2", i, 30, 49 + 16 * i, 381, 16);
+			elementPositionTest("detail.textField1", i, 0, 0, 179, 16);
+			elementPositionTest("detail.textField2", i, 179, 0, 180, 16);
+			elementPositionTest("detail.textField3", i, 359, 0, 22, 16);
 		}
 		for (int i = 14; i < 20; i++) {
-			elementPositionTest("detail.list2", i, 10, 10 + 16 * (i - 14), 401, 16);
-			elementPositionTest("detail.textField1", i, 0, 0, 189, 16);
-			elementPositionTest("detail.textField2", i, 189, 0, 190, 16);
-			elementPositionTest("detail.textField3", i, 379, 0, 22, 16);
+			elementPositionTest("detail.list2", i, 30, 10 + 16 * (i - 14), 381, 16);
+			elementPositionTest("detail.textField1", i, 0, 0, 179, 16);
+			elementPositionTest("detail.textField2", i, 179, 0, 180, 16);
+			elementPositionTest("detail.textField3", i, 359, 0, 22, 16);
 		}
 	}
 
