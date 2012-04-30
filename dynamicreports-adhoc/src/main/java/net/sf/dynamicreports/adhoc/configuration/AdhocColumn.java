@@ -77,6 +77,37 @@ public class AdhocColumn implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocColumn))
+			return false;
+
+		AdhocColumn object = (AdhocColumn) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
+			return false;
+		}
+		if (!(width == null ? object.getWidth() == null : width.equals(object.getWidth()))) {
+			return false;
+		}
+		if (!(style == null ? object.getStyle() == null : style.equals(object.getStyle()))) {
+			return false;
+		}
+		if (!(titleStyle == null ? object.getTitleStyle() == null : titleStyle.equals(object.getTitleStyle()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocColumn clone() {
 		AdhocColumn clone;
 		try {

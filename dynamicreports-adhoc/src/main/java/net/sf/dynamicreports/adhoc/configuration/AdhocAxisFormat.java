@@ -60,6 +60,31 @@ public class AdhocAxisFormat implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocAxisFormat))
+			return false;
+
+		AdhocAxisFormat object = (AdhocAxisFormat) obj;
+		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
+			return false;
+		}
+		if (!(labelFont == null ? object.getLabelFont() == null : labelFont.equals(object.getLabelFont()))) {
+			return false;
+		}
+		if (!(labelColor == null ? object.getLabelColor() == null : labelColor.equals(object.getLabelColor()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocAxisFormat clone() {
 		AdhocAxisFormat clone;
 		try {

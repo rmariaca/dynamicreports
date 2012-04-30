@@ -68,6 +68,34 @@ public class AdhocChart extends AdhocComponent {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocChart))
+			return false;
+
+		AdhocChart object = (AdhocChart) obj;
+		if (!(title == null ? object.getTitle() == null : title.equals(object.getTitle()))) {
+			return false;
+		}
+		if (!(titleFont == null ? object.getTitleFont() == null : titleFont.equals(object.getTitleFont()))) {
+			return false;
+		}
+		if (!(titleColor == null ? object.getTitleColor() == null : titleColor.equals(object.getTitleColor()))) {
+			return false;
+		}
+		if (!(showLegend == null ? object.getShowLegend() == null : showLegend.equals(object.getShowLegend()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocChart clone() {
 		AdhocChart clone = (AdhocChart) super.clone();
 

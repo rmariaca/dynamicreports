@@ -50,6 +50,28 @@ public class AdhocSort implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocSort))
+			return false;
+
+		AdhocSort object = (AdhocSort) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(orderType == null ? object.getOrderType() == null : orderType.equals(object.getOrderType()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocSort clone() {
 		AdhocSort clone;
 		try {

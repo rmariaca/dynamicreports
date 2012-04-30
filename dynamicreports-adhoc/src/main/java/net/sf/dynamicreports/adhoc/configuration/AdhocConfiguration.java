@@ -50,6 +50,28 @@ public class AdhocConfiguration implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocConfiguration))
+			return false;
+
+		AdhocConfiguration object = (AdhocConfiguration) obj;
+		if (!(report == null ? object.getReport() == null : report.equals(object.getReport()))) {
+			return false;
+		}
+		if (!(filter == null ? object.getFilter() == null : filter.equals(object.getFilter()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocConfiguration clone() {
 		AdhocConfiguration clone;
 		try {

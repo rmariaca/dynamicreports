@@ -68,6 +68,34 @@ public class AdhocComponent implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocComponent))
+			return false;
+
+		AdhocComponent object = (AdhocComponent) obj;
+		if (!(key == null ? object.getKey() == null : key.equals(object.getKey()))) {
+			return false;
+		}
+		if (!(style == null ? object.getStyle() == null : style.equals(object.getStyle()))) {
+			return false;
+		}
+		if (!(width == null ? object.getWidth() == null : width.equals(object.getWidth()))) {
+			return false;
+		}
+		if (!(height == null ? object.getHeight() == null : height.equals(object.getHeight()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocComponent clone() {
 		AdhocComponent clone;
 		try {

@@ -51,6 +51,28 @@ public class AdhocPen implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocPen))
+			return false;
+
+		AdhocPen object = (AdhocPen) obj;
+		if (!(lineWidth == null ? object.getLineWidth() == null : lineWidth.equals(object.getLineWidth()))) {
+			return false;
+		}
+		if (!(color == null ? object.getColor() == null : color.equals(object.getColor()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocPen clone() {
 		AdhocPen clone;
 		try {

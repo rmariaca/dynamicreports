@@ -123,6 +123,52 @@ public class AdhocStyle implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocStyle))
+			return false;
+
+		AdhocStyle object = (AdhocStyle) obj;
+		if (!(font == null ? object.getFont() == null : font.equals(object.getFont()))) {
+			return false;
+		}
+		if (!(topBorder == null ? object.getTopBorder() == null : topBorder.equals(object.getTopBorder()))) {
+			return false;
+		}
+		if (!(leftBorder == null ? object.getLeftBorder() == null : leftBorder.equals(object.getLeftBorder()))) {
+			return false;
+		}
+		if (!(bottomBorder == null ? object.getBottomBorder() == null : bottomBorder.equals(object.getBottomBorder()))) {
+			return false;
+		}
+		if (!(rightBorder == null ? object.getRightBorder() == null : rightBorder.equals(object.getRightBorder()))) {
+			return false;
+		}
+		if (!(foregroundColor == null ? object.getForegroundColor() == null : foregroundColor.equals(object.getForegroundColor()))) {
+			return false;
+		}
+		if (!(backgroundColor == null ? object.getBackgroundColor() == null : backgroundColor.equals(object.getBackgroundColor()))) {
+			return false;
+		}
+		if (!(horizontalAlignment == null ? object.getHorizontalAlignment() == null : horizontalAlignment.equals(object.getHorizontalAlignment()))) {
+			return false;
+		}
+		if (!(verticalAlignment == null ? object.getVerticalAlignment() == null : verticalAlignment.equals(object.getVerticalAlignment()))) {
+			return false;
+		}
+		if (!(pattern == null ? object.getPattern() == null : pattern.equals(object.getPattern()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocStyle clone() {
 		AdhocStyle clone;
 		try {

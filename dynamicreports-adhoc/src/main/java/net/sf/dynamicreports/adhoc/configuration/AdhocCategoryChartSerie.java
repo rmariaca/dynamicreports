@@ -59,6 +59,31 @@ public class AdhocCategoryChartSerie implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocCategoryChartSerie))
+			return false;
+
+		AdhocCategoryChartSerie object = (AdhocCategoryChartSerie) obj;
+		if (!(series == null ? object.getSeries() == null : series.equals(object.getSeries()))) {
+			return false;
+		}
+		if (!(value == null ? object.getValue() == null : value.equals(object.getValue()))) {
+			return false;
+		}
+		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocCategoryChartSerie clone() {
 		AdhocCategoryChartSerie clone;
 		try {

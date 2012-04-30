@@ -99,6 +99,40 @@ public class AdhocGroup implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocGroup))
+			return false;
+
+		AdhocGroup object = (AdhocGroup) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(startInNewPage == null ? object.getStartInNewPage() == null : startInNewPage.equals(object.getStartInNewPage()))) {
+			return false;
+		}
+		if (!(layout == null ? object.getLayout() == null : layout.equals(object.getLayout()))) {
+			return false;
+		}
+		if (!(style == null ? object.getStyle() == null : style.equals(object.getStyle()))) {
+			return false;
+		}
+		if (!(titleStyle == null ? object.getTitleStyle() == null : titleStyle.equals(object.getTitleStyle()))) {
+			return false;
+		}
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocGroup clone() {
 		AdhocGroup clone;
 		try {

@@ -68,6 +68,31 @@ public class AdhocValueRestriction extends AdhocRestriction {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocValueRestriction))
+			return false;
+
+		AdhocValueRestriction object = (AdhocValueRestriction) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(operator == null ? object.getOperator() == null : operator.equals(object.getOperator()))) {
+			return false;
+		}
+		if (!(values == null ? object.getValues() == null : values.equals(object.getValues()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocValueRestriction clone() {
 		AdhocValueRestriction clone = (AdhocValueRestriction) super.clone();
 

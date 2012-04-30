@@ -119,6 +119,46 @@ public class AdhocCategoryChart extends AdhocChart {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocCategoryChart))
+			return false;
+
+		AdhocCategoryChart object = (AdhocCategoryChart) obj;
+		if (!(type == null ? object.getType() == null : type.equals(object.getType()))) {
+			return false;
+		}
+		if (!(category == null ? object.getCategory() == null : category.equals(object.getCategory()))) {
+			return false;
+		}
+		if (!(series == null ? object.getSeries() == null : series.equals(object.getSeries()))) {
+			return false;
+		}
+		if (!(seriesColors == null ? object.getSeriesColors() == null : seriesColors.equals(object.getSeriesColors()))) {
+			return false;
+		}
+		if (!(categoryAxis == null ? object.getCategoryAxis() == null : categoryAxis.equals(object.getCategoryAxis()))) {
+			return false;
+		}
+		if (!(valueAxis == null ? object.getValueAxis() == null : valueAxis.equals(object.getValueAxis()))) {
+			return false;
+		}
+		if (!(orientation == null ? object.getOrientation() == null : orientation.equals(object.getOrientation()))) {
+			return false;
+		}
+		if (!(useSeriesAsCategory == null ? object.getUseSeriesAsCategory() == null : useSeriesAsCategory.equals(object.getUseSeriesAsCategory()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocCategoryChart clone() {
 		AdhocCategoryChart clone = (AdhocCategoryChart) super.clone();
 

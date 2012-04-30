@@ -224,6 +224,76 @@ public class AdhocReport implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocReport))
+			return false;
+
+		AdhocReport object = (AdhocReport) obj;
+		if (!(textStyle == null ? object.getTextStyle() == null : textStyle.equals(object.getTextStyle()))) {
+			return false;
+		}
+		if (!(columnStyle == null ? object.getColumnStyle() == null : columnStyle.equals(object.getColumnStyle()))) {
+			return false;
+		}
+		if (!(columnTitleStyle == null ? object.getColumnTitleStyle() == null : columnTitleStyle.equals(object.getColumnTitleStyle()))) {
+			return false;
+		}
+		if (!(groupStyle == null ? object.getGroupStyle() == null : groupStyle.equals(object.getGroupStyle()))) {
+			return false;
+		}
+		if (!(groupTitleStyle == null ? object.getGroupTitleStyle() == null : groupTitleStyle.equals(object.getGroupTitleStyle()))) {
+			return false;
+		}
+		if (!(subtotalStyle == null ? object.getSubtotalStyle() == null : subtotalStyle.equals(object.getSubtotalStyle()))) {
+			return false;
+		}
+		if (!(detailOddRowStyle == null ? object.getDetailOddRowStyle() == null : detailOddRowStyle.equals(object.getDetailOddRowStyle()))) {
+			return false;
+		}
+		if (!(highlightDetailOddRows == null ? object.getHighlightDetailOddRows() == null : highlightDetailOddRows.equals(object.getHighlightDetailOddRows()))) {
+			return false;
+		}
+		if (!(detailEvenRowStyle == null ? object.getDetailEvenRowStyle() == null : detailEvenRowStyle.equals(object.getDetailEvenRowStyle()))) {
+			return false;
+		}
+		if (!(highlightDetailEvenRows == null ? object.getHighlightDetailEvenRows() == null : highlightDetailEvenRows.equals(object.getHighlightDetailEvenRows()))) {
+			return false;
+		}
+		if (!(ignorePagination == null ? object.getIgnorePagination() == null : ignorePagination.equals(object.getIgnorePagination()))) {
+			return false;
+		}
+		if (!(tableOfContents == null ? object.getTableOfContents() == null : tableOfContents.equals(object.getTableOfContents()))) {
+			return false;
+		}
+		if (!(page == null ? object.getPage() == null : page.equals(object.getPage()))) {
+			return false;
+		}
+		if (!(columns == null ? object.getColumns() == null : columns.equals(object.getColumns()))) {
+			return false;
+		}
+		if (!(groups == null ? object.getGroups() == null : groups.equals(object.getGroups()))) {
+			return false;
+		}
+		if (!(sorts == null ? object.getSorts() == null : sorts.equals(object.getSorts()))) {
+			return false;
+		}
+		if (!(subtotals == null ? object.getSubtotals() == null : subtotals.equals(object.getSubtotals()))) {
+			return false;
+		}
+		if (!(components == null ? object.getComponents() == null : components.equals(object.getComponents()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocReport clone() {
 		AdhocReport clone;
 		try {

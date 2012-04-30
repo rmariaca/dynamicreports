@@ -51,6 +51,25 @@ public class AdhocFilter implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocFilter))
+			return false;
+
+		AdhocFilter object = (AdhocFilter) obj;
+		if (!(restrictions == null ? object.getRestrictions() == null : restrictions.equals(object.getRestrictions()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocFilter clone() {
 		AdhocFilter clone;
 		try {

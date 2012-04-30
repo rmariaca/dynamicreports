@@ -86,6 +86,40 @@ public class AdhocFont implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocFont))
+			return false;
+
+		AdhocFont object = (AdhocFont) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(bold == null ? object.getBold() == null : bold.equals(object.getBold()))) {
+			return false;
+		}
+		if (!(italic == null ? object.getItalic() == null : italic.equals(object.getItalic()))) {
+			return false;
+		}
+		if (!(underline == null ? object.getUnderline() == null : underline.equals(object.getUnderline()))) {
+			return false;
+		}
+		if (!(strikeThrough == null ? object.getStrikeThrough() == null : strikeThrough.equals(object.getStrikeThrough()))) {
+			return false;
+		}
+		if (!(size == null ? object.getSize() == null : size.equals(object.getSize()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocFont clone() {
 		AdhocFont clone;
 		try {

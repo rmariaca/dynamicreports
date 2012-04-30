@@ -39,6 +39,25 @@ public class AdhocTextField extends AdhocComponent {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocTextField))
+			return false;
+
+		AdhocTextField object = (AdhocTextField) obj;
+		if (!(text == null ? object.getText() == null : text.equals(object.getText()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocTextField clone() {
 		AdhocTextField clone = (AdhocTextField) super.clone();
 		return clone;

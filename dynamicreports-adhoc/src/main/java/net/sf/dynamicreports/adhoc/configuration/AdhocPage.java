@@ -104,6 +104,46 @@ public class AdhocPage implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocPage))
+			return false;
+
+		AdhocPage object = (AdhocPage) obj;
+		if (!(width == null ? object.getWidth() == null : width.equals(object.getWidth()))) {
+			return false;
+		}
+		if (!(height == null ? object.getHeight() == null : height.equals(object.getHeight()))) {
+			return false;
+		}
+		if (!(pageOrientation == null ? object.getPageOrientation() == null : pageOrientation.equals(object.getPageOrientation()))) {
+			return false;
+		}
+		if (!(topMargin == null ? object.getTopMargin() == null : topMargin.equals(object.getTopMargin()))) {
+			return false;
+		}
+		if (!(bottomMargin == null ? object.getBottomMargin() == null : bottomMargin.equals(object.getBottomMargin()))) {
+			return false;
+		}
+		if (!(leftMargin == null ? object.getLeftMargin() == null : leftMargin.equals(object.getLeftMargin()))) {
+			return false;
+		}
+		if (!(rightMargin == null ? object.getRightMargin() == null : rightMargin.equals(object.getRightMargin()))) {
+			return false;
+		}
+		if (!(ignorePageWidth == null ? object.getIgnorePageWidth() == null : ignorePageWidth.equals(object.getIgnorePageWidth()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocPage clone() {
 		AdhocPage clone;
 		try {

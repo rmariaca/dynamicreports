@@ -54,6 +54,25 @@ public class AdhocRestriction implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocRestriction))
+			return false;
+
+		AdhocRestriction object = (AdhocRestriction) obj;
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocRestriction clone() {
 		AdhocRestriction clone;
 		try {

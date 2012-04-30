@@ -77,6 +77,37 @@ public class AdhocSubtotal implements Cloneable, Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals) {
+			return false;
+		}
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AdhocSubtotal))
+			return false;
+
+		AdhocSubtotal object = (AdhocSubtotal) obj;
+		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+			return false;
+		}
+		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
+			return false;
+		}
+		if (!(calculation == null ? object.getCalculation() == null : calculation.equals(object.getCalculation()))) {
+			return false;
+		}
+		if (!(style == null ? object.getStyle() == null : style.equals(object.getStyle()))) {
+			return false;
+		}
+		if (!(labelStyle == null ? object.getLabelStyle() == null : labelStyle.equals(object.getLabelStyle()))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
 	public AdhocSubtotal clone() {
 		AdhocSubtotal clone;
 		try {
