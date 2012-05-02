@@ -110,6 +110,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		report.setHighlightDetailEvenRows(adhocReport.getHighlightDetailEvenRows());
 		report.setIgnorePagination(adhocReport.getIgnorePagination());
 		report.setTableOfContents(adhocReport.getTableOfContents());
+		page(report, adhocReport.getPage());
 		if (adhocReport.getPage() != null) {
 			report.setIgnorePageWidth(adhocReport.getPage().getIgnorePageWidth());
 		}
@@ -148,7 +149,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected ColumnBuilder<?, ?> column(AdhocColumn adhocColumn) {
 		TextColumnBuilder<?> column = Columns.column(adhocColumn.getName(), getFieldClass(adhocColumn.getName()));
 		if (adhocColumn.getLabel() != null) {
-			column.setTitle(adhocColumn.getLabel());
+			column.setTitle(adhocColumn.getLabel());//TODO
 		}
 		else {
 			column.setTitle(getColumnLabel(adhocColumn.getName()));
@@ -211,7 +212,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 
 	protected Calculation calculation(AdhocCalculation adhocCalculation) {
 		if (adhocCalculation == null) {
-			return null;
+			return Calculation.NOTHING;
 		}
 
 		switch (adhocCalculation) {
@@ -447,7 +448,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected void chart(AdhocChart adhocChart, AbstractChartBuilder<?> chart) {
 		component(adhocChart, chart);
 		chart.setTitle(adhocChart.getTitle());
-		chart.setTitleFont(font(adhocChart.getTitleFont()));
+		if (adhocChart.getTitleFont() != null) {
+			chart.setTitleFont(font(adhocChart.getTitleFont()));
+		}
 		chart.setTitleColor(adhocChart.getTitleColor());
 		chart.setShowLegend(adhocChart.getShowLegend());
 	}
