@@ -215,8 +215,37 @@ public class AdhocReport implements Cloneable, Serializable {
 		return components;
 	}
 
+	public AdhocComponent getComponent(String key) {
+		if (components == null) {
+			return null;
+		}
+
+		for (AdhocComponent component : components) {
+			if (key.equals(component.getKey())) {
+				return component;
+			}
+		}
+		return null;
+	}
+
 	public void addComponent(AdhocComponent component) {
 		this.components.add(component);
+	}
+
+	public void setComponent(String key, AdhocComponent component) {
+		int index = -1;
+		for (AdhocComponent cmp : components) {
+			if (key.equals(cmp.getKey())) {
+				index = components.indexOf(cmp);
+				break;
+			}
+		}
+		if (index != -1) {
+			components.set(index, component);
+		}
+		else {
+			addComponent(component);
+		}
 	}
 
 	public void setComponents(List<AdhocComponent> components) {

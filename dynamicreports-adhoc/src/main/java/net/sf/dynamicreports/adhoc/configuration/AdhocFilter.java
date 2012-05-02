@@ -42,8 +42,37 @@ public class AdhocFilter implements Cloneable, Serializable {
 		return restrictions;
 	}
 
+	public AdhocRestriction getRestriction(String key) {
+		if (restrictions == null) {
+			return null;
+		}
+
+		for (AdhocRestriction restriction : restrictions) {
+			if (key.equals(restriction.getKey())) {
+				return restriction;
+			}
+		}
+		return null;
+	}
+
 	public void addRestriction(AdhocRestriction restriction) {
 		this.restrictions.add(restriction);
+	}
+
+	public void setRestriction(String key, AdhocRestriction restriction) {
+		int index = -1;
+		for (AdhocRestriction cmp : restrictions) {
+			if (key.equals(cmp.getKey())) {
+				index = restrictions.indexOf(cmp);
+				break;
+			}
+		}
+		if (index != -1) {
+			restrictions.set(index, restriction);
+		}
+		else {
+			addRestriction(restriction);
+		}
 	}
 
 	public void setRestrictions(List<AdhocRestriction> restrictions) {
