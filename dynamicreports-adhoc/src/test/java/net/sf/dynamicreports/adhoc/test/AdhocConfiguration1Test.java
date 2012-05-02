@@ -236,7 +236,7 @@ public class AdhocConfiguration1Test {
 
 	@Test
 	public void test() {
-		testConfiguration(adhocConfiguration);
+		testReportConfiguration(adhocConfiguration.getReport());
 	}
 
 	@Test
@@ -246,18 +246,32 @@ public class AdhocConfiguration1Test {
 			AdhocManager.saveConfiguration(adhocConfiguration, os);
 			ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
 			AdhocConfiguration adhocConfiguration = AdhocManager.loadConfiguration(is);
-			testConfiguration(adhocConfiguration);
+			testReportConfiguration(adhocConfiguration.getReport());
 		} catch (DRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
 
-	private void testConfiguration(AdhocConfiguration adhocConfiguration) {
+	@Test
+	public void testEqualsAndClone() {
+		AdhocConfiguration adhocConfiguration2 = adhocConfiguration.clone();
+		testReportConfiguration(adhocConfiguration2.getReport());
+		Assert.assertTrue("equals", adhocConfiguration.equals(adhocConfiguration));
+		Assert.assertTrue("equals", adhocConfiguration.equals(adhocConfiguration2));
+		AdhocColumn adhocColumn = new AdhocColumn();
+		adhocColumn.setName("field3");
+		adhocConfiguration2.getReport().addColumn(adhocColumn);
+		Assert.assertFalse("equals", adhocConfiguration.equals(adhocConfiguration2));
+		AdhocConfiguration adhocConfiguration3 = adhocConfiguration2.clone();
+		Assert.assertTrue("equals", adhocConfiguration2.equals(adhocConfiguration3));
+	}
+
+	private void testReportConfiguration(AdhocReport adhocReport) {
 		DRReport report = null;
 		ReportCustomizer customizer = new ReportCustomizer();
 		try {
-			JasperReportBuilder reportBuilder = AdhocManager.createReport(adhocConfiguration.getReport(), customizer);
+			JasperReportBuilder reportBuilder = AdhocManager.createReport(adhocReport, customizer);
 			report = reportBuilder.getReport();
 		} catch (DRException e) {
 			e.printStackTrace();

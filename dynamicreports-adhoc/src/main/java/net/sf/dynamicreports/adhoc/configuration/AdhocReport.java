@@ -254,9 +254,8 @@ public class AdhocReport implements Cloneable, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		boolean equals = super.equals(obj);
-		if (!equals) {
-			return false;
+		if (this == obj) {
+			return true;
 		}
 		if (obj == null)
 			return false;
