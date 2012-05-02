@@ -34,9 +34,14 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocConfiguration;
+import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
+import net.sf.dynamicreports.adhoc.report.AdhocReportCustomizer;
+import net.sf.dynamicreports.adhoc.report.DefaultAdhocReportCustomizer;
 import net.sf.dynamicreports.adhoc.transformation.AdhocToXmlTransform;
 import net.sf.dynamicreports.adhoc.transformation.XmlToAdhocTransform;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocConfiguration;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -45,6 +50,16 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class AdhocManager {
 	private static AdhocToXmlTransform adhocToXmlTransform = new AdhocToXmlTransform();
 	private static XmlToAdhocTransform xmlToAdhocTransform = new XmlToAdhocTransform();
+
+	public static JasperReportBuilder createReport(AdhocReport adhocReport) throws DRException {
+		return createReport(adhocReport, new DefaultAdhocReportCustomizer());
+	}
+
+	public static JasperReportBuilder createReport(AdhocReport adhocReport, AdhocReportCustomizer adhocReportCustomizer) throws DRException {
+		JasperReportBuilder report = DynamicReports.report();
+		adhocReportCustomizer.customize(report, adhocReport);
+		return report;
+	}
 
 	public static void saveConfiguration(AdhocConfiguration adhocConfiguration, OutputStream os) throws DRException {
 		XmlAdhocConfiguration xmlAdhocConfiguration = adhocToXmlTransform.transform(adhocConfiguration);

@@ -157,7 +157,7 @@ public class AdhocToXmlTransform {
 	protected XmlAdhocColumn column(AdhocColumn adhocColumn) {
 		XmlAdhocColumn xmlAdhocColumn = new XmlAdhocColumn();
 		xmlAdhocColumn.setName(adhocColumn.getName());
-		xmlAdhocColumn.setLabel(adhocColumn.getName());
+		xmlAdhocColumn.setLabel(adhocColumn.getLabel());
 		xmlAdhocColumn.setWidth(adhocColumn.getWidth());
 		xmlAdhocColumn.setStyle(style(adhocColumn.getStyle()));
 		xmlAdhocColumn.setTitleStyle(style(adhocColumn.getTitleStyle()));
