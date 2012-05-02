@@ -31,7 +31,7 @@ public class AdhocColumn implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private String label;
+	private String title;
 	private Integer width;
 	private AdhocStyle style;
 	private AdhocStyle titleStyle;
@@ -44,12 +44,12 @@ public class AdhocColumn implements Cloneable, Serializable {
 		this.name = name;
 	}
 
-	public String getLabel() {
-		return label;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getWidth() {
@@ -90,7 +90,7 @@ public class AdhocColumn implements Cloneable, Serializable {
 		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
 			return false;
 		}
-		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
+		if (!(title == null ? object.getTitle() == null : title.equals(object.getTitle()))) {
 			return false;
 		}
 		if (!(width == null ? object.getWidth() == null : width.equals(object.getWidth()))) {

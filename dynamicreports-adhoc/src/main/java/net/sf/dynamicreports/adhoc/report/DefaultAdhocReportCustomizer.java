@@ -148,8 +148,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 
 	protected ColumnBuilder<?, ?> column(AdhocColumn adhocColumn) {
 		TextColumnBuilder<?> column = Columns.column(adhocColumn.getName(), getFieldClass(adhocColumn.getName()));
-		if (adhocColumn.getLabel() != null) {
-			column.setTitle(adhocColumn.getLabel());//TODO
+		if (adhocColumn.getTitle() != null) {
+			column.setTitle(adhocColumn.getTitle());
 		}
 		else {
 			column.setTitle(getColumnLabel(adhocColumn.getName()));
@@ -384,7 +384,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return;
 		}
 
-		report.setPageFormat(adhocPage.getWidth(), adhocPage.getHeight(), pageOrientation(adhocPage.getPageOrientation()));//TODO
+		report.setPageFormat(adhocPage.getWidth(), adhocPage.getHeight(), pageOrientation(adhocPage.getOrientation()));
 		MarginBuilder margin = DynamicReports.margin();
 		if (adhocPage.getTopMargin() != null) {
 			margin.setTop(adhocPage.getTopMargin());

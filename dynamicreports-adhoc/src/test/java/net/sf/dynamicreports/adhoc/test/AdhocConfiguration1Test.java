@@ -121,7 +121,7 @@ public class AdhocConfiguration1Test {
 
 		AdhocColumn adhocColumn = new AdhocColumn();
 		adhocColumn.setName("field1");
-		adhocColumn.setLabel("Column1");
+		adhocColumn.setTitle("Column1");
 		adhocColumn.setStyle(adhocStyle1);
 		adhocColumn.setTitleStyle(adhocStyle1);
 		adhocColumn.setWidth(50);
@@ -143,7 +143,7 @@ public class AdhocConfiguration1Test {
 		AdhocPage adhocPage = new AdhocPage();
 		adhocPage.setWidth(100);
 		adhocPage.setHeight(200);
-		adhocPage.setPageOrientation(AdhocPageOrientation.PORTRAIT);
+		adhocPage.setOrientation(AdhocPageOrientation.PORTRAIT);
 		adhocPage.setTopMargin(1);
 		adhocPage.setBottomMargin(2);
 		adhocPage.setLeftMargin(3);
@@ -153,7 +153,7 @@ public class AdhocConfiguration1Test {
 
 		adhocColumn = new AdhocColumn();
 		adhocColumn.setName("field2");
-		adhocColumn.setLabel("Column2");
+		adhocColumn.setTitle("Column2");
 		adhocReport.addColumn(adhocColumn);
 
 		adhocColumn = new AdhocColumn();

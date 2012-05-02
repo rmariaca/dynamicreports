@@ -32,7 +32,7 @@ public class AdhocPage implements Cloneable, Serializable {
 
 	private Integer width;
 	private Integer height;
-	private AdhocPageOrientation pageOrientation;
+	private AdhocPageOrientation orientation;
 	private Integer topMargin;
 	private Integer bottomMargin;
 	private Integer leftMargin;
@@ -55,12 +55,12 @@ public class AdhocPage implements Cloneable, Serializable {
 		this.height = height;
 	}
 
-	public AdhocPageOrientation getPageOrientation() {
-		return pageOrientation;
+	public AdhocPageOrientation getOrientation() {
+		return orientation;
 	}
 
-	public void setPageOrientation(AdhocPageOrientation pageOrientation) {
-		this.pageOrientation = pageOrientation;
+	public void setOrientation(AdhocPageOrientation orientation) {
+		this.orientation = orientation;
 	}
 
 	public Integer getTopMargin() {
@@ -120,7 +120,7 @@ public class AdhocPage implements Cloneable, Serializable {
 		if (!(height == null ? object.getHeight() == null : height.equals(object.getHeight()))) {
 			return false;
 		}
-		if (!(pageOrientation == null ? object.getPageOrientation() == null : pageOrientation.equals(object.getPageOrientation()))) {
+		if (!(orientation == null ? object.getOrientation() == null : orientation.equals(object.getOrientation()))) {
 			return false;
 		}
 		if (!(topMargin == null ? object.getTopMargin() == null : topMargin.equals(object.getTopMargin()))) {

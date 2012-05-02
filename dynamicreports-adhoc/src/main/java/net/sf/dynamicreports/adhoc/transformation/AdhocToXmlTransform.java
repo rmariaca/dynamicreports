@@ -157,7 +157,7 @@ public class AdhocToXmlTransform {
 	protected XmlAdhocColumn column(AdhocColumn adhocColumn) {
 		XmlAdhocColumn xmlAdhocColumn = new XmlAdhocColumn();
 		xmlAdhocColumn.setName(adhocColumn.getName());
-		xmlAdhocColumn.setLabel(adhocColumn.getLabel());
+		xmlAdhocColumn.setTitle(adhocColumn.getTitle());
 		xmlAdhocColumn.setWidth(adhocColumn.getWidth());
 		xmlAdhocColumn.setStyle(style(adhocColumn.getStyle()));
 		xmlAdhocColumn.setTitleStyle(style(adhocColumn.getTitleStyle()));
@@ -355,7 +355,7 @@ public class AdhocToXmlTransform {
 		XmlAdhocPage xmlAdhocPage = new XmlAdhocPage();
 		xmlAdhocPage.setWidth(adhocPage.getWidth());
 		xmlAdhocPage.setHeight(adhocPage.getHeight());
-		xmlAdhocPage.setPageOrientation(pageOrientation(adhocPage.getPageOrientation()));
+		xmlAdhocPage.setOrientation(pageOrientation(adhocPage.getOrientation()));
 		xmlAdhocPage.setTopMargin(adhocPage.getTopMargin());
 		xmlAdhocPage.setBottomMargin(adhocPage.getBottomMargin());
 		xmlAdhocPage.setLeftMargin(adhocPage.getLeftMargin());
