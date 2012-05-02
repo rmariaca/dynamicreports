@@ -30,19 +30,27 @@ import java.io.Serializable;
 public class AdhocFont implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private String fontName;
+	private Integer fontSize;
 	private Boolean bold;
 	private Boolean italic;
 	private Boolean underline;
 	private Boolean strikeThrough;
-	private Integer size;
 
-	public String getName() {
-		return name;
+	public String getFontName() {
+		return fontName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFontName(String fontName) {
+		this.fontName = fontName;
+	}
+
+	public Integer getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(Integer fontSize) {
+		this.fontSize = fontSize;
 	}
 
 	public Boolean getBold() {
@@ -77,14 +85,6 @@ public class AdhocFont implements Cloneable, Serializable {
 		this.strikeThrough = strikeThrough;
 	}
 
-	public Integer getSize() {
-		return size;
-	}
-
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		boolean equals = super.equals(obj);
@@ -97,7 +97,10 @@ public class AdhocFont implements Cloneable, Serializable {
 			return false;
 
 		AdhocFont object = (AdhocFont) obj;
-		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
+		if (!(fontName == null ? object.getFontName() == null : fontName.equals(object.getFontName()))) {
+			return false;
+		}
+		if (!(fontSize == null ? object.getFontSize() == null : fontSize.equals(object.getFontSize()))) {
 			return false;
 		}
 		if (!(bold == null ? object.getBold() == null : bold.equals(object.getBold()))) {
@@ -110,9 +113,6 @@ public class AdhocFont implements Cloneable, Serializable {
 			return false;
 		}
 		if (!(strikeThrough == null ? object.getStrikeThrough() == null : strikeThrough.equals(object.getStrikeThrough()))) {
-			return false;
-		}
-		if (!(size == null ? object.getSize() == null : size.equals(object.getSize()))) {
 			return false;
 		}
 

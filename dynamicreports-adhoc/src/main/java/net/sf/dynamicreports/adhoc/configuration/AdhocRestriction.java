@@ -31,10 +31,19 @@ import java.util.Properties;
 public class AdhocRestriction implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private String key;
 	private Properties properties;
 
 	public AdhocRestriction() {
 		properties = new Properties();
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public Properties getProperties() {
@@ -65,6 +74,9 @@ public class AdhocRestriction implements Cloneable, Serializable {
 			return false;
 
 		AdhocRestriction object = (AdhocRestriction) obj;
+		if (!(key == null ? object.getKey() == null : key.equals(object.getKey()))) {
+			return false;
+		}
 		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
 			return false;
 		}

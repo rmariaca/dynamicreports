@@ -67,7 +67,7 @@
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="startInNewPage" type="xs:boolean"/>
-		<xs:attribute name="layout" type="GroupHeaderLayout"/>
+		<xs:attribute name="headerLayout" type="GroupHeaderLayout"/>
 	</xs:complexType>
 
 	<xs:simpleType name="GroupHeaderLayout">
@@ -92,12 +92,16 @@
 	
 	<xs:simpleType name="Calculation">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="NONE"/>
-			<xs:enumeration value="SUM"/>
+			<xs:enumeration value="NOTHING"/>
 			<xs:enumeration value="COUNT"/>
-			<xs:enumeration value="AVG"/>
-			<xs:enumeration value="MIN"/>
-			<xs:enumeration value="MAX"/>
+			<xs:enumeration value="SUM"/>
+			<xs:enumeration value="AVERAGE"/>
+			<xs:enumeration value="LOWEST"/>
+			<xs:enumeration value="HIGHEST"/>
+			<xs:enumeration value="STANDARD_DEVIATION"/>
+			<xs:enumeration value="VARIANCE"/>
+			<xs:enumeration value="FIRST"/>
+			<xs:enumeration value="DISTINCT_COUNT"/>
 		</xs:restriction>
 	</xs:simpleType>
 	
@@ -133,17 +137,17 @@
 	</xs:complexType>
 
 	<xs:complexType name="Font">
-		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="fontName" type="xs:string"/>
+		<xs:attribute name="fontSize" type="xs:int"/>
 		<xs:attribute name="bold" type="xs:boolean"/>
 		<xs:attribute name="italic" type="xs:boolean"/>
 		<xs:attribute name="underline" type="xs:boolean"/>
 		<xs:attribute name="strikeThrough" type="xs:boolean"/>
-		<xs:attribute name="size" type="xs:int"/>
 	</xs:complexType>
 
 	<xs:complexType name="Pen">
 		<xs:attribute name="lineWidth" type="xs:float"/>
-		<xs:attribute name="color" type="xs:string"/>
+		<xs:attribute name="lineColor" type="xs:string"/>
 	</xs:complexType>
 
 	<xs:simpleType name="HorizontalAlignment">
@@ -243,8 +247,8 @@
 				<xs:sequence>					
 					<xs:element name="serie" type="CategoryChartSerie" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="seriesColors" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="categoryAxis" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
-					<xs:element name="valueAxis" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="categoryAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="valueAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
 				</xs:sequence>
 				<xs:attribute name="type" type="CategoryChartType"/>
 				<xs:attribute name="category" type="xs:string"/>
@@ -287,6 +291,7 @@
 		<xs:sequence>
 			<xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute name="key" type="xs:string"/>
 	</xs:complexType>
 
 	<!-- ******************** VALUE RESTRICTION ******************** -->

@@ -26,10 +26,14 @@ package net.sf.dynamicreports.adhoc.configuration;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public enum AdhocCalculation {
-	NONE,
-	SUM,
-	COUNT,
-	AVG,
-	MIN,
-	MAX
+  NOTHING,
+  COUNT,
+  SUM,
+  AVERAGE,
+  LOWEST,
+  HIGHEST,
+  STANDARD_DEVIATION,
+  VARIANCE,
+  FIRST,
+  DISTINCT_COUNT
 }

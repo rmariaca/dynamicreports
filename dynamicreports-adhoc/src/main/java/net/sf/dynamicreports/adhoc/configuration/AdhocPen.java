@@ -32,7 +32,7 @@ public class AdhocPen implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Float lineWidth;
-	private Color color;
+	private Color lineColor;
 
 	public Float getLineWidth() {
 		return lineWidth;
@@ -42,12 +42,12 @@ public class AdhocPen implements Cloneable, Serializable {
 		this.lineWidth = lineWidth;
 	}
 
-	public Color getColor() {
-		return color;
+	public Color getLineColor() {
+		return lineColor;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setLineColor(Color lineColor) {
+		this.lineColor = lineColor;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class AdhocPen implements Cloneable, Serializable {
 		if (!(lineWidth == null ? object.getLineWidth() == null : lineWidth.equals(object.getLineWidth()))) {
 			return false;
 		}
-		if (!(color == null ? object.getColor() == null : color.equals(object.getColor()))) {
+		if (!(lineColor == null ? object.getLineColor() == null : lineColor.equals(object.getLineColor()))) {
 			return false;
 		}
 

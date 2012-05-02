@@ -36,8 +36,8 @@ public class AdhocCategoryChart extends AdhocChart {
 	private String category;
 	private List<AdhocCategoryChartSerie> series;
 	private List<Color> seriesColors;
-	private AdhocAxisFormat categoryAxis;
-	private AdhocAxisFormat valueAxis;
+	private AdhocAxisFormat categoryAxisFormat;
+	private AdhocAxisFormat valueAxisFormat;
 	private AdhocOrientation orientation;
 	private Boolean useSeriesAsCategory;
 
@@ -86,20 +86,20 @@ public class AdhocCategoryChart extends AdhocChart {
 		this.seriesColors = seriesColors;
 	}
 
-	public AdhocAxisFormat getCategoryAxis() {
-		return categoryAxis;
+	public AdhocAxisFormat getCategoryAxisFormat() {
+		return categoryAxisFormat;
 	}
 
-	public void setCategoryAxis(AdhocAxisFormat categoryAxis) {
-		this.categoryAxis = categoryAxis;
+	public void setCategoryAxisFormat(AdhocAxisFormat categoryAxisFormat) {
+		this.categoryAxisFormat = categoryAxisFormat;
 	}
 
-	public AdhocAxisFormat getValueAxis() {
-		return valueAxis;
+	public AdhocAxisFormat getValueAxisFormat() {
+		return valueAxisFormat;
 	}
 
-	public void setValueAxis(AdhocAxisFormat valueAxis) {
-		this.valueAxis = valueAxis;
+	public void setValueAxisFormat(AdhocAxisFormat valueAxisFormat) {
+		this.valueAxisFormat = valueAxisFormat;
 	}
 
 	public AdhocOrientation getOrientation() {
@@ -142,10 +142,10 @@ public class AdhocCategoryChart extends AdhocChart {
 		if (!(seriesColors == null ? object.getSeriesColors() == null : seriesColors.equals(object.getSeriesColors()))) {
 			return false;
 		}
-		if (!(categoryAxis == null ? object.getCategoryAxis() == null : categoryAxis.equals(object.getCategoryAxis()))) {
+		if (!(categoryAxisFormat == null ? object.getCategoryAxisFormat() == null : categoryAxisFormat.equals(object.getCategoryAxisFormat()))) {
 			return false;
 		}
-		if (!(valueAxis == null ? object.getValueAxis() == null : valueAxis.equals(object.getValueAxis()))) {
+		if (!(valueAxisFormat == null ? object.getValueAxisFormat() == null : valueAxisFormat.equals(object.getValueAxisFormat()))) {
 			return false;
 		}
 		if (!(orientation == null ? object.getOrientation() == null : orientation.equals(object.getOrientation()))) {
@@ -174,11 +174,11 @@ public class AdhocCategoryChart extends AdhocChart {
 				clone.addSeriesColor(adhocSeriesColor);
 			}
 		}
-		if (categoryAxis != null) {
-			clone.categoryAxis = categoryAxis.clone();
+		if (categoryAxisFormat != null) {
+			clone.categoryAxisFormat = categoryAxisFormat.clone();
 		}
-		if (valueAxis != null) {
-			clone.valueAxis = valueAxis.clone();
+		if (valueAxisFormat != null) {
+			clone.valueAxisFormat = valueAxisFormat.clone();
 		}
 
 		return clone;

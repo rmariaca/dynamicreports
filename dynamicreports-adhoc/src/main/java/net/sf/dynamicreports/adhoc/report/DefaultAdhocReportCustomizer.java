@@ -171,7 +171,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			group = Groups.group(adhocGroup.getName(), getFieldClass(adhocGroup.getName()));
 		}
 		group.setStartInNewPage(adhocGroup.getStartInNewPage());
-		group.setHeaderLayout(groupHeaderLayout(adhocGroup.getLayout()));//TODO
+		group.setHeaderLayout(groupHeaderLayout(adhocGroup.getHeaderLayout()));
 		group.setStyle(style(adhocGroup.getStyle()));
 		group.setTitleStyle(style(adhocGroup.getTitleStyle()));
 		return group;
@@ -215,18 +215,26 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 
 		switch (adhocCalculation) {
-		case NONE://TODO
+		case NOTHING:
 			return Calculation.NOTHING;
-		case SUM:
-			return Calculation.SUM;
 		case COUNT:
 			return Calculation.COUNT;
-		case AVG:
+		case SUM:
+			return Calculation.SUM;
+		case AVERAGE:
 			return Calculation.AVERAGE;
-		case MIN:
+		case LOWEST:
 			return Calculation.LOWEST;
-		case MAX:
+		case HIGHEST:
 			return Calculation.HIGHEST;
+		case STANDARD_DEVIATION:
+			return Calculation.STANDARD_DEVIATION;
+		case VARIANCE:
+			return Calculation.VARIANCE;
+		case FIRST:
+			return Calculation.FIRST;
+		case DISTINCT_COUNT:
+			return Calculation.DISTINCT_COUNT;
 		default:
 			throw new AdhocException("Calculation " + adhocCalculation.name() + " not supported");
 		}
@@ -312,12 +320,12 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 
 		FontBuilder font = Styles.font();
-		font.setFontName(adhocFont.getName());//TODO
+		font.setFontName(adhocFont.getFontName());
+		font.setFontSize(adhocFont.getFontSize());
 		font.setBold(adhocFont.getBold());
 		font.setItalic(adhocFont.getItalic());
 		font.setUnderline(adhocFont.getUnderline());
 		font.setStrikeThrough(adhocFont.getStrikeThrough());
-		font.setFontSize(adhocFont.getSize());//TODO
 		return font;
 	}
 
@@ -328,7 +336,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 
 		PenBuilder pen = Styles.pen();
 		pen.setLineWidth(adhocPen.getLineWidth());
-		pen.setLineColor(adhocPen.getColor());//TODO
+		pen.setLineColor(adhocPen.getLineColor());
 		return pen;
 	}
 
@@ -493,8 +501,14 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				categoryChart.addSeriesColor(adhocSeriesColor);
 			}
 		}
-		categoryChart.setCategoryAxisFormat(axisFormat(adhocCategoryChart.getCategoryAxis()));//TODO
-		categoryChart.setValueAxisFormat(axisFormat(adhocCategoryChart.getValueAxis()));//TODO
+		AxisFormatBuilder categoryAxisFormat = axisFormat(adhocCategoryChart.getCategoryAxisFormat());
+		if (categoryAxisFormat != null) {
+			categoryChart.setCategoryAxisFormat(categoryAxisFormat);
+		}
+		AxisFormatBuilder valueAxisFormat = axisFormat(adhocCategoryChart.getValueAxisFormat());
+		if (valueAxisFormat != null) {
+			categoryChart.setValueAxisFormat(valueAxisFormat);
+		}
 		categoryChart.setOrientation(orientation(adhocCategoryChart.getOrientation()));
 		categoryChart.setUseSeriesAsCategory(adhocCategoryChart.getUseSeriesAsCategory());
 

@@ -33,7 +33,7 @@ public class AdhocGroup implements Cloneable, Serializable {
 
 	private String name;
 	private Boolean startInNewPage;
-	private AdhocGroupHeaderLayout layout;
+	private AdhocGroupHeaderLayout headerLayout;
 	private AdhocStyle style;
 	private AdhocStyle titleStyle;
 	private Properties properties;
@@ -58,12 +58,12 @@ public class AdhocGroup implements Cloneable, Serializable {
 		this.startInNewPage = startInNewPage;
 	}
 
-	public AdhocGroupHeaderLayout getLayout() {
-		return layout;
+	public AdhocGroupHeaderLayout getHeaderLayout() {
+		return headerLayout;
 	}
 
-	public void setLayout(AdhocGroupHeaderLayout layout) {
-		this.layout = layout;
+	public void setHeaderLayout(AdhocGroupHeaderLayout headerLayout) {
+		this.headerLayout = headerLayout;
 	}
 
 	public AdhocStyle getStyle() {
@@ -116,7 +116,7 @@ public class AdhocGroup implements Cloneable, Serializable {
 		if (!(startInNewPage == null ? object.getStartInNewPage() == null : startInNewPage.equals(object.getStartInNewPage()))) {
 			return false;
 		}
-		if (!(layout == null ? object.getLayout() == null : layout.equals(object.getLayout()))) {
+		if (!(headerLayout == null ? object.getHeaderLayout() == null : headerLayout.equals(object.getHeaderLayout()))) {
 			return false;
 		}
 		if (!(style == null ? object.getStyle() == null : style.equals(object.getStyle()))) {

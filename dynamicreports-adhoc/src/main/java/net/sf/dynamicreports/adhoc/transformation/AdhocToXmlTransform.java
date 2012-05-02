@@ -168,7 +168,7 @@ public class AdhocToXmlTransform {
 		XmlAdhocGroup xmlAdhocGroup = new XmlAdhocGroup();
 		xmlAdhocGroup.setName(adhocGroup.getName());
 		xmlAdhocGroup.setStartInNewPage(adhocGroup.getStartInNewPage());
-		xmlAdhocGroup.setLayout(groupHeaderLayout(adhocGroup.getLayout()));
+		xmlAdhocGroup.setHeaderLayout(groupHeaderLayout(adhocGroup.getHeaderLayout()));
 		xmlAdhocGroup.setStyle(style(adhocGroup.getStyle()));
 		xmlAdhocGroup.setTitleStyle(style(adhocGroup.getTitleStyle()));
 		if (adhocGroup.getProperties() != null && !adhocGroup.getProperties().isEmpty()) {
@@ -210,18 +210,26 @@ public class AdhocToXmlTransform {
 		}
 
 		switch (adhocCalculation) {
-		case NONE:
-			return XmlAdhocCalculation.NONE;
-		case SUM:
-			return XmlAdhocCalculation.SUM;
+		case NOTHING:
+			return XmlAdhocCalculation.NOTHING;
 		case COUNT:
 			return XmlAdhocCalculation.COUNT;
-		case AVG:
-			return XmlAdhocCalculation.AVG;
-		case MIN:
-			return XmlAdhocCalculation.MIN;
-		case MAX:
-			return XmlAdhocCalculation.MAX;
+		case SUM:
+			return XmlAdhocCalculation.SUM;
+		case AVERAGE:
+			return XmlAdhocCalculation.AVERAGE;
+		case LOWEST:
+			return XmlAdhocCalculation.LOWEST;
+		case HIGHEST:
+			return XmlAdhocCalculation.HIGHEST;
+		case STANDARD_DEVIATION:
+			return XmlAdhocCalculation.STANDARD_DEVIATION;
+		case VARIANCE:
+			return XmlAdhocCalculation.VARIANCE;
+		case FIRST:
+			return XmlAdhocCalculation.FIRST;
+		case DISTINCT_COUNT:
+			return XmlAdhocCalculation.DISTINCT_COUNT;
 		default:
 			throw new AdhocException("Calculation " + adhocCalculation.name() + " not supported");
 		}
@@ -281,12 +289,12 @@ public class AdhocToXmlTransform {
 		}
 
 		XmlAdhocFont xmlAdhocFont = new XmlAdhocFont();
-		xmlAdhocFont.setName(adhocFont.getName());
+		xmlAdhocFont.setFontName(adhocFont.getFontName());
+		xmlAdhocFont.setFontSize(adhocFont.getFontSize());
 		xmlAdhocFont.setBold(adhocFont.getBold());
 		xmlAdhocFont.setItalic(adhocFont.getItalic());
 		xmlAdhocFont.setUnderline(adhocFont.getUnderline());
 		xmlAdhocFont.setStrikeThrough(adhocFont.getStrikeThrough());
-		xmlAdhocFont.setSize(adhocFont.getSize());
 		return xmlAdhocFont;
 	}
 
@@ -297,7 +305,7 @@ public class AdhocToXmlTransform {
 
 		XmlAdhocPen xmlAdhocPen = new XmlAdhocPen();
 		xmlAdhocPen.setLineWidth(adhocPen.getLineWidth());
-		xmlAdhocPen.setColor(color(adhocPen.getColor()));
+		xmlAdhocPen.setLineColor(color(adhocPen.getLineColor()));
 		return xmlAdhocPen;
 	}
 
@@ -455,8 +463,8 @@ public class AdhocToXmlTransform {
 				xmlAdhocCategoryChart.getSeriesColors().add(color(adhocSeriesColor));
 			}
 		}
-		xmlAdhocCategoryChart.setCategoryAxis(axisFormat(adhocCategoryChart.getCategoryAxis()));
-		xmlAdhocCategoryChart.setValueAxis(axisFormat(adhocCategoryChart.getValueAxis()));
+		xmlAdhocCategoryChart.setCategoryAxisFormat(axisFormat(adhocCategoryChart.getCategoryAxisFormat()));
+		xmlAdhocCategoryChart.setValueAxisFormat(axisFormat(adhocCategoryChart.getValueAxisFormat()));
 		xmlAdhocCategoryChart.setOrientation(orientation(adhocCategoryChart.getOrientation()));
 		xmlAdhocCategoryChart.setUseSeriesAsCategory(adhocCategoryChart.getUseSeriesAsCategory());
 	}
@@ -524,6 +532,7 @@ public class AdhocToXmlTransform {
 	}
 
 	protected void restriction(AdhocRestriction adhocRestriction, XmlAdhocRestriction xmlAdhocRestriction) {
+		xmlAdhocRestriction.setKey(adhocRestriction.getKey());
 		if (adhocRestriction.getProperties() != null && !adhocRestriction.getProperties().isEmpty()) {
 			properties(adhocRestriction.getProperties(), xmlAdhocRestriction.getProperty());
 		}
