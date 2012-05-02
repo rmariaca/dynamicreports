@@ -24,7 +24,7 @@ package net.sf.dynamicreports.adhoc.report;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,10 +92,10 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
-	protected Map<String, ColumnBuilder<?, ?>> columns = new HashMap<String, ColumnBuilder<?, ?>>();
-	protected Map<String, GroupBuilder<?>> groups = new HashMap<String, GroupBuilder<?>>();
+	protected Map<String, ColumnBuilder<?, ?>> columns = new LinkedHashMap<String, ColumnBuilder<?, ?>>();
+	protected Map<String, GroupBuilder<?>> groups = new LinkedHashMap<String, GroupBuilder<?>>();
 	protected List<BaseSubtotalBuilder<?, ?>> subtotals = new ArrayList<BaseSubtotalBuilder<?, ?>>();
-	protected Map<String, ComponentBuilder<?, ?>> components = new HashMap<String, ComponentBuilder<?, ?>>();
+	protected Map<String, ComponentBuilder<?, ?>> components = new LinkedHashMap<String, ComponentBuilder<?, ?>>();
 
 	public void customize(ReportBuilder<?> report, AdhocReport adhocReport) throws DRException {
 		report.setTextStyle(style(adhocReport.getTextStyle()));
