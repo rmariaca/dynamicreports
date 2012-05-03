@@ -103,6 +103,7 @@ public class AdhocToXmlTransform {
 			XmlAdhocProperty xmlAdhocProperty = new XmlAdhocProperty();
 			xmlAdhocProperty.setKey(key);
 			xmlAdhocProperty.setValue(properties.getProperty(key));
+			xmlAdhocProperties.add(xmlAdhocProperty);
 		}
 	}
 

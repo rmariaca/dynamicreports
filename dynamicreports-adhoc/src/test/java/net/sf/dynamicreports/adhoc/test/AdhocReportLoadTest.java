@@ -23,18 +23,14 @@
 package net.sf.dynamicreports.adhoc.test;
 
 import java.awt.Color;
+import java.io.InputStream;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.adhoc.AdhocManager;
-import net.sf.dynamicreports.adhoc.configuration.AdhocColumn;
 import net.sf.dynamicreports.adhoc.configuration.AdhocConfiguration;
-import net.sf.dynamicreports.adhoc.configuration.AdhocGroup;
-import net.sf.dynamicreports.adhoc.configuration.AdhocPen;
-import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
-import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -47,45 +43,19 @@ import org.junit.Test;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocReportTest extends AbstractJasperTest {
+public class AdhocReportLoadTest extends AbstractJasperTest {
 	private AdhocConfiguration adhocConfiguration;
 	private String groupName;
 
 	@Override
 	public void init() {
-		adhocConfiguration = new AdhocConfiguration();
-		AdhocReport adhocReport = new AdhocReport();
-		adhocConfiguration.setReport(adhocReport);
-
-		AdhocStyle adhocStyle1 = new AdhocStyle();
-		adhocStyle1.setForegroundColor(Color.BLUE);
-		AdhocStyle adhocStyle2 = new AdhocStyle();
-		AdhocPen adhocPen = new AdhocPen();
-		adhocPen.setLineWidth(2f);
-		adhocStyle2.setLeftBorder(adhocPen);
-
-		AdhocColumn adhocColumn = new AdhocColumn();
-		adhocColumn.setName("field1");
-		adhocColumn.setTitle("Column1");
-		adhocColumn.setStyle(adhocStyle1);
-		adhocColumn.setTitleStyle(adhocStyle2);
-		adhocColumn.setWidth(50);
-		adhocReport.addColumn(adhocColumn);
-
-		adhocColumn = new AdhocColumn();
-		adhocColumn.setName("field2");
-		adhocColumn.setTitle("Column2");
-		adhocReport.addColumn(adhocColumn);
-
-		adhocColumn = new AdhocColumn();
-		adhocColumn.setName("field3");
-		adhocReport.addColumn(adhocColumn);
-
-		AdhocGroup adhocGroup = new AdhocGroup();
-		adhocGroup.setName("field4");
-		adhocGroup.setStyle(adhocStyle1);
-		adhocGroup.setTitleStyle(adhocStyle2);
-		adhocReport.addGroup(adhocGroup);
+		try {
+			InputStream is = AdhocConfigurationLoadTest.class.getResourceAsStream("adhocconfiguration2.xml");
+			this.adhocConfiguration = AdhocManager.loadConfiguration(is);
+		} catch (DRException e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 
 		super.init();
 	}
@@ -112,7 +82,7 @@ public class AdhocReportTest extends AbstractJasperTest {
 	public void test() {
 		numberOfPagesTest(1);
 
-		elementValueTest("columnHeader.column_field1.title1", 0, "Column1");
+		elementValueTest("columnHeader.column_field1.title1", 0, "Column1 && C<a>aa</a> \"a\" 'c'");
 		elementValueTest("columnHeader.column_field2.title1", 0, "Column2");
 
 		elementValueTest("detail.column_field11", 0, "test");

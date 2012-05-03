@@ -23,9 +23,7 @@
 package net.sf.dynamicreports.adhoc.report;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
@@ -77,7 +75,7 @@ import net.sf.dynamicreports.report.builder.style.PenBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.style.Styles;
-import net.sf.dynamicreports.report.builder.subtotal.BaseSubtotalBuilder;
+import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.Subtotals;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -92,12 +90,15 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
+	protected ReportBuilder<?> report;
+	protected AdhocReport adhocReport;
 	protected Map<String, ColumnBuilder<?, ?>> columns = new LinkedHashMap<String, ColumnBuilder<?, ?>>();
 	protected Map<String, GroupBuilder<?>> groups = new LinkedHashMap<String, GroupBuilder<?>>();
-	protected List<BaseSubtotalBuilder<?, ?>> subtotals = new ArrayList<BaseSubtotalBuilder<?, ?>>();
 	protected Map<String, ComponentBuilder<?, ?>> components = new LinkedHashMap<String, ComponentBuilder<?, ?>>();
 
 	public void customize(ReportBuilder<?> report, AdhocReport adhocReport) throws DRException {
+		this.report = report;
+		this.adhocReport = adhocReport;
 		report.setTextStyle(style(adhocReport.getTextStyle()));
 		report.setColumnStyle(style(adhocReport.getColumnStyle()));
 		report.setColumnTitleStyle(style(adhocReport.getColumnTitleStyle()));
@@ -128,21 +129,18 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			SortBuilder sort = sort(adhocSort);
 			report.addSort(sort);
 		}
-		for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
-			BaseSubtotalBuilder<?, ?> subtotal = subtotal(adhocSubtotal);
-			subtotals.add(subtotal);
-		}
 		for (AdhocComponent adhocComponent : adhocReport.getComponents()) {
 			ComponentBuilder<?, ?> component = component(adhocComponent);
 			components.put(adhocComponent.getKey(), component);
 		}
+		addSubtotals();
 	}
 
 	protected Class<?> getFieldClass(String name) {
 		return Object.class;
 	}
 
-	protected String getColumnLabel(String name) {
+	protected String getColumnTitle(String name) {
 		return null;
 	}
 
@@ -152,7 +150,10 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			column.setTitle(adhocColumn.getTitle());
 		}
 		else {
-			column.setTitle(getColumnLabel(adhocColumn.getName()));
+			String columnTitle = getColumnTitle(adhocColumn.getName());
+			if (columnTitle != null) {
+				column.setTitle(columnTitle);
+			}
 		}
 		if (adhocColumn.getWidth() != null) {
 			column.setFixedWidth(adhocColumn.getWidth());
@@ -195,8 +196,22 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 	}
 
-	protected BaseSubtotalBuilder<?, ?> subtotal(AdhocSubtotal adhocSubtotal) {
-		BaseSubtotalBuilder<?, ?> subtotal;
+	protected void addSubtotals() {
+		report.subtotalsAtSummary(subtotals());
+	}
+
+	protected SubtotalBuilder<?, ?>[] subtotals() {
+		SubtotalBuilder<?, ?>[] subtotals = new SubtotalBuilder<?, ?>[adhocReport.getSubtotals().size()];
+		int index = 0;
+		for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
+			SubtotalBuilder<?, ?> subtotal = subtotal(adhocSubtotal);
+			subtotals[index++] = subtotal;
+		}
+		return subtotals;
+	}
+
+	protected SubtotalBuilder<?, ?> subtotal(AdhocSubtotal adhocSubtotal) {
+		SubtotalBuilder<?, ?> subtotal;
 		ColumnBuilder<?, ?> subtotalColumn = columns.get(adhocSubtotal.getName());
 		if (subtotalColumn != null && subtotalColumn instanceof ValueColumnBuilder<?, ?>) {
 			subtotal = Subtotals.aggregate((ValueColumnBuilder<?, ?>) subtotalColumn, calculation(adhocSubtotal.getCalculation()));
@@ -204,7 +219,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		else {
 			subtotal = Subtotals.aggregate(adhocSubtotal.getName(), getFieldClass(adhocSubtotal.getName()), (ValueColumnBuilder<?, ?>) subtotalColumn, calculation(adhocSubtotal.getCalculation()));
 		}
-		subtotal.setLabel(adhocSubtotal.getLabel());
+		if (adhocSubtotal.getLabel() != null) {
+			subtotal.setLabel(adhocSubtotal.getLabel());
+		}
 		subtotal.setStyle(style(adhocSubtotal.getStyle()));
 		subtotal.setLabelStyle(style(adhocSubtotal.getLabelStyle()));
 		return subtotal;
@@ -447,7 +464,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 
 	protected void chart(AdhocChart adhocChart, AbstractChartBuilder<?> chart) {
 		component(adhocChart, chart);
-		chart.setTitle(adhocChart.getTitle());
+		if (adhocChart.getTitle() != null) {
+			chart.setTitle(adhocChart.getTitle());
+		}
 		if (adhocChart.getTitleFont() != null) {
 			chart.setTitleFont(font(adhocChart.getTitleFont()));
 		}
@@ -476,7 +495,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 
 		AxisFormatBuilder axisFormat = Charts.axisFormat();
-		axisFormat.setLabel(adhocAxisFormat.getLabel());
+		if (adhocAxisFormat.getLabel() != null) {
+			axisFormat.setLabel(adhocAxisFormat.getLabel());
+		}
 		axisFormat.setLabelFont(font(adhocAxisFormat.getLabelFont()));
 		axisFormat.setLabelColor(adhocAxisFormat.getLabelColor());
 		return axisFormat;

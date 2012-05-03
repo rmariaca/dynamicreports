@@ -86,8 +86,8 @@ public class AdhocGroup implements Cloneable, Serializable {
 		return properties;
 	}
 
-	public void getProperty(String key) {
-		this.properties.getProperty(key);
+	public String getProperty(String key) {
+		return this.properties.getProperty(key);
 	}
 
 	public void addProperty(String key, String value) {
