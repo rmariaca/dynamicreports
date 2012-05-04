@@ -281,7 +281,10 @@ public class AdhocToXmlTransform {
 		if (color == null) {
 			return null;
 		}
-		return String.valueOf(color.getRGB());
+    int colorMask = Integer.parseInt("FFFFFF", 16);
+    int rgb = color.getRGB();
+    String hex = Integer.toHexString(rgb & colorMask).toUpperCase();
+    return "#" + ("000000" + hex).substring(hex.length());
 	}
 
 	protected XmlAdhocFont font(AdhocFont adhocFont) {

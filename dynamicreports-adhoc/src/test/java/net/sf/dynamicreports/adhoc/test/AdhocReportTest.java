@@ -66,7 +66,7 @@ public class AdhocReportTest extends AbstractJasperTest {
 
 		AdhocColumn adhocColumn = new AdhocColumn();
 		adhocColumn.setName("field1");
-		adhocColumn.setTitle("Column1");
+		adhocColumn.setTitle("Column1 && C<a>aa</a> \"a\" 'c'");
 		adhocColumn.setStyle(adhocStyle1);
 		adhocColumn.setTitleStyle(adhocStyle2);
 		adhocColumn.setWidth(50);
@@ -112,7 +112,7 @@ public class AdhocReportTest extends AbstractJasperTest {
 	public void test() {
 		numberOfPagesTest(1);
 
-		elementValueTest("columnHeader.column_field1.title1", 0, "Column1");
+		elementValueTest("columnHeader.column_field1.title1", 0, "Column1 && C<a>aa</a> \"a\" 'c'");
 		elementValueTest("columnHeader.column_field2.title1", 0, "Column2");
 
 		elementValueTest("detail.column_field11", 0, "test");
