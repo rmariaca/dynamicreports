@@ -134,6 +134,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			components.put(adhocComponent.getKey(), component);
 		}
 		addSubtotals();
+		addComponents();
 	}
 
 	protected Class<?> getFieldClass(String name) {
@@ -432,6 +433,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		default:
 			throw new AdhocException("Page orientation " + adhocPageOrientation.name() + " not supported");
 		}
+	}
+
+	protected void addComponents() {
 	}
 
 	protected ComponentBuilder<?, ?> component(AdhocComponent adhocComponent) {
