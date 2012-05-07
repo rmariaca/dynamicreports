@@ -24,7 +24,6 @@ package net.sf.dynamicreports.adhoc.transformation;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Properties;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
 import net.sf.dynamicreports.adhoc.configuration.AdhocCalculation;
@@ -45,6 +44,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPage;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPageOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPen;
+import net.sf.dynamicreports.adhoc.configuration.AdhocProperties;
 import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
 import net.sf.dynamicreports.adhoc.configuration.AdhocRestriction;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
@@ -97,14 +97,30 @@ public class AdhocToXmlTransform {
 		return xmlAdhocConfiguration;
 	}
 
-	protected void properties(Properties properties, List<XmlAdhocProperty> xmlAdhocProperties) {
-		for (Object keyObject : properties.keySet()) {
-			String key = (String) keyObject;
+	protected void properties(AdhocProperties properties, List<XmlAdhocProperty> xmlAdhocProperties) {
+		for (String key : properties.getProperties().keySet()) {
 			XmlAdhocProperty xmlAdhocProperty = new XmlAdhocProperty();
 			xmlAdhocProperty.setKey(key);
-			xmlAdhocProperty.setValue(properties.getProperty(key));
+			Object propertyValue = properties.getProperty(key);
+			xmlAdhocProperty.setValue(propertyValueToString(propertyValue));
+			if (propertyValue != null) {
+				xmlAdhocProperty.setValueClassName(propertyValue.getClass().getName());
+			}
 			xmlAdhocProperties.add(xmlAdhocProperty);
 		}
+	}
+
+	protected String propertyValueToString(Object value) {
+		if (value == null) {
+			return null;
+		}
+		if (value instanceof String) {
+			return (String) value;
+		}
+		if (value instanceof Boolean || value instanceof Integer) {
+			return String.valueOf(value);
+		}
+		throw new AdhocException("Property value type " + value.getClass().getName() + " not supported");
 	}
 
 	protected XmlAdhocReport report(AdhocReport adhocReport) {

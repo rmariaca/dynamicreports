@@ -23,42 +23,40 @@
 package net.sf.dynamicreports.adhoc.configuration;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocRestriction implements Cloneable, Serializable {
+public class AdhocProperties implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String key;
-	private AdhocProperties properties;
+	private Map<String, Object> properties;
 
-	public AdhocRestriction() {
-		properties = new AdhocProperties();
+	public AdhocProperties() {
+		properties = new HashMap<String, Object>();
 	}
 
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public AdhocProperties getProperties() {
+	public Map<String, Object> getProperties() {
 		return properties;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getProperty(String key) {
-		return this.properties.getProperty(key);
+		return (T) this.properties.get(key);
 	}
 
 	public void setProperty(String key, Object value) {
-		this.properties.setProperty(key, value);
+		this.properties.put(key, value);
 	}
 
-	public void setProperties(AdhocProperties properties) {
+	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
+	}
+
+	public boolean isEmpty() {
+		return properties.isEmpty();
 	}
 
 	@Override
@@ -68,13 +66,10 @@ public class AdhocRestriction implements Cloneable, Serializable {
 		}
 		if (obj == null)
 			return false;
-		if (!(obj instanceof AdhocRestriction))
+		if (!(obj instanceof AdhocProperties))
 			return false;
 
-		AdhocRestriction object = (AdhocRestriction) obj;
-		if (!(key == null ? object.getKey() == null : key.equals(object.getKey()))) {
-			return false;
-		}
+		AdhocProperties object = (AdhocProperties) obj;
 		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
 			return false;
 		}
@@ -83,16 +78,19 @@ public class AdhocRestriction implements Cloneable, Serializable {
 	}
 
 	@Override
-	public AdhocRestriction clone() {
-		AdhocRestriction clone;
+	public AdhocProperties clone() {
+		AdhocProperties clone;
 		try {
-			clone = (AdhocRestriction) super.clone();
+			clone = (AdhocProperties) super.clone();
 		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
 		}
 
 		if (properties != null) {
-			clone.properties = properties.clone();
+			clone.properties = new HashMap<String, Object>();
+			for (String key : properties.keySet()) {
+				clone.setProperty(key, properties.get(key));
+			}
 		}
 
 		return clone;

@@ -174,8 +174,8 @@ public class AdhocConfigurationTest {
 
 		adhocGroup = new AdhocGroup();
 		adhocGroup.setName("field4");
-		adhocGroup.addProperty("key1", "value<a>&&</a>1");
-		adhocGroup.addProperty("key2", "value<a>&&</a>2");
+		adhocGroup.setProperty("key1", "value<a>&&</a>1");
+		adhocGroup.setProperty("key2", "value<a>&&</a>2");
 		adhocReport.addGroup(adhocGroup);
 
 		AdhocSort adhocSort = new AdhocSort();
@@ -244,7 +244,10 @@ public class AdhocConfigurationTest {
 
 		AdhocRestriction adhocRestriction = new AdhocRestriction();
 		adhocRestriction.setKey("restriction1");
-		adhocRestriction.addProperty("key", "value");
+		adhocRestriction.setProperty("key", "value");
+		adhocRestriction.setProperty("key_empty", null);
+		adhocRestriction.setProperty("key_boolean", true);
+		adhocRestriction.setProperty("key_int", 100);
 		adhocFilter.addRestriction(adhocRestriction);
 
 		AdhocValueRestriction adhocValueRestriction = new AdhocValueRestriction();
@@ -455,11 +458,14 @@ public class AdhocConfigurationTest {
 		Assert.assertEquals("restriction key", adhocRestriction, adhocConfiguration.getFilter().getRestriction("restriction1"));
 		Assert.assertEquals("restriction key", "restriction1", adhocRestriction.getKey());
 		Assert.assertEquals("restriction property", "value", adhocRestriction.getProperty("key"));
+		Assert.assertNull("restriction property", adhocRestriction.getProperty("key_empty"));
+		Assert.assertTrue("restriction property", (Boolean) adhocRestriction.getProperty("key_boolean"));
+		Assert.assertEquals("restriction property", 100, adhocRestriction.getProperty("key_int"));
 
 		AdhocValueRestriction adhocValueRestriction = (AdhocValueRestriction) adhocConfiguration.getFilter().getRestrictions().get(1);
 		Assert.assertEquals("restriction key", adhocValueRestriction, adhocConfiguration.getFilter().getRestriction("restriction2"));
 		Assert.assertEquals("restriction key", "restriction2", adhocValueRestriction.getKey());
-		Assert.assertEquals("restriction property", 0, adhocValueRestriction.getProperties().size());
+		Assert.assertTrue("restriction property", adhocValueRestriction.getProperties().isEmpty());
 		Assert.assertEquals("restriction name", "aa", adhocValueRestriction.getName());
 		Assert.assertEquals("restriction operator", AdhocValueOperator.IN, adhocValueRestriction.getOperator());
 		Assert.assertEquals("restriction value", "value1", adhocValueRestriction.getValues().get(0));

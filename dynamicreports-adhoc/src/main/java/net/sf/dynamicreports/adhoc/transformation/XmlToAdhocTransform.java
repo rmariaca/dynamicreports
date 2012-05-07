@@ -24,7 +24,6 @@ package net.sf.dynamicreports.adhoc.transformation;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Properties;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
 import net.sf.dynamicreports.adhoc.configuration.AdhocCalculation;
@@ -45,6 +44,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPage;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPageOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPen;
+import net.sf.dynamicreports.adhoc.configuration.AdhocProperties;
 import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
 import net.sf.dynamicreports.adhoc.configuration.AdhocRestriction;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
@@ -85,6 +85,8 @@ import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueOperator;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueRestriction;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocVerticalAlignment;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -97,10 +99,27 @@ public class XmlToAdhocTransform {
 		return adhocConfiguration;
 	}
 
-	protected void properties(List<XmlAdhocProperty> xmlAdhocProperties, Properties properties) {
+	protected void properties(List<XmlAdhocProperty> xmlAdhocProperties, AdhocProperties properties) {
 		for (XmlAdhocProperty xmlAdhocProperty : xmlAdhocProperties) {
-			properties.setProperty(xmlAdhocProperty.getKey(), xmlAdhocProperty.getValue());
+			Object propertyValue = propertyStringToValue(xmlAdhocProperty.getValue(), xmlAdhocProperty.getValueClassName());
+			properties.setProperty(xmlAdhocProperty.getKey(), propertyValue);
 		}
+	}
+
+	protected Object propertyStringToValue(String value, String valueClassName) {
+		if (value == null || StringUtils.isBlank(value) && valueClassName == null) {
+			return null;
+		}
+		if (valueClassName == null || valueClassName.equals(String.class.getName())) {
+			return value;
+		}
+		if (valueClassName.equals(Boolean.class.getName())) {
+			return new Boolean(value);
+		}
+		if (valueClassName.equals(Integer.class.getName())) {
+			return new Integer(value);
+		}
+		throw new AdhocException("Property value type " + valueClassName + " not supported");
 	}
 
 	protected AdhocReport report(XmlAdhocReport xmlAdhocReport) {

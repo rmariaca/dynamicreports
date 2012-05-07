@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.adhoc.configuration;
 
 import java.io.Serializable;
-import java.util.Properties;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -36,10 +35,10 @@ public class AdhocGroup implements Cloneable, Serializable {
 	private AdhocGroupHeaderLayout headerLayout;
 	private AdhocStyle style;
 	private AdhocStyle titleStyle;
-	private Properties properties;
+	private AdhocProperties properties;
 
 	public AdhocGroup() {
-		properties = new Properties();
+		properties = new AdhocProperties();
 	}
 
 	public String getName() {
@@ -82,19 +81,19 @@ public class AdhocGroup implements Cloneable, Serializable {
 		this.titleStyle = titleStyle;
 	}
 
-	public Properties getProperties() {
+	public AdhocProperties getProperties() {
 		return properties;
 	}
 
-	public String getProperty(String key) {
+	public <T> T getProperty(String key) {
 		return this.properties.getProperty(key);
 	}
 
-	public void addProperty(String key, String value) {
+	public void setProperty(String key, Object value) {
 		this.properties.setProperty(key, value);
 	}
 
-	public void setProperties(Properties properties) {
+	public void setProperties(AdhocProperties properties) {
 		this.properties = properties;
 	}
 
@@ -147,11 +146,7 @@ public class AdhocGroup implements Cloneable, Serializable {
 			clone.titleStyle = titleStyle.clone();
 		}
 		if (properties != null) {
-			clone.properties = new Properties();
-			for (Object keyObject : properties.keySet()) {
-				String key = (String) keyObject;
-				clone.addProperty(key, properties.getProperty(key));
-			}
+			clone.properties = properties.clone();
 		}
 
 		return clone;
