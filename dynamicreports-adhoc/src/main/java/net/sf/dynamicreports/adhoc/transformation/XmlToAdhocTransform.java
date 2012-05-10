@@ -101,25 +101,25 @@ public class XmlToAdhocTransform {
 
 	protected void properties(List<XmlAdhocProperty> xmlAdhocProperties, AdhocProperties properties) {
 		for (XmlAdhocProperty xmlAdhocProperty : xmlAdhocProperties) {
-			Object propertyValue = propertyStringToValue(xmlAdhocProperty.getValue(), xmlAdhocProperty.getValueClassName());
+			Object propertyValue = propertyStringToValue(xmlAdhocProperty.getValue(), xmlAdhocProperty.getValueClass());
 			properties.setProperty(xmlAdhocProperty.getKey(), propertyValue);
 		}
 	}
 
-	protected Object propertyStringToValue(String value, String valueClassName) {
-		if (value == null || StringUtils.isBlank(value) && valueClassName == null) {
+	protected Object propertyStringToValue(String value, String valueClass) {
+		if (value == null || StringUtils.isBlank(value) && valueClass == null) {
 			return null;
 		}
-		if (valueClassName == null || valueClassName.equals(String.class.getName())) {
+		if (valueClass == null || valueClass.equals(String.class.getName())) {
 			return value;
 		}
-		if (valueClassName.equals(Boolean.class.getName())) {
+		if (valueClass.equals(Boolean.class.getName())) {
 			return new Boolean(value);
 		}
-		if (valueClassName.equals(Integer.class.getName())) {
+		if (valueClass.equals(Integer.class.getName())) {
 			return new Integer(value);
 		}
-		throw new AdhocException("Property value type " + valueClassName + " not supported");
+		throw new AdhocException("Property value type " + valueClass + " not supported");
 	}
 
 	protected AdhocReport report(XmlAdhocReport xmlAdhocReport) {

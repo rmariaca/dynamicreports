@@ -19,7 +19,7 @@
 		<xs:simpleContent>
  			<xs:extension base="xs:string">
 				<xs:attribute name="key" type="xs:string"/>
-				<xs:attribute name="valueClassName" type="xs:string"/>
+				<xs:attribute name="valueClass" type="xs:string"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
