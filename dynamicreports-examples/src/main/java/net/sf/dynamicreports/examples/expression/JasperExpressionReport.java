@@ -45,10 +45,10 @@ public class JasperExpressionReport {
 	private void build() {
 		try {
 			TextColumnBuilder<String> itemColumn = col.column("item", type.stringType())
-				.setTitle(exp.jasperSyntaxEscapedText("Item"));
+				.setTitle(exp.jasperSyntaxText("Item"));
 			JasperExpression<BigDecimal> priceExpression = exp.jasperSyntax("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class);
 			TextColumnBuilder<BigDecimal> priceColumn = col.column(priceExpression)
-				.setTitle(exp.jasperSyntaxEscapedText("Price"));
+				.setTitle(exp.jasperSyntaxText("Price"));
 
 			report()
 			  .setTemplate(Templates.reportTemplate)

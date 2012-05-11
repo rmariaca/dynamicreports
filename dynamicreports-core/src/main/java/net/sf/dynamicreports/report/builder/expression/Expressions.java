@@ -162,10 +162,10 @@ public class Expressions {
 	 * @param text text to be shown
 	 * @return the expression
 	 *
-	 * @deprecated use jasperSyntaxEscapedText(String text)
+	 * @deprecated use jasperSyntaxText(String text)
 	 */
 	public static JasperExpression<String> jasper(String text) {
-		return jasperSyntaxEscapedText(text);
+		return jasperSyntaxText(text);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class Expressions {
 	 * @param text text to be shown
 	 * @return the expression
 	 */
-	public static JasperExpression<String> jasperSyntaxEscapedText(String text) {
+	public static JasperExpression<String> jasperSyntaxText(String text) {
 		return new JasperExpression<String>("\"" + StringEscapeUtils.escapeJava(text) + "\"", String.class);
 	}
 
@@ -212,7 +212,8 @@ public class Expressions {
 	 * @param expression the jasper expression
 	 * @return the expression
 	 */
-	public static JasperExpression<?> jasperSyntax(String expression) {
+	@SuppressWarnings("rawtypes")
+	public static JasperExpression jasperSyntax(String expression) {
 		return jasperSyntax(expression, Object.class);
 	}
 

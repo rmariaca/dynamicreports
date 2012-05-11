@@ -143,10 +143,10 @@ public class ExpressionBuilders {
 	 * @param text text to be shown
 	 * @return the expression
 	 *
-	 * @deprecated use jasperSyntaxEscapedText(String text)
+	 * @deprecated use jasperSyntaxText(String text)
 	 */
 	public JasperExpression<String> jasper(String text) {
-		return Expressions.jasperSyntaxEscapedText(text);
+		return Expressions.jasperSyntaxText(text);
 	}
 
 	/**
@@ -156,8 +156,8 @@ public class ExpressionBuilders {
 	 * @param text text to be shown
 	 * @return the expression
 	 */
-	public JasperExpression<String> jasperSyntaxEscapedText(String text) {
-		return Expressions.jasperSyntaxEscapedText(text);
+	public JasperExpression<String> jasperSyntaxText(String text) {
+		return Expressions.jasperSyntaxText(text);
 	}
 
 	/**
@@ -193,7 +193,8 @@ public class ExpressionBuilders {
 	 * @param expression the jasper expression
 	 * @return the expression
 	 */
-	public JasperExpression<?> jasperSyntax(String expression) {
+	@SuppressWarnings("rawtypes")
+	public JasperExpression jasperSyntax(String expression) {
 		return Expressions.jasperSyntax(expression);
 	}
 
