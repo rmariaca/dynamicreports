@@ -30,6 +30,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -62,6 +63,11 @@ public class VariableBuilder<T> extends AbstractBuilder<VariableBuilder<T>, DRVa
 
 	protected VariableBuilder(String name, DRIExpression<?> expression, Calculation calculation) {
 		super(new DRVariable<T>(name, expression, calculation));
+	}
+
+	public VariableBuilder<T> setInitialValueExpression(DRIJasperExpression<?> initialValueExpression) {
+		getObject().setInitialValueExpression(initialValueExpression);
+		return this;
 	}
 
 	public VariableBuilder<T> setResetType(Evaluation resetType) {

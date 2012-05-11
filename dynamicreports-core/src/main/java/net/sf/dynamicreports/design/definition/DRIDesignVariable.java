@@ -30,12 +30,14 @@ import net.sf.dynamicreports.report.constant.Calculation;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIDesignVariable extends DRIDesignExpression {
-	
+
 	public DRIDesignExpression getValueExpression();
-	
+
+	public DRIDesignExpression getInitialValueExpression();
+
 	public Calculation getCalculation();
-	
+
 	public ResetType getResetType();
-	
+
 	public DRIDesignGroup getResetGroup();
 }

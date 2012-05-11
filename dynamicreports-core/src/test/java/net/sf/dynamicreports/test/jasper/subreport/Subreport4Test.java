@@ -94,9 +94,9 @@ public class Subreport4Test extends AbstractJasperValueTest {
 			.setParameter("parameter3", "value3")
 			.setTemplateDesign(Subreport4Test.class.getResourceAsStream("subreport4.jrxml"))
 		  .title(
-		  	cmp.text(exp.jasper("$P{parameter1}", String.class)),
-		  	cmp.text(exp.jasper("$P{parameter2}", String.class)),
-		  	cmp.text(exp.jasper("$P{parameter6}", String.class)));
+		  	cmp.text(exp.jasperSyntax("$P{parameter1}")),
+		  	cmp.text(exp.jasperSyntax("$P{parameter2}")),
+		  	cmp.text(exp.jasperSyntax("$P{parameter6}", String.class)));
 		return report;
 	}
 

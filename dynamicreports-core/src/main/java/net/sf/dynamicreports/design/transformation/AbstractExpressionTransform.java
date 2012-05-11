@@ -190,7 +190,8 @@ public abstract class AbstractExpressionTransform {
 
 	private DRIDesignExpression transformVariable(DRIVariable<?> variable) throws DRException {
 		DRDesignVariable designVariable = new DRDesignVariable(variable.getName());
-		designVariable.setValueExpression(transformExpression(variable.getExpression()));
+		designVariable.setValueExpression(transformExpression(variable.getValueExpression()));
+		designVariable.setInitialValueExpression(transformExpression(variable.getInitialValueExpression()));
 		designVariable.setCalculation(variable.getCalculation());
 		designVariable.setResetType(getVariableResetType(variable));
 		designVariable.setResetGroup(getVariableResetGroup(variable));

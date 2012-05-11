@@ -172,10 +172,12 @@ public abstract class AbstractExpressionTransform {
 	//variable
 	private JRDesignVariable variable(DRIDesignVariable variable) {
 		JRDesignExpression expression = getExpression(variable.getValueExpression());
+		JRDesignExpression initialValueExpression = getExpression(variable.getInitialValueExpression());
 
 		JRDesignVariable jrVariable = new JRDesignVariable();
 		jrVariable.setName(variable.getName());
 		jrVariable.setExpression(expression);
+		jrVariable.setInitialValueExpression(initialValueExpression);
 		jrVariable.setValueClass(variable.getValueClass());
 		jrVariable.setCalculation(ConstantTransform.calculation(variable.getCalculation()));
 		ResetType resetType = variable.getResetType();

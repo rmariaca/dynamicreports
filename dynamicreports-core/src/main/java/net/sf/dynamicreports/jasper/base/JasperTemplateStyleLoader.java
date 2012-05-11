@@ -123,7 +123,7 @@ public class JasperTemplateStyleLoader {
 	}
 
 	private static DRConditionalStyle conditionalStyle(JRConditionalStyle jrConditionalStyle) {
-		DRIExpression<Boolean> expression = Expressions.jasper(jrConditionalStyle.getConditionExpression().getText(), Boolean.class);
+		DRIExpression<Boolean> expression = Expressions.jasperSyntax(jrConditionalStyle.getConditionExpression().getText(), Boolean.class);
 		DRConditionalStyle conditionalStyle = new DRConditionalStyle(expression);
 		abstractStyle(jrConditionalStyle, conditionalStyle);
 		return conditionalStyle;

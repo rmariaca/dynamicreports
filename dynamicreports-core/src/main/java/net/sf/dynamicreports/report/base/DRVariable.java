@@ -34,58 +34,67 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRVariable<T> implements DRIVariable<T> {	
+public class DRVariable<T> implements DRIVariable<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private String name;
-	private DRIExpression<?> expression;
+	private DRIExpression<?> valueExpression;
+	private DRIExpression<?> initialValueExpression;
 	private Calculation calculation;
 	private Evaluation resetType;
-	private DRGroup resetGroup;	
-	
-	public DRVariable(DRIExpression<?> expression, Calculation calculation) {
-		this(ReportUtils.generateUniqueName("variable"), expression, calculation);
+	private DRGroup resetGroup;
+
+	public DRVariable(DRIExpression<?> valueExpression, Calculation calculation) {
+		this(ReportUtils.generateUniqueName("variable"), valueExpression, calculation);
 	}
-	
-	public DRVariable(String name, DRIExpression<?> expression, Calculation calculation) {
+
+	public DRVariable(String name, DRIExpression<?> valueExpression, Calculation calculation) {
 		Validate.notEmpty(name, "name must not be empty");
-		Validate.notNull(expression, "expression must not be null");
+		Validate.notNull(valueExpression, "valueExpression must not be null");
 		Validate.notNull(calculation, "calculation must not be null");
 		this.name = name;
-		this.expression = expression;
+		this.valueExpression = valueExpression;
 		this.calculation = calculation;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
+	public DRIExpression<?> getInitialValueExpression() {
+		return initialValueExpression;
+	}
+
+	public void setInitialValueExpression(DRIExpression<?> initialValueExpression) {
+		this.initialValueExpression = initialValueExpression;
+	}
+
 	public Calculation getCalculation() {
 		return calculation;
 	}
-	
+
 	public Evaluation getResetType() {
 		return resetType;
 	}
-	
+
 	public void setResetType(Evaluation resetType) {
 		this.resetType = resetType;
 	}
-	
+
 	public DRGroup getResetGroup() {
 		return resetGroup;
 	}
-	
+
 	public void setResetGroup(DRGroup resetGroup) {
 		this.resetGroup = resetGroup;
-	}	
-	
-	public DRIExpression<?> getExpression() {
-		return expression;
+	}
+
+	public DRIExpression<?> getValueExpression() {
+		return valueExpression;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
-		return (Class<? super T>) ReportUtils.getVariableValueClass(getCalculation(), expression.getValueClass());
+		return (Class<? super T>) ReportUtils.getVariableValueClass(getCalculation(), valueExpression.getValueClass());
 	}
 }

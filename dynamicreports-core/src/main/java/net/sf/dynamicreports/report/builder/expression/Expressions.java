@@ -156,12 +156,26 @@ public class Expressions {
 
 	//jasper
 	/**
-	 * Creates a new jasper string expression, useful only for showing a static text.
+	 * Creates a new jasper string expression, useful only for showing a static text.<br/>
+	 * This method escapes the characters in a {@code String} using Java String rules.
+	 *
+	 * @param text text to be shown
+	 * @return the expression
+	 *
+	 * @deprecated use jasperSyntaxEscapedText(String text)
+	 */
+	public static JasperExpression<String> jasper(String text) {
+		return jasperSyntaxEscapedText(text);
+	}
+
+	/**
+	 * Creates a new jasper string expression, useful only for showing a static text.<br/>
+	 * This method escapes the characters in a {@code String} using Java String rules.
 	 *
 	 * @param text text to be shown
 	 * @return the expression
 	 */
-	public static JasperExpression<String> jasper(String text) {
+	public static JasperExpression<String> jasperSyntaxEscapedText(String text) {
 		return new JasperExpression<String>("\"" + StringEscapeUtils.escapeJava(text) + "\"", String.class);
 	}
 
@@ -172,9 +186,34 @@ public class Expressions {
 	 * @param expression the jasper expression
 	 * @param valueClass the expression class
 	 * @return the expression
+	 *
+	 * @deprecated use jasperSyntax(String expression, Class<? super T> valueClass)
 	 */
 	public static <T> JasperExpression<T> jasper(String expression, Class<? super T> valueClass) {
+		return jasperSyntax(expression, valueClass);
+	}
+
+	/**
+	 * Creates a new jasper expression.<br/>
+	 * This expression allows declaring an expression in a Jasper native syntax. Knowledge of the jasper syntax is also required for proper use.
+	 *
+	 * @param expression the jasper expression
+	 * @param valueClass the expression class
+	 * @return the expression
+	 */
+	public static <T> JasperExpression<T> jasperSyntax(String expression, Class<? super T> valueClass) {
 		return new JasperExpression<T>(expression, valueClass);
+	}
+
+	/**
+	 * Creates a new jasper expression.<br/>
+	 * This expression allows declaring an expression in a Jasper native syntax. Knowledge of the jasper syntax is also required for proper use.
+	 *
+	 * @param expression the jasper expression
+	 * @return the expression
+	 */
+	public static JasperExpression<?> jasperSyntax(String expression) {
+		return jasperSyntax(expression, Object.class);
 	}
 
 	//property

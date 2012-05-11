@@ -30,12 +30,14 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface DRIVariable<T> extends DRIExpression<T>, DRIValue<T> {
-	
+
 	public Calculation getCalculation();
-	
+
 	public Evaluation getResetType();
-	
+
 	public DRIGroup getResetGroup();
-	
-	public DRIExpression<?> getExpression();
+
+	public DRIExpression<?> getValueExpression();
+
+	public DRIExpression<?> getInitialValueExpression();
 }

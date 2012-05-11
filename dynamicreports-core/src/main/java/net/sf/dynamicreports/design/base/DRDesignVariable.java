@@ -31,58 +31,67 @@ import net.sf.dynamicreports.report.constant.Calculation;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignVariable implements DRIDesignVariable {	
+public class DRDesignVariable implements DRIDesignVariable {
 	private String name;
 	private DRIDesignExpression valueExpression;
+	private DRIDesignExpression initialValueExpression;
 	private Calculation calculation;
 	private ResetType resetType;
-	private DRDesignGroup resetGroup;	
-	
+	private DRDesignGroup resetGroup;
+
 	public DRDesignVariable() {
 		this.name = ReportUtils.generateUniqueName("variable");
 	}
-	
+
 	public DRDesignVariable(String name) {
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
-	
+
 	public void setValueExpression(DRIDesignExpression valueExpression) {
 		this.valueExpression = valueExpression;
 	}
-	
+
+	public DRIDesignExpression getInitialValueExpression() {
+		return initialValueExpression;
+	}
+
+	public void setInitialValueExpression(DRIDesignExpression initialValueExpression) {
+		this.initialValueExpression = initialValueExpression;
+	}
+
 	public Calculation getCalculation() {
 		return calculation;
 	}
-	
+
 	public void setCalculation(Calculation calculation) {
 		this.calculation = calculation;
 	}
-	
+
 	public ResetType getResetType() {
 		return resetType;
 	}
-	
+
 	public void setResetType(ResetType resetType) {
 		this.resetType = resetType;
 	}
-	
+
 	public DRDesignGroup getResetGroup() {
 		return resetGroup;
 	}
-	
+
 	public void setResetGroup(DRDesignGroup resetGroup) {
 		this.resetGroup = resetGroup;
-	}	
-	
+	}
+
 	public Class<?> getValueClass() {
-		return ReportUtils.getVariableValueClass(calculation, valueExpression.getValueClass()); 
+		return ReportUtils.getVariableValueClass(calculation, valueExpression.getValueClass());
 	}
 }

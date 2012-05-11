@@ -73,7 +73,7 @@ public class Crosstab5Test extends AbstractJasperCrosstabValueTest implements Se
 		measure3 = ctab.measure(new PercentageExpression1());
 		measure3.setDataType(type.doubleType());
 		String expression = "$V{" + measure1.getName() + "}.doubleValue()/$V{" + measure1.getName() + "_" + rowGroup.getName() + "_" + columnGroup.getName() + "_ALL}.doubleValue() * 100";
-		measure4 = ctab.measure(exp.jasper(expression, Double.class));
+		measure4 = ctab.measure(exp.jasperSyntax(expression, Double.class));
 		measure4.setDataType(type.doubleType());
 		measure5 = ctab.measure(new PercentageExpression2());
 		measure5.setDataType(type.doubleType());
@@ -195,7 +195,7 @@ public class Crosstab5Test extends AbstractJasperCrosstabValueTest implements Se
 		private PercentageExpression2() {
 			addExpression(exp.crosstabValue(variable1));
 			addExpression(exp.crosstabValue(measure1, rowGroup));
-			addExpression(exp.jasper("$V{" + measure1.getName() + "_" + rowGroup.getName() + "_ALL}", Integer.class));
+			addExpression(exp.jasperSyntax("$V{" + measure1.getName() + "_" + rowGroup.getName() + "_ALL}", Integer.class));
 		}
 
 		@Override
