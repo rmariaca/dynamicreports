@@ -38,9 +38,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
-			<artifactId>dynamicreports-examples</artifactId>
+			<artifactId>dynamicreports-adhoc</artifactId>
 			<version>${project.version}</version>
 		</dependency> 
+		<dependency>
+			<groupId>net.sourceforge.dynamicreports</groupId>
+			<artifactId>dynamicreports-examples</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports-core</artifactId>
@@ -166,7 +171,7 @@
 				</dependency>
 				<dependency>
 					<groupId>net.sourceforge.dynamicreports</groupId>
-					<artifactId>dynamicreports-googlecharts</artifactId>
+					<artifactId>dynamicreports-adhoc</artifactId>
 					<version>${project.version}</version>
 					<classifier>sources</classifier>
 				</dependency>
@@ -174,7 +179,7 @@
 					<groupId>net.sourceforge.dynamicreports</groupId>
 					<artifactId>dynamicreports-googlecharts</artifactId>
 					<version>${project.version}</version>
-					<classifier>javadoc</classifier>
+					<classifier>sources</classifier>
 				</dependency>
 				<dependency>
 					<groupId>net.sourceforge.dynamicreports</groupId>

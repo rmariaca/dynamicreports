@@ -49,6 +49,7 @@ file.reference.commons-lang-${project.commonslangVersion}.jar=lib\\commons-lang-
 file.reference.commons-lang3-${project.commonslang3Version}.jar=lib\\commons-lang3-${project.commonslang3Version}.jar
 file.reference.commons-logging-${project.commonsloggingVersion}.jar=lib\\commons-logging-${project.commonsloggingVersion}.jar
 file.reference.dynamicreports-core-${project.version}.jar=lib\\dynamicreports-core-${project.version}.jar
+file.reference.dynamicreports-adhoc-${project.version}.jar=lib\\dynamicreports-adhoc-${project.version}.jar
 file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
 file.reference.itext-${project.itextVersion}.jar=lib\\itext-${project.itextVersion}.jar
 file.reference.jasperreports-${project.jasperreportsVersion}.jar=lib\\jasperreports-${project.jasperreportsVersion}.jar
@@ -99,6 +100,7 @@ javac.classpath=\
     ${r"${"}file.reference.commons-lang3-${project.commonslang3Version}.jar${r"}"}:\
     ${r"${"}file.reference.commons-logging-${project.commonsloggingVersion}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-core-${project.version}.jar${r"}"}:\
+    ${r"${"}file.reference.dynamicreports-adhoc-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.itext-${project.itextVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jasperreports-${project.jasperreportsVersion}.jar${r"}"}:\

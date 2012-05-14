@@ -30,8 +30,9 @@
 				<include>net.sourceforge.dynamicreports:dynamicreports-core:jar</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-core:*:javadoc</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-core:*:sources</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-adhoc:jar</include>
+				<include>net.sourceforge.dynamicreports:dynamicreports-adhoc:*:sources</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:jar</include>
-				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:*:javadoc</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-googlecharts:*:sources</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-examples:jar</include>
 				<include>net.sourceforge.dynamicreports:dynamicreports-examples:*:sources</include>
