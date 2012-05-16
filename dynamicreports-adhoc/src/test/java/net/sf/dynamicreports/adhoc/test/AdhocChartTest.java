@@ -206,6 +206,8 @@ public class AdhocChartTest {
 			AdhocManager.saveConfiguration(adhocConfiguration, os);
 			ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
 			AdhocConfiguration adhocConfiguration = AdhocManager.loadConfiguration(is);
+			Assert.assertTrue("equals", this.adhocConfiguration.equals(adhocConfiguration));
+			Assert.assertTrue("equals", this.adhocConfiguration.equals(adhocConfiguration.clone()));
 			testConfiguration(adhocConfiguration);
 		} catch (DRException e) {
 			e.printStackTrace();
