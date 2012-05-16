@@ -197,6 +197,7 @@
 	<xs:complexType name="Component">
 		<xs:sequence>
 			<xs:element name="style" type="Style" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="xs:string"/>
 		<xs:attribute name="width" type="xs:int"/>
@@ -220,10 +221,17 @@
 			<xs:extension base="Component">
 				<xs:sequence>
 					<xs:element name="titleFont" type="Font" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="serie" type="ChartSerie" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="seriesColors" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="xAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="yAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
 				</xs:sequence>
+				<xs:attribute name="type" type="ChartType"/>
 				<xs:attribute name="title" type="xs:string"/>
 				<xs:attribute name="titleColor" type="xs:string"/>	
 				<xs:attribute name="showLegend" type="xs:boolean"/>				
+				<xs:attribute name="xValue" type="xs:string"/>
+				<xs:attribute name="orientation" type="Orientation"/>			
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -242,33 +250,16 @@
 		<xs:attribute name="label" type="xs:string"/>
 		<xs:attribute name="labelColor" type="xs:string"/>		
 	</xs:complexType>
-
-	<!-- ******************** CATEGORY CHART ******************** -->
-
-	<xs:complexType name="CategoryChart">
-		<xs:complexContent>
-			<xs:extension base="Chart">	
-				<xs:sequence>					
-					<xs:element name="serie" type="CategoryChartSerie" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="seriesColors" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="categoryAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
-					<xs:element name="valueAxisFormat" type="AxisFormat" minOccurs="0" maxOccurs="1"/>
-				</xs:sequence>
-				<xs:attribute name="type" type="CategoryChartType"/>
-				<xs:attribute name="category" type="xs:string"/>
-				<xs:attribute name="orientation" type="Orientation"/>
-				<xs:attribute name="useSeriesAsCategory" type="xs:boolean"/>			
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	
-	<xs:complexType name="CategoryChartSerie">
+	<xs:complexType name="ChartSerie">
 		<xs:attribute name="series" type="xs:string"/>
-		<xs:attribute name="value" type="xs:string"/>
+		<xs:attribute name="xValue" type="xs:string"/>
+		<xs:attribute name="yValue" type="xs:string"/>
+		<xs:attribute name="zValue" type="xs:string"/>
 		<xs:attribute name="label" type="xs:string"/>
 	</xs:complexType>
 
-	<xs:simpleType name="CategoryChartType">
+	<xs:simpleType name="ChartType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="AREA"/>
 			<xs:enumeration value="STACKEDAREA"/>

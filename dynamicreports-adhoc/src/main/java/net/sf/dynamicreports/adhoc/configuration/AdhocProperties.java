@@ -32,6 +32,9 @@ import java.util.Map;
 public class AdhocProperties implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final String PROPERTY_PREFIX = "net.sf.dynamicreports.";
+	public static final String CHART_USE_SERIES_AS_CATEGORY = PROPERTY_PREFIX + "chart.useseriesascategory";
+
 	private Map<String, Object> properties;
 
 	public AdhocProperties() {

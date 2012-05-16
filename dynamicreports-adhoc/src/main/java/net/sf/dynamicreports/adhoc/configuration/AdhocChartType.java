@@ -25,7 +25,7 @@ package net.sf.dynamicreports.adhoc.configuration;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum AdhocCategoryChartType {
+public enum AdhocChartType {
 	AREA,
 	STACKEDAREA,
 	BAR,

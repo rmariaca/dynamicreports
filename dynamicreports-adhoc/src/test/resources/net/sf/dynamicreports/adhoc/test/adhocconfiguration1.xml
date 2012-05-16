@@ -40,19 +40,20 @@
         <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TextField" text="text" key="textField" width="150" height="200">
             <style foregroundColor="#0000FF"/>
         </component>
-        <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:CategoryChart" type="AREA" category="field2" orientation="VERTICAL" useSeriesAsCategory="true" title="title" titleColor="#FF00FF" showLegend="true" key="chart1">
+        <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Chart" type="AREA" title="title" titleColor="#FF00FF" showLegend="true" xValue="field2" orientation="VERTICAL" key="chart1">
+            <property key="net.sf.dynamicreports.chart.useseriesascategory" valueClass="java.lang.Boolean">true</property>
             <titleFont/>
-            <serie series="field5" value="field1" label="label"/>
+            <serie series="field5" yValue="field1" label="label"/>
             <seriesColors>#C0C0C0</seriesColors>
-            <categoryAxisFormat label="label" labelColor="#0000FF">
+            <xAxisFormat label="label" labelColor="#0000FF">
                 <labelFont/>
-            </categoryAxisFormat>
-            <valueAxisFormat label="label" labelColor="#0000FF">
+            </xAxisFormat>
+            <yAxisFormat label="label" labelColor="#0000FF">
                 <labelFont/>
-            </valueAxisFormat>
+            </yAxisFormat>
         </component>
-        <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:CategoryChart" category="field2" key="chart2">
-            <serie value="field1"/>
+        <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Chart" xValue="field2" key="chart2">
+            <serie yValue="field1"/>
         </component>
     </report>
     <filter>

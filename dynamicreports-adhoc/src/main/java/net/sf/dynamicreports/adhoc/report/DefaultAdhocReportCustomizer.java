@@ -28,10 +28,9 @@ import java.util.Map;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
 import net.sf.dynamicreports.adhoc.configuration.AdhocCalculation;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChart;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChartSerie;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChartType;
 import net.sf.dynamicreports.adhoc.configuration.AdhocChart;
+import net.sf.dynamicreports.adhoc.configuration.AdhocChartSerie;
+import net.sf.dynamicreports.adhoc.configuration.AdhocChartType;
 import net.sf.dynamicreports.adhoc.configuration.AdhocColumn;
 import net.sf.dynamicreports.adhoc.configuration.AdhocComponent;
 import net.sf.dynamicreports.adhoc.configuration.AdhocFont;
@@ -43,6 +42,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPage;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPageOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocPen;
+import net.sf.dynamicreports.adhoc.configuration.AdhocProperties;
 import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
@@ -55,11 +55,21 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.MarginBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.SortBuilder;
+import net.sf.dynamicreports.report.builder.chart.AbstractBaseChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AbstractCategoryChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AbstractChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.AbstractChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.AreaChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AxisFormatBuilder;
+import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.Charts;
+import net.sf.dynamicreports.report.builder.chart.LayeredBarChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.StackedAreaChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.StackedBar3DChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.StackedBarChartBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -452,8 +462,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		if (adhocComponent instanceof AdhocTextField) {
 			return textField((AdhocTextField) adhocComponent);
 		}
-		if (adhocComponent instanceof AdhocCategoryChart) {
-			return categoryChart((AdhocCategoryChart) adhocComponent);
+		if (adhocComponent instanceof AdhocChart) {
+			return chart((AdhocChart) adhocComponent);
 		}
 		throw new AdhocException("Component " + adhocComponent.getClass().getName() + " not supported");
 	}
@@ -476,6 +486,34 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return textField;
 	}
 
+	protected AbstractChartBuilder<?> chart(AdhocChart adhocChart) {
+		AdhocChartType type = adhocChart.getType();
+		if (type == null) {
+			type = AdhocChartType.BAR;
+		}
+
+		switch (type) {
+		case AREA:
+			return areaChart(adhocChart);
+		case STACKEDAREA:
+			return stackedAreaChart(adhocChart);
+		case BAR:
+			return barChart(adhocChart);
+		case STACKEDBAR:
+			return stackedBarChart(adhocChart);
+		case BAR3D:
+			return bar3DChart(adhocChart);
+		case STACKEDBAR3D:
+			return stackedBar3DChart(adhocChart);
+		case LINE:
+			return lineChart(adhocChart);
+		case LAYEREDBAR:
+			return layeredBarChart(adhocChart);
+		default:
+			throw new AdhocException("Chart type " + type.name() + " not supported");
+		}
+	}
+
 	protected void chart(AdhocChart adhocChart, AbstractChartBuilder<?> chart) {
 		component(adhocChart, chart);
 		if (adhocChart.getTitle() != null) {
@@ -486,6 +524,92 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		chart.setTitleColor(adhocChart.getTitleColor());
 		chart.setShowLegend(adhocChart.getShowLegend());
+	}
+
+	protected void baseChart(AdhocChart adhocChart, AbstractBaseChartBuilder<?, ?, ?> baseChart) {
+		chart(adhocChart, baseChart);
+		if (adhocChart.getSeriesColors() != null && !adhocChart.getSeriesColors().isEmpty()) {
+			for (Color adhocSeriesColor : adhocChart.getSeriesColors()) {
+				baseChart.addSeriesColor(adhocSeriesColor);
+			}
+		}
+		baseChart.setOrientation(orientation(adhocChart.getOrientation()));
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void categoryChart(AdhocChart adhocChart, AbstractCategoryChartBuilder<?, ?> categoryChart) {
+		baseChart(adhocChart, categoryChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			categoryChart.setCategory((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			categoryChart.setCategory(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				categoryChart.addSerie((CategoryChartSerieBuilder) categoryChartSerie(adhocChartSerie));
+			}
+		}
+		AxisFormatBuilder categoryAxisFormat = axisFormat(adhocChart.getXAxisFormat());
+		if (categoryAxisFormat != null) {
+			categoryChart.setCategoryAxisFormat(categoryAxisFormat);
+		}
+		AxisFormatBuilder valueAxisFormat = axisFormat(adhocChart.getYAxisFormat());
+		if (valueAxisFormat != null) {
+			categoryChart.setValueAxisFormat(valueAxisFormat);
+		}
+		Boolean useSeriesAsCategory = adhocChart.getProperty(AdhocProperties.CHART_USE_SERIES_AS_CATEGORY);
+		categoryChart.setUseSeriesAsCategory(useSeriesAsCategory);
+	}
+
+	protected AreaChartBuilder areaChart(AdhocChart adhocChart) {
+		AreaChartBuilder areaChart = Charts.areaChart();
+		categoryChart(adhocChart, areaChart);
+		return areaChart;
+	}
+
+	protected StackedAreaChartBuilder stackedAreaChart(AdhocChart adhocChart) {
+		StackedAreaChartBuilder stackedAreaChart = Charts.stackedAreaChart();
+		categoryChart(adhocChart, stackedAreaChart);
+		return stackedAreaChart;
+	}
+
+	protected BarChartBuilder barChart(AdhocChart adhocChart) {
+		BarChartBuilder barChart = Charts.barChart();
+		categoryChart(adhocChart, barChart);
+		return barChart;
+	}
+
+	protected StackedBarChartBuilder stackedBarChart(AdhocChart adhocChart) {
+		StackedBarChartBuilder stackedBarChart = Charts.stackedBarChart();
+		categoryChart(adhocChart, stackedBarChart);
+		return stackedBarChart;
+	}
+
+	protected Bar3DChartBuilder bar3DChart(AdhocChart adhocChart) {
+		Bar3DChartBuilder bar3DChart = Charts.bar3DChart();
+		categoryChart(adhocChart, bar3DChart);
+		return bar3DChart;
+	}
+
+	protected StackedBar3DChartBuilder stackedBar3DChart(AdhocChart adhocChart) {
+		StackedBar3DChartBuilder stackedBar3DChart = Charts.stackedBar3DChart();
+		categoryChart(adhocChart, stackedBar3DChart);
+		return stackedBar3DChart;
+	}
+
+	protected LineChartBuilder lineChart(AdhocChart adhocChart) {
+		LineChartBuilder lineChart = Charts.lineChart();
+		categoryChart(adhocChart, lineChart);
+		return lineChart;
+	}
+
+	protected LayeredBarChartBuilder layeredBarChart(AdhocChart adhocChart) {
+		LayeredBarChartBuilder layeredChart = Charts.layeredBarChart();
+		categoryChart(adhocChart, layeredChart);
+		return layeredChart;
 	}
 
 	protected Orientation orientation(AdhocOrientation adhocOrientation) {
@@ -517,92 +641,33 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return axisFormat;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected AbstractCategoryChartBuilder<?, ?> categoryChart(AdhocCategoryChart adhocCategoryChart) {
-		AbstractCategoryChartBuilder<?, ?> categoryChart = categoryChart(adhocCategoryChart.getType());
-		chart(adhocCategoryChart, categoryChart);
-		ColumnBuilder valueColumn = columns.get(adhocCategoryChart.getCategory());
-		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
-			categoryChart.setCategory((ValueColumnBuilder) valueColumn);
-		}
-		else {
-			FieldBuilder field = field(adhocCategoryChart.getCategory());
-			categoryChart.setCategory(field);
-		}
-		if (adhocCategoryChart.getSeries() != null && !adhocCategoryChart.getSeries().isEmpty()) {
-			for (AdhocCategoryChartSerie adhocCategoryChartSerie : adhocCategoryChart.getSeries()) {
-				categoryChart.addSerie(categoryChartSerie(adhocCategoryChartSerie));
+	protected void chartSerie(AdhocChartSerie adhocChartSerie, AbstractChartSerieBuilder<?, ?> chartSerie) {
+		if (adhocChartSerie.getSeries() != null) {
+			ColumnBuilder<?, ?> seriesColumn = columns.get(adhocChartSerie.getSeries());
+			if (seriesColumn != null && seriesColumn instanceof ValueColumnBuilder<?, ?>) {
+				chartSerie.setSeries((ValueColumnBuilder<?, ?>) seriesColumn);
+			}
+			else {
+				chartSerie.setSeries(field(adhocChartSerie.getSeries()));
 			}
 		}
-		if (adhocCategoryChart.getSeriesColors() != null && !adhocCategoryChart.getSeriesColors().isEmpty()) {
-			for (Color adhocSeriesColor : adhocCategoryChart.getSeriesColors()) {
-				categoryChart.addSeriesColor(adhocSeriesColor);
-			}
-		}
-		AxisFormatBuilder categoryAxisFormat = axisFormat(adhocCategoryChart.getCategoryAxisFormat());
-		if (categoryAxisFormat != null) {
-			categoryChart.setCategoryAxisFormat(categoryAxisFormat);
-		}
-		AxisFormatBuilder valueAxisFormat = axisFormat(adhocCategoryChart.getValueAxisFormat());
-		if (valueAxisFormat != null) {
-			categoryChart.setValueAxisFormat(valueAxisFormat);
-		}
-		categoryChart.setOrientation(orientation(adhocCategoryChart.getOrientation()));
-		categoryChart.setUseSeriesAsCategory(adhocCategoryChart.getUseSeriesAsCategory());
-
-		return categoryChart;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected CategoryChartSerieBuilder categoryChartSerie(AdhocCategoryChartSerie adhocCategoryChartSerie) {
+	protected AbstractChartSerieBuilder<?, ?> categoryChartSerie(AdhocChartSerie adhocChartSerie) {
 		CategoryChartSerieBuilder categoryChartSerie;
-		ColumnBuilder valueColumn = columns.get(adhocCategoryChartSerie.getValue());
+		ColumnBuilder valueColumn = columns.get(adhocChartSerie.getYValue());
 		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
 			categoryChartSerie = Charts.serie((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocCategoryChartSerie.getValue());
+			FieldBuilder field = field(adhocChartSerie.getYValue());
 			categoryChartSerie = Charts.serie(field);
 		}
-		if (adhocCategoryChartSerie.getSeries() != null) {
-			ColumnBuilder<?, ?> seriesColumn = columns.get(adhocCategoryChartSerie.getSeries());
-			if (seriesColumn != null && seriesColumn instanceof ValueColumnBuilder<?, ?>) {
-				categoryChartSerie.setSeries((ValueColumnBuilder<?, ?>) seriesColumn);
-			}
-			else {
-				categoryChartSerie.setSeries(field(adhocCategoryChartSerie.getSeries()));
-			}
-		}
-		if (adhocCategoryChartSerie.getLabel() != null) {
-			categoryChartSerie.setLabel(adhocCategoryChartSerie.getLabel());
+		chartSerie(adhocChartSerie, categoryChartSerie);
+		if (adhocChartSerie.getLabel() != null) {
+			categoryChartSerie.setLabel(adhocChartSerie.getLabel());
 		}
 		return categoryChartSerie;
-	}
-
-	protected AbstractCategoryChartBuilder<?, ?> categoryChart(AdhocCategoryChartType adhocCategoryChartType) {
-		if (adhocCategoryChartType == null) {
-			return Charts.barChart();
-		}
-
-		switch (adhocCategoryChartType) {
-		case AREA:
-			return Charts.areaChart();
-		case STACKEDAREA:
-			return Charts.stackedAreaChart();
-		case BAR:
-			return Charts.barChart();
-		case STACKEDBAR:
-			return Charts.stackedBarChart();
-		case BAR3D:
-			return Charts.bar3DChart();
-		case STACKEDBAR3D:
-			return Charts.stackedBar3DChart();
-		case LINE:
-			return Charts.lineChart();
-		case LAYEREDBAR:
-			return Charts.layeredBarChart();
-		default:
-			throw new AdhocException("Category chart type " + adhocCategoryChartType.name() + " not supported");
-		}
 	}
 }

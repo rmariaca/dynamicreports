@@ -34,6 +34,11 @@ public class AdhocComponent implements Cloneable, Serializable {
 	private AdhocStyle style;
 	private Integer width;
 	private Integer height;
+	private AdhocProperties properties;
+
+	public AdhocComponent() {
+		properties = new AdhocProperties();
+	}
 
 	public String getKey() {
 		return key;
@@ -67,6 +72,22 @@ public class AdhocComponent implements Cloneable, Serializable {
 		this.height = height;
 	}
 
+	public AdhocProperties getProperties() {
+		return properties;
+	}
+
+	public <T> T getProperty(String key) {
+		return this.properties.getProperty(key);
+	}
+
+	public void setProperty(String key, Object value) {
+		this.properties.setProperty(key, value);
+	}
+
+	public void setProperties(AdhocProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -90,6 +111,9 @@ public class AdhocComponent implements Cloneable, Serializable {
 		if (!(height == null ? object.getHeight() == null : height.equals(object.getHeight()))) {
 			return false;
 		}
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
+			return false;
+		}
 
 		return true;
 	}
@@ -105,6 +129,9 @@ public class AdhocComponent implements Cloneable, Serializable {
 
 		if (style != null) {
 			clone.style = style.clone();
+		}
+		if (properties != null) {
+			clone.properties = properties.clone();
 		}
 
 		return clone;

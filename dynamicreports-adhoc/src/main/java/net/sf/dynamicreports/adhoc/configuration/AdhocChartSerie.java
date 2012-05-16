@@ -27,11 +27,13 @@ import java.io.Serializable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class AdhocCategoryChartSerie implements Cloneable, Serializable {
+public class AdhocChartSerie implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String series;
-	private String value;
+	private String xValue;
+	private String yValue;
+	private String zValue;
 	private String label;
 
 	public String getSeries() {
@@ -42,12 +44,28 @@ public class AdhocCategoryChartSerie implements Cloneable, Serializable {
 		this.series = series;
 	}
 
-	public String getValue() {
-		return value;
+	public String getXValue() {
+		return xValue;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setXValue(String xValue) {
+		this.xValue = xValue;
+	}
+
+	public String getYValue() {
+		return yValue;
+	}
+
+	public void setYValue(String yValue) {
+		this.yValue = yValue;
+	}
+
+	public String getZValue() {
+		return zValue;
+	}
+
+	public void setZValue(String zValue) {
+		this.zValue = zValue;
 	}
 
 	public String getLabel() {
@@ -65,14 +83,20 @@ public class AdhocCategoryChartSerie implements Cloneable, Serializable {
 		}
 		if (obj == null)
 			return false;
-		if (!(obj instanceof AdhocCategoryChartSerie))
+		if (!(obj instanceof AdhocChartSerie))
 			return false;
 
-		AdhocCategoryChartSerie object = (AdhocCategoryChartSerie) obj;
+		AdhocChartSerie object = (AdhocChartSerie) obj;
 		if (!(series == null ? object.getSeries() == null : series.equals(object.getSeries()))) {
 			return false;
 		}
-		if (!(value == null ? object.getValue() == null : value.equals(object.getValue()))) {
+		if (!(xValue == null ? object.getXValue() == null : xValue.equals(object.getXValue()))) {
+			return false;
+		}
+		if (!(yValue == null ? object.getYValue() == null : yValue.equals(object.getYValue()))) {
+			return false;
+		}
+		if (!(zValue == null ? object.getZValue() == null : zValue.equals(object.getZValue()))) {
 			return false;
 		}
 		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
@@ -83,10 +107,10 @@ public class AdhocCategoryChartSerie implements Cloneable, Serializable {
 	}
 
 	@Override
-	public AdhocCategoryChartSerie clone() {
-		AdhocCategoryChartSerie clone;
+	public AdhocChartSerie clone() {
+		AdhocChartSerie clone;
 		try {
-			clone = (AdhocCategoryChartSerie) super.clone();
+			clone = (AdhocChartSerie) super.clone();
 		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
 		}

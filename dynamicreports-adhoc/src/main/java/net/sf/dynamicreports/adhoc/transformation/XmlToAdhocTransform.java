@@ -27,10 +27,9 @@ import java.util.List;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
 import net.sf.dynamicreports.adhoc.configuration.AdhocCalculation;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChart;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChartSerie;
-import net.sf.dynamicreports.adhoc.configuration.AdhocCategoryChartType;
 import net.sf.dynamicreports.adhoc.configuration.AdhocChart;
+import net.sf.dynamicreports.adhoc.configuration.AdhocChartSerie;
+import net.sf.dynamicreports.adhoc.configuration.AdhocChartType;
 import net.sf.dynamicreports.adhoc.configuration.AdhocColumn;
 import net.sf.dynamicreports.adhoc.configuration.AdhocComponent;
 import net.sf.dynamicreports.adhoc.configuration.AdhocConfiguration;
@@ -57,10 +56,9 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocVerticalAlignment;
 import net.sf.dynamicreports.adhoc.exception.AdhocException;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocAxisFormat;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocCalculation;
-import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocCategoryChart;
-import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocCategoryChartSerie;
-import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocCategoryChartType;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocChart;
+import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocChartSerie;
+import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocChartType;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocColumn;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocComponent;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocConfiguration;
@@ -400,11 +398,6 @@ public class XmlToAdhocTransform {
 			textField((XmlAdhocTextField) xmlAdhocComponent, adhocComponent);
 			return adhocComponent;
 		}
-		if (xmlAdhocComponent instanceof XmlAdhocCategoryChart) {
-			AdhocCategoryChart adhocComponent = new AdhocCategoryChart();
-			categoryChart((XmlAdhocCategoryChart) xmlAdhocComponent, adhocComponent);
-			return adhocComponent;
-		}
 		if (xmlAdhocComponent instanceof XmlAdhocChart) {
 			AdhocChart adhocComponent = new AdhocChart();
 			chart((XmlAdhocChart) xmlAdhocComponent, adhocComponent);
@@ -422,6 +415,9 @@ public class XmlToAdhocTransform {
 		adhocComponent.setStyle(style(xmlAdhocComponent.getStyle()));
 		adhocComponent.setWidth(xmlAdhocComponent.getWidth());
 		adhocComponent.setHeight(xmlAdhocComponent.getHeight());
+		if (xmlAdhocComponent.getProperty() != null && !xmlAdhocComponent.getProperty().isEmpty()) {
+			properties(xmlAdhocComponent.getProperty(), adhocComponent.getProperties());
+		}
 	}
 
 	protected void textField(XmlAdhocTextField xmlAdhocTextField, AdhocTextField adhocTextField) {
@@ -431,10 +427,25 @@ public class XmlToAdhocTransform {
 
 	protected void chart(XmlAdhocChart xmlAdhocChart, AdhocChart adhocChart) {
 		component(xmlAdhocChart, adhocChart);
+		adhocChart.setType(chartType(xmlAdhocChart.getType()));
 		adhocChart.setTitle(xmlAdhocChart.getTitle());
 		adhocChart.setTitleFont(font(xmlAdhocChart.getTitleFont()));
 		adhocChart.setTitleColor(color(xmlAdhocChart.getTitleColor()));
 		adhocChart.setShowLegend(xmlAdhocChart.isShowLegend());
+		adhocChart.setXValue(xmlAdhocChart.getXValue());
+		if (xmlAdhocChart.getSerie() != null && !xmlAdhocChart.getSerie().isEmpty()) {
+			for (XmlAdhocChartSerie xmlAdhocChartSerie : xmlAdhocChart.getSerie()) {
+				adhocChart.addSerie(chartSerie(xmlAdhocChartSerie));
+			}
+		}
+		if (xmlAdhocChart.getSeriesColors() != null && !xmlAdhocChart.getSeriesColors().isEmpty()) {
+			for (String xmlAdhocSeriesColor : xmlAdhocChart.getSeriesColors()) {
+				adhocChart.addSeriesColor(color(xmlAdhocSeriesColor));
+			}
+		}
+		adhocChart.setXAxisFormat(axisFormat(xmlAdhocChart.getXAxisFormat()));
+		adhocChart.setYAxisFormat(axisFormat(xmlAdhocChart.getYAxisFormat()));
+		adhocChart.setOrientation(orientation(xmlAdhocChart.getOrientation()));
 	}
 
 	protected AdhocOrientation orientation(XmlAdhocOrientation xmlAdhocOrientation) {
@@ -464,58 +475,40 @@ public class XmlToAdhocTransform {
 		return adhocAxisFormat;
 	}
 
-	protected void categoryChart(XmlAdhocCategoryChart xmlAdhocCategoryChart, AdhocCategoryChart adhocCategoryChart) {
-		chart(xmlAdhocCategoryChart, adhocCategoryChart);
-		adhocCategoryChart.setType(categoryChartType(xmlAdhocCategoryChart.getType()));
-		adhocCategoryChart.setCategory(xmlAdhocCategoryChart.getCategory());
-		if (xmlAdhocCategoryChart.getSerie() != null && !xmlAdhocCategoryChart.getSerie().isEmpty()) {
-			for (XmlAdhocCategoryChartSerie xmlAdhocCategoryChartSerie : xmlAdhocCategoryChart.getSerie()) {
-				adhocCategoryChart.addSerie(categoryChartSerie(xmlAdhocCategoryChartSerie));
-			}
-		}
-		if (xmlAdhocCategoryChart.getSeriesColors() != null && !xmlAdhocCategoryChart.getSeriesColors().isEmpty()) {
-			for (String xmlAdhocSeriesColor : xmlAdhocCategoryChart.getSeriesColors()) {
-				adhocCategoryChart.addSeriesColor(color(xmlAdhocSeriesColor));
-			}
-		}
-		adhocCategoryChart.setCategoryAxisFormat(axisFormat(xmlAdhocCategoryChart.getCategoryAxisFormat()));
-		adhocCategoryChart.setValueAxisFormat(axisFormat(xmlAdhocCategoryChart.getValueAxisFormat()));
-		adhocCategoryChart.setOrientation(orientation(xmlAdhocCategoryChart.getOrientation()));
-		adhocCategoryChart.setUseSeriesAsCategory(xmlAdhocCategoryChart.isUseSeriesAsCategory());
+	protected AdhocChartSerie chartSerie(XmlAdhocChartSerie xmlAdhocChartSerie) {
+		AdhocChartSerie adhocChartSerie = new AdhocChartSerie();
+		adhocChartSerie.setSeries(xmlAdhocChartSerie.getSeries());
+		adhocChartSerie.setXValue(xmlAdhocChartSerie.getXValue());
+		adhocChartSerie.setYValue(xmlAdhocChartSerie.getYValue());
+		adhocChartSerie.setZValue(xmlAdhocChartSerie.getZValue());
+		adhocChartSerie.setLabel(xmlAdhocChartSerie.getLabel());
+		return adhocChartSerie;
 	}
 
-	protected AdhocCategoryChartSerie categoryChartSerie(XmlAdhocCategoryChartSerie xmlAdhocCategoryChartSerie) {
-		AdhocCategoryChartSerie adhocCategoryChartSerie = new AdhocCategoryChartSerie();
-		adhocCategoryChartSerie.setSeries(xmlAdhocCategoryChartSerie.getSeries());
-		adhocCategoryChartSerie.setValue(xmlAdhocCategoryChartSerie.getValue());
-		adhocCategoryChartSerie.setLabel(xmlAdhocCategoryChartSerie.getLabel());
-		return adhocCategoryChartSerie;
-	}
-
-	protected AdhocCategoryChartType categoryChartType(XmlAdhocCategoryChartType xmlAdhocCategoryChartType) {
-		if (xmlAdhocCategoryChartType == null) {
+	protected AdhocChartType chartType(XmlAdhocChartType xmlAdhocChartType) {
+		if (xmlAdhocChartType == null) {
 			return null;
 		}
 
-		switch (xmlAdhocCategoryChartType) {
+		switch (xmlAdhocChartType) {
 		case AREA:
-			return AdhocCategoryChartType.AREA;
+			return AdhocChartType.AREA;
 		case STACKEDAREA:
-			return AdhocCategoryChartType.STACKEDAREA;
+			return AdhocChartType.STACKEDAREA;
 		case BAR:
-			return AdhocCategoryChartType.BAR;
+			return AdhocChartType.BAR;
 		case STACKEDBAR:
-			return AdhocCategoryChartType.STACKEDBAR;
+			return AdhocChartType.STACKEDBAR;
 		case BAR_3_D:
-			return AdhocCategoryChartType.BAR3D;
+			return AdhocChartType.BAR3D;
 		case STACKEDBAR_3_D:
-			return AdhocCategoryChartType.STACKEDBAR3D;
+			return AdhocChartType.STACKEDBAR3D;
 		case LINE:
-			return AdhocCategoryChartType.LINE;
+			return AdhocChartType.LINE;
 		case LAYEREDBAR:
-			return AdhocCategoryChartType.LAYEREDBAR;
+			return AdhocChartType.LAYEREDBAR;
 		default:
-			throw new AdhocException("Category chart type " + xmlAdhocCategoryChartType.name() + " not supported");
+			throw new AdhocException("Chart type " + xmlAdhocChartType.name() + " not supported");
 		}
 	}
 
