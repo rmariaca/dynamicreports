@@ -59,17 +59,32 @@ import net.sf.dynamicreports.report.builder.chart.AbstractBaseChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AbstractCategoryChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AbstractChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AbstractChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.AbstractPieChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.AbstractTimeSeriesChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.AbstractXyChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AreaChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.AxisFormatBuilder;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.BubbleChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.Charts;
+import net.sf.dynamicreports.report.builder.chart.DifferenceChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.LayeredBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.Pie3DChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.PieChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.ScatterChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.SpiderChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.StackedAreaChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.StackedBar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.StackedBarChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyAreaChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyBarChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyLineChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyzChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -509,6 +524,26 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return lineChart(adhocChart);
 		case LAYEREDBAR:
 			return layeredBarChart(adhocChart);
+		case DIFFERENCE:
+			return differenceChart(adhocChart);
+		case PIE:
+			return pieChart(adhocChart);
+		case PIE3D:
+			return pie3DChart(adhocChart);
+		case SCATTER:
+			return scatterChart(adhocChart);
+		case SPIDER:
+			return spiderChart(adhocChart);
+		case TIMESERIES:
+			return timeSeriesChart(adhocChart);
+		case XYAREA:
+			return xyAreaChart(adhocChart);
+		case XYBAR:
+			return xyBarChart(adhocChart);
+		case XYLINE:
+			return xyLineChart(adhocChart);
+		case BUBBLE:
+			return bubbleChart(adhocChart);
 		default:
 			throw new AdhocException("Chart type " + type.name() + " not supported");
 		}
@@ -549,7 +584,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
 			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
-				categoryChart.addSerie((CategoryChartSerieBuilder) categoryChartSerie(adhocChartSerie));
+				categoryChart.addSerie(categoryChartSerie(adhocChartSerie));
 			}
 		}
 		AxisFormatBuilder categoryAxisFormat = axisFormat(adhocChart.getXAxisFormat());
@@ -562,6 +597,120 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		Boolean useSeriesAsCategory = adhocChart.getProperty(AdhocProperties.CHART_USE_SERIES_AS_CATEGORY);
 		categoryChart.setUseSeriesAsCategory(useSeriesAsCategory);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void timeSeriesChart(AdhocChart adhocChart, AbstractTimeSeriesChartBuilder<?, ?> timeSeriesChart) {
+		baseChart(adhocChart, timeSeriesChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			timeSeriesChart.setTimePeriod((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			timeSeriesChart.setTimePeriod(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				timeSeriesChart.addSerie(categoryChartSerie(adhocChartSerie));
+			}
+		}
+		AxisFormatBuilder timeAxisFormat = axisFormat(adhocChart.getXAxisFormat());
+		if (timeAxisFormat != null) {
+			timeSeriesChart.setTimeAxisFormat(timeAxisFormat);
+		}
+		AxisFormatBuilder valueAxisFormat = axisFormat(adhocChart.getYAxisFormat());
+		if (valueAxisFormat != null) {
+			timeSeriesChart.setValueAxisFormat(valueAxisFormat);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void pieChart(AdhocChart adhocChart, AbstractPieChartBuilder<?, ?> pieChart) {
+		baseChart(adhocChart, pieChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			pieChart.setKey((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			pieChart.setKey(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				pieChart.addSerie(categoryChartSerie(adhocChartSerie));
+			}
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void xyChart(AdhocChart adhocChart, AbstractXyChartBuilder<?, ?> xyChart) {
+		baseChart(adhocChart, xyChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			xyChart.setXValue((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			xyChart.setXValue(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				xyChart.addSerie(xyChartSerie(adhocChartSerie));
+			}
+		}
+		AxisFormatBuilder xAxisFormat = axisFormat(adhocChart.getXAxisFormat());
+		if (xAxisFormat != null) {
+			xyChart.setXAxisFormat(xAxisFormat);
+		}
+		AxisFormatBuilder yAxisFormat = axisFormat(adhocChart.getYAxisFormat());
+		if (yAxisFormat != null) {
+			xyChart.setYAxisFormat(yAxisFormat);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void spiderChart(AdhocChart adhocChart, SpiderChartBuilder spiderChart) {
+		chart(adhocChart, spiderChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			spiderChart.setCategory((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			spiderChart.setCategory(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				spiderChart.addSerie(categoryChartSerie(adhocChartSerie));
+			}
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void bubbleChart(AdhocChart adhocChart, BubbleChartBuilder bubbleChart) {
+		baseChart(adhocChart, bubbleChart);
+		ColumnBuilder valueColumn = columns.get(adhocChart.getXValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			bubbleChart.setXValue((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChart.getXValue());
+			bubbleChart.setXValue(field);
+		}
+		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
+			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
+				bubbleChart.addSerie(xyzChartSerie(adhocChartSerie));
+			}
+		}
+		AxisFormatBuilder xAxisFormat = axisFormat(adhocChart.getXAxisFormat());
+		if (xAxisFormat != null) {
+			bubbleChart.setXAxisFormat(xAxisFormat);
+		}
+		AxisFormatBuilder yAxisFormat = axisFormat(adhocChart.getYAxisFormat());
+		if (yAxisFormat != null) {
+			bubbleChart.setYAxisFormat(yAxisFormat);
+		}
 	}
 
 	protected AreaChartBuilder areaChart(AdhocChart adhocChart) {
@@ -612,6 +761,66 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return layeredChart;
 	}
 
+	protected DifferenceChartBuilder differenceChart(AdhocChart adhocChart) {
+		DifferenceChartBuilder differenceChart = Charts.differenceChart();
+		timeSeriesChart(adhocChart, differenceChart);
+		return differenceChart;
+	}
+
+	protected PieChartBuilder pieChart(AdhocChart adhocChart) {
+		PieChartBuilder pieChart = Charts.pieChart();
+		pieChart(adhocChart, pieChart);
+		return pieChart;
+	}
+
+	protected Pie3DChartBuilder pie3DChart(AdhocChart adhocChart) {
+		Pie3DChartBuilder pie3DChart = Charts.pie3DChart();
+		pieChart(adhocChart, pie3DChart);
+		return pie3DChart;
+	}
+
+	protected ScatterChartBuilder scatterChart(AdhocChart adhocChart) {
+		ScatterChartBuilder scatterChart = Charts.scatterChart();
+		xyChart(adhocChart, scatterChart);
+		return scatterChart;
+	}
+
+	protected SpiderChartBuilder spiderChart(AdhocChart adhocChart) {
+		SpiderChartBuilder spiderChart = Charts.spiderChart();
+		spiderChart(adhocChart, spiderChart);
+		return spiderChart;
+	}
+
+	protected TimeSeriesChartBuilder timeSeriesChart(AdhocChart adhocChart) {
+		TimeSeriesChartBuilder timeSeriesChart = Charts.timeSeriesChart();
+		timeSeriesChart(adhocChart, timeSeriesChart);
+		return timeSeriesChart;
+	}
+
+	protected XyAreaChartBuilder xyAreaChart(AdhocChart adhocChart) {
+		XyAreaChartBuilder xyAreaChart = Charts.xyAreaChart();
+		xyChart(adhocChart, xyAreaChart);
+		return xyAreaChart;
+	}
+
+	protected XyBarChartBuilder xyBarChart(AdhocChart adhocChart) {
+		XyBarChartBuilder xyBarChart = Charts.xyBarChart();
+		xyChart(adhocChart, xyBarChart);
+		return xyBarChart;
+	}
+
+	protected XyLineChartBuilder xyLineChart(AdhocChart adhocChart) {
+		XyLineChartBuilder xyLineChart = Charts.xyLineChart();
+		xyChart(adhocChart, xyLineChart);
+		return xyLineChart;
+	}
+
+	protected BubbleChartBuilder bubbleChart(AdhocChart adhocChart) {
+		BubbleChartBuilder bubbleChart = Charts.bubbleChart();
+		bubbleChart(adhocChart, bubbleChart);
+		return bubbleChart;
+	}
+
 	protected Orientation orientation(AdhocOrientation adhocOrientation) {
 		if (adhocOrientation == null) {
 			return null;
@@ -654,7 +863,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected AbstractChartSerieBuilder<?, ?> categoryChartSerie(AdhocChartSerie adhocChartSerie) {
+	protected CategoryChartSerieBuilder categoryChartSerie(AdhocChartSerie adhocChartSerie) {
 		CategoryChartSerieBuilder categoryChartSerie;
 		ColumnBuilder valueColumn = columns.get(adhocChartSerie.getYValue());
 		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
@@ -669,5 +878,70 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			categoryChartSerie.setLabel(adhocChartSerie.getLabel());
 		}
 		return categoryChartSerie;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected XyChartSerieBuilder xyChartSerie(AdhocChartSerie adhocChartSerie) {
+		XyChartSerieBuilder xyChartSerie;
+		ColumnBuilder valueColumn = columns.get(adhocChartSerie.getYValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			xyChartSerie = Charts.xySerie((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			FieldBuilder field = field(adhocChartSerie.getYValue());
+			xyChartSerie = Charts.xySerie(field);
+		}
+		chartSerie(adhocChartSerie, xyChartSerie);
+		if (adhocChartSerie.getXValue() != null) {
+			valueColumn = columns.get(adhocChartSerie.getXValue());
+			if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+				xyChartSerie.setXValue((ValueColumnBuilder) valueColumn);
+			}
+			else {
+				FieldBuilder field = field(adhocChartSerie.getXValue());
+				xyChartSerie.setXValue(field);
+			}
+		}
+		if (adhocChartSerie.getLabel() != null) {
+			xyChartSerie.setLabel(adhocChartSerie.getLabel());
+		}
+		return xyChartSerie;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected XyzChartSerieBuilder xyzChartSerie(AdhocChartSerie adhocChartSerie) {
+		XyzChartSerieBuilder xyzChartSerie = Charts.xyzSerie();
+		chartSerie(adhocChartSerie, xyzChartSerie);
+		if (adhocChartSerie.getXValue() != null) {
+			ColumnBuilder valueColumn = columns.get(adhocChartSerie.getXValue());
+			if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+				xyzChartSerie.setXValue((ValueColumnBuilder) valueColumn);
+			}
+			else {
+				FieldBuilder field = field(adhocChartSerie.getXValue());
+				xyzChartSerie.setXValue(field);
+			}
+		}
+		if (adhocChartSerie.getYValue() != null) {
+			ColumnBuilder valueColumn = columns.get(adhocChartSerie.getYValue());
+			if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+				xyzChartSerie.setYValue((ValueColumnBuilder) valueColumn);
+			}
+			else {
+				FieldBuilder field = field(adhocChartSerie.getYValue());
+				xyzChartSerie.setYValue(field);
+			}
+		}
+		if (adhocChartSerie.getZValue() != null) {
+			ColumnBuilder valueColumn = columns.get(adhocChartSerie.getZValue());
+			if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+				xyzChartSerie.setZValue((ValueColumnBuilder) valueColumn);
+			}
+			else {
+				FieldBuilder field = field(adhocChartSerie.getZValue());
+				xyzChartSerie.setZValue(field);
+			}
+		}
+		return xyzChartSerie;
 	}
 }

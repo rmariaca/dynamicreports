@@ -507,6 +507,26 @@ public class XmlToAdhocTransform {
 			return AdhocChartType.LINE;
 		case LAYEREDBAR:
 			return AdhocChartType.LAYEREDBAR;
+		case DIFFERENCE:
+			return AdhocChartType.DIFFERENCE;
+		case PIE:
+			return AdhocChartType.PIE;
+		case PIE_3_D:
+			return AdhocChartType.PIE3D;
+		case SCATTER:
+			return AdhocChartType.SCATTER;
+		case SPIDER:
+			return AdhocChartType.SPIDER;
+		case TIMESERIES:
+			return AdhocChartType.TIMESERIES;
+		case XYAREA:
+			return AdhocChartType.XYAREA;
+		case XYBAR:
+			return AdhocChartType.XYBAR;
+		case XYLINE:
+			return AdhocChartType.XYLINE;
+		case BUBBLE:
+			return AdhocChartType.BUBBLE;
 		default:
 			throw new AdhocException("Chart type " + xmlAdhocChartType.name() + " not supported");
 		}

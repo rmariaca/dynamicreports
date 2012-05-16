@@ -269,6 +269,16 @@
 			<xs:enumeration value="STACKEDBAR3D"/>
 			<xs:enumeration value="LINE"/>
 			<xs:enumeration value="LAYEREDBAR"/>
+			<xs:enumeration value="DIFFERENCE"/>
+			<xs:enumeration value="PIE"/>
+			<xs:enumeration value="PIE3D"/>
+			<xs:enumeration value="SCATTER"/>
+			<xs:enumeration value="SPIDER"/>
+			<xs:enumeration value="TIMESERIES"/>
+			<xs:enumeration value="XYAREA"/>
+			<xs:enumeration value="XYBAR"/>
+			<xs:enumeration value="XYLINE"/>
+			<xs:enumeration value="BUBBLE"/>
 		</xs:restriction>
 	</xs:simpleType>
 
