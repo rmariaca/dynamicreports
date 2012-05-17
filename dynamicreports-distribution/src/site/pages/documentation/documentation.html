@@ -65,6 +65,13 @@
 	    </ul>
 	</li>
 	<li><a href="#adhoc">DynamicReports - adhoc</a></li>
+	<li><a href="#examples">Examples</a>
+	    <ul>
+		<li><a href="#examples_eclipse">How to run the examples in Eclipse</a></li>
+		<li><a href="#examples_eclipse_maven">How to run the examples in Eclipse with maven</a></li>
+		<li><a href="#examples_netbeans">How to run the examples in Netbeans</a></li>
+	    </ul>
+	</li>
 </ol>
 </div>
 
@@ -1510,5 +1517,48 @@ JasperReportBuilder reportBuilder = AdhocManager.createReport(configuration.getR
 reportBuilder.setDatasource(...);
 </@java_code>
 </p>
+
+<!-- Examples -->
+<a name="examples"></a><h3>Examples</h3>
+<!-- Examples - How to run the examples in Eclipse -->
+<a name="examples_eclipse"></a><h4>How to run the examples in Eclipse</h4>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project-with-dependencies</a> from the download page</li>
+	<li>Copy <b>/examples/eclipse/dynamicreports-examples</b> from the archive to your workspace e.g. <b>/workspace/dynamicreports-examples</b></li>
+	<li>Copy all files from <b>/lib</b> and <b>/dist</b> folders from the archive to <b>/workspace/dynamicreports_examples/lib/</b></li>
+	<li>
+		Run Eclipse and import project<br/>
+                To import a project, follow these steps<br/>
+		- go to <b>File - Import</b><br/>
+		<p><img class="preview" src="import1.png" alt="File - Import"/></p>
+                - choose <b>Existing Projects into Workspace</b><br/>
+                - click <b>Next</b> button to continue<br/>
+		<p><img class="preview" src="import2.png" alt="Existing Projects into Workspace"/></p>
+                - click the <b>Browse</b> button and find the project on your hard disk<br/>
+                - select the project<br/>
+                - click <b>Finish</b> to perform the import<br/>
+		<p><img class="preview" src="import3.png" alt="Import"/></p>
+	</li>
+	<li>Build the project</li>
+</ul>
+
+<!-- Examples - How to run the examples in Eclipse with maven -->
+<a name="examples_eclipse_maven"></a><h3>How to run the examples in Eclipse with maven</h3>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project</a> from the download page</li>
+	<li>Copy <b>/projects/dynamicreports-examples</b> from the archive to your workspace e.g. <b>/workspace/dynamicreports-examples</b></li>
+	<li>Run Eclipse and import project</li>
+	<li>Build the project</li>
+</ul>
+
+<!-- Examples - How do I run the examples in Eclipse -->
+<a name="examples_netbeans"></a><h3>How to run the examples in Netbeans</h3>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project-with-dependencies</a> from the download page</li>
+	<li>Copy <b>/examples/netbeans/dynamicreports-examples</b> from the archive to your NetBeansProjects folder e.g. <b>/NetBeansProjects/dynamicreports-examples</b></li>
+	<li>Copy all files from <b>/lib</b> and <b>/dist</b> folders from the archive to <b>/NetBeansProjects/dynamicreports_examples/lib/</b></li>
+	<li>Run NetBeans and open the project</li>
+	<li>Build the project</li>
+</ul>
 
 </div>

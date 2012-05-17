@@ -17,7 +17,6 @@
 		<li><a href="${page.path}screenshots.html">Screenshots</a></li>		
 		<li><a href="${page.path}features.html">Features</a></li>
 		<li><a href="${page.path}roadmap.html">Road map</a></li>
-		<li><a href="${page.path}faq.html">FAQ</a></li>
 	</ul>							
 	
 	<h4>Documentation &amp; examples</h4>
