@@ -24,13 +24,12 @@ package net.sf.dynamicreports.examples.complex.shippinglabel;
 
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ShippingLabelData implements ReportData {
+public class ShippingLabelData {
 	private ShippingLabel shippingLabel;
 
 	public ShippingLabelData() {

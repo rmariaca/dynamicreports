@@ -26,14 +26,13 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SalesTableOfContentsData implements ReportData {
+public class SalesTableOfContentsData {
 
 	public JRDataSource createDataSource() {
 		String[] countries = new String[]{"USA", "Canada", "Mexico", "Australia", "France", "Spain", "Germany", "China"};

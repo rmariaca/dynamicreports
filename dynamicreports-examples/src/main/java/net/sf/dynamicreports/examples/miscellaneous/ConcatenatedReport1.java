@@ -23,15 +23,10 @@
 package net.sf.dynamicreports.examples.miscellaneous;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-import net.sf.dynamicreports.examples.complex.ReportData;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.examples.complex.invoice.InvoiceData;
 import net.sf.dynamicreports.examples.complex.invoice.InvoiceDesign;
-import net.sf.dynamicreports.examples.complex.sales.SalesData;
 import net.sf.dynamicreports.examples.complex.sales.SalesDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
-import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -55,20 +50,11 @@ public class ConcatenatedReport1 {
 	}
 
 	private JasperReportBuilder invoiceReport() throws DRException {
-		return createReport(new InvoiceDesign(), new InvoiceData());
+		return new InvoiceDesign().build();
 	}
 
 	private JasperReportBuilder salesReport() throws DRException {
-		return createReport(new SalesDesign(), new SalesData());
-	}
-
-	private <T extends ReportData> JasperReportBuilder createReport(ReportDesign<T> design, T data) throws DRException {
-		JasperReportBuilder reportBuilder = DynamicReports.report();
-		if (data != null) {
-			reportBuilder.setDataSource(data.createDataSource());
-		}
-		design.configureReport(reportBuilder, data);
-		return reportBuilder;
+		return new SalesDesign().build();
 	}
 
 	public static void main(String[] args) {

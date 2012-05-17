@@ -24,13 +24,12 @@ package net.sf.dynamicreports.examples.complex.applicationform;
 
 import java.util.Calendar;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ApplicationFormData implements ReportData {
+public class ApplicationFormData {
 	private ApplicationForm applicationForm;
 
 	public ApplicationFormData() {

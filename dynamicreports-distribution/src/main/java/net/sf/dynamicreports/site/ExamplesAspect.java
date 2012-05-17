@@ -23,7 +23,6 @@
 package net.sf.dynamicreports.site;
 
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.complex.AbstractReportMain;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
@@ -54,17 +53,14 @@ public class ExamplesAspect {
 
 	@Around("build()")
 	public void build(ProceedingJoinPoint pjp) throws Throwable {
-		Class<? extends Object> design = pjp.getTarget().getClass();
-		name = design.getSimpleName().replaceAll("Main", "");
-		if (pjp.getTarget() instanceof AbstractReportMain<?, ?>) {
-			design = Class.forName(design.getName().replaceAll("Main", "Design"));
-		}
+		Class<?> design = pjp.getSignature().getDeclaringType();
+		name = design.getSimpleName().replaceAll("Design", "");
 		String path = design.getName().substring(Templates.class.getPackage().getName().length() + 1).split("\\.")[0];
 		GenerateSite.addExample(name, path, design);
 		pjp.proceed();
 	}
 
-	@Pointcut("execution(void net.sf.dynamicreports.examples..build())")
+	@Pointcut("execution(void net.sf.dynamicreports.examples..main(*))")
 	public void build() {
 	}
 

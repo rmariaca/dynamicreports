@@ -27,8 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.util.Date;
 
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.barcode.Code128BarcodeBuilder;
 import net.sf.dynamicreports.report.builder.barcode.Ean128BarcodeBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
@@ -42,56 +41,64 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
+public class ShippingLabelDesign {
+	private ShippingLabelData data = new ShippingLabelData();
 	private StyleBuilder bold14Style;
 
-	public void configureReport(ReportBuilder<?> rb, ShippingLabelData shippingLabelData) throws DRException {
-		ShippingLabel shippingLabel = shippingLabelData.getShippingLabel();
+	public JasperReportBuilder build() throws DRException {
+		JasperReportBuilder report = report();
 
-		StyleBuilder textStyle            = stl.style().setFontSize(12);
-		bold14Style                       = stl.style(Templates.boldStyle).setFontSize(14);
-		StyleBuilder boldCentered30Style  = stl.style(bold14Style)
-		                                       .setFontSize(30)
-		                                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
-		StyleBuilder boldCentered100Style = stl.style(boldCentered30Style).setFontSize(100);
+		ShippingLabel shippingLabel = data.getShippingLabel();
+
+		StyleBuilder textStyle = stl.style()
+			.setFontSize(12);
+		bold14Style = stl.style(Templates.boldStyle).setFontSize(14);
+		StyleBuilder boldCentered30Style = stl.style(bold14Style)
+			.setFontSize(30)
+			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder boldCentered100Style = stl.style(boldCentered30Style)
+			.setFontSize(100);
 
 		Ean128BarcodeBuilder shippingContainerCode = bcode.ean128("100264835710351")
-		                                                  .setModuleWidth(2.5)
-		                                                  .setStyle(bold14Style);
-		Code128BarcodeBuilder shipToPostalCode     = bcode.code128("09820")
-                                                      .setModuleWidth(3d)
-                                                      .setStyle(bold14Style);
+			.setModuleWidth(2.5)
+			.setStyle(bold14Style);
+		Code128BarcodeBuilder shipToPostalCode = bcode.code128("09820")
+			.setModuleWidth(3d)
+			.setStyle(bold14Style);
 		TextFieldBuilder<Integer> priority = cmp.text(shippingLabel.getPriority())
-		                                        .setStyle(boldCentered100Style);
+			.setStyle(boldCentered100Style);
 		TextFieldBuilder<String> pod = cmp.text(shippingLabel.getPod())
-		                                  .setStyle(boldCentered30Style);
+			.setStyle(boldCentered30Style);
 		TextFieldBuilder<Date> dateShipped = cmp.text(exp.date(shippingLabel.getDateShipped()))
-		                                        .setDataType(type.dateType());
+			.setDataType(type.dateType());
 		TextFieldBuilder<String> po = cmp.text(shippingLabel.getPo())
-		                                 .setStyle(boldCentered30Style);
+			.setStyle(boldCentered30Style);
 
-		rb.setTemplate(Templates.reportTemplate)
-		  .setPageFormat(PageType.A5)
-		  .setTextStyle(textStyle)
-		  .title(
-		  	Templates.createTitleComponent("ShippingLabel"),
-		  	cmp.horizontalList(
-		  		createCustomerComponent("From", shippingLabel.getFrom()),
-		  		createCustomerComponent("To", shippingLabel.getTo())),
-		  	cmp.horizontalList(
-		  		cmp.verticalList(
-		  			createCellComponent("Priority", priority),
-		  			createCellComponent("POD", pod)),
-		  		cmp.verticalList(
-		  			cmp.horizontalList(
-		  				createCellComponent("Carrier", cmp.text(shippingLabel.getCarrier())),
-	  					createCellComponent("Date shipped", dateShipped)),
-			  		cmp.horizontalList(
-			  			createCellComponent("Weight", cmp.text(shippingLabel.getWeight())),
-			  			createCellComponent("Quantity", cmp.text(shippingLabel.getQuantity()))),
-		  			createCellComponent("Ship to postal code", shipToPostalCode))),
-		  	createCellComponent("PO", po),
-		  	createCellComponent("Serial shipping container", shippingContainerCode));
+		report
+			.setTemplate(Templates.reportTemplate)
+			.setPageFormat(PageType.A5)
+			.setTextStyle(textStyle)
+			.title(
+				Templates.createTitleComponent("ShippingLabel"),
+				cmp.horizontalList(
+					createCustomerComponent("From", shippingLabel.getFrom()),
+					createCustomerComponent("To", shippingLabel.getTo())),
+				cmp.horizontalList(
+					cmp.verticalList(
+						createCellComponent("Priority", priority),
+						createCellComponent("POD", pod)),
+					cmp.verticalList(
+						cmp.horizontalList(
+							createCellComponent("Carrier", cmp.text(shippingLabel.getCarrier())),
+							createCellComponent("Date shipped", dateShipped)),
+						cmp.horizontalList(
+							createCellComponent("Weight", cmp.text(shippingLabel.getWeight())),
+							createCellComponent("Quantity", cmp.text(shippingLabel.getQuantity()))),
+						createCellComponent("Ship to postal code", shipToPostalCode))),
+					createCellComponent("PO", po),
+				createCellComponent("Serial shipping container", shippingContainerCode));
+
+		return report;
 	}
 
 	private ComponentBuilder<?, ?> createCustomerComponent(String label, Customer customer) {
@@ -111,5 +118,15 @@ public class ShippingLabelDesign implements ReportDesign<ShippingLabelData> {
 				cmp.horizontalGap(5)));
 		cell.setStyle(stl.style(stl.pen2Point()));
 		return cell;
+	}
+
+	public static void main(String[] args) {
+		ShippingLabelDesign design = new ShippingLabelDesign();
+		try {
+			JasperReportBuilder report = design.build();
+			report.show();
+		} catch (DRException e) {
+			e.printStackTrace();
+		}
 	}
 }

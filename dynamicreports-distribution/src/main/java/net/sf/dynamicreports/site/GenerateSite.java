@@ -193,8 +193,9 @@ public class GenerateSite {
 				int index = dir.getPath().indexOf(name);
 				try {
 					Class<?> classs = Class.forName(dir.getPath().substring(index).replaceAll("\\\\", ".").replaceAll("\\.class", ""));
-					if (classs.getMethod("main", String[].class) != null) {
-						classs.newInstance();
+					Method method = classs.getMethod("main", String[].class);
+					if (method != null) {
+						method.invoke(null, new Object[]{null});
 					}
 				} catch (NoSuchMethodException e) {
 				} catch (Exception e) {

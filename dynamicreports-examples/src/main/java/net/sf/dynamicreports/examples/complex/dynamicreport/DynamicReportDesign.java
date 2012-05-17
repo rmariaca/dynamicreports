@@ -29,8 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
@@ -42,15 +41,19 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DynamicReportDesign implements ReportDesign<DynamicReportData> {
+public class DynamicReportDesign {
+	private DynamicReportData data = new DynamicReportData();
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void configureReport(ReportBuilder<?> rb, DynamicReportData data) throws DRException {
-		rb.setTemplate(Templates.reportTemplate)
+	public JasperReportBuilder build() throws DRException {
+		JasperReportBuilder report = report();
+
+		report
+			.setTemplate(Templates.reportTemplate)
 			.title(Templates.createTitleComponent("DynamicReport"));
 
-		DynamicReport report = data.getDynamicReport();
-		List<DynamicColumn> columns = report.getColumns();
+		DynamicReport dynamicReport = data.getDynamicReport();
+		List<DynamicColumn> columns = dynamicReport.getColumns();
 		Map<String, TextColumnBuilder> drColumns = new HashMap<String, TextColumnBuilder>();
 
 		for (DynamicColumn column : columns) {
@@ -62,33 +65,45 @@ public class DynamicReportDesign implements ReportDesign<DynamicReportData> {
 				drColumn.setHorizontalAlignment(column.getHorizontalAlignment());
 			}
 			drColumns.put(column.getName(), drColumn);
-			rb.columns(drColumn);
+			report.columns(drColumn);
 		}
 
-		for (String group : report.getGroups()) {
+		for (String group : dynamicReport.getGroups()) {
 			ColumnGroupBuilder group2 = grp.group(drColumns.get(group));
-			rb.groupBy(group2);
+			report.groupBy(group2);
 
-			for (String subtotal : report.getSubtotals()) {
-				rb.subtotalsAtGroupFooter(group2, sbt.sum(drColumns.get(subtotal)));
+			for (String subtotal : dynamicReport.getSubtotals()) {
+				report.subtotalsAtGroupFooter(group2, sbt.sum(drColumns.get(subtotal)));
 			}
 		}
 
-		for (String subtotal : report.getSubtotals()) {
-			rb.subtotalsAtSummary(sbt.sum(drColumns.get(subtotal)));
+		for (String subtotal : dynamicReport.getSubtotals()) {
+			report.subtotalsAtSummary(sbt.sum(drColumns.get(subtotal)));
 		}
 
-		if (report.getTitle() != null) {
-			TextFieldBuilder<String> title = cmp.text(report.getTitle())
+		if (dynamicReport.getTitle() != null) {
+			TextFieldBuilder<String> title = cmp.text(dynamicReport.getTitle())
 				.setStyle(Templates.bold12CenteredStyle)
 				.setHorizontalAlignment(HorizontalAlignment.CENTER);
-			rb.addTitle(title);
+			report.addTitle(title);
 		}
-		if (report.isShowPageNumber()) {
+		if (dynamicReport.isShowPageNumber()) {
 			PageXofYBuilder pageXofY = cmp.pageXofY()
 				.setStyle(Templates.boldCenteredStyle);
-			rb.addPageFooter(pageXofY);
+			report.addPageFooter(pageXofY);
 		}
+		report.setDataSource(data.createDataSource());
 
+		return report;
+	}
+
+	public static void main(String[] args) {
+		DynamicReportDesign design = new DynamicReportDesign();
+		try {
+			JasperReportBuilder report = design.build();
+			report.show();
+		} catch (DRException e) {
+			e.printStackTrace();
+		}
 	}
 }

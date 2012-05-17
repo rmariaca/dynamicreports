@@ -28,8 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.component.FillerBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
@@ -45,23 +44,27 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ApplicationFormDesign implements ReportDesign<ApplicationFormData> {
+public class ApplicationFormDesign {
 	private static final int cellWidth = 18;
 	private static final int cellHeight = 18;
+
+	private ApplicationFormData data = new ApplicationFormData();
 
 	private StyleBuilder textStyle;
 	private StyleBuilder centeredStyle;
 	private StyleBuilder labelStyle;
 	private StyleBuilder cellStyle;
 
-	public void configureReport(ReportBuilder<?> rb, ApplicationFormData applicationFormData) throws DRException {
-		ApplicationForm applicationForm = applicationFormData.getApplicationForm();
+	public JasperReportBuilder build() throws DRException {
+		JasperReportBuilder report = report();
+
+		ApplicationForm applicationForm = data.getApplicationForm();
 
 		textStyle = stl.style()
 			.setFontSize(12)
 			.setPadding(2);
 		centeredStyle = stl.style(textStyle)
-				.setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			.setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
 		labelStyle = stl.style(textStyle)
 			.setHorizontalAlignment(HorizontalAlignment.LEFT)
 			.bold();
@@ -88,15 +91,18 @@ public class ApplicationFormDesign implements ReportDesign<ApplicationFormData> 
 			.add(label("Email", 31)).newRow()
 			.add(textCell(applicationForm.getEmail(), 31));
 
-		rb.setTemplate(Templates.reportTemplate)
-		  .setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
-		  .setTextStyle(textStyle)
-		  .title(
-		  	Templates.createTitleComponent("ApplicationForm"),
-		  	cmp.text("APPLICATION FORM").setStyle(Templates.bold18CenteredStyle),
-		  	applicant, cmp.verticalGap(10),
-		  	address, cmp.verticalGap(10),
-		  	contact);
+		report
+			.setTemplate(Templates.reportTemplate)
+			.setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
+			.setTextStyle(textStyle)
+			.title(
+				Templates.createTitleComponent("ApplicationForm"),
+				cmp.text("APPLICATION FORM").setStyle(Templates.bold18CenteredStyle),
+				applicant, cmp.verticalGap(10),
+				address, cmp.verticalGap(10),
+				contact);
+
+		return report;
 	}
 
 	private HorizontalListBuilder dateOfBirth(Date dateOfBirth) {
@@ -154,5 +160,15 @@ public class ApplicationFormDesign implements ReportDesign<ApplicationFormData> 
 			label.setStyle(style);
 		}
 		return label;
+	}
+
+	public static void main(String[] args) {
+		ApplicationFormDesign design = new ApplicationFormDesign();
+		try {
+			JasperReportBuilder report = design.build();
+			report.show();
+		} catch (DRException e) {
+			e.printStackTrace();
+		}
 	}
 }

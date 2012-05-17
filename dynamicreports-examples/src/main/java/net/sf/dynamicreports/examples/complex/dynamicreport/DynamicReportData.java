@@ -26,7 +26,6 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -34,7 +33,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DynamicReportData implements ReportData {
+public class DynamicReportData {
 
 	public JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("state", "item", "orderdate", "quantity", "unitprice");

@@ -26,14 +26,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class InvoiceData implements ReportData {
+public class InvoiceData {
 	private Invoice invoice;
 
 	public InvoiceData() {

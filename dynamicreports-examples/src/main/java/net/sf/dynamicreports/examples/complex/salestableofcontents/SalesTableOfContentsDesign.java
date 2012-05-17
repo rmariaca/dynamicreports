@@ -28,10 +28,9 @@ import java.awt.Color;
 import java.util.List;
 
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
-import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
@@ -55,11 +54,14 @@ import net.sf.dynamicreports.report.exception.DRException;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfContentsData> {
+public class SalesTableOfContentsDesign {
+	private SalesTableOfContentsData data = new SalesTableOfContentsData();
 
-	public void configureReport(ReportBuilder<?> rb, SalesTableOfContentsData invoiceData) throws DRException {
+	public JasperReportBuilder build() throws DRException {
+		JasperReportBuilder report = report();
+
 		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
-		TextColumnBuilder<String> itemColumn    = col.column("Item",    "item",    type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 
 		StyleBuilder headingToc1Style = stl.style(Templates.rootStyle)
 			.italic();
@@ -69,20 +71,24 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 		tableOfContentsCustomizer.setTextFixedWidth(100);
 		tableOfContentsCustomizer.setPageIndexFixedWidth(30);
 
-		rb.setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
+		report
+			.setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
 			.setTemplate(Templates.reportTemplate)
 			.setTableOfContents(tableOfContentsCustomizer)
 			.columns(
-			 	countryColumn,
-			 	itemColumn,
-			 	col.column("Order date", "orderdate", type.dateType()),
-			 	col.column("Quantity",   "quantity",  type.integerType()),
-			 	col.column("Unit price", "unitprice", type.bigDecimalType()))
+				countryColumn,
+				itemColumn,
+				col.column("Order date", "orderdate", type.dateType()),
+				col.column("Quantity",   "quantity",  type.integerType()),
+				col.column("Unit price", "unitprice", type.bigDecimalType()))
 			.groupBy(countryColumn, itemColumn)
 			.title(
 				Templates.createTitleComponent("SalesTableOfContents"))
 			.pageFooter(
-				Templates.footerComponent);
+				Templates.footerComponent)
+			.setDataSource(data.createDataSource());
+
+		return report;
 	}
 
 	private class CustomTableOfContentsCustomizer extends TableOfContentsCustomizer {
@@ -183,6 +189,16 @@ public class SalesTableOfContentsDesign implements ReportDesign<SalesTableOfCont
 			public String evaluate(List<?> values, ReportParameters reportParameters) {
 				return values.get(0) + " - " + values.get(1);
 			}
+		}
+	}
+
+	public static void main(String[] args) {
+		SalesTableOfContentsDesign design = new SalesTableOfContentsDesign();
+		try {
+			JasperReportBuilder report = design.build();
+			report.show();
+		} catch (DRException e) {
+			e.printStackTrace();
 		}
 	}
 }
