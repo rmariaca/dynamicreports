@@ -62,8 +62,9 @@
         	<li><a href="#configuration_defaultSettings">Default settings</a></li>
         	<li><a href="#configuration_maven">Maven configuration</a></li>
         	<li><a href="#configuration_mavenSnapshot">Maven snapshot repository configuration</a></li>
-    	</ul>
+	    </ul>
 	</li>
+	<li><a href="#adhoc">DynamicReports - adhoc</a></li>
 </ol>
 </div>
 
@@ -1233,14 +1234,14 @@ This expression allows declaring an expression in a Jasper native syntax. Knowle
 		<th>description</th>
 	</tr>
 	<tr>
-		<td><b>exp.jasper(String expression, Class class)</b></td>
+		<td><b>exp.jasperSyntax(String expression, Class class),<br/>exp.jasperSyntax(String expression)</b></td>
 		<td>Creates a new jasper expression<br/>
 - expression - the jasper expression<br/>
 - class - the expression class</td>
 	</tr>
 	<tr>
-		<td><b>exp.jasper(String text)</b></td>
-		<td>Creates a new jasper string expression, useful only for showing a static text<br/>
+		<td><b>exp.jasperSyntaxText(String text)</b></td>
+		<td>Creates a new jasper string expression, useful only for showing a static text.<br/>This method escapes the characters in a String using Java String rules.<br/>
 - text - text to be shown</td>
 	</tr>
 </table>
@@ -1248,8 +1249,8 @@ This expression allows declaring an expression in a Jasper native syntax. Knowle
 <b>Examples</b><br/>
 Quick usage:
 <@java_code>
-JasperExpression&lt;BigDecimal&gt; columnExpression = exp.jasper("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class); 
-JasperExpression&lt;String&gt; columnTitle = exp.jasper("Price");
+JasperExpression&lt;BigDecimal&gt; columnExpression = exp.jasperSyntax("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class); 
+JasperExpression&lt;String&gt; columnTitle = exp.jasperSyntaxText("Price");
 TextColumnBuilder&lt;BigDecimal&gt; priceColumn = col.column(columnExpression).setTitle(columnTitle);
 </@java_code>
 Another example:
@@ -1473,6 +1474,41 @@ and add the Sonatype Nexus snapshot repository
 	&lt;/repository&gt;
 &lt;/repositories&gt;
 </@xml_code>
+</p>
+
+<!-- Adhoc -->
+<a name="adhoc"></a><h3>DynamicReports - adhoc</h3>
+<p>
+Adhoc report applications allow users themselves to create specific reports and filter queries. Report is created on the fly, displaying values or charts that user specified via GUI.<br/>
+This project simplifies creating adhoc report applications. It allows to configure reports and filter queries and this configuration can be stored to an xml file or loaded from an xml file.
+The main configuration object is <b>AdhocConfiguration</b> that consists of <b>AdhocReport</b> and <b>AdhocFilter</b> object.<br/>
+<b>AdhocReport</b> - a report configuration object that can be transformed to a dynamic report builder object.<br/>
+<b>AdhocFilter</b> - a filter configuration object. This project doesn't generate sql queries from this object, it only allows you to store and load a filter configuration. <br/>
+Another important class of this project is <b>AdhocManager</b>. It is a helper class that contains methods for loading/storing an AdhocConfiguration from/to a stream and methods for creating a report builder instance from a given AdhocReport object.<br/>
+<img class="preview" src="adhoc.png" alt="DynamicReports - adhoc"/><br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+AdhocConfiguration configuration = new AdhocConfiguration();
+AdhocReport report = new AdhocReport();
+configuration.setReprot(report);
+AdhocColumn column = new AdhocColumn();
+column.setName("item");
+report.addColumn(column);
+</@java_code>
+The following code stores a configuration to an output stream
+<@java_code>
+AdhocManager.saveConfiguration(configuration, outputStream);
+</@java_code>
+The following code loads a configuration from an input stream
+<@java_code>
+AdhocConfiguration configuration = AdhocManager.loadConfiguration(configuration, inputStream);
+</@java_code>
+The following code converts a configuration to a report builder instance
+<@java_code>
+JasperReportBuilder reportBuilder = AdhocManager.createReport(configuration.getReport());
+reportBuilder.setDatasource(...);
+</@java_code>
 </p>
 
 </div>
