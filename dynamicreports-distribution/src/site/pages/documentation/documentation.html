@@ -1486,19 +1486,19 @@ and add the Sonatype Nexus snapshot repository
 <!-- Adhoc -->
 <a name="adhoc"></a><h3>DynamicReports - adhoc</h3>
 <p>
-Adhoc report applications allow users themselves to create specific reports and filter queries. Report is created on the fly, displaying values or charts that user specified via GUI.<br/>
+Adhoc report applications allow users themselves to create specific reports and filter queries. A report is created on the fly, displaying values or charts that a user has specified via GUI.<br/>
 This project simplifies creating adhoc report applications. It allows to configure reports and filter queries and this configuration can be stored to an xml file or loaded from an xml file.
 The main configuration object is <b>AdhocConfiguration</b> that consists of <b>AdhocReport</b> and <b>AdhocFilter</b> object.<br/>
 <b>AdhocReport</b> - a report configuration object that can be transformed to a dynamic report builder object.<br/>
 <b>AdhocFilter</b> - a filter configuration object. This project doesn't generate sql queries from this object, it only allows you to store and load a filter configuration. <br/>
-Another important class of this project is <b>AdhocManager</b>. It is a helper class that contains methods for loading/storing an AdhocConfiguration from/to a stream and methods for creating a report builder instance from a given AdhocReport object.<br/>
+Another important class of this project is <b>AdhocManager</b>. It is a helper class that contains methods of loading/storing an AdhocConfiguration from/to a stream and methods of creating a report builder instance from a given AdhocReport object.<br/>
 <img class="preview" src="adhoc.png" alt="DynamicReports - adhoc"/><br/>
 <b>Examples</b><br/>
 Quick usage:
 <@java_code>
 AdhocConfiguration configuration = new AdhocConfiguration();
 AdhocReport report = new AdhocReport();
-configuration.setReprot(report);
+configuration.setReport(report);
 AdhocColumn column = new AdhocColumn();
 column.setName("item");
 report.addColumn(column);

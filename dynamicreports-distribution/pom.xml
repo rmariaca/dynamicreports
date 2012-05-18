@@ -38,11 +38,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
-			<artifactId>dynamicreports-adhoc</artifactId>
-			<version>${project.version}</version>
-		</dependency> 
-		<dependency>
-			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports-examples</artifactId>
 			<version>${project.version}</version>
 		</dependency>
