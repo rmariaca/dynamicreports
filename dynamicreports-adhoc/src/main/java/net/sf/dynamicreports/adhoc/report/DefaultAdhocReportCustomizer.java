@@ -113,6 +113,8 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -845,7 +847,9 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		if (adhocAxisFormat.getLabel() != null) {
 			axisFormat.setLabel(adhocAxisFormat.getLabel());
 		}
-		axisFormat.setLabelFont(font(adhocAxisFormat.getLabelFont()));
+		if (adhocAxisFormat.getLabelFont() != null) {
+			axisFormat.setLabelFont(font(adhocAxisFormat.getLabelFont()));
+		}
 		axisFormat.setLabelColor(adhocAxisFormat.getLabelColor());
 		return axisFormat;
 	}
@@ -877,6 +881,12 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		if (adhocChartSerie.getLabel() != null) {
 			categoryChartSerie.setLabel(adhocChartSerie.getLabel());
 		}
+		else if (valueColumn == null) {
+			String label = getColumnTitle(adhocChartSerie.getYValue());
+			if (StringUtils.isNotBlank(label)) {
+				categoryChartSerie.setLabel(label);
+			}
+		}
 		return categoryChartSerie;
 	}
 
@@ -904,6 +914,12 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		if (adhocChartSerie.getLabel() != null) {
 			xyChartSerie.setLabel(adhocChartSerie.getLabel());
+		}
+		else if (valueColumn == null) {
+			String label = getColumnTitle(adhocChartSerie.getYValue());
+			if (StringUtils.isNotBlank(label)) {
+				xyChartSerie.setLabel(label);
+			}
 		}
 		return xyChartSerie;
 	}
