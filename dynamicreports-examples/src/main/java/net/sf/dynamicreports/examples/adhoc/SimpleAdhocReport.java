@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.examples.adhoc;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -56,14 +59,19 @@ public class SimpleAdhocReport {
 		column.setName("quantity");
 		report.addColumn(column);
 
-		//AdhocManager.saveConfiguration(configuration, outputStream);
-		//AdhocConfiguration configuration = AdhocManager.loadConfiguration(configuration, inputStream);
-
 	  try {
+	  	//The following code stores the configuration to an xml file
+			AdhocManager.saveConfiguration(configuration, new FileOutputStream("c:/temp/configuration.xml"));
+			@SuppressWarnings("unused")
+			//The following code loads a configuration from an xml file
+			AdhocConfiguration loadedConfiguration = AdhocManager.loadConfiguration(new FileInputStream("c:/temp/configuration.xml"));
+
 			JasperReportBuilder reportBuilder = AdhocManager.createReport(configuration.getReport());
 			reportBuilder.setDataSource(createDataSource());
 			reportBuilder.show();
 		} catch (DRException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
