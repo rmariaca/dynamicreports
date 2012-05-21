@@ -146,6 +146,7 @@ javadoc.nonavbar=false
 javadoc.notree=false
 javadoc.private=false
 javadoc.splitindex=true
+javadoc.reference.dynamicreports-core-${project.version}.jar=lib/dynamicreports-core-${project.version}-javadoc.jar
 javadoc.use=true
 javadoc.version=false
 javadoc.windowtitle=
@@ -164,5 +165,8 @@ run.test.classpath=\
     ${r"${javac.test.classpath}"}:\
     ${r"${build.test.classes.dir}"}
 source.encoding=UTF-8
+source.reference.dynamicreports-core-${project.version}.jar=lib/dynamicreports-core-${project.version}-sources.jar
+source.reference.dynamicreports-adhoc-${project.version}.jar=lib/dynamicreports-adhoc-${project.version}-sources.jar
+source.reference.dynamicreports-googlecharts-${project.version}.jar=lib/dynamicreports-googlecharts-${project.version}-sources.jar
 src.dir=src
 test.src.dir=test

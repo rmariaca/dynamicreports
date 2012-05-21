@@ -28,6 +28,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -54,7 +55,10 @@ public class ExamplesAspect {
 	@Around("build()")
 	public void build(ProceedingJoinPoint pjp) throws Throwable {
 		Class<?> design = pjp.getSignature().getDeclaringType();
-		name = design.getSimpleName().replaceAll("Design", "");
+		name = design.getSimpleName();
+		if (StringUtils.endsWith(name, "Design")) {
+			name = StringUtils.substringBeforeLast(name, "Design");
+		}
 		String path = design.getName().substring(Templates.class.getPackage().getName().length() + 1).split("\\.")[0];
 		GenerateSite.addExample(name, path, design);
 		pjp.proceed();

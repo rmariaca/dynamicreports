@@ -284,6 +284,7 @@
 						<version>2.4.3</version>
 						<executions>
 							<execution>
+								<id>resources</id>
 								<phase>package</phase>
 								<goals>
 									<goal>copy-resources</goal>
@@ -298,6 +299,25 @@
 									</resources>              
 								</configuration>            
 							</execution>
+							<execution>
+								<id>schema</id>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${siteOutputDirectory}/schema</outputDirectory>
+									<resources>          
+										<resource>
+											<directory>../dynamicreports-adhoc/src/main/resources/net/sf/dynamicreports/adhoc/schema</directory>
+											<filtering>true</filtering>
+											<includes>
+												<include>*.xsd</include>
+											</includes>
+										</resource>
+									</resources>              
+								</configuration>            
+							</execution>							
 						</executions>
 					</plugin>
 					<plugin>
