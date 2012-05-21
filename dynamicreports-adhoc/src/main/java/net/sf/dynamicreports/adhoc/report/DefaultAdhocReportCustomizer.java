@@ -166,8 +166,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		addComponents();
 	}
 
-	protected String getColumnTitle(String name) {
-		return null;
+	protected String getFieldLabel(String name) {
+		return name;
 	}
 
 	protected DRIDataType<?, ?> getFieldType(String name) {
@@ -188,7 +188,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			column.setTitle(adhocColumn.getTitle());
 		}
 		else {
-			String columnTitle = getColumnTitle(adhocColumn.getName());
+			String columnTitle = getFieldLabel(adhocColumn.getName());
 			if (columnTitle != null) {
 				column.setTitle(columnTitle);
 			}
@@ -882,7 +882,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			categoryChartSerie.setLabel(adhocChartSerie.getLabel());
 		}
 		else if (valueColumn == null) {
-			String label = getColumnTitle(adhocChartSerie.getYValue());
+			String label = getFieldLabel(adhocChartSerie.getYValue());
 			if (StringUtils.isNotBlank(label)) {
 				categoryChartSerie.setLabel(label);
 			}
@@ -916,7 +916,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			xyChartSerie.setLabel(adhocChartSerie.getLabel());
 		}
 		else if (valueColumn == null) {
-			String label = getColumnTitle(adhocChartSerie.getYValue());
+			String label = getFieldLabel(adhocChartSerie.getYValue());
 			if (StringUtils.isNotBlank(label)) {
 				xyChartSerie.setLabel(label);
 			}

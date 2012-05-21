@@ -144,10 +144,10 @@ public class AdhocCustomizerReport {
 		}
 
 		/**
-		 * If user doesn’t specify a column title, getColumnTitle is evaluated and the return value is used as a column title.
+		 * If a user doesn’t specify a column title, getColumnTitle is evaluated and the return value is used as a column title.
 		 */
 		@Override
-		protected String getColumnTitle(String name) {
+		protected String getFieldLabel(String name) {
 			if (name.equals("item")) {
 				return "Item";
 			}

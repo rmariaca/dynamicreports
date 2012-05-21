@@ -358,7 +358,7 @@ public class AdhocConfigurationTest {
 
 		column = report.getColumns().get(2);
 		Assert.assertEquals("column name", "field3", column.getName());
-		Assert.assertNull("column title", column.getTitleExpression());
+		Assert.assertNotNull("column title", column.getTitleExpression());
 		Assert.assertNull("column style", column.getComponent().getStyle());
 		Assert.assertNull("column title style", column.getTitleStyle());
 		Assert.assertNull("column width", ((DRDimensionComponent) column.getComponent()).getWidth());
