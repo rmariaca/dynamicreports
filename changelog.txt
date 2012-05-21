@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.5.0 (2012-05-21)
+---------------------------------------------------
+ - dynamicreports-adhoc project - a project that simplifies creating adhoc report applications, see SimpleAdhocReport and AdhocCustomizerReport for an example
+   This project allows to configure reports and filter queries and this configuration can be stored or loaded to/from an xml file.
+ - new column attribute was added - setPrintWhenDetailOverflows
+ - minor bug fixes and improvements
+ - new examples - CustomChartReport, ColumnSubreportDataReport, SimpleAdhocReport, AdhocCustomizerReport
+
 Changes in version 2.4.1 (2012-04-12)
 ---------------------------------------------------
  - difference chart, see DifferenceChartReport for an example
