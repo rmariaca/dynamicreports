@@ -48,6 +48,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotal;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTextField;
+import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.configuration.AdhocVerticalAlignment;
 import net.sf.dynamicreports.adhoc.exception.AdhocException;
 import net.sf.dynamicreports.report.builder.DynamicReports;
@@ -109,6 +110,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -624,6 +626,37 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		AxisFormatBuilder valueAxisFormat = axisFormat(adhocChart.getYAxisFormat());
 		if (valueAxisFormat != null) {
 			timeSeriesChart.setValueAxisFormat(valueAxisFormat);
+		}
+		AdhocTimePeriod adhocTimePeriod = adhocChart.getProperty(AdhocProperties.TIMESERIES_CHART_TIME_PERIOD);
+		timeSeriesChart.setTimePeriodType(timePeriodType(adhocTimePeriod));
+	}
+
+	protected TimePeriod timePeriodType(AdhocTimePeriod timePeriod) {
+		if (timePeriod == null) {
+			return null;
+		}
+
+		switch (timePeriod) {
+		case YEAR:
+			return TimePeriod.YEAR;
+		case QUARTER:
+			return TimePeriod.QUARTER;
+		case MONTH:
+			return TimePeriod.MONTH;
+		case WEEK:
+			return TimePeriod.WEEK;
+		case DAY:
+			return TimePeriod.DAY;
+		case HOUR:
+			return TimePeriod.HOUR;
+		case MINUTE:
+			return TimePeriod.MINUTE;
+		case SECOND:
+			return TimePeriod.SECOND;
+		case MILLISECOND:
+			return TimePeriod.MILLISECOND;
+		default:
+			throw new AdhocException("Time period type " + timePeriod.name() + " not supported");
 		}
 	}
 

@@ -50,6 +50,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotal;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTextField;
+import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.configuration.AdhocValueOperator;
 import net.sf.dynamicreports.adhoc.configuration.AdhocValueRestriction;
 import net.sf.dynamicreports.adhoc.configuration.AdhocVerticalAlignment;
@@ -117,6 +118,9 @@ public class XmlToAdhocTransform {
 		if (valueClass.equals(Integer.class.getName())) {
 			return new Integer(value);
 		}
+		if (valueClass.equals(AdhocTimePeriod.class.getName())) {
+			return AdhocTimePeriod.valueOf(value);
+		}
 		throw new AdhocException("Property value type " + valueClass + " not supported");
 	}
 
@@ -174,6 +178,9 @@ public class XmlToAdhocTransform {
 		adhocColumn.setWidth(xmlAdhocColumn.getWidth());
 		adhocColumn.setStyle(style(xmlAdhocColumn.getStyle()));
 		adhocColumn.setTitleStyle(style(xmlAdhocColumn.getTitleStyle()));
+		if (xmlAdhocColumn.getProperty() != null && !xmlAdhocColumn.getProperty().isEmpty()) {
+			properties(xmlAdhocColumn.getProperty(), adhocColumn.getProperties());
+		}
 		return adhocColumn;
 	}
 

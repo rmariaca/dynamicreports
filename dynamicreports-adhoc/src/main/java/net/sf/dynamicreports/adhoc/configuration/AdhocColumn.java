@@ -35,6 +35,11 @@ public class AdhocColumn implements Cloneable, Serializable {
 	private Integer width;
 	private AdhocStyle style;
 	private AdhocStyle titleStyle;
+	private AdhocProperties properties;
+
+	public AdhocColumn() {
+		properties = new AdhocProperties();
+	}
 
 	public String getName() {
 		return name;
@@ -76,6 +81,22 @@ public class AdhocColumn implements Cloneable, Serializable {
 		this.titleStyle = titleStyle;
 	}
 
+	public AdhocProperties getProperties() {
+		return properties;
+	}
+
+	public <T> T getProperty(String key) {
+		return this.properties.getProperty(key);
+	}
+
+	public void setProperty(String key, Object value) {
+		this.properties.setProperty(key, value);
+	}
+
+	public void setProperties(AdhocProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -102,6 +123,9 @@ public class AdhocColumn implements Cloneable, Serializable {
 		if (!(titleStyle == null ? object.getTitleStyle() == null : titleStyle.equals(object.getTitleStyle()))) {
 			return false;
 		}
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
+			return false;
+		}
 
 		return true;
 	}
@@ -120,6 +144,9 @@ public class AdhocColumn implements Cloneable, Serializable {
 		}
 		if (titleStyle != null) {
 			clone.titleStyle = titleStyle.clone();
+		}
+		if (properties != null) {
+			clone.properties = properties.clone();
 		}
 
 		return clone;

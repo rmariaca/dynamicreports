@@ -167,6 +167,19 @@ public class AdhocReport implements Cloneable, Serializable {
 		return columns;
 	}
 
+	public AdhocColumn getColumn(String name) {
+		if (columns == null) {
+			return null;
+		}
+
+		for (AdhocColumn column : columns) {
+			if (column.getName().equals(name)) {
+				return column;
+			}
+		}
+		return null;
+	}
+
 	public void addColumn(AdhocColumn column) {
 		this.columns.add(column);
 	}
