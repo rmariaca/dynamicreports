@@ -129,6 +129,7 @@ public class AdhocConfigurationTest {
 		adhocColumn.setStyle(adhocStyle1);
 		adhocColumn.setTitleStyle(adhocStyle1);
 		adhocColumn.setWidth(50);
+		adhocColumn.setProperty("type", "integer");
 		adhocReport.addColumn(adhocColumn);
 
 		adhocReport.setTextStyle(adhocStyle2);
@@ -355,6 +356,7 @@ public class AdhocConfigurationTest {
 		Assert.assertNotNull("column title style", column.getTitleStyle());
 		Assert.assertEquals("column width", 50, ((DRDimensionComponent) column.getComponent()).getWidth());
 		Assert.assertEquals("column width type", ComponentDimensionType.FIXED, ((DRDimensionComponent) column.getComponent()).getWidthType());
+		Assert.assertEquals("column property", "integer", adhocConfiguration.getReport().getColumn("field1").getProperty("type"));
 
 		column = report.getColumns().get(2);
 		Assert.assertEquals("column name", "field3", column.getName());

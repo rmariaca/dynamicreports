@@ -39,6 +39,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocFont;
 import net.sf.dynamicreports.adhoc.configuration.AdhocOrientation;
 import net.sf.dynamicreports.adhoc.configuration.AdhocProperties;
 import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
+import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.report.DefaultAdhocReportCustomizer;
 import net.sf.dynamicreports.report.base.chart.DRChart;
 import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
@@ -48,6 +49,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Orientation;
+import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIXyChartSerie;
@@ -115,6 +117,7 @@ public class AdhocChartTest {
 		adhocChart.setXAxisFormat(axisFormat);
 		adhocChart.setYAxisFormat(axisFormat);
 		adhocChart.setOrientation(AdhocOrientation.VERTICAL);
+		adhocChart.setProperty(AdhocProperties.TIMESERIES_CHART_TIME_PERIOD, AdhocTimePeriod.MONTH);
 		adhocReport.addComponent(adhocChart);
 
 		adhocChart = new AdhocChart();
@@ -280,6 +283,7 @@ public class AdhocChartTest {
 		Assert.assertNotNull("axis format label font", ((DRAxisPlot) chart.getPlot()).getXAxisFormat().getLabelFont());
 		Assert.assertEquals("axis format label color", Color.BLUE, ((DRAxisPlot) chart.getPlot()).getXAxisFormat().getLabelColor());
 		Assert.assertEquals("chart orientation", Orientation.VERTICAL, ((DRAxisPlot) chart.getPlot()).getOrientation());
+		Assert.assertEquals("chart time period", TimePeriod.MONTH, ((DRTimeSeriesDataset) chart.getDataset()).getTimePeriodType());
 
 		chart = (DRChart) customizer.getComponents().get(2).getComponent();
 		Assert.assertEquals("component key", adhocConfiguration.getReport().getComponents().get(2), adhocConfiguration.getReport().getComponent("chart3"));
