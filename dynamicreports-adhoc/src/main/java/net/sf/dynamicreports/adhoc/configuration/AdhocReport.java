@@ -50,6 +50,7 @@ public class AdhocReport implements Cloneable, Serializable {
 	private List<AdhocSort> sorts;
 	private List<AdhocSubtotal> subtotals;
 	private List<AdhocComponent> components;
+	private AdhocProperties properties;
 
 	public AdhocReport() {
 		columns = new ArrayList<AdhocColumn>();
@@ -57,6 +58,7 @@ public class AdhocReport implements Cloneable, Serializable {
 		sorts = new ArrayList<AdhocSort>();
 		subtotals = new ArrayList<AdhocSubtotal>();
 		components = new ArrayList<AdhocComponent>();
+		properties = new AdhocProperties();
 	}
 
 	public AdhocStyle getTextStyle() {
@@ -265,6 +267,22 @@ public class AdhocReport implements Cloneable, Serializable {
 		this.components = components;
 	}
 
+	public AdhocProperties getProperties() {
+		return properties;
+	}
+
+	public <T> T getProperty(String key) {
+		return this.properties.getProperty(key);
+	}
+
+	public void setProperty(String key, Object value) {
+		this.properties.setProperty(key, value);
+	}
+
+	public void setProperties(AdhocProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -328,6 +346,9 @@ public class AdhocReport implements Cloneable, Serializable {
 			return false;
 		}
 		if (!(components == null ? object.getComponents() == null : components.equals(object.getComponents()))) {
+			return false;
+		}
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
 			return false;
 		}
 
@@ -399,6 +420,9 @@ public class AdhocReport implements Cloneable, Serializable {
 			for (AdhocComponent adhocComponent : components) {
 				clone.addComponent(adhocComponent);
 			}
+		}
+		if (properties != null) {
+			clone.properties = properties.clone();
 		}
 
 		return clone;

@@ -42,6 +42,7 @@
 			<xs:element name="sort" type="Sort" minOccurs="0" maxOccurs="unbounded"/>			
 			<xs:element name="subtotal" type="Subtotal" minOccurs="0" maxOccurs="unbounded"/>			
 			<xs:element name="component" type="Component" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="highlightDetailOddRows" type="xs:boolean"/>		
 		<xs:attribute name="highlightDetailEvenRows" type="xs:boolean"/>

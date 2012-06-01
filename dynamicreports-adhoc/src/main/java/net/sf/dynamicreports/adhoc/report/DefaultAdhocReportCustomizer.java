@@ -52,7 +52,6 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.configuration.AdhocVerticalAlignment;
 import net.sf.dynamicreports.adhoc.exception.AdhocException;
 import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.MarginBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.builder.SortBuilder;
@@ -113,6 +112,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -176,16 +176,16 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return null;
 	}
 
-	protected FieldBuilder<?> field(String name) {
+	protected DRIExpression<?> getFieldExpression(String name) {
 		DRIDataType<?, ?> type = getFieldType(name);
 		if (type != null) {
-			return DynamicReports.field(name, type);
+			return DynamicReports.field(name, type).build();
 		}
-		return DynamicReports.field(name, Object.class);
+		return DynamicReports.field(name, Object.class).build();
 	}
 
 	protected ColumnBuilder<?, ?> column(AdhocColumn adhocColumn) {
-		TextColumnBuilder<?> column = Columns.column(field(adhocColumn.getName()));
+		TextColumnBuilder<?> column = Columns.column(getFieldExpression(adhocColumn.getName()));
 		if (adhocColumn.getTitle() != null) {
 			column.setTitle(adhocColumn.getTitle());
 		}
@@ -210,7 +210,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			group = Groups.group((ValueColumnBuilder<?, ?>) groupColumn);
 		}
 		else {
-			group = Groups.group(field(adhocGroup.getName()));
+			group = Groups.group(getFieldExpression(adhocGroup.getName()));
 		}
 		group.setStartInNewPage(adhocGroup.getStartInNewPage());
 		group.setHeaderLayout(groupHeaderLayout(adhocGroup.getHeaderLayout()));
@@ -257,7 +257,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			subtotal = Subtotals.aggregate((ValueColumnBuilder<?, ?>) subtotalColumn, calculation(adhocSubtotal.getCalculation()));
 		}
 		else {
-			subtotal = Subtotals.aggregate(field(adhocSubtotal.getName()), (ValueColumnBuilder<?, ?>) subtotalColumn, calculation(adhocSubtotal.getCalculation()));
+			subtotal = Subtotals.aggregate(getFieldExpression(adhocSubtotal.getName()), (ValueColumnBuilder<?, ?>) subtotalColumn, calculation(adhocSubtotal.getCalculation()));
 		}
 		if (adhocSubtotal.getLabel() != null) {
 			subtotal.setLabel(adhocSubtotal.getLabel());
@@ -305,7 +305,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			sort = DynamicReports.asc((TextColumnBuilder<?>) sortColumn);
 		}
 		else {
-			sort = DynamicReports.asc(field(adhocSort.getName()));
+			sort = DynamicReports.asc(getFieldExpression(adhocSort.getName()));
 		}
 		sort.setOrderType(orderType(adhocSort.getOrderType()));
 
@@ -583,7 +583,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			categoryChart.setCategory((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			categoryChart.setCategory(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -611,7 +611,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			timeSeriesChart.setTimePeriod((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			timeSeriesChart.setTimePeriod(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -668,7 +668,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			pieChart.setKey((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			pieChart.setKey(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -686,7 +686,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			xyChart.setXValue((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			xyChart.setXValue(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -712,7 +712,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			spiderChart.setCategory((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			spiderChart.setCategory(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -730,7 +730,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			bubbleChart.setXValue((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChart.getXValue());
+			DRIExpression field = getFieldExpression(adhocChart.getXValue());
 			bubbleChart.setXValue(field);
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
@@ -894,7 +894,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				chartSerie.setSeries((ValueColumnBuilder<?, ?>) seriesColumn);
 			}
 			else {
-				chartSerie.setSeries(field(adhocChartSerie.getSeries()));
+				chartSerie.setSeries(getFieldExpression(adhocChartSerie.getSeries()));
 			}
 		}
 	}
@@ -907,7 +907,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			categoryChartSerie = Charts.serie((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChartSerie.getYValue());
+			DRIExpression field = getFieldExpression(adhocChartSerie.getYValue());
 			categoryChartSerie = Charts.serie(field);
 		}
 		chartSerie(adhocChartSerie, categoryChartSerie);
@@ -931,7 +931,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			xyChartSerie = Charts.xySerie((ValueColumnBuilder) valueColumn);
 		}
 		else {
-			FieldBuilder field = field(adhocChartSerie.getYValue());
+			DRIExpression field = getFieldExpression(adhocChartSerie.getYValue());
 			xyChartSerie = Charts.xySerie(field);
 		}
 		chartSerie(adhocChartSerie, xyChartSerie);
@@ -941,7 +941,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				xyChartSerie.setXValue((ValueColumnBuilder) valueColumn);
 			}
 			else {
-				FieldBuilder field = field(adhocChartSerie.getXValue());
+				DRIExpression field = getFieldExpression(adhocChartSerie.getXValue());
 				xyChartSerie.setXValue(field);
 			}
 		}
@@ -967,7 +967,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				xyzChartSerie.setXValue((ValueColumnBuilder) valueColumn);
 			}
 			else {
-				FieldBuilder field = field(adhocChartSerie.getXValue());
+				DRIExpression field = getFieldExpression(adhocChartSerie.getXValue());
 				xyzChartSerie.setXValue(field);
 			}
 		}
@@ -977,7 +977,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				xyzChartSerie.setYValue((ValueColumnBuilder) valueColumn);
 			}
 			else {
-				FieldBuilder field = field(adhocChartSerie.getYValue());
+				DRIExpression field = getFieldExpression(adhocChartSerie.getYValue());
 				xyzChartSerie.setYValue(field);
 			}
 		}
@@ -987,7 +987,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				xyzChartSerie.setZValue((ValueColumnBuilder) valueColumn);
 			}
 			else {
-				FieldBuilder field = field(adhocChartSerie.getZValue());
+				DRIExpression field = getFieldExpression(adhocChartSerie.getZValue());
 				xyzChartSerie.setZValue(field);
 			}
 		}

@@ -169,6 +169,9 @@ public class AdhocToXmlTransform {
 				xmlAdhocReport.getComponent().add(component(adhocComponent));
 			}
 		}
+		if (adhocReport.getProperties() != null && !adhocReport.getProperties().isEmpty()) {
+			properties(adhocReport.getProperties(), xmlAdhocReport.getProperty());
+		}
 
 		return xmlAdhocReport;
 	}
