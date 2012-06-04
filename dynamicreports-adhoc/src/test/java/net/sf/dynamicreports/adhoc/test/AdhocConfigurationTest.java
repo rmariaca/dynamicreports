@@ -99,6 +99,8 @@ public class AdhocConfigurationTest {
 		AdhocReport adhocReport = new AdhocReport();
 		adhocConfiguration.setReport(adhocReport);
 
+		adhocReport.setProperty("report", "property value");
+
 		AdhocStyle adhocStyle1 = new AdhocStyle();
 		adhocStyle1.setForegroundColor(Color.BLUE);
 		AdhocStyle adhocStyle2 = new AdhocStyle();
@@ -307,6 +309,8 @@ public class AdhocConfigurationTest {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+
+		Assert.assertEquals("report property", "property value", adhocConfiguration.getReport().getProperty("report"));
 
 		Assert.assertNotNull("text style", report.getTextStyle());
 		Assert.assertNotNull("column style", report.getColumnStyle());
