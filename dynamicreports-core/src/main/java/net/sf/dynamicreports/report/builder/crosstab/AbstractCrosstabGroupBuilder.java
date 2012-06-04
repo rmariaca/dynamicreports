@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -68,6 +69,9 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 	protected AbstractCrosstabGroupBuilder(DRIExpression<V> expression, U crosstabGroup) {
 		super(crosstabGroup);
 		getObject().setExpression(expression);
+		if (expression instanceof DRIField) {
+			getObject().setDataType(((DRIField<V>) expression).getDataType());
+		}
 	}
 
 	public T setHeaderPattern(String pattern) {

@@ -31,7 +31,9 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIValue;
+import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
@@ -47,32 +49,11 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 	//column
 	protected AggregationSubtotalBuilder(ValueColumnBuilder<?, ?> column, Calculation calculation) {
 		this(column.getColumn(), column, calculation);
-		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
-			setDataType(DataTypes.longType());
-		}
-		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
-				calculation.equals(Calculation.VARIANCE)) {
-			setDataType(DataTypes.doubleType());
-		}
-		else {
-			setDataType(column.getColumn().getComponent().getDataType());
-			setPattern(column.getColumn().getComponent().getPattern());
-		}
 	}
 
 	//field
 	protected AggregationSubtotalBuilder(FieldBuilder<?> field, ColumnBuilder<?, ?> showInColumn, Calculation calculation) {
 		this(field.build(), showInColumn, calculation);
-		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
-			setDataType(DataTypes.longType());
-		}
-		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
-				calculation.equals(Calculation.VARIANCE)) {
-			setDataType(DataTypes.doubleType());
-		}
-		else {
-			setDataType(field.getField().getDataType());
-		}
 	}
 
 	//expression
@@ -80,6 +61,20 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 		super(showInColumn);
 		this.expression = expression;
 		this.calculation = calculation;
+		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
+			setDataType(DataTypes.longType());
+		}
+		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
+				calculation.equals(Calculation.VARIANCE)) {
+			setDataType(DataTypes.doubleType());
+		}
+		else if (expression instanceof DRIValueColumn){
+			setDataType(((DRIValueColumn<?>) expression).getComponent().getDataType());
+			setPattern(((DRIValueColumn<?>) expression).getComponent().getPattern());
+		}
+		else if (expression instanceof DRIField){
+			setDataType(((DRIField<?>) expression).getDataType());
+		}
 	}
 
 	@Override

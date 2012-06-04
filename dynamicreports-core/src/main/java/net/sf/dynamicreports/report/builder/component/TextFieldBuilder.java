@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -67,6 +68,9 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 
 	public TextFieldBuilder<T> setText(DRIExpression<T> textExpression) {
 		getObject().setValueExpression(textExpression);
+		if (textExpression instanceof DRIField && getObject().getDataType() == null) {
+			getObject().setDataType(((DRIField<T>) textExpression).getDataType());
+		}
 		return this;
 	}
 

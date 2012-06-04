@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -131,7 +132,11 @@ public class Columns {
 	 * @return a column builder
 	 */
 	public static <T> TextColumnBuilder<T> column(DRIExpression<T> expression) {
-		return new TextColumnBuilder<T>(expression);
+		TextColumnBuilder<T> textColumnBuilder = new TextColumnBuilder<T>(expression);
+		if (expression instanceof DRIField && ((DRIField<T>) expression).getDataType() != null) {
+			textColumnBuilder.setDataType(((DRIField<T>) expression).getDataType());
+		}
+		return textColumnBuilder;
 	}
 
 	/**

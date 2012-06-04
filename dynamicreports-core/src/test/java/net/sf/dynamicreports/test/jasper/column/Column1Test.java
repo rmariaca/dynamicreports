@@ -50,6 +50,9 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 	private TextColumnBuilder<Double> column4;
 	private TextColumnBuilder<BigDecimal> column5;
 	private TextColumnBuilder<Double> column6;
+	private TextColumnBuilder<Date> column7;
+
+	private Date date = new Date();
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -60,7 +63,8 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 					column3 = col.column("Column3", "field3", Date.class).setPattern("dd.MM.yyyy"),
 					column4 = col.column("Column4", "field4", Double.class).setPattern("#,###.00"),
 					column5 = col.column("Column5", "field5", BigDecimal.class).setValueFormatter(new ColumnValueFormatter()),
-					column6 = col.column("Column6", "field6", Double.class).setPattern(new PatternExpression()));
+					column6 = col.column("Column6", "field6", Double.class).setPattern(new PatternExpression()),
+					column7 = col.column("Column7", field("field7", Date.class).build()));
 	}
 
 	@Override
@@ -75,7 +79,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 		columnTitleValueTest(column2, "Column2\nColumn2", "Column2\nColumn2", "Column2\nColumn2");
 		//column3
 		columnDetailCountTest(column3, 110);
-		columnDetailValueTest(column3, 50, new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+		columnDetailValueTest(column3, 50, new SimpleDateFormat("dd.MM.yyyy").format(date));
 		columnTitleCountTest(column3, 3);
 		columnTitleValueTest(column3, "Column3", "Column3", "Column3");
 		//column4
@@ -97,13 +101,18 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 		columnDetailValueTest(column6, 50, "1.0");
 		columnTitleCountTest(column6, 3);
 		columnTitleValueTest(column6, "Column6", "Column6", "Column6");
+		//column7
+		columnDetailCountTest(column7, 110);
+		columnDetailValueTest(column7, 50, new SimpleDateFormat("MM/dd/yyyy").format(date));
+		columnTitleCountTest(column7, 3);
+		columnTitleValueTest(column7, "Column7", "Column7", "Column7");
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6");
+		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7");
 		for (int i = 0; i < 110; i++) {
-			dataSource.add(1, "test", new Date(), 1d, new BigDecimal(10), 1d);
+			dataSource.add(1, "test", date, 1d, new BigDecimal(10), 1d, date);
 		}
 		return dataSource;
 	}

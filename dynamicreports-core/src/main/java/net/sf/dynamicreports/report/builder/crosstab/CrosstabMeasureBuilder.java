@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.DRICrosstabValue;
+import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -82,6 +83,16 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 
 	protected CrosstabMeasureBuilder(DRIExpression<?> expression, Calculation calculation) {
 		super(new DRCrosstabMeasure<T>(Crosstabs.variable(expression, calculation).build()));
+		if (calculation.equals(Calculation.COUNT) || calculation.equals(Calculation.DISTINCT_COUNT)) {
+			setDataType(DataTypes.longType());
+		}
+		else if (calculation.equals(Calculation.AVERAGE) || calculation.equals(Calculation.STANDARD_DEVIATION) ||
+				calculation.equals(Calculation.VARIANCE)) {
+			setDataType(DataTypes.doubleType());
+		}
+		else if (expression instanceof DRIField) {
+			setDataType(((DRIField<?>) expression).getDataType());
+		}
 	}
 
 	protected CrosstabMeasureBuilder(DRIExpression<?> expression) {
