@@ -20,22 +20,42 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.chart.plot;
+package net.sf.dynamicreports.design.transformation.chartcustomizer;
+
+import org.jfree.data.KeyToGroupMap;
+import org.jfree.data.category.CategoryDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIPiePlot extends DRIBasePlot {
+public class PercentageGroupedCategoryDataset extends PercentageCategoryDataset {
+	private KeyToGroupMap map;
 
-	public Boolean getCircular();
+	public PercentageGroupedCategoryDataset(CategoryDataset dataset, KeyToGroupMap map) {
+		super(dataset);
+		this.map = map;
+	}
 
-	public Boolean getShowLabels();
+	@Override
+	public Number getValue(int row, int column) {
+		double total = 0;
+		for (int i = 0; i < getRowCount(); i++) {
+			Number value = dataset.getValue(i, column);
+			if (value != null) {
+				if (map.getGroup(getRowKey(row)).equals(map.getGroup(getRowKey(i)))) {
+					total += value.doubleValue();
+				}
+			}
+		}
+		Number value = dataset.getValue(row, column);
+		if (value == null) {
+			return 0;
+		}
+		double actual = value.doubleValue();
+		if (total > 0) {
+			return actual / total * 100;
+		}
+		return 0;
+	}
 
-	public Boolean getShowValues();
-
-	public Boolean getShowPercentages();
-
-	public String getLabelFormat();
-
-	public String getLegendLabelFormat();
 }

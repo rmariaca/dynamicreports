@@ -30,12 +30,14 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {	
+public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private DRAxisFormat xAxisFormat;
 	private DRAxisFormat yAxisFormat;
-	
+	private Boolean showValues;
+	private Boolean showPercentages;
+
 	@Override
 	protected void init() {
 		super.init();
@@ -60,5 +62,20 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 		Validate.notNull(yAxisFormat, "yAxisFormat must not be null");
 		this.yAxisFormat = yAxisFormat;
 	}
-	
+
+	public Boolean getShowValues() {
+		return showValues;
+	}
+
+	public void setShowValues(Boolean showValues) {
+		this.showValues = showValues;
+	}
+
+	public Boolean getShowPercentages() {
+		return showPercentages;
+	}
+
+	public void setShowPercentages(Boolean showPercentages) {
+		this.showPercentages = showPercentages;
+	}
 }

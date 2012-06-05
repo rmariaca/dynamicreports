@@ -22,9 +22,6 @@
 
 package net.sf.dynamicreports.design.transformation;
 
-import java.awt.Color;
-import java.awt.Paint;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +65,11 @@ import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.DifferenceRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
@@ -113,15 +115,6 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.LayeredBarRenderer;
-import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.ui.GradientPaintTransformer;
-
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -163,22 +156,22 @@ public class ChartTransform {
 		DRIDesignPlot designPlot;
 
 		if (plot instanceof DRIBar3DPlot) {
-			designPlot = bar3DPlot((DRIBar3DPlot) plot);
+			designPlot = bar3DPlot((DRIBar3DPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRILayeredBarPlot) {
 			designPlot = layeredBarPlot((DRILayeredBarPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIBarPlot) {
-			designPlot = barPlot((DRIBarPlot) plot);
+			designPlot = barPlot((DRIBarPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIDifferencePlot) {
 			designPlot = differencePlot((DRIDifferencePlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRILinePlot) {
-			designPlot = linePlot((DRILinePlot) plot);
+			designPlot = linePlot((DRILinePlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIMultiAxisPlot) {
-			designPlot = multiAxisPlot((DRIMultiAxisPlot) plot, subDataset, resetType, resetGroup);
+			designPlot = multiAxisPlot((DRIMultiAxisPlot) plot, chartCustomizers, subDataset, resetType, resetGroup);
 		}
 		else if (plot instanceof DRIPie3DPlot) {
 			designPlot = pie3DPlot((DRIPie3DPlot) plot, chartCustomizers);
@@ -190,13 +183,13 @@ public class ChartTransform {
 			designPlot = spiderPlot((DRISpiderPlot) plot);
 		}
 		else if (plot instanceof DRIBubblePlot) {
-			designPlot = bubblePlot((DRIBubblePlot) plot);
+			designPlot = bubblePlot((DRIBubblePlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRICandlestickPlot) {
-			designPlot = candlestickPlot((DRICandlestickPlot) plot);
+			designPlot = candlestickPlot((DRICandlestickPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIHighLowPlot) {
-			designPlot = highLowPlot((DRIHighLowPlot) plot);
+			designPlot = highLowPlot((DRIHighLowPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIMeterPlot) {
 			designPlot = meterPlot((DRIMeterPlot) plot);
@@ -205,7 +198,7 @@ public class ChartTransform {
 			designPlot = thermometerPlot((DRIThermometerPlot) plot);
 		}
 		else if (plot instanceof DRIAxisPlot) {
-			designPlot = axisPlot((DRIAxisPlot) plot);
+			designPlot = axisPlot((DRIAxisPlot) plot, chartCustomizers);
 		}
 		else {
 			throw new DRDesignReportException("Chart plot " + plot.getClass().getName() + " not supported");
@@ -221,18 +214,18 @@ public class ChartTransform {
 		return designPlot;
 	}
 
-	private DRDesignBar3DPlot bar3DPlot(DRIBar3DPlot bar3DPlot) throws DRException {
+	private DRDesignBar3DPlot bar3DPlot(DRIBar3DPlot bar3DPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignBar3DPlot designBar3DPlot = new DRDesignBar3DPlot();
-		axisPlot(designBar3DPlot, bar3DPlot);
+		axisPlot(designBar3DPlot, bar3DPlot, chartCustomizers);
 		designBar3DPlot.setXOffset(bar3DPlot.getXOffset());
 		designBar3DPlot.setYOffset(bar3DPlot.getYOffset());
 		designBar3DPlot.setShowLabels(bar3DPlot.getShowLabels());
 		return designBar3DPlot;
 	}
 
-	private DRDesignBarPlot barPlot(DRIBarPlot barPlot) throws DRException {
+	private DRDesignBarPlot barPlot(DRIBarPlot barPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignBarPlot designBarPlot = new DRDesignBarPlot();
-		axisPlot(designBarPlot, barPlot);
+		axisPlot(designBarPlot, barPlot, chartCustomizers);
 		designBarPlot.setShowTickMarks(barPlot.getShowTickMarks());
 		designBarPlot.setShowTickLabels(barPlot.getShowTickLabels());
 		designBarPlot.setShowLabels(barPlot.getShowLabels());
@@ -240,14 +233,14 @@ public class ChartTransform {
 	}
 
 	private DRDesignBarPlot layeredBarPlot(DRILayeredBarPlot layeredBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
-		DRDesignBarPlot designBarPlot = barPlot(layeredBarPlot);
 		chartCustomizers.add(new LayeredBarRendererCustomizer(layeredBarPlot.getSeriesBarWidths()));
+		DRDesignBarPlot designBarPlot = barPlot(layeredBarPlot, chartCustomizers);
 		return designBarPlot;
 	}
 
-	private DRDesignLinePlot linePlot(DRILinePlot linePlot) throws DRException {
+	private DRDesignLinePlot linePlot(DRILinePlot linePlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignLinePlot designLinePlot = new DRDesignLinePlot();
-		axisPlot(designLinePlot, linePlot);
+		axisPlot(designLinePlot, linePlot, chartCustomizers);
 		designLinePlot.setShowShapes(linePlot.getShowShapes());
 		designLinePlot.setShowLines(linePlot.getShowLines());
 		return designLinePlot;
@@ -255,14 +248,14 @@ public class ChartTransform {
 
 	private DRDesignLinePlot differencePlot(DRIDifferencePlot differencePlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignLinePlot designLinePlot = new DRDesignLinePlot();
-		axisPlot(designLinePlot, differencePlot);
 		chartCustomizers.add(new DifferenceRendererCustomizer(differencePlot));
+		axisPlot(designLinePlot, differencePlot, chartCustomizers);
 		return designLinePlot;
 	}
 
-	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, List<DRIChartCustomizer> chartCustomizers, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignMultiAxisPlot designMultiAxisPlot = new DRDesignMultiAxisPlot();
-		axisPlot(designMultiAxisPlot, multiAxisPlot);
+		axisPlot(designMultiAxisPlot, multiAxisPlot, chartCustomizers);
 		for (DRIChartAxis axis : multiAxisPlot.getAxes()) {
 			DRDesignChartAxis designAxis = new DRDesignChartAxis();
 			designAxis.setPosition(axis.getPosition());
@@ -292,7 +285,20 @@ public class ChartTransform {
 		designPiePlot.setLabelFormat(piePlot.getLabelFormat());
 		designPiePlot.setLegendLabelFormat(piePlot.getLegendLabelFormat());
 		if (piePlot.getShowLabels() != null && !piePlot.getShowLabels()) {
-			chartCustomizers.add(new PieChartShowLabelsCustomizer());
+			chartCustomizers.add(new PieChartLabelFormatCustomizer(null));
+		}
+		else {
+			String labelFormat = piePlot.getLabelFormat();
+			if (labelFormat == null) {
+				labelFormat = "{0}";
+			}
+			if (piePlot.getShowValues() != null && piePlot.getShowValues()) {
+				labelFormat += " = {1}";
+			}
+			if (piePlot.getShowPercentages() != null && piePlot.getShowPercentages()) {
+				labelFormat += " ({2})";
+			}
+			chartCustomizers.add(new PieChartLabelFormatCustomizer(labelFormat));
 		}
 	}
 
@@ -313,23 +319,23 @@ public class ChartTransform {
 		return designSpiderPlot;
 	}
 
-	private DRDesignBubblePlot bubblePlot(DRIBubblePlot bubblePlot) throws DRException {
+	private DRDesignBubblePlot bubblePlot(DRIBubblePlot bubblePlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignBubblePlot designBubblePlot = new DRDesignBubblePlot();
-		axisPlot(designBubblePlot, bubblePlot);
+		axisPlot(designBubblePlot, bubblePlot, chartCustomizers);
 		designBubblePlot.setScaleType(bubblePlot.getScaleType());
 		return designBubblePlot;
 	}
 
-	private DRDesignCandlestickPlot candlestickPlot(DRICandlestickPlot candlestickPlot) throws DRException {
+	private DRDesignCandlestickPlot candlestickPlot(DRICandlestickPlot candlestickPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignCandlestickPlot designCandlestickPlot = new DRDesignCandlestickPlot();
-		axisPlot(designCandlestickPlot, candlestickPlot);
+		axisPlot(designCandlestickPlot, candlestickPlot, chartCustomizers);
 		designCandlestickPlot.setShowVolume(candlestickPlot.getShowVolume());
 		return designCandlestickPlot;
 	}
 
-	private DRDesignHighLowPlot highLowPlot(DRIHighLowPlot highLowPlot) throws DRException {
+	private DRDesignHighLowPlot highLowPlot(DRIHighLowPlot highLowPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignHighLowPlot designHighLowPlot = new DRDesignHighLowPlot();
-		axisPlot(designHighLowPlot, highLowPlot);
+		axisPlot(designHighLowPlot, highLowPlot, chartCustomizers);
 		designHighLowPlot.setShowOpenTicks(highLowPlot.getShowOpenTicks());
 		designHighLowPlot.setShowCloseTicks(highLowPlot.getShowCloseTicks());
 		return designHighLowPlot;
@@ -384,15 +390,21 @@ public class ChartTransform {
 		return designInterval;
 	}
 
-	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot) throws DRException {
+	private DRDesignAxisPlot axisPlot(DRIAxisPlot axisPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		DRDesignAxisPlot designAxisPlot = new DRDesignAxisPlot();
-		axisPlot(designAxisPlot, axisPlot);
+		axisPlot(designAxisPlot, axisPlot, chartCustomizers);
 		return designAxisPlot;
 	}
 
-	private void axisPlot(DRDesignAxisPlot designAxisPlot, DRIAxisPlot axisPlot) throws DRException {
+	private void axisPlot(DRDesignAxisPlot designAxisPlot, DRIAxisPlot axisPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		designAxisPlot.setXAxisFormat(axisFormat(axisPlot.getXAxisFormat()));
 		designAxisPlot.setYAxisFormat(axisFormat(axisPlot.getYAxisFormat()));
+		if (axisPlot.getShowPercentages() != null && axisPlot.getShowPercentages()) {
+			chartCustomizers.add(new ShowPercentagesCustomizer());
+		}
+		if (axisPlot.getShowValues() != null && axisPlot.getShowValues()) {
+			chartCustomizers.add(new ShowValuesCustomizer());
+		}
 	}
 
 	//axis format
@@ -692,97 +704,6 @@ public class ChartTransform {
 			}
 
 			return value;
-		}
-	}
-
-	private class PieChartShowLabelsCustomizer implements DRIChartCustomizer, Serializable {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		public void customize(JFreeChart chart, ReportParameters reportParameters) {
-	    PiePlot plot = (PiePlot) chart.getPlot();
-	    plot.setLabelGenerator(null);
-	  }
-	}
-
-	private class LayeredBarRendererCustomizer implements DRIChartCustomizer, Serializable {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private List<Double> seriesBarWidths;
-
-		private LayeredBarRendererCustomizer(List<Double> seriesBarWidths) {
-			this.seriesBarWidths = seriesBarWidths;
-		}
-
-		public void customize(JFreeChart chart, ReportParameters reportParameters) {
-			BarRenderer categoryRenderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
-	    LayeredBarRenderer renderer = new LayeredBarRenderer();
-
-	    renderer.setBaseItemLabelsVisible(categoryRenderer.getBaseItemLabelsVisible());
-	    renderer.setBaseItemLabelFont(categoryRenderer.getBaseItemLabelFont());
-	    renderer.setBaseItemLabelPaint(categoryRenderer.getBaseItemLabelPaint());
-	    renderer.setBaseItemLabelGenerator(categoryRenderer.getBaseItemLabelGenerator());
-			renderer.setShadowVisible(categoryRenderer.getShadowsVisible());
-			CategoryDataset categoryDataset = chart.getCategoryPlot().getDataset();
-			if(categoryDataset != null)	{
-				for(int i = 0; i < categoryDataset.getRowCount(); i++) {
-					Paint seriesOutlinePaint = categoryRenderer.getSeriesOutlinePaint(i);
-					if (seriesOutlinePaint != null) {
-						renderer.setSeriesOutlinePaint(i, seriesOutlinePaint);
-					}
-					Paint seriesPaint = categoryRenderer.getSeriesPaint(i);
-					if (seriesPaint != null) {
-						renderer.setSeriesPaint(i, seriesPaint);
-					}
-				}
-			}
-			renderer.setItemMargin(categoryRenderer.getItemMargin());
-			GradientPaintTransformer gradientPaintTransformer = categoryRenderer.getGradientPaintTransformer();
-			if (gradientPaintTransformer != null) {
-				renderer.setGradientPaintTransformer(gradientPaintTransformer);
-			}
-
-	    if (seriesBarWidths != null) {
-	    	for (int i = 0; i < seriesBarWidths.size(); i++) {
-	    		renderer.setSeriesBarWidth(i, seriesBarWidths.get(i));
-				}
-	    }
-
-	    chart.getCategoryPlot().setRenderer(renderer);
-	  }
-	}
-
-	private class DifferenceRendererCustomizer implements DRIChartCustomizer, Serializable {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private Color positiveColor;
-		private Color negativeColor;
-		private Boolean showShapes;
-
-		private DifferenceRendererCustomizer(DRIDifferencePlot differencePlot) {
-			this.positiveColor = differencePlot.getPositiveColor();
-			this.negativeColor = differencePlot.getNegativeColor();
-			this.showShapes = differencePlot.getShowShapes();
-		}
-
-		public void customize(JFreeChart chart, ReportParameters reportParameters) {
-			XYLineAndShapeRenderer lineRenderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
-      XYDifferenceRenderer renderer = new XYDifferenceRenderer();
-
-	    renderer.setBaseItemLabelsVisible(lineRenderer.getBaseItemLabelsVisible());
-	    renderer.setBaseItemLabelFont(lineRenderer.getBaseItemLabelFont());
-	    renderer.setBaseItemLabelPaint(lineRenderer.getBaseItemLabelPaint());
-	    renderer.setBaseItemLabelGenerator(lineRenderer.getBaseItemLabelGenerator());
-
-      if (positiveColor != null) {
-      	renderer.setPositivePaint(positiveColor);
-      }
-      if (negativeColor != null) {
-      	renderer.setNegativePaint(negativeColor);
-      }
-      if (showShapes != null) {
-      	renderer.setShapesVisible(showShapes);
-      }
-      chart.getXYPlot().setRenderer(renderer);
 		}
 	}
 

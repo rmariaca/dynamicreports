@@ -30,4 +30,8 @@ public interface DRIAxisPlot extends DRIBasePlot {
 	public DRIAxisFormat getXAxisFormat();
 
 	public DRIAxisFormat getYAxisFormat();
+
+	public Boolean getShowValues();
+
+	public Boolean getShowPercentages();
 }

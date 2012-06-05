@@ -1,0 +1,115 @@
+/**
+ * DynamicReports - Free Java reporting library for creating reports dynamically
+ *
+ * Copyright (C) 2010 - 2012 Ricardo Mariaca
+ * http://dynamicreports.sourceforge.net
+ *
+ * This file is part of DynamicReports.
+ *
+ * DynamicReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DynamicReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package net.sf.dynamicreports.design.transformation.chartcustomizer;
+
+import java.util.List;
+
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.DatasetChangeListener;
+import org.jfree.data.general.DatasetGroup;
+
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
+public class PercentageCategoryDataset implements CategoryDataset {
+	protected CategoryDataset dataset;
+
+	public PercentageCategoryDataset(CategoryDataset dataset) {
+		this.dataset = dataset;
+	}
+
+	public Comparable<?> getRowKey(int row) {
+		return dataset.getRowKey(row);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public int getRowIndex(Comparable key) {
+		return dataset.getRowIndex(key);
+	}
+
+	public List<?> getRowKeys() {
+		return dataset.getRowKeys();
+	}
+
+	public Comparable<?> getColumnKey(int column) {
+		return dataset.getColumnKey(column);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public int getColumnIndex(Comparable key) {
+		return dataset.getColumnIndex(key);
+	}
+
+	public List<?> getColumnKeys() {
+		return dataset.getColumnKeys();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Number getValue(Comparable rowKey, Comparable columnKey) {
+		return getValue(getRowIndex(rowKey), getColumnIndex(columnKey));
+	}
+
+	public int getRowCount() {
+		return dataset.getRowCount();
+	}
+
+	public int getColumnCount() {
+		return dataset.getColumnCount();
+	}
+
+	public Number getValue(int row, int column) {
+		double total = 0;
+		for (int i = 0; i < getRowCount(); i++) {
+			Number value = dataset.getValue(i, column);
+			if (value != null) {
+				total += value.doubleValue();
+			}
+		}
+		Number value = dataset.getValue(row, column);
+		if (value == null) {
+			return 0;
+		}
+		double actual = value.doubleValue();
+		if (total > 0) {
+			return actual / total * 100;
+		}
+		return 0;
+	}
+
+	public void addChangeListener(DatasetChangeListener listener) {
+		dataset.addChangeListener(listener);
+	}
+
+	public void removeChangeListener(DatasetChangeListener listener) {
+		dataset.removeChangeListener(listener);
+	}
+
+	public DatasetGroup getGroup() {
+		return dataset.getGroup();
+	}
+
+	public void setGroup(DatasetGroup group) {
+		dataset.setGroup(group);
+	}
+
+}

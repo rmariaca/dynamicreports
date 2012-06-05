@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.definition.style.DRIFont;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRThermometerPlot extends DRAxisPlot implements DRIThermometerPlot {
+public class DRThermometerPlot implements DRIThermometerPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<? extends Number> dataRangeLowExpression;

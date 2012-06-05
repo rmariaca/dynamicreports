@@ -98,4 +98,14 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		getPlot().setYAxisFormat(yAxisFormat.build());
 		return (T) this;
 	}
+
+	public T setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return (T) this;
+	}
+
+	public T setShowPercentages(Boolean showPercentages) {
+		getPlot().setShowPercentages(showPercentages);
+		return (T) this;
+	}
 }

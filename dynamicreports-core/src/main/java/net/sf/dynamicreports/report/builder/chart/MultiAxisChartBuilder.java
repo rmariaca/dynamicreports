@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRMultiAxisPlot;
 import net.sf.dynamicreports.report.constant.AxisPosition;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -32,7 +33,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class MultiAxisChartBuilder extends AbstractCategoryChartBuilder<MultiAxisChartBuilder, DRMultiAxisPlot> {
+public class MultiAxisChartBuilder extends AbstractBaseChartBuilder<MultiAxisChartBuilder, DRMultiAxisPlot, DRChartDataset> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected MultiAxisChartBuilder() {
@@ -55,6 +56,19 @@ public class MultiAxisChartBuilder extends AbstractCategoryChartBuilder<MultiAxi
 	public MultiAxisChartBuilder addChart(AbstractBaseChartBuilder<?, ?, ?> chart, AxisPosition position) {
 		Validate.notNull(chart, "chart must not be null");
 		getPlot().addChart(chart.build(), position);
+		return this;
+	}
+
+	//plot
+	public MultiAxisChartBuilder setXAxisFormat(AxisFormatBuilder xAxisFormat) {
+		Validate.notNull(xAxisFormat, "xAxisFormat must not be null");
+		getPlot().setXAxisFormat(xAxisFormat.build());
+		return this;
+	}
+
+	public MultiAxisChartBuilder setYAxisFormat(AxisFormatBuilder yAxisFormat) {
+		Validate.notNull(yAxisFormat, "yAxisFormat must not be null");
+		getPlot().setYAxisFormat(yAxisFormat.build());
 		return this;
 	}
 }

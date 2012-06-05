@@ -97,6 +97,16 @@ public abstract class AbstractPieChartBuilder<T extends AbstractPieChartBuilder<
 		return (T) this;
 	}
 
+	public T setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return (T) this;
+	}
+
+	public T setShowPercentages(Boolean showPercentages) {
+		getPlot().setShowPercentages(showPercentages);
+		return (T) this;
+	}
+
 	public T setLabelFormat(String labelFormat) {
 		getPlot().setLabelFormat(labelFormat);
 		return (T) this;

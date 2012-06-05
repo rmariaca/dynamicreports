@@ -38,7 +38,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRMeterPlot extends DRAxisPlot implements DRIMeterPlot {
+public class DRMeterPlot implements DRIMeterPlot {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<? extends Number> dataRangeLowExpression;
