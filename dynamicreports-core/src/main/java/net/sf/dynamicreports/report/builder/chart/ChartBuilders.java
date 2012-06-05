@@ -59,6 +59,27 @@ public class ChartBuilders {
 		return Charts.serie(variable);
 	}
 
+	//grouped category serie
+	public GroupedCategoryChartSerieBuilder groupedSerie(ValueColumnBuilder<?, ? extends Number> column) {
+		return Charts.groupedSerie(column);
+	}
+
+	public GroupedCategoryChartSerieBuilder groupedSerie(String fieldName, Class<? extends Number> valueClass) {
+		return Charts.groupedSerie(fieldName, valueClass);
+	}
+
+	public GroupedCategoryChartSerieBuilder groupedSerie(FieldBuilder<? extends Number> field) {
+		return Charts.groupedSerie(field);
+	}
+
+	public GroupedCategoryChartSerieBuilder groupedSerie(DRIExpression<? extends Number> valueExpression) {
+		return Charts.groupedSerie(valueExpression);
+	}
+
+	public GroupedCategoryChartSerieBuilder groupedSerie(VariableBuilder<? extends Number> variable) {
+		return Charts.groupedSerie(variable);
+	}
+
 	//xy serie
 	public XyChartSerieBuilder xySerie(ValueColumnBuilder<?, ? extends Number> column) {
 		return Charts.xySerie(column);
@@ -109,6 +130,10 @@ public class ChartBuilders {
 
 	public StackedBarChartBuilder stackedBarChart() {
 		return Charts.stackedBarChart();
+	}
+
+	public GroupedStackedBarChartBuilder groupedStackedBarChart() {
+		return Charts.groupedStackedBarChart();
 	}
 
 	public Bar3DChartBuilder bar3DChart() {

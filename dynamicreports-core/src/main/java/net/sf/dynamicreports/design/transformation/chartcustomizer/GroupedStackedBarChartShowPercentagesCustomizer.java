@@ -20,34 +20,36 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.chart;
+package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
-import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryChartSerie;
-import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.VariableBuilder;
-import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
+
+import org.apache.commons.lang3.StringUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.KeyToGroupMap;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CategoryChartSerieBuilder extends AbstractCategoryChartSerieBuilder<CategoryChartSerieBuilder, DRCategoryChartSerie> {
+public class GroupedStackedBarChartShowPercentagesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CategoryChartSerieBuilder(ValueColumnBuilder<?, ? extends Number> column) {
-		super(new DRCategoryChartSerie(), column);
+	private KeyToGroupMap map;
+
+	public GroupedStackedBarChartShowPercentagesCustomizer(KeyToGroupMap map) {
+		this.map = map;
 	}
 
-	protected CategoryChartSerieBuilder(FieldBuilder<? extends Number> field) {
-		super(new DRCategoryChartSerie(), field);
+	public void customize(JFreeChart chart, ReportParameters reportParameters) {
+		PercentageGroupedCategoryDataset dataset = new PercentageGroupedCategoryDataset(chart.getCategoryPlot().getDataset(), map);
+		chart.getCategoryPlot().setDataset(dataset);
+    if (StringUtils.isBlank(chart.getCategoryPlot().getRangeAxis().getLabel())) {
+    	chart.getCategoryPlot().getRangeAxis().setLabel("%");
+    }
 	}
 
-	protected CategoryChartSerieBuilder(DRIExpression<? extends Number> valueExpression) {
-		super(new DRCategoryChartSerie(), valueExpression);
-	}
-
-	protected CategoryChartSerieBuilder(VariableBuilder<? extends Number> variable) {
-		super(new DRCategoryChartSerie(), variable);
-	}
 }

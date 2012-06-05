@@ -60,6 +60,27 @@ public class Charts {
 		return new CategoryChartSerieBuilder(variable);
 	}
 
+	//grouped category serie
+	public static GroupedCategoryChartSerieBuilder groupedSerie(ValueColumnBuilder<?, ? extends Number> column) {
+		return new GroupedCategoryChartSerieBuilder(column);
+	}
+
+	public static GroupedCategoryChartSerieBuilder groupedSerie(String fieldName, Class<? extends Number> valueClass) {
+		return groupedSerie(DynamicReports.field(fieldName, valueClass));
+	}
+
+	public static GroupedCategoryChartSerieBuilder groupedSerie(FieldBuilder<? extends Number> field) {
+		return new GroupedCategoryChartSerieBuilder(field);
+	}
+
+	public static GroupedCategoryChartSerieBuilder groupedSerie(DRIExpression<? extends Number> valueExpression) {
+		return new GroupedCategoryChartSerieBuilder(valueExpression);
+	}
+
+	public static GroupedCategoryChartSerieBuilder groupedSerie(VariableBuilder<? extends Number> variable) {
+		return new GroupedCategoryChartSerieBuilder(variable);
+	}
+
 	//xy serie
 	public static XyChartSerieBuilder xySerie(ValueColumnBuilder<?, ? extends Number> column) {
 		return new XyChartSerieBuilder(column);
@@ -110,6 +131,10 @@ public class Charts {
 
 	public static StackedBarChartBuilder stackedBarChart() {
 		return new StackedBarChartBuilder();
+	}
+
+	public static GroupedStackedBarChartBuilder groupedStackedBarChart() {
+		return new GroupedStackedBarChartBuilder();
 	}
 
 	public static Bar3DChartBuilder bar3DChart() {

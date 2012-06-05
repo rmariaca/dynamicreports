@@ -66,12 +66,15 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.DifferenceRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarChartShowPercentagesCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
+import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIDataset;
@@ -86,6 +89,7 @@ import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIGanttChartSerie;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIGroupedCategoryChartSerie;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIHighLowDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRISeriesDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
@@ -101,6 +105,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIBubblePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRICandlestickPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIChartAxis;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIDifferencePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIGroupedStackedBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIHighLowPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILayeredBarPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRILinePlot;
@@ -160,6 +165,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRILayeredBarPlot) {
 			designPlot = layeredBarPlot((DRILayeredBarPlot) plot, chartCustomizers);
+		}
+		else if (plot instanceof DRIGroupedStackedBarPlot) {
+			designPlot = groupedStackedBarPlot((DRIGroupedStackedBarPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIBarPlot) {
 			designPlot = barPlot((DRIBarPlot) plot, chartCustomizers);
@@ -229,6 +237,22 @@ public class ChartTransform {
 		designBarPlot.setShowTickMarks(barPlot.getShowTickMarks());
 		designBarPlot.setShowTickLabels(barPlot.getShowTickLabels());
 		designBarPlot.setShowLabels(barPlot.getShowLabels());
+		return designBarPlot;
+	}
+
+	private DRDesignBarPlot groupedStackedBarPlot(DRIGroupedStackedBarPlot groupedStackedBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		GroupedStackedBarRendererCustomizer renderer = new GroupedStackedBarRendererCustomizer();
+		chartCustomizers.add(renderer);
+		DRDesignBarPlot designBarPlot = barPlot(groupedStackedBarPlot, chartCustomizers);
+		if (groupedStackedBarPlot.getShowPercentages() != null && groupedStackedBarPlot.getShowPercentages()) {
+			int index = 0;
+			for (int i = 0; i < chartCustomizers.size(); i++) {
+				if (chartCustomizers.get(i) instanceof ShowPercentagesCustomizer) {
+					index = i;
+				}
+				chartCustomizers.set(index, new GroupedStackedBarChartShowPercentagesCustomizer(renderer.getMap()));
+			}
+		}
 		return designBarPlot;
 	}
 
@@ -503,7 +527,10 @@ public class ChartTransform {
 		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
 			DRIDesignChartSerie designSerie;
-			if (serie instanceof DRICategoryChartSerie) {
+			if (serie instanceof DRIGroupedCategoryChartSerie) {
+				designSerie = groupedCategorySerie(dataset.getSubDataset(), (DRIGroupedCategoryChartSerie) serie, valueExpression, resetType, resetGroup, index++);
+			}
+			else if (serie instanceof DRICategoryChartSerie) {
 				designSerie = categorySerie(dataset.getSubDataset(), (DRICategoryChartSerie) serie, valueExpression, resetType, resetGroup, index++);
 			}
 			else if (serie instanceof DRIXyChartSerie) {
@@ -589,6 +616,56 @@ public class ChartTransform {
 		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
 
 		return designSerie;
+	}
+
+	private DRDesignCategoryChartSerie groupedCategorySerie(DRIDataset dataset, DRIGroupedCategoryChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
+		DRDesignCategoryChartSerie designSerie = new DRDesignCategoryChartSerie();
+
+		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
+		DRIDesignExpression seriesExpression;
+		if (serie.getSeriesExpression() != null && serie.getSeriesExpression() != null) {
+			GroupedSeriesExpression groupedSeriesExpression = new GroupedSeriesExpression(serie.getGroupExpression(), serie.getSeriesExpression());
+			seriesExpression = expressionTransform.transformExpression(groupedSeriesExpression);
+		}
+		else {
+			seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
+		}
+		designSerie.setSeriesExpression(seriesExpression);
+		DRIDesignExpression serieValueExpression = expressionTransform.transformExpression(serie.getValueExpression());
+		if (serieValueExpression instanceof DRIDesignVariable) {
+			designSerie.setValueExpression(serieValueExpression);
+		}
+		else {
+			if (seriesExpression == null) {
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, null)));
+			}
+			else {
+				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
+			}
+		}
+		DRIExpression<?> labelExpression = serie.getLabelExpression();
+		if (labelExpression == null) {
+			labelExpression = Expressions.text("serie" + index);
+		}
+		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
+
+		return designSerie;
+	}
+
+	private class GroupedSeriesExpression extends AbstractComplexExpression<String> {
+		private static final long serialVersionUID = 1L;
+
+		private GroupedSeriesExpression(DRIExpression<?> groupExpression, DRIExpression<?> seriesExpression) {
+			addExpression(groupExpression);
+			addExpression(seriesExpression);
+		}
+
+		@Override
+		public String evaluate(List<?> values, ReportParameters reportParameters) {
+			String group = (String) values.get(0);
+			String series = (String) values.get(1);
+			return group + GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY + series;
+		}
 	}
 
 	//xy serie

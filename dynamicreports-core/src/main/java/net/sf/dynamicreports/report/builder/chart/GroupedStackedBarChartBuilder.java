@@ -22,32 +22,32 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryChartSerie;
-import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.VariableBuilder;
-import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
+import net.sf.dynamicreports.report.base.chart.plot.DRGroupedStackedBarPlot;
+import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class CategoryChartSerieBuilder extends AbstractCategoryChartSerieBuilder<CategoryChartSerieBuilder, DRCategoryChartSerie> {
+public class GroupedStackedBarChartBuilder extends AbstractCategoryChartBuilder<GroupedStackedBarChartBuilder, DRGroupedStackedBarPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected CategoryChartSerieBuilder(ValueColumnBuilder<?, ? extends Number> column) {
-		super(new DRCategoryChartSerie(), column);
+	protected GroupedStackedBarChartBuilder() {
+		super(ChartType.GROUPEDSTACKEDBAR);
 	}
 
-	protected CategoryChartSerieBuilder(FieldBuilder<? extends Number> field) {
-		super(new DRCategoryChartSerie(), field);
+	public GroupedStackedBarChartBuilder setShowLabels(Boolean showLabels) {
+		getPlot().setShowLabels(showLabels);
+		return this;
 	}
 
-	protected CategoryChartSerieBuilder(DRIExpression<? extends Number> valueExpression) {
-		super(new DRCategoryChartSerie(), valueExpression);
+	public GroupedStackedBarChartBuilder setShowTickLabels(Boolean showTickLabels) {
+		getPlot().setShowTickLabels(showTickLabels);
+		return this;
 	}
 
-	protected CategoryChartSerieBuilder(VariableBuilder<? extends Number> variable) {
-		super(new DRCategoryChartSerie(), variable);
+	public GroupedStackedBarChartBuilder setShowTickMarks(Boolean showTickMarks) {
+		getPlot().setShowTickMarks(showTickMarks);
+		return this;
 	}
 }

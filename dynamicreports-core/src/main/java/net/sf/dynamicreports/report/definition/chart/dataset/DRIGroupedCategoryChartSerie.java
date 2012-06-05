@@ -20,35 +20,14 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.definition.chart.dataset;
+
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	LAYEREDBAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	GROUPEDSTACKEDBAR,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	DIFFERENCE,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER,
-	THERMOMETER,
-	GANTT
+public interface DRIGroupedCategoryChartSerie extends DRICategoryChartSerie {
+
+	public DRIExpression<?> getGroupExpression();
 }

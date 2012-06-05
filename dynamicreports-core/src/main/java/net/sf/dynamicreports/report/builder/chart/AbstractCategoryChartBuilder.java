@@ -67,14 +67,14 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		return (T) this;
 	}
 
-	public T series(CategoryChartSerieBuilder ...chartSeries) {
+	public T series(AbstractCategoryChartSerieBuilder<?, ?> ...chartSeries) {
 		return addSerie(chartSeries);
 	}
 
-	public T addSerie(CategoryChartSerieBuilder ...chartSeries) {
+	public T addSerie(AbstractCategoryChartSerieBuilder<?, ?> ...chartSeries) {
 		Validate.notNull(chartSeries, "chartSeries must not be null");
 		Validate.noNullElements(chartSeries, "chartSeries must not contains null chartSerie");
-		for (CategoryChartSerieBuilder chartSerie : chartSeries) {
+		for (AbstractCategoryChartSerieBuilder<?, ?> chartSerie : chartSeries) {
 			getDataset().addSerie(chartSerie.build());
 		}
 		return (T) this;

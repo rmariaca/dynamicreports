@@ -233,6 +233,7 @@ public class ConstantTransform {
 		case BAR3D:
 			return JRDesignChart.CHART_TYPE_BAR3D;
 		case STACKEDBAR:
+		case GROUPEDSTACKEDBAR:
 			return JRDesignChart.CHART_TYPE_STACKEDBAR;
 		case STACKEDBAR3D:
 			return JRDesignChart.CHART_TYPE_STACKEDBAR3D;

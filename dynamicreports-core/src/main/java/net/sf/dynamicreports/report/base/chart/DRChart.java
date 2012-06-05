@@ -92,6 +92,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 				break;
 			case BAR:
 			case STACKEDBAR:
+			case GROUPEDSTACKEDBAR:
 				dataset = new DRCategoryDataset();
 				plot = new DRBarPlot();
 				break;
