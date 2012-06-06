@@ -111,9 +111,4 @@ public abstract class AbstractTimeSeriesChartBuilder<T extends AbstractTimeSerie
 		getPlot().setShowValues(showValues);
 		return (T) this;
 	}
-
-	public T setShowPercentages(Boolean showPercentages) {
-		getPlot().setShowPercentages(showPercentages);
-		return (T) this;
-	}
 }

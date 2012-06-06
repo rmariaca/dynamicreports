@@ -103,9 +103,4 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		getPlot().setShowValues(showValues);
 		return (T) this;
 	}
-
-	public T setShowPercentages(Boolean showPercentages) {
-		getPlot().setShowPercentages(showPercentages);
-		return (T) this;
-	}
 }
