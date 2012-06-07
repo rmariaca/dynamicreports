@@ -54,4 +54,9 @@ public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBu
 		getPlot().setYOffset(yOffset);
 		return this;
 	}
+
+	public Bar3DChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }

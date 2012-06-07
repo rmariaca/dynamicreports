@@ -49,4 +49,9 @@ public class XyLineChartBuilder extends AbstractXyChartBuilder<XyLineChartBuilde
 		getPlot().setShowLines(showLines);
 		return this;
 	}
+
+	public XyLineChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }

@@ -50,4 +50,9 @@ public class GroupedStackedBarChartBuilder extends AbstractCategoryChartBuilder<
 		getPlot().setShowTickMarks(showTickMarks);
 		return this;
 	}
+
+	public GroupedStackedBarChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }

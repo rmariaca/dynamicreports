@@ -34,6 +34,11 @@ import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.jasperreports.engine.JRDataSource;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.junit.Assert;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -52,6 +57,7 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 				column2 = col.column("Column2", "field2", Integer.class),
 				column3 = col.column("Column3", "field3", Integer.class))
 			.summary(
+				cmp.horizontalList(
 					cht.barChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
@@ -67,7 +73,8 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 					cht.stackedBar3DChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
+						.series(cht.serie(column2), cht.serie(column3))),
+				cmp.horizontalList(
 					cht.areaChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
@@ -83,14 +90,18 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 					cht.lineChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)));
+						.series(cht.serie(column2), cht.serie(column3))),
+					cht.pieChart()
+						.setShowPercentages(true)
+						.setKey(column1)
+						.series(cht.serie(column2)));
 	}
 
 	@Override
 	public void test() {
 		super.test();
 
-		numberOfPagesTest(2);
+		numberOfPagesTest(1);
 
 		String[] categories = new String[]{"value1", "value2", "value3"};
 		String[] series = new String[]{"Column2", "Column3"};
@@ -135,6 +146,10 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 		chartCategoryCountTest("summary.chart8", 0, 4);
 		chartSeriesCountTest("summary.chart8", 0, 2);
 		chartDataTest("summary.chart8", 0, categories, series, values);
+
+		JFreeChart chart = getChart("summary.chart9", 0);
+		String labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
+		Assert.assertEquals("Label format", "{0} ({2})", labelFormat);
 	}
 
 	@Override

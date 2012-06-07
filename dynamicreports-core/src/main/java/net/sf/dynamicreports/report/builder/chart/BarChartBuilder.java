@@ -54,4 +54,9 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 		getPlot().setShowTickMarks(showTickMarks);
 		return this;
 	}
+
+	public BarChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }

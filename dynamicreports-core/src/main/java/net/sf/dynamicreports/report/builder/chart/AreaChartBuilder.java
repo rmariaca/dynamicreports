@@ -35,4 +35,9 @@ public class AreaChartBuilder extends AbstractCategoryChartBuilder<AreaChartBuil
 	protected AreaChartBuilder() {
 		super(ChartType.AREA);
 	}
+
+	public AreaChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }

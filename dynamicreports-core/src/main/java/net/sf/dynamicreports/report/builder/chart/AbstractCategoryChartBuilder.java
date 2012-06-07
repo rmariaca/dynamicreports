@@ -104,11 +104,6 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		return (T) this;
 	}
 
-	public T setShowValues(Boolean showValues) {
-		getPlot().setShowValues(showValues);
-		return (T) this;
-	}
-
 	public T setShowPercentages(Boolean showPercentages) {
 		getPlot().setShowPercentages(showPercentages);
 		return (T) this;

@@ -38,6 +38,8 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.junit.Assert;
@@ -83,24 +85,16 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 					cht.areaChart()
 						.setShowValues(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
-					cht.stackedAreaChart()
-						.setShowValues(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
-					cht.layeredBarChart()
-						.setShowValues(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
+						.series(cht.serie(column3), cht.serie(column2)),
 					cht.lineChart()
 						.setShowValues(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3))),
-				cmp.horizontalList(
-					cht.xyAreaChart()
+						.series(cht.serie(column2), cht.serie(column3)),
+					cht.pieChart()
 						.setShowValues(true)
-						.setXValue(column2)
-						.series(cht.xySerie(column3)),
+						.setKey(column1)
+						.series(cht.serie(column2))),
+				cmp.horizontalList(
 					cht.xyBarChart()
 						.setShowValues(true)
 						.setXValue(column2)
@@ -157,15 +151,15 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
 
 		chart = getChart("summary.chart7", 0);
-		renderer1 = chart.getCategoryPlot().getRenderer();
-		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		String labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
+		Assert.assertEquals("Label format", "{0} = {1}", labelFormat);
 
 		chart = getChart("summary.chart8", 0);
-		renderer1 = chart.getCategoryPlot().getRenderer();
-		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		XYItemRenderer renderer2 = chart.getXYPlot().getRenderer();
+		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
 
 		chart = getChart("summary.chart9", 0);
-		XYItemRenderer renderer2 = chart.getXYPlot().getRenderer();
+		renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
 
 		chart = getChart("summary.chart10", 0);
@@ -177,14 +171,6 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
 
 		chart = getChart("summary.chart12", 0);
-		renderer2 = chart.getXYPlot().getRenderer();
-		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
-
-		chart = getChart("summary.chart13", 0);
-		renderer2 = chart.getXYPlot().getRenderer();
-		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
-
-		chart = getChart("summary.chart14", 0);
 		renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
 	}

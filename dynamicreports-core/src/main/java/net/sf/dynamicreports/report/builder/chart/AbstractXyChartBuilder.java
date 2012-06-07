@@ -99,8 +99,4 @@ public abstract class AbstractXyChartBuilder<T extends AbstractXyChartBuilder<T,
 		return (T) this;
 	}
 
-	public T setShowValues(Boolean showValues) {
-		getPlot().setShowValues(showValues);
-		return (T) this;
-	}
 }

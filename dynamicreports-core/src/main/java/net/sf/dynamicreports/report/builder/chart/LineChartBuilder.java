@@ -45,4 +45,9 @@ public class LineChartBuilder extends AbstractCategoryChartBuilder<LineChartBuil
 		getPlot().setShowLines(showLines);
 		return this;
 	}
+
+	public LineChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
 }
