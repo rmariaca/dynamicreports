@@ -245,12 +245,11 @@ public class ChartTransform {
 		chartCustomizers.add(renderer);
 		DRDesignBarPlot designBarPlot = barPlot(groupedStackedBarPlot, chartCustomizers);
 		if (groupedStackedBarPlot.getShowPercentages() != null && groupedStackedBarPlot.getShowPercentages()) {
-			int index = 0;
 			for (int i = 0; i < chartCustomizers.size(); i++) {
 				if (chartCustomizers.get(i) instanceof ShowPercentagesCustomizer) {
-					index = i;
+					chartCustomizers.set(i, new GroupedStackedBarChartShowPercentagesCustomizer(renderer));
+					break;
 				}
-				chartCustomizers.set(index, new GroupedStackedBarChartShowPercentagesCustomizer(renderer.getMap()));
 			}
 		}
 		return designBarPlot;
@@ -622,26 +621,15 @@ public class ChartTransform {
 		DRDesignCategoryChartSerie designSerie = new DRDesignCategoryChartSerie();
 
 		AbstractExpressionTransform expressionTransform = accessor.getExpressionTransform();
-		DRIDesignExpression seriesExpression;
-		if (serie.getSeriesExpression() != null && serie.getSeriesExpression() != null) {
-			GroupedSeriesExpression groupedSeriesExpression = new GroupedSeriesExpression(serie.getGroupExpression(), serie.getSeriesExpression());
-			seriesExpression = expressionTransform.transformExpression(groupedSeriesExpression);
-		}
-		else {
-			seriesExpression = expressionTransform.transformExpression(serie.getSeriesExpression());
-		}
+		GroupedSeriesExpression groupedSeriesExpression = new GroupedSeriesExpression(serie.getGroupExpression(), serie.getSeriesExpression(), serie.getLabelExpression(), index);
+		DRIDesignExpression seriesExpression = expressionTransform.transformExpression(groupedSeriesExpression);
 		designSerie.setSeriesExpression(seriesExpression);
 		DRIDesignExpression serieValueExpression = expressionTransform.transformExpression(serie.getValueExpression());
 		if (serieValueExpression instanceof DRIDesignVariable) {
 			designSerie.setValueExpression(serieValueExpression);
 		}
 		else {
-			if (seriesExpression == null) {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, null)));
-			}
-			else {
-				designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
-			}
+			designSerie.setValueExpression(expressionTransform.transformExpression(new SerieValueExpression(valueExpression, serieValueExpression, resetType, resetGroup, seriesExpression.getName())));
 		}
 		DRIExpression<?> labelExpression = serie.getLabelExpression();
 		if (labelExpression == null) {
@@ -655,9 +643,24 @@ public class ChartTransform {
 	private class GroupedSeriesExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = 1L;
 
-		private GroupedSeriesExpression(DRIExpression<?> groupExpression, DRIExpression<?> seriesExpression) {
-			addExpression(groupExpression);
-			addExpression(seriesExpression);
+		private GroupedSeriesExpression(DRIExpression<?> groupExpression, DRIExpression<?> seriesExpression, DRIExpression<?> labelExpression, int index) {
+			if (groupExpression != null) {
+				addExpression(groupExpression);
+			}
+			else {
+				addExpression(Expressions.text("group"));
+			}
+			if (seriesExpression != null) {
+				addExpression(seriesExpression);
+			}
+			else {
+				if (labelExpression != null) {
+					addExpression(labelExpression);
+				}
+				else {
+					addExpression(Expressions.text("serie" + index));
+				}
+			}
 		}
 
 		@Override

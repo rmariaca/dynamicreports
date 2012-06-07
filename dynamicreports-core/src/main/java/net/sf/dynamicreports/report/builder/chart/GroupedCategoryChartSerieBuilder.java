@@ -54,24 +54,24 @@ public class GroupedCategoryChartSerieBuilder extends AbstractCategoryChartSerie
 	}
 
 	//group
-	public GroupedCategoryChartSerieBuilder setGroup(ValueColumnBuilder<?, ? extends Number> column) {
+	public GroupedCategoryChartSerieBuilder setGroup(ValueColumnBuilder<?, String> column) {
 		Validate.notNull(column, "column must not be null");
 		getObject().setGroupExpression(column.getColumn());
 		return this;
 	}
 
-	public GroupedCategoryChartSerieBuilder setGroup(FieldBuilder<? extends Number> field) {
+	public GroupedCategoryChartSerieBuilder setGroup(FieldBuilder<String> field) {
 		Validate.notNull(field, "field must not be null");
 		getObject().setGroupExpression(field.build());
 		return this;
 	}
 
-	public GroupedCategoryChartSerieBuilder setGroup(DRIExpression<? extends Number> valueExpression) {
+	public GroupedCategoryChartSerieBuilder setGroup(DRIExpression<String> valueExpression) {
 		getObject().setGroupExpression(valueExpression);
 		return this;
 	}
 
-	public GroupedCategoryChartSerieBuilder setGroup(VariableBuilder<? extends Number> variable) {
+	public GroupedCategoryChartSerieBuilder setGroup(VariableBuilder<String> variable) {
 		Validate.notNull(variable, "variable must not be null");
 		getObject().setGroupExpression(variable.build());
 		return this;

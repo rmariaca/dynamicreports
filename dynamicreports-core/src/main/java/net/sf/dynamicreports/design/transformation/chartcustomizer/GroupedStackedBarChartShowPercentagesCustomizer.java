@@ -30,7 +30,6 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.KeyToGroupMap;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -38,14 +37,14 @@ import org.jfree.data.KeyToGroupMap;
 public class GroupedStackedBarChartShowPercentagesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private KeyToGroupMap map;
+	private GroupedStackedBarRendererCustomizer renderer;
 
-	public GroupedStackedBarChartShowPercentagesCustomizer(KeyToGroupMap map) {
-		this.map = map;
+	public GroupedStackedBarChartShowPercentagesCustomizer(GroupedStackedBarRendererCustomizer renderer) {
+		this.renderer = renderer;
 	}
 
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
-		PercentageGroupedCategoryDataset dataset = new PercentageGroupedCategoryDataset(chart.getCategoryPlot().getDataset(), map);
+		PercentageGroupedCategoryDataset dataset = new PercentageGroupedCategoryDataset(chart.getCategoryPlot().getDataset(), renderer.getMap());
 		chart.getCategoryPlot().setDataset(dataset);
     if (StringUtils.isBlank(chart.getCategoryPlot().getRangeAxis().getLabel())) {
     	chart.getCategoryPlot().getRangeAxis().setLabel("%");

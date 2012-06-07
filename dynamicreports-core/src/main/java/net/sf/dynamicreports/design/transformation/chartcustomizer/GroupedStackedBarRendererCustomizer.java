@@ -41,6 +41,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.SubCategoryAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.category.CategoryDataset;
@@ -99,6 +100,13 @@ public class GroupedStackedBarRendererCustomizer implements DRIChartCustomizer, 
 		GroupedStackedBarRenderer renderer = new GroupedStackedBarRenderer();
 		renderer.setSeriesToGroupMap(map);
 
+		StackedBarRenderer categoryRenderer = (StackedBarRenderer) chart.getCategoryPlot().getRenderer();
+    renderer.setBaseItemLabelsVisible(categoryRenderer.getBaseItemLabelsVisible());
+    renderer.setBaseItemLabelFont(categoryRenderer.getBaseItemLabelFont());
+    renderer.setBaseItemLabelPaint(categoryRenderer.getBaseItemLabelPaint());
+    renderer.setBaseItemLabelGenerator(categoryRenderer.getBaseItemLabelGenerator());
+		renderer.setShadowVisible(categoryRenderer.getShadowsVisible());
+
     renderer.setItemMargin(0.10);
     renderer.setDrawBarOutline(false);
 		for (int i = 0; i < dataset.getRowCount(); i++) {
@@ -110,6 +118,13 @@ public class GroupedStackedBarRendererCustomizer implements DRIChartCustomizer, 
     CategoryAxis domainAxis = chart.getCategoryPlot().getDomainAxis();
 		SubCategoryAxis newDomainAxis = new SubCategoryAxis(domainAxis.getLabel());
 		newDomainAxis.setLabelFont(domainAxis.getLabelFont());
+		newDomainAxis.setTickLabelFont(domainAxis.getTickLabelFont());
+		newDomainAxis.setLabelPaint(domainAxis.getLabelPaint());
+		newDomainAxis.setTickLabelPaint(domainAxis.getTickLabelPaint());
+		newDomainAxis.setAxisLinePaint(domainAxis.getAxisLinePaint());
+		newDomainAxis.setTickMarkPaint(domainAxis.getTickMarkPaint());
+		newDomainAxis.setTickLabelsVisible(domainAxis.isTickLabelsVisible());
+		newDomainAxis.setTickMarksVisible(domainAxis.isTickMarksVisible());
     newDomainAxis.setCategoryMargin(0.05);
     for (String group : groups) {
     	newDomainAxis.addSubCategory(group);

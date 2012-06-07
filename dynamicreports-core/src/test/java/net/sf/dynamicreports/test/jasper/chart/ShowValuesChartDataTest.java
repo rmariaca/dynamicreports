@@ -90,7 +90,16 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 						.setShowValues(true)
 						.setCategory(column1)
 						.series(cht.serie(column2), cht.serie(column3)),
+					cht.groupedStackedBarChart()
+						.setShowValues(true)
+						.setCategory(column1)
+						.series(cht.groupedSerie(column2).setGroup(column1).setSeries(column1))),
+				cmp.horizontalList(
 					cht.pieChart()
+						.setShowValues(true)
+						.setKey(column1)
+						.series(cht.serie(column2)),
+					cht.pie3DChart()
 						.setShowValues(true)
 						.setKey(column1)
 						.series(cht.serie(column2))),
@@ -129,50 +138,70 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		JFreeChart chart = getChart("summary.chart1", 0);
 		CategoryItemRenderer renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart2", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart3", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart4", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart5", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart6", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart7", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
+
+		chart = getChart("summary.chart8", 0);
 		String labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
 		Assert.assertEquals("Label format", "{0} = {1}", labelFormat);
 
-		chart = getChart("summary.chart8", 0);
-		XYItemRenderer renderer2 = chart.getXYPlot().getRenderer();
-		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
-
 		chart = getChart("summary.chart9", 0);
-		renderer2 = chart.getXYPlot().getRenderer();
-		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
+		Assert.assertEquals("Label format", "{0} = {1}", labelFormat);
 
 		chart = getChart("summary.chart10", 0);
-		renderer2 = chart.getXYPlot().getRenderer();
+		XYItemRenderer renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart11", 0);
 		renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart12", 0);
 		renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
+
+		chart = getChart("summary.chart13", 0);
+		renderer2 = chart.getXYPlot().getRenderer();
+		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
+
+		chart = getChart("summary.chart14", 0);
+		renderer2 = chart.getXYPlot().getRenderer();
+		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
 	}
 
 	@Override
