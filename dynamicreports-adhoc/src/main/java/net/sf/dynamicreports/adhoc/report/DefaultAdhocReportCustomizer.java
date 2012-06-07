@@ -70,6 +70,8 @@ import net.sf.dynamicreports.report.builder.chart.BubbleChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.CategoryChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.Charts;
 import net.sf.dynamicreports.report.builder.chart.DifferenceChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.GroupedCategoryChartSerieBuilder;
+import net.sf.dynamicreports.report.builder.chart.GroupedStackedBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.LayeredBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.LineChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.Pie3DChartBuilder;
@@ -520,6 +522,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return barChart(adhocChart);
 		case STACKEDBAR:
 			return stackedBarChart(adhocChart);
+		case GROUPEDSTACKEDBAR:
+			return groupedStackedBarChart(adhocChart);
 		case BAR3D:
 			return bar3DChart(adhocChart);
 		case STACKEDBAR3D:
@@ -588,7 +592,13 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		if (adhocChart.getSeries() != null && !adhocChart.getSeries().isEmpty()) {
 			for (AdhocChartSerie adhocChartSerie : adhocChart.getSeries()) {
-				categoryChart.addSerie(categoryChartSerie(adhocChartSerie));
+				AdhocChartType chartType = adhocChart.getType();
+				if (chartType != null && chartType.equals(AdhocChartType.GROUPEDSTACKEDBAR)) {
+					categoryChart.addSerie(groupedCategoryChartSerie(adhocChartSerie));
+				}
+				else {
+					categoryChart.addSerie(categoryChartSerie(adhocChartSerie));
+				}
 			}
 		}
 		AxisFormatBuilder categoryAxisFormat = axisFormat(adhocChart.getXAxisFormat());
@@ -601,6 +611,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		Boolean useSeriesAsCategory = adhocChart.getProperty(AdhocProperties.CHART_USE_SERIES_AS_CATEGORY);
 		categoryChart.setUseSeriesAsCategory(useSeriesAsCategory);
+		Boolean showPercentages = adhocChart.getProperty(AdhocProperties.CHART_SHOW_PERCENTAGES);
+		categoryChart.setShowPercentages(showPercentages);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -627,8 +639,10 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		if (valueAxisFormat != null) {
 			timeSeriesChart.setValueAxisFormat(valueAxisFormat);
 		}
-		AdhocTimePeriod adhocTimePeriod = adhocChart.getProperty(AdhocProperties.TIMESERIES_CHART_TIME_PERIOD);
+		AdhocTimePeriod adhocTimePeriod = adhocChart.getProperty(AdhocProperties.CHART_TIME_PERIOD);
 		timeSeriesChart.setTimePeriodType(timePeriodType(adhocTimePeriod));
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		timeSeriesChart.setShowValues(showValues);
 	}
 
 	protected TimePeriod timePeriodType(AdhocTimePeriod timePeriod) {
@@ -676,6 +690,10 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 				pieChart.addSerie(categoryChartSerie(adhocChartSerie));
 			}
 		}
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		pieChart.setShowValues(showValues);
+		Boolean showPercentages = adhocChart.getProperty(AdhocProperties.CHART_SHOW_PERCENTAGES);
+		pieChart.setShowPercentages(showPercentages);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -751,6 +769,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected AreaChartBuilder areaChart(AdhocChart adhocChart) {
 		AreaChartBuilder areaChart = Charts.areaChart();
 		categoryChart(adhocChart, areaChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		areaChart.setShowValues(showValues);
 		return areaChart;
 	}
 
@@ -763,30 +783,48 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected BarChartBuilder barChart(AdhocChart adhocChart) {
 		BarChartBuilder barChart = Charts.barChart();
 		categoryChart(adhocChart, barChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		barChart.setShowValues(showValues);
 		return barChart;
 	}
 
 	protected StackedBarChartBuilder stackedBarChart(AdhocChart adhocChart) {
 		StackedBarChartBuilder stackedBarChart = Charts.stackedBarChart();
 		categoryChart(adhocChart, stackedBarChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		stackedBarChart.setShowValues(showValues);
 		return stackedBarChart;
+	}
+
+	protected GroupedStackedBarChartBuilder groupedStackedBarChart(AdhocChart adhocChart) {
+		GroupedStackedBarChartBuilder groupedStackedBarChart = Charts.groupedStackedBarChart();
+		categoryChart(adhocChart, groupedStackedBarChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		groupedStackedBarChart.setShowValues(showValues);
+		return groupedStackedBarChart;
 	}
 
 	protected Bar3DChartBuilder bar3DChart(AdhocChart adhocChart) {
 		Bar3DChartBuilder bar3DChart = Charts.bar3DChart();
 		categoryChart(adhocChart, bar3DChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		bar3DChart.setShowValues(showValues);
 		return bar3DChart;
 	}
 
 	protected StackedBar3DChartBuilder stackedBar3DChart(AdhocChart adhocChart) {
 		StackedBar3DChartBuilder stackedBar3DChart = Charts.stackedBar3DChart();
 		categoryChart(adhocChart, stackedBar3DChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		stackedBar3DChart.setShowValues(showValues);
 		return stackedBar3DChart;
 	}
 
 	protected LineChartBuilder lineChart(AdhocChart adhocChart) {
 		LineChartBuilder lineChart = Charts.lineChart();
 		categoryChart(adhocChart, lineChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		lineChart.setShowValues(showValues);
 		return lineChart;
 	}
 
@@ -817,6 +855,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected ScatterChartBuilder scatterChart(AdhocChart adhocChart) {
 		ScatterChartBuilder scatterChart = Charts.scatterChart();
 		xyChart(adhocChart, scatterChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		scatterChart.setShowValues(showValues);
 		return scatterChart;
 	}
 
@@ -841,12 +881,16 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected XyBarChartBuilder xyBarChart(AdhocChart adhocChart) {
 		XyBarChartBuilder xyBarChart = Charts.xyBarChart();
 		xyChart(adhocChart, xyBarChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		xyBarChart.setShowValues(showValues);
 		return xyBarChart;
 	}
 
 	protected XyLineChartBuilder xyLineChart(AdhocChart adhocChart) {
 		XyLineChartBuilder xyLineChart = Charts.xyLineChart();
 		xyChart(adhocChart, xyLineChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		xyLineChart.setShowValues(showValues);
 		return xyLineChart;
 	}
 
@@ -921,6 +965,41 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			}
 		}
 		return categoryChartSerie;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected GroupedCategoryChartSerieBuilder groupedCategoryChartSerie(AdhocChartSerie adhocChartSerie) {
+		GroupedCategoryChartSerieBuilder groupedCategoryChartSerie;
+		ColumnBuilder valueColumn = columns.get(adhocChartSerie.getYValue());
+		if (valueColumn != null && valueColumn instanceof ValueColumnBuilder) {
+			groupedCategoryChartSerie = Charts.groupedSerie((ValueColumnBuilder) valueColumn);
+		}
+		else {
+			DRIExpression field = getFieldExpression(adhocChartSerie.getYValue());
+			groupedCategoryChartSerie = Charts.groupedSerie(field);
+		}
+		String seriesGroup = adhocChartSerie.getProperty(AdhocProperties.CHART_SERIES_GROUP);
+		if (seriesGroup != null) {
+			ColumnBuilder groupColumn = columns.get(seriesGroup);
+			if (groupColumn != null && groupColumn instanceof ValueColumnBuilder) {
+				groupedCategoryChartSerie.setGroup((ValueColumnBuilder) groupColumn);
+			}
+			else {
+				DRIExpression field = getFieldExpression(seriesGroup);
+				groupedCategoryChartSerie.setGroup(field);
+			}
+		}
+		chartSerie(adhocChartSerie, groupedCategoryChartSerie);
+		if (adhocChartSerie.getLabel() != null) {
+			groupedCategoryChartSerie.setLabel(adhocChartSerie.getLabel());
+		}
+		else if (valueColumn == null) {
+			String label = getFieldLabel(adhocChartSerie.getYValue());
+			if (StringUtils.isNotBlank(label)) {
+				groupedCategoryChartSerie.setLabel(label);
+			}
+		}
+		return groupedCategoryChartSerie;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

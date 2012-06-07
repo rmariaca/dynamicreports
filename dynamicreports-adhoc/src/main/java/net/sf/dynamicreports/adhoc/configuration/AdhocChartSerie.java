@@ -35,6 +35,11 @@ public class AdhocChartSerie implements Cloneable, Serializable {
 	private String yValue;
 	private String zValue;
 	private String label;
+	private AdhocProperties properties;
+
+	public AdhocChartSerie() {
+		properties = new AdhocProperties();
+	}
 
 	public String getSeries() {
 		return series;
@@ -76,6 +81,22 @@ public class AdhocChartSerie implements Cloneable, Serializable {
 		this.label = label;
 	}
 
+	public AdhocProperties getProperties() {
+		return properties;
+	}
+
+	public <T> T getProperty(String key) {
+		return this.properties.getProperty(key);
+	}
+
+	public void setProperty(String key, Object value) {
+		this.properties.setProperty(key, value);
+	}
+
+	public void setProperties(AdhocProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -102,6 +123,9 @@ public class AdhocChartSerie implements Cloneable, Serializable {
 		if (!(label == null ? object.getLabel() == null : label.equals(object.getLabel()))) {
 			return false;
 		}
+		if (!(properties == null ? object.getProperties() == null : properties.equals(object.getProperties()))) {
+			return false;
+		}
 
 		return true;
 	}
@@ -113,6 +137,10 @@ public class AdhocChartSerie implements Cloneable, Serializable {
 			clone = (AdhocChartSerie) super.clone();
 		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
+		}
+
+		if (properties != null) {
+			clone.properties = properties.clone();
 		}
 
 		return clone;

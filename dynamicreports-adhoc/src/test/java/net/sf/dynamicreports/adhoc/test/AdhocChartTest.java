@@ -117,7 +117,7 @@ public class AdhocChartTest {
 		adhocChart.setXAxisFormat(axisFormat);
 		adhocChart.setYAxisFormat(axisFormat);
 		adhocChart.setOrientation(AdhocOrientation.VERTICAL);
-		adhocChart.setProperty(AdhocProperties.TIMESERIES_CHART_TIME_PERIOD, AdhocTimePeriod.MONTH);
+		adhocChart.setProperty(AdhocProperties.CHART_TIME_PERIOD, AdhocTimePeriod.MONTH);
 		adhocReport.addComponent(adhocChart);
 
 		adhocChart = new AdhocChart();

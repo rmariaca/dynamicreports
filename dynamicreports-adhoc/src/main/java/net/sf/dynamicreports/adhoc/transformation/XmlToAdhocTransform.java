@@ -492,6 +492,9 @@ public class XmlToAdhocTransform {
 		adhocChartSerie.setYValue(xmlAdhocChartSerie.getYValue());
 		adhocChartSerie.setZValue(xmlAdhocChartSerie.getZValue());
 		adhocChartSerie.setLabel(xmlAdhocChartSerie.getLabel());
+		if (xmlAdhocChartSerie.getProperty() != null && !xmlAdhocChartSerie.getProperty().isEmpty()) {
+			properties(xmlAdhocChartSerie.getProperty(), adhocChartSerie.getProperties());
+		}
 		return adhocChartSerie;
 	}
 
@@ -509,6 +512,8 @@ public class XmlToAdhocTransform {
 			return AdhocChartType.BAR;
 		case STACKEDBAR:
 			return AdhocChartType.STACKEDBAR;
+		case GROUPEDSTACKEDBAR:
+			return AdhocChartType.GROUPEDSTACKEDBAR;
 		case BAR_3_D:
 			return AdhocChartType.BAR3D;
 		case STACKEDBAR_3_D:

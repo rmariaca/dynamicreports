@@ -34,7 +34,10 @@ public class AdhocProperties implements Cloneable, Serializable {
 
 	public static final String PROPERTY_PREFIX = "net.sf.dynamicreports.";
 	public static final String CHART_USE_SERIES_AS_CATEGORY = PROPERTY_PREFIX + "chart.useseriesascategory";
-	public static final String TIMESERIES_CHART_TIME_PERIOD = PROPERTY_PREFIX + "chart.timeperiod";
+	public static final String CHART_SHOW_VALUES = PROPERTY_PREFIX + "chart.showvalues";
+	public static final String CHART_SHOW_PERCENTAGES = PROPERTY_PREFIX + "chart.showpercentages";
+	public static final String CHART_TIME_PERIOD = PROPERTY_PREFIX + "chart.timeperiod";
+	public static final String CHART_SERIES_GROUP = PROPERTY_PREFIX + "chart.seriesgroup";
 
 	private Map<String, Object> properties;
 

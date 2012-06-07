@@ -254,6 +254,9 @@
 	</xs:complexType>
 	
 	<xs:complexType name="ChartSerie">
+		<xs:sequence>
+			<xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
 		<xs:attribute name="series" type="xs:string"/>
 		<xs:attribute name="xValue" type="xs:string"/>
 		<xs:attribute name="yValue" type="xs:string"/>
@@ -267,6 +270,7 @@
 			<xs:enumeration value="STACKEDAREA"/>
 			<xs:enumeration value="BAR"/>
 			<xs:enumeration value="STACKEDBAR"/>
+			<xs:enumeration value="GROUPEDSTACKEDBAR"/>
 			<xs:enumeration value="BAR3D"/>
 			<xs:enumeration value="STACKEDBAR3D"/>
 			<xs:enumeration value="LINE"/>
