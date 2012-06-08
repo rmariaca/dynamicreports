@@ -22,27 +22,27 @@
 
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
-import org.jfree.data.KeyToGroupMap;
+import org.apache.commons.lang3.StringUtils;
 import org.jfree.data.category.CategoryDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class PercentageGroupedCategoryDataset extends PercentageCategoryDataset {
-	private KeyToGroupMap map;
 
-	public PercentageGroupedCategoryDataset(CategoryDataset dataset, KeyToGroupMap map) {
+	public PercentageGroupedCategoryDataset(CategoryDataset dataset) {
 		super(dataset);
-		this.map = map;
 	}
 
 	@Override
 	public Number getValue(int row, int column) {
 		double total = 0;
+		String group1 = StringUtils.substringBefore((String) getRowKey(row), GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY);
 		for (int i = 0; i < getRowCount(); i++) {
 			Number value = dataset.getValue(i, column);
 			if (value != null) {
-				if (map.getGroup(getRowKey(row)).equals(map.getGroup(getRowKey(i)))) {
+				String group2 = StringUtils.substringBefore((String) getRowKey(i), GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY);
+				if (group1.equals(group2)) {
 					total += value.doubleValue();
 				}
 			}

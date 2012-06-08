@@ -143,8 +143,4 @@ public class GroupedStackedBarRendererCustomizer implements DRIChartCustomizer, 
     chart.getCategoryPlot().setDataset(dataset);
 	}
 
-	public KeyToGroupMap getMap() {
-		return map;
-	}
-
 }

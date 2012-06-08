@@ -66,7 +66,6 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.DifferenceRendererCustomizer;
-import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarChartShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
@@ -244,14 +243,6 @@ public class ChartTransform {
 		GroupedStackedBarRendererCustomizer renderer = new GroupedStackedBarRendererCustomizer();
 		chartCustomizers.add(renderer);
 		DRDesignBarPlot designBarPlot = barPlot(groupedStackedBarPlot, chartCustomizers);
-		if (groupedStackedBarPlot.getShowPercentages() != null && groupedStackedBarPlot.getShowPercentages()) {
-			for (int i = 0; i < chartCustomizers.size(); i++) {
-				if (chartCustomizers.get(i) instanceof ShowPercentagesCustomizer) {
-					chartCustomizers.set(i, new GroupedStackedBarChartShowPercentagesCustomizer(renderer));
-					break;
-				}
-			}
-		}
 		return designBarPlot;
 	}
 
