@@ -222,6 +222,7 @@ public class AdhocConfigurationTest {
 		serie.setYValue("field1");
 		serie.setSeries("field5");
 		serie.setLabel("label");
+		serie.setProperty("series_key", "series_value");
 		adhocChart.addSerie(serie);
 		adhocChart.addSeriesColor(Color.LIGHT_GRAY);
 		AdhocAxisFormat axisFormat = new AdhocAxisFormat();
@@ -425,6 +426,8 @@ public class AdhocConfigurationTest {
 		Assert.assertNotNull("chart serie series", chartSerie.getSeriesExpression());
 		Assert.assertNotNull("chart serie value", chartSerie.getValueExpression());
 		Assert.assertNotNull("chart serie label", chartSerie.getLabelExpression());
+		AdhocChart adhocChart = (AdhocChart) adhocConfiguration.getReport().getComponents().get(1);
+		Assert.assertEquals("property", "series_value", adhocChart.getSeries().get(0).getProperty("series_key"));
 		Assert.assertEquals("chart series color", Color.LIGHT_GRAY, ((DRAxisPlot) chart.getPlot()).getSeriesColors().get(0));
 		Assert.assertNotNull("chart category axis format", ((DRAxisPlot) chart.getPlot()).getXAxisFormat());
 		Assert.assertNotNull("chart value axis format", ((DRAxisPlot) chart.getPlot()).getYAxisFormat());
