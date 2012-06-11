@@ -36,10 +36,6 @@ public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBu
 		super(ChartType.BAR3D);
 	}
 
-	protected Bar3DChartBuilder(ChartType chartType) {
-		super(chartType);
-	}
-
 	public Bar3DChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;

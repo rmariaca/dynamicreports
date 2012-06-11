@@ -22,16 +22,37 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import net.sf.dynamicreports.report.base.chart.plot.DRBarPlot;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class StackedBarChartBuilder extends BarChartBuilder {
+public class StackedBarChartBuilder extends AbstractCategoryChartBuilder<StackedBarChartBuilder, DRBarPlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected StackedBarChartBuilder() {
 		super(ChartType.STACKEDBAR);
+	}
+
+	public StackedBarChartBuilder setShowLabels(Boolean showLabels) {
+		getPlot().setShowLabels(showLabels);
+		return this;
+	}
+
+	public StackedBarChartBuilder setShowTickLabels(Boolean showTickLabels) {
+		getPlot().setShowTickLabels(showTickLabels);
+		return this;
+	}
+
+	public StackedBarChartBuilder setShowTickMarks(Boolean showTickMarks) {
+		getPlot().setShowTickMarks(showTickMarks);
+		return this;
+	}
+
+	public StackedBarChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
 	}
 }

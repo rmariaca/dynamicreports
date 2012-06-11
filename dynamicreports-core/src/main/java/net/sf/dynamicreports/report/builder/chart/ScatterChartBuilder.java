@@ -22,16 +22,32 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import net.sf.dynamicreports.report.base.chart.plot.DRLinePlot;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ScatterChartBuilder extends XyLineChartBuilder {
+public class ScatterChartBuilder extends AbstractXyChartBuilder<ScatterChartBuilder, DRLinePlot> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected ScatterChartBuilder() {
 		super(ChartType.SCATTER);
+	}
+
+	public ScatterChartBuilder setShowShapes(Boolean showShapes) {
+		getPlot().setShowShapes(showShapes);
+		return this;
+	}
+
+	public ScatterChartBuilder setShowLines(Boolean showLines) {
+		getPlot().setShowLines(showLines);
+		return this;
+	}
+
+	public ScatterChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
 	}
 }

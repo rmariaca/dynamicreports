@@ -36,10 +36,6 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 		super(ChartType.BAR);
 	}
 
-	protected BarChartBuilder(ChartType chartType) {
-		super(chartType);
-	}
-
 	public BarChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;

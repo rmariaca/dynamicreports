@@ -36,10 +36,6 @@ public class XyLineChartBuilder extends AbstractXyChartBuilder<XyLineChartBuilde
 		super(ChartType.XYLINE);
 	}
 
-	protected XyLineChartBuilder(ChartType chartType) {
-		super(chartType);
-	}
-
 	public XyLineChartBuilder setShowShapes(Boolean showShapes) {
 		getPlot().setShowShapes(showShapes);
 		return this;
