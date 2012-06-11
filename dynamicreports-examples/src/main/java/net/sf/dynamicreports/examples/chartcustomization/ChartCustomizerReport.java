@@ -20,46 +20,57 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.chart;
+package net.sf.dynamicreports.examples.chartcustomization;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.awt.Color;
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
+import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.renderer.category.BarRenderer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SeriesBarChartReport {
-
-	public SeriesBarChartReport() {
+public class ChartCustomizerReport {
+		
+	public ChartCustomizerReport() {
 		build();
 	}
-
+	
 	private void build() {
 		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-
-		TextColumnBuilder<String>  stateColumn    = col.column("State",    "state",    type.stringType());
-		TextColumnBuilder<String>  itemColumn     = col.column("Item",     "item",     type.stringType());
-		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
-
+		
+		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
+		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
+		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
+		
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .columns(stateColumn, itemColumn, quantityColumn)
-			  .title(Templates.createTitleComponent("SeriesBarChart"))
+			  .columns(itemColumn, quantityColumn, unitPriceColumn)
+			  .title(Templates.createTitleComponent("ChartCustomizer"))
 			  .summary(
 			  	cht.barChart()
+			  	   .setCustomizer(new ChartCustomizer())
 			  	   .setTitle("Bar chart")
 			  	   .setTitleFont(boldFont)
-			  	   .setCategory(stateColumn)
+			  	   .setCategory(itemColumn)
 			  	   .series(
-			  	  		 cht.serie(quantityColumn).setSeries(itemColumn))
+			  	  		 cht.serie(quantityColumn), cht.serie(unitPriceColumn))
 			  	   .setCategoryAxisFormat(
-			  	   	 cht.axisFormat()
+			  	   	cht.axisFormat()
 			  	   	   .setLabel("Item")))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
@@ -68,16 +79,26 @@ public class SeriesBarChartReport {
 			e.printStackTrace();
 		}
 	}
+	
+	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
+		private static final long serialVersionUID = 1L;
 
+		public void customize(JFreeChart chart, ReportParameters reportParameters) {
+			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
+			renderer.setShadowPaint(Color.LIGHT_GRAY);
+			renderer.setShadowVisible(true);
+		}
+	}
+	
 	private JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("state", "item", "quantity");
-		dataSource.add("New York", "Book", 170);
-		dataSource.add("New York", "Notebook", 100);
-		dataSource.add("Washington", "PDA", 120);
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");		
+		dataSource.add("Book", 170, new BigDecimal(100));
+		dataSource.add("Notebook", 90, new BigDecimal(450));
+		dataSource.add("PDA", 120, new BigDecimal(250));
 		return dataSource;
 	}
-
+	
 	public static void main(String[] args) {
-		new SeriesBarChartReport();
+		new ChartCustomizerReport();
 	}
 }

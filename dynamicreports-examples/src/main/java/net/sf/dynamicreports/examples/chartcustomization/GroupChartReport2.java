@@ -20,7 +20,7 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.chart;
+package net.sf.dynamicreports.examples.chartcustomization;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 

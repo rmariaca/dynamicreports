@@ -20,15 +20,16 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.examples.chart;
+package net.sf.dynamicreports.examples.chartcustomization;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.awt.Color;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
@@ -38,40 +39,51 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.renderer.category.BarRenderer;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ChartCustomizerReport {
-		
-	public ChartCustomizerReport() {
+public class ChartLayoutReport {
+
+	public ChartLayoutReport() {
 		build();
 	}
-	
+
 	private void build() {
 		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-		
+
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
-		
+
+		JasperReportBuilder subreport = report();
+		subreport
+	  	.setTemplate(Templates.reportTemplate)
+	  	.columns(itemColumn, quantityColumn, unitPriceColumn)
+	  	.setDataSource(createDataSource());
+
+		BarChartBuilder chart = cht.barChart()
+	  	.setCustomizer(new ChartCustomizer())
+	  	.setTitle("Bar chart")
+	  	.setTitleFont(boldFont)
+	  	.setCategory(itemColumn)
+	  	.series(
+	  		cht.serie(quantityColumn), cht.serie(unitPriceColumn))
+	  	.setValueAxisFormat(
+	  		cht.axisFormat()
+	  			.setRangeMaxValueExpression(500))
+	  	.setCategoryAxisFormat(
+	  		cht.axisFormat()
+	  			.setLabel("Item"));
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .columns(itemColumn, quantityColumn, unitPriceColumn)
-			  .title(Templates.createTitleComponent("ChartCustomizer"))
+			  .title(Templates.createTitleComponent("ChartLayout"))
 			  .summary(
-			  	cht.barChart()
-			  	   .setCustomizer(new ChartCustomizer())
-			  	   .setTitle("Bar chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setCategory(itemColumn)
-			  	   .series(
-			  	  		 cht.serie(quantityColumn), cht.serie(unitPriceColumn))
-			  	   .setCategoryAxisFormat(
-			  	   	cht.axisFormat()
-			  	   	   .setLabel("Item")))
+			  	cmp.horizontalList(chart, cmp.subreport(subreport)))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
@@ -79,26 +91,26 @@ public class ChartCustomizerReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
-			renderer.setShadowPaint(Color.LIGHT_GRAY);
-			renderer.setShadowVisible(true);
+      renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+      renderer.setBaseItemLabelsVisible(true);
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");		
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 170, new BigDecimal(100));
 		dataSource.add("Notebook", 90, new BigDecimal(450));
 		dataSource.add("PDA", 120, new BigDecimal(250));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
-		new ChartCustomizerReport();
+		new ChartLayoutReport();
 	}
 }
