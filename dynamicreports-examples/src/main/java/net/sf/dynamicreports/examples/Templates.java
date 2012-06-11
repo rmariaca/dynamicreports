@@ -116,7 +116,7 @@ public class Templates {
 		  	cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(60, 60),
 		  	cmp.verticalList(
 		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
-		  		cmp.text("http://dynamicreports.sourceforge.net").setStyle(italicStyle).setHyperLink(link)));
+		  		cmp.text("http://dynamicreports.sourceforge.net").setStyle(italicStyle).setHyperLink(link))).setFixedWidth(300);
 
 		footerComponent = cmp.pageXofY()
 		                     .setStyle(
