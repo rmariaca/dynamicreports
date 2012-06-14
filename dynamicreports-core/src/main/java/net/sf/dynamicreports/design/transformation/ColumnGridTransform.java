@@ -177,6 +177,8 @@ public class ColumnGridTransform {
 		titleGroupField.setHeight(columnGridTitleGroup.getTitleHeight());
 		titleGroupField.setHeightType(columnGridTitleGroup.getTitleHeightType());
 		titleGroupField.setRows(columnGridTitleGroup.getTitleRows());
+		titleGroupField.setStretchWithOverflow(columnGridTitleGroup.getTitleStretchWithOverflow());
+		titleGroupField.setPropertyExpressions(columnGridTitleGroup.getTitlePropertyExpressions());
 
 		HorizontalCellComponentAlignment hCellAlignment = null;
 		if (columnGridTitleGroup.getTitleWidth() == null &&

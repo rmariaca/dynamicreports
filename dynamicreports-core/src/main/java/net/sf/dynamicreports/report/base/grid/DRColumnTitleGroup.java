@@ -22,10 +22,14 @@
 
 package net.sf.dynamicreports.report.base.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGridComponent;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnTitleGroup;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
@@ -48,9 +52,12 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 	private Integer titleHeight;
 	private ComponentDimensionType titleHeightType;
 	private Integer titleRows;
+	private Boolean titleStretchWithOverflow;
+	private List<DRIPropertyExpression> titlePropertyExpressions;
 
 	public DRColumnTitleGroup() {
 		this.list = new DRColumnGridList(ListType.HORIZONTAL);
+		titlePropertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
 	public DRColumnGridList getList() {
@@ -184,5 +191,26 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 			Validate.isTrue(titleRows >= 0, "titleRows must be >= 0");
 		}
 		this.titleRows = titleRows;
+	}
+
+	public Boolean getTitleStretchWithOverflow() {
+		return titleStretchWithOverflow;
+	}
+
+	public void setTitleStretchWithOverflow(Boolean titleStretchWithOverflow) {
+		this.titleStretchWithOverflow = titleStretchWithOverflow;
+	}
+
+	public List<DRIPropertyExpression> getTitlePropertyExpressions() {
+		return titlePropertyExpressions;
+	}
+
+	public void addTitlePropertyExpression(DRIPropertyExpression propertyExpression) {
+		Validate.notNull(propertyExpression, "propertyExpression must not be null");
+		this.titlePropertyExpressions.add(propertyExpression);
+	}
+
+	public void setTitlePropertyExpressions(List<DRIPropertyExpression> titlePropertyExpressions) {
+		this.titlePropertyExpressions = titlePropertyExpressions;
 	}
 }

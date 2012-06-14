@@ -22,8 +22,11 @@
 
 package net.sf.dynamicreports.report.definition.grid;
 
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
@@ -48,4 +51,8 @@ public interface DRIColumnTitleGroup extends DRIColumnGridComponent {
 	public ComponentDimensionType getTitleHeightType();
 
 	public Integer getTitleRows();
+
+	public Boolean getTitleStretchWithOverflow();
+
+	public List<DRIPropertyExpression> getTitlePropertyExpressions();
 }

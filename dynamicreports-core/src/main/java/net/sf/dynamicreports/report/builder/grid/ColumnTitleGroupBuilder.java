@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 
 import org.apache.commons.lang3.Validate;
 
@@ -220,6 +221,46 @@ public class ColumnTitleGroupBuilder extends AbstractBuilder<ColumnTitleGroupBui
 	public ColumnTitleGroupBuilder setTitleMinHeight(Integer height) {
 		getObject().setTitleHeight(height);
 		getObject().setTitleHeightType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+
+	public ColumnTitleGroupBuilder setTitleStretchWithOverflow(Boolean stretchWithOverflow) {
+		getObject().setTitleStretchWithOverflow(stretchWithOverflow);
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title group.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a column title group builder
+	 */
+	public ColumnTitleGroupBuilder addTitleProperty(DRIPropertyExpression propertyExpression) {
+		getObject().addTitlePropertyExpression(propertyExpression);
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title group.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a column title group builder
+	 */
+	public ColumnTitleGroupBuilder addTitleProperty(String name, DRIExpression<String> valueExpression) {
+		getObject().addTitlePropertyExpression(Expressions.property(name, valueExpression));
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the column title group.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a column title group builder
+	 */
+	public ColumnTitleGroupBuilder addTitleProperty(String name, String value) {
+		getObject().addTitlePropertyExpression(Expressions.property(name, value));
 		return this;
 	}
 
