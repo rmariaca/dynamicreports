@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 2.5.1 (2012-06-21)
+---------------------------------------------------
+ - grouped stacked bar chart, see GroupedStackedBarChartReport for an example
+ - showValues and showPercentages attributes were added to charts
+ - new column title group attributes were added - setTitleStretchWithOverflow, addTitleProperty
+ - new examples - ChartShowPercentagesReport, ChartShowValuesReport, GroupedStackedBarChartReport
+ 
 Changes in version 2.5.0 (2012-05-21)
 ---------------------------------------------------
  - dynamicreports-adhoc project - a project that simplifies creating adhoc report applications, see SimpleAdhocReport and AdhocCustomizerReport for an example
