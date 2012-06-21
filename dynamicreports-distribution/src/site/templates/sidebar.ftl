@@ -13,7 +13,9 @@
 			
 	<ul class="sidemenu">				
 		<li><a href="${page.path}index.html">Home</a></li>
+		<!---
 		<li><a href="http://sourceforge.net/apps/wordpress/dynamicreports/">News </a><a href="http://sourceforge.net/apps/wordpress/dynamicreports/feed/"><img style="vertical-align:middle" class="preview" src="${page.path}images/rss.png" alt="RSS Feed" width="12" height="12"/></a></li>
+		-->
 		<li><a href="${page.path}screenshots.html">Screenshots</a></li>		
 		<li><a href="${page.path}features.html">Features</a></li>
 		<li><a href="${page.path}roadmap.html">Road map</a></li>
