@@ -25,7 +25,6 @@ dist.dir=dist
 dist.jar=${r"${dist.dir}"}/dynamicreports-examples.jar
 dist.javadoc.dir=${r"${dist.dir}"}/javadoc
 excludes=
-file.reference.activation-${project.activationVersion}.jar=lib\\activation-${project.activationVersion}.jar
 file.reference.avalon-framework-impl-${project.avalonframeworkimplVersion}.jar=lib\\avalon-framework-impl-${project.avalonframeworkimplVersion}.jar
 file.reference.barcode4j-${project.barcode4jVersion}.jar=lib\\barcode4j-${project.barcode4jVersion}.jar
 file.reference.barbecue-${project.barbecueVersion}.jar=lib\\barbecue-${project.barbecueVersion}.jar
@@ -53,17 +52,14 @@ file.reference.dynamicreports-adhoc-${project.version}.jar=lib\\dynamicreports-a
 file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
 file.reference.itext-${project.itextVersion}.jar=lib\\itext-${project.itextVersion}.jar
 file.reference.jasperreports-${project.jasperreportsVersion}.jar=lib\\jasperreports-${project.jasperreportsVersion}.jar
-file.reference.jaxb-api-${project.jaxbimplVersion}.jar=lib\\jaxb-api-${project.jaxbimplVersion}.jar
-file.reference.jaxb-impl-${project.jaxbimplVersion}.jar=lib\\jaxb-impl-${project.jaxbimplVersion}.jar
 file.reference.jcommon-${project.jcommonVersion}.jar=lib\\jcommon-${project.jcommonVersion}.jar
 file.reference.jdtcore-${project.jdtcoreVersion}.jar=lib\\jdtcore-${project.jdtcoreVersion}.jar
 file.reference.jfreechart-${project.jfreechartVersion}.jar=lib\\jfreechart-${project.jfreechartVersion}.jar
 file.reference.jxl-${project.jxlVersion}.jar=lib\\jxl-${project.jxlVersion}.jar
-file.reference.jackson-core-lgpl-${project.jacksonVersion}.jar=lib\\jackson-core-lgpl-${project.jacksonVersion}.jar
-file.reference.jackson-mapper-lgpl-${project.jacksonVersion}.jar=lib\\jackson-mapper-lgpl-${project.jacksonVersion}.jar
+file.reference.jackson-core-asl-${project.jacksonVersion}.jar=lib\\jackson-core-asl-${project.jacksonVersion}.jar
+file.reference.jackson-mapper-asl-${project.jacksonVersion}.jar=lib\\jackson-mapper-asl-${project.jacksonVersion}.jar
 file.reference.log4j-${project.log4jVersion}.jar=lib\\log4j-${project.log4jVersion}.jar
 file.reference.poi-${project.poiVersion}.jar=lib\\poi-${project.poiVersion}.jar
-file.reference.stax-api-${project.staxapiVersion}.jar=lib\\stax-api-${project.staxapiVersion}.jar
 file.reference.xml-apis-${project.xmlapisVersion}.jar=lib\\xml-apis-${project.xmlapisVersion}.jar
 file.reference.xml-apis-ext-${project.xmlapisVersion}.jar=lib\\xml-apis-ext-${project.xmlapisVersion}.jar
 file.reference.spring-core-${project.springframeworkVersion}.jar=lib\\spring-core-${project.springframeworkVersion}.jar
@@ -76,7 +72,6 @@ file.reference.json-${project.jsonVersion}.jar=lib\\json-${project.jsonVersion}.
 includes=**
 jar.compress=false
 javac.classpath=\
-    ${r"${"}file.reference.activation-${project.activationVersion}.jar${r"}"}:\
     ${r"${"}file.reference.avalon-framework-impl-${project.avalonframeworkimplVersion}.jar${r"}"}:\
     ${r"${"}file.reference.barcode4j-${project.barcode4jVersion}.jar${r"}"}:\
     ${r"${"}file.reference.barbecue-${project.barbecueVersion}.jar${r"}"}:\
@@ -104,17 +99,14 @@ javac.classpath=\
     ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.itext-${project.itextVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jasperreports-${project.jasperreportsVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.jaxb-api-${project.jaxbimplVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.jaxb-impl-${project.jaxbimplVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jcommon-${project.jcommonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jdtcore-${project.jdtcoreVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jfreechart-${project.jfreechartVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jxl-${project.jxlVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.jackson-core-lgpl-${project.jacksonVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.jackson-mapper-lgpl-${project.jacksonVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.jackson-core-asl-${project.jacksonVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.jackson-mapper-asl-${project.jacksonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.log4j-${project.log4jVersion}.jar${r"}"}:\
     ${r"${"}file.reference.poi-${project.poiVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.stax-api-${project.staxapiVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xml-apis-${project.xmlapisVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xml-apis-ext-${project.xmlapisVersion}.jar${r"}"}:\
     ${r"${"}file.reference.spring-core-${project.springframeworkVersion}.jar${r"}"}:\

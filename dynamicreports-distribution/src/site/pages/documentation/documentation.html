@@ -1409,7 +1409,6 @@ Copy this file in the root of the classpath.
 <p>
 DynamicReports is synchronized with Maven Central Repository.<br/>
 Add the dependencies listed below to your pom.xml configuration file.
-JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are using Java 1.6.
 <@xml_code>
 &lt;dependency&gt;
 	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
@@ -1426,13 +1425,6 @@ JAXB is part of Java 1.6, therefore dependency to jaxb is no needed if you are u
 	&lt;artifactId&gt;dynamicreports-googlecharts&lt;/artifactId&gt;
 	&lt;version&gt;${project.version}&lt;/version&gt;
 &lt;/dependency&gt; 
-&lt;dependency&gt;
-	&lt;!-- only for JDK 1.5, not required for JDK 1.6 --&gt;
-	&lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
-	&lt;artifactId&gt;jaxb-impl&lt;/artifactId&gt;
-	&lt;version&gt;${project.jaxbimplVersion}&lt;/version&gt;
-	&lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
 </@xml_code>
 </p>
 
@@ -1456,13 +1448,6 @@ update dynamicreports-core version to ${project.developmentVersion}
 	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
 	&lt;artifactId&gt;dynamicreports-googlecharts&lt;/artifactId&gt;
 	&lt;version&gt;${project.developmentVersion}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-	&lt;!-- only for JDK 1.5, not required for JDK 1.6 --&gt;
-	&lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
-	&lt;artifactId&gt;jaxb-impl&lt;/artifactId&gt;
-	&lt;version&gt;${project.jaxbimplVersion}&lt;/version&gt;
-	&lt;scope&gt;runtime&lt;/scope&gt;
 &lt;/dependency&gt;
 </@xml_code>
 and add the Sonatype Nexus snapshot repository

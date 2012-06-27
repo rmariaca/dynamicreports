@@ -17,7 +17,6 @@
 
 	<properties>
 		<aspectjVersion>1.6.3</aspectjVersion>
-		<activationVersion>1.1</activationVersion>
 		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>
 		<bcprovjdk14Version>138</bcprovjdk14Version>
 		<commonsbeanutilsVersion>1.8.0</commonsbeanutilsVersion>
@@ -31,7 +30,6 @@
 		<jfreechartVersion>1.0.12</jfreechartVersion>
 		<log4jVersion>1.2.14</log4jVersion>
 		<jacksonVersion>1.9.4</jacksonVersion>
-		<staxapiVersion>1.0-2</staxapiVersion>
 		<xmlapisVersion>1.3.04</xmlapisVersion>
 	</properties>
 

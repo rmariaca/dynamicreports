@@ -10,7 +10,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/dynamicreports-adhoc-${project.version}.jar" sourcepath="lib/dynamicreports-adhoc-${project.version}-sources.jar"/>
 	<classpathentry kind="lib" path="lib/dynamicreports-googlecharts-${project.version}.jar" sourcepath="lib/dynamicreports-googlecharts-${project.version}-sources.jar"/>
-	<classpathentry kind="lib" path="lib/activation-${project.activationVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/avalon-framework-impl-${project.avalonframeworkimplVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/barcode4j-${project.barcode4jVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/barbecue-${project.barbecueVersion}.jar"/>
@@ -35,17 +34,14 @@
 	<classpathentry kind="lib" path="lib/commons-logging-${project.commonsloggingVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/itext-${project.itextVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-${project.jasperreportsVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-api-${project.jaxbimplVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-${project.jaxbimplVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-${project.jcommonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jdtcore-${project.jdtcoreVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-${project.jfreechartVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jxl-${project.jxlVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-lgpl-${project.jacksonVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-mapper-lgpl-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-asl-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper-asl-${project.jacksonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-${project.log4jVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/poi-${project.poiVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/stax-api-${project.staxapiVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-${project.xmlapisVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-ext-${project.xmlapisVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/spring-core-${project.springframeworkVersion}.jar"/>

@@ -35,7 +35,6 @@ public class Project {
 	private String developmentVersion;
 	private Date date;
 	private String outputDirectory;
-	private String activationVersion;
 	private String avalonframeworkimplVersion;
 	private String barcode4jVersion;
 	private String barbecueVersion;
@@ -49,7 +48,6 @@ public class Project {
 	private String commonsloggingVersion;
 	private String itextVersion;
 	private String jasperreportsVersion;
-	private String jaxbimplVersion;
 	private String jcommonVersion;
 	private String jdtcoreVersion;
 	private String jfreechartVersion;
@@ -57,7 +55,6 @@ public class Project {
 	private String jacksonVersion;
 	private String log4jVersion;
 	private String poiVersion;
-	private String staxapiVersion;
 	private String xmlapisVersion;
 	private String springframeworkVersion;
 	private String hsqldbVersion;
@@ -77,7 +74,6 @@ public class Project {
 		prop = prop.replaceAll(", ", "\n");
 		properties.load(new ByteArrayInputStream(prop.getBytes()));
 
-		activationVersion = properties.getProperty("activationVersion");
 		avalonframeworkimplVersion = properties.getProperty("avalonframeworkimplVersion");
 		barcode4jVersion = properties.getProperty("barcode4jVersion");
 		barbecueVersion = properties.getProperty("barbecueVersion");
@@ -91,7 +87,6 @@ public class Project {
 		commonsloggingVersion = properties.getProperty("commonsloggingVersion");
 		itextVersion = properties.getProperty("itextVersion");
 		jasperreportsVersion = properties.getProperty("jasperreportsVersion");
-		jaxbimplVersion = properties.getProperty("jaxbimplVersion");
 		jcommonVersion = properties.getProperty("jcommonVersion");
 		jdtcoreVersion = properties.getProperty("jdtcoreVersion");
 		jfreechartVersion = properties.getProperty("jfreechartVersion");
@@ -99,7 +94,6 @@ public class Project {
 		jacksonVersion = properties.getProperty("jacksonVersion");
 		log4jVersion = properties.getProperty("log4jVersion");
 		poiVersion = properties.getProperty("poiVersion");
-		staxapiVersion = properties.getProperty("staxapiVersion");
 		xmlapisVersion = properties.getProperty("xmlapisVersion");
 		springframeworkVersion = properties.getProperty("springframeworkVersion");
 		hsqldbVersion = properties.getProperty("hsqldbVersion");
@@ -138,14 +132,6 @@ public class Project {
 
 	public void setOutputDirectory(String outputDirectory) {
 		this.outputDirectory = outputDirectory;
-	}
-
-	public String getActivationVersion() {
-		return activationVersion;
-	}
-
-	public void setActivationVersion(String activationVersion) {
-		this.activationVersion = activationVersion;
 	}
 
 	public String getAvalonframeworkimplVersion() {
@@ -252,14 +238,6 @@ public class Project {
 		this.jasperreportsVersion = jasperreportsVersion;
 	}
 
-	public String getJaxbimplVersion() {
-		return jaxbimplVersion;
-	}
-
-	public void setJaxbimplVersion(String jaxbimplVersion) {
-		this.jaxbimplVersion = jaxbimplVersion;
-	}
-
 	public String getJcommonVersion() {
 		return jcommonVersion;
 	}
@@ -314,14 +292,6 @@ public class Project {
 
 	public void setPoiVersion(String poiVersion) {
 		this.poiVersion = poiVersion;
-	}
-
-	public String getStaxapiVersion() {
-		return staxapiVersion;
-	}
-
-	public void setStaxapiVersion(String staxapiVersion) {
-		this.staxapiVersion = staxapiVersion;
 	}
 
 	public String getXmlapisVersion() {
