@@ -31,8 +31,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.Renderable;
 
 /**
  * A set of methods of creating components
@@ -171,7 +171,7 @@ public class ComponentBuilders {
 		return Components.image(imageUrl);
 	}
 
-	public ImageBuilder image(JRRenderable image) {
+	public ImageBuilder image(Renderable image) {
 		return Components.image(image);
 	}
 

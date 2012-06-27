@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRRenderable;
+import net.sf.jasperreports.engine.Renderable;
 import net.sf.jasperreports.renderers.BatikRenderer;
 
 /**
@@ -42,7 +42,7 @@ public class SvgRendererReport {
 
 	private void build() {
 		try {
-			JRRenderable image = BatikRenderer.getInstance(Templates.class.getResource("images/map.svg"));
+			Renderable image = BatikRenderer.getInstance(Templates.class.getResource("images/map.svg"));
 
 			report()
 			  .setTemplate(Templates.reportTemplate)

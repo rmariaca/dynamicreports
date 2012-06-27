@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.charts.util.DrawChartRenderer;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRRenderable;
+import net.sf.jasperreports.engine.Renderable;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -116,10 +116,10 @@ public class CustomChartReport {
 		}
 	}
 
-	private class ChartExpression extends AbstractSimpleExpression<JRRenderable> {
+	private class ChartExpression extends AbstractSimpleExpression<Renderable> {
 		private static final long serialVersionUID = 1L;
 
-		public JRRenderable evaluate(ReportParameters reportParameters) {
+		public Renderable evaluate(ReportParameters reportParameters) {
 			JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Box and Whisker chart", "Category", "Value", dataset, true);
 			return new DrawChartRenderer(chart, null);
 		}

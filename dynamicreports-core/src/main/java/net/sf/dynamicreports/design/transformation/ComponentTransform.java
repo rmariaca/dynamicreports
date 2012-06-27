@@ -119,7 +119,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRRenderable;
+import net.sf.jasperreports.engine.Renderable;
 import net.sf.jasperreports.renderers.BatikRenderer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -853,10 +853,10 @@ public class ComponentTransform {
 		}
 	}
 
-	private class BooleanImageExpression extends AbstractComplexExpression<JRRenderable> {
+	private class BooleanImageExpression extends AbstractComplexExpression<Renderable> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private JRRenderable imageTrue;
-		private JRRenderable imageFalse;
+		private Renderable imageTrue;
+		private Renderable imageFalse;
 
 		private BooleanImageExpression(DRIBooleanField booleanField) throws DRException {
 			addExpression(booleanField.getValueExpression());
@@ -903,7 +903,7 @@ public class ComponentTransform {
 		}
 
 		@Override
-		public JRRenderable evaluate(List<?> values, ReportParameters reportParameters) {
+		public Renderable evaluate(List<?> values, ReportParameters reportParameters) {
 			Boolean value = (Boolean) values.get(0);
 			if (value != null && value) {
 				return imageTrue;

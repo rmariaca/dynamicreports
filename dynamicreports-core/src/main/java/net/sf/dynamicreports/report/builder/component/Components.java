@@ -33,8 +33,8 @@ import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.Renderable;
 
 import org.apache.commons.lang3.Validate;
 
@@ -177,8 +177,8 @@ public class Components {
 		return new ImageBuilder().setImage(imageUrl);
 	}
 
-	public static ImageBuilder image(JRRenderable image) {
-		return new ImageBuilder().setImage(Expressions.value(image, JRRenderable.class));
+	public static ImageBuilder image(Renderable image) {
+		return new ImageBuilder().setImage(Expressions.value(image, Renderable.class));
 	}
 
 	//subreport

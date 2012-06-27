@@ -38,56 +38,57 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintImage;
-import net.sf.jasperreports.engine.JRRenderable;
+import net.sf.jasperreports.engine.type.ImageTypeEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.util.JRImageLoader;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Image1Test extends AbstractJasperTest {	
+public class Image1Test extends AbstractJasperTest {
 	private Image image;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 			.setImageStyle(stl.style().setImageScale(ImageScale.NO_RESIZE))
 			.title(cmp.image(image = new TestImage()), cmp.image(Image1Test.class.getResource("noimage")));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		try {
-			byte[] imageData = JRImageLoader.loadImageDataFromAWTImage(image, JRRenderable.IMAGE_TYPE_JPEG);
+			byte[] imageData = JRImageLoader.getInstance(DefaultJasperReportsContext.getInstance()).loadBytesFromAwtImage(image, ImageTypeEnum.JPEG);
 			JRPrintImage jrImage = (JRPrintImage) getElementAt("title.image1", 0);
-			Assert.assertTrue("image data", Arrays.equals(imageData, jrImage.getRenderer().getImageData()));
+			Assert.assertTrue("image data", Arrays.equals(imageData, jrImage.getRenderable().getImageData(DefaultJasperReportsContext.getInstance())));
 			Assert.assertEquals("scale image", ScaleImageEnum.CLIP, jrImage.getScaleImageValue());
 		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
-		}		
+		}
 	}
-	
+
 	@Override
 	protected boolean serializableTest() {
 		return false;
 	}
-	
+
 	private class TestImage extends BufferedImage implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public TestImage() {
 			super(100, 100, BufferedImage.TYPE_INT_RGB);
-			Graphics2D g2d = createGraphics();  
-			g2d.setColor(Color.BLUE); 
-			g2d.setComposite(AlphaComposite.Src); 
-			g2d.fill(new Rectangle2D.Float(5, 5, 90, 90)); 
-		}		
+			Graphics2D g2d = createGraphics();
+			g2d.setColor(Color.BLUE);
+			g2d.setComposite(AlphaComposite.Src);
+			g2d.fill(new Rectangle2D.Float(5, 5, 90, 90));
+		}
 	}
 }

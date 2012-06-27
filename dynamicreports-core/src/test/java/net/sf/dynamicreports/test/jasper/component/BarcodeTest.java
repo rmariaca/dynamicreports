@@ -65,7 +65,7 @@ import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class BarcodeTest extends AbstractJasperTest {
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
@@ -78,11 +78,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setWideFactor(2.5)),
-							
+
 					//code128
 					cmp.horizontalList(
 						bcode.code128("12345678"),
@@ -90,10 +90,10 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
-							.setVerticalQuietZone(50d)),	
-							
+							.setVerticalQuietZone(50d)),
+
 					//ean128
 					cmp.horizontalList(
 						bcode.ean128("12345678"),
@@ -101,11 +101,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)),
-							
+
 					//dataMatrix
 					cmp.horizontalList(
 						bcode.dataMatrix("12345678"),
@@ -113,11 +113,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
-							.setShape(BarcodeShape.RECTANGLE)),							
-					
+							.setShape(BarcodeShape.RECTANGLE)),
+
 					//code39
 					cmp.horizontalList(
 						bcode.code39("12345678"),
@@ -125,7 +125,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
@@ -134,7 +134,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setExtendedCharSetEnabled(true)
 							.setIntercharGapWidth(1.5)
 							.setWideFactor(2.5)),
-						
+
 					//interleaved2Of5
 					cmp.horizontalList(
 						bcode.interleaved2Of5("12345678"),
@@ -142,7 +142,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
@@ -156,11 +156,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)),
-									
+
 					//upce
 					cmp.horizontalList(
 						bcode.upce("1100000"),
@@ -168,11 +168,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
-							.setChecksumMode(BarcodeChecksumMode.AUTO)),		
-							
+							.setChecksumMode(BarcodeChecksumMode.AUTO)),
+
 					//ean13
 					cmp.horizontalList(
 						bcode.ean13("110000000000"),
@@ -180,11 +180,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)),
-											
+
 					//ean8
 					cmp.horizontalList(
 						bcode.ean8("1100000"),
@@ -192,11 +192,11 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)),
-							
+
 					//uspsIntelligentMail
 					cmp.horizontalList(
 						bcode.uspsIntelligentMail("34160265194042788110"),
@@ -204,14 +204,14 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
 							.setAscenderHeight(2.6)
 							.setIntercharGapWidth(1.8)
 							.setTrackHeight(20.1)),
-							
+
 					//royalMailCustomer
 					cmp.horizontalList(
 						bcode.royalMailCustomer("34160265194042788110"),
@@ -219,14 +219,14 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
 							.setAscenderHeight(2.6)
 							.setIntercharGapWidth(1.8)
 							.setTrackHeight(20.1)),
-							
+
 					//postnet
 					cmp.horizontalList(
 						bcode.postnet("12345678"),
@@ -234,7 +234,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
@@ -250,7 +250,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)						
+							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setMinColumns(2)
@@ -265,12 +265,12 @@ public class BarcodeTest extends AbstractJasperTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		//codabar
 		CodabarComponent codabar = testBarcode("Codabar", CodabarComponent.class);
-		Assert.assertEquals("Codabar wide factor", 2.5, codabar.getWideFactor());		
+		Assert.assertEquals("Codabar wide factor", 2.5, codabar.getWideFactor());
 		testBarcode("Codabar", 2, 0, "12345678");
 		testBarcode("Codabar", 2, 1, "112345678");
 
@@ -278,17 +278,17 @@ public class BarcodeTest extends AbstractJasperTest {
 		testBarcode("Code128", Code128Component.class);
 		testBarcode("Code128", 3, 0, "12345678");
 		testBarcode("Code128", 3, 1, "112345678");
-		
+
 		//ean128
 		EAN128Component ean128 = testBarcode("EAN128", EAN128Component.class);
 		Assert.assertEquals("EAN128 checksum mode", ChecksumMode.CP_AUTO.getName(), ean128.getChecksumMode());
 		testBarcode("EAN128", 4, 0, "(12)345678");
 		testBarcode("EAN128", 4, 1, "1(12)345678");
-		
+
 		//dataMatrix
 		DataMatrixComponent dataMatrix = testBarcode("DataMatrix", DataMatrixComponent.class);
 		Assert.assertEquals("DataMatrix shape", SymbolShapeHint.FORCE_RECTANGLE.getName(), dataMatrix.getShape());
-		
+
 		//code39
 		Code39Component code39 = testBarcode("Code39", Code39Component.class);
 		Assert.assertEquals("Code39 checksum mode", ChecksumMode.CP_AUTO.getName(), code39.getChecksumMode());
@@ -299,7 +299,7 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("Code39 wide factor", 2.5, code39.getWideFactor());
 		testBarcode("Code39", 6, 0, "12345678");
 		testBarcode("Code39", 6, 1, "112345678");
-		
+
 		//interleaved2Of5
 		Interleaved2Of5Component interleaved2Of5 = testBarcode("Interleaved2Of5", Interleaved2Of5Component.class);
 		Assert.assertEquals("Interleaved2Of5 checksum mode", ChecksumMode.CP_AUTO.getName(), interleaved2Of5.getChecksumMode());
@@ -307,45 +307,45 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("Interleaved2Of5 wide factor", 2.5, interleaved2Of5.getWideFactor());
 		testBarcode("Interleaved2Of5", 7, 0, "12345678");
 		testBarcode("Interleaved2Of5", 7, 1, "112345678");
-		
+
 		//upca
 		UPCAComponent upca = testBarcode("UPCA", UPCAComponent.class);
 		Assert.assertEquals("UPCA checksum mode", ChecksumMode.CP_AUTO.getName(), upca.getChecksumMode());
 		testBarcode("UPCA", 8, 0, "1<.*>10000<.*>00000");
 		testBarcode("UPCA", 8, 1, "1<.*>10000<.*>00000");
-		
+
 		//upce
 		UPCEComponent upce = testBarcode("UPCE", UPCEComponent.class);
 		Assert.assertEquals("UPCE checksum mode", ChecksumMode.CP_AUTO.getName(), upce.getChecksumMode());
 		testBarcode("UPCE", 9, 0, "1<.*>100000");
 		testBarcode("UPCE", 9, 1, "1<.*>100000");
-		
+
 		//ean13
 		EAN13Component ean13 = testBarcode("EAN13", EAN13Component.class);
 		Assert.assertEquals("EAN13 checksum mode", ChecksumMode.CP_AUTO.getName(), ean13.getChecksumMode());
 		testBarcode("EAN13", 10, 0, "1<.*>100000<.*>000006");
 		testBarcode("EAN13", 10, 1, "1<.*>100000<.*>000006");
-		
+
 		//ean8
 		EAN8Component ean8 = testBarcode("EAN8", EAN8Component.class);
 		Assert.assertEquals("EAN8 checksum mode", ChecksumMode.CP_AUTO.getName(), ean8.getChecksumMode());
 		testBarcode("EAN8", 11, 0, "1100<.*>0006");
 		testBarcode("EAN8", 11, 1, "1100<.*>0006");
-		
+
 		//uspsIntelligentMail
 		USPSIntelligentMailComponent uspsIntelligentMail = testBarcode("USPSIntelligentMail", USPSIntelligentMailComponent.class);
 		Assert.assertEquals("USPSIntelligentMail checksum mode", ChecksumMode.CP_AUTO.getName(), uspsIntelligentMail.getChecksumMode());
 		Assert.assertEquals("USPSIntelligentMail ascender height", 2.6, uspsIntelligentMail.getAscenderHeight());
 		Assert.assertEquals("USPSIntelligentMail interchar gap width", 1.8, uspsIntelligentMail.getIntercharGapWidth());
 		Assert.assertEquals("USPSIntelligentMail track height", 20.1, uspsIntelligentMail.getTrackHeight());
-		
+
 		//royalMailCustomer
 		RoyalMailCustomerComponent royalMailCustomer = testBarcode("RoyalMailCustomer", RoyalMailCustomerComponent.class);
 		Assert.assertEquals("RoyalMailCustomer checksum mode", ChecksumMode.CP_AUTO.getName(), royalMailCustomer.getChecksumMode());
 		Assert.assertEquals("RoyalMailCustomer ascender height", 2.6, royalMailCustomer.getAscenderHeight());
 		Assert.assertEquals("RoyalMailCustomer interchar gap width", 1.8, royalMailCustomer.getIntercharGapWidth());
 		Assert.assertEquals("RoyalMailCustomer track height", 20.1, royalMailCustomer.getTrackHeight());
-		
+
 		//postnet
 		POSTNETComponent postnet = testBarcode("POSTNET", POSTNETComponent.class);
 		Assert.assertEquals("POSTNET checksum mode", ChecksumMode.CP_AUTO.getName(), postnet.getChecksumMode());
@@ -354,7 +354,7 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("POSTNET short bar height", 2.5, postnet.getShortBarHeight());
 		Assert.assertEquals("POSTNET baseline position", BaselineAlignment.ALIGN_TOP.getName(), postnet.getBaselinePosition());
 		Assert.assertEquals("POSTNET interchar gap width", 1.5, postnet.getIntercharGapWidth());
-		
+
 		//pdf417
 		PDF417Component pdf417 = testBarcode("PDF417", PDF417Component.class);
 		Assert.assertEquals("PDF417 min columns", new Integer(2), pdf417.getMinColumns());
@@ -364,14 +364,14 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("PDF417 width to height ratio", 2.6, pdf417.getWidthToHeightRatio());
 		Assert.assertEquals("PDF417 error correction level", new Integer(8), pdf417.getErrorCorrectionLevel());
 	}
-	
+
 	private <T extends BarcodeComponent> T testBarcode(String name, Class<T> componentClass) {
 		JRBaseComponentElement barcode = (JRBaseComponentElement) getJasperReport().getTitle().getElementByKey("title." + name + "2");
 		Component component = barcode.getComponent();
 		Assert.assertTrue("Barcode is not instance of " + componentClass.getName(), component.getClass().equals(componentClass));
 		@SuppressWarnings("unchecked")
 		T barcodeComponent = (T) component;
-		
+
 		Assert.assertEquals(name + " module width", 2d, barcodeComponent.getModuleWidth());
 		Assert.assertEquals(name + " orientation", BarcodeComponent.ORIENTATION_LEFT, barcodeComponent.getOrientation());
 		Assert.assertEquals(name + " text position", HumanReadablePlacement.HRP_TOP.getName(), barcodeComponent.getTextPosition());
@@ -379,11 +379,11 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals(name + " vertical quiet zone", 50d, barcodeComponent.getVerticalQuietZone());
 		return barcodeComponent;
 	}
-	
+
 	private void testBarcode(String name, int groupIndex, int index, String code) {
 		JRPrintFrame printFrame = (JRPrintFrame) getElementAt("title.list" + groupIndex, 0);
-		JRPrintImage image = (JRPrintImage) printFrame.getElements().get(index);	
-		BatikRenderer renderer = (BatikRenderer) image.getRenderer();
+		JRPrintImage image = (JRPrintImage) printFrame.getElements().get(index);
+		BatikRenderer renderer = (BatikRenderer) image.getRenderable();
 		try {
 			Field field = renderer.getClass().getDeclaredField("svgText");
 			field.setAccessible(true);

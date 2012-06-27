@@ -50,9 +50,8 @@
 	</developers>
 	
 	<properties>
-		<jasperreportsVersion>4.5.1</jasperreportsVersion>
+		<jasperreportsVersion>4.6.0</jasperreportsVersion>
 		<commonslang3Version>3.1</commonslang3Version>
-		<jaxbimplVersion>2.2.1</jaxbimplVersion>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
@@ -88,13 +87,6 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commonslang3Version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>${jaxbimplVersion}</version>
-				<scope>runtime</scope>
-				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.barcode4j</groupId>
@@ -202,8 +194,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 					<configuration>						
-						<source>1.5</source>
-						<target>1.5</target>
+						<source>1.6</source>
+						<target>1.6</target>
 						<encoding>UTF-8</encoding>
 						<compilerId>jdt</compilerId>
 					</configuration>

@@ -126,7 +126,7 @@ public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 	}
 
 	protected JFreeChart getChart(JRPrintImage image) {
-		DrawChartRenderer renderer = (DrawChartRenderer) image.getRenderer();
+		DrawChartRenderer renderer = (DrawChartRenderer) image.getRenderable();
 		try {
 			Field field = renderer.getClass().getDeclaredField("chart");
 			field.setAccessible(true);

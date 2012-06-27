@@ -31,6 +31,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintImage;
@@ -94,9 +95,9 @@ public class BooleanColumnTest extends AbstractJasperValueTest implements Serial
 	}
 
 	private void testImage(String name, int index) {
-		BatikRenderer batikRenderer = ((BatikRenderer) ((JRPrintImage) getElementAt(name, index)).getRenderer());
+		BatikRenderer batikRenderer = ((BatikRenderer) ((JRPrintImage) getElementAt(name, index)).getRenderable());
 		try {
-			byte[] data = batikRenderer.getImageData();
+			byte[] data = batikRenderer.getImageData(DefaultJasperReportsContext.getInstance());
 			Assert.assertNotNull(data);
 		} catch (JRException e) {
 			Assert.fail(e.getMessage());

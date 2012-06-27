@@ -22,11 +22,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<!-- only for JDK 1.5, not required for JDK 1.6 -->
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
@@ -50,6 +45,7 @@
 				<executions>
 					<execution>
 						<id>jaxb</id>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>

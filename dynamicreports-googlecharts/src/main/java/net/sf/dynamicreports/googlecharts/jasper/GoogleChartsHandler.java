@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.component.Component;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.component.ComponentXmlWriter;
@@ -70,7 +71,7 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 			JRXmlWriteHelper writer = reportWriter.getXmlWriteHelper();
 
 			String namespaceURI = componentKey.getNamespace();
-			String schemaLocation = ComponentsEnvironment.getComponentsBundle(namespaceURI).getXmlParser().getPublicSchemaLocation();
+			String schemaLocation = ComponentsEnvironment.getInstance(DefaultJasperReportsContext.getInstance()).getBundle(namespaceURI).getXmlParser().getPublicSchemaLocation();
 			XmlNamespace namespace = new XmlNamespace(namespaceURI, componentKey.getNamespacePrefix(), schemaLocation);
 
 			writer.startElement(componentKey.getName(), namespace);

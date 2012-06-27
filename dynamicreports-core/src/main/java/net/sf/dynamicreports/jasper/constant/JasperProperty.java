@@ -41,8 +41,8 @@ import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsAbstractMetadataExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporterParameter;
-import net.sf.jasperreports.engine.util.JRProperties;
 import net.sf.jasperreports.engine.util.JRTextMeasurerUtil;
+import net.sf.jasperreports.engine.xml.PrintSaxParserFactory;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -435,9 +435,9 @@ public class JasperProperty {
 
 	//xml
 	/**
-	 * @see JRProperties#EXPORT_XML_VALIDATION
+	 * @see PrintSaxParserFactory#EXPORT_XML_VALIDATION
 	 */
-	public static final String EXPORT_XML_VALIDATION = JRProperties.EXPORT_XML_VALIDATION;
+	public static final String EXPORT_XML_VALIDATION = PrintSaxParserFactory.EXPORT_XML_VALIDATION;
 
 	//csv
 	/**
