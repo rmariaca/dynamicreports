@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.constant.ScaleType;
 public class DRDesignBubblePlot extends DRDesignAxisPlot implements DRIDesignBubblePlot {
 	private ScaleType scaleType;
 
+	@Override
 	public ScaleType getScaleType() {
 		return scaleType;
 	}

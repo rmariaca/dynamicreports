@@ -32,6 +32,7 @@ public class DRDesignPiePlot extends AbstractDesignBasePlot implements DRIDesign
 	private String labelFormat;
 	private String legendLabelFormat;
 
+	@Override
 	public Boolean getCircular() {
 		return circular;
 	}
@@ -40,6 +41,7 @@ public class DRDesignPiePlot extends AbstractDesignBasePlot implements DRIDesign
 		this.circular = circular;
 	}
 
+	@Override
 	public String getLabelFormat() {
 		return labelFormat;
 	}
@@ -48,6 +50,7 @@ public class DRDesignPiePlot extends AbstractDesignBasePlot implements DRIDesign
 		this.labelFormat = labelFormat;
 	}
 
+	@Override
 	public String getLegendLabelFormat() {
 		return legendLabelFormat;
 	}

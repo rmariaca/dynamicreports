@@ -44,18 +44,18 @@ import org.jfree.chart.renderer.category.BarRenderer;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class ChartCustomizerReport {
-		
+
 	public ChartCustomizerReport() {
 		build();
 	}
-	
+
 	private void build() {
 		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-		
+
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -79,25 +79,26 @@ public class ChartCustomizerReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
 			renderer.setShadowPaint(Color.LIGHT_GRAY);
 			renderer.setShadowVisible(true);
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");		
+		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Book", 170, new BigDecimal(100));
 		dataSource.add("Notebook", 90, new BigDecimal(450));
 		dataSource.add("PDA", 120, new BigDecimal(250));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new ChartCustomizerReport();
 	}

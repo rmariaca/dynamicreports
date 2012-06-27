@@ -188,6 +188,7 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		return this;
 	}
 
+	@Override
 	public String getName() {
 		return build().getExpression().getName();
 	}

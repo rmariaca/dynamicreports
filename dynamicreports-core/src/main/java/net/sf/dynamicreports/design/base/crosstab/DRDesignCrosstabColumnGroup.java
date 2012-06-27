@@ -30,6 +30,7 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabColumnG
 public class DRDesignCrosstabColumnGroup extends DRDesignCrosstabGroup implements DRIDesignCrosstabColumnGroup {
 	private int height;
 
+	@Override
 	public int getHeight() {
 		return height;
 	}

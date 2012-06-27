@@ -38,6 +38,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 	private String betweenPagesText;
 	private String lineSeparator;
 	
+	@Override
 	public Integer getCharacterWidth() {
 		return characterWidth;
 	}
@@ -46,6 +47,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 		this.characterWidth = characterWidth;
 	}
 	
+	@Override
 	public Integer getCharacterHeight() {
 		return characterHeight;
 	}
@@ -54,6 +56,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 		this.characterHeight = characterHeight;
 	}
 	
+	@Override
 	public Integer getPageWidth() {
 		return pageWidth;
 	}
@@ -62,6 +65,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 		this.pageWidth = pageWidth;
 	}
 	
+	@Override
 	public Integer getPageHeight() {
 		return pageHeight;
 	}
@@ -70,6 +74,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 		this.pageHeight = pageHeight;
 	}
 	
+	@Override
 	public String getBetweenPagesText() {
 		return betweenPagesText;
 	}
@@ -78,6 +83,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 		this.betweenPagesText = betweenPagesText;
 	}
 	
+	@Override
 	public String getLineSeparator() {
 		return lineSeparator;
 	}

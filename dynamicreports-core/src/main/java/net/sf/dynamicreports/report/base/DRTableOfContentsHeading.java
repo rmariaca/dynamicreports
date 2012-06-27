@@ -35,6 +35,7 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 	private DRTableOfContentsHeading parentHeading;
 	private DRIExpression<String> labelExpression;
 
+	@Override
 	public DRTableOfContentsHeading getParentHeading() {
 		return parentHeading;
 	}
@@ -43,6 +44,7 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 		this.parentHeading = parentHeading;
 	}
 
+	@Override
 	public DRIExpression<String> getLabelExpression() {
 		return labelExpression;
 	}

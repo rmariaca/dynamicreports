@@ -45,6 +45,7 @@ public abstract class AbstractDesignComplexExpression implements DRIDesignComple
 		this.expressions = new ArrayList<DRIDesignExpression>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -57,10 +58,12 @@ public abstract class AbstractDesignComplexExpression implements DRIDesignComple
 		this.expressions.add(expression);
 	}
 
+	@Override
 	public List<DRIDesignExpression> getExpressions() {
 		return expressions;
 	}
 
+	@Override
 	public String getParameterName() {
 		return null;
 	}

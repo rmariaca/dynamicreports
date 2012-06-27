@@ -61,14 +61,17 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.styles = new ArrayList<DRICrosstabCellStyle>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public DRIExpression<?> getExpression() {
 		return expression;
 	}
 
+	@Override
 	public DRIDataType<? super T, T> getDataType() {
 		return dataType;
 	}
@@ -77,6 +80,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.dataType = dataType;
 	}
 
+	@Override
 	public String getPattern() {
 		return pattern;
 	}
@@ -85,6 +89,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.pattern = pattern;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -93,6 +98,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public DRIValueFormatter<?, ? super T> getValueFormatter() {
 		return valueFormatter;
 	}
@@ -101,6 +107,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.valueFormatter = valueFormatter;
 	}
 
+	@Override
 	public Boolean getStretchWithOverflow() {
 		return stretchWithOverflow;
 	}
@@ -109,6 +116,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.stretchWithOverflow = stretchWithOverflow;
 	}
 
+	@Override
 	public List<DRICrosstabCellStyle> getStyles() {
 		return styles;
 	}
@@ -117,6 +125,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.styles = styles;
 	}
 
+	@Override
 	public DRIExpression<?> getTitleExpression() {
 		return titleExpression;
 	}
@@ -125,6 +134,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.titleExpression = titleExpression;
 	}
 
+	@Override
 	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}

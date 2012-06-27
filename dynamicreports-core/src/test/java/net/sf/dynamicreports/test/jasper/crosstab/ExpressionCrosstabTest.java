@@ -142,6 +142,7 @@ public class ExpressionCrosstabTest extends AbstractJasperCrosstabValueTest impl
 	private class MeasureExpression1 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			Integer value1 = reportParameters.getValue("field3");
 			Integer value2 = reportParameters.getValue("field4");
@@ -152,6 +153,7 @@ public class ExpressionCrosstabTest extends AbstractJasperCrosstabValueTest impl
 	private class MeasureExpression2 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			Integer value1 = reportParameters.getValue(measure1);
 			Integer value2 = reportParameters.getValue(variable1);

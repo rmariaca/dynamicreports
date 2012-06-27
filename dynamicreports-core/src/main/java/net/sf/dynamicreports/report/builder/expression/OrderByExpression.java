@@ -38,6 +38,7 @@ public class OrderByExpression extends AbstractSimpleExpression<Comparable<?>> {
 		this.measure = measure;
 	}
 
+	@Override
 	public Comparable<?> evaluate(ReportParameters reportParameters) {
 		return reportParameters.getValue(measure);
 	}

@@ -38,6 +38,7 @@ public abstract class DRFormatField extends DRHyperLinkComponent implements DRIF
 	private DRIExpression<String> formatExpression;
 	private HorizontalAlignment horizontalAlignment;
 
+	@Override
 	public DRIExpression<String> getFormatExpression() {
 		return formatExpression;
 	}
@@ -47,6 +48,7 @@ public abstract class DRFormatField extends DRHyperLinkComponent implements DRIF
 		this.formatExpression = formatExpression;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}

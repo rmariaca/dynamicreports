@@ -31,6 +31,7 @@ public class DRDesignAxisPlot extends AbstractDesignBasePlot implements DRIDesig
 	private DRDesignAxisFormat xAxisFormat;
 	private DRDesignAxisFormat yAxisFormat;
 
+	@Override
 	public DRDesignAxisFormat getXAxisFormat() {
 		return xAxisFormat;
 	}
@@ -39,6 +40,7 @@ public class DRDesignAxisPlot extends AbstractDesignBasePlot implements DRIDesig
 		this.xAxisFormat = xAxisFormat;
 	}
 
+	@Override
 	public DRDesignAxisFormat getYAxisFormat() {
 		return yAxisFormat;
 	}

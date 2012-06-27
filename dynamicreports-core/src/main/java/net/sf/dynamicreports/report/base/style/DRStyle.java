@@ -47,6 +47,7 @@ public class DRStyle extends DRBaseStyle implements DRIStyle {
 		conditionalStyles = new ArrayList<DRConditionalStyle>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -55,6 +56,7 @@ public class DRStyle extends DRBaseStyle implements DRIStyle {
 		this.name = name;
 	}
 
+	@Override
 	public DRIReportStyle getParentStyle() {
 		return parentStyle;
 	}
@@ -63,6 +65,7 @@ public class DRStyle extends DRBaseStyle implements DRIStyle {
 		this.parentStyle = parentStyle;
 	}
 
+	@Override
 	public List<DRConditionalStyle> getConditionalStyles() {
 		return conditionalStyles;
 	}

@@ -39,6 +39,7 @@ public class GoogleChartsDesignConverter extends ElementIconConverter implements
 		super(JRImageLoader.SUBREPORT_IMAGE_RESOURCE);
 	}
 
+	@Override
 	public JRPrintElement convert(ReportConverter reportConverter, JRComponentElement element) {
 		return convert(reportConverter, (JRElement) element);
 	}

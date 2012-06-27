@@ -38,6 +38,7 @@ public class DRLinePlot extends DRAxisPlot implements DRILinePlot {
 		this.showShapes = showShapes;
 	}
 
+	@Override
 	public Boolean getShowShapes() {
 		return showShapes;
 	}
@@ -46,6 +47,7 @@ public class DRLinePlot extends DRAxisPlot implements DRILinePlot {
 		this.showLines = showLines;
 	}
 
+	@Override
 	public Boolean getShowLines() {
 		return showLines;
 	}

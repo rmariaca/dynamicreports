@@ -35,6 +35,7 @@ import org.jfree.chart.JFreeChart;
  */
 public class JasperChartCustomizer extends JRAbstractChartCustomizer {
 
+	@Override
 	public void customize(JFreeChart chart, JRChart jasperChart) {
 		String key = jasperChart.getKey();
 		JasperScriptlet scriptlet = (JasperScriptlet) getParameterValue(JasperScriptlet.SCRIPTLET_NAME);

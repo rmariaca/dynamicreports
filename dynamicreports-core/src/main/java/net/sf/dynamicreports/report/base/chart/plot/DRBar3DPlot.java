@@ -39,6 +39,7 @@ public class DRBar3DPlot extends DRAxisPlot implements DRIBar3DPlot {
 		this.xOffset = xOffset;
 	}
 
+	@Override
 	public Double getXOffset() {
 		return xOffset;
 	}
@@ -47,6 +48,7 @@ public class DRBar3DPlot extends DRAxisPlot implements DRIBar3DPlot {
 		this.yOffset = yOffset;
 	}
 
+	@Override
 	public Double getYOffset() {
 		return yOffset;
 	}
@@ -55,6 +57,7 @@ public class DRBar3DPlot extends DRAxisPlot implements DRIBar3DPlot {
 		this.showLabels = showLabels;
 	}
 
+	@Override
 	public Boolean getShowLabels() {
 		return showLabels;
 	}

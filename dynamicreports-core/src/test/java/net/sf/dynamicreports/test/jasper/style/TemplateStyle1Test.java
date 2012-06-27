@@ -174,6 +174,7 @@ public class TemplateStyle1Test extends AbstractJasperStyleTest implements Seria
 			this.values = Arrays.asList(values);
 		}
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			Integer value = (Integer) reportParameters.getValue("field1");
 			return values.contains(value);

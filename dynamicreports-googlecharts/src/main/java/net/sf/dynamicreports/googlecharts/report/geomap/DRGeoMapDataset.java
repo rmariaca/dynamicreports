@@ -37,6 +37,7 @@ public class DRGeoMapDataset implements DRIGeoMapDataset {
 	private DRIExpression<?> valueExpression;
 	private DRIExpression<?> labelExpression;
 
+	@Override
 	public DRDataset getSubDataset() {
 		return subDataset;
 	}
@@ -45,6 +46,7 @@ public class DRGeoMapDataset implements DRIGeoMapDataset {
 		this.subDataset = subDataset;
 	}
 
+	@Override
 	public DRIExpression<?> getLocationExpression() {
 		return locationExpression;
 	}
@@ -53,6 +55,7 @@ public class DRGeoMapDataset implements DRIGeoMapDataset {
 		this.locationExpression = locationExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
@@ -61,6 +64,7 @@ public class DRGeoMapDataset implements DRIGeoMapDataset {
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}

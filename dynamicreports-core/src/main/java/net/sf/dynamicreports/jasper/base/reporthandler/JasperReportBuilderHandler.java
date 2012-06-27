@@ -42,16 +42,19 @@ public class JasperReportBuilderHandler implements JasperReportHandler {
 		continuousPageNumbering = false;
 	}
 
+	@Override
 	public void concatenate(JasperReportBuilder... jasperReportBuilders) {
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
 			this.jasperReportBuilders.add(jasperReportBuilder);
 		}
 	}
 
+	@Override
 	public void setContinuousPageNumbering(boolean continuousPageNumbering) {
 		this.continuousPageNumbering = continuousPageNumbering;
 	}
 
+	@Override
 	public List<JasperPrint> getPrintList() throws DRException {
 		List<JasperPrint> printList = new ArrayList<JasperPrint>();
 		int pageNumber = 1;

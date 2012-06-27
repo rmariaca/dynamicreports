@@ -55,6 +55,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		intervals = new ArrayList<DRIDesignMeterInterval>();
 	}
 
+	@Override
 	public DRIDesignExpression getDataRangeLowExpression() {
 		return dataRangeLowExpression;
 	}
@@ -63,6 +64,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.dataRangeLowExpression = dataRangeLowExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getDataRangeHighExpression() {
 		return dataRangeHighExpression;
 	}
@@ -71,6 +73,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.dataRangeHighExpression = dataRangeHighExpression;
 	}
 
+	@Override
 	public Color getValueColor() {
 		return valueColor;
 	}
@@ -79,6 +82,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.valueColor = valueColor;
 	}
 
+	@Override
 	public String getValueMask() {
 		return valueMask;
 	}
@@ -87,6 +91,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.valueMask = valueMask;
 	}
 
+	@Override
 	public DRIDesignFont getValueFont() {
 		return valueFont;
 	}
@@ -95,6 +100,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.valueFont = valueFont;
 	}
 
+	@Override
 	public MeterShape getShape() {
 		return shape;
 	}
@@ -103,6 +109,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.shape = shape;
 	}
 
+	@Override
 	public List<DRIDesignMeterInterval> getIntervals() {
 		return intervals;
 	}
@@ -111,6 +118,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.intervals = intervals;
 	}
 
+	@Override
 	public Integer getMeterAngle() {
 		return meterAngle;
 	}
@@ -119,6 +127,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.meterAngle = meterAngle;
 	}
 
+	@Override
 	public String getUnits() {
 		return units;
 	}
@@ -127,6 +136,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.units = units;
 	}
 
+	@Override
 	public Double getTickInterval() {
 		return tickInterval;
 	}
@@ -135,6 +145,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.tickInterval = tickInterval;
 	}
 
+	@Override
 	public Color getMeterBackgroundColor() {
 		return meterBackgroundColor;
 	}
@@ -143,6 +154,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.meterBackgroundColor = meterBackgroundColor;
 	}
 
+	@Override
 	public Color getNeedleColor() {
 		return needleColor;
 	}
@@ -151,6 +163,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.needleColor = needleColor;
 	}
 
+	@Override
 	public Color getTickColor() {
 		return tickColor;
 	}
@@ -159,6 +172,7 @@ public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMete
 		this.tickColor = tickColor;
 	}
 
+	@Override
 	public DRIDesignFont getTickLabelFont() {
 		return tickLabelFont;
 	}

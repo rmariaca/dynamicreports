@@ -38,6 +38,7 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 	private String labelFormat;
 	private String legendLabelFormat;
 
+	@Override
 	public Boolean getCircular() {
 		return circular;
 	}
@@ -50,10 +51,12 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 		this.showLabels = showLabels;
 	}
 
+	@Override
 	public Boolean getShowLabels() {
 		return showLabels;
 	}
 
+	@Override
 	public Boolean getShowValues() {
 		return showValues;
 	}
@@ -62,6 +65,7 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 		this.showValues = showValues;
 	}
 
+	@Override
 	public Boolean getShowPercentages() {
 		return showPercentages;
 	}
@@ -70,6 +74,7 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 		this.showPercentages = showPercentages;
 	}
 
+	@Override
 	public String getLabelFormat() {
 		return labelFormat;
 	}
@@ -78,6 +83,7 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 		this.labelFormat = labelFormat;
 	}
 
+	@Override
 	public String getLegendLabelFormat() {
 		return legendLabelFormat;
 	}

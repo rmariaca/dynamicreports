@@ -46,6 +46,7 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 
 	private static final String GEOMAP_ELEMENT_HTML_TEMPLATE = "net/sf/dynamicreports/googlecharts/jasper/geomap/GeoMapElementHtmlTemplate.vm";
 
+	@Override
 	public String getHtmlFragment(JRHtmlExporterContext context, JRGenericPrintElement element)	{
 		Boolean showLegend = (Boolean) element.getParameterValue(GeoMapPrintElement.PARAMETER_SHOW_LEGEND);
 		GeoMapDataMode dataMode = (GeoMapDataMode) element.getParameterValue(GeoMapPrintElement.PARAMETER_DATA_MODE);
@@ -110,6 +111,7 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
     return "0x" + ("000000" + hex).substring(hex.length());
   }
 
+	@Override
 	public boolean toExport(JRGenericPrintElement element) {
 		return true;
 	}

@@ -44,6 +44,7 @@ public class PropertyExpression implements DRIPropertyExpression {
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -52,6 +53,7 @@ public class PropertyExpression implements DRIPropertyExpression {
 		this.name = name;
 	}
 
+	@Override
 	public DRIExpression<String> getValueExpression() {
 		return valueExpression;
 	}

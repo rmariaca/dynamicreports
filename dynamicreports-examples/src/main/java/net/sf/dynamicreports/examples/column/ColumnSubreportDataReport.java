@@ -72,6 +72,7 @@ public class ColumnSubreportDataReport {
 	private class SubreportDesign extends AbstractSimpleExpression<JasperReportBuilder> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
 			JasperReportBuilder report = report()
 				.columns(col.column("comment", type.stringType()));
@@ -82,6 +83,7 @@ public class ColumnSubreportDataReport {
 	private class SubreportData extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			Collection<Map<String, ?>> value = reportParameters.getValue("comments");
 			return new JRMapCollectionDataSource(value);

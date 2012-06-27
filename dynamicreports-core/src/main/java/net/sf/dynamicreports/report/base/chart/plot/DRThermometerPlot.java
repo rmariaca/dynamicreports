@@ -50,6 +50,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 	private DRIExpression<? extends Number> highDataRangeLowExpression;
 	private DRIExpression<? extends Number> highDataRangeHighExpression;
 
+	@Override
 	public DRIExpression<? extends Number> getDataRangeLowExpression() {
 		return dataRangeLowExpression;
 	}
@@ -58,6 +59,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.dataRangeLowExpression = dataRangeLowExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getDataRangeHighExpression() {
 		return dataRangeHighExpression;
 	}
@@ -66,6 +68,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.dataRangeHighExpression = dataRangeHighExpression;
 	}
 
+	@Override
 	public Color getValueColor() {
 		return valueColor;
 	}
@@ -74,6 +77,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.valueColor = valueColor;
 	}
 
+	@Override
 	public String getValueMask() {
 		return valueMask;
 	}
@@ -82,6 +86,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.valueMask = valueMask;
 	}
 
+	@Override
 	public DRIFont getValueFont() {
 		return valueFont;
 	}
@@ -90,6 +95,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.valueFont = valueFont;
 	}
 
+	@Override
 	public ValueLocation getValueLocation() {
 		return valueLocation;
 	}
@@ -98,6 +104,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.valueLocation = valueLocation;
 	}
 
+	@Override
 	public Color getMercuryColor() {
 		return mercuryColor;
 	}
@@ -106,6 +113,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.mercuryColor = mercuryColor;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getLowDataRangeLowExpression() {
 		return lowDataRangeLowExpression;
 	}
@@ -114,6 +122,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.lowDataRangeLowExpression = lowDataRangeLowExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getLowDataRangeHighExpression() {
 		return lowDataRangeHighExpression;
 	}
@@ -122,6 +131,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.lowDataRangeHighExpression = lowDataRangeHighExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getMediumDataRangeLowExpression() {
 		return mediumDataRangeLowExpression;
 	}
@@ -130,6 +140,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.mediumDataRangeLowExpression = mediumDataRangeLowExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getMediumDataRangeHighExpression() {
 		return mediumDataRangeHighExpression;
 	}
@@ -138,6 +149,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.mediumDataRangeHighExpression = mediumDataRangeHighExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getHighDataRangeLowExpression() {
 		return highDataRangeLowExpression;
 	}
@@ -146,6 +158,7 @@ public class DRThermometerPlot implements DRIThermometerPlot {
 		this.highDataRangeLowExpression = highDataRangeLowExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getHighDataRangeHighExpression() {
 		return highDataRangeHighExpression;
 	}

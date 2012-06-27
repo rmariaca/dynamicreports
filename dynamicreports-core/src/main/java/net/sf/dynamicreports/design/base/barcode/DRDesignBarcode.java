@@ -48,6 +48,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		super(name);
 	}
 
+	@Override
 	public DRIDesignExpression getCodeExpression() {
 		return codeExpression;
 	}
@@ -56,6 +57,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.codeExpression = codeExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getPatternExpression() {
 		return patternExpression;
 	}
@@ -64,6 +66,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.patternExpression = patternExpression;
 	}
 
+	@Override
 	public Double getModuleWidth() {
 		return moduleWidth;
 	}
@@ -72,6 +75,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.moduleWidth = moduleWidth;
 	}
 
+	@Override
 	public BarcodeOrientation getOrientation() {
 		return orientation;
 	}
@@ -80,6 +84,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.orientation = orientation;
 	}
 
+	@Override
 	public BarcodeTextPosition getTextPosition() {
 		return textPosition;
 	}
@@ -88,6 +93,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.textPosition = textPosition;
 	}
 
+	@Override
 	public Double getQuietZone() {
 		return quietZone;
 	}
@@ -96,6 +102,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.quietZone = quietZone;
 	}
 
+	@Override
 	public Double getVerticalQuietZone() {
 		return verticalQuietZone;
 	}
@@ -104,6 +111,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.verticalQuietZone = verticalQuietZone;
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -112,6 +120,7 @@ public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDe
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRIDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}

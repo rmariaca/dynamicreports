@@ -34,6 +34,7 @@ public class DRDesignPie3DPlot extends DRDesignPiePlot implements DRIDesignPie3D
 		this.depthFactor = depthFactor;
 	}
 
+	@Override
 	public Double getDepthFactor() {
 		return depthFactor;
 	}

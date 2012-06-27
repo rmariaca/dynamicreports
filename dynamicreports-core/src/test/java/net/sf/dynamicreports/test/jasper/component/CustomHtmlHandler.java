@@ -31,10 +31,12 @@ import net.sf.jasperreports.engine.export.JRHtmlExporterContext;
  */
 public class CustomHtmlHandler implements GenericElementHtmlHandler {
 
+	@Override
 	public boolean toExport(JRGenericPrintElement element) {
 		return true;
 	}
 
+	@Override
 	public String getHtmlFragment(JRHtmlExporterContext context, JRGenericPrintElement element)	{
 		String id = (String) element.getParameterValue("id");
 		String data = (String) element.getParameterValue("data");	

@@ -34,6 +34,7 @@ public class DRDesignCodabarBarcode extends DRDesignBarcode implements DRIDesign
 		super("Codabar");
 	}
 	
+	@Override
 	public Double getWideFactor() {
 		return wideFactor;
 	}

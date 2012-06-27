@@ -120,6 +120,7 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 	private class ValueExpression1 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			double f1 = reportParameters.getValue(field1);
 			double f2 = reportParameters.getValue(column2);
@@ -130,6 +131,7 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 	private class ValueExpression2 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			double f1 = reportParameters.getValue(expression1);
 			double f2 = reportParameters.getValue(calcExpression8).doubleValue();
@@ -140,6 +142,7 @@ public class ExpressionColumnTest extends AbstractJasperValueTest implements Ser
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Double value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}	

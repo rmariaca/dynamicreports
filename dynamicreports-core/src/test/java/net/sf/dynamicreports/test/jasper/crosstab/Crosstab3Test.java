@@ -114,6 +114,7 @@ public class Crosstab3Test extends AbstractJasperCrosstabValueTest implements Se
 	private class ValueFormatter1 extends AbstractValueFormatter<String, Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Integer value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}
@@ -122,6 +123,7 @@ public class Crosstab3Test extends AbstractJasperCrosstabValueTest implements Se
 	private class ValueFormatter2 extends AbstractValueFormatter<String, String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(String value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}

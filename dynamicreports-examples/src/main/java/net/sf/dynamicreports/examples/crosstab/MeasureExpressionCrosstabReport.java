@@ -89,6 +89,7 @@ public class MeasureExpressionCrosstabReport {
 	private class PriceMeasureExpression extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			Integer quantity = reportParameters.getValue(quantityMeasure);
 			BigDecimal unitPrice = reportParameters.getValue(unitPriceVariable);

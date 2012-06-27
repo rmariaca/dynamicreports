@@ -49,6 +49,7 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 		super(dataset, factory);
 	}
 
+	@Override
 	public void collectExpressions(JRExpressionCollector collector) {
 		GeoMapCompiler.collectExpressions(this, collector);
 	}
@@ -78,14 +79,17 @@ public class GeoMapFillDataset extends JRFillElementDataset implements GeoMapDat
 		return dataset;
 	}
 
+	@Override
 	public JRExpression getLocationExpression() {
 		return ((GeoMapDataset) parent).getLocationExpression();
 	}
 
+	@Override
 	public JRExpression getValueExpression() {
 		return ((GeoMapDataset) parent).getValueExpression();
 	}
 
+	@Override
 	public JRExpression getLabelExpression() {
 		return ((GeoMapDataset) parent).getLabelExpression();
 	}

@@ -34,6 +34,7 @@ public class DREllipse extends DRDimensionComponent implements DRIEllipse {
 
 	private DRPen pen;
 
+	@Override
 	public DRPen getPen() {
 		return pen;
 	}

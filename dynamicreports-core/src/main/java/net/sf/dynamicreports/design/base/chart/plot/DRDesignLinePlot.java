@@ -35,6 +35,7 @@ public class DRDesignLinePlot extends DRDesignAxisPlot implements DRIDesignLineP
 		this.showShapes = showShapes;
 	}
 
+	@Override
 	public Boolean getShowShapes() {
 		return showShapes;
 	}
@@ -43,6 +44,7 @@ public class DRDesignLinePlot extends DRDesignAxisPlot implements DRIDesignLineP
 		this.showLines = showLines;
 	}
 
+	@Override
 	public Boolean getShowLines() {
 		return showLines;
 	}

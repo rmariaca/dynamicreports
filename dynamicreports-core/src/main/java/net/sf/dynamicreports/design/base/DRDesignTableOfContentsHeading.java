@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignTableOfContentsHeading;
 public class DRDesignTableOfContentsHeading implements DRIDesignTableOfContentsHeading {
 	private DRDesignTextField referenceField;
 
+	@Override
 	public DRDesignTextField getReferenceField() {
 		return referenceField;
 	}

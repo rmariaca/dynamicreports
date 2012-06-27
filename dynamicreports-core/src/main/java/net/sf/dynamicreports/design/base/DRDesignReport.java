@@ -141,30 +141,37 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		bandTransform.prepareBands();
 	}
 
+	@Override
 	public DRIReport getReport() {
 		return report;
 	}
 
+	@Override
 	public Integer getPageWidth() {
 		return pageWidth;
 	}
 
+	@Override
 	public ReportTransform getReportTransform() {
 		return reportTransform;
 	}
 
+	@Override
 	public TemplateTransform getTemplateTransform() {
 		return templateTransform;
 	}
 
+	@Override
 	public PageTransform getPageTransform() {
 		return pageTransform;
 	}
 
+	@Override
 	public void transformToMainDataset() {
 		transformToDataset(null);
 	}
 
+	@Override
 	public void transformToDataset(DRIDataset dataset) {
 		if (dataset != null) {
 			expressionTransform = datasetTransform.getDatasetExpressionTransform(dataset);
@@ -174,222 +181,277 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		}
 	}
 
+	@Override
 	public AbstractExpressionTransform getExpressionTransform() {
 		return expressionTransform;
 	}
 
+	@Override
 	public BandTransform getBandTransform() {
 		return bandTransform;
 	}
 
+	@Override
 	public ComponentTransform getComponentTransform() {
 		return componentTransform;
 	}
 
+	@Override
 	public GroupTransform getGroupTransform() {
 		return groupTransform;
 	}
 
+	@Override
 	public ColumnTransform getColumnTransform() {
 		return columnTransform;
 	}
 
+	@Override
 	public ColumnGridTransform getColumnGridTransform() {
 		return columnGridTransform;
 	}
 
+	@Override
 	public StyleTransform getStyleTransform() {
 		return styleTransform;
 	}
 
+	@Override
 	public ChartTransform getChartTransform() {
 		return chartTransform;
 	}
 
+	@Override
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
 	}
 
+	@Override
 	public CrosstabTransform getCrosstabTransform() {
 		return crosstabTransform;
 	}
 
+	@Override
 	public DatasetTransform getDatasetTransform() {
 		return datasetTransform;
 	}
 
+	@Override
 	public TableOfContentsTransform getTableOfContentsTransform() {
 		return tableOfContentsTransform;
 	}
 
+	@Override
 	public DRIDesignTemplateDesign getTemplateDesign() {
 		return reportTransform.getTemplateDesign();
 	}
 
+	@Override
 	public Locale getLocale() {
 		return templateTransform.getLocale();
 	}
 
+	@Override
 	public ResourceBundle getResourceBundle() {
 		return report.getResourceBundle();
 	}
 
+	@Override
 	public String getResourceBundleName() {
 		return templateTransform.getResourceBundleName();
 	}
 
+	@Override
 	public boolean isIgnorePagination() {
 		return templateTransform.isIgnorePagination();
 	}
 
+	@Override
 	public Properties getProperties() {
 		return report.getProperties();
 	}
 
+	@Override
 	public DRDesignQuery getQuery() {
 		return reportTransform.getQuery();
 	}
 
+	@Override
 	public DRDesignPage getPage() {
 		return pageTransform.getPage();
 	}
 
+	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return templateTransform.getWhenNoDataType(getDetailBands().isEmpty(), getNoDataBand());
 	}
 
+	@Override
 	public boolean isTitleOnANewPage() {
 		return templateTransform.isTitleOnANewPage();
 	}
 
+	@Override
 	public boolean isSummaryOnANewPage() {
 		return templateTransform.isSummaryOnANewPage();
 	}
 
+	@Override
 	public boolean isSummaryWithPageHeaderAndFooter() {
 		return templateTransform.isSummaryWithPageHeaderAndFooter();
 	}
 
+	@Override
 	public boolean isFloatColumnFooter() {
 		return templateTransform.isFloatColumnFooter();
 	}
 
+	@Override
 	public Orientation getPrintOrder() {
 		return templateTransform.getPrintOrder();
 	}
 
+	@Override
 	public RunDirection getColumnDirection() {
 		return templateTransform.getColumnDirection();
 	}
 
+	@Override
 	public String getLanguage() {
 		return templateTransform.getLanguage();
 	}
 
+	@Override
 	public boolean isTableOfContents() {
 		return templateTransform.isTableOfContents(tocHeadings);
 	}
 
+	@Override
 	public Map<String, JasperTocHeading> getTableOfContentsHeadings() {
 		return tocHeadings;
 	}
 
+	@Override
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
 		return templateTransform.getTableOfContentsCustomizer();
 	}
 
+	@Override
 	public DRIDesignExpression getFilterExpression() {
 		return reportTransform.getFilterExpression();
 	}
 
+	@Override
 	public Collection<DRIDesignParameter> getParameters() {
 		return reportTransform.getParameters();
 	}
 
+	@Override
 	public Map<String, Object> getParameterValues() {
 		return report.getParameterValues();
 	}
 
+	@Override
 	public Collection<DRIScriptlet> getScriptlets() {
 		return report.getScriptlets();
 	}
 
+	@Override
 	public Collection<DRIDesignField> getFields() {
 		return mainDatasetExpressionTransform.getFields();
 	}
 
+	@Override
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
 		return mainDatasetExpressionTransform.getSystemExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignJasperExpression> getJasperExpressions() {
 		return mainDatasetExpressionTransform.getJasperExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
 		return mainDatasetExpressionTransform.getSimpleExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignStyle> getStyles() {
 		return styleTransform.getStyles();
 	}
 
+	@Override
 	public Collection<DRDesignGroup> getGroups() {
 		return groupTransform.getGroups();
 	}
 
+	@Override
 	public Collection<DRIDesignVariable> getVariables() {
 		return mainDatasetExpressionTransform.getVariables();
 	}
 
+	@Override
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return mainDatasetExpressionTransform.getComplexExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignSort> getSorts() {
 		return mainDatasetExpressionTransform.getSorts();
 	}
 
+	@Override
 	public Collection<DRIDesignDataset> getDatasets() {
 		return datasetTransform.getDatasets();
 	}
 
+	@Override
 	public DRDesignBand getTitleBand() {
 		return bandTransform.getTitleBand();
 	}
 
+	@Override
 	public DRDesignBand getPageHeaderBand() {
 		return bandTransform.getPageHeaderBand();
 	}
 
+	@Override
 	public DRDesignBand getPageFooterBand() {
 		return bandTransform.getPageFooterBand();
 	}
 
+	@Override
 	public DRDesignBand getColumnHeaderBand() {
 		return bandTransform.getColumnHeaderBand();
 	}
 
+	@Override
 	public DRDesignBand getColumnFooterBand() {
 		return bandTransform.getColumnFooterBand();
 	}
 
+	@Override
 	public List<DRDesignBand> getDetailBands() {
 		return bandTransform.getDetailBands();
 	}
 
+	@Override
 	public DRDesignBand getLastPageFooterBand() {
 		return bandTransform.getLastPageFooterBand();
 	}
 
+	@Override
 	public DRDesignBand getSummaryBand() {
 		return bandTransform.getSummaryBand();
 	}
 
+	@Override
 	public DRDesignBand getNoDataBand() {
 		return bandTransform.getNoDataBand();
 	}
 
+	@Override
 	public DRDesignBand getBackgroundBand() {
 		return bandTransform.getBackgroundBand();
 	}

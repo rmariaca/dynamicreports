@@ -106,30 +106,37 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		reportTransform.addDependencies();
 	}
 
+	@Override
 	public ReportTransform getReportTransform() {
 		return reportTransform;
 	}
 
+	@Override
 	public ChartTransform getChartTransform() {
 		return chartTransform;
 	}
 
+	@Override
 	public BarcodeTransform getBarcodeTransform() {
 		return barcodeTransform;
 	}
 
+	@Override
 	public CrosstabTransform getCrosstabTransform() {
 		return crosstabTransform;
 	}
 
+	@Override
 	public ComponentTransform getComponentTransform() {
 		return componentTransform;
 	}
 
+	@Override
 	public void transformToMainDataset() {
 		transformToDataset(null);
 	}
 
+	@Override
 	public void transformToDataset(DRIDesignDataset dataset) {
 		if (dataset != null) {
 			expressionTransform = datasetTransform.getDatasetExpressionTransform(dataset);
@@ -139,10 +146,12 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		}
 	}
 
+	@Override
 	public AbstractExpressionTransform getExpressionTransform() {
 		return expressionTransform;
 	}
 
+	@Override
 	public AbstractExpressionTransform getExpressionTransform(DRIDesignDataset dataset) {
 		if (dataset == null) {
 			return mainDatasetExpressionTransform;
@@ -152,42 +161,52 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		}
 	}
 
+	@Override
 	public GroupTransform getGroupTransform() {
 		return groupTransform;
 	}
 
+	@Override
 	public StyleTransform getStyleTransform() {
 		return styleTransform;
 	}
 
+	@Override
 	public DatasetTransform getDatasetTransform() {
 		return datasetTransform;
 	}
 
+	@Override
 	public DRIDesignReport getReport() {
 		return report;
 	}
 
+	@Override
 	public JasperCustomValues getCustomValues() {
 		return reportTransform.getCustomValues();
 	}
 
+	@Override
 	public JasperDesign getDesign() {
 		return design;
 	}
 
+	@Override
 	public Map<String, Object> getParameters() {
 		return parameters;
 	}
 
+	@Override
 	public Map<String, Object> getParameterValues() {
 		return report.getParameterValues();
 	}
 
+	@Override
 	public Integer getStartPageNumber() {
 		return startPageNumber;
 	}
 
+	@Override
 	public ReportParameters getMasterReportParameters() {
 		return masterReportParameters;
 	}

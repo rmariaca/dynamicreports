@@ -35,6 +35,7 @@ public class DRDesignDataMatrixBarcode extends DRDesignBarcode implements DRIDes
 		super("DataMatrix");
 	}
 
+	@Override
 	public BarcodeShape getShape() {
 		return shape;
 	}

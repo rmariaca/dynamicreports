@@ -37,10 +37,12 @@ public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDe
 		this.conditionExpression = conditionExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getConditionExpression() {
 		return conditionExpression;
 	}
 
+	@Override
 	public DRIDesignDataset getDataset() {
 		return dataset;
 	}

@@ -55,6 +55,7 @@ public class DRColumnGridListCell implements DRIColumnGridListCell {
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public HorizontalCellComponentAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -63,10 +64,12 @@ public class DRColumnGridListCell implements DRIColumnGridListCell {
 		this.verticalAlignment = verticalAlignment;
 	}
 
+	@Override
 	public VerticalCellComponentAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
 
+	@Override
 	public DRIColumnGridComponent getComponent() {
 		return component;
 	}

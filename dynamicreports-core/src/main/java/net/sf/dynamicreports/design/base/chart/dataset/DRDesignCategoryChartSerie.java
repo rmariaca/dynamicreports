@@ -32,6 +32,7 @@ public class DRDesignCategoryChartSerie extends AbstractDesignChartSerie impleme
 	private DRIDesignExpression valueExpression;
 	private DRIDesignExpression labelExpression;
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
@@ -40,6 +41,7 @@ public class DRDesignCategoryChartSerie extends AbstractDesignChartSerie impleme
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getLabelExpression() {
 		return labelExpression;
 	}

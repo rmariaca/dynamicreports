@@ -34,6 +34,7 @@ public class DRDataMatrixBarcode extends DRBarcode implements DRIDataMatrixBarco
 	
 	private BarcodeShape shape;
 
+	@Override
 	public BarcodeShape getShape() {
 		return shape;
 	}

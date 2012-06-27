@@ -35,10 +35,12 @@ public class DRDesignSystemExpression implements DRIDesignSystemExpression {
 		this.systemExpression = systemExpression;
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return systemExpression.getValueClass();
 	}
 
+	@Override
 	public String getName() {
 		return systemExpression.getName();
 	}

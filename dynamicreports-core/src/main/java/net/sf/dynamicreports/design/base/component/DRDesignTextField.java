@@ -47,6 +47,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		super("textField");
 	}
 
+	@Override
 	public String getPattern() {
 		return pattern;
 	}
@@ -55,6 +56,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.pattern = pattern;
 	}
 
+	@Override
 	public DRIDesignExpression getPatternExpression() {
 		return patternExpression;
 	}
@@ -63,6 +65,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.patternExpression = patternExpression;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -71,6 +74,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
@@ -79,6 +83,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public boolean isPrintRepeatedValues() {
 		return printRepeatedValues;
 	}
@@ -87,6 +92,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.printRepeatedValues = printRepeatedValues;
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -95,6 +101,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -103,6 +110,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public Markup getMarkup() {
 		return markup;
 	}
@@ -111,6 +119,7 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 		this.markup = markup;
 	}
 
+	@Override
 	public boolean isStretchWithOverflow() {
 		return stretchWithOverflow;
 	}

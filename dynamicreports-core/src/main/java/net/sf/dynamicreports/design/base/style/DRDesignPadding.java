@@ -33,6 +33,7 @@ public class DRDesignPadding implements DRIDesignPadding {
 	private Integer bottom;
 	private Integer right;
 
+	@Override
 	public Integer getTop() {
 		return top;
 	}
@@ -41,6 +42,7 @@ public class DRDesignPadding implements DRIDesignPadding {
 		this.top = top;
 	}
 
+	@Override
 	public Integer getLeft() {
 		return left;
 	}
@@ -49,6 +51,7 @@ public class DRDesignPadding implements DRIDesignPadding {
 		this.left = left;
 	}
 
+	@Override
 	public Integer getBottom() {
 		return bottom;
 	}
@@ -57,6 +60,7 @@ public class DRDesignPadding implements DRIDesignPadding {
 		this.bottom = bottom;
 	}
 
+	@Override
 	public Integer getRight() {
 		return right;
 	}

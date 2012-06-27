@@ -47,6 +47,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 	private Double labelGap;
 	private Color labelColor;
 
+	@Override
 	public DRIDesignExpression getMaxValueExpression() {
 		return maxValueExpression;
 	}
@@ -55,6 +56,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.maxValueExpression = maxValueExpression;
 	}
 
+	@Override
 	public SpiderRotation getRotation() {
 		return rotation;
 	}
@@ -63,6 +65,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.rotation = rotation;
 	}
 
+	@Override
 	public TableOrder getTableOrder() {
 		return tableOrder;
 	}
@@ -71,6 +74,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.tableOrder = tableOrder;
 	}
 
+	@Override
 	public Boolean getWebFilled() {
 		return webFilled;
 	}
@@ -79,6 +83,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.webFilled = webFilled;
 	}
 
+	@Override
 	public Double getStartAngle() {
 		return startAngle;
 	}
@@ -87,6 +92,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.startAngle = startAngle;
 	}
 
+	@Override
 	public Double getHeadPercent() {
 		return headPercent;
 	}
@@ -95,6 +101,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.headPercent = headPercent;
 	}
 
+	@Override
 	public Double getInteriorGap() {
 		return interiorGap;
 	}
@@ -103,6 +110,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.interiorGap = interiorGap;
 	}
 
+	@Override
 	public Color getAxisLineColor() {
 		return axisLineColor;
 	}
@@ -111,6 +119,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.axisLineColor = axisLineColor;
 	}
 
+	@Override
 	public Float getAxisLineWidth() {
 		return axisLineWidth;
 	}
@@ -119,6 +128,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.axisLineWidth = axisLineWidth;
 	}
 
+	@Override
 	public DRIDesignFont getLabelFont() {
 		return labelFont;
 	}
@@ -127,6 +137,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.labelFont = labelFont;
 	}
 
+	@Override
 	public Double getLabelGap() {
 		return labelGap;
 	}
@@ -135,6 +146,7 @@ public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
 		this.labelGap = labelGap;
 	}
 
+	@Override
 	public Color getLabelColor() {
 		return labelColor;
 	}

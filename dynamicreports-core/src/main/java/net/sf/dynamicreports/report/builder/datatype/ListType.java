@@ -59,6 +59,7 @@ public class ListType extends AbstractDataType<List, List> {
 	private static class ListFormatter extends AbstractValueFormatter<String, List> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+		@Override
 		public String format(List values, ReportParameters reportParameters) {
 			StringBuffer result = new StringBuffer();
 			for (Object value : values) {

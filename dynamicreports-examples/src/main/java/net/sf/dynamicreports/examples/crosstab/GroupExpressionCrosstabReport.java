@@ -99,6 +99,7 @@ public class GroupExpressionCrosstabReport {
 	private class YearExpression extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Integer evaluate(ReportParameters reportParameters) {
 			Calendar c = Calendar.getInstance();
 			c.setTime((Date) reportParameters.getValue("orderdate"));
@@ -109,6 +110,7 @@ public class GroupExpressionCrosstabReport {
 	private class QuarterExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Calendar c = Calendar.getInstance();
 			c.setTime((Date) reportParameters.getValue("orderdate"));

@@ -180,6 +180,7 @@ public class TextColumnBuilder<T> extends ValueColumnBuilder<TextColumnBuilder<T
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
 
+	@Override
 	public String getName() {
 		return getObject().getName();
 	}

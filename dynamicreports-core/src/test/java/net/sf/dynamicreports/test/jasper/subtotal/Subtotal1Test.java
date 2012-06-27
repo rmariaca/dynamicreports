@@ -163,6 +163,7 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(String value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}
@@ -171,6 +172,7 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 	private class ColumnValueFormatter2 extends AbstractValueFormatter<String, Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Integer value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}
@@ -179,6 +181,7 @@ public class Subtotal1Test extends AbstractJasperValueTest implements Serializab
 	private class ColumnCalculationExpression extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Integer evaluate(ReportParameters reportParameters) {
 			return new Integer(((String) reportParameters.getValue("field2")).substring(1));
 		}

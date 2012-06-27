@@ -33,6 +33,7 @@ public class DRDesignMargin implements DRIDesignMargin {
 	private int bottom;
 	private int right;
 
+	@Override
 	public int getTop() {
 		return top;
 	}
@@ -41,6 +42,7 @@ public class DRDesignMargin implements DRIDesignMargin {
 		this.top = top;
 	}
 
+	@Override
 	public int getLeft() {
 		return left;
 	}
@@ -49,6 +51,7 @@ public class DRDesignMargin implements DRIDesignMargin {
 		this.left = left;
 	}
 
+	@Override
 	public int getBottom() {
 		return bottom;
 	}
@@ -57,6 +60,7 @@ public class DRDesignMargin implements DRIDesignMargin {
 		this.bottom = bottom;
 	}
 
+	@Override
 	public int getRight() {
 		return right;
 	}

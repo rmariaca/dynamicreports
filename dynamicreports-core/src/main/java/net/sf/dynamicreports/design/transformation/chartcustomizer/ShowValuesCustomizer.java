@@ -42,6 +42,7 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 public class ShowValuesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer();

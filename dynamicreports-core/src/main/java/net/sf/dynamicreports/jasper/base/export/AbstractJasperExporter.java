@@ -50,6 +50,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 	private Integer offsetY;
 	private Boolean ignorePageMargins;
 
+	@Override
 	public Writer getOutputWriter() {
 		return outputWriter;
 	}
@@ -59,6 +60,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.outputWriter = outputWriter;
 	}
 
+	@Override
 	public OutputStream getOutputStream() {
 		return outputStream;
 	}
@@ -68,6 +70,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.outputStream = outputStream;
 	}
 
+	@Override
 	public File getOutputFile() {
 		return outputFile;
 	}
@@ -77,6 +80,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.outputFile = outputFile;
 	}
 
+	@Override
 	public String getOutputFileName() {
 		return outputFileName;
 	}
@@ -86,6 +90,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.outputFileName = outputFileName;
 	}
 
+	@Override
 	public Integer getPageIndex() {
 		return pageIndex;
 	}
@@ -94,6 +99,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.pageIndex = pageIndex;
 	}
 
+	@Override
 	public Integer getStartPageIndex() {
 		return startPageIndex;
 	}
@@ -102,6 +108,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.startPageIndex = startPageIndex;
 	}
 
+	@Override
 	public Integer getEndPageIndex() {
 		return endPageIndex;
 	}
@@ -110,6 +117,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.endPageIndex = endPageIndex;
 	}
 
+	@Override
 	public String getCharacterEncoding() {
 		return characterEncoding;
 	}
@@ -118,6 +126,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.characterEncoding = characterEncoding;
 	}
 
+	@Override
 	public Integer getOffsetX() {
 		return offsetX;
 	}
@@ -126,6 +135,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.offsetX = offsetX;
 	}
 
+	@Override
 	public Integer getOffsetY() {
 		return offsetY;
 	}
@@ -134,6 +144,7 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.offsetY = offsetY;
 	}
 
+	@Override
 	public Boolean getIgnorePageMargins() {
 		return ignorePageMargins;
 	}

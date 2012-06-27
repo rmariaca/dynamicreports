@@ -842,6 +842,7 @@ public class ComponentTransform {
 			this.keyFalse = keyFalse;
 		}
 
+		@Override
 		public String format(Boolean value, ReportParameters reportParameters) {
 			String key;
 			if (value != null && value) {

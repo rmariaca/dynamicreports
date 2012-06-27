@@ -47,10 +47,12 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
@@ -59,6 +61,7 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getInitialValueExpression() {
 		return initialValueExpression;
 	}
@@ -67,6 +70,7 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.initialValueExpression = initialValueExpression;
 	}
 
+	@Override
 	public Calculation getCalculation() {
 		return calculation;
 	}
@@ -75,6 +79,7 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.calculation = calculation;
 	}
 
+	@Override
 	public ResetType getResetType() {
 		return resetType;
 	}
@@ -83,6 +88,7 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.resetType = resetType;
 	}
 
+	@Override
 	public DRDesignGroup getResetGroup() {
 		return resetGroup;
 	}
@@ -91,6 +97,7 @@ public class DRDesignVariable implements DRIDesignVariable {
 		this.resetGroup = resetGroup;
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return ReportUtils.getVariableValueClass(calculation, valueExpression.getValueClass());
 	}

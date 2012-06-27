@@ -490,6 +490,7 @@ public class ComponentTransform {
 			jasperReports = new HashMap<ReportBuilder<?>, JasperReport>();
 		}
 
+		@Override
 		public Object evaluate(List<?> values, ReportParameters reportParameters) {
 			reportBuilder = (ReportBuilder<?>) values.get(0);
 			if (jasperReports.containsKey(reportBuilder)) {
@@ -524,6 +525,7 @@ public class ComponentTransform {
 			return name;
 		}
 
+		@Override
 		public Class<?> getValueClass() {
 			return JasperReport.class;
 		}
@@ -540,6 +542,7 @@ public class ComponentTransform {
 			}
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public Object evaluate(List<?> values, ReportParameters reportParameters) {
 			Map<String, Object> parameters = null;
@@ -557,6 +560,7 @@ public class ComponentTransform {
 			return parameters;
 		}
 
+		@Override
 		public Class<?> getValueClass() {
 			return Map.class;
 		}
@@ -571,6 +575,7 @@ public class ComponentTransform {
 			}
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public Object evaluate(List<?> values, ReportParameters reportParameters) {
 			Map<String, Object> parameters = null;
@@ -584,6 +589,7 @@ public class ComponentTransform {
 			return parameters;
 		}
 
+		@Override
 		public Class<?> getValueClass() {
 			return Map.class;
 		}

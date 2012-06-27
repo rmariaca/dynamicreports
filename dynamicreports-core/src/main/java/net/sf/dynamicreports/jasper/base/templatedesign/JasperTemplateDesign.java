@@ -122,103 +122,128 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 		margin.setRight(jasperDesign.getRightMargin());
 	}
 
+	@Override
 	public List<DRIField<?>> getFields() {
 		return fields;
 	}
 
+	@Override
 	public boolean isDefinedParameter(String name) {
 		JRParameter parameter = jasperDesign.getParametersMap().get(name);
 		return parameter != null;
 	}
 
+	@Override
 	public String getResourceBundleName() {
 		return jasperDesign.getResourceBundle();
 	}
 
+	@Override
 	public Boolean getIgnorePagination() {
 		return jasperDesign.isIgnorePagination();
 	}
 
+	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return ConstantTransform.whenNoDataType(jasperDesign.getWhenNoDataTypeValue());
 	}
 
+	@Override
 	public Boolean getTitleOnANewPage() {
 		return jasperDesign.isTitleNewPage();
 	}
 
+	@Override
 	public Boolean getSummaryOnANewPage() {
 		return jasperDesign.isSummaryNewPage();
 	}
 
+	@Override
 	public Boolean getSummaryWithPageHeaderAndFooter() {
 		return jasperDesign.isSummaryWithPageHeaderAndFooter();
 	}
 
+	@Override
 	public Boolean getFloatColumnFooter() {
 		return jasperDesign.isFloatColumnFooter();
 	}
 
+	@Override
 	public Integer getPageWidth() {
 		return jasperDesign.getPageWidth();
 	}
 
+	@Override
 	public Integer getPageHeight() {
 		return jasperDesign.getPageHeight();
 	}
 
+	@Override
 	public PageOrientation getPageOrientation() {
 		return ConstantTransform.pageOrientation(jasperDesign.getOrientationValue());
 	}
 
+	@Override
 	public DRIMargin getPageMargin() {
 		return margin;
 	}
 
+	@Override
 	public Integer getPageColumnsPerPage() {
 		return jasperDesign.getColumnCount();
 	}
 
+	@Override
 	public Integer getPageColumnSpace() {
 		return jasperDesign.getColumnSpacing();
 	}
 
+	@Override
 	public Integer getPageColumnWidth() {
 		return jasperDesign.getColumnWidth();
 	}
 
+	@Override
 	public int getTitleComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getTitle());
 	}
 
+	@Override
 	public int getPageHeaderComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getPageHeader());
 	}
 
+	@Override
 	public int getPageFooterComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getPageFooter());
 	}
 
+	@Override
 	public int getColumnHeaderComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getColumnHeader());
 	}
 
+	@Override
 	public int getColumnFooterComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getColumnFooter());
 	}
 
+	@Override
 	public int getLastPageFooterComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getLastPageFooter());
 	}
 
+	@Override
 	public int getSummaryComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getSummary());
 	}
 
+	@Override
 	public int getNoDataComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getNoData());
 	}
 
+	@Override
 	public int getBackgroundComponentsCount() {
 		return getBandComponentsCount(jasperDesign.getBackground());
 	}
@@ -230,6 +255,7 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 		return 0;
 	}
 
+	@Override
 	public JasperDesign getDesign() throws DRException {
 		try {
 			if (templateDesign == null) {

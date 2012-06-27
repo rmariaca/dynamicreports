@@ -33,6 +33,7 @@ public class DRDesignXyzChartSerie extends AbstractDesignChartSerie implements D
 	private DRIDesignExpression yValueExpression;
 	private DRIDesignExpression zValueExpression;
 
+	@Override
 	public DRIDesignExpression getXValueExpression() {
 		return xValueExpression;
 	}
@@ -41,6 +42,7 @@ public class DRDesignXyzChartSerie extends AbstractDesignChartSerie implements D
 		this.xValueExpression = xValueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getYValueExpression() {
 		return yValueExpression;
 	}
@@ -49,6 +51,7 @@ public class DRDesignXyzChartSerie extends AbstractDesignChartSerie implements D
 		this.yValueExpression = yValueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getZValueExpression() {
 		return zValueExpression;
 	}

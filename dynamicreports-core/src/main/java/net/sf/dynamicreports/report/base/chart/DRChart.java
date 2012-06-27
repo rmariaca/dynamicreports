@@ -182,18 +182,22 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		}
 	}
 
+	@Override
 	public ChartType getChartType() {
 		return chartType;
 	}
 
+	@Override
 	public DRChartDataset getDataset() {
 		return dataset;
 	}
 
+	@Override
 	public DRIPlot getPlot() {
 		return plot;
 	}
 
+	@Override
 	public DRIChartCustomizer getCustomizer() {
 		return customizer;
 	}
@@ -202,6 +206,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		this.customizer = customizer;
 	}
 
+	@Override
 	public DRChartTitle getTitle() {
 		return title;
 	}
@@ -211,6 +216,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		this.title = title;
 	}
 
+	@Override
 	public DRChartSubtitle getSubtitle() {
 		return subtitle;
 	}
@@ -220,6 +226,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		this.subtitle = subtitle;
 	}
 
+	@Override
 	public DRChartLegend getLegend() {
 		return legend;
 	}
@@ -229,6 +236,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 		this.legend = legend;
 	}
 
+	@Override
 	public String getTheme() {
 		return theme;
 	}

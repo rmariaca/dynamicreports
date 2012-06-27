@@ -41,10 +41,12 @@ public abstract class AbstractSystemExpression<T> implements DRISystemExpression
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
 		return (Class<T>) ReportUtils.getGenericClass(this, 0);

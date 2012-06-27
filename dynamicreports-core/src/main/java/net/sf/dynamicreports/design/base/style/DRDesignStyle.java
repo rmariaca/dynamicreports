@@ -41,10 +41,12 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 		this.conditionalStyles = new ArrayList<DRDesignConditionalStyle>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public DRDesignStyle getParentStyle() {
 		return parentStyle;
 	}
@@ -53,6 +55,7 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 		this.parentStyle = parentStyle;
 	}
 
+	@Override
 	public List<DRDesignConditionalStyle> getConditionalStyles() {
 		return conditionalStyles;
 	}

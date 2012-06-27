@@ -46,6 +46,7 @@ public class PieChartLabelFormatCustomizer implements DRIChartCustomizer, Serial
 		this.labelFormat = labelFormat;
 	}
 
+	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
     PiePlot plot = (PiePlot) chart.getPlot();
     if (labelFormat == null) {

@@ -68,6 +68,7 @@ public class DRPage implements DRIPage {
    *
    * @return the page width >= 0
    */
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -91,6 +92,7 @@ public class DRPage implements DRIPage {
    *
    * @return the page height >= 0
    */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -109,6 +111,7 @@ public class DRPage implements DRIPage {
 		this.height = height;
 	}
 
+	@Override
 	public PageOrientation getOrientation() {
 		return orientation;
 	}
@@ -117,6 +120,7 @@ public class DRPage implements DRIPage {
 		this.orientation = orientation;
 	}
 
+	@Override
 	public DRMargin getMargin() {
 		return margin;
 	}
@@ -125,6 +129,7 @@ public class DRPage implements DRIPage {
 		this.margin = margin;
 	}
 
+	@Override
 	public Integer getColumnsPerPage() {
 		return columnsPerPage;
 	}
@@ -136,6 +141,7 @@ public class DRPage implements DRIPage {
 		this.columnsPerPage = columnsPerPage;
 	}
 
+	@Override
 	public Integer getColumnSpace() {
 		return columnSpace;
 	}
@@ -147,6 +153,7 @@ public class DRPage implements DRIPage {
 		this.columnSpace = columnSpace;
 	}
 
+	@Override
 	public Boolean getIgnorePageWidth() {
 		return ignorePageWidth;
 	}

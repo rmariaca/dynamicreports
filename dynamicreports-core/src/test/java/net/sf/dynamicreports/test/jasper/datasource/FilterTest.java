@@ -123,6 +123,7 @@ public class FilterTest extends AbstractJasperCrosstabValueTest implements Seria
 	private class FilterExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			String value = reportParameters.getValue("field1");
 			return value.equals("1");
@@ -132,6 +133,7 @@ public class FilterTest extends AbstractJasperCrosstabValueTest implements Seria
 	private class CrosstabFilterExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			String value = reportParameters.getValue("field1");
 			return value.equals("a");

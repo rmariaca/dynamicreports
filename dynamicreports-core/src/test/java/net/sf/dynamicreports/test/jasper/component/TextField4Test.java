@@ -73,6 +73,7 @@ public class TextField4Test extends AbstractJasperValueTest implements Serializa
 	private class TextExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "sum = " + reportParameters.getValue("variable1");
 		}

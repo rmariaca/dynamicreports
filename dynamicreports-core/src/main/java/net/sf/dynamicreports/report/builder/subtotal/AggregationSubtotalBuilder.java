@@ -114,6 +114,7 @@ public class AggregationSubtotalBuilder<T> extends SubtotalBuilder<AggregationSu
 		}
 	}
 
+	@Override
 	public String getName() {
 		return getSubtotal().getName();
 	}

@@ -47,6 +47,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		dataset = new DRGeoMapDataset();
 	}
 
+	@Override
 	public Boolean getShowLegend() {
 		return showLegend;
 	}
@@ -55,6 +56,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		this.showLegend = showLegend;
 	}
 
+	@Override
 	public GeoMapDataMode getDataMode() {
 		return dataMode;
 	}
@@ -63,6 +65,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		this.dataMode = dataMode;
 	}
 
+	@Override
 	public DRIExpression<String> getRegionExpression() {
 		return regionExpression;
 	}
@@ -71,6 +74,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		this.regionExpression = regionExpression;
 	}
 
+	@Override
 	public DRIExpression<String> getValueLabelExpression() {
 		return valueLabelExpression;
 	}
@@ -79,6 +83,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		this.valueLabelExpression = valueLabelExpression;
 	}
 
+	@Override
 	public List<Color> getColors() {
 		return colors;
 	}
@@ -94,6 +99,7 @@ public class DRGeoMap extends DRDimensionComponent implements DRIGeoMap {
 		colors.add(color);
 	}
 
+	@Override
 	public DRGeoMapDataset getDataset() {
 		return dataset;
 	}

@@ -45,6 +45,7 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 		this.yAxisFormat = new DRAxisFormat();
 	}
 
+	@Override
 	public DRAxisFormat getXAxisFormat() {
 		return xAxisFormat;
 	}
@@ -54,6 +55,7 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 		this.xAxisFormat = xAxisFormat;
 	}
 
+	@Override
 	public DRAxisFormat getYAxisFormat() {
 		return yAxisFormat;
 	}
@@ -63,6 +65,7 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 		this.yAxisFormat = yAxisFormat;
 	}
 
+	@Override
 	public Boolean getShowValues() {
 		return showValues;
 	}
@@ -71,6 +74,7 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 		this.showValues = showValues;
 	}
 
+	@Override
 	public Boolean getShowPercentages() {
 		return showPercentages;
 	}

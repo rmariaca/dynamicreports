@@ -36,6 +36,7 @@ public class DRChartAxis implements DRIChartAxis {
 	private AxisPosition position;
 	private DRIChart chart;
 
+	@Override
 	public AxisPosition getPosition() {
 		return position;
 	}
@@ -44,6 +45,7 @@ public class DRChartAxis implements DRIChartAxis {
 		this.position = position;
 	}
 
+	@Override
 	public DRIChart getChart() {
 		return chart;
 	}

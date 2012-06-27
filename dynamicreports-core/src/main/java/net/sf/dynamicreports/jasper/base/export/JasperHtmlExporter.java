@@ -45,6 +45,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	private SizeUnit sizeUnit;
 	private Boolean framesAsNestedTables;
 	
+	@Override
 	public Boolean getOutputImagesToDir() {
 		return outputImagesToDir;
 	}
@@ -53,6 +54,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.outputImagesToDir = outputImagesToDir;
 	}
 	
+	@Override
 	public String getImagesDirName() {
 		return imagesDirName;
 	}
@@ -65,10 +67,12 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.imagesURI = imagesURI;
 	}
 	
+	@Override
 	public String getImagesURI() {
 		return imagesURI;
 	}	
 	
+	@Override
 	public String getHtmlHeader() {
 		return htmlHeader;
 	}
@@ -77,6 +81,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.htmlHeader = htmlHeader;
 	}
 	
+	@Override
 	public String getBetweenPagesHtml() {
 		return betweenPagesHtml;
 	}
@@ -85,6 +90,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.betweenPagesHtml = betweenPagesHtml;
 	}
 	
+	@Override
 	public String getHtmlFooter() {
 		return htmlFooter;
 	}
@@ -93,6 +99,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.htmlFooter = htmlFooter;
 	}
 	
+	@Override
 	public Boolean getRemoveEmptySpaceBetweenRows() {
 		return removeEmptySpaceBetweenRows;
 	}
@@ -101,6 +108,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.removeEmptySpaceBetweenRows = removeEmptySpaceBetweenRows;
 	}
 	
+	@Override
 	public Boolean getWhitePageBackground() {
 		return whitePageBackground;
 	}
@@ -109,6 +117,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.whitePageBackground = whitePageBackground;
 	}
 	
+	@Override
 	public Boolean getUsingImagesToAlign() {
 		return usingImagesToAlign;
 	}
@@ -117,6 +126,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.usingImagesToAlign = usingImagesToAlign;
 	}
 	
+	@Override
 	public Boolean getWrapBreakWord() {
 		return wrapBreakWord;
 	}
@@ -125,6 +135,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.wrapBreakWord = wrapBreakWord;
 	}
 	
+	@Override
 	public SizeUnit getSizeUnit() {
 		return sizeUnit;
 	}
@@ -133,6 +144,7 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 		this.sizeUnit = sizeUnit;
 	}
 	
+	@Override
 	public Boolean getFramesAsNestedTables() {
 		return framesAsNestedTables;
 	}

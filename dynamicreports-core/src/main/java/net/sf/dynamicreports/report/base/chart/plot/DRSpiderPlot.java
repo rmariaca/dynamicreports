@@ -50,6 +50,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 	private Double labelGap;
 	private Color labelColor;
 
+	@Override
 	public DRIExpression<Double> getMaxValueExpression() {
 		return maxValueExpression;
 	}
@@ -58,6 +59,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.maxValueExpression = maxValueExpression;
 	}
 
+	@Override
 	public SpiderRotation getRotation() {
 		return rotation;
 	}
@@ -66,6 +68,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.rotation = rotation;
 	}
 
+	@Override
 	public TableOrder getTableOrder() {
 		return tableOrder;
 	}
@@ -74,6 +77,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.tableOrder = tableOrder;
 	}
 
+	@Override
 	public Boolean getWebFilled() {
 		return webFilled;
 	}
@@ -82,6 +86,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.webFilled = webFilled;
 	}
 
+	@Override
 	public Double getStartAngle() {
 		return startAngle;
 	}
@@ -90,6 +95,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.startAngle = startAngle;
 	}
 
+	@Override
 	public Double getHeadPercent() {
 		return headPercent;
 	}
@@ -98,6 +104,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.headPercent = headPercent;
 	}
 
+	@Override
 	public Double getInteriorGap() {
 		return interiorGap;
 	}
@@ -106,6 +113,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.interiorGap = interiorGap;
 	}
 
+	@Override
 	public Color getAxisLineColor() {
 		return axisLineColor;
 	}
@@ -114,6 +122,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.axisLineColor = axisLineColor;
 	}
 
+	@Override
 	public Float getAxisLineWidth() {
 		return axisLineWidth;
 	}
@@ -122,6 +131,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.axisLineWidth = axisLineWidth;
 	}
 
+	@Override
 	public DRFont getLabelFont() {
 		return labelFont;
 	}
@@ -130,6 +140,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.labelFont = labelFont;
 	}
 
+	@Override
 	public Double getLabelGap() {
 		return labelGap;
 	}
@@ -138,6 +149,7 @@ public class DRSpiderPlot implements DRISpiderPlot {
 		this.labelGap = labelGap;
 	}
 
+	@Override
 	public Color getLabelColor() {
 		return labelColor;
 	}

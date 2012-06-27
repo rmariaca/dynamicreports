@@ -53,10 +53,12 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		this.labelExpression = factory.getExpression(dataset.getLabelExpression());
 	}
 
+	@Override
 	public void collectExpressions(JRExpressionCollector collector) {
 		GeoMapCompiler.collectExpressions(this, collector);
 	}
 
+	@Override
 	public JRExpression getLocationExpression() {
 		return locationExpression;
 	}
@@ -67,6 +69,7 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		getEventSupport().firePropertyChange(PROPERTY_LOCATION_EXPRESSION, old, this.locationExpression);
 	}
 
+	@Override
 	public JRExpression getValueExpression() {
 		return valueExpression;
 	}
@@ -77,6 +80,7 @@ public class StandardGeoMapDataset extends JRDesignElementDataset implements Geo
 		getEventSupport().firePropertyChange(PROPERTY_VALUE_EXPRESSION, old, this.valueExpression);
 	}
 
+	@Override
 	public JRExpression getLabelExpression() {
 		return labelExpression;
 	}

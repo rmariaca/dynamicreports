@@ -120,6 +120,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(BigDecimal value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}
@@ -128,6 +129,7 @@ public class Column1Test extends AbstractJasperValueTest implements Serializable
 	private class PatternExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			String pattern = "#,###.0";
 			Integer reportRowNumber = reportParameters.getReportRowNumber();

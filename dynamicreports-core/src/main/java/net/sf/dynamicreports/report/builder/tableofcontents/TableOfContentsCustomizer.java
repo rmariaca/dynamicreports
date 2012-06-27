@@ -102,18 +102,22 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 		}
 	}
 
+	@Override
 	public void setReport(ReportBuilder<?> report) {
 		this.report = report;
 	}
 
+	@Override
 	public void setHeadings(int headings) {
 		this.headings = headings;
 	}
 
+	@Override
 	public void setLevels(int levels) {
 		this.levels = levels;
 	}
 
+	@Override
 	public void customize() {
 		init();
 
@@ -214,6 +218,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	protected class ReferenceExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue(referenceField);
 		}
@@ -228,6 +233,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 			this.level = level;
 		}
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue(levelField) == level;
 		}

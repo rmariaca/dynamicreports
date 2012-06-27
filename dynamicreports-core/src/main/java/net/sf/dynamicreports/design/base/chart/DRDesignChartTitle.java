@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.constant.Position;
 public class DRDesignChartTitle extends DRDesignChartSubtitle implements DRIDesignChartTitle {
 	private Position position;
 
+	@Override
 	public Position getPosition() {
 		return position;
 	}

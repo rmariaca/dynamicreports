@@ -42,11 +42,11 @@ import net.sf.jasperreports.engine.JRDataSource;
 public class CustomSubtotalReport {
 	private AggregationSubtotalBuilder<Integer> quantitySum;
 	private AggregationSubtotalBuilder<BigDecimal> priceSum;
-	
+
 	public CustomSubtotalReport() {
 		build();
 	}
-	
+
 	private void build() {
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",     "item",     type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity", "quantity", type.integerType());
@@ -58,8 +58,8 @@ public class CustomSubtotalReport {
 		CustomSubtotalBuilder<BigDecimal> unitPriceSbt = sbt.customValue(new UnitPriceSubtotal(), unitPriceColumn)
 		                                                    .setLabel("sum(price) / sum(quantity)")
 		                                                    .setDataType(type.bigDecimalType());
-		
-		try {			
+
+		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
@@ -74,17 +74,18 @@ public class CustomSubtotalReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class UnitPriceSubtotal extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			Integer quantitySumValue = reportParameters.getValue(quantitySum);
 			BigDecimal priceSumValue = reportParameters.getValue(priceSum);
 			return priceSumValue.divide(new BigDecimal(quantitySumValue), 2, BigDecimal.ROUND_HALF_UP);
-		}		
+		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "price");
 		dataSource.add("Book", 3, new BigDecimal(11));
@@ -93,7 +94,7 @@ public class CustomSubtotalReport {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new CustomSubtotalReport();
 	}

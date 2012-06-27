@@ -33,6 +33,7 @@ public class DRDesignParameter implements DRIDesignParameter {
 	private Object value;
 	private boolean external;
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -41,6 +42,7 @@ public class DRDesignParameter implements DRIDesignParameter {
 		this.name = name;
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return valueClass;
 	}
@@ -49,6 +51,7 @@ public class DRDesignParameter implements DRIDesignParameter {
 		this.valueClass = valueClass;
 	}
 
+	@Override
 	public Object getValue() {
 		return value;
 	}
@@ -57,6 +60,7 @@ public class DRDesignParameter implements DRIDesignParameter {
 		this.value = value;
 	}
 
+	@Override
 	public boolean isExternal() {
 		return external;
 	}

@@ -279,6 +279,7 @@ public class GroupTransform {
 			this.dataType = dataType;
 		}
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return dataType.valueToString(valueExpression.getName(), reportParameters);
 		}

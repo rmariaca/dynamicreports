@@ -37,6 +37,7 @@ public class DRCategoryChartSerie extends AbstractChartSerie implements DRICateg
 	private DRIExpression<?> valueExpression;
 	private DRIExpression<?> labelExpression;
 
+	@Override
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
@@ -46,6 +47,7 @@ public class DRCategoryChartSerie extends AbstractChartSerie implements DRICateg
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}

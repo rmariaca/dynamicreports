@@ -55,10 +55,12 @@ public class DRDesignGroup implements DRIDesignGroup {
 		footerBands = new ArrayList<DRDesignBand>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public DRIDesignExpression getGroupExpression() {
 		return groupExpression;
 	}
@@ -67,6 +69,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.groupExpression = groupExpression;
 	}
 
+	@Override
 	public List<DRDesignBand> getHeaderBands() {
 		return headerBands;
 	}
@@ -79,6 +82,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.headerBands.add(headerBand);
 	}
 
+	@Override
 	public List<DRDesignBand> getFooterBands() {
 		return footerBands;
 	}
@@ -95,6 +99,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.footerBands.add(index, footerBand);
 	}
 
+	@Override
 	public boolean isStartInNewPage() {
 		return startInNewPage;
 	}
@@ -103,6 +108,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.startInNewPage = startInNewPage;
 	}
 
+	@Override
 	public boolean isStartInNewColumn() {
 		return startInNewColumn;
 	}
@@ -111,6 +117,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.startInNewColumn = startInNewColumn;
 	}
 
+	@Override
 	public boolean isReprintHeaderOnEachPage() {
 		return reprintHeaderOnEachPage;
 	}
@@ -119,6 +126,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.reprintHeaderOnEachPage = reprintHeaderOnEachPage;
 	}
 
+	@Override
 	public boolean isResetPageNumber() {
 		return resetPageNumber;
 	}
@@ -127,6 +135,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.resetPageNumber = resetPageNumber;
 	}
 
+	@Override
 	public Integer getMinHeightToStartNewPage() {
 		return minHeightToStartNewPage;
 	}
@@ -135,6 +144,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.minHeightToStartNewPage = minHeightToStartNewPage;
 	}
 
+	@Override
 	public GroupFooterPosition getFooterPosition() {
 		return footerPosition;
 	}
@@ -143,6 +153,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 		this.footerPosition = footerPosition;
 	}
 
+	@Override
 	public boolean isKeepTogether() {
 		return keepTogether;
 	}

@@ -45,6 +45,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 	private Double quietZone;
 	private Double verticalQuietZone;
 
+	@Override
 	public DRIExpression<String> getCodeExpression() {
 		return codeExpression;
 	}
@@ -54,6 +55,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.codeExpression = codeExpression;
 	}
 
+	@Override
 	public DRIExpression<String> getPatternExpression() {
 		return patternExpression;
 	}
@@ -62,6 +64,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.patternExpression = patternExpression;
 	}
 
+	@Override
 	public Double getModuleWidth() {
 		return moduleWidth;
 	}
@@ -70,6 +73,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.moduleWidth = moduleWidth;
 	}
 
+	@Override
 	public BarcodeOrientation getOrientation() {
 		return orientation;
 	}
@@ -78,6 +82,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.orientation = orientation;
 	}
 
+	@Override
 	public BarcodeTextPosition getTextPosition() {
 		return textPosition;
 	}
@@ -86,6 +91,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.textPosition = textPosition;
 	}
 
+	@Override
 	public Double getQuietZone() {
 		return quietZone;
 	}
@@ -94,6 +100,7 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 		this.quietZone = quietZone;
 	}
 
+	@Override
 	public Double getVerticalQuietZone() {
 		return verticalQuietZone;
 	}

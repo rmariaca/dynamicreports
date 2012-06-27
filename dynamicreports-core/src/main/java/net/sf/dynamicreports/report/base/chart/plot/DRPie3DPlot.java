@@ -37,6 +37,7 @@ public class DRPie3DPlot extends DRPiePlot implements DRIPie3DPlot {
 		this.depthFactor = depthFactor;
 	}
 
+	@Override
 	public Double getDepthFactor() {
 		return depthFactor;
 	}

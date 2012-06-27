@@ -42,6 +42,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 	private Boolean wrapBreakWord;
 	private SizeUnit sizeUnit;
 
+	@Override
 	public Boolean getOutputImagesToDir() {
 		return outputImagesToDir;
 	}
@@ -50,6 +51,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.outputImagesToDir = outputImagesToDir;
 	}
 
+	@Override
 	public String getImagesDirName() {
 		return imagesDirName;
 	}
@@ -62,10 +64,12 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.imagesURI = imagesURI;
 	}
 
+	@Override
 	public String getImagesURI() {
 		return imagesURI;
 	}
 
+	@Override
 	public String getHtmlHeader() {
 		return htmlHeader;
 	}
@@ -74,6 +78,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.htmlHeader = htmlHeader;
 	}
 
+	@Override
 	public String getBetweenPagesHtml() {
 		return betweenPagesHtml;
 	}
@@ -82,6 +87,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.betweenPagesHtml = betweenPagesHtml;
 	}
 
+	@Override
 	public String getHtmlFooter() {
 		return htmlFooter;
 	}
@@ -90,6 +96,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.htmlFooter = htmlFooter;
 	}
 
+	@Override
 	public Boolean getWhitePageBackground() {
 		return whitePageBackground;
 	}
@@ -98,6 +105,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.whitePageBackground = whitePageBackground;
 	}
 
+	@Override
 	public Boolean getWrapBreakWord() {
 		return wrapBreakWord;
 	}
@@ -106,6 +114,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 		this.wrapBreakWord = wrapBreakWord;
 	}
 
+	@Override
 	public SizeUnit getSizeUnit() {
 		return sizeUnit;
 	}

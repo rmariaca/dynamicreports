@@ -60,14 +60,17 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.showInColumn = showInColumn;
 	}
 
+	@Override
 	public DRColumn<?> getShowInColumn() {
 		return showInColumn;
 	}
 
+	@Override
 	public DRTextField<T> getValueField() {
 		return valueField;
 	}
 
+	@Override
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}
@@ -76,6 +79,7 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.labelExpression = labelExpression;
 	}
 
+	@Override
 	public DRIReportStyle getLabelStyle() {
 		return labelStyle;
 	}
@@ -84,6 +88,7 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.labelStyle = labelStyle;
 	}
 
+	@Override
 	public SubtotalPosition getPosition() {
 		return position;
 	}
@@ -93,6 +98,7 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.position = position;
 	}
 
+	@Override
 	public DRGroup getGroup() {
 		return group;
 	}
@@ -101,10 +107,12 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 		this.group = group;
 	}
 
+	@Override
 	public String getName() {
 		return valueField.getValueExpression().getName();
 	}
 
+	@Override
 	public Class<? super T> getValueClass() {
 		return valueField.getValueExpression().getValueClass();
 	}

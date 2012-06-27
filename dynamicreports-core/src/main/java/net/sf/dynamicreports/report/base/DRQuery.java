@@ -43,10 +43,12 @@ public class DRQuery implements DRIQuery {
 		this.language = language;
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}
 
+	@Override
 	public String getLanguage() {
 		return language;
 	}

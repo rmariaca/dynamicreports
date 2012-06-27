@@ -38,6 +38,7 @@ public class DRXyChartSerie extends AbstractChartSerie implements DRIXyChartSeri
 	private DRIExpression<?> yValueExpression;
 	private DRIExpression<?> labelExpression;
 
+	@Override
 	public DRIExpression<?> getXValueExpression() {
 		return xValueExpression;
 	}
@@ -47,6 +48,7 @@ public class DRXyChartSerie extends AbstractChartSerie implements DRIXyChartSeri
 		this.xValueExpression = xValueExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getYValueExpression() {
 		return yValueExpression;
 	}
@@ -56,6 +58,7 @@ public class DRXyChartSerie extends AbstractChartSerie implements DRIXyChartSeri
 		this.yValueExpression = yValueExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}

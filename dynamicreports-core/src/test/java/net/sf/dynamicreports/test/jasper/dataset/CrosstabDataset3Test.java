@@ -144,6 +144,7 @@ public class CrosstabDataset3Test extends AbstractJasperCrosstabValueTest implem
 	private class MeasureExpression1 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {
@@ -161,6 +162,7 @@ public class CrosstabDataset3Test extends AbstractJasperCrosstabValueTest implem
 	private class MeasureExpression2 extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {

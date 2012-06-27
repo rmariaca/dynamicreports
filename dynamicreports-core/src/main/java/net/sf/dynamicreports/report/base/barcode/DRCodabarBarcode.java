@@ -33,6 +33,7 @@ public class DRCodabarBarcode extends DRBarcode implements DRICodabarBarcode {
 	
 	private Double wideFactor;
 	
+	@Override
 	public Double getWideFactor() {
 		return wideFactor;
 	}

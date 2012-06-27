@@ -138,12 +138,14 @@ public class DatasetTransform {
 			this.parameters = parameters;
 		}
 
+		@Override
 		public Object evaluate(ReportParameters reportParameters) {
 			Map<String, Object> parameters = new HashMap<String, Object>(this.parameters);
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
 		}
 
+		@Override
 		public Class<?> getValueClass() {
 			return Map.class;
 		}

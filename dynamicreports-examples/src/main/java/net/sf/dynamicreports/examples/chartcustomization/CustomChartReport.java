@@ -119,6 +119,7 @@ public class CustomChartReport {
 	private class ChartExpression extends AbstractSimpleExpression<Renderable> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Renderable evaluate(ReportParameters reportParameters) {
 			JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Box and Whisker chart", "Category", "Value", dataset, true);
 			return new DrawChartRenderer(chart, null);

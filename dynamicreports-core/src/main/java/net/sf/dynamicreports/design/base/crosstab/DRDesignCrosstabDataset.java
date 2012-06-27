@@ -36,6 +36,7 @@ public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 	private ResetType resetType;
 	private DRDesignGroup resetGroup;
 
+	@Override
 	public DRDesignDataset getSubDataset() {
 		return subDataset;
 	}
@@ -44,6 +45,7 @@ public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 		this.subDataset = subDataset;
 	}
 
+	@Override
 	public Boolean getDataPreSorted() {
 		return dataPreSorted;
 	}
@@ -52,6 +54,7 @@ public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 		this.dataPreSorted = dataPreSorted;
 	}
 
+	@Override
 	public ResetType getResetType() {
 		return resetType;
 	}
@@ -60,6 +63,7 @@ public class DRDesignCrosstabDataset implements DRIDesignCrosstabDataset {
 		this.resetType = resetType;
 	}
 
+	@Override
 	public DRDesignGroup getResetGroup() {
 		return resetGroup;
 	}

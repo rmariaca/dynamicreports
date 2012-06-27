@@ -37,6 +37,7 @@ public class DRPostnetBarcode extends DRChecksumBarcode implements DRIPostnetBar
 	private BarcodeBaselinePosition baselinePosition;
 	private Double intercharGapWidth;
 
+	@Override
 	public Boolean getDisplayChecksum() {
 		return displayChecksum;
 	}
@@ -45,6 +46,7 @@ public class DRPostnetBarcode extends DRChecksumBarcode implements DRIPostnetBar
 		this.displayChecksum = displayChecksum;
 	}
 
+	@Override
 	public Double getShortBarHeight() {
 		return shortBarHeight;
 	}
@@ -53,6 +55,7 @@ public class DRPostnetBarcode extends DRChecksumBarcode implements DRIPostnetBar
 		this.shortBarHeight = shortBarHeight;
 	}
 
+	@Override
 	public BarcodeBaselinePosition getBaselinePosition() {
 		return baselinePosition;
 	}
@@ -61,6 +64,7 @@ public class DRPostnetBarcode extends DRChecksumBarcode implements DRIPostnetBar
 		this.baselinePosition = baselinePosition;
 	}
 
+	@Override
 	public Double getIntercharGapWidth() {
 		return intercharGapWidth;
 	}

@@ -35,10 +35,12 @@ import net.sf.jasperreports.engine.util.JRStringUtil;
  */
 public class OpenFlashChartHtmlHandler implements GenericElementHtmlHandler {
 
+	@Override
 	public boolean toExport(JRGenericPrintElement element) {
 		return true;
 	}
 
+	@Override
 	public String getHtmlFragment(JRHtmlExporterContext exporterContext, JRGenericPrintElement element) {
 		String divID = "ofc" + System.identityHashCode(element);
 		int width = element.getWidth();

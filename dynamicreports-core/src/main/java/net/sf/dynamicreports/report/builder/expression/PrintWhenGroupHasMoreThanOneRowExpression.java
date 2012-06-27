@@ -38,6 +38,7 @@ public class PrintWhenGroupHasMoreThanOneRowExpression extends AbstractSimpleExp
 		this.groupName = groupName;
 	}
 
+	@Override
 	public Boolean evaluate(ReportParameters reportParameters) {
 		return reportParameters.getGroupCount(groupName) > 1;
 	}

@@ -49,6 +49,7 @@ public abstract class AbstractValueFormatter<T, U> implements DRIValueFormatter<
 		return name;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Class<T> getValueClass() {
 		return (Class<T>) ReportUtils.getGenericClass(this, 0);

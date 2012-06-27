@@ -39,10 +39,12 @@ public abstract class AbstractDesignSimpleExpression implements DRIDesignSimpleE
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getParameterName() {
 		return null;
 	}

@@ -37,6 +37,7 @@ public class DRDesignPage implements DRIDesignPage {
 	private int columnSpace;
 	private int columnWidth;
 	
+	@Override
 	public int getWidth() {
 		return width;
 	}
@@ -45,6 +46,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.width = width;
 	}
 	
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -53,6 +55,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.height = height;
 	}
 	
+	@Override
 	public PageOrientation getOrientation() {
 		return orientation;
 	}
@@ -61,6 +64,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.orientation = orientation;
 	}
 	
+	@Override
 	public DRDesignMargin getMargin() {
 		return margin;
 	}
@@ -69,6 +73,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.margin = margin;
 	}
 	
+	@Override
 	public int getColumnsPerPage() {
 		return columnsPerPage;
 	}
@@ -77,6 +82,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.columnsPerPage = columnsPerPage;
 	}
 	
+	@Override
 	public int getColumnSpace() {
 		return columnSpace;
 	}
@@ -85,6 +91,7 @@ public class DRDesignPage implements DRIDesignPage {
 		this.columnSpace = columnSpace;
 	}
 	
+	@Override
 	public int getColumnWidth() {
 		return columnWidth;
 	}

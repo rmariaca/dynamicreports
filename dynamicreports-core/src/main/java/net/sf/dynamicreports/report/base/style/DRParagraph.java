@@ -50,6 +50,7 @@ public class DRParagraph implements DRIParagraph {
 		tabStops = new ArrayList<DRITabStop>();
 	}
 
+	@Override
 	public LineSpacing getLineSpacing() {
 		return lineSpacing;
 	}
@@ -58,6 +59,7 @@ public class DRParagraph implements DRIParagraph {
 		this.lineSpacing = lineSpacing;
 	}
 
+	@Override
 	public Float getLineSpacingSize() {
 		return lineSpacingSize;
 	}
@@ -66,6 +68,7 @@ public class DRParagraph implements DRIParagraph {
 		this.lineSpacingSize = lineSpacingSize;
 	}
 
+	@Override
 	public Integer getFirstLineIndent() {
 		return firstLineIndent;
 	}
@@ -74,6 +77,7 @@ public class DRParagraph implements DRIParagraph {
 		this.firstLineIndent = firstLineIndent;
 	}
 
+	@Override
 	public Integer getLeftIndent() {
 		return leftIndent;
 	}
@@ -82,6 +86,7 @@ public class DRParagraph implements DRIParagraph {
 		this.leftIndent = leftIndent;
 	}
 
+	@Override
 	public Integer getRightIndent() {
 		return rightIndent;
 	}
@@ -90,6 +95,7 @@ public class DRParagraph implements DRIParagraph {
 		this.rightIndent = rightIndent;
 	}
 
+	@Override
 	public Integer getSpacingBefore() {
 		return spacingBefore;
 	}
@@ -98,6 +104,7 @@ public class DRParagraph implements DRIParagraph {
 		this.spacingBefore = spacingBefore;
 	}
 
+	@Override
 	public Integer getSpacingAfter() {
 		return spacingAfter;
 	}
@@ -106,6 +113,7 @@ public class DRParagraph implements DRIParagraph {
 		this.spacingAfter = spacingAfter;
 	}
 
+	@Override
 	public Integer getTabStopWidth() {
 		return tabStopWidth;
 	}
@@ -114,6 +122,7 @@ public class DRParagraph implements DRIParagraph {
 		this.tabStopWidth = tabStopWidth;
 	}
 
+	@Override
 	public List<DRITabStop> getTabStops() {
 		return tabStops;
 	}

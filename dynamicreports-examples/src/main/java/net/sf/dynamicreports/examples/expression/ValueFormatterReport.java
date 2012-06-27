@@ -74,6 +74,7 @@ public class ValueFormatterReport {
 	private static class ValueFormatter extends AbstractValueFormatter<String, Number> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Number value, ReportParameters reportParameters) {
 			return type.bigDecimalType().valueToString(value, reportParameters.getLocale()) + " EUR";
 		}

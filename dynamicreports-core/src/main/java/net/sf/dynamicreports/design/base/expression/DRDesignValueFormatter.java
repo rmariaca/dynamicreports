@@ -40,10 +40,12 @@ public class DRDesignValueFormatter extends AbstractDesignComplexExpression {
 		addExpression(valueExpression);
 	}
 
+	@Override
 	public Object evaluate(List<?> values, ReportParameters reportParameters) {
 		return valueFormatter.format(values.get(0), reportParameters);
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return valueFormatter.getValueClass();
 	}

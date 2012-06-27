@@ -69,6 +69,7 @@ public class BreakTest extends AbstractJasperPositionTest implements Serializabl
 	public class Expression1 extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getReportRowNumber() == 1;
 		}
@@ -77,6 +78,7 @@ public class BreakTest extends AbstractJasperPositionTest implements Serializabl
 	public class Expression2 extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getReportRowNumber() == 2;
 		}

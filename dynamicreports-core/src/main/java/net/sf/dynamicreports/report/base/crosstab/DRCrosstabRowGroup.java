@@ -34,6 +34,7 @@ public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICros
 	private Integer headerWidth;
 	private Integer totalHeaderHeight;
 
+	@Override
 	public Integer getHeaderWidth() {
 		return headerWidth;
 	}
@@ -42,6 +43,7 @@ public class DRCrosstabRowGroup<T> extends DRCrosstabGroup<T> implements DRICros
 		this.headerWidth = headerWidth;
 	}
 
+	@Override
 	public Integer getTotalHeaderHeight() {
 		return totalHeaderHeight;
 	}

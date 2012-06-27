@@ -54,6 +54,7 @@ public class JasperReportParameters implements ReportParameters {
 		this.jasperScriptlet = jasperScriptlet;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getValue(String name) {
 		ValueType type = jasperScriptlet.getValueType(name);
@@ -79,12 +80,14 @@ public class JasperReportParameters implements ReportParameters {
 		throw new DRReportException("Value " + name + " not found");
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getValue(DRIValue<T> value) {
 		return (T) getValue(value.getName());
 	}
 
 	//field
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getFieldValue(String name) {
 		try {
@@ -95,6 +98,7 @@ public class JasperReportParameters implements ReportParameters {
 	}
 
 	//variable
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getVariableValue(String name) {
 		try {
@@ -104,31 +108,38 @@ public class JasperReportParameters implements ReportParameters {
 		}
 	}
 
+	@Override
 	public Integer getPageNumber() {
 		return (Integer) getVariableValue(JRVariable.PAGE_NUMBER);
 	}
 
+	@Override
 	public Integer getColumnNumber() {
 		return (Integer) getVariableValue(JRVariable.COLUMN_NUMBER);
 	}
 
+	@Override
 	public Integer getReportRowNumber() {
 		return (Integer) getVariableValue(JRVariable.REPORT_COUNT);
 	}
 
+	@Override
 	public Integer getPageRowNumber() {
 		return (Integer) getVariableValue(JRVariable.PAGE_COUNT);
 	}
 
+	@Override
 	public Integer getColumnRowNumber() {
 		return (Integer) getVariableValue(JRVariable.COLUMN_COUNT);
 	}
 
+	@Override
 	public Integer getGroupCount(String groupName) {
 		return (Integer) getVariableValue(groupName + "_COUNT");
 	}
 
 	//parameter
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getParameterValue(String name) {
 		try {
@@ -138,22 +149,27 @@ public class JasperReportParameters implements ReportParameters {
 		}
 	}
 
+	@Override
 	public Connection getConnection() {
 		return (Connection) getParameterValue(JRParameter.REPORT_CONNECTION);
 	}
 
+	@Override
 	public Locale getLocale() {
 		return (Locale) getParameterValue(JRParameter.REPORT_LOCALE);
 	}
 
+	@Override
 	public DRIScriptlet getScriptlet(String name) {
 		return ((CustomScriptlet) getParameterValue(name + JRScriptlet.SCRIPTLET_PARAMETER_NAME_SUFFIX)).getScriptlet();
 	}
 
+	@Override
 	public String getMessage(String key) {
 		return ((ResourceBundle) getParameterValue(JRParameter.REPORT_RESOURCE_BUNDLE)).getString(key);
 	}
 
+	@Override
 	public String getMessage(String key, Object[] arguments) {
 		String message = getMessage(key);
 		if (arguments != null) {
@@ -183,6 +199,7 @@ public class JasperReportParameters implements ReportParameters {
 		return jasperScriptlet.getSystemValue(name);
 	}
 
+	@Override
 	public ReportParameters getMasterParameters() {
 		return (ReportParameters) getParameterValue(MASTER_REPORT_PARAMETERS);
 	}

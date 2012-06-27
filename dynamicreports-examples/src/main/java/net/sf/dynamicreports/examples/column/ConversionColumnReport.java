@@ -92,6 +92,7 @@ public class ConversionColumnReport {
 	private class OrderDateColumn1 extends AbstractSimpleExpression<Date> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Date evaluate(ReportParameters reportParameters) {
 			String value = reportParameters.getValue("orderdate");
 			try {
@@ -106,6 +107,7 @@ public class ConversionColumnReport {
 	private class OrderDateColumn2 extends AbstractSimpleExpression<Date> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Date evaluate(ReportParameters reportParameters) {
 			try {
 				return type.dateType().stringToValue("orderdate", reportParameters);
@@ -119,6 +121,7 @@ public class ConversionColumnReport {
 	private class QuantityColumn1 extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			String value = reportParameters.getValue("quantity");
 			try {
@@ -134,6 +137,7 @@ public class ConversionColumnReport {
 	private class QuantityColumn2 extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			try {
 				return type.bigDecimalType().stringToValue("quantity", reportParameters);

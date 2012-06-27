@@ -33,6 +33,7 @@ public class DRDesignSort implements DRIDesignSort {
 	private DRIDesignExpression expression;
 	private OrderType orderType;
 
+	@Override
 	public DRIDesignExpression getExpression() {
 		return expression;
 	}
@@ -41,6 +42,7 @@ public class DRDesignSort implements DRIDesignSort {
 		this.expression = expression;
 	}
 
+	@Override
 	public OrderType getOrderType() {
 		return orderType;
 	}

@@ -33,11 +33,13 @@ import net.sf.jasperreports.engine.fill.JRFillObjectFactory;
  */
 public class GeoMapFillFactory implements ComponentFillFactory {
 
+	@Override
 	public FillComponent toFillComponent(Component component, JRFillObjectFactory factory) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
 		return new GeoMapFillComponent(geoMap, factory);
 	}
 
+	@Override
 	public FillComponent cloneFillComponent(FillComponent component, JRFillCloneFactory factory) {
 		throw new UnsupportedOperationException();
 	}

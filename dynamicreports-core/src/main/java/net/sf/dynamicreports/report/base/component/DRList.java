@@ -58,6 +58,7 @@ public class DRList extends DRDimensionComponent implements DRIList {
 		this.listCells = new ArrayList<DRListCell>();
 	}
 
+	@Override
 	public List<DRListCell> getListCells() {
 		return listCells;
 	}
@@ -80,10 +81,12 @@ public class DRList extends DRDimensionComponent implements DRIList {
 		this.type = type;
 	}
 
+	@Override
 	public ListType getType() {
 		return type;
 	}
 
+	@Override
 	public Integer getGap() {
 		return gap;
 	}
@@ -95,6 +98,7 @@ public class DRList extends DRDimensionComponent implements DRIList {
 		this.gap = gap;
 	}
 
+	@Override
 	public DRComponent getBackgroundComponent() {
 		return backgroundComponent;
 	}

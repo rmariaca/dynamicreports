@@ -36,6 +36,7 @@ public class DRValueDataset extends DRChartDataset implements DRIValueDataset {
 
 	private DRIExpression<?> valueExpression;
 
+	@Override
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}

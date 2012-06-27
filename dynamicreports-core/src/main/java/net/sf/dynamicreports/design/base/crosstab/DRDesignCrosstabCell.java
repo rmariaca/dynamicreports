@@ -33,6 +33,7 @@ public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {
 	private String columnTotalGroup;
 	private DRDesignCrosstabCellContent content;
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -41,6 +42,7 @@ public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {
 		this.name = name;
 	}
 
+	@Override
 	public String getRowTotalGroup() {
 		return rowTotalGroup;
 	}
@@ -49,6 +51,7 @@ public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {
 		this.rowTotalGroup = rowTotalGroup;
 	}
 
+	@Override
 	public String getColumnTotalGroup() {
 		return columnTotalGroup;
 	}
@@ -57,6 +60,7 @@ public class DRDesignCrosstabCell implements DRIDesignCrosstabCell {
 		this.columnTotalGroup = columnTotalGroup;
 	}
 
+	@Override
 	public DRDesignCrosstabCellContent getContent() {
 		return content;
 	}

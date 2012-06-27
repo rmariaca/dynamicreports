@@ -39,10 +39,12 @@ public class DRDesignComplexExpression extends AbstractDesignComplexExpression {
 		this.parameterName = parameterName;
 	}
 
+	@Override
 	public Object evaluate(List<?> values, ReportParameters reportParameters) {
 		return complexExpression.evaluate(values, reportParameters);
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return complexExpression.getValueClass();
 	}

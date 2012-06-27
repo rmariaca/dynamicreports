@@ -45,6 +45,7 @@ public abstract class AbstractValuesExpression<T extends Number> extends Abstrac
 		this.numbers = numbers;
 	}
 
+	@Override
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Number actualValue = reportParameters.getValue(value);
 		if (actualValue != null) {

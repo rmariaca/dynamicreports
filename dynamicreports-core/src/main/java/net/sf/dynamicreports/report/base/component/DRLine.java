@@ -36,6 +36,7 @@ public class DRLine extends DRDimensionComponent implements DRILine {
 	private LineDirection direction;
 	private DRPen pen;
 
+	@Override
 	public LineDirection getDirection() {
 		return direction;
 	}
@@ -44,6 +45,7 @@ public class DRLine extends DRDimensionComponent implements DRILine {
 		this.direction = direction;
 	}
 
+	@Override
 	public DRPen getPen() {
 		return pen;
 	}

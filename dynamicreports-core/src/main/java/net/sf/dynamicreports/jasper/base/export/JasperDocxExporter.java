@@ -34,6 +34,7 @@ public class JasperDocxExporter extends AbstractJasperExporter implements Jasper
 	private Boolean framesAsNestedTables;
 	private Boolean flexibleRowHeight;
 	
+	@Override
 	public Boolean getFramesAsNestedTables() {
 		return framesAsNestedTables;
 	}
@@ -42,6 +43,7 @@ public class JasperDocxExporter extends AbstractJasperExporter implements Jasper
 		this.framesAsNestedTables = framesAsNestedTables;
 	}
 	
+	@Override
 	public Boolean getFlexibleRowHeight() {
 		return flexibleRowHeight;
 	}

@@ -85,6 +85,7 @@ public class GroupLayoutReport {
 	private class YearExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return type.dateYearType().valueToString("orderdate", reportParameters);
 		}

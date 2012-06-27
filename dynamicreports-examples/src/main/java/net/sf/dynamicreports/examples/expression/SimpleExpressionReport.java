@@ -74,6 +74,7 @@ public class SimpleExpressionReport {
 	private class SimpleExpression extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			Integer quantity = reportParameters.getValue("quantity");
 			BigDecimal unitPrice = reportParameters.getValue("unitprice");

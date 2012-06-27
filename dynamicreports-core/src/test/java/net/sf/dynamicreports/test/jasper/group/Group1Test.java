@@ -118,6 +118,7 @@ public class Group1Test extends AbstractJasperValueTest implements Serializable 
 	private class ValueExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue(field3) + "_1";
 		}		

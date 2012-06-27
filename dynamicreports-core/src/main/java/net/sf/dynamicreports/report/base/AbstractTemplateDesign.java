@@ -38,106 +38,132 @@ import net.sf.dynamicreports.report.exception.DRException;
 public abstract class AbstractTemplateDesign<T> implements DRITemplateDesign<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	@Override
 	public List<DRIField<?>> getFields() {
 		return null;
 	}
 
+	@Override
 	public boolean isDefinedParameter(String name) {
 		return false;
 	}
 
+	@Override
 	public String getResourceBundleName() {
 		return null;
 	}
 
+	@Override
 	public Boolean getIgnorePagination() {
 		return null;
 	}
 
+	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return null;
 	}
 
+	@Override
 	public Boolean getTitleOnANewPage() {
 		return null;
 	}
 
+	@Override
 	public Boolean getSummaryOnANewPage() {
 		return null;
 	}
 
+	@Override
 	public Boolean getSummaryWithPageHeaderAndFooter() {
 		return null;
 	}
 
+	@Override
 	public Boolean getFloatColumnFooter() {
 		return null;
 	}
 
+	@Override
 	public Integer getPageWidth() {
 		return null;
 	}
 
+	@Override
 	public Integer getPageHeight() {
 		return null;
 	}
 
+	@Override
 	public PageOrientation getPageOrientation() {
 		return null;
 	}
 
+	@Override
 	public DRIMargin getPageMargin() {
 		return null;
 	}
 
+	@Override
 	public Integer getPageColumnsPerPage() {
 		return null;
 	}
 
+	@Override
 	public Integer getPageColumnSpace() {
 		return null;
 	}
 
+	@Override
 	public Integer getPageColumnWidth() {
 		return null;
 	}
 
+	@Override
 	public int getTitleComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getPageHeaderComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getPageFooterComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getColumnHeaderComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getColumnFooterComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getLastPageFooterComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getSummaryComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getNoDataComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public int getBackgroundComponentsCount() {
 		return 0;
 	}
 
+	@Override
 	public T getDesign() throws DRException {
 		return null;
 	}

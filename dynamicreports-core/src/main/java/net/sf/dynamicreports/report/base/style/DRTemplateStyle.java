@@ -37,6 +37,7 @@ public class DRTemplateStyle implements DRITemplateStyle {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

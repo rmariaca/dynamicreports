@@ -49,6 +49,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private DRIReportStyle style;
 	private DRIExpression<Boolean> printWhenExpression;
 
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -60,6 +61,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.width = width;
 	}
 
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -71,6 +73,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.height = height;
 	}
 
+	@Override
 	public ComponentDimensionType getWidthType() {
 		return widthType;
 	}
@@ -79,6 +82,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.widthType = widthType;
 	}
 
+	@Override
 	public ComponentDimensionType getHeightType() {
 		return heightType;
 	}
@@ -87,6 +91,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.heightType = heightType;
 	}
 
+	@Override
 	public DRIExpression<Boolean> getValueExpression() {
 		return valueExpression;
 	}
@@ -96,6 +101,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public BooleanComponentType getComponentType() {
 		return componentType;
 	}
@@ -104,6 +110,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.componentType = booleanComponentType;
 	}
 
+	@Override
 	public Integer getImageWidth() {
 		return imageWidth;
 	}
@@ -115,6 +122,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.imageWidth = imageWidth;
 	}
 
+	@Override
 	public Integer getImageHeight() {
 		return imageHeight;
 	}
@@ -126,6 +134,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.imageHeight = imageHeight;
 	}
 
+	@Override
 	public DRIReportStyle getStyle() {
 		return style;
 	}
@@ -134,6 +143,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		this.style = style;
 	}
 
+	@Override
 	public DRIExpression<Boolean> getPrintWhenExpression() {
 		return printWhenExpression;
 	}
@@ -147,6 +157,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 		return valueExpression.getName();
 	}
 
+	@Override
 	public Class<Boolean> getValueClass() {
 		return Boolean.class;
 	}

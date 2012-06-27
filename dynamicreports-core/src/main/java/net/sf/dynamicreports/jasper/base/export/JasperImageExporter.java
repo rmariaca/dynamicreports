@@ -38,6 +38,7 @@ public class JasperImageExporter extends AbstractJasperExporter implements Jaspe
 	private ImageType imageType;
 	private Float zoom;
 
+	@Override
 	public Integer getPageGap() {
 		return pageGap;
 	}
@@ -46,6 +47,7 @@ public class JasperImageExporter extends AbstractJasperExporter implements Jaspe
 		this.pageGap = pageGap;
 	}
 
+	@Override
 	public ImageType getImageType() {
 		return imageType;
 	}
@@ -55,6 +57,7 @@ public class JasperImageExporter extends AbstractJasperExporter implements Jaspe
 		this.imageType = imageType;
 	}
 
+	@Override
 	public Float getZoom() {
 		return zoom;
 	}

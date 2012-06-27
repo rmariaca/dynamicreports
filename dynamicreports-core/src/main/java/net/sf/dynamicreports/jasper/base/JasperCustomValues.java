@@ -114,6 +114,7 @@ public class JasperCustomValues implements DRICustomValues {
 		return jasperScriptlet.getValue(name, values);
 	}
 
+	@Override
 	public void setSystemValue(String name, Object value) {
 		systemValues.put(name, value);
 	}
@@ -138,6 +139,7 @@ public class JasperCustomValues implements DRICustomValues {
 		this.startPageNumber = startPageNumber;
 	}
 
+	@Override
 	public void addTocHeading(int level, String id, String text) {
 		JasperTocHeading heading = new JasperTocHeading();
 		heading.setLevel(level);
@@ -146,10 +148,12 @@ public class JasperCustomValues implements DRICustomValues {
 		tocHeadings.put(id, heading);
 	}
 
+	@Override
 	public Map<String, JasperTocHeading> getTocHeadings() {
 		return tocHeadings;
 	}
 
+	@Override
 	public void setTocHeadings(Map<String, JasperTocHeading> tocHeadings) {
 		this.tocHeadings = tocHeadings;
 	}

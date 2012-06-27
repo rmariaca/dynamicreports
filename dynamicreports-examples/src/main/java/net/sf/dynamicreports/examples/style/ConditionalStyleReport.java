@@ -108,6 +108,7 @@ public class ConditionalStyleReport {
 	private class OrderDateConditionExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			Date orderDate = reportParameters.getValue("orderdate");
 			Integer quantity = reportParameters.getValue("quantity");

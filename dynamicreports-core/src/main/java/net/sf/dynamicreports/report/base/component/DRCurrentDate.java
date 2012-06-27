@@ -33,6 +33,7 @@ public class DRCurrentDate extends DRFormatField implements DRICurrentDate {
 
 	private String pattern;
 
+	@Override
 	public String getPattern() {
 		return pattern;
 	}

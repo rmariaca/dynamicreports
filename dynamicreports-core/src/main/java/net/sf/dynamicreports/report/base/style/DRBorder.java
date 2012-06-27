@@ -50,6 +50,7 @@ public class DRBorder implements DRIBorder {
 		rightPen = pen;
 	}
 
+	@Override
 	public DRPen getTopPen() {
 		return topPen;
 	}
@@ -58,6 +59,7 @@ public class DRBorder implements DRIBorder {
 		this.topPen = topPen;
 	}
 
+	@Override
 	public DRPen getLeftPen() {
 		return leftPen;
 	}
@@ -66,6 +68,7 @@ public class DRBorder implements DRIBorder {
 		this.leftPen = leftPen;
 	}
 
+	@Override
 	public DRPen getBottomPen() {
 		return bottomPen;
 	}
@@ -74,6 +77,7 @@ public class DRBorder implements DRIBorder {
 		this.bottomPen = bottomPen;
 	}
 
+	@Override
 	public DRPen getRightPen() {
 		return rightPen;
 	}

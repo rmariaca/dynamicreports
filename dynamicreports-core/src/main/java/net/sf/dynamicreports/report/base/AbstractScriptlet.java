@@ -43,37 +43,48 @@ public abstract class AbstractScriptlet implements DRIScriptlet {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void afterColumnInit(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void afterDetailEval(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void afterGroupInit(String groupName, ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void afterPageInit(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void afterReportInit(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void beforeColumnInit(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void beforeDetailEval(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void beforeGroupInit(String groupName, ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void beforePageInit(ReportParameters reportParameters) {
 	}
 
+	@Override
 	public void beforeReportInit(ReportParameters reportParameters) {
 	}
 }

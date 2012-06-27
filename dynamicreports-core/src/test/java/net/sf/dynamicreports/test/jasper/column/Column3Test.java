@@ -126,6 +126,7 @@ public class Column3Test extends AbstractJasperValueTest implements Serializable
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Double value, ReportParameters reportParameters) {
 			return "value = " + value;
 		}		

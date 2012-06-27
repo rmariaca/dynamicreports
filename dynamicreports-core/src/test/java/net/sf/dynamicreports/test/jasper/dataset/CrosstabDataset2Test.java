@@ -116,6 +116,7 @@ public class CrosstabDataset2Test extends AbstractJasperCrosstabValueTest implem
 	private class ValueFormatter1 extends AbstractValueFormatter<String, Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Integer value, ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {
@@ -131,6 +132,7 @@ public class CrosstabDataset2Test extends AbstractJasperCrosstabValueTest implem
 	private class ValueFormatter2 extends AbstractValueFormatter<String, String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(String value, ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {

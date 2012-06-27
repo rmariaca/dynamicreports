@@ -43,21 +43,21 @@ import net.sf.jasperreports.engine.JRDataSource;
 public class VariableSubtotalReport {
 	private VariableBuilder<Integer> quantitySum;
 	private VariableBuilder<BigDecimal> priceSum;
-	
+
 	public VariableSubtotalReport() {
 		build();
 	}
-	
-	private void build() {		
+
+	private void build() {
 		quantitySum = variable("quantity", Integer.class, Calculation.SUM);
 		priceSum    = variable("price", BigDecimal.class, Calculation.SUM);
-		
+
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 
 		CustomSubtotalBuilder<BigDecimal> unitPriceSbt = sbt.customValue(new UnitPriceSubtotal(), itemColumn)
 		                                                    .setLabel("sum(price) / sum(quantity)")
 		                                                    .setDataType(type.bigDecimalType());
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -75,17 +75,18 @@ public class VariableSubtotalReport {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class UnitPriceSubtotal extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			Integer quantitySumValue = reportParameters.getValue(quantitySum);
 			BigDecimal priceSumValue = reportParameters.getValue(priceSum);
 			return priceSumValue.divide(new BigDecimal(quantitySumValue), 2, BigDecimal.ROUND_HALF_UP);
-		}		
+		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "price");
 		dataSource.add("Book", 3, new BigDecimal(11));
@@ -94,7 +95,7 @@ public class VariableSubtotalReport {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new VariableSubtotalReport();
 	}

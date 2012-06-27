@@ -60,6 +60,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		titlePropertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
+	@Override
 	public DRColumnGridList getList() {
 		return list;
 	}
@@ -68,6 +69,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		list.addComponent(component);
 	}
 
+	@Override
 	public DRIExpression<?> getTitleExpression() {
 		return titleExpression;
 	}
@@ -76,6 +78,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		this.titleExpression = titleExpression;
 	}
 
+	@Override
 	public DRIReportStyle getTitleStyle() {
 		return titleStyle;
 	}
@@ -89,6 +92,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
    *
    * @return the column title width >= 0
    */
+	@Override
 	public Integer getTitleWidth() {
 		return titleWidth;
 	}
@@ -107,6 +111,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		this.titleWidth = titleWidth;
 	}
 
+	@Override
 	public ComponentDimensionType getTitleWidthType() {
 		return titleWidthType;
 	}
@@ -120,6 +125,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
    *
    * @return the number of title columns >= 0
    */
+	@Override
 	public Integer getTitleColumns() {
 		return titleColumns;
 	}
@@ -144,6 +150,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
    *
    * @return the column title height >= 0
    */
+	@Override
 	public Integer getTitleHeight() {
 		return titleHeight;
 	}
@@ -162,6 +169,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		this.titleHeight = titleHeight;
 	}
 
+	@Override
 	public ComponentDimensionType getTitleHeightType() {
 		return titleHeightType;
 	}
@@ -175,6 +183,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
    *
    * @return the number of title rows >= 0
    */
+	@Override
 	public Integer getTitleRows() {
 		return titleRows;
 	}
@@ -193,6 +202,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		this.titleRows = titleRows;
 	}
 
+	@Override
 	public Boolean getTitleStretchWithOverflow() {
 		return titleStretchWithOverflow;
 	}
@@ -201,6 +211,7 @@ public class DRColumnTitleGroup implements DRIColumnTitleGroup {
 		this.titleStretchWithOverflow = titleStretchWithOverflow;
 	}
 
+	@Override
 	public List<DRIPropertyExpression> getTitlePropertyExpressions() {
 		return titlePropertyExpressions;
 	}

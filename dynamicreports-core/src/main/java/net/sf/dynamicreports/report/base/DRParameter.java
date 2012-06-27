@@ -53,14 +53,17 @@ public class DRParameter<T> implements DRIParameter<T> {
 		this.valueClass = valueClass;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public Class<T> getValueClass() {
 		return valueClass;
 	}
 
+	@Override
 	public T getValue() {
 		return value;
 	}

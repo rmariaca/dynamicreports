@@ -35,14 +35,17 @@ public class DRDesignJasperExpression implements DRIDesignJasperExpression {
 		this.jasperExpression = jasperExpression;
 	}
 
+	@Override
 	public String getExpression() {
 		return jasperExpression.getExpression();
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return jasperExpression.getValueClass();
 	}
 
+	@Override
 	public String getName() {
 		return jasperExpression.getName();
 	}

@@ -65,10 +65,12 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		propertyExpressions = new ArrayList<DRIDesignPropertyExpression>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getUniqueName() {
 		return uniqueName;
 	}
@@ -77,6 +79,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.uniqueName = uniqueName;
 	}
 
+	@Override
 	public DRDesignStyle getStyle() {
 		return style;
 	}
@@ -85,6 +88,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.style = style;
 	}
 
+	@Override
 	public Integer getX() {
 		return x;
 	}
@@ -93,6 +97,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.x = x;
 	}
 
+	@Override
 	public Integer getY() {
 		return y;
 	}
@@ -101,6 +106,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.y = y;
 	}
 
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -109,6 +115,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.width = width;
 	}
 
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -117,6 +124,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.height = height;
 	}
 
+	@Override
 	public DRIDesignExpression getPrintWhenExpression() {
 		return printWhenExpression;
 	}
@@ -125,6 +133,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.printWhenExpression = printWhenExpression;
 	}
 
+	@Override
 	public boolean isRemoveLineWhenBlank() {
 		return isRemoveLineWhenBlank;
 	}
@@ -133,6 +142,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.isRemoveLineWhenBlank = isRemoveLineWhenBlank;
 	}
 
+	@Override
 	public List<DRIDesignPropertyExpression> getPropertyExpressions() {
 		return propertyExpressions;
 	}
@@ -141,6 +151,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.propertyExpressions = propertyExpressions;
 	}
 
+	@Override
 	public ComponentPositionType getPositionType() {
 		return positionType;
 	}
@@ -149,6 +160,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.positionType = positionType;
 	}
 
+	@Override
 	public StretchType getStretchType() {
 		return stretchType;
 	}
@@ -157,6 +169,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.stretchType = stretchType;
 	}
 
+	@Override
 	public boolean isPrintInFirstWholeBand() {
 		return printInFirstWholeBand;
 	}
@@ -165,6 +178,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.printInFirstWholeBand = printInFirstWholeBand;
 	}
 
+	@Override
 	public boolean isPrintWhenDetailOverflows() {
 		return printWhenDetailOverflows;
 	}
@@ -173,6 +187,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.printWhenDetailOverflows = printWhenDetailOverflows;
 	}
 
+	@Override
 	public DRIDesignGroup getPrintWhenGroupChanges() {
 		return printWhenGroupChanges;
 	}
@@ -181,6 +196,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		this.printWhenGroupChanges = printWhenGroupChanges;
 	}
 
+	@Override
 	public DRDesignTableOfContentsHeading getTableOfContentsHeading() {
 		return tableOfContentsHeading;
 	}

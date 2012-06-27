@@ -58,6 +58,7 @@ public class CustomGroupTest extends AbstractJasperValueTest implements Serializ
 	private class YearExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			String orderDate = reportParameters.getValue("field1");
 			return orderDate.split("-")[0];

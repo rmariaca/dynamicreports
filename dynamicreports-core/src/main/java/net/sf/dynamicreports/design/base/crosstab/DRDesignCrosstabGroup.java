@@ -40,6 +40,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 	private DRDesignCrosstabCellContent header;
 	private DRDesignCrosstabCellContent totalHeader;
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -48,6 +49,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.name = name;
 	}
 
+	@Override
 	public CrosstabTotalPosition getTotalPosition() {
 		return totalPosition;
 	}
@@ -56,6 +58,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.totalPosition = totalPosition;
 	}
 
+	@Override
 	public OrderType getOrderType() {
 		return orderType;
 	}
@@ -64,6 +67,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.orderType = orderType;
 	}
 
+	@Override
 	public DRIDesignExpression getExpression() {
 		return expression;
 	}
@@ -72,6 +76,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.expression = expression;
 	}
 
+	@Override
 	public DRIDesignExpression getOrderByExpression() {
 		return orderByExpression;
 	}
@@ -80,6 +85,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.orderByExpression = orderByExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getComparatorExpression() {
 		return comparatorExpression;
 	}
@@ -88,6 +94,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.comparatorExpression = comparatorExpression;
 	}
 
+	@Override
 	public DRDesignCrosstabCellContent getHeader() {
 		return header;
 	}
@@ -96,6 +103,7 @@ public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
 		this.header = header;
 	}
 
+	@Override
 	public DRDesignCrosstabCellContent getTotalHeader() {
 		return totalHeader;
 	}

@@ -51,6 +51,7 @@ public class DRPadding implements DRIPadding {
 		right = padding;
 	}
 
+	@Override
 	public Integer getTop() {
 		return top;
 	}
@@ -62,6 +63,7 @@ public class DRPadding implements DRIPadding {
 		this.top = top;
 	}
 
+	@Override
 	public Integer getLeft() {
 		return left;
 	}
@@ -73,6 +75,7 @@ public class DRPadding implements DRIPadding {
 		this.left = left;
 	}
 
+	@Override
 	public Integer getBottom() {
 		return bottom;
 	}
@@ -84,6 +87,7 @@ public class DRPadding implements DRIPadding {
 		this.bottom = bottom;
 	}
 
+	@Override
 	public Integer getRight() {
 		return right;
 	}

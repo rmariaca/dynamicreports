@@ -38,6 +38,7 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 	private DRIExpression<Boolean> valueExpression;
 	private BooleanComponentType componentType;
 
+	@Override
 	public DRIExpression<Boolean> getValueExpression() {
 		return valueExpression;
 	}
@@ -47,6 +48,7 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public BooleanComponentType getComponentType() {
 		return componentType;
 	}

@@ -36,6 +36,7 @@ public class DRDesignBarPlot extends DRDesignAxisPlot implements DRIDesignBarPlo
 		this.showLabels = showLabels;
 	}
 
+	@Override
 	public Boolean getShowLabels() {
 		return showLabels;
 	}
@@ -44,6 +45,7 @@ public class DRDesignBarPlot extends DRDesignAxisPlot implements DRIDesignBarPlo
 		this.showTickLabels = showTickLabels;
 	}
 
+	@Override
 	public Boolean getShowTickLabels() {
 		return showTickLabels;
 	}
@@ -52,6 +54,7 @@ public class DRDesignBarPlot extends DRDesignAxisPlot implements DRIDesignBarPlo
 		this.showTickMarks = showTickMarks;
 	}
 
+	@Override
 	public Boolean getShowTickMarks() {
 		return showTickMarks;
 	}

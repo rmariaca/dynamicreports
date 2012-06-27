@@ -92,6 +92,7 @@ public class VariableReport {
 	private class QuantitySumTextExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Integer quantitySum = reportParameters.getValue("quantitySum");
 			return "Quantity sum = " + quantitySum;
@@ -123,6 +124,7 @@ public class VariableReport {
 			this.unitPriceColumn = unitPriceColumn;
 		}
 
+		@Override
 		public BigDecimal evaluate(ReportParameters reportParameters) {
 			Integer quantity = reportParameters.getValue(quantityColumn);
 			BigDecimal unitPrice = reportParameters.getValue(unitPriceColumn);

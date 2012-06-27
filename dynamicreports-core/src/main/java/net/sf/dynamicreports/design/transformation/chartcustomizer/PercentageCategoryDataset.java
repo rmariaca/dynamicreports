@@ -38,45 +38,55 @@ public class PercentageCategoryDataset implements CategoryDataset {
 		this.dataset = dataset;
 	}
 
+	@Override
 	public Comparable<?> getRowKey(int row) {
 		return dataset.getRowKey(row);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public int getRowIndex(Comparable key) {
 		return dataset.getRowIndex(key);
 	}
 
+	@Override
 	public List<?> getRowKeys() {
 		return dataset.getRowKeys();
 	}
 
+	@Override
 	public Comparable<?> getColumnKey(int column) {
 		return dataset.getColumnKey(column);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public int getColumnIndex(Comparable key) {
 		return dataset.getColumnIndex(key);
 	}
 
+	@Override
 	public List<?> getColumnKeys() {
 		return dataset.getColumnKeys();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Number getValue(Comparable rowKey, Comparable columnKey) {
 		return getValue(getRowIndex(rowKey), getColumnIndex(columnKey));
 	}
 
+	@Override
 	public int getRowCount() {
 		return dataset.getRowCount();
 	}
 
+	@Override
 	public int getColumnCount() {
 		return dataset.getColumnCount();
 	}
 
+	@Override
 	public Number getValue(int row, int column) {
 		double total = 0;
 		for (int i = 0; i < getRowCount(); i++) {
@@ -96,18 +106,22 @@ public class PercentageCategoryDataset implements CategoryDataset {
 		return 0;
 	}
 
+	@Override
 	public void addChangeListener(DatasetChangeListener listener) {
 		dataset.addChangeListener(listener);
 	}
 
+	@Override
 	public void removeChangeListener(DatasetChangeListener listener) {
 		dataset.removeChangeListener(listener);
 	}
 
+	@Override
 	public DatasetGroup getGroup() {
 		return dataset.getGroup();
 	}
 
+	@Override
 	public void setGroup(DatasetGroup group) {
 		dataset.setGroup(group);
 	}

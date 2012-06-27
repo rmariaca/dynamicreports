@@ -51,6 +51,7 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 		this.expressions = new ArrayList<DRIExpression<?>>();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -81,14 +82,17 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 		this.expressions.add(expression);
 	}
 
+	@Override
 	public List<DRIExpression<?>> getExpressions() {
 		return expressions;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
 		return (Class<? super T>) ReportUtils.getGenericClass(this, 0);
 	}
 
+	@Override
 	public abstract T evaluate(List<?> values, ReportParameters reportParameters);
 }

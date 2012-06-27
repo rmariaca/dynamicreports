@@ -40,6 +40,7 @@ import org.jfree.data.category.CategoryDataset;
 public class ShowPercentagesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
 			CategoryDataset dataset;

@@ -41,6 +41,7 @@ public class DRHyperLink implements DRIHyperLink {
 	private HyperLinkType hyperLinkType;
 	private HyperLinkTarget hyperLinkTarget;
 
+	@Override
 	public DRIExpression<String> getAnchorExpression() {
 		return anchorExpression;
 	}
@@ -49,6 +50,7 @@ public class DRHyperLink implements DRIHyperLink {
 		this.anchorExpression = anchorExpression;
 	}
 
+	@Override
 	public DRIExpression<Integer> getPageExpression() {
 		return pageExpression;
 	}
@@ -57,6 +59,7 @@ public class DRHyperLink implements DRIHyperLink {
 		this.pageExpression = pageExpression;
 	}
 
+	@Override
 	public DRIExpression<String> getReferenceExpression() {
 		return referenceExpression;
 	}
@@ -65,6 +68,7 @@ public class DRHyperLink implements DRIHyperLink {
 		this.referenceExpression = referenceExpression;
 	}
 
+	@Override
 	public DRIExpression<String> getTooltipExpression() {
 		return tooltipExpression;
 	}
@@ -73,6 +77,7 @@ public class DRHyperLink implements DRIHyperLink {
 		this.tooltipExpression = tooltipExpression;
 	}
 
+	@Override
 	public HyperLinkType getType() {
 		return hyperLinkType;
 	}
@@ -81,6 +86,7 @@ public class DRHyperLink implements DRIHyperLink {
 		this.hyperLinkType = hyperLinkType;
 	}
 
+	@Override
 	public HyperLinkTarget getTarget() {
 		return hyperLinkTarget;
 	}

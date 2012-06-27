@@ -121,6 +121,7 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 	private class SubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			JasperReportBuilder report = report();
@@ -139,6 +140,7 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			String[] columns = new String[masterRowNumber];
@@ -162,6 +164,7 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 	private class SubreportTitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "Parameter" + reportParameters.getValue("masterRowNumber");
 		}

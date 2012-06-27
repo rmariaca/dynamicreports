@@ -53,6 +53,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.sheetNames = new ArrayList<String>();
 	}
 	
+	@Override
 	public Boolean getOnePagePerSheet() {
 		return onePagePerSheet;
 	}
@@ -61,6 +62,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.onePagePerSheet = onePagePerSheet;
 	}
 	
+	@Override
 	public Boolean getRemoveEmptySpaceBetweenRows() {
 		return removeEmptySpaceBetweenRows;
 	}
@@ -69,6 +71,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.removeEmptySpaceBetweenRows = removeEmptySpaceBetweenRows;
 	}
 	
+	@Override
 	public Boolean getRemoveEmptySpaceBetweenColumns() {
 		return removeEmptySpaceBetweenColumns;
 	}
@@ -77,6 +80,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.removeEmptySpaceBetweenColumns = removeEmptySpaceBetweenColumns;
 	}
 	
+	@Override
 	public Boolean getWhitePageBackground() {
 		return whitePageBackground;
 	}
@@ -85,6 +89,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.whitePageBackground = whitePageBackground;
 	}
 	
+	@Override
 	public Boolean getDetectCellType() {
 		return detectCellType;
 	}
@@ -93,6 +98,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.detectCellType = detectCellType;
 	}
 	
+	@Override
 	public List<String> getSheetNames() {
 		return sheetNames;
 	}
@@ -105,6 +111,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.sheetNames.add(sheetName);
 	}
 	
+	@Override
 	public Boolean getFontSizeFixEnabled() {
 		return fontSizeFixEnabled;
 	}
@@ -113,6 +120,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.fontSizeFixEnabled = fontSizeFixEnabled;
 	}
 	
+	@Override
 	public Boolean getImageBorderFixEnabled() {
 		return imageBorderFixEnabled;
 	}
@@ -121,6 +129,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.imageBorderFixEnabled = imageBorderFixEnabled;
 	}
 	
+	@Override
 	public Integer getMaxRowsPerSheet() {
 		return maxRowsPerSheet;
 	}
@@ -129,6 +138,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.maxRowsPerSheet = maxRowsPerSheet;
 	}
 	
+	@Override
 	public Boolean getIgnoreGraphics() {
 		return ignoreGraphics;
 	}
@@ -137,6 +147,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.ignoreGraphics = ignoreGraphics;
 	}
 	
+	@Override
 	public Boolean getCollapseRowSpan() {
 		return collapseRowSpan;
 	}
@@ -145,6 +156,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.collapseRowSpan = collapseRowSpan;
 	}
 	
+	@Override
 	public Boolean getIgnoreCellBorder() {
 		return ignoreCellBorder;
 	}
@@ -153,6 +165,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.ignoreCellBorder = ignoreCellBorder;
 	}
 	
+	@Override
 	public Boolean getIgnoreCellBackground() {
 		return ignoreCellBackground;
 	}
@@ -161,6 +174,7 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 		this.ignoreCellBackground = ignoreCellBackground;
 	}
 	
+	@Override
 	public String getPassword() {
 		return password;
 	}

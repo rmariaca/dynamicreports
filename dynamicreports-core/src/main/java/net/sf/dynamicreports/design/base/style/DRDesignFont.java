@@ -38,6 +38,7 @@ public class DRDesignFont implements DRIDesignFont {
 	private String pdfEncoding;
 	private Boolean pdfEmbedded;
 	
+	@Override
 	public String getFontName() {
 		return fontName;
 	}
@@ -46,6 +47,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.fontName = fontName;
 	}
 	
+	@Override
 	public Boolean getBold() {
 		return bold;
 	}
@@ -54,6 +56,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.bold = bold;
 	}
 	
+	@Override
 	public Boolean getItalic() {
 		return italic;
 	}
@@ -62,6 +65,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.italic = italic;
 	}
 	
+	@Override
 	public Boolean getUnderline() {
 		return underline;
 	}
@@ -70,6 +74,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.underline = underline;
 	}
 	
+	@Override
 	public Boolean getStrikeThrough() {
 		return strikeThrough;
 	}
@@ -78,6 +83,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.strikeThrough = strikeThrough;
 	}
 	
+	@Override
 	public Integer getFontSize() {
 		return fontSize;
 	}
@@ -86,6 +92,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.fontSize = fontSize;
 	}
 	
+	@Override
 	public String getPdfFontName() {
 		return pdfFontName;
 	}
@@ -94,6 +101,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.pdfFontName = pdfFontName;
 	}
 	
+	@Override
 	public String getPdfEncoding() {
 		return pdfEncoding;
 	}
@@ -102,6 +110,7 @@ public class DRDesignFont implements DRIDesignFont {
 		this.pdfEncoding = pdfEncoding;
 	}
 	
+	@Override
 	public Boolean getPdfEmbedded() {
 		return pdfEmbedded;
 	}

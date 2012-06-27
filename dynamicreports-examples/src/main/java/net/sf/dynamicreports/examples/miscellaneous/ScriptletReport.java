@@ -76,6 +76,7 @@ public class ScriptletReport {
 	private class ItemSubtotal extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			String result = "";
 			for (String item : itemsCount.keySet()) {

@@ -32,6 +32,7 @@ public class DRDesignParameterExpression implements DRIDesignParameterExpression
 	private String name;
 	private DRIDesignExpression valueExpression;
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -40,6 +41,7 @@ public class DRDesignParameterExpression implements DRIDesignParameterExpression
 		this.name = name;
 	}
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}

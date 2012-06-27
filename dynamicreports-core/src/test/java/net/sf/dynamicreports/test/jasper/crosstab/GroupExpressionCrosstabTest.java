@@ -153,6 +153,7 @@ public class GroupExpressionCrosstabTest extends AbstractJasperCrosstabValueTest
 	private class GroupExpression1 extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Integer evaluate(ReportParameters reportParameters) {
 			Date date = reportParameters.getValue("field2");
 			Calendar c = Calendar.getInstance();
@@ -164,6 +165,7 @@ public class GroupExpressionCrosstabTest extends AbstractJasperCrosstabValueTest
 	private class GroupExpression2 extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Date date = reportParameters.getValue("field2");
 			Calendar c = Calendar.getInstance();

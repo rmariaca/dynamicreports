@@ -74,6 +74,7 @@ public class ComponentColumnReport {
 	public class ImageExpression extends AbstractSimpleExpression<InputStream> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public InputStream evaluate(ReportParameters reportParameters) {
 			return Templates.class.getResourceAsStream("images/" + reportParameters.getValue("image") + ".png");
 		}
@@ -82,6 +83,7 @@ public class ComponentColumnReport {
 	public class ItemExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue("item");
 		}
@@ -90,6 +92,7 @@ public class ComponentColumnReport {
 	public class BarcodeExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue("barcode");
 		}

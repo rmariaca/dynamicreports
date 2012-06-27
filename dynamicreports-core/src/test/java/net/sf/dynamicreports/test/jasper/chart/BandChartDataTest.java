@@ -138,6 +138,7 @@ public class BandChartDataTest extends AbstractJasperChartTest implements Serial
 			this.variableName = variableName;			
 		}
 		
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "Title sum=" + reportParameters.getValue(variableName);
 		}		

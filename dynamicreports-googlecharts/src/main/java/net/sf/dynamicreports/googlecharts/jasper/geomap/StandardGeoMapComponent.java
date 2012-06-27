@@ -76,6 +76,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		this.dataset = new StandardGeoMapDataset(component.getDataset(), factory);
 	}
 
+	@Override
 	public EvaluationTimeEnum getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -86,6 +87,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_EVALUATION_TIME, old, this.evaluationTime);
 	}
 
+	@Override
 	public String getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -96,6 +98,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_EVALUATION_GROUP, old, this.evaluationGroup);
 	}
 
+	@Override
 	public Boolean getShowLegend() {
 		return showLegend;
 	}
@@ -106,6 +109,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_SHOW_LEGEND, old, this.showLegend);
 	}
 
+	@Override
 	public GeoMapDataMode getDataMode() {
 		return dataMode;
 	}
@@ -116,6 +120,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_DATA_MODE, old, this.dataMode);
 	}
 
+	@Override
 	public JRExpression getRegionExpression() {
 		return regionExpression;
 	}
@@ -126,6 +131,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_REGION_EXPRESSION, old, this.regionExpression);
 	}
 
+	@Override
 	public JRExpression getValueLabelExpression() {
 		return valueLabelExpression;
 	}
@@ -136,6 +142,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_VALUE_LABEL_EXPRESSION, old, this.valueLabelExpression);
 	}
 
+	@Override
 	public List<Color> getColors() {
 		return colors;
 	}
@@ -146,6 +153,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_COLORS, old, this.colors);
 	}
 
+	@Override
 	public GeoMapDataset getDataset() {
 		return dataset;
 	}
@@ -156,6 +164,7 @@ public class StandardGeoMapComponent implements GeoMapComponent, Serializable, J
 		getEventSupport().firePropertyChange(PROPERTY_DATASET, old, this.dataset);
 	}
 
+	@Override
 	public JRPropertyChangeSupport getEventSupport() {
 		synchronized (this) {
 			if (eventSupport == null) {

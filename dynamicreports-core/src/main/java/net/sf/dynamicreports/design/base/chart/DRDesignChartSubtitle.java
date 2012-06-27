@@ -36,6 +36,7 @@ public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {
 	private DRDesignFont font;
 	private DRIDesignExpression title;
 
+	@Override
 	public Color getColor() {
 		return color;
 	}
@@ -44,6 +45,7 @@ public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {
 		this.color = color;
 	}
 
+	@Override
 	public DRDesignFont getFont() {
 		return font;
 	}
@@ -52,6 +54,7 @@ public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {
 		this.font = font;
 	}
 
+	@Override
 	public DRIDesignExpression getTitle() {
 		return title;
 	}

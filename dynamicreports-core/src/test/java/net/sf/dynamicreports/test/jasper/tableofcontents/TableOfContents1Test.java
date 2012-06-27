@@ -197,6 +197,7 @@ public class TableOfContents1Test extends AbstractJasperValueTest implements Ser
 
 		private int index = 1;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "group footer" + index++;
 		}

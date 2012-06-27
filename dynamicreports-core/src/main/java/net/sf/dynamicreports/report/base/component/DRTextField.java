@@ -53,6 +53,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private Markup markup;
 	private Boolean stretchWithOverflow;
 
+	@Override
 	public DRIExpression<T> getValueExpression() {
 		return valueExpression;
 	}
@@ -62,6 +63,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public String getPattern() {
 		return pattern;
 	}
@@ -70,6 +72,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.pattern = pattern;
 	}
 
+	@Override
 	public DRIExpression<String> getPatternExpression() {
 		return patternExpression;
 	}
@@ -78,6 +81,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.patternExpression = patternExpression;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -86,6 +90,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public DRIValueFormatter<?, ? super T> getValueFormatter() {
 		return valueFormatter;
 	}
@@ -94,6 +99,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.valueFormatter = valueFormatter;
 	}
 
+	@Override
 	public DRIDataType<? super T, T> getDataType() {
 		return dataType;
 	}
@@ -107,6 +113,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
    *
    * @return the number of columns >= 0
    */
+	@Override
 	public Integer getColumns() {
 		return columns;
 	}
@@ -131,6 +138,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
    *
    * @return the number of rows >= 0
    */
+	@Override
 	public Integer getRows() {
 		return rows;
 	}
@@ -149,6 +157,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.rows = rows;
 	}
 
+	@Override
 	public Evaluation getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -157,6 +166,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -165,6 +175,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public Markup getMarkup() {
 		return markup;
 	}
@@ -173,6 +184,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 		this.markup = markup;
 	}
 
+	@Override
 	public Boolean getStretchWithOverflow() {
 		return stretchWithOverflow;
 	}

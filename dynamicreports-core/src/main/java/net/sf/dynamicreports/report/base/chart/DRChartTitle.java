@@ -34,6 +34,7 @@ public class DRChartTitle extends DRChartSubtitle implements DRIChartTitle {
 	
 	private Position position;
 	
+	@Override
 	public Position getPosition() {
 		return position;
 	}

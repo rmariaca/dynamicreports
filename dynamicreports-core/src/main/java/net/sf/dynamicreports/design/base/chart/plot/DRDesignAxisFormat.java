@@ -44,6 +44,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 	private DRIDesignExpression rangeMinValueExpression;
 	private DRIDesignExpression rangeMaxValueExpression;
 
+	@Override
 	public DRIDesignExpression getLabelExpression() {
 		return labelExpression;
 	}
@@ -52,6 +53,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.labelExpression = labelExpression;
 	}
 
+	@Override
 	public DRDesignFont getLabelFont() {
 		return labelFont;
 	}
@@ -60,6 +62,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.labelFont = labelFont;
 	}
 
+	@Override
 	public Color getLabelColor() {
 		return labelColor;
 	}
@@ -68,6 +71,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.labelColor = labelColor;
 	}
 
+	@Override
 	public DRDesignFont getTickLabelFont() {
 		return tickLabelFont;
 	}
@@ -76,6 +80,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.tickLabelFont = tickLabelFont;
 	}
 
+	@Override
 	public Color getTickLabelColor() {
 		return tickLabelColor;
 	}
@@ -84,6 +89,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.tickLabelColor = tickLabelColor;
 	}
 
+	@Override
 	public String getTickLabelMask() {
 		return tickLabelMask;
 	}
@@ -92,6 +98,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.tickLabelMask = tickLabelMask;
 	}
 
+	@Override
 	public Boolean getVerticalTickLabels() {
 		return verticalTickLabels;
 	}
@@ -100,6 +107,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.verticalTickLabels = verticalTickLabels;
 	}
 
+	@Override
 	public Double getTickLabelRotation() {
 		return tickLabelRotation;
 	}
@@ -108,6 +116,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.tickLabelRotation = tickLabelRotation;
 	}
 
+	@Override
 	public Color getLineColor() {
 		return lineColor;
 	}
@@ -120,6 +129,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.rangeMinValueExpression = rangeMinValueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getRangeMinValueExpression() {
 		return rangeMinValueExpression;
 	}
@@ -128,6 +138,7 @@ public class DRDesignAxisFormat implements DRIDesignAxisFormat {
 		this.rangeMaxValueExpression = rangeMaxValueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getRangeMaxValueExpression() {
 		return rangeMaxValueExpression;
 	}

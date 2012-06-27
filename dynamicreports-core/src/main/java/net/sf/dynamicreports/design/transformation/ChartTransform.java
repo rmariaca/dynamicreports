@@ -729,6 +729,7 @@ public class ChartTransform {
 			this.key = key;
 		}
 
+		@Override
 		public Number evaluate(ReportParameters reportParameters) {
 			if (reportParameters.getReportRowNumber() <= 1) {
 				resetValue = null;

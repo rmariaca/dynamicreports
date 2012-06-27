@@ -35,6 +35,7 @@ public class DRDesignBreak extends DRDesignComponent implements DRIDesignBreak {
 		super("break");
 	}
 
+	@Override
 	public BreakType getType() {
 		return breakType;
 	}

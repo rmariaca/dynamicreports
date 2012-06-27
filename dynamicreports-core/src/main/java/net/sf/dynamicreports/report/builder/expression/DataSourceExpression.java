@@ -42,6 +42,7 @@ public class DataSourceExpression extends AbstractSimpleExpression<JRDataSource>
 		this.dataSource = dataSource;
 	}
 
+	@Override
 	public JRDataSource evaluate(ReportParameters reportParameters) {
 		if (moveFirst && dataSource != null && dataSource instanceof JRRewindableDataSource) {
 			try {

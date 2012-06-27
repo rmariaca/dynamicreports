@@ -41,6 +41,7 @@ public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
 		super("map");
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -49,6 +50,7 @@ public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -57,6 +59,7 @@ public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public DRIDesignExpression getLatitudeExpression() {
 		return latitudeExpression;
 	}
@@ -65,6 +68,7 @@ public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
 		this.latitudeExpression = latitudeExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getLongitudeExpression() {
 		return longitudeExpression;
 	}
@@ -73,6 +77,7 @@ public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
 		this.longitudeExpression = longitudeExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getZoomExpression() {
 		return zoomExpression;
 	}

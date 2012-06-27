@@ -39,6 +39,7 @@ public class DRValueColumn<T> extends DRColumn<DRITextField<T>> implements DRIVa
 		super(valueField);	
 	}
 
+	@Override
 	public Boolean getPrintRepeatedDetailValues() {
 		return printRepeatedDetailValues;
 	}
@@ -52,6 +53,7 @@ public class DRValueColumn<T> extends DRColumn<DRITextField<T>> implements DRIVa
 		return getComponent().getValueExpression().getName();
 	}
 	
+	@Override
 	public Class<? super T> getValueClass() {
 		return getComponent().getValueExpression().getValueClass();
 	}

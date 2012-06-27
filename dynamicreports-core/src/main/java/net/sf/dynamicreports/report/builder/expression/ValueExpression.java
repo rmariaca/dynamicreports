@@ -50,6 +50,7 @@ public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 		this.valueClass = valueClass;
 	}
 
+	@Override
 	public T evaluate(ReportParameters reportParameters) {
 		return value;
 	}

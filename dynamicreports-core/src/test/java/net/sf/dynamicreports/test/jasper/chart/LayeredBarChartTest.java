@@ -147,6 +147,7 @@ public class LayeredBarChartTest extends AbstractJasperChartTest implements Seri
 	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			CategoryPlot categoryPlot = chart.getCategoryPlot();
 			Assert.assertEquals("renderer", LayeredBarRenderer.class, categoryPlot.getRenderer().getClass());

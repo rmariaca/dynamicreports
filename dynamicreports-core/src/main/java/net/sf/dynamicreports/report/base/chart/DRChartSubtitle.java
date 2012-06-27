@@ -39,6 +39,7 @@ public class DRChartSubtitle implements DRIChartSubtitle {
 	private DRFont font;
 	private DRIExpression<String> title;
 
+	@Override
 	public Color getColor() {
 		return color;
 	}
@@ -47,6 +48,7 @@ public class DRChartSubtitle implements DRIChartSubtitle {
 		this.color = color;
 	}
 
+	@Override
 	public DRFont getFont() {
 		return font;
 	}
@@ -55,6 +57,7 @@ public class DRChartSubtitle implements DRIChartSubtitle {
 		this.font = font;
 	}
 
+	@Override
 	public DRIExpression<String> getTitle() {
 		return title;
 	}

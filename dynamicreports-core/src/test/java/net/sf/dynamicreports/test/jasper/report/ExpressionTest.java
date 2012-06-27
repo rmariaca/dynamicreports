@@ -63,6 +63,7 @@ public class ExpressionTest extends AbstractJasperValueTest implements Serializa
 	private class Expression1 extends AbstractSimpleExpression {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Object evaluate(ReportParameters reportParameters) {
 			return "text1";
 		}
@@ -77,6 +78,7 @@ public class ExpressionTest extends AbstractJasperValueTest implements Serializa
 			this.value = value;
 		}
 
+		@Override
 		public T evaluate(ReportParameters reportParameters) {
 			return value;
 		}
@@ -85,6 +87,7 @@ public class ExpressionTest extends AbstractJasperValueTest implements Serializa
 	private class Expression3 extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Integer evaluate(ReportParameters reportParameters) {
 			return 1000;
 		}

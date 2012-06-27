@@ -53,6 +53,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 		this.orientation = orientation;
 	}
 
+	@Override
 	public Orientation getOrientation() {
 		return orientation;
 	}
@@ -68,6 +69,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 		this.seriesColors = seriesColors;
 	}
 
+	@Override
 	public List<Color> getSeriesColors() {
 		return seriesColors;
 	}

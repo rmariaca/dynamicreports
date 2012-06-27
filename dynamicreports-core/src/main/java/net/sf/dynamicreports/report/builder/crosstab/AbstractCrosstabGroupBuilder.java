@@ -162,6 +162,7 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
+	@Override
 	public String getName() {
 		return getObject().getName();
 	}

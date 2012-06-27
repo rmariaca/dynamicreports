@@ -138,6 +138,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 	private class ValueExpression extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {
@@ -156,6 +157,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 	private class CategoryExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Assert.assertNotNull(reportParameters.getMasterParameters());
 			try {
@@ -171,6 +173,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 	private class TitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Assert.assertNull(reportParameters.getMasterParameters());
 			Assert.assertEquals("parameter_value", reportParameters.getValue("parameter"));
@@ -181,6 +184,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 	private class Customizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			Assert.assertNull(reportParameters.getMasterParameters());
 			Assert.assertEquals("parameter_value", reportParameters.getValue("parameter"));
@@ -191,6 +195,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 	private class Datasource3Expression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			Assert.assertNull(reportParameters.getMasterParameters());
 			Assert.assertEquals("parameter_value", reportParameters.getValue("parameter"));

@@ -30,6 +30,7 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGrou
 public class DRDesignCrosstabRowGroup extends DRDesignCrosstabGroup implements DRIDesignCrosstabRowGroup {
 	private int width;
 
+	@Override
 	public int getWidth() {
 		return width;
 	}

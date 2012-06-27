@@ -61,6 +61,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		this.components = new ArrayList<DRDesignComponent>();
 	}
 
+	@Override
 	public List<DRDesignComponent> getComponents() {
 		return components;
 	}
@@ -97,6 +98,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		this.type = type;
 	}
 
+	@Override
 	public ListType getType() {
 		return type;
 	}
@@ -105,6 +107,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		this.componentGroupType = componentGroupType;
 	}
 
+	@Override
 	public ComponentGroupType getComponentGroupType() {
 		return componentGroupType;
 	}
@@ -138,6 +141,7 @@ public class DRDesignList extends DRDesignComponent implements DRIDesignList {
 		this.removable = removable;
 	}
 
+	@Override
 	public DRDesignComponent getBackgroundComponent() {
 		return backgroundComponent;
 	}

@@ -36,6 +36,7 @@ public class DRGroupedCategoryChartSerie extends DRCategoryChartSerie implements
 
 	private DRIExpression<?> groupExpression;
 
+	@Override
 	public DRIExpression<?> getGroupExpression() {
 		return groupExpression;
 	}

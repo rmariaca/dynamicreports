@@ -34,6 +34,7 @@ public class DRHighLowPlot extends DRAxisPlot implements DRIHighLowPlot {
 	private Boolean showOpenTicks;
 	private Boolean showCloseTicks;
 
+	@Override
 	public Boolean getShowOpenTicks() {
 		return showOpenTicks;
 	}
@@ -42,6 +43,7 @@ public class DRHighLowPlot extends DRAxisPlot implements DRIHighLowPlot {
 		this.showOpenTicks = showOpenTicks;
 	}
 
+	@Override
 	public Boolean getShowCloseTicks() {
 		return showCloseTicks;
 	}

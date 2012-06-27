@@ -57,10 +57,12 @@ public class DRDataSource implements JRRewindableDataSource, Serializable {
 		this.values.add(row);
 	}
 
+	@Override
 	public Object getFieldValue(JRField field) throws JRException {
 		return currentRecord.get(field.getName());
 	}
 
+	@Override
 	public boolean next() throws JRException {
 		if (iterator == null) {
 			this.iterator = values.iterator();
@@ -72,6 +74,7 @@ public class DRDataSource implements JRRewindableDataSource, Serializable {
 		return hasNext;
 	}
 
+	@Override
 	public void moveFirst() throws JRException {
 		iterator = null;
 	}

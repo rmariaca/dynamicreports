@@ -59,6 +59,7 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 		handlers.put(name, handler);
 	}
 
+	@Override
 	public void configureDigester(Digester digester) {
 		for (String name : components.keySet()) {
 			String mapPattern = "*/componentElement/googleCharts/" + name;
@@ -66,6 +67,7 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 		}
 	}
 
+	@Override
 	public void writeToXml(ComponentKey componentKey, Component component, JRXmlWriter reportWriter) throws IOException {
 		if (components.containsKey(componentKey.getName())) {
 			JRXmlWriteHelper writer = reportWriter.getXmlWriteHelper();
@@ -80,10 +82,12 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 		}
 	}
 
+	@Override
 	public String getNamespace() {
 		return GoogleChartsExtensionsRegistryFactory.NAMESPACE;
 	}
 
+	@Override
 	public GenericElementHandler getHandler(String elementName, String exporterKey) {
 		if (handlers.containsKey(elementName)) {
 			if (JRHtmlExporter.HTML_EXPORTER_KEY.equals(exporterKey)

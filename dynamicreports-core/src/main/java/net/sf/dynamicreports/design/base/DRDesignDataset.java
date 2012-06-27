@@ -52,6 +52,7 @@ public class DRDesignDataset implements DRIDesignDataset {
 		this.name = ReportUtils.generateUniqueName("dataset");
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -60,34 +61,42 @@ public class DRDesignDataset implements DRIDesignDataset {
 		return datasetExpressionTransform;
 	}
 
+	@Override
 	public Collection<DRIDesignField> getFields() {
 		return datasetExpressionTransform.getFields();
 	}
 
+	@Override
 	public Collection<DRIDesignVariable> getVariables() {
 		return datasetExpressionTransform.getVariables();
 	}
 
+	@Override
 	public Collection<DRIDesignSystemExpression> getSystemExpressions() {
 		return datasetExpressionTransform.getSystemExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignJasperExpression> getJasperExpressions() {
 		return datasetExpressionTransform.getJasperExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignSimpleExpression> getSimpleExpressions() {
 		return datasetExpressionTransform.getSimpleExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignComplexExpression> getComplexExpressions() {
 		return datasetExpressionTransform.getComplexExpressions();
 	}
 
+	@Override
 	public Collection<DRIDesignSort> getSorts() {
 		return datasetExpressionTransform.getSorts();
 	}
 
+	@Override
 	public DRDesignQuery getQuery() {
 		return query;
 	}
@@ -96,6 +105,7 @@ public class DRDesignDataset implements DRIDesignDataset {
 		this.query = query;
 	}
 
+	@Override
 	public DRIDesignExpression getConnectionExpression() {
 		return connectionExpression;
 	}
@@ -104,6 +114,7 @@ public class DRDesignDataset implements DRIDesignDataset {
 		this.connectionExpression = connectionExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getDataSourceExpression() {
 		return dataSourceExpression;
 	}
@@ -112,6 +123,7 @@ public class DRDesignDataset implements DRIDesignDataset {
 		this.dataSourceExpression = dataSourceExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getFilterExpression() {
 		return filterExpression;
 	}

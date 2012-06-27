@@ -37,6 +37,7 @@ public class DRDesignLine extends DRDesignComponent implements DRIDesignLine {
 		super("line");
 	}
 
+	@Override
 	public LineDirection getDirection() {
 		return direction;
 	}
@@ -45,6 +46,7 @@ public class DRDesignLine extends DRDesignComponent implements DRIDesignLine {
 		this.direction = direction;
 	}
 
+	@Override
 	public DRDesignPen getPen() {
 		return pen;
 	}

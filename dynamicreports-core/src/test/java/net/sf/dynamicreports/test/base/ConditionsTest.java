@@ -119,71 +119,88 @@ public class ConditionsTest {
 			this.value = value;
 		}
 
+		@Override
 		public Integer getColumnNumber() {
 			return null;
 		}
 
+		@Override
 		public Integer getColumnRowNumber() {
 			return null;
 		}
 
+		@Override
 		public Connection getConnection() {
 			return null;
 		}
 
+		@Override
 		public Integer getGroupCount(String groupName) {
 			return null;
 		}
 
+		@Override
 		public Locale getLocale() {
 			return null;
 		}
 
+		@Override
 		public String getMessage(String key) {
 			return null;
 		}
 
+		@Override
 		public String getMessage(String key, Object[] arguments) {
 			return null;
 		}
 
+		@Override
 		public Integer getPageNumber() {
 			return null;
 		}
 
+		@Override
 		public Integer getPageRowNumber() {
 			return null;
 		}
 
+		@Override
 		public Integer getReportRowNumber() {
 			return null;
 		}
 
+		@Override
 		public DRIScriptlet getScriptlet(String name) {
 			return null;
 		}
 
+		@Override
 		public <T> T getValue(String name) {
 			return null;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public <T> T getValue(DRIValue<T> value) {
 			return (T) this.value;
 		}
 
+		@Override
 		public ReportParameters getMasterParameters() {
 			return null;
 		}
 
+		@Override
 		public <T> T getFieldValue(String name) {
 			return null;
 		}
 
+		@Override
 		public <T> T getVariableValue(String name) {
 			return null;
 		}
 
+		@Override
 		public <T> T getParameterValue(String name) {
 			return null;
 		}

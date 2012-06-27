@@ -116,6 +116,7 @@ public class JasperSubreport2Test extends AbstractJasperValueTest implements Ser
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			return new JREmptyDataSource(2);
 		}

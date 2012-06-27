@@ -36,6 +36,7 @@ public abstract class AbstractChartSerie implements DRIChartSerie {
 
 	private DRIExpression<?> seriesExpression;
 
+	@Override
 	public DRIExpression<?> getSeriesExpression() {
 		return seriesExpression;
 	}

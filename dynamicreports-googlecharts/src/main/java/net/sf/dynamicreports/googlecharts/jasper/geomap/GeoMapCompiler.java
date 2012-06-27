@@ -34,6 +34,7 @@ import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
  */
 public class GeoMapCompiler implements ComponentCompiler {
 
+	@Override
 	public void collectExpressions(Component component, JRExpressionCollector collector) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
 		collector.addExpression(geoMap.getRegionExpression());
@@ -51,11 +52,13 @@ public class GeoMapCompiler implements ComponentCompiler {
 		}
 	}
 
+	@Override
 	public Component toCompiledComponent(Component component, JRBaseObjectFactory baseFactory) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
 		return new StandardGeoMapComponent(geoMap, baseFactory);
 	}
 
+	@Override
 	public void verify(Component component, JRVerifier verifier) {
 		GeoMapComponent geoMap = (GeoMapComponent) component;
 

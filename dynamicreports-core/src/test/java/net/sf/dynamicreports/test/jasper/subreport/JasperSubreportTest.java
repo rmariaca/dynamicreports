@@ -100,6 +100,7 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 	private class SubreportExpression extends AbstractSimpleExpression<JasperReport> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JasperReport evaluate(ReportParameters reportParameters) {
 			try {
 				InputStream is = JasperSubreportTest.class.getResourceAsStream("subreport" + reportParameters.getReportRowNumber() + ".jrxml");
@@ -115,6 +116,7 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			String[] columns = new String[masterRowNumber];

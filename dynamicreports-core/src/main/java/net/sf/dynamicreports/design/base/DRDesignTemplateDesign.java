@@ -36,42 +36,52 @@ public class DRDesignTemplateDesign implements DRIDesignTemplateDesign {
 		this.templateDesign = templateDesign;		
 	}
 	
+	@Override
 	public int getTitleComponentsCount() {
 		return templateDesign.getTitleComponentsCount();
 	}
 
+	@Override
 	public int getPageHeaderComponentsCount() {
 		return templateDesign.getPageHeaderComponentsCount();
 	}
 
+	@Override
 	public int getPageFooterComponentsCount() {
 		return templateDesign.getPageFooterComponentsCount();
 	}
 
+	@Override
 	public int getColumnHeaderComponentsCount() {
 		return templateDesign.getColumnHeaderComponentsCount();
 	}
 
+	@Override
 	public int getColumnFooterComponentsCount() {
 		return templateDesign.getColumnFooterComponentsCount();
 	}
 
+	@Override
 	public int getLastPageFooterComponentsCount() {
 		return templateDesign.getLastPageFooterComponentsCount();
 	}
 
+	@Override
 	public int getSummaryComponentsCount() {
 		return templateDesign.getSummaryComponentsCount();
 	}
 
+	@Override
 	public int getNoDataComponentsCount() {
 		return templateDesign.getNoDataComponentsCount();
 	}
 
+	@Override
 	public int getBackgroundComponentsCount() {
 		return templateDesign.getBackgroundComponentsCount();
 	}
 	
+	@Override
 	public Object getDesign() throws DRException {
 		return templateDesign.getDesign();
 	}

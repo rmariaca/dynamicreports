@@ -63,10 +63,12 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.name = ReportUtils.generateUniqueName("crosstabGroup");
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getHeaderPattern() {
 		return headerPattern;
 	}
@@ -75,6 +77,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerPattern = headerPattern;
 	}
 
+	@Override
 	public HorizontalAlignment getHeaderHorizontalAlignment() {
 		return headerHorizontalAlignment;
 	}
@@ -83,6 +86,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerHorizontalAlignment = headerHorizontalAlignment;
 	}
 
+	@Override
 	public DRIValueFormatter<?, ? super T> getHeaderValueFormatter() {
 		return headerValueFormatter;
 	}
@@ -91,6 +95,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerValueFormatter = headerValueFormatter;
 	}
 
+	@Override
 	public Boolean getHeaderStretchWithOverflow() {
 		return headerStretchWithOverflow;
 	}
@@ -99,6 +104,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerStretchWithOverflow = headerStretchWithOverflow;
 	}
 
+	@Override
 	public DRIReportStyle getHeaderStyle() {
 		return headerStyle;
 	}
@@ -107,6 +113,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.headerStyle = headerStyle;
 	}
 
+	@Override
 	public Boolean getShowTotal() {
 		return showTotal;
 	}
@@ -115,6 +122,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.showTotal = showTotal;
 	}
 
+	@Override
 	public CrosstabTotalPosition getTotalPosition() {
 		return totalPosition;
 	}
@@ -123,6 +131,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.totalPosition = totalPosition;
 	}
 
+	@Override
 	public DRIExpression<?> getTotalHeaderExpression() {
 		return totalHeaderExpression;
 	}
@@ -131,6 +140,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.totalHeaderExpression = totalHeaderExpression;
 	}
 
+	@Override
 	public DRIReportStyle getTotalHeaderStyle() {
 		return totalHeaderStyle;
 	}
@@ -139,6 +149,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.totalHeaderStyle = totalHeaderStyle;
 	}
 
+	@Override
 	public DRIExpression<T> getExpression() {
 		return expression;
 	}
@@ -148,6 +159,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.expression = expression;
 	}
 
+	@Override
 	public DRIDataType<? super T, T> getDataType() {
 		return dataType;
 	}
@@ -156,6 +168,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.dataType = dataType;
 	}
 
+	@Override
 	public DRIExpression<? extends Comparable<?>> getOrderByExpression() {
 		return orderByExpression;
 	}
@@ -164,6 +177,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.orderByExpression = orderByExpression;
 	}
 
+	@Override
 	public OrderType getOrderType() {
 		return orderType;
 	}
@@ -172,6 +186,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.orderType = orderType;
 	}
 
+	@Override
 	public DRIExpression<? extends Comparator<?>> getComparatorExpression() {
 		return comparatorExpression;
 	}
@@ -180,6 +195,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 		this.comparatorExpression = comparatorExpression;
 	}
 
+	@Override
 	public Class<? super T> getValueClass() {
 		return getExpression().getValueClass();
 	}

@@ -50,6 +50,7 @@ public class DRDesignGenericElement extends DRDesignComponent implements DRIDesi
 		parameterExpressions = new ArrayList<DRIDesignParameterExpression>();
 	}
 
+	@Override
 	public String getGenericElementNamespace() {
 		return genericElementNamespace;
 	}
@@ -58,6 +59,7 @@ public class DRDesignGenericElement extends DRDesignComponent implements DRIDesi
 		this.genericElementNamespace = genericElementNamespace;
 	}
 
+	@Override
 	public String getGenericElementName() {
 		return genericElementName;
 	}
@@ -66,6 +68,7 @@ public class DRDesignGenericElement extends DRDesignComponent implements DRIDesi
 		this.genericElementName = genericElementName;
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -74,6 +77,7 @@ public class DRDesignGenericElement extends DRDesignComponent implements DRIDesi
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -82,6 +86,7 @@ public class DRDesignGenericElement extends DRDesignComponent implements DRIDesi
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public List<DRIDesignParameterExpression> getParameterExpressions() {
 		return parameterExpressions;
 	}

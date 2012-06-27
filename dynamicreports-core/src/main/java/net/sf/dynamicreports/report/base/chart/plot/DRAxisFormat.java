@@ -47,6 +47,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 	private DRIExpression<? extends Number> rangeMinValueExpression;
 	private DRIExpression<? extends Number> rangeMaxValueExpression;
 
+	@Override
 	public DRIExpression<String> getLabelExpression() {
 		return labelExpression;
 	}
@@ -55,6 +56,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.labelExpression = labelExpression;
 	}
 
+	@Override
 	public DRFont getLabelFont() {
 		return labelFont;
 	}
@@ -63,6 +65,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.labelFont = labelFont;
 	}
 
+	@Override
 	public Color getLabelColor() {
 		return labelColor;
 	}
@@ -71,6 +74,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.labelColor = labelColor;
 	}
 
+	@Override
 	public DRFont getTickLabelFont() {
 		return tickLabelFont;
 	}
@@ -79,6 +83,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.tickLabelFont = tickLabelFont;
 	}
 
+	@Override
 	public Color getTickLabelColor() {
 		return tickLabelColor;
 	}
@@ -87,6 +92,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.tickLabelColor = tickLabelColor;
 	}
 
+	@Override
 	public String getTickLabelMask() {
 		return tickLabelMask;
 	}
@@ -95,6 +101,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.tickLabelMask = tickLabelMask;
 	}
 
+	@Override
 	public Boolean getVerticalTickLabels() {
 		return verticalTickLabels;
 	}
@@ -103,6 +110,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.verticalTickLabels = verticalTickLabels;
 	}
 
+	@Override
 	public Double getTickLabelRotation() {
 		return tickLabelRotation;
 	}
@@ -111,6 +119,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.tickLabelRotation = tickLabelRotation;
 	}
 
+	@Override
 	public Color getLineColor() {
 		return lineColor;
 	}
@@ -123,6 +132,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.rangeMinValueExpression = rangeMinValueExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getRangeMinValueExpression() {
 		return rangeMinValueExpression;
 	}
@@ -131,6 +141,7 @@ public class DRAxisFormat implements DRIAxisFormat {
 		this.rangeMaxValueExpression = rangeMaxValueExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getRangeMaxValueExpression() {
 		return rangeMaxValueExpression;
 	}

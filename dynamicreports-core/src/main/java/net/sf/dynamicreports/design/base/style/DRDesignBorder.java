@@ -33,6 +33,7 @@ public class DRDesignBorder implements DRIDesignBorder {
 	private DRDesignPen bottomPen;
 	private DRDesignPen rightPen;
 
+	@Override
 	public DRDesignPen getTopPen() {
 		return topPen;
 	}
@@ -41,6 +42,7 @@ public class DRDesignBorder implements DRIDesignBorder {
 		this.topPen = topPen;
 	}
 
+	@Override
 	public DRDesignPen getLeftPen() {
 		return leftPen;
 	}
@@ -49,6 +51,7 @@ public class DRDesignBorder implements DRIDesignBorder {
 		this.leftPen = leftPen;
 	}
 
+	@Override
 	public DRDesignPen getBottomPen() {
 		return bottomPen;
 	}
@@ -57,6 +60,7 @@ public class DRDesignBorder implements DRIDesignBorder {
 		this.bottomPen = bottomPen;
 	}
 
+	@Override
 	public DRDesignPen getRightPen() {
 		return rightPen;
 	}

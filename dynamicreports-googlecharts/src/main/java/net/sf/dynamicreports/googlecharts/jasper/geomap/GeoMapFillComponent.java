@@ -61,6 +61,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		return geoMapComponent;
 	}
 
+	@Override
 	public void evaluate(byte evaluation) throws JRException {
 		if (isEvaluateNow()) {
 			evaluateGeoMap(evaluation);
@@ -82,10 +83,12 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		return geoMapComponent.getEvaluationTime() == EvaluationTimeEnum.NOW;
 	}
 
+	@Override
 	public FillPrepareResult prepare(int availableHeight) {
 		return FillPrepareResult.PRINT_NO_STRETCH;
 	}
 
+	@Override
 	public JRPrintElement fill() {
 		JRComponentElement element = fillContext.getComponentElement();
 		JRTemplateGenericElement template = new JRTemplateGenericElement(fillContext.getElementOrigin(),

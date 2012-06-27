@@ -65,6 +65,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		linePen = new DRPen();
 	}
 
+	@Override
 	public Color getForegroundColor() {
 		return foregroundColor;
 	}
@@ -73,6 +74,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.foregroundColor = foregroundColor;
 	}
 
+	@Override
 	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
@@ -81,6 +83,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.backgroundColor = backgroundColor;
 	}
 
+	@Override
 	public Integer getRadius() {
 		return radius;
 	}
@@ -89,6 +92,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.radius = radius;
 	}
 
+	@Override
 	public ImageScale getImageScale() {
 		return imageScale;
 	}
@@ -97,6 +101,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.imageScale = imageScale;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -105,6 +110,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public VerticalAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
@@ -113,6 +119,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.verticalAlignment = verticalAlignment;
 	}
 
+	@Override
 	public DRBorder getBorder() {
 		return border;
 	}
@@ -121,6 +128,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.border = border;
 	}
 
+	@Override
 	public DRPadding getPadding() {
 		return padding;
 	}
@@ -129,6 +137,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.padding = padding;
 	}
 
+	@Override
 	public DRFont getFont() {
 		return font;
 	}
@@ -137,6 +146,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.font = font;
 	}
 
+	@Override
 	public Rotation getRotation() {
 		return rotation;
 	}
@@ -145,6 +155,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.rotation = rotation;
 	}
 
+	@Override
 	public String getPattern() {
 		return pattern;
 	}
@@ -153,6 +164,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.pattern = pattern;
 	}
 
+	@Override
 	public Markup getMarkup() {
 		return markup;
 	}
@@ -161,6 +173,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.markup = markup;
 	}
 
+	@Override
 	public DRParagraph getParagraph() {
 		return paragraph;
 	}
@@ -169,6 +182,7 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 		this.paragraph = paragraph;
 	}
 
+	@Override
 	public DRPen getLinePen() {
 		return linePen;
 	}

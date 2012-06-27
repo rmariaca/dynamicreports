@@ -54,6 +54,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		customizers = new ArrayList<DRIChartCustomizer>();
 	}
 
+	@Override
 	public ChartType getChartType() {
 		return chartType;
 	}
@@ -62,6 +63,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.chartType = chartType;
 	}
 
+	@Override
 	public DRDesignChartDataset getDataset() {
 		return dataset;
 	}
@@ -70,6 +72,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.dataset = dataset;
 	}
 
+	@Override
 	public DRIDesignPlot getPlot() {
 		return plot;
 	}
@@ -78,6 +81,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.plot = plot;
 	}
 
+	@Override
 	public List<DRIChartCustomizer> getCustomizers() {
 		return customizers;
 	}
@@ -86,6 +90,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.customizers = customizers;
 	}
 
+	@Override
 	public DRDesignChartTitle getTitle() {
 		return title;
 	}
@@ -94,6 +99,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.title = title;
 	}
 
+	@Override
 	public DRDesignChartSubtitle getSubtitle() {
 		return subtitle;
 	}
@@ -102,6 +108,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.subtitle = subtitle;
 	}
 
+	@Override
 	public DRDesignChartLegend getLegend() {
 		return legend;
 	}
@@ -110,6 +117,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.legend = legend;
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -118,6 +126,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -126,6 +135,7 @@ public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesi
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public String getTheme() {
 		return theme;
 	}

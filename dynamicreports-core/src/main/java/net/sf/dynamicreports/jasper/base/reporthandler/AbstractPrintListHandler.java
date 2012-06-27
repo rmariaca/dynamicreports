@@ -38,6 +38,7 @@ public abstract class AbstractPrintListHandler implements JasperReportHandler {
 		pageNumber = 1;
 	}
 
+	@Override
 	public void concatenate(JasperReportBuilder... jasperReportBuilders) {
 		for (JasperReportBuilder jasperReportBuilder : jasperReportBuilders) {
 			try {
@@ -58,6 +59,7 @@ public abstract class AbstractPrintListHandler implements JasperReportHandler {
 
 	protected abstract void add(JasperPrint jasperPrint);
 
+	@Override
 	public void setContinuousPageNumbering(boolean continuousPageNumbering) {
 		this.continuousPageNumbering = continuousPageNumbering;
 	}

@@ -35,6 +35,7 @@ public class DRDesignTimeSeriesDataset extends DRDesignSeriesDataset implements 
 		this.timePeriodType = timePeriodType;
 	}
 
+	@Override
 	public TimePeriod getTimePeriodType() {
 		return timePeriodType;
 	}

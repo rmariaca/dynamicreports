@@ -78,6 +78,7 @@ public class ExpressionColumnReport {
 	private class ExpressionColumn extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return
 				"Item = " + reportParameters.getValue("item") + ", " +

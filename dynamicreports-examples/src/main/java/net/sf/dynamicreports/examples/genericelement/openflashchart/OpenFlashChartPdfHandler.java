@@ -54,10 +54,12 @@ public class OpenFlashChartPdfHandler implements GenericElementPdfHandler {
 
 	private final ReferenceMap existingContexts = new ReferenceMap(ReferenceMap.WEAK,	ReferenceMap.HARD);
 
+	@Override
 	public boolean toExport(JRGenericPrintElement element) {
 		return true;
 	}
 
+	@Override
 	public void exportElement(JRPdfExporterContext exporterContext,	JRGenericPrintElement element) {
 		try	{
 			PdfWriter writer = exporterContext.getPdfWriter();

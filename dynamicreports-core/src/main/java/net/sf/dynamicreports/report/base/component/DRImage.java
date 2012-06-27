@@ -42,6 +42,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 	private Boolean lazy;
 	private HorizontalAlignment horizontalAlignment;
 
+	@Override
 	public DRIExpression<?> getImageExpression() {
 		return imageExpression;
 	}
@@ -51,6 +52,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 		this.imageExpression = imageExpression;
 	}
 
+	@Override
 	public ImageScale getImageScale() {
 		return imageScale;
 	}
@@ -59,6 +61,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 		this.imageScale = imageScale;
 	}
 
+	@Override
 	public Boolean getUsingCache() {
 		return usingCache;
 	}
@@ -67,6 +70,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 		this.usingCache = usingCache;
 	}
 
+	@Override
 	public Boolean getLazy() {
 		return lazy;
 	}
@@ -75,6 +79,7 @@ public class DRImage extends DRHyperLinkComponent implements DRIImage {
 		this.lazy = lazy;
 	}
 
+	@Override
 	public HorizontalAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}

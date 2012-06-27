@@ -72,6 +72,7 @@ public class GoogleChartsExtensionsRegistryFactory implements ExtensionsRegistry
 		bundle.setComponentManagers(componentManagers);
 
 		REGISTRY = new ExtensionsRegistry() {
+			@Override
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public List getExtensions(Class extensionType) {
 				if (ComponentsBundle.class.equals(extensionType)) {
@@ -98,6 +99,7 @@ public class GoogleChartsExtensionsRegistryFactory implements ExtensionsRegistry
 		transforms.add(new GeoMapTransform());
 	}
 
+	@Override
 	public ExtensionsRegistry createRegistry(String registryId, JRPropertiesMap properties) {
 		return REGISTRY;
 	}

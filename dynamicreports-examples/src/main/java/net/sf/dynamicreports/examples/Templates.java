@@ -160,6 +160,7 @@ public class Templates {
 			this.label = label;
 		}
 
+		@Override
 		public String format(Number value, ReportParameters reportParameters) {
 			return label + currencyType.valueToString(value, reportParameters.getLocale());
 		}

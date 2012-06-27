@@ -34,6 +34,7 @@ public abstract class DRChecksumBarcode extends DRBarcode implements DRIChecksum
 	
 	private BarcodeChecksumMode checksumMode;
 
+	@Override
 	public BarcodeChecksumMode getChecksumMode() {
 		return checksumMode;
 	}

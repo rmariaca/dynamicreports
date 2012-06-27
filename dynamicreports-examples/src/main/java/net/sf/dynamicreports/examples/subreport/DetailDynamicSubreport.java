@@ -67,6 +67,7 @@ public class DetailDynamicSubreport {
 	private class SubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			JasperReportBuilder report = report();
@@ -85,6 +86,7 @@ public class DetailDynamicSubreport {
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			int masterRowNumber = reportParameters.getReportRowNumber();
 			String[] columns = new String[masterRowNumber];

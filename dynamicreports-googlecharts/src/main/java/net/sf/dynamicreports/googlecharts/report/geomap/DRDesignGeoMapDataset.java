@@ -38,6 +38,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 	private ResetType resetType;
 	private DRDesignGroup resetGroup;
 
+	@Override
 	public DRDesignDataset getSubDataset() {
 		return subDataset;
 	}
@@ -46,6 +47,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.subDataset = subDataset;
 	}
 
+	@Override
 	public DRIDesignExpression getLocationExpression() {
 		return locationExpression;
 	}
@@ -54,6 +56,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.locationExpression = locationExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}
@@ -62,6 +65,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.valueExpression = valueExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getLabelExpression() {
 		return labelExpression;
 	}
@@ -70,6 +74,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.labelExpression = labelExpression;
 	}
 
+	@Override
 	public ResetType getResetType() {
 		return resetType;
 	}
@@ -78,6 +83,7 @@ public class DRDesignGeoMapDataset implements DRIDesignGeoMapDataset {
 		this.resetType = resetType;
 	}
 
+	@Override
 	public DRDesignGroup getResetGroup() {
 		return resetGroup;
 	}

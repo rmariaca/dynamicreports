@@ -38,14 +38,14 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CustomGroupReport {
-	
+
 	public CustomGroupReport() {
 		build();
 	}
-	
-	private void build() {				
+
+	private void build() {
 		CustomGroupBuilder yearGroup = grp.group(new YearExpression());
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -58,26 +58,27 @@ public class CustomGroupReport {
 			  .title(Templates.createTitleComponent("CustomGroup"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class YearExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			String orderDate = reportParameters.getValue("orderdate");
 			return orderDate.split("-")[0];
-		}		
+		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("orderdate", "item", "quantity", "unitprice");
 		dataSource.add("2009-11-01", "DVD", 5, new BigDecimal(30));
 		dataSource.add("2009-11-01", "Book", 3, new BigDecimal(11));
-		dataSource.add("2009-12-01", "DVD", 1, new BigDecimal(28));		
+		dataSource.add("2009-12-01", "DVD", 1, new BigDecimal(28));
 		dataSource.add("2009-12-01", "Book", 1, new BigDecimal(15));
 		dataSource.add("2010-01-01", "DVD", 4, new BigDecimal(32));
 		dataSource.add("2010-01-01", "Book", 2, new BigDecimal(15));
@@ -85,7 +86,7 @@ public class CustomGroupReport {
 		dataSource.add("2010-02-01", "Book", 5, new BigDecimal(12));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new CustomGroupReport();
 	}

@@ -48,6 +48,7 @@ public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 		this.columnGroup = columnGroup;
 	}
 
+	@Override
 	public DRICrosstabRowGroup<?> getRowGroup() {
 		return rowGroup;
 	}
@@ -56,6 +57,7 @@ public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 		this.rowGroup = rowGroup;
 	}
 
+	@Override
 	public DRICrosstabColumnGroup<?> getColumnGroup() {
 		return columnGroup;
 	}
@@ -64,6 +66,7 @@ public class DRCrosstabCellStyle implements DRICrosstabCellStyle {
 		this.columnGroup = columnGroup;
 	}
 
+	@Override
 	public DRIReportStyle getStyle() {
 		return style;
 	}

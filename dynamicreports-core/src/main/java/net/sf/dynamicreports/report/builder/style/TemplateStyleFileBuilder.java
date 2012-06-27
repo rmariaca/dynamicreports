@@ -59,6 +59,7 @@ public class TemplateStyleFileBuilder implements TemplateStyleListBuilder {
 		this.styles = styles;
 	}
 
+	@Override
 	public DRIStyle[] getStyles() {
 		return styles;
 	}

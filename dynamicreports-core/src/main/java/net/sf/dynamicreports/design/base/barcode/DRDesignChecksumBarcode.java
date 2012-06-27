@@ -35,6 +35,7 @@ public abstract class DRDesignChecksumBarcode extends DRDesignBarcode implements
 		super(name);
 	}
 
+	@Override
 	public BarcodeChecksumMode getChecksumMode() {
 		return checksumMode;
 	}

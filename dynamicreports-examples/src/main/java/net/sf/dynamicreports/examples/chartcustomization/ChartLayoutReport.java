@@ -95,6 +95,7 @@ public class ChartLayoutReport {
 	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
       renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());

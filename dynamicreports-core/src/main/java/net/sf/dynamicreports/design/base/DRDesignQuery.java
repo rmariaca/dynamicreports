@@ -31,6 +31,7 @@ public class DRDesignQuery implements DRIDesignQuery {
 	private String text;
 	private String language;
 
+	@Override
 	public String getText() {
 		return text;
 	}
@@ -39,6 +40,7 @@ public class DRDesignQuery implements DRIDesignQuery {
 		this.text = text;
 	}
 
+	@Override
 	public String getLanguage() {
 		return language;
 	}

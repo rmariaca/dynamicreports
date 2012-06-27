@@ -42,6 +42,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 	private Integer tabStopWidth;
 	private List<DRIDesignTabStop> tabStops;
 
+	@Override
 	public LineSpacing getLineSpacing() {
 		return lineSpacing;
 	}
@@ -50,6 +51,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.lineSpacing = lineSpacing;
 	}
 
+	@Override
 	public Float getLineSpacingSize() {
 		return lineSpacingSize;
 	}
@@ -58,6 +60,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.lineSpacingSize = lineSpacingSize;
 	}
 
+	@Override
 	public Integer getFirstLineIndent() {
 		return firstLineIndent;
 	}
@@ -66,6 +69,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.firstLineIndent = firstLineIndent;
 	}
 
+	@Override
 	public Integer getLeftIndent() {
 		return leftIndent;
 	}
@@ -74,6 +78,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.leftIndent = leftIndent;
 	}
 
+	@Override
 	public Integer getRightIndent() {
 		return rightIndent;
 	}
@@ -82,6 +87,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.rightIndent = rightIndent;
 	}
 
+	@Override
 	public Integer getSpacingBefore() {
 		return spacingBefore;
 	}
@@ -90,6 +96,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.spacingBefore = spacingBefore;
 	}
 
+	@Override
 	public Integer getSpacingAfter() {
 		return spacingAfter;
 	}
@@ -98,6 +105,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.spacingAfter = spacingAfter;
 	}
 
+	@Override
 	public Integer getTabStopWidth() {
 		return tabStopWidth;
 	}
@@ -106,6 +114,7 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 		this.tabStopWidth = tabStopWidth;
 	}
 
+	@Override
 	public List<DRIDesignTabStop> getTabStops() {
 		return tabStops;
 	}

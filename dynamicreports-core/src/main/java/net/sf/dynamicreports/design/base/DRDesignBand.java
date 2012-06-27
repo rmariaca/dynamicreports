@@ -41,10 +41,12 @@ public class DRDesignBand implements DRIDesignBand {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public SplitType getSplitType() {
 		return splitType;
 	}
@@ -57,6 +59,7 @@ public class DRDesignBand implements DRIDesignBand {
 		this.list = list;
 	}
 
+	@Override
 	public DRDesignList getList() {
 		return list;
 	}
@@ -69,6 +72,7 @@ public class DRDesignBand implements DRIDesignBand {
 		list.addComponent(index, component);
 	}
 
+	@Override
 	public DRDesignComponent getBandComponent() {
 		return bandComponent;
 	}
@@ -77,6 +81,7 @@ public class DRDesignBand implements DRIDesignBand {
 		this.bandComponent = component;
 	}
 
+	@Override
 	public Integer getHeight() {
 		return height;
 	}

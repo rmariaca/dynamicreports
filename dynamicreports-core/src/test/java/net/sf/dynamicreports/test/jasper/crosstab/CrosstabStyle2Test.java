@@ -125,6 +125,7 @@ public class CrosstabStyle2Test extends AbstractJasperCrosstabStyleTest implemen
 			this.values = Arrays.asList(values);
 		}
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			Integer value = reportParameters.getValue(measure1);
 			return values.contains(value);

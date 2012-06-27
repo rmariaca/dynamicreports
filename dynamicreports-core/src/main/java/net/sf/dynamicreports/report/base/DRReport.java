@@ -149,6 +149,7 @@ public class DRReport implements DRIReport {
 		backgroundBand = new DRBand();
 	}
 
+	@Override
 	public DRReportTemplate getTemplate() {
 		return template;
 	}
@@ -158,6 +159,7 @@ public class DRReport implements DRIReport {
 		this.template = template;
 	}
 
+	@Override
 	public List<DRIStyle> getTemplateStyles() {
 		return templateStyles;
 	}
@@ -172,6 +174,7 @@ public class DRReport implements DRIReport {
 		this.templateStyles = templateStyles;
 	}
 
+	@Override
 	public DRITemplateDesign<?> getTemplateDesign() {
 		return templateDesign;
 	}
@@ -181,6 +184,7 @@ public class DRReport implements DRIReport {
 		this.templateDesign = templateDesign;
 	}
 
+	@Override
 	public Locale getLocale() {
 		return locale;
 	}
@@ -189,6 +193,7 @@ public class DRReport implements DRIReport {
 		this.locale = locale;
 	}
 
+	@Override
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
@@ -197,6 +202,7 @@ public class DRReport implements DRIReport {
 		this.resourceBundle = resourceBundle;
 	}
 
+	@Override
 	public String getResourceBundleName() {
 		return resourceBundleName;
 	}
@@ -205,6 +211,7 @@ public class DRReport implements DRIReport {
 		this.resourceBundleName = resourceBundleName;
 	}
 
+	@Override
 	public Boolean getShowColumnTitle() {
 		return showColumnTitle;
 	}
@@ -213,6 +220,7 @@ public class DRReport implements DRIReport {
 		this.showColumnTitle = showColumnTitle;
 	}
 
+	@Override
 	public List<DRColumn<?>> getColumns() {
 		return columns;
 	}
@@ -228,6 +236,7 @@ public class DRReport implements DRIReport {
 		this.columns.add(column);
 	}
 
+	@Override
 	public List<DRGroup> getGroups() {
 		return groups;
 	}
@@ -243,6 +252,7 @@ public class DRReport implements DRIReport {
 		this.groups.add(group);
 	}
 
+	@Override
 	public List<DRField<?>> getFields() {
 		return fields;
 	}
@@ -258,6 +268,7 @@ public class DRReport implements DRIReport {
 		this.fields.add(field);
 	}
 
+	@Override
 	public List<DRVariable<?>> getVariables() {
 		return variables;
 	}
@@ -273,6 +284,7 @@ public class DRReport implements DRIReport {
 		this.variables.add(variable);
 	}
 
+	@Override
 	public List<DRSort> getSorts() {
 		return sorts;
 	}
@@ -288,6 +300,7 @@ public class DRReport implements DRIReport {
 		this.sorts.add(sort);
 	}
 
+	@Override
 	public List<DRSubtotal<?>> getSubtotals() {
 		return subtotals;
 	}
@@ -303,6 +316,7 @@ public class DRReport implements DRIReport {
 		this.subtotals.add(subtotal);
 	}
 
+	@Override
 	public List<DRParameter<?>> getParameters() {
 		return parameters;
 	}
@@ -318,6 +332,7 @@ public class DRReport implements DRIReport {
 		this.parameters.add(parameter);
 	}
 
+	@Override
 	public Map<String, Object> getParameterValues() {
 		return parameterValues;
 	}
@@ -334,6 +349,7 @@ public class DRReport implements DRIReport {
 		this.parameterValues = parameterValues;
 	}
 
+	@Override
 	public List<DRIScriptlet> getScriptlets() {
 		return scriptlets;
 	}
@@ -349,6 +365,7 @@ public class DRReport implements DRIReport {
 		this.scriptlets.add(scriptlet);
 	}
 
+	@Override
 	public Properties getProperties() {
 		return properties;
 	}
@@ -363,6 +380,7 @@ public class DRReport implements DRIReport {
 		this.properties.setProperty(key, value);
 	}
 
+	@Override
 	public DRQuery getQuery() {
 		return query;
 	}
@@ -371,6 +389,7 @@ public class DRReport implements DRIReport {
 		this.query = query;
 	}
 
+	@Override
 	public DRPage getPage() {
 		return page;
 	}
@@ -380,6 +399,7 @@ public class DRReport implements DRIReport {
 		this.page = page;
 	}
 
+	@Override
 	public Boolean getIgnorePagination() {
 		return ignorePagination;
 	}
@@ -388,6 +408,7 @@ public class DRReport implements DRIReport {
 		this.ignorePagination = ignorePagination;
 	}
 
+	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return whenNoDataType;
 	}
@@ -396,6 +417,7 @@ public class DRReport implements DRIReport {
 		this.whenNoDataType = whenNoDataType;
 	}
 
+	@Override
 	public Boolean getTitleOnANewPage() {
 		return titleOnANewPage;
 	}
@@ -404,6 +426,7 @@ public class DRReport implements DRIReport {
 		this.titleOnANewPage = titleOnANewPage;
 	}
 
+	@Override
 	public Boolean getSummaryOnANewPage() {
 		return summaryOnANewPage;
 	}
@@ -412,6 +435,7 @@ public class DRReport implements DRIReport {
 		this.summaryOnANewPage = summaryOnANewPage;
 	}
 
+	@Override
 	public Boolean getSummaryWithPageHeaderAndFooter() {
 		return summaryWithPageHeaderAndFooter;
 	}
@@ -420,6 +444,7 @@ public class DRReport implements DRIReport {
 		this.summaryWithPageHeaderAndFooter = summaryWithPageHeaderAndFooter;
 	}
 
+	@Override
 	public Boolean getFloatColumnFooter() {
 		return floatColumnFooter;
 	}
@@ -428,6 +453,7 @@ public class DRReport implements DRIReport {
 		this.floatColumnFooter = floatColumnFooter;
 	}
 
+	@Override
 	public Orientation getPrintOrder() {
 		return printOrder;
 	}
@@ -436,6 +462,7 @@ public class DRReport implements DRIReport {
 		this.printOrder = printOrder;
 	}
 
+	@Override
 	public RunDirection getColumnDirection() {
 		return columnDirection;
 	}
@@ -444,6 +471,7 @@ public class DRReport implements DRIReport {
 		this.columnDirection = columnDirection;
 	}
 
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -452,6 +480,7 @@ public class DRReport implements DRIReport {
 		this.language = language;
 	}
 
+	@Override
 	public Boolean getUseFieldNameAsDescription() {
 		return useFieldNameAsDescription;
 	}
@@ -460,6 +489,7 @@ public class DRReport implements DRIReport {
 		this.useFieldNameAsDescription = useFieldNameAsDescription;
 	}
 
+	@Override
 	public DRIReportStyle getTextStyle() {
 		return textStyle;
 	}
@@ -468,6 +498,7 @@ public class DRReport implements DRIReport {
 		this.textStyle = textStyle;
 	}
 
+	@Override
 	public DRIReportStyle getColumnTitleStyle() {
 		return columnTitleStyle;
 	}
@@ -476,6 +507,7 @@ public class DRReport implements DRIReport {
 		this.columnTitleStyle = columnTitleStyle;
 	}
 
+	@Override
 	public DRIReportStyle getColumnStyle() {
 		return columnStyle;
 	}
@@ -484,6 +516,7 @@ public class DRReport implements DRIReport {
 		this.columnStyle = columnStyle;
 	}
 
+	@Override
 	public DRIReportStyle getGroupTitleStyle() {
 		return groupTitleStyle;
 	}
@@ -492,6 +525,7 @@ public class DRReport implements DRIReport {
 		this.groupTitleStyle = groupTitleStyle;
 	}
 
+	@Override
 	public DRIReportStyle getGroupStyle() {
 		return groupStyle;
 	}
@@ -500,6 +534,7 @@ public class DRReport implements DRIReport {
 		this.groupStyle = groupStyle;
 	}
 
+	@Override
 	public DRIReportStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
@@ -508,6 +543,7 @@ public class DRReport implements DRIReport {
 		this.subtotalStyle = subtotalStyle;
 	}
 
+	@Override
 	public DRIReportStyle getImageStyle() {
 		return imageStyle;
 	}
@@ -516,6 +552,7 @@ public class DRReport implements DRIReport {
 		this.imageStyle = imageStyle;
 	}
 
+	@Override
 	public DRIReportStyle getChartStyle() {
 		return chartStyle;
 	}
@@ -524,6 +561,7 @@ public class DRReport implements DRIReport {
 		this.chartStyle = chartStyle;
 	}
 
+	@Override
 	public DRIReportStyle getBarcodeStyle() {
 		return barcodeStyle;
 	}
@@ -532,6 +570,7 @@ public class DRReport implements DRIReport {
 		this.barcodeStyle = barcodeStyle;
 	}
 
+	@Override
 	public Boolean getHighlightDetailOddRows() {
 		return highlightDetailOddRows;
 	}
@@ -540,6 +579,7 @@ public class DRReport implements DRIReport {
 		this.highlightDetailOddRows = highlightDetailOddRows;
 	}
 
+	@Override
 	public DRSimpleStyle getDetailOddRowStyle() {
 		return detailOddRowStyle;
 	}
@@ -548,6 +588,7 @@ public class DRReport implements DRIReport {
 		this.detailOddRowStyle = detailOddRowStyle;
 	}
 
+	@Override
 	public Boolean getHighlightDetailEvenRows() {
 		return highlightDetailEvenRows;
 	}
@@ -556,6 +597,7 @@ public class DRReport implements DRIReport {
 		this.highlightDetailEvenRows = highlightDetailEvenRows;
 	}
 
+	@Override
 	public DRSimpleStyle getDetailEvenRowStyle() {
 		return detailEvenRowStyle;
 	}
@@ -564,6 +606,7 @@ public class DRReport implements DRIReport {
 		this.detailEvenRowStyle = detailEvenRowStyle;
 	}
 
+	@Override
 	public List<DRConditionalStyle> getDetailRowHighlighters() {
 		return detailRowHighlighters;
 	}
@@ -579,6 +622,7 @@ public class DRReport implements DRIReport {
 		this.detailRowHighlighters.add(detailRowHighlighter);
 	}
 
+	@Override
 	public DRColumnGrid getColumnGrid() {
 		return columnGrid;
 	}
@@ -587,6 +631,7 @@ public class DRReport implements DRIReport {
 		this.columnGrid = columnGrid;
 	}
 
+	@Override
 	public Boolean getTableOfContents() {
 		return tableOfContents;
 	}
@@ -595,6 +640,7 @@ public class DRReport implements DRIReport {
 		this.tableOfContents = tableOfContents;
 	}
 
+	@Override
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer() {
 		return tableOfContentsCustomizer;
 	}
@@ -603,6 +649,7 @@ public class DRReport implements DRIReport {
 		this.tableOfContentsCustomizer = tableOfContentsCustomizer;
 	}
 
+	@Override
 	public DRIExpression<Boolean> getFilterExpression() {
 		return filterExpression;
 	}
@@ -611,50 +658,62 @@ public class DRReport implements DRIReport {
 		this.filterExpression = filterExpression;
 	}
 
+	@Override
 	public DRBand getTitleBand() {
 		return titleBand;
 	}
 
+	@Override
 	public DRBand getPageHeaderBand() {
 		return pageHeaderBand;
 	}
 
+	@Override
 	public DRBand getPageFooterBand() {
 		return pageFooterBand;
 	}
 
+	@Override
 	public DRBand getColumnHeaderBand() {
 		return columnHeaderBand;
 	}
 
+	@Override
 	public DRBand getColumnFooterBand() {
 		return columnFooterBand;
 	}
 
+	@Override
 	public DRBand getDetailBand() {
 		return detailBand;
 	}
 
+	@Override
 	public DRBand getDetailHeaderBand() {
 		return detailHeaderBand;
 	}
 
+	@Override
 	public DRBand getDetailFooterBand() {
 		return detailFooterBand;
 	}
 
+	@Override
 	public DRBand getLastPageFooterBand() {
 		return lastPageFooterBand;
 	}
 
+	@Override
 	public DRBand getSummaryBand() {
 		return summaryBand;
 	}
 
+	@Override
 	public DRBand getNoDataBand() {
 		return noDataBand;
 	}
 
+	@Override
 	public DRBand getBackgroundBand() {
 		return backgroundBand;
 	}

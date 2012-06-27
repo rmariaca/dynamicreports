@@ -108,6 +108,7 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			return new JREmptyDataSource(2);
 		}
@@ -116,6 +117,7 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 	private class SubreportTitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "Subreport" + reportParameters.getMasterParameters().getReportRowNumber();
 		}
@@ -124,6 +126,7 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 	private class ValueExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getMasterParameters().getReportRowNumber() + "_" + reportParameters.getReportRowNumber();
 		}

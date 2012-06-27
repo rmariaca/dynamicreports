@@ -37,6 +37,7 @@ public class DRGanttChartSerie extends AbstractChartSerie implements DRIGanttCha
 	private DRIExpression<?> percentExpression;
 	private DRIExpression<?> labelExpression;
 
+	@Override
 	public DRIExpression<?> getStartDateExpression() {
 		return startDateExpression;
 	}
@@ -45,6 +46,7 @@ public class DRGanttChartSerie extends AbstractChartSerie implements DRIGanttCha
 		this.startDateExpression = startDateExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getEndDateExpression() {
 		return endDateExpression;
 	}
@@ -53,6 +55,7 @@ public class DRGanttChartSerie extends AbstractChartSerie implements DRIGanttCha
 		this.endDateExpression = endDateExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getPercentExpression() {
 		return percentExpression;
 	}
@@ -61,6 +64,7 @@ public class DRGanttChartSerie extends AbstractChartSerie implements DRIGanttCha
 		this.percentExpression = percentExpression;
 	}
 
+	@Override
 	public DRIExpression<?> getLabelExpression() {
 		return labelExpression;
 	}

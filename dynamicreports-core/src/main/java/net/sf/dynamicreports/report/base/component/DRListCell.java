@@ -54,6 +54,7 @@ public class DRListCell implements DRIListCell {
 		this.horizontalAlignment = horizontalAlignment;
 	}
 
+	@Override
 	public HorizontalCellComponentAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -62,10 +63,12 @@ public class DRListCell implements DRIListCell {
 		this.verticalAlignment = verticalAlignment;
 	}
 
+	@Override
 	public VerticalCellComponentAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
 
+	@Override
 	public DRComponent getComponent() {
 		return component;
 	}

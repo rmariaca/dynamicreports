@@ -49,6 +49,7 @@ public abstract class AbstractBetweenValueExpression<T extends Number> extends A
 		this.max = max;
 	}
 
+	@Override
 	public Boolean evaluate(ReportParameters reportParameters) {
 		Number actualValue = reportParameters.getValue(value);
 		if (actualValue != null) {

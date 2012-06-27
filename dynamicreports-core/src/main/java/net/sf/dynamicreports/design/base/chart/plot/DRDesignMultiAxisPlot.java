@@ -38,6 +38,7 @@ public class DRDesignMultiAxisPlot extends DRDesignAxisPlot implements DRIDesign
 		axes = new ArrayList<DRIDesignChartAxis>();
 	}
 
+	@Override
 	public List<DRIDesignChartAxis> getAxes() {
 		return axes;
 	}

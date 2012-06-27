@@ -39,6 +39,7 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 		super("subreport");
 	}
 
+	@Override
 	public DRIDesignExpression getReportExpression() {
 		return reportExpression;
 	}
@@ -47,6 +48,7 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 		this.reportExpression = reportExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getParametersExpression() {
 		return parametersExpression;
 	}
@@ -55,6 +57,7 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 		this.parametersExpression = parametersExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getConnectionExpression() {
 		return connectionExpression;
 	}
@@ -63,6 +66,7 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 		this.connectionExpression = connectionExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getDataSourceExpression() {
 		return dataSourceExpression;
 	}
@@ -71,6 +75,7 @@ public class DRDesignSubreport extends DRDesignComponent implements DRIDesignSub
 		this.dataSourceExpression = dataSourceExpression;
 	}
 
+	@Override
 	public Boolean getRunToBottom() {
 		return runToBottom;
 	}

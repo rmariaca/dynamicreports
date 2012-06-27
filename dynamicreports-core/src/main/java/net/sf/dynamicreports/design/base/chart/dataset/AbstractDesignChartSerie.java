@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 public abstract class AbstractDesignChartSerie implements DRIDesignChartSerie {
 	private DRIDesignExpression seriesExpression;
 
+	@Override
 	public DRIDesignExpression getSeriesExpression() {
 		return seriesExpression;
 	}

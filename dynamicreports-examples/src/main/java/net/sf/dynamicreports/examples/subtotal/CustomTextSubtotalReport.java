@@ -45,19 +45,19 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class CustomTextSubtotalReport {
-	
+
 	public CustomTextSubtotalReport() {
 		build();
 	}
-	
-	private void build() {		
+
+	private void build() {
 		TextColumnBuilder<String>     countryColumn  = col.column("Country",  "country",  type.stringType());
 		TextColumnBuilder<String>     itemColumn     = col.column("Item",     "item",     type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity", "quantity", type.integerType());
 		TextColumnBuilder<BigDecimal> priceColumn    = col.column("Price",    "price",    type.bigDecimalType());
-		
+
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
-		
+
 		VariableBuilder<Integer>    quantitySum = variable(quantityColumn, Calculation.SUM);
 		VariableBuilder<BigDecimal> priceSum    = variable(priceColumn, Calculation.SUM);
 
@@ -65,20 +65,20 @@ public class CustomTextSubtotalReport {
 		quantityGrpSum.setResetGroup(countryGroup);
 		VariableBuilder<BigDecimal> priceGrpSum = variable(priceColumn, Calculation.SUM);
 		priceGrpSum.setResetType(Evaluation.FIRST_GROUP);
-		
+
 		StyleBuilder subtotalStyle = stl.style()
 		                                .bold()
 		                                .setTopBorder(stl.pen1Point())
 		                                .setHorizontalAlignment(HorizontalAlignment.CENTER);
-		
+
 		TextFieldBuilder<String> summarySbt = cmp.text(new CustomTextSubtotal(quantitySum, priceSum))
 		                                         .setStyle(subtotalStyle);
-		
+
 		TextFieldBuilder<String> groupSbt = cmp.text(new CustomTextSubtotal(quantityGrpSum, priceGrpSum))
 		                                       .setStyle(subtotalStyle);
-		
+
 		countryGroup.footer(groupSbt);
-		
+
 		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
@@ -93,33 +93,34 @@ public class CustomTextSubtotalReport {
 			  .title(Templates.createTitleComponent("CustomTextSubtotal"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();	
+			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class CustomTextSubtotal extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
-		
+
 		private VariableBuilder<Integer> quantitySum;
 		private VariableBuilder<BigDecimal> priceSum;
-		
+
 		public CustomTextSubtotal(VariableBuilder<Integer> quantitySum, VariableBuilder<BigDecimal> priceSum) {
 			this.quantitySum = quantitySum;
 			this.priceSum = priceSum;
 		}
-		
+
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			Integer quantitySumValue = reportParameters.getValue(quantitySum);
 			BigDecimal priceSumValue = reportParameters.getValue(priceSum);
 			BigDecimal unitPriceSbt = priceSumValue.divide(new BigDecimal(quantitySumValue), 2, BigDecimal.ROUND_HALF_UP);
-			return "sum(quantity) = " + type.integerType().valueToString(quantitySum, reportParameters) + ", " + 
+			return "sum(quantity) = " + type.integerType().valueToString(quantitySum, reportParameters) + ", " +
 			       "sum(price) = " + type.bigDecimalType().valueToString(priceSum, reportParameters) + ", " +
-			       "sum(price) / sum(quantity) = " + type.bigDecimalType().valueToString(unitPriceSbt, reportParameters.getLocale());			       
-		}		
+			       "sum(price) / sum(quantity) = " + type.bigDecimalType().valueToString(unitPriceSbt, reportParameters.getLocale());
+		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "price");
 		dataSource.add("USA", "Book", 4, new BigDecimal(10));
@@ -132,7 +133,7 @@ public class CustomTextSubtotalReport {
 		dataSource.add("Canada", "Notebook", 2, new BigDecimal(30));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new CustomTextSubtotalReport();
 	}

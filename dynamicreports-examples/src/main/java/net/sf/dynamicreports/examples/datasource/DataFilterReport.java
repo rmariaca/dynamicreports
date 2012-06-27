@@ -79,6 +79,7 @@ public class DataFilterReport {
 	private class FilterExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue("item").equals("Book");
 		}

@@ -39,6 +39,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		super("PDF417");
 	}
 
+	@Override
 	public Integer getMinColumns() {
 		return minColumns;
 	}
@@ -47,6 +48,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		this.minColumns = minColumns;
 	}
 
+	@Override
 	public Integer getMaxColumns() {
 		return maxColumns;
 	}
@@ -55,6 +57,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		this.maxColumns = maxColumns;
 	}
 
+	@Override
 	public Integer getMinRows() {
 		return minRows;
 	}
@@ -63,6 +66,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		this.minRows = minRows;
 	}
 
+	@Override
 	public Integer getMaxRows() {
 		return maxRows;
 	}
@@ -71,6 +75,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		this.maxRows = maxRows;
 	}
 
+	@Override
 	public Double getWidthToHeightRatio() {
 		return widthToHeightRatio;
 	}
@@ -79,6 +84,7 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 		this.widthToHeightRatio = widthToHeightRatio;
 	}
 
+	@Override
 	public Integer getErrorCorrectionLevel() {
 		return errorCorrectionLevel;
 	}

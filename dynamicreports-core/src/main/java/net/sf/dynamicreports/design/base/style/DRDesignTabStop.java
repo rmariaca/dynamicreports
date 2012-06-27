@@ -32,6 +32,7 @@ public class DRDesignTabStop implements DRIDesignTabStop {
 	private int position;
 	private TabStopAlignment alignment;
 
+	@Override
 	public int getPosition() {
 		return position;
 	}
@@ -40,6 +41,7 @@ public class DRDesignTabStop implements DRIDesignTabStop {
 		this.position = position;
 	}
 
+	@Override
 	public TabStopAlignment getAlignment() {
 		return alignment;
 	}

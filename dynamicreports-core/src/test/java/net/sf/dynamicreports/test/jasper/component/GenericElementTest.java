@@ -92,6 +92,7 @@ public class GenericElementTest {
 	private class ParameterExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return data;
 		}		

@@ -37,10 +37,12 @@ public class DRDesignSimpleExpression extends AbstractDesignSimpleExpression {
 		this.parameterName = parameterName;
 	}
 
+	@Override
 	public Object evaluate(ReportParameters reportParameters) {
 		return simpleExpression.evaluate(reportParameters);
 	}
 
+	@Override
 	public Class<?> getValueClass() {
 		return simpleExpression.getValueClass();
 	}

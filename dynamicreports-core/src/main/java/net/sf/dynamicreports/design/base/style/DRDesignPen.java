@@ -35,6 +35,7 @@ public class DRDesignPen implements DRIDesignPen {
 	private LineStyle lineStyle;
 	private Color lineColor;
 	
+	@Override
 	public Float getLineWidth() {
 		return lineWidth;
 	}
@@ -43,6 +44,7 @@ public class DRDesignPen implements DRIDesignPen {
 		this.lineWidth = lineWidth;
 	}
 	
+	@Override
 	public LineStyle getLineStyle() {
 		return lineStyle;
 	}
@@ -51,6 +53,7 @@ public class DRDesignPen implements DRIDesignPen {
 		this.lineStyle = lineStyle;
 	}
 	
+	@Override
 	public Color getLineColor() {
 		return lineColor;
 	}

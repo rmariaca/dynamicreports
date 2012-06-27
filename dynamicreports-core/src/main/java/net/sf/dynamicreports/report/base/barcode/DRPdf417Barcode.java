@@ -38,6 +38,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 	private Double widthToHeightRatio;
 	private Integer errorCorrectionLevel;
 
+	@Override
 	public Integer getMinColumns() {
 		return minColumns;
 	}
@@ -46,6 +47,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 		this.minColumns = minColumns;
 	}
 
+	@Override
 	public Integer getMaxColumns() {
 		return maxColumns;
 	}
@@ -54,6 +56,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 		this.maxColumns = maxColumns;
 	}
 
+	@Override
 	public Integer getMinRows() {
 		return minRows;
 	}
@@ -62,6 +65,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 		this.minRows = minRows;
 	}
 
+	@Override
 	public Integer getMaxRows() {
 		return maxRows;
 	}
@@ -70,6 +74,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 		this.maxRows = maxRows;
 	}
 
+	@Override
 	public Double getWidthToHeightRatio() {
 		return widthToHeightRatio;
 	}
@@ -78,6 +83,7 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 		this.widthToHeightRatio = widthToHeightRatio;
 	}
 
+	@Override
 	public Integer getErrorCorrectionLevel() {
 		return errorCorrectionLevel;
 	}

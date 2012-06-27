@@ -90,6 +90,7 @@ public class PercentageColumnTest extends AbstractJasperValueTest implements Ser
 	private class ColumnValueFormatter extends AbstractValueFormatter<String, Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String format(Double value, ReportParameters reportParameters) {
 			return "value = " + new DecimalFormat("#,##0.00%", new DecimalFormatSymbols(Locale.ENGLISH)).format(value);
 		}		

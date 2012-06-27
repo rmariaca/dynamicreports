@@ -143,6 +143,7 @@ public class InvoiceDesign {
 	private class TotalPaymentExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			BigDecimal total = reportParameters.getValue(totalSum);
 			BigDecimal shipping = total.add(data.getInvoice().getShipping());

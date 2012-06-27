@@ -35,6 +35,7 @@ public class DRCrosstabDataset implements DRICrosstabDataset {
 	private DRDataset subDataset;
 	private Boolean dataPreSorted;
 
+	@Override
 	public DRDataset getSubDataset() {
 		return subDataset;
 	}
@@ -43,6 +44,7 @@ public class DRCrosstabDataset implements DRICrosstabDataset {
 		this.subDataset = subDataset;
 	}
 
+	@Override
 	public Boolean getDataPreSorted() {
 		return dataPreSorted;
 	}

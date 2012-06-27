@@ -38,6 +38,7 @@ import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
  */
 public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
+	@Override
 	public String getName();
 
 	public String getHeaderPattern();

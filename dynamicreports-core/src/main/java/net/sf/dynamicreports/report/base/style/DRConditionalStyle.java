@@ -41,6 +41,7 @@ public class DRConditionalStyle extends DRBaseStyle implements DRIConditionalSty
 		this.conditionExpression = conditionExpression;
 	}
 
+	@Override
 	public DRIExpression<Boolean> getConditionExpression() {
 		return conditionExpression;
 	}

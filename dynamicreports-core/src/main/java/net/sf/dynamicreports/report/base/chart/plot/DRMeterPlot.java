@@ -60,6 +60,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		intervals = new ArrayList<DRIMeterInterval>();
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getDataRangeLowExpression() {
 		return dataRangeLowExpression;
 	}
@@ -68,6 +69,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.dataRangeLowExpression = dataRangeLowExpression;
 	}
 
+	@Override
 	public DRIExpression<? extends Number> getDataRangeHighExpression() {
 		return dataRangeHighExpression;
 	}
@@ -76,6 +78,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.dataRangeHighExpression = dataRangeHighExpression;
 	}
 
+	@Override
 	public Color getValueColor() {
 		return valueColor;
 	}
@@ -84,6 +87,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.valueColor = valueColor;
 	}
 
+	@Override
 	public String getValueMask() {
 		return valueMask;
 	}
@@ -92,6 +96,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.valueMask = valueMask;
 	}
 
+	@Override
 	public DRFont getValueFont() {
 		return valueFont;
 	}
@@ -100,6 +105,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.valueFont = valueFont;
 	}
 
+	@Override
 	public MeterShape getShape() {
 		return shape;
 	}
@@ -108,6 +114,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.shape = shape;
 	}
 
+	@Override
 	public List<DRIMeterInterval> getIntervals() {
 		return intervals;
 	}
@@ -121,6 +128,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.intervals = intervals;
 	}
 
+	@Override
 	public Integer getMeterAngle() {
 		return meterAngle;
 	}
@@ -129,6 +137,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.meterAngle = meterAngle;
 	}
 
+	@Override
 	public String getUnits() {
 		return units;
 	}
@@ -137,6 +146,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.units = units;
 	}
 
+	@Override
 	public Double getTickInterval() {
 		return tickInterval;
 	}
@@ -145,6 +155,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.tickInterval = tickInterval;
 	}
 
+	@Override
 	public Color getMeterBackgroundColor() {
 		return meterBackgroundColor;
 	}
@@ -153,6 +164,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.meterBackgroundColor = meterBackgroundColor;
 	}
 
+	@Override
 	public Color getNeedleColor() {
 		return needleColor;
 	}
@@ -161,6 +173,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.needleColor = needleColor;
 	}
 
+	@Override
 	public Color getTickColor() {
 		return tickColor;
 	}
@@ -169,6 +182,7 @@ public class DRMeterPlot implements DRIMeterPlot {
 		this.tickColor = tickColor;
 	}
 
+	@Override
 	public DRFont getTickLabelFont() {
 		return tickLabelFont;
 	}

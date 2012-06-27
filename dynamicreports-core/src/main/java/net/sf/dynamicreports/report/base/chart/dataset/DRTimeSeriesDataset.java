@@ -38,6 +38,7 @@ public class DRTimeSeriesDataset extends DRSeriesDataset implements DRITimeSerie
 		this.timePeriodType = timePeriodType;
 	}
 
+	@Override
 	public TimePeriod getTimePeriodType() {
 		return timePeriodType;
 	}

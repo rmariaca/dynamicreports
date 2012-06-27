@@ -44,6 +44,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 	private Integer barHeight;
 	private BarcodeOrientation orientation;
 
+	@Override
 	public BarbecueType getType() {
 		return type;
 	}
@@ -52,6 +53,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.type = type;
 	}
 
+	@Override
 	public DRIExpression<String> getCodeExpression() {
 		return codeExpression;
 	}
@@ -60,6 +62,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.codeExpression = codeExpression;
 	}
 
+	@Override
 	public DRIExpression<String> getApplicationIdentifierExpression() {
 		return applicationIdentifierExpression;
 	}
@@ -68,6 +71,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.applicationIdentifierExpression = applicationIdentifierExpression;
 	}
 
+	@Override
 	public Boolean getDrawText() {
 		return drawText;
 	}
@@ -76,6 +80,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.drawText = drawText;
 	}
 
+	@Override
 	public Boolean getChecksumRequired() {
 		return checksumRequired;
 	}
@@ -84,6 +89,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.checksumRequired = checksumRequired;
 	}
 
+	@Override
 	public Integer getBarWidth() {
 		return barWidth;
 	}
@@ -92,6 +98,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.barWidth = barWidth;
 	}
 
+	@Override
 	public Integer getBarHeight() {
 		return barHeight;
 	}
@@ -100,6 +107,7 @@ public class DRBarbecue extends DRDimensionComponent implements DRIBarbecue {
 		this.barHeight = barHeight;
 	}
 
+	@Override
 	public BarcodeOrientation getOrientation() {
 		return orientation;
 	}

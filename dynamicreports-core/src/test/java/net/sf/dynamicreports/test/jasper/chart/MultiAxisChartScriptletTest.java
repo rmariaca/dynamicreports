@@ -110,6 +110,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	private class Customizer1 implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			XYItemRenderer renderer = chart.getXYPlot().getRenderer();
 			Assert.assertEquals("renderer", XYLineAndShapeRenderer.class, renderer.getClass());
@@ -119,6 +120,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	private class Customizer2 implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			XYItemRenderer renderer = chart.getXYPlot().getRenderer(0);
 			Assert.assertEquals("renderer", XYLineAndShapeRenderer.class, renderer.getClass());
@@ -130,6 +132,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	private class Customizer3 implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer();
 			Assert.assertEquals("renderer", BarRenderer.class, renderer.getClass());
@@ -139,6 +142,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	private class Customizer4 implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer();
 			Assert.assertEquals("renderer", LineAndShapeRenderer.class, renderer.getClass());
@@ -148,6 +152,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	private class Customizer5 implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer(0);
 			Assert.assertEquals("renderer", BarRenderer.class, renderer.getClass());

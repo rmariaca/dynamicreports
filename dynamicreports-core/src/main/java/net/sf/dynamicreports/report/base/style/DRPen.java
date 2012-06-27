@@ -48,6 +48,7 @@ public class DRPen implements DRIPen {
 		this.lineStyle = lineStyle;		
 	}
 	
+	@Override
 	public Float getLineWidth() {
 		return lineWidth;
 	}
@@ -59,6 +60,7 @@ public class DRPen implements DRIPen {
 		this.lineWidth = lineWidth;
 	}
 	
+	@Override
 	public LineStyle getLineStyle() {
 		return lineStyle;
 	}
@@ -67,6 +69,7 @@ public class DRPen implements DRIPen {
 		this.lineStyle = lineStyle;
 	}
 	
+	@Override
 	public Color getLineColor() {
 		return lineColor;
 	}

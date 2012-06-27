@@ -43,10 +43,12 @@ import net.sf.jasperreports.engine.design.JRDesignComponentElement;
  */
 public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRIDesignGeoMap> {
 
+	@Override
 	public boolean isTransform(Object component) {
 		return component instanceof DRIGeoMap || component instanceof DRIDesignGeoMap;
 	}
 
+	@Override
 	public DRIDesignGeoMap designComponent(DesignTransformAccessor accessor, DRIGeoMap geoMap, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRDesignGeoMap designGeoMap = new DRDesignGeoMap();
 		designGeoMap.setEvaluationTime(accessor.getComponentTransform().evaluationTimeFromResetType(resetType));
@@ -77,6 +79,7 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		return designDataset;
 	}
 
+	@Override
 	public JRComponentElement jasperComponent(JasperTransformAccessor accessor, DRIDesignGeoMap geoMap) {
 		StandardGeoMapComponent jrGeoMap = new StandardGeoMapComponent();
 		EvaluationTime evaluationTime = geoMap.getEvaluationTime();

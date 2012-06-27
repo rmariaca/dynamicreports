@@ -34,6 +34,7 @@ public class DRDesignCategoryDataset extends DRDesignSeriesDataset implements DR
 		this.useSeriesAsCategory = useSeriesAsCategory;
 	}
 
+	@Override
 	public boolean isUseSeriesAsCategory() {
 		return useSeriesAsCategory;
 	}

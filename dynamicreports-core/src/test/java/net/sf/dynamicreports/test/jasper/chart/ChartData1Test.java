@@ -121,6 +121,7 @@ public class ChartData1Test extends AbstractJasperChartTest implements Serializa
 	private class ValueExpression extends AbstractSimpleExpression<Double> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Double evaluate(ReportParameters reportParameters) {
 			double f1 = ((Number) reportParameters.getValue("field2")).doubleValue();
 			double f2 = ((Number) reportParameters.getValue("field3")).doubleValue();
@@ -131,6 +132,7 @@ public class ChartData1Test extends AbstractJasperChartTest implements Serializa
 	private class CategoryExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return (String) reportParameters.getValue("field1") + "_exp";
 		}		
@@ -139,6 +141,7 @@ public class ChartData1Test extends AbstractJasperChartTest implements Serializa
 	private class TitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return "Title sum=" + reportParameters.getValue("var1");
 		}		
@@ -147,6 +150,7 @@ public class ChartData1Test extends AbstractJasperChartTest implements Serializa
 	private class Customizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			chart.setTitle("customizer" + reportParameters.getPageNumber());
 		}

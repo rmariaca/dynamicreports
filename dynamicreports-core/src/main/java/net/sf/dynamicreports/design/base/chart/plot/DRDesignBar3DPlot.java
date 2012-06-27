@@ -36,6 +36,7 @@ public class DRDesignBar3DPlot extends DRDesignAxisPlot implements DRIDesignBar3
 		this.xOffset = xOffset;
 	}
 
+	@Override
 	public Double getXOffset() {
 		return xOffset;
 	}
@@ -44,6 +45,7 @@ public class DRDesignBar3DPlot extends DRDesignAxisPlot implements DRIDesignBar3
 		this.yOffset = yOffset;
 	}
 
+	@Override
 	public Double getYOffset() {
 		return yOffset;
 	}
@@ -52,6 +54,7 @@ public class DRDesignBar3DPlot extends DRDesignAxisPlot implements DRIDesignBar3
 		this.showLabels = showLabels;
 	}
 
+	@Override
 	public Boolean getShowLabels() {
 		return showLabels;
 	}

@@ -57,10 +57,12 @@ public class DRVariable<T> implements DRIVariable<T> {
 		this.calculation = calculation;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public DRIExpression<?> getInitialValueExpression() {
 		return initialValueExpression;
 	}
@@ -69,10 +71,12 @@ public class DRVariable<T> implements DRIVariable<T> {
 		this.initialValueExpression = initialValueExpression;
 	}
 
+	@Override
 	public Calculation getCalculation() {
 		return calculation;
 	}
 
+	@Override
 	public Evaluation getResetType() {
 		return resetType;
 	}
@@ -81,6 +85,7 @@ public class DRVariable<T> implements DRIVariable<T> {
 		this.resetType = resetType;
 	}
 
+	@Override
 	public DRGroup getResetGroup() {
 		return resetGroup;
 	}
@@ -89,10 +94,12 @@ public class DRVariable<T> implements DRIVariable<T> {
 		this.resetGroup = resetGroup;
 	}
 
+	@Override
 	public DRIExpression<?> getValueExpression() {
 		return valueExpression;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Class<? super T> getValueClass() {
 		return (Class<? super T>) ReportUtils.getVariableValueClass(getCalculation(), valueExpression.getValueClass());

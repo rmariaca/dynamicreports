@@ -42,6 +42,7 @@ public class DRBand implements DRIBand {
 		this.list = new DRList(ListType.VERTICAL);
 	}
 	
+	@Override
 	public SplitType getSplitType() {
 		return splitType;
 	}
@@ -50,6 +51,7 @@ public class DRBand implements DRIBand {
 		this.splitType = splitType;
 	}
 		
+	@Override
 	public DRList getList() {
 		return list;
 	}

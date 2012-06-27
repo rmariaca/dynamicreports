@@ -37,6 +37,7 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 	private DRDesignComponent component;
 	private DRIDesignStyle style;
 
+	@Override
 	public int getWidth() {
 		return width;
 	}
@@ -45,6 +46,7 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 		this.width = width;
 	}
 
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -61,6 +63,7 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 		return list;
 	}
 
+	@Override
 	public DRDesignComponent getComponent() {
 		return component;
 	}
@@ -69,6 +72,7 @@ public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent
 		this.component = component;
 	}
 
+	@Override
 	public DRIDesignStyle getStyle() {
 		return style;
 	}

@@ -35,6 +35,7 @@ public class DRUspsIntelligentMailBarcode extends DRChecksumBarcode implements D
 	private Double intercharGapWidth;
 	private Double trackHeight;
 
+	@Override
 	public Double getAscenderHeight() {
 		return ascenderHeight;
 	}
@@ -43,6 +44,7 @@ public class DRUspsIntelligentMailBarcode extends DRChecksumBarcode implements D
 		this.ascenderHeight = ascenderHeight;
 	}
 
+	@Override
 	public Double getIntercharGapWidth() {
 		return intercharGapWidth;
 	}
@@ -51,6 +53,7 @@ public class DRUspsIntelligentMailBarcode extends DRChecksumBarcode implements D
 		this.intercharGapWidth = intercharGapWidth;
 	}
 
+	@Override
 	public Double getTrackHeight() {
 		return trackHeight;
 	}

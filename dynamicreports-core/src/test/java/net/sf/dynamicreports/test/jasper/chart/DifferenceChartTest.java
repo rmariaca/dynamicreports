@@ -158,6 +158,7 @@ public class DifferenceChartTest extends AbstractJasperChartTest implements Seri
 	private class ChartCustomizer implements DRIChartCustomizer, Serializable {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+		@Override
 		public void customize(JFreeChart chart, ReportParameters reportParameters) {
 			XYPlot xyPlot = chart.getXYPlot();
 			Assert.assertEquals("renderer", XYDifferenceRenderer.class, xyPlot.getRenderer().getClass());

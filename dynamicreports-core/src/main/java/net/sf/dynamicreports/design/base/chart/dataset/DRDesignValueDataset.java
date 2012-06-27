@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 public class DRDesignValueDataset extends DRDesignChartDataset implements DRIDesignValueDataset {
 	private DRIDesignExpression valueExpression;
 
+	@Override
 	public DRIDesignExpression getValueExpression() {
 		return valueExpression;
 	}

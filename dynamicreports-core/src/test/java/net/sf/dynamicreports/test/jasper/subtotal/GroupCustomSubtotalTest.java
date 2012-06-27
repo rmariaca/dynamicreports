@@ -110,6 +110,7 @@ public class GroupCustomSubtotalTest extends AbstractJasperValueTest implements 
 	private class ValueExpression extends AbstractSimpleExpression<Integer> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public Integer evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue(variable1);
 		}

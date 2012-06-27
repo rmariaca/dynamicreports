@@ -92,6 +92,7 @@ public class ParametersTest extends AbstractJasperValueTest implements Serializa
 	private class TitleExpression extends AbstractSimpleExpression<String> {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		public String evaluate(ReportParameters reportParameters) {
 			return reportParameters.getValue("title");
 		}

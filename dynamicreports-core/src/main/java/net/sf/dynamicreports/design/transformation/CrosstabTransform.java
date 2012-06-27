@@ -600,6 +600,7 @@ public class CrosstabTransform {
 
 		private int rowCount = 0;
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			rowCount++;
 			return false;
@@ -615,6 +616,7 @@ public class CrosstabTransform {
 			this.crosstabRowCount = crosstabRowCount;
 		}
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return crosstabRowCount.rowCount % 2 == 0;
 		}
@@ -629,6 +631,7 @@ public class CrosstabTransform {
 			this.crosstabRowCount = crosstabRowCount;
 		}
 
+		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return crosstabRowCount.rowCount % 2 != 0;
 		}

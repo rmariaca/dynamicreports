@@ -58,6 +58,7 @@ public class DRFont implements DRIFont {
 		this.setFontSize(fontSize);
 	}
 
+	@Override
 	public String getFontName() {
 		return fontName;
 	}
@@ -66,6 +67,7 @@ public class DRFont implements DRIFont {
 		this.fontName = fontName;
 	}
 
+	@Override
 	public Boolean getBold() {
 		return bold;
 	}
@@ -74,6 +76,7 @@ public class DRFont implements DRIFont {
 		this.bold = bold;
 	}
 
+	@Override
 	public Boolean getItalic() {
 		return italic;
 	}
@@ -82,6 +85,7 @@ public class DRFont implements DRIFont {
 		this.italic = italic;
 	}
 
+	@Override
 	public Boolean getUnderline() {
 		return underline;
 	}
@@ -90,6 +94,7 @@ public class DRFont implements DRIFont {
 		this.underline = underline;
 	}
 
+	@Override
 	public Boolean getStrikeThrough() {
 		return strikeThrough;
 	}
@@ -98,6 +103,7 @@ public class DRFont implements DRIFont {
 		this.strikeThrough = strikeThrough;
 	}
 
+	@Override
 	public Integer getFontSize() {
 		return fontSize;
 	}
@@ -109,6 +115,7 @@ public class DRFont implements DRIFont {
 		this.fontSize = fontSize;
 	}
 
+	@Override
 	public String getPdfFontName() {
 		return pdfFontName;
 	}
@@ -118,6 +125,7 @@ public class DRFont implements DRIFont {
 		this.pdfFontName = pdfFontName;
 	}
 
+	@Override
 	public String getPdfEncoding() {
 		return pdfEncoding;
 	}
@@ -127,6 +135,7 @@ public class DRFont implements DRIFont {
 		this.pdfEncoding = pdfEncoding;
 	}
 
+	@Override
 	public Boolean getPdfEmbedded() {
 		return pdfEmbedded;
 	}

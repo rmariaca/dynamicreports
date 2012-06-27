@@ -48,6 +48,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		super(GeoMapPrintElement.GEOMAP_ELEMENT_NAME);
 	}
 
+	@Override
 	public EvaluationTime getEvaluationTime() {
 		return evaluationTime;
 	}
@@ -56,6 +57,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.evaluationTime = evaluationTime;
 	}
 
+	@Override
 	public DRDesignGroup getEvaluationGroup() {
 		return evaluationGroup;
 	}
@@ -64,6 +66,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.evaluationGroup = evaluationGroup;
 	}
 
+	@Override
 	public Boolean getShowLegend() {
 		return showLegend;
 	}
@@ -72,6 +75,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.showLegend = showLegend;
 	}
 
+	@Override
 	public GeoMapDataMode getDataMode() {
 		return dataMode;
 	}
@@ -80,6 +84,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.dataMode = dataMode;
 	}
 
+	@Override
 	public DRIDesignExpression getRegionExpression() {
 		return regionExpression;
 	}
@@ -88,6 +93,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.regionExpression = regionExpression;
 	}
 
+	@Override
 	public DRIDesignExpression getValueLabelExpression() {
 		return valueLabelExpression;
 	}
@@ -96,6 +102,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.valueLabelExpression = valueLabelExpression;
 	}
 
+	@Override
 	public List<Color> getColors() {
 		return colors;
 	}
@@ -104,6 +111,7 @@ public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap
 		this.colors = colors;
 	}
 
+	@Override
 	public DRDesignGeoMapDataset getDataset() {
 		return dataset;
 	}

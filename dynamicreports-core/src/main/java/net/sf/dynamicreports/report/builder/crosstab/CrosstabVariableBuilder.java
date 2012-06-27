@@ -55,6 +55,7 @@ public class CrosstabVariableBuilder<T> extends AbstractBuilder<CrosstabVariable
 		return this;
 	}
 
+	@Override
 	public String getName() {
 		return getObject().getName();
 	}

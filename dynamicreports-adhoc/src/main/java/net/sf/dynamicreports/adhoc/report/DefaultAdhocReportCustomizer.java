@@ -129,6 +129,7 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	protected Map<String, GroupBuilder<?>> groups = new LinkedHashMap<String, GroupBuilder<?>>();
 	protected Map<String, ComponentBuilder<?, ?>> components = new LinkedHashMap<String, ComponentBuilder<?, ?>>();
 
+	@Override
 	public void customize(ReportBuilder<?> report, AdhocReport adhocReport) throws DRException {
 		this.report = report;
 		this.adhocReport = adhocReport;
