@@ -38,6 +38,8 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.renderer.category.BarRenderer;
 
 /**
@@ -88,6 +90,9 @@ public class ChartCustomizerReport {
 			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
 			renderer.setShadowPaint(Color.LIGHT_GRAY);
 			renderer.setShadowVisible(true);
+      CategoryAxis domainAxis = chart.getCategoryPlot().getDomainAxis();
+      domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0)
+      );
 		}
 	}
 
