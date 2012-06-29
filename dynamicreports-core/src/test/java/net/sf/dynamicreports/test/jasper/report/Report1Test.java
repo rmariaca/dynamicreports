@@ -58,6 +58,7 @@ public class Report1Test extends AbstractJasperValueTest {
 			.setLocale(Locale.ENGLISH)
 			.setResourceBundle(new ResourceBundle())
 			.setShowColumnTitle(false)
+			.setShowColumnValues(false)
 			.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
 			.scriptlets(scriptlet = new ReportScriptlet())
 			.parameters(parameter("parameter1", parameter1 = new BigDecimal(10)))
@@ -70,6 +71,7 @@ public class Report1Test extends AbstractJasperValueTest {
 
 		numberOfPagesTest(1);
 		columnTitleCountTest(column1, 0);
+		columnDetailCountTest(column1, 0);
 
 		Assert.assertFalse("fonts", JRFontUtil.getFontFamilyNames().isEmpty());
 

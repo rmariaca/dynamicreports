@@ -62,6 +62,7 @@ public class DRReport implements DRIReport {
 	private String resourceBundleName;
 	private Boolean ignorePagination;
 	private Boolean showColumnTitle;
+	private Boolean showColumnValues;
 	private List<DRColumn<?>> columns;
 	private List<DRGroup> groups;
 	private List<DRSubtotal<?>> subtotals;
@@ -218,6 +219,15 @@ public class DRReport implements DRIReport {
 
 	public void setShowColumnTitle(Boolean showColumnTitle) {
 		this.showColumnTitle = showColumnTitle;
+	}
+
+	@Override
+	public Boolean getShowColumnValues() {
+		return showColumnValues;
+	}
+
+	public void setShowColumnValues(Boolean showColumnValues) {
+		this.showColumnValues = showColumnValues;
 	}
 
 	@Override

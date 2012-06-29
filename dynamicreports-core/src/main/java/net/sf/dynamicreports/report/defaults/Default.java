@@ -64,6 +64,7 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
 public class Default {
 	private Locale locale;
 	private boolean showColumnTitle;
+	private boolean showColumnValues;
 	private boolean ignorePagination;
 	private WhenNoDataType whenNoDataType;
 	private boolean titleOnANewPage;
@@ -252,6 +253,7 @@ public class Default {
 	private void init() {
 		this.locale = Locale.getDefault();
 		this.showColumnTitle = true;
+		this.showColumnValues = true;
 		this.ignorePagination =  false;
 		this.whenNoDataType = WhenNoDataType.NO_PAGES;
 		this.titleOnANewPage = false;
@@ -453,6 +455,10 @@ public class Default {
 
 	public boolean isShowColumnTitle() {
 		return showColumnTitle;
+	}
+
+	public boolean isShowColumnValues() {
+		return showColumnValues;
 	}
 
 	public boolean isIgnorePagination() {

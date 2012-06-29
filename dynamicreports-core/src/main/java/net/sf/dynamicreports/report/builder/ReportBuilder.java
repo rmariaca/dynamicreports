@@ -94,6 +94,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setShowColumnValues(Boolean showColumnValues) {
+		getObject().setShowColumnValues(showColumnValues);
+		return (T) this;
+	}
+
 	public T setPageFormat(PageType pageType) {
 		return setPageFormat(pageType, PageOrientation.PORTRAIT);
 	}

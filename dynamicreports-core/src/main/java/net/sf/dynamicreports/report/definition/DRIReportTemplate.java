@@ -51,6 +51,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getShowColumnTitle();
 
+	public Boolean getShowColumnValues();
+
 	public Boolean getIgnorePagination();
 
 	public WhenNoDataType getWhenNoDataType();

@@ -96,6 +96,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setShowColumnValues(Boolean showColumnValues) {
+		getObject().setShowColumnValues(showColumnValues);
+		return this;
+	}
+
 	public ReportTemplateBuilder ignorePagination() {
 		return setIgnorePagination(true);
 	}

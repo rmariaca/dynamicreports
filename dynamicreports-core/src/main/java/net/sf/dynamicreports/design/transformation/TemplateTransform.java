@@ -135,6 +135,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isShowColumnTitle();
 	}
 
+	protected boolean isShowColumnValues() {
+		if (report.getShowColumnValues() != null) {
+			return report.getShowColumnValues();
+		}
+		if (template.getShowColumnValues() != null) {
+			return template.getShowColumnValues();
+		}
+		return Defaults.getDefaults().isShowColumnValues();
+	}
+
 	public String getResourceBundleName() {
 		if (report.getResourceBundleName() != null) {
 			return report.getResourceBundleName();

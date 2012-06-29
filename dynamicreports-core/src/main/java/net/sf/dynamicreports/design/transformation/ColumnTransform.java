@@ -74,6 +74,7 @@ public class ColumnTransform {
 	public void transform() throws DRException {
 		columnComponents = getColumnComponents();
 		boolean showColumnTitle = accessor.getTemplateTransform().isShowColumnTitle();
+		boolean showColumnValues = accessor.getTemplateTransform().isShowColumnValues();
 		boolean showColumnTitleForGroup = accessor.getBandTransform().getColumnHeaderForGroupBand() != null;
 
 		ColumnGrid columnTitle = null;
@@ -116,7 +117,9 @@ public class ColumnTransform {
 		if (showColumnTitleForGroup && !columnTitleForGroup.isEmpty()) {
 			accessor.getBandTransform().getColumnHeaderForGroupBand().addComponent(0, columnTitleForGroup.getList());
 		}
-		accessor.getBandTransform().getDetailBand().addComponent(detail.getList());
+		if (showColumnValues) {
+			accessor.getBandTransform().getDetailBand().addComponent(detail.getList());
+		}
 	}
 
 	private Map<DRIColumn<?>, DRIComponent> getColumnComponents() throws DRException {

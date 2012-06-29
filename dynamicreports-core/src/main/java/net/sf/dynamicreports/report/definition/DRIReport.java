@@ -59,6 +59,8 @@ public interface DRIReport extends Serializable {
 
 	public Boolean getShowColumnTitle();
 
+	public Boolean getShowColumnValues();
+
 	public List<? extends DRIColumn<?>> getColumns();
 
 	public List<? extends DRIGroup> getGroups();

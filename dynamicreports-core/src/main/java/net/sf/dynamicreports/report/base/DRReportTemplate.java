@@ -55,6 +55,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private List<DRIStyle> templateStyles;
 	private Locale locale;
 	private Boolean showColumnTitle;
+	private Boolean showColumnValues;
 	private Boolean ignorePagination;
 	private WhenNoDataType whenNoDataType;
 	private Boolean titleOnANewPage;
@@ -222,6 +223,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setShowColumnTitle(Boolean showColumnTitle) {
 		this.showColumnTitle = showColumnTitle;
+	}
+
+	@Override
+	public Boolean getShowColumnValues() {
+		return showColumnValues;
+	}
+
+	public void setShowColumnValues(Boolean showColumnValues) {
+		this.showColumnValues = showColumnValues;
 	}
 
 	@Override
