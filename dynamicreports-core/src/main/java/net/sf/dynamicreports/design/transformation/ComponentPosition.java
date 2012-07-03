@@ -133,6 +133,8 @@ class ComponentPosition {
 				case EXPAND:
 				case FLOAT:
 					return null;
+				default:
+					break;
 				}
 			}
 			return HorizontalCellComponentAlignment.LEFT;
@@ -436,6 +438,8 @@ class ComponentPosition {
 					expandCellsWidth += listCell.getComponent().getWidth();
 					expandCells++;
 					break;
+				default:
+					break;
 				}
 			}
 
@@ -569,6 +573,8 @@ class ComponentPosition {
 				case EXPAND:
 					expandCellsHeight += listCell.getComponent().getHeight();
 					expandCells++;
+					break;
+				default:
 					break;
 				}
 			}
