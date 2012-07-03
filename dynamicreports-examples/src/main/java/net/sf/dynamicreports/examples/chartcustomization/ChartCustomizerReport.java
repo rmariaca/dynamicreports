@@ -91,8 +91,7 @@ public class ChartCustomizerReport {
 			renderer.setShadowPaint(Color.LIGHT_GRAY);
 			renderer.setShadowVisible(true);
       CategoryAxis domainAxis = chart.getCategoryPlot().getDomainAxis();
-      domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0)
-      );
+      domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
 		}
 	}
 
