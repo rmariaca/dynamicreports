@@ -1598,6 +1598,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getBooleanComponentType();
 	}
 
+	public boolean getBooleanEmptyWhenNullValue(DRIBooleanField booleanField) {
+		if (booleanField.getEmptyWhenNullValue() != null) {
+			return booleanField.getEmptyWhenNullValue();
+		}
+		if (template.getBooleanEmptyWhenNullValue() != null) {
+			return template.getBooleanEmptyWhenNullValue();
+		}
+		return Defaults.getDefaults().isBooleanEmptyWhenNullValue();
+	}
+
 	public Integer getBooleanColumnImageWidth(DRIBooleanColumn column) {
 		if (column.getImageWidth() != null) {
 			return column.getImageWidth();

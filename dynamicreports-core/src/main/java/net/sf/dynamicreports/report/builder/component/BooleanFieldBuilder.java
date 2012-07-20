@@ -61,4 +61,9 @@ public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldB
 		getObject().setComponentType(booleanComponentType);
 		return this;
 	}
+
+	public BooleanFieldBuilder setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
+		getObject().setEmptyWhenNullValue(emptyWhenNullValue);
+		return this;
+	}
 }

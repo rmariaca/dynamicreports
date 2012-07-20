@@ -33,5 +33,7 @@ public interface DRIBooleanField extends DRIHyperLinkComponent {
 	public DRIExpression<Boolean> getValueExpression();
 
 	public BooleanComponentType getComponentType();
+
+	public Boolean getEmptyWhenNullValue();
 }
 

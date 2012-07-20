@@ -582,6 +582,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setBooleanEmptyWhenNullValue(Boolean booleanEmptyWhenNullValue) {
+		getObject().setBooleanEmptyWhenNullValue(booleanEmptyWhenNullValue);
+		return this;
+	}
+
 	public ReportTemplateBuilder setBooleanColumnImageWidth(Integer booleanColumnImageWidth) {
 		getObject().setBooleanColumnImageWidth(booleanColumnImageWidth);
 		return this;

@@ -44,6 +44,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private ComponentDimensionType heightType;
 	private DRIExpression<Boolean> valueExpression;
 	private BooleanComponentType componentType;
+	private Boolean emptyWhenNullValue;
 	private Integer imageWidth;
 	private Integer imageHeight;
 	private DRIReportStyle style;
@@ -108,6 +109,15 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 
 	public void setComponentType(BooleanComponentType booleanComponentType) {
 		this.componentType = booleanComponentType;
+	}
+
+	@Override
+	public Boolean getEmptyWhenNullValue() {
+		return emptyWhenNullValue;
+	}
+
+	public void setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
+		this.emptyWhenNullValue = emptyWhenNullValue;
 	}
 
 	@Override

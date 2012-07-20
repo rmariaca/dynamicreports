@@ -146,6 +146,11 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 		return this;
 	}
 
+	public BooleanColumnBuilder setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
+		getObject().setEmptyWhenNullValue(emptyWhenNullValue);
+		return this;
+	}
+
 	/**
 	 * Sets the boolean image dimension. Has effect only when the boolean value is presented as an image.
 	 *

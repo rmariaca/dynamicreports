@@ -139,6 +139,7 @@ public class ColumnTransform {
 	private DRIComponent createBooleanComponent(DRIBooleanColumn column) throws DRException {
 		DRBooleanField booleanField = new DRBooleanField();
 		booleanField.setComponentType(column.getComponentType());
+		booleanField.setEmptyWhenNullValue(column.getEmptyWhenNullValue());
 		booleanField.setValueExpression(column.getValueExpression());
 		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
 		DRComponent component = null;

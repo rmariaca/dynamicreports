@@ -47,9 +47,9 @@ public class BooleanColumnReport {
 			  .setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
 			  .columns(
 			  	col.booleanColumn("Boolean\ndefault", "boolean"),
-			  	col.booleanColumn("Boolean\nTEXT_TRUE_FALSE", "boolean").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
+			  	col.booleanColumn("Boolean\nTEXT_TRUE_FALSE", "boolean").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE).setEmptyWhenNullValue(true),
 			  	col.booleanColumn("Boolean\nTEXT_YES_NO", "boolean").setComponentType(BooleanComponentType.TEXT_YES_NO),
-			  	col.booleanColumn("Boolean\nIMAGE_STYLE_1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
+			  	col.booleanColumn("Boolean\nIMAGE_STYLE_1", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setEmptyWhenNullValue(true),
 			  	col.booleanColumn("Boolean\nIMAGE_STYLE_2", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_2),
 			  	col.booleanColumn("Boolean\nIMAGE_STYLE_3", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_3),
 			  	col.booleanColumn("Boolean\nIMAGE_STYLE_4", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_4),
@@ -69,7 +69,7 @@ public class BooleanColumnReport {
 		DRDataSource dataSource = new DRDataSource("boolean");
 		dataSource.add(true);
 		dataSource.add(false);
-		dataSource.add(true);
+		dataSource.add();
 		dataSource.add(false);
 		return dataSource;
 	}

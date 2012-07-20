@@ -37,6 +37,7 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 
 	private DRIExpression<Boolean> valueExpression;
 	private BooleanComponentType componentType;
+	private Boolean emptyWhenNullValue;
 
 	@Override
 	public DRIExpression<Boolean> getValueExpression() {
@@ -56,5 +57,15 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 	public void setComponentType(BooleanComponentType componentType) {
 		this.componentType = componentType;
 	}
+
+	@Override
+	public Boolean getEmptyWhenNullValue() {
+		return emptyWhenNullValue;
+	}
+
+	public void setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
+		this.emptyWhenNullValue = emptyWhenNullValue;
+	}
+
 }
 

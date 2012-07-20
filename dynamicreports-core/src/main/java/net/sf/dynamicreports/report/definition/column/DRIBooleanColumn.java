@@ -46,6 +46,8 @@ public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIC
 
 	public BooleanComponentType getComponentType();
 
+	public Boolean getEmptyWhenNullValue();
+
 	public Integer getImageWidth();
 
 	public Integer getImageHeight();

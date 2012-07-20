@@ -553,6 +553,7 @@ public class ComponentTransform {
 	//boolean
 	protected DRDesignComponent booleanField(DRIBooleanField booleanField, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
+		boolean emptyWhenNullValue = accessor.getTemplateTransform().getBooleanEmptyWhenNullValue(booleanField);;
 		DRHyperLinkComponent component = null;
 
 		switch (componentType) {
@@ -571,7 +572,7 @@ public class ComponentTransform {
 			DRTextField<Boolean> textField = new DRTextField<Boolean>();
 			textField.setValueExpression(booleanField.getValueExpression());
 			textField.setDataType(DataTypes.booleanType());
-			textField.setValueFormatter(new BooleanTextValueFormatter(keyTrue, keyFalse));
+			textField.setValueFormatter(new BooleanTextValueFormatter(keyTrue, keyFalse, emptyWhenNullValue));
 			component = textField;
 			break;
 		case IMAGE_STYLE_1:
@@ -582,7 +583,7 @@ public class ComponentTransform {
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
 			DRImage image = new DRImage();
-			image.setImageExpression(new BooleanImageExpression(booleanField));
+			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue));
 			component = image;
 			break;
 		default:
@@ -836,14 +837,19 @@ public class ComponentTransform {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		private String keyTrue;
 		private String keyFalse;
+		private boolean emptyWhenNullValue;
 
-		private BooleanTextValueFormatter(String keyTrue, String keyFalse) {
+		private BooleanTextValueFormatter(String keyTrue, String keyFalse, boolean emptyWhenNullValue) {
 			this.keyTrue = keyTrue;
 			this.keyFalse = keyFalse;
+			this.emptyWhenNullValue = emptyWhenNullValue;
 		}
 
 		@Override
 		public String format(Boolean value, ReportParameters reportParameters) {
+			if (emptyWhenNullValue && value == null) {
+				return "";
+			}
 			String key;
 			if (value != null && value) {
 				key = keyTrue;
@@ -858,8 +864,10 @@ public class ComponentTransform {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		private Renderable imageTrue;
 		private Renderable imageFalse;
+		private boolean emptyWhenNullValue;
 
-		private BooleanImageExpression(DRIBooleanField booleanField) throws DRException {
+		private BooleanImageExpression(DRIBooleanField booleanField, boolean emptyWhenNullValue) throws DRException {
+			this.emptyWhenNullValue = emptyWhenNullValue;
 			addExpression(booleanField.getValueExpression());
 			String fileNameTrue;
 			String fileNameFalse;
@@ -906,6 +914,9 @@ public class ComponentTransform {
 		@Override
 		public Renderable evaluate(List<?> values, ReportParameters reportParameters) {
 			Boolean value = (Boolean) values.get(0);
+			if (emptyWhenNullValue && value == null) {
+				return null;
+			}
 			if (value != null && value) {
 				return imageTrue;
 			} else {

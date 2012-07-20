@@ -194,6 +194,7 @@ public class Default {
 	private DRStyle crosstabMeasureTitleStyle;
 	//boolean
 	private BooleanComponentType booleanComponentType;
+	private boolean booleanEmptyWhenNullValue;
 	private Integer booleanColumnImageWidth;
 	private Integer booleanColumnImageHeight;
 	private DRStyle booleanColumnStyle;
@@ -395,6 +396,7 @@ public class Default {
 		this.crosstabMeasureTitleStyle = null;
 
 		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
+		this.booleanEmptyWhenNullValue = false;
 		this.booleanColumnImageWidth = 15;
 		this.booleanColumnImageHeight = 15;
 		this.booleanColumnStyle = null;
@@ -887,6 +889,10 @@ public class Default {
 
 	public BooleanComponentType getBooleanComponentType() {
 		return booleanComponentType;
+	}
+
+	public boolean isBooleanEmptyWhenNullValue() {
+		return booleanEmptyWhenNullValue;
 	}
 
 	public Integer getBooleanColumnImageWidth() {

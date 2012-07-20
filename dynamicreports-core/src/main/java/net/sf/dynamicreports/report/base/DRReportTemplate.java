@@ -137,6 +137,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRIReportStyle crosstabMeasureTitleStyle;
 	//boolean
 	private BooleanComponentType booleanComponentType;
+	private Boolean booleanEmptyWhenNullValue;
 	private Integer booleanColumnImageWidth;
 	private Integer booleanColumnImageHeight;
 	private DRIReportStyle booleanColumnStyle;
@@ -920,6 +921,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setBooleanComponentType(BooleanComponentType booleanComponentType) {
 		this.booleanComponentType = booleanComponentType;
+	}
+
+	@Override
+	public Boolean getBooleanEmptyWhenNullValue() {
+		return booleanEmptyWhenNullValue;
+	}
+
+	public void setBooleanEmptyWhenNullValue(Boolean booleanEmptyWhenNullValue) {
+		this.booleanEmptyWhenNullValue = booleanEmptyWhenNullValue;
 	}
 
 	@Override
