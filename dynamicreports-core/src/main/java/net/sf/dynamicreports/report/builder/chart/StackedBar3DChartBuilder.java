@@ -55,4 +55,9 @@ public class StackedBar3DChartBuilder extends AbstractCategoryChartBuilder<Stack
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public StackedBar3DChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

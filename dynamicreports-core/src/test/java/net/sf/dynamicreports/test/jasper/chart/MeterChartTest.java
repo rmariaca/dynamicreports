@@ -48,6 +48,8 @@ public class MeterChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
+		Locale.setDefault(Locale.ENGLISH);
+
 		rb.setLocale(Locale.ENGLISH)
 			.summary(
 				cht.meterChart()
@@ -97,7 +99,7 @@ public class MeterChartTest extends AbstractJasperChartTest {
 		Assert.assertEquals("data range low", 3d, meterPlot.getRange().getLowerBound());
 		Assert.assertEquals("data range high", 30d, meterPlot.getRange().getUpperBound());
 		Assert.assertEquals("value color", Color.BLUE, meterPlot.getValuePaint());
-		Assert.assertEquals("value mask", "15,0", meterPlot.getTickLabelFormat().format(15));
+		Assert.assertEquals("value mask", "15.0", meterPlot.getTickLabelFormat().format(15));
 		Assert.assertEquals("value font", new Font("Arial", Font.PLAIN, 10), meterPlot.getValueFont());
 		Assert.assertEquals("shape", DialShape.CIRCLE, meterPlot.getDialShape());
 		Assert.assertEquals("meter angle", 270, meterPlot.getMeterAngle());

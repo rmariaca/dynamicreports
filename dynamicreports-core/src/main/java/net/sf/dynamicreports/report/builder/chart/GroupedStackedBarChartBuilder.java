@@ -55,4 +55,9 @@ public class GroupedStackedBarChartBuilder extends AbstractCategoryChartBuilder<
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public GroupedStackedBarChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

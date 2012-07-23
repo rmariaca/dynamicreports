@@ -25,6 +25,7 @@ package net.sf.dynamicreports.test.jasper.chart;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
@@ -37,6 +38,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Assert;
 
 /**
@@ -50,6 +52,8 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 		TextColumnBuilder<String> column1;
 		TextColumnBuilder<Integer> column2;
 		TextColumnBuilder<Integer> column3;
+
+		Locale.setDefault(Locale.ENGLISH);
 
 		rb.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
 			.columns(
@@ -93,6 +97,7 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 						.series(cht.serie(column2), cht.serie(column3))),
 					cht.pieChart()
 						.setShowPercentages(true)
+						.setPercentValuePattern("#,##0.#")
 						.setKey(column1)
 						.series(cht.serie(column2)));
 	}
@@ -148,8 +153,13 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 		chartDataTest("summary.chart8", 0, categories, series, values);
 
 		JFreeChart chart = getChart("summary.chart9", 0);
-		String labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
+		StandardPieSectionLabelGenerator labelGenerator = (StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator();
+		String labelFormat = labelGenerator.getLabelFormat();
 		Assert.assertEquals("Label format", "{0} ({2})", labelFormat);
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		dataset.setValue("key1", 21);
+		dataset.setValue("key2", 122);
+		Assert.assertEquals("key1 (14.7%)", labelGenerator.generateSectionLabel(dataset, "key1"));
 	}
 
 	@Override

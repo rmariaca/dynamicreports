@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.Serializable;
+import java.util.Locale;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -50,12 +51,14 @@ import org.jfree.ui.RectangleEdge;
  */
 public class StackedBar3DChartTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-		
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<String> column1;
-		TextColumnBuilder<Integer> column2; 
-		
+		TextColumnBuilder<Integer> column2;
+
+		Locale.setDefault(Locale.ENGLISH);
+
 		rb.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class))
@@ -68,7 +71,7 @@ public class StackedBar3DChartTest extends AbstractJasperChartTest implements Se
 						.setYOffset(3d),
 					cht.stackedBar3DChart()
 						.setCategory(column1)
-						.series(cht.serie(column2))						
+						.series(cht.serie(column2))
 						.setCategoryAxisFormat(
 								cht.axisFormat()
 											.setLabel("category")
@@ -80,7 +83,7 @@ public class StackedBar3DChartTest extends AbstractJasperChartTest implements Se
 											.setLineColor(Color.LIGHT_GRAY)),
 					cht.stackedBar3DChart()
 						.setCategory(column1)
-						.series(cht.serie(column2))													
+						.series(cht.serie(column2))
 						.setValueAxisFormat(
 								cht.axisFormat()
 											.setLabel("value")
@@ -93,13 +96,13 @@ public class StackedBar3DChartTest extends AbstractJasperChartTest implements Se
 											.setRangeMinValueExpression(1)
 											.setRangeMaxValueExpression(15)));
 	}
-	
+
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		JFreeChart chart = getChart("summary.chart1", 0);
 		CategoryPlot categoryPlot = chart.getCategoryPlot();
 		Assert.assertEquals("renderer", StackedBarRenderer3D.class, categoryPlot.getRenderer().getClass());
@@ -107,7 +110,7 @@ public class StackedBar3DChartTest extends AbstractJasperChartTest implements Se
 		Assert.assertTrue("show labels", renderer.getBaseItemLabelsVisible());
 		Assert.assertEquals("x offset", 2d, renderer.getXOffset());
 		Assert.assertEquals("y offset", 3d, renderer.getYOffset());
-		
+
 		chart = getChart("summary.chart2", 0);
 		Axis axis = chart.getCategoryPlot().getDomainAxis();
 		Assert.assertEquals("category label", "category", axis.getLabel());
@@ -118,26 +121,26 @@ public class StackedBar3DChartTest extends AbstractJasperChartTest implements Se
 		CategoryLabelPosition labelPosition = chart.getCategoryPlot().getDomainAxis().getCategoryLabelPositions().getLabelPosition(RectangleEdge.LEFT);
 		Assert.assertEquals("plot label rotation", (45d / 180) * Math.PI, labelPosition.getAngle());
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
-		
+
 		chart = getChart("summary.chart3", 0);
 		axis = chart.getCategoryPlot().getRangeAxis();
 		Assert.assertEquals("value label", "value", axis.getLabel());
 		Assert.assertEquals("value label color", Color.BLUE, axis.getLabelPaint());
 		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
-		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());		
-		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));		
+		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
+		Assert.assertEquals("tick label mask", "10.00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 		Assert.assertEquals("range min value", 1d, ((ValueAxis) axis).getLowerBound());
 		Assert.assertEquals("range max value", 15d, ((ValueAxis) axis).getUpperBound());
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1", "field2");
 		for (int i = 0; i < 4; i++) {
 			dataSource.add("value" + (i + 1), i + 1);
-			dataSource.add("value" + (i + 1), i + 1);	
+			dataSource.add("value" + (i + 1), i + 1);
 		}
 		return dataSource;
 	}

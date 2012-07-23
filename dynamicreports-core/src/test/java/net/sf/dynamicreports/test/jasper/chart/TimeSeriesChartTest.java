@@ -30,6 +30,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -57,6 +58,8 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 		TextColumnBuilder<Date> column1;
 		TextColumnBuilder<Timestamp> column2;
 		TextColumnBuilder<Integer> column3;
+
+		Locale.setDefault(Locale.ENGLISH);
 
 		rb.columns(
 				column1 = col.column("Column1", "field1", Date.class),
@@ -127,7 +130,7 @@ public class TimeSeriesChartTest extends AbstractJasperChartTest implements Seri
 		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
-		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
+		Assert.assertEquals("tick label mask", "10.00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
 		//Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 		Assert.assertEquals("range min value", 1d, ((ValueAxis) axis).getLowerBound());
 		Assert.assertEquals("range max value", 15d, ((ValueAxis) axis).getUpperBound());

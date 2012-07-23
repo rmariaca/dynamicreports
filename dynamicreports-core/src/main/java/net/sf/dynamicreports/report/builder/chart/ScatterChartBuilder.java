@@ -50,4 +50,9 @@ public class ScatterChartBuilder extends AbstractXyChartBuilder<ScatterChartBuil
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public ScatterChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

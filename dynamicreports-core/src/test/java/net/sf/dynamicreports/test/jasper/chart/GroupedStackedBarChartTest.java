@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.Serializable;
+import java.util.Locale;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -54,6 +55,8 @@ public class GroupedStackedBarChartTest extends AbstractJasperChartTest implemen
 	protected void configureReport(JasperReportBuilder rb) {
 		TextColumnBuilder<String> column1;
 		TextColumnBuilder<Integer> column2;
+
+		Locale.setDefault(Locale.ENGLISH);
 
 		rb.columns(
 				column1 = col.column("Column1", "field1", String.class),
@@ -124,7 +127,7 @@ public class GroupedStackedBarChartTest extends AbstractJasperChartTest implemen
 		Assert.assertEquals("value label font", new Font("Arial", Font.BOLD, 10), axis.getLabelFont());
 		Assert.assertEquals("tick label color", Color.CYAN, axis.getTickLabelPaint());
 		Assert.assertEquals("tick label font", new Font("Arial", Font.ITALIC, 10), axis.getTickLabelFont());
-		Assert.assertEquals("tick label mask", "10,00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
+		Assert.assertEquals("tick label mask", "10.00", ((NumberAxis) axis).getNumberFormatOverride().format(10));
 		Assert.assertEquals("line color", Color.LIGHT_GRAY, axis.getAxisLinePaint());
 		Assert.assertEquals("range min value", 1d, ((ValueAxis) axis).getLowerBound());
 		Assert.assertEquals("range max value", 15d, ((ValueAxis) axis).getUpperBound());

@@ -50,4 +50,9 @@ public class XyLineChartBuilder extends AbstractXyChartBuilder<XyLineChartBuilde
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public XyLineChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

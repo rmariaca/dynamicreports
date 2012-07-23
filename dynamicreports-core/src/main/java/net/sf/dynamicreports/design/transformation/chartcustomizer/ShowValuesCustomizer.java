@@ -23,18 +23,25 @@
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.ui.TextAnchor;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -42,17 +49,37 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 public class ShowValuesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private String valuePattern;
+
+	public ShowValuesCustomizer(String valuePattern) {
+		this.valuePattern = valuePattern;
+	}
+
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer();
-			renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+			if (StringUtils.isBlank(valuePattern)) {
+				renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+			}
+			else {
+				renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator(StandardCategoryItemLabelGenerator.DEFAULT_LABEL_FORMAT_STRING, new DecimalFormat(valuePattern)));
+			}
 			renderer.setBaseItemLabelsVisible(Boolean.TRUE);
 			chart.getCategoryPlot().getRangeAxis().zoomRange(0, 1.1);
+			if (renderer.getClass().equals(BarRenderer3D.class)) {
+				((BarRenderer3D) renderer).setItemLabelAnchorOffset(10D);
+				renderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BASELINE_LEFT));
+			}
 		}
 		else if (chart.getPlot() instanceof XYPlot) {
 			XYItemRenderer renderer = chart.getXYPlot().getRenderer();
-			renderer.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
+			if (StringUtils.isBlank(valuePattern)) {
+				renderer.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
+			}
+			else {
+				renderer.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator(StandardXYItemLabelGenerator.DEFAULT_ITEM_LABEL_FORMAT, NumberFormat.getNumberInstance(), new DecimalFormat(valuePattern)));
+			}
 			renderer.setBaseItemLabelsVisible(Boolean.TRUE);
 			chart.getXYPlot().getRangeAxis().zoomRange(0, 1.1);
 		}

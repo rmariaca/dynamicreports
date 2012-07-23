@@ -50,4 +50,9 @@ public class LineChartBuilder extends AbstractCategoryChartBuilder<LineChartBuil
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public LineChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

@@ -40,4 +40,9 @@ public class AreaChartBuilder extends AbstractCategoryChartBuilder<AreaChartBuil
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public AreaChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

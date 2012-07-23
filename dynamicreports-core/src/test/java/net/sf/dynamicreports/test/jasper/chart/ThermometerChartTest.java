@@ -48,6 +48,8 @@ public class ThermometerChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
+		Locale.setDefault(Locale.ENGLISH);
+
 		rb.setLocale(Locale.ENGLISH)
 			.summary(
 				cht.thermometerChart()
@@ -86,7 +88,7 @@ public class ThermometerChartTest extends AbstractJasperChartTest {
 		try {
 			Field field = thermometerPlot.getClass().getDeclaredField("valueFormat");
 			field.setAccessible(true);
-			Assert.assertEquals("value mask", "15,0", ((NumberFormat) field.get(thermometerPlot)).format(15));
+			Assert.assertEquals("value mask", "15.0", ((NumberFormat) field.get(thermometerPlot)).format(15));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

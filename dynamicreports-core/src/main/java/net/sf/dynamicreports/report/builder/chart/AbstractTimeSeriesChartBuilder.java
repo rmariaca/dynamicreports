@@ -111,4 +111,9 @@ public abstract class AbstractTimeSeriesChartBuilder<T extends AbstractTimeSerie
 		getPlot().setShowValues(showValues);
 		return (T) this;
 	}
+
+	public T setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return (T) this;
+	}
 }

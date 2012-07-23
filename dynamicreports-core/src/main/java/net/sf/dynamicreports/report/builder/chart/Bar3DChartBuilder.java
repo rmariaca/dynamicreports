@@ -55,4 +55,9 @@ public class Bar3DChartBuilder extends AbstractCategoryChartBuilder<Bar3DChartBu
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public Bar3DChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }

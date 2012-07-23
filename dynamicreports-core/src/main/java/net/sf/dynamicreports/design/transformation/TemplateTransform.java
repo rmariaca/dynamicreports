@@ -69,7 +69,9 @@ import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryDataset;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRITimeSeriesDataset;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIBasePlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
@@ -1155,6 +1157,20 @@ public class TemplateTransform {
 			return template.getChartSeriesColors();
 		}
 		return Defaults.getDefaults().getChartSeriesColors();
+	}
+
+	protected String getChartAxisValuePattern(DRIAxisPlot axisPlot) {
+		if (axisPlot.getValuePattern() != null) {
+			return axisPlot.getValuePattern();
+		}
+		return Defaults.getDefaults().getChartAxisValuePattern();
+	}
+
+	protected String getPieChartPercentValuePattern(DRIPiePlot piePlot) {
+		if (piePlot.getPercentValuePattern() != null) {
+			return piePlot.getPercentValuePattern();
+		}
+		return Defaults.getDefaults().getChartAxisValuePattern();
 	}
 
 	protected boolean isChartCategoryDatasetUseSeriesAsCategory(DRICategoryDataset dataset) {

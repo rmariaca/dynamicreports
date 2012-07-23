@@ -46,6 +46,11 @@ public class XyBarChartBuilder extends AbstractXyChartBuilder<XyBarChartBuilder,
 		return this;
 	}
 
+	public XyBarChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
+
 	/*public XyBarChartBuilder setShowTickLabels(boolean showTickLabels) {
 		getPlot().setShowTickLabels(showTickLabels);
 		return this;

@@ -41,9 +41,11 @@ public class PieChartLabelFormatCustomizer implements DRIChartCustomizer, Serial
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String labelFormat;
+	private String percentValuePattern;
 
-	public PieChartLabelFormatCustomizer(String labelFormat) {
+	public PieChartLabelFormatCustomizer(String labelFormat, String percentValuePattern) {
 		this.labelFormat = labelFormat;
+		this.percentValuePattern = percentValuePattern;
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class PieChartLabelFormatCustomizer implements DRIChartCustomizer, Serial
     	plot.setLabelGenerator(null);
     }
     else {
-    	plot.setLabelGenerator(new StandardPieSectionLabelGenerator(labelFormat, NumberFormat.getNumberInstance(), new DecimalFormat("#,##0.##%")));
+    	plot.setLabelGenerator(new StandardPieSectionLabelGenerator(labelFormat, NumberFormat.getNumberInstance(), new DecimalFormat(percentValuePattern + "%")));
     }
   }
 }

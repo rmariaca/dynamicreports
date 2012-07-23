@@ -55,4 +55,9 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 		getPlot().setShowValues(showValues);
 		return this;
 	}
+
+	public BarChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
 }
