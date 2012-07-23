@@ -163,7 +163,7 @@ public class Default {
 	private int chartWidth;
 	private int chartHeight;
 	private List<Color> chartSeriesColors;
-	private String chartAxisValuePattern;
+	private String chartValuePattern;
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
 	private ValueLocation chartThermometerPlotValueLocation;
@@ -364,7 +364,7 @@ public class Default {
 		this.chartWidth = 200;
 		this.chartHeight = 200;
 		this.chartSeriesColors = new ArrayList<Color>();
-		this.chartAxisValuePattern = "#,##0.##";
+		this.chartValuePattern = "#,##0.##";
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
 		this.chartThermometerPlotValueLocation = ValueLocation.NONE;
@@ -785,8 +785,8 @@ public class Default {
 		return chartSeriesColors;
 	}
 
-	public String getChartAxisValuePattern() {
-		return chartAxisValuePattern;
+	public String getChartValuePattern() {
+		return chartValuePattern;
 	}
 
 	public boolean isChartCategoryDatasetUseSeriesAsCategory() {

@@ -418,7 +418,7 @@ public class ChartTransform {
 			chartCustomizers.add(new ShowPercentagesCustomizer());
 		}
 		if (axisPlot.getShowValues() != null && axisPlot.getShowValues()) {
-			String valuePattern = accessor.getTemplateTransform().getChartAxisValuePattern(axisPlot);
+			String valuePattern = accessor.getTemplateTransform().getChartValuePattern(axisPlot);
 			chartCustomizers.add(new ShowValuesCustomizer(valuePattern));
 		}
 	}

@@ -1159,18 +1159,18 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getChartSeriesColors();
 	}
 
-	protected String getChartAxisValuePattern(DRIAxisPlot axisPlot) {
+	protected String getChartValuePattern(DRIAxisPlot axisPlot) {
 		if (axisPlot.getValuePattern() != null) {
 			return axisPlot.getValuePattern();
 		}
-		return Defaults.getDefaults().getChartAxisValuePattern();
+		return Defaults.getDefaults().getChartValuePattern();
 	}
 
 	protected String getPieChartPercentValuePattern(DRIPiePlot piePlot) {
 		if (piePlot.getPercentValuePattern() != null) {
 			return piePlot.getPercentValuePattern();
 		}
-		return Defaults.getDefaults().getChartAxisValuePattern();
+		return Defaults.getDefaults().getChartValuePattern();
 	}
 
 	protected boolean isChartCategoryDatasetUseSeriesAsCategory(DRICategoryDataset dataset) {
