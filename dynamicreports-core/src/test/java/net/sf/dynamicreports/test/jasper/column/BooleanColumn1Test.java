@@ -42,7 +42,7 @@ import org.junit.Assert;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class BooleanColumnTest extends AbstractJasperValueTest implements Serializable {
+public class BooleanColumn1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -51,13 +51,15 @@ public class BooleanColumnTest extends AbstractJasperValueTest implements Serial
 			.columns(
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.TEXT_YES_NO),
+					col.booleanColumn("field1").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE).setEmptyWhenNullValue(true),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_2),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_3),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_4),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_CHECKBOX_1),
 					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_CHECKBOX_2),
-					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_BALL));
+					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_BALL),
+					col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setEmptyWhenNullValue(true));
 	}
 
 	@Override
@@ -66,32 +68,47 @@ public class BooleanColumnTest extends AbstractJasperValueTest implements Serial
 
 		numberOfPagesTest(1);
 
-		elementCountTest("detail.column_field11", 2);
-		elementValueTest("detail.column_field11", "True", "False");
+		elementCountTest("detail.column_field11", 3);
+		elementValueTest("detail.column_field11", "True", "False", "False");
 
-		elementCountTest("detail.column_field12", 2);
-		elementValueTest("detail.column_field12", "Yes", "No");
+		elementCountTest("detail.column_field12", 3);
+		elementValueTest("detail.column_field12", "Yes", "No", "No");
+
+		elementCountTest("detail.column_field13", 3);
+		elementValueTest("detail.column_field13", "True", "False", "");
 
 		testImage("detail.image1", 0);
 		testImage("detail.image1", 1);
+		testImage("detail.image1", 2);
 
 		testImage("detail.image2", 0);
 		testImage("detail.image2", 1);
+		testImage("detail.image2", 2);
 
 		testImage("detail.image3", 0);
 		testImage("detail.image3", 1);
+		testImage("detail.image3", 2);
 
 		testImage("detail.image4", 0);
 		testImage("detail.image4", 1);
+		testImage("detail.image4", 2);
 
 		testImage("detail.image5", 0);
 		testImage("detail.image5", 1);
+		testImage("detail.image5", 2);
 
 		testImage("detail.image6", 0);
 		testImage("detail.image6", 1);
+		testImage("detail.image6", 2);
 
 		testImage("detail.image7", 0);
 		testImage("detail.image7", 1);
+		testImage("detail.image7", 2);
+
+		testImage("detail.image8", 0);
+		testImage("detail.image8", 1);
+		Assert.assertNull((((JRPrintImage) getElementAt("detail.image8", 2)).getRenderable()));
+
 	}
 
 	private void testImage(String name, int index) {
@@ -109,6 +126,7 @@ public class BooleanColumnTest extends AbstractJasperValueTest implements Serial
 		DRDataSource dataSource = new DRDataSource("field1");
 		dataSource.add(true);
 		dataSource.add(false);
+		dataSource.add();
 		return dataSource;
 	}
 }
