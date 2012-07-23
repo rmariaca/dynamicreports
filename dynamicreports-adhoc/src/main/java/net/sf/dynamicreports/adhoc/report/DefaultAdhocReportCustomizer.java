@@ -23,7 +23,9 @@
 package net.sf.dynamicreports.adhoc.report;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.adhoc.configuration.AdhocAxisFormat;
@@ -244,16 +246,20 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	}
 
 	protected SubtotalBuilder<?, ?>[] subtotals() {
-		SubtotalBuilder<?, ?>[] subtotals = new SubtotalBuilder<?, ?>[adhocReport.getSubtotals().size()];
-		int index = 0;
+		List<SubtotalBuilder<?, ?>> subtotals = new ArrayList<SubtotalBuilder<?, ?>>();
 		for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
 			SubtotalBuilder<?, ?> subtotal = subtotal(adhocSubtotal);
-			subtotals[index++] = subtotal;
+			if (subtotal != null) {
+				subtotals.add(subtotal);
+			}
 		}
-		return subtotals;
+		return subtotals.toArray(new SubtotalBuilder<?, ?>[subtotals.size()]);
 	}
 
 	protected SubtotalBuilder<?, ?> subtotal(AdhocSubtotal adhocSubtotal) {
+		if (adhocReport.getColumns().isEmpty()) {
+			return null;
+		}
 		SubtotalBuilder<?, ?> subtotal;
 		ColumnBuilder<?, ?> subtotalColumn = columns.get(adhocSubtotal.getName());
 		if (subtotalColumn != null && subtotalColumn instanceof ValueColumnBuilder<?, ?>) {
