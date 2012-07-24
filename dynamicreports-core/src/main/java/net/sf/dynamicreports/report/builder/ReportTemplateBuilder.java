@@ -454,6 +454,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setChartValuePattern(String chartValuePattern) {
+		getObject().setChartValuePattern(chartValuePattern);
+		return this;
+	}
+
+	public ReportTemplateBuilder setChartPercentValuePattern(String chartPercentValuePattern) {
+		getObject().setChartPercentValuePattern(chartPercentValuePattern);
+		return this;
+	}
+
 	public ReportTemplateBuilder setChartTheme(String chartTheme) {
 		getObject().setChartTheme(chartTheme);
 		return this;

@@ -116,6 +116,8 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Integer chartWidth;
 	private Integer chartHeight;
 	private List<Color> chartSeriesColors;
+	private String chartValuePattern;
+	private String chartPercentValuePattern;
 	private String chartTheme;
 	//barcode
 	private Integer barcodeWidth;
@@ -750,6 +752,24 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.noNullElements(chartSeriesColors, "chartSeriesColors must not contains null chartSeriesColor");
 		}
 		this.chartSeriesColors = chartSeriesColors;
+	}
+
+	@Override
+	public String getChartValuePattern() {
+		return chartValuePattern;
+	}
+
+	public void setChartValuePattern(String chartValuePattern) {
+		this.chartValuePattern = chartValuePattern;
+	}
+
+	@Override
+	public String getChartPercentValuePattern() {
+		return chartPercentValuePattern;
+	}
+
+	public void setChartPercentValuePattern(String chartPercentValuePattern) {
+		this.chartPercentValuePattern = chartPercentValuePattern;
 	}
 
 	@Override

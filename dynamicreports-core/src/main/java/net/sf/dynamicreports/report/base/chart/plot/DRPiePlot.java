@@ -34,6 +34,7 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 	private Boolean circular;
 	private Boolean showLabels;
 	private Boolean showValues;
+	private String valuePattern;
 	private Boolean showPercentages;
 	private String percentValuePattern;
 	private String labelFormat;
@@ -64,6 +65,15 @@ public class DRPiePlot extends AbstractBasePlot implements DRIPiePlot {
 
 	public void setShowValues(Boolean showValues) {
 		this.showValues = showValues;
+	}
+
+	@Override
+	public String getValuePattern() {
+		return valuePattern;
+	}
+
+	public void setValuePattern(String valuePattern) {
+		this.valuePattern = valuePattern;
 	}
 
 	@Override

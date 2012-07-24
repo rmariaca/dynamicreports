@@ -44,6 +44,7 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.Assert;
 
@@ -107,6 +108,7 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 						.series(cht.serie(column2)),
 					cht.pie3DChart()
 						.setShowValues(true)
+						.setValuePattern("#,##0.#")
 						.setKey(column1)
 						.series(cht.serie(column2))),
 				cmp.horizontalList(
@@ -187,8 +189,12 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		Assert.assertEquals("Label format", "{0} = {1}", labelFormat);
 
 		chart = getChart("summary.chart9", 0);
-		labelFormat = ((StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator()).getLabelFormat();
+		StandardPieSectionLabelGenerator labelGenerator = (StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator();
+		labelFormat = labelGenerator.getLabelFormat();
 		Assert.assertEquals("Label format", "{0} = {1}", labelFormat);
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		dataset.setValue("key1", 1.192);
+		Assert.assertEquals("key1 = 1.2", labelGenerator.generateSectionLabel(dataset, "key1"));
 
 		DefaultXYDataset xyDataset = new DefaultXYDataset();
 		xyDataset.addSeries("key", new double[][] {new double[]{1d}, new double[]{1.191d}});

@@ -59,7 +59,6 @@ public class GroupedStackedBarRendererCustomizer implements DRIChartCustomizer, 
 
 	public GroupedStackedBarRendererCustomizer() {
 		this.seriesColors = new LinkedHashMap<String, Paint>();
-		this.seriesColors = new LinkedHashMap<String, Paint>();
 	}
 
 	@Override

@@ -60,4 +60,9 @@ public class BarChartBuilder extends AbstractCategoryChartBuilder<BarChartBuilde
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public BarChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

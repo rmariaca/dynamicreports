@@ -55,4 +55,9 @@ public class ScatterChartBuilder extends AbstractXyChartBuilder<ScatterChartBuil
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public ScatterChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

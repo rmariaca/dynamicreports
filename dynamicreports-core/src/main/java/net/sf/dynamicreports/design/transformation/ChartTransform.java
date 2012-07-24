@@ -299,7 +299,7 @@ public class ChartTransform {
 		designPiePlot.setLabelFormat(piePlot.getLabelFormat());
 		designPiePlot.setLegendLabelFormat(piePlot.getLegendLabelFormat());
 		if (piePlot.getShowLabels() != null && !piePlot.getShowLabels()) {
-			chartCustomizers.add(new PieChartLabelFormatCustomizer(null, null));
+			chartCustomizers.add(new PieChartLabelFormatCustomizer(null, null, null));
 		}
 		else {
 			String labelFormat = piePlot.getLabelFormat();
@@ -312,8 +312,9 @@ public class ChartTransform {
 			if (piePlot.getShowPercentages() != null && piePlot.getShowPercentages()) {
 				labelFormat += " ({2})";
 			}
-			String percentValuePattern = accessor.getTemplateTransform().getPieChartPercentValuePattern(piePlot);
-			chartCustomizers.add(new PieChartLabelFormatCustomizer(labelFormat, percentValuePattern));
+			String valuePattern = accessor.getTemplateTransform().getChartValuePattern(piePlot);
+			String percentValuePattern = accessor.getTemplateTransform().getChartPercentValuePattern(piePlot);
+			chartCustomizers.add(new PieChartLabelFormatCustomizer(labelFormat, valuePattern, percentValuePattern));
 		}
 	}
 
@@ -418,7 +419,13 @@ public class ChartTransform {
 			chartCustomizers.add(new ShowPercentagesCustomizer());
 		}
 		if (axisPlot.getShowValues() != null && axisPlot.getShowValues()) {
-			String valuePattern = accessor.getTemplateTransform().getChartValuePattern(axisPlot);
+			String valuePattern;
+			if (axisPlot.getShowPercentages() != null && axisPlot.getShowPercentages()) {
+				valuePattern = accessor.getTemplateTransform().getChartPercentValuePattern(axisPlot);
+			}
+			else {
+				valuePattern = accessor.getTemplateTransform().getChartValuePattern(axisPlot);
+			}
 			chartCustomizers.add(new ShowValuesCustomizer(valuePattern));
 		}
 	}

@@ -164,6 +164,7 @@ public class Default {
 	private int chartHeight;
 	private List<Color> chartSeriesColors;
 	private String chartValuePattern;
+	private String chartPercentValuePattern;
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
 	private ValueLocation chartThermometerPlotValueLocation;
@@ -365,6 +366,7 @@ public class Default {
 		this.chartHeight = 200;
 		this.chartSeriesColors = new ArrayList<Color>();
 		this.chartValuePattern = "#,##0.##";
+		this.chartPercentValuePattern = "#,##0.##";
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
 		this.chartThermometerPlotValueLocation = ValueLocation.NONE;
@@ -789,6 +791,10 @@ public class Default {
 		return chartValuePattern;
 	}
 
+	public String getChartPercentValuePattern() {
+		return chartPercentValuePattern;
+	}
+	
 	public boolean isChartCategoryDatasetUseSeriesAsCategory() {
 		return chartCategoryDatasetUseSeriesAsCategory;
 	}

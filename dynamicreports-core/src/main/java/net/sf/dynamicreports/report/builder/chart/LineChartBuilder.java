@@ -55,4 +55,9 @@ public class LineChartBuilder extends AbstractCategoryChartBuilder<LineChartBuil
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public LineChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

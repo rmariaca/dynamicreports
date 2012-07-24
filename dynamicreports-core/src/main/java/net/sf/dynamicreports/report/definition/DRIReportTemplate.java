@@ -185,6 +185,10 @@ public interface DRIReportTemplate extends Serializable {
 
 	public List<Color> getChartSeriesColors();
 
+	public String getChartValuePattern();
+
+	public String getChartPercentValuePattern();
+
 	public String getChartTheme();
 
 	public BooleanComponentType getBooleanComponentType();

@@ -36,4 +36,6 @@ public interface DRIAxisPlot extends DRIBasePlot {
 	public String getValuePattern();
 
 	public Boolean getShowPercentages();
+
+	public String getPercentValuePattern();
 }

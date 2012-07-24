@@ -33,6 +33,8 @@ public interface DRIPiePlot extends DRIBasePlot {
 
 	public Boolean getShowValues();
 
+	public String getValuePattern();
+
 	public Boolean getShowPercentages();
 
 	public String getPercentValuePattern();

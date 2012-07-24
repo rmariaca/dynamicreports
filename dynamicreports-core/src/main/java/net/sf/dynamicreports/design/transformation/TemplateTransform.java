@@ -1163,14 +1163,40 @@ public class TemplateTransform {
 		if (axisPlot.getValuePattern() != null) {
 			return axisPlot.getValuePattern();
 		}
+		if (template.getChartValuePattern() != null) {
+			return template.getChartValuePattern();
+		}
 		return Defaults.getDefaults().getChartValuePattern();
 	}
 
-	protected String getPieChartPercentValuePattern(DRIPiePlot piePlot) {
+	protected String getChartValuePattern(DRIPiePlot piePlot) {
+		if (piePlot.getValuePattern() != null) {
+			return piePlot.getValuePattern();
+		}
+		if (template.getChartValuePattern() != null) {
+			return template.getChartValuePattern();
+		}
+		return Defaults.getDefaults().getChartValuePattern();
+	}
+
+	protected String getChartPercentValuePattern(DRIAxisPlot axisPlot) {
+		if (axisPlot.getPercentValuePattern() != null) {
+			return axisPlot.getPercentValuePattern();
+		}
+		if (template.getChartPercentValuePattern() != null) {
+			return template.getChartPercentValuePattern();
+		}
+		return Defaults.getDefaults().getChartPercentValuePattern();
+	}
+
+	protected String getChartPercentValuePattern(DRIPiePlot piePlot) {
 		if (piePlot.getPercentValuePattern() != null) {
 			return piePlot.getPercentValuePattern();
 		}
-		return Defaults.getDefaults().getChartValuePattern();
+		if (template.getChartPercentValuePattern() != null) {
+			return template.getChartPercentValuePattern();
+		}
+		return Defaults.getDefaults().getChartPercentValuePattern();
 	}
 
 	protected boolean isChartCategoryDatasetUseSeriesAsCategory(DRICategoryDataset dataset) {

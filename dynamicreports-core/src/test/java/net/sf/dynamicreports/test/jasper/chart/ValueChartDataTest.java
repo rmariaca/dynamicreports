@@ -46,7 +46,7 @@ import org.junit.Assert;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageChartDataTest extends AbstractJasperChartTest implements Serializable {
+public class ValueChartDataTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -58,6 +58,7 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 		Locale.setDefault(Locale.ENGLISH);
 
 		rb.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
+			.setTemplate(template().setChartValuePattern("#,##0.#").setChartPercentValuePattern("#,##0.###"))
 			.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class),
@@ -67,44 +68,37 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 					cht.barChart()
 						.setShowValues(true)
 						.setShowPercentages(true)
+						.setPercentValuePattern("#,##0.##")
 						.setCategory(column1)
 						.series(cht.serie(column2), cht.serie(column3)),
 					cht.bar3DChart()
 						.setShowValues(true)
 						.setShowPercentages(true)
-						.setPercentValuePattern("#,##0.#")
 						.setCategory(column1)
 						.series(cht.serie(column2), cht.serie(column3)),
-					cht.stackedBarChart()
-						.setShowPercentages(true)
+					cht.barChart()
+						.setShowValues(true)
+						.setValuePattern("#,##0.##")
 						.setCategory(column1)
 						.series(cht.serie(column2), cht.serie(column3)),
-					cht.stackedBar3DChart()
-						.setShowPercentages(true)
+					cht.bar3DChart()
+						.setShowValues(true)
 						.setCategory(column1)
 						.series(cht.serie(column2), cht.serie(column3))),
 				cmp.horizontalList(
-					cht.areaChart()
-						.setShowPercentages(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
-					cht.stackedAreaChart()
-						.setShowPercentages(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
-					cht.layeredBarChart()
-						.setShowPercentages(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
-					cht.lineChart()
-						.setShowPercentages(true)
-						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3))),
 					cht.pieChart()
+						.setShowValues(true)
+						.setValuePattern("#,##0.##")
 						.setShowPercentages(true)
-						.setPercentValuePattern("#,##0.#")
+						.setPercentValuePattern("#,##0.##")
 						.setKey(column1)
-						.series(cht.serie(column2)));
+						.series(cht.serie(column2)),
+					cht.pieChart()
+						.setShowValues(true)
+						.setShowPercentages(true)
+						.setKey(column1)
+						.series(cht.serie(column2))
+						));
 	}
 
 	@Override
@@ -113,15 +107,6 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 
 		numberOfPagesTest(1);
 
-		String[] categories = new String[]{"value1", "value2", "value3"};
-		String[] series = new String[]{"Column2", "Column3"};
-		Number[][] values =  new Number[][]{{2d/6 * 100, 4d/6 * 100}, {4d/10 * 100, 6d/10 * 100}, {6d/14 * 100, 8d/14 * 100}, {8d/18 * 100, 10d/18 * 100}};
-
-		chartCountTest("summary.chart1", 1);
-		chartCategoryCountTest("summary.chart1", 0, 4);
-		chartSeriesCountTest("summary.chart1", 0, 2);
-		chartDataTest("summary.chart1", 0, categories, series, values);
-
 		DefaultCategoryDataset categoryDataset = new DefaultCategoryDataset();
 		categoryDataset.addValue(1.191, "row", "column");
 
@@ -129,57 +114,33 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 		CategoryItemRenderer renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
 		Assert.assertEquals("1.19", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
-		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
-
-		chartCountTest("summary.chart2", 1);
-		chartCategoryCountTest("summary.chart2", 0, 4);
-		chartSeriesCountTest("summary.chart2", 0, 2);
-		chartDataTest("summary.chart2", 0, categories, series, values);
 
 		chart = getChart("summary.chart2", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertEquals("1.191", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
+
+		chart = getChart("summary.chart3", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertEquals("1.19", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
+
+		chart = getChart("summary.chart4", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
 		Assert.assertEquals("1.2", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
-		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
-		chartCountTest("summary.chart3", 1);
-		chartCategoryCountTest("summary.chart3", 0, 4);
-		chartSeriesCountTest("summary.chart3", 0, 2);
-		chartDataTest("summary.chart3", 0, categories, series, values);
-
-		chartCountTest("summary.chart4", 1);
-		chartCategoryCountTest("summary.chart4", 0, 4);
-		chartSeriesCountTest("summary.chart4", 0, 2);
-		chartDataTest("summary.chart4", 0, categories, series, values);
-
-		chartCountTest("summary.chart5", 1);
-		chartCategoryCountTest("summary.chart5", 0, 4);
-		chartSeriesCountTest("summary.chart5", 0, 2);
-		chartDataTest("summary.chart5", 0, categories, series, values);
-
-		chartCountTest("summary.chart6", 1);
-		chartCategoryCountTest("summary.chart6", 0, 4);
-		chartSeriesCountTest("summary.chart6", 0, 2);
-		chartDataTest("summary.chart6", 0, categories, series, values);
-
-		chartCountTest("summary.chart7", 1);
-		chartCategoryCountTest("summary.chart7", 0, 4);
-		chartSeriesCountTest("summary.chart7", 0, 2);
-		chartDataTest("summary.chart7", 0, categories, series, values);
-
-		chartCountTest("summary.chart8", 1);
-		chartCategoryCountTest("summary.chart8", 0, 4);
-		chartSeriesCountTest("summary.chart8", 0, 2);
-		chartDataTest("summary.chart8", 0, categories, series, values);
-
-		chart = getChart("summary.chart9", 0);
-		StandardPieSectionLabelGenerator labelGenerator = (StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator();
-		String labelFormat = labelGenerator.getLabelFormat();
-		Assert.assertEquals("Label format", "{0} ({2})", labelFormat);
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("key1", 21);
+		dataset.setValue("key1", 1.191);
 		dataset.setValue("key2", 122);
-		Assert.assertEquals("key1 (14.7%)", labelGenerator.generateSectionLabel(dataset, "key1"));
+
+		chart = getChart("summary.chart5", 0);
+		StandardPieSectionLabelGenerator labelGenerator = (StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator();
+		Assert.assertEquals("key1 = 1.19 (0.97%)", labelGenerator.generateSectionLabel(dataset, "key1"));
+
+		chart = getChart("summary.chart6", 0);
+		labelGenerator = (StandardPieSectionLabelGenerator) ((PiePlot) chart.getPlot()).getLabelGenerator();
+		Assert.assertEquals("key1 = 1.2 (0.967%)", labelGenerator.generateSectionLabel(dataset, "key1"));
 	}
 
 	@Override

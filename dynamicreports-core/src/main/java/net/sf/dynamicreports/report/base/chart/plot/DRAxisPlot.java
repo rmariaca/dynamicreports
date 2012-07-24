@@ -38,6 +38,7 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	private Boolean showValues;
 	private String valuePattern;
 	private Boolean showPercentages;
+	private String percentValuePattern;
 
 	@Override
 	protected void init() {
@@ -91,5 +92,14 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 
 	public void setShowPercentages(Boolean showPercentages) {
 		this.showPercentages = showPercentages;
+	}
+
+	@Override
+	public String getPercentValuePattern() {
+		return percentValuePattern;
+	}
+
+	public void setPercentValuePattern(String percentValuePattern) {
+		this.percentValuePattern = percentValuePattern;
 	}
 }

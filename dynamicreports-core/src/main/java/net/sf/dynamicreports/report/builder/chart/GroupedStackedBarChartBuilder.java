@@ -60,4 +60,9 @@ public class GroupedStackedBarChartBuilder extends AbstractCategoryChartBuilder<
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public GroupedStackedBarChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

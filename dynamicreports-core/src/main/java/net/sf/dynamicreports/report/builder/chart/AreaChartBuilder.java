@@ -45,4 +45,9 @@ public class AreaChartBuilder extends AbstractCategoryChartBuilder<AreaChartBuil
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public AreaChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

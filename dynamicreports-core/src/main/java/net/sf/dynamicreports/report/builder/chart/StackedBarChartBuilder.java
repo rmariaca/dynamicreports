@@ -60,4 +60,9 @@ public class StackedBarChartBuilder extends AbstractCategoryChartBuilder<Stacked
 		getPlot().setValuePattern(valuePattern);
 		return this;
 	}
+
+	public StackedBarChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
 }

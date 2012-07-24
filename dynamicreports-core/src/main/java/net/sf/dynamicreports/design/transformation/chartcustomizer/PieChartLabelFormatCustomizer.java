@@ -24,7 +24,6 @@ package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
@@ -41,10 +40,12 @@ public class PieChartLabelFormatCustomizer implements DRIChartCustomizer, Serial
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String labelFormat;
+	private String valuePattern;
 	private String percentValuePattern;
 
-	public PieChartLabelFormatCustomizer(String labelFormat, String percentValuePattern) {
+	public PieChartLabelFormatCustomizer(String labelFormat, String valuePattern, String percentValuePattern) {
 		this.labelFormat = labelFormat;
+		this.valuePattern = valuePattern;
 		this.percentValuePattern = percentValuePattern;
 	}
 
@@ -55,7 +56,7 @@ public class PieChartLabelFormatCustomizer implements DRIChartCustomizer, Serial
     	plot.setLabelGenerator(null);
     }
     else {
-    	plot.setLabelGenerator(new StandardPieSectionLabelGenerator(labelFormat, NumberFormat.getNumberInstance(), new DecimalFormat(percentValuePattern + "%")));
+    	plot.setLabelGenerator(new StandardPieSectionLabelGenerator(labelFormat, new DecimalFormat(valuePattern), new DecimalFormat(percentValuePattern + "%")));
     }
   }
 }

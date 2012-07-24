@@ -116,4 +116,9 @@ public abstract class AbstractTimeSeriesChartBuilder<T extends AbstractTimeSerie
 		getPlot().setValuePattern(valuePattern);
 		return (T) this;
 	}
+
+	public T setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return (T) this;
+	}
 }
