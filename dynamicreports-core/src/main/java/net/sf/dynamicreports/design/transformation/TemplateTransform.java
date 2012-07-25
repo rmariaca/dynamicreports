@@ -639,7 +639,7 @@ public class TemplateTransform {
 	}
 
 	protected int getPageColumnWidth(DRIDesignPage page) {
-		if (templateDesign.getPageColumnWidth() != null) {
+		if (templateDesign.getPageColumnWidth() != null && !isIgnorePageWidth()) {
 			return templateDesign.getPageColumnWidth();
 		}
 		int columnWidth = page.getWidth() - page.getMargin().getLeft() - page.getMargin().getRight();
