@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.definition.chart.plot;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.constant.Orientation;
 
@@ -35,4 +36,6 @@ public interface DRIBasePlot extends DRIPlot {
 	public Orientation getOrientation();
 
 	public List<Color> getSeriesColors();
+
+	public Map<String, Color> getSerieNamesColors();
 }

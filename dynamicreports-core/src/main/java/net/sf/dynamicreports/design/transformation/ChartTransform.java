@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.DifferenceRen
 import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.SerieNamesColorsCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
@@ -216,6 +218,10 @@ public class ChartTransform {
 			DRIBasePlot basePlot = (DRIBasePlot) plot;
 			designBasePlot.setOrientation(basePlot.getOrientation());
 			designBasePlot.setSeriesColors(accessor.getTemplateTransform().getChartSeriesColors(basePlot));
+			Map<String, Color> serieNamesColors = basePlot.getSerieNamesColors();
+			if (!serieNamesColors.isEmpty()) {
+				chartCustomizers.add(new SerieNamesColorsCustomizer(serieNamesColors));
+			}
 		}
 
 		return designPlot;

@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.builder.chart;
 
 import java.awt.Color;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.plot.AbstractBasePlot;
@@ -64,6 +65,16 @@ public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilde
 		for (Color seriesColor : seriesColors) {
 			getPlot().addSeriesColor(seriesColor);
 		}
+		return (T) this;
+	}
+
+	public T setSerieNamesColors(Map<String, Color> serieNamesColors) {
+		getPlot().setSerieNamesColors(serieNamesColors);
+		return (T) this;
+	}
+
+	public T addSerieNameColor(String serieName, Color color) {
+		getPlot().addSerieNameColor(serieName, color);
 		return (T) this;
 	}
 

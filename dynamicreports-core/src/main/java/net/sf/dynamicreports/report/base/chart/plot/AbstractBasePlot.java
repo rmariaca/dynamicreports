@@ -24,7 +24,9 @@ package net.sf.dynamicreports.report.base.chart.plot;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
@@ -40,6 +42,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 
 	private Orientation orientation;
 	private List<Color> seriesColors;
+	private Map<String, Color> serieNamesColors;
 
 	protected AbstractBasePlot() {
 		init();
@@ -47,6 +50,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 
 	protected void init() {
 		this.seriesColors = new ArrayList<Color>();
+		this.serieNamesColors = new HashMap<String, Color>();
 	}
 
 	public void setOrientation(Orientation orientation) {
@@ -72,5 +76,21 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 	@Override
 	public List<Color> getSeriesColors() {
 		return seriesColors;
+	}
+
+	public void addSerieNameColor(String serieName, Color color) {
+		Validate.notNull(serieName, "serieName must not be null");
+		Validate.notNull(color, "color must not be null");
+		this.serieNamesColors.put(serieName, color);
+	}
+
+	public void setSerieNamesColors(Map<String, Color> serieNamesColors) {
+		Validate.notNull(serieNamesColors, "serieNamesColors must not be null");
+		this.serieNamesColors = serieNamesColors;
+	}
+
+	@Override
+	public Map<String, Color> getSerieNamesColors() {
+		return serieNamesColors;
 	}
 }
