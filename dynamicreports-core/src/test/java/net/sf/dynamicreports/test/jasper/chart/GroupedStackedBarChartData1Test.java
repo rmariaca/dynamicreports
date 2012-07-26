@@ -37,7 +37,7 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupedStackedBarChartDataTest extends AbstractJasperChartTest {
+public class GroupedStackedBarChartData1Test extends AbstractJasperChartTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
