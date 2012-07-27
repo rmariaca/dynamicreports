@@ -153,8 +153,10 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		for (AdhocColumn adhocColumn : adhocReport.getColumns()) {
 			ColumnBuilder<?, ?> column = column(adhocColumn);
-			report.addColumn(column);
-			columns.put(adhocColumn.getName(), column);
+			if (column != null) {
+				report.addColumn(column);
+				columns.put(adhocColumn.getName(), column);
+			}
 		}
 		for (AdhocGroup adhocGroup : adhocReport.getGroups()) {
 			GroupBuilder<?> group = group(adhocGroup);
