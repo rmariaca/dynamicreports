@@ -24,11 +24,11 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.util.Date;
 
-import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
@@ -201,8 +201,10 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		return this;
 	}
 
-	public TextFieldBuilder<T> setEvaluationGroup(DRGroup evaluationGroup) {
-		getObject().setEvaluationGroup(evaluationGroup);
+	public TextFieldBuilder<T> setEvaluationGroup(GroupBuilder<?> evaluationGroup) {
+		Validate.notNull(evaluationGroup, "evaluationGroup must not be null");
+		getObject().setEvaluationGroup(evaluationGroup.build());
+		getObject().setEvaluationTime(Evaluation.GROUP);
 		return this;
 	}
 
