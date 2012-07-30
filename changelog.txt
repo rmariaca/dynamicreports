@@ -1,6 +1,15 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.0.0 (2012-07-30)
+---------------------------------------------------
+ - upgrade to JasperReports 4.6.0
+ - upgrade to Java 1.6, DynamicReports is no longer compatible with Java 1.5
+ - new showColumnValues attribute added to columns, see GroupSubtotalsReport for an example
+ - new seriesColorsByName attribute added to charts, see ChartSeriesColorsByNameReport for an example
+ - new booleanEmptyWhenNullValue attribute added to boolean columns, see BooleanColumnReport for an example
+ - minor bug fixes and improvements
+
 Changes in version 2.5.1 (2012-06-21)
 ---------------------------------------------------
  - grouped stacked bar chart, see GroupedStackedBarChartReport for an example
