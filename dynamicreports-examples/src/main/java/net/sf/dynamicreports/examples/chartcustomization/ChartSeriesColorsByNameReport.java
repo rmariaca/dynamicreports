@@ -38,9 +38,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SeriesColorsChartReport {
+public class ChartSeriesColorsByNameReport {
 
-	public SeriesColorsChartReport() {
+	public ChartSeriesColorsByNameReport() {
 		build();
 	}
 
@@ -60,12 +60,12 @@ public class SeriesColorsChartReport {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(stateColumn, itemColumn, quantityColumn)
-			  .title(Templates.createTitleComponent("SeriesColorsChart"))
+			  .title(Templates.createTitleComponent("ChartSeriesColorsByName"))
 			  .summary(
 			  	cht.barChart()
 			  	   .setTitle("Bar chart")
 			  	   .setTitleFont(boldFont)
-			  	   .setSerieNamesColors(seriesColors)
+			  	   .seriesColorsByName(seriesColors)
 			  	   .setCategory(stateColumn)
 			  	   .series(
 			  	  		 cht.serie(quantityColumn).setSeries(itemColumn))
@@ -92,6 +92,6 @@ public class SeriesColorsChartReport {
 	}
 
 	public static void main(String[] args) {
-		new SeriesColorsChartReport();
+		new ChartSeriesColorsByNameReport();
 	}
 }

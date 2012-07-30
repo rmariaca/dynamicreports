@@ -68,13 +68,13 @@ public abstract class AbstractBaseChartBuilder<T extends AbstractBaseChartBuilde
 		return (T) this;
 	}
 
-	public T setSerieNamesColors(Map<String, Color> serieNamesColors) {
-		getPlot().setSerieNamesColors(serieNamesColors);
+	public T seriesColorsByName(Map<String, Color> seriesColorsByName) {
+		getPlot().setSeriesColorsByName(seriesColorsByName);
 		return (T) this;
 	}
 
-	public T addSerieNameColor(String serieName, Color color) {
-		getPlot().addSerieNameColor(serieName, color);
+	public T addSeriesColorByName(String seriesName, Color color) {
+		getPlot().addSeriesColorByName(seriesName, color);
 		return (T) this;
 	}
 

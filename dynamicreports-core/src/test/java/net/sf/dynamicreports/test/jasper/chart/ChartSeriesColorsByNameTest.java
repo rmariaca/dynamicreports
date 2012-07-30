@@ -50,7 +50,7 @@ import org.jfree.data.xy.XYDataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ChartSerieColorsTest extends AbstractJasperChartTest implements Serializable {
+public class ChartSeriesColorsByNameTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Map<String, Color> colors;
@@ -78,23 +78,23 @@ public class ChartSerieColorsTest extends AbstractJasperChartTest implements Ser
 			.summary(
 				cmp.horizontalList(
 					cht.barChart()
-						.setSerieNamesColors(colors)
+						.seriesColorsByName(colors)
 						.setCategory(column1)
 						.series(
 							cht.serie(column3).setSeries(column2)),
 					cht.groupedStackedBarChart()
-						.setSerieNamesColors(colors)
+						.seriesColorsByName(colors)
 						.setCategory(column1)
 						.series(
 							cht.groupedSerie(column3).setSeries(column2).setGroup(column4))),
 				cmp.horizontalList(
 					cht.pieChart()
-						.setSerieNamesColors(colors)
+						.seriesColorsByName(colors)
 						.setKey(column2)
 						.series(
 							cht.serie(column3)),
 					cht.xyBarChart()
-						.setSerieNamesColors(colors)
+						.seriesColorsByName(colors)
 						.setXValue(column5)
 						.series(
 							cht.xySerie(column3).setSeries(column2))));

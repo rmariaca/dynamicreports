@@ -42,7 +42,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 
 	private Orientation orientation;
 	private List<Color> seriesColors;
-	private Map<String, Color> serieNamesColors;
+	private Map<String, Color> seriesColorsByName;
 
 	protected AbstractBasePlot() {
 		init();
@@ -50,7 +50,7 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 
 	protected void init() {
 		this.seriesColors = new ArrayList<Color>();
-		this.serieNamesColors = new HashMap<String, Color>();
+		this.seriesColorsByName = new HashMap<String, Color>();
 	}
 
 	public void setOrientation(Orientation orientation) {
@@ -78,19 +78,19 @@ public abstract class AbstractBasePlot implements DRIBasePlot {
 		return seriesColors;
 	}
 
-	public void addSerieNameColor(String serieName, Color color) {
-		Validate.notNull(serieName, "serieName must not be null");
+	public void addSeriesColorByName(String seriesName, Color color) {
+		Validate.notNull(seriesName, "seriesName must not be null");
 		Validate.notNull(color, "color must not be null");
-		this.serieNamesColors.put(serieName, color);
+		this.seriesColorsByName.put(seriesName, color);
 	}
 
-	public void setSerieNamesColors(Map<String, Color> serieNamesColors) {
-		Validate.notNull(serieNamesColors, "serieNamesColors must not be null");
-		this.serieNamesColors = serieNamesColors;
+	public void setSeriesColorsByName(Map<String, Color> seriesColorsByName) {
+		Validate.notNull(seriesColorsByName, "seriesColorsByName must not be null");
+		this.seriesColorsByName = seriesColorsByName;
 	}
 
 	@Override
-	public Map<String, Color> getSerieNamesColors() {
-		return serieNamesColors;
+	public Map<String, Color> getSeriesColorsByName() {
+		return seriesColorsByName;
 	}
 }

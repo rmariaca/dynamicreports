@@ -47,11 +47,11 @@ import org.jfree.data.xy.XYDataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SerieNamesColorsCustomizer implements DRIChartCustomizer {
-	private Map<String, Color> seriesColors;
+public class SeriesColorsByNameCustomizer implements DRIChartCustomizer {
+	private Map<String, Color> seriesColorsByName;
 
-	public SerieNamesColorsCustomizer(Map<String, Color> seriesColors) {
-		this.seriesColors = seriesColors;
+	public SeriesColorsByNameCustomizer(Map<String, Color> seriesColorsByName) {
+		this.seriesColorsByName = seriesColorsByName;
 	}
 
 	@Override
@@ -66,12 +66,12 @@ public class SerieNamesColorsCustomizer implements DRIChartCustomizer {
 					key = StringUtils.substringAfter(key, GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY);
 					legend.add(key);
 				}
-				renderer.setSeriesPaint(i, seriesColors.get(key));
+				renderer.setSeriesPaint(i, seriesColorsByName.get(key));
 			}
 			if (!legend.isEmpty()) {
 				LegendItemCollection legendItems = new LegendItemCollection();
 				for (String item : legend) {
-					legendItems.add(new LegendItem(item, seriesColors.get(item)));
+					legendItems.add(new LegendItem(item, seriesColorsByName.get(item)));
 				}
 				chart.getCategoryPlot().setFixedLegendItems(legendItems);
 			}
@@ -81,7 +81,7 @@ public class SerieNamesColorsCustomizer implements DRIChartCustomizer {
 			PieDataset dataset = plot.getDataset();
 			for (int i = 0; i < dataset.getItemCount(); i++) {
 				String key = (String) dataset.getKey(i);
-				plot.setSectionPaint(key, seriesColors.get(key));
+				plot.setSectionPaint(key, seriesColorsByName.get(key));
 			}
 		}
 		else if (chart.getPlot() instanceof XYPlot) {
@@ -89,7 +89,7 @@ public class SerieNamesColorsCustomizer implements DRIChartCustomizer {
 			XYDataset dataset = chart.getXYPlot().getDataset();
 			for (int i = 0; i < dataset.getSeriesCount(); i++) {
 				String key = (String) dataset.getSeriesKey(i);
-				renderer.setSeriesPaint(i, seriesColors.get(key));
+				renderer.setSeriesPaint(i, seriesColorsByName.get(key));
 			}
 		}
 	}

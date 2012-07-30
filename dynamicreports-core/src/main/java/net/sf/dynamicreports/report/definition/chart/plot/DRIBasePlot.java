@@ -37,5 +37,5 @@ public interface DRIBasePlot extends DRIPlot {
 
 	public List<Color> getSeriesColors();
 
-	public Map<String, Color> getSerieNamesColors();
+	public Map<String, Color> getSeriesColorsByName();
 }
