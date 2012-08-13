@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.definition.chart.plot;
 
+import java.util.List;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -38,4 +40,6 @@ public interface DRIAxisPlot extends DRIBasePlot {
 	public Boolean getShowPercentages();
 
 	public String getPercentValuePattern();
+
+	public List<String> getSeriesOrderByName();
 }

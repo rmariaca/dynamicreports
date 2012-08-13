@@ -71,6 +71,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStacke
 import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesColorsByNameCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderByNameCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
@@ -421,6 +422,10 @@ public class ChartTransform {
 	private void axisPlot(DRDesignAxisPlot designAxisPlot, DRIAxisPlot axisPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		designAxisPlot.setXAxisFormat(axisFormat(axisPlot.getXAxisFormat()));
 		designAxisPlot.setYAxisFormat(axisFormat(axisPlot.getYAxisFormat()));
+		List<String> seriesOrderByName = axisPlot.getSeriesOrderByName();
+		if (!seriesOrderByName.isEmpty()) {
+			chartCustomizers.add(new SeriesOrderByNameCustomizer(seriesOrderByName));
+		}
 		if (axisPlot.getShowPercentages() != null && axisPlot.getShowPercentages()) {
 			chartCustomizers.add(new ShowPercentagesCustomizer());
 		}

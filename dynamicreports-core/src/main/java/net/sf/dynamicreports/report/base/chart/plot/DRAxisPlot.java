@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.report.base.chart.plot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 
@@ -39,12 +42,14 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	private String valuePattern;
 	private Boolean showPercentages;
 	private String percentValuePattern;
+	private List<String> seriesOrderByName;
 
 	@Override
 	protected void init() {
 		super.init();
 		this.xAxisFormat = new DRAxisFormat();
 		this.yAxisFormat = new DRAxisFormat();
+		this.seriesOrderByName = new ArrayList<String>();
 	}
 
 	@Override
@@ -102,4 +107,19 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	public void setPercentValuePattern(String percentValuePattern) {
 		this.percentValuePattern = percentValuePattern;
 	}
+
+	@Override
+	public List<String> getSeriesOrderByName() {
+		return seriesOrderByName;
+	}
+
+	public void addSeriesOrderByName(String seriesOrderByName) {
+		Validate.notNull(seriesOrderByName, "seriesOrderByName must not be null");
+		this.seriesOrderByName.add(seriesOrderByName);
+	}
+
+	public void setSeriesOrderByName(List<String> seriesOrderByName) {
+		this.seriesOrderByName = seriesOrderByName;
+	}
+
 }

@@ -108,4 +108,17 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		getPlot().setShowPercentages(showPercentages);
 		return (T) this;
 	}
+
+	public T seriesOrderByName(String ...seriesOrderByName) {
+		return addSeriesOrderByName(seriesOrderByName);
+	}
+
+	public T addSeriesOrderByName(String ...seriesOrderByName) {
+		Validate.notNull(seriesOrderByName, "seriesOrderByName must not be null");
+		Validate.noNullElements(seriesOrderByName, "seriesOrderByName must not contains null seriesName");
+		for (String seriesName : seriesOrderByName) {
+			getPlot().addSeriesOrderByName(seriesName);
+		}
+		return (T) this;
+	}
 }
