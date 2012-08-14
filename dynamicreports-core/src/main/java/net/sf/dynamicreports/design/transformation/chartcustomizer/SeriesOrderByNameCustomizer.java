@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -48,7 +49,13 @@ public class SeriesOrderByNameCustomizer implements DRIChartCustomizer, Serializ
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
-			CategoryDataset dataset = new SeriesOrderByNameCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderByName);
+			CategoryDataset dataset = null;
+			if (!(chart.getCategoryPlot().getRenderer() instanceof GroupedStackedBarRenderer)) {
+				dataset = new SeriesOrderByNameCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderByName);
+			}
+			else {
+				dataset = new SeriesOrderByNameGroupedCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderByName);
+			}
 			chart.getCategoryPlot().setDataset(dataset);
 		}
 	}

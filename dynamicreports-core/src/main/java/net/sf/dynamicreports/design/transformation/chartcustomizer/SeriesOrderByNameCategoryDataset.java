@@ -23,6 +23,8 @@
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jfree.data.category.CategoryDataset;
@@ -34,54 +36,50 @@ import org.jfree.data.general.DatasetGroup;
  */
 public class SeriesOrderByNameCategoryDataset implements CategoryDataset {
 	protected List<String> seriesOrderByName;
+	protected List<String> rowKeys;
 	protected CategoryDataset dataset;
 
 	public SeriesOrderByNameCategoryDataset(CategoryDataset dataset, List<String> seriesOrderByName) {
 		this.dataset = dataset;
-		this.seriesOrderByName = new ArrayList<String>();
-		for (String serieName : seriesOrderByName) {
-			if (dataset.getColumnIndex(serieName) != -1) {
-				this.seriesOrderByName.add(serieName);
-			}
+		this.seriesOrderByName = seriesOrderByName;
+		this.rowKeys = new ArrayList<String>();
+		for (int i = 0; i < dataset.getRowCount(); i++) {
+			String serieName = (String) dataset.getRowKey(i);
+			this.rowKeys.add(serieName);
 		}
-		for (int i = 0; i < dataset.getColumnCount(); i++) {
-			String serieName = (String) dataset.getColumnKey(i);
-			if (!this.seriesOrderByName.contains(serieName)) {
-				this.seriesOrderByName.add(serieName);
-			}
-		}
+		Collections.sort(this.rowKeys, getSeriesComparator());
 	}
 
 	@Override
 	public Comparable<?> getRowKey(int row) {
-		return dataset.getRowKey(row);
+		return rowKeys.get(row);
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public int getRowIndex(Comparable key) {
-		return dataset.getRowIndex(key);
+		return rowKeys.indexOf(key);
 	}
 
 	@Override
 	public List<?> getRowKeys() {
-		return dataset.getRowKeys();
+		return rowKeys;
 	}
 
 	@Override
 	public Comparable<?> getColumnKey(int column) {
-		return seriesOrderByName.get(column);
+		return dataset.getColumnKey(column);
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public int getColumnIndex(Comparable key) {
-		return seriesOrderByName.indexOf(key);
+		return dataset.getColumnIndex(key);
 	}
 
 	@Override
 	public List<?> getColumnKeys() {
-		return seriesOrderByName;
+		return dataset.getColumnKeys();
 	}
 
 	@Override
@@ -102,8 +100,8 @@ public class SeriesOrderByNameCategoryDataset implements CategoryDataset {
 
 	@Override
 	public Number getValue(int row, int column) {
-		int columnIndex = dataset.getColumnIndex(seriesOrderByName.get(column));
-		return dataset.getValue(row, columnIndex);
+		int rowIndex = dataset.getRowIndex(rowKeys.get(row));
+		return dataset.getValue(rowIndex, column);
 	}
 
 	@Override
@@ -124,6 +122,30 @@ public class SeriesOrderByNameCategoryDataset implements CategoryDataset {
 	@Override
 	public void setGroup(DatasetGroup group) {
 		dataset.setGroup(group);
+	}
+
+	protected Comparator<String> getSeriesComparator() {
+		return new SeriesComparator();
+	}
+
+	private class SeriesComparator implements Comparator<String> {
+
+		@Override
+		public int compare(String o1, String o2) {
+			int index1 = seriesOrderByName.indexOf(o1);
+			int index2 = seriesOrderByName.indexOf(o2);
+			if (index1 == index2) {
+				return 0;
+			}
+			if (index1 < 0) {
+				return index1;
+			}
+			if (index2 < 0) {
+				return index2;
+			}
+			return index1 - index2;
+		}
+
 	}
 
 }
