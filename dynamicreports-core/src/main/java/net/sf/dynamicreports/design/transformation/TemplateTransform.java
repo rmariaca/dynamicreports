@@ -532,7 +532,7 @@ public class TemplateTransform {
 	}
 
 	private int pageWidth(int width) throws DRException {
-		if (templateDesign.getPageWidth() != null && templateDesign.getPageWidth() != width) {
+		if (templateDesign.getPageWidth() != null && templateDesign.getPageWidth().intValue() != width) {
 			throw new DRException("Page width must not be different from page width of template design");
 		}
 		return width;
@@ -540,8 +540,8 @@ public class TemplateTransform {
 
 	protected int getPageHeight() throws DRException {
 		if (report.getPage().getHeight() != null) {
-			Integer height = report.getPage().getHeight();
-			if (templateDesign.getPageHeight() != null && templateDesign.getPageHeight() != height) {
+			int height = report.getPage().getHeight();
+			if (templateDesign.getPageHeight() != null && templateDesign.getPageHeight().intValue() != height) {
 				throw new DRException("Page height must not be different from page height of template design");
 			}
 			return height;
