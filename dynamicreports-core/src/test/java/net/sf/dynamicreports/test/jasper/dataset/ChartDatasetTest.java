@@ -75,7 +75,7 @@ public class ChartDatasetTest extends AbstractJasperChartTest implements Seriali
 						cht.serie(new ValueExpression()).setLabel("exp")),
 				cht.barChart()
 					.setSubDataset(dataset2)
-					.setCustomizer(new Customizer())
+					.customizers(new Customizer())
 					.setCategory(new CategoryExpression())
 					.series(
 						cht.serie(col.column("Column2", "field2", Integer.class)),

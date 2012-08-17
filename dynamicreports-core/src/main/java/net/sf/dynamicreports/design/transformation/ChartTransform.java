@@ -151,8 +151,8 @@ public class ChartTransform {
 		designChart.setSubtitle(subtitle(chart.getSubtitle()));
 		designChart.setLegend(legend(chart.getLegend()));
 
-		if (chart.getCustomizer() != null) {
-			designChart.getCustomizers().add(chart.getCustomizer());
+		if (!chart.getCustomizers().isEmpty()) {
+			designChart.getCustomizers().addAll(chart.getCustomizers());
 		}
 
 		return designChart;

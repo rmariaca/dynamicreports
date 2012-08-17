@@ -73,7 +73,7 @@ public class DifferenceChartTest extends AbstractJasperChartTest implements Seri
 				column4 = col.column("Column4", "field4", Integer.class))
 			.summary(
 					cht.differenceChart()
-						.setCustomizer(new ChartCustomizer())
+						.customizers(new ChartCustomizer())
 						.setTimePeriod(column1)
 						.series(cht.serie(column3), cht.serie(column4))
 						.setTimePeriodType(TimePeriod.DAY)

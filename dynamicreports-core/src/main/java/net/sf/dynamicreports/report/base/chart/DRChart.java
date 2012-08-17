@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.report.base.chart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRChartDataset;
 import net.sf.dynamicreports.report.base.chart.dataset.DRHighLowDataset;
@@ -63,7 +66,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	private ChartType chartType;
 	private DRChartDataset dataset;
 	private DRIPlot plot;
-	private DRIChartCustomizer customizer;
+	private List<DRIChartCustomizer> customizers;
 	private DRChartTitle title;
 	private DRChartSubtitle subtitle;
 	private DRChartLegend legend;
@@ -76,6 +79,7 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	@Override
 	protected void init() {
 		super.init();
+		this.customizers = new ArrayList<DRIChartCustomizer>();
 		this.title = new DRChartTitle();
 		this.subtitle = new DRChartSubtitle();
 		this.legend = new DRChartLegend();
@@ -198,12 +202,16 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 	}
 
 	@Override
-	public DRIChartCustomizer getCustomizer() {
-		return customizer;
+	public List<DRIChartCustomizer> getCustomizers() {
+		return customizers;
 	}
 
-	public void setCustomizer(DRIChartCustomizer customizer) {
-		this.customizer = customizer;
+	public void addCustomizer(DRIChartCustomizer customizer) {
+		this.customizers.add(customizer);
+	}
+
+	public void setCustomizers(List<DRIChartCustomizer> customizers) {
+		this.customizers = customizers;
 	}
 
 	@Override

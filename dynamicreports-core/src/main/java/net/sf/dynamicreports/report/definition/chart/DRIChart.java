@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.definition.chart;
 
+import java.util.List;
+
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartDataset;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
@@ -38,7 +40,7 @@ public interface DRIChart extends DRIHyperLinkComponent {
 
 	public DRIPlot getPlot();
 
-	public DRIChartCustomizer getCustomizer();
+	public List<DRIChartCustomizer> getCustomizers();
 
 	public DRIChartTitle getTitle();
 

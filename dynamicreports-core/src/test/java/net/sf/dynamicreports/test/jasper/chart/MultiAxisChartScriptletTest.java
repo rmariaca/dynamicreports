@@ -62,7 +62,7 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 		FieldBuilder<String> field4 = field("field4", type.stringType());
 
 		TimeSeriesChartBuilder chart1 = cht.timeSeriesChart()
-			.setCustomizer(new Customizer1())
+			.customizers(new Customizer1())
   		.setTimePeriod(field1)
   		.setTimePeriodType(TimePeriod.DAY)
   		.series(cht.serie(field2).setLabel("serie1"));
@@ -73,18 +73,18 @@ public class MultiAxisChartScriptletTest extends AbstractJasperChartTest impleme
 	  	.series(cht.serie(field3).setLabel("serie2"));
 
 		BarChartBuilder chart3 = cht.barChart()
-			.setCustomizer(new Customizer3())
+			.customizers(new Customizer3())
 			.setCategory(field4)
 			.series(cht.serie(field2));
 
 		LineChartBuilder chart4 = cht.lineChart()
-			.setCustomizer(new Customizer4())
+			.customizers(new Customizer4())
 			.setCategory(field4)
 			.series(cht.serie(field3));
 
 		rb.summary(
-	  	cht.multiAxisChart(chart1, chart2).setCustomizer(new Customizer2()),
-	  	cht.multiAxisChart(chart3, chart4).setCustomizer(new Customizer5()));
+	  	cht.multiAxisChart(chart1, chart2).customizers(new Customizer2()),
+	  	cht.multiAxisChart(chart3, chart4).customizers(new Customizer5()));
 	}
 
 	@Override

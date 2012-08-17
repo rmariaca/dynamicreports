@@ -65,7 +65,7 @@ public class ChartCustomizerReport {
 			  .title(Templates.createTitleComponent("ChartCustomizer"))
 			  .summary(
 			  	cht.barChart()
-			  	   .setCustomizer(new ChartCustomizer())
+			  	   .customizers(new ChartCustomizer())
 			  	   .setTitle("Bar chart")
 			  	   .setTitleFont(boldFont)
 			  	   .setCategory(itemColumn)

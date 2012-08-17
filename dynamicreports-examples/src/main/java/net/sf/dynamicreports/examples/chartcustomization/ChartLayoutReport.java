@@ -65,7 +65,7 @@ public class ChartLayoutReport {
 	  	.setDataSource(createDataSource());
 
 		BarChartBuilder chart = cht.barChart()
-	  	.setCustomizer(new ChartCustomizer())
+	  	.customizers(new ChartCustomizer())
 	  	.setTitle("Bar chart")
 	  	.setTitleFont(boldFont)
 	  	.setCategory(itemColumn)

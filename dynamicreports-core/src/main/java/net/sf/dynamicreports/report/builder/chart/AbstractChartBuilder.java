@@ -51,8 +51,24 @@ public abstract class AbstractChartBuilder<T extends AbstractChartBuilder<T>> ex
 		super(new DRChart(chartType));
 	}
 
+	/**
+	 * Use addCustomizer or customizers
+	 */
+	@Deprecated
 	public T setCustomizer(DRIChartCustomizer customizer) {
-		getObject().setCustomizer(customizer);
+		return customizers(customizer);
+	}
+
+	public T addCustomizer(DRIChartCustomizer ...customizers) {
+		return customizers(customizers);
+	}
+
+	public T customizers(DRIChartCustomizer ...customizers) {
+		Validate.notNull(customizers, "customizers must not be null");
+		Validate.noNullElements(customizers, "customizers must not contains null customizer");
+		for (DRIChartCustomizer customizer : customizers) {
+			getObject().addCustomizer(customizer);
+		}
 		return (T) this;
 	}
 

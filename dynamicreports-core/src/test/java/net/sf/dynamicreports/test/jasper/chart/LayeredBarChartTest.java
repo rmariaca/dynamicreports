@@ -66,7 +66,7 @@ public class LayeredBarChartTest extends AbstractJasperChartTest implements Seri
 				column2 = col.column("Column2", "field2", Integer.class))
 			.summary(
 					cht.layeredBarChart()
-						.setCustomizer(new ChartCustomizer())
+						.customizers(new ChartCustomizer())
 						.setCategory(column1)
 						.series(cht.serie(column2))
 						.setShowLabels(true)
