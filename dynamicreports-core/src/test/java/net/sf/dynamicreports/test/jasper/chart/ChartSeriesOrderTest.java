@@ -35,6 +35,8 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStacke
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -66,7 +68,8 @@ public class ChartSeriesOrderTest extends AbstractJasperChartTest implements Ser
 		colors.put("c", Color.GREEN);
 		colors.put("d", Color.MAGENTA);
 
-		rb.columns(
+		rb.setPageFormat(PageType.A3, PageOrientation.PORTRAIT)
+			.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", String.class),
 				column3 = col.column("Column3", "field3", Integer.class),
@@ -114,25 +117,39 @@ public class ChartSeriesOrderTest extends AbstractJasperChartTest implements Ser
 				cmp.horizontalList(
 					cht.barChart()
 						.seriesColorsByName(colors)
-						.setSeriesOrderBy(Arrays.asList("c", "b", "a", "d"))
+						.seriesOrderBy("c", "b", "a", "d")
 						.setSeriesOrderType(OrderType.DESCENDING)
 						.setCategory(column1)
 						.series(
 							cht.serie(column3).setSeries(column2)),
 					cht.groupedStackedBarChart()
 						.seriesColorsByName(colors)
-						.setSeriesOrderBy(Arrays.asList("c", "b", "a", "d"))
+						.seriesOrderBy("c", "b", "a", "d")
 						.setSeriesOrderType(OrderType.DESCENDING)
 						.setCategory(column1)
 						.series(
-							cht.groupedSerie(column3).setSeries(column2).setGroup(column4))));
+							cht.groupedSerie(column3).setSeries(column2).setGroup(column4))),
+				cmp.horizontalList(
+					cht.barChart()
+						.seriesColorsByName(colors)
+						.seriesOrderBy("c", "e", "d")
+						.setCategory(column1)
+						.series(
+							cht.serie(column3).setSeries(column2)),
+					cht.barChart()
+						.seriesColorsByName(colors)
+						.seriesOrderBy("g", "e", "d")
+						.setSeriesOrderType(OrderType.DESCENDING)
+						.setCategory(column1)
+						.series(
+							cht.serie(column3).setSeries(column2))));
 	}
 
 	@Override
 	public void test() {
 		super.test();
 
-		numberOfPagesTest(2);
+		numberOfPagesTest(1);
 
 		chartCountTest("summary.chart1", 1);
 		JFreeChart chart = getChart("summary.chart1", 0);
@@ -279,8 +296,6 @@ public class ChartSeriesOrderTest extends AbstractJasperChartTest implements Ser
 		chartSeriesCountTest("summary.chart6", 0, 8);
 		chartDataTest("summary.chart6", 0, categories, series, values);
 
-	//***************
-
 		chartCountTest("summary.chart7", 1);
 		chart = getChart("summary.chart7", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
@@ -329,6 +344,42 @@ public class ChartSeriesOrderTest extends AbstractJasperChartTest implements Ser
 		chartCategoryCountTest("summary.chart8", 0, 2);
 		chartSeriesCountTest("summary.chart8", 0, 8);
 		chartDataTest("summary.chart8", 0, categories, series, values);
+
+		chartCountTest("summary.chart9", 1);
+		chart = getChart("summary.chart9", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		dataset1 = chart.getCategoryPlot().getDataset();
+		for (int i = 0; i < dataset1.getRowCount(); i++) {
+			String key = (String) dataset1.getRowKey(i);
+			Assert.assertNotNull("null series color", colors.get(key));
+			Assert.assertEquals("series color", colors.get(key), renderer1.getSeriesPaint(i));
+		}
+
+		categories = new String[]{"value1", "value2"};
+		series = new String[]{"c", "d", "a", "b"};
+		values =  new Number[][]{{4d, 2d, 5d, 2d}, {2d, 4d, 3d, null}};
+
+		chartCategoryCountTest("summary.chart9", 0, 2);
+		chartSeriesCountTest("summary.chart9", 0, 4);
+		chartDataTest("summary.chart9", 0, categories, series, values);
+
+		chartCountTest("summary.chart10", 1);
+		chart = getChart("summary.chart10", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		dataset1 = chart.getCategoryPlot().getDataset();
+		for (int i = 0; i < dataset1.getRowCount(); i++) {
+			String key = (String) dataset1.getRowKey(i);
+			Assert.assertNotNull("null series color", colors.get(key));
+			Assert.assertEquals("series color", colors.get(key), renderer1.getSeriesPaint(i));
+		}
+
+		categories = new String[]{"value1", "value2"};
+		series = new String[]{"c", "b", "a", "d"};
+		values =  new Number[][]{{4d, 2d, 5d, 2d}, {2d, null, 3d, 4d}};
+
+		chartCategoryCountTest("summary.chart10", 0, 2);
+		chartSeriesCountTest("summary.chart10", 0, 4);
+		chartDataTest("summary.chart10", 0, categories, series, values);
 	}
 
 	@Override

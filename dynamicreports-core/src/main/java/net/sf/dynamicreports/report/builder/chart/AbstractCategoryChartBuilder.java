@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -121,6 +122,10 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 	public T setSeriesOrderBy(List<String> seriesOrderByNames) {
 		getPlot().setSeriesOrderBy(new SeriesOrderByNamesComparator(seriesOrderByNames));
 		return (T) this;
+	}
+
+	public T seriesOrderBy(String ...seriesOrderByNames) {
+		return setSeriesOrderBy(Arrays.asList(seriesOrderByNames));
 	}
 
 	public T setSeriesOrderType(OrderType seriesOrderType) {

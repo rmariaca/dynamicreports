@@ -67,11 +67,14 @@ public class SeriesOrderByNamesComparator implements Comparator<String>, Seriali
 		}
 		int index1 = seriesNames.indexOf(row1);
 		int index2 = seriesNames.indexOf(row2);
+		if (index1 < 0 && index2 < 0) {
+			return row1.compareTo(row2);
+		}
 		if (index1 == index2) {
 			return 0;
 		}
 		if (index1 < 0) {
-			return index1;
+			return index1 * -1;
 		}
 		if (index2 < 0) {
 			return index2;
