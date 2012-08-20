@@ -25,10 +25,14 @@ package net.sf.dynamicreports.examples.complex.salestableofcontents;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
@@ -48,6 +52,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -71,6 +76,10 @@ public class SalesTableOfContentsDesign {
 		tableOfContentsCustomizer.setTextFixedWidth(100);
 		tableOfContentsCustomizer.setPageIndexFixedWidth(30);
 
+		TextFieldBuilder<String> pageHeader = cmp.text(new PageHeaderExpression())
+			.setStyle(Templates.bold12CenteredStyle)
+			.setEvaluationTime(Evaluation.PAGE);
+
 		report
 			.setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
 			.setTemplate(Templates.reportTemplate)
@@ -82,6 +91,7 @@ public class SalesTableOfContentsDesign {
 				col.column("Quantity",   "quantity",  type.integerType()),
 				col.column("Unit price", "unitprice", type.bigDecimalType()))
 			.groupBy(countryColumn, itemColumn)
+			.pageHeader(pageHeader)
 			.title(
 				Templates.createTitleComponent("SalesTableOfContents"))
 			.pageFooter(
@@ -89,6 +99,27 @@ public class SalesTableOfContentsDesign {
 			.setDataSource(data.createDataSource());
 
 		return report;
+	}
+
+	private class PageHeaderExpression extends AbstractSimpleExpression<String> {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public String evaluate(ReportParameters reportParameters) {
+			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
+			Map<String, JasperTocHeading> tocHeadings = customValues.getTocHeadings();
+			if (tocHeadings.isEmpty()) {
+				return "";
+			}
+			List<JasperTocHeading> headings = new ArrayList<JasperTocHeading>(tocHeadings.values());
+			for (int i = headings.size() - 1; i >= 0; i--) {
+				JasperTocHeading jasperTocHeading = headings.get(i);
+				if (jasperTocHeading.getLevel() == 0) {
+					return "Country: " + jasperTocHeading.getText();
+				}
+			}
+			return "";
+		}
 	}
 
 	private class CustomTableOfContentsCustomizer extends TableOfContentsCustomizer {
