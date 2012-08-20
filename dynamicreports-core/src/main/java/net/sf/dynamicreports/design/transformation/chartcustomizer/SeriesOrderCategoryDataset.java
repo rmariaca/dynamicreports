@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.sf.dynamicreports.report.constant.OrderType;
+
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
@@ -34,20 +36,26 @@ import org.jfree.data.general.DatasetGroup;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SeriesOrderByNameCategoryDataset implements CategoryDataset {
-	protected List<String> seriesOrderByName;
+public class SeriesOrderCategoryDataset implements CategoryDataset {
 	protected List<String> rowKeys;
 	protected CategoryDataset dataset;
 
-	public SeriesOrderByNameCategoryDataset(CategoryDataset dataset, List<String> seriesOrderByName) {
+	public SeriesOrderCategoryDataset(CategoryDataset dataset, Comparator<String> seriesOrderBy, OrderType seriesOrderType) {
 		this.dataset = dataset;
-		this.seriesOrderByName = seriesOrderByName;
 		this.rowKeys = new ArrayList<String>();
 		for (int i = 0; i < dataset.getRowCount(); i++) {
 			String serieName = (String) dataset.getRowKey(i);
 			this.rowKeys.add(serieName);
 		}
-		Collections.sort(this.rowKeys, getSeriesComparator());
+		if (seriesOrderBy != null) {
+			Collections.sort(this.rowKeys, seriesOrderBy);
+		}
+		else {
+			Collections.sort(this.rowKeys, new SeriesComparator());
+		}
+		if (seriesOrderType != null && seriesOrderType.equals(OrderType.DESCENDING)) {
+			Collections.reverse(this.rowKeys);
+		}
 	}
 
 	@Override
@@ -124,28 +132,12 @@ public class SeriesOrderByNameCategoryDataset implements CategoryDataset {
 		dataset.setGroup(group);
 	}
 
-	protected Comparator<String> getSeriesComparator() {
-		return new SeriesComparator();
-	}
-
 	private class SeriesComparator implements Comparator<String> {
 
 		@Override
 		public int compare(String o1, String o2) {
-			int index1 = seriesOrderByName.indexOf(o1);
-			int index2 = seriesOrderByName.indexOf(o2);
-			if (index1 == index2) {
-				return 0;
-			}
-			if (index1 < 0) {
-				return index1;
-			}
-			if (index2 < 0) {
-				return index2;
-			}
-			return index1 - index2;
+			return o1.compareTo(o2);
 		}
 
 	}
-
 }

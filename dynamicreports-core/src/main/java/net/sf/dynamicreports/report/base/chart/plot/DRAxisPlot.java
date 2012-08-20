@@ -22,10 +22,10 @@
 
 package net.sf.dynamicreports.report.base.chart.plot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIAxisPlot;
 
 import org.apache.commons.lang3.Validate;
@@ -42,14 +42,14 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	private String valuePattern;
 	private Boolean showPercentages;
 	private String percentValuePattern;
-	private List<String> seriesOrderByName;
+	private Comparator<String> seriesOrderBy;
+	private OrderType seriesOrderType;
 
 	@Override
 	protected void init() {
 		super.init();
 		this.xAxisFormat = new DRAxisFormat();
 		this.yAxisFormat = new DRAxisFormat();
-		this.seriesOrderByName = new ArrayList<String>();
 	}
 
 	@Override
@@ -109,17 +109,21 @@ public class DRAxisPlot extends AbstractBasePlot implements DRIAxisPlot {
 	}
 
 	@Override
-	public List<String> getSeriesOrderByName() {
-		return seriesOrderByName;
+	public Comparator<String> getSeriesOrderBy() {
+		return seriesOrderBy;
 	}
 
-	public void addSeriesOrderByName(String seriesOrderByName) {
-		Validate.notNull(seriesOrderByName, "seriesOrderByName must not be null");
-		this.seriesOrderByName.add(seriesOrderByName);
+	public void setSeriesOrderBy(Comparator<String> seriesOrderBy) {
+		this.seriesOrderBy = seriesOrderBy;
 	}
 
-	public void setSeriesOrderByName(List<String> seriesOrderByName) {
-		this.seriesOrderByName = seriesOrderByName;
+	@Override
+	public OrderType getSeriesOrderType() {
+		return seriesOrderType;
+	}
+
+	public void setSeriesOrderType(OrderType seriesOrderType) {
+		this.seriesOrderType = seriesOrderType;
 	}
 
 }

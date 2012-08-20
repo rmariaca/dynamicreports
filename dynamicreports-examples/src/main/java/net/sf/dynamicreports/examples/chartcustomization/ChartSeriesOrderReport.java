@@ -31,6 +31,7 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.chart.BarChartBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -39,9 +40,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ChartSeriesOrderByNameReport {
+public class ChartSeriesOrderReport {
 
-	public ChartSeriesOrderByNameReport() {
+	public ChartSeriesOrderReport() {
 		build();
 	}
 
@@ -53,7 +54,7 @@ public class ChartSeriesOrderByNameReport {
 		BarChartBuilder chart = cht.barChart()
   		.setCategory(new CategoryExpression())
   		.series(cht.serie(valueColumn).setSeries(stockColumn))
-  		.seriesOrderByName("stock1", "stock2", "stock3")
+  		.setSeriesOrderType(OrderType.ASCENDING)
   		.setValueAxisFormat(
   			cht.axisFormat().setLabel("Stock"));
 
@@ -61,7 +62,7 @@ public class ChartSeriesOrderByNameReport {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(dateColumn, stockColumn, valueColumn)
-			  .title(Templates.createTitleComponent("ChartSeriesOrderByName"))
+			  .title(Templates.createTitleComponent("ChartSeriesOrder"))
 			  .groupBy(dateColumn)
 			  .summary(chart)
 			  .pageFooter(Templates.footerComponent)
@@ -96,7 +97,7 @@ public class ChartSeriesOrderByNameReport {
 	}
 
 	public static void main(String[] args) {
-		new ChartSeriesOrderByNameReport();
+		new ChartSeriesOrderReport();
 	}
 
 	private class CategoryExpression extends AbstractSimpleExpression<String> {

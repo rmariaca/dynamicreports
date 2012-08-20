@@ -23,39 +23,35 @@
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Comparator;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
 import org.jfree.data.category.CategoryDataset;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SeriesOrderByNameCustomizer implements DRIChartCustomizer, Serializable {
+public class SeriesOrderCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private List<String> seriesOrderByName;
+	private Comparator<String> seriesOrderBy;
+	private OrderType seriesOrderType;
 
-	public SeriesOrderByNameCustomizer(List<String> seriesOrderByName) {
-		this.seriesOrderByName = seriesOrderByName;
+	public SeriesOrderCustomizer(Comparator<String> seriesOrderBy, OrderType seriesOrderType) {
+		this.seriesOrderBy = seriesOrderBy;
+		this.seriesOrderType = seriesOrderType;
 	}
 
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
-			CategoryDataset dataset = null;
-			if (!(chart.getCategoryPlot().getRenderer() instanceof GroupedStackedBarRenderer)) {
-				dataset = new SeriesOrderByNameCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderByName);
-			}
-			else {
-				dataset = new SeriesOrderByNameGroupedCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderByName);
-			}
+			CategoryDataset dataset = new SeriesOrderCategoryDataset(chart.getCategoryPlot().getDataset(), seriesOrderBy, seriesOrderType);
 			chart.getCategoryPlot().setDataset(dataset);
 		}
 	}

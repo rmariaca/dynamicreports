@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.transformation;
 
 import java.awt.Color;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStacke
 import net.sf.dynamicreports.design.transformation.chartcustomizer.LayeredBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.PieChartLabelFormatCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesColorsByNameCustomizer;
-import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderByNameCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
@@ -79,6 +80,7 @@ import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
@@ -422,9 +424,10 @@ public class ChartTransform {
 	private void axisPlot(DRDesignAxisPlot designAxisPlot, DRIAxisPlot axisPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		designAxisPlot.setXAxisFormat(axisFormat(axisPlot.getXAxisFormat()));
 		designAxisPlot.setYAxisFormat(axisFormat(axisPlot.getYAxisFormat()));
-		List<String> seriesOrderByName = axisPlot.getSeriesOrderByName();
-		if (!seriesOrderByName.isEmpty()) {
-			chartCustomizers.add(new SeriesOrderByNameCustomizer(seriesOrderByName));
+		Comparator<String> seriesOrderBy = axisPlot.getSeriesOrderBy();
+		OrderType seriesOrderType = axisPlot.getSeriesOrderType();
+		if (seriesOrderBy != null || seriesOrderType != null) {
+			chartCustomizers.add(new SeriesOrderCustomizer(seriesOrderBy, seriesOrderType));
 		}
 		if (axisPlot.getShowPercentages() != null && axisPlot.getShowPercentages()) {
 			chartCustomizers.add(new ShowPercentagesCustomizer());

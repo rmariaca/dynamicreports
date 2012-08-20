@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.report.definition.chart.plot;
 
-import java.util.List;
+import java.util.Comparator;
+
+import net.sf.dynamicreports.report.constant.OrderType;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -41,5 +43,8 @@ public interface DRIAxisPlot extends DRIBasePlot {
 
 	public String getPercentValuePattern();
 
-	public List<String> getSeriesOrderByName();
+	public Comparator<String> getSeriesOrderBy();
+
+	public OrderType getSeriesOrderType();
+
 }

@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import java.util.Comparator;
+import java.util.List;
+
 import net.sf.dynamicreports.report.base.chart.dataset.DRCategoryDataset;
 import net.sf.dynamicreports.report.base.chart.plot.DRAxisPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
@@ -30,6 +33,7 @@ import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -109,16 +113,18 @@ public abstract class AbstractCategoryChartBuilder<T extends AbstractCategoryCha
 		return (T) this;
 	}
 
-	public T seriesOrderByName(String ...seriesOrderByName) {
-		return addSeriesOrderByName(seriesOrderByName);
+	public T setSeriesOrderBy(Comparator<String> seriesOrderBy) {
+		getPlot().setSeriesOrderBy(seriesOrderBy);
+		return (T) this;
 	}
 
-	public T addSeriesOrderByName(String ...seriesOrderByName) {
-		Validate.notNull(seriesOrderByName, "seriesOrderByName must not be null");
-		Validate.noNullElements(seriesOrderByName, "seriesOrderByName must not contains null seriesName");
-		for (String seriesName : seriesOrderByName) {
-			getPlot().addSeriesOrderByName(seriesName);
-		}
+	public T setSeriesOrderBy(List<String> seriesOrderByNames) {
+		getPlot().setSeriesOrderBy(new SeriesOrderByNamesComparator(seriesOrderByNames));
+		return (T) this;
+	}
+
+	public T setSeriesOrderType(OrderType seriesOrderType) {
+		getPlot().setSeriesOrderType(seriesOrderType);
 		return (T) this;
 	}
 }

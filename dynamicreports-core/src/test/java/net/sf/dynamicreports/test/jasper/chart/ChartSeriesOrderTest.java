@@ -33,6 +33,7 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarRendererCustomizer;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -46,7 +47,7 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ChartSeriesOrderByNameTest extends AbstractJasperChartTest implements Serializable {
+public class ChartSeriesOrderTest extends AbstractJasperChartTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Map<String, Color> colors;
@@ -64,8 +65,6 @@ public class ChartSeriesOrderByNameTest extends AbstractJasperChartTest implemen
 		colors.put("c", Color.GREEN);
 		colors.put("d", Color.MAGENTA);
 
-		String[] seriesNames = {"a", "b", "c", "d"};
-
 		rb.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", String.class),
@@ -74,13 +73,13 @@ public class ChartSeriesOrderByNameTest extends AbstractJasperChartTest implemen
 			.summary(
 					cht.barChart()
 						.seriesColorsByName(colors)
-						.seriesOrderByName(seriesNames)
+						.setSeriesOrderType(OrderType.ASCENDING)
 						.setCategory(column1)
 						.series(
 							cht.serie(column3).setSeries(column2)),
 					cht.groupedStackedBarChart()
 						.seriesColorsByName(colors)
-						.seriesOrderByName(seriesNames)
+						.setSeriesOrderType(OrderType.ASCENDING)
 						.setCategory(column1)
 						.series(
 							cht.groupedSerie(column3).setSeries(column2).setGroup(column4)));
