@@ -34,6 +34,8 @@ import net.sf.dynamicreports.report.exception.DRException;
  */
 public interface DRITemplateDesign<T> extends Serializable {
 
+	public String getReportName();
+
 	public List<DRIField<?>> getFields();
 
 	public boolean isDefinedParameter(String name);

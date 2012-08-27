@@ -76,6 +76,7 @@ public class Report1Test extends AbstractJasperValueTest {
 		Assert.assertFalse("fonts", JRFontUtil.getFontFamilyNames().isEmpty());
 
 		JasperPrint jasperPrint = getJasperPrint();
+		Assert.assertEquals("Report", jasperPrint.getName());
 		Assert.assertEquals(OrientationEnum.LANDSCAPE, jasperPrint.getOrientationValue());
 		Assert.assertEquals(1190, jasperPrint.getPageWidth());
 		Assert.assertEquals(842, jasperPrint.getPageHeight());

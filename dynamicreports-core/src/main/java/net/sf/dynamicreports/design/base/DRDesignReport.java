@@ -247,6 +247,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	}
 
 	@Override
+	public String getReportName() {
+		return templateTransform.getReportName();
+	}
+
+	@Override
 	public Locale getLocale() {
 		return templateTransform.getLocale();
 	}

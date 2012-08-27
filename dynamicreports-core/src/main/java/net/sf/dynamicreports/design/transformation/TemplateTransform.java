@@ -117,6 +117,16 @@ public class TemplateTransform {
 		this.templateDesign = report.getTemplateDesign();
 	}
 
+	public String getReportName() {
+		if (report.getReportName() != null) {
+			return report.getReportName();
+		}
+		if (templateDesign.getReportName() != null) {
+			return templateDesign.getReportName();
+		}
+		return Defaults.getDefaults().getReportName();
+	}
+
 	public Locale getLocale() {
 		if (report.getLocale() != null) {
 			return report.getLocale();

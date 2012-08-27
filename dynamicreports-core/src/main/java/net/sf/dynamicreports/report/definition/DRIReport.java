@@ -51,6 +51,8 @@ public interface DRIReport extends Serializable {
 
 	public DRITemplateDesign<?> getTemplateDesign();
 
+	public String getReportName();
+
 	public Locale getLocale();
 
 	public ResourceBundle getResourceBundle();

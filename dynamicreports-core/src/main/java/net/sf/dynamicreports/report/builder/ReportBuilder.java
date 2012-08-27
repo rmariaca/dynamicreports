@@ -74,6 +74,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		super(new DRReport());
 	}
 
+	public T setReportName(String reportName) {
+		getObject().setReportName(reportName);
+		return (T) this;
+	}
+
 	public T setLocale(Locale locale) {
 		getObject().setLocale(locale);
 		return (T) this;

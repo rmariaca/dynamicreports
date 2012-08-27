@@ -123,6 +123,11 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	}
 
 	@Override
+	public String getReportName() {
+		return jasperDesign.getName();
+	}
+
+	@Override
 	public List<DRIField<?>> getFields() {
 		return fields;
 	}

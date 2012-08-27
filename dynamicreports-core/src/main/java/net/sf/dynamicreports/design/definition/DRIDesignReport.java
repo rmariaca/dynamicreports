@@ -49,6 +49,8 @@ public interface DRIDesignReport {
 
 	public DRIDesignTemplateDesign getTemplateDesign();
 
+	public String getReportName();
+
 	public Locale getLocale();
 
 	public ResourceBundle getResourceBundle();

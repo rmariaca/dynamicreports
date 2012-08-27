@@ -26,19 +26,22 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.io.Serializable;
 
+import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Report3Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
-		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
+	protected void configureReport(JasperReportBuilder rb) {
+		rb.setReportName("report1")
+			.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 		  .setSummaryOnANewPage(true)
 			.setSummaryWithPageHeaderAndFooter(true)
 			.pageHeader(cmp.text("page header"))
@@ -49,9 +52,12 @@ public class Report3Test extends AbstractJasperValueTest implements Serializable
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(2);
-		
+
+		JasperPrint jasperPrint = getJasperPrint();
+		Assert.assertEquals("report1", jasperPrint.getName());
+
 		//page header
 		elementCountTest("pageHeader.textField1", 2);
 		elementValueTest("pageHeader.textField1", "page header", "page header");

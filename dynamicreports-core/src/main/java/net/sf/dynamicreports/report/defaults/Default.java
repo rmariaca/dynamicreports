@@ -62,6 +62,7 @@ import net.sf.dynamicreports.report.definition.style.DRIStyle;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Default {
+	private String reportName;
 	private Locale locale;
 	private boolean showColumnTitle;
 	private boolean showColumnValues;
@@ -254,6 +255,7 @@ public class Default {
 	}
 
 	private void init() {
+		this.reportName = "Report";
 		this.locale = Locale.getDefault();
 		this.showColumnTitle = true;
 		this.showColumnValues = true;
@@ -453,6 +455,10 @@ public class Default {
 		this.booleanType = new DRDataType<Boolean, Boolean>(null, HorizontalAlignment.CENTER);
 		this.characterType = new DRDataType<Character, Character>(null, HorizontalAlignment.LEFT);
 		this.stringType = new DRDataType<String, String>(null, HorizontalAlignment.LEFT);
+	}
+
+	public String getReportName() {
+		return reportName;
 	}
 
 	public Locale getLocale() {
@@ -794,7 +800,7 @@ public class Default {
 	public String getChartPercentValuePattern() {
 		return chartPercentValuePattern;
 	}
-	
+
 	public boolean isChartCategoryDatasetUseSeriesAsCategory() {
 		return chartCategoryDatasetUseSeriesAsCategory;
 	}

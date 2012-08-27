@@ -39,6 +39,11 @@ public abstract class AbstractTemplateDesign<T> implements DRITemplateDesign<T> 
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	@Override
+	public String getReportName() {
+		return null;
+	}
+
+	@Override
 	public List<DRIField<?>> getFields() {
 		return null;
 	}

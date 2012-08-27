@@ -27,6 +27,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
@@ -34,6 +35,7 @@ import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -61,6 +63,9 @@ public class TemplateDesign1Test extends AbstractJasperValueTest implements Seri
 		super.test();
 
 		numberOfPagesTest(1);
+
+		JasperPrint jasperPrint = getJasperPrint();
+		Assert.assertEquals("templatedesign1", jasperPrint.getName());
 
 		columnTitleValueTest(column1, "Column1");
 		columnDetailValueTest(column1, "row0", "row1");

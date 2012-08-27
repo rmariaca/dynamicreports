@@ -57,6 +57,7 @@ public class DRReport implements DRIReport {
 	private DRReportTemplate template;
 	private List<DRIStyle> templateStyles;
 	private DRITemplateDesign<?> templateDesign;
+	private String reportName;
 	private Locale locale;
 	private ResourceBundle resourceBundle;
 	private String resourceBundleName;
@@ -183,6 +184,15 @@ public class DRReport implements DRIReport {
 	public void setTemplateDesign(DRITemplateDesign<?> templateDesign) {
 		Validate.notNull(templateDesign, "templateDesign must not be null");
 		this.templateDesign = templateDesign;
+	}
+
+	@Override
+	public String getReportName() {
+		return reportName;
+	}
+
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
 	}
 
 	@Override

@@ -80,6 +80,7 @@ public class ReportTransform {
 			customValues.setTocHeadings(tocHeadings);
 		}
 
+		design.setName(report.getReportName());
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
 		design.setResourceBundle(report.getResourceBundleName());
