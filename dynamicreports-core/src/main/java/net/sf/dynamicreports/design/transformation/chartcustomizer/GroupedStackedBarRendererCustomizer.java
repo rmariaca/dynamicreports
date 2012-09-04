@@ -60,6 +60,7 @@ public class GroupedStackedBarRendererCustomizer implements DRIChartCustomizer, 
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		this.seriesColors = new LinkedHashMap<String, Paint>();
+		this.map = null;
 		Set<String> groups = new LinkedHashSet<String>();
 		CategoryDataset dataset = chart.getCategoryPlot().getDataset();
 
