@@ -25,7 +25,6 @@ package net.sf.dynamicreports.examples.crosstab;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -48,6 +47,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 public class MeasureExpressionCrosstabReport {
 	private CrosstabMeasureBuilder<Integer> quantityMeasure;
 	private CrosstabVariableBuilder<BigDecimal> unitPriceVariable;
+	private CrosstabVariableBuilder<BigDecimal> priceVariable;
 
 	public MeasureExpressionCrosstabReport() {
 		build();
@@ -60,23 +60,31 @@ public class MeasureExpressionCrosstabReport {
 		CrosstabColumnGroupBuilder<String> columnGroup = ctab.columnGroup("item", String.class);
 
 		unitPriceVariable = ctab.variable("unitprice", BigDecimal.class, Calculation.SUM);
+		priceVariable = ctab.variable(new PriceExpression(), Calculation.SUM);
 		quantityMeasure = ctab.measure("Quantity", "quantity", Integer.class, Calculation.SUM);
-		CrosstabMeasureBuilder<BigDecimal> priceMeasure = ctab.measure("Price", new PriceMeasureExpression());
-		priceMeasure.setDataType(type.bigDecimalType());
+		//price1 = sum(unitprice) * sum(quantity)
+		CrosstabMeasureBuilder<BigDecimal> priceMeasure1 = ctab.measure("Price1", new PriceMeasure1Expression());
+		priceMeasure1.setDataType(type.bigDecimalType());
+		//price2 = sum(unitprice * quantity)
+		CrosstabMeasureBuilder<BigDecimal> priceMeasure2 = ctab.measure("Price2", new PriceMeasure2Expression());
+		priceMeasure2.setDataType(type.bigDecimalType());
 
 		CrosstabBuilder crosstab = ctab.crosstab()
-		                               .headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
-		                               .rowGroups(rowGroup)
-		                               .columnGroups(columnGroup)
-		                               .variables(unitPriceVariable)
-		                               .measures(quantityMeasure, priceMeasure);
+			.headerCell(cmp.text("State / Item").setStyle(Templates.boldCenteredStyle))
+			.setCellWidth(180)
+			.rowGroups(rowGroup)
+			.columnGroups(columnGroup)
+			.variables(unitPriceVariable, priceVariable)
+			.measures(quantityMeasure, priceMeasure1, priceMeasure2);
 
 		try {
 			report()
-			  .fields(field("orderdate", Date.class))
 			  .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
 			  .setTemplate(Templates.reportTemplate)
-			  .title(Templates.createTitleComponent("MeasureExpressionCrosstab"))
+			  .title(
+			  	Templates.createTitleComponent("MeasureExpressionCrosstab"),
+			  	cmp.text("Price1 = SUM(quantity) * SUM(unitPrice)").setStyle(Templates.boldStyle),
+			  	cmp.text("Price2 = SUM(quantity * unitPrice)").setStyle(Templates.boldStyle))
 			  .summary(crosstab)
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
@@ -86,7 +94,18 @@ public class MeasureExpressionCrosstabReport {
 		}
 	}
 
-	private class PriceMeasureExpression extends AbstractSimpleExpression<BigDecimal> {
+	private class PriceExpression extends AbstractSimpleExpression<BigDecimal> {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public BigDecimal evaluate(ReportParameters reportParameters) {
+			Integer quantity = reportParameters.getValue("quantity");
+			BigDecimal unitPrice = reportParameters.getValue("unitprice");
+			return unitPrice.multiply(new BigDecimal(quantity));
+		}
+	}
+
+	private class PriceMeasure1Expression extends AbstractSimpleExpression<BigDecimal> {
 		private static final long serialVersionUID = 1L;
 
 		@Override
@@ -94,6 +113,15 @@ public class MeasureExpressionCrosstabReport {
 			Integer quantity = reportParameters.getValue(quantityMeasure);
 			BigDecimal unitPrice = reportParameters.getValue(unitPriceVariable);
 			return unitPrice.multiply(new BigDecimal(quantity));
+		}
+	}
+
+	private class PriceMeasure2Expression extends AbstractSimpleExpression<BigDecimal> {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public BigDecimal evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceVariable);
 		}
 	}
 
