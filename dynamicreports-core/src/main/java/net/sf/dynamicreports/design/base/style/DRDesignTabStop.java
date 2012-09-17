@@ -25,6 +25,8 @@ package net.sf.dynamicreports.design.base.style;
 import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -48,5 +50,24 @@ public class DRDesignTabStop implements DRIDesignTabStop {
 
 	public void setAlignment(TabStopAlignment alignment) {
 		this.alignment = alignment;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignTabStop o = (DRDesignTabStop) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(position, o.position)
+			.append(alignment, o.alignment);
+		return equalsBuilder.isEquals();
 	}
 }

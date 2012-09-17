@@ -56,11 +56,13 @@ import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIPadding;
 import net.sf.dynamicreports.report.definition.style.DRIParagraph;
 import net.sf.dynamicreports.report.definition.style.DRIPen;
-import net.sf.dynamicreports.report.definition.style.DRITemplateStyle;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.definition.style.DRITabStop;
+import net.sf.dynamicreports.report.definition.style.DRITemplateStyle;
 import net.sf.dynamicreports.report.exception.DRException;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -135,7 +137,12 @@ public class StyleTransform {
 	}
 
 	private DRDesignStyle style(DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
-		DRDesignStyle designStyle = new DRDesignStyle();
+	  final DRDesignStyle designStyle;
+	  if (StringUtils.isBlank(style.getName())) {
+      designStyle = new DRDesignStyle();
+	  } else {
+	    designStyle = new DRDesignStyle(style.getName());
+	  }
 		baseStyle(designStyle, style);
 		if (style.getParentStyle() != null) {
 			designStyle.setParentStyle(transformStyle(style.getParentStyle(), textStyle, defaultStyleType));

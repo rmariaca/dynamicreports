@@ -27,38 +27,60 @@ import java.awt.Color;
 import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
 import net.sf.dynamicreports.report.constant.LineStyle;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignPen implements DRIDesignPen {	
+public class DRDesignPen implements DRIDesignPen {
 	private Float lineWidth;
 	private LineStyle lineStyle;
 	private Color lineColor;
-	
+
 	@Override
 	public Float getLineWidth() {
 		return lineWidth;
 	}
-	
+
 	public void setLineWidth(Float lineWidth) {
 		this.lineWidth = lineWidth;
 	}
-	
+
 	@Override
 	public LineStyle getLineStyle() {
 		return lineStyle;
 	}
-	
+
 	public void setLineStyle(LineStyle lineStyle) {
 		this.lineStyle = lineStyle;
 	}
-	
+
 	@Override
 	public Color getLineColor() {
 		return lineColor;
 	}
-	
+
 	public void setLineColor(Color lineColor) {
 		this.lineColor = lineColor;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignPen o = (DRDesignPen) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(lineWidth, o.lineWidth)
+			.append(lineStyle, o.lineStyle)
+			.append(lineColor, o.lineColor);
+		return equalsBuilder.isEquals();
+	}
 }

@@ -24,10 +24,12 @@ package net.sf.dynamicreports.design.base.style;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignBorder;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignBorder implements DRIDesignBorder {	
+public class DRDesignBorder implements DRIDesignBorder {
 	private DRDesignPen topPen;
 	private DRDesignPen leftPen;
 	private DRDesignPen bottomPen;
@@ -67,5 +69,26 @@ public class DRDesignBorder implements DRIDesignBorder {
 
 	public void setRightPen(DRDesignPen rightPen) {
 		this.rightPen = rightPen;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignBorder o = (DRDesignBorder) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(topPen, o.topPen)
+			.append(leftPen, o.leftPen)
+			.append(bottomPen, o.bottomPen)
+			.append(rightPen, o.rightPen);
+		return equalsBuilder.isEquals();
 	}
 }

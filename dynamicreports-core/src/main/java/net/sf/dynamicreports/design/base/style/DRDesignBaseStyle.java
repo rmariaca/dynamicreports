@@ -31,6 +31,8 @@ import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -174,6 +176,37 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 
 	public void setLinePen(DRDesignPen linePen) {
 		this.linePen = linePen;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignBaseStyle o = (DRDesignBaseStyle) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(foregroundColor, o.foregroundColor)
+			.append(backgroundColor, o.backgroundColor)
+			.append(radius, o.radius)
+			.append(imageScale, o.imageScale)
+			.append(horizontalAlignment, o.horizontalAlignment)
+			.append(verticalAlignment, o.verticalAlignment)
+			.append(border, o.border)
+			.append(padding, o.padding)
+			.append(font, o.font)
+			.append(rotation, o.rotation)
+			.append(pattern, o.pattern)
+			.append(markup, o.markup)
+			.append(paragraph, o.paragraph)
+			.append(linePen, o.linePen);
+		return equalsBuilder.isEquals();
 	}
 
 }

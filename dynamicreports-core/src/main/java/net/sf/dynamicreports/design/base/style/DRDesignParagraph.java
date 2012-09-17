@@ -28,6 +28,8 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignParagraph;
 import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -121,5 +123,31 @@ public class DRDesignParagraph implements DRIDesignParagraph {
 
 	public void setTabStops(List<DRIDesignTabStop> tabStops) {
 		this.tabStops = tabStops;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignParagraph o = (DRDesignParagraph) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(lineSpacing, o.lineSpacing)
+			.append(lineSpacingSize, o.lineSpacingSize)
+			.append(firstLineIndent, o.firstLineIndent)
+			.append(leftIndent, o.leftIndent)
+			.append(rightIndent, o.rightIndent)
+			.append(spacingBefore, o.spacingBefore)
+			.append(spacingAfter, o.spacingAfter)
+			.append(tabStopWidth, o.tabStopWidth)
+			.append(tabStops, o.tabStops);
+		return equalsBuilder.isEquals();
 	}
 }

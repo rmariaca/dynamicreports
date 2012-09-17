@@ -28,6 +28,9 @@ import java.util.List;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.ReportUtils;
 
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -37,8 +40,12 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 	private List<DRDesignConditionalStyle> conditionalStyles;
 
 	public DRDesignStyle() {
-		this.name = ReportUtils.generateUniqueName("style");
-		this.conditionalStyles = new ArrayList<DRDesignConditionalStyle>();
+	  this(ReportUtils.generateUniqueName("style"));
+	}
+
+	public DRDesignStyle(String name) {
+	  this.name = Validate.notBlank(name);
+    this.conditionalStyles = new ArrayList<DRDesignConditionalStyle>();
 	}
 
 	@Override
@@ -66,5 +73,20 @@ public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
 
 	public void addConditionalStyle(DRDesignConditionalStyle conditionalStyle) {
 		this.conditionalStyles.add(conditionalStyle);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		EqualsBuilder equalsBuilder = new EqualsBuilder().appendSuper(super.equals(obj));
+		if (equalsBuilder.isEquals()) {
+			DRDesignStyle o = (DRDesignStyle) obj;
+			if (!(parentStyle == null ? o.getParentStyle() == null : parentStyle.getName().equals(o.getParentStyle().getName()))) {
+				return false;
+			}
+			equalsBuilder
+				.append(name, o.name)
+				.append(conditionalStyles, o.conditionalStyles);
+		}
+		return equalsBuilder.isEquals();
 	}
 }

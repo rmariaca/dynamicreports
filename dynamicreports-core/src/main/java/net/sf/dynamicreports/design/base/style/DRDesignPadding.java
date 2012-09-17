@@ -24,10 +24,12 @@ package net.sf.dynamicreports.design.base.style;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignPadding;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignPadding implements DRIDesignPadding {	
+public class DRDesignPadding implements DRIDesignPadding {
 	private Integer top;
 	private Integer left;
 	private Integer bottom;
@@ -67,5 +69,26 @@ public class DRDesignPadding implements DRIDesignPadding {
 
 	public void setRight(Integer right) {
 		this.right = right;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignPadding o = (DRDesignPadding) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(top, o.top)
+			.append(left, o.left)
+			.append(bottom, o.bottom)
+			.append(right, o.right);
+		return equalsBuilder.isEquals();
 	}
 }

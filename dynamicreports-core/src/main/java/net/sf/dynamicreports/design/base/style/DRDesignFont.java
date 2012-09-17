@@ -24,10 +24,12 @@ package net.sf.dynamicreports.design.base.style;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DRDesignFont implements DRIDesignFont {	
+public class DRDesignFont implements DRIDesignFont {
 	private String fontName;
 	private Integer fontSize;
 	private Boolean bold;
@@ -37,85 +39,111 @@ public class DRDesignFont implements DRIDesignFont {
 	private String pdfFontName;
 	private String pdfEncoding;
 	private Boolean pdfEmbedded;
-	
+
 	@Override
 	public String getFontName() {
 		return fontName;
 	}
-	
+
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
 	}
-	
+
 	@Override
 	public Boolean getBold() {
 		return bold;
 	}
-	
+
 	public void setBold(Boolean bold) {
 		this.bold = bold;
 	}
-	
+
 	@Override
 	public Boolean getItalic() {
 		return italic;
 	}
-	
+
 	public void setItalic(Boolean italic) {
 		this.italic = italic;
 	}
-	
+
 	@Override
 	public Boolean getUnderline() {
 		return underline;
 	}
-	
+
 	public void setUnderline(Boolean underline) {
 		this.underline = underline;
 	}
-	
+
 	@Override
 	public Boolean getStrikeThrough() {
 		return strikeThrough;
 	}
-	
+
 	public void setStrikeThrough(Boolean strikeThrough) {
 		this.strikeThrough = strikeThrough;
 	}
-	
+
 	@Override
 	public Integer getFontSize() {
 		return fontSize;
 	}
-	
+
 	public void setFontSize(Integer fontSize) {
 		this.fontSize = fontSize;
 	}
-	
+
 	@Override
 	public String getPdfFontName() {
 		return pdfFontName;
 	}
-	
+
 	public void setPdfFontName(String pdfFontName) {
 		this.pdfFontName = pdfFontName;
 	}
-	
+
 	@Override
 	public String getPdfEncoding() {
 		return pdfEncoding;
 	}
-	
+
 	public void setPdfEncoding(String pdfEncoding) {
 		this.pdfEncoding = pdfEncoding;
 	}
-	
+
 	@Override
 	public Boolean getPdfEmbedded() {
 		return pdfEmbedded;
 	}
-	
+
 	public void setPdfEmbedded(Boolean pdfEmbedded) {
 		this.pdfEmbedded = pdfEmbedded;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	  if (obj == null) {
+			return false;
+		}
+	  if (obj == this) {
+			return true;
+		}
+	  if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+	  DRDesignFont o = (DRDesignFont) obj;
+		EqualsBuilder equalsBuilder = new EqualsBuilder()
+			.append(fontName, o.fontName)
+			.append(fontSize, o.fontSize)
+			.append(bold, o.bold)
+			.append(italic, o.italic)
+			.append(underline, o.underline)
+			.append(strikeThrough, o.strikeThrough)
+			.append(pdfFontName, o.pdfFontName)
+			.append(pdfEncoding, o.pdfEncoding)
+			.append(pdfEmbedded, o.pdfEmbedded);
+		return equalsBuilder.isEquals();
+	}
 }

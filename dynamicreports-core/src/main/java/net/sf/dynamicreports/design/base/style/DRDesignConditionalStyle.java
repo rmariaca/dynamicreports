@@ -26,6 +26,8 @@ import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
@@ -49,5 +51,17 @@ public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDe
 
 	public void setDataset(DRIDesignDataset dataset) {
 		this.dataset = dataset;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		EqualsBuilder equalsBuilder = new EqualsBuilder().appendSuper(super.equals(obj));
+		if (equalsBuilder.isEquals()) {
+			DRDesignConditionalStyle o = (DRDesignConditionalStyle) obj;
+			equalsBuilder
+				.append(conditionExpression, o.conditionExpression)
+				.append(dataset, o.dataset);
+		}
+		return equalsBuilder.isEquals();
 	}
 }
