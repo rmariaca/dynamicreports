@@ -102,6 +102,7 @@ public class ReportTemplateTest {
 						.setDetailOddRowStyle(stl.simpleStyle().setBackgroundColor(Color.BLUE))
 						.setHighlightDetailEvenRows(true)
 						.setDetailEvenRowStyle(stl.simpleStyle().setBackgroundColor(Color.CYAN))
+						.setDefaultFont(stl.font().setFontSize(12))
 						.setTextStyle(stl.style().bold())
 
 						.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
@@ -175,6 +176,7 @@ public class ReportTemplateTest {
 			DRIDesignStyle style = columnTextField1.getStyle();
 			Assert.assertEquals("detail odd row style", Color.BLUE, style.getConditionalStyles().get(0).getBackgroundColor());
 			Assert.assertEquals("detail even row style", Color.CYAN, style.getConditionalStyles().get(1).getBackgroundColor());
+			Assert.assertEquals("default font", new Integer(12), style.getParentStyle().getFont().getFontSize());
 			Assert.assertTrue("text style bold", style.getParentStyle().getFont().getBold());
 
 			Assert.assertEquals("page width", 1190, report.getPage().getWidth());
