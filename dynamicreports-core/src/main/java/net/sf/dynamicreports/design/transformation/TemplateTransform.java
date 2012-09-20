@@ -325,6 +325,13 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getTableOfContentsCustomizer();
 	}
 
+	public boolean isAddGroupToTableOfContents(DRIGroup group) {
+		if (group.getAddToTableOfContents() != null) {
+			return group.getAddToTableOfContents();
+		}
+		return Defaults.getDefaults().isAddGroupToTableOfContents();
+	}
+
 	//style
 	protected DRISimpleStyle getDetailOddRowStyle() {
 		if (isHighlightDetailOddRows()) {

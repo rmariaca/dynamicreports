@@ -53,6 +53,8 @@ public interface DRIGroup extends Serializable {
 
 	public Boolean getShowColumnHeaderAndFooter();
 
+	public Boolean getAddToTableOfContents();
+
 	public DRIExpression<Boolean> getPrintSubtotalsWhenExpression();
 
 	public Integer getPadding();

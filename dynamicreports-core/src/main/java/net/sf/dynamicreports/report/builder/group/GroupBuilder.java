@@ -71,6 +71,11 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T setAddToTableOfContents(Boolean addToTableOfContents) {
+		getObject().setAddToTableOfContents(addToTableOfContents);
+		return (T) this;
+	}
+
 	public T setPrintSubtotalsWhenExpression(DRIExpression<Boolean> printSubtotalsWhenExpression) {
 		getObject().setPrintSubtotalsWhenExpression(printSubtotalsWhenExpression);
 		return (T) this;

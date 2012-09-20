@@ -98,7 +98,8 @@ public class TableOfContentsTransform {
 
 	protected DRDesignTableOfContentsHeading groupHeading(DRIGroup group, int level) throws DRException {
 		boolean tableOfContents = accessor.isTableOfContents();
-		if (tableOfContents) {
+		boolean isAddGroupToTableOfContents = accessor.getTemplateTransform().isAddGroupToTableOfContents(group);
+		if (tableOfContents && isAddGroupToTableOfContents) {
 			DRTextField<String> referenceField = new DRTextField<String>();
 			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), group.getValueField().getValueExpression()));
 			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName()));

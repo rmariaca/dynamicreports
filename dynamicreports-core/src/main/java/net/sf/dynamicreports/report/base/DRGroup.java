@@ -48,6 +48,7 @@ public class DRGroup implements DRIGroup {
 	private Boolean hideColumn;
 	private Boolean groupByDataType;
 	private Boolean showColumnHeaderAndFooter;
+	private Boolean addToTableOfContents;
 	private DRIExpression<Boolean> printSubtotalsWhenExpression;
 	private Integer padding;
 	private Boolean startInNewPage;
@@ -148,6 +149,15 @@ public class DRGroup implements DRIGroup {
 
 	public void setShowColumnHeaderAndFooter(Boolean showColumnHeaderAndFooter) {
 		this.showColumnHeaderAndFooter = showColumnHeaderAndFooter;
+	}
+
+	@Override
+	public Boolean getAddToTableOfContents() {
+		return addToTableOfContents;
+	}
+
+	public void setAddToTableOfContents(Boolean addToTableOfContents) {
+		this.addToTableOfContents = addToTableOfContents;
 	}
 
 	@Override
