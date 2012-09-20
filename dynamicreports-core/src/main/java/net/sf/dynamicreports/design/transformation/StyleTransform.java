@@ -48,7 +48,6 @@ import net.sf.dynamicreports.report.base.style.DRFont;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRParagraph;
 import net.sf.dynamicreports.report.base.style.DRPen;
-import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.style.DRIBaseStyle;
 import net.sf.dynamicreports.report.definition.style.DRIBorder;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
@@ -99,19 +98,31 @@ public class StyleTransform {
 		DRDesignStyle designStyle = style(getStyle(style), textStyle, defaultStyleType);
 		if (textStyle) {
 			if (StyleResolver.getFontName(designStyle) == null) {
-				designStyle.getFont().setFontName(Defaults.getDefaults().getFont().getFontName());
+				designStyle.getFont().setFontName(accessor.getTemplateTransform().getDefaultFontName());
 			}
 			if (StyleResolver.getFontSize(designStyle) == null) {
-				designStyle.getFont().setFontSize(Defaults.getDefaults().getFont().getFontSize());
+				designStyle.getFont().setFontSize(accessor.getTemplateTransform().getDefaultFontSize());
+			}
+			if (StyleResolver.getFontBold(designStyle) == null) {
+				designStyle.getFont().setBold(accessor.getTemplateTransform().getDefaultFontBold());
+			}
+			if (StyleResolver.getFontItalic(designStyle) == null) {
+				designStyle.getFont().setItalic(accessor.getTemplateTransform().getDefaultFontItalic());
+			}
+			if (StyleResolver.getFontUnderline(designStyle) == null) {
+				designStyle.getFont().setUnderline(accessor.getTemplateTransform().getDefaultFontUnderline());
+			}
+			if (StyleResolver.getFontStrikeThrough(designStyle) == null) {
+				designStyle.getFont().setStrikeThrough(accessor.getTemplateTransform().getDefaultFontStrikeThrough());
 			}
 			if (StyleResolver.getPdfFontName(designStyle) == null) {
-				designStyle.getFont().setPdfFontName(Defaults.getDefaults().getFont().getPdfFontName());
+				designStyle.getFont().setPdfFontName(accessor.getTemplateTransform().getDefaultFontPdfFontName());
 			}
 			if (StyleResolver.getPdfEncoding(designStyle) == null) {
-				designStyle.getFont().setPdfEncoding(Defaults.getDefaults().getFont().getPdfEncoding());
+				designStyle.getFont().setPdfEncoding(accessor.getTemplateTransform().getDefaultFontPdfEncoding());
 			}
 			if (StyleResolver.getPdfEmbedded(designStyle) == null) {
-				designStyle.getFont().setPdfEmbedded(Defaults.getDefaults().getFont().getPdfEmbedded());
+				designStyle.getFont().setPdfEmbedded(accessor.getTemplateTransform().getDefaultFontPdfEmbedded());
 			}
 		}
 		addStyle(styleName, designStyle);

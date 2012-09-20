@@ -38,6 +38,7 @@ import net.sf.dynamicreports.report.builder.grid.ColumnGridComponentBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.group.Groups;
 import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
+import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -476,6 +477,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//style
+	public T setDefaultFont(FontBuilder defaultFont) {
+		if (defaultFont != null) {
+			getObject().setDefaultFont(defaultFont.build());
+		}
+		else {
+			getObject().setDefaultFont(null);
+		}
+		return (T) this;
+	}
+
 	public T setTextStyle(ReportStyleBuilder textStyle) {
 		if (textStyle != null) {
 			getObject().setTextStyle(textStyle.build());

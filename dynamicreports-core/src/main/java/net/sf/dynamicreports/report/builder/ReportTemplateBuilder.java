@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.DRReportTemplate;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
+import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
@@ -205,6 +206,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		}
 		else {
 			getObject().setDetailEvenRowStyle(null);
+		}
+		return this;
+	}
+
+	public ReportTemplateBuilder setDefaultFont(FontBuilder defaultFont) {
+		if (defaultFont != null) {
+			getObject().setDefaultFont(defaultFont.build());
+		}
+		else {
+			getObject().setDefaultFont(null);
 		}
 		return this;
 	}

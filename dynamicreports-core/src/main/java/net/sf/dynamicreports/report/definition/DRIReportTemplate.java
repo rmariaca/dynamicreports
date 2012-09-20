@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -80,6 +81,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getHighlightDetailEvenRows();
 
 	public DRISimpleStyle getDetailEvenRowStyle();
+
+	public DRIFont getDefaultFont();
 
 	public DRIReportStyle getTextStyle();
 

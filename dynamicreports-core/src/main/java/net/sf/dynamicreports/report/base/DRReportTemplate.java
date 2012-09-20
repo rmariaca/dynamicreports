@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
+import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -71,6 +72,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private DRSimpleStyle detailOddRowStyle;
 	private Boolean highlightDetailEvenRows;
 	private DRSimpleStyle detailEvenRowStyle;
+	private DRIFont defaultFont;
 	private DRIReportStyle textStyle;
 	private DRIReportStyle columnTitleStyle;
 	private DRIReportStyle columnStyle;
@@ -361,6 +363,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setDetailEvenRowStyle(DRSimpleStyle detailEvenRowStyle) {
 		this.detailEvenRowStyle = detailEvenRowStyle;
+	}
+
+	@Override
+	public DRIFont getDefaultFont() {
+		return defaultFont;
+	}
+
+	public void setDefaultFont(DRIFont defaultFont) {
+		this.defaultFont = defaultFont;
 	}
 
 	@Override

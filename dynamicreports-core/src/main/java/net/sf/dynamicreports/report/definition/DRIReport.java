@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
 import net.sf.dynamicreports.report.definition.style.DRIConditionalStyle;
+import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -106,6 +107,8 @@ public interface DRIReport extends Serializable {
 	public String getLanguage();
 
 	public Boolean getUseFieldNameAsDescription();
+
+	public DRIFont getDefaultFont();
 
 	public DRIReportStyle getTextStyle();
 

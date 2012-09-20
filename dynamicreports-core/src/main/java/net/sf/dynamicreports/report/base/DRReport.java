@@ -43,6 +43,7 @@ import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
@@ -95,6 +96,7 @@ public class DRReport implements DRIReport {
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
 	private DRIExpression<Boolean> filterExpression;
 
+	private DRIFont defaultFont;
 	private DRIReportStyle textStyle;
 	private DRIReportStyle columnTitleStyle;
 	private DRIReportStyle columnStyle;
@@ -507,6 +509,15 @@ public class DRReport implements DRIReport {
 
 	public void setUseFieldNameAsDescription(Boolean useFieldNameAsDescription) {
 		this.useFieldNameAsDescription = useFieldNameAsDescription;
+	}
+
+	@Override
+	public DRIFont getDefaultFont() {
+		return defaultFont;
+	}
+
+	public void setDefaultFont(DRIFont defaultFont) {
+		this.defaultFont = defaultFont;
 	}
 
 	@Override

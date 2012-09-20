@@ -118,7 +118,7 @@ public class StyleResolver {
 		return null;
 	}
 
-	private static Boolean getFontBold(DRDesignStyle style) {
+	protected static Boolean getFontBold(DRDesignStyle style) {
 		if (style == null) {
 			return null;
 		}
@@ -131,7 +131,7 @@ public class StyleResolver {
 		return null;
 	}
 
-	private static Boolean getFontItalic(DRDesignStyle style) {
+	protected static Boolean getFontItalic(DRDesignStyle style) {
 		if (style == null) {
 			return null;
 		}
@@ -140,6 +140,32 @@ public class StyleResolver {
 		}
 		if (style.getParentStyle() != null) {
 			return getFontItalic(style.getParentStyle());
+		}
+		return null;
+	}
+
+	protected static Boolean getFontUnderline(DRDesignStyle style) {
+		if (style == null) {
+			return null;
+		}
+		if (style.getFont().getUnderline() != null) {
+			return style.getFont().getUnderline();
+		}
+		if (style.getParentStyle() != null) {
+			return getFontUnderline(style.getParentStyle());
+		}
+		return null;
+	}
+
+	protected static Boolean getFontStrikeThrough(DRDesignStyle style) {
+		if (style == null) {
+			return null;
+		}
+		if (style.getFont().getStrikeThrough() != null) {
+			return style.getFont().getStrikeThrough();
+		}
+		if (style.getParentStyle() != null) {
+			return getFontStrikeThrough(style.getParentStyle());
 		}
 		return null;
 	}

@@ -372,6 +372,96 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isHighlightDetailEvenRows();
 	}
 
+	protected String getDefaultFontName() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getFontName() != null) {
+			return report.getDefaultFont().getFontName();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getFontName() != null) {
+			return template.getDefaultFont().getFontName();
+		}
+		return Defaults.getDefaults().getFont().getFontName();
+	}
+
+	protected Integer getDefaultFontSize() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getFontSize() != null) {
+			return report.getDefaultFont().getFontSize();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getFontSize() != null) {
+			return template.getDefaultFont().getFontSize();
+		}
+		return Defaults.getDefaults().getFont().getFontSize();
+	}
+
+	protected Boolean getDefaultFontBold() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getBold() != null) {
+			return report.getDefaultFont().getBold();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getBold() != null) {
+			return template.getDefaultFont().getBold();
+		}
+		return Defaults.getDefaults().getFont().getBold();
+	}
+
+	protected Boolean getDefaultFontItalic() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getItalic() != null) {
+			return report.getDefaultFont().getItalic();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getItalic() != null) {
+			return template.getDefaultFont().getItalic();
+		}
+		return Defaults.getDefaults().getFont().getItalic();
+	}
+
+	protected Boolean getDefaultFontUnderline() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getUnderline() != null) {
+			return report.getDefaultFont().getUnderline();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getUnderline() != null) {
+			return template.getDefaultFont().getUnderline();
+		}
+		return Defaults.getDefaults().getFont().getUnderline();
+	}
+
+	protected Boolean getDefaultFontStrikeThrough() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getStrikeThrough() != null) {
+			return report.getDefaultFont().getStrikeThrough();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getStrikeThrough() != null) {
+			return template.getDefaultFont().getStrikeThrough();
+		}
+		return Defaults.getDefaults().getFont().getStrikeThrough();
+	}
+
+	protected String getDefaultFontPdfFontName() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getPdfFontName() != null) {
+			return report.getDefaultFont().getPdfFontName();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getPdfFontName() != null) {
+			return template.getDefaultFont().getPdfFontName();
+		}
+		return Defaults.getDefaults().getFont().getPdfFontName();
+	}
+
+	protected String getDefaultFontPdfEncoding() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getPdfEncoding() != null) {
+			return report.getDefaultFont().getPdfEncoding();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getPdfEncoding() != null) {
+			return template.getDefaultFont().getPdfEncoding();
+		}
+		return Defaults.getDefaults().getFont().getPdfEncoding();
+	}
+
+	protected Boolean getDefaultFontPdfEmbedded() {
+		if (report.getDefaultFont() != null && report.getDefaultFont().getPdfEmbedded() != null) {
+			return report.getDefaultFont().getPdfEmbedded();
+		}
+		if (template.getDefaultFont() != null && template.getDefaultFont().getPdfEmbedded() != null) {
+			return template.getDefaultFont().getPdfEmbedded();
+		}
+		return Defaults.getDefaults().getFont().getPdfEmbedded();
+	}
+
 	protected DRIReportStyle getTextStyle() {
 		if (report.getTextStyle() != null) {
 			return report.getTextStyle();
