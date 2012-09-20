@@ -63,7 +63,7 @@ public class TableOfContentsReport3 {
 			  	col.column("Quantity",   "quantity",  type.integerType()),
 			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(countryGroup, itemGroup)
-			  .title(Templates.createTitleComponent("TableOfContents1"))
+			  .title(Templates.createTitleComponent("TableOfContents3"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
 			  .show();
