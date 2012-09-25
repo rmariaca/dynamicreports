@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.0.2 (2012-09-25)
+---------------------------------------------------
+ - new group attribute was added - setAddToTableOfContents, see TableOfContentsReport3 for an example
+   This attribute allows to remove group labels from the table of contents
+ - ability to set a default report font, see DefaultFontReport for an example
+ - minor bug fixes
+ 
 Changes in version 3.0.1 (2012-08-28)
 ---------------------------------------------------
  - upgrade to JasperReports 4.7.0
