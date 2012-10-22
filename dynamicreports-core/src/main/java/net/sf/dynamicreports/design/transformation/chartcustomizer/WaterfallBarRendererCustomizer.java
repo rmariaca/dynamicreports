@@ -28,6 +28,7 @@ import java.io.Serializable;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIWaterfallBarPlot;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.renderer.category.BarRenderer;
@@ -45,6 +46,13 @@ public class WaterfallBarRendererCustomizer implements DRIChartCustomizer, Seria
   private Paint lastBarPaint;
   private Paint positiveBarPaint;
   private Paint negativeBarPaint;
+
+	public WaterfallBarRendererCustomizer(DRIWaterfallBarPlot waterfallBarPlot) {
+		this.firstBarPaint = waterfallBarPlot.getFirstBarPaint();
+		this.lastBarPaint = waterfallBarPlot.getLastBarPaint();
+		this.positiveBarPaint = waterfallBarPlot.getPositiveBarPaint();
+		this.negativeBarPaint = waterfallBarPlot.getNegativeBarPaint();
+	}
 
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
@@ -90,21 +98,5 @@ public class WaterfallBarRendererCustomizer implements DRIChartCustomizer, Seria
 
     chart.getCategoryPlot().setRenderer(renderer);
   }
-
-	public void setFirstBarPaint(Paint firstBarPaint) {
-		this.firstBarPaint = firstBarPaint;
-	}
-
-	public void setLastBarPaint(Paint lastBarPaint) {
-		this.lastBarPaint = lastBarPaint;
-	}
-
-	public void setPositiveBarPaint(Paint positiveBarPaint) {
-		this.positiveBarPaint = positiveBarPaint;
-	}
-
-	public void setNegativeBarPaint(Paint negativeBarPaint) {
-		this.negativeBarPaint = negativeBarPaint;
-	}
 
 }

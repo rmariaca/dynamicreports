@@ -272,11 +272,7 @@ public class ChartTransform {
 	}
 
 	private DRDesignBarPlot waterfallBarPlot(DRIWaterfallBarPlot waterfallBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
-		WaterfallBarRendererCustomizer waterfallBarCustomizer = new WaterfallBarRendererCustomizer();
-		waterfallBarCustomizer.setFirstBarPaint(waterfallBarPlot.getFirstBarPaint());
-		waterfallBarCustomizer.setLastBarPaint(waterfallBarPlot.getLastBarPaint());
-		waterfallBarCustomizer.setPositiveBarPaint(waterfallBarPlot.getPositiveBarPaint());
-		waterfallBarCustomizer.setNegativeBarPaint(waterfallBarPlot.getNegativeBarPaint());
+		WaterfallBarRendererCustomizer waterfallBarCustomizer = new WaterfallBarRendererCustomizer(waterfallBarPlot);
 		chartCustomizers.add(waterfallBarCustomizer);
 		DRDesignBarPlot designBarPlot = barPlot(waterfallBarPlot, chartCustomizers);
 		return designBarPlot;
