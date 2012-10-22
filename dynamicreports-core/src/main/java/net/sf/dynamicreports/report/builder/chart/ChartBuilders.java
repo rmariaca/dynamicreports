@@ -128,6 +128,10 @@ public class ChartBuilders {
 		return Charts.layeredBarChart();
 	}
 
+	public WaterfallBarChartBuilder waterfallBarChart() {
+		return Charts.waterfallBarChart();
+	}
+
 	public StackedBarChartBuilder stackedBarChart() {
 		return Charts.stackedBarChart();
 	}
@@ -174,6 +178,10 @@ public class ChartBuilders {
 
 	public XyLineChartBuilder xyLineChart() {
 		return Charts.xyLineChart();
+	}
+
+	public XyStepChartBuilder xyStepChart() {
+		return Charts.xyStepChart();
 	}
 
 	public ScatterChartBuilder scatterChart() {

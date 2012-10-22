@@ -129,6 +129,10 @@ public class Charts {
 		return new LayeredBarChartBuilder();
 	}
 
+	public static WaterfallBarChartBuilder waterfallBarChart() {
+		return new WaterfallBarChartBuilder();
+	}
+
 	public static StackedBarChartBuilder stackedBarChart() {
 		return new StackedBarChartBuilder();
 	}
@@ -175,6 +179,10 @@ public class Charts {
 
 	public static XyLineChartBuilder xyLineChart() {
 		return new XyLineChartBuilder();
+	}
+
+	public static XyStepChartBuilder xyStepChart() {
+		return new XyStepChartBuilder();
 	}
 
 	public static ScatterChartBuilder scatterChart() {
