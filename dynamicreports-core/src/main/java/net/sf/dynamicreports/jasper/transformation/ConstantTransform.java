@@ -229,6 +229,7 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_STACKEDAREA;
 		case BAR:
 		case LAYEREDBAR:
+		case WATERFALLBAR:
 			return JRDesignChart.CHART_TYPE_BAR;
 		case BAR3D:
 			return JRDesignChart.CHART_TYPE_BAR3D;

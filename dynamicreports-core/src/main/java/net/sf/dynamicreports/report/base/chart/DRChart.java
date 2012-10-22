@@ -47,6 +47,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRPie3DPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRThermometerPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRWaterfallBarPlot;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -107,6 +108,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case LAYEREDBAR:
 				dataset = new DRCategoryDataset();
 				plot = new DRLayeredBarPlot();
+				break;
+			case WATERFALLBAR:
+				dataset = new DRCategoryDataset();
+				plot = new DRWaterfallBarPlot();
 				break;
 			case BAR3D:
 			case STACKEDBAR3D:

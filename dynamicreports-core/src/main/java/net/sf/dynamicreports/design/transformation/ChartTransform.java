@@ -75,6 +75,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesColorsB
 import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.WaterfallBarRendererCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
@@ -121,6 +122,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPiePlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIWaterfallBarPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -169,6 +171,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRILayeredBarPlot) {
 			designPlot = layeredBarPlot((DRILayeredBarPlot) plot, chartCustomizers);
+		}
+		else if (plot instanceof DRIWaterfallBarPlot) {
+			designPlot = waterfallBarPlot((DRIWaterfallBarPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIGroupedStackedBarPlot) {
 			designPlot = groupedStackedBarPlot((DRIGroupedStackedBarPlot) plot, chartCustomizers);
@@ -258,6 +263,17 @@ public class ChartTransform {
 	private DRDesignBarPlot layeredBarPlot(DRILayeredBarPlot layeredBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
 		chartCustomizers.add(new LayeredBarRendererCustomizer(layeredBarPlot.getSeriesBarWidths()));
 		DRDesignBarPlot designBarPlot = barPlot(layeredBarPlot, chartCustomizers);
+		return designBarPlot;
+	}
+
+	private DRDesignBarPlot waterfallBarPlot(DRIWaterfallBarPlot waterfallBarPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		WaterfallBarRendererCustomizer waterfallBarCustomizer = new WaterfallBarRendererCustomizer();
+		waterfallBarCustomizer.setFirstBarPaint(waterfallBarPlot.getFirstBarPaint());
+		waterfallBarCustomizer.setLastBarPaint(waterfallBarPlot.getLastBarPaint());
+		waterfallBarCustomizer.setPositiveBarPaint(waterfallBarPlot.getPositiveBarPaint());
+		waterfallBarCustomizer.setNegativeBarPaint(waterfallBarPlot.getNegativeBarPaint());
+		chartCustomizers.add(waterfallBarCustomizer);
+		DRDesignBarPlot designBarPlot = barPlot(waterfallBarPlot, chartCustomizers);
 		return designBarPlot;
 	}
 
