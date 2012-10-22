@@ -84,10 +84,12 @@ import net.sf.dynamicreports.report.builder.chart.StackedAreaChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.StackedBar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.StackedBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.TimeSeriesChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.WaterfallBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.XyAreaChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.XyBarChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.XyChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.chart.XyLineChartBuilder;
+import net.sf.dynamicreports.report.builder.chart.XyStepChartBuilder;
 import net.sf.dynamicreports.report.builder.chart.XyzChartSerieBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.Columns;
@@ -541,6 +543,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return lineChart(adhocChart);
 		case LAYEREDBAR:
 			return layeredBarChart(adhocChart);
+		case WATERFALLBAR:
+			return waterfallBarChart(adhocChart);
 		case DIFFERENCE:
 			return differenceChart(adhocChart);
 		case PIE:
@@ -559,6 +563,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return xyBarChart(adhocChart);
 		case XYLINE:
 			return xyLineChart(adhocChart);
+		case XYSTEP:
+			return xyStepChart(adhocChart);
 		case BUBBLE:
 			return bubbleChart(adhocChart);
 		default:
@@ -843,6 +849,12 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return layeredChart;
 	}
 
+	protected WaterfallBarChartBuilder waterfallBarChart(AdhocChart adhocChart) {
+		WaterfallBarChartBuilder waterfallChart = Charts.waterfallBarChart();
+		categoryChart(adhocChart, waterfallChart);
+		return waterfallChart;
+	}
+
 	protected DifferenceChartBuilder differenceChart(AdhocChart adhocChart) {
 		DifferenceChartBuilder differenceChart = Charts.differenceChart();
 		timeSeriesChart(adhocChart, differenceChart);
@@ -901,6 +913,14 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
 		xyLineChart.setShowValues(showValues);
 		return xyLineChart;
+	}
+
+	protected XyStepChartBuilder xyStepChart(AdhocChart adhocChart) {
+		XyStepChartBuilder xyStepChart = Charts.xyStepChart();
+		xyChart(adhocChart, xyStepChart);
+		Boolean showValues = adhocChart.getProperty(AdhocProperties.CHART_SHOW_VALUES);
+		xyStepChart.setShowValues(showValues);
+		return xyStepChart;
 	}
 
 	protected BubbleChartBuilder bubbleChart(AdhocChart adhocChart) {

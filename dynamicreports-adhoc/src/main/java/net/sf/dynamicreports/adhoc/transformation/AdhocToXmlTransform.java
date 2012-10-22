@@ -527,6 +527,8 @@ public class AdhocToXmlTransform {
 			return XmlAdhocChartType.LINE;
 		case LAYEREDBAR:
 			return XmlAdhocChartType.LAYEREDBAR;
+		case WATERFALLBAR:
+			return XmlAdhocChartType.WATERFALLBAR;
 		case DIFFERENCE:
 			return XmlAdhocChartType.DIFFERENCE;
 		case PIE:
@@ -545,6 +547,8 @@ public class AdhocToXmlTransform {
 			return XmlAdhocChartType.XYBAR;
 		case XYLINE:
 			return XmlAdhocChartType.XYLINE;
+		case XYSTEP:
+			return XmlAdhocChartType.XYSTEP;
 		case BUBBLE:
 			return XmlAdhocChartType.BUBBLE;
 		default:

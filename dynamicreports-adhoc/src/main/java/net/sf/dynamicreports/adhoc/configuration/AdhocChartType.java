@@ -35,6 +35,7 @@ public enum AdhocChartType {
 	STACKEDBAR3D,
 	LINE,
 	LAYEREDBAR,
+	WATERFALLBAR,
   DIFFERENCE,
   PIE,
   PIE3D,
@@ -44,5 +45,6 @@ public enum AdhocChartType {
   XYAREA,
   XYBAR,
   XYLINE,
+  XYSTEP,
   BUBBLE
 }
