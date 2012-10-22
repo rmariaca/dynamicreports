@@ -252,6 +252,7 @@ public class ConstantTransform {
 		case XYBAR:
 			return JRDesignChart.CHART_TYPE_XYBAR;
 		case XYLINE:
+		case XYSTEP:
 			return JRDesignChart.CHART_TYPE_XYLINE;
 		case SCATTER:
 			return JRDesignChart.CHART_TYPE_SCATTER;

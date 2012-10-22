@@ -76,6 +76,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderCu
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.WaterfallBarRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.XyStepRendererCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
@@ -123,6 +124,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIWaterfallBarPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIXyStepPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -183,6 +185,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRIDifferencePlot) {
 			designPlot = differencePlot((DRIDifferencePlot) plot, chartCustomizers);
+		}
+		else if (plot instanceof DRIXyStepPlot) {
+			designPlot = xyStepPlot((DRIXyStepPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRILinePlot) {
 			designPlot = linePlot((DRILinePlot) plot, chartCustomizers);
@@ -290,6 +295,11 @@ public class ChartTransform {
 		chartCustomizers.add(new DifferenceRendererCustomizer(differencePlot));
 		axisPlot(designLinePlot, differencePlot, chartCustomizers);
 		return designLinePlot;
+	}
+
+	private DRDesignLinePlot xyStepPlot(DRIXyStepPlot xyStepPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		chartCustomizers.add(new XyStepRendererCustomizer(xyStepPlot.getStepPoint()));
+		return linePlot(xyStepPlot, chartCustomizers);
 	}
 
 	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, List<DRIChartCustomizer> chartCustomizers, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
