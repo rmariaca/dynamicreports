@@ -57,6 +57,21 @@ public class WaterfallBarChartBuilder extends AbstractCategoryChartBuilder<Water
 		return this;
 	}
 
+	public WaterfallBarChartBuilder setShowValues(Boolean showValues) {
+		getPlot().setShowValues(showValues);
+		return this;
+	}
+
+	public WaterfallBarChartBuilder setValuePattern(String valuePattern) {
+		getPlot().setValuePattern(valuePattern);
+		return this;
+	}
+
+	public WaterfallBarChartBuilder setPercentValuePattern(String percentValuePattern) {
+		getPlot().setPercentValuePattern(percentValuePattern);
+		return this;
+	}
+
 	public WaterfallBarChartBuilder setFirstBarPaint(Paint firstBarPaint) {
 		getPlot().setFirstBarPaint(firstBarPaint);
 		return this;

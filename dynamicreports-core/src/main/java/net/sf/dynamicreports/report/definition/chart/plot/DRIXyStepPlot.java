@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.definition.chart.plot;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIXyStepPlot extends DRILinePlot {
+public interface DRIXyStepPlot extends DRIAxisPlot {
 
 	public Double getStepPoint();
 

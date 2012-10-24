@@ -294,8 +294,10 @@ public class ChartTransform {
 	}
 
 	private DRDesignLinePlot xyStepPlot(DRIXyStepPlot xyStepPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		DRDesignLinePlot designLinePlot = new DRDesignLinePlot();
 		chartCustomizers.add(new XyStepRendererCustomizer(xyStepPlot.getStepPoint()));
-		return linePlot(xyStepPlot, chartCustomizers);
+		axisPlot(designLinePlot, xyStepPlot, chartCustomizers);
+		return designLinePlot;
 	}
 
 	private DRDesignMultiAxisPlot multiAxisPlot(DRIMultiAxisPlot multiAxisPlot, List<DRIChartCustomizer> chartCustomizers, DRIDataset subDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {

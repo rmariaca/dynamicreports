@@ -53,6 +53,8 @@ public class XyStepRendererCustomizer implements DRIChartCustomizer, Serializabl
     renderer.setBaseItemLabelFont(lineRenderer.getBaseItemLabelFont());
     renderer.setBaseItemLabelPaint(lineRenderer.getBaseItemLabelPaint());
     renderer.setBaseItemLabelGenerator(lineRenderer.getBaseItemLabelGenerator());
+    renderer.setBaseShapesVisible(lineRenderer.getBaseShapesVisible());
+    renderer.setBaseLinesVisible(lineRenderer.getBaseLinesVisible());
 
     if (stepPoint != null) {
     	renderer.setStepPoint(stepPoint);

@@ -36,16 +36,6 @@ public class XyStepChartBuilder extends AbstractXyChartBuilder<XyStepChartBuilde
 		super(ChartType.XYSTEP);
 	}
 
-	public XyStepChartBuilder setShowShapes(Boolean showShapes) {
-		getPlot().setShowShapes(showShapes);
-		return this;
-	}
-
-	public XyStepChartBuilder setShowLines(Boolean showLines) {
-		getPlot().setShowLines(showLines);
-		return this;
-	}
-
 	public XyStepChartBuilder setShowValues(Boolean showValues) {
 		getPlot().setShowValues(showValues);
 		return this;
