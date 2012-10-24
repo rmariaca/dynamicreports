@@ -124,18 +124,28 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 					cht.scatterChart()
 						.setShowValues(true)
 						.setXValue(column2)
-						.series(cht.xySerie(column3)),
+						.series(cht.xySerie(column3))),
 				cmp.horizontalList(
 					cht.timeSeriesChart()
 						.setShowValues(true)
 						.setTimePeriod(column4)
 						.series(cht.serie(column2), cht.serie(column3))
-						.setTimePeriodType(TimePeriod.DAY)),
+						.setTimePeriodType(TimePeriod.DAY),
 					cht.differenceChart()
 						.setShowValues(true)
 						.setTimePeriod(column4)
 						.series(cht.serie(column2), cht.serie(column3))
-						.setTimePeriodType(TimePeriod.DAY)));
+						.setTimePeriodType(TimePeriod.DAY),
+					cht.xyStepChart()
+						.setShowValues(true)
+						.setValuePattern("#,##0.#")
+						.setXValue(column2)
+						.series(cht.xySerie(column3)),
+					cht.waterfallBarChart()
+						.setShowValues(true)
+						.setValuePattern("#,##0.#")
+						.setCategory(column1)
+						.series(cht.serie(column2))));
 	}
 
 	@Override
@@ -225,6 +235,18 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		renderer2 = chart.getXYPlot().getRenderer();
 		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
 		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
+
+		chart = getChart("summary.chart15", 0);
+		renderer2 = chart.getXYPlot().getRenderer();
+		Assert.assertNotNull(renderer2.getBaseItemLabelGenerator());
+		Assert.assertEquals("1.2", renderer2.getBaseItemLabelGenerator().generateLabel(xyDataset, 0, 0));
+		Assert.assertTrue(renderer2.getBaseItemLabelsVisible());
+
+		chart = getChart("summary.chart16", 0);
+		renderer1 = chart.getCategoryPlot().getRenderer();
+		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
+		Assert.assertEquals("1.2", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
+		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 	}
 
 	@Override
