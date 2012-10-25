@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.0.3 (2012-10-25)
+---------------------------------------------------
+ - upgrade to JasperReports 4.7.1
+ - xystep chart, see XyStepChartReport for an example
+ - waterfallbar chart, see WaterfallBarChartReport for an example
+
 Changes in version 3.0.2 (2012-09-25)
 ---------------------------------------------------
  - new group attribute was added - setAddToTableOfContents, see TableOfContentsReport3 for an example
