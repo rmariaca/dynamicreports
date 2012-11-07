@@ -1,0 +1,1549 @@
+<div id="documentation">
+
+<!-- TOC -->
+<div id="toc">
+<p>
+<b>Table of contents</b>
+</p>
+<ol>
+	<li><a href="#syntax">Syntax</a></li>
+	<li><a href="#reportBuilder">Report builder</a>
+    	<ul>
+        	<li><a href="#reportBuilder_jasperReportBuilder">JasperReportBuilder</a></li>
+        	<li><a href="#reportBuilder_jasperConcatenatedBuilder">JasperConcatenatedBuilder</a></li>
+    	</ul>
+    </li>
+	<li><a href="#dataSource">Data Source</a>
+	    <ul>
+        	<li><a href="#dataSource_database">Database</a></li>
+        	<li><a href="#dataSource_dataSourceObject">Data source object</a></li>
+    	</ul>
+	</li>
+	<li><a href="#reportBands">Report bands</a>
+	    <ul>
+        	<li><a href="#reportBands_title">Title</a></li>
+        	<li><a href="#reportBands_pageHeader">Page header</a></li>
+        	<li><a href="#reportBands_pageFooter">Page footer</a></li>
+        	<li><a href="#reportBands_columnHeader">Column header</a></li>
+        	<li><a href="#reportBands_columnFooter">Column footer</a></li>
+        	<li><a href="#reportBands_groupHeader">Group header</a></li>
+        	<li><a href="#reportBands_groupFooter">Group footer</a></li>
+        	<li><a href="#reportBands_detail">Detail</a></li>
+        	<li><a href="#reportBands_detailHeader">Detail header</a></li>
+        	<li><a href="#reportBands_detailFooter">Detail footer</a></li>
+        	<li><a href="#reportBands_lastPageFooter">Last page footer</a></li>
+        	<li><a href="#reportBands_summary">Summary</a></li>
+        	<li><a href="#reportBands_noData">No data</a></li>
+        	<li><a href="#reportBands_background">Background</a></li>
+    	</ul>
+    </li>
+	<li><a href="#column">Column</a>
+	    <ul>
+        	<li><a href="#column_textColumn">Text column</a></li>
+        	<li><a href="#column_expressionColumn">Expression column</a></li>
+        	<li><a href="#column_percentageColumn">Percentage column</a></li>
+        	<li><a href="#column_rowNumberColumn">Row number column</a></li>
+        	<li><a href="#column_booleanColumn">Boolean column</a></li>
+        	<li><a href="#column_componentColumn">Component column</a></li>
+    	</ul>
+    </li>
+	<li><a href="#expression">Expression</a>
+	    <ul>
+        	<li><a href="#expression_simpleExpression">Simple expression</a></li>
+        	<li><a href="#expression_complexExpression">Complex expression</a></li>
+        	<li><a href="#expression_jasperExpression">Jasper expression</a></li>
+        	<li><a href="#expression_valueFormatter">Value formatter</a></li>
+    	</ul>
+	</li>
+	<li><a href="#fonts">Fonts</a></li>
+	<li><a href="#servlets">Servlets</a></li>
+	<li><a href="#configuration">Configuration</a>
+	    <ul>
+        	<li><a href="#configuration_defaultSettings">Default settings</a></li>
+        	<li><a href="#configuration_maven">Maven configuration</a></li>
+        	<li><a href="#configuration_mavenSnapshot">Maven snapshot repository configuration</a></li>
+	    </ul>
+	</li>
+	<li><a href="#adhoc">DynamicReports - adhoc</a></li>
+	<li><a href="#examples">Examples</a>
+	    <ul>
+		<li><a href="#examples_eclipse">How to run the examples in Eclipse</a></li>
+		<li><a href="#examples_eclipse_maven">How to run the examples in Eclipse with maven</a></li>
+		<li><a href="#examples_netbeans">How to run the examples in Netbeans</a></li>
+	    </ul>
+	</li>
+</ol>
+</div>
+
+<!-- Syntax -->
+<a name="syntax"></a><h3>Syntax</h3>
+<p>
+Before you start creating reports with DynamicReports, you should consider which java syntax you will use. 
+Java 5 added static imports that allow static methods or constants to be referenced without qualifying them with a class name. DynamicReports provides a lot of static methods of creating every part of a report and therefore you can consider using a static import for these methods.<br/>
+Let's see in detail the difference between using and not using a static import:
+</p>
+<p><b>Classic java syntax (without using a static import)</b></p>
+<@java_code>
+JasperReportBuilder report = DynamicReports.report();
+report.addColumn(Columns.column("Item", "item", DataTypes.stringType()));
+report.addColumn(Columns.column("Quantity", "quantity", DataTypes.integerType()));
+report.addTitle(Componens.text("Report title"));
+report.setDataSource(dataSource)
+report.show();
+</@java_code>
+<p><b>Using a static import for DynamicReports methods</b></p> 
+<@java_code>
+import static net.sf.dynamicreports. DynamicReports.*;
+report()
+   .columns(
+     col.column("Item", "item", type.stringType()),  
+     col.column("Quantity", "quantity", type.integerType()))  
+   .title(cmp.text("Report title"))
+   .setDataSource(dataSource)
+   .show();
+</@java_code>
+<p>
+As you can see, static imports improve readability of the code but they are not mandatory. It's only up to you which code syntax you will prefer to use.<br/>
+All examples and tutorials in the documentation use static imports to provide more readability of the code.<br/>
+<b>Examples</b><br/>
+<a href="../examples/simplereport_classicsyntax.html">SimpleReport_ClassicSyntax</a>, 
+<a href="../examples/simplereport_step01.html">SimpleReport_Step1</a>
+</p>
+
+<!-- Report builder -->
+<a name="reportBuilder"></a><h3>Report builder</h3>
+<!-- Report builder - JasperReportBuilder -->
+<a name="reportBuilder_jasperReportBuilder"></a><h4>JasperReportBuilder</h4>
+<p>
+The most used report builder for creating reports. It allows constructing and customizing the whole report content. A report consists of bands, columns, subtotals, groups, and other parts. Each part is created and configured using a particular builder method and it's passed to the report builder instance.<br/>
+In the table below, you will find a list of all available builders:
+</p>
+<table>
+	<tr>
+		<th>Builder name</th>
+		<th>Using a static import for DynamicReports methods<br/><i>import static net.sf.dynamicreports. DynamicReports.*</i></th>
+		<th>Without a static import</th>
+		<th>Using a particular builder</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><b>ColumnBuilders</b></td>
+		<td>col.*</td>
+		<td>DynamicReports.col.*</td>
+		<td>Columns.*</td>
+		<td>A set of methods of creating report columns</td>
+	</tr>
+	<tr>
+		<td><b>GridBuilders</b></td>
+		<td>grid.*</td>
+		<td>DynamicReports.grid.*</td>
+		<td>Grids.*</td>
+		<td>A set of methods of customizing columns layout</td>
+	</tr>
+	<tr>
+		<td><b>GroupBuilders</b></td>
+		<td>grp.*</td>
+		<td>DynamicReports.grp.*</td>
+		<td>Groups.*</td>
+		<td>A set of methods of creating report groups</td>
+	</tr>
+	<tr>
+		<td><b>SubtotalBuilders</b></td>
+		<td>sbt.*</td>
+		<td>DynamicReports.sbt.*</td>
+		<td>Subtotals.*</td>
+		<td>A set of methods of creating column subtotals</td>
+	</tr>
+	<tr>
+		<td><b>StyleBuilders</b></td>
+		<td>stl.*</td>
+		<td>DynamicReports.stl.*</td>
+		<td>Styles.*</td>
+		<td>A set of methods of creating and customizing styles</td>
+	</tr>
+	<tr>
+		<td><b>ComponentBuilders</b></td>
+		<td>cmp.*</td>
+		<td>DynamicReports.cmp.*</td>
+		<td>Components.*</td>
+		<td>A set of methods of creating components</td>
+	</tr>
+	<tr>
+		<td><b>ExpressionBuilders</b></td>
+		<td>exp.*</td>
+		<td>DynamicReports.exp.*</td>
+		<td>Expressions.*</td>
+		<td>A set of build in expressions</td>
+	</tr>
+	<tr>
+		<td><b>ConditionBuilders</b></td>
+		<td>cnd.*</td>
+		<td>DynamicReports.cnd.*</td>
+		<td>Conditions.*</td>
+		<td>A set of build in condition expressions</td>
+	</tr>
+	<tr>
+		<td><b>DataTypeBuilders</b></td>
+		<td>type.*</td>
+		<td>DynamicReports.type.*</td>
+		<td>DataTypes.*</td>
+		<td>A set of build in data types</td>
+	</tr>
+	<tr>
+		<td><b>ChartBuilders</b></td>
+		<td>cht.*</td>
+		<td>DynamicReports.cht.*</td>
+		<td>Charts.*</td>
+		<td>A set of methods of creating and customizing charts</td>
+	</tr>
+	<tr>
+		<td><b>ExporterBuilders</b></td>
+		<td>export.*</td>
+		<td>DynamicReports.export.*</td>
+		<td>Exporters.*</td>
+		<td>A set of methods of creating exporters</td>
+	</tr>
+	<tr>
+		<td><b>BarcodeBuilders</b></td>
+		<td>bcode.*</td>
+		<td>DynamicReports.bcode.*</td>
+		<td>Barcodes.*</td>
+		<td>A set of methods of creating barcodes</td>
+	</tr>
+	<tr>
+		<td><b>CrosstabBuilders</b></td>
+		<td>ctab.*</td>
+		<td>DynamicReports.ctab.*</td>
+		<td>Crosstabs.*</td>
+		<td>A set of methods of creating and customizing crosstabs</td>
+	</tr>
+</table>	
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()
+   .columns(
+     col.column("Item", "item", type.stringType()),  
+     col.column("Quantity", "quantity", type.integerType()))  
+   .title(cmp.text("Report title"))
+   .setDataSource(...)
+   .show();
+</@java_code>
+Another example:
+<a href="../examples/simplereport_step01.html">SimpleReport_Step1</a>
+</p>
+
+<!-- Report builder - JasperConcatenatedBuilder -->
+<a name="reportBuilder_jasperConcatenatedBuilder"></a><h4>JasperConcatenatedBuilder</h4>
+<p>
+This report builder allows concatenating several separated reports into one single document. Each report starts on a new page with its own page dimension.<br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+JasperReportBuilder report1 = ...;
+JasperReportBuilder report2 = ...;
+ concatenatedReport()
+   .concatenate(report1, report2)
+  .toPdf(...)
+</@java_code>
+Another examples:
+<a href="../examples/concatenatedreport1.html">ConcatenatedReport1</a>,
+<a href="../examples/concatenatedreport2.html">ConcatenatedReport2</a>
+</p>
+
+<!-- Data Source -->
+<a name="dataSource"></a><h3>Data Source</h3>
+<p>
+The important part of reporting is the data source which fills the report design with given data. Data can be retrieved from various sources such as a database, a xml file or using an interface JRDataSource. JasperReports itself has a lot of implementations of JRDataSource interface and basically implementation of this interface by you is quite often unneeded.<br/>
+Data in reports can be additionally sorted or filtered and some components such as chart, subreport, and crosstab can have their own data source if it's needed. Please refer to the link below for examples.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setFilterExpression(DRIExpression&lt;Boolean&gt; filterExpression)</b></td>
+		<td>Sets a dataset filter expression. The expression must be a type of Boolean</td>
+	</tr>
+	<tr>
+		<td><b>sortBy(TextColumnBuilder&lt;?&gt; ...sortColumns),<br/>sortBy(SortBuilder ...sorts),<br/>addSort(SortBuilder ...sorts)</b></td>
+		<td>Adds a sort field to the dataset</td>
+	</tr>
+</table>
+<p>	
+<b>Examples</b><br/>
+<a href="../examples/examples.html#datasource">DataSource examples</a>
+</p>
+
+<!-- Data Source - Database -->
+<a name="dataSource_database"></a><h4>Database</h4>
+<p>
+In this type of data source, data are retrieved from a database. You only need a properly configured database connector and a SQL query.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDataSource(String sql, Connection connection),<br/>setDataSource(QueryBuilder query, Connection connection),<br/>setDataSource(ResultSet resultSet)</b></td>
+		<td>Sets a database data source</td>
+	</tr>
+</table>	
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+java.sql.Connection connection = ...;
+String query = "SELECT * FROM ...";
+report()
+  .setDataSource(query, connection) 
+</@java_code>
+Another example:
+<a href="../examples/databasedatasourcereport.html">DatabaseDataSourceReport</a>
+</p>
+
+<!-- Data Source - Data source object -->
+<a name="dataSource_dataSourceObject"></a><h4>Data source object</h4>
+<p>
+In this type, a JRDataSource object is expected as a data source. A good explanation of various implementations of data sources, as well as a few examples can be found using the following link:
+<a href="http://jasperreports.sourceforge.net/sample.reference/datasource/index.html">JasperReports data sources</a><br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDataSource(JRDataSource dataSource),<br/>setDataSource(Collection&lt;?&gt; collection)</b></td>
+		<td>Sets a data source object</td>
+	</tr>
+</table>	
+<p>	
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+List&lt;JavaBean&gt; data = new ArrayList&lt;JavaBean&gt;();
+report()
+  .setDataSource(new JRBeanCollectionDataSource(data)) 
+</@java_code>
+Another example:
+<a href="../examples/collectiondatasourcereport.html">CollectionDataSourceReport</a>
+</p>
+
+<!-- Report bands -->
+<a name="reportBands"></a><h3>Report bands</h3>
+<p>
+Each report consists of several sections (bands). Each band has its particular location, signification, dimension, and can contain components. The height of the band is based on the component's dimension that it contains and can grow when the components are stretched.<br/>
+<img class="preview" src="bands.png" alt="Report bands"/><br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()
+  .title(cmp.text("This is a title band"))  
+  .pageHeader(cmp.text ("This is a page header band"))  
+  .pageFooter(cmp.text ("This is a page footer band"))
+</@java_code>
+Another example:
+<a href="../examples/bandreport.html">BandReport</a><br/><br/>
+A report contains these bands:
+</p>
+
+<!-- Report bands - Title -->
+<a name="reportBands_title"></a><h4>Title</h4> 
+<p>
+The band is printed on the first page and only once.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>titleOnANewPage()</b></td>
+		<td>Prints the title band on a separate page</td>
+	</tr>
+	<tr>
+		<td><b>setTitleOnANewPage(Boolean titleOnANewPage)</b></td>
+		<td>Sets whether or not the title band is printed on a separate page</td>
+	</tr>
+	<tr>
+		<td><b>setTitleSplitType(SplitType splitType)</b></td>
+		<td>Sets the title band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setTitleStyle(StyleBuilder style)</b></td>
+		<td>Sets a title band style</td>
+	</tr>
+	<tr>
+		<td><b>title(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addTitle(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the title band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Page header -->
+<a name="reportBands_pageHeader"></a><h4>Page header</h4>
+<p>
+The band is printed on each page at the top of the page.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setPageHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the page header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setPageHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a page header band style</td>
+	</tr>
+	<tr>
+		<td><b>pageHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addPageHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the page header band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Page footer -->
+<a name="reportBands_pageFooter"></a><h4>Page footer</h4>
+<p>
+The band is printed on each page at the bottom of the page.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setPageFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the page footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setPageFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a page footer band style</td>
+	</tr>
+	<tr>
+		<td><b>pageFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addPageFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the page footer band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Column header -->
+<a name="reportBands_columnHeader"></a><h4>Column header</h4>
+<p>
+The band is printed on each page at the top of the page and it's placed below the page header band.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setColumnHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the column header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setColumnHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a column header band style</td>
+	</tr>
+	<tr>
+		<td><b>columnHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addColumnHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the column header band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Column footer -->
+<a name="reportBands_columnFooter"></a><h4>Column footer</h4>
+<p>
+The band is printed on each page at the bottom of the page and it's placed above the page footer band.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setColumnFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the column footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>floatColumnFooter()</b></td>
+		<td>Prints the column footer band at the bottom of the column</td>
+	</tr>
+	<tr>
+		<td><b>setFloatColumnFooter(Boolean floatColumnFooter)</b></td>
+		<td>Sets whether or not the column footer band is printed at the bottom of the column</td>
+	</tr>
+	<tr>
+		<td><b>setColumnFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a column footer band style</td>
+	</tr>
+	<tr>
+		<td><b>columnFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addColumnFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the column footer band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Group header -->
+<a name="reportBands_groupHeader"></a><h4>Group header</h4>
+<p>
+The band is printed for each data group. It's placed above the grouped data and between the column header and footer.
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setGroupHeaderSplitType(GroupBuilder&lt;?&gt; group, SplitType splitType)</b></td>
+		<td>Sets the group header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setGroupHeaderStyle(GroupBuilder&lt;?&gt; group, StyleBuilder style)</b></td>
+		<td>Sets a group header band style</td>
+	</tr>
+	<tr>
+		<td><b>groupHeader(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components),<br/>addGroupHeader(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the group header band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Group footer -->
+<a name="reportBands_groupFooter"></a><h4>Group footer</h4>
+<p>
+The band is printed for each data group. It's placed below the grouped data and between the column header and footer.
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setGroupFooterSplitType(GroupBuilder&lt;?&gt; group, SplitType splitType)</b></td>
+		<td>Sets the group footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setGroupFooterStyle(GroupBuilder&lt;?&gt; group, StyleBuilder style)</b></td>
+		<td>Sets a group footer band style</td>
+	</tr>
+	<tr>
+		<td><b>groupFooter(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components),<br/>addGroupFooter(GroupBuilder&lt;?&gt; group, ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the group footer band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Detail -->
+<a name="reportBands_detail"></a><h4>Detail</h4>
+<p>
+The band is printed for each record row in the data source and it's placed between the column header and footer band.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail band style</td>
+	</tr>
+	<tr>
+		<td><b>detail(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetail(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Detail header -->
+<a name="reportBands_detailHeader"></a><h4>Detail header</h4>
+<p>
+The band is printed for each record row in the data source and it's placed above the detail band.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailHeaderSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail header band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailHeaderStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail header band style</td>
+	</tr>
+	<tr>
+		<td><b>detailHeader(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetailHeader(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail header band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Detail footer -->
+<a name="reportBands_detailFooter"></a><h4>Detail footer</h4>
+<p>
+The band is printed for each record row in the data source and it's placed below the detail band.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setDetailFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the detail footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setDetailFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a detail footer band style</td>
+	</tr>
+	<tr>
+		<td><b>detailFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addDetailFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the detail footer band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Last page footer -->
+<a name="reportBands_lastPageFooter"></a><h4>Last page footer</h4>
+<p>
+The band is printed only on the last page at the bottom of the page.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setLastPageFooterSplitType(SplitType splitType)</b></td>
+		<td>Sets the last page footer band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setLastPageFooterStyle(StyleBuilder style)</b></td>
+		<td>Sets a last page footer band style</td>
+	</tr>
+	<tr>
+		<td><b>lastPageFooter(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addLastPageFooter(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the last page footer band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Summary -->
+<a name="reportBands_summary"></a><h4>Summary</h4>
+<p>
+The band is printed on the last page and only once.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>summaryOnANewPage()</b></td>
+		<td>Prints the summary band on a separate page</td>
+	</tr>
+	<tr>
+		<td><b>setSummaryOnANewPage(Boolean summaryOnANewPage)</b></td>
+		<td>Sets whether or not the summary band is printed on a separate page</td>
+	</tr>
+	<tr>
+		<td><b>summaryWithPageHeaderAndFooter()</b></td>
+		<td>Prints the summary band with the page header and footer</td>
+	</tr>
+	<tr>
+		<td><b>setSummaryWithPageHeaderAndFooter(Boolean summaryWithPageHeaderAndFooter)</b></td>
+		<td>Sets whether or not the summary band is printed with the page header and footer</td>
+	</tr>
+	<tr>
+		<td><b>setSummarySplitType(SplitType splitType)</b></td>
+		<td>Sets the summary band split type<br/>
+<i>SplitType.PREVENT</i> - prevents the band from splitting<br/>
+<i>SplitType.STRETCH</i> - the band can be split, but never within its declared height.<br/>
+<i>SplitType.IMMEDIATE</i> - the band can be split</td>
+	</tr>
+	<tr>
+		<td><b>setSummaryStyle(StyleBuilder style)</b></td>
+		<td>Sets a summary band style</td>
+	</tr>
+	<tr>
+		<td><b>summary(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addSummary(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the summary band</td>
+	</tr>
+</table>
+
+<!-- Report bands - No data -->
+<a name="reportBands_noData"></a><h4>No data</h4>
+<p>
+The band is printed only when the data source is empty. It's used to show the information that there are not any data in the report.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setNoDataStyle(StyleBuilder style)</b></td>
+		<td>Sets a no data band style</td>
+	</tr>
+	<tr>
+		<td><b>noData(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addNoData(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the no data band</td>
+	</tr>
+</table>
+
+<!-- Report bands - Background -->
+<a name="reportBands_background"></a><h4>Background</h4>
+<p>
+The band is printed on each page. It's mostly used for adding watermarks to the report.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setBackgroundStyle(StyleBuilder style)</b></td>
+		<td>Sets a background band style</td>
+	</tr>
+	<tr>
+		<td><b>background(ComponentBuilder&lt;?, ?&gt; ... components),<br/>addBackground(ComponentBuilder&lt;?, ?&gt; ... components)</b></td>
+		<td>Adds components to the background band</td>
+	</tr>
+</table>
+
+<!-- Column -->
+<a name="column"></a><h3>Column</h3>
+<p>
+DynamicReports has an ability to display data in a multi-column layout. There is no limit in number of columns added to the report, only keep in mind that the more columns you add to the report, the less space will be available for each column.<br/> 
+All columns automatically fit the available page width.<br/>
+<img class="preview" src="column.png" alt="Column"/>
+The picture above shows what is a column and how it is divided.<br/>
+<b>Configuration options of a column title</b>
+</p>               
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setTitle(String title),<br/>setTitle(DRIExpression&lt;?&gt; titleExpression)</b></td>
+		<td>Sets the column title</td>
+	</tr>
+	<tr>
+		<td><b>setTitleStyle(StyleBuilder titleStyle)</b></td>
+		<td>Sets the column title style</td>
+	</tr>
+	<tr>
+		<td><b>setTitleRows(Integer rows),<br/>setTitleFixedRows(Integer rows),<br/>setTitleMinRows(Integer rows)</b></td>
+		<td>This method is used to define the height of a column title. The height is set to the rows multiplied by height of the font</td>
+	</tr>
+	<tr>
+		<td><b>setTitleHeight(Integer height),<br/>setTitleFixedHeight(Integer height),<br/>setTitleMinHeight(Integer height)</b></td>
+		<td>Sets the height of a column title</td>
+	</tr>
+</table>
+<p>
+<b>Configuration options of column values</b>
+</p>               
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setStyle(StyleBuilder style)</b></td>
+		<td>Sets the column value style</td>
+	</tr>
+	<tr>
+		<td><b>setPrintWhenExpression(DRIExpression&lt;Boolean&gt; printWhenExpression)</b></td>
+		<td>Sets the print when expression. The expression must be a type of Boolean and it decides whether or not a column value will be printed</td>
+	</tr>
+	<tr>
+		<td><b>setRows(Integer rows),<br/>setFixedRows(Integer rows),<br/>setMinRows(Integer rows)</b></td>
+		<td>This method is used to define the height of a column value. The height is set to the rows multiplied by height of the font</td>
+	</tr>
+	<tr>
+		<td><b>setHeight(Integer height),<br/>setFixedHeight(Integer height),<br/>setMinHeight(Integer height)</b></td>
+		<td>Sets the height of a column value</td>
+	</tr>
+	<tr>
+		<td><b>setPrintRepeatedDetailValues(Boolean printRepeatedDetailValues)</b></td>
+		<td>Specifies whether or not print a value if the value is the same as the previous value</td>
+	</tr>
+	<tr>
+		<td><b>setHorizontalAlignment(HorizontalAlignment horizontalAlignment)</b></td>
+		<td>Sets the column value horizontal alignment</td>
+	</tr>
+	<tr>
+		<td><b>setPattern(String pattern),<br/>setPattern(DRIExpression&lt;String&gt; patternExpression)</b></td>
+		<td>Sets the column value format pattern</td>
+	</tr>
+	<tr>
+		<td><b>setValueFormatter(DRIValueFormatter&lt;?, ? super U&gt; valueFormatter)</b></td>
+		<td>Sets the column value format expression</td>
+	</tr>
+	<tr>
+		<td><b>setHyperLink(HyperLinkBuilder hyperLink)</b></td>
+		<td>Sets the column value hyperlink</td>
+	</tr>
+	<tr>
+		<td><b>setStretchWithOverflow(Boolean stretchWithOverflow)</b></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><b>addProperty(DRIPropertyExpression propertyExpression),<br/>addProperty(String name, DRIExpression&lt;String&gt; valueExpression),<br/>addProperty(String name, String value)</b></td>
+		<td>Adds a jasper property to the column value</td>
+	</tr>
+</table>
+
+<p>
+<b>Configuration options of a column</b>
+</p>               
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setColumns(Integer columns),<br/>setFixedColumns(Integer columns),<br/>setMinColumns(Integer columns)</b></td>
+		<td>This method is used to define the width of a column. The width is set to the columns multiplied by width of the character m for the used font</td>
+	</tr>
+	<tr>
+		<td><b>setWidth(Integer width),<br/>setFixedWidth(Integer width),<br/>setMinWidth(Integer width)</b></td>
+		<td>Sets the width of a column</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+<a href="../examples/examples.html#column">Column examples</a>
+</p>
+
+<!-- Column - Text column -->
+<a name="column_textColumn"></a><h4>Text column</h4>
+<p>
+It is represented by a TextColumnBuilder instance and it is used to show values from the data source.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.column(String fieldName, Class&lt;T&gt; valueClass),<br/>col.column(String title, String fieldName, Class&lt;T&gt; valueClass)</b></td>
+		<td>Creates a new column<br/>
+- title (optional) - the column title<br/>
+- fieldName - the name of the field<br/>
+- valueClass - the field value class</td>
+	</tr>
+	<tr>
+		<td><b>col.column(String fieldName, DRIDataType&lt;? super T, T&gt; dataType),<br/>col.column(String title, String fieldName, DRIDataType&lt;? super T, T&gt; dataType)</b></td>
+		<td>Creates a new column<br/>
+- title (optional) - the column title<br/>
+- fieldName - the name of the field<br/>
+- dataType - the field data type</td>
+	</tr>
+	<tr>
+		<td><b>col.column(FieldBuilder&lt;T&gt; field),<br/>col.column(String title, FieldBuilder&lt;T&gt; field)</b></td>
+		<td>Creates a new column<br/>
+- title (optional) - the column title<br/>
+- field - the field definition</td>
+	</tr>
+	<tr>
+		<td><b>columnInstance.add(TextColumnBuilder&lt;? extends Number&gt; column),<br/>columnInstance.add(Number number)</b></td>
+		<td>Creates a new column by adding a value or a column value to the columnInstance column </td>
+	</tr>
+	<tr>
+		<td><b>columnInstance.subtract(TextColumnBuilder&lt;? extends Number&gt; column),<br/>columnInstance.subtract(Number number)</b></td>
+		<td>Creates a new column by subtracting a value or a column value from the columnInstance column </td>
+	</tr>
+	<tr>
+		<td><b>columnInstance.multiply(TextColumnBuilder&lt;? extends Number&gt; column),<br/>columnInstance.multiply(Number number)</b></td>
+		<td>Creates a new column by multiplying the columnInstance column with a value or a column value</td>
+	</tr>
+	<tr>
+		<td><b>columnInstance.divide(int scale, TextColumnBuilder&lt;? extends Number&gt; column),<br/>columnInstance.divide(int scale, Number number)</b></td>
+		<td>Creates a new column by dividing the columnInstance column with a value or a column value</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()  
+  .columns(  
+    col.column("Item", "item", type.stringType()),  
+    col.column("Quantity", "quantity", type.integerType()))
+  .setDataSource(...) 
+</@java_code>
+Another example:
+<a href="../examples/columndatatypesreport.html">ColumnDataTypesReport</a>
+</p>
+
+<!-- Column - Expression column -->
+<a name="column_expressionColumn"></a><h4>Expression column</h4>
+<p>
+It is represented by a TextColumnBuilder instance and the displayed values are defined in an expression.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.column(DRIExpression&lt;T&gt; expression),<br/>col.column(String title, DRIExpression&lt;T&gt; expression)</b></td>
+		<td>Creates a new expression column<br/>
+- title (optional) - the column title<br/>
+- expression - the value expression</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()
+  .columns(  
+    col.column("Expression column", new ExpressionColumn()))
+  .setDataSource(...) 
+
+private class ExpressionColumn extends AbstractSimpleExpression&lt;String&gt; {
+  public String evaluate(ReportParameters reportParameters) {  
+    return ...;
+  }         
+}
+</@java_code>
+Another example:
+<a href="../examples/expressioncolumnreport.html">ExpressionColumnReport</a>
+</p>
+
+<!-- Column - Percentage column -->
+<a name="column_percentageColumn"></a><h4>Percentage column</h4>
+<p>
+It is represented by a PercentageColumnBuilder instance. It calculates percentage values from the field or column values.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.percentageColumn(ValueColumnBuilder&lt;?, ? extends Number&gt; column),<br/>col. percentageColumn(String title, ValueColumnBuilder&lt;?, ? extends Number&gt; column)</b></td>
+		<td>Creates a new percentage column from the column values<br/>
+- title (optional) - the column title<br/>
+- column - the column definition</td>
+	</tr>
+	<tr>
+		<td><b>col.percentageColumn(String fieldName, Class&lt;? extends Number&gt; valueClass),<br/>col.percentageColumn(String title, String fieldName, Class&lt;? extends Number&gt; valueClass)</b></td>
+		<td>Creates a new percentage column from the field values<br/>
+- title (optional) - the column title<br/>
+- fieldName - the name of the field<br/>
+- valueClass - the field value class</td>
+	</tr>
+	<tr>
+		<td><b>col.percentageColumn(FieldBuilder&lt;? extends Number&gt; field),<br/>col.percentageColumn(String title, FieldBuilder&lt;? extends Number&gt; field)</b></td>
+		<td>Creates a new percentage column from the field values<br/>
+- title (optional) - the column title<br/>
+- field - the field definition</td>
+	</tr>
+</table>
+<p>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setTotalType(PercentageTotalType totalType)</b></td>
+		<td>Sets the total type. Has effect only when the report contains at least one group</td>
+	</tr>
+	<tr>
+		<td><b>setTotalGroup(GroupBuilder&lt;?&gt; totalGroup)</b></td>
+		<td>Sets the total group. Has effect only when the report contains at least one group</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+TextColumnBuilder&lt;Integer&gt; quantityColumn = col.column("Quantity", "quantity", type.integerType());  
+PercentageColumnBuilder quantityPercColumn = col.percentageColumn("Quantity [%]", quantityColumn); 
+report()
+  .columns(  
+    quantityColumn, quantityPercColumn)
+  .setDataSource(...) 
+</@java_code>
+Another example:
+<a href="../examples/percentagecolumnsreport.html">PercentageColumnsReport</a>
+</p>
+
+<!-- Column - Row number column -->
+<a name="column_rowNumberColumn"></a><h4>Row number column</h4>
+<p>
+It is represented by a TextColumnBuilder instance and displays row numbers.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.columnRowNumberColumn(),<br/>col.columnRowNumberColumn(String title)</b></td>
+		<td>Creates a new row number column, the row number is reset on each new column<br/>
+- title (optional) - the column title</td>
+	</tr>
+	<tr>
+		<td><b>col.pageRowNumberColumn(),<br/>col.pageRowNumberColumn(String title)</b></td>
+		<td>Creates a new row number column,  the row number is reset on each new page<br/>
+- title (optional) - the column title</td>
+	</tr>
+	<tr>
+		<td><b>col.reportRowNumberColumn(),<br/>col.reportRowNumberColumn(String title)</b></td>
+		<td>Creates a new row number column<br/>
+- title (optional) - the column title</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()
+  .columns(  
+    col.reportRowNumberColumn("Report row"))
+  .setDataSource(...) 
+</@java_code>
+Another example:
+<a href="../examples/rownumbercolumnsreport.html">RowNumberColumnsReport</a>
+</p>
+
+<!-- Column - Boolean column -->
+<a name="column_booleanColumn"></a><h4>Boolean column</h4>
+<p>
+It is represented by a BooleanColumnBuilder instance and shows a boolean value either as a text or as an image.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.booleanColumn(String fieldName),<br/>col.booleanColumn(String title, String fieldName)</b></td>
+		<td>Creates a new boolean column<br/>
+- title (optional) - the column title<br/>
+- fieldName - the name of the field</td>
+	</tr>
+	<tr>
+		<td><b>col.booleanColumn(FieldBuilder&lt;Boolean&gt; field),<br/>col.booleanColumn(String title, FieldBuilder&lt;Boolean&gt; field)</b></td>
+		<td>Creates a new boolean column<br/>
+- title (optional) - the column title<br/>
+- field - the field definition</td>
+	</tr>
+	<tr>
+		<td><b>col.booleanColumn(DRIExpression&lt;Boolean&gt; expression),<br/>col.booleanColumn(String title, DRIExpression&lt;Boolean&gt; expression)</b></td>
+		<td>Creates a new boolean column<br/>
+- title (optional) - the column title<br/>
+- expression - the boolean value expression</td>
+	</tr>
+</table>
+<p>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>setComponentType(BooleanComponentType booleanComponentType)</b></td>
+		<td>Sets the boolean presentation type.<br/>
+<i>BooleanComponentType.TEXT_*</i> - shows a text value<br/>
+<i>BooleanComponentType.IMAGE_*</i> - shows an image</td>
+	</tr>
+	<tr>
+		<td><b>setImageDimension(Integer width, Integer height),<br/>setImageWidth(Integer width),<br/>setImageHeight(Integer height)</b></td>
+		<td>Sets the boolean image dimension. Has effect only when the boolean value is presented as an image</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+report()
+  .columns(  
+    col.booleanColumn("Boolean", "boolean"),  
+col.booleanColumn("Boolean", "boolean").setComponentType(BooleanComponentType.IMAGE_STYLE_1))
+  .setDataSource(...) 
+</@java_code>
+Another example:
+<a href="../examples/booleancolumnreport.html">BooleanColumnReport</a>
+</p>
+
+<!-- Column - Component column -->
+<a name="column_componentColumn"></a><h4>Component column</h4>
+<p>
+It is represented by a ComponentColumnBuilder instance and is used to display custom components (e.g. images or complex content) in columns.<br/>
+<b>Builders</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>col.componentColumn(ComponentBuilder&lt;?, ?&gt; component),<br/>col.componentColumn(String title, ComponentBuilder&lt;?, ?&gt; component)</b></td>
+		<td>Creates a new component column<br/>
+- title (optional) - the column title<br/>
+- component - the component definition</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+ImageBuilder image = cmp.image(...);
+ComponentBuilder&lt;?, ?&gt; component = ...;
+report() 
+  .columns(  
+    col.componentColumn("Image", image), 
+    col.componentColumn("Component", component))  
+  .setDataSource(...) 
+</@java_code>
+Another example:
+<a href="../examples/componentcolumnreport.html">ComponentColumnReport</a>
+</p>
+
+<!-- Expression -->
+<a name="expression"></a><h3>Expression</h3>
+<p>
+Expressions are used to define various calculations, conditions, text field content, specific report groups, etc.
+Every expression can access the declared report fields, variables and other expressions and get their values to calculate the expression value.<br/>
+It must be an instance of DRIExpression.
+</p>
+
+<!-- Expression - Simple expression -->
+<a name="expression_simpleExpression"></a><h4>Simple expression</h4>
+<p>
+The basic and the simplest implementation of an expression.<br/>
+A simple expression must be an instance of DRISimpleExpression and implement the inherited abstract method evaluate.<br/>
+<i>public Object evaluate(ReportParameters reportParameters);</i><br/>
+- reportParameters - access to report fields, variables, parameters, expressions, and other report values<br/>
+- the method returns the result of the expression evaluation<br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+private class SimpleExpression extends AbstractSimpleExpression&lt;BigDecimal&gt; {
+  public BigDecimal evaluate(ReportParameters reportParameters) {
+    Integer quantity = reportParameters.getValue("quantity");
+    BigDecimal unitPrice = reportParameters.getValue("unitprice");
+    return new BigDecimal(quantity).multiply(unitPrice);
+  }
+}
+</@java_code>
+Another example:
+<a href="../examples/simpleexpressionreport.html">SimpleExpressionReport</a>
+</p>
+
+<!-- Expression - Complex expression -->
+<a name="expression_complexExpression"></a><h4>Complex expression</h4>
+<p>
+The difference between a simple and complex expression is that a complex expression allows registering additional fields or variables that are not defined in the report and are needed for calculating the value.<br/>
+A complex expression must be an instance of DRIComplexExpression and must implement the inherited abstract method evaluate.<br/>
+<i>public Object evaluate(List&lt;?&gt; values, ReportParameters reportParameters);</i><br/>
+- values - the values of the registered expressions<br/>
+- reportParameters - access to report fields, variables, parameters, expressions, and other report values<br/>
+- the method returns the result of the expression evaluation<br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+private class ComplexExpression extends AbstractComplexExpression&lt;BigDecimal&gt; {
+  public ComplexExpression() {
+    addExpression(field("quantity", Integer.class));
+    addExpression(field("unitprice", BigDecimal.class));
+  }
+
+  @Override
+  public BigDecimal evaluate(List&lt;?&gt; values, ReportParameters reportParameters) {
+    Integer quantity = (Integer) values.get(0);
+    BigDecimal unitPrice = (BigDecimal) values.get(1);
+    return new BigDecimal(quantity).multiply(unitPrice);
+  }
+}
+</@java_code>
+Another example:
+<a href="../examples/complexexpressionreport.html">ComplexExpressionReport</a>
+</p>
+
+<!-- Expression - Jasper expression -->
+<a name="expression_jasperExpression"></a><h4>Jasper expression</h4>
+<p>
+This expression allows declaring an expression in a Jasper native syntax. Knowledge of the jasper syntax is also required for proper use.<br/>
+<b>Configuration options</b>
+</p>
+<table>
+	<tr>
+		<th>method</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><b>exp.jasperSyntax(String expression, Class class),<br/>exp.jasperSyntax(String expression)</b></td>
+		<td>Creates a new jasper expression<br/>
+- expression - the jasper expression<br/>
+- class - the expression class</td>
+	</tr>
+	<tr>
+		<td><b>exp.jasperSyntaxText(String text)</b></td>
+		<td>Creates a new jasper string expression, useful only for showing a static text.<br/>This method escapes the characters in a String using Java String rules.<br/>
+- text - text to be shown</td>
+	</tr>
+</table>
+<p>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+JasperExpression&lt;BigDecimal&gt; columnExpression = exp.jasperSyntax("new BigDecimal($F{quantity}).multiply($F{unitprice})", BigDecimal.class); 
+JasperExpression&lt;String&gt; columnTitle = exp.jasperSyntaxText("Price");
+TextColumnBuilder&lt;BigDecimal&gt; priceColumn = col.column(columnExpression).setTitle(columnTitle);
+</@java_code>
+Another example:
+<a href="../examples/jasperexpressionreport.html">JasperExpressionReport</a>
+</p>
+
+<!-- Expression - Value formatter -->
+<a name="expression_valueFormatter"></a><h4>Value formatter</h4>
+<p>
+The purpose of this expression is to format a value only. For instance, when it is necessary to display a currency next to the value or just show a value in another format. It can be applied in any report column, group, subtotal, or text field component.<br/>
+A value formatter expression must be an instance of DRIValueFormatter and must implement the inherited abstract method format.<br/>
+<i>public Object format(Object value, ReportParameters reportParameters);</i><br/>
+- value - the value to be formatted<br/>
+- reportParameters - access to report fields, variables, parameters, expressions, and other report values<br/>
+- the method returns the formatted value<br/>
+<b>Examples</b><br/>
+Quick usage:<br/>
+The code below converts a big decimal value to a string and adds a currency symbol next to the value.
+<@java_code>
+TextColumnBuilder&lt;BigDecimal&gt;  column = ...;
+column. setValueFormatter(new ValueFormatter()))  
+private class ValueFormatter extends AbstractValueFormatter&lt;String, BigDecimal&gt; {      
+  public String format(BigDecimal value, ReportParameters reportParameters) {  
+    return value + " EUR";  
+  }  
+} 
+</@java_code>
+Another example:
+<a href="../examples/valueformatterreport.html">ValueFormatterReport</a>
+</p>
+
+<!-- Fonts -->
+<a name="fonts"></a><h3>Fonts</h3>
+<p>
+Font configuration is very important for a proper report generation and exports. In pdf exports in particular, where it is possible to embed fonts into a document. Keep in mind that if a font is not found, a default system font is used, and this may cause a lot of problems with the layout of the report.<br/>
+The font configuration itself is not very complicated, just follow these few steps:<br/><br/>
+Say, we want to register a font named <i>FreeUniversal</i>.<br/>
+First we need to create a font configuration file <i>fonts.xml</i> and add it in the root of the classpath. Using this configuration, we should register all fonts that are used in the reports. It's recommended to register all font styles (normal, bold, italic and bolditalic).<br/>
+The configuration file will look like this: 
+<@xml_code>
+&lt;fontFamilies&gt;
+  &lt;fontFamily name="FreeUniversal"&gt;
+    &lt;normal>net/sf/dynamicreports/examples/fonts/FreeUniversal-regular.ttf&lt;/normal&gt;
+    &lt;bold>net/sf/dynamicreports/examples/fonts/FreeUniversal-Bold.ttf&lt;/bold&gt;
+    &lt;italic>net/sf/dynamicreports/examples/fonts/FreeUniversal-Italic.ttf&lt;/italic&gt;
+    &lt;boldItalic>net/sf/dynamicreports/examples/fonts/FreeUniversal-BoldItalic.ttf&lt;/boldItalic&gt;
+    &lt;pdfEncoding>Cp1252&lt;/pdfEncoding&gt;
+    &lt;pdfEmbedded>true&lt;/pdfEmbedded&gt;
+  &lt;/fontFamily&gt;
+&lt;/fontFamilies&gt;
+</@xml_code>
+Now we have to add the font files to the classpath or pack them into a separate jar file and put the jar to the classpath. The font <i>net/sf/dynamicreports/examples/fonts/FreeUniversal-regular.ttf</i> means that the font file <i>FreeUniversal-regular.ttf</i> has to be found in package <i>net.sf.dynamicreports.examples.fonts</i>.<br/><br/>
+And finally, we need to create a <i>jasper_extension.properties</i> file and register the font configuration file:
+<@xml_code>
+net.sf.jasperreports.extension.registry.factory.simple.font.families=net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
+net.sf.jasperreports.extension.simple.font.families.drfonts=fonts.xml
+</@xml_code>
+After applying the configuration above, you can use the font in this way:
+<@java_code> 
+StyleBuilder plainStyle = stl.style()
+  .setFontName("FreeUniversal");
+report().
+  title(cmp.text("text - plain").setStyle(plainStyle))
+</@java_code>
+If you want to set the font <i>FreeUniversal</i> as a deafult font, create a <i>dynamicreports-defaults.xml</i> file and set the default font name: 
+<@xml_code>
+&lt;DynamicReports&gt;
+  &lt;!-- DEFAULT FONT --&gt;
+  &lt;font fontName="FreeUniversal" fontSize="10"/&gt;
+&lt;/DynamicReports&gt;
+</@xml_code>
+If you don't set the style in a column or any other text component, the default font is used 
+<@java_code>
+report().
+  title(cmp.text("text - default font"))
+</@java_code>
+You can check if the configuration is working properly by exporting the report into pdf. Open the pdf document and look at the document properties and select fonts, there should be a list of all embedded <i>FreeUniversal</i> fonts.<br/>
+<img class="preview" src="fonts.png" alt="Fonts"/><br/> 
+For more information about font configuration visit the following site:<br/>
+<a href="http://jasperforge.org/uploads/publish/jasperreportswebsite/trunk/sample.reference/fonts/index.html#fontextensions">Font extensions</a><br/>
+<b>Examples</b><br/>
+<a href="../examples/fontsreport.html">FontsReport</a>
+</p>
+
+<!-- Servlets -->
+<a name="servlets"></a><h3>Servlets</h3>
+<p>
+Code below shows using the DynamicReports within a servlet.
+The servlet will display a pdf document on the web browser.
+<@java_code>
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.dynamicreports.report.exception.DRException;
+
+public class PdfReportServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("application/pdf");
+		OutputStream out = resp.getOutputStream();
+		try {
+			report()
+				...
+				.toPdf(out);
+		} catch (DRException e) {
+			throw new ServletException(e);
+		} 
+		out.close();
+	}
+}
+</@java_code>
+</p>
+
+<!-- Configuration -->
+<a name="configuration"></a><h3>Configuration</h3>
+<!-- Configuration - Default settings -->
+<a name="configuration_defaultSettings"></a><h4>Default settings</h4>
+<p>
+DynamicReports automatically looks for a file named 
+<a id="dynamicreports-defaults_source" title="dynamicreports-defaults" href="../examples/dynamicreports-defaults.html">dynamicreports-defaults.xml</a> 
+on startup.<br/>
+In this file you can change the default settings (default font, pattern and horizontal alignment for all data types).
+<@xml_code>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;DynamicReports&gt;
+		&lt;!-- DEFAULT FONT --&gt;
+		&lt;font fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" pdfEmbedded="false"/&gt;
+		  	
+		&lt;!-- DEFAULT DATA TYPES --&gt;
+		&lt;bigDecimalType pattern="#,##0.00#" horizontalAlignment="RIGHT"/&gt;
+		&lt;dateType pattern="MM/dd/yyyy" horizontalAlignment="RIGHT"/&gt;
+		...	
+	&lt;/DynamicReports&gt;
+</@xml_code>
+Copy this file in the root of the classpath.
+</p>
+
+<!-- Configuration - Maven configuration -->
+<a name="configuration_maven"></a><h4>Maven configuration</h4>
+<p>
+DynamicReports is synchronized with Maven Central Repository.<br/>
+Add the dependencies listed below to your pom.xml configuration file.
+<@xml_code>
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-core&lt;/artifactId&gt;
+	&lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-adhoc&lt;/artifactId&gt;
+	&lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt;   
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-googlecharts&lt;/artifactId&gt;
+	&lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt; 
+</@xml_code>
+</p>
+
+<!-- Configuration - Maven snapshot repository configuration -->
+<a name="configuration_mavenSnapshot"></a><h4>Maven snapshot repository configuration</h4>
+<p>
+To use the development snapshots of DynamicReports, change your pom.xml configuration:<br/>
+update dynamicreports-core version to ${project.developmentVersion}
+<@xml_code>
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-core&lt;/artifactId&gt;
+	&lt;version&gt;${project.developmentVersion}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-adhoc&lt;/artifactId&gt;
+	&lt;version&gt;${project.developmentVersion}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;net.sourceforge.dynamicreports&lt;/groupId&gt;
+	&lt;artifactId&gt;dynamicreports-googlecharts&lt;/artifactId&gt;
+	&lt;version&gt;${project.developmentVersion}&lt;/version&gt;
+&lt;/dependency&gt;
+</@xml_code>
+and add the Sonatype Nexus snapshot repository
+<@xml_code>
+&lt;repositories&gt;
+	&lt;repository&gt;
+		&lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+		&lt;name&gt;Sonatype Nexus Snapshots&lt;/name&gt;
+		&lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
+		&lt;releases&gt;
+			&lt;enabled&gt;false&lt;/enabled&gt;
+		&lt;/releases&gt;
+		&lt;snapshots&gt;
+			&lt;enabled&gt;true&lt;/enabled&gt;
+		&lt;/snapshots&gt;
+	&lt;/repository&gt;
+&lt;/repositories&gt;
+</@xml_code>
+</p>
+
+<!-- Adhoc -->
+<a name="adhoc"></a><h3>DynamicReports - adhoc</h3>
+<p>
+Adhoc report applications allow users themselves to create specific reports and filter queries. A report is created on the fly, displaying values or charts that a user has specified via GUI.<br/>
+This project simplifies creating adhoc report applications. It allows to configure reports and filter queries and this configuration can be stored to an xml file or loaded from an xml file.
+The main configuration object is <b>AdhocConfiguration</b> that consists of <b>AdhocReport</b> and <b>AdhocFilter</b> object.<br/>
+<b>AdhocReport</b> - a report configuration object that can be transformed to a dynamic report builder object.<br/>
+<b>AdhocFilter</b> - a filter configuration object. This project doesn't generate sql queries from this object, it only allows you to store and load a filter configuration. <br/>
+Another important class of this project is <b>AdhocManager</b>. It is a helper class that contains methods of loading/storing an AdhocConfiguration from/to a stream and methods of creating a report builder instance from a given AdhocReport object.<br/>
+<img class="preview" src="adhoc.png" alt="DynamicReports - adhoc"/><br/>
+<b>Examples</b><br/>
+Quick usage:
+<@java_code>
+AdhocConfiguration configuration = new AdhocConfiguration();
+AdhocReport report = new AdhocReport();
+configuration.setReport(report);
+AdhocColumn column = new AdhocColumn();
+column.setName("item");
+report.addColumn(column);
+</@java_code>
+The following code stores a configuration to an output stream
+<@java_code>
+AdhocManager.saveConfiguration(configuration, outputStream);
+</@java_code>
+The following code loads a configuration from an input stream
+<@java_code>
+AdhocConfiguration configuration = AdhocManager.loadConfiguration(configuration, inputStream);
+</@java_code>
+The following code converts a configuration to a report builder instance
+<@java_code>
+JasperReportBuilder reportBuilder = AdhocManager.createReport(configuration.getReport());
+reportBuilder.setDatasource(...);
+</@java_code>
+</p>
+
+<!-- Examples -->
+<a name="examples"></a><h3>Examples</h3>
+<!-- Examples - How to run the examples in Eclipse -->
+<a name="examples_eclipse"></a><h4>How to run the examples in Eclipse</h4>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project-with-dependencies</a> from the download page</li>
+	<li>Copy <b>/examples/eclipse/dynamicreports-examples</b> from the archive to your workspace e.g. <b>/workspace/dynamicreports-examples</b></li>
+	<li>Copy all files from <b>/lib</b> and <b>/dist</b> folders from the archive to <b>/workspace/dynamicreports_examples/lib/</b></li>
+	<li>
+		Run Eclipse and import project<br/>
+                To import a project, follow these steps<br/>
+		- go to <b>File - Import</b><br/>
+		<p><img class="preview" src="import1.png" alt="File - Import"/></p>
+                - choose <b>Existing Projects into Workspace</b><br/>
+                - click <b>Next</b> button to continue<br/>
+		<p><img class="preview" src="import2.png" alt="Existing Projects into Workspace"/></p>
+                - click the <b>Browse</b> button and find the project on your hard disk<br/>
+                - select the project<br/>
+                - click <b>Finish</b> to perform the import<br/>
+		<p><img class="preview" src="import3.png" alt="Import"/></p>
+	</li>
+	<li>Build the project</li>
+</ul>
+
+<!-- Examples - How to run the examples in Eclipse with maven -->
+<a name="examples_eclipse_maven"></a><h3>How to run the examples in Eclipse with maven</h3>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project</a> from the download page</li>
+	<li>Copy <b>/projects/dynamicreports-examples</b> from the archive to your workspace e.g. <b>/workspace/dynamicreports-examples</b></li>
+	<li>Run Eclipse and import project</li>
+	<li>Build the project</li>
+</ul>
+
+<!-- Examples - How do I run the examples in Eclipse -->
+<a name="examples_netbeans"></a><h3>How to run the examples in Netbeans</h3>
+<ul>
+	<li>Download <a href="${page.path}download.html">dynamicreports-${project.version}-project-with-dependencies</a> from the download page</li>
+	<li>Copy <b>/examples/netbeans/dynamicreports-examples</b> from the archive to your NetBeansProjects folder e.g. <b>/NetBeansProjects/dynamicreports-examples</b></li>
+	<li>Copy all files from <b>/lib</b> and <b>/dist</b> folders from the archive to <b>/NetBeansProjects/dynamicreports_examples/lib/</b></li>
+	<li>Run NetBeans and open the project</li>
+	<li>Build the project</li>
+</ul>
+
+</div>
