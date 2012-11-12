@@ -79,10 +79,12 @@
 <a name="syntax"></a><h3>Syntax</h3>
 <p>
 Before you start creating reports with DynamicReports, you should consider which java syntax you will use. 
-Java 5 added static imports that allow static methods or constants to be referenced without qualifying them with a class name. DynamicReports provides a lot of static methods of creating every part of a report and therefore you can consider using a static import for these methods.<br/>
-Let's see in detail the difference between using and not using a static import:
+Java 5 added static imports that allow static methods or constants to be referenced without qualifying them with a class name. DynamicReports provides a lot of static methods of creating every part of a report and therefore you can consider using a static import for these methods.
+And DynamicReports also provides the abillity to use <a href="http://en.wikipedia.org/wiki/Method_chaining">Method chaining</a> (also known as <a href="http://en.wikipedia.org/wiki/Fluent_interface">Fluent interface</a>). 
+Both are useful for code readability, the ability to replace multiple calls to a class with a single one, and for invoking multiple method calls.<br/>
+Let's see in detail the difference between using and not using a static import and method chaining:
 </p>
-<p><b>Classic java syntax (without using a static import)</b></p>
+<p><b>Classic java syntax (without using a static import and method chaining)</b></p>
 <@java_code>
 JasperReportBuilder report = DynamicReports.report();
 report.addColumn(Columns.column("Item", "item", DataTypes.stringType()));
@@ -91,9 +93,9 @@ report.addTitle(Componens.text("Report title"));
 report.setDataSource(dataSource)
 report.show();
 </@java_code>
-<p><b>Using a static import for DynamicReports methods</b></p> 
+<p><b>Using a static import for DynamicReports methods and method chaining</b></p> 
 <@java_code>
-import static net.sf.dynamicreports. DynamicReports.*;
+import static net.sf.dynamicreports.DynamicReports.*;
 report()
    .columns(
      col.column("Item", "item", type.stringType()),  
@@ -103,8 +105,8 @@ report()
    .show();
 </@java_code>
 <p>
-As you can see, static imports improve readability of the code but they are not mandatory. It's only up to you which code syntax you will prefer to use.<br/>
-All examples and tutorials in the documentation use static imports to provide more readability of the code.<br/>
+As you can see, static imports and method chaining improve readability of the code but they are not mandatory. It's only up to you which code syntax you will prefer to use.<br/>
+All examples and tutorials in the documentation use static imports and method chaining to provide more readability of the code.<br/>
 <b>Examples</b><br/>
 <a href="../examples/simplereport_classicsyntax.html">SimpleReport_ClassicSyntax</a>, 
 <a href="../examples/simplereport_step01.html">SimpleReport_Step1</a>
