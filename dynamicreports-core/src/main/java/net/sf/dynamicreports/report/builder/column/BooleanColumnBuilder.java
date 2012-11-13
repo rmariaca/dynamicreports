@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -183,6 +184,17 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 */
 	public BooleanColumnBuilder setImageHeight(Integer height) {
 		getObject().setImageHeight(height);
+		return this;
+	}
+
+	/**
+	 * Sets the column value horizontal alignment.
+	 *
+	 * @param horizontalAlignment
+	 * @return a column builder
+	 */
+	public BooleanColumnBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
 

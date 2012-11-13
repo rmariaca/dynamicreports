@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -35,5 +36,11 @@ public interface DRIBooleanField extends DRIHyperLinkComponent {
 	public BooleanComponentType getComponentType();
 
 	public Boolean getEmptyWhenNullValue();
+
+	public Integer getImageWidth();
+
+	public Integer getImageHeight();
+
+	public HorizontalAlignment getHorizontalAlignment();
 }
 

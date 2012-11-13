@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.base.column;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -47,6 +48,7 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 	private Boolean emptyWhenNullValue;
 	private Integer imageWidth;
 	private Integer imageHeight;
+	private HorizontalAlignment horizontalAlignment;
 	private DRIReportStyle style;
 	private DRIExpression<Boolean> printWhenExpression;
 
@@ -142,6 +144,15 @@ public class DRBooleanColumn extends DRColumn<DRIComponent> implements DRIBoolea
 			Validate.isTrue(imageHeight >= 0, "imageHeight must be >= 0");
 		}
 		this.imageHeight = imageHeight;
+	}
+
+	@Override
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
 	}
 
 	@Override

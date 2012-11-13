@@ -199,8 +199,8 @@ public class Default {
 	//boolean
 	private BooleanComponentType booleanComponentType;
 	private boolean booleanEmptyWhenNullValue;
-	private Integer booleanColumnImageWidth;
-	private Integer booleanColumnImageHeight;
+	private int booleanImageWidth;
+	private int booleanImageHeight;
 	private DRStyle booleanColumnStyle;
 	//split
 	private SplitType defaultSplitType;
@@ -405,8 +405,8 @@ public class Default {
 
 		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
 		this.booleanEmptyWhenNullValue = false;
-		this.booleanColumnImageWidth = 15;
-		this.booleanColumnImageHeight = 15;
+		this.booleanImageWidth = 15;
+		this.booleanImageHeight = 15;
 		this.booleanColumnStyle = null;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
@@ -919,12 +919,12 @@ public class Default {
 		return booleanEmptyWhenNullValue;
 	}
 
-	public Integer getBooleanColumnImageWidth() {
-		return booleanColumnImageWidth;
+	public int getBooleanImageWidth() {
+		return booleanImageWidth;
 	}
 
-	public Integer getBooleanColumnImageHeight() {
-		return booleanColumnImageHeight;
+	public int getBooleanImageHeight() {
+		return booleanImageHeight;
 	}
 
 	public DRIStyle getBooleanColumnStyle() {

@@ -198,9 +198,9 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getBooleanEmptyWhenNullValue();
 
-	public Integer getBooleanColumnImageWidth();
+	public Integer getBooleanImageWidth();
 
-	public Integer getBooleanColumnImageHeight();
+	public Integer getBooleanImageHeight();
 
 	public DRIReportStyle getBooleanColumnStyle();
 

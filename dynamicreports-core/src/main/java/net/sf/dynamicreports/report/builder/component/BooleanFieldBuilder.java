@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -64,6 +65,46 @@ public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldB
 
 	public BooleanFieldBuilder setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
 		getObject().setEmptyWhenNullValue(emptyWhenNullValue);
+		return this;
+	}
+
+	/**
+	 * Sets the boolean image dimension. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param width the image width
+	 * @param height the image height
+	 * @return a column builder
+	 */
+	public BooleanFieldBuilder setImageDimension(Integer width, Integer height) {
+		getObject().setImageWidth(width);
+		getObject().setImageHeight(height);
+		return this;
+	}
+
+	/**
+	 * Sets the boolean image width. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param width the image width
+	 * @return a column builder
+	 */
+	public BooleanFieldBuilder setImageWidth(Integer width) {
+		getObject().setImageWidth(width);
+		return this;
+	}
+
+	/**
+	 * Sets the boolean image height. Has effect only when the boolean value is presented as an image.
+	 *
+	 * @param height the image height
+	 * @return a column builder
+	 */
+	public BooleanFieldBuilder setImageHeight(Integer height) {
+		getObject().setImageHeight(height);
+		return this;
+	}
+
+	public BooleanFieldBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		getObject().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
 }

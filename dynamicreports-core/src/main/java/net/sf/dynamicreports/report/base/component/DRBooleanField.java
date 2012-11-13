@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -38,6 +39,9 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 	private DRIExpression<Boolean> valueExpression;
 	private BooleanComponentType componentType;
 	private Boolean emptyWhenNullValue;
+	private Integer imageWidth;
+	private Integer imageHeight;
+	private HorizontalAlignment horizontalAlignment;
 
 	@Override
 	public DRIExpression<Boolean> getValueExpression() {
@@ -67,5 +71,37 @@ public class DRBooleanField extends DRHyperLinkComponent implements DRIBooleanFi
 		this.emptyWhenNullValue = emptyWhenNullValue;
 	}
 
+	@Override
+	public Integer getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(Integer imageWidth) {
+		if (imageWidth != null) {
+			Validate.isTrue(imageWidth >= 0, "imageWidth must be >= 0");
+		}
+		this.imageWidth = imageWidth;
+	}
+
+	@Override
+	public Integer getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(Integer imageHeight) {
+		if (imageHeight != null) {
+			Validate.isTrue(imageHeight >= 0, "imageHeight must be >= 0");
+		}
+		this.imageHeight = imageHeight;
+	}
+
+	@Override
+	public HorizontalAlignment getHorizontalAlignment() {
+		return horizontalAlignment;
+	}
+
+	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		this.horizontalAlignment = horizontalAlignment;
+	}
 }
 

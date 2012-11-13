@@ -76,21 +76,10 @@
        xlink:href="#linearGradient3289"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(359.65123,517.12194)" />
-    <filter
-       id="filter3317">
-      <feGaussianBlur
-         id="feGaussianBlur3319"
-         stdDeviation="0.306875"
-         inkscape:collect="always" />
-    </filter>
   </defs>
   <g
      transform="translate(-359,-516.36218)"
      id="layer1">
-    <path
-       d="M 366.1875,517.875 L 365.84375,518.25 L 360.78125,523.3125 L 360.40625,523.65625 L 360.78125,524 L 370,533.25 L 360.78125,542.46875 L 360.40625,542.8125 L 360.78125,543.15625 L 365.84375,548.21875 L 366.1875,548.59375 L 366.53125,548.21875 L 375.75,539 L 384.96875,548.21875 L 385.3125,548.59375 L 385.65625,548.21875 L 390.71875,543.15625 L 391.0625,542.8125 L 390.71875,542.46875 L 381.5,533.25 L 390.71875,524 L 391.0625,523.65625 L 390.71875,523.3125 L 385.65625,518.25 L 385.3125,517.875 L 384.96875,518.25 L 375.75,527.46875 L 366.53125,518.25 L 366.1875,517.875 z"
-       id="path3311"
-       style="opacity:1;fill:#000000;fill-opacity:0.36078431;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter3317)" />
     <path
        d="M 6.53125,1.46875 L 1.46875,6.53125 L 11.03125,16.125 L 1.46875,25.6875 L 6.53125,30.75 L 16.09375,21.1875 L 25.65625,30.75 L 30.71875,25.6875 L 21.15625,16.125 L 30.71875,6.53125 L 25.65625,1.46875 L 16.09375,11.03125 L 6.53125,1.46875 z"
        transform="translate(359,516.36218)"

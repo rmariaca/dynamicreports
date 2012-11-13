@@ -142,8 +142,8 @@ public class DRReportTemplate implements DRIReportTemplate {
 	//boolean
 	private BooleanComponentType booleanComponentType;
 	private Boolean booleanEmptyWhenNullValue;
-	private Integer booleanColumnImageWidth;
-	private Integer booleanColumnImageHeight;
+	private Integer booleanImageWidth;
+	private Integer booleanImageHeight;
 	private DRIReportStyle booleanColumnStyle;
 	//split
 	private SplitType defaultSplitType;
@@ -964,21 +964,21 @@ public class DRReportTemplate implements DRIReportTemplate {
 	}
 
 	@Override
-	public Integer getBooleanColumnImageWidth() {
-		return booleanColumnImageWidth;
+	public Integer getBooleanImageWidth() {
+		return booleanImageWidth;
 	}
 
-	public void setBooleanColumnImageWidth(Integer booleanColumnImageWidth) {
-		this.booleanColumnImageWidth = booleanColumnImageWidth;
+	public void setBooleanImageWidth(Integer booleanImageWidth) {
+		this.booleanImageWidth = booleanImageWidth;
 	}
 
 	@Override
-	public Integer getBooleanColumnImageHeight() {
-		return booleanColumnImageHeight;
+	public Integer getBooleanImageHeight() {
+		return booleanImageHeight;
 	}
 
-	public void setBooleanColumnImageHeight(Integer booleanColumnImageHeight) {
-		this.booleanColumnImageHeight = booleanColumnImageHeight;
+	public void setBooleanImageHeight(Integer booleanImageHeight) {
+		this.booleanImageHeight = booleanImageHeight;
 	}
 
 	@Override

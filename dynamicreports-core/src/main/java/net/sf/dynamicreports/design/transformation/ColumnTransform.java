@@ -34,20 +34,12 @@ import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRBooleanField;
-import net.sf.dynamicreports.report.base.component.DRComponent;
-import net.sf.dynamicreports.report.base.component.DRFiller;
-import net.sf.dynamicreports.report.base.component.DRList;
-import net.sf.dynamicreports.report.base.component.DRListCell;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
-import net.sf.dynamicreports.report.constant.ComponentDimensionType;
-import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.constant.StretchType;
-import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
@@ -142,16 +134,16 @@ public class ColumnTransform {
 		booleanField.setEmptyWhenNullValue(column.getEmptyWhenNullValue());
 		booleanField.setValueExpression(column.getValueExpression());
 		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
-		DRComponent component = null;
-
+		booleanField.setWidth(column.getWidth());
+		booleanField.setWidthType(column.getWidthType());
+		booleanField.setHeight(column.getHeight());
+		booleanField.setHeightType(column.getHeightType());
+		booleanField.setImageWidth(column.getImageWidth());
+		booleanField.setImageHeight(column.getImageHeight());
+		booleanField.setHorizontalAlignment(column.getHorizontalAlignment());
 		switch (componentType) {
 		case TEXT_TRUE_FALSE:
 		case TEXT_YES_NO:
-			booleanField.setWidth(column.getWidth());
-			booleanField.setWidthType(column.getWidthType());
-			booleanField.setHeight(column.getHeight());
-			booleanField.setHeightType(column.getHeightType());
-			component = booleanField;
 			break;
 		case IMAGE_STYLE_1:
 		case IMAGE_STYLE_2:
@@ -160,52 +152,19 @@ public class ColumnTransform {
 		case IMAGE_CHECKBOX_1:
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
-			int hFillerWidth1 = 1;
-			int hFillerWidth2 = 1;
-			if (column.getWidth() != null) {
-				int width = column.getWidth() - accessor.getTemplateTransform().getBooleanColumnImageWidth(column);
-				hFillerWidth1 = width / 2;
-				hFillerWidth2 = width - hFillerWidth1;
+			if (booleanField.getHeight() == null) {
+				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
+				booleanField.setHeight(height);
 			}
-
-			DRList hList = new DRList();
-			DRFiller filler = new DRFiller();
-			filler.setWidth(hFillerWidth1);
-			filler.setWidthType(column.getWidthType());
-			filler.setHeight(column.getHeight());
-			filler.setHeightType(column.getHeightType());
-			hList.addComponent(filler);
-
-			booleanField.setWidth(accessor.getTemplateTransform().getBooleanColumnImageWidth(column));
-			booleanField.setHeight(accessor.getTemplateTransform().getBooleanColumnImageHeight(column));
-			booleanField.setWidthType(ComponentDimensionType.FIXED);
-			booleanField.setHeightType(ComponentDimensionType.FIXED);
-			DRListCell cell = new DRListCell(booleanField);
-			cell.setVerticalAlignment(VerticalCellComponentAlignment.MIDDLE);
-			hList.addCell(cell);
-
-			filler = new DRFiller();
-			filler.setWidth(hFillerWidth2);
-			filler.setWidthType(column.getWidthType());
-			hList.addComponent(filler);
-
-			DRList vList = new DRList(ListType.VERTICAL);
-			filler = new DRFiller();
-			filler.setWidth(accessor.getTemplateTransform().getBooleanImageColumnWidth(column));
-			filler.setWidthType(column.getWidthType());
-			vList.addComponent(filler);
-			vList.addComponent(hList);
-			vList.setStretchType(StretchType.RELATIVE_TO_TALLEST_OBJECT);
-			component = vList;
 			break;
 		default:
 			throw new DRDesignReportException("Boolean component type " + componentType.name() + " not supported");
 		}
 
-		component.setStyle(accessor.getTemplateTransform().getBooleanColumnStyle(column));
-		component.setPrintWhenExpression(column.getPrintWhenExpression());
+		booleanField.setStyle(accessor.getTemplateTransform().getBooleanColumnStyle(column));
+		booleanField.setPrintWhenExpression(column.getPrintWhenExpression());
 
-		return component;
+		return booleanField;
 	}
 
 	//title

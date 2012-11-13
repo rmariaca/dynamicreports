@@ -1757,24 +1757,34 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isBooleanEmptyWhenNullValue();
 	}
 
-	public Integer getBooleanColumnImageWidth(DRIBooleanColumn column) {
-		if (column.getImageWidth() != null) {
-			return column.getImageWidth();
+	public int getBooleanImageWidth(DRIBooleanField booleanField) {
+		if (booleanField.getImageWidth() != null) {
+			return booleanField.getImageWidth();
 		}
-		if (template.getBooleanColumnImageWidth() != null) {
-			return template.getBooleanColumnImageWidth();
+		if (template.getBooleanImageWidth() != null) {
+			return template.getBooleanImageWidth();
 		}
-		return Defaults.getDefaults().getBooleanColumnImageWidth();
+		return Defaults.getDefaults().getBooleanImageWidth();
 	}
 
-	public Integer getBooleanColumnImageHeight(DRIBooleanColumn column) {
-		if (column.getImageHeight() != null) {
-			return column.getImageHeight();
+	public int getBooleanImageHeight(DRIBooleanField booleanField) {
+		if (booleanField.getImageHeight() != null) {
+			return booleanField.getImageHeight();
 		}
-		if (template.getBooleanColumnImageHeight() != null) {
-			return template.getBooleanColumnImageHeight();
+		if (template.getBooleanImageHeight() != null) {
+			return template.getBooleanImageHeight();
 		}
-		return Defaults.getDefaults().getBooleanColumnImageHeight();
+		return Defaults.getDefaults().getBooleanImageHeight();
+	}
+
+	protected HorizontalAlignment getBooleanHorizontalAlignment(DRIBooleanField booleanField, DRDesignStyle style) {
+		if (booleanField.getHorizontalAlignment() != null) {
+			return booleanField.getHorizontalAlignment();
+		}
+		if (StyleResolver.getHorizontalAlignment(style) != null) {
+			return null;//StyleResolver.getHorizontalAlignment(style);
+		}
+		return Defaults.getDefaults().getBooleanType().getHorizontalAlignment();
 	}
 
 	public DRIReportStyle getBooleanColumnStyle(DRIBooleanColumn column) {
@@ -1785,13 +1795,6 @@ public class TemplateTransform {
 			return template.getBooleanColumnStyle();
 		}
 		return Defaults.getDefaults().getBooleanColumnStyle();
-	}
-
-	public Integer getBooleanImageColumnWidth(DRIBooleanColumn column) {
-		if (column.getWidth() != null) {
-			return column.getWidth();
-		}
-		return Defaults.getDefaults().getColumnWidth();
 	}
 
 	public Map<String, DRIStyle> getTemplateStyles() {

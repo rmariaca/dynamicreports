@@ -22,6 +22,9 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.awt.Dimension;
+import java.awt.geom.Dimension2D;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,6 +86,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
+import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIGroup;
@@ -119,7 +123,9 @@ import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.Renderable;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.renderers.BatikRenderer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -572,6 +578,7 @@ public class ComponentTransform {
 			DRTextField<Boolean> textField = new DRTextField<Boolean>();
 			textField.setValueExpression(booleanField.getValueExpression());
 			textField.setDataType(DataTypes.booleanType());
+			textField.setHorizontalAlignment(booleanField.getHorizontalAlignment());
 			textField.setValueFormatter(new BooleanTextValueFormatter(keyTrue, keyFalse, emptyWhenNullValue));
 			component = textField;
 			break;
@@ -583,6 +590,11 @@ public class ComponentTransform {
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
 			DRImage image = new DRImage();
+			image.setImageScale(ImageScale.NO_RESIZE);
+			if (booleanField.getImageHeight() == null) {
+				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
+				image.setHeight(height);
+			}
 			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue));
 			component = image;
 			break;
@@ -601,7 +613,12 @@ public class ComponentTransform {
 		component.setPrintWhenExpression(booleanField.getPrintWhenExpression());
 		component.setPropertyExpressions(booleanField.getPropertyExpressions());
 
-		return component(component, defaultStyleType, resetType, resetGroup);
+		DRDesignComponent designComponent = component(component, defaultStyleType, resetType, resetGroup);
+		if (designComponent instanceof DRDesignImage) {
+			TemplateTransform templateTransform = accessor.getTemplateTransform();
+			((DRDesignImage) designComponent).setHorizontalAlignment(templateTransform.getBooleanHorizontalAlignment(booleanField, designComponent.getStyle()));
+		}
+		return designComponent;
 	}
 
 	//break
@@ -904,8 +921,10 @@ public class ComponentTransform {
 				throw new DRDesignReportException("BooleanComponentType " + booleanField.getComponentType().name() + " not supported");
 			}
 			try {
-				imageTrue = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"));
-				imageFalse = BatikRenderer.getInstance(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"));
+				int width = accessor.getTemplateTransform().getBooleanImageWidth(booleanField);
+				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
+				imageTrue = new CustomBatikRenderer(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"), width, height);
+				imageFalse = new CustomBatikRenderer(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"), width, height);
 			} catch (JRException e) {
 				throw new DRException(e);
 			}
@@ -923,6 +942,23 @@ public class ComponentTransform {
 				return imageFalse;
 			}
 		}
+	}
+
+	private class CustomBatikRenderer extends BatikRenderer {
+		private static final long serialVersionUID = 1L;
+
+		private Dimension dimension;
+
+		public CustomBatikRenderer(URL svgURL, int width, int height) throws JRException {
+			super(JRLoader.loadBytes(svgURL), null);
+			this.dimension = new Dimension(width, height);
+		}
+
+		@Override
+		public Dimension2D getDimension(JasperReportsContext jasperReportsContext) {
+			return dimension;
+		}
+
 	}
 
 }
