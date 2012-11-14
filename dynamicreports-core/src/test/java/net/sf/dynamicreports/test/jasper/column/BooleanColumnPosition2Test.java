@@ -48,12 +48,10 @@ public class BooleanColumnPosition2Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 		elementPositionTest("detail.column_field11", 0, 0, 0, 277, 49);
-		elementPositionTest("detail.list2", 0, 277, 0, 278, 39);
-		elementPositionTest("detail.image1", 0, 131, 12, 15, 15);
+		elementPositionTest("detail.column_field12", 0, 277, 0, 278, 49);
 
 		elementPositionTest("detail.column_field11", 1, 0, 0, 277, 39);
-		elementPositionTest("detail.list2", 1, 277, 0, 278, 39);
-		elementPositionTest("detail.image1", 1, 131, 12, 15, 15);
+		elementPositionTest("detail.column_field12", 1, 277, 0, 278, 39);
 	}
 
 	@Override

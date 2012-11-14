@@ -53,8 +53,7 @@ public class BooleanColumnPosition3Test extends AbstractJasperPositionTest {
 
 		elementPositionTest("detail.list1", 0, 10, 26, 210, 40);
 		elementPositionTest("detail.column_field11", 0, 0, 0, 100, 40);
-		elementPositionTest("detail.list2", 0, 100, 0, 110, 40);
-		elementPositionTest("detail.image1", 0, 47, 13, 15, 15);
+		elementPositionTest("detail.column_field12", 0, 100, 0, 110, 40);
 	}
 
 	@Override

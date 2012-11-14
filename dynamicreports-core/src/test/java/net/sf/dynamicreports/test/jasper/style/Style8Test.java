@@ -27,10 +27,14 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.BooleanColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
+import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -46,8 +50,8 @@ public class Style8Test extends AbstractJasperStyleTest {
 		rb.setColumnStyle(stl.style(stl.pen1Point()).bold())
 		  .columns(
 		  	column1 = col.booleanColumn("field1"),
-		  	column2 = col.booleanColumn("field2").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
-		  	column3 = col.booleanColumn("field3").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setStyle(stl.style(stl.pen2Point())),
+		  	column2 = col.booleanColumn("field2").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setHorizontalAlignment(HorizontalAlignment.LEFT),
+		  	column3 = col.booleanColumn("field3").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setStyle(stl.style(stl.pen2Point()).setVerticalAlignment(VerticalAlignment.MIDDLE)),
 		  	column4 = col.column("field4", type.stringType()));
 	}
 
@@ -63,6 +67,14 @@ public class Style8Test extends AbstractJasperStyleTest {
 		columnDetailBorderTest(column3, 0, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2);
 		columnDetailStyleTest(column4, 0, null, null, "Arial", 10, true, null);
 		columnDetailBorderTest(column4, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
+
+		columnDetailAlignmentTest(column1, 0, HorizontalAlignEnum.CENTER);
+		columnDetailAlignmentTest(column2, 0, HorizontalAlignEnum.LEFT);
+		columnDetailAlignmentTest(column3, 0, HorizontalAlignEnum.CENTER);
+
+		columnDetailAlignmentTest(column1, 0, VerticalAlignEnum.TOP);
+		columnDetailAlignmentTest(column2, 0, VerticalAlignEnum.TOP);
+		columnDetailAlignmentTest(column3, 0, VerticalAlignEnum.MIDDLE);
 	}
 
 	@Override

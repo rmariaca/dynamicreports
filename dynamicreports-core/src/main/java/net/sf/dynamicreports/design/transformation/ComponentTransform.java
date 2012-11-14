@@ -336,15 +336,20 @@ public class ComponentTransform {
 
 	//image
 	private DRDesignImage image(DRIImage image) throws DRException {
+		return image(image, null, DefaultStyleType.IMAGE);
+	}
+
+	private DRDesignImage image(DRIImage image, Integer imageHeight, DefaultStyleType defaultStyleType) throws DRException {
 		DRDesignImage designImage = new DRDesignImage();
-		hyperlink(designImage, image, image.getStyle(), false, DefaultStyleType.IMAGE);
+		hyperlink(designImage, image, image.getStyle(), false, defaultStyleType);
 		designImage.setImageScale(image.getImageScale());
 		designImage.setImageExpression(accessor.getExpressionTransform().transformExpression(image.getImageExpression()));
 		designImage.setUsingCache(image.getUsingCache());
 		designImage.setLazy(image.getLazy());
 		designImage.setHorizontalAlignment(image.getHorizontalAlignment());
 		designImage.setWidth(accessor.getTemplateTransform().getImageWidth(image));
-		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image));
+		DRDesignStyle style = designImage.getStyle();
+		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image, imageHeight, style));
 		return designImage;
 	}
 
@@ -591,10 +596,6 @@ public class ComponentTransform {
 		case IMAGE_BALL:
 			DRImage image = new DRImage();
 			image.setImageScale(ImageScale.NO_RESIZE);
-			if (booleanField.getImageHeight() == null) {
-				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
-				image.setHeight(height);
-			}
 			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue));
 			component = image;
 			break;
@@ -613,10 +614,15 @@ public class ComponentTransform {
 		component.setPrintWhenExpression(booleanField.getPrintWhenExpression());
 		component.setPropertyExpressions(booleanField.getPropertyExpressions());
 
-		DRDesignComponent designComponent = component(component, defaultStyleType, resetType, resetGroup);
-		if (designComponent instanceof DRDesignImage) {
+		DRDesignComponent designComponent;
+		if (component instanceof DRIImage) {
+			int imageHeight = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
+			designComponent = image((DRIImage) component, imageHeight, defaultStyleType);
 			TemplateTransform templateTransform = accessor.getTemplateTransform();
 			((DRDesignImage) designComponent).setHorizontalAlignment(templateTransform.getBooleanHorizontalAlignment(booleanField, designComponent.getStyle()));
+		}
+		else {
+			designComponent = component(component, defaultStyleType, resetType, resetGroup);
 		}
 		return designComponent;
 	}

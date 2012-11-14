@@ -1079,9 +1079,12 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getImageWidth();
 	}
 
-	protected int getImageHeight(DRIImage image) {
+	protected int getImageHeight(DRIImage image, Integer imageHeight, DRDesignStyle style) {
 		if (image.getHeight() != null) {
 			return image.getHeight();
+		}
+		if (imageHeight != null) {
+			return imageHeight + StyleResolver.getVerticalPadding(style);
 		}
 		if (template.getImageHeight() != null) {
 			return template.getImageHeight();

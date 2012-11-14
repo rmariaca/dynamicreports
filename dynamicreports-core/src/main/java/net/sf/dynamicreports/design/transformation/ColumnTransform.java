@@ -32,14 +32,12 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
-import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.base.component.DRBooleanField;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRPadding;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.definition.column.DRIBooleanColumn;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
@@ -133,7 +131,6 @@ public class ColumnTransform {
 		booleanField.setComponentType(column.getComponentType());
 		booleanField.setEmptyWhenNullValue(column.getEmptyWhenNullValue());
 		booleanField.setValueExpression(column.getValueExpression());
-		BooleanComponentType componentType = accessor.getTemplateTransform().getBooleanComponentType(booleanField);
 		booleanField.setWidth(column.getWidth());
 		booleanField.setWidthType(column.getWidthType());
 		booleanField.setHeight(column.getHeight());
@@ -141,29 +138,8 @@ public class ColumnTransform {
 		booleanField.setImageWidth(column.getImageWidth());
 		booleanField.setImageHeight(column.getImageHeight());
 		booleanField.setHorizontalAlignment(column.getHorizontalAlignment());
-		switch (componentType) {
-		case TEXT_TRUE_FALSE:
-		case TEXT_YES_NO:
-			break;
-		case IMAGE_STYLE_1:
-		case IMAGE_STYLE_2:
-		case IMAGE_STYLE_3:
-		case IMAGE_STYLE_4:
-		case IMAGE_CHECKBOX_1:
-		case IMAGE_CHECKBOX_2:
-		case IMAGE_BALL:
-			if (booleanField.getHeight() == null) {
-				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
-				booleanField.setHeight(height);
-			}
-			break;
-		default:
-			throw new DRDesignReportException("Boolean component type " + componentType.name() + " not supported");
-		}
-
 		booleanField.setStyle(accessor.getTemplateTransform().getBooleanColumnStyle(column));
 		booleanField.setPrintWhenExpression(column.getPrintWhenExpression());
-
 		return booleanField;
 	}
 

@@ -33,6 +33,7 @@ import net.sf.jasperreports.engine.JRStyle;
 import net.sf.jasperreports.engine.base.JRBoxPen;
 import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
+import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -94,6 +95,14 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		Assert.assertEquals("horizontalAlignment", horizontalAlignment, element.getHorizontalAlignmentValue());
 	}
 
+	protected void verticalAlignmentTest(String name, int index, VerticalAlignEnum verticalAlignment) {
+		JRAlignment element = (JRAlignment) getElementAt(name, index);
+		if (verticalAlignment == null) {
+			Assert.assertEquals("verticalAlignment", VerticalAlignEnum.TOP, element.getVerticalAlignmentValue());
+		}
+		Assert.assertEquals("verticalAlignment", verticalAlignment, element.getVerticalAlignmentValue());
+	}
+
 	//column detail
 	protected void columnDetailStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnDetailName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
@@ -105,6 +114,10 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 
 	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, horizontalAlignment);
+	}
+
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, VerticalAlignEnum verticalAlignment) {
+		verticalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, verticalAlignment);
 	}
 
 	protected void columnDetailBorderTest(ColumnBuilder<?, ?> column, int index, Color topColor, LineStyleEnum topLineStyle, float top, Color bottomColor, LineStyleEnum bottomLineStyle, float bottom, Color leftColor, LineStyleEnum leftLineStyle, float left, Color rightColor, LineStyleEnum rightLineStyle, float right) {

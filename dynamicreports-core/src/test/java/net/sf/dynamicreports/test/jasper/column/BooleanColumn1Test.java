@@ -77,37 +77,37 @@ public class BooleanColumn1Test extends AbstractJasperValueTest implements Seria
 		elementCountTest("detail.column_field13", 3);
 		elementValueTest("detail.column_field13", "True", "False", "");
 
-		testImage("detail.image1", 0);
-		testImage("detail.image1", 1);
-		testImage("detail.image1", 2);
+		testImage("detail.column_field14", 0);
+		testImage("detail.column_field14", 1);
+		testImage("detail.column_field14", 2);
 
-		testImage("detail.image2", 0);
-		testImage("detail.image2", 1);
-		testImage("detail.image2", 2);
+		testImage("detail.column_field15", 0);
+		testImage("detail.column_field15", 1);
+		testImage("detail.column_field15", 2);
 
-		testImage("detail.image3", 0);
-		testImage("detail.image3", 1);
-		testImage("detail.image3", 2);
+		testImage("detail.column_field16", 0);
+		testImage("detail.column_field16", 1);
+		testImage("detail.column_field16", 2);
 
-		testImage("detail.image4", 0);
-		testImage("detail.image4", 1);
-		testImage("detail.image4", 2);
+		testImage("detail.column_field17", 0);
+		testImage("detail.column_field17", 1);
+		testImage("detail.column_field17", 2);
 
-		testImage("detail.image5", 0);
-		testImage("detail.image5", 1);
-		testImage("detail.image5", 2);
+		testImage("detail.column_field18", 0);
+		testImage("detail.column_field18", 1);
+		testImage("detail.column_field18", 2);
 
-		testImage("detail.image6", 0);
-		testImage("detail.image6", 1);
-		testImage("detail.image6", 2);
+		testImage("detail.column_field19", 0);
+		testImage("detail.column_field19", 1);
+		testImage("detail.column_field19", 2);
 
-		testImage("detail.image7", 0);
-		testImage("detail.image7", 1);
-		testImage("detail.image7", 2);
+		testImage("detail.column_field110", 0);
+		testImage("detail.column_field110", 1);
+		testImage("detail.column_field110", 2);
 
-		testImage("detail.image8", 0);
-		testImage("detail.image8", 1);
-		Assert.assertNull((((JRPrintImage) getElementAt("detail.image8", 2)).getRenderable()));
+		testImage("detail.column_field111", 0);
+		testImage("detail.column_field111", 1);
+		Assert.assertNull((((JRPrintImage) getElementAt("detail.column_field111", 2)).getRenderable()));
 
 	}
 

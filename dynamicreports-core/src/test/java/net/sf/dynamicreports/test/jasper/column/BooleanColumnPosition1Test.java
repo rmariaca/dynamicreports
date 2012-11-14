@@ -38,7 +38,7 @@ public class BooleanColumnPosition1Test extends AbstractJasperPositionTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
 				col.booleanColumn("field1").setComponentType(BooleanComponentType.TEXT_TRUE_FALSE),
-				col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1),
+				col.booleanColumn("field1").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setStyle(stl.style().setPadding(0)),
 				col.column("field2", String.class).setFixedWidth(20));
 	}
 
@@ -48,12 +48,10 @@ public class BooleanColumnPosition1Test extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 		elementPositionTest("detail.column_field11", 0, 0, 0, 277, 38);
-		elementPositionTest("detail.list2", 0, 277, 0, 278, 16);
-		elementPositionTest("detail.image1", 0, 131, 1, 15, 15);
+		elementPositionTest("detail.column_field12", 0, 277, 0, 278, 38);
 
 		elementPositionTest("detail.column_field11", 1, 0, 0, 277, 16);
-		elementPositionTest("detail.list2", 1, 277, 0, 278, 16);
-		elementPositionTest("detail.image1", 1, 131, 1, 15, 15);
+		elementPositionTest("detail.column_field12", 1, 277, 0, 278, 16);
 	}
 
 	@Override
