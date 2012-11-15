@@ -1791,8 +1791,8 @@ public class TemplateTransform {
 	}
 
 	public DRIReportStyle getBooleanColumnStyle(DRIBooleanColumn column) {
-		if (column.getStyle() != null) {
-			return column.getStyle();
+		if (column.getComponent().getStyle() != null) {
+			return column.getComponent().getStyle();
 		}
 		if (template.getBooleanColumnStyle() != null) {
 			return template.getBooleanColumnStyle();

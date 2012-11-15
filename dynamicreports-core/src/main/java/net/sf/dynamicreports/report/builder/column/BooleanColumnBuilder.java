@@ -23,8 +23,8 @@
 package net.sf.dynamicreports.report.builder.column;
 
 import net.sf.dynamicreports.report.base.column.DRBooleanColumn;
+import net.sf.dynamicreports.report.base.component.DRBooleanField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -42,14 +42,14 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected BooleanColumnBuilder(FieldBuilder<Boolean> field) {
-		super(new DRBooleanColumn());
+		super(new DRBooleanColumn(new DRBooleanField()));
 		Validate.notNull(field, "field must not be null");
-		getObject().setValueExpression(field.getField());
+		getComponent().setValueExpression(field.getField());
 	}
 
 	protected BooleanColumnBuilder(DRIExpression<Boolean> valueExpression) {
-		super(new DRBooleanColumn());
-		getObject().setValueExpression(valueExpression);
+		super(new DRBooleanColumn(new DRBooleanField()));
+		getComponent().setValueExpression(valueExpression);
 	}
 
   /**
@@ -61,7 +61,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setWidth(Integer width) {
-		getObject().setWidth(width);
+		getComponent().setWidth(width);
 		return this;
 	}
 
@@ -74,8 +74,8 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setFixedWidth(Integer width) {
-		getObject().setWidth(width);
-		getObject().setWidthType(ComponentDimensionType.FIXED);
+		getComponent().setWidth(width);
+		getComponent().setWidthType(ComponentDimensionType.FIXED);
 		return this;
 	}
 
@@ -88,8 +88,8 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setMinWidth(Integer width) {
-		getObject().setWidth(width);
-		getObject().setWidthType(ComponentDimensionType.EXPAND);
+		getComponent().setWidth(width);
+		getComponent().setWidthType(ComponentDimensionType.EXPAND);
 		return this;
 	}
 
@@ -102,7 +102,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setHeight(Integer height) {
-		getObject().setHeight(height);
+		getComponent().setHeight(height);
 		return this;
 	}
 
@@ -115,8 +115,8 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setFixedHeight(Integer height) {
-		getObject().setHeight(height);
-		getObject().setHeightType(ComponentDimensionType.FIXED);
+		getComponent().setHeight(height);
+		getComponent().setHeightType(ComponentDimensionType.FIXED);
 		return this;
 	}
 
@@ -129,8 +129,8 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
    * @return a column builder
    */
 	public BooleanColumnBuilder setMinHeight(Integer height) {
-		getObject().setHeight(height);
-		getObject().setHeightType(ComponentDimensionType.EXPAND);
+		getComponent().setHeight(height);
+		getComponent().setHeightType(ComponentDimensionType.EXPAND);
 		return this;
 	}
 
@@ -143,12 +143,12 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 * @return a column builder
 	 */
 	public BooleanColumnBuilder setComponentType(BooleanComponentType booleanComponentType) {
-		getObject().setComponentType(booleanComponentType);
+		getComponent().setComponentType(booleanComponentType);
 		return this;
 	}
 
 	public BooleanColumnBuilder setEmptyWhenNullValue(Boolean emptyWhenNullValue) {
-		getObject().setEmptyWhenNullValue(emptyWhenNullValue);
+		getComponent().setEmptyWhenNullValue(emptyWhenNullValue);
 		return this;
 	}
 
@@ -160,8 +160,8 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 * @return a column builder
 	 */
 	public BooleanColumnBuilder setImageDimension(Integer width, Integer height) {
-		getObject().setImageWidth(width);
-		getObject().setImageHeight(height);
+		getComponent().setImageWidth(width);
+		getComponent().setImageHeight(height);
 		return this;
 	}
 
@@ -172,7 +172,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 * @return a column builder
 	 */
 	public BooleanColumnBuilder setImageWidth(Integer width) {
-		getObject().setImageWidth(width);
+		getComponent().setImageWidth(width);
 		return this;
 	}
 
@@ -183,7 +183,7 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 * @return a column builder
 	 */
 	public BooleanColumnBuilder setImageHeight(Integer height) {
-		getObject().setImageHeight(height);
+		getComponent().setImageHeight(height);
 		return this;
 	}
 
@@ -194,24 +194,12 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 * @return a column builder
 	 */
 	public BooleanColumnBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		getComponent().setHorizontalAlignment(horizontalAlignment);
 		return this;
 	}
 
 	@Override
-	public BooleanColumnBuilder setStyle(ReportStyleBuilder style) {
-		if (style != null) {
-			getObject().setStyle(style.getStyle());
-		}
-		else {
-			getObject().setStyle(null);
-		}
-		return this;
-	}
-
-	@Override
-	public BooleanColumnBuilder setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
-		getObject().setPrintWhenExpression(printWhenExpression);
-		return this;
+	protected DRBooleanField getComponent() {
+		return (DRBooleanField) getObject().getComponent();
 	}
 }

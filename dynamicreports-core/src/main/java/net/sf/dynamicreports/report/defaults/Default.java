@@ -405,8 +405,8 @@ public class Default {
 
 		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
 		this.booleanEmptyWhenNullValue = false;
-		this.booleanImageWidth = 15;
-		this.booleanImageHeight = 15;
+		this.booleanImageWidth = 14;
+		this.booleanImageHeight = 14;
 		this.booleanColumnStyle = null;
 
 		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;

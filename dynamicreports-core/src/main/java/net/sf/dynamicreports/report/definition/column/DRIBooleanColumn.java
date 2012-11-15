@@ -22,40 +22,13 @@
 
 package net.sf.dynamicreports.report.definition.column;
 
-import net.sf.dynamicreports.report.constant.BooleanComponentType;
-import net.sf.dynamicreports.report.constant.ComponentDimensionType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.DRIValue;
-import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIComponent>, DRIValue<Boolean> {
+public interface DRIBooleanColumn extends DRIExpression<Boolean>, DRIColumn<DRIBooleanField>, DRIValue<Boolean> {
 
-	public Integer getWidth();
-
-	public Integer getHeight();
-
-	public ComponentDimensionType getWidthType();
-
-	public ComponentDimensionType getHeightType();
-
-	public DRIExpression<Boolean> getValueExpression();
-
-	public BooleanComponentType getComponentType();
-
-	public Boolean getEmptyWhenNullValue();
-
-	public Integer getImageWidth();
-
-	public Integer getImageHeight();
-
-	public HorizontalAlignment getHorizontalAlignment();
-
-	public DRIReportStyle getStyle();
-
-	public DRIExpression<Boolean> getPrintWhenExpression();
 }

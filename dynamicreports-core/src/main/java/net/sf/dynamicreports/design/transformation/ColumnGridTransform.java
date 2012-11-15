@@ -137,10 +137,10 @@ public class ColumnGridTransform {
 				DRIColumn<?> column = (DRIColumn<?>) component;
 				if (column instanceof DRIBooleanColumn) {
 					if (horizontalAlignment == null) {
-						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIBooleanColumn) column).getWidthType());
+						horizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(((DRIBooleanColumn) column).getComponent().getWidthType());
 					}
 					if (verticalAlignment == null) {
-						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIBooleanColumn) column).getHeightType());
+						verticalAlignment = ConstantTransform.toVerticalCellComponentAlignment(((DRIBooleanColumn) column).getComponent().getHeightType());
 					}
 				}
 				else {

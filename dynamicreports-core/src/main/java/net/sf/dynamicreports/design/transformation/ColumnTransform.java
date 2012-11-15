@@ -118,29 +118,13 @@ public class ColumnTransform {
 			if (!accessor.getGroupTransform().getHideGroupColumns().contains(column)) {
 				DRIComponent component = column.getComponent();
 				if (column instanceof DRIBooleanColumn) {
-					component = createBooleanComponent((DRIBooleanColumn) column);
+					component = column.getComponent();
+					((DRBooleanField) component).setStyle(accessor.getTemplateTransform().getBooleanColumnStyle((DRIBooleanColumn) column));
 				}
 				columnComponents.put(column, component);
 			}
 		}
 		return columnComponents;
-	}
-
-	private DRIComponent createBooleanComponent(DRIBooleanColumn column) throws DRException {
-		DRBooleanField booleanField = new DRBooleanField();
-		booleanField.setComponentType(column.getComponentType());
-		booleanField.setEmptyWhenNullValue(column.getEmptyWhenNullValue());
-		booleanField.setValueExpression(column.getValueExpression());
-		booleanField.setWidth(column.getWidth());
-		booleanField.setWidthType(column.getWidthType());
-		booleanField.setHeight(column.getHeight());
-		booleanField.setHeightType(column.getHeightType());
-		booleanField.setImageWidth(column.getImageWidth());
-		booleanField.setImageHeight(column.getImageHeight());
-		booleanField.setHorizontalAlignment(column.getHorizontalAlignment());
-		booleanField.setStyle(accessor.getTemplateTransform().getBooleanColumnStyle(column));
-		booleanField.setPrintWhenExpression(column.getPrintWhenExpression());
-		return booleanField;
 	}
 
 	//title

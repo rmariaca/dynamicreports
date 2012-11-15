@@ -53,9 +53,9 @@ public class BooleanColumnPosition5Test extends AbstractJasperPositionTest {
 		elementPositionTest("columnHeader.column_field1.title1", 0, 0, 0, 287, 16);
 		elementPositionTest("columnHeader.column_field1.title2", 0, 287, 0, 288, 16);
 
-		elementPositionTest("detail.list1", 0, 10, 26, 575, 19);
-		elementPositionTest("detail.column_field11", 0, 0, 0, 287, 19);
-		elementPositionTest("detail.column_field12", 0, 287, 0, 288, 19);
+		elementPositionTest("detail.list1", 0, 10, 26, 575, 18);
+		elementPositionTest("detail.column_field11", 0, 0, 0, 287, 18);
+		elementPositionTest("detail.column_field12", 0, 287, 0, 288, 18);
 	}
 
 	@Override

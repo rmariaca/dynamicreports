@@ -157,7 +157,7 @@ public abstract class AbstractExpressionTransform {
 			express = transformExpression(((DRIValueColumn<?>) expression).getComponent().getValueExpression());
 		}
 		else if (expression instanceof DRIBooleanColumn) {
-			express = transformExpression(((DRIBooleanColumn) expression).getValueExpression());
+			express = transformExpression(((DRIBooleanColumn) expression).getComponent().getValueExpression());
 		}
 		else if (expression instanceof DRISubtotal<?>) {
 			express = transformExpression(((DRISubtotal<?>) expression).getValueField().getValueExpression());
