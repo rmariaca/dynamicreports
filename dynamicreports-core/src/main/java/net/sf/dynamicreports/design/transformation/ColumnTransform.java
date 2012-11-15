@@ -118,13 +118,33 @@ public class ColumnTransform {
 			if (!accessor.getGroupTransform().getHideGroupColumns().contains(column)) {
 				DRIComponent component = column.getComponent();
 				if (column instanceof DRIBooleanColumn) {
-					component = column.getComponent();
-					((DRBooleanField) component).setStyle(accessor.getTemplateTransform().getBooleanColumnStyle((DRIBooleanColumn) column));
+					component = createBooleanComponent((DRIBooleanColumn) column);
 				}
 				columnComponents.put(column, component);
 			}
 		}
 		return columnComponents;
+	}
+
+	private DRIComponent createBooleanComponent(DRIBooleanColumn column) throws DRException {
+		DRIReportStyle booleanColumnStyle = accessor.getTemplateTransform().getBooleanColumnStyle(column);
+		if (booleanColumnStyle == null) {
+			return column.getComponent();
+		}
+		DRBooleanField booleanField = new DRBooleanField();
+		booleanField.setComponentType(column.getComponent().getComponentType());
+		booleanField.setEmptyWhenNullValue(column.getComponent().getEmptyWhenNullValue());
+		booleanField.setValueExpression(column.getComponent().getValueExpression());
+		booleanField.setWidth(column.getComponent().getWidth());
+		booleanField.setWidthType(column.getComponent().getWidthType());
+		booleanField.setHeight(column.getComponent().getHeight());
+		booleanField.setHeightType(column.getComponent().getHeightType());
+		booleanField.setImageWidth(column.getComponent().getImageWidth());
+		booleanField.setImageHeight(column.getComponent().getImageHeight());
+		booleanField.setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
+		booleanField.setStyle(booleanColumnStyle);
+		booleanField.setPrintWhenExpression(column.getComponent().getPrintWhenExpression());
+		return booleanField;
 	}
 
 	//title
