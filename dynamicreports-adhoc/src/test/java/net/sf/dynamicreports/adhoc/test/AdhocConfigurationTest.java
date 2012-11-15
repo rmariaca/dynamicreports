@@ -52,6 +52,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocRestriction;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotal;
+import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotalPosition;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTextField;
 import net.sf.dynamicreports.adhoc.configuration.AdhocValueOperator;
 import net.sf.dynamicreports.adhoc.configuration.AdhocValueRestriction;
@@ -78,6 +79,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSerie;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -200,6 +202,12 @@ public class AdhocConfigurationTest {
 
 		adhocSubtotal = new AdhocSubtotal();
 		adhocSubtotal.setName("field1");
+		adhocReport.addSubtotal(adhocSubtotal);
+
+		adhocSubtotal = new AdhocSubtotal();
+		adhocSubtotal.setName("field2");
+		adhocSubtotal.setPosition(AdhocSubtotalPosition.GROUP_FOOTER);
+		adhocSubtotal.setGroupName("field4");
 		adhocReport.addSubtotal(adhocSubtotal);
 
 		AdhocTextField adhocTextField = new AdhocTextField();
@@ -389,12 +397,18 @@ public class AdhocConfigurationTest {
 		Assert.assertNotNull("sort name", sort.getExpression());
 		Assert.assertEquals("sort order", OrderType.DESCENDING, sort.getOrderType());
 
-		Assert.assertEquals("subtotals", 2, report.getSubtotals().size());
+		Assert.assertEquals("subtotals", 3, report.getSubtotals().size());
 		DRSubtotal<?> subtotal = report.getSubtotals().get(0);
+		Assert.assertNull("subtotal label", subtotal.getLabelExpression());
+		Assert.assertNull("subtotal style", subtotal.getValueField().getStyle());
+		Assert.assertNull("subtotal label style", subtotal.getLabelStyle());
+		Assert.assertEquals("subtotal position", SubtotalPosition.GROUP_FOOTER, subtotal.getPosition());
+		Assert.assertEquals("subtotal group", report.getGroups().get(1), subtotal.getGroup());
+		subtotal = report.getSubtotals().get(1);
 		Assert.assertNotNull("subtotal label", subtotal.getLabelExpression());
 		Assert.assertNotNull("subtotal style", subtotal.getValueField().getStyle());
 		Assert.assertNotNull("subtotal label style", subtotal.getLabelStyle());
-		subtotal = report.getSubtotals().get(1);
+		subtotal = report.getSubtotals().get(2);
 		Assert.assertNull("subtotal label", subtotal.getLabelExpression());
 		Assert.assertNull("subtotal style", subtotal.getValueField().getStyle());
 		Assert.assertNull("subtotal label style", subtotal.getLabelStyle());
