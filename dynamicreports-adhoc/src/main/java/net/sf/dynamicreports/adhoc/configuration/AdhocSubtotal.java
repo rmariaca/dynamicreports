@@ -35,6 +35,8 @@ public class AdhocSubtotal implements Cloneable, Serializable {
 	private AdhocCalculation calculation;
 	private AdhocStyle style;
 	private AdhocStyle labelStyle;
+	private AdhocSubtotalPosition position;
+	private String groupName;
 
 	public String getName() {
 		return name;
@@ -76,15 +78,33 @@ public class AdhocSubtotal implements Cloneable, Serializable {
 		this.labelStyle = labelStyle;
 	}
 
+	public AdhocSubtotalPosition getPosition() {
+		return position;
+	}
+
+	public void setPosition(AdhocSubtotalPosition position) {
+		this.position = position;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null)
+		if (obj == null) {
 			return false;
-		if (!(obj instanceof AdhocSubtotal))
+		}
+		if (!(obj instanceof AdhocSubtotal)) {
 			return false;
+		}
 
 		AdhocSubtotal object = (AdhocSubtotal) obj;
 		if (!(name == null ? object.getName() == null : name.equals(object.getName()))) {
@@ -100,6 +120,12 @@ public class AdhocSubtotal implements Cloneable, Serializable {
 			return false;
 		}
 		if (!(labelStyle == null ? object.getLabelStyle() == null : labelStyle.equals(object.getLabelStyle()))) {
+			return false;
+		}
+		if (!(position == null ? object.getPosition() == null : position.equals(object.getPosition()))) {
+			return false;
+		}
+		if (!(groupName == null ? object.getGroupName() == null : groupName.equals(object.getGroupName()))) {
 			return false;
 		}
 

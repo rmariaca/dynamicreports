@@ -49,6 +49,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocRestriction;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotal;
+import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotalPosition;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTextField;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.configuration.AdhocValueOperator;
@@ -79,6 +80,7 @@ import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocRestriction;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocSort;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocStyle;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocSubtotal;
+import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocSubtotalPosition;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocTextField;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueOperator;
 import net.sf.dynamicreports.adhoc.xmlconfiguration.XmlAdhocValueRestriction;
@@ -224,6 +226,8 @@ public class XmlToAdhocTransform {
 		adhocSubtotal.setCalculation(calculation(xmlAdhocSubtotal.getCalculation()));
 		adhocSubtotal.setStyle(style(xmlAdhocSubtotal.getStyle()));
 		adhocSubtotal.setLabelStyle(style(xmlAdhocSubtotal.getLabelStyle()));
+		adhocSubtotal.setPosition(subtotalPosition(xmlAdhocSubtotal.getPosition()));
+		adhocSubtotal.setGroupName(xmlAdhocSubtotal.getGroupName());
 		return adhocSubtotal;
 	}
 
@@ -255,6 +259,43 @@ public class XmlToAdhocTransform {
 			return AdhocCalculation.DISTINCT_COUNT;
 		default:
 			throw new AdhocException("Calculation " + xmlAdhocCalculation.name() + " not supported");
+		}
+	}
+
+	protected AdhocSubtotalPosition subtotalPosition(XmlAdhocSubtotalPosition xmlAdhocSubtotalPosition) {
+		if (xmlAdhocSubtotalPosition == null) {
+			return null;
+		}
+
+		switch (xmlAdhocSubtotalPosition) {
+		case TITLE:
+			return AdhocSubtotalPosition.TITLE;
+		case PAGE_HEADER:
+			return AdhocSubtotalPosition.PAGE_HEADER;
+		case PAGE_FOOTER:
+			return AdhocSubtotalPosition.PAGE_FOOTER;
+		case COLUMN_HEADER:
+			return AdhocSubtotalPosition.COLUMN_HEADER;
+		case COLUMN_FOOTER:
+			return AdhocSubtotalPosition.COLUMN_FOOTER;
+		case GROUP_HEADER:
+			return AdhocSubtotalPosition.GROUP_HEADER;
+		case GROUP_FOOTER:
+			return AdhocSubtotalPosition.GROUP_FOOTER;
+		case FIRST_GROUP_HEADER:
+			return AdhocSubtotalPosition.FIRST_GROUP_HEADER;
+		case FIRST_GROUP_FOOTER:
+			return AdhocSubtotalPosition.FIRST_GROUP_FOOTER;
+		case LAST_GROUP_HEADER:
+			return AdhocSubtotalPosition.LAST_GROUP_HEADER;
+		case LAST_GROUP_FOOTER:
+			return AdhocSubtotalPosition.LAST_GROUP_FOOTER;
+		case LAST_PAGE_FOOTER:
+			return AdhocSubtotalPosition.LAST_PAGE_FOOTER;
+		case SUMMARY:
+			return AdhocSubtotalPosition.SUMMARY;
+		default:
+			throw new AdhocException("SubtotalPosition " + xmlAdhocSubtotalPosition.name() + " not supported");
 		}
 	}
 

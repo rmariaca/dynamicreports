@@ -49,6 +49,7 @@ import net.sf.dynamicreports.adhoc.configuration.AdhocReport;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSort;
 import net.sf.dynamicreports.adhoc.configuration.AdhocStyle;
 import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotal;
+import net.sf.dynamicreports.adhoc.configuration.AdhocSubtotalPosition;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTextField;
 import net.sf.dynamicreports.adhoc.configuration.AdhocTimePeriod;
 import net.sf.dynamicreports.adhoc.configuration.AdhocVerticalAlignment;
@@ -122,6 +123,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -246,12 +248,24 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 	}
 
 	protected void addSubtotals() {
+		for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
+			if (adhocSubtotal.getPosition() == null) {
+				continue;
+			}
+			SubtotalBuilder<?, ?> subtotal = subtotal(adhocSubtotal);
+			if (subtotal != null) {
+				addSubtotal(subtotal, adhocSubtotal.getPosition(), adhocSubtotal.getGroupName());
+			}
+		}
 		report.subtotalsAtSummary(subtotals());
 	}
 
 	protected SubtotalBuilder<?, ?>[] subtotals() {
 		List<SubtotalBuilder<?, ?>> subtotals = new ArrayList<SubtotalBuilder<?, ?>>();
 		for (AdhocSubtotal adhocSubtotal : adhocReport.getSubtotals()) {
+			if (adhocSubtotal.getPosition() != null) {
+				continue;
+			}
 			SubtotalBuilder<?, ?> subtotal = subtotal(adhocSubtotal);
 			if (subtotal != null) {
 				subtotals.add(subtotal);
@@ -308,6 +322,54 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 			return Calculation.DISTINCT_COUNT;
 		default:
 			throw new AdhocException("Calculation " + adhocCalculation.name() + " not supported");
+		}
+	}
+
+	protected void addSubtotal(SubtotalBuilder<?, ?> subtotal, AdhocSubtotalPosition adhocSubtotalPosition, String groupName) {
+		Validate.notNull(adhocSubtotalPosition, "subtotalPosition must not be null");
+
+		switch (adhocSubtotalPosition) {
+		case TITLE:
+			report.addSubtotalAtTitle(subtotal);
+			break;
+		case PAGE_HEADER:
+			report.addSubtotalAtPageHeader(subtotal);
+			break;
+		case PAGE_FOOTER:
+			report.addSubtotalAtPageFooter(subtotal);
+			break;
+		case COLUMN_HEADER:
+			report.addSubtotalAtColumnHeader(subtotal);
+			break;
+		case COLUMN_FOOTER:
+			report.addSubtotalAtColumnFooter(subtotal);
+			break;
+		case GROUP_HEADER:
+			report.addSubtotalAtGroupHeader(groups.get(groupName), subtotal);
+			break;
+		case GROUP_FOOTER:
+			report.addSubtotalAtGroupFooter(groups.get(groupName), subtotal);
+			break;
+		case FIRST_GROUP_HEADER:
+			report.addSubtotalAtFirstGroupHeader(subtotal);
+			break;
+		case FIRST_GROUP_FOOTER:
+			report.addSubtotalAtFirstGroupFooter(subtotal);
+			break;
+		case LAST_GROUP_HEADER:
+			report.addSubtotalAtLastGroupHeader(subtotal);
+			break;
+		case LAST_GROUP_FOOTER:
+			report.addSubtotalAtLastGroupFooter(subtotal);
+			break;
+		case LAST_PAGE_FOOTER:
+			report.addSubtotalAtPageFooter(subtotal);
+			break;
+		case SUMMARY:
+			report.addSubtotalAtSummary(subtotal);
+			break;
+		default:
+			throw new AdhocException("SubtotalPosition " + adhocSubtotalPosition.name() + " not supported");
 		}
 	}
 
