@@ -30,7 +30,6 @@ import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -39,6 +38,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
+import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -69,8 +69,12 @@ public class TableOfContentsTransform {
 				labelExpression = Expressions.text("");
 			}
 			String expressionName = labelExpression.getName();
-			referenceField.setValueExpression(new TocReferenceExpression(level, expressionName, labelExpression));
-			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName));
+			DRIExpression<String> anchorNameExpression = null;
+			if (component instanceof DRIHyperLinkComponent) {
+				anchorNameExpression = ((DRIHyperLinkComponent) component).getAnchorNameExpression();
+			}
+			referenceField.setValueExpression(new TocReferenceExpression(level, expressionName, labelExpression, anchorNameExpression));
+			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName, anchorNameExpression));
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(1);
 			designReferenceField.setHeight(1);
@@ -101,8 +105,9 @@ public class TableOfContentsTransform {
 		boolean isAddGroupToTableOfContents = accessor.getTemplateTransform().isAddGroupToTableOfContents(group);
 		if (tableOfContents && isAddGroupToTableOfContents) {
 			DRTextField<String> referenceField = new DRTextField<String>();
-			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), group.getValueField().getValueExpression()));
-			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName()));
+			DRITextField<?> valueField = group.getValueField();
+			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), valueField.getValueExpression(), valueField.getAnchorNameExpression()));
+			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName(), valueField.getAnchorNameExpression()));
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(0);
 			designReferenceField.setHeight(0);
@@ -121,16 +126,27 @@ public class TableOfContentsTransform {
 
 		private int level;
 		private String expressionName;
+		private boolean customId;
 
-		private TocReferenceExpression(int level, String expressionName, DRIExpression<?> labelExpression) {
+		private TocReferenceExpression(int level, String expressionName, DRIExpression<?> labelExpression, DRIExpression<String> anchorNameExpression) {
 			this.level = level;
 			this.expressionName = expressionName;
+			customId = anchorNameExpression != null;
 			addExpression(labelExpression);
+			if (anchorNameExpression != null) {
+				addExpression(anchorNameExpression);
+			}
 		}
 
 		@Override
 		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String id = expressionName + "_" + reportParameters.getReportRowNumber();
+			String id;
+			if (customId) {
+				id = (String) values.get(1);
+			}
+			else {
+				id = expressionName + "_" + reportParameters.getReportRowNumber();
+			}
 			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
 			String text = String.valueOf(values.get(0));
 			customValues.addTocHeading(level, id, text);
@@ -138,18 +154,29 @@ public class TableOfContentsTransform {
 		}
 	}
 
-	private class TocReferenceLinkExpression extends AbstractSimpleExpression<String> {
+	private class TocReferenceLinkExpression extends AbstractComplexExpression<String> {
 		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		private String expressionName;
+		private boolean customId;
 
-		private TocReferenceLinkExpression(String expressionName) {
+		private TocReferenceLinkExpression(String expressionName, DRIExpression<String> anchorNameExpression) {
 			this.expressionName = expressionName;
+			customId = anchorNameExpression != null;
+			if (anchorNameExpression != null) {
+				addExpression(anchorNameExpression);
+			}
 		}
 
 		@Override
-		public String evaluate(ReportParameters reportParameters) {
-			String id = expressionName + "_" + reportParameters.getReportRowNumber();
+		public String evaluate(List<?> values, ReportParameters reportParameters) {
+			String id;
+			if (customId) {
+				id = (String) values.get(0);
+			}
+			else {
+				id = expressionName + "_" + reportParameters.getReportRowNumber();
+			}
 			return id;
 		}
 	}

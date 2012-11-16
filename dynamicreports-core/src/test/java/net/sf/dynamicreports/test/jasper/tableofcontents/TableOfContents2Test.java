@@ -45,6 +45,7 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 	private DRIExpression<String> labelExpression3;
 	private DRIExpression<String> labelExpression4;
 	private DRIExpression<String> labelExpression5;
+	private DRIExpression<String> labelExpression6;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -52,6 +53,8 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 		labelExpression2 = exp.text("summary");
 		TextFieldBuilder<String> textField = cmp.text("text2");
 		labelExpression3 = textField.getComponent().getValueExpression();
+		TextFieldBuilder<String> textField3 = cmp.text("text3");
+		labelExpression6 = textField3.getComponent().getValueExpression();
 
 		rb.tableOfContents()
 			.title(
@@ -62,7 +65,8 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 	  		cmp.text("text").setTableOfContentsHeading(tableOfContentsHeading().setLabel(labelExpression2)),
 	  		textField.setTableOfContentsHeading(tableOfContentsHeading()),
 	  		cmp.line().setTableOfContentsHeading(tableOfContentsHeading()),
-	  		cmp.subreport(createSubreport1()));
+	  		cmp.subreport(createSubreport1()),
+	  		textField3.setTableOfContentsHeading(tableOfContentsHeading()).setAnchorName("Custom anchor text"));
 	}
 
 	private JasperReportBuilder createSubreport1() {
@@ -92,7 +96,7 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 
 		elementValueTest("title.textField1", "Table of contents");
 
-		elementCountTest("detail.textField1", 6);
+		elementCountTest("detail.textField1", 7);
 
 		String anchorName = labelExpression1.getName() + "_0";
 		elementValueTest("detail.textField1", 0, "title");
@@ -144,7 +148,17 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 		pageIndex = (JRPrintText) getElementAt("detail.textField3", 5);
 		Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
 
-		elementValueTest("detail.textField3", "1", "1", "1", "1", "1", "1");
+		anchorName = "Custom anchor text";
+		elementValueTest("detail.textField1", 6, "text3");
+		text = (JRPrintText) getElementAt("detail.textField1", 6);
+		Assert.assertEquals("text anchor", anchorName, text.getHyperlinkAnchor());
+		dots = (JRPrintText) getElementAt("detail.textField2", 6);
+		Assert.assertTrue("dots", StringUtils.containsOnly(dots.getText(), "."));
+		Assert.assertEquals("dots anchor", anchorName, dots.getHyperlinkAnchor());
+		pageIndex = (JRPrintText) getElementAt("detail.textField3", 6);
+		Assert.assertEquals("pageIndex anchor", anchorName, pageIndex.getHyperlinkAnchor());
+
+		elementValueTest("detail.textField3", "1", "1", "1", "1", "1", "1", "1");
 
 		String name1 = labelExpression1.getName() + ".tocReference";
 		String name2 = "title.textField1";
@@ -199,6 +213,17 @@ public class TableOfContents2Test extends AbstractJasperValueTest {
 		Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
 		elementValueTest(name2, 3, "text4");
 		reference = (JRPrintText) getElementAt(name2, 3);
+		Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
+
+		name1 = labelExpression6.getName() + ".tocReference";
+		name2 = "summary.textField3";
+		elementCountTest(name1, 1);
+		anchorName = "Custom anchor text";
+		elementValueTest(name1, 0, "");
+		reference = (JRPrintText) getElementAt(name1, 0);
+		Assert.assertEquals("reference anchorName " + name1, anchorName, reference.getAnchorName());
+		elementValueTest(name2, 0, "text3");
+		reference = (JRPrintText) getElementAt(name2, 0);
 		Assert.assertEquals("reference anchorName " + name2, anchorName, reference.getAnchorName());
 
 		columnTitleCountTest(column1, 1);
