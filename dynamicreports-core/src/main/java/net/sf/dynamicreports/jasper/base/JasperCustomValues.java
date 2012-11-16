@@ -30,7 +30,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpres
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.jasper.constant.ValueType;
-import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
@@ -71,9 +70,9 @@ public class JasperCustomValues implements DRICustomValues {
 	}
 
 	public void addValueType(String name, ValueType valueType) {
-		if (valueTypes.containsKey(name)) {
+		/*if (valueTypes.containsKey(name)) {
 			throw new JasperDesignException("Duplicate value name \"" + name + "\"");
-		}
+		}*/
 		valueTypes.put(name, valueType);
 	}
 
