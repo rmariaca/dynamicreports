@@ -180,7 +180,16 @@ public class CrosstabTransform {
 		textField.setValueFormatter(group.getHeaderValueFormatter());
 		textField.setDataType(group.getDataType());
 		textField.setStretchWithOverflow(group.getHeaderStretchWithOverflow());
-		if (group instanceof DRICrosstabRowGroup) {
+
+		boolean measureTitle = false;
+		for (DRICrosstabMeasure<?> crosstabMeasure : crosstab.getMeasures()) {
+			if (crosstabMeasure.getTitleExpression() != null) {
+				measureTitle = true;
+				break;
+			}
+		}
+
+		if (group instanceof DRICrosstabRowGroup || (group instanceof DRICrosstabColumnGroup && !measureTitle)) {
 			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
 		}
 		DRIReportStyle groupStyle = group.getHeaderStyle();
@@ -221,7 +230,7 @@ public class CrosstabTransform {
 			}
 			textField.setValueExpression(totalHeaderExpression);
 			textField.setStyle(totalStyle);
-			if (group instanceof DRICrosstabRowGroup) {
+			if (group instanceof DRICrosstabRowGroup || (group instanceof DRICrosstabColumnGroup && !measureTitle)) {
 				textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
 			}
 
