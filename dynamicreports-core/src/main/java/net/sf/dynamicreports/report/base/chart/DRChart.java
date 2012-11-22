@@ -48,6 +48,7 @@ import net.sf.dynamicreports.report.base.chart.plot.DRPiePlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRSpiderPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRThermometerPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRWaterfallBarPlot;
+import net.sf.dynamicreports.report.base.chart.plot.DRXyBlockPlot;
 import net.sf.dynamicreports.report.base.chart.plot.DRXyStepPlot;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -166,6 +167,10 @@ public class DRChart extends DRHyperLinkComponent implements DRIChart {
 			case MULTI_AXIS:
 				dataset = new DRChartDataset();
 				plot = new DRMultiAxisPlot();
+				break;
+			case XYBLOCK:
+				dataset = new DRSeriesDataset();
+				plot = new DRXyBlockPlot();
 				break;
 			case BUBBLE:
 				dataset = new DRSeriesDataset();

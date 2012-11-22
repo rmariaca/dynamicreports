@@ -76,6 +76,7 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.SeriesOrderCu
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowPercentagesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.WaterfallBarRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.chartcustomizer.XyBlockRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.XyStepRendererCustomizer;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -124,6 +125,7 @@ import net.sf.dynamicreports.report.definition.chart.plot.DRIPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRISpiderPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIThermometerPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIWaterfallBarPlot;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIXyBlockPlot;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIXyStepPlot;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -203,6 +205,9 @@ public class ChartTransform {
 		}
 		else if (plot instanceof DRISpiderPlot) {
 			designPlot = spiderPlot((DRISpiderPlot) plot);
+		}
+		else if (plot instanceof DRIXyBlockPlot) {
+			designPlot = xyBlockPlot((DRIXyBlockPlot) plot, chartCustomizers);
 		}
 		else if (plot instanceof DRIBubblePlot) {
 			designPlot = bubblePlot((DRIBubblePlot) plot, chartCustomizers);
@@ -366,6 +371,13 @@ public class ChartTransform {
 		designSpiderPlot.setLabelGap(spiderPlot.getLabelGap());
 		designSpiderPlot.setLabelColor(spiderPlot.getLabelColor());
 		return designSpiderPlot;
+	}
+
+	private DRDesignAxisPlot xyBlockPlot(DRIXyBlockPlot xyBlockPlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {
+		DRDesignBubblePlot designBubblePlot = new DRDesignBubblePlot();
+		chartCustomizers.add(new XyBlockRendererCustomizer(xyBlockPlot));
+		axisPlot(designBubblePlot, xyBlockPlot, chartCustomizers);
+		return designBubblePlot;
 	}
 
 	private DRDesignBubblePlot bubblePlot(DRIBubblePlot bubblePlot, List<DRIChartCustomizer> chartCustomizers) throws DRException {

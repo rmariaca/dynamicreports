@@ -20,38 +20,20 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.definition.chart.plot;
+
+import java.awt.Paint;
+import java.io.Serializable;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	LAYEREDBAR,
-	WATERFALLBAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	GROUPEDSTACKEDBAR,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	DIFFERENCE,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	XYSTEP,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	XYBLOCK,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER,
-	THERMOMETER,
-	GANTT
+public interface DRIPaintScale extends Serializable {
+
+	public String getLabel();
+
+	public double getValue();
+
+	public Paint getPaint();
+
 }

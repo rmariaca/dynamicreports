@@ -20,38 +20,51 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.constant;
+package net.sf.dynamicreports.report.base.chart.plot;
+
+import java.awt.Paint;
+
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.chart.plot.DRIPaintScale;
+
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public enum ChartType {
-	AREA,
-	STACKEDAREA,
-	BAR,
-	LAYEREDBAR,
-	WATERFALLBAR,
-	BAR3D,
-	STACKEDBAR,
-	STACKEDBAR3D,
-	GROUPEDSTACKEDBAR,
-	LINE,
-	PIE,
-	PIE3D,
-	TIMESERIES,
-	DIFFERENCE,
-	XYAREA,
-	XYBAR,
-	XYLINE,
-	XYSTEP,
-	SCATTER,
-	MULTI_AXIS,
-	SPIDER,
-	XYBLOCK,
-	BUBBLE,
-	CANDLESTICK,
-	HIGHLOW,
-	METER,
-	THERMOMETER,
-	GANTT
+public class DRPaintScale implements DRIPaintScale {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private String label;
+	private double value;
+	private Paint paint;
+
+	@Override
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	@Override
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
+
+	@Override
+	public Paint getPaint() {
+		return paint;
+	}
+
+	public void setPaint(Paint paint) {
+		Validate.notNull(paint, "paint must not be null");
+		this.paint = paint;
+	}
+
 }

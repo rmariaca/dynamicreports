@@ -258,6 +258,7 @@ public class ConstantTransform {
 			return JRDesignChart.CHART_TYPE_SCATTER;
 		case MULTI_AXIS:
 			return JRDesignChart.CHART_TYPE_MULTI_AXIS;
+		case XYBLOCK:
 		case BUBBLE:
 			return JRDesignChart.CHART_TYPE_BUBBLE;
 		case CANDLESTICK:

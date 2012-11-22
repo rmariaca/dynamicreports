@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
+import java.awt.Paint;
+
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
@@ -198,6 +200,10 @@ public class ChartBuilders {
 
 	public MultiAxisChartBuilder multiAxisChart(AbstractBaseChartBuilder<?, ?, ?> ...charts) {
 		return Charts.multiAxisChart(charts);
+	}
+
+	public XyBlockChartBuilder xyBlockChart(double defaultLowerBound, double defaultUpperBound, Paint defaultPaint) {
+		return Charts.xyBlockChart(defaultLowerBound, defaultUpperBound, defaultPaint);
 	}
 
 	public BubbleChartBuilder bubbleChart() {
