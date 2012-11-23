@@ -21,7 +21,7 @@
 			
 	<h4>Support</h4>
 	<ul class="sidemenu">
-		<li><a href="http://sourceforge.net/apps/phpbb/dynamicreports/">Forum</a></li>
+		<li><a href="${page.path}forum/">Forum</a></li>
 		<li><a href="http://sourceforge.net/tracker/?group_id=313754">Project tracker</a></li>
 		<li><a href="${page.path}contact.html">Contact</a></li>
 	</ul>
