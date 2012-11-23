@@ -20,30 +20,19 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.chart.plot;
-
-import java.awt.Paint;
-import java.util.List;
-
-import net.sf.dynamicreports.report.constant.RectangleAnchor;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIXyBlockPlot extends DRIAxisPlot {
-
-	public Double getBlockWidth();
-
-	public Double getBlockHeight();
-
-	public RectangleAnchor getRectangleAnchor();
-
-	public double getDefaultLowerBound();
-
-	public double getDefaultUpperBound();
-
-  public Paint getDefaultPaint();
-
-	public List<DRIPaintScale> getPaintScales();
-
+public enum RectangleAnchor {
+	CENTER,
+	TOP,
+	TOP_LEFT,
+	TOP_RIGHT,
+	BOTTOM,
+	BOTTOM_LEFT,
+	BOTTOM_RIGHT,
+	LEFT,
+	RIGHT
 }

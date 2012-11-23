@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
 import java.io.Serializable;
 
+import net.sf.dynamicreports.jasper.transformation.ConstantTransform;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
@@ -35,7 +36,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
-import org.jfree.ui.RectangleAnchor;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -51,6 +51,9 @@ public class XyBlockRendererCustomizer implements DRIChartCustomizer, Serializab
 
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
+		chart.getXYPlot().getDomainAxis().setUpperMargin(0);
+		chart.getXYPlot().getRangeAxis().setUpperMargin(0);
+
     XYBlockRenderer renderer = new XYBlockRenderer();
     if (xyBlockPlot.getBlockWidth() != null) {
     	renderer.setBlockWidth(xyBlockPlot.getBlockWidth());
@@ -58,7 +61,9 @@ public class XyBlockRendererCustomizer implements DRIChartCustomizer, Serializab
     if (xyBlockPlot.getBlockHeight() != null) {
     	renderer.setBlockHeight(xyBlockPlot.getBlockHeight());
     }
-    renderer.setBlockAnchor(RectangleAnchor.BOTTOM_LEFT);
+    if (xyBlockPlot.getRectangleAnchor() != null) {
+    	renderer.setBlockAnchor(ConstantTransform.rectangleAnchor(xyBlockPlot.getRectangleAnchor()));
+    }
     LookupPaintScale paintScale = new LookupPaintScale(xyBlockPlot.getDefaultLowerBound(), xyBlockPlot.getDefaultUpperBound(), xyBlockPlot.getDefaultPaint());
     for (DRIPaintScale scale : xyBlockPlot.getPaintScales()) {
     	paintScale.add(scale.getValue(), scale.getPaint());

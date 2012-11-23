@@ -20,30 +20,28 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.chart.plot;
+package net.sf.dynamicreports.report.builder.chart;
 
 import java.awt.Paint;
-import java.util.List;
 
-import net.sf.dynamicreports.report.constant.RectangleAnchor;
+import net.sf.dynamicreports.report.base.chart.plot.DRPaintScale;
+import net.sf.dynamicreports.report.builder.AbstractBuilder;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIXyBlockPlot extends DRIAxisPlot {
+public class PaintScaleBuilder extends AbstractBuilder<PaintScaleBuilder, DRPaintScale> {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	public Double getBlockWidth();
+	protected PaintScaleBuilder(String label, double value, Paint paint) {
+		super(new DRPaintScale());
+		getObject().setLabel(label);
+		getObject().setValue(value);
+		getObject().setPaint(paint);
+	}
 
-	public Double getBlockHeight();
-
-	public RectangleAnchor getRectangleAnchor();
-
-	public double getDefaultLowerBound();
-
-	public double getDefaultUpperBound();
-
-  public Paint getDefaultPaint();
-
-	public List<DRIPaintScale> getPaintScales();
-
+	public DRPaintScale getPaintScale() {
+		return build();
+	}
 }

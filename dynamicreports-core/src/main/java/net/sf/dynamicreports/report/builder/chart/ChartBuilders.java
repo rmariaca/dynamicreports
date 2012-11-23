@@ -40,6 +40,10 @@ public class ChartBuilders {
 		return Charts.axisFormat();
 	}
 
+	public PaintScaleBuilder paintScale(String label, double value, Paint paint) {
+		return Charts.paintScale(label, value, paint);
+	}
+
 	//category serie
 	public CategoryChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
 		return Charts.serie(column);

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.RectangleAnchor;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIPaintScale;
 import net.sf.dynamicreports.report.definition.chart.plot.DRIXyBlockPlot;
 
@@ -40,6 +41,7 @@ public class DRXyBlockPlot extends DRAxisPlot implements DRIXyBlockPlot {
 
 	private Double blockWidth;
 	private Double blockHeight;
+	private RectangleAnchor rectangleAnchor;
 	private double defaultLowerBound;
 	private double defaultUpperBound;
 	private Paint defaultPaint;
@@ -65,6 +67,15 @@ public class DRXyBlockPlot extends DRAxisPlot implements DRIXyBlockPlot {
 
 	public void setBlockHeight(Double blockHeight) {
 		this.blockHeight = blockHeight;
+	}
+
+	@Override
+	public RectangleAnchor getRectangleAnchor() {
+		return rectangleAnchor;
+	}
+
+	public void setRectangleAnchor(RectangleAnchor rectangleAnchor) {
+		this.rectangleAnchor = rectangleAnchor;
 	}
 
 	@Override

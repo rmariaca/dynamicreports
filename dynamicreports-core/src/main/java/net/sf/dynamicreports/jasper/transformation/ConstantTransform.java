@@ -57,6 +57,7 @@ import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
+import net.sf.dynamicreports.report.constant.RectangleAnchor;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.ScaleType;
@@ -1032,6 +1033,31 @@ public class ConstantTransform {
 			return ScaleTypeEnum.ON_RANGE_AXIS;
 		default:
 			throw new JasperDesignException("ScaleType " + scaleType.name() + " not supported");
+		}
+	}
+
+	public static org.jfree.ui.RectangleAnchor rectangleAnchor(RectangleAnchor rectangleAnchor) {
+		switch (rectangleAnchor) {
+		case CENTER:
+			return org.jfree.ui.RectangleAnchor.CENTER;
+		case TOP:
+			return org.jfree.ui.RectangleAnchor.TOP;
+		case TOP_LEFT:
+			return org.jfree.ui.RectangleAnchor.TOP_LEFT;
+		case TOP_RIGHT:
+			return org.jfree.ui.RectangleAnchor.TOP_RIGHT;
+		case BOTTOM:
+			return org.jfree.ui.RectangleAnchor.BOTTOM;
+		case BOTTOM_LEFT:
+			return org.jfree.ui.RectangleAnchor.BOTTOM_LEFT;
+		case BOTTOM_RIGHT:
+			return org.jfree.ui.RectangleAnchor.BOTTOM_RIGHT;
+		case LEFT:
+			return org.jfree.ui.RectangleAnchor.LEFT;
+		case RIGHT:
+			return org.jfree.ui.RectangleAnchor.RIGHT;
+		default:
+			throw new JasperDesignException("RectangleAnchor " + rectangleAnchor.name() + " not supported");
 		}
 	}
 }

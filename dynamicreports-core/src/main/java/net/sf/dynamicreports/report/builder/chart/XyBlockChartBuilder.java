@@ -25,7 +25,6 @@ package net.sf.dynamicreports.report.builder.chart;
 import java.awt.Paint;
 
 import net.sf.dynamicreports.report.base.chart.dataset.DRSeriesDataset;
-import net.sf.dynamicreports.report.base.chart.plot.DRPaintScale;
 import net.sf.dynamicreports.report.base.chart.plot.DRXyBlockPlot;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
@@ -33,6 +32,7 @@ import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.RectangleAnchor;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -115,12 +115,21 @@ public class XyBlockChartBuilder extends AbstractBaseChartBuilder<XyBlockChartBu
 		return this;
 	}
 
-	public XyBlockChartBuilder addPaintScale(String label, double value, Paint paint) {
-		DRPaintScale paintScale = new DRPaintScale();
-		paintScale.setLabel(label);
-		paintScale.setValue(value);
-		paintScale.setPaint(paint);
-		getPlot().addPaintScale(paintScale);
+	public XyBlockChartBuilder setRectangleAnchor(RectangleAnchor rectangleAnchor) {
+		getPlot().setRectangleAnchor(rectangleAnchor);
+		return this;
+	}
+
+	public XyBlockChartBuilder paintScales(PaintScaleBuilder ...paintScales) {
+		return addPaintScale(paintScales);
+	}
+
+	public XyBlockChartBuilder addPaintScale(PaintScaleBuilder ...paintScales) {
+		Validate.notNull(paintScales, "paintScales must not be null");
+		Validate.noNullElements(paintScales, "paintScales must not contains null paintScale");
+		for (PaintScaleBuilder paintScale : paintScales) {
+			getPlot().addPaintScale(paintScale.build());
+		}
 		return this;
 	}
 

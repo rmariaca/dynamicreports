@@ -41,6 +41,10 @@ public class Charts {
 		return new AxisFormatBuilder();
 	}
 
+	public static PaintScaleBuilder paintScale(String label, double value, Paint paint) {
+		return new PaintScaleBuilder(label, value, paint);
+	}
+
 	//category serie
 	public static CategoryChartSerieBuilder serie(ValueColumnBuilder<?, ? extends Number> column) {
 		return new CategoryChartSerieBuilder(column);
