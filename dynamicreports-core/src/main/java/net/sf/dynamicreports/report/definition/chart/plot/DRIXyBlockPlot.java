@@ -36,7 +36,7 @@ public interface DRIXyBlockPlot extends DRIAxisPlot {
 
 	public Double getBlockHeight();
 
-	public RectangleAnchor getRectangleAnchor();
+	public RectangleAnchor getBlockAnchor();
 
 	public double getDefaultLowerBound();
 

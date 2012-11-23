@@ -41,7 +41,7 @@ public class DRXyBlockPlot extends DRAxisPlot implements DRIXyBlockPlot {
 
 	private Double blockWidth;
 	private Double blockHeight;
-	private RectangleAnchor rectangleAnchor;
+	private RectangleAnchor blockAnchor;
 	private double defaultLowerBound;
 	private double defaultUpperBound;
 	private Paint defaultPaint;
@@ -70,12 +70,12 @@ public class DRXyBlockPlot extends DRAxisPlot implements DRIXyBlockPlot {
 	}
 
 	@Override
-	public RectangleAnchor getRectangleAnchor() {
-		return rectangleAnchor;
+	public RectangleAnchor getBlockAnchor() {
+		return blockAnchor;
 	}
 
-	public void setRectangleAnchor(RectangleAnchor rectangleAnchor) {
-		this.rectangleAnchor = rectangleAnchor;
+	public void setBlockAnchor(RectangleAnchor blockAnchor) {
+		this.blockAnchor = blockAnchor;
 	}
 
 	@Override

@@ -115,8 +115,8 @@ public class XyBlockChartBuilder extends AbstractBaseChartBuilder<XyBlockChartBu
 		return this;
 	}
 
-	public XyBlockChartBuilder setRectangleAnchor(RectangleAnchor rectangleAnchor) {
-		getPlot().setRectangleAnchor(rectangleAnchor);
+	public XyBlockChartBuilder setBlockAnchor(RectangleAnchor blockAnchor) {
+		getPlot().setBlockAnchor(blockAnchor);
 		return this;
 	}
 

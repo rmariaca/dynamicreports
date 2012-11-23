@@ -61,8 +61,8 @@ public class XyBlockRendererCustomizer implements DRIChartCustomizer, Serializab
     if (xyBlockPlot.getBlockHeight() != null) {
     	renderer.setBlockHeight(xyBlockPlot.getBlockHeight());
     }
-    if (xyBlockPlot.getRectangleAnchor() != null) {
-    	renderer.setBlockAnchor(ConstantTransform.rectangleAnchor(xyBlockPlot.getRectangleAnchor()));
+    if (xyBlockPlot.getBlockAnchor() != null) {
+    	renderer.setBlockAnchor(ConstantTransform.rectangleAnchor(xyBlockPlot.getBlockAnchor()));
     }
     LookupPaintScale paintScale = new LookupPaintScale(xyBlockPlot.getDefaultLowerBound(), xyBlockPlot.getDefaultUpperBound(), xyBlockPlot.getDefaultPaint());
     for (DRIPaintScale scale : xyBlockPlot.getPaintScales()) {
