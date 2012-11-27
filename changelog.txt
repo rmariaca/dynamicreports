@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.0.4 (2012-11-27)
+---------------------------------------------------
+ - xy block chart, see XyBlockChartReport for an example
+ - added the ability to set a subtotal position in AdhocSubtotal  
+ - minor bug fixes and improvements
+ 
 Changes in version 3.0.3 (2012-10-25)
 ---------------------------------------------------
  - upgrade to JasperReports 4.7.1
