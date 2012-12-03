@@ -22,9 +22,6 @@
 
 package net.sf.dynamicreports.design.transformation;
 
-import java.awt.Dimension;
-import java.awt.geom.Dimension2D;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -123,10 +120,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.Renderable;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.renderers.BatikRenderer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -948,23 +942,6 @@ public class ComponentTransform {
 				return imageFalse;
 			}
 		}
-	}
-
-	private class CustomBatikRenderer extends BatikRenderer {
-		private static final long serialVersionUID = 1L;
-
-		private Dimension dimension;
-
-		public CustomBatikRenderer(URL svgURL, int width, int height) throws JRException {
-			super(JRLoader.loadBytes(svgURL), null);
-			this.dimension = new Dimension(width, height);
-		}
-
-		@Override
-		public Dimension2D getDimension(JasperReportsContext jasperReportsContext) {
-			return dimension;
-		}
-
 	}
 
 }
