@@ -44,6 +44,7 @@ public class DRDesignGroup implements DRIDesignGroup {
 	private Integer minHeightToStartNewPage;
 	private GroupFooterPosition footerPosition;
 	private boolean keepTogether;
+	private boolean headerWithSubtotal;
 
 	public DRDesignGroup(String name) {
 		this.name = name;
@@ -161,4 +162,14 @@ public class DRDesignGroup implements DRIDesignGroup {
 	public void setKeepTogether(boolean keepTogether) {
 		this.keepTogether = keepTogether;
 	}
+
+	@Override
+	public boolean isHeaderWithSubtotal() {
+		return headerWithSubtotal;
+	}
+
+	public void setHeaderWithSubtotal(boolean headerWithSubtotal) {
+		this.headerWithSubtotal = headerWithSubtotal;
+	}
+
 }

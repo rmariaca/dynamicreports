@@ -118,6 +118,7 @@ public class Default {
 	private Integer groupMinHeightToStartNewPage;
 	private GroupFooterPosition groupFooterPosition;
 	private boolean groupKeepTogether;
+	private boolean groupHeaderWithSubtotal;
 	private boolean groupByDataType;
 	//table of contents
 	private boolean tableOfContents;
@@ -319,6 +320,7 @@ public class Default {
 		this.groupMinHeightToStartNewPage = null;
 		this.groupFooterPosition = GroupFooterPosition.NORMAL;
 		this.groupKeepTogether = false;
+		this.groupHeaderWithSubtotal = false;
 		this.groupByDataType = false;
 
 		this.tableOfContents = false;
@@ -661,6 +663,10 @@ public class Default {
 
 	public boolean isGroupKeepTogether() {
 		return groupKeepTogether;
+	}
+
+	public boolean isGroupHeaderWithSubtotal() {
+		return groupHeaderWithSubtotal;
 	}
 
 	public boolean isGroupByDataType() {

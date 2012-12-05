@@ -404,6 +404,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setGroupHeaderWithSubtotal(Boolean groupHeaderWithSubtotal) {
+		getObject().setGroupHeaderWithSubtotal(groupHeaderWithSubtotal);
+		return this;
+	}
+
 	public ReportTemplateBuilder tableOfContents() {
 		return setTableOfContents(true);
 	}

@@ -948,6 +948,16 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isGroupKeepTogether();
 	}
 
+	protected boolean isGroupHeaderWithSubtotal(DRIGroup group) {
+		if (group.getHeaderWithSubtotal() != null) {
+			return group.getHeaderWithSubtotal();
+		}
+		if (template.getGroupHeaderWithSubtotal() != null) {
+			return template.getGroupHeaderWithSubtotal();
+		}
+		return Defaults.getDefaults().isGroupHeaderWithSubtotal();
+	}
+
 	protected boolean isGroupByDataType(DRIGroup group) {
 		if (group.getGroupByDataType() != null) {
 			return group.getGroupByDataType();

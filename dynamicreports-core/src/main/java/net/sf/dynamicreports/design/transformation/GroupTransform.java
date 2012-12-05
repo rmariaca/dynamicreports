@@ -216,6 +216,7 @@ public class GroupTransform {
 		designGroup.setMinHeightToStartNewPage(templateTransform.getGroupMinHeightToStartNewPage(group));
 		designGroup.setFooterPosition(templateTransform.getGroupFooterPosition(group));
 		designGroup.setKeepTogether(templateTransform.isGroupKeepTogether(group));
+		designGroup.setHeaderWithSubtotal(templateTransform.isGroupHeaderWithSubtotal(group));
 		DRIExpression<?> groupExpression = group.getValueField().getValueExpression();
 		if (templateTransform.isGroupByDataType(group) && group.getValueField().getDataType() != null) {
 			accessor.getExpressionTransform().transformExpression(groupExpression);

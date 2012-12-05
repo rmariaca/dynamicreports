@@ -140,6 +140,8 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Boolean getGroupKeepTogether();
 
+	public Boolean getGroupHeaderWithSubtotal();
+
 	public Boolean getTableOfContents();
 
 	public DRITableOfContentsCustomizer getTableOfContentsCustomizer();

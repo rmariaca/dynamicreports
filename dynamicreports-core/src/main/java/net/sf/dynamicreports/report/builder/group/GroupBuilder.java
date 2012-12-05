@@ -141,6 +141,15 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T headerWithSubtotal() {
+		return setHeaderWithSubtotal(true);
+	}
+
+	public T setHeaderWithSubtotal(Boolean headerWithSubtotal) {
+		getObject().setHeaderWithSubtotal(headerWithSubtotal);
+		return (T) this;
+	}
+
 	public T groupByDataType() {
 		return setGroupByDataType(true);
 	}

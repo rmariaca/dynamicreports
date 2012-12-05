@@ -53,4 +53,6 @@ public interface DRIDesignGroup {
 	public GroupFooterPosition getFooterPosition();
 
 	public boolean isKeepTogether();
+
+	public boolean isHeaderWithSubtotal();
 }

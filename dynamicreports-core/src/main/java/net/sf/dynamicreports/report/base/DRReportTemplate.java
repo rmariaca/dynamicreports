@@ -104,6 +104,7 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Boolean groupResetPageNumber;
 	private GroupFooterPosition groupFooterPosition;
 	private Boolean groupKeepTogether;
+	private Boolean groupHeaderWithSubtotal;
 	//table of contents
 	public Boolean tableOfContents;
 	public DRITableOfContentsCustomizer tableOfContentsCustomizer;
@@ -656,6 +657,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setGroupKeepTogether(Boolean groupKeepTogether) {
 		this.groupKeepTogether = groupKeepTogether;
+	}
+
+	@Override
+	public Boolean getGroupHeaderWithSubtotal() {
+		return groupHeaderWithSubtotal;
+	}
+
+	public void setGroupHeaderWithSubtotal(Boolean groupHeaderWithSubtotal) {
+		this.groupHeaderWithSubtotal = groupHeaderWithSubtotal;
 	}
 
 	@Override

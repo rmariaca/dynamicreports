@@ -58,6 +58,7 @@ public class DRGroup implements DRIGroup {
 	private Integer minHeightToStartNewPage;
 	private GroupFooterPosition footerPosition;
 	private Boolean keepTogether;
+	private Boolean headerWithSubtotal;
 	private DRBand headerBand;
 	private DRBand footerBand;
 
@@ -242,6 +243,15 @@ public class DRGroup implements DRIGroup {
 
 	public void setKeepTogether(Boolean keepTogether) {
 		this.keepTogether = keepTogether;
+	}
+
+	@Override
+	public Boolean getHeaderWithSubtotal() {
+		return headerWithSubtotal;
+	}
+
+	public void setHeaderWithSubtotal(Boolean headerWithSubtotal) {
+		this.headerWithSubtotal = headerWithSubtotal;
 	}
 
 	@Override

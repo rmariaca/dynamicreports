@@ -27,6 +27,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.jasperreports.engine.JRElement;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignSection;
@@ -64,9 +65,23 @@ public class BandTransform {
 		}
 		for (DRIDesignGroup group : report.getGroups()) {
 			if (group.getHeaderBands() != null) {
+				JRDesignBand jrTitleAndValueBand = null;
 				for (DRIDesignBand band : group.getHeaderBands()) {
 					JRDesignBand jrBand = band(band);
+					if (band.getName() != null && band.getName().equals("groupHeaderTitleAndValue")) {
+						jrTitleAndValueBand = jrBand;
+					}
 					if (jrBand != null) {
+						if (band.getName() != null && band.getName().equals("subtotalGroupHeader") &&
+								jrTitleAndValueBand != null && group.isHeaderWithSubtotal()) {
+							if (jrTitleAndValueBand.getHeight() < jrBand.getHeight()) {
+								jrTitleAndValueBand.setHeight(jrBand.getHeight());
+							}
+							for (JRElement jrElement : jrBand.getElements()) {
+								jrTitleAndValueBand.addElement(jrElement);
+							}
+							continue;
+						}
 						((JRDesignSection) accessor.getGroupTransform().getGroup(group).getGroupHeaderSection()).addBand(jrBand);
 					}
 				}

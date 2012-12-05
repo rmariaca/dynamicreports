@@ -73,6 +73,8 @@ public interface DRIGroup extends Serializable {
 
 	public Boolean getKeepTogether();
 
+	public Boolean getHeaderWithSubtotal();
+
 	public DRIBand getHeaderBand();
 
 	public DRIBand getFooterBand();
