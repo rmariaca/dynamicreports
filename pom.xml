@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>DynamicReports - parent</name>
-	<url>http://dynamicreports.sourceforge.net</url>
+	<url>http://www.dynamicreports.org</url>
 	<description>DynamicReports parent</description>
 	<inceptionYear>2010</inceptionYear>
 	<licenses>
