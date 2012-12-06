@@ -120,6 +120,7 @@ public class ReportTemplateTest {
 						.setGroupStartInNewPage(true)
 						.setGroupStartInNewColumn(true)
 						.setGroupReprintHeaderOnEachPage(true)
+						.setGroupHeaderWithSubtotal(true)
 
 						.setTextFieldWidth(150)
 
@@ -204,6 +205,7 @@ public class ReportTemplateTest {
 			Assert.assertTrue("group start in new page", group.isStartInNewPage());
 			Assert.assertTrue("group start in new column", group.isStartInNewColumn());
 			Assert.assertTrue("group reprint header on each page", group.isReprintHeaderOnEachPage());
+			Assert.assertTrue("group header with subtotal", group.isHeaderWithSubtotal());
 
 			Assert.assertEquals("text field width", new Integer(150), textField.getWidth());
 
