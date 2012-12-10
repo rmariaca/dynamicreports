@@ -87,6 +87,7 @@ import net.sf.dynamicreports.report.definition.component.DRIImage;
 import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIMap;
+import net.sf.dynamicreports.report.definition.component.DRIMultiPageList;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
@@ -1246,6 +1247,27 @@ public class TemplateTransform {
 			return template.getListgap();
 		}
 		return Defaults.getDefaults().getListgap();
+	}
+
+	//multi page list
+	protected int getMultiPageListWidth(DRIMultiPageList multiPageList) {
+		if (multiPageList.getWidth() != null) {
+			return multiPageList.getWidth();
+		}
+		if (template.getMultiPageListWidth() != null) {
+			return template.getMultiPageListWidth();
+		}
+		return Defaults.getDefaults().getMultiPageListWidth();
+	}
+
+	protected int getMultiPageListHeight(DRIMultiPageList multiPageList) {
+		if (multiPageList.getHeight() != null) {
+			return multiPageList.getHeight();
+		}
+		if (template.getMultiPageListHeight() != null) {
+			return template.getMultiPageListHeight();
+		}
+		return Defaults.getDefaults().getMultiPageListHeight();
 	}
 
 	//chart

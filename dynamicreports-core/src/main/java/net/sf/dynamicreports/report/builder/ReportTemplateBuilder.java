@@ -448,6 +448,16 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 		return this;
 	}
 
+	public ReportTemplateBuilder setMultiPageListHeight(Integer multiPageListHeight) {
+		getObject().setMultiPageListHeight(multiPageListHeight);
+		return this;
+	}
+
+	public ReportTemplateBuilder setMultiPageListWidth(Integer multiPageListWidth) {
+		getObject().setMultiPageListWidth(multiPageListWidth);
+		return this;
+	}
+
 	public ReportTemplateBuilder setChartHeight(Integer chartHeight) {
 		getObject().setChartHeight(chartHeight);
 		return this;

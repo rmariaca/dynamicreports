@@ -162,6 +162,9 @@ public class Default {
 	private int listgap;
 	private HorizontalCellComponentAlignment horizontalCellComponentAlignment;
 	private VerticalCellComponentAlignment verticalCellComponentAlignment;
+	//multi page list
+	private int multiPageListWidth;
+	private int multiPageListHeight;
 	//chart
 	private int chartWidth;
 	private int chartHeight;
@@ -367,6 +370,9 @@ public class Default {
 		this.listgap = 0;
 		this.horizontalCellComponentAlignment = HorizontalCellComponentAlignment.FLOAT;
 		this.verticalCellComponentAlignment = VerticalCellComponentAlignment.EXPAND;
+
+		this.multiPageListWidth = 200;
+		this.multiPageListHeight = 0;
 
 		this.chartWidth = 200;
 		this.chartHeight = 200;
@@ -791,6 +797,14 @@ public class Default {
 
 	public VerticalCellComponentAlignment getVerticalCellComponentAlignment() {
 		return verticalCellComponentAlignment;
+	}
+
+	public int getMultiPageListWidth() {
+		return multiPageListWidth;
+	}
+
+	public int getMultiPageListHeight() {
+		return multiPageListHeight;
 	}
 
 	public int getChartWidth() {

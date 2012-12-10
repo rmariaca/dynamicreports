@@ -115,6 +115,9 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private Integer imageHeight;
 	//list
 	private Integer listgap;
+	//multi page list
+	private Integer multiPageListWidth;
+	private Integer multiPageListHeight;
 	//chart
 	private Integer chartWidth;
 	private Integer chartHeight;
@@ -732,6 +735,24 @@ public class DRReportTemplate implements DRIReportTemplate {
 			Validate.isTrue(listgap >= 0, "listgap must be >= 0");
 		}
 		this.listgap = listgap;
+	}
+
+	@Override
+	public Integer getMultiPageListWidth() {
+		return multiPageListWidth;
+	}
+
+	public void setMultiPageListWidth(Integer multiPageListWidth) {
+		this.multiPageListWidth = multiPageListWidth;
+	}
+
+	@Override
+	public Integer getMultiPageListHeight() {
+		return multiPageListHeight;
+	}
+
+	public void setMultiPageListHeight(Integer multiPageListHeight) {
+		this.multiPageListHeight = multiPageListHeight;
 	}
 
 	@Override

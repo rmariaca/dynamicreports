@@ -94,6 +94,14 @@ public class Components {
 		return new VerticalListCellBuilder(component);
 	}
 
+	public static MultiPageListBuilder multiPageList() {
+		return new MultiPageListBuilder();
+	}
+
+	public static MultiPageListBuilder multiPageList(ComponentBuilder<?, ?> ...components) {
+		return new MultiPageListBuilder().add(components);
+	}
+
 	public static CurrentDateBuilder currentDate() {
 		return new CurrentDateBuilder();
 	}

@@ -154,6 +154,10 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Integer getListgap();
 
+	public Integer getMultiPageListHeight();
+
+	public Integer getMultiPageListWidth();
+
 	public Integer getChartHeight();
 
 	public Integer getChartWidth();

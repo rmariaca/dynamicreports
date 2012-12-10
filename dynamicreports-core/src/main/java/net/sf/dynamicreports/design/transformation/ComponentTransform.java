@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,18 +64,25 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.DRBand;
 import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRHyperLink;
+import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.base.style.DRStyle;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
+import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.component.CustomComponentTransform;
 import net.sf.dynamicreports.report.component.CustomComponents;
 import net.sf.dynamicreports.report.component.DRICustomComponent;
@@ -107,6 +116,7 @@ import net.sf.dynamicreports.report.definition.component.DRILine;
 import net.sf.dynamicreports.report.definition.component.DRIList;
 import net.sf.dynamicreports.report.definition.component.DRIListCell;
 import net.sf.dynamicreports.report.definition.component.DRIMap;
+import net.sf.dynamicreports.report.definition.component.DRIMultiPageList;
 import net.sf.dynamicreports.report.definition.component.DRIPageNumber;
 import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
@@ -119,6 +129,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.Renderable;
 
@@ -142,6 +153,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIList) {
 			return list((DRIList) component, defaultStyleType, resetType, resetGroup);
+		}
+		if (component instanceof DRIMultiPageList) {
+			return multiPageList((DRIMultiPageList) component);
 		}
 		if (component instanceof DRIFiller) {
 			return filler((DRIFiller) component);
@@ -287,6 +301,22 @@ public class ComponentTransform {
 			}
 		}
 		return null;
+	}
+
+	//multi page list
+	private DRDesignSubreport multiPageList(DRIMultiPageList multiPageList) throws DRException {
+		DRDesignSubreport designSubreport = new DRDesignSubreport();
+		component(designSubreport, multiPageList, multiPageList.getStyle(), false, DefaultStyleType.NONE);
+		designSubreport.setWidth(accessor.getTemplateTransform().getMultiPageListWidth(multiPageList));
+		designSubreport.setHeight(accessor.getTemplateTransform().getMultiPageListHeight(multiPageList));
+    JasperReportBuilder multiPageReport = DynamicReports.report();
+    MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(multiPageList.getComponents());
+    multiPageReport.detail(Components.subreport(subreportExpression));
+    DRIDesignExpression reportExpression = accessor.getExpressionTransform().transformExpression(Expressions.value(multiPageReport));
+    DRIDesignExpression dataSourceExpression = accessor.getExpressionTransform().transformExpression(Expressions.dataSource(new JREmptyDataSource(multiPageList.getComponents().size())));
+    designSubreport.setReportExpression(reportExpression);
+    designSubreport.setDataSourceExpression(dataSourceExpression);
+		return designSubreport;
 	}
 
 	//text field
@@ -941,6 +971,25 @@ public class ComponentTransform {
 			} else {
 				return imageFalse;
 			}
+		}
+	}
+
+	private class MultiPageListSubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
+		private static final long serialVersionUID = 1L;
+
+		private List<DRIComponent> detailComponents;
+
+		public MultiPageListSubreportExpression(List<DRIComponent> detailComponents) {
+			this.detailComponents = detailComponents;
+		}
+
+		@Override
+		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
+      JasperReportBuilder report = report();
+      DRBand titleBand = report.getReport().getTitleBand();
+      DRComponent detailComponent = (DRComponent) detailComponents.get(reportParameters.getReportRowNumber() - 1);
+      titleBand.addComponent(detailComponent);
+			return report;
 		}
 	}
 

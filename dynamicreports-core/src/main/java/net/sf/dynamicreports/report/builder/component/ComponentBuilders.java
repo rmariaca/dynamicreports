@@ -88,6 +88,14 @@ public class ComponentBuilders {
 		return Components.vListCell(component);
 	}
 
+	public MultiPageListBuilder multiPageList() {
+		return Components.multiPageList();
+	}
+
+	public MultiPageListBuilder multiPageList(ComponentBuilder<?, ?> ...components) {
+		return Components.multiPageList(components);
+	}
+
 	public CurrentDateBuilder currentDate() {
 		return Components.currentDate();
 	}
