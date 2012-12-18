@@ -30,7 +30,6 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
-import net.sf.dynamicreports.design.base.component.DRDesignFiller;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstab;
@@ -125,6 +124,8 @@ public class CrosstabTransform {
 				addMeasure(designCrosstab, (DRICrosstabVariable<?>) measure.getExpression());
 			}
 		}
+		accessor.getExpressionTransform().transformExpression(new CrosstabRowCounter());
+		addRowCountExpression(designCrosstab);
 		crosstabs.put(designCrosstab, crosstab);
 		accessor.transformToMainDataset();
 
@@ -141,14 +142,13 @@ public class CrosstabTransform {
 		return designDataset;
 	}
 
-	private CrosstabRowCount addRowCountExpression(DRDesignCrosstab designCrosstab) throws DRException {
+	private void addRowCountExpression(DRDesignCrosstab designCrosstab) throws DRException {		
 		DRDesignCrosstabRowGroup lastRowGroup = getLastValue(designCrosstab.getRowGroups());
 		DRFiller filler = new DRFiller();
 		CrosstabRowCount rowCountExpression = new CrosstabRowCount();
 		filler.setPrintWhenExpression(rowCountExpression);
-		DRDesignFiller designTextField = accessor.getComponentTransform().filler(filler);
+		DRDesignComponent designTextField = accessor.getComponentTransform().filler(filler);
 		lastRowGroup.getHeader().getList().addComponent(designTextField);
-		return rowCountExpression;
 	}
 
 	private DRDesignCrosstabCellContent cellContent(DRICrosstabCellContent cellContent, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
@@ -607,42 +607,53 @@ public class CrosstabTransform {
 	private class CrosstabRowCount extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
-		private int rowCount = 0;
-
 		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
-			rowCount++;
+			CrosstabRowCounter counter = reportParameters.getValue(ReportParameters.CROSSTAB_ROW_COUNTER);
+			counter.increment();
 			return false;
 		}
 	}
 
+	public class CrosstabRowCounter extends AbstractSimpleExpression<CrosstabRowCounter> {
+		private static final long serialVersionUID = 1L;
+
+		private int rowNumber = 1;
+
+		@Override
+		public CrosstabRowCounter evaluate(ReportParameters reportParameters) {
+			return this;
+		}
+		
+		private void increment() {
+			rowNumber++;
+		}
+		
+		public int getRowNumber() {
+			return rowNumber;
+		}
+		
+		@Override
+		public String getName() {
+			return ReportParameters.CROSSTAB_ROW_COUNTER;
+		}
+	}
+	
 	private class CrosstabPrintInOddRow extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
-		private CrosstabRowCount crosstabRowCount;
-
-		private CrosstabPrintInOddRow(CrosstabRowCount crosstabRowCount) {
-			this.crosstabRowCount = crosstabRowCount;
-		}
-
 		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
-			return crosstabRowCount.rowCount % 2 == 0;
+			return reportParameters.getCrosstabRowNumber() % 2 != 0;
 		}
 	}
 
 	private class CrosstabPrintInEvenRow extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
-		private CrosstabRowCount crosstabRowCount;
-
-		private CrosstabPrintInEvenRow(CrosstabRowCount crosstabRowCount) {
-			this.crosstabRowCount = crosstabRowCount;
-		}
-
 		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {
-			return crosstabRowCount.rowCount % 2 != 0;
+			return reportParameters.getCrosstabRowNumber() % 2 == 0;
 		}
 	}
 
@@ -666,12 +677,11 @@ public class CrosstabTransform {
 			DRISimpleStyle detailOddRowStyle = accessor.getTemplateTransform().getCrosstabOddRowStyle(crosstab);
 			DRISimpleStyle detailEvenRowStyle = accessor.getTemplateTransform().getCrosstabEvenRowStyle(crosstab);
 			if (detailOddRowStyle != null || detailEvenRowStyle != null) {
-				CrosstabRowCount rowCountExpression = addRowCountExpression(designCrosstab);
 				if (detailOddRowStyle != null) {
-					rowHighlighters.add(detailRowConditionalStyle(detailOddRowStyle, new CrosstabPrintInOddRow(rowCountExpression)));
+					rowHighlighters.add(detailRowConditionalStyle(detailOddRowStyle, new CrosstabPrintInOddRow()));
 				}
 				if (detailEvenRowStyle != null) {
-					rowHighlighters.add(detailRowConditionalStyle(detailEvenRowStyle, new CrosstabPrintInEvenRow(rowCountExpression)));
+					rowHighlighters.add(detailRowConditionalStyle(detailEvenRowStyle, new CrosstabPrintInEvenRow()));
 				}
 			}
 

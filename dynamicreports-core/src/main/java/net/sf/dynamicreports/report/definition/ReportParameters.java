@@ -29,6 +29,7 @@ import java.util.Locale;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public interface ReportParameters {
+	public static final String CROSSTAB_ROW_COUNTER = "CROSSTAB_ROW_NUMBER";
 
 	public <T> T getValue(String name);
 
@@ -50,6 +51,8 @@ public interface ReportParameters {
 
 	public Integer getColumnRowNumber();
 
+	public Integer getCrosstabRowNumber();
+	
 	public Integer getGroupCount(String groupName);
 
 	public Connection getConnection();

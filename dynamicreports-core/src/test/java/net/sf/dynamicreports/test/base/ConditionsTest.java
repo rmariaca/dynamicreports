@@ -170,6 +170,11 @@ public class ConditionsTest {
 		}
 
 		@Override
+		public Integer getCrosstabRowNumber() {
+			return null;
+		}
+		
+		@Override
 		public DRIScriptlet getScriptlet(String name) {
 			return null;
 		}
