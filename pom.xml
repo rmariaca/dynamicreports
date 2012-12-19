@@ -10,7 +10,7 @@
     
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-parent</artifactId>
-	<version>3.0.5-SNAPSHOT</version>
+	<version>3.1.0</version>
 	<packaging>pom</packaging>
 
 	<name>DynamicReports - parent</name>
@@ -25,9 +25,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk</connection>
-		<developerConnection>scm:svn:https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk</developerConnection>
-		<url>http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/trunk</url>
+		<connection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/tags/dynamicreports-3.1.0</connection>
+		<developerConnection>scm:svn:https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/tags/dynamicreports-3.1.0</developerConnection>
+		<url>http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/tags/dynamicreports-3.1.0</url>
 	</scm>
  
 	<modules>
