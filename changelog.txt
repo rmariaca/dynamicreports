@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.1.0 (2012-12-19)
+---------------------------------------------------
+ - multiPageList component, see MultiPageListReport for an example 
+ - new group attribute was added - headerWithSubtotal , see GroupHeaderWithSubtotalReport for an example  
+ - minor bug fixes and improvements
+ 
 Changes in version 3.0.4 (2012-11-27)
 ---------------------------------------------------
  - xy block chart, see XyBlockChartReport for an example
