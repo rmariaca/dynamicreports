@@ -54,14 +54,11 @@ public class MultiPageListReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .setTextStyle(stl.style())
-			  .title(
-			  		Templates.createTitleComponent("MultiPageList"))
-			  	.summary(
-			  	multiPageList)
-			  .pageFooter(Templates.footerComponent)
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.title(Templates.createTitleComponent("MultiPageList"))
+				.summary(multiPageList)
+				.pageFooter(Templates.footerComponent)
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
