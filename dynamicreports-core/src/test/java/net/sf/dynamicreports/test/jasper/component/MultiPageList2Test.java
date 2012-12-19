@@ -38,11 +38,15 @@ public class MultiPageList2Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		MultiPageListBuilder multiPageList = cmp.multiPageList();
-		for (int i = 0; i < 150; i++) {
-			multiPageList.add(cmp.text("text"));
+		MultiPageListBuilder multiPageList1 = cmp.multiPageList();
+		for (int i = 0; i < 3; i++) {
+			MultiPageListBuilder multiPageList2 = cmp.multiPageList();
+			multiPageList1.add(multiPageList2);
+			for (int j = 0; j < 50; j++) {
+				multiPageList2.add(cmp.text("text"));
+			}
 		}
-		rb.title(multiPageList)
+		rb.title(multiPageList1)
 			.columns(
 				column1 = col.column("Column1", "field1", Integer.class));
 	}
