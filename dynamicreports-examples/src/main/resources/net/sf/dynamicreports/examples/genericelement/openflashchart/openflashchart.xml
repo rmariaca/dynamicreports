@@ -7,7 +7,7 @@
 
 	<bean id="openFlashChartExportHandlerBundle" 
 			class="net.sf.jasperreports.engine.export.DefaultElementHandlerBundle">
-		<property name="namespace" value="http://dynamicreports.sourceforge.net/openflashchart"/>
+		<property name="namespace" value="http://www.dynamicreports.org/openflashchart"/>
 		<property name="elementHandlers">
 			<map>
 				<entry key="openflashchart">

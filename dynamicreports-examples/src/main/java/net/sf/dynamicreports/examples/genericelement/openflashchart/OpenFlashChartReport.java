@@ -49,13 +49,13 @@ public class OpenFlashChartReport {
 	private void build() {
 		pieChart1 = new PieChart();
 		pieChart1.setTitle("Quantity");
-		GenericElementBuilder chart1 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
+		GenericElementBuilder chart1 = cmp.genericElement("http://www.dynamicreports.org/openflashchart", "openflashchart")
 			.setHeight(200)
 			.addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart1);
 
 		pieChart2 = new PieChart();
 		pieChart2.setTitle("Unit price");
-		GenericElementBuilder chart2 = cmp.genericElement("http://dynamicreports.sourceforge.net/openflashchart", "openflashchart")
+		GenericElementBuilder chart2 = cmp.genericElement("http://www.dynamicreports.org/openflashchart", "openflashchart")
 			.setHeight(200)
 			.addParameter(PieChart.PARAMETER_CHART_GENERATOR, pieChart2);
 
