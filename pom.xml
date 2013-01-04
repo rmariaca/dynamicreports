@@ -310,7 +310,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.7</version>
+						<version>2.9</version>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
@@ -319,6 +319,9 @@
 								</goals>
 							</execution>
 						</executions>
+						<configuration>
+							<javadocExecutable>${env.JAVA_1.7_HOME}\bin\javadoc.exe</javadocExecutable>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
