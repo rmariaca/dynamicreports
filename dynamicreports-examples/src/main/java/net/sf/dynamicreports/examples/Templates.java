@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -39,7 +39,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class Templates {
 	public static final StyleBuilder rootStyle;
@@ -110,13 +110,13 @@ public class Templates {
 
 		currencyType = new CurrencyType();
 
-		HyperLinkBuilder link = hyperLink("http://dynamicreports.sourceforge.net");
+		HyperLinkBuilder link = hyperLink("http://www.dynamicreports.org");
 		dynamicReportsComponent =
 		  cmp.horizontalList(
 		  	cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(60, 60),
 		  	cmp.verticalList(
 		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
-		  		cmp.text("http://dynamicreports.sourceforge.net").setStyle(italicStyle).setHyperLink(link))).setFixedWidth(300);
+		  		cmp.text("http://www.dynamicreports.org").setStyle(italicStyle).setHyperLink(link))).setFixedWidth(300);
 
 		footerComponent = cmp.pageXofY()
 		                     .setStyle(

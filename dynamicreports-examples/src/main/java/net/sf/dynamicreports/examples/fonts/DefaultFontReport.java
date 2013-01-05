@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  *
  * This report is working properly only when the font "FreeUniversal" is registered.
  * The font is registered in these files: customfonts.xml and jasperreports_extension.properties. The files are located in the root of the classpath.

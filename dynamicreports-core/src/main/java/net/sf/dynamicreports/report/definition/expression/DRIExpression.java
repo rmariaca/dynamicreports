@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -28,7 +28,7 @@ import java.io.Serializable;
  * Expressions are used to define various calculations, conditions, text field content, specific report groups, etc.
  * Every expression can access the declared report fields, variables and other expressions and get their values to calculate the expression value.
  *
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface DRIExpression<T> extends Serializable {
 

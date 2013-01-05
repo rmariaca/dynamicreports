@@ -7,7 +7,7 @@
 
 	<bean id="customExportHandlerBundle" 
 			class="net.sf.jasperreports.engine.export.DefaultElementHandlerBundle">
-		<property name="namespace" value="http://dynamicreports.sourceforge.net/custom"/>
+		<property name="namespace" value="http://www.dynamicreports.org/custom"/>
 		<property name="elementHandlers">
 			<map>
 				<entry key="custom">

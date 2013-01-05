@@ -2,7 +2,7 @@ DynamicReports
 -----------------------------------
 
 
-http://dynamicreports.sourceforge.net
+http://www.dynamicreports.org
 
 
 DynamicReports is an open source Java reporting library based on JasperReports. 

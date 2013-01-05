@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -45,7 +45,7 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.XYDataset;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SeriesColorsByNameCustomizer implements DRIChartCustomizer {
 	private Map<String, Color> seriesColorsByName;

@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -41,7 +41,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class GenericElementTest {
 	private String data = "";
@@ -66,7 +66,7 @@ public class GenericElementTest {
 	}
 	
 	protected void configureReport(JasperReportBuilder rb) {
-		GenericElementBuilder genericElement = cmp.genericElement("http://dynamicreports.sourceforge.net/custom", "custom")
+		GenericElementBuilder genericElement = cmp.genericElement("http://www.dynamicreports.org/custom", "custom")
 		  .addParameter("id", "10")
 		  .addParameter("data", new ParameterExpression());
 		

@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -45,11 +45,11 @@ import net.sf.jasperreports.extensions.ExtensionsRegistry;
 import net.sf.jasperreports.extensions.ExtensionsRegistryFactory;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class GoogleChartsExtensionsRegistryFactory implements ExtensionsRegistryFactory {
-	public static final String NAMESPACE = "http://dynamicreports.sourceforge.net/googlecharts";
-	public static final String XSD_LOCATION = "http://dynamicreports.sourceforge.net/xsd/googlecharts.xsd";
+	public static final String NAMESPACE = "http://www.dynamicreports.org/googlecharts";
+	public static final String XSD_LOCATION = "http://www.dynamicreports.org/xsd/googlecharts.xsd";
 	public static final String XSD_RESOURCE = "net/sf/dynamicreports/googlecharts/jasper/googlecharts.xsd";
 
 	private static final ExtensionsRegistry REGISTRY;

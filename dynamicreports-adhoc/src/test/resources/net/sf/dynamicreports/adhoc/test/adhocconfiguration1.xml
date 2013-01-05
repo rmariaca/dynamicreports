@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:configuration xmlns:ns2="http://dynamicreports.sourceforge.net/schema/adhocconfiguration">
+<ns2:configuration xmlns:ns2="http://www.dynamicreports.org/schema/adhocconfiguration">
     <report highlightDetailOddRows="true" highlightDetailEvenRows="true" ignorePagination="true" tableOfContents="true">
         <textStyle foregroundColor="#FFFFFF" backgroundColor="#404040" horizontalAlignment="CENTER" verticalAlignment="MIDDLE" pattern="#,###.00">
             <font fontName="a" fontSize="5" bold="true" italic="true" underline="true" strikeThrough="true"/>

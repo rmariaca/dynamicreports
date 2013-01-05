@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -69,7 +69,7 @@ import org.apache.commons.lang3.Validate;
  * This report builder allows concatenating several separated reports into one single document.
  * Each report starts on a new page with its own page dimension.
  *
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class JasperConcatenatedReportBuilder implements Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;

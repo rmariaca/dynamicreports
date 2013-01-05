@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -29,7 +29,7 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMultiAxisPlot;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignMultiAxisPlot extends DRDesignAxisPlot implements DRIDesignMultiAxisPlot {
 	private List<DRIDesignChartAxis> axes;

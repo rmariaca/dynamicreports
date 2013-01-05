@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -99,7 +99,7 @@ import org.apache.commons.lang3.Validate;
  * A report consists of bands, columns, subtotals, groups, and other parts.
  * Each part is created and configured using a particular builder method and it's passed to the report builder instance.
  *
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;

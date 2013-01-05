@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -43,7 +43,7 @@ import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class CrosstabStyle6Test extends AbstractJasperCrosstabStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;

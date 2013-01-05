@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -26,7 +26,7 @@ package net.sf.dynamicreports.report.definition.expression;
  * This expression allows declaring an expression in a Jasper native syntax.
  * Knowledge of the jasper syntax is also required for proper use.
  *
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface DRIJasperExpression<T> extends DRIExpression<T> {
 

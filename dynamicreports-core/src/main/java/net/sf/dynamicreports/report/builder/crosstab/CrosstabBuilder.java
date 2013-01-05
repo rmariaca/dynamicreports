@@ -1,8 +1,8 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2012 Ricardo Mariaca
- * http://dynamicreports.sourceforge.net
+ * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
  *
@@ -38,7 +38,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 import org.apache.commons.lang3.Validate;
 
 /**
- * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class CrosstabBuilder extends DimensionComponentBuilder<CrosstabBuilder, DRCrosstab> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;

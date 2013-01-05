@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://dynamicreports.sourceforge.net/googlecharts"
-	xmlns:c="http://dynamicreports.sourceforge.net/googlecharts"
+	targetNamespace="http://www.dynamicreports.org/googlecharts"
+	xmlns:c="http://www.dynamicreports.org/googlecharts"
 	xmlns:jr="http://jasperreports.sourceforge.net/jasperreports"
 	elementFormDefault="qualified">
 
