@@ -142,7 +142,7 @@ public class CrosstabTransform {
 		return designDataset;
 	}
 
-	private void addRowCountExpression(DRDesignCrosstab designCrosstab) throws DRException {		
+	private void addRowCountExpression(DRDesignCrosstab designCrosstab) throws DRException {
 		DRDesignCrosstabRowGroup lastRowGroup = getLastValue(designCrosstab.getRowGroups());
 		DRFiller filler = new DRFiller();
 		CrosstabRowCount rowCountExpression = new CrosstabRowCount();
@@ -525,7 +525,7 @@ public class CrosstabTransform {
 		}
 		designMeasure.setValueExpression(accessor.getExpressionTransform().transformExpression(expression));
 		designMeasure.setCalculation(variable.getCalculation());
-		designMeasure.setPercentageType(variable.getPercentageType());
+		designMeasure.setPercentageType(accessor.getTemplateTransform().getCrosstabPercentageType(variable));
 
 		designCrosstab.getMeasures().add(designMeasure);
 	}
@@ -624,21 +624,21 @@ public class CrosstabTransform {
 		public CrosstabRowCounter evaluate(ReportParameters reportParameters) {
 			return this;
 		}
-		
+
 		private void increment() {
 			rowNumber++;
 		}
-		
+
 		public int getRowNumber() {
 			return rowNumber;
 		}
-		
+
 		@Override
 		public String getName() {
 			return ReportParameters.CROSSTAB_ROW_COUNTER;
 		}
 	}
-	
+
 	private class CrosstabPrintInOddRow extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 

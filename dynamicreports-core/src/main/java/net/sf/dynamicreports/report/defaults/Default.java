@@ -38,6 +38,7 @@ import net.sf.dynamicreports.report.base.style.DRSimpleStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizer;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -200,6 +201,7 @@ public class Default {
 	private DRStyle crosstabGrandTotalStyle;
 	private DRStyle crosstabCellStyle;
 	private DRStyle crosstabMeasureTitleStyle;
+	private CrosstabPercentageType crosstabPercentageType;
 	//boolean
 	private BooleanComponentType booleanComponentType;
 	private boolean booleanEmptyWhenNullValue;
@@ -410,6 +412,7 @@ public class Default {
 		this.crosstabGrandTotalStyle = null;
 		this.crosstabCellStyle = null;
 		this.crosstabMeasureTitleStyle = null;
+		this.crosstabPercentageType = CrosstabPercentageType.NONE;
 
 		this.booleanComponentType = BooleanComponentType.TEXT_TRUE_FALSE;
 		this.booleanEmptyWhenNullValue = false;
@@ -929,6 +932,10 @@ public class Default {
 
 	public DRStyle getCrosstabMeasureTitleStyle() {
 		return crosstabMeasureTitleStyle;
+	}
+
+	public CrosstabPercentageType getCrosstabPercentageType() {
+		return crosstabPercentageType;
 	}
 
 	public BooleanComponentType getBooleanComponentType() {

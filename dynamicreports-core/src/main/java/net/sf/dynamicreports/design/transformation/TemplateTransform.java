@@ -43,6 +43,7 @@ import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
+import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
@@ -96,6 +97,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
+import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRISimpleStyle;
@@ -1770,6 +1772,13 @@ public class TemplateTransform {
 			return template.getCrosstabMeasureTitleStyle();
 		}
 		return Defaults.getDefaults().getCrosstabMeasureTitleStyle();
+	}
+
+	protected CrosstabPercentageType getCrosstabPercentageType(DRICrosstabVariable<?> variable) {
+		if (variable.getPercentageType() != null) {
+			return variable.getPercentageType();
+		}
+		return Defaults.getDefaults().getCrosstabPercentageType();
 	}
 
 	public BooleanComponentType getBooleanComponentType(DRIBooleanField booleanField) {

@@ -50,6 +50,7 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 	private CrosstabMeasureBuilder<Double> measure4;
 	private CrosstabMeasureBuilder<Integer> measure5;
 	private CrosstabMeasureBuilder<Double> measure6;
+	private CrosstabMeasureBuilder<Double> measure7;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -68,6 +69,7 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 		measure5 = ctab.measure(column5, Calculation.COUNT);
 		measure6 = ctab.measure(column5, Calculation.COUNT);
 		measure6.setPercentageType(CrosstabPercentageType.GRAND_TOTAL);
+		measure7 = ctab.measure(column4, Calculation.AVERAGE);
 
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.headerCell(cmp.text("Header"))
@@ -76,7 +78,7 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 			.columnGroups(
 				columnGroup = ctab.columnGroup(column2))
 			.measures(
-				measure1, measure2, measure3, measure4, measure5, measure6);
+				measure1, measure2, measure3, measure4, measure5, measure6, measure7);
 
 		rb.setLocale(Locale.ENGLISH)
 			.columns(column1, column2, column3, column4, column5)
@@ -165,6 +167,16 @@ public class Crosstab1Test extends AbstractJasperCrosstabValueTest {
 		crosstabCellValueTest(measure6, rowGroup, null, "50", "50");
 		crosstabCellCountTest(measure6, rowGroup, columnGroup, 1);
 		crosstabCellValueTest(measure6, rowGroup, columnGroup, "100");
+
+		//measure7
+		crosstabCellCountTest(measure7, null, null, 6);
+		crosstabCellValueTest(measure7, null, null, "2.5", "4.5", "6.5", "8.5", "6.5", "8.5");
+		crosstabCellCountTest(measure7, null, columnGroup, 3);
+		crosstabCellValueTest(measure7, null, columnGroup, "3.5", "7.5", "7.5");
+		crosstabCellCountTest(measure7, rowGroup, null, 2);
+		crosstabCellValueTest(measure7, rowGroup, null, "5.2", "7.2");
+		crosstabCellCountTest(measure7, rowGroup, columnGroup, 1);
+		crosstabCellValueTest(measure7, rowGroup, columnGroup, "6.2");
 	}
 
 	@Override
