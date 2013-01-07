@@ -65,10 +65,11 @@ public class GenerateSite {
 	private static final String pages_path = "src/site/pages/";
 	private static final String htmlToImageFile = "target/htmltoimage.bat";
 	private static final float image_large_zoom = 1.1f;
-	private static final float image_medium_zoom = 0.15f;
-	private static final float image_small_zoom = 0.08f;
+	private static final float image_medium_zoom = 0.2f;
+	private static final float image_small_zoom = 0.12f;
 
 	private static Template temp;
+	private static Template temp2;
 	private static StringTemplateLoader loader;
 	private static List<Example> examples;
 	private static boolean runExamples;
@@ -101,6 +102,7 @@ public class GenerateSite {
 
 			project = new Project();
 			temp = cfg.getTemplate(templates_path + "site.ftl");
+			temp2 = cfg.getTemplate(templates_path + "project.ftl");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,37 +111,20 @@ public class GenerateSite {
 	}
 
 	public GenerateSite() throws Exception {
-		//generatePages();
+		generateProjectXml();
 		if (runExamples) {
 			generateExamples();
 		}
 	}
 
-	/*private void generatePages() throws Exception {
-		File dir = new File(pages_path);
-		for (File file : dir.listFiles(new Filter())) {
-			String fileName = file.getName();
-			String name = file.getName();//StringUtils.substringBeforeLast(file.getName(), ".html");
-			Page page = new Page(fileName, pages_path + fileName, loadFile(new FileReader(file)));
-			page.setTitle((String) pageProp.get(name));
-			String description = (String) pageProp.get(name + "_description");
-			if (description != null) {
-				page.setDescription(description);
-			}
-			String keywords = (String) pageProp.get(name + "_keywords");
-			if (keywords != null) {
-				page.setKeywords(keywords);
-			}
+	private void generateProjectXml() throws Exception {
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("project", project);
 
-			Map<String, Object> root = new HashMap<String, Object>();
-			root.put("project", project);
-			root.put("page", page);
-
-			Writer out = new FileWriter(site_path + fileName);
-			temp.process(root, out);
-			out.flush();
-		}
-	}*/
+		Writer out = new FileWriter(site_path + "project.xml");
+		temp2.process(root, out);
+		out.flush();
+	}
 
 	private void generateExamples() throws Exception {
 		runExamples(new File(examples_classpath));

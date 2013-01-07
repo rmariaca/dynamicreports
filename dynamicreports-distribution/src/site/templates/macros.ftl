@@ -87,7 +87,7 @@
 
 <#macro example_preview id file="pdf" file_ext="">
 <td style="text-align:center;border:none">
-	<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img src="${page.examples}${id?lower_case}_m.png" alt="${id}"/></a>
+	<a rel="image" href="${page.examples}${id?lower_case}.png" title="${id}"><img src="${page.examples}${id?lower_case}_s.png" alt="${id}"/></a>
 	<a href="${page.examples}${id?lower_case}${file_ext}.${file}" title="${file} preview"><img src="${page.path}images/site/${file}.png" alt="${file}" width="16" height="16"/></a>
 	<a rel="image" href="${page.examples}${id?lower_case}.png"><img src="${page.path}images/site/preview.png" alt="${id}"/></a>
 </td>
