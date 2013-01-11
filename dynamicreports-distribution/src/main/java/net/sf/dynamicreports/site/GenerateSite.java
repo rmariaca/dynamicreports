@@ -66,7 +66,7 @@ public class GenerateSite {
 	private static final String htmlToImageFile = "target/htmltoimage.bat";
 	private static final float image_large_zoom = 1.1f;
 	private static final float image_medium_zoom = 0.2f;
-	private static final float image_small_zoom = 0.12f;
+	private static final float image_small_zoom = 0.11f;
 
 	private static Template temp;
 	private static Template temp2;
@@ -179,7 +179,7 @@ public class GenerateSite {
 
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				groups.add(example.getPath());
-				content += "<a name=\"" + example.getPath() + "\"></a><h3>" + pageProp.getProperty(example.getPath()) + "</h3><br/>\r\n";
+				content += "<p><a name=\"" + example.getPath() + "\"></a></p><h3 style=\"background:#CCC;padding:5px;\">" + pageProp.getProperty(example.getPath()) + "</h3><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
@@ -208,7 +208,7 @@ public class GenerateSite {
 
 		String groupContent = "<ul style=\"margin: 5px 20px; padding: 0 20px; list-style-type: none;\">\r\n";
 		for (String group : groups) {
-			groupContent += "<li><a href=\"examples/dynamicreport_examples#" + group + "\">" + pageProp.getProperty(group) + "</a></li>\r\n";
+			groupContent += "<li><a href=\"examples/examples-overview#" + group + "\">" + pageProp.getProperty(group) + "</a></li>\r\n";
 		}
 		groupContent += "</ul>\r\n";
 		content = "<div style=\"padding: 5px; background: #F0F0F0;\">\r\n<p><b>Table of contents</b></p>\r\n" + groupContent + "</div>\r\n" + content;
