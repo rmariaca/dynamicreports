@@ -1312,8 +1312,8 @@ The configuration file will look like this:
 &lt;/fontFamilies&gt;
 </@xml_code>
 Now we have to add the font files to the classpath or pack them into a separate jar file and put the jar to the classpath. The font <i>net/sf/dynamicreports/examples/fonts/FreeUniversal-regular.ttf</i> means that the font file <i>FreeUniversal-regular.ttf</i> has to be found in package <i>net.sf.dynamicreports.examples.fonts</i>.<br/><br/>
-And finally, we need to create a <i>jasper_extension.properties</i> file and register the font configuration file:
-<@xml_code>
+And finally, we need to create a <i>jasperreports_extension.properties</i> file and register the font configuration file:
+<@java_code>
 net.sf.jasperreports.extension.registry.factory.simple.font.families=net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
 net.sf.jasperreports.extension.simple.font.families.drfonts=fonts.xml
 </@xml_code>

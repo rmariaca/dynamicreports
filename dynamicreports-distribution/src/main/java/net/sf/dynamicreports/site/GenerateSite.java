@@ -179,7 +179,7 @@ public class GenerateSite {
 
 			if (previous == null || !previous.getPath().equals(example.getPath())) {
 				groups.add(example.getPath());
-				content += "<p><a name=\"" + example.getPath() + "\"></a></p><h3 style=\"background:#CCC;padding:5px;\">" + pageProp.getProperty(example.getPath()) + "</h3><br/>\r\n";
+				content += "<p><a name=\"" + example.getPath() + "\"></a></p><h3>" + pageProp.getProperty(example.getPath()) + "</h3><br/>\r\n";
 				content += "<table class=\"example\">\r\n";
 			}
 			text1 += "<@example_link id=\"" + example.getName() + "\"/>\r\n";
@@ -206,13 +206,13 @@ public class GenerateSite {
 		}
 		content += "<@example_link id=\"" + Templates.class.getSimpleName() + "\" table=false/><br/>\r\n";
 
-		String groupContent = "<ul style=\"margin: 5px 20px; padding: 0 20px; list-style-type: none;\">\r\n";
+		String groupContent = "<ul>\r\n";
 		for (String group : groups) {
 			groupContent += "<li><a href=\"examples/examples-overview#" + group + "\">" + pageProp.getProperty(group) + "</a></li>\r\n";
 		}
 		groupContent += "</ul>\r\n";
-		content = "<div style=\"padding: 5px; background: #F0F0F0;\">\r\n<p><b>Table of contents</b></p>\r\n" + groupContent + "</div>\r\n" + content;
-		//content += "</div>";
+		content = "<div id=\"documentation\">\r\n<div id=\"toc\">\r\n<p><b>Table of contents</b></p>\r\n" + groupContent + "</div>\r\n" + content;
+		content += "</div>";
 
     loader.putTemplate(name, content);
 
@@ -387,17 +387,6 @@ public class GenerateSite {
     }
     return content;
 	}
-
-	/*private class Filter implements FileFilter {
-
-		@Override
-		public boolean accept(File pathname) {
-			if (pathname.isDirectory()) {
-				return false;
-			}
-			return StringUtils.endsWith(pathname.getName(), ".html");
-		}
-	}*/
 
 	public static void main(String[] args) throws Exception {
 		new GenerateSite();
