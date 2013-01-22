@@ -56,6 +56,8 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 		DRIDataType dataType = column.getComponent().getDataType();
 		getObject().getValueField().setDataType(dataType);
 		getObject().getValueField().setStyle(column.getComponent().getStyle());
+		getObject().getValueField().setPattern(column.getComponent().getPattern());
+		getObject().getValueField().setPatternExpression(column.getComponent().getPatternExpression());
 		getObject().getValueField().setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
 		getObject().setTitleExpression(column.getTitleExpression());
 		getObject().setTitleStyle(column.getTitleStyle());
