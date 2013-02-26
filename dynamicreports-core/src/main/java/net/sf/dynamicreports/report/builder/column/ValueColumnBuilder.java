@@ -319,6 +319,19 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 		return (T) this;
 	}
 
+	public T printInFirstWholeBand() {
+		return setPrintInFirstWholeBand(true);
+	}
+
+	public T setPrintInFirstWholeBand(Boolean printInFirstWholeBand) {
+		getComponent().setPrintInFirstWholeBand(printInFirstWholeBand);
+		return (T) this;
+	}
+
+	public T printWhenDetailOverflows() {
+		return setPrintWhenDetailOverflows(true);
+	}
+
 	public T setPrintWhenDetailOverflows(Boolean printWhenDetailOverflows) {
 		getComponent().setPrintWhenDetailOverflows(printWhenDetailOverflows);
 		return (T) this;
