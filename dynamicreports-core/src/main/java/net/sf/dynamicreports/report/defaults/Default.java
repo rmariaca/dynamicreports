@@ -256,6 +256,8 @@ public class Default {
   private DRDataType<Character, Character> characterType;
   private DRDataType<String, String> stringType;
 	private HorizontalAlignment pageXofYHorizontalAlignment;
+	//system fonts
+	private boolean loadSystemFonts;
 
 	public Default() {
 		init();
@@ -468,6 +470,8 @@ public class Default {
 		this.booleanType = new DRDataType<Boolean, Boolean>(null, HorizontalAlignment.CENTER);
 		this.characterType = new DRDataType<Character, Character>(null, HorizontalAlignment.LEFT);
 		this.stringType = new DRDataType<String, String>(null, HorizontalAlignment.LEFT);
+
+		this.loadSystemFonts = true;
 	}
 
 	public String getReportName() {
@@ -1128,6 +1132,14 @@ public class Default {
 
 	public HorizontalAlignment getPageXofYHorizontalAlignment() {
 		return pageXofYHorizontalAlignment;
+	}
+
+	public boolean isLoadSystemFonts() {
+		return loadSystemFonts;
+	}
+
+	protected void setLoadSystemFonts(boolean loadSystemFonts) {
+		this.loadSystemFonts = loadSystemFonts;
 	}
 
 }

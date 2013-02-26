@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.exception.DRReportException;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DefaultBinder {
-	
+
 	public static Default bind(XmlDynamicReports xmlDynamicReports) {
 		Default defaults = new Default();
 		if (xmlDynamicReports != null) {
@@ -65,18 +65,22 @@ public class DefaultBinder {
 			bind(defaults.getBooleanType(), xmlDynamicReports.getBooleanType());
 			bind(defaults.getCharacterType(), xmlDynamicReports.getCharacterType());
 			bind(defaults.getStringType(), xmlDynamicReports.getStringType());
+
+			if (xmlDynamicReports.isLoadSystemFonts() != null) {
+				defaults.setLoadSystemFonts(xmlDynamicReports.isLoadSystemFonts());
+			}
 		}
 		return defaults;
 	}
-	
+
 	private static void bind(DRDataType<?, ?> dataType, XmlDataType xmlDataType) {
 		if (xmlDataType == null) {
 			return;
 		}
-		
+
 		if (xmlDataType.getPattern() != null) {
 			dataType.setPattern(xmlDataType.getPattern());
-		}		
+		}
 		if (xmlDataType.getHorizontalAlignment() != null) {
 			HorizontalAlignment alignment = HorizontalAlignment.valueOf(xmlDataType.getHorizontalAlignment().name());
 			if (alignment == null) {
@@ -91,21 +95,21 @@ public class DefaultBinder {
 		if (xmlFont == null) {
 			return;
 		}
-		
+
 		if (xmlFont.getFontName() != null) {
 			font.setFontName(xmlFont.getFontName());
 		}
 		if (xmlFont.getFontSize() != null) {
 			font.setFontSize(xmlFont.getFontSize());
-		}	
+		}
 		if (xmlFont.getPdfFontName() != null) {
 			font.setPdfFontName(xmlFont.getPdfFontName());
-		}	
+		}
 		if (xmlFont.getPdfEncoding() != null) {
 			font.setPdfEncoding(xmlFont.getPdfEncoding());
 		}
 		if (xmlFont.isPdfEmbedded() != null) {
 			font.setPdfEmbedded(xmlFont.isPdfEmbedded());
-		}	
+		}
 	}
 }
