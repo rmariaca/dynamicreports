@@ -824,13 +824,15 @@ public class ChartTransform {
 			else {
 				keyValue = reportParameters.getValue(valueExpression.getName());
 			}
-			if (!values.containsKey(keyValue)) {
-				values.put(keyValue, 0d);
-			}
 			Number serieValue = reportParameters.getValue(serieExpression.getName());
-			double value = values.get(keyValue).doubleValue();
+			Double value = values.get(keyValue);
 			if (serieValue != null) {
-				value += serieValue.doubleValue();
+				if (value == null) {
+					value = serieValue.doubleValue();
+				}
+				else {
+					value += serieValue.doubleValue();
+				}
 				values.put(keyValue, value);
 			}
 
