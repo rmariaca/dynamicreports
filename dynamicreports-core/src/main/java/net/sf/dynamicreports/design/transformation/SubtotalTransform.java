@@ -99,10 +99,15 @@ public class SubtotalTransform {
 				columnFooter.addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			case GROUP_HEADER:
+				EvaluationTime evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+				if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+					subtotalValueComponent.setEvaluationTime(EvaluationTime.GROUP);
+					subtotalValueComponent.setEvaluationGroup(accessor.getGroupTransform().getGroup(subtotal.getGroup()));
+				}
 				getGroupGrid(subtotal.getGroup(), groupHeader).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				break;
 			case GROUP_FOOTER:
-				EvaluationTime evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+				evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
 				if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
 					subtotalValueComponent.setEvaluationTime(EvaluationTime.NOW);
 				}
@@ -110,6 +115,11 @@ public class SubtotalTransform {
 				break;
 			case FIRST_GROUP_HEADER:
 				DRIGroup firstGroup = accessor.getGroupTransform().getFirstGroup();
+				evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+				if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+					subtotalValueComponent.setEvaluationTime(EvaluationTime.GROUP);
+					subtotalValueComponent.setEvaluationGroup(accessor.getGroupTransform().getGroup(firstGroup));
+				}
 				if (firstGroup != null) {
 					getGroupGrid(firstGroup, groupHeader).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				}
@@ -126,6 +136,11 @@ public class SubtotalTransform {
 				break;
 			case LAST_GROUP_HEADER:
 				DRIGroup lastGroup = accessor.getGroupTransform().getLastGroup();
+				evaluationTime = accessor.getComponentTransform().detectEvaluationTime(subtotalValueComponent.getValueExpression());
+				if (evaluationTime == null || !evaluationTime.equals(EvaluationTime.AUTO)) {
+					subtotalValueComponent.setEvaluationTime(EvaluationTime.GROUP);
+					subtotalValueComponent.setEvaluationGroup(accessor.getGroupTransform().getGroup(lastGroup));
+				}
 				if (lastGroup != null) {
 					getGroupGrid(lastGroup, groupHeader).addComponent(showInColumn, horizontalAlignment, verticalAlignment, subtotalComponent);
 				}

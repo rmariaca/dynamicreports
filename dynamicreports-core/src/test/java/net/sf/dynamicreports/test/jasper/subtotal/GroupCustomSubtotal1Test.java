@@ -48,7 +48,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class GroupCustomSubtotalTest extends AbstractJasperValueTest implements Serializable {
+public class GroupCustomSubtotal1Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private TextColumnBuilder<Integer> column2;
