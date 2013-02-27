@@ -130,7 +130,7 @@ public class GenerateSite {
 		runExamples(new File(examples_classpath));
 		generateExamplesHtml();
 		generateExampleHtml("Templates", "", "", Templates.class);
-		generateExampleHtml("dynamicreports-defaults", "", "", GenerateSite.class.getResourceAsStream("/dynamicreports-defaults.xml"), "xml");
+		generateExampleHtml("dynamicreports-defaults", "", "", GenerateSite.class.getResourceAsStream("dynamicreports-defaults.xml"), "xml");
 	}
 
 	private void runExamples(File dir) throws Exception {
