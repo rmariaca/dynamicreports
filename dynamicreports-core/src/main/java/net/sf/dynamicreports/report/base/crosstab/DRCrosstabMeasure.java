@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
@@ -50,6 +51,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 	private HorizontalAlignment horizontalAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
+	private DRHyperLink hyperLink;
 	private List<DRICrosstabCellStyle> styles;
 	private DRIExpression<?> titleExpression;
 	private DRIReportStyle titleStyle;
@@ -114,6 +116,15 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 
 	public void setStretchWithOverflow(Boolean stretchWithOverflow) {
 		this.stretchWithOverflow = stretchWithOverflow;
+	}
+
+	@Override
+	public DRHyperLink getHyperLink() {
+		return hyperLink;
+	}
+
+	public void setHyperLink(DRHyperLink hyperLink) {
+		this.hyperLink = hyperLink;
 	}
 
 	@Override

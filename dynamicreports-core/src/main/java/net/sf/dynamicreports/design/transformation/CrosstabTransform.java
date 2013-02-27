@@ -42,6 +42,7 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRFiller;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellContent;
@@ -180,6 +181,7 @@ public class CrosstabTransform {
 		textField.setValueFormatter(group.getHeaderValueFormatter());
 		textField.setDataType(group.getDataType());
 		textField.setStretchWithOverflow(group.getHeaderStretchWithOverflow());
+		textField.setHyperLink((DRHyperLink) group.getHeaderHyperLink());
 
 		boolean measureTitle = false;
 		for (DRICrosstabMeasure<?> crosstabMeasure : crosstab.getMeasures()) {
@@ -470,6 +472,7 @@ public class CrosstabTransform {
 			textField.setDataType(measure.getDataType());
 			textField.setStretchWithOverflow(measure.getStretchWithOverflow());
 			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+			textField.setHyperLink((DRHyperLink) measure.getHyperLink());
 			textField.setStyle(measuresStyle.getStyle(measure, rowGroup, columnGroup));
 			DRDesignTextField designTextField = accessor.getComponentTransform().textField(textField, DefaultStyleType.TEXT);
 			String name = "cell_measure[" + measure.getName() + "]";

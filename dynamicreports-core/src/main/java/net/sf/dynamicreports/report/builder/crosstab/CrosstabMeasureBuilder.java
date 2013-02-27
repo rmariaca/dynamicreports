@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.base.crosstab.DRCrosstabMeasure;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabVariable;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
@@ -137,6 +138,22 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 
 	public CrosstabMeasureBuilder<T> setStretchWithOverflow(Boolean stretchWithOverflow) {
 		getObject().setStretchWithOverflow(stretchWithOverflow);
+		return this;
+	}
+
+	/**
+	 * Sets the crosstab measure hyperlink.
+	 *
+	 * @param hyperLink the measure hyperlink
+	 * @return a crosstab measure builder
+	 */
+	public CrosstabMeasureBuilder<T> setHyperLink(HyperLinkBuilder hyperLink) {
+		if (hyperLink != null) {
+			getObject().setHyperLink(hyperLink.getHyperLink());
+		}
+		else {
+			getObject().setHyperLink(null);
+		}
 		return this;
 	}
 

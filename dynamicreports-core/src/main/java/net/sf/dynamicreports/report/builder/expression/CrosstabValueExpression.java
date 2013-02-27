@@ -35,6 +35,10 @@ import net.sf.dynamicreports.report.definition.DRICrosstabValue;
 public final class CrosstabValueExpression<T> extends AbstractSystemExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	protected CrosstabValueExpression(AbstractCrosstabGroupBuilder<?, ?, ?> group) {
+		super(group.getName());
+	}
+
 	protected CrosstabValueExpression(DRICrosstabValue<T> measure) {
 		super(measure.getName());
 	}

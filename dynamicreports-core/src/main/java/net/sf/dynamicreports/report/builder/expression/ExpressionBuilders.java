@@ -235,6 +235,10 @@ public class ExpressionBuilders {
 		return Expressions.orderBy(measure);
 	}
 
+	public <T> CrosstabValueExpression<T> crosstabValue(AbstractCrosstabGroupBuilder<?, ?, ?> group) {
+		return Expressions.crosstabValue(group);
+	}
+
 	public <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure) {
 		return Expressions.crosstabValue(measure);
 	}

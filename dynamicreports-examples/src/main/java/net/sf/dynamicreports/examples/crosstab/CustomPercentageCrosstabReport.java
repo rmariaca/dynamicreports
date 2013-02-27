@@ -122,7 +122,7 @@ public class CustomPercentageCrosstabReport {
 		private static final long serialVersionUID = 1L;
 
 		private PercentageExpression(CrosstabMeasureBuilder<BigDecimal> unitPriceMeasure, CrosstabColumnGroupBuilder<String> columnGroup) {
-			addExpression(exp.crosstabValue(unitPriceMeasure));
+			addExpression(unitPriceMeasure);
 			addExpression(exp.crosstabValue(unitPriceMeasure, columnGroup));
 		}
 

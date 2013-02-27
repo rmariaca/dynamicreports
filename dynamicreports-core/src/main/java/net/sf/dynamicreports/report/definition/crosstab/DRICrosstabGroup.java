@@ -27,6 +27,7 @@ import java.util.Comparator;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
@@ -48,6 +49,8 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 	public DRIValueFormatter<?, ? super T> getHeaderValueFormatter();
 
 	public Boolean getHeaderStretchWithOverflow();
+
+	public DRIHyperLink getHeaderHyperLink();
 
 	public DRIReportStyle getHeaderStyle();
 

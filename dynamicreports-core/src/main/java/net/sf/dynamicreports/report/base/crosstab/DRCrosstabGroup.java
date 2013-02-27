@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.base.crosstab;
 import java.util.Comparator;
 
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -48,6 +49,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private HorizontalAlignment headerHorizontalAlignment;
 	private DRIValueFormatter<?, ? super T> headerValueFormatter;
 	private Boolean headerStretchWithOverflow;
+	private DRHyperLink headerHyperLink;
 	private DRIReportStyle headerStyle;
 	private Boolean showTotal;
 	private CrosstabTotalPosition totalPosition;
@@ -102,6 +104,15 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 
 	public void setHeaderStretchWithOverflow(Boolean headerStretchWithOverflow) {
 		this.headerStretchWithOverflow = headerStretchWithOverflow;
+	}
+
+	@Override
+	public DRHyperLink getHeaderHyperLink() {
+		return headerHyperLink;
+	}
+
+	public void setHeaderHyperLink(DRHyperLink headerHyperLink) {
+		this.headerHyperLink = headerHyperLink;
 	}
 
 	@Override

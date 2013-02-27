@@ -254,6 +254,10 @@ public class Expressions {
 		return new OrderByExpression(measure);
 	}
 
+	public static <T> CrosstabValueExpression<T> crosstabValue(AbstractCrosstabGroupBuilder<?, ?, ?> group) {
+		return new CrosstabValueExpression<T>(group);
+	}
+
 	public static <T> CrosstabValueExpression<T> crosstabValue(DRICrosstabValue<T> measure) {
 		return new CrosstabValueExpression<T>(measure);
 	}

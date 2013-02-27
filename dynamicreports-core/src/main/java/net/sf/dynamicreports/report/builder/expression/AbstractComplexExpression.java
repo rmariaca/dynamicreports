@@ -30,6 +30,8 @@ import net.sf.dynamicreports.report.base.DRField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.AbstractCrosstabGroupBuilder;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
@@ -80,6 +82,16 @@ public abstract class AbstractComplexExpression<T> implements DRIComplexExpressi
 	protected void addExpression(DRIExpression<?> expression) {
 		Validate.notNull(expression, "expression must not be null");
 		this.expressions.add(expression);
+	}
+
+	protected void addExpression(AbstractCrosstabGroupBuilder<?, ?, ?> crosstabGroup) {
+		Validate.notNull(crosstabGroup, "crosstabGroup must not be null");
+		this.expressions.add(Expressions.crosstabValue(crosstabGroup));
+	}
+
+	protected void addExpression(CrosstabMeasureBuilder<?> crosstabMeasure) {
+		Validate.notNull(crosstabMeasure, "crosstabMeasure must not be null");
+		this.expressions.add(Expressions.crosstabValue(crosstabMeasure));
 	}
 
 	@Override

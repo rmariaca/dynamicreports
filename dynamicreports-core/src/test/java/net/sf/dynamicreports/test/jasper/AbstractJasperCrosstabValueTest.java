@@ -90,7 +90,7 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 		elementValueTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), values);
 	}
 
-	private String getPrefix(int index) {
+	protected String getPrefix(int index) {
 		return crosstabBand + ".crosstab" + index + ".";
 	}
 

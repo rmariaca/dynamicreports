@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -49,6 +50,8 @@ public interface DRICrosstabMeasure<T> extends Serializable {
 	public DRIValueFormatter<?, ? super T> getValueFormatter();
 
 	public Boolean getStretchWithOverflow();
+
+	public DRIHyperLink getHyperLink();
 
 	public List<DRICrosstabCellStyle> getStyles();
 

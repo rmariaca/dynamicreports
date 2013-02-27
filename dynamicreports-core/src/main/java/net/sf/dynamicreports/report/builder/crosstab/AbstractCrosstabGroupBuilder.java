@@ -28,6 +28,7 @@ import net.sf.dynamicreports.report.base.column.DRValueColumn;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabGroup;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
@@ -91,6 +92,22 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 
 	public T setHeaderStretchWithOverflow(Boolean stretchWithOverflow) {
 		getObject().setHeaderStretchWithOverflow(stretchWithOverflow);
+		return (T) this;
+	}
+
+	/**
+	 * Sets the crosstab group header hyperlink.
+	 *
+	 * @param hyperLink the group header hyperlink
+	 * @return a crosstab group builder
+	 */
+	public T setHeaderHyperLink(HyperLinkBuilder hyperLink) {
+		if (hyperLink != null) {
+			getObject().setHeaderHyperLink(hyperLink.getHyperLink());
+		}
+		else {
+			getObject().setHeaderHyperLink(null);
+		}
 		return (T) this;
 	}
 
