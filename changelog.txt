@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.1.1 (2013-02-28)
+---------------------------------------------------
+ - ability to add to a crosstab group or to a crosstab measure hyperlinks
+ - new column attribute was added - setPrintInFirstWholeBand
+ - loading the default font settings from the file fonts.xml can be disabled by setting 'loadSystemFonts' to false in the dynamicreports-defaults.xml configuration
+ - minor bug fixes
+
 Changes in version 3.1.0 (2012-12-19)
 ---------------------------------------------------
  - multiPageList component, see MultiPageListReport for an example 
