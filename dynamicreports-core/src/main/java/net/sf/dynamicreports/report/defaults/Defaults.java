@@ -64,8 +64,7 @@ public class Defaults {
 				is = Defaults.class.getResourceAsStream("/" + resource);
 			}
 		}
-		if (is == null && log.isErrorEnabled()) {
-			log.error("dynamicreports-defaults.xml file not found");
+		if (is == null) {
 			return null;
 		}
 
