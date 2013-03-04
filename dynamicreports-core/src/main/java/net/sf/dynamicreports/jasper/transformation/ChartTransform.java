@@ -164,35 +164,48 @@ public class ChartTransform {
 			jrChart.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrChart.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrChart.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
-			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
-			if (hyperLinkType != null) {
-				jrChart.setHyperlinkType(hyperLinkType);
+			if (hyperLink.getType() != null) {
+				HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+				if (hyperLinkType != null) {
+					jrChart.setHyperlinkType(hyperLinkType);
+				}
+				else {
+					jrChart.setLinkType(hyperLink.getType());
+				}
 			}
-			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
-			if (hyperLinkTarget != null) {
-				jrChart.setHyperlinkTarget(hyperLinkTarget);
+			if (hyperLink.getTarget() != null) {
+				HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+				if (hyperLinkTarget != null) {
+					jrChart.setHyperlinkTarget(hyperLinkTarget);
+				}
+				else {
+					jrChart.setLinkTarget(hyperLink.getTarget());
+				}
 			}
 		}
 
 		DRIDesignChartTitle title = chart.getTitle();
 		jrChart.setTitleColor(title.getColor());
-		if (title.getFont() != null)
+		if (title.getFont() != null) {
 			jrChart.setTitleFont(accessor.getStyleTransform().font(title.getFont()));
+		}
 		jrChart.setTitleExpression(accessor.getExpressionTransform().getExpression(title.getTitle()));
 		jrChart.setTitlePosition(ConstantTransform.chartPosition(title.getPosition()));
 
 		DRIDesignChartSubtitle subtitle = chart.getSubtitle();
 		jrChart.setSubtitleColor(subtitle.getColor());
-		if (subtitle.getFont() != null)
+		if (subtitle.getFont() != null) {
 			jrChart.setSubtitleFont(accessor.getStyleTransform().font(subtitle.getFont()));
+		}
 		jrChart.setSubtitleExpression(accessor.getExpressionTransform().getExpression(subtitle.getTitle()));
 
 		DRIDesignChartLegend legend = chart.getLegend();
 		jrChart.setLegendColor(legend.getColor());
 		jrChart.setLegendBackgroundColor(legend.getBackgroundColor());
 		jrChart.setShowLegend(legend.getShowLegend());
-		if (legend.getFont() != null)
+		if (legend.getFont() != null) {
 			jrChart.setLegendFont(accessor.getStyleTransform().font(legend.getFont()));
+		}
 		jrChart.setLegendPosition(ConstantTransform.chartPosition(legend.getPosition()));
 
 		if (!chart.getCustomizers().isEmpty()) {
@@ -1001,35 +1014,48 @@ public class ChartTransform {
 			settings.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			settings.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			settings.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
-			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
-			if (hyperLinkType != null) {
-				settings.setLinkType(JRHyperlinkHelper.getLinkType(hyperLinkType));
+			if (hyperLink.getType() != null) {
+				HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+				if (hyperLinkType != null) {
+					settings.setLinkType(JRHyperlinkHelper.getLinkType(hyperLinkType));
+				}
+				else {
+					settings.setLinkType(hyperLink.getType());
+				}
 			}
-			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
-			if (hyperLinkTarget != null) {
-				settings.setLinkTarget(JRHyperlinkHelper.getLinkTarget(hyperLinkTarget));
+			if (hyperLink.getTarget() != null) {
+				HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+				if (hyperLinkTarget != null) {
+					settings.setLinkTarget(JRHyperlinkHelper.getLinkTarget(hyperLinkTarget));
+				}
+				else {
+					settings.setLinkTarget(hyperLink.getTarget());
+				}
 			}
 		}
 
 		DRIDesignChartTitle title = chart.getTitle();
 		settings.setTitleColor(title.getColor());
-		if (title.getFont() != null)
+		if (title.getFont() != null) {
 			settings.setTitleFont(accessor.getStyleTransform().font(title.getFont()));
+		}
 		settings.setTitleExpression(accessor.getExpressionTransform().getExpression(title.getTitle()));
 		settings.setTitlePosition(ConstantTransform.chartPosition(title.getPosition()));
 
 		DRIDesignChartSubtitle subtitle = chart.getSubtitle();
 		settings.setSubtitleColor(subtitle.getColor());
-		if (subtitle.getFont() != null)
+		if (subtitle.getFont() != null) {
 			settings.setSubtitleFont(accessor.getStyleTransform().font(subtitle.getFont()));
+		}
 		settings.setSubtitleExpression(accessor.getExpressionTransform().getExpression(subtitle.getTitle()));
 
 		DRIDesignChartLegend legend = chart.getLegend();
 		settings.setLegendColor(legend.getColor());
 		settings.setLegendBackgroundColor(legend.getBackgroundColor());
 		settings.setShowLegend(legend.getShowLegend());
-		if (legend.getFont() != null)
+		if (legend.getFont() != null) {
 			settings.setLegendFont(accessor.getStyleTransform().font(legend.getFont()));
+		}
 		settings.setLegendPosition(ConstantTransform.chartPosition(legend.getPosition()));
 
 		if (!chart.getCustomizers().isEmpty()) {

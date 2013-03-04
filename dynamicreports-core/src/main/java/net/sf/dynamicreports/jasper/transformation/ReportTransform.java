@@ -198,13 +198,23 @@ public class ReportTransform {
 		jrHyperLink.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 		jrHyperLink.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 		jrHyperLink.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
-		HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
-		if (hyperLinkType != null) {
-			jrHyperLink.setHyperlinkType(hyperLinkType);
+		if (hyperLink.getType() != null) {
+			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+			if (hyperLinkType != null) {
+				jrHyperLink.setHyperlinkType(hyperLinkType);
+			}
+			else {
+				jrHyperLink.setLinkType(hyperLink.getType());
+			}
 		}
-		HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
-		if (hyperLinkTarget != null) {
-			jrHyperLink.setHyperlinkTarget(hyperLinkTarget);
+		if (hyperLink.getTarget() != null) {
+			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+			if (hyperLinkTarget != null) {
+				jrHyperLink.setHyperlinkTarget(hyperLinkTarget);
+			}
+			else {
+				jrHyperLink.setLinkTarget(hyperLink.getTarget());
+			}
 		}
 
 		return jrHyperLink;

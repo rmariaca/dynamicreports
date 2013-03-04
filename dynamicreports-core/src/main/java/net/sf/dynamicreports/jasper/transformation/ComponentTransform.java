@@ -294,13 +294,23 @@ public class ComponentTransform {
 			jrTextField.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrTextField.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrTextField.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
-			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
-			if (hyperLinkType != null) {
-				jrTextField.setHyperlinkType(hyperLinkType);
+			if (hyperLink.getType() != null) {
+				HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+				if (hyperLinkType != null) {
+					jrTextField.setHyperlinkType(hyperLinkType);
+				}
+				else {
+					jrTextField.setLinkType(hyperLink.getType());
+				}
 			}
-			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
-			if (hyperLinkTarget != null) {
-				jrTextField.setHyperlinkTarget(hyperLinkTarget);
+			if (hyperLink.getTarget() != null) {
+				HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+				if (hyperLinkTarget != null) {
+					jrTextField.setHyperlinkTarget(hyperLinkTarget);
+				}
+				else {
+					jrTextField.setLinkTarget(hyperLink.getTarget());
+				}
 			}
 		}
 
@@ -347,13 +357,23 @@ public class ComponentTransform {
 			jrImage.setHyperlinkPageExpression(accessor.getExpressionTransform().getExpression(hyperLink.getPageExpression()));
 			jrImage.setHyperlinkReferenceExpression(accessor.getExpressionTransform().getExpression(hyperLink.getReferenceExpression()));
 			jrImage.setHyperlinkTooltipExpression(accessor.getExpressionTransform().getExpression(hyperLink.getTooltipExpression()));
-			HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
-			if (hyperLinkType != null) {
-				jrImage.setHyperlinkType(hyperLinkType);
+			if (hyperLink.getType() != null) {
+				HyperlinkTypeEnum hyperLinkType = ConstantTransform.hyperLinkType(hyperLink.getType());
+				if (hyperLinkType != null) {
+					jrImage.setHyperlinkType(hyperLinkType);
+				}
+				else {
+					jrImage.setLinkType(hyperLink.getType());
+				}
 			}
-			HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
-			if (hyperLinkTarget != null) {
-				jrImage.setHyperlinkTarget(hyperLinkTarget);
+			if (hyperLink.getTarget() != null) {
+				HyperlinkTargetEnum hyperLinkTarget = ConstantTransform.hyperLinkTarget(hyperLink.getTarget());
+				if (hyperLinkTarget != null) {
+					jrImage.setHyperlinkTarget(hyperLinkTarget);
+				}
+				else {
+					jrImage.setLinkTarget(hyperLink.getTarget());
+				}
 			}
 		}
 

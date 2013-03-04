@@ -23,8 +23,6 @@
 package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HyperLinkTarget;
-import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -38,8 +36,8 @@ public class DRHyperLink implements DRIHyperLink {
 	private DRIExpression<Integer> pageExpression;
 	private DRIExpression<String> referenceExpression;
 	private DRIExpression<String> tooltipExpression;
-	private HyperLinkType hyperLinkType;
-	private HyperLinkTarget hyperLinkTarget;
+	private String hyperLinkType;
+	private String hyperLinkTarget;
 
 	@Override
 	public DRIExpression<String> getAnchorExpression() {
@@ -78,20 +76,20 @@ public class DRHyperLink implements DRIHyperLink {
 	}
 
 	@Override
-	public HyperLinkType getType() {
+	public String getType() {
 		return hyperLinkType;
 	}
 
-	public void setType(HyperLinkType hyperLinkType) {
+	public void setType(String hyperLinkType) {
 		this.hyperLinkType = hyperLinkType;
 	}
 
 	@Override
-	public HyperLinkTarget getTarget() {
+	public String getTarget() {
 		return hyperLinkTarget;
 	}
 
-	public void setTarget(HyperLinkTarget hyperLinkTarget) {
+	public void setTarget(String hyperLinkTarget) {
 		this.hyperLinkTarget = hyperLinkTarget;
 	}
 }

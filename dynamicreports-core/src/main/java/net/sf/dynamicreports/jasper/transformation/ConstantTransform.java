@@ -108,6 +108,7 @@ import net.sf.jasperreports.engine.type.TabStopAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Millisecond;
@@ -910,12 +911,13 @@ public class ConstantTransform {
 		}
 	}
 
-	public static HyperlinkTypeEnum hyperLinkType(HyperLinkType hyperLinkType) {
-		if (hyperLinkType == null) {
+	public static HyperlinkTypeEnum hyperLinkType(String hyperLinkType) {
+		if (hyperLinkType == null || !EnumUtils.isValidEnum(HyperLinkType.class, hyperLinkType)) {
 			return null;
 		}
 
-		switch (hyperLinkType) {
+		HyperLinkType type = HyperLinkType.valueOf(hyperLinkType);
+		switch (type) {
 		case NONE:
 			return HyperlinkTypeEnum.NONE;
 		case REFERENCE:
@@ -929,16 +931,17 @@ public class ConstantTransform {
 		case REMOTE_PAGE:
 			return HyperlinkTypeEnum.REMOTE_PAGE;
 		default:
-			throw new JasperDesignException("HyperLinkType " + hyperLinkType.name() + " not supported");
+			throw new JasperDesignException("HyperLinkType " + type.name() + " not supported");
 		}
 	}
 
-	public static HyperlinkTargetEnum hyperLinkTarget(HyperLinkTarget hyperLinkTarget) {
-		if (hyperLinkTarget == null) {
+	public static HyperlinkTargetEnum hyperLinkTarget(String hyperLinkTarget) {
+		if (hyperLinkTarget == null || !EnumUtils.isValidEnum(HyperLinkTarget.class, hyperLinkTarget)) {
 			return null;
 		}
 
-		switch (hyperLinkTarget) {
+		HyperLinkTarget target = HyperLinkTarget.valueOf(hyperLinkTarget);
+		switch (target) {
 		case NONE:
 			return HyperlinkTargetEnum.NONE;
 		case SELF:
@@ -950,7 +953,7 @@ public class ConstantTransform {
 		case TOP:
 			return HyperlinkTargetEnum.TOP;
 		default:
-			throw new JasperDesignException("HyperLinkTarget " + hyperLinkTarget.name() + " not supported");
+			throw new JasperDesignException("HyperLinkTarget " + target.name() + " not supported");
 		}
 	}
 

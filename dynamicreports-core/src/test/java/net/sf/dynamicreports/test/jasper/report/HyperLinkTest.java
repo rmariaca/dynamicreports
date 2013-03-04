@@ -40,16 +40,20 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		HyperLinkBuilder hyperLink = hyperLink()
+		HyperLinkBuilder hyperLink1 = hyperLink()
 			.setReference("reference")
 			.setTooltip("tooltip")
 			.setAnchor("anchor")
 			.setPage(1)
 			.setType(HyperLinkType.LOCAL_ANCHOR)
 			.setTarget(HyperLinkTarget.TOP);
+		HyperLinkBuilder hyperLink2 = hyperLink()
+			.setType("customType")
+			.setTarget("customTarget");
 
 		rb.title(
-			cmp.text("title 1").setHyperLink(hyperLink).setAnchorName("anchorName").setBookmarkLevel(1));
+			cmp.text("title 1").setHyperLink(hyperLink1).setAnchorName("anchorName").setBookmarkLevel(1),
+			cmp.text("title 2").setHyperLink(hyperLink2));
 	}
 
 	@Override
@@ -66,6 +70,14 @@ public class HyperLinkTest extends AbstractJasperValueTest {
 		Assert.assertEquals("hyperlink bookmark level", 1, textField.getBookmarkLevel());
 		Assert.assertEquals("hyperlink page", new Integer(1), textField.getHyperlinkPage());
 		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.LOCAL_ANCHOR, textField.getHyperlinkTypeValue());
+		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.LOCAL_ANCHOR.getName(), textField.getLinkType());
 		Assert.assertEquals("hyperlink target", HyperlinkTargetEnum.TOP, textField.getHyperlinkTargetValue());
+		Assert.assertEquals("hyperlink target", HyperlinkTargetEnum.TOP.getName(), textField.getLinkTarget());
+
+		textField = (JRPrintText) getElementAt("title.textField2", 0);
+		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.CUSTOM, textField.getHyperlinkTypeValue());
+		Assert.assertEquals("hyperlink type reference", "customType", textField.getLinkType());
+		Assert.assertEquals("hyperlink target", HyperlinkTargetEnum.CUSTOM, textField.getHyperlinkTargetValue());
+		Assert.assertEquals("hyperlink target", "customTarget", textField.getLinkTarget());
 	}
 }

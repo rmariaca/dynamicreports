@@ -24,8 +24,6 @@ package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
 
-import net.sf.dynamicreports.report.constant.HyperLinkTarget;
-import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -41,7 +39,7 @@ public interface DRIHyperLink extends Serializable {
 
 	public DRIExpression<String> getTooltipExpression();
 
-	public HyperLinkType getType();
+	public String getType();
 
-	public HyperLinkTarget getTarget();
+	public String getTarget();
 }

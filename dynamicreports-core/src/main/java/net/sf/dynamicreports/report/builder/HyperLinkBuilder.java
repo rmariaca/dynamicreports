@@ -59,7 +59,7 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 	public HyperLinkBuilder setLink(DRIExpression<String> linkExpression) {
 		Validate.notNull(linkExpression, "linkExpression must not be null");
 		getObject().setReferenceExpression(linkExpression);
-		getObject().setType(HyperLinkType.REFERENCE);
+		getObject().setType(HyperLinkType.REFERENCE.name());
 		return this;
 	}
 
@@ -104,11 +104,21 @@ public class HyperLinkBuilder extends AbstractBuilder<HyperLinkBuilder, DRHyperL
 	}
 
 	public HyperLinkBuilder setType(HyperLinkType hyperLinkType) {
+		getObject().setType(hyperLinkType.name());
+		return this;
+	}
+
+	public HyperLinkBuilder setType(String hyperLinkType) {
 		getObject().setType(hyperLinkType);
 		return this;
 	}
 
 	public HyperLinkBuilder setTarget(HyperLinkTarget hyperLinkTarget) {
+		getObject().setTarget(hyperLinkTarget.name());
+		return this;
+	}
+
+	public HyperLinkBuilder setTarget(String hyperLinkTarget) {
 		getObject().setTarget(hyperLinkTarget);
 		return this;
 	}
