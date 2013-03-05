@@ -48,7 +48,12 @@ public class PageNumberPositionTest extends AbstractJasperPositionTest {
 					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.RIGHT),
 					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.JUSTIFIED),
 					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.CENTER),
-					cmp.horizontalList(pageXofYLeft, pageXofYRight, pageXofYLeft, pageXofYRight));
+					cmp.horizontalList(pageXofYLeft, pageXofYRight, pageXofYLeft, pageXofYRight),
+					cmp.pageXofY().setPageXFixedWidth(20),
+					cmp.pageXofY().setPageYFixedWidth(25),
+					cmp.pageXslashY().setPageXFixedWidth(30),
+					cmp.pageXslashY().setPageYFixedWidth(35),
+					cmp.pageXofY().setPageXFixedWidth(18).setPageYFixedWidth(22));
 	}
 
 	@Override
@@ -82,5 +87,20 @@ public class PageNumberPositionTest extends AbstractJasperPositionTest {
 
 		elementPositionTest("pageFooter.textField17", 0, 0, 0, 90, 12);
 		elementPositionTest("pageFooter.textField18", 0, 90, 0, 54, 12);
+
+		elementPositionTest("pageFooter.textField19", 0, 0, 0, 20, 16);
+		elementPositionTest("pageFooter.textField20", 0, 20, 0, 555, 16);
+
+		elementPositionTest("pageFooter.textField21", 0, 0, 0, 550, 16);
+		elementPositionTest("pageFooter.textField22", 0, 550, 0, 25, 16);
+
+		elementPositionTest("pageFooter.textField23", 0, 0, 0, 30, 16);
+		elementPositionTest("pageFooter.textField24", 0, 30, 0, 545, 16);
+
+		elementPositionTest("pageFooter.textField25", 0, 0, 0, 540, 16);
+		elementPositionTest("pageFooter.textField26", 0, 540, 0, 35, 16);
+
+		elementPositionTest("pageFooter.textField27", 0, 0, 0, 18, 16);
+		elementPositionTest("pageFooter.textField28", 0, 18, 0, 22, 16);
 	}
 }

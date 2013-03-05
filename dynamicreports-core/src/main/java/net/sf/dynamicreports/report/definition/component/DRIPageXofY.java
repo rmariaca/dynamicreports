@@ -22,10 +22,20 @@
 
 package net.sf.dynamicreports.report.definition.component;
 
+import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface DRIPageXofY extends DRIFormatField {
+
+	public Integer getPageXWidth();
+
+	public ComponentDimensionType getPageXWidthType();
+
+	public Integer getPageYWidth();
+
+	public ComponentDimensionType getPageYWidthType();
 
 }
 

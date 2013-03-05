@@ -470,7 +470,7 @@ public class ComponentTransform {
 			pageYField.setEvaluationGroup((DRGroup) pageYEvaluationGroup);
 		}
 
-		int pageXofYWidth = templateTransform.getPageXofYWidth(pageXofY, style);
+		int pageXofYWidth = templateTransform.getPageXofYWidth(pageXofY);
 		switch (horizontalAlignment) {
 		case LEFT:
 			int pageXWidth = StyleResolver.getFontWidth(style, 4);
@@ -500,6 +500,19 @@ public class ComponentTransform {
 			pageYField.setWidth(pageXofYWidth / 2);
 			pageYField.setWidthType(pageXofY.getWidthType());
 			break;
+		}
+
+		if (pageXofY.getPageXWidth() != null) {
+			pageXField.setWidth(pageXofY.getPageXWidth());
+		}
+		if (pageXofY.getPageXWidthType() != null) {
+			pageXField.setWidthType(pageXofY.getPageXWidthType());
+		}
+		if (pageXofY.getPageYWidth() != null) {
+			pageYField.setWidth(pageXofY.getPageYWidth());
+		}
+		if (pageXofY.getPageYWidthType() != null) {
+			pageYField.setWidthType(pageXofY.getPageYWidthType());
 		}
 
 		DRList listPageXofY = new DRList();

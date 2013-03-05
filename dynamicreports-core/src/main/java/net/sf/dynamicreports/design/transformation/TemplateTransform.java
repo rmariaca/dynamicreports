@@ -1054,7 +1054,7 @@ public class TemplateTransform {
 	}
 
 	//page x of y
-	protected int getPageXofYWidth(DRIPageXofY pageXofY, DRDesignStyle style) {
+	protected int getPageXofYWidth(DRIPageXofY pageXofY) {
 		if (pageXofY.getWidth() != null) {
 			return pageXofY.getWidth();
 		}

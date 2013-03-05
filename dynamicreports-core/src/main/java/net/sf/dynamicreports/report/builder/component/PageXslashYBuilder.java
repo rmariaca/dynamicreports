@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRPageXofY;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
+import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 
 /**
@@ -34,6 +35,82 @@ public class PageXslashYBuilder extends AbstractFormatFieldBuilder<PageXslashYBu
 
 	protected PageXslashYBuilder() {
 		super(new DRPageXofY());
+	}
+
+  /**
+   * Sets the pageX component preferred width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageX component preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageXWidth(Integer width) {
+		getObject().setPageXWidth(width);
+		return this;
+	}
+
+  /**
+   * Sets the pageX component fixed width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageX component fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageXFixedWidth(Integer width) {
+		getObject().setPageXWidth(width);
+		getObject().setPageXWidthType(ComponentDimensionType.FIXED);
+		return this;
+	}
+
+  /**
+   * Sets the pageX component minimum width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageX component minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageXMinWidth(Integer width) {
+		getObject().setPageXWidth(width);
+		getObject().setPageXWidthType(ComponentDimensionType.EXPAND);
+		return this;
+	}
+
+  /**
+   * Sets the pageY component preferred width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageY component preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageYWidth(Integer width) {
+		getObject().setPageYWidth(width);
+		return this;
+	}
+
+  /**
+   * Sets the pageY component fixed width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageY component fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageYFixedWidth(Integer width) {
+		getObject().setPageYWidth(width);
+		getObject().setPageYWidthType(ComponentDimensionType.FIXED);
+		return this;
+	}
+
+  /**
+   * Sets the pageY component minimum width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the pageY component minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public PageXslashYBuilder setPageYMinWidth(Integer width) {
+		getObject().setPageYWidth(width);
+		getObject().setPageYWidthType(ComponentDimensionType.EXPAND);
+		return this;
 	}
 
 	@Override
