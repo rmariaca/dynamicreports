@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.definition;
 
+import net.sf.dynamicreports.report.constant.ComponentDimensionType;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
@@ -40,6 +42,12 @@ public interface DRISubtotal<T> extends DRIExpression<T>, DRIValue<T> {
 	public DRIExpression<?> getLabelExpression();
 
 	public DRIReportStyle getLabelStyle();
+
+	public Position getLabelPosition();
+
+	public Integer getLabelWidth();
+
+	public ComponentDimensionType getLabelWidthType();
 
 	public SubtotalPosition getPosition();
 

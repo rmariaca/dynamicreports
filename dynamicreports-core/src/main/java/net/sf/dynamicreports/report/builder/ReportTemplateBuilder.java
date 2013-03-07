@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -406,6 +407,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setGroupHeaderWithSubtotal(Boolean groupHeaderWithSubtotal) {
 		getObject().setGroupHeaderWithSubtotal(groupHeaderWithSubtotal);
+		return this;
+	}
+
+	public ReportTemplateBuilder setSubtotalLabelPosition(Position subtotalLabelPosition) {
+		getObject().setSubtotalLabelPosition(subtotalLabelPosition);
 		return this;
 	}
 

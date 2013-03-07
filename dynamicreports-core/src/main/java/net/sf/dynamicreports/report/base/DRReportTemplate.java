@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -105,6 +106,8 @@ public class DRReportTemplate implements DRIReportTemplate {
 	private GroupFooterPosition groupFooterPosition;
 	private Boolean groupKeepTogether;
 	private Boolean groupHeaderWithSubtotal;
+	//subtotal
+	private Position subtotalLabelPosition;
 	//table of contents
 	public Boolean tableOfContents;
 	public DRITableOfContentsCustomizer tableOfContentsCustomizer;
@@ -669,6 +672,15 @@ public class DRReportTemplate implements DRIReportTemplate {
 
 	public void setGroupHeaderWithSubtotal(Boolean groupHeaderWithSubtotal) {
 		this.groupHeaderWithSubtotal = groupHeaderWithSubtotal;
+	}
+
+	@Override
+	public Position getSubtotalLabelPosition() {
+		return subtotalLabelPosition;
+	}
+
+	public void setSubtotalLabelPosition(Position subtotalLabelPosition) {
+		this.subtotalLabelPosition = subtotalLabelPosition;
 	}
 
 	@Override

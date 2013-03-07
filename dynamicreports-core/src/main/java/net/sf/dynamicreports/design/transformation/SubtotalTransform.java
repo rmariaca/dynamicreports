@@ -38,6 +38,7 @@ import net.sf.dynamicreports.report.base.component.DRFiller;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.definition.DRIBand;
@@ -77,10 +78,7 @@ public class SubtotalTransform {
 			DRDesignTextField subtotalValueComponent = valueComponent(subtotal);
 			DRDesignComponent subtotalComponent = subtotalValueComponent;
 			if (subtotal.getLabelExpression() != null) {
-				DRDesignList list = new DRDesignList(ListType.VERTICAL);
-				list.addComponent(horizontalAlignment, verticalAlignment, labelComponent(subtotal));
-				list.addComponent(horizontalAlignment, verticalAlignment, subtotalComponent);
-				subtotalComponent = list;
+				subtotalComponent = subtotalWithLabelComponent(subtotal, subtotalComponent);
 			}
 			switch (position) {
 			case TITLE:
@@ -200,6 +198,56 @@ public class SubtotalTransform {
 		}
 		addBeforeBandComponent(accessor.getBandTransform().getLastPageFooterBand(), lastPageFooter, filler);
 		addBeforeBandComponent(accessor.getBandTransform().getSummaryBand(), summary, filler);
+	}
+
+	private DRDesignComponent subtotalWithLabelComponent(DRISubtotal<?> subtotal, DRDesignComponent subtotalComponent) throws DRException {
+		HorizontalCellComponentAlignment horizontalAlignment = HorizontalCellComponentAlignment.FLOAT;
+		VerticalCellComponentAlignment verticalAlignment = VerticalCellComponentAlignment.TOP;
+		DRDesignList list = new DRDesignList();
+
+		Position labelPosition = accessor.getTemplateTransform().getSubtotalLabelPosition(subtotal);
+		switch (labelPosition) {
+		case TOP:
+			list.setType(ListType.VERTICAL);
+			list.addComponent(horizontalAlignment, verticalAlignment, labelComponent(subtotal));
+			list.addComponent(horizontalAlignment, verticalAlignment, subtotalComponent);
+			break;
+		case BOTTOM:
+			list.setType(ListType.VERTICAL);
+			list.addComponent(horizontalAlignment, verticalAlignment, subtotalComponent);
+			list.addComponent(horizontalAlignment, verticalAlignment, labelComponent(subtotal));
+			break;
+		case LEFT:
+			list.setType(ListType.HORIZONTAL);
+			DRDesignComponent labelComponent = labelComponent(subtotal);
+			if (subtotal.getLabelWidth() != null) {
+				labelComponent.setWidth(subtotal.getLabelWidth());
+			}
+			HorizontalCellComponentAlignment labelHorizontalAlignment = horizontalAlignment;
+			if (subtotal.getLabelWidthType() != null) {
+				labelHorizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(subtotal.getLabelWidthType());
+			}
+			list.addComponent(labelHorizontalAlignment, VerticalCellComponentAlignment.EXPAND, labelComponent);
+			list.addComponent(horizontalAlignment, VerticalCellComponentAlignment.EXPAND, subtotalComponent);
+			break;
+		case RIGHT:
+			list.setType(ListType.HORIZONTAL);
+			labelComponent = labelComponent(subtotal);
+			if (subtotal.getLabelWidth() != null) {
+				labelComponent.setWidth(subtotal.getLabelWidth());
+			}
+			labelHorizontalAlignment = horizontalAlignment;
+			if (subtotal.getLabelWidthType() != null) {
+				labelHorizontalAlignment = ConstantTransform.toHorizontalCellComponentAlignment(subtotal.getLabelWidthType());
+			}
+			list.addComponent(horizontalAlignment, VerticalCellComponentAlignment.EXPAND, subtotalComponent);
+			list.addComponent(labelHorizontalAlignment, VerticalCellComponentAlignment.EXPAND, labelComponent);
+			break;
+		default:
+			throw new DRDesignReportException("Subtotal label position " + labelPosition.name() + " not supported");
+		}
+
+		return list;
 	}
 
 	private ColumnGrid getGroupGrid(DRIGroup group, Map<DRIGroup, ColumnGrid> groupList) throws DRException {

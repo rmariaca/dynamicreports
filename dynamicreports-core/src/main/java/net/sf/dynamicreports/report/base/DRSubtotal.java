@@ -24,7 +24,9 @@ package net.sf.dynamicreports.report.base;
 
 import net.sf.dynamicreports.report.base.column.DRColumn;
 import net.sf.dynamicreports.report.base.component.DRTextField;
+import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -45,6 +47,9 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 
 	private DRIExpression<?> labelExpression;
 	private DRIReportStyle labelStyle;
+	private Position labelPosition;
+	private Integer labelWidth;
+	private ComponentDimensionType labelWidthType;
 
 	public DRSubtotal(DRColumn<?> showInColumn) {
 		setShowInColumn(showInColumn);
@@ -86,6 +91,33 @@ public class DRSubtotal<T> implements DRISubtotal<T> {
 
 	public void setLabelStyle(DRIReportStyle labelStyle) {
 		this.labelStyle = labelStyle;
+	}
+
+	@Override
+	public Position getLabelPosition() {
+		return labelPosition;
+	}
+
+	public void setLabelPosition(Position labelPosition) {
+		this.labelPosition = labelPosition;
+	}
+
+	@Override
+	public Integer getLabelWidth() {
+		return labelWidth;
+	}
+
+	public void setLabelWidth(Integer labelWidth) {
+		this.labelWidth = labelWidth;
+	}
+
+	@Override
+	public ComponentDimensionType getLabelWidthType() {
+		return labelWidthType;
+	}
+
+	public void setLabelWidthType(ComponentDimensionType labelWidthType) {
+		this.labelWidthType = labelWidthType;
 	}
 
 	@Override

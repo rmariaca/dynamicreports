@@ -50,6 +50,7 @@ import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.StretchType;
@@ -63,6 +64,7 @@ import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIReportTemplate;
+import net.sf.dynamicreports.report.definition.DRISubtotal;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
@@ -966,6 +968,17 @@ public class TemplateTransform {
 			return group.getGroupByDataType();
 		}
 		return Defaults.getDefaults().isGroupByDataType();
+	}
+
+	//subtotal
+	public Position getSubtotalLabelPosition(DRISubtotal<?> subtotal) {
+		if (subtotal.getLabelPosition() != null) {
+			return subtotal.getLabelPosition();
+		}
+		if (template.getSubtotalLabelPosition() != null) {
+			return template.getSubtotalLabelPosition();
+		}
+		return Defaults.getDefaults().getSubtotalLabelPosition();
 	}
 
 	//text field

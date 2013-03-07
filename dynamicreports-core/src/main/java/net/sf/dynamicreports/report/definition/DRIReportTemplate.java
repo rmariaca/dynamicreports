@@ -32,6 +32,7 @@ import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -141,6 +142,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getGroupKeepTogether();
 
 	public Boolean getGroupHeaderWithSubtotal();
+
+	public Position getSubtotalLabelPosition();
 
 	public Boolean getTableOfContents();
 

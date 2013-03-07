@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -78,6 +79,49 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		else {
 			getObject().setLabelStyle(null);
 		}
+		return (T) this;
+	}
+
+	public T setLabelPosition(Position labelPosition) {
+		getObject().setLabelPosition(labelPosition);
+		return (T) this;
+	}
+
+  /**
+   * Sets the label component preferred width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the label component preferred width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public T setLabelWidth(Integer width) {
+		getObject().setLabelWidth(width);
+		return (T) this;
+	}
+
+  /**
+   * Sets the label component fixed width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the label component fixed width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public T setLabelFixedWidth(Integer width) {
+		getObject().setLabelWidth(width);
+		getObject().setLabelWidthType(ComponentDimensionType.FIXED);
+		return (T) this;
+	}
+
+  /**
+   * Sets the label component minimum width.
+   * @see net.sf.dynamicreports.report.builder.Units
+   *
+   * @param width the label component minimum width >= 0
+   * @exception IllegalArgumentException if <code>width</code> is < 0
+   */
+	public T setLabelMinWidth(Integer width) {
+		getObject().setLabelWidth(width);
+		getObject().setLabelWidthType(ComponentDimensionType.EXPAND);
 		return (T) this;
 	}
 

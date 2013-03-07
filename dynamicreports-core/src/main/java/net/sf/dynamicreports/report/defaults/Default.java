@@ -49,6 +49,7 @@ import net.sf.dynamicreports.report.constant.Language;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
@@ -121,6 +122,8 @@ public class Default {
 	private boolean groupKeepTogether;
 	private boolean groupHeaderWithSubtotal;
 	private boolean groupByDataType;
+	//subtotal
+	private Position subtotalLabelPosition;
 	//table of contents
 	private boolean tableOfContents;
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
@@ -329,6 +332,8 @@ public class Default {
 		this.groupKeepTogether = false;
 		this.groupHeaderWithSubtotal = false;
 		this.groupByDataType = false;
+
+		this.subtotalLabelPosition = Position.TOP;
 
 		this.tableOfContents = false;
 		this.tableOfContentsCustomizer = new TableOfContentsCustomizer();
@@ -684,6 +689,10 @@ public class Default {
 
 	public boolean isGroupByDataType() {
 		return groupByDataType;
+	}
+
+	public Position getSubtotalLabelPosition() {
+		return subtotalLabelPosition;
 	}
 
 	public boolean isTableOfContents() {
