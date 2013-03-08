@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:configuration xmlns:ns2="http://www.dynamicreports.org/schema/adhocconfiguration">
+<ns2:configuration xmlns:ns2="http://dynamicreports.sourceforge.net/schema/adhocconfiguration">
     <report>
         <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:Chart" type="AREA" title="title" titleColor="#FF00FF" showLegend="true" xValue="field2" orientation="VERTICAL" key="chart1">
             <property key="net.sf.dynamicreports.chart.useseriesascategory" valueClass="java.lang.Boolean">true</property>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="http://www.dynamicreports.org/schema/adhocconfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.dynamicreports.org/schema/adhocconfiguration">
+<xs:schema xmlns="http://dynamicreports.sourceforge.net/schema/adhocconfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://dynamicreports.sourceforge.net/schema/adhocconfiguration">
 	
 	<xs:element name="configuration" type="Configuration">
 	</xs:element>
