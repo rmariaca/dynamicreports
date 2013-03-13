@@ -481,6 +481,7 @@
 							<finalName>dynamicreports-${project.version}</finalName>
 							<descriptors>
 								<descriptor>src/assemblies/site.xml</descriptor>
+								<descriptor>src/assemblies/site_apidocs.xml</descriptor>
 							</descriptors>
 						</configuration>
 						<executions>
