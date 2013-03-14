@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.1.2 (2013-03-14)
+---------------------------------------------------
+ - new subtotal attributes were added - setLabelPosition, setLabelWidth, setLabelFixedWidth, setLabelMinWidth   
+ - added to pageYofY and pageXslashY attributes that allows to set pageX or pageY width
+ - fixed problem with a wrong namespace that was used in the previous verion of dynamicreports-adhoc (3.1.1)
+   The wrong namespace caused problems with loading adhoc configurations from xml files and with saving xml configuration files 
+ - minor bug fixes and improvements
+
 Changes in version 3.1.1 (2013-02-28)
 ---------------------------------------------------
  - ability to add to a crosstab group or to a crosstab measure hyperlinks
