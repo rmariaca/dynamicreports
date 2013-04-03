@@ -139,6 +139,7 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 		pageTransform.transformPageWidth();
 		subtotalTransform.transform();
 		bandTransform.prepareBands();
+		styleTransform.transformTemplateStyles();
 	}
 
 	@Override

@@ -34,7 +34,11 @@ public class StyleBuilder extends BaseStyleBuilder<StyleBuilder, DRStyle> implem
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected StyleBuilder() {
-		super(new DRStyle());
+		this(new DRStyle());
+	}
+
+	protected StyleBuilder(DRStyle style) {
+		super(style);
 	}
 
 	public StyleBuilder conditionalStyles(ConditionalStyleBuilder ...conditionalStyles) {

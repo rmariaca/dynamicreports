@@ -42,7 +42,7 @@ import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.builder.style.TemplateStyleListBuilder;
+import net.sf.dynamicreports.report.builder.style.TemplateStylesBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.PercentageSubtotalBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
@@ -60,7 +60,6 @@ import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 
 import org.apache.commons.lang3.Validate;
 
@@ -326,16 +325,16 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	}
 
 	//template style
-	public T templateStyles(TemplateStyleListBuilder ...templateStyleLists) {
-		return addTemplateStyle(templateStyleLists);
+	public T templateStyles(TemplateStylesBuilder ...templateStyles) {
+		return addTemplateStyle(templateStyles);
 	}
 
-	public T addTemplateStyle(TemplateStyleListBuilder ...templateStyleLists) {
-		Validate.notNull(templateStyleLists, "templateStyleLists must not be null");
-		Validate.noNullElements(templateStyleLists, "templateStyleLists must not contains null templateStyleLists");
-		for (TemplateStyleListBuilder templateStyle : templateStyleLists) {
-			for (DRIStyle style : templateStyle.getStyles()) {
-				getObject().addTemplateStyle(style);
+	public T addTemplateStyle(TemplateStylesBuilder ...templateStyles) {
+		Validate.notNull(templateStyles, "templateStyles must not be null");
+		Validate.noNullElements(templateStyles, "templateStyles must not contains null templateStyle");
+		for (TemplateStylesBuilder templateStyle : templateStyles) {
+			for (StyleBuilder style : templateStyle.getStyles()) {
+				addTemplateStyle(style);
 			}
 		}
 		return (T) this;

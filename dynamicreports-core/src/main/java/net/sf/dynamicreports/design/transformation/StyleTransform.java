@@ -80,6 +80,7 @@ public class StyleTransform {
 	private void init() {
 		styles = new LinkedHashMap<String, DRIDesignStyle>();
 		designStyles = new HashMap<String, DRDesignStyle>();
+		templateStyles = accessor.getTemplateTransform().getTemplateStyles();
 	}
 
 	private DRDesignStyle transformStyle(DRIReportStyle style, boolean textStyle) throws DRException {
@@ -172,9 +173,6 @@ public class StyleTransform {
 			return (DRIStyle) reportStyle;
 		}
 		if (reportStyle instanceof DRITemplateStyle) {
-			if (templateStyles == null) {
-				templateStyles = accessor.getTemplateTransform().getTemplateStyles();
-			}
 			String name = ((DRITemplateStyle) reportStyle).getName();
 			DRIStyle style = templateStyles.get(name);
 			if (style == null) {
@@ -183,6 +181,15 @@ public class StyleTransform {
 			return style;
 		}
 		throw new DRDesignReportException("Style " + reportStyle.getClass().getName() + " not supported");
+	}
+
+	public void transformTemplateStyles() throws DRException {
+		for (DRIStyle style : templateStyles.values()) {
+			if (styles.containsKey(style.getName())) {
+				continue;
+			}
+			transformStyle(style, false);
+		}
 	}
 
 	private DRDesignConditionalStyle conditionalStyle(DRIConditionalStyle conditionalStyle) throws DRException {

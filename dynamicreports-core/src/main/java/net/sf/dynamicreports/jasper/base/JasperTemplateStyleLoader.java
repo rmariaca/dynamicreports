@@ -46,7 +46,6 @@ import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRConditionalStyle;
 import net.sf.jasperreports.engine.JRException;
@@ -72,12 +71,12 @@ import org.apache.commons.lang3.Validate;
  */
 public class JasperTemplateStyleLoader {
 
-	public static DRIStyle[] loadStyles(File file) {
+	public static DRStyle[] loadStyles(File file) {
 		Validate.notNull(file, "file must not be null");
 		return loadStyles(JRXmlTemplateLoader.load(file));
 	}
 
-	public static DRIStyle[] loadStyles(String fileName) throws DRException {
+	public static DRStyle[] loadStyles(String fileName) throws DRException {
 		Validate.notNull(fileName, "fileName must not be null");
 		try {
 			return loadStyles(JRXmlTemplateLoader.load(fileName));
@@ -86,20 +85,20 @@ public class JasperTemplateStyleLoader {
 		}
 	}
 
-	public static DRIStyle[] loadStyles(InputStream inputStream) {
+	public static DRStyle[] loadStyles(InputStream inputStream) {
 		Validate.notNull(inputStream, "inputStream must not be null");
 		return loadStyles(JRXmlTemplateLoader.load(inputStream));
 	}
 
-	public static DRIStyle[] loadStyles(URL url) {
+	public static DRStyle[] loadStyles(URL url) {
 		Validate.notNull(url, "url must not be null");
 		return loadStyles(JRXmlTemplateLoader.load(url));
 	}
 
-	private static DRIStyle[] loadStyles(JRTemplate template) {
+	private static DRStyle[] loadStyles(JRTemplate template) {
 		Validate.notNull(template, "template must not be null");
 		JRStyle[] jrStyles = template.getStyles();
-		DRIStyle[] styles = new DRIStyle[jrStyles.length];
+		DRStyle[] styles = new DRStyle[jrStyles.length];
 		for (int i = 0; i < jrStyles.length; i++) {
 			JRStyle jrStyle = jrStyles[i];
 			styles[i] = convertStyle(jrStyle);

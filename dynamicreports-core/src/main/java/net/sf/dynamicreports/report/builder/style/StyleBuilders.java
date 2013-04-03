@@ -154,19 +154,23 @@ public class StyleBuilders {
 		return Styles.conditionalStyle(conditionExpression);
 	}
 
-	public TemplateStyleFileBuilder loadStyles(InputStream inputStream) {
+	public TemplateStylesBuilder templateStyles() {
+		return Styles.templateStyles();
+	}
+
+	public TemplateStylesBuilder loadStyles(InputStream inputStream) {
 		return Styles.loadStyles(inputStream);
 	}
 
-	public TemplateStyleFileBuilder loadStyles(File file) {
+	public TemplateStylesBuilder loadStyles(File file) {
 		return Styles.loadStyles(file);
 	}
 
-	public TemplateStyleFileBuilder loadStyles(String fileName) throws DRException {
+	public TemplateStylesBuilder loadStyles(String fileName) throws DRException {
 		return Styles.loadStyles(fileName);
 	}
 
-	public TemplateStyleFileBuilder loadStyles(URL url) {
+	public TemplateStylesBuilder loadStyles(URL url) {
 		return Styles.loadStyles(url);
 	}
 }
