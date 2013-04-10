@@ -25,9 +25,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk</connection>
-		<developerConnection>scm:svn:https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/trunk</developerConnection>
-		<url>http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/trunk</url>
+		<connection>scm:svn:http://svn.code.sf.net/p/dynamicreports/code/trunk</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/dynamicreports/code/trunk</developerConnection>
+		<url>http://svn.code.sf.net/p/dynamicreports/code/trunk</url>
 	</scm>
  
 	<modules>
