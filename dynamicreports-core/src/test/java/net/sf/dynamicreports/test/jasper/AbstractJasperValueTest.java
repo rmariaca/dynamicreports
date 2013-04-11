@@ -28,8 +28,10 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.BaseSubtotalBuilder;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.JRPrintText;
+import net.sf.jasperreports.engine.util.JRStyledTextUtil;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -52,12 +54,16 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 		List<JRPrintElement> elements = findElement(name);
 		Assert.assertTrue(values.length <= elements.size());
 		for (int i = 0; i < values.length; i++) {
-			Assert.assertEquals("element value " + name, values[i], ((JRPrintText) elements.get(i)).getText());
+			JRPrintText textElement = (JRPrintText) elements.get(i);
+			String value = JRStyledTextUtil.getInstance(DefaultJasperReportsContext.getInstance()).getTruncatedText(textElement);
+			Assert.assertEquals("element value " + name, values[i], value);
 		}
 	}
 
 	private String getElementValue(String key, int index) {
-		return ((JRPrintText) getElementAt(key, index)).getText();
+		JRPrintText textElement = (JRPrintText) getElementAt(key, index);
+		String value = JRStyledTextUtil.getInstance(DefaultJasperReportsContext.getInstance()).getTruncatedText(textElement);
+		return value;
 	}
 
 	private String getElementFullValue(String key, int index) {

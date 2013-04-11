@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.DefaultJasperReportsContext;
+import net.sf.jasperreports.engine.JRComponentElement;
 import net.sf.jasperreports.engine.component.Component;
-import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.component.ComponentXmlWriter;
 import net.sf.jasperreports.engine.component.ComponentsEnvironment;
 import net.sf.jasperreports.engine.component.XmlDigesterConfigurer;
@@ -68,15 +68,20 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 	}
 
 	@Override
-	public void writeToXml(ComponentKey componentKey, Component component, JRXmlWriter reportWriter) throws IOException {
-		if (components.containsKey(componentKey.getName())) {
+	public boolean isToWrite(JRComponentElement componentElement, JRXmlWriter reportWriter) {
+		return false;
+	}
+
+	@Override
+	public void writeToXml(JRComponentElement componentElement, JRXmlWriter reportWriter) throws IOException {
+		if (components.containsKey(componentElement.getComponentKey().getName())) {
 			JRXmlWriteHelper writer = reportWriter.getXmlWriteHelper();
 
-			String namespaceURI = componentKey.getNamespace();
+			String namespaceURI = componentElement.getComponentKey().getNamespace();
 			String schemaLocation = ComponentsEnvironment.getInstance(DefaultJasperReportsContext.getInstance()).getBundle(namespaceURI).getXmlParser().getPublicSchemaLocation();
-			XmlNamespace namespace = new XmlNamespace(namespaceURI, componentKey.getNamespacePrefix(), schemaLocation);
+			XmlNamespace namespace = new XmlNamespace(namespaceURI, componentElement.getComponentKey().getNamespacePrefix(), schemaLocation);
 
-			writer.startElement(componentKey.getName(), namespace);
+			writer.startElement(componentElement.getComponentKey().getName(), namespace);
 
 			writer.closeElement();
 		}

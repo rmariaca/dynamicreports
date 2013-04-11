@@ -37,10 +37,11 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.fonts.FontUtil;
 import net.sf.jasperreports.engine.type.OrientationEnum;
-import net.sf.jasperreports.engine.util.JRFontUtil;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -73,7 +74,8 @@ public class Report1Test extends AbstractJasperValueTest {
 		columnTitleCountTest(column1, 0);
 		columnDetailCountTest(column1, 0);
 
-		Assert.assertFalse("fonts", JRFontUtil.getFontFamilyNames().isEmpty());
+		FontUtil fontUtil = FontUtil.getInstance(DefaultJasperReportsContext.getInstance());
+		Assert.assertFalse("fonts", fontUtil.getFontFamilyNames().isEmpty());
 
 		JasperPrint jasperPrint = getJasperPrint();
 		Assert.assertEquals("Report", jasperPrint.getName());
