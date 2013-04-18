@@ -391,4 +391,32 @@ public class Columns {
 	public static BooleanColumnBuilder booleanColumn(String title, DRIExpression<Boolean> expression) {
 		return booleanColumn(expression).setTitle(title);
 	}
+
+	//empty column
+	/**
+	 * Creates a new empty column.<br/>
+	 *
+	 * @return a column builder
+	 */
+	public static TextColumnBuilder<String> emptyColumn() {
+		return emptyColumn(false, false);
+	}
+
+	/**
+	 * Creates a new empty column.<br/>
+	 *
+	 * @param showTitle show column title
+	 * @param showDetailRows show detail rows
+	 * @return a column builder
+	 */
+	public static TextColumnBuilder<String> emptyColumn(boolean showTitle, boolean showDetailRows) {
+		TextColumnBuilder<String> column = column(Expressions.text(null));
+		if (showTitle) {
+			column.setTitle("");
+		}
+		if (!showDetailRows) {
+			column.setPrintWhenExpression(Expressions.value(false));
+		}
+		return column;
+	}
 }

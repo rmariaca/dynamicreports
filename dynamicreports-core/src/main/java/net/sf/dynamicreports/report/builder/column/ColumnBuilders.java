@@ -372,4 +372,25 @@ public class ColumnBuilders {
 	public BooleanColumnBuilder booleanColumn(String title, DRIExpression<Boolean> expression) {
 		return Columns.booleanColumn(title, expression);
 	}
+
+	//empty column
+	/**
+	 * Creates a new empty column.<br/>
+	 *
+	 * @return a column builder
+	 */
+	public TextColumnBuilder<String> emptyColumn() {
+		return Columns.emptyColumn();
+	}
+
+	/**
+	 * Creates a new empty column.<br/>
+	 *
+	 * @param showTitle show column title
+	 * @param showDetailRows show detail rows
+	 * @return a column builder
+	 */
+	public TextColumnBuilder<String> emptyColumn(boolean showTitle, boolean showDetailRows) {
+		return Columns.emptyColumn(showTitle, showDetailRows);
+	}
 }
