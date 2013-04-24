@@ -38,8 +38,9 @@
 	<classpathentry kind="lib" path="lib/jdtcore-${project.jdtcoreVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-${project.jfreechartVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jxl-${project.jxlVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-asl-${project.jacksonVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-mapper-asl-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind-${project.jacksonVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-annotations-${project.jacksonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-${project.log4jVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/poi-${project.poiVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-${project.xmlapisVersion}.jar"/>
