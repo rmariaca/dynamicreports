@@ -629,10 +629,10 @@ public class TemplateTransform {
 
 	private int getStaticPageWidth() throws DRException {
 		if (accessor.getPageWidth() != null) {
-			return pageWidth(accessor.getPageWidth());
+			return accessor.getPageWidth();
 		}
 		if (report.getPage().getWidth() != null) {
-			return pageWidth(report.getPage().getWidth());
+			return report.getPage().getWidth();
 		}
 		if (templateDesign.getPageWidth() != null) {
 			return templateDesign.getPageWidth();
@@ -643,20 +643,9 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getPageWidth();
 	}
 
-	private int pageWidth(int width) throws DRException {
-		if (templateDesign.getPageWidth() != null && templateDesign.getPageWidth().intValue() != width) {
-			throw new DRException("Page width must not be different from page width of template design");
-		}
-		return width;
-	}
-
 	protected int getPageHeight() throws DRException {
 		if (report.getPage().getHeight() != null) {
-			int height = report.getPage().getHeight();
-			if (templateDesign.getPageHeight() != null && templateDesign.getPageHeight().intValue() != height) {
-				throw new DRException("Page height must not be different from page height of template design");
-			}
-			return height;
+			return report.getPage().getHeight();
 		}
 		if (templateDesign.getPageHeight() != null) {
 			return templateDesign.getPageHeight();
@@ -669,11 +658,7 @@ public class TemplateTransform {
 
 	protected PageOrientation getPageOrientation() throws DRException {
 		if (report.getPage().getOrientation() != null) {
-			PageOrientation orientation = report.getPage().getOrientation();
-			if (templateDesign.getPageOrientation() != null && templateDesign.getPageOrientation() != orientation) {
-				throw new DRException("Page orientation must not be different from page orientation of template design");
-			}
-			return orientation;
+			return report.getPage().getOrientation();
 		}
 		if (templateDesign.getPageOrientation() != null) {
 			return templateDesign.getPageOrientation();
@@ -686,23 +671,7 @@ public class TemplateTransform {
 
 	protected DRIMargin getPageMargin() throws DRException {
 		if (report.getPage().getMargin() != null) {
-			DRIMargin margin = report.getPage().getMargin();
-			if (templateDesign.getPageMargin() != null) {
-				DRIMargin templateMargin = templateDesign.getPageMargin();
-				if (templateMargin.getLeft() != margin.getLeft()) {
-					throw new DRException("Page left margin must not be different from page left margin of template design");
-				}
-				if (templateMargin.getRight() != margin.getRight()) {
-					throw new DRException("Page right margin must not be different from page right margin of template design");
-				}
-				if (templateMargin.getTop() != margin.getTop()) {
-					throw new DRException("Page top margin must not be different from page top margin of template design");
-				}
-				if (templateMargin.getBottom() != margin.getBottom()) {
-					throw new DRException("Page bottom margin must not be different from page bottom margin of template design");
-				}
-			}
-			return margin;
+			return report.getPage().getMargin();
 		}
 		if (templateDesign.getPageMargin() != null) {
 			return templateDesign.getPageMargin();
@@ -718,11 +687,7 @@ public class TemplateTransform {
 
 	protected int getPageColumnsPerPage() throws DRException {
 		if (report.getPage().getColumnsPerPage() != null) {
-			Integer columnsPerPage = report.getPage().getColumnsPerPage();
-			if (templateDesign.getPageColumnsPerPage() != null && templateDesign.getPageColumnsPerPage() != columnsPerPage) {
-				throw new DRException("Page columns per page must not be different from page column count of template design");
-			}
-			return columnsPerPage;
+			return report.getPage().getColumnsPerPage();
 		}
 		if (templateDesign.getPageColumnsPerPage() != null) {
 			return templateDesign.getPageColumnsPerPage();
@@ -735,11 +700,7 @@ public class TemplateTransform {
 
 	protected int getPageColumnSpace() throws DRException {
 		if (report.getPage().getColumnSpace() != null) {
-			Integer columnSpace = report.getPage().getColumnSpace();
-			if (templateDesign.getPageColumnSpace() != null && templateDesign.getPageColumnSpace() != columnSpace) {
-				throw new DRException("Page column space must not be different from page column spacing of template design");
-			}
-			return columnSpace;
+			return report.getPage().getColumnSpace();
 		}
 		if (templateDesign.getPageColumnSpace() != null) {
 			return templateDesign.getPageColumnSpace();
@@ -751,12 +712,13 @@ public class TemplateTransform {
 	}
 
 	protected int getPageColumnWidth(DRIDesignPage page) {
-		if (templateDesign.getPageColumnWidth() != null && !isIgnorePageWidth()) {
-			return templateDesign.getPageColumnWidth();
-		}
 		int columnWidth = page.getWidth() - page.getMargin().getLeft() - page.getMargin().getRight();
 		columnWidth -= page.getColumnSpace() * (page.getColumnsPerPage() - 1);
 		columnWidth = columnWidth / page.getColumnsPerPage();
+		if (templateDesign.getPageColumnWidth() != null && templateDesign.getPageColumnWidth() > 0 &&
+				templateDesign.getPageColumnWidth() < columnWidth && !isIgnorePageWidth()) {
+			return templateDesign.getPageColumnWidth();
+		}
 		return columnWidth;
 	}
 
