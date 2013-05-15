@@ -7,6 +7,5 @@
 	</weaver>
 	<aspects>
 		<aspect name="net.sf.dynamicreports.site.ExamplesAspect" />
-		<aspect name="net.sf.dynamicreports.site.ExamplesAspect2" />
 	</aspects>
 </aspectj>
