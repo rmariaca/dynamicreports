@@ -20,25 +20,12 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition;
-
-import java.io.Serializable;
-
-import net.sf.dynamicreports.report.builder.ReportBuilder;
-import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRITableOfContentsCustomizer extends Serializable {
-
-	public void setReport(ReportBuilder<?> report);
-
-	public void setHeadings(int headings);
-
-	public void setLevels(int levels);
-
-	public void customize();
-
-	public TableOfContentsPosition getPosition();
+public enum TableOfContentsPosition {
+	TOP,
+	BOTTOM
 }

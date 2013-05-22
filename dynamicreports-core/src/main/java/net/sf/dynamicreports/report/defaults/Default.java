@@ -52,6 +52,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
+import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
@@ -128,6 +129,7 @@ public class Default {
 	private boolean tableOfContents;
 	private DRITableOfContentsCustomizer tableOfContentsCustomizer;
 	private boolean addGroupToTableOfContents;
+	private TableOfContentsPosition tableOfContentsPosition;
 	//text field
 	private int textFieldWidth;
 	private boolean textFieldPrintRepeatedValues;
@@ -338,6 +340,7 @@ public class Default {
 		this.tableOfContents = false;
 		this.tableOfContentsCustomizer = new TableOfContentsCustomizer();
 		this.addGroupToTableOfContents = true;
+		this.tableOfContentsPosition = TableOfContentsPosition.TOP;
 
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
@@ -705,6 +708,10 @@ public class Default {
 
 	public boolean isAddGroupToTableOfContents() {
 		return addGroupToTableOfContents;
+	}
+
+	public TableOfContentsPosition getTableOfContentsPosition() {
+		return tableOfContentsPosition;
 	}
 
 	public int getTextFieldWidth() {

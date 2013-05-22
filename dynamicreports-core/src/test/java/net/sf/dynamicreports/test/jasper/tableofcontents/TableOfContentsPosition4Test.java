@@ -27,6 +27,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
+import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,6 +41,7 @@ public class TableOfContentsPosition4Test extends AbstractJasperPositionTest {
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		TableOfContentsCustomizerBuilder tableOfContentsCustomizer = tableOfContentsCustomizer()
+			.setPosition(TableOfContentsPosition.BOTTOM)
 			.setTextFixedWidth(100)
 			.setPageIndexFixedWidth(30);
 
@@ -68,6 +70,8 @@ public class TableOfContentsPosition4Test extends AbstractJasperPositionTest {
 			elementPositionTest("detail.textField2", i, 100, 0, 445, 16);
 			elementPositionTest("detail.textField3", i, 545, 0, 30, 16);
 		}
+
+		containsElement("title.textField1", 1);
 	}
 
 	@Override

@@ -25,6 +25,7 @@ package net.sf.dynamicreports.report.builder.tableofcontents;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -67,6 +68,11 @@ public class TableOfContentsCustomizerBuilder extends AbstractBuilder<TableOfCon
 
 	public TableOfContentsCustomizerBuilder setPageIndexFixedWidth(Integer pageIndexFixedWidth) {
 		this.getObject().setPageIndexFixedWidth(pageIndexFixedWidth);
+		return this;
+	}
+
+	public TableOfContentsCustomizerBuilder setPosition(TableOfContentsPosition position) {
+		this.getObject().setPosition(position);
 		return this;
 	}
 }

@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
+import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
@@ -69,6 +70,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	protected Integer textFixedWidth;
 	protected Integer dotsFixedWidth;
 	protected Integer pageIndexFixedWidth;
+	protected TableOfContentsPosition position;
 
 	static {
 		StringBuilder dots = new StringBuilder(200);
@@ -213,6 +215,15 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 
 	public void setPageIndexFixedWidth(Integer pageIndexFixedWidth) {
 		this.pageIndexFixedWidth = pageIndexFixedWidth;
+	}
+
+	@Override
+	public TableOfContentsPosition getPosition() {
+		return position;
+	}
+
+	public void setPosition(TableOfContentsPosition position) {
+		this.position = position;
 	}
 
 	protected class ReferenceExpression extends AbstractSimpleExpression<String> {

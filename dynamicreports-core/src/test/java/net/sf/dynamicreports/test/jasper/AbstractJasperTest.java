@@ -141,7 +141,7 @@ public abstract class AbstractJasperTest {
 		return elements;
 	}
 
-	private void findElement(String key, List<JRPrintElement> elements, JRPrintElement element) {
+	protected void findElement(String key, List<JRPrintElement> elements, JRPrintElement element) {
 		if (key.equals(element.getKey())) {
 			elements.add(element);
 		}
@@ -150,6 +150,18 @@ public abstract class AbstractJasperTest {
 				JRPrintElement element2 = (JRPrintElement) iterator.next();
 				findElement(key, elements, element2);
 			}
+		}
+	}
+
+	protected void containsElement(String key, int pageIndex) {
+		List<JRPrintElement> elements = new ArrayList<JRPrintElement>();
+		JRPrintPage page = getJasperPrint().getPages().get(pageIndex);
+		for (Iterator<?> iterator = page.getElements().iterator(); iterator.hasNext();) {
+			JRPrintElement element = (JRPrintElement) iterator.next();
+			findElement(key, elements, element);
+		}
+		if (elements.isEmpty()) {
+			Assert.fail("Element " + key + " at page index " + pageIndex + " not found");
 		}
 	}
 

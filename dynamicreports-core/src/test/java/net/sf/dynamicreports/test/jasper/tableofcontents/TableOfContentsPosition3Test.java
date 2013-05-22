@@ -68,6 +68,8 @@ public class TableOfContentsPosition3Test extends AbstractJasperPositionTest {
 			elementPositionTest("detail.textField2", i, 179, 0, 180, 16);
 			elementPositionTest("detail.textField3", i, 359, 0, 22, 16);
 		}
+
+		containsElement("title.textField1", 0);
 	}
 
 	@Override

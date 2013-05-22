@@ -33,8 +33,11 @@ import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.base.DRPage;
 import net.sf.dynamicreports.report.builder.MarginBuilder;
+import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
+import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
@@ -81,6 +84,10 @@ public class JasperTocReport {
 			tableOfContents.setHeadings(headings.size());
 			tableOfContents.setLevels(levels);
 			tableOfContents.customize();
+			TableOfContentsPosition tableOfContentsPosition = tableOfContents.getPosition();
+			if (tableOfContentsPosition == null) {
+				tableOfContentsPosition = Defaults.getDefaults().getTableOfContentsPosition();
+			}
 
 			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			DRPage tocPage = tocReport.getReport().getPage();
@@ -99,7 +106,16 @@ public class JasperTocReport {
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();
 			for (int i = 0; i < tocJasperPrint.getPages().size(); i++) {
 				JRPrintPage page = tocJasperPrint.getPages().get(i);
-				jasperPrint.addPage(i, page);
+				switch (tableOfContentsPosition) {
+				case TOP:
+					jasperPrint.addPage(i, page);
+					break;
+				case BOTTOM:
+					jasperPrint.addPage(page);
+					break;
+				default:
+					throw new JasperDesignException("Table of contents position " + tableOfContentsPosition.name() + " not supported");
+				}
 			}
 			for (JRStyle style : tocJasperPrint.getStyles()) {
 				jasperPrint.addStyle(style);
