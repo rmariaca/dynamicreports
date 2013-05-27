@@ -25,8 +25,10 @@ package net.sf.dynamicreports.report.builder.tableofcontents;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
@@ -53,6 +55,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	protected static String dots;
 
 	protected ReportBuilder<?> report;
+	protected List<JasperTocHeading> headingList;
 	protected int headings;
 	protected int levels;
 
@@ -107,6 +110,11 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	@Override
 	public void setReport(ReportBuilder<?> report) {
 		this.report = report;
+	}
+
+	@Override
+	public void setHeadingList(List<JasperTocHeading> headingList) {
+		this.headingList = headingList;
 	}
 
 	@Override
@@ -240,7 +248,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 
 		private int level;
 
-		private PrintHeadingExpression(int level) {
+		public PrintHeadingExpression(int level) {
 			this.level = level;
 		}
 

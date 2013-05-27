@@ -34,7 +34,7 @@ public interface DRICustomValues {
 
 	public void setSystemValue(String name, Object value);
 
-	public void addTocHeading(int level, String id, String text);
+	public void addTocHeading(int level, String id, String text, Object customValue);
 
 	public Map<String, JasperTocHeading> getTocHeadings();
 

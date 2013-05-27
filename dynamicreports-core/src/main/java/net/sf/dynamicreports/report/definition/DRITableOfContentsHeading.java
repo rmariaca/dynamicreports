@@ -35,4 +35,6 @@ public interface DRITableOfContentsHeading extends Serializable {
 
 	public DRIExpression<String> getLabelExpression();
 
+	public DRIExpression<?> getCustomValueExpression();
+
 }

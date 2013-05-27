@@ -58,6 +58,16 @@ public class TableOfContentsHeadingBuilder extends AbstractBuilder<TableOfConten
 		return this;
 	}
 
+	public TableOfContentsHeadingBuilder setCustomValue(Object customValue) {
+		this.getObject().setCustomValueExpression(Expressions.value(customValue));
+		return this;
+	}
+
+	public TableOfContentsHeadingBuilder setCustomValue(DRIExpression<?> customValueExpression) {
+		this.getObject().setCustomValueExpression(customValueExpression);
+		return this;
+	}
+
 	public DRTableOfContentsHeading getTableOfContentsHeading() {
 		return build();
 	}

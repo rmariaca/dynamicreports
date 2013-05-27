@@ -34,6 +34,7 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 
 	private DRTableOfContentsHeading parentHeading;
 	private DRIExpression<String> labelExpression;
+	private DRIExpression<?> customValueExpression;
 
 	@Override
 	public DRTableOfContentsHeading getParentHeading() {
@@ -51,6 +52,15 @@ public class DRTableOfContentsHeading implements DRITableOfContentsHeading {
 
 	public void setLabelExpression(DRIExpression<String> labelExpression) {
 		this.labelExpression = labelExpression;
+	}
+
+	@Override
+	public DRIExpression<?> getCustomValueExpression() {
+		return customValueExpression;
+	}
+
+	public void setCustomValueExpression(DRIExpression<?> customValueExpression) {
+		this.customValueExpression = customValueExpression;
 	}
 
 }

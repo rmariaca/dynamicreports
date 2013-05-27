@@ -79,16 +79,6 @@ public class JasperTocReport {
 			}
 			levels++;
 
-			DRITableOfContentsCustomizer tableOfContents = jasperReportDesign.getReport().getTableOfContentsCustomizer();
-			tableOfContents.setReport(tocReport);
-			tableOfContents.setHeadings(headings.size());
-			tableOfContents.setLevels(levels);
-			tableOfContents.customize();
-			TableOfContentsPosition tableOfContentsPosition = tableOfContents.getPosition();
-			if (tableOfContentsPosition == null) {
-				tableOfContentsPosition = Defaults.getDefaults().getTableOfContentsPosition();
-			}
-
 			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			DRPage tocPage = tocReport.getReport().getPage();
 			tocPage.setWidth(designPage.getWidth());
@@ -103,6 +93,17 @@ public class JasperTocReport {
 			tocReport.setPageMargin(tocMargin);
 			tocReport.setDataSource(new JRBeanCollectionDataSource(headingList));
 
+			DRITableOfContentsCustomizer tableOfContents = jasperReportDesign.getReport().getTableOfContentsCustomizer();
+			tableOfContents.setReport(tocReport);
+			tableOfContents.setHeadingList(headingList);
+			tableOfContents.setHeadings(headings.size());
+			tableOfContents.setLevels(levels);
+			tableOfContents.customize();
+
+			TableOfContentsPosition tableOfContentsPosition = tableOfContents.getPosition();
+			if (tableOfContentsPosition == null) {
+				tableOfContentsPosition = Defaults.getDefaults().getTableOfContentsPosition();
+			}
 			JasperPrint tocJasperPrint = tocReport.toJasperPrint();
 			for (int i = 0; i < tocJasperPrint.getPages().size(); i++) {
 				JRPrintPage page = tocJasperPrint.getPages().get(i);

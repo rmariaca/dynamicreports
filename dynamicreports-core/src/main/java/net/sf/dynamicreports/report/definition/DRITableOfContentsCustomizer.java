@@ -23,7 +23,9 @@
 package net.sf.dynamicreports.report.definition;
 
 import java.io.Serializable;
+import java.util.List;
 
+import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 
@@ -33,6 +35,8 @@ import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 public interface DRITableOfContentsCustomizer extends Serializable {
 
 	public void setReport(ReportBuilder<?> report);
+
+	public void setHeadingList(List<JasperTocHeading> headingList);
 
 	public void setHeadings(int headings);
 

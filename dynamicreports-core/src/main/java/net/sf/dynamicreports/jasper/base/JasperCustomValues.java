@@ -139,11 +139,12 @@ public class JasperCustomValues implements DRICustomValues {
 	}
 
 	@Override
-	public void addTocHeading(int level, String id, String text) {
+	public void addTocHeading(int level, String id, String text, Object customValue) {
 		JasperTocHeading heading = new JasperTocHeading();
 		heading.setLevel(level);
 		heading.setText(text);
 		heading.setReference(id);
+		heading.setCustomValue(customValue);
 		tocHeadings.put(id, heading);
 	}
 

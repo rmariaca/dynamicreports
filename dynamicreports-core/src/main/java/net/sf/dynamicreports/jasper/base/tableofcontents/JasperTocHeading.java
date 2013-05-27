@@ -30,6 +30,7 @@ public class JasperTocHeading {
 	private String text;
 	private String reference;
 	private Integer pageIndex;
+	private Object customValue;
 
 	public Integer getLevel() {
 		return level;
@@ -62,4 +63,13 @@ public class JasperTocHeading {
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
+
+	public Object getCustomValue() {
+		return customValue;
+	}
+
+	public void setCustomValue(Object customValue) {
+		this.customValue = customValue;
+	}
+
 }
