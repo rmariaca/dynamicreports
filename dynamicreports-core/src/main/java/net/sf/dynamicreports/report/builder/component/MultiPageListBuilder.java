@@ -23,7 +23,9 @@
 package net.sf.dynamicreports.report.builder.component;
 
 import net.sf.dynamicreports.report.base.component.DRMultiPageList;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 
 import org.apache.commons.lang3.Validate;
 
@@ -46,4 +48,20 @@ public class MultiPageListBuilder extends DimensionComponentBuilder<MultiPageLis
 		return this;
 	}
 
+	public MultiPageListBuilder newPage() {
+		BreakBuilder pageBreak = Components.pageBreak();
+		pageBreak.setPrintWhenExpression(new PageBreakExpression());
+		getObject().addComponent(pageBreak.build());
+		return this;
+	}
+
+	private class PageBreakExpression extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getMasterParameters().getPageRowNumber() > 0;
+		}
+
+	}
 }
