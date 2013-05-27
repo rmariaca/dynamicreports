@@ -53,7 +53,7 @@ public class ChartShowPercentagesReport {
 		BarChartBuilder barChart = cht.barChart()
 			.setShowPercentages(true)
 			.setShowValues(true)
-			.setValuePattern("#,##0")
+			.setPercentValuePattern("#,##0")
 			.setCategory(itemColumn)
 			.series(cht.serie(stock1Column), cht.serie(stock2Column), cht.serie(stock3Column));
 		StackedBarChartBuilder stackedBarChart = cht.stackedBarChart()
