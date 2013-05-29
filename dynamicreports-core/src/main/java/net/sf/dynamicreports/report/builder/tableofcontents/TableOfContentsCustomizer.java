@@ -131,6 +131,20 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 	public void customize() {
 		init();
 
+		report
+			.title(
+				title(),
+				cmp.filler().setFixedHeight(20))
+			.fields(
+				levelField, textField, referenceField, pageIndexField)
+			.detail(detailComponent());
+	}
+
+	protected ComponentBuilder<?, ?> title() {
+		return cmp.text(new SystemMessageExpression("table_of_contents")).setStyle(titleStyle);
+	}
+
+	protected ComponentBuilder<?, ?> detailComponent() {
 		VerticalListBuilder detailComponent = cmp.verticalList();
 		for (int i = 0; i < levels; i++) {
 			ComponentBuilder<?, ?> headingComponent = headingComponent(i);
@@ -138,18 +152,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 			headingComponent.removeLineWhenBlank();
 			detailComponent.add(headingComponent);
 		}
-
-		report
-			.title(
-				title(),
-				cmp.filler().setFixedHeight(20))
-			.fields(
-				levelField, textField, referenceField, pageIndexField)
-			.detail(detailComponent);
-	}
-
-	protected ComponentBuilder<?, ?> title() {
-		return cmp.text(new SystemMessageExpression("table_of_contents")).setStyle(titleStyle);
+		return detailComponent;
 	}
 
 	protected ComponentBuilder<?, ?> headingComponent(int level) {
