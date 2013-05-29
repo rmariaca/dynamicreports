@@ -87,6 +87,10 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 		elementValueTest(JasperTestUtils.getColumnDetailName(column), values);
 	}
 
+	protected void columnDetailAtPageIndexTest(ColumnBuilder<?, ?> column, int pageIndex) {
+		containsElement(JasperTestUtils.getColumnDetailName(column), pageIndex);
+	}
+
 	//column title
 	protected void columnTitleCountTest(ColumnBuilder<?, ?> column, int expectedNumberOfElements) {
 		elementCountTest(JasperTestUtils.getColumnTitleName(column), expectedNumberOfElements);
