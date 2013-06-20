@@ -227,6 +227,8 @@ public class ColumnGridTransform {
 			return new GridList(columnList, null);
 		}
 
+		columnGrid.setEmpty(!titleGroup);
+
 		DRDesignList list = new DRDesignList();
 		list.setType(ListType.VERTICAL);
 		if (hCellAlignment != null) {

@@ -37,15 +37,17 @@ import net.sf.dynamicreports.report.definition.column.DRIColumn;
 class ColumnGrid {
 	private DRDesignList list;
 	private Map<DRIColumn<?>, DRDesignList> columnsLists;
-	
+	private boolean isEmpty;
+
 	public ColumnGrid() {
 		columnsLists = new HashMap<DRIColumn<?>, DRDesignList>();
+		isEmpty = true;
 	}
-	
+
 	public void addList(DRIColumn<?> column, DRDesignList list) {
 		columnsLists.put(column, list);
 	}
-	
+
 	public void addComponent(DRIColumn<?> column, DRDesignComponent component) {
 		if (columnsLists.containsKey(column)) {
 			columnsLists.get(column).addComponent(component);
@@ -57,21 +59,25 @@ class ColumnGrid {
 			columnsLists.get(column).addComponent(horizontalAlignment, verticalAlignment, component);
 		}
 	}
-	
+
 	public void setList(DRDesignList list) {
 		this.list = list;
 	}
-	
+
 	public DRDesignList getList() {
 		return list;
 	}
-	
+
 	public boolean isEmpty() {
 		for (DRDesignList list : columnsLists.values()) {
 			if (!list.isEmpty()) {
 				return false;
 			}
 		}
-		return true;
+		return isEmpty;
+	}
+
+	public void setEmpty(boolean isEmpty) {
+		this.isEmpty = isEmpty;
 	}
 }
