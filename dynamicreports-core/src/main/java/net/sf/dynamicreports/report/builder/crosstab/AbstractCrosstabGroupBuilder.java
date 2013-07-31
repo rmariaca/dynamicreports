@@ -40,6 +40,7 @@ import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 import org.apache.commons.lang3.Validate;
@@ -121,6 +122,41 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
+	/**
+	 * Adds a jasper property to the header group.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a crosstab group builder
+	 */
+	public T addHeaderProperty(DRIPropertyExpression propertyExpression) {
+		getObject().addHeaderPropertyExpression(propertyExpression);
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the header group.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a crosstab group builder
+	 */
+	public T addHeaderProperty(String name, DRIExpression<String> valueExpression) {
+		getObject().addHeaderPropertyExpression(Expressions.property(name, valueExpression));
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the header group.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a crosstab group builder
+	 */
+	public T addHeaderProperty(String name, String value) {
+		getObject().addHeaderPropertyExpression(Expressions.property(name, value));
+		return (T) this;
+	}
+
 	public T setShowTotal(Boolean showTotal) {
 		getObject().setShowTotal(showTotal);
 		return (T) this;
@@ -148,6 +184,41 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		else {
 			getObject().setTotalHeaderStyle(null);
 		}
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the total header group.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a crosstab group builder
+	 */
+	public T addTotalHeaderProperty(DRIPropertyExpression propertyExpression) {
+		getObject().addTotalHeaderPropertyExpression(propertyExpression);
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the total header group.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a crosstab group builder
+	 */
+	public T addTotalHeaderProperty(String name, DRIExpression<String> valueExpression) {
+		getObject().addTotalHeaderPropertyExpression(Expressions.property(name, valueExpression));
+		return (T) this;
+	}
+
+	/**
+	 * Adds a jasper property to the total header group.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a crosstab group builder
+	 */
+	public T addTotalHeaderProperty(String name, String value) {
+		getObject().addTotalHeaderPropertyExpression(Expressions.property(name, value));
 		return (T) this;
 	}
 

@@ -41,6 +41,7 @@ import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.exception.DRReportException;
 
@@ -154,6 +155,41 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		else {
 			getObject().setHyperLink(null);
 		}
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the measure.
+	 *
+	 * @param propertyExpression the property expression
+	 * @return a crosstab measure builder
+	 */
+	public CrosstabMeasureBuilder<T> addProperty(DRIPropertyExpression propertyExpression) {
+		getObject().addPropertyExpression(propertyExpression);
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the measure.
+	 *
+	 * @param name the property name
+	 * @param valueExpression the property value expression
+	 * @return a crosstab measure builder
+	 */
+	public CrosstabMeasureBuilder<T> addProperty(String name, DRIExpression<String> valueExpression) {
+		getObject().addPropertyExpression(Expressions.property(name, valueExpression));
+		return this;
+	}
+
+	/**
+	 * Adds a jasper property to the measure.
+	 *
+	 * @param name the property name
+	 * @param value the property value
+	 * @return a crosstab measure builder
+	 */
+	public CrosstabMeasureBuilder<T> addProperty(String name, String value) {
+		getObject().addPropertyExpression(Expressions.property(name, value));
 		return this;
 	}
 

@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
@@ -52,6 +53,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
 	private DRHyperLink hyperLink;
+	private List<DRIPropertyExpression> propertyExpressions;
 	private List<DRICrosstabCellStyle> styles;
 	private DRIExpression<?> titleExpression;
 	private DRIReportStyle titleStyle;
@@ -61,6 +63,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 		this.expression = expression;
 		this.name = ReportUtils.generateUniqueName("crosstabMeasure");
 		this.styles = new ArrayList<DRICrosstabCellStyle>();
+		propertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
 	@Override
@@ -125,6 +128,20 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 
 	public void setHyperLink(DRHyperLink hyperLink) {
 		this.hyperLink = hyperLink;
+	}
+
+	@Override
+	public List<DRIPropertyExpression> getPropertyExpressions() {
+		return propertyExpressions;
+	}
+
+	public void addPropertyExpression(DRIPropertyExpression propertyExpression) {
+		Validate.notNull(propertyExpression, "propertyExpression must not be null");
+		this.propertyExpressions.add(propertyExpression);
+	}
+
+	public void setPropertyExpressions(List<DRIPropertyExpression> propertyExpressions) {
+		this.propertyExpressions = propertyExpressions;
 	}
 
 	@Override

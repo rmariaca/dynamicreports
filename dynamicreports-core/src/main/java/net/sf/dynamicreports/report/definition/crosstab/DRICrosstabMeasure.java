@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
@@ -52,6 +53,8 @@ public interface DRICrosstabMeasure<T> extends Serializable {
 	public Boolean getStretchWithOverflow();
 
 	public DRIHyperLink getHyperLink();
+
+	public List<DRIPropertyExpression> getPropertyExpressions();
 
 	public List<DRICrosstabCellStyle> getStyles();
 

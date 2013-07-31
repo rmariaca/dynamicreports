@@ -22,7 +22,9 @@
 
 package net.sf.dynamicreports.report.base.crosstab;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.DRHyperLink;
@@ -33,6 +35,7 @@ import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 
@@ -51,10 +54,12 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private Boolean headerStretchWithOverflow;
 	private DRHyperLink headerHyperLink;
 	private DRIReportStyle headerStyle;
+	private List<DRIPropertyExpression> headerPropertyExpressions;
 	private Boolean showTotal;
 	private CrosstabTotalPosition totalPosition;
 	private DRIExpression<?> totalHeaderExpression;
 	private DRIReportStyle totalHeaderStyle;
+	private List<DRIPropertyExpression> totalHeaderPropertyExpressions;
 	private DRIExpression<T> expression;
 	private DRIDataType<? super T, T> dataType;
 	private DRIExpression<? extends Comparable<?>> orderByExpression;
@@ -63,6 +68,8 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 
 	public DRCrosstabGroup() {
 		this.name = ReportUtils.generateUniqueName("crosstabGroup");
+		headerPropertyExpressions = new ArrayList<DRIPropertyExpression>();
+		totalHeaderPropertyExpressions = new ArrayList<DRIPropertyExpression>();
 	}
 
 	@Override
@@ -125,6 +132,20 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	}
 
 	@Override
+	public List<DRIPropertyExpression> getHeaderPropertyExpressions() {
+		return headerPropertyExpressions;
+	}
+
+	public void addHeaderPropertyExpression(DRIPropertyExpression headerPropertyExpression) {
+		Validate.notNull(headerPropertyExpression, "headerPropertyExpression must not be null");
+		this.headerPropertyExpressions.add(headerPropertyExpression);
+	}
+
+	public void setHeaderPropertyExpressions(List<DRIPropertyExpression> headerPropertyExpressions) {
+		this.headerPropertyExpressions = headerPropertyExpressions;
+	}
+
+	@Override
 	public Boolean getShowTotal() {
 		return showTotal;
 	}
@@ -158,6 +179,20 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 
 	public void setTotalHeaderStyle(DRIReportStyle totalHeaderStyle) {
 		this.totalHeaderStyle = totalHeaderStyle;
+	}
+
+	@Override
+	public List<DRIPropertyExpression> getTotalHeaderPropertyExpressions() {
+		return totalHeaderPropertyExpressions;
+	}
+
+	public void addTotalHeaderPropertyExpression(DRIPropertyExpression totalHeaderPropertyExpression) {
+		Validate.notNull(totalHeaderPropertyExpression, "totalHeaderPropertyExpression must not be null");
+		this.totalHeaderPropertyExpressions.add(totalHeaderPropertyExpression);
+	}
+
+	public void setTotalHeaderPropertyExpressions(List<DRIPropertyExpression> totalHeaderPropertyExpressions) {
+		this.totalHeaderPropertyExpressions = totalHeaderPropertyExpressions;
 	}
 
 	@Override

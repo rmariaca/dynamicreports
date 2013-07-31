@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.report.definition.crosstab;
 
 import java.util.Comparator;
+import java.util.List;
 
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -30,6 +31,7 @@ import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
@@ -54,6 +56,8 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
 	public DRIReportStyle getHeaderStyle();
 
+	public List<DRIPropertyExpression> getHeaderPropertyExpressions();
+
 	public Boolean getShowTotal();
 
 	public CrosstabTotalPosition getTotalPosition();
@@ -61,6 +65,8 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 	public DRIExpression<?> getTotalHeaderExpression();
 
 	public DRIReportStyle getTotalHeaderStyle();
+
+	public List<DRIPropertyExpression> getTotalHeaderPropertyExpressions();
 
 	public DRIExpression<T> getExpression();
 
