@@ -60,6 +60,15 @@ public abstract class AbstractJasperValueTest extends AbstractJasperTest {
 		}
 	}
 
+	protected void elementFullValueTest(String name, String ...values) {
+		List<JRPrintElement> elements = findElement(name);
+		Assert.assertTrue(values.length <= elements.size());
+		for (int i = 0; i < values.length; i++) {
+			String value = ((JRPrintText) elements.get(i)).getFullText();
+			Assert.assertEquals("element value " + name, values[i], value);
+		}
+	}
+
 	private String getElementValue(String key, int index) {
 		JRPrintText textElement = (JRPrintText) getElementAt(key, index);
 		String value = JRStyledTextUtil.getInstance(DefaultJasperReportsContext.getInstance()).getTruncatedText(textElement);

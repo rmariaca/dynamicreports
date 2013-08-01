@@ -54,6 +54,10 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 		elementValueTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), values);
 	}
 
+	protected void crosstabGroupHeaderFullValueTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, String ...values) {
+		elementFullValueTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), values);
+	}
+
 	//group total header
 	protected void crosstabGroupTotalHeaderCountTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int expectedNumberOfElements) {
 		elementCountTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), expectedNumberOfElements);
@@ -61,6 +65,10 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 
 	protected void crosstabGroupTotalHeaderValueTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, String ...values) {
 		elementValueTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), values);
+	}
+
+	protected void crosstabGroupTotalHeaderFullValueTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, String ...values) {
+		elementFullValueTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), values);
 	}
 
 	//group title header
@@ -88,6 +96,10 @@ public abstract class AbstractJasperCrosstabValueTest extends AbstractJasperValu
 
 	protected void crosstabCellValueTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, String ...values) {
 		elementValueTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), values);
+	}
+
+	protected void crosstabCellFullValueTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, String ...values) {
+		elementFullValueTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), values);
 	}
 
 	protected String getPrefix(int index) {
