@@ -177,6 +177,11 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
+	public T setTotalHeaderStretchWithOverflow(Boolean stretchWithOverflow) {
+		getObject().setTotalHeaderStretchWithOverflow(stretchWithOverflow);
+		return (T) this;
+	}
+
 	public T setTotalHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().setTotalHeaderStyle(style.getStyle());

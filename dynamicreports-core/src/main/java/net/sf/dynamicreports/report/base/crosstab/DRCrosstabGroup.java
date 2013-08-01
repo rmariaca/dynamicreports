@@ -58,6 +58,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	private Boolean showTotal;
 	private CrosstabTotalPosition totalPosition;
 	private DRIExpression<?> totalHeaderExpression;
+	private Boolean totalHeaderStretchWithOverflow;
 	private DRIReportStyle totalHeaderStyle;
 	private List<DRIPropertyExpression> totalHeaderPropertyExpressions;
 	private DRIExpression<T> expression;
@@ -170,6 +171,15 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 
 	public void setTotalHeaderExpression(DRIExpression<?> totalHeaderExpression) {
 		this.totalHeaderExpression = totalHeaderExpression;
+	}
+
+	@Override
+	public Boolean getTotalHeaderStretchWithOverflow() {
+		return totalHeaderStretchWithOverflow;
+	}
+
+	public void setTotalHeaderStretchWithOverflow(Boolean totalHeaderStretchWithOverflow) {
+		this.totalHeaderStretchWithOverflow = totalHeaderStretchWithOverflow;
 	}
 
 	@Override

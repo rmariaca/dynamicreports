@@ -232,6 +232,7 @@ public class CrosstabTransform {
 				totalHeaderExpression = new SystemMessageExpression("total");
 			}
 			textField.setValueExpression(totalHeaderExpression);
+			textField.setStretchWithOverflow(group.getTotalHeaderStretchWithOverflow());
 			textField.setPropertyExpressions(group.getTotalHeaderPropertyExpressions());
 			textField.setStyle(totalStyle);
 			if (group instanceof DRICrosstabRowGroup || (group instanceof DRICrosstabColumnGroup && !measureTitle)) {

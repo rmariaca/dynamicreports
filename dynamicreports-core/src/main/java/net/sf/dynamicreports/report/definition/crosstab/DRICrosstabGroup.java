@@ -64,6 +64,8 @@ public interface DRICrosstabGroup<T> extends DRISystemExpression<T> {
 
 	public DRIExpression<?> getTotalHeaderExpression();
 
+	public Boolean getTotalHeaderStretchWithOverflow();
+
 	public DRIReportStyle getTotalHeaderStyle();
 
 	public List<DRIPropertyExpression> getTotalHeaderPropertyExpressions();
