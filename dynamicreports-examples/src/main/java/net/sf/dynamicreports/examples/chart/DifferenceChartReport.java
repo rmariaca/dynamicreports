@@ -43,27 +43,26 @@ public class DifferenceChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .title(Templates.createTitleComponent("DifferenceChart"))
-			  .summary(
-			  	cht.differenceChart()
-			  	   .setTitle("Difference chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setTimePeriod(field("date", type.dateType()))
-			  	   .setTimePeriodType(TimePeriod.DAY)
-			  	   .series(
-			  	  		cht.serie(field("value1", type.doubleType())).setLabel("Value1"),
-			  	  		cht.serie(field("value2", type.doubleType())).setLabel("Value2"))
-			  	   .setTimeAxisFormat(
-			  	   	cht.axisFormat()
-			  	   	   .setLabel("Date")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.title(Templates.createTitleComponent("DifferenceChart"))
+				.summary(
+					cht.differenceChart()
+						.setTitle("Difference chart")
+						.setTitleFont(boldFont)
+						.setTimePeriod(field("date", type.dateType()))
+						.setTimePeriodType(TimePeriod.DAY)
+						.series(
+							cht.serie(field("value1", type.doubleType())).setLabel("Value1"),
+							cht.serie(field("value2", type.doubleType())).setLabel("Value2"))
+						.setTimeAxisFormat(
+							cht.axisFormat().setLabel("Date")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -72,13 +71,13 @@ public class DifferenceChartReport {
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("date", "value1", "value2");
 		double value1 = 0;
-    double value2 = 0;
-    Calendar c = Calendar.getInstance();
-    for (int i = 0; i < 300; i++) {
-    	c.add(Calendar.DAY_OF_MONTH, -1);
-    	value1 += Math.random() - 0.5;
-      value2 += Math.random() - 0.5;
-      dataSource.add(c.getTime(), value1, value2);
+		double value2 = 0;
+		Calendar c = Calendar.getInstance();
+		for (int i = 0; i < 300; i++) {
+			c.add(Calendar.DAY_OF_MONTH, -1);
+			value1 += Math.random() - 0.5;
+			value2 += Math.random() - 0.5;
+			dataSource.add(c.getTime(), value1, value2);
 		}
 		return dataSource;
 	}

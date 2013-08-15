@@ -45,25 +45,25 @@ public class PieChartReport {
 	private void build() {
 		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(itemColumn, quantityColumn, unitPriceColumn)
-			  .title(Templates.createTitleComponent("PieChart"))
-			  .summary(
-			  	cht.pieChart()
-			  	   .setTitle("Pie chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setKey(itemColumn)
-			  	   .series(
-			  	  		 cht.serie(unitPriceColumn)))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(itemColumn, quantityColumn, unitPriceColumn)
+				.title(Templates.createTitleComponent("PieChart"))
+				.summary(
+					cht.pieChart()
+						.setTitle("Pie chart")
+						.setTitleFont(boldFont)
+						.setKey(itemColumn)
+						.series(
+							cht.serie(unitPriceColumn)))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -71,9 +71,9 @@ public class PieChartReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
-		dataSource.add("Book", 70, new BigDecimal(100));
-		dataSource.add("Notebook", 25, new BigDecimal(500));
-		dataSource.add("PDA", 40, new BigDecimal(250));
+		dataSource.add("Tablet", 350, new BigDecimal(300));
+		dataSource.add("Laptop", 300, new BigDecimal(500));
+		dataSource.add("Smartphone", 450, new BigDecimal(250));
 		return dataSource;
 	}
 

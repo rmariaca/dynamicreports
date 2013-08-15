@@ -40,32 +40,32 @@ public class ScatterChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<Integer> xColumn  = col.column("X",  "x",  type.integerType());
+		TextColumnBuilder<Integer> xColumn = col.column("X", "x", type.integerType());
 		TextColumnBuilder<Integer> y1Column = col.column("Y1", "y1", type.integerType());
 		TextColumnBuilder<Integer> y2Column = col.column("Y2", "y2", type.integerType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(xColumn, y1Column, y2Column)
-			  .title(Templates.createTitleComponent("ScatterChart"))
-			  .summary(
-			  	cht.scatterChart()
-			  	   .setTitle("Scatter chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setShowLines(false)
-			  	   .setXValue(xColumn)
-			  	   .series(
-			  	  		 cht.xySerie(y1Column), cht.xySerie(y2Column))
-			  	   .setXAxisFormat(
-			  	   	cht.axisFormat().setLabel("X"))
-			  	   .setYAxisFormat(
-					   	cht.axisFormat().setLabel("Y")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(xColumn, y1Column, y2Column)
+				.title(Templates.createTitleComponent("ScatterChart"))
+				.summary(
+					cht.scatterChart()
+						.setTitle("Scatter chart")
+						.setTitleFont(boldFont)
+						.setShowLines(false)
+						.setXValue(xColumn)
+						.series(
+							cht.xySerie(y1Column), cht.xySerie(y2Column))
+						.setXAxisFormat(
+							cht.axisFormat().setLabel("X"))
+						.setYAxisFormat(
+							cht.axisFormat().setLabel("Y")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

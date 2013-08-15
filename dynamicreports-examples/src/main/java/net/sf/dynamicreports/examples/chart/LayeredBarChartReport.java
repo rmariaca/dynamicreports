@@ -43,7 +43,7 @@ public class LayeredBarChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
@@ -63,8 +63,7 @@ public class LayeredBarChartReport {
 						.series(
 							cht.serie(quantityColumn), cht.serie(unitPriceColumn))
 						.setCategoryAxisFormat(
-							cht.axisFormat()
-								.setLabel("Item")))
+							cht.axisFormat().setLabel("Item")))
 				.pageFooter(Templates.footerComponent)
 				.setDataSource(createDataSource())
 				.show();
@@ -75,9 +74,9 @@ public class LayeredBarChartReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
-		dataSource.add("Book", 270, new BigDecimal(100));
-		dataSource.add("Camera", 170, new BigDecimal(150));
-		dataSource.add("PDA", 120, new BigDecimal(250));
+		dataSource.add("Tablet", 350, new BigDecimal(300));
+		dataSource.add("Laptop", 300, new BigDecimal(500));
+		dataSource.add("Smartphone", 450, new BigDecimal(250));
 		return dataSource;
 	}
 

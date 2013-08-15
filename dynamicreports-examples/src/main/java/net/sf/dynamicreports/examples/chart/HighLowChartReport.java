@@ -44,7 +44,7 @@ public class HighLowChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		TextColumnBuilder<String> seriesColumn  = col.column("Series", "series", type.stringType());
 		TextColumnBuilder<Date> dateColumn = col.column("Date", "date", type.dateType());
@@ -56,29 +56,29 @@ public class HighLowChartReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(seriesColumn, dateColumn, highColumn, lowColumn, openColumn, closeColumn, volumeColumn)
-			  .title(Templates.createTitleComponent("HighLowChart"))
-			  .summary(
-			  	cht.highLowChart()
-			  		.setTitle("HighLow chart")
-			  		.setTitleFont(boldFont)
-			  		.setSeries(seriesColumn)
-			  		.setDate(dateColumn)
-			  		.setHigh(highColumn)
-			  		.setLow(lowColumn)
-			  		.setOpen(openColumn)
-			  		.setClose(closeColumn)
-			  		.setVolume(volumeColumn)
-			  		.setShowOpenTicks(true)
-			  		.setShowCloseTicks(true)
-			  		.setTimeAxisFormat(
-			  			cht.axisFormat().setLabel("Date"))
-			  		.setValueAxisFormat(
-			  			cht.axisFormat().setLabel("Value")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(seriesColumn, dateColumn, highColumn, lowColumn, openColumn, closeColumn, volumeColumn)
+				.title(Templates.createTitleComponent("HighLowChart"))
+				.summary(
+					cht.highLowChart()
+						.setTitle("HighLow chart")
+						.setTitleFont(boldFont)
+						.setSeries(seriesColumn)
+						.setDate(dateColumn)
+						.setHigh(highColumn)
+						.setLow(lowColumn)
+						.setOpen(openColumn)
+						.setClose(closeColumn)
+						.setVolume(volumeColumn)
+						.setShowOpenTicks(true)
+						.setShowCloseTicks(true)
+						.setTimeAxisFormat(
+							cht.axisFormat().setLabel("Date"))
+						.setValueAxisFormat(
+							cht.axisFormat().setLabel("Value")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

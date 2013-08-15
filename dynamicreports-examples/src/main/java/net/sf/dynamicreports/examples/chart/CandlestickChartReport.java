@@ -44,9 +44,9 @@ public class CandlestickChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<String> seriesColumn  = col.column("Series", "series", type.stringType());
+		TextColumnBuilder<String> seriesColumn = col.column("Series", "series", type.stringType());
 		TextColumnBuilder<Date> dateColumn = col.column("Date", "date", type.dateType());
 		TextColumnBuilder<Double> highColumn = col.column("High", "high", type.doubleType());
 		TextColumnBuilder<Double> lowColumn = col.column("Low", "low", type.doubleType());
@@ -56,27 +56,27 @@ public class CandlestickChartReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(seriesColumn, dateColumn, highColumn, lowColumn, openColumn, closeColumn, volumeColumn)
-			  .title(Templates.createTitleComponent("CandlestickChart"))
-			  .summary(
-			  	cht.candlestickChart()
-			  		.setTitle("Candlestick chart")
-			  		.setTitleFont(boldFont)
-			  		.setSeries(seriesColumn)
-			  		.setDate(dateColumn)
-			  		.setHigh(highColumn)
-			  		.setLow(lowColumn)
-			  		.setOpen(openColumn)
-			  		.setClose(closeColumn)
-			  		.setVolume(volumeColumn)
-			  		.setTimeAxisFormat(
-			  			cht.axisFormat().setLabel("Date"))
-			  		.setValueAxisFormat(
-			  			cht.axisFormat().setLabel("Value")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(seriesColumn, dateColumn, highColumn, lowColumn, openColumn, closeColumn, volumeColumn)
+				.title(Templates.createTitleComponent("CandlestickChart"))
+				.summary(
+					cht.candlestickChart()
+						.setTitle("Candlestick chart")
+						.setTitleFont(boldFont)
+						.setSeries(seriesColumn)
+						.setDate(dateColumn)
+						.setHigh(highColumn)
+						.setLow(lowColumn)
+						.setOpen(openColumn)
+						.setClose(closeColumn)
+						.setVolume(volumeColumn)
+						.setTimeAxisFormat(
+							cht.axisFormat().setLabel("Date"))
+						.setValueAxisFormat(
+							cht.axisFormat().setLabel("Value")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

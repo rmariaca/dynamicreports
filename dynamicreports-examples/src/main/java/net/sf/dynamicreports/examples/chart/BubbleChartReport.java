@@ -40,9 +40,9 @@ public class BubbleChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<Double> xColumn  = col.column("X",  "x",  type.doubleType());
+		TextColumnBuilder<Double> xColumn = col.column("X", "x", type.doubleType());
 		TextColumnBuilder<Double> y1Column = col.column("Y1", "y1", type.doubleType());
 		TextColumnBuilder<Double> z1Column = col.column("Z1", "z1", type.doubleType());
 		TextColumnBuilder<Double> y2Column = col.column("Y2", "y2", type.doubleType());
@@ -50,24 +50,24 @@ public class BubbleChartReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(xColumn, y1Column, z1Column, y2Column, z2Column)
-			  .title(Templates.createTitleComponent("BubbleChart"))
-			  .summary(
-			  	cht.bubbleChart()
-			  	   .setTitle("Bubble chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setXValue(xColumn)
-			  	   .series(
-			  	  		 cht.xyzSerie().setYValue(y1Column).setZValue(z1Column),
-			  	  		 cht.xyzSerie().setYValue(y2Column).setZValue(z2Column))
-			  	   .setXAxisFormat(
-			  	   	cht.axisFormat().setLabel("X"))
-			  	   .setYAxisFormat(
-					   	cht.axisFormat().setLabel("Y")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(xColumn, y1Column, z1Column, y2Column, z2Column)
+				.title(Templates.createTitleComponent("BubbleChart"))
+				.summary(
+					cht.bubbleChart()
+						.setTitle("Bubble chart")
+						.setTitleFont(boldFont)
+						.setXValue(xColumn)
+						.series(
+							cht.xyzSerie().setYValue(y1Column).setZValue(z1Column),
+							cht.xyzSerie().setYValue(y2Column).setZValue(z2Column))
+						.setXAxisFormat(
+							cht.axisFormat().setLabel("X"))
+						.setYAxisFormat(
+							cht.axisFormat().setLabel("Y")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
