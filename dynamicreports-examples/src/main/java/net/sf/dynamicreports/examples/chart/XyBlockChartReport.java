@@ -44,7 +44,7 @@ public class XyBlockChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		TextColumnBuilder<Integer> xColumn = col.column("X", "x", type.integerType());
 		TextColumnBuilder<Integer> yColumn = col.column("Y", "y", type.integerType());

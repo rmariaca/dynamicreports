@@ -34,50 +34,49 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class StackedBarChartReport {
-		
+
 	public StackedBarChartReport() {
 		build();
 	}
-	
+
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
-		
-		TextColumnBuilder<String>  itemColumn   = col.column("Item",    "item",   type.stringType());
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
+
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		TextColumnBuilder<Integer> stock1Column = col.column("Stock 1", "stock1", type.integerType());
 		TextColumnBuilder<Integer> stock2Column = col.column("Stock 2", "stock2", type.integerType());
 		TextColumnBuilder<Integer> stock3Column = col.column("Stock 3", "stock3", type.integerType());
-		
+
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(itemColumn, stock1Column, stock2Column, stock3Column)
-			  .title(Templates.createTitleComponent("StackedBarChart"))
-			  .summary(
-			  	cht.stackedBarChart()
-			  	   .setTitle("Stacked bar chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setCategory(itemColumn)
-			  	   .series(
-			  	  		 cht.serie(stock1Column), cht.serie(stock2Column), cht.serie(stock3Column))
-			  	   .setCategoryAxisFormat(
-			  	   	cht.axisFormat()
-			  	   	   .setLabel("Item")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(itemColumn, stock1Column, stock2Column, stock3Column)
+				.title(Templates.createTitleComponent("StackedBarChart"))
+				.summary(
+					cht.stackedBarChart()
+						.setTitle("Stacked bar chart")
+						.setTitleFont(boldFont)
+						.setCategory(itemColumn)
+						.series(
+							cht.serie(stock1Column), cht.serie(stock2Column), cht.serie(stock3Column))
+						.setCategoryAxisFormat(
+							cht.axisFormat().setLabel("Item")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("item", "stock1", "stock2", "stock3");		
-		dataSource.add("Notebook", 90, 85, 40);
-		dataSource.add("Book", 170, 100, 150);
-		dataSource.add("PDA", 120, 80, 60);
+		DRDataSource dataSource = new DRDataSource("item", "stock1", "stock2", "stock3");
+		dataSource.add("Tablet", 90, 85, 40);
+		dataSource.add("Laptop", 170, 100, 150);
+		dataSource.add("Smartphone", 120, 80, 60);
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new StackedBarChartReport();
 	}

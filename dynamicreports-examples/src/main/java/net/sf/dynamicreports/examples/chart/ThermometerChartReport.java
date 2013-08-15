@@ -60,13 +60,13 @@ public class ThermometerChartReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .title(Templates.createTitleComponent("ThermometerChart"))
-			  .summary(
-			  	cmp.horizontalList(chart1, chart2))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.title(Templates.createTitleComponent("ThermometerChart"))
+				.summary(
+					cmp.horizontalList(chart1, chart2))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

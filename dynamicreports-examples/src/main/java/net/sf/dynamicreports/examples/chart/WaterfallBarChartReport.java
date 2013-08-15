@@ -40,7 +40,7 @@ public class WaterfallBarChartReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
@@ -57,8 +57,7 @@ public class WaterfallBarChartReport {
 						.setCategory(itemColumn)
 						.series(cht.serie(quantityColumn))
 						.setCategoryAxisFormat(
-							cht.axisFormat()
-								.setLabel("Item")))
+							cht.axisFormat().setLabel("Item")))
 						.pageFooter(Templates.footerComponent)
 				.setDataSource(createDataSource())
 				.show();
@@ -69,9 +68,9 @@ public class WaterfallBarChartReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity");
-		dataSource.add("Book", 170);
-		dataSource.add("Notebook", 90);
-		dataSource.add("PDA", 120);
+		dataSource.add("Tablet", 170);
+		dataSource.add("Laptop", 90);
+		dataSource.add("Smartphone", 120);
 		dataSource.add("Total", 380);
 		return dataSource;
 	}
