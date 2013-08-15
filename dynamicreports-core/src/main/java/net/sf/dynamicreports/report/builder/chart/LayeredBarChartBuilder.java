@@ -38,10 +38,6 @@ public class LayeredBarChartBuilder extends AbstractCategoryChartBuilder<Layered
 		super(ChartType.LAYEREDBAR);
 	}
 
-	protected LayeredBarChartBuilder(ChartType chartType) {
-		super(chartType);
-	}
-
 	public LayeredBarChartBuilder setShowLabels(Boolean showLabels) {
 		getPlot().setShowLabels(showLabels);
 		return this;
