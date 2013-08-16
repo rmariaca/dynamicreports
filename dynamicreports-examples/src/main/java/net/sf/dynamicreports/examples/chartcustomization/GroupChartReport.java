@@ -38,56 +38,55 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class GroupChartReport {
-		
+
 	public GroupChartReport() {
 		build();
 	}
-	
-	private void build() {		
-		TextColumnBuilder<String>     countryColumn  = col.column("Country",  "country",  type.stringType());
-		TextColumnBuilder<String>     itemColumn     = col.column("Item",     "item",     type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity", "quantity", type.integerType());
-		TextColumnBuilder<BigDecimal> salesColumn    = col.column("Sales",    "sales",    type.bigDecimalType());
-		
+
+	private void build() {
+		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
+		TextColumnBuilder<BigDecimal> salesColumn = col.column("Sales", "sales", type.bigDecimalType());
+
 		Bar3DChartBuilder chart = cht.bar3DChart()
-		                             .setFixedHeight(180)
-		                             .setCategory(itemColumn)
-		                             .series(cht.serie(quantityColumn), cht.serie(salesColumn))
-		                             .setCategoryAxisFormat(
-		                             	cht.axisFormat()
-		                             	  .setLabel("Item"));
-		
+			.setFixedHeight(180)
+			.setCategory(itemColumn)
+			.series(cht.serie(quantityColumn), cht.serie(salesColumn))
+			.setCategoryAxisFormat(
+				cht.axisFormat().setLabel("Item"));
+
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn)
-		                                     .footer(chart);
-		
-		try {			
+			.footer(chart);
+
+		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(countryColumn, itemColumn, quantityColumn, salesColumn)
-			  .title(Templates.createTitleComponent("GroupChart"))
-			  .groupBy(countryGroup)
-			  .summary(
-			  	cmp.text("All countries").setStyle(Templates.bold12CenteredStyle), 
-			  	chart)
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(countryColumn, itemColumn, quantityColumn, salesColumn)
+				.title(Templates.createTitleComponent("GroupChart"))
+				.groupBy(countryGroup)
+				.summary(
+					cmp.text("All countries").setStyle(Templates.bold12CenteredStyle),
+					chart)
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
-		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "sales");		
-		dataSource.add("USA", "Book", 170, new BigDecimal(100));
-		dataSource.add("USA", "Notebook", 90, new BigDecimal(280));
-		dataSource.add("USA", "PDA", 120, new BigDecimal(250));
-		dataSource.add("Canada", "Book", 120, new BigDecimal(80));
-		dataSource.add("Canada", "Notebook", 150, new BigDecimal(310));
-		dataSource.add("Canada", "PDA", 100, new BigDecimal(180));
+		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "sales");
+		dataSource.add("USA", "Tablet", 170, new BigDecimal(100));
+		dataSource.add("USA", "Laptop", 90, new BigDecimal(280));
+		dataSource.add("USA", "Smartphone", 120, new BigDecimal(250));
+		dataSource.add("Canada", "Tablet", 120, new BigDecimal(80));
+		dataSource.add("Canada", "Laptop", 150, new BigDecimal(310));
+		dataSource.add("Canada", "Smartphone", 100, new BigDecimal(180));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new GroupChartReport();
 	}

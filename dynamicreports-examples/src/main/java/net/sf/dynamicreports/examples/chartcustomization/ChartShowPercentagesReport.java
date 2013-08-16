@@ -101,9 +101,9 @@ public class ChartShowPercentagesReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "stock1", "stock2", "stock3");
-		dataSource.add("Notebook", 95, 80, 50);
-		dataSource.add("Book", 170, 100, 80);
-		dataSource.add("PDA", 120, 80, 60);
+		dataSource.add("Laptop", 95, 80, 50);
+		dataSource.add("Tablet", 170, 100, 80);
+		dataSource.add("Smartphone", 120, 80, 60);
 		return dataSource;
 	}
 

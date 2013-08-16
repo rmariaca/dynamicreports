@@ -49,7 +49,7 @@ public class GroupChartReport2 {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
 		TextColumnBuilder<String> yearColumn = col.column("Year", "year", type.stringType());
 		TextColumnBuilder<String> stockColumn = col.column("Stock", "stock", type.stringType());
@@ -74,13 +74,13 @@ public class GroupChartReport2 {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(yearColumn, stockColumn, itemColumn, quantityColumn)
-			  .title(Templates.createTitleComponent("GroupChart2"))
-			  .summary(cmp.subreport(subReport))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(yearColumn, stockColumn, itemColumn, quantityColumn)
+				.title(Templates.createTitleComponent("GroupChart2"))
+				.summary(cmp.subreport(subReport))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -88,14 +88,14 @@ public class GroupChartReport2 {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("year", "stock", "item", "quantity");
-		dataSource.add("2010", "Stock1", "Book", 80);
-		dataSource.add("2010", "Stock1", "PDA", 40);
-		dataSource.add("2010", "Stock2", "Book", 70);
-		dataSource.add("2010", "Stock2", "PDA", 250);
-		dataSource.add("2011", "Stock1", "Book", 40);
-		dataSource.add("2011", "Stock1", "PDA", 90);
-		dataSource.add("2011", "Stock2", "Book", 180);
-		dataSource.add("2011", "Stock2", "PDA", 150);
+		dataSource.add("2010", "Stock1", "Tablet", 80);
+		dataSource.add("2010", "Stock1", "Smartphone", 40);
+		dataSource.add("2010", "Stock2", "Tablet", 70);
+		dataSource.add("2010", "Stock2", "Smartphone", 250);
+		dataSource.add("2011", "Stock1", "Tablet", 40);
+		dataSource.add("2011", "Stock1", "Smartphone", 90);
+		dataSource.add("2011", "Stock2", "Tablet", 180);
+		dataSource.add("2011", "Stock2", "Smartphone", 150);
 		return dataSource;
 	}
 

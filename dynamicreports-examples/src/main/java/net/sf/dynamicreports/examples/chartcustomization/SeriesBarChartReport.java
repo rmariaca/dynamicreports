@@ -42,28 +42,27 @@ public class SeriesBarChartReport {
 	private void build() {
 		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<String>  stateColumn    = col.column("State",    "state",    type.stringType());
-		TextColumnBuilder<String>  itemColumn     = col.column("Item",     "item",     type.stringType());
+		TextColumnBuilder<String> stateColumn = col.column("State", "state", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(stateColumn, itemColumn, quantityColumn)
-			  .title(Templates.createTitleComponent("SeriesBarChart"))
-			  .summary(
-			  	cht.barChart()
-			  	   .setTitle("Bar chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setCategory(stateColumn)
-			  	   .series(
-			  	  		 cht.serie(quantityColumn).setSeries(itemColumn))
-			  	   .setCategoryAxisFormat(
-			  	   	 cht.axisFormat()
-			  	   	   .setLabel("Item")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(stateColumn, itemColumn, quantityColumn)
+				.title(Templates.createTitleComponent("SeriesBarChart"))
+				.summary(
+					cht.barChart()
+						.setTitle("Bar chart")
+						.setTitleFont(boldFont)
+						.setCategory(stateColumn)
+						.series(
+							cht.serie(quantityColumn).setSeries(itemColumn))
+						.setCategoryAxisFormat(
+							cht.axisFormat().setLabel("Item")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -71,12 +70,12 @@ public class SeriesBarChartReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("state", "item", "quantity");
-		dataSource.add("New York", "Book", 170);
-		dataSource.add("New York", "Notebook", 100);
-		dataSource.add("New York", "PDA", 120);
-		dataSource.add("Washington", "Book", 110);
-		dataSource.add("Washington", "Notebook", 90);
-		dataSource.add("Washington", "PDA", 160);
+		dataSource.add("New York", "Tablet", 170);
+		dataSource.add("New York", "Laptop", 100);
+		dataSource.add("New York", "Smartphone", 120);
+		dataSource.add("Washington", "Tablet", 110);
+		dataSource.add("Washington", "Laptop", 90);
+		dataSource.add("Washington", "Smartphone", 160);
 		return dataSource;
 	}
 

@@ -52,22 +52,22 @@ public class ChartSeriesOrderReport {
 		TextColumnBuilder<Integer> valueColumn = col.column("Value", "value", type.integerType());
 
 		BarChartBuilder chart = cht.barChart()
-  		.setCategory(new CategoryExpression())
-  		.series(cht.serie(valueColumn).setSeries(stockColumn))
-  		.setSeriesOrderType(OrderType.ASCENDING)
-  		.setValueAxisFormat(
-  			cht.axisFormat().setLabel("Stock"));
+			.setCategory(new CategoryExpression())
+			.series(cht.serie(valueColumn).setSeries(stockColumn))
+			.setSeriesOrderType(OrderType.ASCENDING)
+			.setValueAxisFormat(
+				cht.axisFormat().setLabel("Stock"));
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(dateColumn, stockColumn, valueColumn)
-			  .title(Templates.createTitleComponent("ChartSeriesOrder"))
-			  .groupBy(dateColumn)
-			  .summary(chart)
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(dateColumn, stockColumn, valueColumn)
+				.title(Templates.createTitleComponent("ChartSeriesOrder"))
+				.groupBy(dateColumn)
+				.summary(chart)
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

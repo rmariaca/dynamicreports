@@ -43,39 +43,37 @@ public class GroupCountChartReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String>  countryColumn  = col.column("Country",  "country",  type.stringType());
-		TextColumnBuilder<String>  itemColumn     = col.column("Item",     "item",     type.stringType());
+		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
 
 		Bar3DChartBuilder chart1 = cht.bar3DChart()
-		                              .setFixedHeight(180)
-		                              .setCategory(countryColumn)
-		                              .series(cht.serie(exp.number(1)).setLabel("Items (group count)"))
-		                              .setCategoryAxisFormat(
-		                              	 cht.axisFormat()
-		                              	   .setLabel("Country"));
+			.setFixedHeight(180)
+			.setCategory(countryColumn)
+			.series(cht.serie(exp.number(1)).setLabel("Items (group count)"))
+			.setCategoryAxisFormat(
+				cht.axisFormat().setLabel("Country"));
 
 		VariableBuilder<Integer> itemVariable = variable(itemColumn, Calculation.DISTINCT_COUNT);
 		itemVariable.setResetType(Evaluation.FIRST_GROUP);
 
 		Bar3DChartBuilder chart2 = cht.bar3DChart()
-                                  .setFixedHeight(180)
-                                  .setCategory(countryColumn)
-                                  .series(cht.serie(itemVariable).setLabel("Items (group distinct count)"))
-                                  .setCategoryAxisFormat(
-                                  	 cht.axisFormat()
-                                  	   .setLabel("Country"));
+			.setFixedHeight(180)
+			.setCategory(countryColumn)
+			.series(cht.serie(itemVariable).setLabel("Items (group distinct count)"))
+			.setCategoryAxisFormat(
+				cht.axisFormat().setLabel("Country"));
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(countryColumn, itemColumn, quantityColumn)
-			  .title(Templates.createTitleComponent("GroupCountChart"))
-			  .groupBy(grp.group(countryColumn))
-			  .summary(cmp.horizontalList(chart1, chart2))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(countryColumn, itemColumn, quantityColumn)
+				.title(Templates.createTitleComponent("GroupCountChart"))
+				.groupBy(grp.group(countryColumn))
+				.summary(cmp.horizontalList(chart1, chart2))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -83,12 +81,12 @@ public class GroupCountChartReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("country", "item", "quantity");
-		dataSource.add("USA", "Book", 170);
-		dataSource.add("USA", "Book", 80);
-		dataSource.add("USA", "Notebook", 90);
-		dataSource.add("USA", "PDA", 120);
-		dataSource.add("Canada", "Book", 120);
-		dataSource.add("Canada", "Notebook", 150);
+		dataSource.add("USA", "Tablet", 170);
+		dataSource.add("USA", "Tablet", 80);
+		dataSource.add("USA", "Laptop", 90);
+		dataSource.add("USA", "Smartphone", 120);
+		dataSource.add("Canada", "Tablet", 120);
+		dataSource.add("Canada", "Laptop", 150);
 		return dataSource;
 	}
 

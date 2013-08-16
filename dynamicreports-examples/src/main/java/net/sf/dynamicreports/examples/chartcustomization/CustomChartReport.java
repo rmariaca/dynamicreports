@@ -63,15 +63,15 @@ public class CustomChartReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .scriptlets(new ReportScriptlet())
-			  .columns(seriesColumn, categoryColumn, meanColumn, medianColumn, q1Column, q3Column, minRegularValueColumn, maxRegularValueColumn, minOutlierColumn, maxOutlierColumn)
-			  .title(Templates.createTitleComponent("CustomChart"))
-			  .summary(
-			  	cmp.image(new ChartExpression()).setFixedHeight(300))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.scriptlets(new ReportScriptlet())
+				.columns(seriesColumn, categoryColumn, meanColumn, medianColumn, q1Column, q3Column, minRegularValueColumn, maxRegularValueColumn, minOutlierColumn, maxOutlierColumn)
+				.title(Templates.createTitleComponent("CustomChart"))
+				.summary(
+					cmp.image(new ChartExpression()).setFixedHeight(300))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -101,16 +101,16 @@ public class CustomChartReport {
 		@Override
 		public void afterDetailEval(ReportParameters reportParameters) {
 			super.afterDetailEval(reportParameters);
-	    String series = reportParameters.getValue("series");
-	    String category = reportParameters.getValue("category");
-	    Double mean = reportParameters.getValue("mean");
-	    Double median = reportParameters.getValue("median");
-	    Double q1 = reportParameters.getValue("q1");
-	    Double q3 = reportParameters.getValue("q3");
-	    Double minRegularValue = reportParameters.getValue("minregularvalue");
-	    Double maxRegularValue = reportParameters.getValue("maxregularvalue");
-	    Double minOutlier = reportParameters.getValue("minoutlier");
-	    Double maxOutlier = reportParameters.getValue("maxoutlier");
+			String series = reportParameters.getValue("series");
+			String category = reportParameters.getValue("category");
+			Double mean = reportParameters.getValue("mean");
+			Double median = reportParameters.getValue("median");
+			Double q1 = reportParameters.getValue("q1");
+			Double q3 = reportParameters.getValue("q3");
+			Double minRegularValue = reportParameters.getValue("minregularvalue");
+			Double maxRegularValue = reportParameters.getValue("maxregularvalue");
+			Double minOutlier = reportParameters.getValue("minoutlier");
+			Double maxOutlier = reportParameters.getValue("maxoutlier");
 			BoxAndWhiskerItem item = new BoxAndWhiskerItem(mean, median, q1, q3, minRegularValue, maxRegularValue, minOutlier, maxOutlier, null);
 			dataset.add(item, series, category);
 		}

@@ -52,31 +52,30 @@ public class ChartCustomizerReport {
 	}
 
 	private void build() {
-		FontBuilder  boldFont = stl.fontArialBold().setFontSize(12);
+		FontBuilder boldFont = stl.fontArialBold().setFontSize(12);
 
-		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(itemColumn, quantityColumn, unitPriceColumn)
-			  .title(Templates.createTitleComponent("ChartCustomizer"))
-			  .summary(
-			  	cht.barChart()
-			  	   .customizers(new ChartCustomizer())
-			  	   .setTitle("Bar chart")
-			  	   .setTitleFont(boldFont)
-			  	   .setCategory(itemColumn)
-			  	   .series(
-			  	  		 cht.serie(quantityColumn), cht.serie(unitPriceColumn))
-			  	   .setCategoryAxisFormat(
-			  	   	cht.axisFormat()
-			  	   	   .setLabel("Item")))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(itemColumn, quantityColumn, unitPriceColumn)
+				.title(Templates.createTitleComponent("ChartCustomizer"))
+				.summary(
+					cht.barChart()
+						.customizers(new ChartCustomizer())
+						.setTitle("Bar chart")
+						.setTitleFont(boldFont)
+						.setCategory(itemColumn)
+						.series(
+							cht.serie(quantityColumn), cht.serie(unitPriceColumn))
+						.setCategoryAxisFormat(
+							cht.axisFormat().setLabel("Item")))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -90,16 +89,16 @@ public class ChartCustomizerReport {
 			BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
 			renderer.setShadowPaint(Color.LIGHT_GRAY);
 			renderer.setShadowVisible(true);
-      CategoryAxis domainAxis = chart.getCategoryPlot().getDomainAxis();
-      domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
+			CategoryAxis domainAxis = chart.getCategoryPlot().getDomainAxis();
+			domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
 		}
 	}
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
-		dataSource.add("Book", 170, new BigDecimal(100));
-		dataSource.add("Notebook", 90, new BigDecimal(450));
-		dataSource.add("PDA", 120, new BigDecimal(250));
+		dataSource.add("Tablet", 350, new BigDecimal(300));
+		dataSource.add("Laptop", 300, new BigDecimal(500));
+		dataSource.add("Smartphone", 450, new BigDecimal(250));
 		return dataSource;
 	}
 
