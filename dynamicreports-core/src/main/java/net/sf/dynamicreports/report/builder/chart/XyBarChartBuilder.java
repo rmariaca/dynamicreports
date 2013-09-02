@@ -51,10 +51,10 @@ public class XyBarChartBuilder extends AbstractXyChartBuilder<XyBarChartBuilder,
 		return this;
 	}
 
-	public XyBarChartBuilder setPercentValuePattern(String percentValuePattern) {
+	/*public XyBarChartBuilder setPercentValuePattern(String percentValuePattern) {
 		getPlot().setPercentValuePattern(percentValuePattern);
 		return this;
-	}
+	}*/
 
 	/*public XyBarChartBuilder setShowTickLabels(boolean showTickLabels) {
 		getPlot().setShowTickLabels(showTickLabels);
