@@ -312,6 +312,7 @@ public class ComponentTransform {
     JasperReportBuilder multiPageReport = DynamicReports.report();
     MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(multiPageList.getComponents());
     multiPageReport.detail(Components.subreport(subreportExpression));
+    multiPageReport.setDetailSplitType(multiPageList.getSplitType());
     DRIDesignExpression reportExpression = accessor.getExpressionTransform().transformExpression(Expressions.value(multiPageReport));
     DRIDesignExpression dataSourceExpression = accessor.getExpressionTransform().transformExpression(Expressions.dataSource(new JREmptyDataSource(multiPageList.getComponents().size())));
     designSubreport.setReportExpression(reportExpression);

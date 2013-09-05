@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIMultiPageList;
 
@@ -36,6 +37,7 @@ public class DRMultiPageList extends DRDimensionComponent implements DRIMultiPag
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private List<DRIComponent> components;
+	private SplitType splitType;
 
 	public DRMultiPageList() {
 		components = new ArrayList<DRIComponent>();
@@ -52,6 +54,15 @@ public class DRMultiPageList extends DRDimensionComponent implements DRIMultiPag
 
 	public void setComponents(List<DRIComponent> components) {
 		this.components = components;
+	}
+
+	@Override
+	public SplitType getSplitType() {
+		return splitType;
+	}
+
+	public void setSplitType(SplitType splitType) {
+		this.splitType = splitType;
 	}
 
 }

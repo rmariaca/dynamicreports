@@ -24,11 +24,15 @@ package net.sf.dynamicreports.report.definition.component;
 
 import java.util.List;
 
+import net.sf.dynamicreports.report.constant.SplitType;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface DRIMultiPageList extends DRIDimensionComponent {
 
 	public List<DRIComponent> getComponents();
+
+	public SplitType getSplitType();
 
 }
