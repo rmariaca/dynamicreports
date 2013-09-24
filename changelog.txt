@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.1.5 (2013-09-24)
+---------------------------------------------------
+ - upgrade to JasperReports 5.2.0
+ - setSplitType method was added to MultiPageListBuilder, this allows to change SplitType of its detail components
+ - new crosstab group attribute was added - setTotalHeaderStretchWithOverflow
+ - added methods to crosstab that allows to add jasper properties to a crosstab group header and crosstab measure
+
 Changes in version 3.1.4 (2013-07-09)
 ---------------------------------------------------
  - newPage() method was added to MultiPageListBuilder, this allows to move to a new page
