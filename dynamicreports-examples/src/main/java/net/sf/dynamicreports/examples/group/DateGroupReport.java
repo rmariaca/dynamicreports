@@ -39,54 +39,54 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DateGroupReport {
-	
+
 	public DateGroupReport() {
 		build();
 	}
-	
-	private void build() {		
-		TextColumnBuilder<Date> yearColumn  = col.column("Order year",  "orderdate", type.dateYearType());
+
+	private void build() {
+		TextColumnBuilder<Date> yearColumn = col.column("Order year", "orderdate", type.dateYearType());
 		TextColumnBuilder<Date> monthColumn = col.column("Order month", "orderdate", type.dateMonthType());
-		
-		ColumnGroupBuilder yearGroup  = grp.group(yearColumn)
-		                                   .groupByDataType();
+
+		ColumnGroupBuilder yearGroup = grp.group(yearColumn)
+			.groupByDataType();
 		ColumnGroupBuilder monthGroup = grp.group(monthColumn)
-		                                   .groupByDataType();
-		
+			.groupByDataType();
+
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(
-			  	yearColumn,
-			  	monthColumn,
-			  	col.column("Order date", "orderdate", type.dateType()),
-			  	col.column("Item",       "item",      type.stringType()),
-			  	col.column("Quantity",   "quantity",  type.integerType()),
-			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .groupBy(
-			  	yearGroup, monthGroup)
-			  .title(Templates.createTitleComponent("DateGroup"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();	
+				.setTemplate(Templates.reportTemplate)
+				.columns(
+					yearColumn,
+					monthColumn,
+					col.column("Order date", "orderdate", type.dateType()),
+					col.column("Item", "item", type.stringType()),
+					col.column("Quantity", "quantity", type.integerType()),
+					col.column("Unit price", "unitprice", type.bigDecimalType()))
+				.groupBy(
+					yearGroup, monthGroup)
+				.title(Templates.createTitleComponent("DateGroup"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("orderdate", "item", "quantity", "unitprice");
-		dataSource.add(toDate(2009, 11, 1), "DVD", 5, new BigDecimal(30));
-		dataSource.add(toDate(2009, 11, 1), "Book", 3, new BigDecimal(11));
-		dataSource.add(toDate(2009, 12, 1), "DVD", 1, new BigDecimal(28));		
-		dataSource.add(toDate(2009, 12, 1), "Book", 1, new BigDecimal(15));
-		dataSource.add(toDate(2010, 1, 1), "DVD", 4, new BigDecimal(32));
-		dataSource.add(toDate(2010, 1, 1), "Book", 2, new BigDecimal(15));
-		dataSource.add(toDate(2010, 2, 1), "DVD", 3, new BigDecimal(25));
-		dataSource.add(toDate(2010, 2, 1), "Book", 5, new BigDecimal(12));
+		dataSource.add(toDate(2009, 11, 1), "Tablet", 5, new BigDecimal(250));
+		dataSource.add(toDate(2009, 11, 1), "Laptop", 3, new BigDecimal(480));
+		dataSource.add(toDate(2009, 12, 1), "Smartphone", 1, new BigDecimal(280));
+		dataSource.add(toDate(2009, 12, 1), "Tablet", 1, new BigDecimal(190));
+		dataSource.add(toDate(2010, 1, 1), "Tablet", 4, new BigDecimal(230));
+		dataSource.add(toDate(2010, 1, 1), "Laptop", 2, new BigDecimal(650));
+		dataSource.add(toDate(2010, 2, 1), "Laptop", 3, new BigDecimal(550));
+		dataSource.add(toDate(2010, 2, 1), "Smartphone", 5, new BigDecimal(210));
 		return dataSource;
 	}
-	
+
 	private Date toDate(int year, int month, int day) {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, year);
@@ -94,7 +94,7 @@ public class DateGroupReport {
 		c.set(Calendar.DAY_OF_MONTH, day);
 		return c.getTime();
 	}
-	
+
 	public static void main(String[] args) {
 		new DateGroupReport();
 	}

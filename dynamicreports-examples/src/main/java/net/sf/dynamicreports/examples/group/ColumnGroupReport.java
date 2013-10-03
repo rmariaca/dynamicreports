@@ -40,50 +40,51 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class ColumnGroupReport {
-	
+
 	public ColumnGroupReport() {
 		build();
 	}
-	
-	private void build() {		
+
+	private void build() {
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
-		
+
 		ColumnGroupBuilder itemGroup = grp.group(itemColumn)
-		                                  .setTitleWidth(30)
-		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
-		                                  .showColumnHeaderAndFooter();
-		
-		try {			
+			.setTitleWidth(30)
+			.setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
+			.showColumnHeaderAndFooter();
+
+		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .setShowColumnTitle(false)
-			  .columns(
-			  	itemColumn,
-			  	col.column("Order date", "orderdate", type.dateType()),
-			  	col.column("Quantity",   "quantity",  type.integerType()),
-			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .groupBy(itemGroup)
-			  .title(Templates.createTitleComponent("Group"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();	
+				.setTemplate(Templates.reportTemplate)
+				.setShowColumnTitle(false)
+				.columns(
+					itemColumn,
+					col.column("Order date", "orderdate", type.dateType()),
+					col.column("Quantity", "quantity", type.integerType()),
+					col.column("Unit price", "unitprice", type.bigDecimalType()))
+				.groupBy(itemGroup)
+				.title(Templates.createTitleComponent("Group"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "orderdate", "quantity", "unitprice");
-		dataSource.add("DVD", toDate(2010, 1, 1), 5, new BigDecimal(30));
-		dataSource.add("DVD", toDate(2010, 1, 3), 1, new BigDecimal(28));
-		dataSource.add("DVD", toDate(2010, 1, 19), 5, new BigDecimal(32));
-		dataSource.add("Book", toDate(2010, 1, 5), 3, new BigDecimal(11));
-		dataSource.add("Book", toDate(2010, 1, 8), 1, new BigDecimal(15));
-		dataSource.add("Book", toDate(2010, 1, 15), 5, new BigDecimal(10));
-		dataSource.add("Book", toDate(2010, 1, 20), 8, new BigDecimal(9));
+		dataSource.add("Tablet", toDate(2010, 1, 1), 5, new BigDecimal(300));
+		dataSource.add("Tablet", toDate(2010, 1, 3), 1, new BigDecimal(280));
+		dataSource.add("Tablet", toDate(2010, 1, 19), 5, new BigDecimal(320));
+		dataSource.add("Laptop", toDate(2010, 1, 5), 3, new BigDecimal(580));
+		dataSource.add("Laptop", toDate(2010, 1, 8), 1, new BigDecimal(620));
+		dataSource.add("Laptop", toDate(2010, 1, 15), 5, new BigDecimal(600));
+		dataSource.add("Smartphone", toDate(2010, 1, 18), 8, new BigDecimal(150));
+		dataSource.add("Smartphone", toDate(2010, 1, 20), 8, new BigDecimal(210));
 		return dataSource;
 	}
-	
+
 	private Date toDate(int year, int month, int day) {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, year);
@@ -91,7 +92,7 @@ public class ColumnGroupReport {
 		c.set(Calendar.DAY_OF_MONTH, day);
 		return c.getTime();
 	}
-	
+
 	public static void main(String[] args) {
 		new ColumnGroupReport();
 	}

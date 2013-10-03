@@ -60,16 +60,16 @@ public class GroupSubtotalsReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .setSubtotalStyle(Templates.columnStyle)
-			  .setShowColumnValues(false)
-			  .columns(yearColumn, monthColumn, quantityColumn, unitPriceColumn)
-			  .groupBy(yearGroup, monthGroup)
-			  .subtotalsAtGroupFooter(monthGroup, sbt.first(monthColumn), sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
-			  .title(Templates.createTitleComponent("GroupSubtotals"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.setSubtotalStyle(Templates.columnStyle)
+				.setShowColumnValues(false)
+				.columns(yearColumn, monthColumn, quantityColumn, unitPriceColumn)
+				.groupBy(yearGroup, monthGroup)
+				.subtotalsAtGroupFooter(monthGroup, sbt.first(monthColumn), sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
+				.title(Templates.createTitleComponent("GroupSubtotals"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}

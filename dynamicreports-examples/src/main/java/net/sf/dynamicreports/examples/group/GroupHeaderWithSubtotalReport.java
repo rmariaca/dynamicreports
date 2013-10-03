@@ -60,21 +60,21 @@ public class GroupHeaderWithSubtotalReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .setSubtotalStyle(stl.style(Templates.boldStyle))
-			  .fields(
-			  	field("orderdate", type.dateYearType()))
-			  .columns(
-			  	yearColumn,	orderDateColumn, itemColumn, quantityColumn, unitPriceColumn)
-			  .groupBy(yearGroup)
-			  .subtotalsAtGroupHeader(yearGroup,
-			  	sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
-			  .subtotalsAtSummary(
-			  	sbt.aggregate(exp.text("Total"), yearColumn, Calculation.NOTHING), sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
-			  .title(Templates.createTitleComponent("GroupHeaderWithSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.setSubtotalStyle(stl.style(Templates.boldStyle))
+				.fields(
+					field("orderdate", type.dateYearType()))
+				.columns(
+					yearColumn,	orderDateColumn, itemColumn, quantityColumn, unitPriceColumn)
+				.groupBy(yearGroup)
+				.subtotalsAtGroupHeader(yearGroup,
+					sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
+				.subtotalsAtSummary(
+					sbt.aggregate(exp.text("Total"), yearColumn, Calculation.NOTHING), sbt.sum(quantityColumn), sbt.sum(unitPriceColumn))
+				.title(Templates.createTitleComponent("GroupHeaderWithSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -91,13 +91,14 @@ public class GroupHeaderWithSubtotalReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("orderdate", "item", "quantity", "unitprice");
-		dataSource.add(toDate(2010, 1, 1), "DVD", 4, new BigDecimal(31));
-		dataSource.add(toDate(2010, 1, 1), "Book", 5, new BigDecimal(18));
-		dataSource.add(toDate(2010, 2, 1), "DVD", 2, new BigDecimal(28));
-		dataSource.add(toDate(2010, 2, 1), "Book", 8, new BigDecimal(12));
-		dataSource.add(toDate(2011, 11, 1), "DVD", 4, new BigDecimal(31));
-		dataSource.add(toDate(2011, 11, 1), "Book", 1, new BigDecimal(19));
-		dataSource.add(toDate(2011, 12, 1), "DVD", 6, new BigDecimal(21));
+		dataSource.add(toDate(2009, 11, 1), "Tablet", 5, new BigDecimal(250));
+		dataSource.add(toDate(2009, 11, 1), "Laptop", 3, new BigDecimal(480));
+		dataSource.add(toDate(2009, 12, 1), "Smartphone", 1, new BigDecimal(280));
+		dataSource.add(toDate(2009, 12, 1), "Tablet", 1, new BigDecimal(190));
+		dataSource.add(toDate(2010, 1, 1), "Tablet", 4, new BigDecimal(230));
+		dataSource.add(toDate(2010, 1, 1), "Laptop", 2, new BigDecimal(650));
+		dataSource.add(toDate(2010, 2, 1), "Laptop", 3, new BigDecimal(550));
+		dataSource.add(toDate(2010, 2, 1), "Smartphone", 5, new BigDecimal(210));
 		return dataSource;
 	}
 

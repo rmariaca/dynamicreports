@@ -48,17 +48,17 @@ public class CustomGroupReport {
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(
-			  	col.column("Order date", "orderdate", type.stringType()),
-			  	col.column("Item",       "item",      type.stringType()),
-			  	col.column("Quantity",   "quantity",  type.integerType()),
-			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
-			  .groupBy(yearGroup)
-			  .title(Templates.createTitleComponent("CustomGroup"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(
+					col.column("Order date", "orderdate", type.stringType()),
+					col.column("Item", "item", type.stringType()),
+					col.column("Quantity", "quantity", type.integerType()),
+					col.column("Unit price", "unitprice", type.bigDecimalType()))
+				.groupBy(yearGroup)
+				.title(Templates.createTitleComponent("CustomGroup"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -76,14 +76,14 @@ public class CustomGroupReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("orderdate", "item", "quantity", "unitprice");
-		dataSource.add("2009-11-01", "DVD", 5, new BigDecimal(30));
-		dataSource.add("2009-11-01", "Book", 3, new BigDecimal(11));
-		dataSource.add("2009-12-01", "DVD", 1, new BigDecimal(28));
-		dataSource.add("2009-12-01", "Book", 1, new BigDecimal(15));
-		dataSource.add("2010-01-01", "DVD", 4, new BigDecimal(32));
-		dataSource.add("2010-01-01", "Book", 2, new BigDecimal(15));
-		dataSource.add("2010-02-01", "DVD", 3, new BigDecimal(25));
-		dataSource.add("2010-02-01", "Book", 5, new BigDecimal(12));
+		dataSource.add("2009-11-01", "Tablet", 5, new BigDecimal(250));
+		dataSource.add("2009-11-01", "Laptop", 3, new BigDecimal(480));
+		dataSource.add("2009-12-01", "Smartphone", 1, new BigDecimal(280));
+		dataSource.add("2009-12-01", "Tablet", 1, new BigDecimal(190));
+		dataSource.add("2010-01-01", "Tablet", 4, new BigDecimal(230));
+		dataSource.add("2010-01-01", "Laptop", 2, new BigDecimal(650));
+		dataSource.add("2010-02-01", "Laptop", 3, new BigDecimal(550));
+		dataSource.add("2010-02-01", "Smartphone", 5, new BigDecimal(210));
 		return dataSource;
 	}
 
