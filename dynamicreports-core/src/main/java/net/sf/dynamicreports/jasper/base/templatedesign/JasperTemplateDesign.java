@@ -37,6 +37,7 @@ import net.sf.dynamicreports.report.base.DRMargin;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
@@ -151,6 +152,11 @@ public class JasperTemplateDesign implements DRITemplateDesign<JasperDesign> {
 	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return ConstantTransform.whenNoDataType(jasperDesign.getWhenNoDataTypeValue());
+	}
+
+	@Override
+	public WhenResourceMissingType getWhenResourceMissingType() {
+		return ConstantTransform.whenResourceMissingType(jasperDesign.getWhenResourceMissingTypeValue());
 	}
 
 	@Override

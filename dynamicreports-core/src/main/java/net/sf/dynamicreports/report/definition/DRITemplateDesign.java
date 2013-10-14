@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -45,6 +46,8 @@ public interface DRITemplateDesign<T> extends Serializable {
 	public Boolean getIgnorePagination();
 
 	public WhenNoDataType getWhenNoDataType();
+
+	public WhenResourceMissingType getWhenResourceMissingType();
 
 	public Boolean getTitleOnANewPage();
 

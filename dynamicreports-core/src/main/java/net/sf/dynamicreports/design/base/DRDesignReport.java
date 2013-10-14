@@ -64,6 +64,7 @@ import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -290,6 +291,11 @@ public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport 
 	@Override
 	public WhenNoDataType getWhenNoDataType() {
 		return templateTransform.getWhenNoDataType(getDetailBands().isEmpty(), getNoDataBand());
+	}
+
+	@Override
+	public WhenResourceMissingType getWhenResourceMissingType() {
+		return templateTransform.getWhenResourceMissingType();
 	}
 
 	@Override

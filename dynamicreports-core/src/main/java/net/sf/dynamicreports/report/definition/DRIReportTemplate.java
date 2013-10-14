@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.style.DRIFont;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
@@ -58,6 +59,8 @@ public interface DRIReportTemplate extends Serializable {
 	public Boolean getIgnorePagination();
 
 	public WhenNoDataType getWhenNoDataType();
+
+	public WhenResourceMissingType getWhenResourceMissingType();
 
 	public Boolean getTitleOnANewPage();
 

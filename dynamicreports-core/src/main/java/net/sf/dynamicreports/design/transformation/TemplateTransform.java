@@ -57,6 +57,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIField;
@@ -202,6 +203,19 @@ public class TemplateTransform {
 			return WhenNoDataType.ALL_SECTIONS_NO_DETAIL;
 		}
 		return Defaults.getDefaults().getWhenNoDataType();
+	}
+
+	public WhenResourceMissingType getWhenResourceMissingType() {
+		if (report.getWhenResourceMissingType() != null) {
+			return report.getWhenResourceMissingType();
+		}
+		if (templateDesign.getWhenResourceMissingType() != null) {
+			return templateDesign.getWhenResourceMissingType();
+		}
+		if (template.getWhenResourceMissingType() != null) {
+			return template.getWhenResourceMissingType();
+		}
+		return Defaults.getDefaults().getWhenResourceMissingType();
 	}
 
 	public boolean isTitleOnANewPage() {

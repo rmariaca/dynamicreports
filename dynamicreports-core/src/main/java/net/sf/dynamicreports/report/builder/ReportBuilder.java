@@ -56,6 +56,7 @@ import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -154,6 +155,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 
 	public T setWhenNoDataType(WhenNoDataType whenNoDataType) {
 		getObject().setWhenNoDataType(whenNoDataType);
+		return (T) this;
+	}
+
+	public T setWhenResourceMissingType(WhenResourceMissingType whenResourceMissingType) {
+		getObject().setWhenResourceMissingType(whenResourceMissingType);
 		return (T) this;
 	}
 

@@ -39,6 +39,7 @@ import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 
@@ -66,6 +67,8 @@ public interface DRIDesignReport {
 	public DRIDesignPage getPage();
 
 	public WhenNoDataType getWhenNoDataType();
+
+	public WhenResourceMissingType getWhenResourceMissingType();
 
 	public boolean isTitleOnANewPage();
 

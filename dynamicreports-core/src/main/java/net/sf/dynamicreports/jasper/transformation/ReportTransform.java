@@ -91,6 +91,7 @@ public class ReportTransform {
 		}
 		page();
 		design.setWhenNoDataType(ConstantTransform.whenNoDataType(report.getWhenNoDataType()));
+		design.setWhenResourceMissingType(ConstantTransform.whenResourceMissingType(report.getWhenResourceMissingType()));
 		design.setTitleNewPage(report.isTitleOnANewPage());
 		design.setSummaryNewPage(report.isSummaryOnANewPage());
 		design.setSummaryWithPageHeaderAndFooter(report.isSummaryWithPageHeaderAndFooter());

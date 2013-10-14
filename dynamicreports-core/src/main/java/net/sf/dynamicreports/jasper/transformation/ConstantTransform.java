@@ -70,6 +70,7 @@ import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
 import net.sf.jasperreports.charts.type.EdgeEnum;
 import net.sf.jasperreports.charts.type.MeterShapeEnum;
@@ -107,6 +108,7 @@ import net.sf.jasperreports.engine.type.StretchTypeEnum;
 import net.sf.jasperreports.engine.type.TabStopAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
+import net.sf.jasperreports.engine.type.WhenResourceMissingTypeEnum;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.jfree.data.time.Day;
@@ -305,6 +307,36 @@ public class ConstantTransform {
 			return WhenNoDataType.NO_DATA_SECTION;
 		default:
 			throw new JasperDesignException("When no data type " + whenNoDataType.name() + " not supported");
+		}
+	}
+
+	protected static WhenResourceMissingTypeEnum whenResourceMissingType(WhenResourceMissingType whenResourceMissingType) {
+		switch (whenResourceMissingType) {
+		case NULL:
+			return WhenResourceMissingTypeEnum.NULL;
+		case EMPTY:
+			return WhenResourceMissingTypeEnum.EMPTY;
+		case KEY:
+			return WhenResourceMissingTypeEnum.KEY;
+		case ERROR:
+			return WhenResourceMissingTypeEnum.ERROR;
+		default:
+			throw new JasperDesignException("When resource missing type " + whenResourceMissingType.name() + " not supported");
+		}
+	}
+
+	public static WhenResourceMissingType whenResourceMissingType(WhenResourceMissingTypeEnum whenResourceMissingType) {
+		switch (whenResourceMissingType) {
+		case NULL:
+			return WhenResourceMissingType.NULL;
+		case EMPTY:
+			return WhenResourceMissingType.EMPTY;
+		case KEY:
+			return WhenResourceMissingType.KEY;
+		case ERROR:
+			return WhenResourceMissingType.ERROR;
+		default:
+			throw new JasperDesignException("When resource missing type " + whenResourceMissingType.name() + " not supported");
 		}
 	}
 

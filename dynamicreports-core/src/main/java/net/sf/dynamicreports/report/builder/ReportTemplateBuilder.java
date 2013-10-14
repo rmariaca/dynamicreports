@@ -44,6 +44,7 @@ import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 
 import org.apache.commons.lang3.Validate;
@@ -113,6 +114,11 @@ public class ReportTemplateBuilder extends AbstractBuilder<ReportTemplateBuilder
 
 	public ReportTemplateBuilder setWhenNoDataType(WhenNoDataType whenNoDataType) {
 		getObject().setWhenNoDataType(whenNoDataType);
+		return this;
+	}
+
+	public ReportTemplateBuilder setWhenResourceMissingType(WhenResourceMissingType whenResourceMissingType) {
+		getObject().setWhenResourceMissingType(whenResourceMissingType);
 		return this;
 	}
 

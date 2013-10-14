@@ -27,6 +27,7 @@ import java.util.List;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIMargin;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
@@ -65,6 +66,11 @@ public abstract class AbstractTemplateDesign<T> implements DRITemplateDesign<T> 
 
 	@Override
 	public WhenNoDataType getWhenNoDataType() {
+		return null;
+	}
+
+	@Override
+	public WhenResourceMissingType getWhenResourceMissingType() {
 		return null;
 	}
 

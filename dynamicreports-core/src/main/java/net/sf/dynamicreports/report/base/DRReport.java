@@ -38,6 +38,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIReport;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
@@ -78,6 +79,7 @@ public class DRReport implements DRIReport {
 	private DRQuery query;
 	private DRPage page;
 	private WhenNoDataType whenNoDataType;
+	private WhenResourceMissingType whenResourceMissingType;
 	private Boolean titleOnANewPage;
 	private Boolean summaryOnANewPage;
 	private Boolean summaryWithPageHeaderAndFooter;
@@ -437,6 +439,15 @@ public class DRReport implements DRIReport {
 
 	public void setWhenNoDataType(WhenNoDataType whenNoDataType) {
 		this.whenNoDataType = whenNoDataType;
+	}
+
+	@Override
+	public WhenResourceMissingType getWhenResourceMissingType() {
+		return whenResourceMissingType;
+	}
+
+	public void setWhenResourceMissingType(WhenResourceMissingType whenResourceMissingType) {
+		this.whenResourceMissingType = whenResourceMissingType;
 	}
 
 	@Override

@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.column.DRIColumn;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.grid.DRIColumnGrid;
@@ -91,6 +92,8 @@ public interface DRIReport extends Serializable {
 	public Boolean getIgnorePagination();
 
 	public WhenNoDataType getWhenNoDataType();
+
+	public WhenResourceMissingType getWhenResourceMissingType();
 
 	public Boolean getTitleOnANewPage();
 

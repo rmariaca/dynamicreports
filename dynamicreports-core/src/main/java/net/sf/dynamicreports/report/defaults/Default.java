@@ -57,6 +57,7 @@ import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.ValueLocation;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
@@ -71,6 +72,7 @@ public class Default {
 	private boolean showColumnValues;
 	private boolean ignorePagination;
 	private WhenNoDataType whenNoDataType;
+	private WhenResourceMissingType whenResourceMissingType;
 	private boolean titleOnANewPage;
 	private boolean summaryOnANewPage;
 	private boolean summaryWithPageHeaderAndFooter;
@@ -275,6 +277,7 @@ public class Default {
 		this.showColumnValues = true;
 		this.ignorePagination =  false;
 		this.whenNoDataType = WhenNoDataType.NO_PAGES;
+		this.whenResourceMissingType = WhenResourceMissingType.NULL;
 		this.titleOnANewPage = false;
 		this.summaryOnANewPage = false;
 		this.summaryWithPageHeaderAndFooter = false;
@@ -504,6 +507,10 @@ public class Default {
 
 	public WhenNoDataType getWhenNoDataType() {
 		return whenNoDataType;
+	}
+
+	public WhenResourceMissingType getWhenResourceMissingType() {
+		return whenResourceMissingType;
 	}
 
 	public boolean isTitleOnANewPage() {
