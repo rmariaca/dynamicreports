@@ -52,6 +52,7 @@ import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.dynamicreports.test.design.DesignReportBuilder;
 
@@ -90,6 +91,7 @@ public class ReportTemplateTest {
 						.setShowColumnTitle(false)
 						.setIgnorePagination(true)
 						.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
+						.setWhenResourceMissingType(WhenResourceMissingType.KEY)
 						.setTitleOnANewPage(true)
 						.setSummaryOnANewPage(true)
 						.setSummaryWithPageHeaderAndFooter(true)
@@ -165,6 +167,7 @@ public class ReportTemplateTest {
 			Assert.assertNull("show column title", report.getColumnHeaderBand());
 			Assert.assertTrue("ignore pagination", report.isIgnorePagination());
 			Assert.assertEquals("when no data type", WhenNoDataType.ALL_SECTIONS_NO_DETAIL, report.getWhenNoDataType());
+			Assert.assertEquals("when resource missing type", WhenResourceMissingType.KEY, report.getWhenResourceMissingType());
 			Assert.assertTrue("title on a new page", report.isTitleOnANewPage());
 			Assert.assertTrue("summary on a new page", report.isSummaryOnANewPage());
 			Assert.assertTrue("summary with page header and footer", report.isSummaryWithPageHeaderAndFooter());

@@ -34,6 +34,7 @@ import net.sf.dynamicreports.report.base.AbstractScriptlet;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
@@ -56,8 +57,10 @@ public class Report1Test extends AbstractJasperValueTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
 				column1 = col.column("Column1", "field1", Integer.class))
+			.title(cmp.text(exp.jasperSyntax("$R{bundleKey3}", String.class)))
 			.setLocale(Locale.ENGLISH)
 			.setResourceBundle(new ResourceBundle())
+			.setWhenResourceMissingType(WhenResourceMissingType.KEY)
 			.setShowColumnTitle(false)
 			.setShowColumnValues(false)
 			.setPageFormat(PageType.A3, PageOrientation.LANDSCAPE)
@@ -73,6 +76,8 @@ public class Report1Test extends AbstractJasperValueTest {
 		numberOfPagesTest(1);
 		columnTitleCountTest(column1, 0);
 		columnDetailCountTest(column1, 0);
+
+		elementValueTest("title.textField1", "bundleKey3");
 
 		FontUtil fontUtil = FontUtil.getInstance(DefaultJasperReportsContext.getInstance());
 		Assert.assertFalse("fonts", fontUtil.getFontFamilyNames().isEmpty());
