@@ -43,30 +43,30 @@ public class GroupSubtotalReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String>     countryColumn  = col.column("Country",  "country",  type.stringType());
-		TextColumnBuilder<String>     itemColumn     = col.column("Item",     "item",     type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity", "quantity", type.integerType());
-		TextColumnBuilder<BigDecimal> priceColumn    = col.column("Price",    "price",    type.bigDecimalType());
+		TextColumnBuilder<String> countryColumn  = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
+		TextColumnBuilder<BigDecimal> priceColumn = col.column("Price", "price", type.bigDecimalType());
 
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(
-			  	countryColumn, itemColumn, quantityColumn, priceColumn)
-			  .groupBy(
-			  	countryGroup)
-			  .subtotalsAtFirstGroupFooter(
-			  	sbt.sum(quantityColumn))
-			  .subtotalsAtGroupFooter(
-			  	countryGroup, sbt.sum(priceColumn))
-			  .subtotalsAtSummary(
-			  	sbt.text("Total", itemColumn), sbt.sum(quantityColumn), sbt.sum(priceColumn))
-			  .title(Templates.createTitleComponent("GroupSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(
+					countryColumn, itemColumn, quantityColumn, priceColumn)
+				.groupBy(
+					countryGroup)
+				.subtotalsAtFirstGroupFooter(
+					sbt.sum(quantityColumn))
+				.subtotalsAtGroupFooter(
+					countryGroup, sbt.sum(priceColumn))
+				.subtotalsAtSummary(
+					sbt.text("Total", itemColumn), sbt.sum(quantityColumn), sbt.sum(priceColumn))
+				.title(Templates.createTitleComponent("GroupSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -74,14 +74,14 @@ public class GroupSubtotalReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "price");
-		dataSource.add("USA", "Book", 4, new BigDecimal(10));
-		dataSource.add("USA", "Book", 3, new BigDecimal(10));
-		dataSource.add("USA", "Notebook", 2, new BigDecimal(20));
-		dataSource.add("USA", "Notebook", 1, new BigDecimal(20));
-		dataSource.add("Canada", "Book", 6, new BigDecimal(15));
-		dataSource.add("Canada", "Book", 2, new BigDecimal(15));
-		dataSource.add("Canada", "Notebook", 3, new BigDecimal(30));
-		dataSource.add("Canada", "Notebook", 2, new BigDecimal(30));
+		dataSource.add("USA", "Tablet", 4, new BigDecimal(150));
+		dataSource.add("USA", "Tablet", 3, new BigDecimal(190));
+		dataSource.add("USA", "Laptop", 2, new BigDecimal(250));
+		dataSource.add("USA", "Laptop", 1, new BigDecimal(420));
+		dataSource.add("Canada", "Tablet", 6, new BigDecimal(120));
+		dataSource.add("Canada", "Tablet", 2, new BigDecimal(180));
+		dataSource.add("Canada", "Laptop", 3, new BigDecimal(300));
+		dataSource.add("Canada", "Laptop", 2, new BigDecimal(390));
 		return dataSource;
 	}
 

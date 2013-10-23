@@ -50,27 +50,27 @@ public class VariableSubtotalReport {
 
 	private void build() {
 		quantitySum = variable("quantity", Integer.class, Calculation.SUM);
-		priceSum    = variable("price", BigDecimal.class, Calculation.SUM);
+		priceSum = variable("price", BigDecimal.class, Calculation.SUM);
 
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 
 		CustomSubtotalBuilder<BigDecimal> unitPriceSbt = sbt.customValue(new UnitPriceSubtotal(), itemColumn)
-		                                                    .setLabel("sum(price) / sum(quantity)")
-		                                                    .setDataType(type.bigDecimalType());
+			.setLabel("sum(price) / sum(quantity)")
+			.setDataType(type.bigDecimalType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .variables(
-			  	quantitySum, priceSum)
-			  .columns(
-			  	itemColumn)
-			  .subtotalsAtSummary(
-			  	unitPriceSbt)
-			  .title(Templates.createTitleComponent("VariableSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.variables(
+					quantitySum, priceSum)
+				.columns(
+					itemColumn)
+				.subtotalsAtSummary(
+					unitPriceSbt)
+				.title(Templates.createTitleComponent("VariableSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -89,10 +89,11 @@ public class VariableSubtotalReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "price");
-		dataSource.add("Book", 3, new BigDecimal(11));
-		dataSource.add("Book", 1, new BigDecimal(15));
-		dataSource.add("Book", 3, new BigDecimal(10));
-		dataSource.add("Book", 8, new BigDecimal(9));
+		dataSource.add("Tablet", 3, new BigDecimal(330));
+		dataSource.add("Tablet", 1, new BigDecimal(150));
+		dataSource.add("Laptop", 3, new BigDecimal(900));
+		dataSource.add("Smartphone", 8, new BigDecimal(720));
+		dataSource.add("Smartphone", 6, new BigDecimal(720));
 		return dataSource;
 	}
 

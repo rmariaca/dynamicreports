@@ -51,15 +51,15 @@ public class CustomTextSubtotalReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String>     countryColumn  = col.column("Country",  "country",  type.stringType());
-		TextColumnBuilder<String>     itemColumn     = col.column("Item",     "item",     type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity", "quantity", type.integerType());
-		TextColumnBuilder<BigDecimal> priceColumn    = col.column("Price",    "price",    type.bigDecimalType());
+		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
+		TextColumnBuilder<BigDecimal> priceColumn = col.column("Price", "price", type.bigDecimalType());
 
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
 
-		VariableBuilder<Integer>    quantitySum = variable(quantityColumn, Calculation.SUM);
-		VariableBuilder<BigDecimal> priceSum    = variable(priceColumn, Calculation.SUM);
+		VariableBuilder<Integer> quantitySum = variable(quantityColumn, Calculation.SUM);
+		VariableBuilder<BigDecimal> priceSum = variable(priceColumn, Calculation.SUM);
 
 		VariableBuilder<Integer> quantityGrpSum = variable(quantityColumn, Calculation.SUM);
 		quantityGrpSum.setResetGroup(countryGroup);
@@ -67,33 +67,33 @@ public class CustomTextSubtotalReport {
 		priceGrpSum.setResetType(Evaluation.FIRST_GROUP);
 
 		StyleBuilder subtotalStyle = stl.style()
-		                                .bold()
-		                                .setTopBorder(stl.pen1Point())
-		                                .setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.bold()
+			.setTopBorder(stl.pen1Point())
+			.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
 		TextFieldBuilder<String> summarySbt = cmp.text(new CustomTextSubtotal(quantitySum, priceSum))
-		                                         .setStyle(subtotalStyle);
+			.setStyle(subtotalStyle);
 
 		TextFieldBuilder<String> groupSbt = cmp.text(new CustomTextSubtotal(quantityGrpSum, priceGrpSum))
-		                                       .setStyle(subtotalStyle);
+			.setStyle(subtotalStyle);
 
 		countryGroup.footer(groupSbt);
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .variables(
-			  	quantitySum, priceSum, quantityGrpSum, priceGrpSum)
-			  .columns(
-			  	countryColumn, itemColumn, quantityColumn, priceColumn)
-			  .groupBy(
-			  	countryGroup)
-			  .summary(
-			  	summarySbt)
-			  .title(Templates.createTitleComponent("CustomTextSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.variables(
+					quantitySum, priceSum, quantityGrpSum, priceGrpSum)
+				.columns(
+					countryColumn, itemColumn, quantityColumn, priceColumn)
+				.groupBy(
+					countryGroup)
+				.summary(
+					summarySbt)
+				.title(Templates.createTitleComponent("CustomTextSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -116,21 +116,21 @@ public class CustomTextSubtotalReport {
 			BigDecimal priceSumValue = reportParameters.getValue(priceSum);
 			BigDecimal unitPriceSbt = priceSumValue.divide(new BigDecimal(quantitySumValue), 2, BigDecimal.ROUND_HALF_UP);
 			return "sum(quantity) = " + type.integerType().valueToString(quantitySum, reportParameters) + ", " +
-			       "sum(price) = " + type.bigDecimalType().valueToString(priceSum, reportParameters) + ", " +
-			       "sum(price) / sum(quantity) = " + type.bigDecimalType().valueToString(unitPriceSbt, reportParameters.getLocale());
+				"sum(price) = " + type.bigDecimalType().valueToString(priceSum, reportParameters) + ", " +
+				"sum(price) / sum(quantity) = " + type.bigDecimalType().valueToString(unitPriceSbt, reportParameters.getLocale());
 		}
 	}
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("country", "item", "quantity", "price");
-		dataSource.add("USA", "Book", 4, new BigDecimal(10));
-		dataSource.add("USA", "Book", 3, new BigDecimal(10));
-		dataSource.add("USA", "Notebook", 2, new BigDecimal(20));
-		dataSource.add("USA", "Notebook", 1, new BigDecimal(20));
-		dataSource.add("Canada", "Book", 6, new BigDecimal(15));
-		dataSource.add("Canada", "Book", 2, new BigDecimal(15));
-		dataSource.add("Canada", "Notebook", 3, new BigDecimal(30));
-		dataSource.add("Canada", "Notebook", 2, new BigDecimal(30));
+		dataSource.add("USA", "Tablet", 4, new BigDecimal(600));
+		dataSource.add("USA", "Tablet", 3, new BigDecimal(570));
+		dataSource.add("USA", "Laptop", 2, new BigDecimal(500));
+		dataSource.add("USA", "Laptop", 1, new BigDecimal(420));
+		dataSource.add("Canada", "Tablet", 6, new BigDecimal(720));
+		dataSource.add("Canada", "Tablet", 2, new BigDecimal(360));
+		dataSource.add("Canada", "Laptop", 3, new BigDecimal(900));
+		dataSource.add("Canada", "Laptop", 2, new BigDecimal(780));
 		return dataSource;
 	}
 

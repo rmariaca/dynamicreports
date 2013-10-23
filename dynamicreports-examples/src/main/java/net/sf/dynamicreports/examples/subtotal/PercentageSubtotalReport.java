@@ -47,51 +47,57 @@ public class PercentageSubtotalReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String>     countryColumn = col.column("Country", "country", type.stringType());
-		TextColumnBuilder<String>     itemColumn    = col.column("Item",    "item",    type.stringType());
-		TextColumnBuilder<BigDecimal> priceColumn   = col.column("Price",   "price",   type.bigDecimalType());
+		TextColumnBuilder<String> countryColumn = col.column("Country", "country", type.stringType());
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<BigDecimal> priceColumn = col.column("Price", "price", type.bigDecimalType());
 
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
-		ColumnGroupBuilder itemGroup    = grp.group(itemColumn);
+		ColumnGroupBuilder itemGroup = grp.group(itemColumn);
 
-		StyleBuilder countryLabelStyle       = stl.style().setForegroundColor(Color.RED);
-		StyleBuilder countryStyle            = stl.style(countryLabelStyle)
-		                                          .setTopBorder(stl.pen1Point());
-		StyleBuilder itemInCountryLabelStyle = stl.style().setForegroundColor(Color.GREEN);
-		StyleBuilder itemInCountryStyle      = stl.style(itemInCountryLabelStyle)
-		                                          .setTopBorder(stl.pen1Point());
-		StyleBuilder itemLabelStyle          = stl.style().setForegroundColor(Color.BLUE);
-		StyleBuilder itemStyle               = stl.style(itemLabelStyle)
-		                                          .setTopBorder(stl.pen1Point());
+		StyleBuilder countryLabelStyle = stl.style()
+			.setForegroundColor(Color.RED);
+		StyleBuilder countryStyle = stl.style(countryLabelStyle)
+			.setTopBorder(stl.pen1Point());
+		StyleBuilder itemInCountryLabelStyle = stl.style()
+			.setForegroundColor(Color.GREEN);
+		StyleBuilder itemInCountryStyle = stl.style(itemInCountryLabelStyle)
+			.setTopBorder(stl.pen1Point());
+		StyleBuilder itemLabelStyle = stl.style()
+			.setForegroundColor(Color.BLUE);
+		StyleBuilder itemStyle = stl.style(itemLabelStyle)
+			.setTopBorder(stl.pen1Point());
 
-		PercentageSubtotalBuilder countryPercentage       = sbt.percentage(priceColumn).setLabel("country price [%]")
-		                                                       .setLabelStyle(countryLabelStyle)
-		                                                       .setStyle(countryStyle);
+		PercentageSubtotalBuilder countryPercentage = sbt.percentage(priceColumn)
+			.setLabel("country price [%]")
+			.setLabelStyle(countryLabelStyle)
+			.setStyle(countryStyle);
 
-		PercentageSubtotalBuilder itemInCountryPercentage = sbt.percentage(priceColumn).setLabel("item in country price[%]")
-		                                                       .setLabelStyle(itemInCountryLabelStyle)
-		                                                       .setStyle(itemInCountryStyle);
+		PercentageSubtotalBuilder itemInCountryPercentage = sbt.percentage(priceColumn)
+			.setLabel("item in country price[%]")
+			.setLabelStyle(itemInCountryLabelStyle)
+			.setStyle(itemInCountryStyle);
 
-		PercentageSubtotalBuilder itemPercentage          = sbt.percentage(priceColumn).setLabel("item price[%]")
-		                                                       .setLabelStyle(itemLabelStyle)
-		                                                       .setStyle(itemStyle)
-		                                                       .setTotalType(PercentageTotalType.REPORT);
+		PercentageSubtotalBuilder itemPercentage = sbt.percentage(priceColumn)
+			.setLabel("item price[%]")
+			.setLabelStyle(itemLabelStyle)
+			.setStyle(itemStyle)
+			.setTotalType(PercentageTotalType.REPORT);
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(
-			  	countryColumn, itemColumn,	priceColumn)
-			  .groupBy(
-			  	countryGroup, itemGroup)
-			  .subtotalsOfPercentageAtGroupFooter(
-			  	countryGroup, countryPercentage)
-			  .subtotalsOfPercentageAtGroupFooter(
-			  	itemGroup, itemInCountryPercentage, itemPercentage)
-			  .title(Templates.createTitleComponent("PercentageSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(
+					countryColumn, itemColumn,	priceColumn)
+				.groupBy(
+					countryGroup, itemGroup)
+				.subtotalsOfPercentageAtGroupFooter(
+					countryGroup, countryPercentage)
+				.subtotalsOfPercentageAtGroupFooter(
+					itemGroup, itemInCountryPercentage, itemPercentage)
+				.title(Templates.createTitleComponent("PercentageSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -99,14 +105,14 @@ public class PercentageSubtotalReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("country", "item", "price");
-		dataSource.add("USA", "Book", new BigDecimal(10));
-		dataSource.add("USA", "Book", new BigDecimal(10));
-		dataSource.add("USA", "Notebook", new BigDecimal(20));
-		dataSource.add("USA", "Notebook", new BigDecimal(20));
-		dataSource.add("Canada", "Book", new BigDecimal(15));
-		dataSource.add("Canada", "Book", new BigDecimal(15));
-		dataSource.add("Canada", "Notebook", new BigDecimal(30));
-		dataSource.add("Canada", "Notebook", new BigDecimal(30));
+		dataSource.add("USA", "Tablet", new BigDecimal(150));
+		dataSource.add("USA", "Tablet", new BigDecimal(190));
+		dataSource.add("USA", "Laptop", new BigDecimal(250));
+		dataSource.add("USA", "Laptop", new BigDecimal(420));
+		dataSource.add("Canada", "Tablet", new BigDecimal(120));
+		dataSource.add("Canada", "Tablet", new BigDecimal(180));
+		dataSource.add("Canada", "Laptop", new BigDecimal(300));
+		dataSource.add("Canada", "Laptop", new BigDecimal(390));
 		return dataSource;
 	}
 

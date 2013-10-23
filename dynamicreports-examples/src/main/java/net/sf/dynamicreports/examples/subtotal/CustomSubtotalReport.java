@@ -48,28 +48,31 @@ public class CustomSubtotalReport {
 	}
 
 	private void build() {
-		TextColumnBuilder<String>     itemColumn      = col.column("Item",     "item",     type.stringType());
-		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity", "quantity", type.integerType());
-		TextColumnBuilder<BigDecimal> priceColumn     = col.column("Price",    "price",    type.bigDecimalType());
-		TextColumnBuilder<BigDecimal> unitPriceColumn = priceColumn.divide(2, quantityColumn).setTitle("Price / Quantity");
+		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
+		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType());
+		TextColumnBuilder<BigDecimal> priceColumn = col.column("Price", "price", type.bigDecimalType());
+		TextColumnBuilder<BigDecimal> unitPriceColumn = priceColumn.divide(2, quantityColumn)
+			.setTitle("Price / Quantity");
 
-		quantitySum  = sbt.sum(quantityColumn).setLabel("sum");
-		priceSum     = sbt.sum(priceColumn).setLabel("sum");
+		quantitySum = sbt.sum(quantityColumn)
+			.setLabel("sum");
+		priceSum = sbt.sum(priceColumn)
+			.setLabel("sum");
 		CustomSubtotalBuilder<BigDecimal> unitPriceSbt = sbt.customValue(new UnitPriceSubtotal(), unitPriceColumn)
-		                                                    .setLabel("sum(price) / sum(quantity)")
-		                                                    .setDataType(type.bigDecimalType());
+			.setLabel("sum(price) / sum(quantity)")
+			.setDataType(type.bigDecimalType());
 
 		try {
 			report()
-			  .setTemplate(Templates.reportTemplate)
-			  .columns(
-			  	itemColumn,	quantityColumn, priceColumn, unitPriceColumn)
-			  .subtotalsAtSummary(
-			  	quantitySum, priceSum, unitPriceSbt)
-			  .title(Templates.createTitleComponent("CustomSubtotal"))
-			  .pageFooter(Templates.footerComponent)
-			  .setDataSource(createDataSource())
-			  .show();
+				.setTemplate(Templates.reportTemplate)
+				.columns(
+					itemColumn,	quantityColumn, priceColumn, unitPriceColumn)
+				.subtotalsAtSummary(
+					quantitySum, priceSum, unitPriceSbt)
+				.title(Templates.createTitleComponent("CustomSubtotal"))
+				.pageFooter(Templates.footerComponent)
+				.setDataSource(createDataSource())
+				.show();
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
@@ -88,10 +91,11 @@ public class CustomSubtotalReport {
 
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "price");
-		dataSource.add("Book", 3, new BigDecimal(11));
-		dataSource.add("Book", 1, new BigDecimal(15));
-		dataSource.add("Book", 3, new BigDecimal(10));
-		dataSource.add("Book", 8, new BigDecimal(9));
+		dataSource.add("Tablet", 3, new BigDecimal(330));
+		dataSource.add("Tablet", 1, new BigDecimal(150));
+		dataSource.add("Laptop", 3, new BigDecimal(900));
+		dataSource.add("Smartphone", 8, new BigDecimal(720));
+		dataSource.add("Smartphone", 6, new BigDecimal(720));
 		return dataSource;
 	}
 
