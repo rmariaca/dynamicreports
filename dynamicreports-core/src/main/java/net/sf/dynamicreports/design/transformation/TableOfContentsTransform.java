@@ -109,6 +109,7 @@ public class TableOfContentsTransform {
 			DRITextField<?> valueField = group.getValueField();
 			referenceField.setValueExpression(new TocReferenceExpression(level, group.getName(), valueField.getValueExpression(), valueField.getAnchorNameExpression(), null));
 			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(group.getName(), valueField.getAnchorNameExpression()));
+			referenceField.setPrintWhenExpression(new TocPrintWhenExpression(valueField.getValueExpression()));
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(0);
 			designReferenceField.setHeight(0);
@@ -191,6 +192,27 @@ public class TableOfContentsTransform {
 				id = expressionName + "_" + reportParameters.getReportRowNumber();
 			}
 			return id;
+		}
+	}
+
+	private class TocPrintWhenExpression extends AbstractComplexExpression<Boolean> {
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+		private Object lastValue;
+
+		private TocPrintWhenExpression(DRIExpression<?> expression) {
+			addExpression(expression);
+		}
+
+		@Override
+		public Boolean evaluate(List<?> values, ReportParameters reportParameters) {
+			Object value = values.get(0);
+			if (lastValue != null && lastValue.equals(value)) {
+				lastValue = value;
+				return false;
+			}
+			lastValue = value;
+			return true;
 		}
 	}
 }
