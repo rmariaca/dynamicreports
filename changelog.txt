@@ -1,6 +1,11 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.1.6 (2013-11-21)
+---------------------------------------------------
+ - new report attribute was added - setWhenResourceMissingType
+ - fixed a bug in table of contents where group entries were repeated in toc when a group reprints its header on each page
+
 Changes in version 3.1.5 (2013-09-24)
 ---------------------------------------------------
  - upgrade to JasperReports 5.2.0
