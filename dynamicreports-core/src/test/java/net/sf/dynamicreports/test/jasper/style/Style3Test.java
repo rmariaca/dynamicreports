@@ -1,7 +1,7 @@
 /**
  * DynamicReports - Free Java reporting library for creating reports dynamically
  *
- * Copyright (C) 2010 - 2013 Ricardo Mariaca
+ * Copyright (C) 2010 - 2014 Ricardo Mariaca
  * http://www.dynamicreports.org
  *
  * This file is part of DynamicReports.
