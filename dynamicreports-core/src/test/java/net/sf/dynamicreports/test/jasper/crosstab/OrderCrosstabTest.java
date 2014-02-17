@@ -74,7 +74,7 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 
 		//column group
 		crosstabGroupHeaderCountTest(columnGroup, 2);
-		crosstabGroupHeaderValueTest(columnGroup, "d", "c");
+		crosstabGroupHeaderValueTest(columnGroup, "c", "d");
 		crosstabGroupTotalHeaderCountTest(columnGroup, 0);
 
 		//row group
@@ -84,7 +84,7 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 
 		//measure1
 		crosstabCellCountTest(measure1, null, null, 4);
-		crosstabCellValueTest(measure1, null, null, "3", "7", "11", "15");
+		crosstabCellValueTest(measure1, null, null, "7", "3", "15", "11");
 		crosstabCellCountTest(measure1, null, columnGroup, 0);
 		crosstabCellCountTest(measure1, rowGroup, null, 0);
 		crosstabCellCountTest(measure1, rowGroup, columnGroup, 0);
