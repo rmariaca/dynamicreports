@@ -82,6 +82,7 @@ import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
+import net.sf.jasperreports.engine.analytics.dataset.BucketOrder;
 import net.sf.jasperreports.engine.design.JRDesignChart;
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
@@ -908,6 +909,21 @@ public class ConstantTransform {
 			return SortOrderEnum.ASCENDING;
 		case DESCENDING:
 			return SortOrderEnum.DESCENDING;
+		default:
+			throw new JasperDesignException("OrderType " + orderType.name() + " not supported");
+		}
+	}
+
+	public static BucketOrder bucketOrderType(OrderType orderType) {
+		if (orderType == null) {
+			return null;
+		}
+
+		switch (orderType) {
+		case ASCENDING:
+			return BucketOrder.ASCENDING;
+		case DESCENDING:
+			return BucketOrder.DESCENDING;
 		default:
 			throw new JasperDesignException("OrderType " + orderType.name() + " not supported");
 		}

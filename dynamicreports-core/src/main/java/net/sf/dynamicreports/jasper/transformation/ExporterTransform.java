@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.io.File;
+
 import net.sf.dynamicreports.design.transformation.StyleResolver;
 import net.sf.dynamicreports.jasper.definition.export.JasperICsvExporter;
 import net.sf.dynamicreports.jasper.definition.export.JasperIDocxExporter;
@@ -47,6 +49,8 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.export.FileHtmlResourceHandler;
+import net.sf.jasperreports.engine.export.HtmlResourceHandler;
 import net.sf.jasperreports.engine.export.JExcelApiExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporterParameter;
@@ -71,6 +75,7 @@ import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.web.util.WebHtmlResourceHandler;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -190,16 +195,27 @@ public class ExporterTransform {
 	}
 
 	private JRExporter xhtml(JasperIXhtmlExporter jasperExporter) {
-		JRExporter jrExporter = new JRXhtmlExporter();
+		JRXhtmlExporter jrExporter = new JRXhtmlExporter();
 		exporter(jrExporter, jasperExporter);
-		if (jasperExporter.getOutputImagesToDir() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IS_OUTPUT_IMAGES_TO_DIR, jasperExporter.getOutputImagesToDir());
+
+		Boolean outputImagesToDir = jasperExporter.getOutputImagesToDir();
+		String imagesUri = jasperExporter.getImagesURI();
+		HtmlResourceHandler imageHandler = null;
+		if (outputImagesToDir == null || outputImagesToDir) {
+			File imagesDir = null;
+			String imagesDirName = jasperExporter.getImagesDirName();
+			if (imagesDirName != null) {
+				imagesDir = new File(imagesDirName);
+			}
+			if (imagesDir != null) {
+				imageHandler = new FileHtmlResourceHandler(imagesDir, imagesUri == null ? imagesDir.getName() + "/{0}" : imagesUri + "{0}");
+			}
 		}
-		if (jasperExporter.getImagesDirName() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_DIR_NAME, jasperExporter.getImagesDirName());
+		if (imageHandler == null && imagesUri != null) {
+			imageHandler = new WebHtmlResourceHandler(imagesUri + "{0}");
 		}
-		if (jasperExporter.getImagesURI() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, jasperExporter.getImagesURI());
+		if (imageHandler != null) {
+			jrExporter.setImageHandler(imageHandler);
 		}
 		if (jasperExporter.getHtmlHeader() != null) {
 			jrExporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, jasperExporter.getHtmlHeader());
@@ -330,16 +346,27 @@ public class ExporterTransform {
 	}
 
 	private JRExporter html(JasperIHtmlExporter jasperExporter) {
-		JRExporter jrExporter = new JRHtmlExporter();
+		JRHtmlExporter jrExporter = new JRHtmlExporter();
 		exporter(jrExporter, jasperExporter);
-		if (jasperExporter.getOutputImagesToDir() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IS_OUTPUT_IMAGES_TO_DIR, jasperExporter.getOutputImagesToDir());
+
+		Boolean outputImagesToDir = jasperExporter.getOutputImagesToDir();
+		String imagesUri = jasperExporter.getImagesURI();
+		HtmlResourceHandler imageHandler = null;
+		if (outputImagesToDir == null || outputImagesToDir) {
+			File imagesDir = null;
+			String imagesDirName = jasperExporter.getImagesDirName();
+			if (imagesDirName != null) {
+				imagesDir = new File(imagesDirName);
+			}
+			if (imagesDir != null) {
+				imageHandler = new FileHtmlResourceHandler(imagesDir, imagesUri == null ? imagesDir.getName() + "/{0}" : imagesUri + "{0}");
+			}
 		}
-		if (jasperExporter.getImagesDirName() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_DIR_NAME, jasperExporter.getImagesDirName());
+		if (imageHandler == null && imagesUri != null) {
+			imageHandler = new WebHtmlResourceHandler(imagesUri + "{0}");
 		}
-		if (jasperExporter.getImagesURI() != null) {
-			jrExporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, jasperExporter.getImagesURI());
+		if (imageHandler != null) {
+			jrExporter.setImageHandler(imageHandler);
 		}
 		if (jasperExporter.getHtmlHeader() != null) {
 			jrExporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, jasperExporter.getHtmlHeader());

@@ -164,7 +164,7 @@ public class CrosstabTransform {
 	private JRDesignCrosstabBucket bucket(DRIDesignCrosstabGroup group) {
 		JRDesignCrosstabBucket jrBucket = new JRDesignCrosstabBucket();
 		if (group.getOrderType() != null) {
-			jrBucket.setOrder(ConstantTransform.orderType(group.getOrderType()));
+			jrBucket.setOrder(ConstantTransform.bucketOrderType(group.getOrderType()));
 		}
 		jrBucket.setExpression(accessor.getExpressionTransform().getExpression(group.getExpression()));
 		jrBucket.setOrderByExpression(accessor.getExpressionTransform().getExpression(group.getOrderByExpression()));

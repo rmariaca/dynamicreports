@@ -94,7 +94,7 @@ public class GeoMapFillComponent extends BaseFillComponent {
 		JRTemplateGenericElement template = new JRTemplateGenericElement(fillContext.getElementOrigin(),
 				fillContext.getDefaultStyleProvider(), GeoMapPrintElement.GEOMAP_ELEMENT_TYPE);
 
-		JRTemplateGenericPrintElement printElement = new JRTemplateGenericPrintElement(template, elementId);
+		JRTemplateGenericPrintElement printElement = new JRTemplateGenericPrintElement(template, printElementOriginator);
 		printElement.setX(element.getX());
 		printElement.setY(fillContext.getElementPrintY());
 		printElement.setWidth(element.getWidth());
