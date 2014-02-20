@@ -97,6 +97,25 @@ public class ChartSeriesColorsByNameTest extends AbstractJasperChartTest impleme
 						.seriesColorsByName(colors)
 						.setXValue(column5)
 						.series(
+							cht.xySerie(column3).setSeries(column2))),
+				cmp.horizontalList(
+					cht.barChart()
+						.setDataSource(new DRDataSource("field1", "field2", "field3", "field4", "field5"))
+						.seriesColorsByName(colors)
+						.setCategory(column1)
+						.series(
+							cht.serie(column3).setSeries(column2)),
+					cht.pieChart()
+						.setDataSource(new DRDataSource("field1", "field2", "field3", "field4", "field5"))
+						.seriesColorsByName(colors)
+						.setKey(column2)
+						.series(
+							cht.serie(column3)),
+					cht.xyBarChart()
+						.setDataSource(new DRDataSource("field1", "field2", "field3", "field4", "field5"))
+						.seriesColorsByName(colors)
+						.setXValue(column5)
+						.series(
 							cht.xySerie(column3).setSeries(column2))));
 	}
 

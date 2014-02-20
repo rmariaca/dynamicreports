@@ -60,13 +60,15 @@ public class SeriesColorsByNameCustomizer implements DRIChartCustomizer {
 			CategoryItemRenderer renderer = chart.getCategoryPlot().getRenderer();
 			CategoryDataset dataset = chart.getCategoryPlot().getDataset();
 			Set<String> legend = new LinkedHashSet<String>();
-			for (int i = 0; i < dataset.getRowCount(); i++) {
-				String key = (String) dataset.getRowKey(i);
-				if (renderer instanceof GroupedStackedBarRenderer) {
-					key = StringUtils.substringAfter(key, GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY);
-					legend.add(key);
+			if (dataset != null) {
+				for (int i = 0; i < dataset.getRowCount(); i++) {
+					String key = (String) dataset.getRowKey(i);
+					if (renderer instanceof GroupedStackedBarRenderer) {
+						key = StringUtils.substringAfter(key, GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY);
+						legend.add(key);
+					}
+					renderer.setSeriesPaint(i, seriesColorsByName.get(key));
 				}
-				renderer.setSeriesPaint(i, seriesColorsByName.get(key));
 			}
 			if (!legend.isEmpty()) {
 				LegendItemCollection legendItems = new LegendItemCollection();
