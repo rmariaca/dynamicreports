@@ -195,6 +195,11 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	public T setHeaderPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getHeaderBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	public T setHeaderStyle(ReportStyleBuilder style) {
 		if (style != null) {
 			getObject().getHeaderBand().getList().setStyle(style.build());
@@ -227,6 +232,11 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 	//footer
 	public T setFooterSplitType(SplitType splitType) {
 		getObject().getFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setFooterPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getFooterBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 

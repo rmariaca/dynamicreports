@@ -122,7 +122,12 @@ public class BandTransform {
 		}
 		JRDesignBand jrBand = new JRDesignBand();
 		if (band.getBandComponent() != null) {
-			jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getBandComponent().getPrintWhenExpression()));
+			if (band.getPrintWhenExpression() != null) {
+				jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getPrintWhenExpression()));
+			}
+			else {
+				jrBand.setPrintWhenExpression(accessor.getExpressionTransform().getExpression(band.getBandComponent().getPrintWhenExpression()));
+			}
 			jrBand.setSplitType(ConstantTransform.splitType(band.getSplitType()));
 			JRDesignElement[] jrElements = accessor.getComponentTransform().component(band.getBandComponent(), ListType.VERTICAL);
 			for (JRDesignElement jrElement : jrElements) {

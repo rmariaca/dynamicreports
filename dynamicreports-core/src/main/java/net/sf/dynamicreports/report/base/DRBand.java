@@ -28,35 +28,46 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRBand implements DRIBand {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private SplitType splitType;
 	private DRList list;
-	
+	private DRIExpression<Boolean> printWhenExpression;
+
 	public DRBand() {
 		this.list = new DRList(ListType.VERTICAL);
 	}
-	
+
 	@Override
 	public SplitType getSplitType() {
 		return splitType;
 	}
-	
+
 	public void setSplitType(SplitType splitType) {
 		this.splitType = splitType;
 	}
-		
+
 	@Override
 	public DRList getList() {
 		return list;
 	}
-	
+
 	public void addComponent(DRComponent component) {
 		list.addComponent(component);
+	}
+
+	@Override
+	public DRIExpression<Boolean> getPrintWhenExpression() {
+		return printWhenExpression;
+	}
+
+	public void setPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		this.printWhenExpression = printWhenExpression;
 	}
 }

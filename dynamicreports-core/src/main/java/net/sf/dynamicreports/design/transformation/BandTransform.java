@@ -182,6 +182,7 @@ public class BandTransform {
 		DRDesignBand designBand = new DRDesignBand(bandName);
 		designBand.setSplitType(splitType);
 		designBand.setList(accessor.getComponentTransform().list(band.getList(), DefaultStyleType.TEXT, resetType, resetGroup));
+		designBand.setPrintWhenExpression(accessor.getExpressionTransform().transformExpression(band.getPrintWhenExpression()));
 
 		if (designBand.getList().getStyle() == null && defaultStyle != null) {
 			designBand.getList().setStyle(accessor.getStyleTransform().transformStyle(defaultStyle, false, DefaultStyleType.NONE));

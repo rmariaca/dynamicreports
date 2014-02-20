@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.definition;
 
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.SplitType;
 
 /**
@@ -40,4 +41,6 @@ public interface DRIDesignBand {
 	public DRDesignList getList();
 
 	public Integer getHeight();
+
+	public DRIDesignExpression getPrintWhenExpression();
 }

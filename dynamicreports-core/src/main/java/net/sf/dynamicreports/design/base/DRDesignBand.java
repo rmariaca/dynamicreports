@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.SplitType;
 
 /**
@@ -36,6 +37,7 @@ public class DRDesignBand implements DRIDesignBand {
 	private DRDesignList list;
 	private DRDesignComponent bandComponent;
 	private Integer height;
+	private DRIDesignExpression printWhenExpression;
 
 	public DRDesignBand(String name) {
 		this.name = name;
@@ -88,5 +90,14 @@ public class DRDesignBand implements DRIDesignBand {
 
 	public void setHeight(Integer height) {
 		this.height = height;
+	}
+
+	@Override
+	public DRIDesignExpression getPrintWhenExpression() {
+		return printWhenExpression;
+	}
+
+	public void setPrintWhenExpression(DRIDesignExpression printWhenExpression) {
+		this.printWhenExpression = printWhenExpression;
 	}
 }

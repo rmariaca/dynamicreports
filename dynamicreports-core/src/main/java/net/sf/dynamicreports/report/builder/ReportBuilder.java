@@ -912,6 +912,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setTitlePrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getTitleBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a title band style
 	 *
@@ -973,6 +978,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 */
 	public T setPageHeaderSplitType(SplitType splitType) {
 		getObject().getPageHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setPageHeaderPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getPageHeaderBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 
@@ -1040,6 +1050,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setPageFooterPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getPageFooterBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a page footer band style
 	 *
@@ -1104,6 +1119,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setColumnHeaderPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getColumnHeaderBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a column header band style
 	 *
@@ -1165,6 +1185,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 */
 	public T setColumnFooterSplitType(SplitType splitType) {
 		getObject().getColumnFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setColumnFooterPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getColumnFooterBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 
@@ -1234,6 +1259,15 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		Validate.isTrue(index >= 0, "group must be registered");
 		DRGroup drGroup = getObject().getGroups().get(index);
 		drGroup.getHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setGroupHeaderPrintWhenExpression(GroupBuilder<?> group, DRIExpression<Boolean> printWhenExpression) {
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		drGroup.getHeaderBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 
@@ -1321,6 +1355,15 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setGroupFooterPrintWhenExpression(GroupBuilder<?> group, DRIExpression<Boolean> printWhenExpression) {
+		Validate.notNull(group, "group must not be null");
+		int index = getObject().getGroups().indexOf(group.getGroup());
+		Validate.isTrue(index >= 0, "group must be registered");
+		DRGroup drGroup = getObject().getGroups().get(index);
+		drGroup.getFooterBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a group footer band style
 	 *
@@ -1400,6 +1443,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setDetailPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getDetailBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a detail band style
 	 *
@@ -1461,6 +1509,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 */
 	public T setDetailHeaderSplitType(SplitType splitType) {
 		getObject().getDetailHeaderBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setDetailHeaderPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getDetailHeaderBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 
@@ -1528,6 +1581,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setDetailFooterPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getDetailFooterBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a detail footer band style
 	 *
@@ -1589,6 +1647,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 */
 	public T setLastPageFooterSplitType(SplitType splitType) {
 		getObject().getLastPageFooterBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setLastPageFooterPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getLastPageFooterBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 
@@ -1656,6 +1719,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setSummaryPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getSummaryBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a summary band style
 	 *
@@ -1720,6 +1788,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 		return (T) this;
 	}
 
+	public T setNoDataPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getNoDataBand().setPrintWhenExpression(printWhenExpression);
+		return (T) this;
+	}
+
 	/**
 	 * Sets a no data band style
 	 *
@@ -1781,6 +1854,11 @@ public class ReportBuilder<T extends ReportBuilder<T>> extends AbstractBuilder<T
 	 */
 	public T setBackgroundSplitType(SplitType splitType) {
 		getObject().getBackgroundBand().setSplitType(splitType);
+		return (T) this;
+	}
+
+	public T setBackgroundPrintWhenExpression(DRIExpression<Boolean> printWhenExpression) {
+		getObject().getBackgroundBand().setPrintWhenExpression(printWhenExpression);
 		return (T) this;
 	}
 

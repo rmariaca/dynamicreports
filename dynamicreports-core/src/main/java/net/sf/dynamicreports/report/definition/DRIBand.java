@@ -26,13 +26,16 @@ import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.component.DRIList;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface DRIBand extends Serializable {
-	
+
 	public SplitType getSplitType();
-		
+
 	public DRIList getList();
+
+	public DRIExpression<Boolean> getPrintWhenExpression();
 }
