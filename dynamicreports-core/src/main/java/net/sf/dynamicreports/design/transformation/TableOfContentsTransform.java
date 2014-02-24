@@ -76,6 +76,7 @@ public class TableOfContentsTransform {
 			DRIExpression<?> customValueExpression = tocHeading.getCustomValueExpression();
 			referenceField.setValueExpression(new TocReferenceExpression(level, expressionName, labelExpression, anchorNameExpression, customValueExpression));
 			referenceField.setAnchorNameExpression(new TocReferenceLinkExpression(expressionName, anchorNameExpression));
+			referenceField.setPrintWhenExpression(component.getPrintWhenExpression());
 			DRDesignTextField designReferenceField = accessor.getComponentTransform().textField(referenceField, DefaultStyleType.TEXT);
 			designReferenceField.setWidth(1);
 			designReferenceField.setHeight(1);
