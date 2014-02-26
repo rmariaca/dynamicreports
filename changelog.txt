@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.2.0 (2014-02-26)
+---------------------------------------------------
+ - upgrade to JasperReports 5.5.1
+ - setPrintWhenExpression method was added to all report bands
+ - minor bug fixes
+
 Changes in version 3.1.6 (2013-11-21)
 ---------------------------------------------------
  - new report attribute was added - setWhenResourceMissingType
