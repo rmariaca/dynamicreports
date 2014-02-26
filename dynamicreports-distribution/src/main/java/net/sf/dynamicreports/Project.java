@@ -61,6 +61,7 @@ public class Project {
 	private String xalanVersion;
 	private String velocityVersion;
 	private String jsonVersion;
+	private String servletVersion;
 
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -100,6 +101,7 @@ public class Project {
 		xalanVersion = properties.getProperty("xalanVersion");
 		velocityVersion = properties.getProperty("velocityVersion");
 		jsonVersion = properties.getProperty("jsonVersion");
+		servletVersion = properties.getProperty("servletVersion");
 	}
 
 	public String getVersion() {
@@ -340,6 +342,14 @@ public class Project {
 
 	public void setJsonVersion(String jsonVersion) {
 		this.jsonVersion = jsonVersion;
+	}
+
+	public String getServletVersion() {
+		return servletVersion;
+	}
+
+	public void setServletVersion(String servletVersion) {
+		this.servletVersion = servletVersion;
 	}
 
 }

@@ -30,6 +30,7 @@
 		<jfreechartVersion>1.0.12</jfreechartVersion>
 		<log4jVersion>1.2.14</log4jVersion>
 		<jacksonVersion>2.1.4</jacksonVersion>
+		<servletVersion>2.4</servletVersion>
 		<xmlapisVersion>1.3.04</xmlapisVersion>
 	</properties>
 

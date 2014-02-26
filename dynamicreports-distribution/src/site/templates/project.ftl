@@ -11,7 +11,8 @@
 	<jfreechartVersion>${project.jfreechartVersion}</jfreechartVersion>
 	<jcommonVersion>${project.jcommonVersion}</jcommonVersion>
 	<commonslang3Version>${project.commonslang3Version}</commonslang3Version>
-	<jacksonVersion>${project.jacksonVersion}</jacksonVersion>	
+	<jacksonVersion>${project.jacksonVersion}</jacksonVersion>
+	<servletVersion>${project.servletVersion}</servletVersion>
 	<log4jVersion>${project.log4jVersion}</log4jVersion>
 	<commonslangVersion>${project.commonslangVersion}</commonslangVersion>
 	<velocityVersion>${project.velocityVersion}</velocityVersion>
