@@ -80,6 +80,11 @@ public class BarbecueTest extends AbstractJasperTest {
 	}
 
 	@Override
+	protected boolean serializableJrPrintTest() {
+		return false;
+	}
+
+	@Override
 	public void test() {
 		super.test();
 

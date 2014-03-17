@@ -39,11 +39,14 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintPage;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +72,9 @@ public abstract class AbstractJasperTest {
 				reportBuilder.setDataSource(dataSource);
 			}
 			build();
+			if (serializableJrPrintTest()) {
+				jasperPrint = serializableTest(jasperPrint);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -88,6 +94,10 @@ public abstract class AbstractJasperTest {
 		return true;
 	}
 
+	protected boolean serializableJrPrintTest() {
+		return true;
+	}
+
 	private JasperReportBuilder serializableTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -98,6 +108,16 @@ public abstract class AbstractJasperTest {
     InputStream stream = new ByteArrayInputStream(bos.toByteArray());
     ObjectInputStream ois = new ObjectInputStream(stream);
     return (JasperReportBuilder) ois.readObject();
+	}
+
+	private JasperPrint serializableTest(JasperPrint jasperPrint) throws IOException, JRException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		JRSaver.saveObject(jasperPrint, bos);
+		bos.flush();
+		bos.close();
+
+    InputStream stream = new ByteArrayInputStream(bos.toByteArray());
+    return (JasperPrint) JRLoader.loadObject(stream);
 	}
 
 	public JasperReportBuilder getReportBuilder() {

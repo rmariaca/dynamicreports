@@ -22,11 +22,13 @@
 
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.OrderType;
 
 import org.jfree.data.category.CategoryDataset;
@@ -36,7 +38,9 @@ import org.jfree.data.general.DatasetGroup;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class SeriesOrderCategoryDataset implements CategoryDataset {
+public class SeriesOrderCategoryDataset implements CategoryDataset, Serializable {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	protected List<String> rowKeys;
 	protected CategoryDataset dataset;
 

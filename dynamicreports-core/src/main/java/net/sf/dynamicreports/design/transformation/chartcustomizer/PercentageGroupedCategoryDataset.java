@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
+import net.sf.dynamicreports.report.constant.Constants;
+
 import org.apache.commons.lang3.StringUtils;
 import org.jfree.data.category.CategoryDataset;
 
@@ -29,6 +31,7 @@ import org.jfree.data.category.CategoryDataset;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class PercentageGroupedCategoryDataset extends PercentageCategoryDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	public PercentageGroupedCategoryDataset(CategoryDataset dataset) {
 		super(dataset);

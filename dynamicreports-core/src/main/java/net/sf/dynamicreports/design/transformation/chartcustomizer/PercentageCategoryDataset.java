@@ -22,7 +22,10 @@
 
 package net.sf.dynamicreports.design.transformation.chartcustomizer;
 
+import java.io.Serializable;
 import java.util.List;
+
+import net.sf.dynamicreports.report.constant.Constants;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeListener;
@@ -31,7 +34,9 @@ import org.jfree.data.general.DatasetGroup;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class PercentageCategoryDataset implements CategoryDataset {
+public class PercentageCategoryDataset implements CategoryDataset, Serializable {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	protected CategoryDataset dataset;
 
 	public PercentageCategoryDataset(CategoryDataset dataset) {
