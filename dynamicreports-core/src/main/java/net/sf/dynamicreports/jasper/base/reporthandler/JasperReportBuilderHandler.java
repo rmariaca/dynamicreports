@@ -68,7 +68,6 @@ public class JasperReportBuilderHandler implements JasperReportHandler {
 			JasperPrint jasperPrint = jasperReportBuilder.toJasperPrint();
 			printList.add(jasperPrint);
 			pageNumber += jasperPrint.getPages().size();
-			jasperReportBuilder.rebuild();
 		}
 		return printList;
 	}
