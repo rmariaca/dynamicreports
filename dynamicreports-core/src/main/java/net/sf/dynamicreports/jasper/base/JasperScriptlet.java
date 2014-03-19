@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.jasper.base;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -88,8 +89,20 @@ public class JasperScriptlet extends JRDefaultScriptlet {
 		return getCustomValues().getSystemValue(name);
 	}
 
+	protected Collection<String> getFields() {
+		return fieldsMap.keySet();
+	}
+
+	protected Collection<String> getVariables() {
+		return variablesMap.keySet();
+	}
+
+	protected Collection<String> getParameters() {
+		return parametersMap.keySet();
+	}
+
 	@Override
-	public void setData(Map<String, JRFillParameter> parsm, Map<String,JRFillField> fldsm, Map<String,JRFillVariable> varsm, JRFillGroup[] grps) {
+	public void setData(Map<String, JRFillParameter> parsm, Map<String, JRFillField> fldsm, Map<String, JRFillVariable> varsm, JRFillGroup[] grps) {
 		super.setData(parsm, fldsm, varsm, grps);
 		reportParameters = new JasperReportParameters(this);
 	}

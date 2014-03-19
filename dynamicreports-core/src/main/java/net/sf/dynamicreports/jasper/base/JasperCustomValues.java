@@ -33,6 +33,8 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class JasperCustomValues implements DRICustomValues {
 	private Map<String, ValueType> valueTypes;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
@@ -156,5 +158,15 @@ public class JasperCustomValues implements DRICustomValues {
 	@Override
 	public void setTocHeadings(Map<String, JasperTocHeading> tocHeadings) {
 		this.tocHeadings = tocHeadings;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		for (String name : valueTypes.keySet()) {
+			result.append(valueTypes.get(name).name() + ":" + name);
+			result.append(", ");
+		}
+		return "{" + StringUtils.removeEnd(result.toString(), ", ") + "}";
 	}
 }

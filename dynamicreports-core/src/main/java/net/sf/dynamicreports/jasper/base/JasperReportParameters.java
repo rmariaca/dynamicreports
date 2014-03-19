@@ -25,6 +25,7 @@ package net.sf.dynamicreports.jasper.base;
 import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -142,7 +143,7 @@ public class JasperReportParameters implements ReportParameters {
 		}
 		return 0;
 	}
-	
+
 	@Override
 	public Integer getGroupCount(String groupName) {
 		return (Integer) getVariableValue(groupName + "_COUNT");
@@ -213,4 +214,33 @@ public class JasperReportParameters implements ReportParameters {
 	public ReportParameters getMasterParameters() {
 		return (ReportParameters) getParameterValue(MASTER_REPORT_PARAMETERS);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+
+		result.append("FIELDS:\n");
+		Collection<String> names = jasperScriptlet.getFields();
+		for (String name : names) {
+			result.append(name + " = " + getFieldValue(name));
+			result.append("\n");
+		}
+
+		result.append("VARIABLES:\n");
+		names = jasperScriptlet.getVariables();
+		for (String name : names) {
+			result.append(name + " = " + getVariableValue(name));
+			result.append("\n");
+		}
+
+		result.append("PARAMETERS:\n");
+		names = jasperScriptlet.getParameters();
+		for (String name : names) {
+			result.append(name + " = " + getParameterValue(name));
+			result.append("\n");
+		}
+
+		return result.toString();
+	}
+
 }
