@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
+import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.DRIDesignTableOfContentsHeading;
@@ -503,6 +504,9 @@ public class ComponentTransform {
 		private Map<ReportBuilder<?>, JasperReport> jasperReports;
 
 		public SubreportExpression(DRIDesignExpression reportExpression, Integer pageWidth) {
+			SubreportWidthExpression pageWidthExpression = new SubreportWidthExpression(pageWidth);
+			accessor.getExpressionTransform().addSimpleExpression(pageWidthExpression);
+			addExpression(pageWidthExpression);
 			addExpression(reportExpression);
 			this.pageWidth = pageWidth;
 			this.name = ReportUtils.generateUniqueName("subreportExpression");
@@ -512,7 +516,7 @@ public class ComponentTransform {
 
 		@Override
 		public Object evaluate(List<?> values, ReportParameters reportParameters) {
-			reportBuilder = (ReportBuilder<?>) values.get(0);
+			reportBuilder = (ReportBuilder<?>) values.get(1);
 			if (jasperReports.containsKey(reportBuilder)) {
 				return jasperReports.get(reportBuilder);
 			}
@@ -549,6 +553,27 @@ public class ComponentTransform {
 		public Class<?> getValueClass() {
 			return JasperReport.class;
 		}
+	}
+
+	private class SubreportWidthExpression extends AbstractDesignSimpleExpression {
+		private Integer pageWidth;
+
+		private SubreportWidthExpression(Integer pageWidth) {
+			this.pageWidth = pageWidth;
+		}
+
+		@Override
+		public Object evaluate(ReportParameters reportParameters) {
+			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
+			customValues.setSubreportWidth(pageWidth);
+			return pageWidth;
+		}
+
+		@Override
+		public Class<?> getValueClass() {
+			return Integer.class;
+		}
+
 	}
 
 	private class SubreportParametersExpression extends AbstractDesignComplexExpression {

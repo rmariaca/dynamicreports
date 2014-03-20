@@ -216,6 +216,11 @@ public class JasperReportParameters implements ReportParameters {
 	}
 
 	@Override
+	public Integer getSubreportWidth() {
+		return jasperScriptlet.getSubreportWidth();
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 

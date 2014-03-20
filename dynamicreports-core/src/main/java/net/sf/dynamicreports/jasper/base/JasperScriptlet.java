@@ -101,6 +101,10 @@ public class JasperScriptlet extends JRDefaultScriptlet {
 		return parametersMap.keySet();
 	}
 
+	protected Integer getSubreportWidth() {
+		return getCustomValues().getSubreportWidth();
+	}
+
 	@Override
 	public void setData(Map<String, JRFillParameter> parsm, Map<String, JRFillField> fldsm, Map<String, JRFillVariable> varsm, JRFillGroup[] grps) {
 		super.setData(parsm, fldsm, varsm, grps);

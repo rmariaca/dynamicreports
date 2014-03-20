@@ -44,6 +44,7 @@ public class JasperCustomValues implements DRICustomValues {
 	private JasperScriptlet jasperScriptlet;
 	private Integer startPageNumber;
 	private Map<String, JasperTocHeading> tocHeadings;
+	private Integer subreportWidth;
 
 	public JasperCustomValues() {
 		init();
@@ -158,6 +159,15 @@ public class JasperCustomValues implements DRICustomValues {
 	@Override
 	public void setTocHeadings(Map<String, JasperTocHeading> tocHeadings) {
 		this.tocHeadings = tocHeadings;
+	}
+
+	public Integer getSubreportWidth() {
+		return subreportWidth;
+	}
+
+	@Override
+	public void setSubreportWidth(Integer subreportWidth) {
+		this.subreportWidth = subreportWidth;
 	}
 
 	@Override

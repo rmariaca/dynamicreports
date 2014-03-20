@@ -173,7 +173,7 @@ public class ConditionsTest {
 		public Integer getCrosstabRowNumber() {
 			return null;
 		}
-		
+
 		@Override
 		public DRIScriptlet getScriptlet(String name) {
 			return null;
@@ -192,6 +192,11 @@ public class ConditionsTest {
 
 		@Override
 		public ReportParameters getMasterParameters() {
+			return null;
+		}
+
+		@Override
+		public Integer getSubreportWidth() {
 			return null;
 		}
 

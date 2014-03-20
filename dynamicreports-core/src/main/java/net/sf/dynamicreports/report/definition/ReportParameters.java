@@ -52,7 +52,7 @@ public interface ReportParameters {
 	public Integer getColumnRowNumber();
 
 	public Integer getCrosstabRowNumber();
-	
+
 	public Integer getGroupCount(String groupName);
 
 	public Connection getConnection();
@@ -66,4 +66,6 @@ public interface ReportParameters {
 	public String getMessage(String key, Object[] arguments);
 
 	public ReportParameters getMasterParameters();
+
+	public Integer getSubreportWidth();
 }

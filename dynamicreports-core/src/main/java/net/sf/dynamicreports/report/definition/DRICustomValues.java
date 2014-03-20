@@ -39,4 +39,6 @@ public interface DRICustomValues {
 	public Map<String, JasperTocHeading> getTocHeadings();
 
 	public void setTocHeadings(Map<String, JasperTocHeading> tocHeadings);
+
+	public void setSubreportWidth(Integer subreportWidth);
 }
