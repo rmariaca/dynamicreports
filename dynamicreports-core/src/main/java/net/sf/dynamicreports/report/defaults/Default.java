@@ -304,7 +304,7 @@ public class Default {
 		this.groupStyle = null;
 		this.subtotalStyle = null;
 		this.imageStyle = new DRStyle();
-		imageStyle.setImageScale(ImageScale.FILL_PROPORTIONALLY);
+		imageStyle.setImageScale(ImageScale.RETAIN_SHAPE);
 		this.chartStyle = null;
 		this.barcodeStyle = null;
 

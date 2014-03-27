@@ -223,11 +223,15 @@ public class JasperTemplateStyleLoader {
 
 		switch (imageScale) {
 		case CLIP:
-			return ImageScale.NO_RESIZE;
+			return ImageScale.CLIP;
 		case FILL_FRAME:
-			return ImageScale.FILL;
+			return ImageScale.FILL_FRAME;
 		case RETAIN_SHAPE:
-			return ImageScale.FILL_PROPORTIONALLY;
+			return ImageScale.RETAIN_SHAPE;
+		case REAL_HEIGHT:
+			return ImageScale.REAL_HEIGHT;
+		case REAL_SIZE:
+			return ImageScale.REAL_SIZE;
 		default:
 			throw new JasperDesignException("Image scale " + imageScale.name() + " not supported");
 		}

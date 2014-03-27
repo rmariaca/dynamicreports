@@ -633,7 +633,7 @@ public class ComponentTransform {
 		case IMAGE_CHECKBOX_2:
 		case IMAGE_BALL:
 			DRImage image = new DRImage();
-			image.setImageScale(ImageScale.NO_RESIZE);
+			image.setImageScale(ImageScale.CLIP);
 			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue));
 			component = image;
 			break;

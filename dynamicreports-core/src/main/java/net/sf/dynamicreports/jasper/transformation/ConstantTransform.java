@@ -152,18 +152,26 @@ public class ConstantTransform {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected static ScaleImageEnum imageScale(ImageScale imageScale) {
 		if (imageScale == null) {
 			return null;
 		}
 
 		switch (imageScale) {
+		case CLIP:
 		case NO_RESIZE:
 			return ScaleImageEnum.CLIP;
+		case FILL_FRAME:
 		case FILL:
 			return ScaleImageEnum.FILL_FRAME;
+		case RETAIN_SHAPE:
 		case FILL_PROPORTIONALLY:
 			return ScaleImageEnum.RETAIN_SHAPE;
+		case REAL_HEIGHT:
+			return ScaleImageEnum.REAL_HEIGHT;
+		case REAL_SIZE:
+			return ScaleImageEnum.REAL_SIZE;
 		default:
 			throw new JasperDesignException("Image scale " + imageScale.name() + " not supported");
 		}

@@ -56,7 +56,7 @@ public class ListBackgroundReport {
 			.setRadius(5);
 
 		ImageBuilder background1 = cmp.image(Templates.class.getResource("images/background.gif"))
-			.setImageScale(ImageScale.NO_RESIZE)
+			.setImageScale(ImageScale.CLIP)
 			.setStyle(style1);
 		RectangleBuilder background2 = cmp.rectangle()
 			.setStyle(style2);
