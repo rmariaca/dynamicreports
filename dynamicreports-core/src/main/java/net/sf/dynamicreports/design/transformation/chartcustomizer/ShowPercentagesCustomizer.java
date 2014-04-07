@@ -43,14 +43,16 @@ public class ShowPercentagesCustomizer implements DRIChartCustomizer, Serializab
 	@Override
 	public void customize(JFreeChart chart, ReportParameters reportParameters) {
 		if (chart.getPlot() instanceof CategoryPlot) {
-			CategoryDataset dataset;
-			if (!(chart.getCategoryPlot().getRenderer() instanceof GroupedStackedBarRenderer)) {
-				dataset = new PercentageCategoryDataset(chart.getCategoryPlot().getDataset());
+			if (chart.getCategoryPlot().getDataset() != null) {
+				CategoryDataset dataset;
+				if (!(chart.getCategoryPlot().getRenderer() instanceof GroupedStackedBarRenderer)) {
+					dataset = new PercentageCategoryDataset(chart.getCategoryPlot().getDataset());
+				}
+				else {
+					dataset = new PercentageGroupedCategoryDataset(chart.getCategoryPlot().getDataset());
+				}
+				chart.getCategoryPlot().setDataset(dataset);
 			}
-			else {
-				dataset = new PercentageGroupedCategoryDataset(chart.getCategoryPlot().getDataset());
-			}
-			chart.getCategoryPlot().setDataset(dataset);
 			if (StringUtils.isBlank(chart.getCategoryPlot().getRangeAxis().getLabel())) {
 				chart.getCategoryPlot().getRangeAxis().setLabel("%");
 			}
