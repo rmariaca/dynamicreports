@@ -82,12 +82,12 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 					cht.stackedBar3DChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3))),
-				cmp.horizontalList(
+						.series(cht.serie(column2), cht.serie(column3)),
 					cht.areaChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
+						.series(cht.serie(column2), cht.serie(column3))),
+				cmp.horizontalList(
 					cht.stackedAreaChart()
 						.setShowPercentages(true)
 						.setCategory(column1)
@@ -104,7 +104,13 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 						.setShowPercentages(true)
 						.setPercentValuePattern("#,##0.#")
 						.setKey(column1)
-						.series(cht.serie(column2)));
+						.series(cht.serie(column2)),
+					cht.barChart()
+						.setShowValues(true)
+						.setShowPercentages(true)
+						.setCategory(column1)
+						.series(cht.serie(column2))
+						.setDataSource(new DRDataSource()));
 	}
 
 	@Override
