@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.base.DRDesignGroup;
@@ -128,6 +129,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
+import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -310,7 +312,7 @@ public class ComponentTransform {
 		designSubreport.setWidth(accessor.getTemplateTransform().getMultiPageListWidth(multiPageList));
 		designSubreport.setHeight(accessor.getTemplateTransform().getMultiPageListHeight(multiPageList));
     JasperReportBuilder multiPageReport = DynamicReports.report();
-    MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(multiPageList.getComponents());
+    MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(multiPageList.getComponents(), accessor.getTemplateTransform().getTemplateStyles());
     multiPageReport.detail(Components.subreport(subreportExpression));
     multiPageReport.setDetailSplitType(multiPageList.getSplitType());
     DRIDesignExpression reportExpression = accessor.getExpressionTransform().transformExpression(Expressions.value(multiPageReport));
@@ -992,14 +994,19 @@ public class ComponentTransform {
 		private static final long serialVersionUID = 1L;
 
 		private List<DRIComponent> detailComponents;
+		private Map<String, DRIStyle> templateStyles;
 
-		public MultiPageListSubreportExpression(List<DRIComponent> detailComponents) {
+		public MultiPageListSubreportExpression(List<DRIComponent> detailComponents, Map<String, DRIStyle> templateStyles) {
 			this.detailComponents = detailComponents;
+			this.templateStyles = templateStyles;
 		}
 
 		@Override
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
       JasperReportBuilder report = report();
+      for (DRIStyle style : templateStyles.values()) {
+    	  report.getReport().addTemplateStyle(style);
+      }      
       DRBand titleBand = report.getReport().getTitleBand();
       DRComponent detailComponent = (DRComponent) detailComponents.get(reportParameters.getReportRowNumber() - 1);
       titleBand.addComponent(detailComponent);
