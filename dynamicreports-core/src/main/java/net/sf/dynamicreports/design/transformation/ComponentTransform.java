@@ -1004,9 +1004,13 @@ public class ComponentTransform {
 		@Override
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
       JasperReportBuilder report = report();
+      report.setLocale(accessor.getLocale());
+      report.setResourceBundle(accessor.getResourceBundle());
+      report.setResourceBundle(accessor.getResourceBundleName());
+      report.setWhenResourceMissingType(accessor.getWhenResourceMissingType());
       for (DRIStyle style : templateStyles.values()) {
     	  report.getReport().addTemplateStyle(style);
-      }      
+      }
       DRBand titleBand = report.getReport().getTitleBand();
       DRComponent detailComponent = (DRComponent) detailComponents.get(reportParameters.getReportRowNumber() - 1);
       titleBand.addComponent(detailComponent);

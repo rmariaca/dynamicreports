@@ -22,7 +22,11 @@
 
 package net.sf.dynamicreports.design.transformation;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import net.sf.dynamicreports.design.base.DRDesignPage;
+import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.dynamicreports.report.definition.DRIDataset;
 import net.sf.dynamicreports.report.definition.DRIReport;
 
@@ -72,4 +76,12 @@ public interface DesignTransformAccessor {
 	public boolean isTableOfContents();
 
 	public DRDesignPage getPage();
+
+	public Locale getLocale();
+
+	public ResourceBundle getResourceBundle();
+
+	public String getResourceBundleName();
+
+	public WhenResourceMissingType getWhenResourceMissingType();
 }
