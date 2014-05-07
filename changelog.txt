@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 3.2.1 (2014-05-07)
+---------------------------------------------------
+ - getSubreportWidth() method was added to ReportParameters class, the method returns the available width for a subreport
+ - added new scale types (REAL_HEIGHT and REAL_SIZE) to ImageScale enum
+ - minor bug fixes
+ 
 Changes in version 3.2.0 (2014-02-26)
 ---------------------------------------------------
  - upgrade to JasperReports 5.5.1
