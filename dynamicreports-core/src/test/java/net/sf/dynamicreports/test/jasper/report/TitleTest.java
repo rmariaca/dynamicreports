@@ -35,48 +35,49 @@ import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class TitleTest extends AbstractJasperValueTest {
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.setResourceBundle("net.sf.dynamicreports.test.jasper.report.test")
-			.columns(				
+			.columns(
 				col.column("Column1", "field1", Integer.class))
-			.title(					
-				cmp.text("title 1").setHyperLink(hyperLink("link").setTooltip("tooltip")), 
-				cmp.text("title 2"), 
+			.title(
+				cmp.text("title 1").setHyperLink(hyperLink("link").setTooltip("tooltip")),
+				cmp.text("title 2"),
 				cmp.text("title 3"),
-				cmp.text(exp.message("title")));
+				cmp.text(exp.message("title")),
+				cmp.multiPageList(cmp.text(exp.message("title"))));
 	}
 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(2);
-		elementCountTest("title.textField1", 1);
-		elementValueTest("title.textField1", "title 1");
-		
+		elementCountTest("title.textField1", 2);
+		elementValueTest("title.textField1", "title 1", "test title");
+
 		JRPrintText textField = (JRPrintText) getElementAt("title.textField1", 0);
 		Assert.assertEquals("hyperlink reference", "link", textField.getHyperlinkReference());
 		Assert.assertEquals("hyperlink tooltip", "tooltip", textField.getHyperlinkTooltip());
 		Assert.assertEquals("hyperlink type reference", HyperlinkTypeEnum.REFERENCE, textField.getHyperlinkTypeValue());
-		
+
 		elementCountTest("title.textField2", 1);
 		elementValueTest("title.textField2", "title 2");
-		
+
 		elementCountTest("title.textField3", 1);
 		elementValueTest("title.textField3", "title 3");
-		
+
 		elementCountTest("title.textField4", 1);
 		elementValueTest("title.textField4", "test title");
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1");
 		for (int i = 0; i < 50; i++) {
 			dataSource.add(i);
-		}		
+		}
 		return dataSource;
 	}
 }

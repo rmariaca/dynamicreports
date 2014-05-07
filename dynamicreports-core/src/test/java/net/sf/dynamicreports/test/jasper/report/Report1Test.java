@@ -57,7 +57,11 @@ public class Report1Test extends AbstractJasperValueTest {
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.columns(
 				column1 = col.column("Column1", "field1", Integer.class))
-			.title(cmp.text(exp.jasperSyntax("$R{bundleKey3}", String.class)))
+			.title(
+				cmp.text(exp.jasperSyntax("$R{bundleKey3}", String.class)),
+				cmp.multiPageList(
+					cmp.text(exp.jasperSyntax("$R{bundleKey3}", String.class)),
+					cmp.text(exp.jasperSyntax("$R{bundleKey1}", String.class))))
 			.setLocale(Locale.ENGLISH)
 			.setResourceBundle(new ResourceBundle())
 			.setWhenResourceMissingType(WhenResourceMissingType.KEY)
@@ -77,7 +81,8 @@ public class Report1Test extends AbstractJasperValueTest {
 		columnTitleCountTest(column1, 0);
 		columnDetailCountTest(column1, 0);
 
-		elementValueTest("title.textField1", "bundleKey3");
+		elementCountTest("title.textField1", 3);
+		elementValueTest("title.textField1", "bundleKey3", "bundleKey3", "bundleValue");
 
 		FontUtil fontUtil = FontUtil.getInstance(DefaultJasperReportsContext.getInstance());
 		Assert.assertFalse("fonts", fontUtil.getFontFamilyNames().isEmpty());
