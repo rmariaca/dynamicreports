@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabValueTest;
+import net.sf.dynamicreports.test.jasper.JasperTestUtils;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
@@ -59,7 +60,7 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest implements Se
 				measure1 = ctab.measure("field3", Integer.class, Calculation.SUM));
 
 		rb.setLocale(Locale.ENGLISH)
-			.summary(crosstab);
+			.summary(crosstab, crosstab);
 	}
 
 	@Override
@@ -91,6 +92,14 @@ public class Crosstab4Test extends AbstractJasperCrosstabValueTest implements Se
 		crosstabCellValueTest(measure1, rowGroup, null, "3", "3");
 		crosstabCellCountTest(measure1, rowGroup, columnGroup, 1);
 		crosstabCellValueTest(measure1, rowGroup, columnGroup, "6");
+
+		//column group
+		elementCountTest(getPrefix(2) + JasperTestUtils.getCrosstabGroupHeaderName(columnGroup), 2);
+		elementCountTest(getPrefix(2) + JasperTestUtils.getCrosstabGroupTotalHeaderName(columnGroup), 1);
+
+		//row group
+		elementCountTest(getPrefix(2) + JasperTestUtils.getCrosstabGroupHeaderName(rowGroup), 3);
+		elementCountTest(getPrefix(2) + JasperTestUtils.getCrosstabGroupTotalHeaderName(rowGroup), 1);
 	}
 
 	@Override
