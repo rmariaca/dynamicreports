@@ -82,6 +82,7 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class CrosstabTransform {
 	private DesignTransformAccessor accessor;
 	private Map<DRDesignCrosstab, DRICrosstab> crosstabs;
+	private CrosstabRowCounter crosstabRowCounter;
 
 	public CrosstabTransform(DesignTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -90,6 +91,7 @@ public class CrosstabTransform {
 
 	private void init() {
 		crosstabs = new HashMap<DRDesignCrosstab, DRICrosstab>();
+		crosstabRowCounter = new CrosstabRowCounter();
 	}
 
 	protected DRDesignCrosstab transform(DRICrosstab crosstab, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
@@ -125,7 +127,7 @@ public class CrosstabTransform {
 				addMeasure(designCrosstab, (DRICrosstabVariable<?>) measure.getExpression());
 			}
 		}
-		accessor.getExpressionTransform().transformExpression(new CrosstabRowCounter());
+		accessor.getExpressionTransform().transformExpression(crosstabRowCounter);
 		addRowCountExpression(designCrosstab);
 		crosstabs.put(designCrosstab, crosstab);
 		accessor.transformToMainDataset();
