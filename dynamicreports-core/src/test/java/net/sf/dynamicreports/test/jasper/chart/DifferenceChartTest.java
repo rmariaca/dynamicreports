@@ -64,9 +64,8 @@ public class DifferenceChartTest extends AbstractJasperChartTest implements Seri
 		TextColumnBuilder<Integer> column3;
 		TextColumnBuilder<Integer> column4;
 
-		Locale.setDefault(Locale.ENGLISH);
-
-		rb.columns(
+		rb.setLocale(Locale.ENGLISH)
+			.columns(
 				column1 = col.column("Column1", "field1", Date.class),
 				column2 = col.column("Column2", "field2", Timestamp.class),
 				column3 = col.column("Column3", "field3", Integer.class),

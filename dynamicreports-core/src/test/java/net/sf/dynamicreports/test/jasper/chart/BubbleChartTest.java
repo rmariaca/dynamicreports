@@ -53,9 +53,8 @@ public class BubbleChartTest extends AbstractJasperChartTest {
 		TextColumnBuilder<Integer> column2;
 		TextColumnBuilder<Double> column3;
 
-		Locale.setDefault(Locale.ENGLISH);
-
-		rb.columns(
+		rb.setLocale(Locale.ENGLISH)
+			.columns(
 				column1 = col.column("Column1", "field1", Integer.class),
 				column2 = col.column("Column2", "field2", Integer.class),
 				column3 = col.column("Column3", "field3", Double.class))

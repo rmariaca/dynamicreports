@@ -54,9 +54,8 @@ public class XyBarChartTest extends AbstractJasperChartTest implements Serializa
 		TextColumnBuilder<Integer> column1;
 		TextColumnBuilder<Integer> column2;
 
-		Locale.setDefault(Locale.ENGLISH);
-
-		rb.columns(
+		rb.setLocale(Locale.ENGLISH)
+			.columns(
 				column1 = col.column("Column1", "field1", Integer.class),
 				column2 = col.column("Column2", "field2", Integer.class))
 			.summary(

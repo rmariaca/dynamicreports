@@ -48,8 +48,6 @@ public class MeterChartTest extends AbstractJasperChartTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		Locale.setDefault(Locale.ENGLISH);
-
 		rb.setLocale(Locale.ENGLISH)
 			.summary(
 				cht.meterChart()
