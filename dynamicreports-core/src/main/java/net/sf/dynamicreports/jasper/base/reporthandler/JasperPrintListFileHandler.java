@@ -106,7 +106,31 @@ public class JasperPrintListFileHandler extends AbstractPrintListHandler {
 
 		@Override
 		public Iterator<JasperPrint> iterator() {
-			throw new UnsupportedOperationException();
+			return new Iterator<JasperPrint>() {
+				private Iterator<File> it = tempFiles.iterator();
+
+				@Override
+				public boolean hasNext() {
+					return it.hasNext();
+				}
+
+				@Override
+				public JasperPrint next() {
+					File tempFile = it.next();
+					try {
+						JasperPrint jasperPrint = JRLoader.loadJasperPrint(tempFile, virtualizer);
+						return jasperPrint;
+					} catch (JRException e) {
+						throw new DRReportException(e);
+					}
+				}
+
+				@Override
+				public void remove() {
+					throw new UnsupportedOperationException();
+				}
+
+			};
 		}
 
 		@Override
