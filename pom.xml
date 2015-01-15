@@ -50,14 +50,14 @@
 	</developers>
 	
 	<properties>
-		<jasperreportsVersion>5.5.1</jasperreportsVersion>
+		<jasperreportsVersion>6.0.0</jasperreportsVersion>
 		<servletVersion>2.4</servletVersion>
 		<commonslang3Version>3.1</commonslang3Version>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
 		<springframeworkVersion>2.5</springframeworkVersion>
-		<poiVersion>3.7</poiVersion>
+		<poiVersion>3.10.1</poiVersion>
 		<jxlVersion>2.6.10</jxlVersion>
 		<junitVersion>4.0</junitVersion>
 		<hsqldbVersion>1.8.0.10</hsqldbVersion>
@@ -81,7 +81,11 @@
 					<exclusion>
 						<groupId>bouncycastle</groupId>
 						<artifactId>bctsp-jdk14</artifactId>
-					</exclusion>				
+					</exclusion>	
+					<exclusion>
+						<groupId>org.olap4j</groupId>
+						<artifactId>olap4j</artifactId>
+					</exclusion>			
 				</exclusions>
 			</dependency>
 			<dependency>

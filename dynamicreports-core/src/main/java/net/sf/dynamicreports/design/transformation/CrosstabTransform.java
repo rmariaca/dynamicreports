@@ -140,7 +140,12 @@ public class CrosstabTransform {
 		DRDesignCrosstabDataset designDataset = new DRDesignCrosstabDataset();
 		designDataset.setSubDataset(accessor.getDatasetTransform().transform(dataset.getSubDataset()));
 		designDataset.setDataPreSorted(dataset.getDataPreSorted());
-		designDataset.setResetType(resetType);
+		if (resetType != null && resetType.equals(ResetType.NONE)) {
+			designDataset.setResetType(ResetType.REPORT);
+		}
+		else {
+			designDataset.setResetType(resetType);
+		}
 		designDataset.setResetGroup(resetGroup);
 		return designDataset;
 	}

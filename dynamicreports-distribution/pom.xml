@@ -19,14 +19,14 @@
 		<aspectjVersion>1.6.3</aspectjVersion>
 		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>
 		<bcprovjdk14Version>138</bcprovjdk14Version>
-		<commonsbeanutilsVersion>1.8.0</commonsbeanutilsVersion>
+		<commonsbeanutilsVersion>1.9.0</commonsbeanutilsVersion>
 		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
 		<commonsdigesterVersion>2.1</commonsdigesterVersion>
 		<commonsloggingVersion>1.1.1</commonsloggingVersion>
 		<commonslangVersion>2.5</commonslangVersion>
-		<itextVersion>2.1.7.js2</itextVersion>
+		<itextpdfVersion>5.5.0</itextpdfVersion>
 		<jcommonVersion>1.0.15</jcommonVersion>
-		<jdtcoreVersion>3.1.0</jdtcoreVersion>
+		<ecjVersion>4.3.1</ecjVersion>
 		<jfreechartVersion>1.0.12</jfreechartVersion>
 		<log4jVersion>1.2.14</log4jVersion>
 		<jacksonVersion>2.1.4</jacksonVersion>

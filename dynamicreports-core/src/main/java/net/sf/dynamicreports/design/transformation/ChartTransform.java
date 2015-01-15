@@ -562,7 +562,12 @@ public class ChartTransform {
 		}
 
 		designDataset.setSubDataset(designSubDataset);
-		designDataset.setResetType(resetType);
+		if (resetType != null && resetType.equals(ResetType.NONE)) {
+			designDataset.setResetType(ResetType.REPORT);
+		}
+		else {
+			designDataset.setResetType(resetType);
+		}
 		designDataset.setResetGroup(resetGroup);
 		accessor.transformToMainDataset();
 

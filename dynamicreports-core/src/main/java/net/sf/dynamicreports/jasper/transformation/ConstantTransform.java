@@ -126,7 +126,7 @@ import org.krysalis.barcode4j.ChecksumMode;
 import org.krysalis.barcode4j.HumanReadablePlacement;
 import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)

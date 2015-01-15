@@ -56,7 +56,7 @@ public class OrderCrosstabTest extends AbstractJasperCrosstabValueTest implement
 			.rowGroups(
 				rowGroup = ctab.rowGroup("field1", String.class).setOrderType(OrderType.DESCENDING).setShowTotal(false))
 			.columnGroups(
-				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).orderBy(measure1))
+				columnGroup = ctab.columnGroup("field2", String.class).setShowTotal(false).orderBy(measure1).setOrderType(OrderType.DESCENDING))
 			.measures(
 				measure1);
 

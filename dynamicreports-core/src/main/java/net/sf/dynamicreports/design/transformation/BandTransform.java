@@ -107,7 +107,7 @@ public class BandTransform {
 		lastPageFooterBand = band("lastPageFooter", band, templateTransform.getLastPageFooterSplitType(band), templateTransform.getLastPageFooterStyle(band), templateTransform.getLastPageFooterBackgroundComponent(band), ResetType.PAGE, null);
 
 		band = report.getSummaryBand();
-		summaryBand = band("summary", band, templateTransform.getSummarySplitType(band), templateTransform.getSummaryStyle(band), templateTransform.getSummaryBackgroundComponent(band), ResetType.REPORT, null);
+		summaryBand = band("summary", band, templateTransform.getSummarySplitType(band), templateTransform.getSummaryStyle(band), templateTransform.getSummaryBackgroundComponent(band), ResetType.NONE, null);
 
 		band = report.getNoDataBand();
 		noDataBand = band("noData", band, templateTransform.getNoDataSplitType(band), templateTransform.getNoDataStyle(band), templateTransform.getNoDataBackgroundComponent(band), ResetType.NONE, null);
