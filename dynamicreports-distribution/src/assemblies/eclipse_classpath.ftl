@@ -41,7 +41,6 @@
 	<classpathentry kind="lib" path="lib/jackson-core-${project.jacksonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-${project.jacksonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-annotations-${project.jacksonVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api-${project.servletVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-${project.log4jVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/poi-${project.poiVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-${project.xmlapisVersion}.jar"/>

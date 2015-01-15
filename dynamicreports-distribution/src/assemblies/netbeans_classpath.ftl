@@ -59,7 +59,6 @@ file.reference.jxl-${project.jxlVersion}.jar=lib\\jxl-${project.jxlVersion}.jar
 file.reference.jackson-core-${project.jacksonVersion}.jar=lib\\jackson-core-${project.jacksonVersion}.jar
 file.reference.jackson-databind-${project.jacksonVersion}.jar=lib\\jackson-databind-${project.jacksonVersion}.jar
 file.reference.jackson-annotations-${project.jacksonVersion}.jar=lib\\jackson-annotations-${project.jacksonVersion}.jar
-file.reference.servlet-api-${project.servletVersion}.jar=lib\\servlet-api-${project.servletVersion}.jar
 file.reference.log4j-${project.log4jVersion}.jar=lib\\log4j-${project.log4jVersion}.jar
 file.reference.poi-${project.poiVersion}.jar=lib\\poi-${project.poiVersion}.jar
 file.reference.xml-apis-${project.xmlapisVersion}.jar=lib\\xml-apis-${project.xmlapisVersion}.jar
@@ -108,7 +107,6 @@ javac.classpath=\
     ${r"${"}file.reference.jackson-core-${project.jacksonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jackson-databind-${project.jacksonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jackson-annotations-${project.jacksonVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.servlet-api-${project.servletVersion}.jar${r"}"}:\
     ${r"${"}file.reference.log4j-${project.log4jVersion}.jar${r"}"}:\
     ${r"${"}file.reference.poi-${project.poiVersion}.jar${r"}"}:\
     ${r"${"}file.reference.xml-apis-${project.xmlapisVersion}.jar${r"}"}:\
