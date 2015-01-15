@@ -46,10 +46,10 @@ public class Project {
 	private String commonslangVersion;
 	private String commonslang3Version;
 	private String commonsloggingVersion;
-	private String itextVersion;
+	private String itextpdfVersion;
 	private String jasperreportsVersion;
 	private String jcommonVersion;
-	private String jdtcoreVersion;
+	private String ecjVersion;
 	private String jfreechartVersion;
 	private String jxlVersion;
 	private String jacksonVersion;
@@ -61,7 +61,6 @@ public class Project {
 	private String xalanVersion;
 	private String velocityVersion;
 	private String jsonVersion;
-	private String servletVersion;
 
 	public Project() throws IOException {
 		version = System.getenv("version");
@@ -86,10 +85,10 @@ public class Project {
 		commonslangVersion = properties.getProperty("commonslangVersion");
 		commonslang3Version = properties.getProperty("commonslang3Version");
 		commonsloggingVersion = properties.getProperty("commonsloggingVersion");
-		itextVersion = properties.getProperty("itextVersion");
+		itextpdfVersion = properties.getProperty("itextpdfVersion");
 		jasperreportsVersion = properties.getProperty("jasperreportsVersion");
 		jcommonVersion = properties.getProperty("jcommonVersion");
-		jdtcoreVersion = properties.getProperty("jdtcoreVersion");
+		ecjVersion = properties.getProperty("ecjVersion");
 		jfreechartVersion = properties.getProperty("jfreechartVersion");
 		jxlVersion = properties.getProperty("jxlVersion");
 		jacksonVersion = properties.getProperty("jacksonVersion");
@@ -101,7 +100,6 @@ public class Project {
 		xalanVersion = properties.getProperty("xalanVersion");
 		velocityVersion = properties.getProperty("velocityVersion");
 		jsonVersion = properties.getProperty("jsonVersion");
-		servletVersion = properties.getProperty("servletVersion");
 	}
 
 	public String getVersion() {
@@ -224,12 +222,12 @@ public class Project {
 		this.commonsloggingVersion = commonsloggingVersion;
 	}
 
-	public String getItextVersion() {
-		return itextVersion;
+	public String getItextpdfVersion() {
+		return itextpdfVersion;
 	}
 
-	public void setItextVersion(String itextVersion) {
-		this.itextVersion = itextVersion;
+	public void setItextpdfVersion(String itextpdfVersion) {
+		this.itextpdfVersion = itextpdfVersion;
 	}
 
 	public String getJasperreportsVersion() {
@@ -248,12 +246,12 @@ public class Project {
 		this.jcommonVersion = jcommonVersion;
 	}
 
-	public String getJdtcoreVersion() {
-		return jdtcoreVersion;
+	public String getEcjVersion() {
+		return ecjVersion;
 	}
 
-	public void setJdtcoreVersion(String jdtcoreVersion) {
-		this.jdtcoreVersion = jdtcoreVersion;
+	public void setEcjVersion(String ecjVersion) {
+		this.ecjVersion = ecjVersion;
 	}
 
 	public String getJfreechartVersion() {
@@ -342,14 +340,6 @@ public class Project {
 
 	public void setJsonVersion(String jsonVersion) {
 		this.jsonVersion = jsonVersion;
-	}
-
-	public String getServletVersion() {
-		return servletVersion;
-	}
-
-	public void setServletVersion(String servletVersion) {
-		this.servletVersion = servletVersion;
 	}
 
 }

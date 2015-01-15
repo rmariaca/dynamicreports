@@ -51,7 +51,6 @@
 	
 	<properties>
 		<jasperreportsVersion>6.0.0</jasperreportsVersion>
-		<servletVersion>2.4</servletVersion>
 		<commonslang3Version>3.1</commonslang3Version>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
@@ -87,12 +86,6 @@
 						<artifactId>olap4j</artifactId>
 					</exclusion>			
 				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>${servletVersion}</version>
-				<scope>runtime</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
