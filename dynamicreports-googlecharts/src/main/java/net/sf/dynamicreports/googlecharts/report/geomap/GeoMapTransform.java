@@ -72,7 +72,12 @@ public class GeoMapTransform implements CustomComponentTransform<DRIGeoMap, DRID
 		designDataset.setLocationExpression(accessor.getExpressionTransform().transformExpression(dataset.getLocationExpression()));
 		designDataset.setValueExpression(accessor.getExpressionTransform().transformExpression(dataset.getValueExpression()));
 		designDataset.setLabelExpression(accessor.getExpressionTransform().transformExpression(dataset.getLabelExpression()));
-		designDataset.setResetType(resetType);
+		if (resetType != null && resetType.equals(ResetType.NONE)) {
+			designDataset.setResetType(ResetType.REPORT);
+		}
+		else {
+			designDataset.setResetType(resetType);
+		}
 		designDataset.setResetGroup(resetGroup);
 		accessor.transformToMainDataset();
 
