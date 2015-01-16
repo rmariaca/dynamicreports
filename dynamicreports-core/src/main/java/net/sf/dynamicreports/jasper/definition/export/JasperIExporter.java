@@ -31,7 +31,7 @@ import java.io.Writer;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface JasperIExporter extends Serializable {
-		
+
 	public Writer getOutputWriter();
 
 	public OutputStream getOutputStream();
@@ -41,16 +41,15 @@ public interface JasperIExporter extends Serializable {
 	public String getOutputFileName();
 
 	public Integer getPageIndex();
-	
+
 	public Integer getStartPageIndex();
-	
+
 	public Integer getEndPageIndex();
-	
+
 	public String getCharacterEncoding();
-	
+
 	public Integer getOffsetX();
-	
+
 	public Integer getOffsetY();
-	
-	public Boolean getIgnorePageMargins();
+
 }

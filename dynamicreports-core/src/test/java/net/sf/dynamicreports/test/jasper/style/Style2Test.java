@@ -41,18 +41,18 @@ import net.sf.jasperreports.engine.type.LineStyleEnum;
  */
 public class Style2Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<Integer> column1;
 	private TextColumnBuilder<String> column2;
 	private ColumnGroupBuilder group1;
 	private AggregationSubtotalBuilder<Integer> subtotal1;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		StyleBuilder textStyle = stl.style().setPadding(2);
-		StyleBuilder titleStyle = stl.style(textStyle).bold();	
+		StyleBuilder titleStyle = stl.style(textStyle).bold();
 		StyleBuilder subtotalStyle = stl.style(2).setTopBorder(stl.pen1Point()).bold();
-		
+
 		rb.setTextStyle(textStyle)
 			.setColumnTitleStyle(titleStyle)
 			.setSubtotalStyle(subtotalStyle)
@@ -66,24 +66,24 @@ public class Style2Test extends AbstractJasperStyleTest implements Serializable 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		//column1		
-		columnTitleStyleTest(column1, 0, null, null, "Arial", 10, true, null);
+
+		//column1
+		columnTitleStyleTest(column1, 0, null, null, "Arial", 10f, true, null);
 		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
-				
-		columnDetailStyleTest(column1, 0, null, null, "Arial", 10, null, null);
+
+		columnDetailStyleTest(column1, 0, null, null, "Arial", 10f, null, null);
 		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
-		
+
 		//column2
-		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, true, null);
-		
+		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10f, true, null);
+
 		//subtotal
-		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10, true, null);
+		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10f, true, null);
 		subtotalLabelBorderTest(subtotal1, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0);
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1", "field2");

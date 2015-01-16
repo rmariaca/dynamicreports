@@ -26,16 +26,16 @@ package net.sf.dynamicreports.jasper.definition.export;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface JasperITextExporter extends JasperIExporter {
-	
-	public Integer getCharacterWidth();
-	
-	public Integer getCharacterHeight();
-	
-	public Integer getPageWidth();
-	
-	public Integer getPageHeight();
-	
-	public String getBetweenPagesText();
-	
+
+	public Float getCharacterWidth();
+
+	public Float getCharacterHeight();
+
+	public Integer getPageWidthInChars();
+
+	public Integer getPageHeightInChars();
+
+	public String getPageSeparator();
+
 	public String getLineSeparator();
 }

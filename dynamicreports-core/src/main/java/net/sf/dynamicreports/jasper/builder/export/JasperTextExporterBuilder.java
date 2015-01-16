@@ -35,28 +35,68 @@ public class JasperTextExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		super(new JasperTextExporter());
 	}
 
+	/**
+	 * @deprecated To be removed. Use setCharacterWidth(Float characterWidth) instead.
+	 */
+	@Deprecated
 	public JasperTextExporterBuilder setCharacterWidth(Integer characterWidth) {
+		return setCharacterWidth(characterWidth != null ? characterWidth.floatValue() : null);
+	}
+
+	public JasperTextExporterBuilder setCharacterWidth(Float characterWidth) {
 		this.getObject().setCharacterWidth(characterWidth);
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed. Use setCharacterHeight(Float characterHeight) instead.
+	 */
+	@Deprecated
 	public JasperTextExporterBuilder setCharacterHeight(Integer characterHeight) {
+		return setCharacterHeight(characterHeight != null ? characterHeight.floatValue() : null);
+	}
+
+	public JasperTextExporterBuilder setCharacterHeight(Float characterHeight) {
 		this.getObject().setCharacterHeight(characterHeight);
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed. Use setPageWidthInChars instead.
+	 */
+	@Deprecated
 	public JasperTextExporterBuilder setPageWidth(Integer pageWidth) {
-		this.getObject().setPageWidth(pageWidth);
+		return setPageWidthInChars(pageWidth);
+	}
+
+	public JasperTextExporterBuilder setPageWidthInChars(Integer pageWidth) {
+		this.getObject().setPageWidthInChars(pageWidth);
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed. Use setPageHeightInChars instead.
+	 */
+	@Deprecated
 	public JasperTextExporterBuilder setPageHeight(Integer pageHeight) {
-		this.getObject().setPageHeight(pageHeight);
+		return setPageHeightInChars(pageHeight);
+	}
+
+	public JasperTextExporterBuilder setPageHeightInChars(Integer pageHeight) {
+		this.getObject().setPageHeightInChars(pageHeight);
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed. Use setPageSeparator instead.
+	 */
+	@Deprecated
 	public JasperTextExporterBuilder setBetweenPagesText(String betweenPagesText) {
-		this.getObject().setBetweenPagesText(betweenPagesText);
+		return setPageSeparator(betweenPagesText);
+	}
+
+	public JasperTextExporterBuilder setPageSeparator(String pageSeparator) {
+		this.getObject().setPageSeparator(pageSeparator);
 		return this;
 	}
 

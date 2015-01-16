@@ -48,7 +48,6 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 	private String characterEncoding;
 	private Integer offsetX;
 	private Integer offsetY;
-	private Boolean ignorePageMargins;
 
 	@Override
 	public Writer getOutputWriter() {
@@ -144,12 +143,4 @@ public abstract class AbstractJasperExporter implements JasperIExporter {
 		this.offsetY = offsetY;
 	}
 
-	@Override
-	public Boolean getIgnorePageMargins() {
-		return ignorePageMargins;
-	}
-
-	public void setIgnorePageMargins(Boolean ignorePageMargins) {
-		this.ignorePageMargins = ignorePageMargins;
-	}
 }

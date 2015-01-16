@@ -46,4 +46,6 @@ public interface JasperIXhtmlExporter extends JasperIExporter {
 	public Boolean getWrapBreakWord();
 
 	public SizeUnit getSizeUnit();
+
+	public Boolean getIgnorePageMargins();
 }

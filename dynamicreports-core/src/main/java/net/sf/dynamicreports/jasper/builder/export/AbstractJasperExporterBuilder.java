@@ -91,11 +91,6 @@ public abstract class AbstractJasperExporterBuilder<T extends AbstractJasperExpo
 		return (T) this;
 	}
 
-	public T setIgnorePageMargins(Boolean ignorePageMargins) {
-		getObject().setIgnorePageMargins(ignorePageMargins);
-		return (T) this;
-	}
-
 	public U getExporter() {
 		return build();
 	}

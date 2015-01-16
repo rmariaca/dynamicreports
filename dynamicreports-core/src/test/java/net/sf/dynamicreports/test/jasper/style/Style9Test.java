@@ -54,6 +54,6 @@ public class Style9Test extends AbstractJasperStyleTest {
 
 		JRStyle style = getElementAt("title.rectangle1", 0).getStyle();
 		Assert.assertEquals("foreColor", Color.BLUE, style.getForecolor());
-		styleTest("title.textField1", 0, Color.BLUE, null, "Arial", 10, true, null);
+		styleTest("title.textField1", 0, Color.BLUE, null, "Arial", 10f, true, null);
 	}
 }

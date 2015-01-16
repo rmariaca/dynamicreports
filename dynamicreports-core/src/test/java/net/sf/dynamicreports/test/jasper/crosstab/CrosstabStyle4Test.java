@@ -91,52 +91,52 @@ public class CrosstabStyle4Test extends AbstractJasperCrosstabStyleTest {
 		Color color2 = new Color(239, 48, 239);
 		Color color3 = new Color(239, 48, 48);
 
-		crosstabGroupHeaderStyleTest(rowGroup1, 0, null, Color.BLUE, "Arial", 10, true, null);
-		crosstabGroupTotalHeaderStyleTest(rowGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);
+		crosstabGroupHeaderStyleTest(rowGroup1, 0, null, Color.BLUE, "Arial", 10f, true, null);
+		crosstabGroupTotalHeaderStyleTest(rowGroup1, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
 
-		crosstabGroupHeaderStyleTest(rowGroup2, 0, null, Color.BLUE, "Arial", 10, true, null);
-		crosstabGroupTotalHeaderStyleTest(rowGroup2, 0, null, Color.RED, "Arial", 10, null, null);
+		crosstabGroupHeaderStyleTest(rowGroup2, 0, null, Color.BLUE, "Arial", 10f, true, null);
+		crosstabGroupTotalHeaderStyleTest(rowGroup2, 0, null, Color.RED, "Arial", 10f, null, null);
 
-		crosstabGroupHeaderStyleTest(columnGroup1, 0, null, Color.BLUE, "Arial", 10, true, null);
-		crosstabGroupTotalHeaderStyleTest(columnGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);
+		crosstabGroupHeaderStyleTest(columnGroup1, 0, null, Color.BLUE, "Arial", 10f, true, null);
+		crosstabGroupTotalHeaderStyleTest(columnGroup1, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
 
-		crosstabGroupHeaderStyleTest(columnGroup2, 0, null, Color.BLUE, "Arial", 10, true, null);
-		crosstabGroupTotalHeaderStyleTest(columnGroup2, 0, null, Color.RED, "Arial", 10, null, null);
+		crosstabGroupHeaderStyleTest(columnGroup2, 0, null, Color.BLUE, "Arial", 10f, true, null);
+		crosstabGroupTotalHeaderStyleTest(columnGroup2, 0, null, Color.RED, "Arial", 10f, null, null);
 
-		crosstabCellStyleTest(measure1, null, null, 0, null, Color.YELLOW, "Arial", 10, null, true);
-		crosstabCellStyleTest(measure1, null, null, 1, null, Color.YELLOW, "Arial", 10, null, true);
-		crosstabCellStyleTest(measure1, null, null, 2, null, color1, "Arial", 10, true, true);
-		crosstabCellStyleTest(measure1, null, null, 3, null, color1, "Arial", 10, true, true);
-		crosstabCellStyleTest(measure1, null, null, 4, null, Color.YELLOW, "Arial", 10, null, true);
-		crosstabCellStyleTest(measure1, null, null, 5, null, Color.YELLOW, "Arial", 10, null, true);
-		crosstabCellStyleTest(measure1, null, null, 6, null, color1, "Arial", 10, true, true);
-		crosstabCellStyleTest(measure1, null, null, 7, null, color1, "Arial", 10, true, true);
+		crosstabCellStyleTest(measure1, null, null, 0, null, Color.YELLOW, "Arial", 10f, null, true);
+		crosstabCellStyleTest(measure1, null, null, 1, null, Color.YELLOW, "Arial", 10f, null, true);
+		crosstabCellStyleTest(measure1, null, null, 2, null, color1, "Arial", 10f, true, true);
+		crosstabCellStyleTest(measure1, null, null, 3, null, color1, "Arial", 10f, true, true);
+		crosstabCellStyleTest(measure1, null, null, 4, null, Color.YELLOW, "Arial", 10f, null, true);
+		crosstabCellStyleTest(measure1, null, null, 5, null, Color.YELLOW, "Arial", 10f, null, true);
+		crosstabCellStyleTest(measure1, null, null, 6, null, color1, "Arial", 10f, true, true);
+		crosstabCellStyleTest(measure1, null, null, 7, null, color1, "Arial", 10f, true, true);
 
-		crosstabCellStyleTest(measure1, rowGroup1, null, 0, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup1, null, 1, null, Color.MAGENTA, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, rowGroup1, null, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, rowGroup1, null, 1, null, Color.MAGENTA, "Arial", 10f, true, null);
 
-		crosstabCellStyleTest(measure1, rowGroup2, null, 0, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, rowGroup2, null, 1, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, rowGroup2, null, 2, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, rowGroup2, null, 3, null, Color.RED, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, null, 0, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, null, 1, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, null, 2, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, null, 3, null, Color.RED, "Arial", 10f, null, null);
 
-		crosstabCellStyleTest(measure1, null, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, null, columnGroup1, 1, null, color2, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, null, columnGroup1, 2, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, null, columnGroup1, 3, null, color2, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup1, 1, null, color2, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup1, 2, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup1, 3, null, color2, "Arial", 10f, true, null);
 
-		crosstabCellStyleTest(measure1, null, columnGroup2, 0, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, columnGroup2, 1, null, color3, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, null, columnGroup2, 2, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, columnGroup2, 3, null, color3, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup2, 0, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, columnGroup2, 1, null, color3, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, null, columnGroup2, 2, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, columnGroup2, 3, null, color3, "Arial", 10f, true, null);
 
-		crosstabCellStyleTest(measure1, rowGroup1, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup1, columnGroup2, 0, null, Color.MAGENTA, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, rowGroup1, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, rowGroup1, columnGroup2, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
 
-		crosstabCellStyleTest(measure1, rowGroup2, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup2, columnGroup2, 0, null, Color.RED, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, rowGroup2, columnGroup1, 1, null, Color.MAGENTA, "Arial", 10, true, null);
-		crosstabCellStyleTest(measure1, rowGroup2, columnGroup2, 1, null, Color.RED, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, columnGroup1, 0, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, rowGroup2, columnGroup2, 0, null, Color.RED, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, rowGroup2, columnGroup1, 1, null, Color.MAGENTA, "Arial", 10f, true, null);
+		crosstabCellStyleTest(measure1, rowGroup2, columnGroup2, 1, null, Color.RED, "Arial", 10f, null, null);
 	}
 
 	@Override

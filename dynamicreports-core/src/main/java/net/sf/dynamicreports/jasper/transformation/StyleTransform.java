@@ -135,8 +135,9 @@ public class StyleTransform {
 	}
 
 	protected void pen(JRPen jrPen, DRIDesignPen pen) {
-		if (pen == null)
+		if (pen == null) {
 			return;
+		}
 
 		jrPen.setLineColor(pen.getLineColor());
 		jrPen.setLineStyle(ConstantTransform.lineStyle(pen.getLineStyle()));
@@ -144,8 +145,9 @@ public class StyleTransform {
 	}
 
 	private void border(JRLineBox lineBox, DRIDesignBorder border) {
-		if (border == null)
+		if (border == null) {
 			return;
+		}
 
 		pen(lineBox.getLeftPen(), border.getLeftPen());
 		pen(lineBox.getRightPen(), border.getRightPen());
@@ -154,8 +156,9 @@ public class StyleTransform {
 	}
 
 	private void padding(JRLineBox lineBox, DRIDesignPadding padding) {
-		if (padding == null)
+		if (padding == null) {
 			return;
+		}
 
 		lineBox.setLeftPadding(padding.getLeft());
 		lineBox.setRightPadding(padding.getRight());
@@ -164,13 +167,14 @@ public class StyleTransform {
 	}
 
 	private void font(JRBaseStyle baseStyle, DRIDesignFont font) {
-		if (font == null)
+		if (font == null) {
 			return;
+		}
 
 		baseStyle.setFontName(font.getFontName());
 		baseStyle.setBold(font.getBold());
 		baseStyle.setItalic(font.getItalic());
-		baseStyle.setFontSize(font.getFontSize());
+		baseStyle.setFontSize(font.getFontSize() == null ? null : font.getFontSize().floatValue());
 		baseStyle.setStrikeThrough(font.getStrikeThrough());
 		baseStyle.setUnderline(font.getUnderline());
 		baseStyle.setPdfFontName(font.getPdfFontName());
@@ -179,14 +183,15 @@ public class StyleTransform {
 	}
 
 	protected JRBaseFont font(DRIDesignFont font) {
-		if (font == null)
+		if (font == null) {
 			return null;
+		}
 
 		JRBaseFont jrFont = new JRBaseFont();
 		jrFont.setFontName(font.getFontName());
 		jrFont.setBold(font.getBold());
 		jrFont.setItalic(font.getItalic());
-		jrFont.setFontSize(font.getFontSize());
+		jrFont.setFontSize(font.getFontSize() == null ? null : font.getFontSize().floatValue());
 		jrFont.setStrikeThrough(font.getStrikeThrough());
 		jrFont.setUnderline(font.getUnderline());
 		jrFont.setPdfFontName(font.getPdfFontName());
@@ -196,8 +201,9 @@ public class StyleTransform {
 	}
 
 	protected JRDesignStyle getStyle(DRIDesignStyle style) {
-		if (style == null)
+		if (style == null) {
 			return null;
+		}
 		if (!accessor.getDesign().getStylesMap().containsKey(style.getName())) {
 			throw new JasperDesignException("Style \"" + style.getName() + "\" is not registered");
 		}

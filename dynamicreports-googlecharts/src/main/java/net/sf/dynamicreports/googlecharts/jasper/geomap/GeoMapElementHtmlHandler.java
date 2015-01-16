@@ -29,9 +29,8 @@ import java.util.Set;
 import net.sf.dynamicreports.googlecharts.report.geomap.GeoMapDataMode;
 import net.sf.jasperreports.engine.JRGenericPrintElement;
 import net.sf.jasperreports.engine.export.GenericElementHtmlHandler;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRHtmlExporterContext;
-import net.sf.jasperreports.engine.export.JRXhtmlExporter;
 import net.sf.jasperreports.engine.type.ModeEnum;
 import net.sf.jasperreports.engine.util.JRColorUtil;
 import net.sf.jasperreports.web.util.VelocityUtil;
@@ -87,14 +86,14 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		velocityContext.put("valueLabel", valueLabel);
 		velocityContext.put("colors", stringColors);
 		velocityContext.put("dataset", dataset);
-		if(context.getExporter() instanceof JRXhtmlExporter) {
+		if(context.getExporterRef() instanceof HtmlExporter) {
 			velocityContext.put("xhtml", "xhtml");
-			velocityContext.put("elementX", ((JRXhtmlExporter)context.getExporter()).toSizeUnit(element.getX()));
-			velocityContext.put("elementY", ((JRXhtmlExporter)context.getExporter()).toSizeUnit(element.getY()));
+			velocityContext.put("elementX", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getX()));
+			velocityContext.put("elementY", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getY()));
 		}
 		else {
-			velocityContext.put("elementX", ((JRHtmlExporter)context.getExporter()).toSizeUnit(element.getX()));
-			velocityContext.put("elementY", ((JRHtmlExporter)context.getExporter()).toSizeUnit(element.getY()));
+			velocityContext.put("elementX", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getX()));
+			velocityContext.put("elementY", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getY()));
 		}
 		velocityContext.put("elementWidth", element.getWidth());
 		velocityContext.put("elementHeight", element.getHeight());

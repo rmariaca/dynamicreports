@@ -172,35 +172,67 @@ public class Exporters {
 	}
 
 	//xhtml
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public static JasperXhtmlExporterBuilder xhtmlExporter(Writer outputWriter) {
 		return new JasperXhtmlExporterBuilder().setOutputWriter(outputWriter);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public static JasperXhtmlExporterBuilder xhtmlExporter(OutputStream outputStream) {
 		return new JasperXhtmlExporterBuilder().setOutputStream(outputStream);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public static JasperXhtmlExporterBuilder xhtmlExporter(File outputFile) {
 		return new JasperXhtmlExporterBuilder().setOutputFile(outputFile);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public static JasperXhtmlExporterBuilder xhtmlExporter(String outputFileName) {
 		return new JasperXhtmlExporterBuilder().setOutputFileName(outputFileName);
 	}
 
 	//excelApiXls
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public static JasperExcelApiXlsExporterBuilder excelApiXlsExporter(Writer outputWriter) {
 		return new JasperExcelApiXlsExporterBuilder().setOutputWriter(outputWriter);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public static JasperExcelApiXlsExporterBuilder excelApiXlsExporter(OutputStream outputStream) {
 		return new JasperExcelApiXlsExporterBuilder().setOutputStream(outputStream);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public static JasperExcelApiXlsExporterBuilder excelApiXlsExporter(File outputFile) {
 		return new JasperExcelApiXlsExporterBuilder().setOutputFile(outputFile);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public static JasperExcelApiXlsExporterBuilder excelApiXlsExporter(String outputFileName) {
 		return new JasperExcelApiXlsExporterBuilder().setOutputFileName(outputFileName);
 	}

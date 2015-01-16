@@ -28,67 +28,67 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperTextExporter extends AbstractJasperExporter implements JasperITextExporter {	
+public class JasperTextExporter extends AbstractJasperExporter implements JasperITextExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private Integer characterWidth;
-	private Integer characterHeight;
-	private Integer pageWidth;
-	private Integer pageHeight;
-	private String betweenPagesText;
+
+	private Float characterWidth;
+	private Float characterHeight;
+	private Integer pageWidthInChars;
+	private Integer pageHeightInChars;
+	private String pageSeparator;
 	private String lineSeparator;
-	
+
 	@Override
-	public Integer getCharacterWidth() {
+	public Float getCharacterWidth() {
 		return characterWidth;
 	}
-	
-	public void setCharacterWidth(Integer characterWidth) {
+
+	public void setCharacterWidth(Float characterWidth) {
 		this.characterWidth = characterWidth;
 	}
-	
+
 	@Override
-	public Integer getCharacterHeight() {
+	public Float getCharacterHeight() {
 		return characterHeight;
 	}
-	
-	public void setCharacterHeight(Integer characterHeight) {
+
+	public void setCharacterHeight(Float characterHeight) {
 		this.characterHeight = characterHeight;
 	}
-	
+
 	@Override
-	public Integer getPageWidth() {
-		return pageWidth;
+	public Integer getPageWidthInChars() {
+		return pageWidthInChars;
 	}
-	
-	public void setPageWidth(Integer pageWidth) {
-		this.pageWidth = pageWidth;
+
+	public void setPageWidthInChars(Integer pageWidthInChars) {
+		this.pageWidthInChars = pageWidthInChars;
 	}
-	
+
 	@Override
-	public Integer getPageHeight() {
-		return pageHeight;
+	public Integer getPageHeightInChars() {
+		return pageHeightInChars;
 	}
-	
-	public void setPageHeight(Integer pageHeight) {
-		this.pageHeight = pageHeight;
+
+	public void setPageHeightInChars(Integer pageHeightInChars) {
+		this.pageHeightInChars = pageHeightInChars;
 	}
-	
+
 	@Override
-	public String getBetweenPagesText() {
-		return betweenPagesText;
+	public String getPageSeparator() {
+		return pageSeparator;
 	}
-	
-	public void setBetweenPagesText(String betweenPagesText) {
-		this.betweenPagesText = betweenPagesText;
+
+	public void setPageSeparator(String pageSeparator) {
+		this.pageSeparator = pageSeparator;
 	}
-	
+
 	@Override
 	public String getLineSeparator() {
 		return lineSeparator;
 	}
-	
+
 	public void setLineSeparator(String lineSeparator) {
 		this.lineSeparator = lineSeparator;
-	}	
+	}
 }

@@ -28,6 +28,6 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperExcelApiXlsExporter extends AbstractJasperExcelExporter implements JasperIExcelApiXlsExporter {	
+public class JasperExcelApiXlsExporter extends AbstractJasperExcelExporter implements JasperIExcelApiXlsExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 }

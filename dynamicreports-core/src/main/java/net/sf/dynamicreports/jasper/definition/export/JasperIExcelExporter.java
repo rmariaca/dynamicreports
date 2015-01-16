@@ -27,33 +27,35 @@ import java.util.List;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface JasperIExcelExporter extends JasperIExporter {	
-	
+public interface JasperIExcelExporter extends JasperIExporter {
+
 	public Boolean getOnePagePerSheet();
-	
+
 	public Boolean getRemoveEmptySpaceBetweenRows();
-	
+
 	public Boolean getRemoveEmptySpaceBetweenColumns();
-	
+
 	public Boolean getWhitePageBackground();
-	
+
 	public Boolean getDetectCellType();
-	
+
 	public List<String> getSheetNames();
-	
+
 	public Boolean getFontSizeFixEnabled();
-	
+
 	public Boolean getImageBorderFixEnabled();
-	
+
 	public Integer getMaxRowsPerSheet();
-	
+
 	public Boolean getIgnoreGraphics();
-	
+
 	public Boolean getCollapseRowSpan();
-	
+
 	public Boolean getIgnoreCellBorder();
-	
+
 	public Boolean getIgnoreCellBackground();
-	
+
 	public String getPassword();
+
+	public Boolean getIgnorePageMargins();
 }

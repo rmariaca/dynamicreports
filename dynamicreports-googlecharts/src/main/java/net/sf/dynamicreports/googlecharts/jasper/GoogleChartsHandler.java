@@ -34,8 +34,7 @@ import net.sf.jasperreports.engine.component.ComponentsEnvironment;
 import net.sf.jasperreports.engine.component.XmlDigesterConfigurer;
 import net.sf.jasperreports.engine.export.GenericElementHandler;
 import net.sf.jasperreports.engine.export.GenericElementHandlerBundle;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
-import net.sf.jasperreports.engine.export.JRXhtmlExporter;
+import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.util.JRXmlWriteHelper;
 import net.sf.jasperreports.engine.util.XmlNamespace;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
@@ -95,8 +94,7 @@ public class GoogleChartsHandler implements XmlDigesterConfigurer, ComponentXmlW
 	@Override
 	public GenericElementHandler getHandler(String elementName, String exporterKey) {
 		if (handlers.containsKey(elementName)) {
-			if (JRHtmlExporter.HTML_EXPORTER_KEY.equals(exporterKey)
-					|| JRXhtmlExporter.XHTML_EXPORTER_KEY.equals(exporterKey)) {
+			if (HtmlExporter.HTML_EXPORTER_KEY.equals(exporterKey)) {
 				return handlers.get(elementName);
 			}
 		}

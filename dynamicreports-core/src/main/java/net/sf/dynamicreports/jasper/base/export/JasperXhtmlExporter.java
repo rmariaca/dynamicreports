@@ -41,6 +41,7 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 	private Boolean whitePageBackground;
 	private Boolean wrapBreakWord;
 	private SizeUnit sizeUnit;
+	private Boolean ignorePageMargins;
 
 	@Override
 	public Boolean getOutputImagesToDir() {
@@ -121,5 +122,14 @@ public class JasperXhtmlExporter extends AbstractJasperExporter implements Jaspe
 
 	public void setSizeUnit(SizeUnit sizeUnit) {
 		this.sizeUnit = sizeUnit;
+	}
+
+	@Override
+	public Boolean getIgnorePageMargins() {
+		return ignorePageMargins;
+	}
+
+	public void setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.ignorePageMargins = ignorePageMargins;
 	}
 }

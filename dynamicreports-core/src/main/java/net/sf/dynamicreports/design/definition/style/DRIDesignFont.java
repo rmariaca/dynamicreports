@@ -28,20 +28,20 @@ package net.sf.dynamicreports.design.definition.style;
 public interface DRIDesignFont {
 
 	public String getFontName();
-	
+
 	public Boolean getBold();
-	
+
 	public Boolean getItalic();
-	
+
 	public Boolean getUnderline();
-	
+
 	public Boolean getStrikeThrough();
-	
+
 	public Integer getFontSize();
-	
+
 	public String getPdfFontName();
-	
+
 	public String getPdfEncoding();
-	
+
 	public Boolean getPdfEmbedded();
 }

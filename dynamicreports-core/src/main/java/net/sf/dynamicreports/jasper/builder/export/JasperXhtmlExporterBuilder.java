@@ -28,7 +28,9 @@ import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
+ * @deprecated To be removed. Use JasperHtmlExporterBuilder instead.
  */
+@Deprecated
 public class JasperXhtmlExporterBuilder extends AbstractJasperExporterBuilder<JasperXhtmlExporterBuilder, JasperXhtmlExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -78,6 +80,11 @@ public class JasperXhtmlExporterBuilder extends AbstractJasperExporterBuilder<Ja
 
 	public JasperXhtmlExporterBuilder setSizeUnit(SizeUnit sizeUnit) {
 		this.getObject().setSizeUnit(sizeUnit);
+		return this;
+	}
+
+	public JasperXhtmlExporterBuilder setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.getObject().setIgnorePageMargins(ignorePageMargins);
 		return this;
 	}
 }

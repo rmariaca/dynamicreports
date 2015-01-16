@@ -46,8 +46,16 @@ public class JasperImageExporterBuilder extends AbstractJasperExporterBuilder<Ja
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed. Use setZoomRatio instead.
+	 */
+	@Deprecated
 	public JasperImageExporterBuilder setZoom(Float zoom) {
-		this.getObject().setZoom(zoom);
+		return setZoomRatio(zoom);
+	}
+
+	public JasperImageExporterBuilder setZoomRatio(Float zoom) {
+		this.getObject().setZoomRatio(zoom);
 		return this;
 	}
 }

@@ -93,7 +93,7 @@ public class StyleResolver {
 		}
 
 		FontUtil fontUtil = FontUtil.getInstance(DefaultJasperReportsContext.getInstance());
-		Font font = fontUtil.getAwtFontFromBundles(fontName, fontStyle, fontSize, Locale.getDefault(), true);
+		Font font = fontUtil.getAwtFontFromBundles(fontName, fontStyle, (float) fontSize, Locale.getDefault(), true);
 		if (font == null) {
 			font = new Font(fontName, fontStyle, fontSize);
 		}

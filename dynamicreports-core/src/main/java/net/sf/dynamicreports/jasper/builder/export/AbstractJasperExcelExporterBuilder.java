@@ -115,4 +115,9 @@ public abstract class AbstractJasperExcelExporterBuilder<T extends AbstractJaspe
 		this.getObject().setPassword(password);
 		return (T) this;
 	}
+
+	public T setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.getObject().setIgnorePageMargins(ignorePageMargins);
+		return (T) this;
+	}
 }

@@ -37,9 +37,9 @@ import net.sf.jasperreports.engine.type.LineStyleEnum;
  */
 public class Style5Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
+	protected void configureReport(JasperReportBuilder rb) {
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 		  .setTextStyle(stl.style(stl.pen1Point()).setPadding(2))
 		  .pageFooter(
@@ -49,16 +49,16 @@ public class Style5Test extends AbstractJasperStyleTest implements Serializable 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		//column1		
-		styleTest("pageFooter.textField1", 0, null, null, "Arial", 10, null, null);
+
+		//column1
+		styleTest("pageFooter.textField1", 0, null, null, "Arial", 10f, null, null);
 		horizontalAlignmentTest("pageFooter.textField1", 0, HorizontalAlignEnum.RIGHT);
 		paddingTest("pageFooter.textField1", 0, 2, 2, 2, 0);
 		borderTest("pageFooter.textField1", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 0);
-		
-		styleTest("pageFooter.textField2", 0, null, null, "Arial", 10, null, null);
+
+		styleTest("pageFooter.textField2", 0, null, null, "Arial", 10f, null, null);
 		horizontalAlignmentTest("pageFooter.textField2", 0, HorizontalAlignEnum.LEFT);
 		paddingTest("pageFooter.textField2", 0, 2, 2, 0, 2);
 		borderTest("pageFooter.textField2", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 1);

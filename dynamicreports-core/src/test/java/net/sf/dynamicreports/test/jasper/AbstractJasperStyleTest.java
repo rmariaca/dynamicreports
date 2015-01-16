@@ -40,17 +40,17 @@ import net.sf.jasperreports.engine.type.VerticalAlignEnum;
  */
 public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 
-	protected void styleTest(String name, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void styleTest(String name, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		JRStyle style = getElementAt(name, index).getStyle();
 		styleTest(style, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
-	protected void styleTest(JRStyle style, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void styleTest(JRStyle style, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		Assert.assertNotNull("style is null", style);
 		Assert.assertEquals("foreColor", foreColor, style.getForecolor());
 		Assert.assertEquals("backColor", backColor, style.getBackcolor());
 		Assert.assertEquals("fontName", fontName, style.getFontName());
-		Assert.assertEquals("fontSize", fontSize, style.getFontSize());
+		Assert.assertEquals("fontSize", fontSize, style.getFontsize());
 		Assert.assertEquals("bold", bold, style.isBold());
 		Assert.assertEquals("italic", italic, style.isItalic());
 	}
@@ -104,7 +104,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	}
 
 	//column detail
-	protected void columnDetailStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void columnDetailStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnDetailName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -133,7 +133,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		paddingTest(JasperTestUtils.getColumnTitleName(column), index, top, bottom, left, right);
 	}
 
-	protected void columnTitleStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void columnTitleStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnTitleName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -146,7 +146,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		borderTest(JasperTestUtils.getSubtotalLabelName(subtotal, 1), index, topColor, topLineStyle, top, bottomColor, bottomLineStyle, bottom, leftColor, leftLineStyle, left, rightColor, rightLineStyle, right);
 	}
 
-	protected void subtotalLabelStyleTest(SubtotalBuilder<?, ?> subtotal, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void subtotalLabelStyleTest(SubtotalBuilder<?, ?> subtotal, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getSubtotalLabelName(subtotal, 1), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -159,17 +159,17 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		paddingTest(JasperTestUtils.getSubtotalName(subtotal, 1), index, top, bottom, left, right);
 	}
 
-	protected void subtotalStyleTest(SubtotalBuilder<?, ?> subtotal, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void subtotalStyleTest(SubtotalBuilder<?, ?> subtotal, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getSubtotalName(subtotal, 1), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
 	//group header title
-	protected void groupHeaderTitleStyleTest(GroupBuilder<?> group, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void groupHeaderTitleStyleTest(GroupBuilder<?> group, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getHeaderTitleGroupName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
 	//group header
-	protected void groupHeaderStyleTest(GroupBuilder<?> group, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
+	protected void groupHeaderStyleTest(GroupBuilder<?> group, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getHeaderGroupName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 

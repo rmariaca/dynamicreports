@@ -42,7 +42,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 	}
 
 	//header
-	protected void crosstabHeaderElementStyleTest(String name, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabHeaderElementStyleTest(String name, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + "headercell." + name, index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -59,7 +59,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 	}
 
 	//group header
-	protected void crosstabGroupHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabGroupHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -75,12 +75,12 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), index, horizontalAlignment);
 	}
 
-	protected void crosstabGroupTitleHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabGroupTitleHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleHeaderName(group, measure), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
 	//group total header
-	protected void crosstabGroupTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabGroupTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
@@ -96,12 +96,12 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, horizontalAlignment);
 	}
 
-	protected void crosstabGroupTitleTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabGroupTitleTotalHeaderStyleTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, CrosstabMeasureBuilder<?> measure, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTitleTotalHeaderName(group, measure), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
 	//cell
-	protected void crosstabCellStyleTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color foreColor, Color backColor, String fontName, Integer fontSize, Boolean bold, Boolean italic) {
+	protected void crosstabCellStyleTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, Color foreColor, Color backColor, String fontName, Float fontSize, Boolean bold, Boolean italic) {
 		styleTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 

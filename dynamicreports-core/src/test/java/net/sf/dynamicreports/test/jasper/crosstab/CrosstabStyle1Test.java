@@ -90,24 +90,24 @@ public class CrosstabStyle1Test extends AbstractJasperCrosstabStyleTest {
 
 		setCrosstabBand("summary");
 
-		crosstabHeaderElementStyleTest("textField1", 0, null, null, "Arial", 12, true, null);
+		crosstabHeaderElementStyleTest("textField1", 0, null, null, "Arial", 12f, true, null);
 
-		crosstabGroupHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
+		crosstabGroupHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
+		crosstabGroupTotalHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
 		crosstabGroupTotalHeaderHorizontalAlignmentTest(rowGroup, 0, HorizontalAlignEnum.CENTER);
 
-		crosstabGroupHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
-		crosstabGroupTotalHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12, true, null);
+		crosstabGroupHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
+		crosstabGroupTotalHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
 		crosstabGroupTotalHeaderHorizontalAlignmentTest(columnGroup, 0, HorizontalAlignEnum.CENTER);
 
 		for (int i = 0; i < 4; i++) {
-			crosstabCellStyleTest(measure1, null, null, i, null, null, "Arial", 10, true, null);
+			crosstabCellStyleTest(measure1, null, null, i, null, null, "Arial", 10f, true, null);
 		}
 		for (int i = 0; i < 2; i++) {
-			crosstabCellStyleTest(measure1, rowGroup, null, i, null, Color.BLUE, "Arial", 10, true, null);
-			crosstabCellStyleTest(measure1, null, columnGroup, i, null, Color.ORANGE, "Arial", 10, true, null);
+			crosstabCellStyleTest(measure1, rowGroup, null, i, null, Color.BLUE, "Arial", 10f, true, null);
+			crosstabCellStyleTest(measure1, null, columnGroup, i, null, Color.ORANGE, "Arial", 10f, true, null);
 		}
-		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.RED, "Arial", 10, true, null);
+		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.RED, "Arial", 10f, true, null);
 
 	}
 

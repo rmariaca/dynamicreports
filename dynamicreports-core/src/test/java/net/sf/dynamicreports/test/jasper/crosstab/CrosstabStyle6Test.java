@@ -64,12 +64,12 @@ public class CrosstabStyle6Test extends AbstractJasperCrosstabStyleTest implemen
 
 		ConditionalStyleBuilder condition = stl.conditionalStyle(new ConditionExpression())
                 .setBackgroundColor(new Color(200, 200, 200));
-		
+
 		StyleBuilder style = stl.style()
                 .conditionalStyles(condition);
-		
+
 		measure1.setStyle(style);
-		
+
 		CrosstabBuilder crosstab = ctab.crosstab()
 			.highlightEvenRows()
 			.rowGroups(
@@ -94,9 +94,9 @@ public class CrosstabStyle6Test extends AbstractJasperCrosstabStyleTest implemen
 		Color color1 = new Color(240, 240, 240);
 		Color color2 = new Color(200, 200, 200);
 
-		crosstabCellStyleTest(measure1, null, null, 0, null, color2, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 1, null, color1, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 2, null, color2, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 0, null, color2, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 1, null, color1, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 2, null, color2, "Arial", 10f, null, null);
 	}
 
 	protected JRDataSource createDataSource1() {
@@ -106,7 +106,7 @@ public class CrosstabStyle6Test extends AbstractJasperCrosstabStyleTest implemen
 		dataSource.add("c", "c", 1);
 		return dataSource;
 	}
-	
+
 	private class ConditionExpression extends AbstractSimpleExpression<Boolean> {
 		private static final long serialVersionUID = 1L;
 
@@ -114,6 +114,6 @@ public class CrosstabStyle6Test extends AbstractJasperCrosstabStyleTest implemen
 		public Boolean evaluate(ReportParameters reportParameters) {
 			return reportParameters.getCrosstabRowNumber() == 1 || reportParameters.getCrosstabRowNumber() == 3;
 		}
-		
+
 	}
 }

@@ -173,35 +173,67 @@ public class ExporterBuilders {
 	}
 
 	//xhtml
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public JasperXhtmlExporterBuilder xhtmlExporter(Writer outputWriter) {
 		return Exporters.xhtmlExporter(outputWriter);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public JasperXhtmlExporterBuilder xhtmlExporter(OutputStream outputStream) {
 		return Exporters.xhtmlExporter(outputStream);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public JasperXhtmlExporterBuilder xhtmlExporter(File outputFile) {
 		return Exporters.xhtmlExporter(outputFile);
 	}
 
+	/**
+	 * @deprecated To be removed. Use htmlExporter instead.
+	 */
+	@Deprecated
 	public JasperXhtmlExporterBuilder xhtmlExporter(String outputFileName) {
 		return Exporters.xhtmlExporter(outputFileName);
 	}
 
 	//excelApiXls
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public JasperExcelApiXlsExporterBuilder excelApiXlsExporter(Writer outputWriter) {
 		return Exporters.excelApiXlsExporter(outputWriter);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public JasperExcelApiXlsExporterBuilder excelApiXlsExporter(OutputStream outputStream) {
 		return Exporters.excelApiXlsExporter(outputStream);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public JasperExcelApiXlsExporterBuilder excelApiXlsExporter(File outputFile) {
 		return Exporters.excelApiXlsExporter(outputFile);
 	}
 
+	/**
+	 * @deprecated To be removed. Use xlsExporter or xlsxExporter instead.
+	 */
+	@Deprecated
 	public JasperExcelApiXlsExporterBuilder excelApiXlsExporter(String outputFileName) {
 		return Exporters.excelApiXlsExporter(outputFileName);
 	}

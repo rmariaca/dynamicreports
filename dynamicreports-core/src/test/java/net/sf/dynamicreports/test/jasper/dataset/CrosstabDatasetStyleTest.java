@@ -93,18 +93,18 @@ public class CrosstabDatasetStyleTest extends AbstractJasperCrosstabStyleTest im
 
 		Color color = new Color(240, 240, 240);
 
-		crosstabCellStyleTest(measure1, null, null, 0, null, null, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 1, null, null, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 2, null, color, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 3, null, Color.ORANGE, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 0, null, null, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 1, null, null, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 2, null, color, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 3, null, Color.ORANGE, "Arial", 10f, null, null);
 
-		crosstabCellStyleTest(measure1, rowGroup, null, 0, null, Color.ORANGE, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, rowGroup, null, 1, null, null, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, rowGroup, null, 0, null, Color.ORANGE, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, rowGroup, null, 1, null, null, "Arial", 10f, null, null);
 
-		crosstabCellStyleTest(measure1, null, columnGroup, 0, null, Color.ORANGE, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, columnGroup, 1, null, color, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, columnGroup, 0, null, Color.ORANGE, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, columnGroup, 1, null, color, "Arial", 10f, null, null);
 
-		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.ORANGE, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, rowGroup, columnGroup, 0, null, Color.ORANGE, "Arial", 10f, null, null);
 
 	}
 

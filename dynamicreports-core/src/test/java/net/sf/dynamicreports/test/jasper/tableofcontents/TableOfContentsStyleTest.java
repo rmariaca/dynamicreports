@@ -76,18 +76,18 @@ public class TableOfContentsStyleTest extends AbstractJasperStyleTest {
 
 		numberOfPagesTest(3);
 
-		styleTest("title.textField1", 0, Color.BLUE, null, "Arial", 18, true, null);
+		styleTest("title.textField1", 0, Color.BLUE, null, "Arial", 18f, true, null);
 
 		for (int i = 0; i < 3; i++) {
-			styleTest("detail.textField1", i, null, null, "Arial", 12, true, null);
-			styleTest("detail.textField2", i, null, null, "Arial", 12, true, null);
-			styleTest("detail.textField3", i, null, null, "Arial", 12, true, null);
+			styleTest("detail.textField1", i, null, null, "Arial", 12f, true, null);
+			styleTest("detail.textField2", i, null, null, "Arial", 12f, true, null);
+			styleTest("detail.textField3", i, null, null, "Arial", 12f, true, null);
 		}
 
 		for (int i = 0; i < 9; i++) {
-			styleTest("detail.textField4", i, null, null, "Arial", 10, null, true);
-			styleTest("detail.textField5", i, null, null, "Arial", 10, null, true);
-			styleTest("detail.textField6", i, null, null, "Arial", 10, null, true);
+			styleTest("detail.textField4", i, null, null, "Arial", 10f, null, true);
+			styleTest("detail.textField5", i, null, null, "Arial", 10f, null, true);
+			styleTest("detail.textField6", i, null, null, "Arial", 10f, null, true);
 		}
 	}
 

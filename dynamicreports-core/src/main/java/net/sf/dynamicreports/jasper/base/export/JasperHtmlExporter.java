@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.constant.Constants;
  */
 public class JasperHtmlExporter extends AbstractJasperExporter implements JasperIHtmlExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Boolean outputImagesToDir;
 	private String imagesDirName;
 	private String imagesURI;
@@ -44,112 +44,122 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	private Boolean wrapBreakWord;
 	private SizeUnit sizeUnit;
 	private Boolean framesAsNestedTables;
-	
+	private Boolean ignorePageMargins;
+
 	@Override
 	public Boolean getOutputImagesToDir() {
 		return outputImagesToDir;
 	}
-	
+
 	public void setOutputImagesToDir(Boolean outputImagesToDir) {
 		this.outputImagesToDir = outputImagesToDir;
 	}
-	
+
 	@Override
 	public String getImagesDirName() {
 		return imagesDirName;
 	}
-	
+
 	public void setImagesDirName(String imagesDirName) {
 		this.imagesDirName = imagesDirName;
 	}
-	
+
 	public void setImagesURI(String imagesURI) {
 		this.imagesURI = imagesURI;
 	}
-	
+
 	@Override
 	public String getImagesURI() {
 		return imagesURI;
-	}	
-	
+	}
+
 	@Override
 	public String getHtmlHeader() {
 		return htmlHeader;
 	}
-	
+
 	public void setHtmlHeader(String htmlHeader) {
 		this.htmlHeader = htmlHeader;
 	}
-	
+
 	@Override
 	public String getBetweenPagesHtml() {
 		return betweenPagesHtml;
 	}
-	
+
 	public void setBetweenPagesHtml(String betweenPagesHtml) {
 		this.betweenPagesHtml = betweenPagesHtml;
 	}
-	
+
 	@Override
 	public String getHtmlFooter() {
 		return htmlFooter;
 	}
-	
+
 	public void setHtmlFooter(String htmlFooter) {
 		this.htmlFooter = htmlFooter;
 	}
-	
+
 	@Override
 	public Boolean getRemoveEmptySpaceBetweenRows() {
 		return removeEmptySpaceBetweenRows;
 	}
-	
+
 	public void setRemoveEmptySpaceBetweenRows(Boolean removeEmptySpaceBetweenRows) {
 		this.removeEmptySpaceBetweenRows = removeEmptySpaceBetweenRows;
 	}
-	
+
 	@Override
 	public Boolean getWhitePageBackground() {
 		return whitePageBackground;
 	}
-	
+
 	public void setWhitePageBackground(Boolean whitePageBackground) {
 		this.whitePageBackground = whitePageBackground;
 	}
-	
+
 	@Override
 	public Boolean getUsingImagesToAlign() {
 		return usingImagesToAlign;
 	}
-	
+
 	public void setUsingImagesToAlign(Boolean usingImagesToAlign) {
 		this.usingImagesToAlign = usingImagesToAlign;
 	}
-	
+
 	@Override
 	public Boolean getWrapBreakWord() {
 		return wrapBreakWord;
 	}
-	
+
 	public void setWrapBreakWord(Boolean wrapBreakWord) {
 		this.wrapBreakWord = wrapBreakWord;
 	}
-	
+
 	@Override
 	public SizeUnit getSizeUnit() {
 		return sizeUnit;
 	}
-	
+
 	public void setSizeUnit(SizeUnit sizeUnit) {
 		this.sizeUnit = sizeUnit;
 	}
-	
+
 	@Override
 	public Boolean getFramesAsNestedTables() {
 		return framesAsNestedTables;
 	}
-	
+
 	public void setFramesAsNestedTables(Boolean framesAsNestedTables) {
 		this.framesAsNestedTables = framesAsNestedTables;
-	}	
+	}
+
+	@Override
+	public Boolean getIgnorePageMargins() {
+		return ignorePageMargins;
+	}
+
+	public void setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.ignorePageMargins = ignorePageMargins;
+	}
 }

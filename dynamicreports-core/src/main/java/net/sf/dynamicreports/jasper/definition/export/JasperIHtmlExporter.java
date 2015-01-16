@@ -28,28 +28,30 @@ import net.sf.dynamicreports.jasper.constant.SizeUnit;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface JasperIHtmlExporter extends JasperIExporter {
-	
+
 	public Boolean getOutputImagesToDir();
-	
+
 	public String getImagesDirName();
-	
+
 	public String getImagesURI();
-	
+
 	public String getHtmlHeader();
-	
+
 	public String getBetweenPagesHtml();
-	
+
 	public String getHtmlFooter();
-	
+
 	public Boolean getRemoveEmptySpaceBetweenRows();
-	
+
 	public Boolean getWhitePageBackground();
-	
+
 	public Boolean getUsingImagesToAlign();
-	
+
 	public Boolean getWrapBreakWord();
-	
+
 	public SizeUnit getSizeUnit();
-	
-	public Boolean getFramesAsNestedTables();	
+
+	public Boolean getFramesAsNestedTables();
+
+	public Boolean getIgnorePageMargins();
 }

@@ -28,35 +28,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.dynamicreports.Project;
-
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.Template;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class GenerateClasspath {
-	
+
 	public static void main(String[] args) throws Exception {
 		Project project = new Project();
-		Configuration cfg = new Configuration();		
-		cfg.setObjectWrapper(new DefaultObjectWrapper());
+		Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+		cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build());
 		Template temp = cfg.getTemplate("src/assemblies/eclipse_classpath.ftl");
-		Map<String, Object> root = new HashMap<String, Object>();		
-		root.put("project", project);		
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("project", project);
 		Writer out = new FileWriter(project.getOutputDirectory() + "/eclipse_classpath");
 		temp.process(root, out);
 		out.flush();
-		
+
 		project = new Project();
-		cfg = new Configuration();		
-		cfg.setObjectWrapper(new DefaultObjectWrapper());
+		cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+		cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build());
 		temp = cfg.getTemplate("src/assemblies/netbeans_classpath.ftl");
-		root = new HashMap<String, Object>();		
-		root.put("project", project);		
+		root = new HashMap<String, Object>();
+		root.put("project", project);
 		out = new FileWriter(project.getOutputDirectory() + "/netbeans_classpath");
 		temp.process(root, out);
 		out.flush();
 	}
-} 
+}

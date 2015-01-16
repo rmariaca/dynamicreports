@@ -78,22 +78,22 @@ public class TemplateStyle4Test extends AbstractJasperStyleTest implements Seria
 		numberOfPagesTest(1);
 
 		//column1
-		columnTitleStyleTest(column1, 0, null, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column1, 0, null, null, "Arial", 10f, true, null);
 		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
 
-		columnDetailStyleTest(column1, 0, null, null, "Arial", 10, null, null);
+		columnDetailStyleTest(column1, 0, null, null, "Arial", 10f, null, null);
 		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
 
 		//column2
-		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, true, null);
+		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10f, true, null);
 
 		//subtotal
-		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10, true, null);
+		subtotalLabelStyleTest(subtotal1, 0, null, null, "Arial", 10f, true, null);
 		subtotalLabelBorderTest(subtotal1, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 0);
 
 		//title
-		styleTest("title.textField1", 0, null, null, "Arial", 15, true, null);
-		styleTest("title.textField2", 0, null, null, "Arial", 10, true, null);
+		styleTest("title.textField1", 0, null, null, "Arial", 15f, true, null);
+		styleTest("title.textField2", 0, null, null, "Arial", 10f, true, null);
 	}
 
 	@Override

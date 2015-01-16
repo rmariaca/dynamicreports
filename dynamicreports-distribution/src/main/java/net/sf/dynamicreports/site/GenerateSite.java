@@ -52,7 +52,7 @@ import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.Template;
 
 /**
@@ -87,8 +87,8 @@ public class GenerateSite {
 		htmlToImage_key = System.getenv("htmlToImageKey");
 		examples_path = site_path + "examples/";
 
-		Configuration cfg = new Configuration();
-		cfg.setObjectWrapper(new DefaultObjectWrapper());
+		Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+		cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build());
 
 		TemplateLoader[] loaders = new TemplateLoader[2];
 		loaders[0] = cfg.getTemplateLoader();
@@ -261,7 +261,7 @@ public class GenerateSite {
 		imageExporter.setOffsetX(1);
 		imageExporter.setOffsetY(1);
 		imageExporter.setPageGap(1);
-		imageExporter.setZoom(zoom);
+		imageExporter.setZoomRatio(zoom);
 		if (reportBuilder.toJasperPrint().getPages().size() > 3) {
 			imageExporter.setEndPageIndex(2);
 		}

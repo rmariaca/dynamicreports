@@ -103,49 +103,49 @@ public class TemplateStyle1Test extends AbstractJasperStyleTest implements Seria
 		Color color2 = new Color(200, 200, 200);
 
 		//column1
-		columnTitleStyleTest(column1, 0, Color.BLACK, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column1, 0, Color.BLACK, null, "Arial", 10f, true, null);
 		columnTitleBorderTest(column1, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		columnTitlePaddingTest(column1, 0, 2, 2, 2, 2);
 
 		columnDetailPaddingTest(column1, 0, 2, 2, 2, 2);
-		columnDetailStyleTest(column1, 0, Color.BLACK, color1, "Arial", 10, null, true);
-		columnDetailStyleTest(column1, 1, Color.BLACK, color2, "Arial", 10, null, true);
-		columnDetailStyleTest(column1, 2, Color.RED, color1, "Arial", 10, true, true);
-		columnDetailStyleTest(column1, 5, Color.BLACK, Color.RED, "Arial", 10, true, true);
-		columnDetailStyleTest(column1, 6, Color.BLACK, color1, "Arial", 10, true, true);
-		columnDetailStyleTest(column1, 9, Color.RED, color2, "Arial", 10, null, true);
-		columnDetailStyleTest(column1, 16, Color.BLACK, Color.ORANGE, "Arial", 10, null, true);
+		columnDetailStyleTest(column1, 0, Color.BLACK, color1, "Arial", 10f, null, true);
+		columnDetailStyleTest(column1, 1, Color.BLACK, color2, "Arial", 10f, null, true);
+		columnDetailStyleTest(column1, 2, Color.RED, color1, "Arial", 10f, true, true);
+		columnDetailStyleTest(column1, 5, Color.BLACK, Color.RED, "Arial", 10f, true, true);
+		columnDetailStyleTest(column1, 6, Color.BLACK, color1, "Arial", 10f, true, true);
+		columnDetailStyleTest(column1, 9, Color.RED, color2, "Arial", 10f, null, true);
+		columnDetailStyleTest(column1, 16, Color.BLACK, Color.ORANGE, "Arial", 10f, null, true);
 
 		//column2
-		columnTitleStyleTest(column2, 0, Color.BLACK, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column2, 0, Color.BLACK, null, "Arial", 10f, true, null);
 		columnTitleBorderTest(column2, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		columnTitlePaddingTest(column2, 0, 2, 2, 2, 2);
 
 		columnDetailPaddingTest(column2, 0, 2, 2, 2, 2);
-		columnDetailStyleTest(column2, 0, Color.BLACK, color1, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 1, Color.BLACK, color2, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 2, Color.RED, color1, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 5, Color.BLACK, Color.RED, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 6, Color.BLACK, color1, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 9, Color.RED, color2, "Arial", 10, true, true);
-		columnDetailStyleTest(column2, 16, Color.BLACK, Color.RED, "Arial", 10, true, true);
+		columnDetailStyleTest(column2, 0, Color.BLACK, color1, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 1, Color.BLACK, color2, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 2, Color.RED, color1, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 5, Color.BLACK, Color.RED, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 6, Color.BLACK, color1, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 9, Color.RED, color2, "Arial", 10f, true, true);
+		columnDetailStyleTest(column2, 16, Color.BLACK, Color.RED, "Arial", 10f, true, true);
 
 		//column3
-		columnTitleStyleTest(column3, 0, Color.BLACK, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column3, 0, Color.BLACK, null, "Arial", 10f, true, null);
 		columnTitleBorderTest(column3, 0, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2, Color.BLACK, LineStyleEnum.SOLID, 2);
 		columnTitlePaddingTest(column3, 0, 2, 2, 2, 2);
 
 		columnDetailPaddingTest(column3, 0, 2, 2, 2, 2);
-		columnDetailStyleTest(column3, 0, Color.BLACK, color1, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 1, Color.BLACK, color2, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 2, Color.RED, color1, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 5, Color.BLACK, Color.RED, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 6, Color.BLACK, color1, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 9, Color.RED, color2, "Arial", 10, null, true);
-		columnDetailStyleTest(column3, 16, Color.BLACK, Color.RED, "Arial", 10, null, true);
+		columnDetailStyleTest(column3, 0, Color.BLACK, color1, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 1, Color.BLACK, color2, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 2, Color.RED, color1, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 5, Color.BLACK, Color.RED, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 6, Color.BLACK, color1, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 9, Color.RED, color2, "Arial", 10f, null, true);
+		columnDetailStyleTest(column3, 16, Color.BLACK, Color.RED, "Arial", 10f, null, true);
 
 		//subtotal1
-		subtotalStyleTest(subtotal1, 0, Color.BLACK, Color.YELLOW, "Arial", 10, true, null);
+		subtotalStyleTest(subtotal1, 0, Color.BLACK, Color.YELLOW, "Arial", 10f, true, null);
 		subtotalBorderTest(subtotal1, 0, Color.BLACK, LineStyleEnum.SOLID, 1, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0, Color.BLACK, LineStyleEnum.SOLID, 0);
 		subtotalPaddingTest(subtotal1, 0, 2, 2, 2, 2);
 
@@ -153,7 +153,7 @@ public class TemplateStyle1Test extends AbstractJasperStyleTest implements Seria
 		styleTest("title.list1", 0, null, null, "SansSerif", null, null, null);
 		borderTest("title.list1", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 		paddingTest("title.list1", 0, 0, 0, 0, 0);
-		styleTest("title.textField1", 0, Color.BLACK, null, "Arial", 15, true, null);
+		styleTest("title.textField1", 0, Color.BLACK, null, "Arial", 15f, true, null);
 	}
 
 	@Override

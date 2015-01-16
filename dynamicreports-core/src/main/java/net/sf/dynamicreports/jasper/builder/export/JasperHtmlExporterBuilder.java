@@ -76,6 +76,10 @@ public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed.
+	 */
+	@Deprecated
 	public JasperHtmlExporterBuilder setUsingImagesToAlign(Boolean usingImagesToAlign) {
 		this.getObject().setUsingImagesToAlign(usingImagesToAlign);
 		return this;
@@ -91,8 +95,17 @@ public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		return this;
 	}
 
+	/**
+	 * @deprecated To be removed.
+	 */
+	@Deprecated
 	public JasperHtmlExporterBuilder setFramesAsNestedTables(Boolean framesAsNestedTables) {
 		this.getObject().setFramesAsNestedTables(framesAsNestedTables);
+		return this;
+	}
+
+	public JasperHtmlExporterBuilder setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.getObject().setIgnorePageMargins(ignorePageMargins);
 		return this;
 	}
 }

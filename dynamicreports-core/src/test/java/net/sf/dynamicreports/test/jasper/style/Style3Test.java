@@ -70,20 +70,20 @@ public class Style3Test extends AbstractJasperStyleTest implements Serializable 
 		numberOfPagesTest(1);
 
 		//column2
-		columnTitleStyleTest(column2, 0, Color.RED, null, "Arial", 10, null, null);
-		columnDetailStyleTest(column2, 0, Color.BLUE, null, "Arial", 10, null, null);
+		columnTitleStyleTest(column2, 0, Color.RED, null, "Arial", 10f, null, null);
+		columnDetailStyleTest(column2, 0, Color.BLUE, null, "Arial", 10f, null, null);
 
 		//column3
-		columnTitleStyleTest(column3, 0, Color.RED, null, "Arial", 10, null, null);
-		columnDetailStyleTest(column3, 0, null, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column3, 0, Color.RED, null, "Arial", 10f, null, null);
+		columnDetailStyleTest(column3, 0, null, null, "Arial", 10f, true, null);
 
 		//column4
-		columnTitleStyleTest(column4, 0, null, null, "Arial", 10, null, true);
-		columnDetailStyleTest(column4, 0, Color.BLUE, null, "Arial", 10, true, null);
+		columnTitleStyleTest(column4, 0, null, null, "Arial", 10f, null, true);
+		columnDetailStyleTest(column4, 0, Color.BLUE, null, "Arial", 10f, true, null);
 
 		//group1
-		groupHeaderTitleStyleTest(group1, 0, null, null, "Arial", 10, true, null);
-		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, null, true);
+		groupHeaderTitleStyleTest(group1, 0, null, null, "Arial", 10f, true, null);
+		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10f, null, true);
 	}
 
 	@Override

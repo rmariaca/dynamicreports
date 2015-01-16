@@ -61,14 +61,14 @@ public class DefaultFontTest extends AbstractJasperStyleTest implements Serializ
 		numberOfPagesTest(1);
 
 		//column1
-		columnDetailStyleTest(column1, 0, null, null, "Arial", 12, true, null);
-		columnDetailStyleTest(column1, 1, null, null, "Arial", 12, true, null);
-		columnDetailStyleTest(column1, 2, null, null, "Arial", 12, true, null);
+		columnDetailStyleTest(column1, 0, null, null, "Arial", 12f, true, null);
+		columnDetailStyleTest(column1, 1, null, null, "Arial", 12f, true, null);
+		columnDetailStyleTest(column1, 2, null, null, "Arial", 12f, true, null);
 
 		//column2
-		columnDetailStyleTest(column2, 0, Color.BLACK, null, "Arial", 12, null, null);
-		columnDetailStyleTest(column2, 1, Color.BLACK, null, "Arial", 12, null, null);
-		columnDetailStyleTest(column2, 2, Color.BLACK, null, "Arial", 12, null, null);
+		columnDetailStyleTest(column2, 0, Color.BLACK, null, "Arial", 12f, null, null);
+		columnDetailStyleTest(column2, 1, Color.BLACK, null, "Arial", 12f, null, null);
+		columnDetailStyleTest(column2, 2, Color.BLACK, null, "Arial", 12f, null, null);
 	}
 
 	@Override

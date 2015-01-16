@@ -54,6 +54,7 @@ public class ExportTest {
 		concatenatedReport.concatenate(report, report, report);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void exportTest() {
 		try {
@@ -79,6 +80,7 @@ public class ExportTest {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void concatenatedExportTest() {
 		try {

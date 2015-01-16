@@ -82,9 +82,9 @@ public class CrosstabStyle3Test extends AbstractJasperCrosstabStyleTest implemen
 		Color color1 = new Color(240, 240, 240);
 		Color color2 = new Color(200, 200, 200);
 
-		crosstabCellStyleTest(measure1, null, null, 0, Color.BLACK, color2, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 1, Color.BLACK, color1, "Arial", 10, null, null);
-		crosstabCellStyleTest(measure1, null, null, 2, Color.BLACK, color2, "Arial", 10, null, null);
+		crosstabCellStyleTest(measure1, null, null, 0, Color.BLACK, color2, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 1, Color.BLACK, color1, "Arial", 10f, null, null);
+		crosstabCellStyleTest(measure1, null, null, 2, Color.BLACK, color2, "Arial", 10f, null, null);
 	}
 
 	@Override

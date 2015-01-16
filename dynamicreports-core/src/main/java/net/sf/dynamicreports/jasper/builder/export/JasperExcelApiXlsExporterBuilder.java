@@ -27,7 +27,9 @@ import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
+ * @deprecated To be removed. Use JasperXlsExporterBuilder or JasperXlsxExporterBuilder instead.
  */
+@Deprecated
 public class JasperExcelApiXlsExporterBuilder extends AbstractJasperExcelExporterBuilder<JasperExcelApiXlsExporterBuilder, JasperExcelApiXlsExporter> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 

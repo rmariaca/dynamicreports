@@ -84,8 +84,6 @@ import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.analytics.dataset.BucketOrder;
 import net.sf.jasperreports.engine.design.JRDesignChart;
-import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
-import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
@@ -110,6 +108,8 @@ import net.sf.jasperreports.engine.type.TabStopAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 import net.sf.jasperreports.engine.type.WhenResourceMissingTypeEnum;
+import net.sf.jasperreports.export.type.HtmlSizeUnitEnum;
+import net.sf.jasperreports.export.type.PdfVersionEnum;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.jfree.data.time.Day;
@@ -568,31 +568,31 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static String sizeUnit(SizeUnit sizeUnit) {
+	protected static HtmlSizeUnitEnum sizeUnit(SizeUnit sizeUnit) {
 		switch (sizeUnit) {
 		case PIXEL:
-			return JRHtmlExporterParameter.SIZE_UNIT_PIXEL;
+			return HtmlSizeUnitEnum.PIXEL;
 		case POINT:
-			return JRHtmlExporterParameter.SIZE_UNIT_POINT;
+			return HtmlSizeUnitEnum.POINT;
 		default:
 			throw new JasperDesignException("SizeUnit " + sizeUnit.name() + " not supported");
 		}
 	}
 
-	protected static Character pdfVersion(PdfVersion pdfVersion) {
+	protected static PdfVersionEnum pdfVersion(PdfVersion pdfVersion) {
 		switch (pdfVersion) {
 		case VERION_1_2:
-			return JRPdfExporterParameter.PDF_VERSION_1_2;
+			return PdfVersionEnum.VERSION_1_2;
 		case VERION_1_3:
-			return JRPdfExporterParameter.PDF_VERSION_1_3;
+			return PdfVersionEnum.VERSION_1_3;
 		case VERION_1_4:
-			return JRPdfExporterParameter.PDF_VERSION_1_4;
+			return PdfVersionEnum.VERSION_1_4;
 		case VERION_1_5:
-			return JRPdfExporterParameter.PDF_VERSION_1_5;
+			return PdfVersionEnum.VERSION_1_5;
 		case VERION_1_6:
-			return JRPdfExporterParameter.PDF_VERSION_1_6;
+			return PdfVersionEnum.VERSION_1_6;
 		case VERION_1_7:
-			return JRPdfExporterParameter.PDF_VERSION_1_7;
+			return PdfVersionEnum.VERSION_1_7;
 		default:
 			throw new JasperDesignException("PdfVersion " + pdfVersion.name() + " not supported");
 		}

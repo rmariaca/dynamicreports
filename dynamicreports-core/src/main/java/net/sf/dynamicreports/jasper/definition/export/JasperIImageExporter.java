@@ -27,11 +27,11 @@ import net.sf.dynamicreports.jasper.constant.ImageType;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface JasperIImageExporter extends JasperIExporter {	
-	
+public interface JasperIImageExporter extends JasperIExporter {
+
 	public Integer getPageGap();
-	
+
 	public ImageType getImageType();
-	
-	public Float getZoom();
+
+	public Float getZoomRatio();
 }

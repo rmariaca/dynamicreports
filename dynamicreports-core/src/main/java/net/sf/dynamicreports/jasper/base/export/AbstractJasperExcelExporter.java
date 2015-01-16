@@ -31,9 +31,9 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter implements JasperIExcelExporter {	
+public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter implements JasperIExcelExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Boolean onePagePerSheet;
 	private Boolean removeEmptySpaceBetweenRows;
 	private Boolean removeEmptySpaceBetweenColumns;
@@ -48,61 +48,62 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 	private Boolean ignoreCellBorder;
 	private Boolean ignoreCellBackground;
 	private String password;
-	
+	private Boolean ignorePageMargins;
+
 	public AbstractJasperExcelExporter() {
 		this.sheetNames = new ArrayList<String>();
 	}
-	
+
 	@Override
 	public Boolean getOnePagePerSheet() {
 		return onePagePerSheet;
 	}
-	
+
 	public void setOnePagePerSheet(Boolean onePagePerSheet) {
 		this.onePagePerSheet = onePagePerSheet;
 	}
-	
+
 	@Override
 	public Boolean getRemoveEmptySpaceBetweenRows() {
 		return removeEmptySpaceBetweenRows;
 	}
-	
+
 	public void setRemoveEmptySpaceBetweenRows(Boolean removeEmptySpaceBetweenRows) {
 		this.removeEmptySpaceBetweenRows = removeEmptySpaceBetweenRows;
 	}
-	
+
 	@Override
 	public Boolean getRemoveEmptySpaceBetweenColumns() {
 		return removeEmptySpaceBetweenColumns;
 	}
-	
+
 	public void setRemoveEmptySpaceBetweenColumns(Boolean removeEmptySpaceBetweenColumns) {
 		this.removeEmptySpaceBetweenColumns = removeEmptySpaceBetweenColumns;
 	}
-	
+
 	@Override
 	public Boolean getWhitePageBackground() {
 		return whitePageBackground;
 	}
-	
+
 	public void setWhitePageBackground(Boolean whitePageBackground) {
 		this.whitePageBackground = whitePageBackground;
 	}
-	
+
 	@Override
 	public Boolean getDetectCellType() {
 		return detectCellType;
 	}
-	
+
 	public void setDetectCellType(Boolean detectCellType) {
 		this.detectCellType = detectCellType;
 	}
-	
+
 	@Override
 	public List<String> getSheetNames() {
 		return sheetNames;
 	}
-	
+
 	public void setSheetNames(List<String> sheetNames) {
 		this.sheetNames = sheetNames;
 	}
@@ -110,76 +111,85 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 	public void addSheetName(String sheetName) {
 		this.sheetNames.add(sheetName);
 	}
-	
+
 	@Override
 	public Boolean getFontSizeFixEnabled() {
 		return fontSizeFixEnabled;
 	}
-	
+
 	public void setFontSizeFixEnabled(Boolean fontSizeFixEnabled) {
 		this.fontSizeFixEnabled = fontSizeFixEnabled;
 	}
-	
+
 	@Override
 	public Boolean getImageBorderFixEnabled() {
 		return imageBorderFixEnabled;
 	}
-	
+
 	public void setImageBorderFixEnabled(Boolean imageBorderFixEnabled) {
 		this.imageBorderFixEnabled = imageBorderFixEnabled;
 	}
-	
+
 	@Override
 	public Integer getMaxRowsPerSheet() {
 		return maxRowsPerSheet;
 	}
-	
+
 	public void setMaxRowsPerSheet(Integer maxRowsPerSheet) {
 		this.maxRowsPerSheet = maxRowsPerSheet;
 	}
-	
+
 	@Override
 	public Boolean getIgnoreGraphics() {
 		return ignoreGraphics;
 	}
-	
+
 	public void setIgnoreGraphics(Boolean ignoreGraphics) {
 		this.ignoreGraphics = ignoreGraphics;
 	}
-	
+
 	@Override
 	public Boolean getCollapseRowSpan() {
 		return collapseRowSpan;
 	}
-	
+
 	public void setCollapseRowSpan(Boolean collapseRowSpan) {
 		this.collapseRowSpan = collapseRowSpan;
 	}
-	
+
 	@Override
 	public Boolean getIgnoreCellBorder() {
 		return ignoreCellBorder;
 	}
-	
+
 	public void setIgnoreCellBorder(Boolean ignoreCellBorder) {
 		this.ignoreCellBorder = ignoreCellBorder;
 	}
-	
+
 	@Override
 	public Boolean getIgnoreCellBackground() {
 		return ignoreCellBackground;
 	}
-	
+
 	public void setIgnoreCellBackground(Boolean ignoreCellBackground) {
 		this.ignoreCellBackground = ignoreCellBackground;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+
+	@Override
+	public Boolean getIgnorePageMargins() {
+		return ignorePageMargins;
+	}
+
+	public void setIgnorePageMargins(Boolean ignorePageMargins) {
+		this.ignorePageMargins = ignorePageMargins;
+	}
 }

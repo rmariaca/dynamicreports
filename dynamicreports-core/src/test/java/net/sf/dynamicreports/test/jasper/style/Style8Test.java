@@ -61,11 +61,11 @@ public class Style8Test extends AbstractJasperStyleTest {
 
 		numberOfPagesTest(1);
 
-		columnDetailStyleTest(column1, 0, null, null, "Arial", 10, true, null);
+		columnDetailStyleTest(column1, 0, null, null, "Arial", 10f, true, null);
 		columnDetailBorderTest(column1, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 		columnDetailBorderTest(column2, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 		columnDetailBorderTest(column3, 0, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2, null, LineStyleEnum.SOLID, 2);
-		columnDetailStyleTest(column4, 0, null, null, "Arial", 10, true, null);
+		columnDetailStyleTest(column4, 0, null, null, "Arial", 10f, true, null);
 		columnDetailBorderTest(column4, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 
 		columnDetailAlignmentTest(column1, 0, HorizontalAlignEnum.CENTER);

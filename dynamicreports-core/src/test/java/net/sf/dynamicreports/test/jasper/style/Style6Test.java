@@ -60,14 +60,14 @@ public class Style6Test extends AbstractJasperStyleTest implements Serializable 
 		Color color2 = new Color(240, 240, 240);
 
 		//column1
-		columnDetailStyleTest(column1, 0, null, color1, "Arial", 10, null, null);
-		columnDetailStyleTest(column1, 1, null, Color.BLUE, "Arial", 10, null, null);
-		columnDetailStyleTest(column1, 2, null, color1, "Arial", 10, null, null);
+		columnDetailStyleTest(column1, 0, null, color1, "Arial", 10f, null, null);
+		columnDetailStyleTest(column1, 1, null, Color.BLUE, "Arial", 10f, null, null);
+		columnDetailStyleTest(column1, 2, null, color1, "Arial", 10f, null, null);
 
 		//column2
-		columnDetailStyleTest(column2, 0, Color.BLACK, color2, "Arial", 10, null, null);
-		columnDetailStyleTest(column2, 1, Color.BLACK, null, "Arial", 10, null, null);
-		columnDetailStyleTest(column2, 2, Color.BLACK, color2, "Arial", 10, null, null);
+		columnDetailStyleTest(column2, 0, Color.BLACK, color2, "Arial", 10f, null, null);
+		columnDetailStyleTest(column2, 1, Color.BLACK, null, "Arial", 10f, null, null);
+		columnDetailStyleTest(column2, 2, Color.BLACK, color2, "Arial", 10f, null, null);
 	}
 
 	@Override

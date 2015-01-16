@@ -40,7 +40,6 @@ import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperCsvExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperDocxExporterBuilder;
-import net.sf.dynamicreports.jasper.builder.export.JasperExcelApiXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperOdtExporterBuilder;
@@ -48,7 +47,6 @@ import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperPptxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperRtfExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperTextExporterBuilder;
-import net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
@@ -57,11 +55,14 @@ import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
-import net.sf.jasperreports.engine.export.JRGraphics2DExporterParameter;
+import net.sf.jasperreports.export.Exporter;
+import net.sf.jasperreports.export.ExporterInput;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleGraphics2DExporterConfiguration;
+import net.sf.jasperreports.export.SimpleGraphics2DExporterOutput;
+import net.sf.jasperreports.export.SimpleGraphics2DReportConfiguration;
 
 import org.apache.commons.lang3.Validate;
 
@@ -122,14 +123,23 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
 			for (int i = 0; i < jasperPrint.getPages().size(); i++) {
 				try {
-					JRGraphics2DExporter exporter = new JRGraphics2DExporter();
-					exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-					exporter.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D, pageImage.getGraphics());
-					exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_X, offset);
-					exporter.setParameter(JRGraphics2DExporterParameter.OFFSET_Y, 1);
-					exporter.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(i));
-					exporter.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO, new Float(zoom));
-					exporter.exportReport();
+					SimpleExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
+					SimpleGraphics2DExporterOutput exporterOutput = new SimpleGraphics2DExporterOutput();
+					exporterOutput.setGraphics2D((Graphics2D) pageImage.getGraphics());
+					SimpleGraphics2DReportConfiguration reportExportConfiguration = new SimpleGraphics2DReportConfiguration();
+					reportExportConfiguration.setPageIndex(i);
+					reportExportConfiguration.setOffsetX(offset);
+					reportExportConfiguration.setOffsetY(1);
+					reportExportConfiguration.setZoomRatio(zoom);
+					SimpleGraphics2DExporterConfiguration exporterConfiguration = new SimpleGraphics2DExporterConfiguration();
+
+					JRGraphics2DExporter jrExporter = new JRGraphics2DExporter();
+					jrExporter.setExporterInput(exporterInput);
+					jrExporter.setExporterOutput(exporterOutput);
+					jrExporter.setConfiguration(reportExportConfiguration);
+					jrExporter.setConfiguration(exporterConfiguration);
+
+					jrExporter.exportReport();
 					offset += pageWidth + 1;
 				} catch (JRException e) {
 					throw new DRException(e);
@@ -226,20 +236,36 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 	}
 
 	//xhtml
+	/**
+	 * @deprecated To be removed. Use toHtml instead
+	 */
+	@Deprecated
 	public JasperConcatenatedReportBuilder toXhtml(OutputStream outputStream) throws DRException {
 		return toXhtml(Exporters.xhtmlExporter(outputStream));
 	}
 
-	public JasperConcatenatedReportBuilder toXhtml(JasperXhtmlExporterBuilder xhtmlExporterBuilder) throws DRException {
+	/**
+	 * @deprecated To be removed. Use toHtml instead
+	 */
+	@Deprecated
+	public JasperConcatenatedReportBuilder toXhtml(net.sf.dynamicreports.jasper.builder.export.JasperXhtmlExporterBuilder xhtmlExporterBuilder) throws DRException {
 		return export(xhtmlExporterBuilder);
 	}
 
 	//excelApiXls
+	/**
+	 * @deprecated To be removed. Use toXls or toXlsx instead
+	 */
+	@Deprecated
 	public JasperConcatenatedReportBuilder toExcelApiXls(OutputStream outputStream) throws DRException {
 		return toExcelApiXls(Exporters.excelApiXlsExporter(outputStream));
 	}
 
-	public JasperConcatenatedReportBuilder toExcelApiXls(JasperExcelApiXlsExporterBuilder excelApiXlsExporterBuilder) throws DRException {
+	/**
+	 * @deprecated To be removed. Use toXls or toXlsx instead
+	 */
+	@Deprecated
+	public JasperConcatenatedReportBuilder toExcelApiXls(net.sf.dynamicreports.jasper.builder.export.JasperExcelApiXlsExporterBuilder excelApiXlsExporterBuilder) throws DRException {
 		return export(excelApiXlsExporterBuilder);
 	}
 
@@ -283,8 +309,9 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 		Validate.notNull(exporterBuilder, "exporterBuilder must not be null");
 		try {
 			ExporterTransform exporterTransform = new ExporterTransform(exporterBuilder.build());
-			JRExporter exporter = exporterTransform.transform();
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperReportHandler.getPrintList());
+			@SuppressWarnings("unchecked")
+			Exporter<ExporterInput, ?, ?, ?> exporter = (Exporter<ExporterInput, ?, ?, ?>) exporterTransform.transform();
+			exporter.setExporterInput(SimpleExporterInput.getInstance(jasperReportHandler.getPrintList()));
 			exporter.exportReport();
 		} catch (JRException e) {
 			throw new DRException(e);

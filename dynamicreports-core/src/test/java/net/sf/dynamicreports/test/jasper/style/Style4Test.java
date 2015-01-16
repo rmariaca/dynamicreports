@@ -43,10 +43,10 @@ import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
  */
 public class Style4Test extends AbstractJasperStyleTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private TextColumnBuilder<Date> column1;
 	private ColumnGroupBuilder group1;
-	
+
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		StyleBuilder groupStyle = stl.style()
@@ -59,7 +59,7 @@ public class Style4Test extends AbstractJasperStyleTest implements Serializable 
 		             .setHideColumn(false)
                  .groupByDataType()
                  .setStyle(groupStyle);
-		
+
 		rb.columns(column1)
 		  .groupBy(group1);
 	}
@@ -67,18 +67,18 @@ public class Style4Test extends AbstractJasperStyleTest implements Serializable 
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
-		//column1		
-		columnDetailStyleTest(column1, 0, Color.BLACK, null, "Arial", 10, null, null);
+
+		//column1
+		columnDetailStyleTest(column1, 0, Color.BLACK, null, "Arial", 10f, null, null);
 		columnDetailAlignmentTest(column1, 0, HorizontalAlignEnum.RIGHT);
-		
+
 		//group1
-		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10, true, null);
+		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10f, true, null);
 		groupHeaderAlignmentTest(group1, 0, HorizontalAlignEnum.LEFT);
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1");

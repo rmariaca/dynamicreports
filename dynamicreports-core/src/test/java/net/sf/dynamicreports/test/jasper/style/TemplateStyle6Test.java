@@ -22,9 +22,7 @@
 
 package net.sf.dynamicreports.test.jasper.style;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.cmp;
-import static net.sf.dynamicreports.report.builder.DynamicReports.stl;
-import static net.sf.dynamicreports.report.builder.DynamicReports.template;
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.io.Serializable;
 
@@ -59,7 +57,7 @@ public class TemplateStyle6Test extends AbstractJasperStyleTest implements Seria
 
 		numberOfPagesTest(1);
 
-		styleTest("title.textField1", 0, null, null, "Arial", 10, true, null);
+		styleTest("title.textField1", 0, null, null, "Arial", 10f, true, null);
 		paddingTest("title.textField1", 0, 2, 2, 2, 2);
 	}
 
