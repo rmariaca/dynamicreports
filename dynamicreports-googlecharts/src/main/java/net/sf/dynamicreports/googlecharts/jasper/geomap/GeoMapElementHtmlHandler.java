@@ -33,6 +33,11 @@ import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRHtmlExporterContext;
 import net.sf.jasperreports.engine.type.ModeEnum;
 import net.sf.jasperreports.engine.util.JRColorUtil;
+import net.sf.jasperreports.export.Exporter;
+import net.sf.jasperreports.export.ExporterInput;
+import net.sf.jasperreports.export.HtmlExporterConfiguration;
+import net.sf.jasperreports.export.HtmlExporterOutput;
+import net.sf.jasperreports.export.HtmlReportConfiguration;
 import net.sf.jasperreports.web.util.VelocityUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -86,7 +91,10 @@ public class GeoMapElementHtmlHandler implements GenericElementHtmlHandler {
 		velocityContext.put("valueLabel", valueLabel);
 		velocityContext.put("colors", stringColors);
 		velocityContext.put("dataset", dataset);
-		if(context.getExporterRef() instanceof HtmlExporter) {
+    @SuppressWarnings("unchecked")
+		Exporter<ExporterInput, ? extends HtmlReportConfiguration, ? extends HtmlExporterConfiguration, HtmlExporterOutput> exporter = context.getExporterRef();
+    HtmlExporter htmlExporter2 = exporter instanceof HtmlExporter ? (HtmlExporter)exporter : null;
+		if(htmlExporter2 == null) {
 			velocityContext.put("xhtml", "xhtml");
 			velocityContext.put("elementX", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getX()));
 			velocityContext.put("elementY", ((HtmlExporter)context.getExporterRef()).toSizeUnit((float) element.getY()));
