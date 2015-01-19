@@ -40,20 +40,21 @@ file.reference.batik-script-${project.batikbridgeVersion}.jar=lib\\batik-script-
 file.reference.batik-svg-dom-${project.batikbridgeVersion}.jar=lib\\batik-svg-dom-${project.batikbridgeVersion}.jar
 file.reference.batik-util-${project.batikbridgeVersion}.jar=lib\\batik-util-${project.batikbridgeVersion}.jar
 file.reference.batik-xml-${project.batikbridgeVersion}.jar=lib\\batik-xml-${project.batikbridgeVersion}.jar
-file.reference.bcprov-jdk14-${project.bcprovjdk14Version}.jar=lib\\bcprov-jdk14-${project.bcprovjdk14Version}.jar
+file.reference.bcprov-jdk15on-${project.bcprovjdk15onVersion}.jar=lib\\bcprov-jdk15on-${project.bcprovjdk15onVersion}.jar
 file.reference.commons-beanutils-${project.commonsbeanutilsVersion}.jar=lib\\commons-beanutils-${project.commonsbeanutilsVersion}.jar
 file.reference.commons-collections-${project.commonscollectionsVersion}.jar=lib\\commons-collections-${project.commonscollectionsVersion}.jar
 file.reference.commons-digester-${project.commonsdigesterVersion}.jar=lib\\commons-digester-${project.commonsdigesterVersion}.jar
 file.reference.commons-lang-${project.commonslangVersion}.jar=lib\\commons-lang-${project.commonslangVersion}.jar
 file.reference.commons-lang3-${project.commonslang3Version}.jar=lib\\commons-lang3-${project.commonslang3Version}.jar
 file.reference.commons-logging-${project.commonsloggingVersion}.jar=lib\\commons-logging-${project.commonsloggingVersion}.jar
+file.reference.commons-codec-${project.commonscodecVersion}.jar=lib\\commons-codec-${project.commonscodecVersion}.jar
 file.reference.dynamicreports-core-${project.version}.jar=lib\\dynamicreports-core-${project.version}.jar
 file.reference.dynamicreports-adhoc-${project.version}.jar=lib\\dynamicreports-adhoc-${project.version}.jar
 file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
-file.reference.itext-${project.itextVersion}.jar=lib\\itext-${project.itextVersion}.jar
+file.reference.itextpdf-${project.itextpdfVersion}.jar=lib\\itextpdf-${project.itextpdfVersion}.jar
 file.reference.jasperreports-${project.jasperreportsVersion}.jar=lib\\jasperreports-${project.jasperreportsVersion}.jar
 file.reference.jcommon-${project.jcommonVersion}.jar=lib\\jcommon-${project.jcommonVersion}.jar
-file.reference.jdtcore-${project.jdtcoreVersion}.jar=lib\\jdtcore-${project.jdtcoreVersion}.jar
+file.reference.ecj-${project.ecjVersion}.jar=lib\\ecj-${project.ecjVersion}.jar
 file.reference.jfreechart-${project.jfreechartVersion}.jar=lib\\jfreechart-${project.jfreechartVersion}.jar
 file.reference.jxl-${project.jxlVersion}.jar=lib\\jxl-${project.jxlVersion}.jar
 file.reference.jackson-core-${project.jacksonVersion}.jar=lib\\jackson-core-${project.jacksonVersion}.jar
@@ -88,20 +89,21 @@ javac.classpath=\
     ${r"${"}file.reference.batik-svg-dom-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-util-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-xml-${project.batikbridgeVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.bcprov-jdk14-${project.bcprovjdk14Version}.jar${r"}"}:\
+    ${r"${"}file.reference.bcprov-jdk15on-${project.bcprovjdk15onVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-beanutils-${project.commonsbeanutilsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-collections-${project.commonscollectionsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-digester-${project.commonsdigesterVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-lang-${project.commonslangVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-lang3-${project.commonslang3Version}.jar${r"}"}:\
     ${r"${"}file.reference.commons-logging-${project.commonsloggingVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.commons-codec-${project.commonscodecVersion}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-core-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-adhoc-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
-    ${r"${"}file.reference.itext-${project.itextVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.itextpdf-${project.itextpdfVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jasperreports-${project.jasperreportsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jcommon-${project.jcommonVersion}.jar${r"}"}:\
-    ${r"${"}file.reference.jdtcore-${project.jdtcoreVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.ecj-${project.ecjVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jfreechart-${project.jfreechartVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jxl-${project.jxlVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jackson-core-${project.jacksonVersion}.jar${r"}"}:\

@@ -25,17 +25,18 @@
 	<classpathentry kind="lib" path="lib/batik-svg-dom-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-util-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-xml-${project.batikbridgeVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-jdk14-${project.bcprovjdk14Version}.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk15on-${project.bcprovjdk15onVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-${project.commonsbeanutilsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-${project.commonscollectionsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-${project.commonsdigesterVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-${project.commonslangVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-${project.commonslang3Version}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-${project.commonsloggingVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/itext-${project.itextVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-${project.commonscodecVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-${project.itextpdfVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-${project.jasperreportsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-${project.jcommonVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/jdtcore-${project.jdtcoreVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/ecj-${project.ecjVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-${project.jfreechartVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jxl-${project.jxlVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-${project.jacksonVersion}.jar"/>

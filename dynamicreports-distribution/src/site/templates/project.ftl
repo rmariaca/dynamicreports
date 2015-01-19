@@ -6,6 +6,7 @@
 	<commonsloggingVersion>${project.commonsloggingVersion}</commonsloggingVersion>
 	<commonscollectionsVersion>${project.commonscollectionsVersion}</commonscollectionsVersion>
 	<commonsdigesterVersion>${project.commonsdigesterVersion}</commonsdigesterVersion>
+	<commonscodecVersion>${project.commonscodecVersion}</commonscodecVersion>
 	<xmlapisVersion>${project.xmlapisVersion}</xmlapisVersion>
 	<ecjVersion>${project.ecjVersion}</ecjVersion>
 	<jfreechartVersion>${project.jfreechartVersion}</jfreechartVersion>
@@ -22,7 +23,7 @@
 	<itextpdfVersion>${project.itextpdfVersion}</itextpdfVersion>
 	<jxlVersion>${project.jxlVersion}</jxlVersion>
 	<poiVersion>${project.poiVersion}</poiVersion>
-	<bcprovjdk14Version>${project.bcprovjdk14Version}</bcprovjdk14Version>
+	<bcprovjdk15onVersion>${project.bcprovjdk15onVersion}</bcprovjdk15onVersion>
 	<springframeworkVersion>${project.springframeworkVersion}</springframeworkVersion>
 	<hsqldbVersion>${project.hsqldbVersion}</hsqldbVersion>
 	<xalanVersion>${project.xalanVersion}</xalanVersion>

@@ -39,13 +39,14 @@ public class Project {
 	private String barcode4jVersion;
 	private String barbecueVersion;
 	private String batikbridgeVersion;
-	private String bcprovjdk14Version;
+	private String bcprovjdk15onVersion;
 	private String commonsbeanutilsVersion;
 	private String commonscollectionsVersion;
 	private String commonsdigesterVersion;
 	private String commonslangVersion;
 	private String commonslang3Version;
 	private String commonsloggingVersion;
+	private String commonscodecVersion;
 	private String itextpdfVersion;
 	private String jasperreportsVersion;
 	private String jcommonVersion;
@@ -78,13 +79,14 @@ public class Project {
 		barcode4jVersion = properties.getProperty("barcode4jVersion");
 		barbecueVersion = properties.getProperty("barbecueVersion");
 		batikbridgeVersion = properties.getProperty("batikbridgeVersion");
-		bcprovjdk14Version = properties.getProperty("bcprovjdk14Version");
+		bcprovjdk15onVersion = properties.getProperty("bcprovjdk15onVersion");
 		commonsbeanutilsVersion = properties.getProperty("commonsbeanutilsVersion");
 		commonscollectionsVersion = properties.getProperty("commonscollectionsVersion");
 		commonsdigesterVersion = properties.getProperty("commonsdigesterVersion");
 		commonslangVersion = properties.getProperty("commonslangVersion");
 		commonslang3Version = properties.getProperty("commonslang3Version");
 		commonsloggingVersion = properties.getProperty("commonsloggingVersion");
+		commonscodecVersion = properties.getProperty("commonscodecVersion");
 		itextpdfVersion = properties.getProperty("itextpdfVersion");
 		jasperreportsVersion = properties.getProperty("jasperreportsVersion");
 		jcommonVersion = properties.getProperty("jcommonVersion");
@@ -166,12 +168,12 @@ public class Project {
 		this.batikbridgeVersion = batikbridgeVersion;
 	}
 
-	public String getBcprovjdk14Version() {
-		return bcprovjdk14Version;
+	public String getBcprovjdk15onVersion() {
+		return bcprovjdk15onVersion;
 	}
 
-	public void setBcprovjdk14Version(String bcprovjdk14Version) {
-		this.bcprovjdk14Version = bcprovjdk14Version;
+	public void setBcprovjdk15onVersion(String bcprovjdk15onVersion) {
+		this.bcprovjdk15onVersion = bcprovjdk15onVersion;
 	}
 
 	public String getCommonsbeanutilsVersion() {
@@ -220,6 +222,14 @@ public class Project {
 
 	public void setCommonsloggingVersion(String commonsloggingVersion) {
 		this.commonsloggingVersion = commonsloggingVersion;
+	}
+
+	public String getCommonscodecVersion() {
+		return commonscodecVersion;
+	}
+
+	public void setCommonscodecVersion(String commonscodecVersion) {
+		this.commonscodecVersion = commonscodecVersion;
 	}
 
 	public String getItextpdfVersion() {
