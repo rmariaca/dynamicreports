@@ -17,13 +17,13 @@
 
 	<properties>
 		<aspectjVersion>1.6.3</aspectjVersion>
-		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>
-		<bcprovjdk14Version>138</bcprovjdk14Version>
+		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>		
 		<commonsbeanutilsVersion>1.9.0</commonsbeanutilsVersion>
 		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
 		<commonsdigesterVersion>2.1</commonsdigesterVersion>
 		<commonsloggingVersion>1.1.1</commonsloggingVersion>
 		<commonslangVersion>2.5</commonslangVersion>
+		<commonscodecVersion>1.5</commonscodecVersion>
 		<itextpdfVersion>5.5.0</itextpdfVersion>
 		<jcommonVersion>1.0.15</jcommonVersion>
 		<ecjVersion>4.3.1</ecjVersion>

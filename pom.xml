@@ -56,6 +56,7 @@
 		<barbecueVersion>1.5-beta1</barbecueVersion>
 		<batikbridgeVersion>1.7</batikbridgeVersion>
 		<springframeworkVersion>2.5</springframeworkVersion>
+		<bcprovjdk15onVersion>1.49</bcprovjdk15onVersion>
 		<poiVersion>3.10.1</poiVersion>
 		<jxlVersion>2.6.10</jxlVersion>
 		<junitVersion>4.0</junitVersion>
@@ -74,12 +75,16 @@
 				<version>${jasperreportsVersion}</version>
 				<exclusions>
 					<exclusion>
-						<groupId>bouncycastle</groupId>
-						<artifactId>bcmail-jdk14</artifactId>
+						<groupId>org.apache.lucene</groupId>
+						<artifactId>lucene-core</artifactId>
 					</exclusion>
-					<exclusion>
-						<groupId>bouncycastle</groupId>
-						<artifactId>bctsp-jdk14</artifactId>
+						<exclusion>
+						<groupId>org.apache.lucene</groupId>
+						<artifactId>lucene-analyzers-common</artifactId>
+					</exclusion>
+						<exclusion>
+						<groupId>org.apache.lucene</groupId>
+						<artifactId>lucene-queryparser</artifactId>
 					</exclusion>	
 					<exclusion>
 						<groupId>org.olap4j</groupId>
@@ -130,6 +135,13 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>${springframeworkVersion}</version>
+				<scope>runtime</scope>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<version>${bcprovjdk15onVersion}</version>
 				<scope>runtime</scope>
 				<optional>true</optional>
 			</dependency>				  
