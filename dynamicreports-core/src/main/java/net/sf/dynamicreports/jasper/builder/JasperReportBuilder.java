@@ -428,20 +428,20 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		int pages = toPage - fromPage;
 
 		int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
+		int pageHeight = (int) (jasperPrint.getPageHeight() * zoom);
 		int width = pageWidth * pages + (pages - 1) + offsetX * 2;
 		int height = (int) (jasperPrint.getPageHeight() * zoom) + offsetY * 2;
-		Image pageImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 		int offset = offsetX;
 		for (int i = 0; i < pages; i++) {
 			try {
 				SimpleExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
 				SimpleGraphics2DExporterOutput exporterOutput = new SimpleGraphics2DExporterOutput();
+				Image pageImage = new BufferedImage(pageWidth, pageHeight, BufferedImage.TYPE_INT_RGB);
 				exporterOutput.setGraphics2D((Graphics2D) pageImage.getGraphics());
 				SimpleGraphics2DReportConfiguration reportExportConfiguration = new SimpleGraphics2DReportConfiguration();
 				reportExportConfiguration.setPageIndex(fromPage);
-				reportExportConfiguration.setOffsetX(offset);
-				reportExportConfiguration.setOffsetY(offsetY);
 				reportExportConfiguration.setZoomRatio(zoom);
 				SimpleGraphics2DExporterConfiguration exporterConfiguration = new SimpleGraphics2DExporterConfiguration();
 
@@ -452,6 +452,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 				jrExporter.setConfiguration(exporterConfiguration);
 
 				jrExporter.exportReport();
+				((Graphics2D) image.getGraphics()).drawImage(pageImage, offset, offsetY, null);
 				fromPage++;
 				offset += pageWidth + pageGap;
 			} catch (JRException e) {
@@ -460,13 +461,13 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		try {
 			if (imageExporter.getOutputStream() != null) {
-				ImageIO.write((RenderedImage) pageImage, imageType, imageExporter.getOutputStream());
+				ImageIO.write((RenderedImage) image, imageType, imageExporter.getOutputStream());
 			}
 			else if (imageExporter.getOutputFileName() != null) {
-				ImageIO.write((RenderedImage) pageImage, imageType, new File(imageExporter.getOutputFileName()));
+				ImageIO.write((RenderedImage) image, imageType, new File(imageExporter.getOutputFileName()));
 			}
 			else if (imageExporter.getOutputFile() != null) {
-				ImageIO.write((RenderedImage) pageImage, imageType, imageExporter.getOutputFile());
+				ImageIO.write((RenderedImage) image, imageType, imageExporter.getOutputFile());
 			}
 			else {
 				throw new JasperDesignException("ImageExporter output not supported");

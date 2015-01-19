@@ -113,23 +113,23 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 			}
 		}
 
-		Image pageImage = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2d = (Graphics2D) pageImage.getGraphics();
+		Image image = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = (Graphics2D) image.getGraphics();
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.fill(new Rectangle2D.Float(1, 1, maxWidth - 1, maxHeight - 1));
 
 		int offset = 1;
 		for (JasperPrint jasperPrint : jasperReportHandler.getPrintList()) {
 			int pageWidth = (int) (jasperPrint.getPageWidth() * zoom);
+			int pageHeight = (int) (jasperPrint.getPageHeight() * zoom);
 			for (int i = 0; i < jasperPrint.getPages().size(); i++) {
 				try {
 					SimpleExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
 					SimpleGraphics2DExporterOutput exporterOutput = new SimpleGraphics2DExporterOutput();
+					Image pageImage = new BufferedImage(pageWidth, pageHeight, BufferedImage.TYPE_INT_RGB);
 					exporterOutput.setGraphics2D((Graphics2D) pageImage.getGraphics());
 					SimpleGraphics2DReportConfiguration reportExportConfiguration = new SimpleGraphics2DReportConfiguration();
 					reportExportConfiguration.setPageIndex(i);
-					reportExportConfiguration.setOffsetX(offset);
-					reportExportConfiguration.setOffsetY(1);
 					reportExportConfiguration.setZoomRatio(zoom);
 					SimpleGraphics2DExporterConfiguration exporterConfiguration = new SimpleGraphics2DExporterConfiguration();
 
@@ -140,6 +140,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 					jrExporter.setConfiguration(exporterConfiguration);
 
 					jrExporter.exportReport();
+					((Graphics2D) image.getGraphics()).drawImage(pageImage, offset, 1, null);
 					offset += pageWidth + 1;
 				} catch (JRException e) {
 					throw new DRException(e);
@@ -147,7 +148,7 @@ public class JasperConcatenatedReportBuilder implements Serializable {
 			}
 		}
 		try {
-			ImageIO.write((RenderedImage) pageImage, "png", outputStream);
+			ImageIO.write((RenderedImage) image, "png", outputStream);
 		} catch (IOException e) {
 			throw new DRException(e);
 		}
