@@ -52,6 +52,7 @@ file.reference.dynamicreports-core-${project.version}.jar=lib\\dynamicreports-co
 file.reference.dynamicreports-adhoc-${project.version}.jar=lib\\dynamicreports-adhoc-${project.version}.jar
 file.reference.dynamicreports-googlecharts-${project.version}.jar=lib\\dynamicreports-googlecharts-${project.version}.jar
 file.reference.itextpdf-${project.itextpdfVersion}.jar=lib\\itextpdf-${project.itextpdfVersion}.jar
+file.reference.itext-pdfa-${project.itextpdfVersion}.jar=lib\\itext-pdfa-${project.itextpdfVersion}.jar
 file.reference.jasperreports-${project.jasperreportsVersion}.jar=lib\\jasperreports-${project.jasperreportsVersion}.jar
 file.reference.jcommon-${project.jcommonVersion}.jar=lib\\jcommon-${project.jcommonVersion}.jar
 file.reference.ecj-${project.ecjVersion}.jar=lib\\ecj-${project.ecjVersion}.jar
@@ -101,6 +102,7 @@ javac.classpath=\
     ${r"${"}file.reference.dynamicreports-adhoc-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.dynamicreports-googlecharts-${project.version}.jar${r"}"}:\
     ${r"${"}file.reference.itextpdf-${project.itextpdfVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.itext-pdfa-${project.itextpdfVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jasperreports-${project.jasperreportsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.jcommon-${project.jcommonVersion}.jar${r"}"}:\
     ${r"${"}file.reference.ecj-${project.ecjVersion}.jar${r"}"}:\
