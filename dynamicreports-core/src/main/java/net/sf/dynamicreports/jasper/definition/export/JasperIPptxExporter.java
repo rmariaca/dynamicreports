@@ -27,4 +27,6 @@ package net.sf.dynamicreports.jasper.definition.export;
  */
 public interface JasperIPptxExporter extends JasperIExporter {
 
+	public Boolean getIgnoreHyperLink();
+
 }

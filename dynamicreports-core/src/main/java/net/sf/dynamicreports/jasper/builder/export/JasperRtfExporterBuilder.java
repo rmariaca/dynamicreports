@@ -34,4 +34,9 @@ public class JasperRtfExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 	protected JasperRtfExporterBuilder() {
 		super(new JasperRtfExporter());
 	}
+
+	public JasperRtfExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
 }

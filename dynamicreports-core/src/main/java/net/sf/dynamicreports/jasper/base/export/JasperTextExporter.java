@@ -37,6 +37,7 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 	private Integer pageHeightInChars;
 	private String pageSeparator;
 	private String lineSeparator;
+	private Boolean trimLineRight;
 
 	@Override
 	public Float getCharacterWidth() {
@@ -91,4 +92,14 @@ public class JasperTextExporter extends AbstractJasperExporter implements Jasper
 	public void setLineSeparator(String lineSeparator) {
 		this.lineSeparator = lineSeparator;
 	}
+
+	@Override
+	public Boolean getTrimLineRight() {
+		return trimLineRight;
+	}
+
+	public void setTrimLineRight(Boolean trimLineRight) {
+		this.trimLineRight = trimLineRight;
+	}
+
 }

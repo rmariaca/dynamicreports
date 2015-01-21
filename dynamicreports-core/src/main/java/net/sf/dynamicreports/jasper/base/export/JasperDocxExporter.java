@@ -28,27 +28,38 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperDocxExporter extends AbstractJasperExporter implements JasperIDocxExporter {	
+public class JasperDocxExporter extends AbstractJasperExporter implements JasperIDocxExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Boolean framesAsNestedTables;
 	private Boolean flexibleRowHeight;
-	
+	private Boolean ignoreHyperLink;
+
 	@Override
 	public Boolean getFramesAsNestedTables() {
 		return framesAsNestedTables;
 	}
-	
+
 	public void setFramesAsNestedTables(Boolean framesAsNestedTables) {
 		this.framesAsNestedTables = framesAsNestedTables;
 	}
-	
+
 	@Override
 	public Boolean getFlexibleRowHeight() {
 		return flexibleRowHeight;
 	}
-	
+
 	public void setFlexibleRowHeight(Boolean flexibleRowHeight) {
 		this.flexibleRowHeight = flexibleRowHeight;
-	}	
+	}
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
+
 }

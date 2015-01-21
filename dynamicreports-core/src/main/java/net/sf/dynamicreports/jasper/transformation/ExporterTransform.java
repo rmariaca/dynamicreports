@@ -59,6 +59,8 @@ import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.export.AbstractXlsExporterConfiguration;
+import net.sf.jasperreports.export.AbstractXlsReportConfiguration;
 import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleCsvExporterConfiguration;
 import net.sf.jasperreports.export.SimpleCsvReportConfiguration;
@@ -296,6 +298,9 @@ public class ExporterTransform {
 		SimpleOutputStreamExporterOutput exporterOutput = simpleOutputStreamExporterOutput(jasperExporter);
 		SimplePptxReportConfiguration reportExportConfiguration = new SimplePptxReportConfiguration();
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
 		SimplePptxExporterConfiguration exporterConfiguration = new SimplePptxExporterConfiguration();
 
 		JRPptxExporter jrExporter = new JRPptxExporter();
@@ -336,6 +341,9 @@ public class ExporterTransform {
 		if (jasperExporter.getLineSeparator() != null) {
 			exporterConfiguration.setLineSeparator(jasperExporter.getLineSeparator());
 		}
+		if (jasperExporter.getTrimLineRight() != null) {
+			exporterConfiguration.setTrimLineRight(jasperExporter.getTrimLineRight());
+		}
 
 		JRTextExporter jrExporter = new JRTextExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -348,6 +356,9 @@ public class ExporterTransform {
 		SimpleWriterExporterOutput exporterOutput = simpleWriterExporterOutput(jasperExporter);
 		SimpleRtfReportConfiguration reportExportConfiguration = new SimpleRtfReportConfiguration();
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
 		SimpleRtfExporterConfiguration exporterConfiguration = new SimpleRtfExporterConfiguration();
 
 		JRRtfExporter jrExporter = new JRRtfExporter();
@@ -363,6 +374,18 @@ public class ExporterTransform {
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
 		if (jasperExporter.getForceSvgShapes() != null) {
 			reportExportConfiguration.setForceSvgShapes(jasperExporter.getForceSvgShapes());
+		}
+		if (jasperExporter.getCollapseMissingBookmarkLevels() != null) {
+			reportExportConfiguration.setCollapseMissingBookmarkLevels(jasperExporter.getCollapseMissingBookmarkLevels());
+		}
+		if (jasperExporter.getSizePageToContent() != null) {
+			reportExportConfiguration.setSizePageToContent(jasperExporter.getSizePageToContent());
+		}
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
+		if (jasperExporter.getForceLineBreakPolicy() != null) {
+			reportExportConfiguration.setForceLineBreakPolicy(jasperExporter.getForceLineBreakPolicy());
 		}
 		SimplePdfExporterConfiguration exporterConfiguration = new SimplePdfExporterConfiguration();
 		if (jasperExporter.getCreatingBatchModeBookmarks() != null) {
@@ -413,6 +436,24 @@ public class ExporterTransform {
 		if (jasperExporter.getTagLanguage() != null) {
 			exporterConfiguration.setTagLanguage(jasperExporter.getTagLanguage());
 		}
+		if (jasperExporter.getPrintScaling() != null) {
+			exporterConfiguration.setPrintScaling(ConstantTransform.pdfPrintScaling(jasperExporter.getPrintScaling()));
+		}
+		if (jasperExporter.getPdfaConformance() != null) {
+			exporterConfiguration.setPdfaConformance(ConstantTransform.pdfaConformance(jasperExporter.getPdfaConformance()));
+		}
+		if (jasperExporter.getIccProfilePath() != null) {
+			exporterConfiguration.setIccProfilePath(jasperExporter.getIccProfilePath());
+		}
+		if (jasperExporter.getAllowedPermissionsHint() != null) {
+			exporterConfiguration.setAllowedPermissionsHint(jasperExporter.getAllowedPermissionsHint());
+		}
+		if (jasperExporter.getDeniedPermissionsHint() != null) {
+			exporterConfiguration.setDeniedPermissionsHint(jasperExporter.getDeniedPermissionsHint());
+		}
+		if (jasperExporter.getDisplayMetadataTitle() != null) {
+			exporterConfiguration.setDisplayMetadataTitle(jasperExporter.getDisplayMetadataTitle());
+		}
 
 		JRPdfExporter jrExporter = new JRPdfExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -425,6 +466,12 @@ public class ExporterTransform {
 		SimpleOutputStreamExporterOutput exporterOutput = simpleOutputStreamExporterOutput(jasperExporter);
 		SimpleOdtReportConfiguration reportExportConfiguration = new SimpleOdtReportConfiguration();
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
+		if (jasperExporter.getFlexibleRowHeight() != null) {
+			reportExportConfiguration.setFlexibleRowHeight(jasperExporter.getFlexibleRowHeight());
+		}
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
 		SimpleOdtExporterConfiguration exporterConfiguration = new SimpleOdtExporterConfiguration();
 
 		JROdtExporter jrExporter = new JROdtExporter();
@@ -437,8 +484,12 @@ public class ExporterTransform {
 	private JROdsExporter ods(JasperIOdsExporter jasperExporter) {
 		SimpleOutputStreamExporterOutput exporterOutput = simpleOutputStreamExporterOutput(jasperExporter);
 		SimpleOdsReportConfiguration reportExportConfiguration = new SimpleOdsReportConfiguration();
-		reportExportConfiguration(reportExportConfiguration, jasperExporter);
+		reportExcelExportConfiguration(reportExportConfiguration, jasperExporter);
+		if (jasperExporter.getFlexibleRowHeight() != null) {
+			reportExportConfiguration.setFlexibleRowHeight(jasperExporter.getFlexibleRowHeight());
+		}
 		SimpleOdsExporterConfiguration exporterConfiguration = new SimpleOdsExporterConfiguration();
+		reportExcelExporterConfiguration(exporterConfiguration, jasperExporter);
 
 		JROdsExporter jrExporter = new JROdsExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -485,6 +536,18 @@ public class ExporterTransform {
 		if (jasperExporter.getIgnorePageMargins() != null) {
 			reportExportConfiguration.setIgnorePageMargins(jasperExporter.getIgnorePageMargins());
 		}
+		if (jasperExporter.getBorderCollapse() != null) {
+			reportExportConfiguration.setBorderCollapse(jasperExporter.getBorderCollapse());
+		}
+		if (jasperExporter.getAccessibleHtml() != null) {
+			reportExportConfiguration.setAccessibleHtml(jasperExporter.getAccessibleHtml());
+		}
+		if (jasperExporter.getZoomRatio() != null) {
+			reportExportConfiguration.setZoomRatio(jasperExporter.getZoomRatio());
+		}
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
 		SimpleHtmlExporterConfiguration exporterConfiguration = new SimpleHtmlExporterConfiguration();
 		if (jasperExporter.getHtmlHeader() != null) {
 			exporterConfiguration.setHtmlHeader(jasperExporter.getHtmlHeader());
@@ -494,6 +557,9 @@ public class ExporterTransform {
 		}
 		if (jasperExporter.getHtmlFooter() != null) {
 			exporterConfiguration.setHtmlFooter(jasperExporter.getHtmlFooter());
+		}
+		if (jasperExporter.getFlushOutput() != null) {
+			exporterConfiguration.setFlushOutput(jasperExporter.getFlushOutput());
 		}
 
 		HtmlExporter jrExporter = new HtmlExporter();
@@ -556,7 +622,7 @@ public class ExporterTransform {
 		return jrExporter;
 	}
 
-	private void reportExcelExportConfiguration(SimpleXlsReportConfiguration reportExportConfiguration, JasperIExcelExporter jasperExporter) {
+	private void reportExcelExportConfiguration(AbstractXlsReportConfiguration reportExportConfiguration, JasperIExcelExporter jasperExporter) {
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
 		if (jasperExporter.getOnePagePerSheet() != null) {
 			reportExportConfiguration.setOnePagePerSheet(jasperExporter.getOnePagePerSheet());
@@ -604,6 +670,81 @@ public class ExporterTransform {
 		if (jasperExporter.getIgnorePageMargins() != null) {
 			reportExportConfiguration.setIgnorePageMargins(jasperExporter.getIgnorePageMargins());
 		}
+		if (jasperExporter.getWrapText() != null) {
+			reportExportConfiguration.setWrapText(jasperExporter.getWrapText());
+		}
+		if (jasperExporter.getCellLocked() != null) {
+			reportExportConfiguration.setCellLocked(jasperExporter.getCellLocked());
+		}
+		if (jasperExporter.getCellHidden() != null) {
+			reportExportConfiguration.setCellHidden(jasperExporter.getCellHidden());
+		}
+		if (jasperExporter.getSheetHeaderLeft() != null) {
+			reportExportConfiguration.setSheetHeaderLeft(jasperExporter.getSheetHeaderLeft());
+		}
+		if (jasperExporter.getSheetHeaderCenter() != null) {
+			reportExportConfiguration.setSheetHeaderCenter(jasperExporter.getSheetHeaderCenter());
+		}
+		if (jasperExporter.getSheetHeaderRight() != null) {
+			reportExportConfiguration.setSheetHeaderRight(jasperExporter.getSheetHeaderRight());
+		}
+		if (jasperExporter.getSheetFooterLeft() != null) {
+			reportExportConfiguration.setSheetFooterLeft(jasperExporter.getSheetFooterLeft());
+		}
+		if (jasperExporter.getSheetFooterCenter() != null) {
+			reportExportConfiguration.setSheetFooterCenter(jasperExporter.getSheetFooterCenter());
+		}
+		if (jasperExporter.getSheetFooterRight() != null) {
+			reportExportConfiguration.setSheetFooterRight(jasperExporter.getSheetFooterRight());
+		}
+		if (jasperExporter.getFormatPatternsMap() != null) {
+			reportExportConfiguration.setFormatPatternsMap(jasperExporter.getFormatPatternsMap());
+		}
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
+		}
+		if (jasperExporter.getIgnoreAnchors() != null) {
+			reportExportConfiguration.setIgnoreAnchors(jasperExporter.getIgnoreAnchors());
+		}
+		if (jasperExporter.getFitWidth() != null) {
+			reportExportConfiguration.setFitWidth(jasperExporter.getFitWidth());
+		}
+		if (jasperExporter.getFitHeight() != null) {
+			reportExportConfiguration.setFitHeight(jasperExporter.getFitHeight());
+		}
+		if (jasperExporter.getPageScale() != null) {
+			reportExportConfiguration.setPageScale(jasperExporter.getPageScale());
+		}
+		if (jasperExporter.getSheetDirection() != null) {
+			reportExportConfiguration.setSheetDirection(ConstantTransform.runDirection(jasperExporter.getSheetDirection()));
+		}
+		if (jasperExporter.getColumnWidthRatio() != null) {
+			reportExportConfiguration.setColumnWidthRatio(jasperExporter.getColumnWidthRatio());
+		}
+		if (jasperExporter.getUseTimeZone() != null) {
+			reportExportConfiguration.setUseTimeZone(jasperExporter.getUseTimeZone());
+		}
+		if (jasperExporter.getFirstPageNumber() != null) {
+			reportExportConfiguration.setFirstPageNumber(jasperExporter.getFirstPageNumber());
+		}
+		if (jasperExporter.getShowGridLines() != null) {
+			reportExportConfiguration.setShowGridLines(jasperExporter.getShowGridLines());
+		}
+		if (jasperExporter.getImageAnchorType() != null) {
+			reportExportConfiguration.setImageAnchorType(ConstantTransform.imageAnchorType(jasperExporter.getImageAnchorType()));
+		}
+	}
+
+	private void reportExcelExporterConfiguration(AbstractXlsExporterConfiguration exporterConfiguration, JasperIExcelExporter jasperExporter) {
+		if (jasperExporter.getCreateCustomPalette() != null) {
+			exporterConfiguration.setCreateCustomPalette(jasperExporter.getCreateCustomPalette());
+		}
+		if (jasperExporter.getWorkbookTemplate() != null) {
+			exporterConfiguration.setWorkbookTemplate(jasperExporter.getWorkbookTemplate());
+		}
+		if (jasperExporter.getKeepWorkbookTemplateSheets() != null) {
+			exporterConfiguration.setKeepWorkbookTemplateSheets(jasperExporter.getKeepWorkbookTemplateSheets());
+		}
 	}
 
 	private JRXlsxExporter xlsx(JasperIXlsxExporter jasperExporter) {
@@ -611,6 +752,10 @@ public class ExporterTransform {
 		SimpleXlsxReportConfiguration reportExportConfiguration = new SimpleXlsxReportConfiguration();
 		reportExcelExportConfiguration(reportExportConfiguration, jasperExporter);
 		SimpleXlsxExporterConfiguration exporterConfiguration = new SimpleXlsxExporterConfiguration();
+		reportExcelExporterConfiguration(exporterConfiguration, jasperExporter);
+		if (jasperExporter.getMacroTemplate() != null) {
+			exporterConfiguration.setMacroTemplate(jasperExporter.getMacroTemplate());
+		}
 
 		JRXlsxExporter jrExporter = new JRXlsxExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -624,6 +769,7 @@ public class ExporterTransform {
 		SimpleXlsReportConfiguration reportExportConfiguration = new SimpleXlsReportConfiguration();
 		reportExcelExportConfiguration(reportExportConfiguration, jasperExporter);
 		SimpleXlsExporterConfiguration exporterConfiguration = new SimpleXlsExporterConfiguration();
+		reportExcelExporterConfiguration(exporterConfiguration, jasperExporter);
 
 		JRXlsExporter jrExporter = new JRXlsExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -638,6 +784,7 @@ public class ExporterTransform {
 		net.sf.jasperreports.export.SimpleJxlReportConfiguration reportExportConfiguration = new net.sf.jasperreports.export.SimpleJxlReportConfiguration();
 		reportExportConfiguration(reportExportConfiguration, jasperExporter);
 		net.sf.jasperreports.export.SimpleJxlExporterConfiguration exporterConfiguration = new net.sf.jasperreports.export.SimpleJxlExporterConfiguration();
+		reportExcelExporterConfiguration(exporterConfiguration, jasperExporter);
 
 		net.sf.jasperreports.engine.export.JExcelApiExporter jrExporter = new net.sf.jasperreports.engine.export.JExcelApiExporter();
 		jrExporter.setExporterOutput(exporterOutput);
@@ -655,6 +802,9 @@ public class ExporterTransform {
 		}
 		if (jasperExporter.getFlexibleRowHeight() != null) {
 			reportExportConfiguration.setFlexibleRowHeight(jasperExporter.getFlexibleRowHeight());
+		}
+		if (jasperExporter.getIgnoreHyperLink() != null) {
+			reportExportConfiguration.setIgnoreHyperlink(jasperExporter.getIgnoreHyperLink());
 		}
 		SimpleDocxExporterConfiguration exporterConfiguration = new SimpleDocxExporterConfiguration();
 

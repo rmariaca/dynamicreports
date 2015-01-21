@@ -22,8 +22,12 @@
 
 package net.sf.dynamicreports.jasper.builder.export;
 
+import java.util.Map;
+
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExcelExporter;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.ImageAnchorType;
+import net.sf.dynamicreports.report.constant.RunDirection;
 
 import org.apache.commons.lang3.Validate;
 
@@ -118,6 +122,126 @@ public abstract class AbstractJasperExcelExporterBuilder<T extends AbstractJaspe
 
 	public T setIgnorePageMargins(Boolean ignorePageMargins) {
 		this.getObject().setIgnorePageMargins(ignorePageMargins);
+		return (T) this;
+	}
+
+	public T setWrapText(Boolean wrapText) {
+		this.getObject().setWrapText(wrapText);
+		return (T) this;
+	}
+
+	public T setCellLocked(Boolean cellLocked) {
+		this.getObject().setCellLocked(cellLocked);
+		return (T) this;
+	}
+
+	public T setCellHidden(Boolean cellHidden) {
+		this.getObject().setCellHidden(cellHidden);
+		return (T) this;
+	}
+
+	public T setSheetHeaderLeft(String sheetHeaderLeft) {
+		this.getObject().setSheetHeaderLeft(sheetHeaderLeft);
+		return (T) this;
+	}
+
+	public T setSheetHeaderCenter(String sheetHeaderCenter) {
+		this.getObject().setSheetHeaderCenter(sheetHeaderCenter);
+		return (T) this;
+	}
+
+	public T setSheetHeaderRight(String sheetHeaderRight) {
+		this.getObject().setSheetHeaderRight(sheetHeaderRight);
+		return (T) this;
+	}
+
+	public T setSheetFooterLeft(String sheetFooterLeft) {
+		this.getObject().setSheetFooterLeft(sheetFooterLeft);
+		return (T) this;
+	}
+
+	public T setSheetFooterCenter(String sheetFooterCenter) {
+		this.getObject().setSheetFooterCenter(sheetFooterCenter);
+		return (T) this;
+	}
+
+	public T setSheetFooterRight(String sheetFooterRight) {
+		this.getObject().setSheetFooterRight(sheetFooterRight);
+		return (T) this;
+	}
+
+	public T setFormatPatternsMap(Map<String, String> formatPatternsMap) {
+		this.getObject().setFormatPatternsMap(formatPatternsMap);
+		return (T) this;
+	}
+
+	public T setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return (T) this;
+	}
+
+	public T setIgnoreAnchors(Boolean ignoreAnchors) {
+		this.getObject().setIgnoreAnchors(ignoreAnchors);
+		return (T) this;
+	}
+
+	public T setFitWidth(Integer fitWidth) {
+		this.getObject().setFitWidth(fitWidth);
+		return (T) this;
+	}
+
+	public T setFitHeight(Integer fitHeight) {
+		this.getObject().setFitHeight(fitHeight);
+		return (T) this;
+	}
+
+	public T setPageScale(Integer pageScale) {
+		this.getObject().setPageScale(pageScale);
+		return (T) this;
+	}
+
+	public T setSheetDirection(RunDirection sheetDirection) {
+		this.getObject().setSheetDirection(sheetDirection);
+		return (T) this;
+	}
+
+	public T setColumnWidthRatio(Float columnWidthRatio) {
+		this.getObject().setColumnWidthRatio(columnWidthRatio);
+		return (T) this;
+	}
+
+	public T setUseTimeZone(Boolean useTimeZone) {
+		this.getObject().setUseTimeZone(useTimeZone);
+		return (T) this;
+	}
+
+	public T setFirstPageNumber(Integer firstPageNumber) {
+		this.getObject().setFirstPageNumber(firstPageNumber);
+		return (T) this;
+	}
+
+	public T setShowGridLines(Boolean showGridLines) {
+		this.getObject().setShowGridLines(showGridLines);
+		return (T) this;
+	}
+
+	public T setImageAnchorType(ImageAnchorType imageAnchorType) {
+		this.getObject().setImageAnchorType(imageAnchorType);
+		return (T) this;
+	}
+
+	public T setCreateCustomPalette(Boolean createCustomPalette) {
+		this.getObject().setCreateCustomPalette(createCustomPalette);
+		return (T) this;
+	}
+
+	public T setWorkbookTemplate(String workbookTemplate) {
+		this.getObject().setWorkbookTemplate(workbookTemplate);
+		return (T) this;
+	}
+
+	public T setKeepWorkbookTemplateSheets(Boolean keepWorkbookTemplateSheets) {
+		this.getObject().setKeepWorkbookTemplateSheets(keepWorkbookTemplateSheets);
 		return (T) this;
 	}
 }

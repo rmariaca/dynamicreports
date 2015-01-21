@@ -28,6 +28,27 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperOdtExporter extends AbstractJasperExporter implements JasperIOdtExporter {	
+public class JasperOdtExporter extends AbstractJasperExporter implements JasperIOdtExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private Boolean flexibleRowHeight;
+	private Boolean ignoreHyperLink;
+
+	@Override
+	public Boolean getFlexibleRowHeight() {
+		return flexibleRowHeight;
+	}
+
+	public void setFlexibleRowHeight(Boolean flexibleRowHeight) {
+		this.flexibleRowHeight = flexibleRowHeight;
+	}
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
 }

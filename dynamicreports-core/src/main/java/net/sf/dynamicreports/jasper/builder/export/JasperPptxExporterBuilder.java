@@ -34,4 +34,9 @@ public class JasperPptxExporterBuilder extends AbstractJasperExporterBuilder<Jas
 	protected JasperPptxExporterBuilder() {
 		super(new JasperPptxExporter());
 	}
+
+	public JasperPptxExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
 }

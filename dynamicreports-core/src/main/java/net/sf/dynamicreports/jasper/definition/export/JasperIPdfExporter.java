@@ -26,6 +26,8 @@ import java.util.List;
 
 import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
+import net.sf.dynamicreports.report.constant.PdfPrintScaling;
+import net.sf.dynamicreports.report.constant.PdfaConformance;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -65,4 +67,24 @@ public interface JasperIPdfExporter extends JasperIExporter {
 	public Boolean getTagged();
 
 	public String getTagLanguage();
+
+	public Boolean getCollapseMissingBookmarkLevels();
+
+	public Boolean getSizePageToContent();
+
+	public Boolean getIgnoreHyperLink();
+
+	public Boolean getForceLineBreakPolicy();
+
+	public PdfPrintScaling getPrintScaling();
+
+	public PdfaConformance getPdfaConformance();
+
+	public String getIccProfilePath();
+
+	public String getAllowedPermissionsHint();
+
+	public String getDeniedPermissionsHint();
+
+	public Boolean getDisplayMetadataTitle();
 }

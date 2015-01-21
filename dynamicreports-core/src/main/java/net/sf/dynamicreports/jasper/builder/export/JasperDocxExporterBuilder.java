@@ -44,4 +44,9 @@ public class JasperDocxExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		this.getObject().setFlexibleRowHeight(flexibleRowHeight);
 		return this;
 	}
+
+	public JasperDocxExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
 }

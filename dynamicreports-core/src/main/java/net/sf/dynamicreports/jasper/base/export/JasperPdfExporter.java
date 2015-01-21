@@ -29,6 +29,8 @@ import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.jasper.definition.export.JasperIPdfExporter;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.PdfPrintScaling;
+import net.sf.dynamicreports.report.constant.PdfaConformance;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -53,6 +55,16 @@ public class JasperPdfExporter extends AbstractJasperExporter implements JasperI
 	private String pdfJavaScript;
 	private Boolean tagged;
 	private String tagLanguage;
+	private Boolean collapseMissingBookmarkLevels;
+	private Boolean sizePageToContent;
+	private Boolean ignoreHyperLink;
+	private Boolean forceLineBreakPolicy;
+	private PdfPrintScaling printScaling;
+	private PdfaConformance pdfaConformance;
+	private String iccProfilePath;
+	private String allowedPermissionsHint;
+	private String deniedPermissionsHint;
+	private Boolean displayMetadataTitle;
 
 	public JasperPdfExporter() {
 		permissions = new ArrayList<PdfPermission>();
@@ -214,4 +226,95 @@ public class JasperPdfExporter extends AbstractJasperExporter implements JasperI
 	public void setTagLanguage(String tagLanguage) {
 		this.tagLanguage = tagLanguage;
 	}
+
+	@Override
+	public Boolean getCollapseMissingBookmarkLevels() {
+		return collapseMissingBookmarkLevels;
+	}
+
+	public void setCollapseMissingBookmarkLevels(Boolean collapseMissingBookmarkLevels) {
+		this.collapseMissingBookmarkLevels = collapseMissingBookmarkLevels;
+	}
+
+	@Override
+	public Boolean getSizePageToContent() {
+		return sizePageToContent;
+	}
+
+	public void setSizePageToContent(Boolean sizePageToContent) {
+		this.sizePageToContent = sizePageToContent;
+	}
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
+
+	@Override
+	public Boolean getForceLineBreakPolicy() {
+		return forceLineBreakPolicy;
+	}
+
+	public void setForceLineBreakPolicy(Boolean forceLineBreakPolicy) {
+		this.forceLineBreakPolicy = forceLineBreakPolicy;
+	}
+
+	@Override
+	public PdfPrintScaling getPrintScaling() {
+		return printScaling;
+	}
+
+	public void setPrintScaling(PdfPrintScaling printScaling) {
+		this.printScaling = printScaling;
+	}
+
+	@Override
+	public PdfaConformance getPdfaConformance() {
+		return pdfaConformance;
+	}
+
+	public void setPdfaConformance(PdfaConformance pdfaConformance) {
+		this.pdfaConformance = pdfaConformance;
+	}
+
+	@Override
+	public String getIccProfilePath() {
+		return iccProfilePath;
+	}
+
+	public void setIccProfilePath(String iccProfilePath) {
+		this.iccProfilePath = iccProfilePath;
+	}
+
+	@Override
+	public String getAllowedPermissionsHint() {
+		return allowedPermissionsHint;
+	}
+
+	public void setAllowedPermissionsHint(String allowedPermissionsHint) {
+		this.allowedPermissionsHint = allowedPermissionsHint;
+	}
+
+	@Override
+	public String getDeniedPermissionsHint() {
+		return deniedPermissionsHint;
+	}
+
+	public void setDeniedPermissionsHint(String deniedPermissionsHint) {
+		this.deniedPermissionsHint = deniedPermissionsHint;
+	}
+
+	@Override
+	public Boolean getDisplayMetadataTitle() {
+		return displayMetadataTitle;
+	}
+
+	public void setDisplayMetadataTitle(Boolean displayMetadataTitle) {
+		this.displayMetadataTitle = displayMetadataTitle;
+	}
+
 }

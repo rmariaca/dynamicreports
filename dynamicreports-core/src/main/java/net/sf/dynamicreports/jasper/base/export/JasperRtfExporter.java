@@ -28,6 +28,17 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperRtfExporter extends AbstractJasperExporter implements JasperIRtfExporter {	
+public class JasperRtfExporter extends AbstractJasperExporter implements JasperIRtfExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private Boolean ignoreHyperLink;
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
 }

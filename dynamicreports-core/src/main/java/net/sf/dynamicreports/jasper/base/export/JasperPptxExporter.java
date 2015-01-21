@@ -31,4 +31,15 @@ import net.sf.dynamicreports.report.constant.Constants;
 public class JasperPptxExporter extends AbstractJasperExporter implements JasperIPptxExporter {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	private Boolean ignoreHyperLink;
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
+
 }

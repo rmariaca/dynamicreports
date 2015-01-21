@@ -25,5 +25,7 @@ package net.sf.dynamicreports.jasper.definition.export;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface JasperIOdsExporter extends JasperIExporter {	
+public interface JasperIOdsExporter extends JasperIExcelExporter {
+
+	public Boolean getFlexibleRowHeight();
 }

@@ -34,4 +34,14 @@ public class JasperOdtExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 	protected JasperOdtExporterBuilder() {
 		super(new JasperOdtExporter());
 	}
+
+	public JasperOdtExporterBuilder setFlexibleRowHeight(Boolean flexibleRowHeight) {
+		this.getObject().setFlexibleRowHeight(flexibleRowHeight);
+		return this;
+	}
+
+	public JasperOdtExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
 }

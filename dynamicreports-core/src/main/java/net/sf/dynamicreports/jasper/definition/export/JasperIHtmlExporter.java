@@ -54,4 +54,14 @@ public interface JasperIHtmlExporter extends JasperIExporter {
 	public Boolean getFramesAsNestedTables();
 
 	public Boolean getIgnorePageMargins();
+
+	public String getBorderCollapse();
+
+	public Boolean getAccessibleHtml();
+
+	public Float getZoomRatio();
+
+	public Boolean getIgnoreHyperLink();
+
+	public Boolean getFlushOutput();
 }

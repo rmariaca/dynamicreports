@@ -26,8 +26,10 @@ package net.sf.dynamicreports.jasper.definition.export;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public interface JasperIDocxExporter extends JasperIExporter {
-	
+
 	public Boolean getFramesAsNestedTables();
-	
-	public Boolean getFlexibleRowHeight();	
+
+	public Boolean getFlexibleRowHeight();
+
+	public Boolean getIgnoreHyperLink();
 }

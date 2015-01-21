@@ -108,4 +108,29 @@ public class JasperHtmlExporterBuilder extends AbstractJasperExporterBuilder<Jas
 		this.getObject().setIgnorePageMargins(ignorePageMargins);
 		return this;
 	}
+
+	public JasperHtmlExporterBuilder setBorderCollapse(String borderCollapse) {
+		this.getObject().setBorderCollapse(borderCollapse);
+		return this;
+	}
+
+	public JasperHtmlExporterBuilder setAccessibleHtml(Boolean accessibleHtml) {
+		this.getObject().setAccessibleHtml(accessibleHtml);
+		return this;
+	}
+
+	public JasperHtmlExporterBuilder setZoomRatio(Float zoomRatio) {
+		this.getObject().setZoomRatio(zoomRatio);
+		return this;
+	}
+
+	public JasperHtmlExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
+
+	public JasperHtmlExporterBuilder setFlushOutput(Boolean flushOutput) {
+		this.getObject().setFlushOutput(flushOutput);
+		return this;
+	}
 }

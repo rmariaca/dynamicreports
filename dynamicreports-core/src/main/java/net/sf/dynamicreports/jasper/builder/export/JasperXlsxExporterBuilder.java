@@ -34,4 +34,10 @@ public class JasperXlsxExporterBuilder extends AbstractJasperExcelExporterBuilde
 	protected JasperXlsxExporterBuilder() {
 		super(new JasperXlsxExporter());
 	}
+
+	public JasperXlsxExporterBuilder setMacroTemplate(String macroTemplate) {
+		getObject().setMacroTemplate(macroTemplate);
+		return this;
+	}
+
 }

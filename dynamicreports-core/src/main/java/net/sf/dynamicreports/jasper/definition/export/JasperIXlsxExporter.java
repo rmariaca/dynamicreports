@@ -25,5 +25,7 @@ package net.sf.dynamicreports.jasper.definition.export;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface JasperIXlsxExporter extends JasperIExcelExporter {	
+public interface JasperIXlsxExporter extends JasperIExcelExporter {
+
+	public String getMacroTemplate();
 }

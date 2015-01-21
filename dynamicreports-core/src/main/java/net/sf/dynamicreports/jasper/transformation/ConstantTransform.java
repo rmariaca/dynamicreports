@@ -47,6 +47,7 @@ import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
+import net.sf.dynamicreports.report.constant.ImageAnchorType;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineDirection;
 import net.sf.dynamicreports.report.constant.LineSpacing;
@@ -56,6 +57,8 @@ import net.sf.dynamicreports.report.constant.MeterShape;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.PdfPrintScaling;
+import net.sf.dynamicreports.report.constant.PdfaConformance;
 import net.sf.dynamicreports.report.constant.Position;
 import net.sf.dynamicreports.report.constant.RectangleAnchor;
 import net.sf.dynamicreports.report.constant.Rotation;
@@ -84,6 +87,7 @@ import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabTotalPositionEnum;
 import net.sf.jasperreports.engine.analytics.dataset.BucketOrder;
 import net.sf.jasperreports.engine.design.JRDesignChart;
+import net.sf.jasperreports.engine.export.type.ImageAnchorTypeEnum;
 import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
@@ -109,7 +113,9 @@ import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 import net.sf.jasperreports.engine.type.WhenResourceMissingTypeEnum;
 import net.sf.jasperreports.export.type.HtmlSizeUnitEnum;
+import net.sf.jasperreports.export.type.PdfPrintScalingEnum;
 import net.sf.jasperreports.export.type.PdfVersionEnum;
+import net.sf.jasperreports.export.type.PdfaConformanceEnum;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.jfree.data.time.Day;
@@ -174,6 +180,23 @@ public class ConstantTransform {
 			return ScaleImageEnum.REAL_SIZE;
 		default:
 			throw new JasperDesignException("Image scale " + imageScale.name() + " not supported");
+		}
+	}
+
+	protected static ImageAnchorTypeEnum imageAnchorType(ImageAnchorType imageAnchorType) {
+		if (imageAnchorType == null) {
+			return null;
+		}
+
+		switch (imageAnchorType) {
+		case MOVE_SIZE:
+			return ImageAnchorTypeEnum.MOVE_SIZE;
+		case MOVE_NO_SIZE:
+			return ImageAnchorTypeEnum.MOVE_NO_SIZE;
+		case NO_MOVE_NO_SIZE:
+			return ImageAnchorTypeEnum.NO_MOVE_NO_SIZE;
+		default:
+			throw new JasperDesignException("Image anchor type " + imageAnchorType.name() + " not supported");
 		}
 	}
 
@@ -623,6 +646,30 @@ public class ConstantTransform {
 			}
 		}
 		return permission;
+	}
+
+	protected static PdfPrintScalingEnum pdfPrintScaling(PdfPrintScaling pdfPrintScaling) {
+		switch (pdfPrintScaling) {
+		case NONE:
+			return PdfPrintScalingEnum.NONE;
+		case DEFAULT:
+			return PdfPrintScalingEnum.DEFAULT;
+		default:
+			throw new JasperDesignException("Pdf print scaling " + pdfPrintScaling.name() + " not supported");
+		}
+	}
+
+	protected static PdfaConformanceEnum pdfaConformance(PdfaConformance pdfaConformance) {
+		switch (pdfaConformance) {
+		case NONE:
+			return PdfaConformanceEnum.NONE;
+		case PDFA_1A:
+			return PdfaConformanceEnum.PDFA_1A;
+		case PDFA_1B:
+			return PdfaConformanceEnum.PDFA_1B;
+		default:
+			throw new JasperDesignException("Pdfa conformance " + pdfaConformance.name() + " not supported");
+		}
 	}
 
 	public static int barcodeOrientation(BarcodeOrientation orientation) {

@@ -26,6 +26,8 @@ import net.sf.dynamicreports.jasper.base.export.JasperPdfExporter;
 import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.PdfPrintScaling;
+import net.sf.dynamicreports.report.constant.PdfaConformance;
 
 import org.apache.commons.lang3.Validate;
 
@@ -129,6 +131,56 @@ public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 
 	public JasperPdfExporterBuilder setTagLanguage(String tagLanguage) {
 		this.getObject().setTagLanguage(tagLanguage);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setCollapseMissingBookmarkLevels(Boolean collapseMissingBookmarkLevels) {
+		this.getObject().setCollapseMissingBookmarkLevels(collapseMissingBookmarkLevels);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setSizePageToContent(Boolean sizePageToContent) {
+		this.getObject().setSizePageToContent(sizePageToContent);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.getObject().setIgnoreHyperLink(ignoreHyperLink);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setForceLineBreakPolicy(Boolean forceLineBreakPolicy) {
+		this.getObject().setForceLineBreakPolicy(forceLineBreakPolicy);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setPrintScaling(PdfPrintScaling printScaling) {
+		this.getObject().setPrintScaling(printScaling);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setPdfaConformance(PdfaConformance pdfaConformance) {
+		this.getObject().setPdfaConformance(pdfaConformance);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setIccProfilePath(String iccProfilePath) {
+		this.getObject().setIccProfilePath(iccProfilePath);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setAllowedPermissionsHint(String allowedPermissionsHint) {
+		this.getObject().setAllowedPermissionsHint(allowedPermissionsHint);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setDeniedPermissionsHint(String deniedPermissionsHint) {
+		this.getObject().setDeniedPermissionsHint(deniedPermissionsHint);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder setDisplayMetadataTitle(Boolean displayMetadataTitle) {
+		this.getObject().setDisplayMetadataTitle(displayMetadataTitle);
 		return this;
 	}
 }

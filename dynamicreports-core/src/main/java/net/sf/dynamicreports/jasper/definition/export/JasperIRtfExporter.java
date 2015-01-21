@@ -25,5 +25,7 @@ package net.sf.dynamicreports.jasper.definition.export;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface JasperIRtfExporter extends JasperIExporter {	
+public interface JasperIRtfExporter extends JasperIExporter {
+
+	public Boolean getIgnoreHyperLink();
 }

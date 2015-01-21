@@ -45,6 +45,11 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	private SizeUnit sizeUnit;
 	private Boolean framesAsNestedTables;
 	private Boolean ignorePageMargins;
+	private String borderCollapse;
+	private Boolean accessibleHtml;
+	private Float zoomRatio;
+	private Boolean ignoreHyperLink;
+	private Boolean flushOutput;
 
 	@Override
 	public Boolean getOutputImagesToDir() {
@@ -162,4 +167,50 @@ public class JasperHtmlExporter extends AbstractJasperExporter implements Jasper
 	public void setIgnorePageMargins(Boolean ignorePageMargins) {
 		this.ignorePageMargins = ignorePageMargins;
 	}
+
+	@Override
+	public String getBorderCollapse() {
+		return borderCollapse;
+	}
+
+	public void setBorderCollapse(String borderCollapse) {
+		this.borderCollapse = borderCollapse;
+	}
+
+	@Override
+	public Boolean getAccessibleHtml() {
+		return accessibleHtml;
+	}
+
+	public void setAccessibleHtml(Boolean accessibleHtml) {
+		this.accessibleHtml = accessibleHtml;
+	}
+
+	@Override
+	public Float getZoomRatio() {
+		return zoomRatio;
+	}
+
+	public void setZoomRatio(Float zoomRatio) {
+		this.zoomRatio = zoomRatio;
+	}
+
+	@Override
+	public Boolean getIgnoreHyperLink() {
+		return ignoreHyperLink;
+	}
+
+	public void setIgnoreHyperLink(Boolean ignoreHyperLink) {
+		this.ignoreHyperLink = ignoreHyperLink;
+	}
+
+	@Override
+	public Boolean getFlushOutput() {
+		return flushOutput;
+	}
+
+	public void setFlushOutput(Boolean flushOutput) {
+		this.flushOutput = flushOutput;
+	}
+
 }

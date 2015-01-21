@@ -23,6 +23,10 @@
 package net.sf.dynamicreports.jasper.definition.export;
 
 import java.util.List;
+import java.util.Map;
+
+import net.sf.dynamicreports.report.constant.ImageAnchorType;
+import net.sf.dynamicreports.report.constant.RunDirection;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -58,4 +62,52 @@ public interface JasperIExcelExporter extends JasperIExporter {
 	public String getPassword();
 
 	public Boolean getIgnorePageMargins();
+
+	public Boolean getWrapText();
+
+	public Boolean getCellLocked();
+
+	public Boolean getCellHidden();
+
+	public String getSheetHeaderLeft();
+
+	public String getSheetHeaderCenter();
+
+	public String getSheetHeaderRight();
+
+	public String getSheetFooterLeft();
+
+	public String getSheetFooterCenter();
+
+	public String getSheetFooterRight();
+
+	public Map<String, String> getFormatPatternsMap();
+
+	public Boolean getIgnoreHyperLink();
+
+	public Boolean getIgnoreAnchors();
+
+	public Integer getFitWidth();
+
+	public Integer getFitHeight();
+
+	public Integer getPageScale();
+
+	public RunDirection getSheetDirection();
+
+	public Float getColumnWidthRatio();
+
+	public Boolean getUseTimeZone();
+
+	public Integer getFirstPageNumber();
+
+	public Boolean getShowGridLines();
+
+	public ImageAnchorType getImageAnchorType();
+
+	public Boolean getCreateCustomPalette();
+
+	public String getWorkbookTemplate();
+
+	public Boolean getKeepWorkbookTemplateSheets();
 }

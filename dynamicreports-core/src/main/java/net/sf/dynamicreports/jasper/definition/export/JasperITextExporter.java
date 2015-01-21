@@ -38,4 +38,6 @@ public interface JasperITextExporter extends JasperIExporter {
 	public String getPageSeparator();
 
 	public String getLineSeparator();
+
+	public Boolean getTrimLineRight();
 }
