@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 4.0.0 (2015-01-22)
+---------------------------------------------------
+ - upgrade to JasperReports 6.0.0
+ - upgrade to iText 5.5.0 and POI 3.10.1 in exporters
+ - xhtml and jexcelapi exporters are deprecated since they will not be maintained and will be removed from JasperReports sometime in the future
+ - report exporters have been updated due to the new API for report exporting introduced in JasperReports
+
 Changes in version 3.2.1 (2014-05-07)
 ---------------------------------------------------
  - getSubreportWidth() method was added to ReportParameters class, the method returns the available width for a subreport
