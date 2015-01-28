@@ -431,7 +431,7 @@ public class CrosstabTransform {
 			if (rowHighlighters != null && !rowHighlighters.isEmpty()) {
 				Color backgroundColor = StyleResolver.getBackgroundColor(style, accessor.getStyleTransform());
 				for (DRIConditionalStyle conditionalStyle : rowHighlighters) {
-					if (backgroundColor != null) {
+					if (backgroundColor != null && conditionalStyle.getBackgroundColor() != null) {
 						DRConditionalStyle newConditionalStyle = new DRConditionalStyle(conditionalStyle.getConditionExpression());
 						accessor.getStyleTransform().copyStyle(newConditionalStyle, conditionalStyle);
 						Color mergedColor = StyleResolver.mergeColors(backgroundColor, conditionalStyle.getBackgroundColor(), 0.25f);

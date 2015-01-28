@@ -29,6 +29,8 @@ import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -41,13 +43,21 @@ public class Style6Test extends AbstractJasperStyleTest implements Serializable 
 
 	private TextColumnBuilder<String> column1;
 	private TextColumnBuilder<String> column2;
+	private TextColumnBuilder<String> column3;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
+		StyleBuilder style = stl.style();
+		style.setBackgroundColor(Color.WHITE);
+		ConditionalStyleBuilder conditionalStyle = stl.conditionalStyle(cnd.equal(field("field3", type.stringType()), "2"));
+		conditionalStyle.setForegroundColor(Color.BLUE);
+		style.conditionalStyles(conditionalStyle);
+
 		rb.highlightDetailEvenRows()
 			.columns(
 					column1 = col.column("Column1", "field1", type.stringType()).setStyle(stl.style().setBackgroundColor(Color.BLUE)),
-					column2 = col.column("Column2", "field2", type.stringType()));
+					column2 = col.column("Column2", "field2", type.stringType()),
+					column3 = col.column("Column3", "field3", type.stringType()).setStyle(style));
 	}
 
 	@Override
@@ -58,6 +68,7 @@ public class Style6Test extends AbstractJasperStyleTest implements Serializable 
 
 		Color color1 = new Color(60, 60, 251);
 		Color color2 = new Color(240, 240, 240);
+		Color color3 = new Color(251, 251, 251);
 
 		//column1
 		columnDetailStyleTest(column1, 0, null, color1, "Arial", 10f, null, null);
@@ -68,13 +79,18 @@ public class Style6Test extends AbstractJasperStyleTest implements Serializable 
 		columnDetailStyleTest(column2, 0, Color.BLACK, color2, "Arial", 10f, null, null);
 		columnDetailStyleTest(column2, 1, Color.BLACK, null, "Arial", 10f, null, null);
 		columnDetailStyleTest(column2, 2, Color.BLACK, color2, "Arial", 10f, null, null);
+
+		//column3
+		columnDetailStyleTest(column3, 0, null, color3, "Arial", 10f, null, null);
+		columnDetailStyleTest(column3, 1, Color.BLUE, Color.WHITE, "Arial", 10f, null, null);
+		columnDetailStyleTest(column3, 2, null, color3, "Arial", 10f, null, null);
 	}
 
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3");
 		dataSource.add("1", "1", "1");
-		dataSource.add("1", "1", "1");
+		dataSource.add("1", "1", "2");
 		dataSource.add("1", "1", "1");
 		return dataSource;
 	}
