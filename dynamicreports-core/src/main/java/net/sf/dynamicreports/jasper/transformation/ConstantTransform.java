@@ -80,7 +80,6 @@ import net.sf.jasperreports.charts.type.MeterShapeEnum;
 import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.charts.type.ValueLocationEnum;
-import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
@@ -92,7 +91,8 @@ import net.sf.jasperreports.engine.type.BreakTypeEnum;
 import net.sf.jasperreports.engine.type.CalculationEnum;
 import net.sf.jasperreports.engine.type.EvaluationTimeEnum;
 import net.sf.jasperreports.engine.type.FooterPositionEnum;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalImageAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.LineDirectionEnum;
@@ -109,7 +109,7 @@ import net.sf.jasperreports.engine.type.SortOrderEnum;
 import net.sf.jasperreports.engine.type.SplitTypeEnum;
 import net.sf.jasperreports.engine.type.StretchTypeEnum;
 import net.sf.jasperreports.engine.type.TabStopAlignEnum;
-import net.sf.jasperreports.engine.type.VerticalAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 import net.sf.jasperreports.engine.type.WhenResourceMissingTypeEnum;
 import net.sf.jasperreports.export.type.HtmlSizeUnitEnum;
@@ -132,7 +132,7 @@ import org.krysalis.barcode4j.ChecksumMode;
 import org.krysalis.barcode4j.HumanReadablePlacement;
 import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
-import com.itextpdf.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -200,39 +200,56 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static HorizontalAlignEnum horizontalAlignment(HorizontalAlignment horizontalAlignment) {
+	protected static HorizontalImageAlignEnum horizontalImageAlignment(HorizontalAlignment horizontalAlignment) {
 		if (horizontalAlignment == null) {
 			return null;
 		}
 
 		switch (horizontalAlignment) {
 		case LEFT:
-			return HorizontalAlignEnum.LEFT;
+			return HorizontalImageAlignEnum.LEFT;
 		case CENTER:
-			return HorizontalAlignEnum.CENTER;
+			return HorizontalImageAlignEnum.CENTER;
 		case RIGHT:
-			return HorizontalAlignEnum.RIGHT;
+			return HorizontalImageAlignEnum.RIGHT;
+		default:
+			throw new JasperDesignException("Horizontal image alignment " + horizontalAlignment.name() + " not supported");
+		}
+	}
+
+	protected static HorizontalTextAlignEnum horizontalAlignment(HorizontalAlignment horizontalAlignment) {
+		if (horizontalAlignment == null) {
+			return null;
+		}
+
+		switch (horizontalAlignment) {
+		case LEFT:
+			return HorizontalTextAlignEnum.LEFT;
+		case CENTER:
+			return HorizontalTextAlignEnum.CENTER;
+		case RIGHT:
+			return HorizontalTextAlignEnum.RIGHT;
 		case JUSTIFIED:
-			return HorizontalAlignEnum.JUSTIFIED;
+			return HorizontalTextAlignEnum.JUSTIFIED;
 		default:
 			throw new JasperDesignException("Horizontal alignment " + horizontalAlignment.name() + " not supported");
 		}
 	}
 
-	protected static VerticalAlignEnum verticalAlignment(VerticalAlignment verticalAlignment) {
+	protected static VerticalTextAlignEnum verticalAlignment(VerticalAlignment verticalAlignment) {
 		if (verticalAlignment == null) {
 			return null;
 		}
 
 		switch (verticalAlignment) {
 		case TOP:
-			return VerticalAlignEnum.TOP;
+			return VerticalTextAlignEnum.TOP;
 		case MIDDLE:
-			return VerticalAlignEnum.MIDDLE;
+			return VerticalTextAlignEnum.MIDDLE;
 		case BOTTOM:
-			return VerticalAlignEnum.BOTTOM;
+			return VerticalTextAlignEnum.BOTTOM;
 		case JUSTIFIED:
-			return VerticalAlignEnum.JUSTIFIED;
+			return VerticalTextAlignEnum.JUSTIFIED;
 		default:
 			throw new JasperDesignException("Vertical alignment " + verticalAlignment.name() + " not supported");
 		}
@@ -672,16 +689,16 @@ public class ConstantTransform {
 		}
 	}
 
-	public static int barcodeOrientation(BarcodeOrientation orientation) {
+	public static net.sf.jasperreports.components.barcode4j.OrientationEnum barcodeOrientation(BarcodeOrientation orientation) {
 		switch (orientation) {
 		case NONE:
-			return BarcodeComponent.ORIENTATION_UP;
+			return net.sf.jasperreports.components.barcode4j.OrientationEnum.UP;
 		case LEFT:
-			return BarcodeComponent.ORIENTATION_LEFT;
+			return net.sf.jasperreports.components.barcode4j.OrientationEnum.LEFT;
 		case RIGHT:
-			return BarcodeComponent.ORIENTATION_RIGHT;
+			return net.sf.jasperreports.components.barcode4j.OrientationEnum.RIGHT;
 		case UPSIDE_DOWN:
-			return BarcodeComponent.ORIENTATION_DOWN;
+			return net.sf.jasperreports.components.barcode4j.OrientationEnum.DOWN;
 		default:
 			throw new JasperDesignException("BarcodeOrientation " + orientation.name() + " not supported");
 		}
@@ -701,6 +718,23 @@ public class ConstantTransform {
 			throw new JasperDesignException("BarcodeOrientation " + orientation.name() + " not supported");
 		}
 	}
+
+	/*public static TextPositionEnum barcodeTextPosition(BarcodeTextPosition textPosition) {
+		if (textPosition == null) {
+			return null;
+		}
+
+		switch (textPosition) {
+		case NONE:
+			return TextPositionEnum.NONE;
+		case BOTTOM:
+			return TextPositionEnum.BOTTOM;
+		case TOP:
+			return TextPositionEnum.UP;
+		default:
+			throw new JasperDesignException("BarcodeTextPosition " + textPosition.name() + " not supported");
+		}
+	}*/
 
 	public static HumanReadablePlacement barcodeTextPosition(BarcodeTextPosition textPosition) {
 		if (textPosition == null) {

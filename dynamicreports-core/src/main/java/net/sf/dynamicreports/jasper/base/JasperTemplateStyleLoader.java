@@ -55,13 +55,13 @@ import net.sf.jasperreports.engine.JRPen;
 import net.sf.jasperreports.engine.JRStyle;
 import net.sf.jasperreports.engine.JRTemplate;
 import net.sf.jasperreports.engine.TabStop;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineSpacingEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.type.TabStopAlignEnum;
-import net.sf.jasperreports.engine.type.VerticalAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
 
 import org.apache.commons.lang3.Validate;
@@ -133,8 +133,8 @@ public class JasperTemplateStyleLoader {
 		style.setBackgroundColor(jrStyle.getOwnBackcolor());
 		style.setRadius(jrStyle.getOwnRadius());
 		style.setImageScale(imageScale(jrStyle.getOwnScaleImageValue()));
-		style.setHorizontalAlignment(horizontalAlignment(jrStyle.getOwnHorizontalAlignmentValue()));
-		style.setVerticalAlignment(verticalAlignment(jrStyle.getOwnVerticalAlignmentValue()));
+		style.setHorizontalAlignment(horizontalAlignment(jrStyle.getOwnHorizontalTextAlign()));
+		style.setVerticalAlignment(verticalAlignment(jrStyle.getOwnVerticalTextAlign()));
 		border(jrStyle.getLineBox(), style.getBorder());
 		padding(jrStyle.getLineBox(), style.getPadding());
 		font(jrStyle, style.getFont());
@@ -237,7 +237,7 @@ public class JasperTemplateStyleLoader {
 		}
 	}
 
-	private static HorizontalAlignment horizontalAlignment(HorizontalAlignEnum horizontalAlignment) {
+	private static HorizontalAlignment horizontalAlignment(HorizontalTextAlignEnum horizontalAlignment) {
 		if (horizontalAlignment == null) {
 			return null;
 		}
@@ -256,7 +256,7 @@ public class JasperTemplateStyleLoader {
 		}
 	}
 
-	private static VerticalAlignment verticalAlignment(VerticalAlignEnum verticalAlignment) {
+	private static VerticalAlignment verticalAlignment(VerticalTextAlignEnum verticalAlignment) {
 		if (verticalAlignment == null) {
 			return null;
 		}

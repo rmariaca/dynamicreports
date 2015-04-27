@@ -104,8 +104,8 @@ public class StyleTransform {
 		}
 		baseStyle.setRadius(style.getRadius());
 		baseStyle.setScaleImage(ConstantTransform.imageScale(style.getImageScale()));
-		baseStyle.setHorizontalAlignment(ConstantTransform.horizontalAlignment(style.getHorizontalAlignment()));
-		baseStyle.setVerticalAlignment(ConstantTransform.verticalAlignment(style.getVerticalAlignment()));
+		baseStyle.setHorizontalTextAlign(ConstantTransform.horizontalAlignment(style.getHorizontalAlignment()));
+		baseStyle.setVerticalTextAlign(ConstantTransform.verticalAlignment(style.getVerticalAlignment()));
 		border(baseStyle.getLineBox(), style.getBorder());
 		padding(baseStyle.getLineBox(), style.getPadding());
 		font(baseStyle, style.getFont());
