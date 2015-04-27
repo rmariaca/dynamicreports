@@ -28,12 +28,15 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
-import net.sf.jasperreports.engine.JRAlignment;
+import net.sf.jasperreports.engine.JRImageAlignment;
 import net.sf.jasperreports.engine.JRStyle;
+import net.sf.jasperreports.engine.JRTextAlignment;
 import net.sf.jasperreports.engine.base.JRBoxPen;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalImageAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
-import net.sf.jasperreports.engine.type.VerticalAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalImageAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -87,20 +90,36 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		Assert.assertEquals(right, style.getLineBox().getRightPadding());
 	}
 
-	protected void horizontalAlignmentTest(String name, int index, HorizontalAlignEnum horizontalAlignment) {
-		JRAlignment element = (JRAlignment) getElementAt(name, index);
+	protected void horizontalAlignmentTest(String name, int index, HorizontalImageAlignEnum horizontalAlignment) {
+		JRImageAlignment element = (JRImageAlignment) getElementAt(name, index);
 		if (horizontalAlignment == null) {
-			Assert.assertEquals("horizontalAlignment", HorizontalAlignEnum.LEFT, element.getHorizontalAlignmentValue());
+			Assert.assertEquals("horizontalAlignment", HorizontalImageAlignEnum.LEFT, element.getHorizontalImageAlign());
 		}
-		Assert.assertEquals("horizontalAlignment", horizontalAlignment, element.getHorizontalAlignmentValue());
+		Assert.assertEquals("horizontalAlignment", horizontalAlignment, element.getHorizontalImageAlign());
 	}
 
-	protected void verticalAlignmentTest(String name, int index, VerticalAlignEnum verticalAlignment) {
-		JRAlignment element = (JRAlignment) getElementAt(name, index);
+	protected void verticalAlignmentTest(String name, int index, VerticalImageAlignEnum verticalAlignment) {
+		JRImageAlignment element = (JRImageAlignment) getElementAt(name, index);
 		if (verticalAlignment == null) {
-			Assert.assertEquals("verticalAlignment", VerticalAlignEnum.TOP, element.getVerticalAlignmentValue());
+			Assert.assertEquals("verticalAlignment", VerticalTextAlignEnum.TOP, element.getVerticalImageAlign());
 		}
-		Assert.assertEquals("verticalAlignment", verticalAlignment, element.getVerticalAlignmentValue());
+		Assert.assertEquals("verticalAlignment", verticalAlignment, element.getVerticalImageAlign());
+	}
+
+	protected void horizontalAlignmentTest(String name, int index, HorizontalTextAlignEnum horizontalAlignment) {
+		JRTextAlignment element = (JRTextAlignment) getElementAt(name, index);
+		if (horizontalAlignment == null) {
+			Assert.assertEquals("horizontalAlignment", HorizontalTextAlignEnum.LEFT, element.getHorizontalTextAlign());
+		}
+		Assert.assertEquals("horizontalAlignment", horizontalAlignment, element.getHorizontalTextAlign());
+	}
+
+	protected void verticalAlignmentTest(String name, int index, VerticalTextAlignEnum verticalAlignment) {
+		JRTextAlignment element = (JRTextAlignment) getElementAt(name, index);
+		if (verticalAlignment == null) {
+			Assert.assertEquals("verticalAlignment", VerticalTextAlignEnum.TOP, element.getVerticalTextAlign());
+		}
+		Assert.assertEquals("verticalAlignment", verticalAlignment, element.getVerticalTextAlign());
 	}
 
 	//column detail
@@ -112,11 +131,19 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		paddingTest(JasperTestUtils.getColumnDetailName(column), index, top, bottom, left, right);
 	}
 
-	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalImageAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, horizontalAlignment);
 	}
 
-	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, VerticalAlignEnum verticalAlignment) {
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, VerticalImageAlignEnum verticalAlignment) {
+		verticalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, verticalAlignment);
+	}
+
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalTextAlignEnum horizontalAlignment) {
+		horizontalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, horizontalAlignment);
+	}
+
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, VerticalTextAlignEnum verticalAlignment) {
 		verticalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, verticalAlignment);
 	}
 
@@ -137,7 +164,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		styleTest(JasperTestUtils.getColumnTitleName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
-	protected void columnTitleAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void columnTitleAlignmentTest(ColumnBuilder<?, ?> column, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getColumnTitleName(column), index, horizontalAlignment);
 	}
 
@@ -173,7 +200,7 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		styleTest(JasperTestUtils.getHeaderGroupName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
 	}
 
-	protected void groupHeaderAlignmentTest(GroupBuilder<?> group, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void groupHeaderAlignmentTest(GroupBuilder<?> group, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(JasperTestUtils.getHeaderGroupName(group), index, horizontalAlignment);
 	}
 }

@@ -50,7 +50,8 @@ public class Pie3DChartTest extends AbstractJasperChartTest implements Serializa
 		TextColumnBuilder<String> column1;
 		TextColumnBuilder<Integer> column2;
 
-		rb.columns(
+		rb.addProperty("net.sf.jasperreports.chart.pie.ignore.duplicated.key", "true")
+			.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class))
 			.summary(

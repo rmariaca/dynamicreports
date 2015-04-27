@@ -56,8 +56,6 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 
 		numberOfPagesTest(1);
 
-		elementCountTest("detail.subreport1", 5);
-
 		//title
 		elementCountTest("title.textField1", 5);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3", "Subreport4", "Subreport5");

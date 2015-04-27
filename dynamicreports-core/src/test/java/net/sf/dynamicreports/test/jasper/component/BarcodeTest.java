@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.constant.BarcodeShape;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
-import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
+import net.sf.jasperreports.components.barcode4j.Barcode4jComponent;
 import net.sf.jasperreports.components.barcode4j.CodabarComponent;
 import net.sf.jasperreports.components.barcode4j.Code128Component;
 import net.sf.jasperreports.components.barcode4j.Code39Component;
@@ -44,9 +44,11 @@ import net.sf.jasperreports.components.barcode4j.EAN128Component;
 import net.sf.jasperreports.components.barcode4j.EAN13Component;
 import net.sf.jasperreports.components.barcode4j.EAN8Component;
 import net.sf.jasperreports.components.barcode4j.Interleaved2Of5Component;
+import net.sf.jasperreports.components.barcode4j.OrientationEnum;
 import net.sf.jasperreports.components.barcode4j.PDF417Component;
 import net.sf.jasperreports.components.barcode4j.POSTNETComponent;
 import net.sf.jasperreports.components.barcode4j.RoyalMailCustomerComponent;
+import net.sf.jasperreports.components.barcode4j.TextPositionEnum;
 import net.sf.jasperreports.components.barcode4j.UPCAComponent;
 import net.sf.jasperreports.components.barcode4j.UPCEComponent;
 import net.sf.jasperreports.components.barcode4j.USPSIntelligentMailComponent;
@@ -58,7 +60,6 @@ import net.sf.jasperreports.renderers.BatikRenderer;
 
 import org.krysalis.barcode4j.BaselineAlignment;
 import org.krysalis.barcode4j.ChecksumMode;
-import org.krysalis.barcode4j.HumanReadablePlacement;
 import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
 /**
@@ -219,7 +220,6 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
@@ -234,7 +234,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)
+							.setTextPosition(BarcodeTextPosition.BOTTOM)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setChecksumMode(BarcodeChecksumMode.AUTO)
@@ -250,7 +250,7 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setPattern("1")
 							.setModuleWidth(2d)
 							.setOrientation(BarcodeOrientation.LEFT)
-							.setTextPosition(BarcodeTextPosition.TOP)
+							.setTextPosition(BarcodeTextPosition.NONE)
 							.setQuietZone(100d)
 							.setVerticalQuietZone(50d)
 							.setMinColumns(2)
@@ -347,7 +347,7 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("RoyalMailCustomer track height", 20.1, royalMailCustomer.getTrackHeight());
 
 		//postnet
-		POSTNETComponent postnet = testBarcode("POSTNET", POSTNETComponent.class);
+		POSTNETComponent postnet = testBarcode("POSTNET", POSTNETComponent.class, TextPositionEnum.BOTTOM);
 		Assert.assertEquals("POSTNET checksum mode", ChecksumMode.CP_AUTO.getName(), postnet.getChecksumMode());
 		Assert.assertEquals("POSTNET display checksum", Boolean.TRUE, postnet.getDisplayChecksum());
 		Assert.assertEquals("POSTNET interchar gap width", 1.5, postnet.getIntercharGapWidth());
@@ -356,7 +356,7 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("POSTNET interchar gap width", 1.5, postnet.getIntercharGapWidth());
 
 		//pdf417
-		PDF417Component pdf417 = testBarcode("PDF417", PDF417Component.class);
+		PDF417Component pdf417 = testBarcode("PDF417", PDF417Component.class, TextPositionEnum.NONE);
 		Assert.assertEquals("PDF417 min columns", new Integer(2), pdf417.getMinColumns());
 		Assert.assertEquals("PDF417 max columns", new Integer(30), pdf417.getMaxColumns());
 		Assert.assertEquals("PDF417 min rows", new Integer(3), pdf417.getMinRows());
@@ -365,7 +365,11 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("PDF417 error correction level", new Integer(8), pdf417.getErrorCorrectionLevel());
 	}
 
-	private <T extends BarcodeComponent> T testBarcode(String name, Class<T> componentClass) {
+	private <T extends Barcode4jComponent> T testBarcode(String name, Class<T> componentClass) {
+		return testBarcode(name, componentClass, null);
+	}
+
+	private <T extends Barcode4jComponent> T testBarcode(String name, Class<T> componentClass, TextPositionEnum textPosition) {
 		JRBaseComponentElement barcode = (JRBaseComponentElement) getJasperReport().getTitle().getElementByKey("title." + name + "2");
 		Component component = barcode.getComponent();
 		Assert.assertTrue("Barcode is not instance of " + componentClass.getName(), component.getClass().equals(componentClass));
@@ -373,8 +377,8 @@ public class BarcodeTest extends AbstractJasperTest {
 		T barcodeComponent = (T) component;
 
 		Assert.assertEquals(name + " module width", 2d, barcodeComponent.getModuleWidth());
-		Assert.assertEquals(name + " orientation", BarcodeComponent.ORIENTATION_LEFT, barcodeComponent.getOrientation());
-		Assert.assertEquals(name + " text position", HumanReadablePlacement.HRP_TOP.getName(), barcodeComponent.getTextPosition());
+		Assert.assertEquals(name + " orientation", OrientationEnum.LEFT, barcodeComponent.getOrientationValue());
+		Assert.assertEquals(name + " text position", textPosition, barcodeComponent.getTextPositionValue());
 		Assert.assertEquals(name + " quiet zone", 100d, barcodeComponent.getQuietZone());
 		Assert.assertEquals(name + " vertical quiet zone", 50d, barcodeComponent.getVerticalQuietZone());
 		return barcodeComponent;

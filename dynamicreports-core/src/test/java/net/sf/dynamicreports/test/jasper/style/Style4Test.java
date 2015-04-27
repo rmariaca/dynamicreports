@@ -36,7 +36,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -72,11 +72,11 @@ public class Style4Test extends AbstractJasperStyleTest implements Serializable 
 
 		//column1
 		columnDetailStyleTest(column1, 0, Color.BLACK, null, "Arial", 10f, null, null);
-		columnDetailAlignmentTest(column1, 0, HorizontalAlignEnum.RIGHT);
+		columnDetailAlignmentTest(column1, 0, HorizontalTextAlignEnum.RIGHT);
 
 		//group1
 		groupHeaderStyleTest(group1, 0, null, null, "Arial", 10f, true, null);
-		groupHeaderAlignmentTest(group1, 0, HorizontalAlignEnum.LEFT);
+		groupHeaderAlignmentTest(group1, 0, HorizontalTextAlignEnum.LEFT);
 	}
 
 	@Override

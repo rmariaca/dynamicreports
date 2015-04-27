@@ -29,7 +29,7 @@ import java.io.Serializable;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 
 /**
@@ -54,12 +54,12 @@ public class Style5Test extends AbstractJasperStyleTest implements Serializable 
 
 		//column1
 		styleTest("pageFooter.textField1", 0, null, null, "Arial", 10f, null, null);
-		horizontalAlignmentTest("pageFooter.textField1", 0, HorizontalAlignEnum.RIGHT);
+		horizontalAlignmentTest("pageFooter.textField1", 0, HorizontalTextAlignEnum.RIGHT);
 		paddingTest("pageFooter.textField1", 0, 2, 2, 2, 0);
 		borderTest("pageFooter.textField1", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 0);
 
 		styleTest("pageFooter.textField2", 0, null, null, "Arial", 10f, null, null);
-		horizontalAlignmentTest("pageFooter.textField2", 0, HorizontalAlignEnum.LEFT);
+		horizontalAlignmentTest("pageFooter.textField2", 0, HorizontalTextAlignEnum.LEFT);
 		paddingTest("pageFooter.textField2", 0, 2, 2, 0, 2);
 		borderTest("pageFooter.textField2", 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 0, null, LineStyleEnum.SOLID, 1);
 	}

@@ -57,7 +57,8 @@ public class PercentageChartDataTest extends AbstractJasperChartTest implements 
 
 		Locale.setDefault(Locale.ENGLISH);
 
-		rb.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
+		rb.addProperty("net.sf.jasperreports.chart.pie.ignore.duplicated.key", "true")
+			.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
 			.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", Integer.class),

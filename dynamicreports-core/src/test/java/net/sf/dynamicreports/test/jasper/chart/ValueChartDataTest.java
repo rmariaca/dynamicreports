@@ -57,7 +57,8 @@ public class ValueChartDataTest extends AbstractJasperChartTest implements Seria
 
 		Locale.setDefault(Locale.ENGLISH);
 
-		rb.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
+		rb.addProperty("net.sf.jasperreports.chart.pie.ignore.duplicated.key", "true")
+			.setPageFormat(PageType.A2, PageOrientation.PORTRAIT)
 			.setTemplate(template().setChartValuePattern("#,##0.#").setChartPercentValuePattern("#,##0.###"))
 			.columns(
 				column1 = col.column("Column1", "field1", String.class),

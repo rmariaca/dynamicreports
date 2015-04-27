@@ -38,7 +38,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -94,11 +94,11 @@ public class CrosstabStyle1Test extends AbstractJasperCrosstabStyleTest {
 
 		crosstabGroupHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
 		crosstabGroupTotalHeaderStyleTest(rowGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
-		crosstabGroupTotalHeaderHorizontalAlignmentTest(rowGroup, 0, HorizontalAlignEnum.CENTER);
+		crosstabGroupTotalHeaderHorizontalAlignmentTest(rowGroup, 0, HorizontalTextAlignEnum.CENTER);
 
 		crosstabGroupHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
 		crosstabGroupTotalHeaderStyleTest(columnGroup, 0, null, Color.LIGHT_GRAY, "Arial", 12f, true, null);
-		crosstabGroupTotalHeaderHorizontalAlignmentTest(columnGroup, 0, HorizontalAlignEnum.CENTER);
+		crosstabGroupTotalHeaderHorizontalAlignmentTest(columnGroup, 0, HorizontalTextAlignEnum.CENTER);
 
 		for (int i = 0; i < 4; i++) {
 			crosstabCellStyleTest(measure1, null, null, i, null, null, "Arial", 10f, true, null);

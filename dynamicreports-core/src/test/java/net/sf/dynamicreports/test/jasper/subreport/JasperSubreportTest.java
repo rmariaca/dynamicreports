@@ -59,8 +59,6 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 
 		numberOfPagesTest(1);
 
-		elementCountTest("detail.subreport1", 3);
-
 		//title
 		elementCountTest("title.textField1", 3);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3");

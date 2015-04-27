@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.builder.crosstab.AbstractCrosstabGroupBuilde
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 
 /**
@@ -54,7 +54,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		paddingTest(getPrefix(1) + "headercell." + name, index, top, bottom, left, right);
 	}
 
-	protected void crosstabHeaderElementHorizontalAlignmentTest(String name, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void crosstabHeaderElementHorizontalAlignmentTest(String name, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(getPrefix(1) + "headercell." + name, index, horizontalAlignment);
 	}
 
@@ -71,7 +71,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		paddingTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), index, top, bottom, left, right);
 	}
 
-	protected void crosstabGroupHeaderHorizontalAlignmentTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void crosstabGroupHeaderHorizontalAlignmentTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupHeaderName(group), index, horizontalAlignment);
 	}
 
@@ -92,7 +92,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		paddingTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, top, bottom, left, right);
 	}
 
-	protected void crosstabGroupTotalHeaderHorizontalAlignmentTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void crosstabGroupTotalHeaderHorizontalAlignmentTest(AbstractCrosstabGroupBuilder<?, ?, ?> group, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabGroupTotalHeaderName(group), index, horizontalAlignment);
 	}
 
@@ -113,7 +113,7 @@ public abstract class AbstractJasperCrosstabStyleTest extends AbstractJasperStyl
 		paddingTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, top, bottom, left, right);
 	}
 
-	protected void crosstabCellHorizontalAlignmentTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, HorizontalAlignEnum horizontalAlignment) {
+	protected void crosstabCellHorizontalAlignmentTest(CrosstabMeasureBuilder<?> measure, CrosstabRowGroupBuilder<?> rowGroup, CrosstabColumnGroupBuilder<?> columnGroup, int index, HorizontalTextAlignEnum horizontalAlignment) {
 		horizontalAlignmentTest(getPrefix(1) + JasperTestUtils.getCrosstabCellName(measure, rowGroup, columnGroup), index, horizontalAlignment);
 	}
 

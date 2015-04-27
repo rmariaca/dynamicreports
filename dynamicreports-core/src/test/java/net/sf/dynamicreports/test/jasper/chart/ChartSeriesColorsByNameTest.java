@@ -69,7 +69,8 @@ public class ChartSeriesColorsByNameTest extends AbstractJasperChartTest impleme
 		colors.put("c", Color.GREEN);
 		colors.put("d", Color.MAGENTA);
 
-		rb.columns(
+		rb.addProperty("net.sf.jasperreports.chart.pie.ignore.duplicated.key", "true")
+			.columns(
 				column1 = col.column("Column1", "field1", String.class),
 				column2 = col.column("Column2", "field2", String.class),
 				column3 = col.column("Column3", "field3", Integer.class),

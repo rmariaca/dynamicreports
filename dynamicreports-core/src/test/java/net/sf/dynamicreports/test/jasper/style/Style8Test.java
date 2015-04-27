@@ -32,9 +32,11 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalImageAlignEnum;
+import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
-import net.sf.jasperreports.engine.type.VerticalAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalImageAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -68,13 +70,13 @@ public class Style8Test extends AbstractJasperStyleTest {
 		columnDetailStyleTest(column4, 0, null, null, "Arial", 10f, true, null);
 		columnDetailBorderTest(column4, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 
-		columnDetailAlignmentTest(column1, 0, HorizontalAlignEnum.CENTER);
-		columnDetailAlignmentTest(column2, 0, HorizontalAlignEnum.LEFT);
-		columnDetailAlignmentTest(column3, 0, HorizontalAlignEnum.CENTER);
+		columnDetailAlignmentTest(column1, 0, HorizontalTextAlignEnum.CENTER);
+		columnDetailAlignmentTest(column2, 0, HorizontalImageAlignEnum.LEFT);
+		columnDetailAlignmentTest(column3, 0, HorizontalImageAlignEnum.CENTER);
 
-		columnDetailAlignmentTest(column1, 0, VerticalAlignEnum.TOP);
-		columnDetailAlignmentTest(column2, 0, VerticalAlignEnum.TOP);
-		columnDetailAlignmentTest(column3, 0, VerticalAlignEnum.MIDDLE);
+		columnDetailAlignmentTest(column1, 0, VerticalTextAlignEnum.TOP);
+		columnDetailAlignmentTest(column2, 0, VerticalImageAlignEnum.TOP);
+		columnDetailAlignmentTest(column3, 0, VerticalImageAlignEnum.MIDDLE);
 	}
 
 	@Override
