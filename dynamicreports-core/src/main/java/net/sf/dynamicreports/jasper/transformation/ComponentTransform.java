@@ -590,16 +590,13 @@ public class ComponentTransform {
 		@Override
 		@SuppressWarnings("unchecked")
 		public Object evaluate(List<?> values, ReportParameters reportParameters) {
-			Map<String, Object> parameters = null;
-			if (!values.isEmpty()) {
-				parameters = (Map<String, Object>) values.get(0);
-			}
-			else {
-				parameters = new HashMap<String, Object>();
-			}
+			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.putAll(subreportExpression.getReportDesign().getParameters());
 			if (subreportExpression.getReportDesign().getParameterValues() != null) {
 				parameters.putAll(subreportExpression.getReportDesign().getParameterValues());
+			}
+			if (!values.isEmpty()) {
+				parameters.putAll((Map<String, Object>) values.get(0));
 			}
 			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
 			return parameters;
