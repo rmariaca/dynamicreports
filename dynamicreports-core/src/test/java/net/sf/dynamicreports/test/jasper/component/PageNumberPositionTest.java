@@ -26,7 +26,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 
@@ -37,17 +37,17 @@ public class PageNumberPositionTest extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
-		StyleBuilder style = stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT);
+		StyleBuilder style = stl.style().setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		PageXofYBuilder pageXofYLeft = cmp.pageXofY().setStyle(stl.style(style));
-		PageXofYBuilder pageXofYRight = cmp.pageXofY().setStyle(stl.style(style).setHorizontalAlignment(HorizontalAlignment.RIGHT));
+		PageXofYBuilder pageXofYRight = cmp.pageXofY().setStyle(stl.style(style).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT));
 
 		rb.setWhenNoDataType(WhenNoDataType.ALL_SECTIONS_NO_DETAIL)
 		  .pageFooter(
 					cmp.pageXofY(),
-					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.LEFT),
-					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.RIGHT),
-					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.JUSTIFIED),
-					cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.CENTER),
+					cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.LEFT),
+					cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT),
+					cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.JUSTIFIED),
+					cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 					cmp.horizontalList(pageXofYLeft, pageXofYRight, pageXofYLeft, pageXofYRight),
 					cmp.pageXofY().setPageXFixedWidth(20),
 					cmp.pageXofY().setPageYFixedWidth(25),

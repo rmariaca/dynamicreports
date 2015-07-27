@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabRowGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperCrosstabStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -55,7 +55,7 @@ public class CrosstabStyle1Test extends AbstractJasperCrosstabStyleTest {
 
 		StyleBuilder titleStyle1 = stl.style().setFontSize(12).bold();
 		StyleBuilder titleStyle2 = stl.style(titleStyle1).setBackgroundColor(Color.LIGHT_GRAY);
-		StyleBuilder titleStyle3 = stl.style(titleStyle2).setBorder(stl.pen1Point()).setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder titleStyle3 = stl.style(titleStyle2).setBorder(stl.pen1Point()).setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder cellStyle = stl.style().bold();
 		StyleBuilder rowGroupCellStyle = stl.style(cellStyle).setBackgroundColor(Color.BLUE);
 		StyleBuilder columnGroupCellStyle = stl.style(cellStyle).setBackgroundColor(Color.ORANGE);

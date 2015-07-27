@@ -30,7 +30,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -49,7 +49,7 @@ public class TableOfContentsStyleTest extends AbstractJasperStyleTest {
 			.setForegroundColor(Color.BLUE)
 			.setFontSize(18)
 			.bold()
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder headingTocStyle = stl.style()
 			.setFontSize(12)
 			.bold();

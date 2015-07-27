@@ -32,8 +32,8 @@ import java.util.Map;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -75,7 +75,7 @@ public class BooleanColumn3Test {
 		JasperReportBuilder rb = report();
 		rb.columns(col.booleanColumn("Column1", "field1")
 			.setComponentType(BooleanComponentType.IMAGE_CHECKBOX_1)
-			.setStyle(stl.style().setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.TOP)));
+			.setStyle(stl.style().setTextAlignment(HorizontalTextAlignment.CENTER, VerticalTextAlignment.TOP)));
 		return rb;
 	}
 

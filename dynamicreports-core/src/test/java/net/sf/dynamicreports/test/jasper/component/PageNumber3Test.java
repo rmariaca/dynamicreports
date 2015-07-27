@@ -29,7 +29,7 @@ import java.io.Serializable;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
@@ -54,10 +54,10 @@ public class PageNumber3Test extends AbstractJasperValueTest implements Serializ
 				cmp.pageXslashY(),
 				cmp.pageXofY(),
 				cmp.pageXofY().setFormatExpression("Page {0} of {1}"),
-				cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.LEFT),
-				cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.RIGHT),
-				cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.JUSTIFIED),
-				cmp.pageXofY().setHorizontalAlignment(HorizontalAlignment.CENTER));
+				cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.LEFT),
+				cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT),
+				cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.JUSTIFIED),
+				cmp.pageXofY().setHorizontalTextAlignment(HorizontalTextAlignment.CENTER));
 	}
 
 	@Override

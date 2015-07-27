@@ -27,7 +27,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -35,7 +35,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class SubtotalPosition2Test extends AbstractJasperPositionTest {	
+public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 	private AggregationSubtotalBuilder<Integer> subtotal1;
 	private AggregationSubtotalBuilder<Integer> subtotal2;
 	private AggregationSubtotalBuilder<Integer> subtotal3;
@@ -46,15 +46,15 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 	private TextColumnBuilder<Integer> column5;
 	private TextColumnBuilder<String> column6;
 	private TextColumnBuilder<Integer> column7;
-	
+
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {						
+	protected void configureReport(JasperReportBuilder rb) {
 		StyleBuilder textStyle = stl.style(stl.pen1Point()).setPadding(2);
-		StyleBuilder columnStyle = stl.style(textStyle).setVerticalAlignment(VerticalAlignment.MIDDLE);
-		
+		StyleBuilder columnStyle = stl.style(textStyle).setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
+
 		rb.setTextStyle(textStyle)
 		.setColumnStyle(columnStyle)
-			.columns(					
+			.columns(
 				column1 = col.column("", "field1", type.stringType()).setFixedWidth(200),
 				column2 = col.column("", "field2", type.stringType()),
 				column3 = col.column("", "field3", type.stringType()),
@@ -63,8 +63,8 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 				column6 = col.column("", "field6", type.stringType()).setFixedColumns(3),
 				column7 = col.column("", "field7", type.integerType()).setTitleRows(2))
 			.subtotalsAtSummary(
-					subtotal1 = sbt.sum(column4),	
-					subtotal2 = sbt.sum(column5).setRows(2),	
+					subtotal1 = sbt.sum(column4),
+					subtotal2 = sbt.sum(column5).setRows(2),
 					subtotal3 = sbt.sum(column7))
 			.columnGrid(
 					column1, column2, column3,
@@ -76,9 +76,9 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 	@Override
 	public void test() {
 		super.test();
-		
+
 		numberOfPagesTest(1);
-		
+
 		//columns
 		elementPositionTest("columnHeader.list1", 0, 10, 10, 575, 43);
 		columnTitlePositionTest(column1, 0, 0, 0, 200, 43);
@@ -90,7 +90,7 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 		columnTitlePositionTest(column5, 0, 0, 0, 85, 27);
 		columnTitlePositionTest(column6, 0, 85, 0, 31, 27);
 		columnTitlePositionTest(column7, 0, 116, 0, 85, 27);
-		
+
 		elementPositionTest("detail.list1", 0, 10, 53, 575, 43);
 		columnDetailPositionTest(column1, 0, 0, 0, 200, 43);
 		columnDetailPositionTest(column2, 0, 200, 0, 87, 43);
@@ -101,7 +101,7 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 		columnDetailPositionTest(column5, 0, 0, 0, 85, 16);
 		columnDetailPositionTest(column6, 0, 85, 0, 31, 16);
 		columnDetailPositionTest(column7, 0, 116, 0, 85, 16);
-		
+
 		//summary
 		elementPositionTest("summary.list1", 0, 10, 96, 575, 43);
 		//elementPositionTest("summary.list2", 0, 374, 0, 201, 43);
@@ -110,7 +110,7 @@ public class SubtotalPosition2Test extends AbstractJasperPositionTest {
 		subtotalPositionTest(subtotal2, 0, 0, 0, 85, 27);
 		subtotalPositionTest(subtotal3, 0, 116, 0, 85, 16);
 	}
-	
+
 	@Override
 	protected JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("field1", "field2", "field3", "field4", "field5", "field6", "field7");

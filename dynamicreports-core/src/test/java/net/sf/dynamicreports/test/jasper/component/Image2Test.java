@@ -29,7 +29,7 @@ import java.util.Arrays;
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.component.ImageBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
 import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -46,7 +46,7 @@ public class Image2Test extends AbstractJasperTest {
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		ImageBuilder image = cmp.image(Image2Test.class.getResourceAsStream("dynamicreports.png"))
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalImageAlignment(HorizontalImageAlignment.CENTER);
 		rb.pageHeader(image)
 			.detail(cmp.filler().setFixedHeight(20));
 	}

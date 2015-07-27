@@ -27,8 +27,8 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.BooleanColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.test.jasper.AbstractJasperStyleTest;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -52,8 +52,8 @@ public class Style8Test extends AbstractJasperStyleTest {
 		rb.setColumnStyle(stl.style(stl.pen1Point()).bold())
 		  .columns(
 		  	column1 = col.booleanColumn("field1"),
-		  	column2 = col.booleanColumn("field2").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setHorizontalAlignment(HorizontalAlignment.LEFT),
-		  	column3 = col.booleanColumn("field3").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setStyle(stl.style(stl.pen2Point()).setVerticalAlignment(VerticalAlignment.MIDDLE)),
+		  	column2 = col.booleanColumn("field2").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setHorizontalImageAlignment(HorizontalImageAlignment.RIGHT),
+		  	column3 = col.booleanColumn("field3").setComponentType(BooleanComponentType.IMAGE_STYLE_1).setStyle(stl.style(stl.pen2Point()).setHorizontalImageAlignment(HorizontalImageAlignment.CENTER).setVerticalImageAlignment(VerticalImageAlignment.MIDDLE)),
 		  	column4 = col.column("field4", type.stringType()));
 	}
 
@@ -71,7 +71,7 @@ public class Style8Test extends AbstractJasperStyleTest {
 		columnDetailBorderTest(column4, 0, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1, null, LineStyleEnum.SOLID, 1);
 
 		columnDetailAlignmentTest(column1, 0, HorizontalTextAlignEnum.CENTER);
-		columnDetailAlignmentTest(column2, 0, HorizontalImageAlignEnum.LEFT);
+		columnDetailAlignmentTest(column2, 0, HorizontalImageAlignEnum.RIGHT);
 		columnDetailAlignmentTest(column3, 0, HorizontalImageAlignEnum.CENTER);
 
 		columnDetailAlignmentTest(column1, 0, VerticalTextAlignEnum.TOP);
