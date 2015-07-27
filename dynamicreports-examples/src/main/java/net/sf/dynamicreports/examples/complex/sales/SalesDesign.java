@@ -102,6 +102,7 @@ public class SalesDesign {
 
 		//configure report
 		report
+			.addProperty("net.sf.jasperreports.chart.pie.ignore.duplicated.key", "true")
 			.setTemplate(Templates.reportTemplate)
 			//columns
 			.columns(
