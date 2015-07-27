@@ -58,7 +58,7 @@ public class ColumnGroupBuilder extends GroupBuilder<ColumnGroupBuilder> {
 		getObject().getValueField().setStyle(column.getComponent().getStyle());
 		getObject().getValueField().setPattern(column.getComponent().getPattern());
 		getObject().getValueField().setPatternExpression(column.getComponent().getPatternExpression());
-		getObject().getValueField().setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
+		getObject().getValueField().setHorizontalTextAlignment(column.getComponent().getHorizontalTextAlignment());
 		getObject().setTitleExpression(column.getTitleExpression());
 		getObject().setTitleStyle(column.getTitleStyle());
 		getObject().setTitleWidth(column.getComponent().getWidth());

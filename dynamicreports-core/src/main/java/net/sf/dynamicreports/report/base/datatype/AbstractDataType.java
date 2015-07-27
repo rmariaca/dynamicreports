@@ -26,7 +26,7 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -50,7 +50,7 @@ public abstract class AbstractDataType<U, T extends U> implements DRIDataType<U,
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
 		return null;
 	}
 

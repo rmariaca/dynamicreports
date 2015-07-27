@@ -30,12 +30,14 @@ import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
+@SuppressWarnings("deprecation")
 public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImage> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -87,8 +89,22 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 		return this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalImageAlignment instead
+	 */
+	@Deprecated
 	public ImageBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalImageAlignment(HorizontalImageAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalImageAlignment(null);
+		}
+		return this;
+	}
+
+	public ImageBuilder setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		getObject().setHorizontalImageAlignment(horizontalImageAlignment);
 		return this;
 	}
 }

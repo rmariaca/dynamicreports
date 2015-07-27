@@ -112,12 +112,12 @@ import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.Subtotals;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.TimePeriod;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -420,8 +420,8 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		}
 		baseStyle.setForegroundColor(adhocStyle.getForegroundColor());
 		baseStyle.setBackgroundColor(adhocStyle.getBackgroundColor());
-		baseStyle.setHorizontalAlignment(horizontalAlignment(adhocStyle.getHorizontalAlignment()));
-		baseStyle.setVerticalAlignment(verticalAlignment(adhocStyle.getVerticalAlignment()));
+		baseStyle.setHorizontalTextAlignment(horizontalTextAlignment(adhocStyle.getHorizontalAlignment()));
+		baseStyle.setVerticalTextAlignment(verticalTextAlignment(adhocStyle.getVerticalAlignment()));
 		baseStyle.setPattern(adhocStyle.getPattern());
 
 		return baseStyle;
@@ -473,41 +473,41 @@ public class DefaultAdhocReportCustomizer implements AdhocReportCustomizer {
 		return pen;
 	}
 
-	protected HorizontalAlignment horizontalAlignment(AdhocHorizontalAlignment adhocHorizontalAlignment) {
+	protected HorizontalTextAlignment horizontalTextAlignment(AdhocHorizontalAlignment adhocHorizontalAlignment) {
 		if (adhocHorizontalAlignment == null) {
 			return null;
 		}
 
 		switch (adhocHorizontalAlignment) {
 		case LEFT:
-			return HorizontalAlignment.LEFT;
+			return HorizontalTextAlignment.LEFT;
 		case CENTER:
-			return HorizontalAlignment.CENTER;
+			return HorizontalTextAlignment.CENTER;
 		case RIGHT:
-			return HorizontalAlignment.RIGHT;
+			return HorizontalTextAlignment.RIGHT;
 		case JUSTIFIED:
-			return HorizontalAlignment.JUSTIFIED;
+			return HorizontalTextAlignment.JUSTIFIED;
 		default:
-			throw new AdhocException("Horizontal alignment " + adhocHorizontalAlignment.name() + " not supported");
+			throw new AdhocException("Horizontal text alignment " + adhocHorizontalAlignment.name() + " not supported");
 		}
 	}
 
-	protected VerticalAlignment verticalAlignment(AdhocVerticalAlignment adhocVerticalAlignment) {
+	protected VerticalTextAlignment verticalTextAlignment(AdhocVerticalAlignment adhocVerticalAlignment) {
 		if (adhocVerticalAlignment == null) {
 			return null;
 		}
 
 		switch (adhocVerticalAlignment) {
 		case TOP:
-			return VerticalAlignment.TOP;
+			return VerticalTextAlignment.TOP;
 		case MIDDLE:
-			return VerticalAlignment.MIDDLE;
+			return VerticalTextAlignment.MIDDLE;
 		case BOTTOM:
-			return VerticalAlignment.BOTTOM;
+			return VerticalTextAlignment.BOTTOM;
 		case JUSTIFIED:
-			return VerticalAlignment.JUSTIFIED;
+			return VerticalTextAlignment.JUSTIFIED;
 		default:
-			throw new AdhocException("Vertical alignment " + adhocVerticalAlignment.name() + " not supported");
+			throw new AdhocException("Vertical text alignment " + adhocVerticalAlignment.name() + " not supported");
 		}
 	}
 

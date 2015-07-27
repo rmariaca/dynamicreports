@@ -91,8 +91,8 @@ import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
@@ -334,7 +334,7 @@ public class ComponentTransform {
 		designTextField.setHeight(templateTransform.getTextFieldHeight(textField, style));
 		designTextField.setPattern(templateTransform.getTextFieldPattern(textField, style));
 		designTextField.setPatternExpression(accessor.getExpressionTransform().transformExpression(textField.getPatternExpression()));
-		designTextField.setHorizontalAlignment(templateTransform.getTextFieldHorizontalAlignment(textField, style));
+		designTextField.setHorizontalTextAlignment(templateTransform.getTextFieldHorizontalTextAlignment(textField, style));
 		designTextField.setValueExpression(accessor.getExpressionTransform().transformExpression(textField.getValueExpression(), templateTransform.getTextFieldValueFormatter(textField), null));
 		designTextField.setMarkup(textField.getMarkup());
 		if (textField.getEvaluationTime() != null) {
@@ -373,7 +373,7 @@ public class ComponentTransform {
 		designImage.setImageExpression(accessor.getExpressionTransform().transformExpression(image.getImageExpression()));
 		designImage.setUsingCache(image.getUsingCache());
 		designImage.setLazy(image.getLazy());
-		designImage.setHorizontalAlignment(image.getHorizontalAlignment());
+		designImage.setHorizontalImageAlignment(image.getHorizontalImageAlignment());
 		designImage.setWidth(accessor.getTemplateTransform().getImageWidth(image));
 		DRDesignStyle style = designImage.getStyle();
 		designImage.setHeight(accessor.getTemplateTransform().getImageHeight(image, imageHeight, style));
@@ -430,7 +430,7 @@ public class ComponentTransform {
 		}
 		DRDesignStyle style = accessor.getStyleTransform().transformStyle(pageXofYStyle, true, defaultStyleType);
 		Integer height = templateTransform.getPageXofYHeight(pageXofY, style);
-		HorizontalAlignment horizontalAlignment = templateTransform.getPageXofYHorizontalAlignment(pageXofY, style);
+		HorizontalTextAlignment horizontalTextAlignment = templateTransform.getPageXofYHorizontalTextAlignment(pageXofY, style);
 
 		DRStyle newStylePageX = new DRStyle();
 		newStylePageX.setParentStyle(pageXofYStyle);
@@ -451,7 +451,7 @@ public class ComponentTransform {
 		pageXField.setStyle(newStylePageX);
 		pageXField.setHeight(height);
 		pageXField.setHeightType(pageXofY.getHeightType());
-		pageXField.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+		pageXField.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT);
 		pageXField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), 0));
 
 		DRTextField<String> pageYField = new DRTextField<String>();
@@ -462,7 +462,7 @@ public class ComponentTransform {
 		pageYField.setStyle(newStylePageY);
 		pageYField.setHeight(height);
 		pageYField.setHeightType(pageXofY.getHeightType());
-		pageYField.setHorizontalAlignment(HorizontalAlignment.LEFT);
+		pageYField.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		pageYField.setValueExpression(new PageXofYNumberExpression(pageXofY.getFormatExpression(), 1));
 		DRIGroup pageYEvaluationGroup = accessor.getGroupTransform().getFirstResetPageNumberGroup();
 		if (pageYEvaluationGroup == null) {
@@ -474,7 +474,7 @@ public class ComponentTransform {
 		}
 
 		int pageXofYWidth = templateTransform.getPageXofYWidth(pageXofY);
-		switch (horizontalAlignment) {
+		switch (horizontalTextAlignment) {
 		case LEFT:
 			int pageXWidth = StyleResolver.getFontWidth(style, 4);
 			int pageYWidth = pageXofYWidth - pageXWidth;
@@ -564,7 +564,7 @@ public class ComponentTransform {
 		formatFieldTextField.setWidthType(formatField.getWidthType());
 		formatFieldTextField.setHeight(formatField.getHeight());
 		formatFieldTextField.setHeightType(formatField.getHeightType());
-		formatFieldTextField.setHorizontalAlignment(formatField.getHorizontalAlignment());
+		formatFieldTextField.setHorizontalTextAlignment(formatField.getHorizontalTextAlignment());
 		formatFieldTextField.setValueExpression(expression);
 		return formatFieldTextField;
 	}
@@ -623,7 +623,7 @@ public class ComponentTransform {
 			DRTextField<Boolean> textField = new DRTextField<Boolean>();
 			textField.setValueExpression(booleanField.getValueExpression());
 			textField.setDataType(DataTypes.booleanType());
-			textField.setHorizontalAlignment(booleanField.getHorizontalAlignment());
+			textField.setHorizontalTextAlignment(booleanField.getHorizontalTextAlignment());
 			textField.setValueFormatter(new BooleanTextValueFormatter(keyTrue, keyFalse, emptyWhenNullValue));
 			component = textField;
 			break;
@@ -659,7 +659,7 @@ public class ComponentTransform {
 			int imageHeight = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
 			designComponent = image((DRIImage) component, imageHeight, defaultStyleType);
 			TemplateTransform templateTransform = accessor.getTemplateTransform();
-			((DRDesignImage) designComponent).setHorizontalAlignment(templateTransform.getBooleanHorizontalAlignment(booleanField, designComponent.getStyle()));
+			((DRDesignImage) designComponent).setHorizontalImageAlignment(templateTransform.getBooleanHorizontalImageAlignment(booleanField, designComponent.getStyle()));
 		}
 		else {
 			designComponent = component(component, defaultStyleType, resetType, resetGroup);

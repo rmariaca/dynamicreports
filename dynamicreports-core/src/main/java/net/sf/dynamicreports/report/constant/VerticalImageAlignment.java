@@ -20,30 +20,13 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.builder.datatype;
-
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
-import net.sf.dynamicreports.report.defaults.Defaults;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class ShortType extends NumberType<Short> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-	@Override
-	public String getPattern() {
-		return Defaults.getDefaults().getShortType().getPattern();
-	}
-
-	@Override
-	public HorizontalTextAlignment getHorizontalTextAlignment() {
-		return Defaults.getDefaults().getShortType().getHorizontalTextAlignment();
-	}
-
-	@Override
-	protected Short numberToValue(Number number) {
-		return new Short(number.shortValue());
-	}
+public enum VerticalImageAlignment {
+	TOP,
+	MIDDLE,
+	BOTTOM
 }

@@ -26,7 +26,7 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 
 /**
@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.constant.Markup;
 public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRIDesignTextField {
 	private String pattern;
 	private DRIDesignExpression patternExpression;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 	private DRIDesignExpression valueExpression;
 	private boolean printRepeatedValues;
 	private EvaluationTime evaluationTime;
@@ -66,12 +66,12 @@ public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRI
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	@Override

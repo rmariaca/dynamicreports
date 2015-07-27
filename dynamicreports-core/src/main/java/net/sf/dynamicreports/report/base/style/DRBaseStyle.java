@@ -25,11 +25,13 @@ package net.sf.dynamicreports.report.base.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.definition.style.DRIBaseStyle;
 
 /**
@@ -42,8 +44,10 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 	private Color backgroundColor;
 	private Integer radius;
 	private ImageScale imageScale;
-	private HorizontalAlignment horizontalAlignment;
-	private VerticalAlignment verticalAlignment;
+	private HorizontalImageAlignment horizontalImageAlignment;
+	private VerticalImageAlignment verticalImageAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
+	private VerticalTextAlignment verticalTextAlignment;
 	private DRBorder border;
 	private DRPadding padding;
 	private DRFont font;
@@ -102,21 +106,39 @@ public abstract class DRBaseStyle implements DRIBaseStyle {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalImageAlignment getHorizontalImageAlignment() {
+		return horizontalImageAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		this.horizontalImageAlignment = horizontalImageAlignment;
 	}
 
 	@Override
-	public VerticalAlignment getVerticalAlignment() {
-		return verticalAlignment;
+	public VerticalImageAlignment getVerticalImageAlignment() {
+		return verticalImageAlignment;
 	}
 
-	public void setVerticalAlignment(VerticalAlignment verticalAlignment) {
-		this.verticalAlignment = verticalAlignment;
+	public void setVerticalImageAlignment(VerticalImageAlignment verticalImageAlignment) {
+		this.verticalImageAlignment = verticalImageAlignment;
+	}
+
+	@Override
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
+	}
+
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
+	}
+
+	@Override
+	public VerticalTextAlignment getVerticalTextAlignment() {
+		return verticalTextAlignment;
+	}
+
+	public void setVerticalTextAlignment(VerticalTextAlignment verticalTextAlignment) {
+		this.verticalTextAlignment = verticalTextAlignment;
 	}
 
 	@Override

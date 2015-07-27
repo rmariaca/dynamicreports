@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -44,6 +45,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
+@SuppressWarnings("deprecation")
 public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuilder<T>, DRTextField<T>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -102,8 +104,22 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 		return this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public TextFieldBuilder<T> setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalTextAlignment(null);
+		}
+		return this;
+	}
+
+	public TextFieldBuilder<T> setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
 		return this;
 	}
 

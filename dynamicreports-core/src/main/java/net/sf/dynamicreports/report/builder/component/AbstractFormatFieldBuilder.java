@@ -26,12 +26,13 @@ import net.sf.dynamicreports.report.base.component.DRFormatField;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "deprecation" })
 public abstract class AbstractFormatFieldBuilder<T extends AbstractFormatFieldBuilder<T, U>, U extends DRFormatField> extends HyperLinkComponentBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -49,8 +50,22 @@ public abstract class AbstractFormatFieldBuilder<T extends AbstractFormatFieldBu
 		return (T) this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalTextAlignment(null);
+		}
+		return (T) this;
+	}
+
+	public T setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
 		return (T) this;
 	}
 }

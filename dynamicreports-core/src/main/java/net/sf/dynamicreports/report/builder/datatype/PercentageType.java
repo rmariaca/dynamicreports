@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.datatype;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
@@ -38,7 +38,7 @@ public class PercentageType extends DoubleType {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getPercentageType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getPercentageType().getHorizontalTextAlignment();
 	}
 }

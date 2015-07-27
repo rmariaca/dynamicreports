@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.definition.crosstab;
 import java.io.Serializable;
 import java.util.List;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -46,7 +46,7 @@ public interface DRICrosstabMeasure<T> extends Serializable {
 
 	public String getPattern();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 
 	public DRIValueFormatter<?, ? super T> getValueFormatter();
 

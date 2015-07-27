@@ -29,6 +29,8 @@ import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -38,6 +40,7 @@ import org.apache.commons.lang3.Validate;
  *
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
+@SuppressWarnings("deprecation")
 public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DRBooleanColumn> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -192,9 +195,39 @@ public class BooleanColumnBuilder extends ColumnBuilder<BooleanColumnBuilder, DR
 	 *
 	 * @param horizontalAlignment
 	 * @return a column builder
+	 *
+	 * @deprecated use setHorizontalImageAlignment instead
 	 */
+	@Deprecated
 	public BooleanColumnBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getComponent().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getComponent().setHorizontalImageAlignment(HorizontalImageAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getComponent().setHorizontalImageAlignment(null);
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the column value horizontal image alignment.
+	 *
+	 * @param horizontalImageAlignment
+	 * @return a column builder
+	 */
+	public BooleanColumnBuilder setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		getComponent().setHorizontalImageAlignment(horizontalImageAlignment);
+		return this;
+	}
+
+	/**
+	 * Sets the column value horizontal text alignment.
+	 *
+	 * @param horizontalTextAlignment
+	 * @return a column builder
+	 */
+	public BooleanColumnBuilder setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getComponent().setHorizontalTextAlignment(horizontalTextAlignment);
 		return this;
 	}
 

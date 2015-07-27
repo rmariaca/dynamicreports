@@ -36,6 +36,7 @@ import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.DRICrosstabValue;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
@@ -50,6 +51,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
+@SuppressWarnings("deprecation")
 public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBuilder<T>, DRCrosstabMeasure<T>> implements DRICrosstabValue<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -127,8 +129,22 @@ public class CrosstabMeasureBuilder<T> extends AbstractBuilder<CrosstabMeasureBu
 		return this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public CrosstabMeasureBuilder<T> setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalTextAlignment(null);
+		}
+		return this;
+	}
+
+	public CrosstabMeasureBuilder<T> setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
 		return this;
 	}
 

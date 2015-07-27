@@ -24,11 +24,13 @@ package net.sf.dynamicreports.design.definition.style;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -43,9 +45,13 @@ public interface DRIDesignBaseStyle {
 
 	public ImageScale getImageScale();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 
-	public VerticalAlignment getVerticalAlignment();
+	public VerticalTextAlignment getVerticalTextAlignment();
+
+	public HorizontalImageAlignment getHorizontalImageAlignment();
+
+	public VerticalImageAlignment getVerticalImageAlignment();
 
 	public DRIDesignBorder getBorder();
 

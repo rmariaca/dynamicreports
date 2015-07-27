@@ -47,7 +47,8 @@ import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.Position;
@@ -994,15 +995,15 @@ public class TemplateTransform {
 		return null;
 	}
 
-	protected HorizontalAlignment getTextFieldHorizontalAlignment(DRITextField<?> textField, DRDesignStyle style) {
-		if (textField.getHorizontalAlignment() != null) {
-			return textField.getHorizontalAlignment();
+	protected HorizontalTextAlignment getTextFieldHorizontalTextAlignment(DRITextField<?> textField, DRDesignStyle style) {
+		if (textField.getHorizontalTextAlignment() != null) {
+			return textField.getHorizontalTextAlignment();
 		}
-		if (StyleResolver.getHorizontalAlignment(style) != null) {
-			return null;//StyleResolver.getHorizontalAlignment(style);
+		if (StyleResolver.getHorizontalTextAlignment(style) != null) {
+			return null;//StyleResolver.getHorizontalTextAlignment(style);
 		}
 		if (textField.getDataType() != null) {
-			return textField.getDataType().getHorizontalAlignment();
+			return textField.getDataType().getHorizontalTextAlignment();
 		}
 		return null;
 	}
@@ -1060,14 +1061,14 @@ public class TemplateTransform {
 		return StyleResolver.getFontHeight(style, 1);
 	}
 
-	protected HorizontalAlignment getPageXofYHorizontalAlignment(DRIPageXofY pageXofY, DRDesignStyle style) {
-		if (pageXofY.getHorizontalAlignment() != null) {
-			return pageXofY.getHorizontalAlignment();
+	protected HorizontalTextAlignment getPageXofYHorizontalTextAlignment(DRIPageXofY pageXofY, DRDesignStyle style) {
+		if (pageXofY.getHorizontalTextAlignment() != null) {
+			return pageXofY.getHorizontalTextAlignment();
 		}
-		if (StyleResolver.getHorizontalAlignment(style) != null) {
-			return StyleResolver.getHorizontalAlignment(style);
+		if (StyleResolver.getHorizontalTextAlignment(style) != null) {
+			return StyleResolver.getHorizontalTextAlignment(style);
 		}
-		return Defaults.getDefaults().getPageXofYHorizontalAlignment();
+		return Defaults.getDefaults().getPageXofYHorizontalTextAlignment();
 	}
 
 	//image
@@ -1810,14 +1811,14 @@ public class TemplateTransform {
 		return Defaults.getDefaults().getBooleanImageHeight();
 	}
 
-	protected HorizontalAlignment getBooleanHorizontalAlignment(DRIBooleanField booleanField, DRDesignStyle style) {
-		if (booleanField.getHorizontalAlignment() != null) {
-			return booleanField.getHorizontalAlignment();
+	protected HorizontalImageAlignment getBooleanHorizontalImageAlignment(DRIBooleanField booleanField, DRDesignStyle style) {
+		if (booleanField.getHorizontalImageAlignment() != null) {
+			return booleanField.getHorizontalImageAlignment();
 		}
-		if (StyleResolver.getHorizontalAlignment(style) != null) {
+		if (StyleResolver.getHorizontalImageAlignment(style) != null) {
 			return null;//StyleResolver.getHorizontalAlignment(style);
 		}
-		return Defaults.getDefaults().getBooleanType().getHorizontalAlignment();
+		return null;//Defaults.getDefaults().getBooleanType().getHorizontalImageAlignment();
 	}
 
 	public DRIReportStyle getBooleanColumnStyle(DRIBooleanColumn column) {

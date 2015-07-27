@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.builder.datatype;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
@@ -40,8 +40,8 @@ public class BigDecimalType extends NumberType<BigDecimal> {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getBigDecimalType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getBigDecimalType().getHorizontalTextAlignment();
 	}
 
 	@Override

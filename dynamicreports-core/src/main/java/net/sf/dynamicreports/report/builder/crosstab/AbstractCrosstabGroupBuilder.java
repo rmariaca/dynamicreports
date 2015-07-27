@@ -35,6 +35,7 @@ import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.DRIValue;
@@ -48,7 +49,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "deprecation" })
 public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGroupBuilder<T, U, V>, U extends DRCrosstabGroup<V>, V> extends AbstractBuilder<T, U> implements DRIValue<V> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -81,8 +82,22 @@ public abstract class AbstractCrosstabGroupBuilder<T extends AbstractCrosstabGro
 		return (T) this;
 	}
 
+	/**
+	 * @deprecated use setHeaderHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public T setHeaderHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHeaderHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHeaderHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHeaderHorizontalTextAlignment(null);
+		}
+		return (T) this;
+	}
+
+	public T setHeaderHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHeaderHorizontalTextAlignment(horizontalTextAlignment);
 		return (T) this;
 	}
 

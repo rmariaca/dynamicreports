@@ -37,14 +37,16 @@ import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.base.style.DRTabStop;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRConditionalStyle;
@@ -55,12 +57,14 @@ import net.sf.jasperreports.engine.JRPen;
 import net.sf.jasperreports.engine.JRStyle;
 import net.sf.jasperreports.engine.JRTemplate;
 import net.sf.jasperreports.engine.TabStop;
+import net.sf.jasperreports.engine.type.HorizontalImageAlignEnum;
 import net.sf.jasperreports.engine.type.HorizontalTextAlignEnum;
 import net.sf.jasperreports.engine.type.LineSpacingEnum;
 import net.sf.jasperreports.engine.type.LineStyleEnum;
 import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.type.TabStopAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalImageAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
 
@@ -133,8 +137,10 @@ public class JasperTemplateStyleLoader {
 		style.setBackgroundColor(jrStyle.getOwnBackcolor());
 		style.setRadius(jrStyle.getOwnRadius());
 		style.setImageScale(imageScale(jrStyle.getOwnScaleImageValue()));
-		style.setHorizontalAlignment(horizontalAlignment(jrStyle.getOwnHorizontalTextAlign()));
-		style.setVerticalAlignment(verticalAlignment(jrStyle.getOwnVerticalTextAlign()));
+		style.setHorizontalImageAlignment(horizontalImageAlignment(jrStyle.getOwnHorizontalImageAlign()));
+		style.setVerticalImageAlignment(verticalImageAlignment(jrStyle.getOwnVerticalImageAlign()));
+		style.setHorizontalTextAlignment(horizontalTextAlignment(jrStyle.getOwnHorizontalTextAlign()));
+		style.setVerticalTextAlignment(verticalTextAlignment(jrStyle.getOwnVerticalTextAlign()));
 		border(jrStyle.getLineBox(), style.getBorder());
 		padding(jrStyle.getLineBox(), style.getPadding());
 		font(jrStyle, style.getFont());
@@ -237,41 +243,75 @@ public class JasperTemplateStyleLoader {
 		}
 	}
 
-	private static HorizontalAlignment horizontalAlignment(HorizontalTextAlignEnum horizontalAlignment) {
-		if (horizontalAlignment == null) {
+	private static HorizontalImageAlignment horizontalImageAlignment(HorizontalImageAlignEnum horizontalImageAlignment) {
+		if (horizontalImageAlignment == null) {
 			return null;
 		}
 
-		switch (horizontalAlignment) {
+		switch (horizontalImageAlignment) {
 		case LEFT:
-			return HorizontalAlignment.LEFT;
+			return HorizontalImageAlignment.LEFT;
 		case CENTER:
-			return HorizontalAlignment.CENTER;
+			return HorizontalImageAlignment.CENTER;
 		case RIGHT:
-			return HorizontalAlignment.RIGHT;
-		case JUSTIFIED:
-			return HorizontalAlignment.JUSTIFIED;
+			return HorizontalImageAlignment.RIGHT;
 		default:
-			throw new JasperDesignException("Horizontal alignment " + horizontalAlignment.name() + " not supported");
+			throw new JasperDesignException("Horizontal image alignment " + horizontalImageAlignment.name() + " not supported");
 		}
 	}
 
-	private static VerticalAlignment verticalAlignment(VerticalTextAlignEnum verticalAlignment) {
-		if (verticalAlignment == null) {
+	private static VerticalImageAlignment verticalImageAlignment(VerticalImageAlignEnum verticalImageAlignment) {
+		if (verticalImageAlignment == null) {
 			return null;
 		}
 
-		switch (verticalAlignment) {
+		switch (verticalImageAlignment) {
 		case TOP:
-			return VerticalAlignment.TOP;
+			return VerticalImageAlignment.TOP;
 		case MIDDLE:
-			return VerticalAlignment.MIDDLE;
+			return VerticalImageAlignment.MIDDLE;
 		case BOTTOM:
-			return VerticalAlignment.BOTTOM;
-		case JUSTIFIED:
-			return VerticalAlignment.JUSTIFIED;
+			return VerticalImageAlignment.BOTTOM;
 		default:
-			throw new JasperDesignException("Vertical alignment " + verticalAlignment.name() + " not supported");
+			throw new JasperDesignException("Vertical image alignment " + verticalImageAlignment.name() + " not supported");
+		}
+	}
+
+	private static HorizontalTextAlignment horizontalTextAlignment(HorizontalTextAlignEnum horizontalTextAlignment) {
+		if (horizontalTextAlignment == null) {
+			return null;
+		}
+
+		switch (horizontalTextAlignment) {
+		case LEFT:
+			return HorizontalTextAlignment.LEFT;
+		case CENTER:
+			return HorizontalTextAlignment.CENTER;
+		case RIGHT:
+			return HorizontalTextAlignment.RIGHT;
+		case JUSTIFIED:
+			return HorizontalTextAlignment.JUSTIFIED;
+		default:
+			throw new JasperDesignException("Horizontal text alignment " + horizontalTextAlignment.name() + " not supported");
+		}
+	}
+
+	private static VerticalTextAlignment verticalTextAlignment(VerticalTextAlignEnum verticalTextAlignment) {
+		if (verticalTextAlignment == null) {
+			return null;
+		}
+
+		switch (verticalTextAlignment) {
+		case TOP:
+			return VerticalTextAlignment.TOP;
+		case MIDDLE:
+			return VerticalTextAlignment.MIDDLE;
+		case BOTTOM:
+			return VerticalTextAlignment.BOTTOM;
+		case JUSTIFIED:
+			return VerticalTextAlignment.JUSTIFIED;
+		default:
+			throw new JasperDesignException("Vertical text alignment " + verticalTextAlignment.name() + " not supported");
 		}
 	}
 

@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.base.component;
 import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -43,7 +43,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private DRIExpression<T> valueExpression;
 	private String pattern;
 	private DRIExpression<String> patternExpression;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private DRIDataType<? super T, T> dataType;
 	private Integer columns;
@@ -82,12 +82,12 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	@Override

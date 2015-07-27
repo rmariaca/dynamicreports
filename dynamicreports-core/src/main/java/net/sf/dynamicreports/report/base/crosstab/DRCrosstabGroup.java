@@ -30,7 +30,7 @@ import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -49,7 +49,7 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 
 	private String name;
 	private String headerPattern;
-	private HorizontalAlignment headerHorizontalAlignment;
+	private HorizontalTextAlignment headerHorizontalTextAlignment;
 	private DRIValueFormatter<?, ? super T> headerValueFormatter;
 	private Boolean headerStretchWithOverflow;
 	private DRHyperLink headerHyperLink;
@@ -88,12 +88,12 @@ public abstract class DRCrosstabGroup<T> implements DRICrosstabGroup<T> {
 	}
 
 	@Override
-	public HorizontalAlignment getHeaderHorizontalAlignment() {
-		return headerHorizontalAlignment;
+	public HorizontalTextAlignment getHeaderHorizontalTextAlignment() {
+		return headerHorizontalTextAlignment;
 	}
 
-	public void setHeaderHorizontalAlignment(HorizontalAlignment headerHorizontalAlignment) {
-		this.headerHorizontalAlignment = headerHorizontalAlignment;
+	public void setHeaderHorizontalTextAlignment(HorizontalTextAlignment headerHorizontalTextAlignment) {
+		this.headerHorizontalTextAlignment = headerHorizontalTextAlignment;
 	}
 
 	@Override

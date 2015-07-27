@@ -23,7 +23,8 @@
 package net.sf.dynamicreports.report.base.datatype;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 /**
@@ -33,7 +34,7 @@ public class DRDataType<U, T extends U> extends AbstractDataType<U, T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String pattern;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 	private DRIValueFormatter<?, ? extends U> valueFormatter;
 
 	public DRDataType() {
@@ -43,9 +44,9 @@ public class DRDataType<U, T extends U> extends AbstractDataType<U, T> {
 		this.pattern = pattern;
 	}
 
-	public DRDataType(String pattern, HorizontalAlignment horizontalAlignment) {
+	public DRDataType(String pattern, HorizontalTextAlignment horizontalTextAlignment) {
 		this.pattern = pattern;
-		this.horizontalAlignment = horizontalAlignment;
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	public void setPattern(String pattern) {
@@ -57,13 +58,13 @@ public class DRDataType<U, T extends U> extends AbstractDataType<U, T> {
 		return pattern;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
 	public void setValueFormatter(DRIValueFormatter<?, ? extends U> valueFormatter) {

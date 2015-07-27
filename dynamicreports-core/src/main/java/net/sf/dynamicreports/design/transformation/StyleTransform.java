@@ -205,8 +205,10 @@ public class StyleTransform {
 		designBaseStyle.setBackgroundColor(baseStyle.getBackgroundColor());
 		designBaseStyle.setRadius(baseStyle.getRadius());
 		designBaseStyle.setImageScale(baseStyle.getImageScale());
-		designBaseStyle.setHorizontalAlignment(baseStyle.getHorizontalAlignment());
-		designBaseStyle.setVerticalAlignment(baseStyle.getVerticalAlignment());
+		designBaseStyle.setHorizontalImageAlignment(baseStyle.getHorizontalImageAlignment());
+		designBaseStyle.setVerticalImageAlignment(baseStyle.getVerticalImageAlignment());
+		designBaseStyle.setHorizontalTextAlignment(baseStyle.getHorizontalTextAlignment());
+		designBaseStyle.setVerticalTextAlignment(baseStyle.getVerticalTextAlignment());
 		designBaseStyle.setBorder(border(baseStyle.getBorder()));
 		designBaseStyle.setPadding(padding(baseStyle.getPadding()));
 		designBaseStyle.setFont(transformFont(baseStyle.getFont()));
@@ -314,8 +316,10 @@ public class StyleTransform {
 		toStyle.setBackgroundColor(fromStyle.getBackgroundColor());
 		toStyle.setRadius(fromStyle.getRadius());
 		toStyle.setImageScale(fromStyle.getImageScale());
-		toStyle.setHorizontalAlignment(fromStyle.getHorizontalAlignment());
-		toStyle.setVerticalAlignment(fromStyle.getVerticalAlignment());
+		toStyle.setHorizontalImageAlignment(fromStyle.getHorizontalImageAlignment());
+		toStyle.setVerticalImageAlignment(fromStyle.getVerticalImageAlignment());
+		toStyle.setHorizontalTextAlignment(fromStyle.getHorizontalTextAlignment());
+		toStyle.setVerticalTextAlignment(fromStyle.getVerticalTextAlignment());
 		toStyle.setBorder((DRBorder) fromStyle.getBorder());
 		toStyle.setPadding((DRPadding) fromStyle.getPadding());
 		toStyle.setFont((DRFont) fromStyle.getFont());

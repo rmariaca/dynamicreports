@@ -184,7 +184,7 @@ public class CrosstabTransform {
 		DRTextField textField = new DRTextField();
 		textField.setValueExpression(group);
 		textField.setPattern(group.getHeaderPattern());
-		textField.setHorizontalAlignment(group.getHeaderHorizontalAlignment());
+		textField.setHorizontalTextAlignment(group.getHeaderHorizontalTextAlignment());
 		textField.setValueFormatter(group.getHeaderValueFormatter());
 		textField.setDataType(group.getDataType());
 		textField.setStretchWithOverflow(group.getHeaderStretchWithOverflow());
@@ -477,7 +477,7 @@ public class CrosstabTransform {
 			}
 
 			textField.setPattern(measure.getPattern());
-			textField.setHorizontalAlignment(measure.getHorizontalAlignment());
+			textField.setHorizontalTextAlignment(measure.getHorizontalTextAlignment());
 			textField.setValueFormatter(measure.getValueFormatter());
 			textField.setDataType(measure.getDataType());
 			textField.setStretchWithOverflow(measure.getStretchWithOverflow());

@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.definition.datatype;
 import java.io.Serializable;
 import java.util.Locale;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
@@ -40,7 +40,7 @@ public interface DRIDataType<U, T extends U> extends Serializable {
 
 	public DRIValueFormatter<?, ? extends U> getValueFormatter();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 
 	public String valueToString(U value, Locale locale);
 

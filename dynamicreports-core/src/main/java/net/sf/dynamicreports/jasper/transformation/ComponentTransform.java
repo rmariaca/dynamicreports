@@ -328,7 +328,7 @@ public class ComponentTransform {
 			jrTextField.setPattern(pattern);
 		}
 		jrTextField.setPatternExpression(accessor.getExpressionTransform().getExpression(textField.getPatternExpression()));
-		jrTextField.setHorizontalTextAlign(ConstantTransform.horizontalAlignment(textField.getHorizontalAlignment()));
+		jrTextField.setHorizontalTextAlign(ConstantTransform.horizontalTextAlignment(textField.getHorizontalTextAlignment()));
 		jrTextField.setExpression(accessor.getExpressionTransform().getExpression(textField.getValueExpression()));
 		jrTextField.setPrintRepeatedValues(textField.isPrintRepeatedValues());
 		jrTextField.setMarkup(ConstantTransform.markup(textField.getMarkup()));
@@ -380,7 +380,7 @@ public class ComponentTransform {
 
 		jrImage.setOnErrorType(OnErrorTypeEnum.BLANK);
 		jrImage.setScaleImage(ConstantTransform.imageScale(image.getImageScale()));
-		jrImage.setHorizontalImageAlign(ConstantTransform.horizontalImageAlignment(image.getHorizontalAlignment()));
+		jrImage.setHorizontalImageAlign(ConstantTransform.horizontalImageAlignment(image.getHorizontalImageAlignment()));
 		jrImage.setExpression(accessor.getExpressionTransform().getExpression(image.getImageExpression()));
 		if (image.getUsingCache() != null) {
 			jrImage.setUsingCache(image.getUsingCache());

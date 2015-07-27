@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
@@ -37,7 +38,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "deprecation" })
 public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> extends ColumnBuilder<T, DRValueColumn<U>> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -65,9 +66,29 @@ public abstract class ValueColumnBuilder<T extends ValueColumnBuilder<T, U>, U> 
 	 *
 	 * @param horizontalAlignment
 	 * @return a column builder
+	 *
+	 * @deprecated use setHorizontalTextAlignment instead
 	 */
+	@Deprecated
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getComponent().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getComponent().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getComponent().setHorizontalTextAlignment(null);
+		}
+
+		return (T) this;
+	}
+
+	/**
+	 * Sets the column value horizontal text alignment.
+	 *
+	 * @param horizontalTextAlignment
+	 * @return a column builder
+	 */
+	public T setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getComponent().setHorizontalTextAlignment(horizontalTextAlignment);
 		return (T) this;
 	}
 

@@ -75,12 +75,12 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.SubtotalPosition;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.definition.chart.dataset.DRICategoryChartSerie;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -347,8 +347,8 @@ public class AdhocConfigurationTest {
 		Assert.assertEquals("pen line color", Color.CYAN, style.getBorder().getTopPen().getLineColor());
 		Assert.assertEquals("foreground color", Color.WHITE, style.getForegroundColor());
 		Assert.assertEquals("background color", Color.DARK_GRAY, style.getBackgroundColor());
-		Assert.assertEquals("horizontal alignment", HorizontalAlignment.CENTER, style.getHorizontalAlignment());
-		Assert.assertEquals("vertical alignment", VerticalAlignment.MIDDLE, style.getVerticalAlignment());
+		Assert.assertEquals("horizontal alignment", HorizontalTextAlignment.CENTER, style.getHorizontalTextAlignment());
+		Assert.assertEquals("vertical alignment", VerticalTextAlignment.MIDDLE, style.getVerticalTextAlignment());
 		Assert.assertEquals("pattern", "#,###.00", style.getPattern());
 
 		DRPage page = report.getPage();

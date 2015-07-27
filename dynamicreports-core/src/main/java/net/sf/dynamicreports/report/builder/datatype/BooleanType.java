@@ -26,7 +26,7 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -42,8 +42,8 @@ public class BooleanType extends AbstractDataType<Boolean, Boolean> {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getBooleanType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getBooleanType().getHorizontalTextAlignment();
 	}
 
 	@Override

@@ -25,7 +25,7 @@ package net.sf.dynamicreports.design.definition.component;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 
 /**
@@ -37,7 +37,7 @@ public interface DRIDesignTextField extends DRIDesignHyperLinkComponent {
 
 	public DRIDesignExpression getPatternExpression();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 
 	public DRIDesignExpression getValueExpression();
 

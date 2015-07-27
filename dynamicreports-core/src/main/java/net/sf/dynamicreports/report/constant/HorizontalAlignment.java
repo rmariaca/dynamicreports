@@ -24,6 +24,8 @@ package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
+ *
+ * @deprecated use HorizontalTextAligment for texts or HorizontalImageAligment for images instead
  */
 public enum HorizontalAlignment {
 	LEFT,

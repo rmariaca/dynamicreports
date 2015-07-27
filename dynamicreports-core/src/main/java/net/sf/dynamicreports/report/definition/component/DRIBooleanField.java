@@ -23,7 +23,8 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -41,6 +42,8 @@ public interface DRIBooleanField extends DRIHyperLinkComponent {
 
 	public Integer getImageHeight();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalImageAlignment getHorizontalImageAlignment();
+
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 }
 

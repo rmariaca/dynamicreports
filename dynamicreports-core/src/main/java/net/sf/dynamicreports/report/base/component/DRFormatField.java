@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.base.component;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.component.DRIFormatField;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -36,7 +36,7 @@ public abstract class DRFormatField extends DRHyperLinkComponent implements DRIF
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<String> formatExpression;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 
 	@Override
 	public DRIExpression<String> getFormatExpression() {
@@ -49,12 +49,12 @@ public abstract class DRFormatField extends DRHyperLinkComponent implements DRIF
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 }
 

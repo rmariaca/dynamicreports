@@ -28,6 +28,8 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 import org.apache.commons.lang3.Validate;
@@ -35,6 +37,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
+@SuppressWarnings("deprecation")
 public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldBuilder, DRBooleanField> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -103,8 +106,27 @@ public class BooleanFieldBuilder extends HyperLinkComponentBuilder<BooleanFieldB
 		return this;
 	}
 
+	public BooleanFieldBuilder setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		getObject().setHorizontalImageAlignment(horizontalImageAlignment);
+		return this;
+	}
+
+	/**
+	 * @deprecated use setHorizontalImageAlignment instead
+	 */
+	@Deprecated
 	public BooleanFieldBuilder setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalImageAlignment(HorizontalImageAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalImageAlignment(null);
+		}
+		return this;
+	}
+
+	public BooleanFieldBuilder setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
 		return this;
 	}
 }

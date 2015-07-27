@@ -24,7 +24,7 @@ package net.sf.dynamicreports.report.defaults;
 
 import net.sf.dynamicreports.report.base.datatype.DRDataType;
 import net.sf.dynamicreports.report.base.style.DRFont;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.xml.XmlDataType;
 import net.sf.dynamicreports.report.defaults.xml.XmlDynamicReports;
 import net.sf.dynamicreports.report.defaults.xml.XmlFont;
@@ -82,11 +82,11 @@ public class DefaultBinder {
 			dataType.setPattern(xmlDataType.getPattern());
 		}
 		if (xmlDataType.getHorizontalAlignment() != null) {
-			HorizontalAlignment alignment = HorizontalAlignment.valueOf(xmlDataType.getHorizontalAlignment().name());
+			HorizontalTextAlignment alignment = HorizontalTextAlignment.valueOf(xmlDataType.getHorizontalAlignment().name());
 			if (alignment == null) {
-				throw new DRReportException("Horizontal alignment " + xmlDataType.getHorizontalAlignment().name() + " not supported");
+				throw new DRReportException("Horizontal text alignment " + xmlDataType.getHorizontalAlignment().name() + " not supported");
 			}
-			dataType.setHorizontalAlignment(alignment);
+			dataType.setHorizontalTextAlignment(alignment);
 		}
 	}
 

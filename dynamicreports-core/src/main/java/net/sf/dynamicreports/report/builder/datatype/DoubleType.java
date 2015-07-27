@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.datatype;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
@@ -38,8 +38,8 @@ public class DoubleType extends NumberType<Double> {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getDoubleType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getDoubleType().getHorizontalTextAlignment();
 	}
 
 	@Override

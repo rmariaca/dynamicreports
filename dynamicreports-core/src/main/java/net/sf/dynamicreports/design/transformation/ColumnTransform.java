@@ -141,7 +141,8 @@ public class ColumnTransform {
 		booleanField.setHeightType(column.getComponent().getHeightType());
 		booleanField.setImageWidth(column.getComponent().getImageWidth());
 		booleanField.setImageHeight(column.getComponent().getImageHeight());
-		booleanField.setHorizontalAlignment(column.getComponent().getHorizontalAlignment());
+		booleanField.setHorizontalImageAlignment(column.getComponent().getHorizontalImageAlignment());
+		booleanField.setHorizontalTextAlignment(column.getComponent().getHorizontalTextAlignment());
 		booleanField.setStyle(booleanColumnStyle);
 		booleanField.setPrintWhenExpression(column.getComponent().getPrintWhenExpression());
 		return booleanField;

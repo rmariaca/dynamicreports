@@ -29,7 +29,7 @@ import java.util.Locale;
 
 import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -45,8 +45,8 @@ public class DateType extends AbstractDataType<Date, Date> {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getDateType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getDateType().getHorizontalTextAlignment();
 	}
 
 	@Override

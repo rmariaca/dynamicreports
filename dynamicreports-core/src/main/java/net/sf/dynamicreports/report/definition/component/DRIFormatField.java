@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.report.definition.component;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -32,6 +32,6 @@ public interface DRIFormatField extends DRIHyperLinkComponent {
 
 	public DRIExpression<String> getFormatExpression();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 }
 

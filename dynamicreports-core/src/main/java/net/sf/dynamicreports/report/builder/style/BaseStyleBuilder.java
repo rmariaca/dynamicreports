@@ -29,19 +29,23 @@ import net.sf.dynamicreports.report.base.style.DRTabStop;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.LineSpacing;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 
 import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "deprecation" })
 public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U extends DRBaseStyle> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -201,8 +205,27 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		return (T) this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalTextAlignment(null);
+		}
+		return (T) this;
+	}
+
+	public T setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
+		return (T) this;
+	}
+
+	public T setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		getObject().setHorizontalImageAlignment(horizontalImageAlignment);
 		return (T) this;
 	}
 
@@ -260,14 +283,59 @@ public abstract class BaseStyleBuilder<T extends BaseStyleBuilder<T, U>, U exten
 		return (T) this;
 	}
 
+	/**
+	 * @deprecated use setTextAlignment instead
+	 */
+	@Deprecated
 	public T setAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment) {
-		getObject().setHorizontalAlignment(horizontalAlignment);
-		getObject().setVerticalAlignment(verticalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().setHorizontalTextAlignment(null);
+		}
+		if (verticalAlignment != null) {
+			getObject().setVerticalTextAlignment(VerticalTextAlignment.valueOf(verticalAlignment.name()));
+		}
+		else {
+			getObject().setVerticalTextAlignment(null);
+		}
 		return (T) this;
 	}
 
+	public T setTextAlignment(HorizontalTextAlignment horizontalTextAlignment, VerticalTextAlignment verticalTextAlignment) {
+		getObject().setHorizontalTextAlignment(horizontalTextAlignment);
+		getObject().setVerticalTextAlignment(verticalTextAlignment);
+		return (T) this;
+	}
+
+	public T setImageAlignment(HorizontalImageAlignment horizontalImageAlignment, VerticalImageAlignment verticalImageAlignment) {
+		getObject().setHorizontalImageAlignment(horizontalImageAlignment);
+		getObject().setVerticalImageAlignment(verticalImageAlignment);
+		return (T) this;
+	}
+
+	/**
+	 * @deprecated use setVerticalTextAlignment instead
+	 */
+	@Deprecated
 	public T setVerticalAlignment(VerticalAlignment verticalAlignment) {
-		getObject().setVerticalAlignment(verticalAlignment);
+		if (verticalAlignment != null) {
+			getObject().setVerticalTextAlignment(VerticalTextAlignment.valueOf(verticalAlignment.name()));
+		}
+		else {
+			getObject().setVerticalTextAlignment(null);
+		}
+		return (T) this;
+	}
+
+	public T setVerticalTextAlignment(VerticalTextAlignment verticalTextAlignment) {
+		getObject().setVerticalTextAlignment(verticalTextAlignment);
+		return (T) this;
+	}
+
+	public T setVerticalImageAlignment(VerticalImageAlignment verticalImageAlignment) {
+		getObject().setVerticalImageAlignment(verticalImageAlignment);
 		return (T) this;
 	}
 

@@ -25,11 +25,13 @@ package net.sf.dynamicreports.design.base.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.constant.Rotation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
@@ -41,8 +43,10 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	private Color backgroundColor;
 	private Integer radius;
 	private ImageScale imageScale;
-	private HorizontalAlignment horizontalAlignment;
-	private VerticalAlignment verticalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
+	private VerticalTextAlignment verticalTextAlignment;
+	private HorizontalImageAlignment horizontalImageAlignment;
+	private VerticalImageAlignment verticalImageAlignment;
 	private DRDesignBorder border;
 	private DRDesignPadding padding;
 	private DRDesignFont font;
@@ -89,21 +93,39 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	@Override
-	public VerticalAlignment getVerticalAlignment() {
-		return verticalAlignment;
+	public VerticalTextAlignment getVerticalTextAlignment() {
+		return verticalTextAlignment;
 	}
 
-	public void setVerticalAlignment(VerticalAlignment verticalAlignment) {
-		this.verticalAlignment = verticalAlignment;
+	public void setVerticalTextAlignment(VerticalTextAlignment verticalTextAlignment) {
+		this.verticalTextAlignment = verticalTextAlignment;
+	}
+
+	@Override
+	public HorizontalImageAlignment getHorizontalImageAlignment() {
+		return horizontalImageAlignment;
+	}
+
+	public void setHorizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		this.horizontalImageAlignment = horizontalImageAlignment;
+	}
+
+	@Override
+	public VerticalImageAlignment getVerticalImageAlignment() {
+		return verticalImageAlignment;
+	}
+
+	public void setVerticalImageAlignment(VerticalImageAlignment verticalImageAlignment) {
+		this.verticalImageAlignment = verticalImageAlignment;
 	}
 
 	@Override
@@ -196,8 +218,10 @@ public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
 			.append(backgroundColor, o.backgroundColor)
 			.append(radius, o.radius)
 			.append(imageScale, o.imageScale)
-			.append(horizontalAlignment, o.horizontalAlignment)
-			.append(verticalAlignment, o.verticalAlignment)
+			.append(horizontalTextAlignment, o.horizontalTextAlignment)
+			.append(verticalTextAlignment, o.verticalTextAlignment)
+			.append(horizontalImageAlignment, o.horizontalImageAlignment)
+			.append(verticalImageAlignment, o.verticalImageAlignment)
 			.append(border, o.border)
 			.append(padding, o.padding)
 			.append(font, o.font)

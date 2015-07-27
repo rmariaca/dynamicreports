@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -39,7 +40,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes", "deprecation"})
 public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBuilder<T, DRGroup> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
@@ -169,8 +170,22 @@ public abstract class GroupBuilder<T extends GroupBuilder<T>> extends AbstractBu
 		return (T) this;
 	}
 
+	/**
+	 * @deprecated use setHorizontalTextAlignment instead
+	 */
+	@Deprecated
 	public T setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		getObject().getValueField().setHorizontalAlignment(horizontalAlignment);
+		if (horizontalAlignment != null) {
+			getObject().getValueField().setHorizontalTextAlignment(HorizontalTextAlignment.valueOf(horizontalAlignment.name()));
+		}
+		else {
+			getObject().getValueField().setHorizontalTextAlignment(null);
+		}
+		return (T) this;
+	}
+
+	public T setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		getObject().getValueField().setHorizontalTextAlignment(horizontalTextAlignment);
 		return (T) this;
 	}
 

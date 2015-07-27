@@ -28,7 +28,7 @@ import java.util.List;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -49,7 +49,7 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 	private DRIExpression<?> expression;
 	private DRIDataType<? super T, T> dataType;
 	private String pattern;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 	private DRIValueFormatter<?, ? super T> valueFormatter;
 	private Boolean stretchWithOverflow;
 	private DRHyperLink hyperLink;
@@ -95,12 +95,12 @@ public class DRCrosstabMeasure<T> implements DRICrosstabMeasure<T> {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 	@Override

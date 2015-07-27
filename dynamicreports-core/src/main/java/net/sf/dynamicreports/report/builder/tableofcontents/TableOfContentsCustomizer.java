@@ -40,7 +40,7 @@ import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.builder.style.ReportStyleBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
@@ -103,7 +103,7 @@ public class TableOfContentsCustomizer implements DRITableOfContentsCustomizer {
 			titleStyle = stl.style()
 				.bold()
 				.setFontSize(16)
-				.setHorizontalAlignment(HorizontalAlignment.CENTER);
+				.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		}
 	}
 

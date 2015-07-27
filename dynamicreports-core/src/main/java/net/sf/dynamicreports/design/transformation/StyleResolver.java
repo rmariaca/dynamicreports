@@ -31,7 +31,8 @@ import java.util.Locale;
 import net.sf.dynamicreports.design.base.style.DRDesignStyle;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.base.style.DRFont;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
 import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.jasperreports.engine.DefaultJasperReportsContext;
@@ -329,15 +330,28 @@ public class StyleResolver {
 		return null;
 	}
 
-	public static HorizontalAlignment getHorizontalAlignment(DRDesignStyle style) {
+	public static HorizontalTextAlignment getHorizontalTextAlignment(DRDesignStyle style) {
 		if (style == null) {
 			return null;
 		}
-		if (style.getHorizontalAlignment() != null) {
-			return style.getHorizontalAlignment();
+		if (style.getHorizontalTextAlignment() != null) {
+			return style.getHorizontalTextAlignment();
 		}
 		if (style.getParentStyle() != null) {
-			return getHorizontalAlignment(style.getParentStyle());
+			return getHorizontalTextAlignment(style.getParentStyle());
+		}
+		return null;
+	}
+
+	public static HorizontalImageAlignment getHorizontalImageAlignment(DRDesignStyle style) {
+		if (style == null) {
+			return null;
+		}
+		if (style.getHorizontalImageAlignment() != null) {
+			return style.getHorizontalImageAlignment();
+		}
+		if (style.getParentStyle() != null) {
+			return getHorizontalImageAlignment(style.getParentStyle());
 		}
 		return null;
 	}

@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.builder.datatype;
 
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
@@ -38,7 +38,7 @@ public class DateYearToHourType extends DateType {
 	}
 
 	@Override
-	public HorizontalAlignment getHorizontalAlignment() {
-		return Defaults.getDefaults().getDateYearToHourType().getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return Defaults.getDefaults().getDateYearToHourType().getHorizontalTextAlignment();
 	}
 }

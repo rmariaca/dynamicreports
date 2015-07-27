@@ -42,8 +42,8 @@ import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Language;
 import net.sf.dynamicreports.report.constant.Orientation;
@@ -262,7 +262,7 @@ public class Default {
   private DRDataType<Boolean, Boolean> booleanType;
   private DRDataType<Character, Character> characterType;
   private DRDataType<String, String> stringType;
-	private HorizontalAlignment pageXofYHorizontalAlignment;
+	private HorizontalTextAlignment pageXofYHorizontalTextAlignment;
 	//system fonts
 	private boolean loadSystemFonts;
 
@@ -433,7 +433,7 @@ public class Default {
 		this.booleanImageHeight = 14;
 		this.booleanColumnStyle = null;
 
-		this.pageXofYHorizontalAlignment = HorizontalAlignment.CENTER;
+		this.pageXofYHorizontalTextAlignment = HorizontalTextAlignment.CENTER;
 
 		this.defaultSplitType = null;
 		this.titleSplitType = null;
@@ -457,30 +457,30 @@ public class Default {
 
 		this.font = new DRFont("SansSerif", 10);
 
-		this.bigDecimalType = new DRDataType<Number, BigDecimal>("#,##0.00#", HorizontalAlignment.RIGHT);
-		this.bigIntegerType = new DRDataType<Number, BigInteger>("#,##0", HorizontalAlignment.RIGHT);
-		this.byteType = new DRDataType<Number, Byte>("#,##0", HorizontalAlignment.RIGHT);
-		this.doubleType = new DRDataType<Number, Double>("#,##0.#", HorizontalAlignment.RIGHT);
-		this.floatType = new DRDataType<Number, Float>("#,##0.#", HorizontalAlignment.RIGHT);
-		this.integerType = new DRDataType<Number, Integer>("#,##0", HorizontalAlignment.RIGHT);
-		this.longType = new DRDataType<Number, Long>("#,##0", HorizontalAlignment.RIGHT);
-		this.shortType = new DRDataType<Number, Short>("#,##0", HorizontalAlignment.RIGHT);
-		this.dateType = new DRDataType<Date, Date>("MM/dd/yyyy", HorizontalAlignment.RIGHT);
-		this.dateYearToMonthType = new DRDataType<Date, Date>("MM/yyyy", HorizontalAlignment.RIGHT);
-		this.dateYearToHourType = new DRDataType<Date, Date>("MM/dd/yyyy h a", HorizontalAlignment.RIGHT);
-		this.dateYearToMinuteType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm a", HorizontalAlignment.RIGHT);
-		this.dateYearToSecondType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss a", HorizontalAlignment.RIGHT);
-		this.dateYearToFractionType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
-		this.dateYearType = new DRDataType<Date, Date>("yyyy", HorizontalAlignment.RIGHT);
-		this.dateMonthType = new DRDataType<Date, Date>("MMMM", HorizontalAlignment.RIGHT);
-		this.dateDayType = new DRDataType<Date, Date>("dd", HorizontalAlignment.RIGHT);
-		this.timeHourToMinuteType = new DRDataType<Date, Date>("h:mm a", HorizontalAlignment.RIGHT);
-		this.timeHourToSecondType = new DRDataType<Date, Date>("h:mm:ss a", HorizontalAlignment.RIGHT);
-		this.timeHourToFractionType = new DRDataType<Date, Date>("h:mm:ss,SSS a", HorizontalAlignment.RIGHT);
-		this.percentageType = new DRDataType<Number, Double>("#,##0.00%", HorizontalAlignment.RIGHT);
-		this.booleanType = new DRDataType<Boolean, Boolean>(null, HorizontalAlignment.CENTER);
-		this.characterType = new DRDataType<Character, Character>(null, HorizontalAlignment.LEFT);
-		this.stringType = new DRDataType<String, String>(null, HorizontalAlignment.LEFT);
+		this.bigDecimalType = new DRDataType<Number, BigDecimal>("#,##0.00#", HorizontalTextAlignment.RIGHT);
+		this.bigIntegerType = new DRDataType<Number, BigInteger>("#,##0", HorizontalTextAlignment.RIGHT);
+		this.byteType = new DRDataType<Number, Byte>("#,##0", HorizontalTextAlignment.RIGHT);
+		this.doubleType = new DRDataType<Number, Double>("#,##0.#", HorizontalTextAlignment.RIGHT);
+		this.floatType = new DRDataType<Number, Float>("#,##0.#", HorizontalTextAlignment.RIGHT);
+		this.integerType = new DRDataType<Number, Integer>("#,##0", HorizontalTextAlignment.RIGHT);
+		this.longType = new DRDataType<Number, Long>("#,##0", HorizontalTextAlignment.RIGHT);
+		this.shortType = new DRDataType<Number, Short>("#,##0", HorizontalTextAlignment.RIGHT);
+		this.dateType = new DRDataType<Date, Date>("MM/dd/yyyy", HorizontalTextAlignment.RIGHT);
+		this.dateYearToMonthType = new DRDataType<Date, Date>("MM/yyyy", HorizontalTextAlignment.RIGHT);
+		this.dateYearToHourType = new DRDataType<Date, Date>("MM/dd/yyyy h a", HorizontalTextAlignment.RIGHT);
+		this.dateYearToMinuteType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm a", HorizontalTextAlignment.RIGHT);
+		this.dateYearToSecondType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss a", HorizontalTextAlignment.RIGHT);
+		this.dateYearToFractionType = new DRDataType<Date, Date>("MM/dd/yyyy h:mm:ss,SSS a", HorizontalTextAlignment.RIGHT);
+		this.dateYearType = new DRDataType<Date, Date>("yyyy", HorizontalTextAlignment.RIGHT);
+		this.dateMonthType = new DRDataType<Date, Date>("MMMM", HorizontalTextAlignment.RIGHT);
+		this.dateDayType = new DRDataType<Date, Date>("dd", HorizontalTextAlignment.RIGHT);
+		this.timeHourToMinuteType = new DRDataType<Date, Date>("h:mm a", HorizontalTextAlignment.RIGHT);
+		this.timeHourToSecondType = new DRDataType<Date, Date>("h:mm:ss a", HorizontalTextAlignment.RIGHT);
+		this.timeHourToFractionType = new DRDataType<Date, Date>("h:mm:ss,SSS a", HorizontalTextAlignment.RIGHT);
+		this.percentageType = new DRDataType<Number, Double>("#,##0.00%", HorizontalTextAlignment.RIGHT);
+		this.booleanType = new DRDataType<Boolean, Boolean>(null, HorizontalTextAlignment.CENTER);
+		this.characterType = new DRDataType<Character, Character>(null, HorizontalTextAlignment.LEFT);
+		this.stringType = new DRDataType<String, String>(null, HorizontalTextAlignment.LEFT);
 
 		this.loadSystemFonts = true;
 	}
@@ -1153,8 +1153,8 @@ public class Default {
 		return stringType;
 	}
 
-	public HorizontalAlignment getPageXofYHorizontalAlignment() {
-		return pageXofYHorizontalAlignment;
+	public HorizontalTextAlignment getPageXofYHorizontalTextAlignment() {
+		return pageXofYHorizontalTextAlignment;
 	}
 
 	public boolean isLoadSystemFonts() {

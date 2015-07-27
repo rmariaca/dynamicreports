@@ -44,7 +44,8 @@ import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkTarget;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.ImageAnchorType;
@@ -71,7 +72,8 @@ import net.sf.dynamicreports.report.constant.TabStopAlignment;
 import net.sf.dynamicreports.report.constant.TableOrder;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.ValueLocation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalImageAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.report.constant.WhenResourceMissingType;
 import net.sf.jasperreports.charts.type.AxisPositionEnum;
@@ -109,6 +111,7 @@ import net.sf.jasperreports.engine.type.SortOrderEnum;
 import net.sf.jasperreports.engine.type.SplitTypeEnum;
 import net.sf.jasperreports.engine.type.StretchTypeEnum;
 import net.sf.jasperreports.engine.type.TabStopAlignEnum;
+import net.sf.jasperreports.engine.type.VerticalImageAlignEnum;
 import net.sf.jasperreports.engine.type.VerticalTextAlignEnum;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 import net.sf.jasperreports.engine.type.WhenResourceMissingTypeEnum;
@@ -200,29 +203,12 @@ public class ConstantTransform {
 		}
 	}
 
-	protected static HorizontalImageAlignEnum horizontalImageAlignment(HorizontalAlignment horizontalAlignment) {
-		if (horizontalAlignment == null) {
+	protected static HorizontalTextAlignEnum horizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		if (horizontalTextAlignment == null) {
 			return null;
 		}
 
-		switch (horizontalAlignment) {
-		case LEFT:
-			return HorizontalImageAlignEnum.LEFT;
-		case CENTER:
-			return HorizontalImageAlignEnum.CENTER;
-		case RIGHT:
-			return HorizontalImageAlignEnum.RIGHT;
-		default:
-			throw new JasperDesignException("Horizontal image alignment " + horizontalAlignment.name() + " not supported");
-		}
-	}
-
-	protected static HorizontalTextAlignEnum horizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		if (horizontalAlignment == null) {
-			return null;
-		}
-
-		switch (horizontalAlignment) {
+		switch (horizontalTextAlignment) {
 		case LEFT:
 			return HorizontalTextAlignEnum.LEFT;
 		case CENTER:
@@ -232,16 +218,16 @@ public class ConstantTransform {
 		case JUSTIFIED:
 			return HorizontalTextAlignEnum.JUSTIFIED;
 		default:
-			throw new JasperDesignException("Horizontal alignment " + horizontalAlignment.name() + " not supported");
+			throw new JasperDesignException("Horizontal text alignment " + horizontalTextAlignment.name() + " not supported");
 		}
 	}
 
-	protected static VerticalTextAlignEnum verticalAlignment(VerticalAlignment verticalAlignment) {
-		if (verticalAlignment == null) {
+	protected static VerticalTextAlignEnum verticalTextAlignment(VerticalTextAlignment verticalTextAlignment) {
+		if (verticalTextAlignment == null) {
 			return null;
 		}
 
-		switch (verticalAlignment) {
+		switch (verticalTextAlignment) {
 		case TOP:
 			return VerticalTextAlignEnum.TOP;
 		case MIDDLE:
@@ -251,7 +237,41 @@ public class ConstantTransform {
 		case JUSTIFIED:
 			return VerticalTextAlignEnum.JUSTIFIED;
 		default:
-			throw new JasperDesignException("Vertical alignment " + verticalAlignment.name() + " not supported");
+			throw new JasperDesignException("Vertical text alignment " + verticalTextAlignment.name() + " not supported");
+		}
+	}
+
+	protected static HorizontalImageAlignEnum horizontalImageAlignment(HorizontalImageAlignment horizontalImageAlignment) {
+		if (horizontalImageAlignment == null) {
+			return null;
+		}
+
+		switch (horizontalImageAlignment) {
+		case LEFT:
+			return HorizontalImageAlignEnum.LEFT;
+		case CENTER:
+			return HorizontalImageAlignEnum.CENTER;
+		case RIGHT:
+			return HorizontalImageAlignEnum.RIGHT;
+		default:
+			throw new JasperDesignException("Horizontal image alignment " + horizontalImageAlignment.name() + " not supported");
+		}
+	}
+
+	protected static VerticalImageAlignEnum verticalImageAlignment(VerticalImageAlignment verticalImageAlignment) {
+		if (verticalImageAlignment == null) {
+			return null;
+		}
+
+		switch (verticalImageAlignment) {
+		case TOP:
+			return VerticalImageAlignEnum.TOP;
+		case MIDDLE:
+			return VerticalImageAlignEnum.MIDDLE;
+		case BOTTOM:
+			return VerticalImageAlignEnum.BOTTOM;
+		default:
+			throw new JasperDesignException("Vertical image alignment " + verticalImageAlignment.name() + " not supported");
 		}
 	}
 

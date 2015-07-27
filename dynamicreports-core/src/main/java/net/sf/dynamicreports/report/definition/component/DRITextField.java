@@ -23,7 +23,7 @@
 package net.sf.dynamicreports.report.definition.component;
 
 import net.sf.dynamicreports.report.constant.Evaluation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -41,7 +41,7 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 
 	public DRIExpression<String> getPatternExpression();
 
-	public HorizontalAlignment getHorizontalAlignment();
+	public HorizontalTextAlignment getHorizontalTextAlignment();
 
 	public DRIValueFormatter<?, ? super T> getValueFormatter();
 

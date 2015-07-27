@@ -24,6 +24,8 @@ package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
+ *
+ * @deprecated use VerticalTextAligment for texts or VerticalImageAligment for images instead
  */
 public enum VerticalAlignment {
 	TOP,

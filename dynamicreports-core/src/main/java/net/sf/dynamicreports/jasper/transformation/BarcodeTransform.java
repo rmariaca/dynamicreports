@@ -158,6 +158,7 @@ public class BarcodeTransform {
 		return jrBarbecue;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void barcode(Barcode4jComponent jrBarcode, DRIDesignBarcode barcode) {
 		EvaluationTime evaluationTime = barcode.getEvaluationTime();
 		jrBarcode.setEvaluationTimeValue(ConstantTransform.evaluationTime(evaluationTime));
