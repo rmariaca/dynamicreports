@@ -47,7 +47,7 @@ public class Project {
 	private String commonslang3Version;
 	private String commonsloggingVersion;
 	private String commonscodecVersion;
-	private String itextpdfVersion;
+	private String itextVersion;
 	private String jasperreportsVersion;
 	private String jcommonVersion;
 	private String ecjVersion;
@@ -87,7 +87,7 @@ public class Project {
 		commonslang3Version = properties.getProperty("commonslang3Version");
 		commonsloggingVersion = properties.getProperty("commonsloggingVersion");
 		commonscodecVersion = properties.getProperty("commonscodecVersion");
-		itextpdfVersion = properties.getProperty("itextpdfVersion");
+		itextVersion = properties.getProperty("itextVersion");
 		jasperreportsVersion = properties.getProperty("jasperreportsVersion");
 		jcommonVersion = properties.getProperty("jcommonVersion");
 		ecjVersion = properties.getProperty("ecjVersion");
@@ -232,12 +232,12 @@ public class Project {
 		this.commonscodecVersion = commonscodecVersion;
 	}
 
-	public String getItextpdfVersion() {
-		return itextpdfVersion;
+	public String getItextVersion() {
+		return itextVersion;
 	}
 
-	public void setItextpdfVersion(String itextpdfVersion) {
-		this.itextpdfVersion = itextpdfVersion;
+	public void setItextVersion(String itextVersion) {
+		this.itextVersion = itextVersion;
 	}
 
 	public String getJasperreportsVersion() {

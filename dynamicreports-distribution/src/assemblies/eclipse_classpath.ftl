@@ -33,8 +33,7 @@
 	<classpathentry kind="lib" path="lib/commons-lang3-${project.commonslang3Version}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-${project.commonsloggingVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-${project.commonscodecVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/itextpdf-${project.itextpdfVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/itext-pdfa-${project.itextpdfVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/itext-${project.itextVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-${project.jasperreportsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-${project.jcommonVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/ecj-${project.ecjVersion}.jar"/>

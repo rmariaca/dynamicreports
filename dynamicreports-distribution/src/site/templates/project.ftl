@@ -20,7 +20,7 @@
 	<barbecueVersion>${project.barbecueVersion}</barbecueVersion>
 	<avalonframeworkimplVersion>${project.avalonframeworkimplVersion}</avalonframeworkimplVersion>
 	<batikbridgeVersion>${project.batikbridgeVersion}</batikbridgeVersion>
-	<itextpdfVersion>${project.itextpdfVersion}</itextpdfVersion>
+	<itextVersion>${project.itextVersion}</itextVersion>
 	<jxlVersion>${project.jxlVersion}</jxlVersion>
 	<poiVersion>${project.poiVersion}</poiVersion>
 	<bcprovjdk15onVersion>${project.bcprovjdk15onVersion}</bcprovjdk15onVersion>
