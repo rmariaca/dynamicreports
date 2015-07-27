@@ -23,7 +23,7 @@
 	<itextVersion>${project.itextVersion}</itextVersion>
 	<jxlVersion>${project.jxlVersion}</jxlVersion>
 	<poiVersion>${project.poiVersion}</poiVersion>
-	<bcprovjdk15onVersion>${project.bcprovjdk15onVersion}</bcprovjdk15onVersion>
+	<bcprovjdk14Version>${project.bcprovjdk14Version}</bcprovjdk14Version>
 	<springframeworkVersion>${project.springframeworkVersion}</springframeworkVersion>
 	<hsqldbVersion>${project.hsqldbVersion}</hsqldbVersion>
 	<xalanVersion>${project.xalanVersion}</xalanVersion>

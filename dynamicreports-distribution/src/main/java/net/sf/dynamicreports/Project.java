@@ -39,7 +39,7 @@ public class Project {
 	private String barcode4jVersion;
 	private String barbecueVersion;
 	private String batikbridgeVersion;
-	private String bcprovjdk15onVersion;
+	private String bcprovjdk14Version;
 	private String commonsbeanutilsVersion;
 	private String commonscollectionsVersion;
 	private String commonsdigesterVersion;
@@ -79,7 +79,7 @@ public class Project {
 		barcode4jVersion = properties.getProperty("barcode4jVersion");
 		barbecueVersion = properties.getProperty("barbecueVersion");
 		batikbridgeVersion = properties.getProperty("batikbridgeVersion");
-		bcprovjdk15onVersion = properties.getProperty("bcprovjdk15onVersion");
+		bcprovjdk14Version = properties.getProperty("bcprovjdk14Version");
 		commonsbeanutilsVersion = properties.getProperty("commonsbeanutilsVersion");
 		commonscollectionsVersion = properties.getProperty("commonscollectionsVersion");
 		commonsdigesterVersion = properties.getProperty("commonsdigesterVersion");
@@ -168,12 +168,12 @@ public class Project {
 		this.batikbridgeVersion = batikbridgeVersion;
 	}
 
-	public String getBcprovjdk15onVersion() {
-		return bcprovjdk15onVersion;
+	public String getBcprovjdk14Version() {
+		return bcprovjdk14Version;
 	}
 
-	public void setBcprovjdk15onVersion(String bcprovjdk15onVersion) {
-		this.bcprovjdk15onVersion = bcprovjdk15onVersion;
+	public void setBcprovjdk14Version(String bcprovjdk14Version) {
+		this.bcprovjdk14Version = bcprovjdk14Version;
 	}
 
 	public String getCommonsbeanutilsVersion() {

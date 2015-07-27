@@ -25,7 +25,7 @@
 	<classpathentry kind="lib" path="lib/batik-svg-dom-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-util-${project.batikbridgeVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/batik-xml-${project.batikbridgeVersion}.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-jdk15on-${project.bcprovjdk15onVersion}.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk14-${project.bcprovjdk14Version}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-${project.commonsbeanutilsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-${project.commonscollectionsVersion}.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-${project.commonsdigesterVersion}.jar"/>
