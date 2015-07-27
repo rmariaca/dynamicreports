@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -40,18 +40,18 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SimpleReport_Step06 {
-	
+
 	public SimpleReport_Step06() {
 		build();
 	}
-	
+
 	private void build() {
 		StyleBuilder boldStyle         = stl.style().bold();
-		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);
-		
+
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
@@ -62,7 +62,7 @@ public class SimpleReport_Step06 {
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                                                   .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		Bar3DChartBuilder itemChart = cht.bar3DChart()
 		                                 .setTitle("Sales by item")
 		                                 .setCategory(itemColumn)
@@ -73,7 +73,7 @@ public class SimpleReport_Step06 {
 		                                 .setCategory(itemColumn)
 		                                 .setUseSeriesAsCategory(true)
 		                                 .addSerie(
-		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));		
+		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
 		try {
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
@@ -95,7 +95,7 @@ public class SimpleReport_Step06 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -108,7 +108,7 @@ public class SimpleReport_Step06 {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleReport_Step06();
 	}

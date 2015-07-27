@@ -34,12 +34,12 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SimpleReport_Step01 {
-	
+
 	public SimpleReport_Step01() {
 		build();
 	}
-	
-	private void build() {	
+
+	private void build() {
 		try {
 			report()//create new report design
 			  .columns(//add columns
@@ -55,7 +55,7 @@ public class SimpleReport_Step01 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -68,7 +68,7 @@ public class SimpleReport_Step01 {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleReport_Step01();
 	}

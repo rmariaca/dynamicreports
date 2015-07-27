@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizer;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -57,7 +57,7 @@ public class CustomTableOfContentsReport {
 			.setForegroundColor(Color.BLUE)
 			.setFontSize(18)
 			.bold()
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder headingToc0Style = stl.style(Templates.rootStyle)
 			.setFontSize(12)
 			.bold();

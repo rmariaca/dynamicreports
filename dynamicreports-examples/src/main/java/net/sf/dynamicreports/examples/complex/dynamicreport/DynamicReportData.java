@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
@@ -87,7 +87,7 @@ public class DynamicReportData {
     report.addColumn(new DynamicColumn("State", "state", "string"));
     report.addColumn(new DynamicColumn("Item", "item", "string"));
     DynamicColumn column = new DynamicColumn("Order date", "orderdate", "date");
-    column.setHorizontalAlignment(HorizontalAlignment.CENTER);
+    column.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
     report.addColumn(column);
 		report.addColumn(new DynamicColumn("Quantity", "quantity", "integer"));
     column = new DynamicColumn("Unit price", "unitprice", "bigDecimal");

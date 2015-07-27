@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.builder.column.ComponentColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -50,7 +50,7 @@ public class VerticalValuesReport {
 
 	private void build() {
 		StyleBuilder nameStyle = stl.style().bold();
-		StyleBuilder valueStyle = stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT);
+		StyleBuilder valueStyle = stl.style().setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 
 		FieldBuilder<String>     itemField      = field("item",      type.stringType());
 		FieldBuilder<Integer>    quantityField  = field("quantity",  type.integerType());

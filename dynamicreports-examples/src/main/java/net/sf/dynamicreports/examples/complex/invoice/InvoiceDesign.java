@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -54,16 +54,16 @@ public class InvoiceDesign {
 		StyleBuilder subtotalStyle = stl.style(columnStyle)
 			.bold();
 		StyleBuilder shippingStyle = stl.style(Templates.boldStyle)
-			.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT);
 
 		//init columns
 		TextColumnBuilder<Integer> rowNumberColumn = col.reportRowNumberColumn()
 			.setFixedColumns(2)
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		TextColumnBuilder<String> descriptionColumn = col.column("Description", "description", type.stringType())
 			.setFixedWidth(250);
 		TextColumnBuilder<Integer> quantityColumn = col.column("Quantity", "quantity", type.integerType())
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit Price", "unitprice", Templates.currencyType);
 		TextColumnBuilder<String> taxColumn = col.column("Tax", exp.text("20%"))
 			.setFixedColumns(3);

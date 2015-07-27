@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -61,8 +61,8 @@ public class DynamicReportDesign {
 			if (column.getPattern() != null) {
 				drColumn.setPattern(column.getPattern());
 			}
-			if (column.getHorizontalAlignment() != null) {
-				drColumn.setHorizontalAlignment(column.getHorizontalAlignment());
+			if (column.getHorizontalTextAlignment() != null) {
+				drColumn.setHorizontalTextAlignment(column.getHorizontalTextAlignment());
 			}
 			drColumns.put(column.getName(), drColumn);
 			report.columns(drColumn);
@@ -84,7 +84,7 @@ public class DynamicReportDesign {
 		if (dynamicReport.getTitle() != null) {
 			TextFieldBuilder<String> title = cmp.text(dynamicReport.getTitle())
 				.setStyle(Templates.bold12CenteredStyle)
-				.setHorizontalAlignment(HorizontalAlignment.CENTER);
+				.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 			report.addTitle(title);
 		}
 		if (dynamicReport.isShowPageNumber()) {

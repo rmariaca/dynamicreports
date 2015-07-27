@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -55,7 +55,7 @@ public class ShippingLabelDesign {
 		bold14Style = stl.style(Templates.boldStyle).setFontSize(14);
 		StyleBuilder boldCentered30Style = stl.style(bold14Style)
 			.setFontSize(30)
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder boldCentered100Style = stl.style(boldCentered30Style)
 			.setFontSize(100);
 

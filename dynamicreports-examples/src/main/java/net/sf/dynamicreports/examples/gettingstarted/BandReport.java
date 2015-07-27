@@ -27,9 +27,9 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Rotation;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -47,9 +47,9 @@ public class BandReport {
 	private void build() {
 		boldCenteredStyle = stl.style()
 		                       .bold()
-		                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                       .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder backgroundStyle = stl.style(boldCenteredStyle)
-		                                  .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                  .setVerticalTextAlignment(VerticalTextAlignment.MIDDLE)
 		                                  .setRotation(Rotation.LEFT);
 
 		TextColumnBuilder<String> column1 = col.column("Column1", "column1", type.stringType());

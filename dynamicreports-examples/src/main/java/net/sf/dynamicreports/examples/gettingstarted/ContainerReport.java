@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -45,7 +45,7 @@ public class ContainerReport {
 	private void build() {
 		boldCenteredStyle = stl.style()
 		                       .bold()
-		                       .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                       .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		borderedStyle     = stl.style(stl.pen1Point());
 
 		try {

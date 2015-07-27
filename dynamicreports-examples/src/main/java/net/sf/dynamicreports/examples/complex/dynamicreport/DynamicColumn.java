@@ -22,7 +22,7 @@
 
 package net.sf.dynamicreports.examples.complex.dynamicreport;
 
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -32,7 +32,7 @@ public class DynamicColumn {
 	private String title;
 	private String type;
 	private String pattern;
-	private HorizontalAlignment horizontalAlignment;
+	private HorizontalTextAlignment horizontalTextAlignment;
 
 	public DynamicColumn(String title, String name, String type) {
 		this.name = name;
@@ -72,12 +72,12 @@ public class DynamicColumn {
 		this.pattern = pattern;
 	}
 
-	public HorizontalAlignment getHorizontalAlignment() {
-		return horizontalAlignment;
+	public HorizontalTextAlignment getHorizontalTextAlignment() {
+		return horizontalTextAlignment;
 	}
 
-	public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
-		this.horizontalAlignment = horizontalAlignment;
+	public void setHorizontalTextAlignment(HorizontalTextAlignment horizontalTextAlignment) {
+		this.horizontalTextAlignment = horizontalTextAlignment;
 	}
 
 }

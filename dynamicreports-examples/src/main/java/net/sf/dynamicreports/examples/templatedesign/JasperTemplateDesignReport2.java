@@ -29,8 +29,8 @@ import java.io.InputStream;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -85,8 +85,8 @@ public class JasperTemplateDesignReport2 {
 
 	private JasperReportBuilder createSubreport(String title) {
 		StyleBuilder style = stl.style()
-		                        .setHorizontalAlignment(HorizontalAlignment.CENTER)
-		                        .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                        .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER)
+		                        .setVerticalTextAlignment(VerticalTextAlignment.MIDDLE)
 		                        .setBorder(stl.pen1Point());
 
 		JasperReportBuilder report = report();

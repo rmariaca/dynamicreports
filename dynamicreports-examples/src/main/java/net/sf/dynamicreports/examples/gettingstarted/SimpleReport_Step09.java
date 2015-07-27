@@ -33,8 +33,8 @@ import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -43,21 +43,21 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SimpleReport_Step09 {
-	
+
 	public SimpleReport_Step09() {
 		build();
 	}
-	
+
 	private void build() {
 		StyleBuilder boldStyle         = stl.style().bold();
-		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);
 		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
-		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                    .setVerticalTextAlignment(VerticalTextAlignment.MIDDLE)
 		                                    .setFontSize(15);
-		
+
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
@@ -68,7 +68,7 @@ public class SimpleReport_Step09 {
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                                                   .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		Bar3DChartBuilder itemChart = cht.bar3DChart()
 		                                 .setTitle("Sales by item")
 		                                 .setCategory(itemColumn)
@@ -100,8 +100,8 @@ public class SimpleReport_Step09 {
 			  	cmp.horizontalList()
 			  		.add(
 			  			cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(80, 80),
-			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
-			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
+			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT),
+			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT))
 			  		.newRow()
 			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
@@ -113,7 +113,7 @@ public class SimpleReport_Step09 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -126,7 +126,7 @@ public class SimpleReport_Step09 {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleReport_Step09();
 	}

@@ -35,8 +35,8 @@ import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -45,23 +45,23 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SimpleReport_Step12 {
-	
+
 	public SimpleReport_Step12() {
 		build();
 	}
-	
+
 	private void build() {
 		CurrencyType currencyType = new CurrencyType();
-		
+
 		StyleBuilder boldStyle         = stl.style().bold();
-		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);
 		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
-		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                    .setVerticalTextAlignment(VerticalTextAlignment.MIDDLE)
 		                                    .setFontSize(15);
-		
+
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
@@ -73,7 +73,7 @@ public class SimpleReport_Step12 {
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                                                   .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		Bar3DChartBuilder itemChart = cht.bar3DChart()
 		                                 .setTitle("Sales by item")
 		                                 .setCategory(itemColumn)
@@ -87,7 +87,7 @@ public class SimpleReport_Step12 {
 		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
 		ColumnGroupBuilder itemGroup = grp.group(itemColumn);
 		itemGroup.setPrintSubtotalsWhenExpression(exp.printWhenGroupHasMoreThanOneRow(itemGroup));
-		
+
 		ConditionalStyleBuilder condition1 = stl.conditionalStyle(cnd.greater(priceColumn, 150))
 		                                        .setBackgroundColor(new Color(210, 255, 210));
 		ConditionalStyleBuilder condition2 = stl.conditionalStyle(cnd.smaller(priceColumn, 30))
@@ -122,8 +122,8 @@ public class SimpleReport_Step12 {
 			  	cmp.horizontalList()
 			  		.add(
 			  			cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(80, 80),
-			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
-			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
+			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT),
+			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT))
 			  		.newRow()
 			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
@@ -135,16 +135,16 @@ public class SimpleReport_Step12 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class CurrencyType extends BigDecimalType {
 		private static final long serialVersionUID = 1L;
-		
+
 		@Override
 		public String getPattern() {
 			return "$ #,###.00";
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -157,7 +157,7 @@ public class SimpleReport_Step12 {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleReport_Step12();
 	}

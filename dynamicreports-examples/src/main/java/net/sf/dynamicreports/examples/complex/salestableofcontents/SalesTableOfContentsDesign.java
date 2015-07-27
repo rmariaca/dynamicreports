@@ -48,7 +48,7 @@ import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCusto
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.HyperLinkType;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -160,7 +160,7 @@ public class SalesTableOfContentsDesign {
 			TextFieldBuilder<String> pageIndexComponent = cmp.text(new CountryHeadingExpression())
 				.setHyperLink(countryReferenceHyperLink)
 				.setStyle(style)
-				.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+				.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT);
 			headingComponent.add(pageIndexComponent);
 
 			return headingComponent;

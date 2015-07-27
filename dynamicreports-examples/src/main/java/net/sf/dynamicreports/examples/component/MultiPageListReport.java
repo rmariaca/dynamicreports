@@ -27,8 +27,8 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.component.MultiPageListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
@@ -42,7 +42,7 @@ public class MultiPageListReport {
 
 	private void build() {
 		StyleBuilder style = stl.style(stl.pen1Point())
-			.setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			.setTextAlignment(HorizontalTextAlignment.CENTER, VerticalTextAlignment.MIDDLE);
 
 		MultiPageListBuilder multiPageList = cmp.multiPageList();
 		for (int i = 0; i < 10; i++) {

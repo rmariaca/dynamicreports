@@ -34,8 +34,8 @@ import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.builder.tableofcontents.TableOfContentsCustomizerBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
@@ -64,21 +64,21 @@ public class Templates {
 		boldStyle           = stl.style(rootStyle).bold();
 		italicStyle         = stl.style(rootStyle).italic();
 		boldCenteredStyle   = stl.style(boldStyle)
-		                         .setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+		                         .setTextAlignment(HorizontalTextAlignment.CENTER, VerticalTextAlignment.MIDDLE);
 		bold12CenteredStyle = stl.style(boldCenteredStyle)
 		                         .setFontSize(12);
 		bold18CenteredStyle = stl.style(boldCenteredStyle)
 		                         .setFontSize(18);
 		bold22CenteredStyle = stl.style(boldCenteredStyle)
                              .setFontSize(22);
-		columnStyle         = stl.style(rootStyle).setVerticalAlignment(VerticalAlignment.MIDDLE);
+		columnStyle         = stl.style(rootStyle).setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
 		columnTitleStyle    = stl.style(columnStyle)
 		                         .setBorder(stl.pen1Point())
-		                         .setHorizontalAlignment(HorizontalAlignment.CENTER)
+		                         .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER)
 		                         .setBackgroundColor(Color.LIGHT_GRAY)
 		                         .bold();
 		groupStyle          = stl.style(boldStyle)
-		                         .setHorizontalAlignment(HorizontalAlignment.LEFT);
+		                         .setHorizontalTextAlignment(HorizontalTextAlignment.LEFT);
 		subtotalStyle       = stl.style(boldStyle)
 		                         .setTopBorder(stl.pen1Point());
 
@@ -115,7 +115,7 @@ public class Templates {
 		  cmp.horizontalList(
 		  	cmp.image(Templates.class.getResource("images/dynamicreports.png")).setFixedDimension(60, 60),
 		  	cmp.verticalList(
-		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
+		  		cmp.text("DynamicReports").setStyle(bold22CenteredStyle).setHorizontalTextAlignment(HorizontalTextAlignment.LEFT),
 		  		cmp.text("http://www.dynamicreports.org").setStyle(italicStyle).setHyperLink(link))).setFixedWidth(300);
 
 		footerComponent = cmp.pageXofY()
@@ -131,7 +131,7 @@ public class Templates {
 		return cmp.horizontalList()
 		        .add(
 		        	dynamicReportsComponent,
-		        	cmp.text(label).setStyle(bold18CenteredStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
+		        	cmp.text(label).setStyle(bold18CenteredStyle).setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT))
 		        .newRow()
 		        .add(cmp.line())
 		        .newRow()

@@ -35,7 +35,7 @@ import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Evaluation;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -69,7 +69,7 @@ public class CustomTextSubtotalReport {
 		StyleBuilder subtotalStyle = stl.style()
 			.bold()
 			.setTopBorder(stl.pen1Point())
-			.setHorizontalAlignment(HorizontalAlignment.CENTER);
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 
 		TextFieldBuilder<String> summarySbt = cmp.text(new CustomTextSubtotal(quantitySum, priceSum))
 			.setStyle(subtotalStyle);

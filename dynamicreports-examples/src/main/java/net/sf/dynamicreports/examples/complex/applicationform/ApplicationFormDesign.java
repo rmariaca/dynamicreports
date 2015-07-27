@@ -33,10 +33,10 @@ import net.sf.dynamicreports.report.builder.component.FillerBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -64,13 +64,13 @@ public class ApplicationFormDesign {
 			.setFontSize(12)
 			.setPadding(2);
 		centeredStyle = stl.style(textStyle)
-			.setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			.setTextAlignment(HorizontalTextAlignment.CENTER, VerticalTextAlignment.MIDDLE);
 		labelStyle = stl.style(textStyle)
-			.setHorizontalAlignment(HorizontalAlignment.LEFT)
+			.setHorizontalTextAlignment(HorizontalTextAlignment.LEFT)
 			.bold();
 		cellStyle = stl.style(textStyle)
 			.setBorder(stl.pen1Point())
-			.setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			.setTextAlignment(HorizontalTextAlignment.CENTER, VerticalTextAlignment.MIDDLE);
 
 		HorizontalListBuilder applicant = cmp.horizontalList()
 			.add(label("First name", 14), emptyCell(1), label("Last name", 16)).newRow()

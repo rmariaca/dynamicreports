@@ -28,7 +28,7 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -37,14 +37,14 @@ import net.sf.jasperreports.engine.JRDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SimpleReport_Step02 {
-	
+
 	public SimpleReport_Step02() {
 		build();
 	}
-	
+
 	private void build() {
 		StyleBuilder boldStyle         = stl.style().bold();
-		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
+		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalTextAlignment(HorizontalTextAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())
 		                                    .setBackgroundColor(Color.LIGHT_GRAY);
@@ -65,7 +65,7 @@ public class SimpleReport_Step02 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource createDataSource() {
 		DRDataSource dataSource = new DRDataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -78,7 +78,7 @@ public class SimpleReport_Step02 {
 		dataSource.add("Book", 8, new BigDecimal(9));
 		return dataSource;
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleReport_Step02();
 	}

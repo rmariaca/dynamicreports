@@ -33,8 +33,8 @@ import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -57,11 +57,11 @@ public class TemplateStyleReport {
 			.italic();
 		StyleBuilder columnStyle = stl.style()
 			.setName("columnStyle")
-			.setVerticalAlignment(VerticalAlignment.MIDDLE);
+			.setVerticalTextAlignment(VerticalTextAlignment.MIDDLE);
 		StyleBuilder columnTitleStyle = stl.style(columnStyle)
 			.setName("columnTitleStyle")
 			.setBorder(stl.pen1Point())
-			.setHorizontalAlignment(HorizontalAlignment.CENTER)
+			.setHorizontalTextAlignment(HorizontalTextAlignment.CENTER)
 			.setBackgroundColor(Color.LIGHT_GRAY);
 		ReportTemplateBuilder template = template()
 			.templateStyles(style1, style2, columnStyle, columnTitleStyle);
