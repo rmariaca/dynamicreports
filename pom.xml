@@ -96,7 +96,15 @@
 					<exclusion>
 						<groupId>org.olap4j</groupId>
 						<artifactId>olap4j</artifactId>
-					</exclusion>			
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.castor</groupId>
+						<artifactId>castor-xml</artifactId>
+					</exclusion>	
+					<exclusion>
+						<groupId>com.google.zxing</groupId>
+						<artifactId>core</artifactId>
+					</exclusion>		
 				</exclusions>
 			</dependency>
 			<dependency>
