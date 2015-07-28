@@ -43,6 +43,7 @@ import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
+import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.Language;
@@ -215,6 +216,7 @@ public class Default {
 	private int booleanImageWidth;
 	private int booleanImageHeight;
 	private DRStyle booleanColumnStyle;
+	private HorizontalImageAlignment booleanHorizontalImageAlignment;
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -432,6 +434,7 @@ public class Default {
 		this.booleanImageWidth = 14;
 		this.booleanImageHeight = 14;
 		this.booleanColumnStyle = null;
+		this.booleanHorizontalImageAlignment = HorizontalImageAlignment.CENTER;
 
 		this.pageXofYHorizontalTextAlignment = HorizontalTextAlignment.CENTER;
 
@@ -983,6 +986,10 @@ public class Default {
 
 	public DRIStyle getBooleanColumnStyle() {
 		return booleanColumnStyle;
+	}
+
+	public HorizontalImageAlignment getBooleanHorizontalImageAlignment() {
+		return booleanHorizontalImageAlignment;
 	}
 
 	public SplitType getDefaultSplitType() {

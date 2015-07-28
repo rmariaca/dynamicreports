@@ -1818,7 +1818,7 @@ public class TemplateTransform {
 		if (StyleResolver.getHorizontalImageAlignment(style) != null) {
 			return null;//StyleResolver.getHorizontalAlignment(style);
 		}
-		return null;//Defaults.getDefaults().getBooleanType().getHorizontalImageAlignment();
+		return Defaults.getDefaults().getBooleanHorizontalImageAlignment();
 	}
 
 	public DRIReportStyle getBooleanColumnStyle(DRIBooleanColumn column) {
