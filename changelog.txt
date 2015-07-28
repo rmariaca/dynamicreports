@@ -1,6 +1,13 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 4.0.1 (2015-07-28)
+---------------------------------------------------
+ - upgrade to JasperReports 6.1.0
+ - downgrade to iText 2.1.7 in pdf exporter
+ - horizontal/vertical alignment was replaced by horizontal/vertical text alignment in text fields and horizontal/vertical image alignment in images
+ - minor bug fixes
+ 
 Changes in version 4.0.0 (2015-01-22)
 ---------------------------------------------------
  - upgrade to JasperReports 6.0.0
