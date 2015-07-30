@@ -26,11 +26,14 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.component.DRIDesignMap;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignMap extends DRDesignComponent implements DRIDesignMap {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
 	private DRIDesignExpression latitudeExpression;

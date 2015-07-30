@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignBaseStyle;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
@@ -39,6 +40,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class DRDesignBaseStyle implements DRIDesignBaseStyle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Color foregroundColor;
 	private Color backgroundColor;
 	private Integer radius;

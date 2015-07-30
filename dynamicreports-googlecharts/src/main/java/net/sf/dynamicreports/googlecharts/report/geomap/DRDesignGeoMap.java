@@ -30,11 +30,14 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.googlecharts.jasper.geomap.GeoMapPrintElement;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignGeoMap extends DRDesignComponent implements DRIDesignGeoMap {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private EvaluationTime evaluationTime;
 	private DRDesignGroup evaluationGroup;
 	private Boolean showLegend;

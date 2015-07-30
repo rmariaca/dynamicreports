@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.base.crosstab;
 
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.OrderType;
 
@@ -31,6 +32,8 @@ import net.sf.dynamicreports.report.constant.OrderType;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class DRDesignCrosstabGroup implements DRIDesignCrosstabGroup {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private CrosstabTotalPosition totalPosition;
 	private OrderType orderType;

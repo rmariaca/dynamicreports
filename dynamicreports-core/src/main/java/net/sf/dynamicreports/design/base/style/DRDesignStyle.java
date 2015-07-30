@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.constant.Constants;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -35,6 +36,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignStyle extends DRDesignBaseStyle implements DRIDesignStyle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private DRDesignStyle parentStyle;
 	private List<DRDesignConditionalStyle> conditionalStyles;

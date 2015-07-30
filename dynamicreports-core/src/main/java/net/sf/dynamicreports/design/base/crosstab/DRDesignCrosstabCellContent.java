@@ -26,11 +26,14 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCellContent;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignCrosstabCellContent implements DRIDesignCrosstabCellContent {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private int width;
 	private int height;
 	private DRDesignList list;

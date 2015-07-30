@@ -32,12 +32,15 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.report.constant.ChartType;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignChart extends DRDesignHyperlinkComponent implements DRIDesignChart {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private ChartType chartType;
 	private DRDesignChartDataset dataset;
 	private DRIDesignPlot plot;

@@ -27,11 +27,14 @@ import java.awt.Color;
 import net.sf.dynamicreports.design.base.style.DRDesignFont;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChartSubtitle;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignChartSubtitle implements DRIDesignChartSubtitle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Color color;
 	private DRDesignFont font;
 	private DRIDesignExpression title;

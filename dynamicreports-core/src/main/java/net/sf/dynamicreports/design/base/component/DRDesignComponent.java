@@ -32,12 +32,15 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.StretchType;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class DRDesignComponent implements DRIDesignComponent {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private String uniqueName;
 	private DRDesignStyle style;

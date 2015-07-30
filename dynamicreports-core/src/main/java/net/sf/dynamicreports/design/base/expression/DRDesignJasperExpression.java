@@ -23,12 +23,15 @@
 package net.sf.dynamicreports.design.base.expression;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignJasperExpression implements DRIDesignJasperExpression {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIJasperExpression<?> jasperExpression;
 
 	public DRDesignJasperExpression(DRIJasperExpression<?> jasperExpression) {

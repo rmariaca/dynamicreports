@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.style;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignConditionalStyle;
+import net.sf.dynamicreports.report.constant.Constants;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
@@ -32,6 +33,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignConditionalStyle extends DRDesignBaseStyle implements DRIDesignConditionalStyle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression conditionExpression;
 	private DRIDesignDataset dataset;
 

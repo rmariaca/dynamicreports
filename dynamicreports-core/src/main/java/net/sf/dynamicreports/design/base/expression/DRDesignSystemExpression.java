@@ -23,14 +23,17 @@
 package net.sf.dynamicreports.design.base.expression;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRISystemExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignSystemExpression implements DRIDesignSystemExpression {	
+public class DRDesignSystemExpression implements DRIDesignSystemExpression {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRISystemExpression<?> systemExpression;
-	
+
 	public DRDesignSystemExpression(DRISystemExpression<?> systemExpression) {
 		this.systemExpression = systemExpression;
 	}

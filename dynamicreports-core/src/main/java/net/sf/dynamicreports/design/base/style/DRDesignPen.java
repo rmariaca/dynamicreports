@@ -25,6 +25,7 @@ package net.sf.dynamicreports.design.base.style;
 import java.awt.Color;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignPen;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.LineStyle;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -33,6 +34,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignPen implements DRIDesignPen {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Float lineWidth;
 	private LineStyle lineStyle;
 	private Color lineColor;

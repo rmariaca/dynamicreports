@@ -26,12 +26,15 @@ import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.DRIDesignBand;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.SplitType;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignBand implements DRIDesignBand {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private SplitType splitType;
 	private DRDesignList list;

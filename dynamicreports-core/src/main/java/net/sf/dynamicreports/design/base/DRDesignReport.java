@@ -61,6 +61,7 @@ import net.sf.dynamicreports.design.transformation.SubtotalTransform;
 import net.sf.dynamicreports.design.transformation.TableOfContentsTransform;
 import net.sf.dynamicreports.design.transformation.TemplateTransform;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
 import net.sf.dynamicreports.report.constant.RunDirection;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
@@ -75,6 +76,8 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignReport implements DesignTransformAccessor, DRIDesignReport {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIReport report;
 	private Integer pageWidth;
 	private Map<String, JasperTocHeading> tocHeadings;

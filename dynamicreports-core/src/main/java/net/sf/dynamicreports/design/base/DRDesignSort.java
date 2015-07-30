@@ -24,12 +24,15 @@ package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignSort;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.OrderType;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignSort implements DRIDesignSort {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression expression;
 	private OrderType orderType;
 

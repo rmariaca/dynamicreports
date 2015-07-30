@@ -23,12 +23,15 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignPage;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignPage implements DRIDesignPage {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private int width;
 	private int height;
 	private PageOrientation orientation;
@@ -36,67 +39,67 @@ public class DRDesignPage implements DRIDesignPage {
 	private int columnsPerPage;
 	private int columnSpace;
 	private int columnWidth;
-	
+
 	@Override
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	
+
 	@Override
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
+
 	@Override
 	public PageOrientation getOrientation() {
 		return orientation;
 	}
-	
+
 	public void setOrientation(PageOrientation orientation) {
 		this.orientation = orientation;
 	}
-	
+
 	@Override
 	public DRDesignMargin getMargin() {
 		return margin;
 	}
-	
+
 	public void setMargin(DRDesignMargin margin) {
 		this.margin = margin;
 	}
-	
+
 	@Override
 	public int getColumnsPerPage() {
 		return columnsPerPage;
 	}
-	
+
 	public void setColumnsPerPage(int columnsPerPage) {
 		this.columnsPerPage = columnsPerPage;
 	}
-	
+
 	@Override
 	public int getColumnSpace() {
 		return columnSpace;
 	}
-	
+
 	public void setColumnSpace(int columnSpace) {
 		this.columnSpace = columnSpace;
 	}
-	
+
 	@Override
 	public int getColumnWidth() {
 		return columnWidth;
 	}
-	
+
 	public void setColumnWidth(int columnWidth) {
 		this.columnWidth = columnWidth;
-	}	
+	}
 }

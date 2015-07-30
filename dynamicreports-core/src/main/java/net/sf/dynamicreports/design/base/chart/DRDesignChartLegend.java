@@ -26,63 +26,66 @@ import java.awt.Color;
 
 import net.sf.dynamicreports.design.base.style.DRDesignFont;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChartLegend;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Position;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignChartLegend implements DRIDesignChartLegend {		
+public class DRDesignChartLegend implements DRIDesignChartLegend {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Color color;
 	private Color backgroundColor;
-	private Boolean showLegend;	
+	private Boolean showLegend;
 	private DRDesignFont font;
 	private Position position;
-	
+
 	public DRDesignChartLegend() {
 	}
-	
+
 	@Override
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	@Override
 	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
-	
+
 	public void setBackgroundColor(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
-	
+
 	@Override
 	public Boolean getShowLegend() {
 		return showLegend;
 	}
-	
+
 	public void setShowLegend(Boolean showLegend) {
 		this.showLegend = showLegend;
 	}
-	
+
 	@Override
 	public DRDesignFont getFont() {
 		return font;
 	}
-	
+
 	public void setFont(DRDesignFont font) {
 		this.font = font;
 	}
-	
+
 	@Override
 	public Position getPosition() {
 		return position;
 	}
-	
+
 	public void setPosition(Position position) {
 		this.position = position;
-	}	
+	}
 }

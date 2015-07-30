@@ -23,11 +23,14 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignQuery;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignQuery implements DRIDesignQuery {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String text;
 	private String language;
 

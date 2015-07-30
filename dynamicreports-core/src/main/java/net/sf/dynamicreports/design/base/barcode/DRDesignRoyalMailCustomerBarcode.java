@@ -23,15 +23,18 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignRoyalMailCustomerBarcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignRoyalMailCustomerBarcode extends DRDesignChecksumBarcode implements DRIDesignRoyalMailCustomerBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Double ascenderHeight;
 	private Double intercharGapWidth;
 	private Double trackHeight;
-	
+
 	public DRDesignRoyalMailCustomerBarcode() {
 		super("RoyalMailCustomer");
 	}
@@ -61,5 +64,5 @@ public class DRDesignRoyalMailCustomerBarcode extends DRDesignChecksumBarcode im
 
 	public void setTrackHeight(Double trackHeight) {
 		this.trackHeight = trackHeight;
-	}	
+	}
 }

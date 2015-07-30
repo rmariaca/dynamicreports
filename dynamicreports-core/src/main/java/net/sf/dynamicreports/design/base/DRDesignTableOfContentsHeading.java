@@ -24,11 +24,14 @@ package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.definition.DRIDesignTableOfContentsHeading;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignTableOfContentsHeading implements DRIDesignTableOfContentsHeading {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRDesignTextField referenceField;
 
 	@Override

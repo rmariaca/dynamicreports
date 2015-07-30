@@ -23,11 +23,14 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignMargin;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignMargin implements DRIDesignMargin {	
+public class DRDesignMargin implements DRIDesignMargin {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private int top;
 	private int left;
 	private int bottom;

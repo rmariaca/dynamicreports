@@ -24,11 +24,14 @@ package net.sf.dynamicreports.design.base.expression;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class AbstractDesignSimpleExpression implements DRIDesignSimpleExpression {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 
 	protected AbstractDesignSimpleExpression() {

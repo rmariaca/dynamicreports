@@ -35,11 +35,14 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.transformation.DatasetExpressionTransform;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignDataset implements DRIDesignDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private DatasetExpressionTransform datasetExpressionTransform;
 	private DRDesignQuery query;

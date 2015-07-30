@@ -23,11 +23,14 @@
 package net.sf.dynamicreports.design.base.chart.plot;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPiePlot;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignPiePlot extends AbstractDesignBasePlot implements DRIDesignPiePlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Boolean circular;
 	private String labelFormat;
 	private String legendLabelFormat;

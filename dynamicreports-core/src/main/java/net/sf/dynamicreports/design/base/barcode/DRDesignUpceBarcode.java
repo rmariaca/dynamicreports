@@ -23,11 +23,13 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignUpceBarcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignUpceBarcode extends DRDesignChecksumBarcode implements DRIDesignUpceBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	public DRDesignUpceBarcode() {
 		super("UPCE");

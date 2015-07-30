@@ -23,12 +23,15 @@
 package net.sf.dynamicreports.design.base.chart.plot;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBubblePlot;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.ScaleType;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignBubblePlot extends DRDesignAxisPlot implements DRIDesignBubblePlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private ScaleType scaleType;
 
 	@Override

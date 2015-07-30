@@ -24,13 +24,16 @@ package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignChecksumBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class DRDesignChecksumBarcode extends DRDesignBarcode implements DRIDesignChecksumBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private BarcodeChecksumMode checksumMode;
-	
+
 	public DRDesignChecksumBarcode(String name) {
 		super(name);
 	}
@@ -42,5 +45,5 @@ public abstract class DRDesignChecksumBarcode extends DRDesignBarcode implements
 
 	public void setChecksumMode(BarcodeChecksumMode checksumMode) {
 		this.checksumMode = checksumMode;
-	}	
+	}
 }

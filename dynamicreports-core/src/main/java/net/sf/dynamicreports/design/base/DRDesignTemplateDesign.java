@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.base;
 
 import net.sf.dynamicreports.design.definition.DRIDesignTemplateDesign;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRITemplateDesign;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -30,12 +31,14 @@ import net.sf.dynamicreports.report.exception.DRException;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignTemplateDesign implements DRIDesignTemplateDesign {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRITemplateDesign<?> templateDesign;
 
 	public DRDesignTemplateDesign (DRITemplateDesign<?> templateDesign) {
-		this.templateDesign = templateDesign;		
+		this.templateDesign = templateDesign;
 	}
-	
+
 	@Override
 	public int getTitleComponentsCount() {
 		return templateDesign.getTitleComponentsCount();
@@ -80,7 +83,7 @@ public class DRDesignTemplateDesign implements DRIDesignTemplateDesign {
 	public int getBackgroundComponentsCount() {
 		return templateDesign.getBackgroundComponentsCount();
 	}
-	
+
 	@Override
 	public Object getDesign() throws DRException {
 		return templateDesign.getDesign();

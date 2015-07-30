@@ -23,12 +23,15 @@
 package net.sf.dynamicreports.design.base.chart;
 
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChartTitle;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Position;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignChartTitle extends DRDesignChartSubtitle implements DRIDesignChartTitle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Position position;
 
 	@Override

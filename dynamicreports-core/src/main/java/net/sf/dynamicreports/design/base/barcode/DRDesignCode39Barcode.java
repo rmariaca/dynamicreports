@@ -23,17 +23,20 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignCode39Barcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignCode39Barcode extends DRDesignChecksumBarcode implements DRIDesignCode39Barcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Boolean displayChecksum;
 	private Boolean displayStartStop;
 	private Boolean extendedCharSetEnabled;
 	private Double intercharGapWidth;
 	private Double wideFactor;
-	
+
 	public DRDesignCode39Barcode() {
 		super("Code39");
 	}
@@ -81,5 +84,5 @@ public class DRDesignCode39Barcode extends DRDesignChecksumBarcode implements DR
 
 	public void setWideFactor(Double wideFactor) {
 		this.wideFactor = wideFactor;
-	}	
+	}
 }

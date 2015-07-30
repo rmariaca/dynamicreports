@@ -23,18 +23,21 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignPdf417Barcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignPdf417Barcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Integer minColumns;
 	private Integer maxColumns;
 	private Integer minRows;
 	private Integer maxRows;
 	private Double widthToHeightRatio;
 	private Integer errorCorrectionLevel;
-	
+
 	public DRDesignPdf417Barcode() {
 		super("PDF417");
 	}
@@ -91,5 +94,5 @@ public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignP
 
 	public void setErrorCorrectionLevel(Integer errorCorrectionLevel) {
 		this.errorCorrectionLevel = errorCorrectionLevel;
-	}	
+	}
 }

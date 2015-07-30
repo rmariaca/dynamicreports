@@ -26,6 +26,7 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.Markup;
 
@@ -33,6 +34,8 @@ import net.sf.dynamicreports.report.constant.Markup;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignTextField extends DRDesignHyperlinkComponent implements DRIDesignTextField {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String pattern;
 	private DRIDesignExpression patternExpression;
 	private HorizontalTextAlignment horizontalTextAlignment;

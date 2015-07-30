@@ -24,11 +24,14 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.base.style.DRDesignPen;
 import net.sf.dynamicreports.design.definition.component.DRIDesignRectangle;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignRectangle extends DRDesignComponent implements DRIDesignRectangle {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Integer radius;
 	private DRDesignPen pen;
 

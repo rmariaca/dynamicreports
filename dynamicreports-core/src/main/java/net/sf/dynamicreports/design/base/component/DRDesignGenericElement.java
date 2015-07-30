@@ -29,21 +29,24 @@ import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.component.DRIDesignGenericElement;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignGenericElement extends DRDesignComponent implements DRIDesignGenericElement {
-	private String genericElementNamespace;	
-	private String genericElementName;	
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private String genericElementNamespace;
+	private String genericElementName;
 	private EvaluationTime evaluationTime;
-	private DRDesignGroup evaluationGroup;	
+	private DRDesignGroup evaluationGroup;
 	private List<DRIDesignParameterExpression> parameterExpressions;
-	
+
 	public DRDesignGenericElement() {
 		super("genericElement");
 	}
-	
+
 	@Override
 	protected void init() {
 		super.init();

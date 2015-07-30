@@ -28,12 +28,15 @@ import java.util.List;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.RunDirection;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignCrosstab extends DRDesignComponent implements DRIDesignCrosstab {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRDesignCrosstabDataset dataset;
 	private Boolean repeatColumnHeaders;
 	private Boolean repeatRowHeaders;

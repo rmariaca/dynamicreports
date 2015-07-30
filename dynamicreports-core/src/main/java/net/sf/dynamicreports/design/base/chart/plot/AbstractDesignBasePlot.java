@@ -26,12 +26,15 @@ import java.awt.Color;
 import java.util.List;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignBasePlot;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Orientation;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class AbstractDesignBasePlot implements DRIDesignBasePlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Orientation orientation;
 	private List<Color> seriesColors;
 

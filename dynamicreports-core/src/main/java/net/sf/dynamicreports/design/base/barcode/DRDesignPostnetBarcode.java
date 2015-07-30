@@ -24,16 +24,19 @@ package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignPostnetBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeBaselinePosition;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignPostnetBarcode extends DRDesignChecksumBarcode implements DRIDesignPostnetBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Boolean displayChecksum;
 	private Double shortBarHeight;
 	private BarcodeBaselinePosition baselinePosition;
 	private Double intercharGapWidth;
-	
+
 	public DRDesignPostnetBarcode() {
 		super("POSTNET");
 	}
@@ -72,5 +75,5 @@ public class DRDesignPostnetBarcode extends DRDesignChecksumBarcode implements D
 
 	public void setIntercharGapWidth(Double intercharGapWidth) {
 		this.intercharGapWidth = intercharGapWidth;
-	}		
+	}
 }

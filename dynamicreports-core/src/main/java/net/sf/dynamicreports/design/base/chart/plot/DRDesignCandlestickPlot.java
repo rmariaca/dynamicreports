@@ -23,11 +23,14 @@
 package net.sf.dynamicreports.design.base.chart.plot;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignCandlestickPlot;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignCandlestickPlot extends DRDesignAxisPlot implements DRIDesignCandlestickPlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Boolean showVolume;
 
 	public void setShowVolume(Boolean showVolume) {

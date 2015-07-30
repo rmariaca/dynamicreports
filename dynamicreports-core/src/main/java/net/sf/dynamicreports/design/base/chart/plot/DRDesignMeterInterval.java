@@ -26,11 +26,14 @@ import java.awt.Color;
 
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMeterInterval;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignMeterInterval implements DRIDesignMeterInterval {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String label;
 	private Color backgroundColor;
 	private Double alpha;

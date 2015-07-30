@@ -26,12 +26,15 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignCrosstabMeasure implements DRIDesignCrosstabMeasure {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private String name;
 	private DRIDesignExpression valueExpression;
 	private Calculation calculation;

@@ -23,12 +23,14 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignEan128Barcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignEan128Barcode extends DRDesignChecksumBarcode implements DRIDesignEan128Barcode {
-	
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	public DRDesignEan128Barcode() {
 		super("EAN128");
 	}

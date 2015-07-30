@@ -25,17 +25,20 @@ package net.sf.dynamicreports.design.base.expression;
 import java.util.List;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignValueFormatter extends AbstractDesignComplexExpression {	
+public class DRDesignValueFormatter extends AbstractDesignComplexExpression {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIValueFormatter<?, Object> valueFormatter;
-	
+
 	@SuppressWarnings("unchecked")
-	public DRDesignValueFormatter(DRIValueFormatter<?, ?> valueFormatter, DRIDesignExpression valueExpression) {		
+	public DRDesignValueFormatter(DRIValueFormatter<?, ?> valueFormatter, DRIDesignExpression valueExpression) {
 		this.valueFormatter = (DRIValueFormatter<?, Object>) valueFormatter;
 		addExpression(valueExpression);
 	}

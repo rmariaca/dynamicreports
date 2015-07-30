@@ -23,13 +23,16 @@
 package net.sf.dynamicreports.design.base.chart.dataset;
 
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignTimeSeriesDataset;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignTimeSeriesDataset extends DRDesignSeriesDataset implements DRIDesignTimeSeriesDataset {	
-	private TimePeriod timePeriodType;	
+public class DRDesignTimeSeriesDataset extends DRDesignSeriesDataset implements DRIDesignTimeSeriesDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
+	private TimePeriod timePeriodType;
 
 	public void setTimePeriodType(TimePeriod timePeriodType) {
 		this.timePeriodType = timePeriodType;

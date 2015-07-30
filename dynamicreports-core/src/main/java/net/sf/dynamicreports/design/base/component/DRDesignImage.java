@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.definition.component.DRIDesignImage;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 
@@ -31,6 +32,8 @@ import net.sf.dynamicreports.report.constant.ImageScale;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignImage extends DRDesignHyperlinkComponent implements DRIDesignImage {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private ImageScale imageScale;
 	private DRIDesignExpression imageExpression;
 	private Boolean usingCache;

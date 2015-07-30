@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.base.style;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignTabStop;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -31,6 +32,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignTabStop implements DRIDesignTabStop {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private int position;
 	private TabStopAlignment alignment;
 

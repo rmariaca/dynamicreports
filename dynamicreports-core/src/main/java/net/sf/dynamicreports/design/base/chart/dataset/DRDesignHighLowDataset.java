@@ -25,11 +25,14 @@ package net.sf.dynamicreports.design.base.chart.dataset;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignHighLowDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignHighLowDataset extends DRDesignChartDataset implements DRIDesignHighLowDataset {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression seriesExpression;
 	private DRIDesignExpression dateExpression;
 	private DRIDesignExpression highExpression;

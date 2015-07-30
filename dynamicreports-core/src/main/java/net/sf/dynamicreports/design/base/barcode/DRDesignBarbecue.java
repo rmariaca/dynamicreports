@@ -29,11 +29,14 @@ import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.BarbecueType;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignBarbecue extends DRDesignComponent implements DRIDesignBarbecue {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private BarbecueType type;
 	private DRIDesignExpression codeExpression;
 	private DRIDesignExpression applicationIdentifierExpression;

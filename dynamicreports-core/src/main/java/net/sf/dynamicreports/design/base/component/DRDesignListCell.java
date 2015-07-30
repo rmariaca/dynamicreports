@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.base.component;
 
 import java.io.Serializable;
 
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
@@ -31,6 +32,8 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignListCell implements Serializable {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private HorizontalCellComponentAlignment horizontalAlignment;
 	private VerticalCellComponentAlignment verticalAlignment;
 	private DRDesignComponent component;

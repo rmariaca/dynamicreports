@@ -25,11 +25,14 @@ package net.sf.dynamicreports.design.base.chart.plot;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignChartAxis;
 import net.sf.dynamicreports.report.constant.AxisPosition;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignChartAxis implements DRIDesignChartAxis {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private AxisPosition position;
 	private DRIDesignChart chart;
 

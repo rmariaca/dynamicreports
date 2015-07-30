@@ -23,15 +23,18 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignUspsIntelligentMailBarcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignUspsIntelligentMailBarcode extends DRDesignChecksumBarcode implements DRIDesignUspsIntelligentMailBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Double ascenderHeight;
 	private Double intercharGapWidth;
 	private Double trackHeight;
-	
+
 	public DRDesignUspsIntelligentMailBarcode() {
 		super("USPSIntelligentMail");
 	}
@@ -61,5 +64,5 @@ public class DRDesignUspsIntelligentMailBarcode extends DRDesignChecksumBarcode 
 
 	public void setTrackHeight(Double trackHeight) {
 		this.trackHeight = trackHeight;
-	}	
+	}
 }

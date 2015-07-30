@@ -24,12 +24,15 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.base.style.DRDesignPen;
 import net.sf.dynamicreports.design.definition.component.DRIDesignLine;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.LineDirection;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignLine extends DRDesignComponent implements DRIDesignLine {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private LineDirection direction;
 	private DRDesignPen pen;
 

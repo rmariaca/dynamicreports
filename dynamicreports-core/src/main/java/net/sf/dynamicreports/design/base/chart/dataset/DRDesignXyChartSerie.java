@@ -24,11 +24,14 @@ package net.sf.dynamicreports.design.base.chart.dataset;
 
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignXyChartSerie;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignXyChartSerie extends AbstractDesignChartSerie implements DRIDesignXyChartSerie {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression xValueExpression;
 	private DRIDesignExpression yValueExpression;
 	private DRIDesignExpression labelExpression;

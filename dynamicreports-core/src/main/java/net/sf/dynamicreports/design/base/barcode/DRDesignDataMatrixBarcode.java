@@ -24,13 +24,16 @@ package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignDataMatrixBarcode;
 import net.sf.dynamicreports.report.constant.BarcodeShape;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignDataMatrixBarcode extends DRDesignBarcode implements DRIDesignDataMatrixBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private BarcodeShape shape;
-	
+
 	public DRDesignDataMatrixBarcode() {
 		super("DataMatrix");
 	}
@@ -42,5 +45,5 @@ public class DRDesignDataMatrixBarcode extends DRDesignBarcode implements DRIDes
 
 	public void setShape(BarcodeShape shape) {
 		this.shape = shape;
-	}	
+	}
 }

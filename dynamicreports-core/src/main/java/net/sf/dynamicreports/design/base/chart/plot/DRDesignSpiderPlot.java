@@ -27,6 +27,7 @@ import java.awt.Color;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignSpiderPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.SpiderRotation;
 import net.sf.dynamicreports.report.constant.TableOrder;
 
@@ -34,6 +35,8 @@ import net.sf.dynamicreports.report.constant.TableOrder;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignSpiderPlot implements DRIDesignSpiderPlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression maxValueExpression;
 	private SpiderRotation rotation;
 	private TableOrder tableOrder;

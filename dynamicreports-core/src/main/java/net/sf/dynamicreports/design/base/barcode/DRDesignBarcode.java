@@ -29,11 +29,14 @@ import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public abstract class DRDesignBarcode extends DRDesignComponent implements DRIDesignBarcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression codeExpression;
 	private DRIDesignExpression patternExpression;
 	private Double moduleWidth;

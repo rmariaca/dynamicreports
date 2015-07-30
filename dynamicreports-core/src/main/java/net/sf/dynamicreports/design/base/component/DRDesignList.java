@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.sf.dynamicreports.design.constant.ComponentGroupType;
 import net.sf.dynamicreports.design.definition.component.DRIDesignList;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
@@ -35,6 +36,8 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignList extends DRDesignComponent implements DRIDesignList {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private List<DRDesignListCell> listCells;
 	private List<DRDesignComponent> components;
 	private ListType type;

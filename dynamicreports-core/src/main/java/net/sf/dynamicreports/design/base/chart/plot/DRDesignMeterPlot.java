@@ -30,12 +30,15 @@ import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMeterInterval
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignMeterPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.MeterShape;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignMeterPlot extends DRDesignAxisPlot implements DRIDesignMeterPlot {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private DRIDesignExpression dataRangeLowExpression;
 	private DRIDesignExpression dataRangeHighExpression;
 	private Color valueColor;

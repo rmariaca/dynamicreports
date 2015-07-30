@@ -27,6 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
@@ -48,6 +49,8 @@ import org.jfree.data.xy.XYDataset;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SeriesColorsByNameCustomizer implements DRIChartCustomizer {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Map<String, Color> seriesColorsByName;
 
 	public SeriesColorsByNameCustomizer(Map<String, Color> seriesColorsByName) {

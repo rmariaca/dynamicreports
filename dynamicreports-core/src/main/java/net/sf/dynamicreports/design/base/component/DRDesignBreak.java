@@ -24,13 +24,16 @@ package net.sf.dynamicreports.design.base.component;
 
 import net.sf.dynamicreports.design.definition.component.DRIDesignBreak;
 import net.sf.dynamicreports.report.constant.BreakType;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignBreak extends DRDesignComponent implements DRIDesignBreak {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private BreakType breakType;
-	
+
 	public DRDesignBreak() {
 		super("break");
 	}
@@ -42,5 +45,5 @@ public class DRDesignBreak extends DRDesignComponent implements DRIDesignBreak {
 
 	public void setType(BreakType breakType) {
 		this.breakType = breakType;
-	}	
+	}
 }

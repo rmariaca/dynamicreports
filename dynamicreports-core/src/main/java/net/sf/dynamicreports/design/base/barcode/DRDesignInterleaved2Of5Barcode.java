@@ -23,14 +23,17 @@
 package net.sf.dynamicreports.design.base.barcode;
 
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignInterleaved2Of5Barcode;
+import net.sf.dynamicreports.report.constant.Constants;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDesignInterleaved2Of5Barcode extends DRDesignChecksumBarcode implements DRIDesignInterleaved2Of5Barcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Boolean displayChecksum;
 	private Double wideFactor;
-	
+
 	public DRDesignInterleaved2Of5Barcode() {
 		super("Interleaved2Of5");
 	}
@@ -51,5 +54,5 @@ public class DRDesignInterleaved2Of5Barcode extends DRDesignChecksumBarcode impl
 
 	public void setWideFactor(Double wideFactor) {
 		this.wideFactor = wideFactor;
-	}	
+	}
 }
