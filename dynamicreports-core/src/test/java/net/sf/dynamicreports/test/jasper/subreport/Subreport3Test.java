@@ -23,6 +23,9 @@
 package net.sf.dynamicreports.test.jasper.subreport;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.Serializable;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
@@ -34,7 +37,8 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class Subreport3Test extends AbstractJasperValueTest {
+public class Subreport3Test extends AbstractJasperValueTest implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
@@ -53,11 +57,6 @@ public class Subreport3Test extends AbstractJasperValueTest {
 
 		elementCountTest("title.textField1", 6);
 		elementValueTest("title.textField1", "1 3", "1 4", "1 5", "2 3", "2 4", "2 5");
-	}
-
-	@Override
-	protected boolean serializableTest() {
-		return false;
 	}
 
 	@Override

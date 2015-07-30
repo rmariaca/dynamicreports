@@ -79,11 +79,6 @@ public class Subreport4Test extends AbstractJasperValueTest {
 		elementValueTest("summary.textField3", "value5", "value7");
 	}
 
-	@Override
-	protected boolean serializableTest() {
-		return false;
-	}
-
 	private JasperReportBuilder subreport1() throws DRException {
 		JasperReportBuilder report = report();
 		report

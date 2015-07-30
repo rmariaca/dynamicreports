@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -65,7 +66,8 @@ public abstract class AbstractJasperTest {
 			reportBuilder = DynamicReports.report();
 			configureReport(reportBuilder);
 			if (serializableTest()) {
-				reportBuilder = serializableTest(reportBuilder);
+				reportBuilder = serializableReportTest(reportBuilder);
+				serializableParametersTest(reportBuilder.getJasperParameters());
 			}
 			JRDataSource dataSource = createDataSource();
 			if (dataSource != null) {
@@ -98,7 +100,7 @@ public abstract class AbstractJasperTest {
 		return true;
 	}
 
-	private JasperReportBuilder serializableTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
+	private JasperReportBuilder serializableReportTest(JasperReportBuilder report) throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.writeObject(report);
@@ -108,6 +110,19 @@ public abstract class AbstractJasperTest {
     InputStream stream = new ByteArrayInputStream(bos.toByteArray());
     ObjectInputStream ois = new ObjectInputStream(stream);
     return (JasperReportBuilder) ois.readObject();
+	}
+
+	@SuppressWarnings("unchecked")
+	private Map<String, Object> serializableParametersTest(Map<String, Object> parameters) throws IOException, ClassNotFoundException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
+		oos.writeObject(parameters);
+		oos.flush();
+		oos.close();
+
+    InputStream stream = new ByteArrayInputStream(bos.toByteArray());
+    ObjectInputStream ois = new ObjectInputStream(stream);
+    return (Map<String, Object>) ois.readObject();
 	}
 
 	private JasperPrint serializableTest(JasperPrint jasperPrint) throws IOException, JRException {
