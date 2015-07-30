@@ -28,13 +28,14 @@ import java.util.Map;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class CrosstabParametersExpression extends AbstractDesignSimpleExpression {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private Map<String, Object> parameters;
 

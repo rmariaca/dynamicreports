@@ -62,7 +62,7 @@ public class MultiPageListBuilder extends DimensionComponentBuilder<MultiPageLis
 	}
 
 	private class PageBreakExpression extends AbstractSimpleExpression<Boolean> {
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 		@Override
 		public Boolean evaluate(ReportParameters reportParameters) {

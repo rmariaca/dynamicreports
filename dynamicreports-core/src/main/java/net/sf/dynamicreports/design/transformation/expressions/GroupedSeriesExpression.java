@@ -27,6 +27,7 @@ import java.util.List;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.GroupedStackedBarRendererCustomizer;
 import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -34,7 +35,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class GroupedSeriesExpression extends AbstractComplexExpression<String> {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	public GroupedSeriesExpression(DRIExpression<?> groupExpression, DRIExpression<?> seriesExpression, DRIExpression<?> labelExpression, int index) {
 		if (groupExpression != null) {

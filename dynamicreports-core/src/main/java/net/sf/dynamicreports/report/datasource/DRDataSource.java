@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
 import net.sf.jasperreports.engine.JRRewindableDataSource;
@@ -37,7 +38,7 @@ import net.sf.jasperreports.engine.JRRewindableDataSource;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class DRDataSource implements JRRewindableDataSource, Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String[] columns;
 	private List<Map<String, Object>> values;

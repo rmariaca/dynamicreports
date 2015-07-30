@@ -24,13 +24,14 @@ package net.sf.dynamicreports.report.builder.expression;
 
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.crosstab.CrosstabMeasureBuilder;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class OrderByExpression extends AbstractSimpleExpression<Comparable<?>> {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private CrosstabMeasureBuilder<? extends Comparable<?>> measure;
 

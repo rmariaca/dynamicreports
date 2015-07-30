@@ -32,6 +32,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
@@ -46,7 +47,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class SubreportExpression extends AbstractDesignComplexExpression {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	private static final Log log = LogFactory.getLog(SubreportExpression.class);
 
 	private String name;
