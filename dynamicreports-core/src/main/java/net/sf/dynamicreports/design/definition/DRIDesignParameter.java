@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignParameter {
+public interface DRIDesignParameter extends Serializable {
 
 	public String getName();
 

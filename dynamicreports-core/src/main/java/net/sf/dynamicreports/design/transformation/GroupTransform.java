@@ -38,17 +38,15 @@ import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.design.transformation.expressions.GroupByDataTypeExpression;
 import net.sf.dynamicreports.report.base.DRVariable;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
-import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.definition.DRIBand;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIReport;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.column.DRIValueColumn;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
@@ -269,20 +267,4 @@ public class GroupTransform {
 		return designGroups.values();
 	}
 
-	private class GroupByDataTypeExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private DRIExpression<?> valueExpression;
-		DRIDataType<?, ?> dataType;
-
-		public GroupByDataTypeExpression(DRIExpression<?> valueExpression, DRIDataType<?, ?> dataType) {
-			this.valueExpression = valueExpression;
-			this.dataType = dataType;
-		}
-
-		@Override
-		public String evaluate(ReportParameters reportParameters) {
-			return dataType.valueToString(valueExpression.getName(), reportParameters);
-		}
-	}
 }

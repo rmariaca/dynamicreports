@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition.chart;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
@@ -30,7 +31,7 @@ import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignChartSubtitle {
+public interface DRIDesignChartSubtitle extends Serializable {
 
 	public Color getColor();
 

@@ -22,30 +22,32 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.exception.DRException;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignTemplateDesign {
+public interface DRIDesignTemplateDesign extends Serializable {
 
 	public int getTitleComponentsCount();
-	
+
 	public int getPageHeaderComponentsCount();
-	
+
 	public int getPageFooterComponentsCount();
-	
+
 	public int getColumnHeaderComponentsCount();
-	
+
 	public int getColumnFooterComponentsCount();
-	
+
 	public int getLastPageFooterComponentsCount();
-	
+
 	public int getSummaryComponentsCount();
-	
+
 	public int getNoDataComponentsCount();
-	
+
 	public int getBackgroundComponentsCount();
-	
+
 	public Object getDesign() throws DRException;
 }

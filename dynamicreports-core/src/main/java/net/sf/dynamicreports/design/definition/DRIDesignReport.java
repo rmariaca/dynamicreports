@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +47,7 @@ import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignReport {
+public interface DRIDesignReport extends Serializable {
 
 	public DRIDesignTemplateDesign getTemplateDesign();
 

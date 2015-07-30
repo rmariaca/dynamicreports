@@ -22,10 +22,8 @@
 
 package net.sf.dynamicreports.jasper.transformation;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabCell;
@@ -36,11 +34,9 @@ import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabGroup;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstabRowGroup;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
-import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.jasper.transformation.expression.CrosstabParametersExpression;
 import net.sf.dynamicreports.report.constant.ListType;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.crosstabs.design.JRDesignCellContents;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstab;
 import net.sf.jasperreports.crosstabs.design.JRDesignCrosstabBucket;
@@ -229,24 +225,4 @@ public class CrosstabTransform {
 		}
 	}
 
-	private class CrosstabParametersExpression extends AbstractDesignSimpleExpression {
-		private Map<String, Object> parameters;
-
-		public CrosstabParametersExpression(Map<String, Object> parameters) {
-			super(ReportUtils.generateUniqueName("crosstabParametersExpression"));
-			this.parameters = parameters;
-		}
-
-		@Override
-		public Object evaluate(ReportParameters reportParameters) {
-			Map<String, Object> parameters = new HashMap<String, Object>(this.parameters);
-			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
-			return parameters;
-		}
-
-		@Override
-		public Class<?> getValueClass() {
-			return Map.class;
-		}
-	}
 }

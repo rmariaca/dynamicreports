@@ -23,20 +23,18 @@
 package net.sf.dynamicreports.design.transformation;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
+import net.sf.dynamicreports.design.transformation.expressions.TocPrintWhenExpression;
+import net.sf.dynamicreports.design.transformation.expressions.TocReferenceExpression;
+import net.sf.dynamicreports.design.transformation.expressions.TocReferenceLinkExpression;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsHeading;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIHyperLinkComponent;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
@@ -124,96 +122,4 @@ public class TableOfContentsTransform {
 		return null;
 	}
 
-	private class TocReferenceExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private int level;
-		private String expressionName;
-		private boolean customId;
-		private boolean isCustomValue;
-
-		private TocReferenceExpression(int level, String expressionName, DRIExpression<?> labelExpression, DRIExpression<String> anchorNameExpression, DRIExpression<?> customValueExpression) {
-			this.level = level;
-			this.expressionName = expressionName;
-			customId = anchorNameExpression != null;
-			addExpression(labelExpression);
-			if (anchorNameExpression != null) {
-				addExpression(anchorNameExpression);
-			}
-			isCustomValue = customValueExpression != null;
-			if (customValueExpression != null) {
-				addExpression(customValueExpression);
-			}
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String id;
-			Object customValue = null;
-			if (customId) {
-				id = (String) values.get(1);
-				if (isCustomValue) {
-					customValue = values.get(2);
-				}
-			}
-			else {
-				id = expressionName + "_" + reportParameters.getReportRowNumber();
-				if (isCustomValue) {
-					customValue = values.get(1);
-				}
-			}
-			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			String text = String.valueOf(values.get(0));
-			customValues.addTocHeading(level, id, text, customValue);
-			return null;
-		}
-	}
-
-	private class TocReferenceLinkExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private String expressionName;
-		private boolean customId;
-
-		private TocReferenceLinkExpression(String expressionName, DRIExpression<String> anchorNameExpression) {
-			this.expressionName = expressionName;
-			customId = anchorNameExpression != null;
-			if (anchorNameExpression != null) {
-				addExpression(anchorNameExpression);
-			}
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String id;
-			if (customId) {
-				id = (String) values.get(0);
-			}
-			else {
-				id = expressionName + "_" + reportParameters.getReportRowNumber();
-			}
-			return id;
-		}
-	}
-
-	private class TocPrintWhenExpression extends AbstractComplexExpression<Boolean> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private Object lastValue;
-
-		private TocPrintWhenExpression(DRIExpression<?> expression) {
-			addExpression(expression);
-		}
-
-		@Override
-		public Boolean evaluate(List<?> values, ReportParameters reportParameters) {
-			Object value = values.get(0);
-			if (lastValue != null && lastValue.equals(value)) {
-				lastValue = value;
-				return false;
-			}
-			lastValue = value;
-			return true;
-		}
-	}
 }

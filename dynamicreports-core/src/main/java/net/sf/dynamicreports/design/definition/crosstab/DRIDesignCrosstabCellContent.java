@@ -22,13 +22,15 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignCrosstabCellContent {
+public interface DRIDesignCrosstabCellContent extends Serializable {
 
 	public int getWidth();
 

@@ -30,12 +30,15 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpres
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 import net.sf.dynamicreports.jasper.constant.ValueType;
+import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class JasperCustomValues implements DRICustomValues {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Map<String, ValueType> valueTypes;
 	private Map<String, DRIDesignSimpleExpression> simpleExpressions;
 	private Map<String, DRIDesignComplexExpression> complexExpressions;

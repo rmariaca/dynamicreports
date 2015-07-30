@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignFont {
+public interface DRIDesignFont extends Serializable {
 
 	public String getFontName();
 

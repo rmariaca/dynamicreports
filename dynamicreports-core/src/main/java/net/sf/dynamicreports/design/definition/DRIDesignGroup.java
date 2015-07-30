@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -30,7 +31,7 @@ import net.sf.dynamicreports.report.constant.GroupFooterPosition;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignGroup {
+public interface DRIDesignGroup extends Serializable {
 
 	public String getName();
 

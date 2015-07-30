@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.CrosstabTotalPosition;
 import net.sf.dynamicreports.report.constant.OrderType;
@@ -29,7 +31,7 @@ import net.sf.dynamicreports.report.constant.OrderType;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignCrosstabGroup {
+public interface DRIDesignCrosstabGroup extends Serializable {
 
 	public String getName();
 

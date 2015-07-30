@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.definition.chart;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.definition.ReportParameters;
 
 import org.jfree.chart.JFreeChart;
@@ -29,7 +31,7 @@ import org.jfree.chart.JFreeChart;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIChartCustomizer {
-	
+public interface DRIChartCustomizer extends Serializable {
+
 	public void customize(JFreeChart chart, ReportParameters reportParameters);
 }

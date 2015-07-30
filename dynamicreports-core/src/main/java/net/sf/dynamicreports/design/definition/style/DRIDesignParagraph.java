@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.sf.dynamicreports.report.constant.LineSpacing;
@@ -29,7 +30,7 @@ import net.sf.dynamicreports.report.constant.LineSpacing;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignParagraph {
+public interface DRIDesignParagraph extends Serializable {
 
 	public LineSpacing getLineSpacing();
 

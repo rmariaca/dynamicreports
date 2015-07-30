@@ -23,15 +23,10 @@
 package net.sf.dynamicreports.jasper.transformation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
-import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
-import net.sf.dynamicreports.design.base.expression.AbstractDesignSimpleExpression;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.DRIDesignTableOfContentsHeading;
@@ -51,14 +46,14 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignRectangle;
 import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.crosstab.DRIDesignCrosstab;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignParameterExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignPropertyExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
-import net.sf.dynamicreports.jasper.base.JasperReportDesign;
-import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
-import net.sf.dynamicreports.report.ReportUtils;
+import net.sf.dynamicreports.jasper.transformation.expression.JasperSubreportParametersExpression;
+import net.sf.dynamicreports.jasper.transformation.expression.SubreportExpression;
+import net.sf.dynamicreports.jasper.transformation.expression.SubreportParametersExpression;
+import net.sf.dynamicreports.jasper.transformation.expression.SubreportWidthExpression;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.component.CustomComponentTransform;
 import net.sf.dynamicreports.report.component.CustomComponents;
@@ -66,15 +61,9 @@ import net.sf.dynamicreports.report.component.DRIDesignCustomComponent;
 import net.sf.dynamicreports.report.constant.ComponentPositionType;
 import net.sf.dynamicreports.report.constant.ListType;
 import net.sf.dynamicreports.report.constant.StretchType;
-import net.sf.dynamicreports.report.definition.DRICustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
 import net.sf.jasperreports.components.map.StandardMapComponent;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRGenericElementType;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.component.ComponentKey;
 import net.sf.jasperreports.engine.design.JRDesignBreak;
 import net.sf.jasperreports.engine.design.JRDesignComponentElement;
@@ -94,15 +83,11 @@ import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 public class ComponentTransform {
-	private static final Log log = LogFactory.getLog(SubreportExpression.class);
-
 	private JasperTransformAccessor accessor;
 
 	public ComponentTransform(JasperTransformAccessor accessor) {
@@ -400,7 +385,9 @@ public class ComponentTransform {
 		jrSubreport.setRunToBottom(subreport.getRunToBottom());
 
 		if (ReportBuilder.class.isAssignableFrom(subreport.getReportExpression().getValueClass())) {
-			SubreportExpression subreportExpression = new SubreportExpression(subreport.getReportExpression(), width);
+			SubreportWidthExpression pageWidthExpression = new SubreportWidthExpression(width);
+			accessor.getExpressionTransform().addSimpleExpression(pageWidthExpression);
+			SubreportExpression subreportExpression = new SubreportExpression(pageWidthExpression, subreport.getReportExpression(), width);
 			accessor.getExpressionTransform().addComplexExpression(subreportExpression);
 			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreportExpression));
 
@@ -496,144 +483,4 @@ public class ComponentTransform {
 		return jrComponent;
 	}
 
-	private class SubreportExpression extends AbstractDesignComplexExpression {
-		private String name;
-		private Integer pageWidth;
-		private ReportBuilder<?> reportBuilder;
-		private Map<ReportBuilder<?>, JasperReportDesign> reportDesigns;
-		private Map<ReportBuilder<?>, JasperReport> jasperReports;
-
-		public SubreportExpression(DRIDesignExpression reportExpression, Integer pageWidth) {
-			SubreportWidthExpression pageWidthExpression = new SubreportWidthExpression(pageWidth);
-			accessor.getExpressionTransform().addSimpleExpression(pageWidthExpression);
-			addExpression(pageWidthExpression);
-			addExpression(reportExpression);
-			this.pageWidth = pageWidth;
-			this.name = ReportUtils.generateUniqueName("subreportExpression");
-			reportDesigns = new HashMap<ReportBuilder<?>, JasperReportDesign>();
-			jasperReports = new HashMap<ReportBuilder<?>, JasperReport>();
-		}
-
-		@Override
-		public Object evaluate(List<?> values, ReportParameters reportParameters) {
-			reportBuilder = (ReportBuilder<?>) values.get(1);
-			if (jasperReports.containsKey(reportBuilder)) {
-				return jasperReports.get(reportBuilder);
-			}
-			try {
-				DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-				DRDesignReport report = new DRDesignReport(reportBuilder.build(), pageWidth, customValues.getTocHeadings());
-				JasperReportDesign reportDesign = new JasperReportDesign(report, reportParameters, null);
-				JasperReport jasperReport = JasperCompileManager.compileReport(reportDesign.getDesign());
-				reportDesigns.put(reportBuilder, reportDesign);
-				jasperReports.put(reportBuilder, jasperReport);
-				return jasperReport;
-			} catch (JRException e) {
-				if (log.isErrorEnabled()) {
-					log.error("Error encountered while creating subreport design", e);
-				}
-			} catch (DRException e) {
-				if (log.isErrorEnabled()) {
-					log.error("Error encountered while creating subreport design", e);
-				}
-			}
-			return null;
-		}
-
-		public JasperReportDesign getReportDesign() {
-			return reportDesigns.get(reportBuilder);
-		}
-
-		@Override
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public Class<?> getValueClass() {
-			return JasperReport.class;
-		}
-	}
-
-	private class SubreportWidthExpression extends AbstractDesignSimpleExpression {
-		private Integer pageWidth;
-
-		private SubreportWidthExpression(Integer pageWidth) {
-			this.pageWidth = pageWidth;
-		}
-
-		@Override
-		public Object evaluate(ReportParameters reportParameters) {
-			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			customValues.setSubreportWidth(pageWidth);
-			return pageWidth;
-		}
-
-		@Override
-		public Class<?> getValueClass() {
-			return Integer.class;
-		}
-
-	}
-
-	private class SubreportParametersExpression extends AbstractDesignComplexExpression {
-		private SubreportExpression subreportExpression;
-
-		public SubreportParametersExpression(SubreportExpression subreportExpression, DRIDesignExpression parametersExpression) {
-			super(ReportUtils.generateUniqueName("subreportParametersExpression"));
-			this.subreportExpression = subreportExpression;
-			if (parametersExpression != null) {
-				addExpression(parametersExpression);
-			}
-		}
-
-		@Override
-		@SuppressWarnings("unchecked")
-		public Object evaluate(List<?> values, ReportParameters reportParameters) {
-			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.putAll(subreportExpression.getReportDesign().getParameters());
-			if (subreportExpression.getReportDesign().getParameterValues() != null) {
-				parameters.putAll(subreportExpression.getReportDesign().getParameterValues());
-			}
-			if (!values.isEmpty()) {
-				parameters.putAll((Map<String, Object>) values.get(0));
-			}
-			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
-			return parameters;
-		}
-
-		@Override
-		public Class<?> getValueClass() {
-			return Map.class;
-		}
-	}
-
-	private class JasperSubreportParametersExpression extends AbstractDesignComplexExpression {
-
-		public JasperSubreportParametersExpression(DRIDesignExpression parametersExpression) {
-			super(ReportUtils.generateUniqueName("jasperSubreportParametersExpression"));
-			if (parametersExpression != null) {
-				addExpression(parametersExpression);
-			}
-		}
-
-		@Override
-		@SuppressWarnings("unchecked")
-		public Object evaluate(List<?> values, ReportParameters reportParameters) {
-			Map<String, Object> parameters = null;
-			if (!values.isEmpty()) {
-				parameters = (Map<String, Object>) values.get(0);
-			}
-			else {
-				parameters = new HashMap<String, Object>();
-			}
-			parameters.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
-			return parameters;
-		}
-
-		@Override
-		public Class<?> getValueClass() {
-			return Map.class;
-		}
-	}
 }

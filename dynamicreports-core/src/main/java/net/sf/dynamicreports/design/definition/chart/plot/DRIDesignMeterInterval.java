@@ -23,13 +23,14 @@
 package net.sf.dynamicreports.design.definition.chart.plot;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignMeterInterval {
+public interface DRIDesignMeterInterval extends Serializable {
 
 	public String getLabel();
 

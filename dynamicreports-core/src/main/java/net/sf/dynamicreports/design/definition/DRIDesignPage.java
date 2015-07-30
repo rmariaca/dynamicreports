@@ -22,13 +22,15 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.constant.PageOrientation;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignPage {
-	
+public interface DRIDesignPage extends Serializable {
+
 	public int getWidth();
 
 	public int getHeight();
@@ -40,6 +42,6 @@ public interface DRIDesignPage {
 	public int getColumnsPerPage();
 
 	public int getColumnSpace();
-	
+
 	public int getColumnWidth();
 }

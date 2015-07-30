@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition.style;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.HorizontalImageAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
@@ -35,7 +36,7 @@ import net.sf.dynamicreports.report.constant.VerticalTextAlignment;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignBaseStyle {
+public interface DRIDesignBaseStyle extends Serializable {
 
 	public Color getForegroundColor();
 

@@ -22,12 +22,14 @@
 
 package net.sf.dynamicreports.design.definition.chart.dataset;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignChartSerie {
+public interface DRIDesignChartSerie extends Serializable {
 
 	public DRIDesignExpression getSeriesExpression();
 }

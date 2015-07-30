@@ -23,17 +23,18 @@
 package net.sf.dynamicreports.design.definition.style;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.report.constant.LineStyle;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignPen {
+public interface DRIDesignPen extends Serializable {
 
 	public Float getLineWidth();
-	
+
 	public LineStyle getLineStyle();
-	
+
 	public Color getLineColor();
 }

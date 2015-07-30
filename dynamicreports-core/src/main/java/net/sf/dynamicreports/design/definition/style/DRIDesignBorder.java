@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignBorder {
+public interface DRIDesignBorder extends Serializable {
 
 	public DRIDesignPen getTopPen();
 

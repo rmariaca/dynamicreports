@@ -22,9 +22,11 @@
 
 package net.sf.dynamicreports.design.definition.chart.plot;
 
+import java.io.Serializable;
+
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignPlot {
+public interface DRIDesignPlot extends Serializable {
 }

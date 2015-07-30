@@ -22,12 +22,14 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignTableOfContentsHeading {
+public interface DRIDesignTableOfContentsHeading extends Serializable {
 
 	public DRIDesignTextField getReferenceField();
 

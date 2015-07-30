@@ -22,11 +22,13 @@
 
 package net.sf.dynamicreports.design.definition.expression;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignExpression {
-	
+public interface DRIDesignExpression extends Serializable {
+
 	public String getName();
 
 	public Class<?> getValueClass();

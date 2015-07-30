@@ -22,13 +22,15 @@
 
 package net.sf.dynamicreports.design.definition.chart.plot;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.report.constant.AxisPosition;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignChartAxis {
+public interface DRIDesignChartAxis extends Serializable {
 
 	public AxisPosition getPosition();
 

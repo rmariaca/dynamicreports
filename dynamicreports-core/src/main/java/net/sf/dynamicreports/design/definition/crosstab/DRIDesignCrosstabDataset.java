@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.design.definition.DRIDesignDataset;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
@@ -29,7 +31,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignCrosstabDataset {
+public interface DRIDesignCrosstabDataset extends Serializable {
 
 	public DRIDesignDataset getSubDataset();
 

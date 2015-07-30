@@ -22,13 +22,15 @@
 
 package net.sf.dynamicreports.design.base.component;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignListCell {
+public class DRDesignListCell implements Serializable {
 	private HorizontalCellComponentAlignment horizontalAlignment;
 	private VerticalCellComponentAlignment verticalAlignment;
 	private DRDesignComponent component;
@@ -40,21 +42,21 @@ public class DRDesignListCell {
 	protected DRDesignListCell(DRDesignComponent component) {
 		this(null, null, component);
 	}
-	
+
 	protected DRDesignListCell(HorizontalCellComponentAlignment horizontalAlignment, VerticalCellComponentAlignment verticalAlignment, DRDesignComponent component) {
 		this.horizontalAlignment = horizontalAlignment;
 		this.verticalAlignment = verticalAlignment;
 		this.component = component;
 	}
-	
+
 	public HorizontalCellComponentAlignment getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
-	
+
 	public void setHorizontalAlignment(HorizontalCellComponentAlignment horizontalAlignment) {
 		this.horizontalAlignment = horizontalAlignment;
 	}
-	
+
 	public VerticalCellComponentAlignment getVerticalAlignment() {
 		return verticalAlignment;
 	}
@@ -62,7 +64,7 @@ public class DRDesignListCell {
 	public void setVerticalAlignment(VerticalCellComponentAlignment verticalAlignment) {
 		this.verticalAlignment = verticalAlignment;
 	}
-	
+
 	public DRDesignComponent getComponent() {
 		return component;
 	}
@@ -97,5 +99,5 @@ public class DRDesignListCell {
 
 	public void setHeight(Integer height) {
 		this.height = height;
-	}			
+	}
 }

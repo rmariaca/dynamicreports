@@ -22,12 +22,14 @@
 
 package net.sf.dynamicreports.design.definition.style;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.report.constant.TabStopAlignment;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignTabStop {
+public interface DRIDesignTabStop extends Serializable {
 
 	public int getPosition();
 

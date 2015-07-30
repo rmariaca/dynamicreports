@@ -24,7 +24,6 @@ package net.sf.dynamicreports.design.transformation;
 
 import java.awt.Color;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,14 +77,12 @@ import net.sf.dynamicreports.design.transformation.chartcustomizer.ShowValuesCus
 import net.sf.dynamicreports.design.transformation.chartcustomizer.WaterfallBarRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.XyBlockRendererCustomizer;
 import net.sf.dynamicreports.design.transformation.chartcustomizer.XyStepRendererCustomizer;
+import net.sf.dynamicreports.design.transformation.expressions.GroupedSeriesExpression;
+import net.sf.dynamicreports.design.transformation.expressions.SerieValueExpression;
 import net.sf.dynamicreports.report.ReportUtils;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
-import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.OrderType;
 import net.sf.dynamicreports.report.definition.DRIDataset;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
 import net.sf.dynamicreports.report.definition.chart.DRIChartLegend;
@@ -695,37 +692,6 @@ public class ChartTransform {
 		return designSerie;
 	}
 
-	private class GroupedSeriesExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = 1L;
-
-		private GroupedSeriesExpression(DRIExpression<?> groupExpression, DRIExpression<?> seriesExpression, DRIExpression<?> labelExpression, int index) {
-			if (groupExpression != null) {
-				addExpression(groupExpression);
-			}
-			else {
-				addExpression(Expressions.text("group"));
-			}
-			if (seriesExpression != null) {
-				addExpression(seriesExpression);
-			}
-			else {
-				if (labelExpression != null) {
-					addExpression(labelExpression);
-				}
-				else {
-					addExpression(Expressions.text("serie" + index));
-				}
-			}
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String group = (String) values.get(0);
-			String series = (String) values.get(1);
-			return group + GroupedStackedBarRendererCustomizer.GROUP_SERIES_KEY + series;
-		}
-	}
-
 	//xy serie
 	private DRDesignXyChartSerie xySerie(DRIDataset dataset, DRIXyChartSerie serie, DRIDesignExpression valueExpression, ResetType resetType, DRDesignGroup resetGroup, int index) throws DRException {
 		DRDesignXyChartSerie designSerie = new DRDesignXyChartSerie();
@@ -772,77 +738,6 @@ public class ChartTransform {
 		}
 		designSerie.setLabelExpression(expressionTransform.transformExpression(labelExpression));
 		return designSerie;
-	}
-
-	private class SerieValueExpression extends AbstractSimpleExpression<Number> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private DRIDesignExpression valueExpression;
-		private DRIDesignExpression serieExpression;
-		private ResetType resetType;
-		private DRDesignGroup resetGroup;
-		private String key;
-		private Object resetValue;
-		private Map<Object, Double> values;
-
-		public SerieValueExpression(DRIDesignExpression valueExpression, DRIDesignExpression serieExpression, ResetType resetType, DRDesignGroup resetGroup, String key) {
-			this.valueExpression = valueExpression;
-			this.serieExpression = serieExpression;
-			this.resetType = resetType;
-			this.resetGroup = resetGroup;
-			this.key = key;
-		}
-
-		@Override
-		public Number evaluate(ReportParameters reportParameters) {
-			if (reportParameters.getReportRowNumber() <= 1) {
-				resetValue = null;
-				values = new HashMap<Object, Double>();
-			}
-
-			Object resetValue = null;
-			switch (resetType) {
-			case NONE:
-			case REPORT:
-				break;
-			case PAGE:
-				resetValue = reportParameters.getPageNumber();
-				break;
-			case COLUMN:
-				resetValue = reportParameters.getColumnNumber();
-				break;
-			case GROUP:
-				resetValue = reportParameters.getValue(resetGroup.getGroupExpression().getName());
-				break;
-			default:
-				throw new DRDesignReportException("Reset type " + resetType.name() + " not supported");
-			}
-			if (this.resetValue != null && !this.resetValue.equals(resetValue)) {
-				this.values = new HashMap<Object, Double>();
-			}
-			this.resetValue = resetValue;
-
-			Object keyValue;
-			if (key != null) {
-				keyValue = reportParameters.getValue(valueExpression.getName()) + "_" + reportParameters.getValue(key);
-			}
-			else {
-				keyValue = reportParameters.getValue(valueExpression.getName());
-			}
-			Number serieValue = reportParameters.getValue(serieExpression.getName());
-			Double value = values.get(keyValue);
-			if (serieValue != null) {
-				if (value == null) {
-					value = serieValue.doubleValue();
-				}
-				else {
-					value += serieValue.doubleValue();
-				}
-				values.put(keyValue, value);
-			}
-
-			return value;
-		}
 	}
 
 }

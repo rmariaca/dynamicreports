@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.design.transformation.CrosstabTransform.CrosstabRowCounter;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabRowCounter;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
 import net.sf.dynamicreports.report.definition.DRIValue;

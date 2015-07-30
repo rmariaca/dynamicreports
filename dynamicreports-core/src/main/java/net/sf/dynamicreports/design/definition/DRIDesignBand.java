@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.base.component.DRDesignList;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -30,7 +32,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignBand {
+public interface DRIDesignBand extends Serializable {
 
 	public String getName();
 

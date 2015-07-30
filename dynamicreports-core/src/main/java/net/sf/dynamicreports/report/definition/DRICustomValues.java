@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.report.definition;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
@@ -29,7 +30,7 @@ import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRICustomValues {
+public interface DRICustomValues extends Serializable {
 	public static final String NAME = "CUSTOM_VALUES";
 
 	public void setSystemValue(String name, Object value);

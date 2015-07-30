@@ -22,10 +22,12 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import java.io.Serializable;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignCrosstabCell {
+public interface DRIDesignCrosstabCell extends Serializable {
 
 	public String getName();
 

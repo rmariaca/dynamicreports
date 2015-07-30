@@ -22,16 +22,6 @@
 
 package net.sf.dynamicreports.design.transformation;
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*;
-
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.DRDesignHyperLink;
 import net.sf.dynamicreports.design.base.DRDesignTableOfContentsHeading;
@@ -65,31 +55,31 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignJasperExpress
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
+import net.sf.dynamicreports.design.transformation.expressions.BooleanImageExpression;
+import net.sf.dynamicreports.design.transformation.expressions.BooleanTextValueFormatter;
+import net.sf.dynamicreports.design.transformation.expressions.CurrentDateExpression;
+import net.sf.dynamicreports.design.transformation.expressions.MultiPageListDataSourceExpression;
+import net.sf.dynamicreports.design.transformation.expressions.MultiPageListSubreportExpression;
+import net.sf.dynamicreports.design.transformation.expressions.PageNumberExpression;
+import net.sf.dynamicreports.design.transformation.expressions.PageXofYNumberExpression;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.ReportUtils;
-import net.sf.dynamicreports.report.base.DRBand;
 import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.base.DRHyperLink;
-import net.sf.dynamicreports.report.base.component.DRComponent;
 import net.sf.dynamicreports.report.base.component.DRHyperLinkComponent;
 import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.base.component.DRList;
 import net.sf.dynamicreports.report.base.component.DRTextField;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.base.style.DRPen;
 import net.sf.dynamicreports.report.base.style.DRStyle;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
-import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.component.CustomComponentTransform;
 import net.sf.dynamicreports.report.component.CustomComponents;
 import net.sf.dynamicreports.report.component.DRICustomComponent;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.constant.ComponentDimensionType;
-import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
 import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
@@ -98,7 +88,6 @@ import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
@@ -129,14 +118,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import net.sf.dynamicreports.report.definition.style.DRIReportStyle;
-import net.sf.dynamicreports.report.definition.style.DRIStyle;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.Renderable;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -312,11 +294,11 @@ public class ComponentTransform {
 		designSubreport.setWidth(accessor.getTemplateTransform().getMultiPageListWidth(multiPageList));
 		designSubreport.setHeight(accessor.getTemplateTransform().getMultiPageListHeight(multiPageList));
     JasperReportBuilder multiPageReport = DynamicReports.report();
-    MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(multiPageList.getComponents(), accessor.getTemplateTransform().getTemplateStyles());
+    MultiPageListSubreportExpression subreportExpression = new MultiPageListSubreportExpression(accessor.getLocale(), accessor.getResourceBundle(), accessor.getResourceBundleName(), accessor.getWhenResourceMissingType(), multiPageList.getComponents(), accessor.getTemplateTransform().getTemplateStyles());
     multiPageReport.detail(Components.subreport(subreportExpression));
     multiPageReport.setDetailSplitType(multiPageList.getSplitType());
     DRIDesignExpression reportExpression = accessor.getExpressionTransform().transformExpression(Expressions.value(multiPageReport));
-    DRIDesignExpression dataSourceExpression = accessor.getExpressionTransform().transformExpression(Expressions.dataSource(new JREmptyDataSource(multiPageList.getComponents().size())));
+    DRIDesignExpression dataSourceExpression = accessor.getExpressionTransform().transformExpression(new MultiPageListDataSourceExpression(multiPageList.getComponents().size()));
     designSubreport.setReportExpression(reportExpression);
     designSubreport.setDataSourceExpression(dataSourceExpression);
 		return designSubreport;
@@ -636,7 +618,9 @@ public class ComponentTransform {
 		case IMAGE_BALL:
 			DRImage image = new DRImage();
 			image.setImageScale(ImageScale.CLIP);
-			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue));
+			int width = accessor.getTemplateTransform().getBooleanImageWidth(booleanField);
+			int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
+			image.setImageExpression(new BooleanImageExpression(booleanField, emptyWhenNullValue, width, height));
 			component = image;
 			break;
 		default:
@@ -823,199 +807,6 @@ public class ComponentTransform {
 			}
 		}
 		return evaluationGroup;
-	}
-
-	private class PageXofYNumberExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		private int index;
-
-		public PageXofYNumberExpression(DRIExpression<String> pageNumberFormatExpression, int index) {
-			addExpression(pageNumberFormatExpression);
-			this.index = index;
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String pattern = (String) values.get(0);
-			Validate.isTrue(StringUtils.contains(pattern, "{0}"), "Wrong format pattern \"" + pattern + "\", missing argument {0}");
-			Validate.isTrue(StringUtils.contains(pattern, "{1}"), "Wrong format pattern \"" + pattern + "\", missing argument {1}");
-			Validate.isTrue(pattern.indexOf("{0}") < pattern.indexOf("{1}"), "Wrong format pattern \"" + pattern + "\", argument {0} must be before {1}");
-			int index1 = pattern.indexOf("{0}");
-			if (index == 0) {
-				pattern = pattern.substring(0, index1 + 3);
-			}
-			else {
-				pattern = pattern.substring(index1 + 3);
-			}
-			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
-			String result = format.format(new Object[]{reportParameters.getPageNumber(), reportParameters.getPageNumber()});
-			return result;
-		}
-	}
-
-	private class PageNumberExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-
-		public PageNumberExpression(DRIExpression<String> pageNumberFormatExpression) {
-			addExpression(pageNumberFormatExpression);
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String pattern = (String) values.get(0);
-			MessageFormat format = new MessageFormat(pattern, reportParameters.getLocale());
-			String result = format.format(new Object[]{reportParameters.getPageNumber()});
-			return result;
-		}
-	}
-
-	private class CurrentDateExpression extends AbstractComplexExpression<String> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private String datePattern;
-
-		public CurrentDateExpression(DRIExpression<String> currentDateExpression, String datePattern) {
-			this.datePattern = datePattern;
-			addExpression(currentDateExpression);
-		}
-
-		@Override
-		public String evaluate(List<?> values, ReportParameters reportParameters) {
-			String pattern = (String) values.get(0);
-			Locale locale = reportParameters.getLocale();
-			MessageFormat format = new MessageFormat(pattern, locale);
-			String date;
-			if (datePattern == null) {
-				date = DataTypes.dateType().valueToString(new Date(), locale);
-			}
-			else {
-				date = new SimpleDateFormat(datePattern, locale).format(new Date());
-			}
-			String result = format.format(new Object[]{date});
-			return result;
-		}
-	}
-
-	private class BooleanTextValueFormatter extends AbstractValueFormatter<String, Boolean> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private String keyTrue;
-		private String keyFalse;
-		private boolean emptyWhenNullValue;
-
-		private BooleanTextValueFormatter(String keyTrue, String keyFalse, boolean emptyWhenNullValue) {
-			this.keyTrue = keyTrue;
-			this.keyFalse = keyFalse;
-			this.emptyWhenNullValue = emptyWhenNullValue;
-		}
-
-		@Override
-		public String format(Boolean value, ReportParameters reportParameters) {
-			if (emptyWhenNullValue && value == null) {
-				return "";
-			}
-			String key;
-			if (value != null && value) {
-				key = keyTrue;
-			} else {
-				key = keyFalse;
-			}
-			return ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_NAME, reportParameters.getLocale()).getString(key);
-		}
-	}
-
-	private class BooleanImageExpression extends AbstractComplexExpression<Renderable> {
-		private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		private Renderable imageTrue;
-		private Renderable imageFalse;
-		private boolean emptyWhenNullValue;
-
-		private BooleanImageExpression(DRIBooleanField booleanField, boolean emptyWhenNullValue) throws DRException {
-			this.emptyWhenNullValue = emptyWhenNullValue;
-			addExpression(booleanField.getValueExpression());
-			String fileNameTrue;
-			String fileNameFalse;
-			switch (booleanField.getComponentType()) {
-			case IMAGE_STYLE_1:
-				fileNameTrue = "boolean1_true";
-				fileNameFalse = "boolean1_false";
-				break;
-			case IMAGE_STYLE_2:
-				fileNameTrue = "boolean2_true";
-				fileNameFalse = "boolean2_false";
-				break;
-			case IMAGE_STYLE_3:
-				fileNameTrue = "boolean3_true";
-				fileNameFalse = "boolean3_false";
-				break;
-			case IMAGE_STYLE_4:
-				fileNameTrue = "boolean1_true";
-				fileNameFalse = "boolean4_false";
-				break;
-			case IMAGE_CHECKBOX_1:
-				fileNameTrue = "checkbox1_true";
-				fileNameFalse = "checkbox_false";
-				break;
-			case IMAGE_CHECKBOX_2:
-				fileNameTrue = "checkbox2_true";
-				fileNameFalse = "checkbox_false";
-				break;
-			case IMAGE_BALL:
-				fileNameTrue = "ball_green";
-				fileNameFalse = "ball_red";
-				break;
-			default:
-				throw new DRDesignReportException("BooleanComponentType " + booleanField.getComponentType().name() + " not supported");
-			}
-			try {
-				int width = accessor.getTemplateTransform().getBooleanImageWidth(booleanField);
-				int height = accessor.getTemplateTransform().getBooleanImageHeight(booleanField);
-				imageTrue = new CustomBatikRenderer(ReportUtils.class.getResource("images/" + fileNameTrue + ".svg"), width, height);
-				imageFalse = new CustomBatikRenderer(ReportUtils.class.getResource("images/" + fileNameFalse + ".svg"), width, height);
-			} catch (JRException e) {
-				throw new DRException(e);
-			}
-		}
-
-		@Override
-		public Renderable evaluate(List<?> values, ReportParameters reportParameters) {
-			Boolean value = (Boolean) values.get(0);
-			if (emptyWhenNullValue && value == null) {
-				return null;
-			}
-			if (value != null && value) {
-				return imageTrue;
-			} else {
-				return imageFalse;
-			}
-		}
-	}
-
-	private class MultiPageListSubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
-		private static final long serialVersionUID = 1L;
-
-		private List<DRIComponent> detailComponents;
-		private Map<String, DRIStyle> templateStyles;
-
-		public MultiPageListSubreportExpression(List<DRIComponent> detailComponents, Map<String, DRIStyle> templateStyles) {
-			this.detailComponents = detailComponents;
-			this.templateStyles = templateStyles;
-		}
-
-		@Override
-		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
-      JasperReportBuilder report = report();
-      report.setLocale(accessor.getLocale());
-      report.setResourceBundle(accessor.getResourceBundle());
-      report.setResourceBundle(accessor.getResourceBundleName());
-      report.setWhenResourceMissingType(accessor.getWhenResourceMissingType());
-      for (DRIStyle style : templateStyles.values()) {
-    	  report.getReport().addTemplateStyle(style);
-      }
-      DRBand titleBand = report.getReport().getTitleBand();
-      DRComponent detailComponent = (DRComponent) detailComponents.get(reportParameters.getReportRowNumber() - 1);
-      titleBand.addComponent(detailComponent);
-			return report;
-		}
 	}
 
 }

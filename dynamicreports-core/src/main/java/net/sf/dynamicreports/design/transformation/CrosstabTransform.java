@@ -42,21 +42,23 @@ import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabMeasure;
 import net.sf.dynamicreports.design.base.crosstab.DRDesignCrosstabRowGroup;
 import net.sf.dynamicreports.design.constant.DefaultStyleType;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabExpression;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabMeasureExpression;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabPrintInEvenRow;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabPrintInOddRow;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabRowCount;
+import net.sf.dynamicreports.design.transformation.expressions.CrosstabRowCounter;
 import net.sf.dynamicreports.report.base.DRHyperLink;
 import net.sf.dynamicreports.report.base.component.DRFiller;
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellContent;
 import net.sf.dynamicreports.report.base.crosstab.DRCrosstabCellStyle;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.base.style.DRConditionalStyle;
 import net.sf.dynamicreports.report.base.style.DRStyle;
-import net.sf.dynamicreports.report.builder.expression.AbstractComplexExpression;
 import net.sf.dynamicreports.report.builder.expression.SystemMessageExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 import net.sf.dynamicreports.report.constant.StretchType;
-import net.sf.dynamicreports.report.definition.DRICustomValues;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellContent;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabCellStyle;
@@ -66,7 +68,6 @@ import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabRowGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabVariable;
-import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIJasperExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
@@ -548,127 +549,12 @@ public class CrosstabTransform {
 		return crosstabs.get(designCrosstab);
 	}
 
-	private class CrosstabMeasureExpression extends AbstractComplexExpression<Double> {
-		private static final long serialVersionUID = 1L;
-
-		public CrosstabMeasureExpression(DRIExpression<?> expression) {
-			addExpression(expression);
-		}
-
-		@Override
-		public Double evaluate(List<?> values, ReportParameters reportParameters) {
-			Number value = (Number) values.get(0);
-			if (value != null) {
-				return value.doubleValue();
-			}
-			return null;
-		}
-	}
-
 	private <T> DRIExpression<T> getCrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) throws DRException {
 		if (expression instanceof DRIJasperExpression) {
 			return expression;
 		}
+		accessor.getExpressionTransform().transformExpression(expression);
 		return new CrosstabExpression<T>(crosstab, expression);
-	}
-
-	private class CrosstabExpression<T> extends AbstractComplexExpression<T> {
-		private static final long serialVersionUID = 1L;
-
-		private DRIExpression<T> expression;
-
-		public CrosstabExpression(DRICrosstab crosstab, DRIExpression<T> expression) throws DRException {
-			this.expression = expression;
-			accessor.getExpressionTransform().transformExpression(expression);
-			if (expression instanceof DRIComplexExpression) {
-				for (DRIExpression<?> express : ((DRIComplexExpression<?>) expression).getExpressions()) {
-					addExpression(express);
-				}
-			}
-			for (DRICrosstabVariable<?> variable : crosstab.getVariables()) {
-				addExpression(variable);
-			}
-			for (DRICrosstabMeasure<?> measure : crosstab.getMeasures()) {
-				if (measure.getExpression() instanceof DRICrosstabVariable<?>) {
-					addExpression(measure.getExpression());
-				}
-			}
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public T evaluate(List<?> values, ReportParameters reportParameters) {
-			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			for (int i = 0; i < getExpressions().size(); i++) {
-				customValues.setSystemValue(getExpressions().get(i).getName(), values.get(i));
-			}
-			if (expression instanceof DRIComplexExpression) {
-				DRIComplexExpression<?> express = (DRIComplexExpression<?>) expression;
-				return (T) express.evaluate(values, reportParameters);
-			}
-			else {
-				return reportParameters.getValue(expression.getName());
-			}
-		}
-
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		@Override
-		public Class getValueClass() {
-			return expression.getValueClass();
-		}
-	}
-
-	private class CrosstabRowCount extends AbstractSimpleExpression<Boolean> {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public Boolean evaluate(ReportParameters reportParameters) {
-			CrosstabRowCounter counter = reportParameters.getValue(ReportParameters.CROSSTAB_ROW_COUNTER);
-			counter.increment();
-			return false;
-		}
-	}
-
-	public class CrosstabRowCounter extends AbstractSimpleExpression<CrosstabRowCounter> {
-		private static final long serialVersionUID = 1L;
-
-		private int rowNumber = 1;
-
-		@Override
-		public CrosstabRowCounter evaluate(ReportParameters reportParameters) {
-			return this;
-		}
-
-		private void increment() {
-			rowNumber++;
-		}
-
-		public int getRowNumber() {
-			return rowNumber;
-		}
-
-		@Override
-		public String getName() {
-			return ReportParameters.CROSSTAB_ROW_COUNTER;
-		}
-	}
-
-	private class CrosstabPrintInOddRow extends AbstractSimpleExpression<Boolean> {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public Boolean evaluate(ReportParameters reportParameters) {
-			return reportParameters.getCrosstabRowNumber() % 2 != 0;
-		}
-	}
-
-	private class CrosstabPrintInEvenRow extends AbstractSimpleExpression<Boolean> {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public Boolean evaluate(ReportParameters reportParameters) {
-			return reportParameters.getCrosstabRowNumber() % 2 == 0;
-		}
 	}
 
 	private class MeasuresStyles {

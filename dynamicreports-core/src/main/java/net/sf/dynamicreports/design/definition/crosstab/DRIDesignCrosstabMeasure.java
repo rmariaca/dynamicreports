@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.design.definition.crosstab;
 
+import java.io.Serializable;
+
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
@@ -29,15 +31,15 @@ import net.sf.dynamicreports.report.constant.CrosstabPercentageType;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignCrosstabMeasure {
+public interface DRIDesignCrosstabMeasure extends Serializable {
 
 	public String getName();
 
 	public Class<?> getValueClass();
-	
+
 	public DRIDesignExpression getValueExpression();
-	
+
 	public Calculation getCalculation();
-	
+
 	public CrosstabPercentageType getPercentageType();
 }

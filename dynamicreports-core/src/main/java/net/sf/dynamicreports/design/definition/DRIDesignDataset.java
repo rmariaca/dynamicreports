@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
@@ -33,7 +34,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSystemExpress
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignDataset {
+public interface DRIDesignDataset extends Serializable {
 
 	public String getName();
 

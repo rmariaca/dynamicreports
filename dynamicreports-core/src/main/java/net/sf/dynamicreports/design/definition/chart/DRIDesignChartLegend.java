@@ -23,6 +23,7 @@
 package net.sf.dynamicreports.design.definition.chart;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.design.definition.style.DRIDesignFont;
 import net.sf.dynamicreports.report.constant.Position;
@@ -30,15 +31,15 @@ import net.sf.dynamicreports.report.constant.Position;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignChartLegend {
+public interface DRIDesignChartLegend extends Serializable {
 
 	public Color getColor();
-	
+
 	public Color getBackgroundColor();
-	
+
 	public Boolean getShowLegend();
-	
+
 	public DRIDesignFont getFont();
-	
+
 	public Position getPosition();
 }

@@ -22,6 +22,7 @@
 
 package net.sf.dynamicreports.design.definition.component;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
@@ -35,7 +36,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignComponent {
+public interface DRIDesignComponent extends Serializable {
 	public String getName();
 
 	public String getUniqueName();
