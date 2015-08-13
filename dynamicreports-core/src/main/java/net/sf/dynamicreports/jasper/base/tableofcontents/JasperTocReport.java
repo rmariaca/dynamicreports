@@ -28,12 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.dynamicreports.design.definition.DRIDesignMargin;
-import net.sf.dynamicreports.design.definition.DRIDesignPage;
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.jasper.transformation.ConstantTransform;
 import net.sf.dynamicreports.report.base.DRPage;
 import net.sf.dynamicreports.report.builder.MarginBuilder;
 import net.sf.dynamicreports.report.constant.TableOfContentsPosition;
@@ -79,21 +78,19 @@ public class JasperTocReport {
 			}
 			levels++;
 
-			DRIDesignPage designPage = jasperReportDesign.getReport().getPage();
 			DRPage tocPage = tocReport.getReport().getPage();
-			tocPage.setWidth(designPage.getWidth());
-			tocPage.setHeight(designPage.getHeight());
-			tocPage.setOrientation(designPage.getOrientation());
-			DRIDesignMargin designMargin = designPage.getMargin();
+			tocPage.setWidth(jasperReportDesign.getDesign().getPageWidth());
+			tocPage.setHeight(jasperReportDesign.getDesign().getPageHeight());
+			tocPage.setOrientation(ConstantTransform.pageOrientation(jasperReportDesign.getDesign().getOrientationValue()));
 			MarginBuilder tocMargin = margin();
-			tocMargin.setTop(designMargin.getTop());
-			tocMargin.setLeft(designMargin.getLeft());
-			tocMargin.setBottom(designMargin.getBottom());
-			tocMargin.setRight(designMargin.getRight());
+			tocMargin.setTop(jasperReportDesign.getDesign().getTopMargin());
+			tocMargin.setLeft(jasperReportDesign.getDesign().getLeftMargin());
+			tocMargin.setBottom(jasperReportDesign.getDesign().getBottomMargin());
+			tocMargin.setRight(jasperReportDesign.getDesign().getRightMargin());
 			tocReport.setPageMargin(tocMargin);
 			tocReport.setDataSource(new JRBeanCollectionDataSource(headingList));
 
-			DRITableOfContentsCustomizer tableOfContents = jasperReportDesign.getReport().getTableOfContentsCustomizer();
+			DRITableOfContentsCustomizer tableOfContents = jasperReportDesign.getTableOfContentsCustomizer();
 			tableOfContents.setReport(tocReport);
 			tableOfContents.setHeadingList(headingList);
 			tableOfContents.setHeadings(headings.size());

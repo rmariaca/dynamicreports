@@ -22,10 +22,16 @@
 
 package net.sf.dynamicreports.jasper.base.tableofcontents;
 
+import java.io.Serializable;
+
+import net.sf.dynamicreports.report.constant.Constants;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class JasperTocHeading {
+public class JasperTocHeading implements Serializable {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+
 	private Integer level;
 	private String text;
 	private String reference;

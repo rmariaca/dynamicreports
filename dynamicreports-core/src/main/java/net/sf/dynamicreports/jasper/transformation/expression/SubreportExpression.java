@@ -28,8 +28,10 @@ import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.design.base.expression.AbstractDesignComplexExpression;
+import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
+import net.sf.dynamicreports.jasper.transformation.JasperTransform;
 import net.sf.dynamicreports.report.ReportUtils;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
@@ -73,8 +75,10 @@ public class SubreportExpression extends AbstractDesignComplexExpression {
 		}
 		try {
 			DRICustomValues customValues = (DRICustomValues) reportParameters.getParameterValue(DRICustomValues.NAME);
-			DRDesignReport report = new DRDesignReport(reportBuilder.build(), pageWidth, customValues.getTocHeadings());
+			DRIDesignReport report = new DRDesignReport(reportBuilder.build(), pageWidth, customValues.getTocHeadings());
 			JasperReportDesign reportDesign = new JasperReportDesign(report, reportParameters, null);
+			JasperTransform jasperTransform = new JasperTransform(report, reportDesign);
+			jasperTransform.transform();
 			JasperReport jasperReport = JasperCompileManager.compileReport(reportDesign.getDesign());
 			reportDesigns.put(reportBuilder, reportDesign);
 			jasperReports.put(reportBuilder, jasperReport);
@@ -93,6 +97,10 @@ public class SubreportExpression extends AbstractDesignComplexExpression {
 
 	public JasperReportDesign getReportDesign() {
 		return reportDesigns.get(reportBuilder);
+	}
+
+	public ReportBuilder<?> getReportBuilder() {
+		return reportBuilder;
 	}
 
 	@Override

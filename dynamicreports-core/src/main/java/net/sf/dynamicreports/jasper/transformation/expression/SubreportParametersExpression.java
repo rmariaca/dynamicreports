@@ -54,8 +54,8 @@ public class SubreportParametersExpression extends AbstractDesignComplexExpressi
 	public Object evaluate(List<?> values, ReportParameters reportParameters) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.putAll(subreportExpression.getReportDesign().getParameters());
-		if (subreportExpression.getReportDesign().getParameterValues() != null) {
-			parameters.putAll(subreportExpression.getReportDesign().getParameterValues());
+		if (subreportExpression.getReportBuilder().getReport().getParameterValues() != null) {
+			parameters.putAll(subreportExpression.getReportBuilder().getReport().getParameterValues());
 		}
 		if (!values.isEmpty()) {
 			parameters.putAll((Map<String, Object>) values.get(0));

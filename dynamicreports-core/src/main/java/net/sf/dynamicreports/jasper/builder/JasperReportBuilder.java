@@ -40,6 +40,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
+import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
 import net.sf.dynamicreports.jasper.base.export.JasperImageExporter;
@@ -64,6 +65,7 @@ import net.sf.dynamicreports.jasper.builder.export.JasperXmlExporterBuilder;
 import net.sf.dynamicreports.jasper.constant.ImageType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.jasper.transformation.ExporterTransform;
+import net.sf.dynamicreports.jasper.transformation.JasperTransform;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.QueryBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
@@ -111,9 +113,9 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	private JasperDesign jasperDesign;
 	private JasperReport jasperReport;
 	private JasperPrint jasperPrint;
-	private JRDataSource dataSource;
-	private Connection connection;
-	private JRVirtualizer virtualizer;
+	private transient JRDataSource dataSource;
+	private transient Connection connection;
+	private transient JRVirtualizer virtualizer;
 	private Integer startPageNumber;
 	private Map<String, Object> parameters;
 
@@ -261,7 +263,10 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 
 	private JasperReportDesign toJasperReportDesign() throws DRException {
 		if (reportDesign == null) {
-			reportDesign = new JasperReportDesign(new DRDesignReport(build()), startPageNumber);
+			DRIDesignReport report = new DRDesignReport(build());
+			reportDesign = new JasperReportDesign(report, startPageNumber);
+			JasperTransform jasperTransform = new JasperTransform(report, reportDesign);
+			jasperTransform.transform();
 		}
 		return reportDesign;
 	}
@@ -290,8 +295,8 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 			parameters = new HashMap<String, Object>();
 			JasperReportDesign jasperReportDesign = toJasperReportDesign();
 			parameters.putAll(jasperReportDesign.getParameters());
-			if (jasperReportDesign.getParameterValues() != null) {
-				parameters.putAll(jasperReportDesign.getParameterValues());
+			if (getReport().getParameterValues() != null) {
+				parameters.putAll(getReport().getParameterValues());
 			}
 		}
 		return parameters;
@@ -315,7 +320,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 					jasperPrint = JasperFillManager.fillReport(toJasperReport(), parameters);
 				}
 
-				if (toJasperReportDesign().getReport().isTableOfContents()) {
+				if (toJasperReportDesign().isTableOfContents()) {
 					JasperTocReport.createTocReport(toJasperReportDesign(), jasperPrint);
 				}
 			}

@@ -60,7 +60,6 @@ import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
  */
 public class ReportTransform {
 	private JasperTransformAccessor accessor;
-	private JasperCustomValues customValues;
 
 	public ReportTransform(JasperTransformAccessor accessor) {
 		this.accessor = accessor;
@@ -71,13 +70,12 @@ public class ReportTransform {
 		JasperDesign design = accessor.getDesign();
 		Map<String, Object> parameters = accessor.getParameters();
 
-		customValues = new JasperCustomValues();
 		if (report.isTableOfContents()) {
 			Map<String, JasperTocHeading> tocHeadings = report.getTableOfContentsHeadings();
 			if (tocHeadings == null) {
 				tocHeadings = new LinkedHashMap<String, JasperTocHeading>();
 			}
-			customValues.setTocHeadings(tocHeadings);
+			accessor.getCustomValues().setTocHeadings(tocHeadings);
 		}
 
 		design.setName(report.getReportName());
@@ -106,7 +104,7 @@ public class ReportTransform {
 
 		if (accessor.getStartPageNumber() != null) {
 			addScriptlet("startPageNumber", StartPageNumberScriptlet.class);
-			customValues.setStartPageNumber(accessor.getStartPageNumber());
+			accessor.getCustomValues().setStartPageNumber(accessor.getStartPageNumber());
 		}
 
 		for (DRIScriptlet scriptlet : report.getScriptlets()) {
@@ -263,7 +261,4 @@ public class ReportTransform {
 		return jrQuery;
 	}
 
-	public JasperCustomValues getCustomValues() {
-		return customValues;
-	}
 }
