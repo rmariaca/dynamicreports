@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignPdf417Barcode extends DRDesignBarcode implements DRIDesignPdf417Barcode {
+public class DRDesignPdf417Barcode extends DRDesignBarcode4j implements DRIDesignPdf417Barcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private Integer minColumns;

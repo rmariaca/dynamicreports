@@ -25,6 +25,7 @@ package net.sf.dynamicreports.jasper.transformation;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarbecue;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
+import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode4j;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignCodabarBarcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignCode128Barcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignCode39Barcode;
@@ -44,6 +45,7 @@ import net.sf.jasperreports.components.ComponentsExtensionsRegistryFactory;
 import net.sf.jasperreports.components.barbecue.BarbecueComponent;
 import net.sf.jasperreports.components.barbecue.StandardBarbecueComponent;
 import net.sf.jasperreports.components.barcode4j.Barcode4jComponent;
+import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.components.barcode4j.CodabarComponent;
 import net.sf.jasperreports.components.barcode4j.Code128Component;
 import net.sf.jasperreports.components.barcode4j.Code39Component;
@@ -158,54 +160,58 @@ public class BarcodeTransform {
 		return jrBarbecue;
 	}
 
-	@SuppressWarnings("deprecation")
-	private void barcode(Barcode4jComponent jrBarcode, DRIDesignBarcode barcode) {
+	private void barcode(BarcodeComponent jrBarcode, DRIDesignBarcode barcode) {
 		EvaluationTime evaluationTime = barcode.getEvaluationTime();
 		jrBarcode.setEvaluationTimeValue(ConstantTransform.evaluationTime(evaluationTime));
 		if (evaluationTime != null && evaluationTime.equals(EvaluationTime.GROUP) && barcode.getEvaluationGroup() != null) {
 			jrBarcode.setEvaluationGroup(accessor.getGroupTransform().getGroup(barcode.getEvaluationGroup()).getName());
 		}
 		jrBarcode.setCodeExpression(accessor.getExpressionTransform().getExpression(barcode.getCodeExpression()));
-		jrBarcode.setPatternExpression(accessor.getExpressionTransform().getExpression(barcode.getPatternExpression()));
-		jrBarcode.setModuleWidth(barcode.getModuleWidth());
-		if (barcode.getOrientation() != null) {
-			jrBarcode.setOrientation(ConstantTransform.barcodeOrientation(barcode.getOrientation()));
+	}
+
+	@SuppressWarnings("deprecation")
+	private void barcode4j(Barcode4jComponent jrBarcode4j, DRIDesignBarcode4j barcode4j) {
+		barcode(jrBarcode4j, barcode4j);
+		jrBarcode4j.setPatternExpression(accessor.getExpressionTransform().getExpression(barcode4j.getPatternExpression()));
+		jrBarcode4j.setModuleWidth(barcode4j.getModuleWidth());
+		if (barcode4j.getOrientation() != null) {
+			jrBarcode4j.setOrientation(ConstantTransform.barcodeOrientation(barcode4j.getOrientation()));
 		}
-		jrBarcode.setTextPosition(ConstantTransform.barcodeTextPosition(barcode.getTextPosition()));
-		jrBarcode.setQuietZone(barcode.getQuietZone());
-		jrBarcode.setVerticalQuietZone(barcode.getVerticalQuietZone());
+		jrBarcode4j.setTextPosition(ConstantTransform.barcodeTextPosition(barcode4j.getTextPosition()));
+		jrBarcode4j.setQuietZone(barcode4j.getQuietZone());
+		jrBarcode4j.setVerticalQuietZone(barcode4j.getVerticalQuietZone());
 	}
 
 	private Barcode4jComponent codabar(DRIDesignCodabarBarcode barcode) {
 		CodabarComponent jrBarcode = new CodabarComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setWideFactor(barcode.getWideFactor());
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent code128(DRIDesignCode128Barcode barcode) {
 		Code128Component jrBarcode = new Code128Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent ean128(DRIDesignEan128Barcode barcode) {
 		EAN128Component jrBarcode = new EAN128Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent dataMatrix(DRIDesignDataMatrixBarcode barcode) {
 		DataMatrixComponent jrBarcode = new DataMatrixComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setShape(ConstantTransform.barcodeShape(barcode.getShape()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent code39(DRIDesignCode39Barcode barcode) {
 		Code39Component jrBarcode = new Code39Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		jrBarcode.setDisplayChecksum(barcode.getDisplayChecksum());
 		jrBarcode.setDisplayStartStop(barcode.getDisplayStartStop());
@@ -217,7 +223,7 @@ public class BarcodeTransform {
 
 	private Barcode4jComponent interleaved2Of5(DRIDesignInterleaved2Of5Barcode barcode) {
 		Interleaved2Of5Component jrBarcode = new Interleaved2Of5Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		jrBarcode.setDisplayChecksum(barcode.getDisplayChecksum());
 		jrBarcode.setWideFactor(barcode.getWideFactor());
@@ -226,35 +232,35 @@ public class BarcodeTransform {
 
 	private Barcode4jComponent upca(DRIDesignUpcaBarcode barcode) {
 		UPCAComponent jrBarcode = new UPCAComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent upce(DRIDesignUpceBarcode barcode) {
 		UPCEComponent jrBarcode = new UPCEComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent ean13(DRIDesignEan13Barcode barcode) {
 		EAN13Component jrBarcode = new EAN13Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent ean8(DRIDesignEan8Barcode barcode) {
 		EAN8Component jrBarcode = new EAN8Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		return jrBarcode;
 	}
 
 	private Barcode4jComponent uspsIntelligentMail(DRIDesignUspsIntelligentMailBarcode barcode) {
 		USPSIntelligentMailComponent jrBarcode = new USPSIntelligentMailComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		jrBarcode.setAscenderHeight(barcode.getAscenderHeight());
 		jrBarcode.setIntercharGapWidth(barcode.getIntercharGapWidth());
@@ -264,7 +270,7 @@ public class BarcodeTransform {
 
 	private Barcode4jComponent royalMailCustomer(DRIDesignRoyalMailCustomerBarcode barcode) {
 		RoyalMailCustomerComponent jrBarcode = new RoyalMailCustomerComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()));
 		jrBarcode.setAscenderHeight(barcode.getAscenderHeight());
 		jrBarcode.setIntercharGapWidth(barcode.getIntercharGapWidth());
@@ -274,7 +280,7 @@ public class BarcodeTransform {
 
 	private Barcode4jComponent postnet(DRIDesignPostnetBarcode barcode) {
 		POSTNETComponent jrBarcode = new POSTNETComponent();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		if (barcode.getChecksumMode() != null) {
 			jrBarcode.setChecksumMode(ConstantTransform.barcodeChecksumMode(barcode.getChecksumMode()).getName());
 		}
@@ -289,7 +295,7 @@ public class BarcodeTransform {
 
 	private Barcode4jComponent pdf417(DRIDesignPdf417Barcode barcode) {
 		PDF417Component jrBarcode = new PDF417Component();
-		barcode(jrBarcode, barcode);
+		barcode4j(jrBarcode, barcode);
 		jrBarcode.setMinColumns(barcode.getMinColumns());
 		jrBarcode.setMaxColumns(barcode.getMaxColumns());
 		jrBarcode.setMinRows(barcode.getMinRows());

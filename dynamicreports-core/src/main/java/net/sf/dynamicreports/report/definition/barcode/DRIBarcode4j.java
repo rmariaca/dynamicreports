@@ -22,20 +22,24 @@
 
 package net.sf.dynamicreports.report.definition.barcode;
 
+import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIPdf417Barcode extends DRIBarcode4j {
+public interface DRIBarcode4j extends DRIBarcode {
 
-	public Integer getMinColumns();
+	public DRIExpression<String> getPatternExpression();
 
-	public Integer getMaxColumns();
+	public Double getModuleWidth();
 
-	public Integer getMinRows();
+	public BarcodeOrientation getOrientation();
 
-	public Integer getMaxRows();
+	public BarcodeTextPosition getTextPosition();
 
-	public Double getWidthToHeightRatio();
+	public Double getQuietZone();
 
-	public Integer getErrorCorrectionLevel();
+	public Double getVerticalQuietZone();
 }

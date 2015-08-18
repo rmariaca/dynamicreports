@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class CodabarBarcodeBuilder extends AbstractBarcodeBuilder<CodabarBarcodeBuilder, DRCodabarBarcode> {
+public class CodabarBarcodeBuilder extends AbstractBarcode4jBuilder<CodabarBarcodeBuilder, DRCodabarBarcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected CodabarBarcodeBuilder(String code) {

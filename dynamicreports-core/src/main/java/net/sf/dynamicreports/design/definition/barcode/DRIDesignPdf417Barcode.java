@@ -25,7 +25,7 @@ package net.sf.dynamicreports.design.definition.barcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDesignPdf417Barcode extends DRIDesignBarcode {
+public interface DRIDesignPdf417Barcode extends DRIDesignBarcode4j {
 
 	public Integer getMinColumns();
 

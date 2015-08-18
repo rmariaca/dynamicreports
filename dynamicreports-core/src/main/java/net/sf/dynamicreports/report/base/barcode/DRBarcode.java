@@ -23,8 +23,6 @@
 package net.sf.dynamicreports.report.base.barcode;
 
 import net.sf.dynamicreports.report.base.component.DRDimensionComponent;
-import net.sf.dynamicreports.report.constant.BarcodeOrientation;
-import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
@@ -38,12 +36,6 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<String> codeExpression;
-	private DRIExpression<String> patternExpression;
-	private Double moduleWidth;
-	private BarcodeOrientation orientation;
-	private BarcodeTextPosition textPosition;
-	private Double quietZone;
-	private Double verticalQuietZone;
 
 	@Override
 	public DRIExpression<String> getCodeExpression() {
@@ -53,59 +45,5 @@ public abstract class DRBarcode extends DRDimensionComponent implements DRIBarco
 	public void setCodeExpression(DRIExpression<String> codeExpression) {
 		Validate.notNull(codeExpression, "codeExpression must not be null");
 		this.codeExpression = codeExpression;
-	}
-
-	@Override
-	public DRIExpression<String> getPatternExpression() {
-		return patternExpression;
-	}
-
-	public void setPatternExpression(DRIExpression<String> patternExpression) {
-		this.patternExpression = patternExpression;
-	}
-
-	@Override
-	public Double getModuleWidth() {
-		return moduleWidth;
-	}
-
-	public void setModuleWidth(Double moduleWidth) {
-		this.moduleWidth = moduleWidth;
-	}
-
-	@Override
-	public BarcodeOrientation getOrientation() {
-		return orientation;
-	}
-
-	public void setOrientation(BarcodeOrientation orientation) {
-		this.orientation = orientation;
-	}
-
-	@Override
-	public BarcodeTextPosition getTextPosition() {
-		return textPosition;
-	}
-
-	public void setTextPosition(BarcodeTextPosition textPosition) {
-		this.textPosition = textPosition;
-	}
-
-	@Override
-	public Double getQuietZone() {
-		return quietZone;
-	}
-
-	public void setQuietZone(Double quietZone) {
-		this.quietZone = quietZone;
-	}
-
-	@Override
-	public Double getVerticalQuietZone() {
-		return verticalQuietZone;
-	}
-
-	public void setVerticalQuietZone(Double verticalQuietZone) {
-		this.verticalQuietZone = verticalQuietZone;
 	}
 }

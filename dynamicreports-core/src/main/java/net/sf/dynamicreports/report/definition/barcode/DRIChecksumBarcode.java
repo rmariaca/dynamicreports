@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIChecksumBarcode extends DRIBarcode {
+public interface DRIChecksumBarcode extends DRIBarcode4j {
 
-	public BarcodeChecksumMode getChecksumMode();	
+	public BarcodeChecksumMode getChecksumMode();
 }

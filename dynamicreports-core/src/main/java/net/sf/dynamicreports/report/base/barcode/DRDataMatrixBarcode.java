@@ -29,9 +29,9 @@ import net.sf.dynamicreports.report.definition.barcode.DRIDataMatrixBarcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDataMatrixBarcode extends DRBarcode implements DRIDataMatrixBarcode {
+public class DRDataMatrixBarcode extends DRBarcode4j implements DRIDataMatrixBarcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private BarcodeShape shape;
 
 	@Override
@@ -41,5 +41,5 @@ public class DRDataMatrixBarcode extends DRBarcode implements DRIDataMatrixBarco
 
 	public void setShape(BarcodeShape shape) {
 		this.shape = shape;
-	}	
+	}
 }

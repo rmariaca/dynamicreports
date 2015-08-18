@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.transformation;
 
 import net.sf.dynamicreports.design.base.barcode.DRDesignBarbecue;
 import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
+import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode4j;
 import net.sf.dynamicreports.design.base.barcode.DRDesignChecksumBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignCodabarBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignCode128Barcode;
@@ -42,6 +43,7 @@ import net.sf.dynamicreports.design.base.barcode.DRDesignUspsIntelligentMailBarc
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
+import net.sf.dynamicreports.report.definition.barcode.DRIBarcode4j;
 import net.sf.dynamicreports.report.definition.barcode.DRIChecksumBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRICodabarBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRICode128Barcode;
@@ -136,29 +138,33 @@ public class BarcodeTransform {
 		designBarcode.setWidth(accessor.getTemplateTransform().getBarcodeWidth(barcode));
 		designBarcode.setHeight(accessor.getTemplateTransform().getBarcodeHeight(barcode));
 		designBarcode.setCodeExpression(accessor.getExpressionTransform().transformExpression(barcode.getCodeExpression()));
-		designBarcode.setPatternExpression(accessor.getExpressionTransform().transformExpression(barcode.getPatternExpression()));
-		designBarcode.setModuleWidth(barcode.getModuleWidth());
-		designBarcode.setOrientation(barcode.getOrientation());
-		designBarcode.setTextPosition(barcode.getTextPosition());
-		designBarcode.setQuietZone(barcode.getQuietZone());
-		designBarcode.setVerticalQuietZone(barcode.getVerticalQuietZone());
+	}
+
+	private void barcode4j(DRDesignBarcode4j designBarcode4j, DRIBarcode4j barcode4j) throws DRException {
+		barcode(designBarcode4j, barcode4j);
+		designBarcode4j.setPatternExpression(accessor.getExpressionTransform().transformExpression(barcode4j.getPatternExpression()));
+		designBarcode4j.setModuleWidth(barcode4j.getModuleWidth());
+		designBarcode4j.setOrientation(barcode4j.getOrientation());
+		designBarcode4j.setTextPosition(barcode4j.getTextPosition());
+		designBarcode4j.setQuietZone(barcode4j.getQuietZone());
+		designBarcode4j.setVerticalQuietZone(barcode4j.getVerticalQuietZone());
 	}
 
 	private void checksumBarcode(DRDesignChecksumBarcode designBarcode, DRIChecksumBarcode barcode) throws DRException {
-		barcode(designBarcode, barcode);
+		barcode4j(designBarcode, barcode);
 		designBarcode.setChecksumMode(barcode.getChecksumMode());
 	}
 
 	private DRDesignCodabarBarcode codabar(DRICodabarBarcode barcode) throws DRException {
 		DRDesignCodabarBarcode designBarcode = new DRDesignCodabarBarcode();
-		barcode(designBarcode, barcode);
+		barcode4j(designBarcode, barcode);
 		designBarcode.setWideFactor(barcode.getWideFactor());
 		return designBarcode;
 	}
 
 	private DRDesignCode128Barcode code128(DRICode128Barcode barcode) throws DRException {
 		DRDesignCode128Barcode designBarcode = new DRDesignCode128Barcode();
-		barcode(designBarcode, barcode);
+		barcode4j(designBarcode, barcode);
 		return designBarcode;
 	}
 
@@ -170,7 +176,7 @@ public class BarcodeTransform {
 
 	private DRDesignDataMatrixBarcode dataMatrix(DRIDataMatrixBarcode barcode) throws DRException {
 		DRDesignDataMatrixBarcode designBarcode = new DRDesignDataMatrixBarcode();
-		barcode(designBarcode, barcode);
+		barcode4j(designBarcode, barcode);
 		designBarcode.setShape(barcode.getShape());
 		return designBarcode;
 	}
@@ -248,7 +254,7 @@ public class BarcodeTransform {
 
 	private DRDesignPdf417Barcode pdf417(DRIPdf417Barcode barcode) throws DRException {
 		DRDesignPdf417Barcode designBarcode = new DRDesignPdf417Barcode();
-		barcode(designBarcode, barcode);
+		barcode4j(designBarcode, barcode);
 		designBarcode.setMinColumns(barcode.getMinColumns());
 		designBarcode.setMaxColumns(barcode.getMaxColumns());
 		designBarcode.setMinRows(barcode.getMinRows());

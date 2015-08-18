@@ -20,22 +20,27 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.report.definition.barcode;
+package net.sf.dynamicreports.design.definition.barcode;
+
+import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIPdf417Barcode extends DRIBarcode4j {
+public interface DRIDesignBarcode4j extends DRIDesignBarcode {
 
-	public Integer getMinColumns();
+	public DRIDesignExpression getPatternExpression();
 
-	public Integer getMaxColumns();
+	public Double getModuleWidth();
 
-	public Integer getMinRows();
+	public BarcodeOrientation getOrientation();
 
-	public Integer getMaxRows();
+	public BarcodeTextPosition getTextPosition();
 
-	public Double getWidthToHeightRatio();
+	public Double getQuietZone();
 
-	public Integer getErrorCorrectionLevel();
+	public Double getVerticalQuietZone();
+
 }

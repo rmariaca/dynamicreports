@@ -22,8 +22,6 @@
 
 package net.sf.dynamicreports.report.definition.barcode;
 
-import net.sf.dynamicreports.report.constant.BarcodeOrientation;
-import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -34,15 +32,4 @@ public interface DRIBarcode extends DRIDimensionComponent {
 
 	public DRIExpression<String> getCodeExpression();
 
-	public DRIExpression<String> getPatternExpression();
-
-	public Double getModuleWidth();
-
-	public BarcodeOrientation getOrientation();
-
-	public BarcodeTextPosition getTextPosition();
-
-	public Double getQuietZone();
-
-	public Double getVerticalQuietZone();
 }

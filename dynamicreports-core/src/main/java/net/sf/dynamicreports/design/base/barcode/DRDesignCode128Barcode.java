@@ -28,7 +28,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignCode128Barcode extends DRDesignBarcode implements DRIDesignCode128Barcode {
+public class DRDesignCode128Barcode extends DRDesignBarcode4j implements DRIDesignCode128Barcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	public DRDesignCode128Barcode() {

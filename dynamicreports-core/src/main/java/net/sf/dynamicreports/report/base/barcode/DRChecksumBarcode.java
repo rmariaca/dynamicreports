@@ -29,9 +29,9 @@ import net.sf.dynamicreports.report.definition.barcode.DRIChecksumBarcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public abstract class DRChecksumBarcode extends DRBarcode implements DRIChecksumBarcode {
+public abstract class DRChecksumBarcode extends DRBarcode4j implements DRIChecksumBarcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private BarcodeChecksumMode checksumMode;
 
 	@Override
@@ -41,5 +41,5 @@ public abstract class DRChecksumBarcode extends DRBarcode implements DRIChecksum
 
 	public void setChecksumMode(BarcodeChecksumMode checksumMode) {
 		this.checksumMode = checksumMode;
-	}	
+	}
 }

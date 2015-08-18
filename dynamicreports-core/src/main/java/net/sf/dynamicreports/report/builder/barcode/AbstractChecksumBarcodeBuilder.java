@@ -31,7 +31,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractChecksumBarcodeBuilder<T extends AbstractBarcodeBuilder<T, U>, U extends DRChecksumBarcode> extends AbstractBarcodeBuilder<T, U> {
+public abstract class AbstractChecksumBarcodeBuilder<T extends AbstractBarcode4jBuilder<T, U>, U extends DRChecksumBarcode> extends AbstractBarcode4jBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractChecksumBarcodeBuilder(String code, U barcode) {

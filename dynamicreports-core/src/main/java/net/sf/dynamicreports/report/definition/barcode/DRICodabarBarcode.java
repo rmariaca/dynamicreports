@@ -25,7 +25,7 @@ package net.sf.dynamicreports.report.definition.barcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRICodabarBarcode extends DRIBarcode {
+public interface DRICodabarBarcode extends DRIBarcode4j {
 
 	public Double getWideFactor();
 }

@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class Pdf417BarcodeBuilder extends AbstractBarcodeBuilder<Pdf417BarcodeBuilder, DRPdf417Barcode> {
+public class Pdf417BarcodeBuilder extends AbstractBarcode4jBuilder<Pdf417BarcodeBuilder, DRPdf417Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected Pdf417BarcodeBuilder(String code) {

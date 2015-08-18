@@ -28,16 +28,16 @@ import net.sf.dynamicreports.report.definition.barcode.DRICodabarBarcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRCodabarBarcode extends DRBarcode implements DRICodabarBarcode {
+public class DRCodabarBarcode extends DRBarcode4j implements DRICodabarBarcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Double wideFactor;
-	
+
 	@Override
 	public Double getWideFactor() {
 		return wideFactor;
 	}
-	
+
 	public void setWideFactor(Double wideFactor) {
 		this.wideFactor = wideFactor;
 	}

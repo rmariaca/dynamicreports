@@ -28,9 +28,9 @@ import net.sf.dynamicreports.report.definition.barcode.DRIPdf417Barcode;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
+public class DRPdf417Barcode extends DRBarcode4j implements DRIPdf417Barcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private Integer minColumns;
 	private Integer maxColumns;
 	private Integer minRows;
@@ -90,5 +90,5 @@ public class DRPdf417Barcode extends DRBarcode implements DRIPdf417Barcode {
 
 	public void setErrorCorrectionLevel(Integer errorCorrectionLevel) {
 		this.errorCorrectionLevel = errorCorrectionLevel;
-	}	
+	}
 }

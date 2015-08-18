@@ -26,8 +26,6 @@ import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignGroup;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
-import net.sf.dynamicreports.report.constant.BarcodeOrientation;
-import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -35,18 +33,6 @@ import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 public interface DRIDesignBarcode extends DRIDesignComponent {
 
 	public DRIDesignExpression getCodeExpression();
-
-	public DRIDesignExpression getPatternExpression();
-
-	public Double getModuleWidth();
-
-	public BarcodeOrientation getOrientation();
-
-	public BarcodeTextPosition getTextPosition();
-
-	public Double getQuietZone();
-
-	public Double getVerticalQuietZone();
 
 	public EvaluationTime getEvaluationTime();
 

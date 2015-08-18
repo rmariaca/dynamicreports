@@ -22,9 +22,10 @@
 
 package net.sf.dynamicreports.report.builder.barcode;
 
-import net.sf.dynamicreports.report.base.barcode.DRBarcode;
-import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
+import net.sf.dynamicreports.report.base.barcode.DRBarcode4j;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
+import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
@@ -32,26 +33,50 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractBarcodeBuilder<T extends AbstractBarcodeBuilder<T, U>, U extends DRBarcode> extends DimensionComponentBuilder<T, U> {
+public abstract class AbstractBarcode4jBuilder<T extends AbstractBarcode4jBuilder<T, U>, U extends DRBarcode4j> extends AbstractBarcodeBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	protected AbstractBarcodeBuilder(String code, U barcode) {
-		super(barcode);
-		setCode(code);
+	protected AbstractBarcode4jBuilder(String code, U barcode) {
+		super(code, barcode);
 	}
 
-	protected AbstractBarcodeBuilder(DRIExpression<String> codeExpression, U barcode) {
-		super(barcode);
+	protected AbstractBarcode4jBuilder(DRIExpression<String> codeExpression, U barcode) {
+		super(codeExpression, barcode);
 		setCode(codeExpression);
 	}
 
-	public T setCode(String code) {
-		getObject().setCodeExpression(Expressions.text(code));
+	public T setPattern(String pattern) {
+		getObject().setPatternExpression(Expressions.text(pattern));
 		return (T) this;
 	}
 
-	public T setCode(DRIExpression<String> codeExpression) {
-		getObject().setCodeExpression(codeExpression);
+	public T setPattern(DRIExpression<String> patternExpression) {
+		getObject().setPatternExpression(patternExpression);
+		return (T) this;
+	}
+
+	public T setModuleWidth(Double moduleWidth) {
+		getObject().setModuleWidth(moduleWidth);
+		return (T) this;
+	}
+
+	public T setOrientation(BarcodeOrientation orientation) {
+		getObject().setOrientation(orientation);
+		return (T) this;
+	}
+
+	public T setTextPosition(BarcodeTextPosition textPosition) {
+		getObject().setTextPosition(textPosition);
+		return (T) this;
+	}
+
+	public T setQuietZone(Double quietZone) {
+		getObject().setQuietZone(quietZone);
+		return (T) this;
+	}
+
+	public T setVerticalQuietZone(Double verticalQuietZone) {
+		getObject().setVerticalQuietZone(verticalQuietZone);
 		return (T) this;
 	}
 }

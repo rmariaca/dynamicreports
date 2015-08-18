@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.constant.BarcodeShape;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public interface DRIDataMatrixBarcode extends DRIBarcode {
+public interface DRIDataMatrixBarcode extends DRIBarcode4j {
 
 	public BarcodeShape getShape();
 }
