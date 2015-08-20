@@ -158,6 +158,15 @@ public class Barcodes {
 		return new Pdf417BarcodeBuilder(codeExpression);
 	}
 
+	//qrCode
+	public static QrCodeBuilder qrCode(String code) {
+		return new QrCodeBuilder(code);
+	}
+
+	public static QrCodeBuilder qrCode(DRIExpression<String> codeExpression) {
+		return new QrCodeBuilder(codeExpression);
+	}
+
 	//barbecue 2of7
 	public static BarbecueBuilder barbecue_2of7(String code) {
 		return new BarbecueBuilder(BarbecueType.BARCODE_2OF7, code);

@@ -61,6 +61,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PdfPrintScaling;
 import net.sf.dynamicreports.report.constant.PdfaConformance;
 import net.sf.dynamicreports.report.constant.Position;
+import net.sf.dynamicreports.report.constant.QrCodeErrorCorrectionLevel;
 import net.sf.dynamicreports.report.constant.RectangleAnchor;
 import net.sf.dynamicreports.report.constant.Rotation;
 import net.sf.dynamicreports.report.constant.RunDirection;
@@ -82,6 +83,7 @@ import net.sf.jasperreports.charts.type.MeterShapeEnum;
 import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.charts.type.ValueLocationEnum;
+import net.sf.jasperreports.components.barcode4j.ErrorCorrectionLevelEnum;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
@@ -821,6 +823,25 @@ public class ConstantTransform {
 			return BaselineAlignment.ALIGN_BOTTOM;
 		default:
 			throw new JasperDesignException("BarcodeBaselinePosition " + baselinePosition.name() + " not supported");
+		}
+	}
+
+	public static ErrorCorrectionLevelEnum qrCodeErrorCorrectionLevel(QrCodeErrorCorrectionLevel errorCorrectionLevel) {
+		if (errorCorrectionLevel == null) {
+			return null;
+		}
+
+		switch (errorCorrectionLevel) {
+		case L:
+			return ErrorCorrectionLevelEnum.L;
+		case M:
+			return ErrorCorrectionLevelEnum.M;
+		case Q:
+			return ErrorCorrectionLevelEnum.Q;
+		case H:
+			return ErrorCorrectionLevelEnum.H;
+		default:
+			throw new JasperDesignException("QrCodeErrorCorrectionLevel " + errorCorrectionLevel.name() + " not supported");
 		}
 	}
 

@@ -36,6 +36,7 @@ import net.sf.dynamicreports.design.definition.barcode.DRIDesignEan8Barcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignInterleaved2Of5Barcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignPdf417Barcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignPostnetBarcode;
+import net.sf.dynamicreports.design.definition.barcode.DRIDesignQrCode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignRoyalMailCustomerBarcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignUpcaBarcode;
 import net.sf.dynamicreports.design.definition.barcode.DRIDesignUpceBarcode;
@@ -56,6 +57,7 @@ import net.sf.jasperreports.components.barcode4j.EAN8Component;
 import net.sf.jasperreports.components.barcode4j.Interleaved2Of5Component;
 import net.sf.jasperreports.components.barcode4j.PDF417Component;
 import net.sf.jasperreports.components.barcode4j.POSTNETComponent;
+import net.sf.jasperreports.components.barcode4j.QRCodeComponent;
 import net.sf.jasperreports.components.barcode4j.RoyalMailCustomerComponent;
 import net.sf.jasperreports.components.barcode4j.UPCAComponent;
 import net.sf.jasperreports.components.barcode4j.UPCEComponent;
@@ -88,7 +90,7 @@ public class BarcodeTransform {
 		return jrComponent;
 	}
 
-	private Barcode4jComponent barcodeComponent(DRIDesignBarcode barcode) {
+	private BarcodeComponent barcodeComponent(DRIDesignBarcode barcode) {
 		if (barcode instanceof DRIDesignCodabarBarcode) {
 			return codabar((DRIDesignCodabarBarcode) barcode);
 		}
@@ -130,6 +132,9 @@ public class BarcodeTransform {
 		}
 		else if (barcode instanceof DRIDesignPdf417Barcode) {
 			return pdf417((DRIDesignPdf417Barcode) barcode);
+		}
+		else if (barcode instanceof DRIDesignQrCode) {
+			return qrCode((DRIDesignQrCode) barcode);
 		}
 		else {
 			throw new JasperDesignException("Barcode " + barcode.getClass().getName() + " not supported");
@@ -304,4 +309,13 @@ public class BarcodeTransform {
 		jrBarcode.setErrorCorrectionLevel(barcode.getErrorCorrectionLevel());
 		return jrBarcode;
 	}
+
+	private QRCodeComponent qrCode(DRIDesignQrCode qrCode) {
+		QRCodeComponent jrQrCode = new QRCodeComponent();
+		barcode(jrQrCode, qrCode);
+		jrQrCode.setMargin(qrCode.getMargin());
+		jrQrCode.setErrorCorrectionLevel(ConstantTransform.qrCodeErrorCorrectionLevel(qrCode.getErrorCorrectionLevel()));
+		return jrQrCode;
+	}
+
 }

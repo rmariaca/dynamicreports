@@ -36,6 +36,7 @@ import net.sf.dynamicreports.design.base.barcode.DRDesignEan8Barcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignInterleaved2Of5Barcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignPdf417Barcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignPostnetBarcode;
+import net.sf.dynamicreports.design.base.barcode.DRDesignQrCode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignRoyalMailCustomerBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUpcaBarcode;
 import net.sf.dynamicreports.design.base.barcode.DRDesignUpceBarcode;
@@ -55,6 +56,7 @@ import net.sf.dynamicreports.report.definition.barcode.DRIEan8Barcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIInterleaved2Of5Barcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIPdf417Barcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIPostnetBarcode;
+import net.sf.dynamicreports.report.definition.barcode.DRIQrCode;
 import net.sf.dynamicreports.report.definition.barcode.DRIRoyalMailCustomerBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIUpcaBarcode;
 import net.sf.dynamicreports.report.definition.barcode.DRIUpceBarcode;
@@ -113,6 +115,9 @@ public class BarcodeTransform {
 		}
 		else if (barcode instanceof DRIPdf417Barcode) {
 			return pdf417((DRIPdf417Barcode) barcode);
+		}
+		else if (barcode instanceof DRIQrCode) {
+			return qrCode((DRIQrCode) barcode);
 		}
 		else {
 			throw new DRDesignReportException("Barcode " + barcode.getClass().getName() + " not supported");
@@ -262,5 +267,13 @@ public class BarcodeTransform {
 		designBarcode.setWidthToHeightRatio(barcode.getWidthToHeightRatio());
 		designBarcode.setErrorCorrectionLevel(barcode.getErrorCorrectionLevel());
 		return designBarcode;
+	}
+
+	private DRDesignQrCode qrCode(DRIQrCode qrCode) throws DRException {
+		DRDesignQrCode designQrCode = new DRDesignQrCode();
+		barcode(designQrCode, qrCode);
+		designQrCode.setMargin(qrCode.getMargin());
+		designQrCode.setErrorCorrectionLevel(qrCode.getErrorCorrectionLevel());
+		return designQrCode;
 	}
 }
