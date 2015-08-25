@@ -25,6 +25,7 @@ package net.sf.dynamicreports.examples.component;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
+import net.sf.dynamicreports.report.builder.component.DimensionComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 
@@ -40,12 +41,15 @@ public class BarcodeReport {
 	private void build() {
 		try {
 			report()
-			  .setTemplate(template().setBarcodeHeight(50))
+			  .setTemplate(template().setBarcodeHeight(40))
 			  .title(
 			  	Templates.createTitleComponent("Barcode"),
 			  	cmp.text("Barcode4j").setStyle(Templates.bold18CenteredStyle),
 			  	barcode4j(),
-			  	cmp.verticalGap(20),
+			  	cmp.verticalGap(10),
+			  	cmp.text("ZXing").setStyle(Templates.bold18CenteredStyle),
+			  	barcode("QrCode", bcode.qrCode("12345678")),
+			  	cmp.verticalGap(10),
 			  	cmp.text("Barbecue").setStyle(Templates.bold18CenteredStyle),
 			  	barbecue())
 			  .show();
@@ -110,7 +114,7 @@ public class BarcodeReport {
 		return list;
 	}
 
-	private ComponentBuilder<?, ?> barcode(String label, ComponentBuilder<?, ?> barcode) {
+	private ComponentBuilder<?, ?> barcode(String label, DimensionComponentBuilder<?, ?> barcode) {
 		return cmp.verticalList(cmp.text(label).setStyle(Templates.bold12CenteredStyle), barcode);
 	}
 
