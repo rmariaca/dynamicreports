@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
 import net.sf.dynamicreports.report.constant.BarcodeShape;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
+import net.sf.dynamicreports.report.constant.QrCodeErrorCorrectionLevel;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
 import net.sf.dynamicreports.test.jasper.AbstractJasperTest;
 import net.sf.jasperreports.components.barcode4j.Barcode4jComponent;
@@ -43,10 +44,12 @@ import net.sf.jasperreports.components.barcode4j.DataMatrixComponent;
 import net.sf.jasperreports.components.barcode4j.EAN128Component;
 import net.sf.jasperreports.components.barcode4j.EAN13Component;
 import net.sf.jasperreports.components.barcode4j.EAN8Component;
+import net.sf.jasperreports.components.barcode4j.ErrorCorrectionLevelEnum;
 import net.sf.jasperreports.components.barcode4j.Interleaved2Of5Component;
 import net.sf.jasperreports.components.barcode4j.OrientationEnum;
 import net.sf.jasperreports.components.barcode4j.PDF417Component;
 import net.sf.jasperreports.components.barcode4j.POSTNETComponent;
+import net.sf.jasperreports.components.barcode4j.QRCodeComponent;
 import net.sf.jasperreports.components.barcode4j.RoyalMailCustomerComponent;
 import net.sf.jasperreports.components.barcode4j.TextPositionEnum;
 import net.sf.jasperreports.components.barcode4j.UPCAComponent;
@@ -258,7 +261,12 @@ public class BarcodeTest extends AbstractJasperTest {
 							.setMinRows(3)
 							.setMaxRows(29)
 							.setWidthToHeightRatio(2.6)
-							.setErrorCorrectionLevel(8))
+							.setErrorCorrectionLevel(8)),
+
+					//qrcode
+					bcode.qrCode("123456")
+						.setMargin(2)
+						.setErrorCorrectionLevel(QrCodeErrorCorrectionLevel.H)
 			);
 	}
 
@@ -363,6 +371,9 @@ public class BarcodeTest extends AbstractJasperTest {
 		Assert.assertEquals("PDF417 max rows", new Integer(29), pdf417.getMaxRows());
 		Assert.assertEquals("PDF417 width to height ratio", 2.6, pdf417.getWidthToHeightRatio());
 		Assert.assertEquals("PDF417 error correction level", new Integer(8), pdf417.getErrorCorrectionLevel());
+
+		//qrCode
+		testQrCode();
 	}
 
 	private <T extends Barcode4jComponent> T testBarcode(String name, Class<T> componentClass) {
@@ -397,5 +408,15 @@ public class BarcodeTest extends AbstractJasperTest {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	private void testQrCode() {
+		JRBaseComponentElement barcode = (JRBaseComponentElement) getJasperReport().getTitle().getElementByKey("title.QRCode1");
+		Component component = barcode.getComponent();
+		Assert.assertTrue("QRCode is not instance of " + QRCodeComponent.class.getName(), component.getClass().equals(QRCodeComponent.class));
+		QRCodeComponent qrComponentComponent = (QRCodeComponent) component;
+
+		Assert.assertEquals("QRCode margin", new Integer(2), qrComponentComponent.getMargin());
+		Assert.assertEquals("QRCode error correction level", ErrorCorrectionLevelEnum.H, qrComponentComponent.getErrorCorrectionLevel());
 	}
 }
