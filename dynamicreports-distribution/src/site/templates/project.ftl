@@ -18,6 +18,7 @@
 	<velocityVersion>${project.velocityVersion}</velocityVersion>
 	<barcode4jVersion>${project.barcode4jVersion}</barcode4jVersion>
 	<barbecueVersion>${project.barbecueVersion}</barbecueVersion>
+	<zxingVersion>${project.zxingVersion}</zxingVersion>
 	<avalonframeworkimplVersion>${project.avalonframeworkimplVersion}</avalonframeworkimplVersion>
 	<batikbridgeVersion>${project.batikbridgeVersion}</batikbridgeVersion>
 	<itextVersion>${project.itextVersion}</itextVersion>

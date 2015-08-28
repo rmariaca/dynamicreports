@@ -28,6 +28,7 @@ excludes=
 file.reference.avalon-framework-impl-${project.avalonframeworkimplVersion}.jar=lib\\avalon-framework-impl-${project.avalonframeworkimplVersion}.jar
 file.reference.barcode4j-${project.barcode4jVersion}.jar=lib\\barcode4j-${project.barcode4jVersion}.jar
 file.reference.barbecue-${project.barbecueVersion}.jar=lib\\barbecue-${project.barbecueVersion}.jar
+file.reference.zxing-${project.zxingVersion}.jar=lib\\barbecue-${project.zxingVersion}.jar
 file.reference.batik-anim-${project.batikbridgeVersion}.jar=lib\\batik-anim-${project.batikbridgeVersion}.jar
 file.reference.batik-awt-util-${project.batikbridgeVersion}.jar=lib\\batik-awt-util-${project.batikbridgeVersion}.jar
 file.reference.batik-bridge-${project.batikbridgeVersion}.jar=lib\\batik-bridge-${project.batikbridgeVersion}.jar
@@ -77,6 +78,7 @@ javac.classpath=\
     ${r"${"}file.reference.avalon-framework-impl-${project.avalonframeworkimplVersion}.jar${r"}"}:\
     ${r"${"}file.reference.barcode4j-${project.barcode4jVersion}.jar${r"}"}:\
     ${r"${"}file.reference.barbecue-${project.barbecueVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.zxing-${project.zxingVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-anim-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-awt-util-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-bridge-${project.batikbridgeVersion}.jar${r"}"}:\

@@ -38,6 +38,7 @@ public class Project {
 	private String avalonframeworkimplVersion;
 	private String barcode4jVersion;
 	private String barbecueVersion;
+	private String zxingVersion;
 	private String batikbridgeVersion;
 	private String bcprovjdk14Version;
 	private String commonsbeanutilsVersion;
@@ -78,6 +79,7 @@ public class Project {
 		avalonframeworkimplVersion = properties.getProperty("avalonframeworkimplVersion");
 		barcode4jVersion = properties.getProperty("barcode4jVersion");
 		barbecueVersion = properties.getProperty("barbecueVersion");
+		zxingVersion = properties.getProperty("zxingVersion");
 		batikbridgeVersion = properties.getProperty("batikbridgeVersion");
 		bcprovjdk14Version = properties.getProperty("bcprovjdk14Version");
 		commonsbeanutilsVersion = properties.getProperty("commonsbeanutilsVersion");
@@ -158,6 +160,14 @@ public class Project {
 
 	public void setBarbecueVersion(String barbecueVersion) {
 		this.barbecueVersion = barbecueVersion;
+	}
+
+	public String getZxingVersion() {
+		return zxingVersion;
+	}
+
+	public void setZxingVersion(String zxingVersion) {
+		this.zxingVersion = zxingVersion;
 	}
 
 	public String getBatikbridgeVersion() {
