@@ -277,28 +277,28 @@ public class BarcodeTest extends AbstractJasperTest {
 		numberOfPagesTest(1);
 
 		//codabar
-		CodabarComponent codabar = testBarcode("Codabar", CodabarComponent.class);
+		CodabarComponent codabar = testBarcode("Codabar", CodabarComponent.class, TextPositionEnum.TOP);
 		Assert.assertEquals("Codabar wide factor", 2.5, codabar.getWideFactor());
 		testBarcode("Codabar", 2, 0, "12345678");
 		testBarcode("Codabar", 2, 1, "112345678");
 
 		//code128
-		testBarcode("Code128", Code128Component.class);
+		testBarcode("Code128", Code128Component.class, TextPositionEnum.TOP);
 		testBarcode("Code128", 3, 0, "12345678");
 		testBarcode("Code128", 3, 1, "112345678");
 
 		//ean128
-		EAN128Component ean128 = testBarcode("EAN128", EAN128Component.class);
+		EAN128Component ean128 = testBarcode("EAN128", EAN128Component.class, TextPositionEnum.TOP);
 		Assert.assertEquals("EAN128 checksum mode", ChecksumMode.CP_AUTO.getName(), ean128.getChecksumMode());
 		testBarcode("EAN128", 4, 0, "(12)345678");
 		testBarcode("EAN128", 4, 1, "1(12)345678");
 
 		//dataMatrix
-		DataMatrixComponent dataMatrix = testBarcode("DataMatrix", DataMatrixComponent.class);
+		DataMatrixComponent dataMatrix = testBarcode("DataMatrix", DataMatrixComponent.class, TextPositionEnum.TOP);
 		Assert.assertEquals("DataMatrix shape", SymbolShapeHint.FORCE_RECTANGLE.getName(), dataMatrix.getShape());
 
 		//code39
-		Code39Component code39 = testBarcode("Code39", Code39Component.class);
+		Code39Component code39 = testBarcode("Code39", Code39Component.class, TextPositionEnum.TOP);
 		Assert.assertEquals("Code39 checksum mode", ChecksumMode.CP_AUTO.getName(), code39.getChecksumMode());
 		Assert.assertEquals("Code39 display checksum", Boolean.TRUE, code39.isDisplayChecksum());
 		Assert.assertEquals("Code39 display start stop", Boolean.TRUE, code39.isDisplayStartStop());
@@ -309,7 +309,7 @@ public class BarcodeTest extends AbstractJasperTest {
 		testBarcode("Code39", 6, 1, "112345678");
 
 		//interleaved2Of5
-		Interleaved2Of5Component interleaved2Of5 = testBarcode("Interleaved2Of5", Interleaved2Of5Component.class);
+		Interleaved2Of5Component interleaved2Of5 = testBarcode("Interleaved2Of5", Interleaved2Of5Component.class, TextPositionEnum.TOP);
 		Assert.assertEquals("Interleaved2Of5 checksum mode", ChecksumMode.CP_AUTO.getName(), interleaved2Of5.getChecksumMode());
 		Assert.assertEquals("Interleaved2Of5 display checksum", Boolean.TRUE, interleaved2Of5.isDisplayChecksum());
 		Assert.assertEquals("Interleaved2Of5 wide factor", 2.5, interleaved2Of5.getWideFactor());
@@ -317,38 +317,38 @@ public class BarcodeTest extends AbstractJasperTest {
 		testBarcode("Interleaved2Of5", 7, 1, "112345678");
 
 		//upca
-		UPCAComponent upca = testBarcode("UPCA", UPCAComponent.class);
+		UPCAComponent upca = testBarcode("UPCA", UPCAComponent.class, TextPositionEnum.TOP);
 		Assert.assertEquals("UPCA checksum mode", ChecksumMode.CP_AUTO.getName(), upca.getChecksumMode());
 		testBarcode("UPCA", 8, 0, "1<.*>10000<.*>00000");
 		testBarcode("UPCA", 8, 1, "1<.*>10000<.*>00000");
 
 		//upce
-		UPCEComponent upce = testBarcode("UPCE", UPCEComponent.class);
+		UPCEComponent upce = testBarcode("UPCE", UPCEComponent.class, TextPositionEnum.TOP);
 		Assert.assertEquals("UPCE checksum mode", ChecksumMode.CP_AUTO.getName(), upce.getChecksumMode());
 		testBarcode("UPCE", 9, 0, "1<.*>100000");
 		testBarcode("UPCE", 9, 1, "1<.*>100000");
 
 		//ean13
-		EAN13Component ean13 = testBarcode("EAN13", EAN13Component.class);
+		EAN13Component ean13 = testBarcode("EAN13", EAN13Component.class, TextPositionEnum.TOP);
 		Assert.assertEquals("EAN13 checksum mode", ChecksumMode.CP_AUTO.getName(), ean13.getChecksumMode());
 		testBarcode("EAN13", 10, 0, "1<.*>100000<.*>000006");
 		testBarcode("EAN13", 10, 1, "1<.*>100000<.*>000006");
 
 		//ean8
-		EAN8Component ean8 = testBarcode("EAN8", EAN8Component.class);
+		EAN8Component ean8 = testBarcode("EAN8", EAN8Component.class, TextPositionEnum.TOP);
 		Assert.assertEquals("EAN8 checksum mode", ChecksumMode.CP_AUTO.getName(), ean8.getChecksumMode());
 		testBarcode("EAN8", 11, 0, "1100<.*>0006");
 		testBarcode("EAN8", 11, 1, "1100<.*>0006");
 
 		//uspsIntelligentMail
-		USPSIntelligentMailComponent uspsIntelligentMail = testBarcode("USPSIntelligentMail", USPSIntelligentMailComponent.class);
+		USPSIntelligentMailComponent uspsIntelligentMail = testBarcode("USPSIntelligentMail", USPSIntelligentMailComponent.class, TextPositionEnum.TOP);
 		Assert.assertEquals("USPSIntelligentMail checksum mode", ChecksumMode.CP_AUTO.getName(), uspsIntelligentMail.getChecksumMode());
 		Assert.assertEquals("USPSIntelligentMail ascender height", 2.6, uspsIntelligentMail.getAscenderHeight());
 		Assert.assertEquals("USPSIntelligentMail interchar gap width", 1.8, uspsIntelligentMail.getIntercharGapWidth());
 		Assert.assertEquals("USPSIntelligentMail track height", 20.1, uspsIntelligentMail.getTrackHeight());
 
 		//royalMailCustomer
-		RoyalMailCustomerComponent royalMailCustomer = testBarcode("RoyalMailCustomer", RoyalMailCustomerComponent.class);
+		RoyalMailCustomerComponent royalMailCustomer = testBarcode("RoyalMailCustomer", RoyalMailCustomerComponent.class, null);
 		Assert.assertEquals("RoyalMailCustomer checksum mode", ChecksumMode.CP_AUTO.getName(), royalMailCustomer.getChecksumMode());
 		Assert.assertEquals("RoyalMailCustomer ascender height", 2.6, royalMailCustomer.getAscenderHeight());
 		Assert.assertEquals("RoyalMailCustomer interchar gap width", 1.8, royalMailCustomer.getIntercharGapWidth());
@@ -374,10 +374,6 @@ public class BarcodeTest extends AbstractJasperTest {
 
 		//qrCode
 		testQrCode();
-	}
-
-	private <T extends Barcode4jComponent> T testBarcode(String name, Class<T> componentClass) {
-		return testBarcode(name, componentClass, null);
 	}
 
 	private <T extends Barcode4jComponent> T testBarcode(String name, Class<T> componentClass, TextPositionEnum textPosition) {

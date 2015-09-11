@@ -174,7 +174,6 @@ public class BarcodeTransform {
 		jrBarcode.setCodeExpression(accessor.getExpressionTransform().getExpression(barcode.getCodeExpression()));
 	}
 
-	@SuppressWarnings("deprecation")
 	private void barcode4j(Barcode4jComponent jrBarcode4j, DRIDesignBarcode4j barcode4j) {
 		barcode(jrBarcode4j, barcode4j);
 		jrBarcode4j.setPatternExpression(accessor.getExpressionTransform().getExpression(barcode4j.getPatternExpression()));

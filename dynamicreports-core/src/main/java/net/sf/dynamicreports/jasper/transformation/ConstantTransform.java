@@ -84,6 +84,7 @@ import net.sf.jasperreports.charts.type.PlotOrientationEnum;
 import net.sf.jasperreports.charts.type.ScaleTypeEnum;
 import net.sf.jasperreports.charts.type.ValueLocationEnum;
 import net.sf.jasperreports.components.barcode4j.ErrorCorrectionLevelEnum;
+import net.sf.jasperreports.components.barcode4j.TextPositionEnum;
 import net.sf.jasperreports.components.spiderchart.type.SpiderRotationEnum;
 import net.sf.jasperreports.components.spiderchart.type.TableOrderEnum;
 import net.sf.jasperreports.crosstabs.type.CrosstabPercentageEnum;
@@ -134,7 +135,6 @@ import org.jfree.data.time.Week;
 import org.jfree.data.time.Year;
 import org.krysalis.barcode4j.BaselineAlignment;
 import org.krysalis.barcode4j.ChecksumMode;
-import org.krysalis.barcode4j.HumanReadablePlacement;
 import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
 import com.lowagie.text.pdf.PdfWriter;
@@ -741,7 +741,7 @@ public class ConstantTransform {
 		}
 	}
 
-	/*public static TextPositionEnum barcodeTextPosition(BarcodeTextPosition textPosition) {
+	public static TextPositionEnum barcodeTextPosition(BarcodeTextPosition textPosition) {
 		if (textPosition == null) {
 			return null;
 		}
@@ -752,24 +752,7 @@ public class ConstantTransform {
 		case BOTTOM:
 			return TextPositionEnum.BOTTOM;
 		case TOP:
-			return TextPositionEnum.UP;
-		default:
-			throw new JasperDesignException("BarcodeTextPosition " + textPosition.name() + " not supported");
-		}
-	}*/
-
-	public static HumanReadablePlacement barcodeTextPosition(BarcodeTextPosition textPosition) {
-		if (textPosition == null) {
-			return null;
-		}
-
-		switch (textPosition) {
-		case NONE:
-			return HumanReadablePlacement.HRP_NONE;
-		case BOTTOM:
-			return HumanReadablePlacement.HRP_BOTTOM;
-		case TOP:
-			return HumanReadablePlacement.HRP_TOP;
+			return TextPositionEnum.TOP;
 		default:
 			throw new JasperDesignException("BarcodeTextPosition " + textPosition.name() + " not supported");
 		}
