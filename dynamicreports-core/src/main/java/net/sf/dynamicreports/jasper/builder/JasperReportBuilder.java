@@ -321,7 +321,7 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 				}
 
 				if (toJasperReportDesign().isTableOfContents()) {
-					JasperTocReport.createTocReport(toJasperReportDesign(), jasperPrint);
+					JasperTocReport.createTocReport(toJasperReportDesign(), jasperPrint, parameters);
 				}
 			}
 			catch (JRException e) {

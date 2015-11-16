@@ -26,7 +26,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
@@ -40,6 +42,7 @@ import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRITableOfContentsCustomizer;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRPrintElement;
 import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintPage;
@@ -55,7 +58,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class JasperTocReport {
 
-	public static void createTocReport(JasperReportDesign jasperReportDesign, JasperPrint jasperPrint) throws DRException, JRException {
+	public static void createTocReport(JasperReportDesign jasperReportDesign, JasperPrint jasperPrint, Map<String, Object> parameters) throws DRException, JRException {
 		JasperCustomValues customValues = jasperReportDesign.getCustomValues();
 		Map<String, JasperTocHeading> headings = customValues.getTocHeadings();
 		if (headings != null && !headings.isEmpty()) {
@@ -87,6 +90,8 @@ public class JasperTocReport {
 			tocMargin.setLeft(jasperReportDesign.getDesign().getLeftMargin());
 			tocMargin.setBottom(jasperReportDesign.getDesign().getBottomMargin());
 			tocMargin.setRight(jasperReportDesign.getDesign().getRightMargin());
+			tocReport.setLocale((Locale) parameters.get(JRParameter.REPORT_LOCALE));
+			tocReport.setResourceBundle((ResourceBundle) parameters.get(JRParameter.REPORT_RESOURCE_BUNDLE));
 			tocReport.setPageMargin(tocMargin);
 			tocReport.setDataSource(new JRBeanCollectionDataSource(headingList));
 
