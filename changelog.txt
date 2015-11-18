@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 4.0.2 (2015-11-18)
+---------------------------------------------------
+ - upgrade to JasperReports 6.1.1
+ - added support for QR Code barcode, see BarcodeReport for an example 
+ - minor bug fixes and improvements
+ 
 Changes in version 4.0.1 (2015-07-28)
 ---------------------------------------------------
  - upgrade to JasperReports 6.1.0
