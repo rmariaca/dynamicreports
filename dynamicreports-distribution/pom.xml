@@ -26,10 +26,10 @@
 		<commonslangVersion>2.5</commonslangVersion>
 		<commonscodecVersion>1.5</commonscodecVersion>
 		<zxingVersion>2.3.0</zxingVersion>
-		<itextVersion>2.1.7.js2</itextVersion>
-		<jcommonVersion>1.0.15</jcommonVersion>
+		<itextVersion>2.1.7.js3</itextVersion>
+		<jcommonVersion>1.0.23</jcommonVersion>
 		<ecjVersion>4.3.1</ecjVersion>
-		<jfreechartVersion>1.0.12</jfreechartVersion>
+		<jfreechartVersion>1.0.19</jfreechartVersion>
 		<log4jVersion>1.2.14</log4jVersion>
 		<jacksonVersion>2.1.4</jacksonVersion>
 		<xmlapisVersion>1.3.04</xmlapisVersion>
