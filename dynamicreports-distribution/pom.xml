@@ -26,7 +26,7 @@
 		<commonslangVersion>2.5</commonslangVersion>
 		<commonscodecVersion>1.5</commonscodecVersion>
 		<zxingVersion>2.3.0</zxingVersion>
-		<itextVersion>2.1.7.js3</itextVersion>
+		<itextVersion>2.1.7.js4</itextVersion>
 		<jcommonVersion>1.0.23</jcommonVersion>
 		<ecjVersion>4.3.1</ecjVersion>
 		<jfreechartVersion>1.0.19</jfreechartVersion>
