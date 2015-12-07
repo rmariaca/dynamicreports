@@ -113,6 +113,8 @@ import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.component.DRITotalPages;
+import net.sf.dynamicreports.report.definition.component.DRIXyList;
+import net.sf.dynamicreports.report.definition.component.DRIXyListCell;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIParameterExpression;
@@ -137,6 +139,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIList) {
 			return list((DRIList) component, defaultStyleType, resetType, resetGroup);
+		}
+		if (component instanceof DRIXyList) {
+			return xyList((DRIXyList) component, defaultStyleType, resetType, resetGroup);
 		}
 		if (component instanceof DRIMultiPageList) {
 			return multiPageList((DRIMultiPageList) component);
@@ -269,6 +274,22 @@ public class ComponentTransform {
 			designList.addComponent(horizontalAlignment, verticalAlignment, component(component, defaultStyleType, resetType, resetGroup));
 		}
 		designList.setBackgroundComponent(listBackgroundComponent(list.getBackgroundComponent(), defaultStyleType, resetType, resetGroup));
+
+		return designList;
+	}
+
+	protected DRDesignList xyList(DRIXyList xyList, DefaultStyleType defaultStyleType, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignList designList = new DRDesignList(null);
+		component(designList, xyList, xyList.getStyle(), false, DefaultStyleType.NONE);
+		designList.setWidth(accessor.getTemplateTransform().getXyListWidth(xyList));
+		designList.setHeight(accessor.getTemplateTransform().getXyListHeight(xyList));
+		designList.setCalculateComponents(designList.getWidth() == null && designList.getHeight() == null);
+		for (DRIXyListCell innerComponent : xyList.getXyListCells()) {
+			DRDesignComponent designComponent = component(innerComponent.getComponent(), defaultStyleType, resetType, resetGroup);
+			designComponent.setX(innerComponent.getX());
+			designComponent.setY(innerComponent.getY());
+			designList.addComponent(HorizontalCellComponentAlignment.LEFT, VerticalCellComponentAlignment.TOP, designComponent);
+		}
 
 		return designList;
 	}

@@ -45,7 +45,7 @@ import org.apache.commons.lang3.Validate;
  */
 public class Components {
 
-	//horizontal
+	//horizontal list
 	public static HorizontalListBuilder horizontalList() {
 		return new HorizontalListBuilder();
 	}
@@ -63,7 +63,7 @@ public class Components {
 		return new HorizontalListCellBuilder(component);
 	}
 
-	//horizontal flow
+	//horizontal flow list
 	public static HorizontalListBuilder horizontalFlowList() {
 		return new HorizontalFlowListBuilder();
 	}
@@ -76,7 +76,7 @@ public class Components {
 		return new HorizontalFlowListBuilder().add(cells);
 	}
 
-	//vertical
+	//vertical list
 	public static VerticalListBuilder verticalList() {
 		return new VerticalListBuilder();
 	}
@@ -94,6 +94,26 @@ public class Components {
 		return new VerticalListCellBuilder(component);
 	}
 
+	//xy list
+	public static XyListBuilder xyList() {
+		return new XyListBuilder();
+	}
+
+	public static XyListBuilder xyList(XyListCellBuilder ...cells) {
+		return new XyListBuilder().add(cells);
+	}
+
+	public static XyListCellBuilder xyListCell(Integer x, Integer y, ComponentBuilder<?, ?> component) {
+		Validate.notNull(component, "component must not be null");
+		return new XyListCellBuilder(x, y, component);
+	}
+
+	public static XyListCellBuilder xyListCell(Integer x, Integer y, Integer width, Integer height, ComponentBuilder<?, ?> component) {
+		Validate.notNull(component, "component must not be null");
+		return new XyListCellBuilder(x, y, width, height, component);
+	}
+
+	//multi page list
 	public static MultiPageListBuilder multiPageList() {
 		return new MultiPageListBuilder();
 	}

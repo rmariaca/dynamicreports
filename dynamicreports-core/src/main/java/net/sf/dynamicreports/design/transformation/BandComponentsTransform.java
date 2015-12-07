@@ -144,8 +144,12 @@ class BandComponentsTransform {
 					}
 					return null;
 				}
-				elm.setX(lComponent.getX() + elm.getX());
-				elm.setY(lComponent.getY() + elm.getY());
+				if (lComponent != elm &&
+						(!(lComponent instanceof DRDesignList) ||
+								lComponent instanceof DRDesignList && !(lComponent.getStyle() == null && lComponent.getPrintWhenExpression() == null && ((DRDesignList) lComponent).getBackgroundComponent() == null))) {
+					elm.setX(lComponent.getX() + elm.getX());
+					elm.setY(lComponent.getY() + elm.getY());
+				}
 
 				if (list.getStyle() == null && list.getPrintWhenExpression() == null && list.getBackgroundComponent() == null) {
 					elm.setX(list.getX() + elm.getX());

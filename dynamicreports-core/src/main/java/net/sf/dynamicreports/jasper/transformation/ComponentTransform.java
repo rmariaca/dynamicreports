@@ -224,7 +224,7 @@ public class ComponentTransform {
 	}
 
 	private StretchType detectStretchType(ListType listType) {
-		if (listType.equals(ListType.VERTICAL)) {
+		if (listType == null || listType.equals(ListType.VERTICAL)) {
 			return StretchType.NO_STRETCH;
 		}
 

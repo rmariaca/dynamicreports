@@ -97,6 +97,7 @@ import net.sf.dynamicreports.report.definition.component.DRIPageXofY;
 import net.sf.dynamicreports.report.definition.component.DRIRectangle;
 import net.sf.dynamicreports.report.definition.component.DRISubreport;
 import net.sf.dynamicreports.report.definition.component.DRITextField;
+import net.sf.dynamicreports.report.definition.component.DRIXyList;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstab;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabColumnGroup;
 import net.sf.dynamicreports.report.definition.crosstab.DRICrosstabMeasure;
@@ -1239,6 +1240,21 @@ public class TemplateTransform {
 			return template.getListgap();
 		}
 		return Defaults.getDefaults().getListgap();
+	}
+
+	//xy list
+	protected Integer getXyListWidth(DRIXyList xyList) {
+		if (xyList.getWidth() != null) {
+			return xyList.getWidth();
+		}
+		return Defaults.getDefaults().getListWidth();
+	}
+
+	protected Integer getXyListHeight(DRIXyList xyList) {
+		if (xyList.getHeight() != null) {
+			return xyList.getHeight();
+		}
+		return Defaults.getDefaults().getListHeight();
 	}
 
 	//multi page list

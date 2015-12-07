@@ -41,7 +41,7 @@ import net.sf.jasperreports.engine.Renderable;
  */
 public class ComponentBuilders {
 
-	//horizontal
+	//horizontal list
 	public HorizontalListBuilder horizontalList() {
 		return Components.horizontalList();
 	}
@@ -58,7 +58,7 @@ public class ComponentBuilders {
 		return Components.hListCell(component);
 	}
 
-	//horizontal flow
+	//horizontal flow list
 	public HorizontalListBuilder horizontalFlowList() {
 		return Components.horizontalFlowList();
 	}
@@ -71,7 +71,7 @@ public class ComponentBuilders {
 		return Components.horizontalFlowList(cells);
 	}
 
-	//vertical
+	//vertical list
 	public VerticalListBuilder verticalList() {
 		return Components.verticalList();
 	}
@@ -88,6 +88,24 @@ public class ComponentBuilders {
 		return Components.vListCell(component);
 	}
 
+	//xy list
+	public XyListBuilder xyList() {
+		return Components.xyList();
+	}
+
+	public XyListBuilder xyList(XyListCellBuilder ...cells) {
+		return Components.xyList(cells);
+	}
+
+	public XyListCellBuilder xyListCell(Integer x, Integer y, ComponentBuilder<?, ?> component) {
+		return Components.xyListCell(x, y, component);
+	}
+
+	public XyListCellBuilder xyListCell(Integer x, Integer y, Integer width, Integer height, ComponentBuilder<?, ?> component) {
+		return Components.xyListCell(x, y, width, height, component);
+	}
+
+	//multi page list
 	public MultiPageListBuilder multiPageList() {
 		return Components.multiPageList();
 	}
