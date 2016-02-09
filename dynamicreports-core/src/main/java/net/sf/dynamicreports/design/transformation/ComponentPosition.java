@@ -275,6 +275,10 @@ class ComponentPosition {
 		int maxWidth = 0;
 		ListType type = list.getType();
 
+		if (type == null) {
+			return;
+		}
+
 		switch (type) {
 		case HORIZONTAL:
 			int floatCells = 0;

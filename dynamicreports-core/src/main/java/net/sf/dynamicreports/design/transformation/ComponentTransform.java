@@ -284,6 +284,7 @@ public class ComponentTransform {
 		designList.setWidth(accessor.getTemplateTransform().getXyListWidth(xyList));
 		designList.setHeight(accessor.getTemplateTransform().getXyListHeight(xyList));
 		designList.setCalculateComponents(designList.getWidth() == null && designList.getHeight() == null);
+		designList.setRemovable(true);
 		for (DRIXyListCell innerComponent : xyList.getXyListCells()) {
 			DRDesignComponent designComponent = component(innerComponent.getComponent(), defaultStyleType, resetType, resetGroup);
 			designComponent.setX(innerComponent.getX());
