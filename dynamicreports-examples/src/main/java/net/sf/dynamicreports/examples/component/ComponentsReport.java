@@ -71,7 +71,11 @@ public class ComponentsReport {
 			  		"empty space", cmp.filler(),
 			  		"text field", cmp.text("text")),
 			  	cmp.verticalGap(50),
-			  	cmp.horizontalList(cmp.text("text"), cmp.horizontalGap(100), cmp.text("text")))
+			  	cmp.horizontalList(cmp.text("text"), cmp.horizontalGap(100), cmp.text("text")),
+			  	cmp.xyList()
+			  		.add(50, 15, cmp.text("text"))
+			  		.add(110, 20, cmp.text("text"))
+			  		.add(170, 25, cmp.text("text")))
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
