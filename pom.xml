@@ -245,7 +245,7 @@
 											<goal>testCompile</goal>
 										</goals>
 										<parameters>
-											<compilerId>jdt</compilerId>
+											<compilerId>eclipse</compilerId>
 										</parameters>
 									</pluginExecutionFilter>
 									<action>
