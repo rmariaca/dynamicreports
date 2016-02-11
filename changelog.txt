@@ -1,6 +1,11 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 4.1.0 (2016-02-11)
+---------------------------------------------------
+ - upgrade to JasperReports 6.2.0
+ - xyList component, see ComponentsReport for an example
+ 
 Changes in version 4.0.2 (2015-11-18)
 ---------------------------------------------------
  - upgrade to JasperReports 6.1.1
