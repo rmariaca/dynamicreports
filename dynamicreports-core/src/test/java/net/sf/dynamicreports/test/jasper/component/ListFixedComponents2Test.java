@@ -23,19 +23,21 @@
 package net.sf.dynamicreports.test.jasper.component;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class ListFixedComponentsTest extends AbstractJasperPositionTest {
+public class ListFixedComponents2Test extends AbstractJasperPositionTest {
 
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		rb.title(
-			  cmp.horizontalList(
-			  		cmp.text("a").setFixedWidth(50), cmp.text("a").setFixedWidth(100)));
+			cmp.horizontalList(cmp.text(""))
+				.setFixedWidth(300)
+				.setBaseStyle(stl.style().setPadding(5)));
 	}
 
 	@Override
@@ -44,9 +46,8 @@ public class ListFixedComponentsTest extends AbstractJasperPositionTest {
 
 		numberOfPagesTest(1);
 
-		elementPositionTest("title.list1", 0, 10, 10, 150, 16);
+		elementPositionTest("title.list1", 0, 10, 10, 300, 26);
 
-		elementPositionTest("title.textField1", 0, 0, 0, 50, 16);
-		elementPositionTest("title.textField2", 0, 50, 0, 100, 16);
+		elementPositionTest("title.textField1", 0, 0, 0, 290, 16);
 	}
 }

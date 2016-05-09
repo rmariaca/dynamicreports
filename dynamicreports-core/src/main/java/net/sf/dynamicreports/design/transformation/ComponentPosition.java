@@ -325,28 +325,24 @@ class ComponentPosition {
 			maxWidth = splitHorizontalListWhenOverflowWidth(name, list, availableWidth);
 			break;
 		case VERTICAL:
-			if (list.getListCells().isEmpty()) {
-				maxWidth = availableWidth;
-			}
-			else {
-				for (DRDesignListCell listCell : list.getListCells()) {
-					DRDesignComponent component = listCell.getComponent();
-					if (component.getWidth() > availableWidth) {
-						if (listCell.getHorizontalAlignment().equals(HorizontalCellComponentAlignment.FLOAT)) {
-							if (component instanceof DRDesignList) {
-								recalculateWidth(name, (DRDesignList) component, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
-							}
-							else {
-								component.setWidth(availableWidth);
-							}
+			maxWidth = availableWidth;
+			for (DRDesignListCell listCell : list.getListCells()) {
+				DRDesignComponent component = listCell.getComponent();
+				if (component.getWidth() > availableWidth) {
+					if (listCell.getHorizontalAlignment().equals(HorizontalCellComponentAlignment.FLOAT)) {
+						if (component instanceof DRDesignList) {
+							recalculateWidth(name, (DRDesignList) component, availableWidth - StyleResolver.getHorizontalPadding(component.getStyle()));
 						}
 						else {
-							throw new DRException(name + " components reaches outside available width, available width = " + availableWidth + ", components width = " + component.getWidth());
+							component.setWidth(availableWidth);
 						}
 					}
-					if (component.getWidth() > maxWidth) {
-						maxWidth = component.getWidth();
+					else {
+						throw new DRException(name + " components reaches outside available width, available width = " + availableWidth + ", components width = " + component.getWidth());
 					}
+				}
+				if (component.getWidth() > maxWidth) {
+					maxWidth = component.getWidth();
 				}
 			}
 			break;
