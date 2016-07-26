@@ -24,7 +24,9 @@ package net.sf.dynamicreports.test.jasper.component;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.lang.reflect.Field;
+import org.krysalis.barcode4j.BaselineAlignment;
+import org.krysalis.barcode4j.ChecksumMode;
+import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
 import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -55,15 +57,13 @@ import net.sf.jasperreports.components.barcode4j.TextPositionEnum;
 import net.sf.jasperreports.components.barcode4j.UPCAComponent;
 import net.sf.jasperreports.components.barcode4j.UPCEComponent;
 import net.sf.jasperreports.components.barcode4j.USPSIntelligentMailComponent;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintImage;
 import net.sf.jasperreports.engine.base.JRBaseComponentElement;
 import net.sf.jasperreports.engine.component.Component;
-import net.sf.jasperreports.renderers.BatikRenderer;
-
-import org.krysalis.barcode4j.BaselineAlignment;
-import org.krysalis.barcode4j.ChecksumMode;
-import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
+import net.sf.jasperreports.renderers.SimpleRenderToImageAwareDataRenderer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -394,13 +394,11 @@ public class BarcodeTest extends AbstractJasperTest {
 	private void testBarcode(String name, int groupIndex, int index, String code) {
 		JRPrintFrame printFrame = (JRPrintFrame) getElementAt("title.list" + groupIndex, 0);
 		JRPrintImage image = (JRPrintImage) printFrame.getElements().get(index);
-		BatikRenderer renderer = (BatikRenderer) image.getRenderable();
+		SimpleRenderToImageAwareDataRenderer renderer = (SimpleRenderToImageAwareDataRenderer) image.getRenderer();
 		try {
-			Field field = renderer.getClass().getDeclaredField("svgText");
-			field.setAccessible(true);
-			String barcode = (String) field.get(renderer);
+			String barcode = new String(renderer.getData(DefaultJasperReportsContext.getInstance()));
 			Assert.assertTrue(name + " code", barcode.matches(".*>" + code.replaceAll("\\(", "\\\\(").replaceAll("\\)", "\\\\)") + "<.*"));
-		} catch (Exception e) {
+		} catch (JRException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}

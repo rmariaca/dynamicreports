@@ -30,18 +30,19 @@ import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.renderers.BatikRenderer;
+import net.sf.jasperreports.renderers.SimpleDataRenderer;
+import net.sf.jasperreports.renderers.WrappingSvgDataToGraphics2DRenderer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class CustomBatikRenderer extends BatikRenderer {
+public class CustomBatikRenderer extends WrappingSvgDataToGraphics2DRenderer {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private Dimension dimension;
 
 	public CustomBatikRenderer(URL svgURL, int width, int height) throws JRException {
-		super(JRLoader.loadBytes(svgURL), null);
+		super(new SimpleDataRenderer(JRLoader.loadBytes(svgURL), null));
 		this.dimension = new Dimension(width, height);
 	}
 

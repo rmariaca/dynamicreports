@@ -27,6 +27,9 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.io.Serializable;
 import java.util.Locale;
 
+import org.junit.Assert;
+
+import net.sf.dynamicreports.design.transformation.CustomBatikRenderer;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.constant.BooleanComponentType;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
@@ -35,9 +38,6 @@ import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintImage;
-import net.sf.jasperreports.renderers.BatikRenderer;
-
-import org.junit.Assert;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -70,7 +70,7 @@ public class BooleanColumn2Test extends AbstractJasperValueTest implements Seria
 
 		testImage("detail.column_field13", 0);
 		testImage("detail.column_field13", 1);
-		Assert.assertNull((((JRPrintImage) getElementAt("detail.column_field13", 2)).getRenderable()));
+		Assert.assertNull((((JRPrintImage) getElementAt("detail.column_field13", 2)).getRenderer()));
 
 		testImage("detail.column_field14", 0);
 		testImage("detail.column_field14", 1);
@@ -78,9 +78,9 @@ public class BooleanColumn2Test extends AbstractJasperValueTest implements Seria
 	}
 
 	private void testImage(String name, int index) {
-		BatikRenderer batikRenderer = ((BatikRenderer) ((JRPrintImage) getElementAt(name, index)).getRenderable());
+		CustomBatikRenderer batikRenderer = ((CustomBatikRenderer) ((JRPrintImage) getElementAt(name, index)).getRenderer());
 		try {
-			byte[] data = batikRenderer.getImageData(DefaultJasperReportsContext.getInstance());
+			byte[] data = batikRenderer.getData(DefaultJasperReportsContext.getInstance());
 			Assert.assertNotNull(data);
 		} catch (JRException e) {
 			Assert.fail(e.getMessage());

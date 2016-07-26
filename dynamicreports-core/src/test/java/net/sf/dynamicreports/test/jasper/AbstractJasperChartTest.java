@@ -25,10 +25,6 @@ package net.sf.dynamicreports.test.jasper;
 import java.lang.reflect.Field;
 import java.util.Date;
 
-import junit.framework.Assert;
-import net.sf.jasperreports.charts.util.DrawChartRenderer;
-import net.sf.jasperreports.engine.JRPrintImage;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
@@ -36,6 +32,10 @@ import org.jfree.data.gantt.GanttCategoryDataset;
 import org.jfree.data.xy.DefaultHighLowDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
+
+import junit.framework.Assert;
+import net.sf.jasperreports.charts.util.DrawChartRendererImpl;
+import net.sf.jasperreports.engine.JRPrintImage;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -126,7 +126,7 @@ public abstract class AbstractJasperChartTest extends AbstractJasperValueTest {
 	}
 
 	protected JFreeChart getChart(JRPrintImage image) {
-		DrawChartRenderer renderer = (DrawChartRenderer) image.getRenderable();
+		DrawChartRendererImpl renderer = (DrawChartRendererImpl) image.getRenderer();
 		try {
 			Field field = renderer.getClass().getDeclaredField("chart");
 			field.setAccessible(true);

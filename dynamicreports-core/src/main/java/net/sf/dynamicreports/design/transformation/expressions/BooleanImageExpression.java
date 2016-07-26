@@ -33,7 +33,7 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.component.DRIBooleanField;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.Renderable;
+import net.sf.jasperreports.renderers.Renderable;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
