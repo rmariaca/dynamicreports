@@ -20,7 +20,7 @@
 		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>	
 		<bcprovjdk14Version>138</bcprovjdk14Version>	
 		<commonsbeanutilsVersion>1.9.0</commonsbeanutilsVersion>
-		<commonscollectionsVersion>3.2.1</commonscollectionsVersion>
+		<commonscollectionsVersion>3.2.2</commonscollectionsVersion>
 		<commonsdigesterVersion>2.1</commonsdigesterVersion>
 		<commonsloggingVersion>1.1.1</commonsloggingVersion>
 		<commonslangVersion>2.5</commonslangVersion>
@@ -79,6 +79,10 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-bridge</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>xmlgraphics-commons</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
