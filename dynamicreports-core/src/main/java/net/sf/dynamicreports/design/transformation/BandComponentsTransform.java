@@ -218,7 +218,7 @@ class BandComponentsTransform {
 				backgroundComponent.setY(0);
 				backgroundComponent.setWidth(list.getWidth() - StyleResolver.getHorizontalPadding(list.getStyle()));
 				backgroundComponent.setHeight(list.getHeight() - StyleResolver.getVerticalPadding(list.getStyle()));
-				backgroundComponent.setStretchType(StretchType.RELATIVE_TO_TALLEST_OBJECT);
+				backgroundComponent.setStretchType(StretchType.ELEMENT_GROUP_HEIGHT);
 				list.setBackgroundComponent(backgroundComponent);
 			}
 			for (DRDesignComponent listComponent : list.getComponents()) {

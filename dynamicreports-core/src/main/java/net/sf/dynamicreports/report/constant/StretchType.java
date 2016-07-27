@@ -27,6 +27,16 @@ package net.sf.dynamicreports.report.constant;
  */
 public enum StretchType {
 	NO_STRETCH,
+	/**
+	 * @deprecated use ELEMENT_GROUP_HEIGHT instead
+	 */
 	RELATIVE_TO_TALLEST_OBJECT,
-	RELATIVE_TO_BAND_HEIGHT;
+	/**
+	 * @deprecated use CONTAINER_HEIGHT instead
+	 */
+	RELATIVE_TO_BAND_HEIGHT,
+	ELEMENT_GROUP_HEIGHT,
+	ELEMENT_GROUP_BOTTOM,
+	CONTAINER_HEIGHT,
+	CONTAINER_BOTTOM;
 }

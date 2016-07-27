@@ -24,6 +24,22 @@ package net.sf.dynamicreports.jasper.transformation;
 
 import java.util.List;
 
+import org.apache.commons.lang3.EnumUtils;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Hour;
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.Minute;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.Quarter;
+import org.jfree.data.time.Second;
+import org.jfree.data.time.Week;
+import org.jfree.data.time.Year;
+import org.krysalis.barcode4j.BaselineAlignment;
+import org.krysalis.barcode4j.ChecksumMode;
+import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
+
+import com.lowagie.text.pdf.PdfWriter;
+
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.constant.ResetType;
 import net.sf.dynamicreports.jasper.constant.PdfPermission;
@@ -122,22 +138,6 @@ import net.sf.jasperreports.export.type.HtmlSizeUnitEnum;
 import net.sf.jasperreports.export.type.PdfPrintScalingEnum;
 import net.sf.jasperreports.export.type.PdfVersionEnum;
 import net.sf.jasperreports.export.type.PdfaConformanceEnum;
-
-import org.apache.commons.lang3.EnumUtils;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.Hour;
-import org.jfree.data.time.Millisecond;
-import org.jfree.data.time.Minute;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.Quarter;
-import org.jfree.data.time.Second;
-import org.jfree.data.time.Week;
-import org.jfree.data.time.Year;
-import org.krysalis.barcode4j.BaselineAlignment;
-import org.krysalis.barcode4j.ChecksumMode;
-import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
-
-import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -1055,6 +1055,7 @@ public class ConstantTransform {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static StretchTypeEnum stretchType(StretchType stretchType) {
 		if (stretchType == null) {
 			return StretchTypeEnum.NO_STRETCH;
@@ -1064,9 +1065,17 @@ public class ConstantTransform {
 		case NO_STRETCH:
 			return StretchTypeEnum.NO_STRETCH;
 		case RELATIVE_TO_BAND_HEIGHT:
-			return StretchTypeEnum.RELATIVE_TO_BAND_HEIGHT;
+			return StretchTypeEnum.CONTAINER_HEIGHT;
 		case RELATIVE_TO_TALLEST_OBJECT:
-			return StretchTypeEnum.RELATIVE_TO_TALLEST_OBJECT;
+			return StretchTypeEnum.ELEMENT_GROUP_HEIGHT;
+		case ELEMENT_GROUP_HEIGHT:
+			return StretchTypeEnum.ELEMENT_GROUP_HEIGHT;
+		case ELEMENT_GROUP_BOTTOM:
+			return StretchTypeEnum.ELEMENT_GROUP_BOTTOM;
+		case CONTAINER_HEIGHT:
+			return StretchTypeEnum.CONTAINER_HEIGHT;
+		case CONTAINER_BOTTOM:
+			return StretchTypeEnum.CONTAINER_BOTTOM;
 		default:
 			throw new JasperDesignException("StretchType " + stretchType.name() + " not supported");
 		}

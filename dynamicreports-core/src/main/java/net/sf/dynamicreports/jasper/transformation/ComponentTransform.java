@@ -25,6 +25,8 @@ package net.sf.dynamicreports.jasper.transformation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignTextField;
 import net.sf.dynamicreports.design.constant.EvaluationTime;
@@ -81,8 +83,6 @@ import net.sf.jasperreports.engine.design.JRDesignTextField;
 import net.sf.jasperreports.engine.type.HyperlinkTargetEnum;
 import net.sf.jasperreports.engine.type.HyperlinkTypeEnum;
 import net.sf.jasperreports.engine.type.OnErrorTypeEnum;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -228,7 +228,7 @@ public class ComponentTransform {
 			return StretchType.NO_STRETCH;
 		}
 
-		return StretchType.RELATIVE_TO_TALLEST_OBJECT;
+		return StretchType.ELEMENT_GROUP_HEIGHT;
 	}
 
 	//list

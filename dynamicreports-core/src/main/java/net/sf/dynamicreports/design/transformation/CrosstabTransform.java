@@ -201,7 +201,7 @@ public class CrosstabTransform {
 		}
 
 		if (group instanceof DRICrosstabRowGroup || (group instanceof DRICrosstabColumnGroup && !measureTitle)) {
-			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+			textField.setStretchType(StretchType.CONTAINER_HEIGHT);
 		}
 		DRIReportStyle groupStyle = group.getHeaderStyle();
 		if (groupStyle == null) {
@@ -244,7 +244,7 @@ public class CrosstabTransform {
 			textField.setPropertyExpressions(group.getTotalHeaderPropertyExpressions());
 			textField.setStyle(totalStyle);
 			if (group instanceof DRICrosstabRowGroup || (group instanceof DRICrosstabColumnGroup && !measureTitle)) {
-				textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+				textField.setStretchType(StretchType.CONTAINER_HEIGHT);
 			}
 
 			DRDesignCrosstabCellContent totalHeader = createCellContent(getCellStyle(totalStyle), resetType, resetGroup);
@@ -465,7 +465,7 @@ public class CrosstabTransform {
 		designCell.setColumnTotalGroup(columnTotalGroup);
 
 		DRDesignList designList = new DRDesignList();
-		designList.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+		designList.setStretchType(StretchType.CONTAINER_HEIGHT);
 		for (DRICrosstabMeasure<?> measure : crosstab.getMeasures()) {
 			DRTextField textField = new DRTextField();
 
@@ -482,7 +482,7 @@ public class CrosstabTransform {
 			textField.setValueFormatter(measure.getValueFormatter());
 			textField.setDataType(measure.getDataType());
 			textField.setStretchWithOverflow(measure.getStretchWithOverflow());
-			textField.setStretchType(StretchType.RELATIVE_TO_BAND_HEIGHT);
+			textField.setStretchType(StretchType.CONTAINER_HEIGHT);
 			textField.setHyperLink((DRHyperLink) measure.getHyperLink());
 			textField.setPropertyExpressions(measure.getPropertyExpressions());
 			textField.setStyle(measuresStyle.getStyle(measure, rowGroup, columnGroup));
