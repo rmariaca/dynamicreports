@@ -37,6 +37,7 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintImage;
 import net.sf.jasperreports.engine.type.HorizontalImageAlignEnum;
+import net.sf.jasperreports.renderers.SimpleDataRenderer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -59,9 +60,9 @@ public class Image2Test extends AbstractJasperTest {
 
 		try {
 			JRPrintImage jrImage = (JRPrintImage) getElementAt("pageHeader.image1", 0);
-			byte[] imageData1 = jrImage.getRenderable().getImageData(DefaultJasperReportsContext.getInstance());
+			byte[] imageData1 = ((SimpleDataRenderer) jrImage.getRenderer()).getData(DefaultJasperReportsContext.getInstance());
 			jrImage = (JRPrintImage) getElementAt("pageHeader.image1", 1);
-			byte[] imageData2 = jrImage.getRenderable().getImageData(DefaultJasperReportsContext.getInstance());
+			byte[] imageData2 = ((SimpleDataRenderer) jrImage.getRenderer()).getData(DefaultJasperReportsContext.getInstance());
 			Assert.assertTrue("image data", Arrays.equals(imageData1, imageData2));
 			Assert.assertEquals("image horizontal alignment", HorizontalImageAlignEnum.CENTER, jrImage.getHorizontalImageAlign());
 		} catch (JRException e) {

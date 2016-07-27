@@ -44,6 +44,7 @@ import net.sf.jasperreports.engine.JRPrintImage;
 import net.sf.jasperreports.engine.type.ImageTypeEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.util.JRImageLoader;
+import net.sf.jasperreports.renderers.SimpleDataRenderer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -67,7 +68,7 @@ public class Image1Test extends AbstractJasperTest {
 		try {
 			byte[] imageData = JRImageLoader.getInstance(DefaultJasperReportsContext.getInstance()).loadBytesFromAwtImage(image, ImageTypeEnum.JPEG);
 			JRPrintImage jrImage = (JRPrintImage) getElementAt("title.image1", 0);
-			Assert.assertTrue("image data", Arrays.equals(imageData, jrImage.getRenderable().getImageData(DefaultJasperReportsContext.getInstance())));
+			Assert.assertTrue("image data", Arrays.equals(imageData, ((SimpleDataRenderer) jrImage.getRenderer()).getData(DefaultJasperReportsContext.getInstance())));
 			Assert.assertEquals("scale image", ScaleImageEnum.CLIP, jrImage.getScaleImageValue());
 		} catch (JRException e) {
 			e.printStackTrace();
