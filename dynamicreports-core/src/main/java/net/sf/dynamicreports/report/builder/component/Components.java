@@ -27,6 +27,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
@@ -34,9 +36,7 @@ import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.constant.BreakType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.Renderable;
-
-import org.apache.commons.lang3.Validate;
+import net.sf.jasperreports.renderers.Renderable;
 
 /**
  * A set of methods of creating components
@@ -207,6 +207,14 @@ public class Components {
 
 	public static ImageBuilder image(Renderable image) {
 		return new ImageBuilder().setImage(Expressions.value(image, Renderable.class));
+	}
+
+	/**
+	 * @deprecated use image(net.sf.jasperreports.renderers.Renderable image) instead
+	 */
+	@Deprecated
+	public static ImageBuilder image(net.sf.jasperreports.engine.Renderable image) {
+		return new ImageBuilder().setImage(Expressions.value(image, net.sf.jasperreports.engine.Renderable.class));
 	}
 
 	//subreport

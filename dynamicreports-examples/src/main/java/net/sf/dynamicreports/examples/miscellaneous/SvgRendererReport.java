@@ -23,13 +23,15 @@
 package net.sf.dynamicreports.examples.miscellaneous;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.Renderable;
-import net.sf.jasperreports.renderers.BatikRenderer;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.renderers.Renderable;
+import net.sf.jasperreports.renderers.SimpleDataRenderer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -42,7 +44,7 @@ public class SvgRendererReport {
 
 	private void build() {
 		try {
-			Renderable image = BatikRenderer.getInstance(Templates.class.getResource("images/map.svg"));
+			Renderable image = new SimpleDataRenderer(JRLoader.loadBytes(Templates.class.getResource("images/map.svg")), null);
 
 			report()
 			  .setTemplate(Templates.reportTemplate)

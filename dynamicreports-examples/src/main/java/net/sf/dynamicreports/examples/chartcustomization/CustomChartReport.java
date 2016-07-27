@@ -23,6 +23,12 @@
 package net.sf.dynamicreports.examples.chartcustomization;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.statistics.BoxAndWhiskerItem;
+import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.base.AbstractScriptlet;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
@@ -30,14 +36,9 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.charts.util.DrawChartRenderer;
+import net.sf.jasperreports.charts.util.DrawChartRendererImpl;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.Renderable;
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.statistics.BoxAndWhiskerItem;
-import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+import net.sf.jasperreports.renderers.Renderable;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -122,7 +123,7 @@ public class CustomChartReport {
 		@Override
 		public Renderable evaluate(ReportParameters reportParameters) {
 			JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Box and Whisker chart", "Category", "Value", dataset, true);
-			return new DrawChartRenderer(chart, null);
+			return new DrawChartRendererImpl(chart, null);
 		}
 	}
 

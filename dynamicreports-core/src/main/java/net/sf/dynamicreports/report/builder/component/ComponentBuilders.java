@@ -32,7 +32,7 @@ import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.Renderable;
+import net.sf.jasperreports.renderers.Renderable;
 
 /**
  * A set of methods of creating components
@@ -198,6 +198,14 @@ public class ComponentBuilders {
 	}
 
 	public ImageBuilder image(Renderable image) {
+		return Components.image(image);
+	}
+
+	/**
+	 * @deprecated use image(net.sf.jasperreports.renderers.Renderable image) instead
+	 */
+	@Deprecated
+	public ImageBuilder image(net.sf.jasperreports.engine.Renderable image) {
 		return Components.image(image);
 	}
 
