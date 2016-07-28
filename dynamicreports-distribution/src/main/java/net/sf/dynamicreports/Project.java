@@ -40,6 +40,7 @@ public class Project {
 	private String barbecueVersion;
 	private String zxingVersion;
 	private String batikbridgeVersion;
+	private String xmlgraphicscommonsVersion;
 	private String bcprovjdk14Version;
 	private String commonsbeanutilsVersion;
 	private String commonscollectionsVersion;
@@ -81,6 +82,7 @@ public class Project {
 		barbecueVersion = properties.getProperty("barbecueVersion");
 		zxingVersion = properties.getProperty("zxingVersion");
 		batikbridgeVersion = properties.getProperty("batikbridgeVersion");
+		xmlgraphicscommonsVersion = properties.getProperty("xmlgraphicscommonsVersion");
 		bcprovjdk14Version = properties.getProperty("bcprovjdk14Version");
 		commonsbeanutilsVersion = properties.getProperty("commonsbeanutilsVersion");
 		commonscollectionsVersion = properties.getProperty("commonscollectionsVersion");
@@ -176,6 +178,14 @@ public class Project {
 
 	public void setBatikbridgeVersion(String batikbridgeVersion) {
 		this.batikbridgeVersion = batikbridgeVersion;
+	}
+
+	public String getXmlgraphicscommonsVersion() {
+		return xmlgraphicscommonsVersion;
+	}
+
+	public void setXmlgraphicscommonsVersion(String xmlgraphicscommonsVersion) {
+		this.xmlgraphicscommonsVersion = xmlgraphicscommonsVersion;
 	}
 
 	public String getBcprovjdk14Version() {

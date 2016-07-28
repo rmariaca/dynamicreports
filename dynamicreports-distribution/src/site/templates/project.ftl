@@ -21,6 +21,7 @@
 	<zxingVersion>${project.zxingVersion}</zxingVersion>
 	<avalonframeworkimplVersion>${project.avalonframeworkimplVersion}</avalonframeworkimplVersion>
 	<batikbridgeVersion>${project.batikbridgeVersion}</batikbridgeVersion>
+	<xmlgraphicscommonsVersion>${project.xmlgraphicscommonsVersion}</xmlgraphicscommonsVersion>
 	<itextVersion>${project.itextVersion}</itextVersion>
 	<jxlVersion>${project.jxlVersion}</jxlVersion>
 	<poiVersion>${project.poiVersion}</poiVersion>

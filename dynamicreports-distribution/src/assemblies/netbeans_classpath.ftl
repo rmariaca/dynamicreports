@@ -41,6 +41,7 @@ file.reference.batik-script-${project.batikbridgeVersion}.jar=lib\\batik-script-
 file.reference.batik-svg-dom-${project.batikbridgeVersion}.jar=lib\\batik-svg-dom-${project.batikbridgeVersion}.jar
 file.reference.batik-util-${project.batikbridgeVersion}.jar=lib\\batik-util-${project.batikbridgeVersion}.jar
 file.reference.batik-xml-${project.batikbridgeVersion}.jar=lib\\batik-xml-${project.batikbridgeVersion}.jar
+file.reference.xmlgraphics-commons-${project.xmlgraphicscommonsVersion}.jar=lib\\xmlgraphics-commons-${project.xmlgraphicscommonsVersion}.jar
 file.reference.bcprov-jdk14-${project.bcprovjdk14Version}.jar=lib\\bcprov-jdk14-${project.bcprovjdk14Version}.jar
 file.reference.commons-beanutils-${project.commonsbeanutilsVersion}.jar=lib\\commons-beanutils-${project.commonsbeanutilsVersion}.jar
 file.reference.commons-collections-${project.commonscollectionsVersion}.jar=lib\\commons-collections-${project.commonscollectionsVersion}.jar
@@ -91,6 +92,7 @@ javac.classpath=\
     ${r"${"}file.reference.batik-svg-dom-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-util-${project.batikbridgeVersion}.jar${r"}"}:\
     ${r"${"}file.reference.batik-xml-${project.batikbridgeVersion}.jar${r"}"}:\
+    ${r"${"}file.reference.xmlgraphics-commons-${project.xmlgraphicscommonsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.bcprov-jdk14-${project.bcprovjdk14Version}.jar${r"}"}:\
     ${r"${"}file.reference.commons-beanutils-${project.commonsbeanutilsVersion}.jar${r"}"}:\
     ${r"${"}file.reference.commons-collections-${project.commonscollectionsVersion}.jar${r"}"}:\
