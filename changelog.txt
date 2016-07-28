@@ -1,6 +1,12 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 4.1.1 (2016-07-28)
+---------------------------------------------------
+ - upgrade to JasperReports 6.2.2
+ - added new types of component stretch type
+ - minor bug fixes
+ 
 Changes in version 4.1.0 (2016-02-11)
 ---------------------------------------------------
  - upgrade to JasperReports 6.2.0
