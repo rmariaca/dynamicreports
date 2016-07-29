@@ -16,7 +16,7 @@
 	<description>Dynamicreports distribution</description>
 
 	<properties>
-		<aspectjVersion>1.6.3</aspectjVersion>
+		<aspectjVersion>1.7.4</aspectjVersion>
 		<avalonframeworkimplVersion>4.2.0</avalonframeworkimplVersion>	
 		<bcprovjdk14Version>138</bcprovjdk14Version>	
 		<commonsbeanutilsVersion>1.9.0</commonsbeanutilsVersion>
@@ -136,6 +136,32 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.7</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>${aspectjVersion}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<source>${sourceVersion}</source>
+					<complianceLevel>${sourceVersion}</complianceLevel>
+					<target>${targetVersion}</target>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>

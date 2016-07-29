@@ -50,6 +50,9 @@
 	</developers>
 	
 	<properties>
+		<sourceVersion>1.7</sourceVersion>
+		<targetVersion>1.7</targetVersion>
+		<encoding>UTF-8</encoding>
 		<jasperreportsVersion>6.3.0</jasperreportsVersion>
 		<commonslang3Version>3.1</commonslang3Version>
 		<barcode4jVersion>2.0</barcode4jVersion>
@@ -238,9 +241,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.3</version>
 					<configuration>						
-						<source>1.7</source>
-						<target>1.7</target>
-						<encoding>UTF-8</encoding>
+						<source>${sourceVersion}</source>
+						<target>${targetVersion}</target>
+						<encoding>${encoding}</encoding>
 						<compilerId>eclipse</compilerId>
 					</configuration>
 					<dependencies>
