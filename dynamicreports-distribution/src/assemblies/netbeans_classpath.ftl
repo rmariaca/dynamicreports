@@ -129,8 +129,8 @@ javac.compilerargs=
 javac.deprecation=false
 javac.processorpath=\
     ${r"${javac.classpath}"}
-javac.source=1.6
-javac.target=1.6
+javac.source=1.7
+javac.target=1.7
 javac.test.classpath=\
     ${r"${javac.classpath}"}:\
     ${r"${build.classes.dir}"}:\
