@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
  */
 public class ConditionBuilders {
 
+	@SuppressWarnings("unchecked")
 	public <T> EqualExpression equal(DRIValue<T> value, T ...values) {
 		return Conditions.equal(value, values);
 	}
@@ -39,6 +40,7 @@ public class ConditionBuilders {
 		return Conditions.equal(value, number);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {
 		return Conditions.unEqual(value, values);
 	}

@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
  */
 public class Conditions {
 
+	@SafeVarargs
 	public static <T> EqualExpression equal(DRIValue<T> value, T ...values) {
 		return new EqualExpression(value, values);
 	}
@@ -39,6 +40,7 @@ public class Conditions {
 		return new EqualValueExpression<T>(value, number);
 	}
 
+	@SafeVarargs
 	public static <T> UnEqualExpression unEqual(DRIValue<T> value, T ...values) {
 		return new UnEqualExpression(value, values);
 	}

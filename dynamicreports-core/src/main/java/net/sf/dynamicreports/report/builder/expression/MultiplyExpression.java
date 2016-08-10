@@ -33,10 +33,11 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 public class MultiplyExpression extends CalculationExpression {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	@SafeVarargs
 	public MultiplyExpression(DRIExpression<? extends Number> ...expressions) {
 		super(expressions);
 	}
-	
+
 	@Override
 	protected BigDecimal calculate(BigDecimal value1, BigDecimal value2) {
 		return value1.multiply(value2);

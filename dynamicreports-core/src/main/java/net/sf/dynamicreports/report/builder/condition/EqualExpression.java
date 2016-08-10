@@ -22,12 +22,12 @@
 
 package net.sf.dynamicreports.report.builder.condition;
 
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.ReportParameters;
-
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -38,6 +38,7 @@ public class EqualExpression extends AbstractSimpleExpression<Boolean> {
 	private DRIValue<?> value;
 	private Object[] values;
 
+	@SafeVarargs
 	public <T> EqualExpression(DRIValue<T> value, T ...values) {
 		Validate.notNull(value, "value must not be null");
 		Validate.noNullElements(values, "values must not contains null value");

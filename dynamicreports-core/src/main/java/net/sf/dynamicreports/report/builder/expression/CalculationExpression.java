@@ -25,11 +25,11 @@ package net.sf.dynamicreports.report.builder.expression;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -37,6 +37,7 @@ import org.apache.commons.lang3.Validate;
 abstract class CalculationExpression extends AbstractComplexExpression<BigDecimal> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
+	@SafeVarargs
 	protected CalculationExpression(DRIExpression<? extends Number> ...expressions) {
 		Validate.notNull(expressions, "expressions must not be null");
 		Validate.noNullElements(expressions, "expressions must not contains null expression");
@@ -60,11 +61,11 @@ abstract class CalculationExpression extends AbstractComplexExpression<BigDecima
 				result = bigDecimalValue;
 			}
 			else {
-				result = calculate(result, bigDecimalValue);	
+				result = calculate(result, bigDecimalValue);
 			}
 		}
 		return result;
 	}
-	
+
 	protected abstract BigDecimal calculate(BigDecimal value1, BigDecimal value2);
 }

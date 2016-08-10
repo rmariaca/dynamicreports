@@ -32,14 +32,15 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
  */
 public class DivideExpression extends CalculationExpression {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
+
 	private int scale;
 
+	@SafeVarargs
 	public DivideExpression(int scale, DRIExpression<? extends Number> ...expressions) {
 		super(expressions);
 		this.scale = scale;
 	}
-	
+
 	@Override
 	protected BigDecimal calculate(BigDecimal value1, BigDecimal value2) {
 		return value1.divide(value2, scale, BigDecimal.ROUND_HALF_UP);
