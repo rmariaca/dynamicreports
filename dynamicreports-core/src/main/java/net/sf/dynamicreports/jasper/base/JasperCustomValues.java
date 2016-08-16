@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.sf.dynamicreports.design.definition.expression.DRIDesignComplexExpression;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.tableofcontents.JasperTocHeading;
@@ -33,8 +35,6 @@ import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRICustomValues;
 import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class JasperCustomValues implements DRICustomValues {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
@@ -44,7 +44,7 @@ public class JasperCustomValues implements DRICustomValues {
 	private Map<String, DRIDesignComplexExpression> complexExpressions;
 	private Map<String, List<DRIChartCustomizer>> chartCustomizers;
 	private Map<String, Object> systemValues;
-	private JasperScriptlet jasperScriptlet;
+	private transient ThreadLocal<JasperScriptlet> localJasperScriptlet;
 	private Integer startPageNumber;
 	private Map<String, JasperTocHeading> tocHeadings;
 	private Integer subreportWidth;
@@ -54,6 +54,7 @@ public class JasperCustomValues implements DRICustomValues {
 	}
 
 	private void init() {
+		localJasperScriptlet = new ThreadLocal<>();
 		valueTypes = new HashMap<String, ValueType>();
 		simpleExpressions = new HashMap<String, DRIDesignSimpleExpression>();
 		complexExpressions = new HashMap<String, DRIDesignComplexExpression>();
@@ -112,10 +113,12 @@ public class JasperCustomValues implements DRICustomValues {
 	}
 
 	public Object getValue(String valueName) {
+		JasperScriptlet jasperScriptlet = localJasperScriptlet.get();
 		return jasperScriptlet.getValue(valueName);
 	}
 
 	public Object getValue(String name, Object[] values) {
+		JasperScriptlet jasperScriptlet = localJasperScriptlet.get();
 		return jasperScriptlet.getValue(name, values);
 	}
 
@@ -129,11 +132,11 @@ public class JasperCustomValues implements DRICustomValues {
 	}
 
 	protected JasperScriptlet getJasperScriptlet() {
-		return jasperScriptlet;
+		return localJasperScriptlet.get();
 	}
 
 	protected void setJasperScriptlet(JasperScriptlet jasperScriptlet) {
-		this.jasperScriptlet = jasperScriptlet;
+		localJasperScriptlet.set(jasperScriptlet);
 	}
 
 	public Integer getStartPageNumber() {
