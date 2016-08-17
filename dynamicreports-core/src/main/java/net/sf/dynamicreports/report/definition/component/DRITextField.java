@@ -58,5 +58,7 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 	public Markup getMarkup();
 
 	public Boolean getStretchWithOverflow();
+
+	public Boolean getPrintRepeatedValues();
 }
 

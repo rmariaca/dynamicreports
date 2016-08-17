@@ -22,6 +22,8 @@
 
 package net.sf.dynamicreports.report.base.component;
 
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.report.base.DRGroup;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.Evaluation;
@@ -31,8 +33,6 @@ import net.sf.dynamicreports.report.definition.component.DRITextField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -52,6 +52,7 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 	private DRGroup evaluationGroup;
 	private Markup markup;
 	private Boolean stretchWithOverflow;
+	private Boolean printRepeatedValues;
 
 	@Override
 	public DRIExpression<T> getValueExpression() {
@@ -191,6 +192,15 @@ public class DRTextField<T> extends DRHyperLinkComponent implements DRITextField
 
 	public void setStretchWithOverflow(Boolean stretchWithOverflow) {
 		this.stretchWithOverflow = stretchWithOverflow;
+	}
+
+	@Override
+	public Boolean getPrintRepeatedValues() {
+		return printRepeatedValues;
+	}
+
+	public void setPrintRepeatedValues(Boolean printRepeatedValues) {
+		this.printRepeatedValues = printRepeatedValues;
 	}
 }
 

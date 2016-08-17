@@ -1026,6 +1026,13 @@ public class TemplateTransform {
 		return Defaults.getDefaults().isTextFieldStretchWithOverflow();
 	}
 
+	protected boolean isTextFieldPrintRepeatedValues(DRITextField<?> textField) {
+		if (textField.getPrintRepeatedValues() != null) {
+			return textField.getPrintRepeatedValues();
+		}
+		return Defaults.getDefaults().isTextFieldPrintRepeatedValues();
+	}
+
 	//text field
 	protected int getBooleanFieldWidth(DRIBooleanField booleanField, DRDesignStyle style) {
 		if (booleanField.getWidth() != null) {

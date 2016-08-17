@@ -24,6 +24,8 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.report.base.component.DRTextField;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.VariableBuilder;
@@ -39,8 +41,6 @@ import net.sf.dynamicreports.report.definition.DRIField;
 import net.sf.dynamicreports.report.definition.datatype.DRIDataType;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 import net.sf.dynamicreports.report.definition.expression.DRIValueFormatter;
-
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -231,6 +231,11 @@ public class TextFieldBuilder<T> extends HyperLinkComponentBuilder<TextFieldBuil
 
 	public TextFieldBuilder<T> setStretchWithOverflow(Boolean stretchWithOverflow) {
 		getObject().setStretchWithOverflow(stretchWithOverflow);
+		return this;
+	}
+
+	public TextFieldBuilder<T> setPrintRepeatedValues(Boolean printRepeatedValues) {
+		getObject().setPrintRepeatedValues(printRepeatedValues);
 		return this;
 	}
 }

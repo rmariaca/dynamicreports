@@ -85,7 +85,6 @@ import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.constant.ImageScale;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
-import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIGroup;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.barcode.DRIBarbecue;
@@ -331,7 +330,7 @@ public class ComponentTransform {
 		DRDesignTextField designTextField = new DRDesignTextField();
 		hyperlink(designTextField, textField, textField.getStyle(), true, defaultStyleType);
 		TemplateTransform templateTransform = accessor.getTemplateTransform();
-		designTextField.setPrintRepeatedValues(Defaults.getDefaults().isTextFieldPrintRepeatedValues());
+		designTextField.setPrintRepeatedValues(templateTransform.isTextFieldPrintRepeatedValues(textField));
 		designTextField.setStretchWithOverflow(templateTransform.getTextFieldStretchWithOverflow(textField));
 		DRDesignStyle style = designTextField.getStyle();
 		designTextField.setWidth(templateTransform.getTextFieldWidth(textField, style));
