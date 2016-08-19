@@ -20,26 +20,41 @@
  * along with DynamicReports. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.dynamicreports.design.base.chart.dataset;
+package net.sf.dynamicreports.report.base.chart.dataset;
 
-import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
-import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
+import org.apache.commons.lang3.Validate;
+
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
+import net.sf.dynamicreports.report.definition.chart.dataset.DRIChartSerie;
+import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public abstract class AbstractDesignChartSerie implements DRIDesignChartSerie {
+public abstract class DRChartSerie implements DRIChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private DRIDesignExpression seriesExpression;
+	private DRIExpression<?> seriesExpression;
+	private DRIHyperLink itemHyperLink;
 
 	@Override
-	public DRIDesignExpression getSeriesExpression() {
+	public DRIExpression<?> getSeriesExpression() {
 		return seriesExpression;
 	}
 
-	public void setSeriesExpression(DRIDesignExpression seriesExpression) {
+	public void setSeriesExpression(DRIExpression<?> seriesExpression) {
+		Validate.notNull(seriesExpression, "seriesExpression must not be null");
 		this.seriesExpression = seriesExpression;
 	}
+
+	@Override
+	public DRIHyperLink getItemHyperLink() {
+		return itemHyperLink;
+	}
+
+	public void setItemHyperLink(DRIHyperLink itemHyperLink) {
+		this.itemHyperLink = itemHyperLink;
+	}
+
 }

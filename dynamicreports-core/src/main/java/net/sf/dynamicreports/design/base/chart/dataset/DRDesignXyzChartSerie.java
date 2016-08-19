@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignXyzChartSerie extends AbstractDesignChartSerie implements DRIDesignXyzChartSerie {
+public class DRDesignXyzChartSerie extends DRDesignChartSerie implements DRIDesignXyzChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIDesignExpression xValueExpression;

@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRGanttChartSerie extends AbstractChartSerie implements DRIGanttChartSerie {
+public class DRGanttChartSerie extends DRChartSerie implements DRIGanttChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<?> startDateExpression;

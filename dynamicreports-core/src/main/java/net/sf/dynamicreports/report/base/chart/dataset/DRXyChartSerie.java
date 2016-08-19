@@ -31,7 +31,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRXyChartSerie extends AbstractChartSerie implements DRIXyChartSerie {
+public class DRXyChartSerie extends DRChartSerie implements DRIXyChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<?> xValueExpression;

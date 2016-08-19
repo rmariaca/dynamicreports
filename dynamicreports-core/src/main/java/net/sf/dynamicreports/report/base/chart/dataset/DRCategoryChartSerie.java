@@ -31,7 +31,7 @@ import org.apache.commons.lang3.Validate;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRCategoryChartSerie extends AbstractChartSerie implements DRICategoryChartSerie {
+public class DRCategoryChartSerie extends DRChartSerie implements DRICategoryChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIExpression<?> valueExpression;

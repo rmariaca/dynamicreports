@@ -33,6 +33,7 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartLegend;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartSubtitle;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartTitle;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
@@ -61,8 +62,8 @@ import net.sf.dynamicreports.design.base.chart.plot.DRDesignPiePlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignSpiderPlot;
 import net.sf.dynamicreports.design.base.chart.plot.DRDesignThermometerPlot;
 import net.sf.dynamicreports.design.constant.ResetType;
+import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.DRIDesignVariable;
-import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
 import net.sf.dynamicreports.design.definition.chart.plot.DRIDesignPlot;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 import net.sf.dynamicreports.design.exception.DRDesignReportException;
@@ -573,11 +574,11 @@ public class ChartTransform {
 
 	private void seriesDataset(DRISeriesDataset dataset, DRDesignSeriesDataset designDataset, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
 		DRIDesignExpression valueExpression = accessor.getExpressionTransform().transformExpression(dataset.getValueExpression());
-		designDataset.setItemHyperLink(accessor.getReportTransform().hyperlink(dataset.getItemHyperLink()));
+		DRIDesignHyperLink datasetItemHyperLink = accessor.getReportTransform().hyperlink(dataset.getItemHyperLink());
 		designDataset.setValueExpression(valueExpression);
 		int index = 0;
 		for (DRIChartSerie serie : dataset.getSeries()) {
-			DRIDesignChartSerie designSerie;
+			DRDesignChartSerie designSerie;
 			if (serie instanceof DRIGroupedCategoryChartSerie) {
 				designSerie = groupedCategorySerie(dataset.getSubDataset(), (DRIGroupedCategoryChartSerie) serie, valueExpression, resetType, resetGroup, index++);
 			}
@@ -596,6 +597,12 @@ public class ChartTransform {
 			else {
 				throw new DRDesignReportException("Chart serie " + serie.getClass().getName() + " not supported");
 			}
+			DRIDesignHyperLink itemHyperLink = accessor.getReportTransform().hyperlink(serie.getItemHyperLink());
+			if (itemHyperLink == null) {
+				itemHyperLink = datasetItemHyperLink;
+			}
+			designSerie.setItemHyperLink(itemHyperLink);
+
 			designDataset.addSerie(designSerie);
 		}
 	}

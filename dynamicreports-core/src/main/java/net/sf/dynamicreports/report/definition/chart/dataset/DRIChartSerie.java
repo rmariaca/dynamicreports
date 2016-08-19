@@ -24,6 +24,7 @@ package net.sf.dynamicreports.report.definition.chart.dataset;
 
 import java.io.Serializable;
 
+import net.sf.dynamicreports.report.definition.DRIHyperLink;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
 
 /**
@@ -33,4 +34,5 @@ public interface DRIChartSerie extends Serializable {
 
 	public DRIExpression<?> getSeriesExpression();
 
+	public DRIHyperLink getItemHyperLink();
 }

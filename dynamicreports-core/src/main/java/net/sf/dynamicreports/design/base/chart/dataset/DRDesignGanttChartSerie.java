@@ -29,7 +29,7 @@ import net.sf.dynamicreports.report.constant.Constants;
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
-public class DRDesignGanttChartSerie extends AbstractDesignChartSerie implements DRIDesignGanttChartSerie {
+public class DRDesignGanttChartSerie extends DRDesignChartSerie implements DRIDesignGanttChartSerie {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private DRIDesignExpression startDateExpression;

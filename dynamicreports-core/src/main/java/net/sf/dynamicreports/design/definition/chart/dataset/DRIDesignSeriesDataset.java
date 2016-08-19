@@ -24,7 +24,6 @@ package net.sf.dynamicreports.design.definition.chart.dataset;
 
 import java.util.List;
 
-import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
@@ -35,6 +34,4 @@ public interface DRIDesignSeriesDataset extends DRIDesignChartDataset {
 	public DRIDesignExpression getValueExpression();
 
 	public List<? extends DRIDesignChartSerie> getSeries();
-
-	public DRIDesignHyperLink getItemHyperLink();
 }

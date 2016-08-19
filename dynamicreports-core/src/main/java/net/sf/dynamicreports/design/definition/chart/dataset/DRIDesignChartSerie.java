@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.definition.chart.dataset;
 
 import java.io.Serializable;
 
+import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 
 /**
@@ -32,4 +33,6 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
 public interface DRIDesignChartSerie extends Serializable {
 
 	public DRIDesignExpression getSeriesExpression();
+
+	public DRIDesignHyperLink getItemHyperLink();
 }

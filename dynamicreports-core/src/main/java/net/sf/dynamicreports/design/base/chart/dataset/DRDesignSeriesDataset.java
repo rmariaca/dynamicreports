@@ -25,7 +25,6 @@ package net.sf.dynamicreports.design.base.chart.dataset;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignChartSerie;
 import net.sf.dynamicreports.design.definition.chart.dataset.DRIDesignSeriesDataset;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignExpression;
@@ -39,7 +38,6 @@ public class DRDesignSeriesDataset extends DRDesignChartDataset implements DRIDe
 
 	private DRIDesignExpression valueExpression;
 	private List<DRIDesignChartSerie> series;
-	private DRIDesignHyperLink itemHyperLink;
 
 	public DRDesignSeriesDataset() {
 		series = new ArrayList<DRIDesignChartSerie>();
@@ -61,15 +59,6 @@ public class DRDesignSeriesDataset extends DRDesignChartDataset implements DRIDe
 	@Override
 	public List<DRIDesignChartSerie> getSeries() {
 		return series;
-	}
-
-	@Override
-	public DRIDesignHyperLink getItemHyperLink() {
-		return itemHyperLink;
-	}
-
-	public void setItemHyperLink(DRIDesignHyperLink itemHyperLink) {
-		this.itemHyperLink = itemHyperLink;
 	}
 
 }

@@ -22,21 +22,22 @@
 
 package net.sf.dynamicreports.report.builder.chart;
 
-import net.sf.dynamicreports.report.base.chart.dataset.AbstractChartSerie;
+import org.apache.commons.lang3.Validate;
+
+import net.sf.dynamicreports.report.base.chart.dataset.DRChartSerie;
 import net.sf.dynamicreports.report.builder.AbstractBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
+import net.sf.dynamicreports.report.builder.HyperLinkBuilder;
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRIExpression;
-
-import org.apache.commons.lang3.Validate;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractChartSerieBuilder<T extends AbstractChartSerieBuilder<T, U>, U extends AbstractChartSerie> extends AbstractBuilder<T, U> {
+public abstract class AbstractChartSerieBuilder<T extends AbstractChartSerieBuilder<T, U>, U extends DRChartSerie> extends AbstractBuilder<T, U> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	protected AbstractChartSerieBuilder(U object) {
@@ -61,6 +62,12 @@ public abstract class AbstractChartSerieBuilder<T extends AbstractChartSerieBuil
 
 	public T setSeries(DRIExpression<?> expression) {
 		getObject().setSeriesExpression(expression);
+		return (T) this;
+	}
+
+	public T setItemHyperLink(HyperLinkBuilder itemHyperLink) {
+		Validate.notNull(itemHyperLink, "itemHyperLink must not be null");
+		getObject().setItemHyperLink(itemHyperLink.build());
 		return (T) this;
 	}
 }
