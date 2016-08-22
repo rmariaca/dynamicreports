@@ -33,10 +33,10 @@ import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartLegend;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartSubtitle;
 import net.sf.dynamicreports.design.base.chart.DRDesignChartTitle;
-import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignCategoryDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartDataset;
+import net.sf.dynamicreports.design.base.chart.dataset.DRDesignChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignGanttChartSerie;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignHighLowDataset;
 import net.sf.dynamicreports.design.base.chart.dataset.DRDesignSeriesDataset;
@@ -474,7 +474,11 @@ public class ChartTransform {
 			else {
 				valuePattern = accessor.getTemplateTransform().getChartValuePattern(axisPlot);
 			}
-			chartCustomizers.add(new ShowValuesCustomizer(valuePattern));
+			boolean customRangeMaxValue = false;
+			if (axisPlot.getYAxisFormat() != null) {
+				customRangeMaxValue = axisPlot.getYAxisFormat().getRangeMaxValueExpression() != null;
+			}
+			chartCustomizers.add(new ShowValuesCustomizer(valuePattern, customRangeMaxValue));
 		}
 	}
 

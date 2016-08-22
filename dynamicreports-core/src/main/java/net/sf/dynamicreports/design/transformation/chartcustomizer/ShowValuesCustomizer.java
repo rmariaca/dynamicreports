@@ -26,10 +26,6 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
-import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
-
 import org.apache.commons.lang3.StringUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -43,6 +39,10 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.ui.TextAnchor;
 
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.report.definition.chart.DRIChartCustomizer;
+
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
  */
@@ -50,9 +50,11 @@ public class ShowValuesCustomizer implements DRIChartCustomizer, Serializable {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
 	private String valuePattern;
+	private boolean customRangeMaxValue;
 
-	public ShowValuesCustomizer(String valuePattern) {
+	public ShowValuesCustomizer(String valuePattern, boolean customRangeMaxValue) {
 		this.valuePattern = valuePattern;
+		this.customRangeMaxValue = customRangeMaxValue;
 	}
 
 	@Override
@@ -66,7 +68,9 @@ public class ShowValuesCustomizer implements DRIChartCustomizer, Serializable {
 				renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator(StandardCategoryItemLabelGenerator.DEFAULT_LABEL_FORMAT_STRING, new DecimalFormat(valuePattern)));
 			}
 			renderer.setBaseItemLabelsVisible(Boolean.TRUE);
-			chart.getCategoryPlot().getRangeAxis().zoomRange(0, 1.1);
+			if (!customRangeMaxValue) {
+				chart.getCategoryPlot().getRangeAxis().zoomRange(0, 1.1);
+			}
 			if (renderer.getClass().equals(BarRenderer3D.class)) {
 				((BarRenderer3D) renderer).setItemLabelAnchorOffset(10D);
 				renderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BASELINE_LEFT));
