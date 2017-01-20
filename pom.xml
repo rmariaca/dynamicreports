@@ -53,7 +53,8 @@
 		<sourceVersion>1.7</sourceVersion>
 		<targetVersion>1.7</targetVersion>
 		<encoding>UTF-8</encoding>
-		<jasperreportsVersion>6.3.0</jasperreportsVersion>
+		<jasperreportsVersion>6.4.0</jasperreportsVersion>
+		<commonslangVersion>2.6</commonslangVersion>
 		<commonslang3Version>3.1</commonslang3Version>
 		<barcode4jVersion>2.0</barcode4jVersion>
 		<barbecueVersion>1.5-beta1</barbecueVersion>
@@ -110,7 +111,12 @@
 						<groupId>com.ibm.icu</groupId>
 					</exclusion>
 				</exclusions>
-			</dependency>			
+			</dependency>	
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commonslangVersion}</version>
+			</dependency>		
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
