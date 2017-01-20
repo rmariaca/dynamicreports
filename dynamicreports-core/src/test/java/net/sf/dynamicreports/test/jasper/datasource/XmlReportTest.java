@@ -27,6 +27,8 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.Locale;
 
+import org.junit.Assert;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.constant.QueryLanguage;
@@ -35,8 +37,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRXmlDataSource;
 import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.JRXmlUtils;
-
-import org.junit.Assert;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -119,6 +119,6 @@ public class XmlReportTest extends AbstractJasperValueTest {
 		columnTitleCountTest(column6, 1);
 		columnTitleValueTest(column6, "Column6");
 		columnDetailCountTest(column6, 1);
-		columnDetailValueTest(column6, 0, "");
+		columnDetailValueTest(column6, 0, "10.00");
 	}
 }

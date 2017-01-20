@@ -367,6 +367,9 @@ public class ConstantTransform {
 	}
 
 	public static WhenNoDataType whenNoDataType(WhenNoDataTypeEnum whenNoDataType) {
+		if (whenNoDataType == null) {
+			return null;
+		}
 		switch (whenNoDataType) {
 		case NO_PAGES:
 			return WhenNoDataType.NO_PAGES;
