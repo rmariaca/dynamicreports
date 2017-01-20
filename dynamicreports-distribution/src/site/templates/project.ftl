@@ -11,6 +11,7 @@
 	<ecjVersion>${project.ecjVersion}</ecjVersion>
 	<jfreechartVersion>${project.jfreechartVersion}</jfreechartVersion>
 	<jcommonVersion>${project.jcommonVersion}</jcommonVersion>
+	<commonslangVersion>${project.commonslangVersion}</commonslangVersion>
 	<commonslang3Version>${project.commonslang3Version}</commonslang3Version>
 	<jacksonVersion>${project.jacksonVersion}</jacksonVersion>
 	<log4jVersion>${project.log4jVersion}</log4jVersion>

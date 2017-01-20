@@ -23,9 +23,8 @@
 		<commonscollectionsVersion>3.2.2</commonscollectionsVersion>
 		<commonsdigesterVersion>2.1</commonsdigesterVersion>
 		<commonsloggingVersion>1.1.1</commonsloggingVersion>
-		<commonslangVersion>2.5</commonslangVersion>
 		<commonscodecVersion>1.5</commonscodecVersion>
-		<zxingVersion>2.3.0</zxingVersion>
+		<zxingVersion>3.2.1</zxingVersion>
 		<itextVersion>2.1.7.js5</itextVersion>
 		<jcommonVersion>1.0.23</jcommonVersion>
 		<ecjVersion>4.3.1</ecjVersion>
@@ -96,11 +95,6 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commonsloggingVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>${commonslangVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
