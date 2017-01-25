@@ -15,7 +15,6 @@
 	<commonslang3Version>${project.commonslang3Version}</commonslang3Version>
 	<jacksonVersion>${project.jacksonVersion}</jacksonVersion>
 	<log4jVersion>${project.log4jVersion}</log4jVersion>
-	<commonslangVersion>${project.commonslangVersion}</commonslangVersion>
 	<velocityVersion>${project.velocityVersion}</velocityVersion>
 	<barcode4jVersion>${project.barcode4jVersion}</barcode4jVersion>
 	<barbecueVersion>${project.barbecueVersion}</barbecueVersion>
