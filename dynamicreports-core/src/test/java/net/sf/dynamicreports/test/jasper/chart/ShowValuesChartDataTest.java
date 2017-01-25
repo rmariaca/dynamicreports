@@ -29,15 +29,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.constant.PageOrientation;
-import net.sf.dynamicreports.report.constant.PageType;
-import net.sf.dynamicreports.report.constant.TimePeriod;
-import net.sf.dynamicreports.report.datasource.DRDataSource;
-import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
-import net.sf.jasperreports.engine.JRDataSource;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
@@ -47,6 +38,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.Assert;
+
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.constant.PageOrientation;
+import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.TimePeriod;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
+import net.sf.dynamicreports.test.jasper.AbstractJasperChartTest;
+import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -79,7 +79,8 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 						.setShowValues(true)
 						.setValuePattern("#,##0.#")
 						.setCategory(column1)
-						.series(cht.serie(column2), cht.serie(column3)),
+						.series(cht.serie(column2), cht.serie(column3))
+						.setValueAxisFormat(cht.axisFormat().setRangeMaxValueExpression(6)),
 					cht.stackedBarChart()
 						.setShowValues(true)
 						.setCategory(column1)
@@ -161,12 +162,14 @@ public class ShowValuesChartDataTest extends AbstractJasperChartTest implements 
 		CategoryItemRenderer renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
 		Assert.assertEquals("1.19", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
+		Assert.assertEquals(5.775d, chart.getCategoryPlot().getRangeAxis().getRange().getUpperBound());
 		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart2", 0);
 		renderer1 = chart.getCategoryPlot().getRenderer();
 		Assert.assertNotNull(renderer1.getBaseItemLabelGenerator());
 		Assert.assertEquals("1.2", renderer1.getBaseItemLabelGenerator().generateLabel(categoryDataset, 0, 0));
+		Assert.assertEquals(6d, chart.getCategoryPlot().getRangeAxis().getRange().getUpperBound());
 		Assert.assertTrue(renderer1.getBaseItemLabelsVisible());
 
 		chart = getChart("summary.chart3", 0);
