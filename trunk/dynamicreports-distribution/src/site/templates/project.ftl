@@ -1,0 +1,32 @@
+<project>
+	<projectVersion>${project.version}</projectVersion>
+	<developmentVersion>${project.developmentVersion}</developmentVersion>
+	<jasperreportsVersion>${project.jasperreportsVersion}</jasperreportsVersion>
+	<commonsbeanutilsVersion>${project.commonsbeanutilsVersion}</commonsbeanutilsVersion>
+	<commonsloggingVersion>${project.commonsloggingVersion}</commonsloggingVersion>
+	<commonscollectionsVersion>${project.commonscollectionsVersion}</commonscollectionsVersion>
+	<commonsdigesterVersion>${project.commonsdigesterVersion}</commonsdigesterVersion>
+	<commonscodecVersion>${project.commonscodecVersion}</commonscodecVersion>
+	<xmlapisVersion>${project.xmlapisVersion}</xmlapisVersion>
+	<ecjVersion>${project.ecjVersion}</ecjVersion>
+	<jfreechartVersion>${project.jfreechartVersion}</jfreechartVersion>
+	<jcommonVersion>${project.jcommonVersion}</jcommonVersion>
+	<commonslangVersion>${project.commonslangVersion}</commonslangVersion>
+	<commonslang3Version>${project.commonslang3Version}</commonslang3Version>
+	<jacksonVersion>${project.jacksonVersion}</jacksonVersion>
+	<log4jVersion>${project.log4jVersion}</log4jVersion>
+	<velocityVersion>${project.velocityVersion}</velocityVersion>
+	<barcode4jVersion>${project.barcode4jVersion}</barcode4jVersion>
+	<barbecueVersion>${project.barbecueVersion}</barbecueVersion>
+	<zxingVersion>${project.zxingVersion}</zxingVersion>
+	<avalonframeworkimplVersion>${project.avalonframeworkimplVersion}</avalonframeworkimplVersion>
+	<batikbridgeVersion>${project.batikbridgeVersion}</batikbridgeVersion>
+	<xmlgraphicscommonsVersion>${project.xmlgraphicscommonsVersion}</xmlgraphicscommonsVersion>
+	<itextVersion>${project.itextVersion}</itextVersion>
+	<jxlVersion>${project.jxlVersion}</jxlVersion>
+	<poiVersion>${project.poiVersion}</poiVersion>
+	<bcprovjdk14Version>${project.bcprovjdk14Version}</bcprovjdk14Version>
+	<springframeworkVersion>${project.springframeworkVersion}</springframeworkVersion>
+	<hsqldbVersion>${project.hsqldbVersion}</hsqldbVersion>
+	<xalanVersion>${project.xalanVersion}</xalanVersion>
+</project>
