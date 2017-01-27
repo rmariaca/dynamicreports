@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<version>9</version>
 	</parent>
     
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-parent</artifactId>
-	<version>5.0.1-SNAPSHOT</version>
+	<version>4.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>DynamicReports - parent</name>
