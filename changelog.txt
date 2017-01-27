@@ -1,6 +1,14 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 5.0.0 (2017-01-27)
+---------------------------------------------------
+ - upgrade to JasperReports 6.4.0
+ - upgrade to Java 1.7, DynamicReports is no longer compatible with Java 1.6
+ - setPrintRepeatedValues method was added to TextFieldBuilder
+ - ability to add item hyperlinks to chart series
+ - minor bug fixes
+ 
 Changes in version 4.1.1 (2016-07-28)
 ---------------------------------------------------
  - upgrade to JasperReports 6.2.2
